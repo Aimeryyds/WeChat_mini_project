@@ -1,0 +1,25 @@
+<statusbar bindinited="onStatusBarInited" class="status-bar" title="{{shareName}}"></statusbar>
+<view class="main has-toast {{isIPhoneX?'iphoneX':''}}" wx:if="{{!error.visibility&&!initing}}">
+    <view style="height: {{statusBarHeight}}px"></view>
+    <share-header-bar guest="{{guest}}" hidden="{{multiFileInfo.selecting}}" host="{{host}}" isSelecting="{{choosingPath}}"></share-header-bar>
+    <toast-bar id="toast-bar" top="{{statusBarHeight}}"></toast-bar>
+    <view class="choose-wrapper" hidden="{{!multiFileInfo.selecting}}">
+        <view catchtap="selectAll" class="btn-select" hidden="{{multiFileInfo.allSelected}}">
+            全选
+        </view>
+        <view catchtap="cancelSelectAll" class="btn-select" hidden="{{!multiFileInfo.allSelected}}">
+            取消全选
+        </view>
+        <text class="title">选中{{multiFileInfo.selectedCount}}/{{multiFileInfo.totalCount}}项</text>
+        <view catchtap="cancelSelection" class="btn-cancel">取消</view>
+    </view>
+    <view class="share-tip">微云分享</view>
+    <scroll-view bindscrolltolower="scrollToBottom" class="scroll-wrapper" lowerThreshold="300" scrollY="true">
+        <share-multi-files bind:clickitem="clickItem" multiFileInfo="{{multiFileInfo}}" wx:if="{{!singleFile}}"></share-multi-files>
+        <share-single-file bind:clickitem="clickItem" previewHeight="{{previewHeight}}" shareNickName="{{shareNickName}}" singleFile="{{singleFile}}" singleFileInfo="{{singleFileInfo}}" wx:if="{{singleFile}}"></share-single-file>
+    </scroll-view>
+    <share-bottom-bar bind:cancelSelectDir="cancelSelectDir" bind:enterSelectSaveDir="enterSelectSaveDir" bind:enterselection="enterSelection" bind:save="save" bind:saveIntoSelectDir="saveIntoSelectDir" bind:selectSaveDir="selectSaveDir" bind:selectSaveDirBackToUpper="selectSaveDirBackToUpper" bind:selectSaveDirLoadMore="selectSaveDirLoadMore" guest="{{guest}}" hidden="{{!host.nickName}}" host="{{host}}" isFullScreen="{{isBottomBarFullScreen}}" isIPhoneX="{{isIPhoneX}}" isSelecting="{{choosingPath}}" isSelectingDir="{{isSelectingDir}}" loading="{{dirLoading}}" multiFileInfo="{{multiFileInfo}}" selectDirInfo="{{selectDirInfo}}" tips="{{dirTips}}" tucaoData="{{tucaoData}}"></share-bottom-bar>
+    <save-result bind:saveBackground="saveBackground" bind:saveRetry="saveRetry" id="save-result"></save-result>
+</view>
+<share-error code="{{error.code}}" msg="{{error.message}}" wx:if="{{error.visibility&&!initing}}"></share-error>
+<view class="xloading" wx:if="{{initing}}"></view>

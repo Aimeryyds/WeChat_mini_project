@@ -1,0 +1,94 @@
+<view class="fix-in-bottom {{isIPhoneX?'iphoneX':''}}">
+    <view class="toast-wrapper tBor" hidden="{{isSelecting}}">
+        <view class="op" wx:if="{{!multiFileInfo||multiFileInfo.totalCount!==0}}">
+            <button class="btn btn-share" hoverClass="none" openType="share" type="primary">
+                分享给好友
+            </button>
+            <button catchtap="enterSelection" class="btn btn-primary" hoverClass="none" type="primary" wx:if="{{guest.is}}">
+                保存到微云
+            </button>
+        </view>
+        <view class="op" wx:else>
+            <button class="btn btn-share btn-disable" type="primary">
+                分享给好友
+            </button>
+            <button class="btn btn-primary btn-disable" type="primary" wx:if="{{guest.is}}">
+                保存到微云
+            </button>
+        </view>
+    </view>
+    <view class="wrapper" hidden="{{!isSelecting}}">
+        <view catchtap="hideSelectDir" class="mask" wx:if="{{isSelectingDir}}"></view>
+        <view class="select-wrapper" wx:if="{{isSelectingDir}}">
+            <view class="head-wrapper">
+                <view class="position-tip">保存位置：</view>
+                <view class="head">{{selectDirInfo.fullPath}}</view>
+            </view>
+            <scroll-view bindscrolltolower="loadMore" class="dir-scroll  {{isFullScreen?'full-screen':''}}" scrollY="true">
+                <view class="dir-list">
+                    <view bindtap="backToUpper" class="item" wx:if="{{!selectDirInfo.isIndex}}">
+                        <view class="back">返回上一层</view>
+                    </view>
+                    <view animation="{{opAnimationData}}" bindtap="clickDirItem" class="item" data-item="{{dirItem}}" wx:for="{{selectDirInfo.dirList}}" wx:for-item="dirItem" wx:key="dir_key">
+                        <image class="img" mode="scaleToFill" src="../../../../img/filetype_icons/ico_folder_small.svg"></image>
+                        <view class="title-wrapper">
+                            <view class="title">{{dirItem.dir_name}}</view>
+                        </view>
+                    </view>
+                </view>
+                <view class="cal">
+                    <view class="load-status" wx:if="{{loading}}">
+                        <image class="loading" mode="aspectFit" src="../../../../img/more-loading.gif"></image>
+                    </view>
+                    <text class="cal-num" wx:if="{{tips}}">{{tips}}</text>
+                    <text class="cal-num">共有 {{selectDirInfo.dirLength}} 个文件夹</text>
+                </view>
+            </scroll-view>
+        </view>
+        <view class="toast-wrapper tBor">
+            <view class="op" wx:if="{{isSelectingDir}}">
+                <text class="new-folder">新建文件夹</text>
+                <view catchtap="saveIntoSelectDir" class="btn-save " type="primary">
+                    保存
+                </view>
+            </view>
+            <view class="op" wx:if="{{!isSelectingDir}}">
+                <view catchtap="selectLoaction" class="input" type="default">
+                    <text class="save-tip">保存位置：</text>
+                    <text class="current-dir">{{selectDirInfo.fullPath?selectDirInfo.fullPath:selectDirInfo.currDir}}</text>
+                </view>
+                <view catchtap="save" class="btn-save {{multiFileInfo&&multiFileInfo.selectedCount===0?'btn-disable':'btn-primary'}}" type="primary">
+                    保存
+                </view>
+            </view>
+        </view>
+    </view>
+</view>
+<view class="pannel-wrapper {{isIPhoneX?'iphoneX':''}}" hidden="{{!personBoxVisibility}}">
+    <view catchtap="hidePersonBox" class="mask"></view>
+    <view class="pannel {{host.vipType==='svip'?'pannel-svip':''}} {{host.vipType==='vip'?'pannel-vip':''}}">
+        <view class="pannel-hd">
+            <image class="avatar" mode="aspectFit" src="{{host.avatarURL}}"></image>
+            <view class="user-info">
+                <view class="title-info">
+                    <text class="name">{{host.nickName}}</text>
+                    <image class="lv-icon-s" mode="aspectFit" src="{{host.vipImgURL}}"></image>
+                </view>
+                <view class="sub-info">
+                    <text class="txt">存储空间</text>
+                    <text class="txt">
+                        {{host.usedSpaceText}}/{{host.totalSpaceText}}
+                    </text>
+                </view>
+            </view>
+        </view>
+        <view class="pannel-bd">
+            <navigator class="list-btn" url="/page/index/index">
+                <text class="txt">查看我的微云(QQ:{{host.uin}})</text>
+            </navigator>
+            <navigator appId="wx8abaf00ee8c3202e" class="list-btn" extraData="{{tucaoData}}" target="miniProgram" wx:if="{{false}}">
+                <text class="txt">吐个槽</text>
+            </navigator>
+        </view>
+    </view>
+</view>

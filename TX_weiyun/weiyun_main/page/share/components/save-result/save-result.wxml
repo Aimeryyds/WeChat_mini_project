@@ -1,0 +1,12 @@
+<view class="pannel-wrapper {{isIPhoneX?'iphoneX':''}}" hidden="{{!isShow}}">
+    <view catchtap="hideSaveResult" class="mask"></view>
+    <view class="save-result-wrapper">
+        <image class="icon-type {{type=='progress'?'rotate':''}}" src="{{icon}}"></image>
+        <text class="save-title">{{title}}</text>
+        <text class="save-message">{{message}}</text>
+        <text catchtap="retrySave" class="btn-retry" hidden="{{!retryButtonVisibility}}">重试</text>
+        <text catchtap="saveBackground" class="btn-complete" hidden="{{!okButtonVisibility}}">好的</text>
+        <text catchtap="hideSaveResult" class="btn-complete" hidden="{{!retryButtonVisibility}}">返回</text>
+        <text catchtap="completeSave" class="btn-complete" hidden="{{!finishButtonVisibility}}">完成</text>
+    </view>
+</view>

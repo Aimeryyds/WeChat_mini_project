@@ -1,0 +1,19 @@
+<view class="navigation" style="height: {{barHeight}}px; background-color: {{color==='black'?'#000000':'#2980ff'}}">
+    <view class="navigation__statusbar" style="height: {{statusHeight}}px"></view>
+    <view class="navigation-inner">
+        <view class="navigation__item" style="height: {{titleHeight}}px">
+            <view class="navigation__item-hd">
+                <navigator class="navigation__btn navigation__btn-back" hoverClass="none" openType="exit" target="miniProgram" wx:if="{{showMainBack}}">
+                    <image class="navigation__btn-icon" src="../../img/navigation/icon-back-02@2x.png"></image>
+                    <view class="navigation__btn-txt" wx:if="{{textBack}}">{{textBack}}</view>
+                </navigator>
+                <button catchtap="back" class="navigation__btn navigation__btn-back" hoverClass="none" plain="false" wx:elif="{{showDirectoryBack}}">
+                    <image class="navigation__btn-icon" src="../../img/navigation/icon-back-02@2x.png"></image>
+                </button>
+            </view>
+            <view class="navigation__item-bd">
+                <text class="navigation__title" style="line-height: {{titleHeight}}px">{{title}}</text>
+            </view>
+        </view>
+    </view>
+</view>

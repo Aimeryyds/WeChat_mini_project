@@ -1,0 +1,37 @@
+<view class="fix-in-bottom" hidden="{{hidden}}">
+    <view class="toast-wrapper tBor" hidden="{{isSelecting}}">
+        <navigator bind:tap="clickLogo" class="logo-wrapper" url="/page/index/index">
+            <image class="logo" src="../../../../img/logo-text@2x.png"></image>
+        </navigator>
+        <view catchtap="showPersonBox" class="user-info">
+            <text class="name">{{host.nickName}}</text>
+            <image class="lv-icon-s" mode="aspectFit" src="{{host.vipImgURL}}"></image>
+            <image class="arr-icon-s" mode="aspectFit" src="/img/ico_arr_s@2x.png"></image>
+        </view>
+    </view>
+</view>
+<view class="pannel-wrapper {{isIPhoneX?'iphoneX':''}}" hidden="{{!personBoxVisibility}}">
+    <view catchtap="hidePersonBox" class="mask"></view>
+    <view class="pannel {{host.vipType==='svip'?'pannel-svip':''}} {{host.vipType==='vip'?'pannel-vip':''}}">
+        <view class="pannel-hd">
+            <image class="avatar" mode="aspectFit" src="{{host.avatarURL}}"></image>
+            <view class="user-info">
+                <view class="title-info">
+                    <text class="name">{{host.nickName}}</text>
+                    <image class="lv-icon-s" mode="aspectFit" src="{{host.vipImgURL}}"></image>
+                </view>
+                <view class="sub-info">
+                    <text class="txt">存储空间</text>
+                    <text class="txt">
+                        {{host.usedSpaceText}}/{{host.totalSpaceText}}
+                    </text>
+                </view>
+            </view>
+        </view>
+        <view class="pannel-bd">
+            <navigator class="list-btn" url="/page/index/index">
+                <text class="txt">查看我的微云(QQ:{{host.uin}})</text>
+            </navigator>
+        </view>
+    </view>
+</view>

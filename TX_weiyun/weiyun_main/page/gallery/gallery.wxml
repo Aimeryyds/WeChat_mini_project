@@ -1,0 +1,35 @@
+<statusbar class="status-bar" color="black" title="{{current+1+'/'+list.length}}"></statusbar>
+<swiper bindchange="change" class="gallery" currentItemId="{{list[current].id}}">
+    <swiper-item class="gallery-bd" itemId="{{image.id}}" wx:for="{{list}}" wx:for-item="image" wx:key="id">
+        <view class="gallery__item">
+            <image lazyLoad bindtouchend="touchEnd" bindtouchmove="touchMove" bindtouchstart="touchStart" catchtap="preivew" class="gallery__item-img" data-src="{{image.original||image.preview}}" mode="aspectFit" src="{{image.original||image.preview}}"></image>
+        </view>
+    </swiper-item>
+</swiper>
+<view class="gallery-shadow-wrap">
+    <image class="gallery-shadow-wrap__img" mode="aspectFill" src="../../img/gallery/img-shadow-bottom@2x.png"></image>
+</view>
+<view class="gallery-meta">
+    <view class="gallery-meta-inner">
+        <view bindtap="share" class="gallery-meta__item gallery-meta__item-forwarding" wx:if="{{canShare}}">
+            <image class="gallery-meta__item-img" mode="aspectFill" src="../../img/gallery/icon-forwarding@2x.png"></image>
+        </view>
+        <view class="gallery-meta__item gallery-meta__item-forwarding gallery-meta__item_disable" wx:else>
+            <image class="gallery-meta__item-img" mode="aspectFill" src="../../img/gallery/icon-forwarding@2x.png"></image>
+        </view>
+        <view bindtap="download" class="gallery-meta__item gallery-meta__item-save" data-scene="save">
+            <image class="gallery-meta__item-img" mode="aspectFill" src="../../img/gallery/icon-download@2x.png"></image>
+        </view>
+    </view>
+</view>
+<view class="gallery-progress">
+    <view class="gallery-progress-inner">
+        <view class="gallery-progress__btn" wx:if="{{progressing}}">
+            <text class="gallery-progress__txt">{{progress}}%</text>
+            <image class="gallery-progress__btn-close" src="../../img/gallery/icon-close@2x.png"></image>
+        </view>
+        <view bindtap="download" class="gallery-progress__btn gallery-progress__btn-original" data-scene="original" wx:if="{{!progressing&&!list[current].original}}">
+            <text class="gallery-progress__txt">查看原图({{list[current].size||'0B'}})</text>
+        </view>
+    </view>
+</view>

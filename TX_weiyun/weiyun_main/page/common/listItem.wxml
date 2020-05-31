@@ -1,0 +1,27 @@
+<template name="listItem">
+    <view animation="{{opAnimationData}}" class="item">
+        <view class="file-wrapper">
+            <view bindtap="bindItemTap" class="type-wrapper" data-key="{{dir_key||file_id}}">
+                <image binderror="imageError" class="img" mode="aspectFill" src="{{is_image?ext_info.https_url+'&size=64*64':is_video&&ext_info.thumb_url?ext_info.thumb_url+'/64':'../../img/filetype_icons/ico_'+icon+'_small.svg'}}"></image>
+            </view>
+            <view class="content-wrapper bBor">
+                <view class="info-wrapper">
+                    <view bindtap="bindItemTap" class="file-info is-dir" data-key="{{dir_key||file_id}}">
+                        <view class="title">
+              {{dir_name||filename}}
+            </view>
+                        <view class="sub-info">
+              {{modify_time}} {{file_read_size||''}}
+            </view>
+                    </view>
+                    <view catchtap="catchOpTap" class="op" data-index="{{index}}" data-key="{{dir_key||file_id}}">
+                        <image class="icon-dot" mode="aspectFill" src="../../img/icon-dot.svg"></image>
+                    </view>
+                </view>
+                <view style="visibility:{{download_progress>0&&download_progress<100?'visiable':'hidden'}}">
+                    <progress color="#2980ff" percent="{{download_progress}}" strokeWidth="6rpx"></progress>
+                </view>
+            </view>
+        </view>
+    </view>
+</template>

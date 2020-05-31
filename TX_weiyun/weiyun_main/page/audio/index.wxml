@@ -1,0 +1,34 @@
+<statusbar bindinited="onStatusBarInited" class="status-bar" title="{{audioName}}"></statusbar>
+<view class="wy-audio" style="margin-top: {{statusBarHeight}}px">
+    <view class="audio-hd">
+        <view class="audio-bg">
+            <image class="img" mode="aspectFill" src="../../img/audio-bg.png"></image>
+        </view>
+    </view>
+    <view class="audio-bd">
+        <view class="audio-img" wx:if="{{false}}">
+            <image class="img" mode="aspectFill" src="../../img/audio-img.png"></image>
+        </view>
+        <view class="audio-info">
+            <view class="audio-info-tit">{{audioName}}</view>
+            <view class="audio-info-text">{{audioSize}}</view>
+        </view>
+    </view>
+    <view class="audio-ft">
+        <view class="audio-progress">
+            <slider bindchange="bindSeek" class="progress-panel" color="#B5B5B5" max="100" min="0" selectedColor="#2980FF" step="1" value="{{audioProgess}}"></slider>
+            <view class="progress-time">
+                <view class="progress-time-now">{{audioTime}}</view>
+                <view class="progress-time-all">{{audioDuration}}</view>
+            </view>
+        </view>
+        <view class="audio-act">
+            <view bindtap="bindPlayTap" class="button" style="display: {{audioPlay?'none':''}};">
+                <image class="img" mode="aspectFill" src="../../img/icon-play-m.png"></image>
+            </view>
+            <view bindtap="bindPauseTap" class="button" style="display: {{audioPlay?'':'none'}};">
+                <image class="img" mode="aspectFill" src="../../img/icon-pause-m.png"></image>
+            </view>
+        </view>
+    </view>
+</view>

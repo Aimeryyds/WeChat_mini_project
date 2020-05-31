@@ -1,0 +1,14 @@
+<import src="../common/listItem.wxml"></import>
+<import src="../common/blankStatus.wxml"></import>
+<scroll-view bindscroll="onScroll" bindscrolltolower="loadMore" bindscrolltoupper="onPullDownRefresh" class="list-wrapper" scrollTop="{{scrollTop}}" scrollY="true" style="height:auto;">
+    <view class="list-file" style="display:{{dirList.length?'':'none'}}">
+        <template is="listItem" data="{{...dirItem,index:index}}" wx:for="{{dirList}}" wx:for-item="dirItem" wx:key="dir_key"></template>
+    </view>
+    <view class="list-file" style="display:{{fileList.length?'':'none'}}">
+        <template is="listItem" data="{{...fileItem,index:index}}" wx:for="{{fileList}}" wx:for-item="fileItem" wx:key="file_id"></template>
+    </view>
+    <view class="blank-file" style="display:{{dirList.length||fileList.length?'none':''}}">
+        <template is="blankStatus" data="{{...fileBlankData}}"></template>
+    </view>
+    <include src="../common/cal.wxml"></include>
+</scroll-view>

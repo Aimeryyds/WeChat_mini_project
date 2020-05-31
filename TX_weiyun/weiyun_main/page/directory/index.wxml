@@ -1,0 +1,12 @@
+<statusbar customBack bindback="onStatusBack" bindinited="onStatusBarInited" class="status-bar" title="{{title}}"></statusbar>
+<view class="wy-wrapper" style="top: {{statusBarHeight}}px">
+    <view class="main">
+        <include src="../common/listView.wxml"></include>
+    </view>
+    <view class="rename-wrapper" style="display: {{renameDisplay?'':'none'}};">
+        <view bindtap="bindReNameMaskTap" class="mask"></view>
+        <view class="rename-content">
+            <input bindconfirm="bindReNameConfirm" bindinput="bindReNameInput" class="rename-input" data-key="{{renameKey||''}}" focus="{{renameFocus}}" maxlength="100" placeholder="请输入文件名" type="text" value="{{renameName}}"></input>
+        </view>
+    </view>
+</view>

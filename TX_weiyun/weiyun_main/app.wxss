@@ -1,0 +1,50 @@
+page {
+    background-color: #F8F8F8;
+}
+
+.xloading {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    z-index: 99;
+    width: 90px;
+    height: 90px;
+    background-image: url(https://qzonestyle.gtimg.cn/aoi/sola/20180731175025_Mbc4Qihlvx.png);
+    animation: xLoading 1200ms steps(39,end) infinite forwards;
+    transform: translate(-50%,-50%);
+    background-position: 0 0;
+    background-size: cover;
+}
+
+@-webkit-keyframes xLoading {
+    0% {
+        background-position: 0 0;
+    }
+
+    100% {
+        background-position: 0 3510px;
+    }
+}
+
+@keyframes xLoading {
+    0% {
+        background-position: 0 0;
+    }
+
+    100% {
+        background-position: 0 3510px;
+    }
+}
+
+button {
+    padding-left: 0;
+    padding-right: 0;
+    line-height: 1;
+    background-color: transparent;
+}
+
+button[plain] {
+    color: #000;
+    border: 0;
+    background-color: transparent;
+}

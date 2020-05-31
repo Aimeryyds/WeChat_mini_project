@@ -1,0 +1,27 @@
+<statusbar bindinited="onStatusBarInited" class="status-bar" title="微云"></statusbar>
+<view class="wy-wrapper">
+    <view class="nav-list bBor" style="top: {{statusBarHeight}}px">
+        <view class="item {{currentTab===index?'act':''}}" wx:for="{{navList}}" wx:for-item="navItem" wx:key="unique">
+            <view bindtap="bindNavTap" class="btn" data-index="{{index}}">
+                <text class="txt">{{navItem.txt}}</text>
+            </view>
+            <i class="border" style="display:{{currentTab===index?'block':'none'}}"></i>
+        </view>
+        <i class="after"></i>
+    </view>
+    <view class="main main-doc" style="padding-top: {{statusBarHeight+(filterDisplay?12:0)}}px">
+        <view class="main-hd" style="display:{{filterDisplay?'':'none'}}">
+            <view bindtap="bindFilterTap" class="btn {{currentFilter===index?'act':''}}" data-index="{{index}}" wx:for="{{filterList}}" wx:for-item="filterItem" wx:key="unique">
+                <i class="border" style="display:{{index===0?'none':'block'}}"></i>
+                            {{filterItem.text}}
+                        </view>
+        </view>
+        <include src="../common/listView.wxml"></include>
+    </view>
+    <view class="rename-wrapper" style="display: {{renameDisplay?'':'none'}};">
+        <view bindtap="bindReNameMaskTap" class="mask"></view>
+        <view class="rename-content">
+            <input bindconfirm="bindReNameConfirm" bindinput="bindReNameInput" class="rename-input" data-key="{{renameKey||''}}" focus="{{renameFocus}}" maxlength="100" placeholder="请输入文件名" type="text" value="{{renameName}}"></input>
+        </view>
+    </view>
+</view>

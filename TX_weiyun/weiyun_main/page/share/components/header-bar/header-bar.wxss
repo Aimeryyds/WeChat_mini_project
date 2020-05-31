@@ -1,0 +1,283 @@
+.toast-wrapper {
+    height: 110rpx;
+    padding: 0 24rpx;
+    background-color: #FFFFFF;
+    display: flex;
+    align-items: center;
+    flex-direction: row;
+    justify-content: space-between;
+}
+
+.logo-wrapper {
+    display: flex;
+    flex-direction: row;
+}
+
+.logo:last-child:after {
+    display: none;
+}
+
+.logo {
+    width: 220rpx;
+    height: 49.8rpx;
+}
+
+.brand {
+    font-family: 'PingFangSC-Regular';
+    font-size: 34rpx;
+    margin-left: 2rpx;
+    font-weight: 400;
+}
+
+.tBor {
+    position: relative;
+}
+
+.tBor:before {
+    position: absolute;
+    content: "";
+    height: 2rpx;
+    background: #D5D4D9;
+    left: 0;
+    right: 0;
+    top: 0;
+}
+
+.iphoneX .toast-wrapper {
+    padding-bottom: 68rpx;
+}
+
+.toast-wrapper .user-info {
+    display: flex;
+    align-items: center;
+    font-size: 32rpx;
+}
+
+.iphoneX .toast-wrapper .user-info {
+    font-size: 36rpx;
+}
+
+.toast-wrapper .user-info .name {
+    display: -webkit-box;
+    -webkit-line-clamp: 1;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+    font-size: 28rpx;
+    color: #000;
+}
+
+.toast-wrapper .user-info .lv-icon-s {
+    width: 58rpx;
+    height: 28rpx;
+    margin-left: 10rpx;
+}
+
+.toast-wrapper .user-info .arr-icon-s {
+    width: 18rpx;
+    height: 12rpx;
+    margin-left: 10rpx;
+}
+
+.wrapper {
+    height: 100%;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+}
+
+.wrapper .mask {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0,0,0,.4);
+    z-index: 0;
+}
+
+.pannel-wrapper.hide {
+    display: none;
+}
+
+.pannel-wrapper {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    z-index: 3;
+}
+
+.pannel-wrapper .mask {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0,0,0,.4);
+    z-index: 3;
+}
+
+.pannel-wrapper .pannel {
+    position: absolute;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: #FFFFFF;
+    z-index: 3;
+}
+
+.iphoneX.pannel-wrapper .pannel {
+    padding-bottom: 68rpx;
+}
+
+.pannel-wrapper .pannel-hd {
+    width: 100%;
+    height: 148rpx;
+    background-color: #F8F8F8;
+    display: flex;
+    align-items: center;
+    padding: 26rpx 24rpx;
+    box-sizing: border-box;
+}
+
+.pannel-svip .pannel-hd {
+    background-image: url(https://qzonestyle.gtimg.cn/aoi/sola/20180703170730_E3KWl4leMS.png);
+    background-size: cover;
+}
+
+.pannel-vip .pannel-hd {
+    background-image: url(https://qzonestyle.gtimg.cn/aoi/sola/20180716141014_jy93KbDMFj.png);
+    background-size: cover;
+}
+
+.pannel-wrapper .pannel-hd .avatar {
+    width: 100rpx;
+    height: 100rpx;
+    border-radius: 4rpx;
+    margin-right: 24rpx;
+}
+
+.pannel-wrapper .pannel-hd .user-info {
+    flex: 1;
+    min-width: 0;
+}
+
+.pannel-svip .pannel-hd .user-info {
+    color: #FFFFFF;
+}
+
+.pannel-wrapper .pannel-hd .title-info {
+    display: inline-flex;
+    align-items: center;
+    font-size: 0;
+}
+
+.pannel-wrapper .user-info .name {
+    font-size: 32rpx;
+    display: -webkit-box;
+    -webkit-line-clamp: 1;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+}
+
+.pannel-wrapper .user-info .lv-icon-s {
+    display: inline-block;
+    width: 68rpx;
+    height: 30rpx;
+    margin-left: 20rpx;
+}
+
+.pannel-wrapper .user-info .sub-info {
+    color: rgba(119,119,119,.7);
+    font-size: 24rpx;
+}
+
+.pannel-svip .user-info .sub-info {
+    color: rgba(255,255,255,.7);
+}
+
+.pannel-wrapper .user-info .sub-info .txt {
+    margin-right: 8rpx;
+}
+
+.pannel-wrapper .pannel-bd .list-btn {
+    padding: 0 24rpx;
+    height: 100rpx;
+    line-height: 100rpx;
+    font-size: 32rpx;
+    position: relative;
+}
+
+.pannel-wrapper .pannel-bd .list-btn:after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 24rpx;
+    right: 0;
+    border-bottom: 1px solid #C8C7CC;
+}
+
+.pannel-wrapper .pannel-bd .list-btn:last-child:after {
+    display: none;
+}
+
+@media only screen and (-webkit-min-device-pixel-ratio:1.5) {
+    .pannel-wrapper .pannel-bd .list-btn:after {
+        transform: scaleY(0.6666);
+    }
+
+    .pannel-wrapper .pannel-bd .list-btn:after {
+        transform-origin: 0 100%;
+    }
+
+    .toast-wrapper .input::before {
+        transform: scale(0.6666);
+        width: 150%;
+        height: 150%;
+        transform-origin: 0 0;
+        border-radius: 8rpx;
+    }
+
+    .tBor:before,.bBor:after {
+        transform: scaleY(.6666);
+    }
+
+    .tBor:before,.bBor:after {
+        transform-origin: 0 100%;
+    }
+}
+
+@media only screen and (-webkit-min-device-pixel-ratio:2) {
+    .pannel-wrapper .pannel-bd .list-btn:after {
+        transform: scaleY(0.5);
+    }
+
+    .toast-wrapper .input::before {
+        transform: scale(0.5);
+        width: 200%;
+        height: 200%;
+        border-radius: 12rpx;
+    }
+
+    .tBor:before,.bBor:after {
+        transform: scaleY(.5);
+    }
+}
+
+@media only screen and (-webkit-min-device-pixel-ratio:3) {
+    .pannel-wrapper .pannel-bd .list-btn:after {
+        transform: scaleY(0.3333);
+    }
+
+    .toast-wrapper .input::before {
+        transform: scale(0.3333);
+        width: 300%;
+        height: 300%;
+        border-radius: 18rpx;
+    }
+
+    .tBor:before,.bBor:after {
+        transform: scaleY(.3333);
+    }
+}

@@ -1,0 +1,20 @@
+var format = (function(n) {
+    var integer;
+    var decimal;
+    var num;
+    if (typeof n !== 'number') {
+        return (n)
+    } else {
+        integer = Math.floor(n / 10000);
+        num = n % 10000;
+        decimal = Math.round(num / 1000);
+        return (integer > 0 ? integer + '.' + decimal + 'w' : n)
+    }
+});
+var abs = (function(n) {
+    return (Math.abs(n))
+});
+module.exports = ({
+    format: format,
+    abs: abs,
+});

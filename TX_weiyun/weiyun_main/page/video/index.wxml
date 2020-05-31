@@ -1,0 +1,15 @@
+<statusbar class="status-bar" color="black" title="{{videoName}}"></statusbar>
+<view class="wy-img-list-wrapper" style="height:{{videoHeight+'px'}}; margin-top: {{videoMargin+'px'}}">
+    <view class="" style="display:{{videoPlay?'':'none'}}" wx:if="{{videoPlay}}">
+        <video autoplay="{{true}}" binderror="bindVideoError" class="video" controls="true" id="mainVideo" objectFit="contain" src="{{videoSrc}}" style="height:{{videoHeight+'px'}};"></video>
+    </view>
+    <view bindtap="bindThumbTap" class="img-item img-item-spec" wx:if="{{!videoPlay}}">
+        <image class="img" mode="aspectFill" src="{{videoCover}}" style="height:{{videoHeight+'px'}};"></image>
+        <view class="img-item-attr">
+            <view class="icon-media-ctrl">
+                <image class="icon" mode="aspectFit" src="../../img/icon-media-play@2x.png"></image>
+            </view>
+            <text class="time">{{videoTimeDurning}}</text>
+        </view>
+    </view>
+</view>

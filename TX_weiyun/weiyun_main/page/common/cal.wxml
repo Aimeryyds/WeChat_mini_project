@@ -1,0 +1,7 @@
+<view class="cal" wx:if="{{dirList.length||fileList.length}}">
+    <view class="load-status" wx:if="{{loading}}">
+        <image class="loading" mode="aspectFit" src="../../img/more-loading.gif"></image>
+    </view>
+    <text class="cal-num" wx:if="{{tips}}">{{tips}}</text>
+    <text class="cal-num">共有 {{fileLength?fileLength+'个文件':''}} {{dirLength?dirLength+'个文件夹':''}}</text>
+</view>

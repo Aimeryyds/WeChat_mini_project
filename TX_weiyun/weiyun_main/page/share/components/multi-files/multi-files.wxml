@@ -1,0 +1,60 @@
+<view class="list-wrapper {{multiFileInfo.selecting?'editing':''}}" wx:if="{{!multiFileInfo.isAllPicVideo}}">
+    <view catchtap="clickItem" class="item" data-item="{{item}}" wx:for="{{multiFileInfo.dirList}}" wx:key="{{item.id}}">
+        <view class="file-wrapper">
+            <label class="checkbox {{item.selected?'checked':'unchecked'}}">
+                <checkbox></checkbox>
+            </label>
+            <view class="type-wrapper">
+                <image class="img" mode="aspectFit" src="{{item.iconImageSrc}}">>
+                </image>
+            </view>
+            <view class="info-wrapper bBor">
+                <view class="file-info is-dir">
+                    <view class="title">
+                        <text>{{item.name}}</text>
+                    </view>
+                    <view class="sub-info">
+                        <text>{{item.totalCount}}项</text>
+                    </view>
+                </view>
+            </view>
+        </view>
+    </view>
+    <view catchtap="clickItem" class="item" data-item="{{item}}" wx:for="{{multiFileInfo.fileList}}" wx:key="{{item.id}}">
+        <view class="file-wrapper">
+            <label class="checkbox {{item.selected?'checked':'unchecked'}}">
+                <checkbox></checkbox>
+            </label>
+            <view class="type-wrapper">
+                <image class="img" mode="aspectFill" src="{{item.thumbURL||item.iconImageSrc}}"></image>
+            </view>
+            <view class="info-wrapper bBor">
+                <view class="file-info is-dir">
+                    <view class="title">{{item.name}}</view>
+                    <view class="sub-info">{{item.sizeText}}</view>
+                </view>
+            </view>
+        </view>
+    </view>
+</view>
+<view class="pics-wrapper" wx:if="{{multiFileInfo.isAllPicVideo}}">
+    <view catchtap="clickItem" class="item" data-item="{{item}}" wx:for="{{multiFileInfo.fileList}}" wx:key="{{item.id}}">
+        <image class="img" mode="aspectFill" src="{{item.thumbURL}}"></image>
+        <image class="icon" mode="aspectFill" src="/img/share/icon-checked@2x.png" wx:if="{{multiFileInfo.selecting&&item.selected}}"></image>
+        <view class="item-bd" wx:if="{{item.type==='video'}}">
+            <text class="txt">{{item.videoDurationText}}</text>
+        </view>
+    </view>
+</view>
+<view class="loading-wrapper" hidden="{{!multiFileInfo.loadingMore}}">
+    <view class="loading">
+        <image class="icon-loading" mode="aspectFill" src="/img/loading.png"></image>
+    </view>
+    <text class="loading-txt">正在加载...</text>
+</view>
+<view class="empty" wx:if="{{multiFileInfo.totalCount===0}}">
+    <view class="empty__bd">
+        <image class="empty__img" src="/img/share/img-empty@2x.png"></image>
+        <b class="empty__txt">没有文件</b>
+    </view>
+</view>

@@ -1,0 +1,133 @@
+.video-wrapper {
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+}
+
+.video-wrapper .hd {
+    background-color: #000;
+    padding: 80rpx 0;
+}
+
+.video-wrapper .hd .video {
+    width: 100%;
+}
+
+.video-wrapper .bd {
+    flex: 1;
+    overflow-y: scroll;
+}
+
+.video-wrapper .video-info__wrap {
+    padding: 30rpx 30rpx 122rpx 30rpx;
+}
+
+.video-wrapper .video-info {
+    position: relative;
+    padding-bottom: 30rpx;
+    line-height: 1;
+}
+
+.video-wrapper .video-info:after {
+    content: "";
+    position: absolute;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    border-bottom: 1px solid #d5d4d9;
+}
+
+.video-wrapper .video-info .name {
+    display: block;
+    line-height: 1.5;
+    font-size: 18px;
+    font-weight: bold;
+    word-break: break-all;
+    word-wrap: break-word;
+}
+
+.video-wrapper .video-info .info {
+    display: inline-block;
+    line-height: 1.3;
+    font-size: 14px;
+    color: #777;
+    display: block;
+    margin-top: 9px;
+}
+
+.video-wrapper .from-info {
+    display: inline-block;
+    line-height: 1.3;
+    color: #9b9b9b;
+    font-size: 14px;
+    text-align: center;
+    padding-top: 40rpx;
+}
+
+.single-pic-wrapper .single-pic {
+    width: 100%;
+}
+
+.unread-file-wrapper {
+    padding-top: 160rpx;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.unread-file-wrapper .unread-file {
+    text-align: center;
+}
+
+.unread-file-wrapper .file-icon {
+    width: 210rpx;
+    height: 210rpx;
+}
+
+.unread-file-wrapper .file-info .name {
+    display: block;
+    font-size: 18px;
+    word-break: break-all;
+    word-wrap: break-word;
+}
+
+.unread-file-wrapper .file-info .size {
+    display: block;
+    font-size: 14px;
+    color: #777;
+    margin-top: 5px;
+}
+
+.unread-file-wrapper .file-info {
+    margin-bottom: 10px;
+}
+
+.unread-file-wrapper .btn-open {
+    font-size: 14px;
+    color: #2980ff;
+    padding: 5px 30px;
+    display: inline-block;
+}
+
+@media only screen and (-webkit-min-device-pixel-ratio:1.5) {
+    .video-wrapper .video-info:after {
+        transform: scaleY(0.6666);
+    }
+
+    .video-wrapper .video-info:after {
+        transform-origin: 0 100%;
+    }
+}
+
+@media only screen and (-webkit-min-device-pixel-ratio:2) {
+    .video-wrapper .video-info:after {
+        transform: scaleY(0.5);
+    }
+}
+
+@media only screen and (device-width:375px) and (device-height:812px) and (-webkit-device-pixel-ratio:3) {
+    .video-wrapper .video-info__wrap {
+        padding: 30rpx 30rpx 200rpx 30rpx;
+    }
+}

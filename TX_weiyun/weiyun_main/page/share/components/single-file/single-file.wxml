@@ -1,0 +1,28 @@
+<view class="video-wrapper" wx:if="{{singleFile==='video'}}">
+    <view class="hd">
+        <video class="video" objectFit="cover" src="{{singleFileInfo.downloadURL}}"></video>
+    </view>
+    <view class="bd">
+        <view class="video-info__wrap">
+            <view class="video-info">
+                <text class="name">{{singleFileInfo.name}}</text>
+                <text class="info">{{singleFileInfo.sizeText}}</text>
+            </view>
+            <view class="from-info" wx:if="{{shareNickName}}">
+                <text class="name">来自{{shareNickName}}</text>
+            </view>
+        </view>
+    </view>
+</view>
+<view class="single-pic-wrapper" wx:if="{{singleFile==='pic'}}">
+    <image catchtap="clickItem" class="single-pic" data-item="{{singleFileInfo}}" mode="aspectFit" src="{{singleFileInfo.previewURL}}" style="height: {{singleFileInfo.previewHeight+'px'}}"></image>
+</view>
+<view class="unread-file-wrapper" wx:if="{{singleFile&&singleFile!=='video'&&singleFile!=='pic'}}">
+    <view catchtap="clickItem" class="unread-file" data-item="{{singleFileInfo}}">
+        <image class="file-icon" mode="aspectFill" src="{{singleFileInfo.iconImageSrc}}"></image>
+        <view class="file-info">
+            <text class="name">{{singleFileInfo.name}}</text>
+            <text class="size">{{singleFileInfo.sizeText}}</text>
+        </view>
+    </view>
+</view>

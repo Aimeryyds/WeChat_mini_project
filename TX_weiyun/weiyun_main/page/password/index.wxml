@@ -1,0 +1,15 @@
+<statusbar bindinited="onStatusBarInited" class="status-bar" title="独立密码验证"></statusbar>
+<view class="pwd-wrapper" style="margin-top:{{statusBarHeight}}px">
+    <view class="pwd-user">{{user}}<text class="pwd-tips">  独立密码验证通过后，2小时内不再重复验证</text>
+    </view>
+    <input bindconfirm="onConfirm" bindinput="onInput" class="pwd-input" focus="true" maxlength="16" password="{{true}}" placeholder="请输入您的独立密码"></input>
+    <view class="pwd-form">
+        <button bindtap="onConfirm" class="pwd-button">确定</button>
+    </view>
+    <view class="pwd-forget-text" wx:if="{{forget}}">
+        <view bindtap="onForgetHide" class="pwd-forget-hide">收起 ▲</view>
+        <view class="pwd-forget-title">您可以使用以下方法找回独立密码：</view>
+        <rich-text class="pwd-forget-content" nodes="{{nodes}}" selectable="true"></rich-text>
+    </view>
+    <view bindtap="onForgetShow" class="pwd-forget-show" wx:else>忘记密码？</view>
+</view>
