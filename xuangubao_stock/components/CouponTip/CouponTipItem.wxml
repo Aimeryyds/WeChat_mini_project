@@ -1,0 +1,12 @@
+<view catchtap="__e" class="coupon-item _li data-v-68b93695" data-event-opts="{{[ [ 'tap',[ [ 'clickCoupon',['$event'] ] ] ] ]}}">
+    <view class="price-field _div data-v-68b93695">
+        <view class="_p data-v-68b93695">{{couponItem.primaryField}}</view>
+        <view class="_p data-v-68b93695" wx:if="{{couponItem.secondaryField}}">{{couponItem.secondaryField}}</view>
+    </view>
+    <view class="desc-field _div data-v-68b93695">
+        <view class="title _p data-v-68b93695">{{couponItem.title}}</view>
+        <view class="expireHint _p data-v-68b93695" wx:if="{{couponItem.expireHint}}">{{couponItem.expireHint}}</view>
+        <view class="useperiod _p data-v-68b93695" wx:if="{{beginTime}}">{{'·'+beginTime+'-'+endTime}}</view>
+        <view class="desc _p data-v-68b93695" wx:if="{{couponItem.desc}}">{{'·'+couponItem.desc}}</view>
+    </view>
+</view>

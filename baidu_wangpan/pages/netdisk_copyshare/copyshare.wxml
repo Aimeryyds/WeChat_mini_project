@@ -1,0 +1,25 @@
+<Navbar id="navbar"></Navbar>
+<view style="height:{{height}}px"></view>
+<view class="wrap-container">
+    <view class="wrap-container-mask" wx:if="{{isCopying}}"></view>
+    <view class="bacth-bound batch-header bottom-shadow">
+        <view class="info-tab tab1 ellipsis">当前位置：<text>{{targetFolder}}</text>
+        </view>
+        <view bindtap="goToBack" class="info-tab" wx:if="{{showCancel}}">取消</view>
+    </view>
+    <view class="batch-content" style="height:{{boxHeight}}rpx">
+        <XList canSwitchMode="{{false}}" id="XList" sharePage="{{true}}" showLoading="{{true}}" whenEmpty="batchEditList"></XList>
+    </view>
+    <view class="bacth-bound batch-bottom {{isTrans?'is-trans':''}}">
+        <view catchtap="createNewFolder" class="bottom-menu" wx:if="{{!isTrans}}">
+            新建文件夹
+        </view>
+        <view class="bottom-menu">
+            <TransSave bind:goback="goToBack" currentPath="{{currentPath}}" saveList="{{saveList}}" wx:if="{{isTrans}}"></TransSave>
+            <CopyButton bind:copyEnd="copyEnd" bind:copyStart="copyStart" id="copyButton" wx:else>保存（{{listLen}}）</CopyButton>
+        </view>
+    </view>
+</view>
+<FileNameDialog id="folderDialog"></FileNameDialog>
+<Toast id="toast"></Toast>
+<ShowDialog id="showDialog"></ShowDialog>

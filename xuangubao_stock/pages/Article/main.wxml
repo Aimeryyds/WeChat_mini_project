@@ -1,0 +1,20 @@
+<view class="article-page _div data-v-15e7a7ec">
+    <title-bar-with-capsule bind:__l="__l" class="data-v-15e7a7ec" title="文章详情" vueId="1"></title-bar-with-capsule>
+    <article-page article="{{article}}" bind:__l="__l" class="data-v-15e7a7ec" commentTotalCount="{{commentTotalCount}}" comments="{{comments}}" relatedArticles="{{relatedArticles}}" subject="{{subject}}" vueId="2" wx:if="{{article&&subject}}"></article-page>
+    <open-app bind:__l="__l" class="data-v-15e7a7ec" path="{{'https://xuangubao.cn/article/'+article.id}}" vueId="3" wx:if="{{showOpenAppBtn&&article}}"></open-app>
+    <share-pane bind:__l="__l" bind:goToComment="__e" bind:savePoster="__e" class="data-v-15e7a7ec" data-event-opts="{{[ [ '^savePoster',[ ['savePoster'] ] ],[ '^goToComment',[ ['goToComment'] ] ] ]}}" vueId="4"></share-pane>
+    <share-card article="{{article}}" bind:__l="__l" bind:finishDrawCard="__e" class="data-v-15e7a7ec vue-ref" data-event-opts="{{[ [ '^finishDrawCard',[ ['finishDrawCard'] ] ] ]}}" data-ref="card" vueId="5" wx:if="{{article&&!shareCard}}"></share-card>
+    <share-poster article="{{article}}" bind:__l="__l" bind:finishDrawPoster="__e" class="data-v-15e7a7ec vue-ref" data-event-opts="{{[ [ '^finishDrawPoster',[ ['finishDrawPoster'] ] ] ]}}" data-ref="poster" shareKey="{{shareKey}}" traceId="{{traceId}}" vueId="6" wx:if="{{article&&!shareImage}}"></share-poster>
+    <pop-up-modal bind:__l="__l" bind:closeModal="__e" class="data-v-15e7a7ec" data-event-opts="{{[ [ '^closeModal',[ ['closeModal'] ] ] ]}}" vueId="7" vueSlots="{{['default']}}" wx:if="{{showModal}}">
+        <view class="result-page data-v-15e7a7ec">
+            <image bindtap="__e" class="image _img data-v-15e7a7ec" data-event-opts="{{[ [ 'tap',[ [ 'previewImg',['$event'] ] ] ] ]}}" data-src="{{shareImage}}" mode="aspectFit" src="{{shareImage}}"></image>
+            <view class="title _div data-v-15e7a7ec">保存图片，叫小伙伴们来围观吧</view>
+            <view bindtap="__e" class="save-btn _div data-v-15e7a7ec" data-event-opts="{{[ [ 'tap',[ [ 'savePic',['$event'] ] ] ] ]}}">
+                <view class="iconfont icon-xiaochengxuqietu-11 _i data-v-15e7a7ec"></view>
+                <label class="_span data-v-15e7a7ec">保存图片</label>
+            </view>
+        </view>
+    </pop-up-modal>
+    <paying-flow bind:__l="__l" class="data-v-15e7a7ec" vueId="8" wx:if="{{showPayFlow}}"></paying-flow>
+    <auth-flow bind:__l="__l" class="data-v-15e7a7ec" vueId="9" wx:if="{{showPayFlow}}"></auth-flow>
+</view>

@@ -1,0 +1,31 @@
+<view class="pay-result" wx:if="{{getResultSuc}}">
+    <image class="right-icon" src="https://staticiot.cdn.bcebos.com/union%2Fstaticwx%2Fic_buy_done.png"></image>
+    <view class="result-title">购买成功~</view>
+    <view class="result-note" wx:if="{{type==='vip'}}">
+        <text wx:if="{{isSvip}}">即将尊享5T超大空间、单次转存文件数5万等特权~</text>
+        <text wx:else>即将尊享2T空间、单次转存文件数3000等特权~</text>
+    </view>
+    <view class="result-info" wx:if="{{type==='vip'}}">
+        <view class="info-item">
+            <text class="item-label">用户昵称</text>
+            <text class="item-value">{{username}}</text>
+        </view>
+        <view class="info-item">
+            <text class="item-label">支付金额</text>
+            <text class="item-value">{{price}}元</text>
+        </view>
+        <view class="info-item">
+            <text class="item-label">购买商品</text>
+            <text class="item-value">{{name[productName]}}</text>
+        </view>
+        <view class="info-item">
+            <text class="item-label">到期时间</text>
+            <text class="item-value">{{endTime}}</text>
+        </view>
+    </view>
+</view>
+<view class="pay-result no-result" wx:else>
+    <image class="right-icon" src="https://staticiot.cdn.bcebos.com/union%2Fstaticwx%2Fic_buy_done.png"></image>
+    <view class="result-title">支付成功，订单处理中</view>
+    <view class="result-note">稍后请在会员中心查看身份更新状况</view>
+</view>

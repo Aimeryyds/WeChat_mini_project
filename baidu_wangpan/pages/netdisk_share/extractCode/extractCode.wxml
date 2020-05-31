@@ -1,0 +1,32 @@
+<scroll-view scrollY scrollTop="{{viewScrollTop}}" style="height: {{systemInfo.windowHeight-navHeight}}px;">
+    <view style="height: {{systemInfo.windowHeight-navHeight+(showVerifyCode?scrollTopWithVerify:scrollTop)}}px;">
+        <view class="extract-code__user">
+            <image class="display-block margin-h-center extract-code__user-avatar" src="{{sharedUser.avatar}}"></image>
+            <text class="display-block text-center extract-code__user-name">{{sharedUser.name}}</text>
+            <text class="display-block text-center extract-code__user-desc">给你分享了文件</text>
+        </view>
+        <view class="extract-code__form">
+            <view class="extract-code__form-item">
+                <input adjustPosition="{{false}}" bindblur="extractCodeBlur" bindfocus="extractCodeFocus" bindinput="handleInput" class="extract-code__input text-center extract-code__code-input" confirmType="done" placeholder="请输入提取码" placeholderClass="extract-code__input-placeholder" type="text" value="{{extractCode}}"></input>
+                <text class="extract-code__form-item-err">{{extractCodeErr}}</text>
+            </view>
+            <view class="extract-code__verify-code" wx:if="{{showVerifyCode}}">
+                <view class="extract-code__form-item inline-block-v-middle">
+                    <input adjustPosition="{{false}}" bindblur="verifyCodeBlur" bindfocus="verifyCodeFocus" bindinput="handleVerifyCodeInput" class="extract-code__input text-center extract-code__verify-code-input" confirmType="done" placeholder="输入验证码" placeholderClass="extract-code__input-placeholder" type="text" value="{{verifyCode}}"></input>
+                    <text class="extract-code__form-item-err">{{verifyCodeErr}}</text>
+                </view>
+                <view class="extract-code__form-item inline-block-v-middle">
+                    <image binderror="handleVerifyCodeImgErr" bindtap="handleVerifyCodeImgTap" class="extract-code__verify-code-img inline-block-v-middle" src="{{verifyCodeImgInfo.vcodeImg}}"></image>
+                    <text bindtap="changeVerifyCode" class="extract-code__verify-code-img--error extract-code__form-item-err" wx:if="{{verifyCodeImgErr}}">加载出错，点击重试</text>
+                    <text bindtap="changeVerifyCode" class="extract-code__form-item-err extract-code__verify-code-img-tip">看不清？换一张</text>
+                </view>
+            </view>
+            <view class="extract-code__obtain-btn {{!extractCode?'extract-code__obtain-btn--disabled':''}}">
+                <BlueButton bind:action="handleObtainTap">
+                    <text>提取文件</text>
+                </BlueButton>
+                <text class="countdown" wx:if="{{shareUrlInfo.expiredType!==0}}">该链接将于{{countdown}}过期</text>
+            </view>
+        </view>
+    </view>
+</scroll-view>

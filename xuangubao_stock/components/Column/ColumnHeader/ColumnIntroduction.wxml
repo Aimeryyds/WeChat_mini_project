@@ -1,0 +1,20 @@
+<view bindtap="__e" class="column-introduction _div data-v-6c3772f8" data-event-opts="{{[ [ 'tap',[ [ 'toggle',['$event'] ] ] ] ]}}" wx:if="{{subject.introduction||subject.specialty||subject.updateFrequency}}">
+    <view class="_ul data-v-6c3772f8" style="{{'max-height:'+maxHeight+'px'+';'}}">
+        <view class="_li data-v-6c3772f8" wx:if="{{subject.introduction}}">
+            <view class="_header data-v-6c3772f8">简介</view>
+            <view class="_div data-v-6c3772f8">{{subject.introduction}}</view>
+        </view>
+        <view class="_li data-v-6c3772f8" wx:if="{{subject.specialty}}">
+            <view class="_header data-v-6c3772f8">能力圈</view>
+            <view class="_div data-v-6c3772f8">{{subject.specialty}}</view>
+        </view>
+        <view class="_li data-v-6c3772f8" wx:if="{{subject.updateFrequency}}">
+            <view class="_header data-v-6c3772f8">更新频率</view>
+            <view class="_div data-v-6c3772f8">{{subject.updateFrequency}}</view>
+        </view>
+    </view>
+    <view class="column-introduction_action _div data-v-6c3772f8">
+        <view class="iconfont icon-xiangshangzhankai _i data-v-6c3772f8" wx:if="{{expanded}}"></view>
+        <view class="iconfont icon-xiangxia _i data-v-6c3772f8" wx:else></view>
+    </view>
+</view>

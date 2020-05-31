@@ -1,0 +1,12 @@
+<view class="topTab">
+    <view class="tabs {{scrolling=='true'?'scrolling':'noscrolling'}}">
+        <view bindtap="switchPage" class="tab {{currentTab===tab.name?'actived':''}}" data-name="{{tab.name}}" wx:for="{{tabs}}" wx:for-item="tab" wx:key="{{tab.name}}">
+            <view class="name">
+                <text>{{tab.name}}</text>
+            </view>
+        </view>
+    </view>
+    <view class="content">
+        <slot></slot>
+    </view>
+</view>

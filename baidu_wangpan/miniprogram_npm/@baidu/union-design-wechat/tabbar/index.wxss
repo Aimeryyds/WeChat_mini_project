@@ -1,0 +1,42 @@
+.u-tab-bar {
+    position: relative;
+    width: 100%;
+    height: 100rpx;
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    background-color: #fff;
+}
+
+.u-tab-bar:before {
+    position: absolute;
+    content: '';
+    top: 0;
+    left: 0;
+    width: 200%;
+    height: 200%;
+    transform: scale(0.5);
+    transform-origin: 0 0;
+    box-sizing: border-box;
+    border: 0px solid #e9eaec;
+    border-top-width: 1px;
+}
+
+.u-tab-bar-list {
+    position: absolute;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+}
+
+.u-tab-bar-item {
+    float: left;
+    height: 100%;
+}
+
+.u-tab-bar-fixed {
+    position: fixed;
+    bottom: 0;
+    z-index: 9999;
+}

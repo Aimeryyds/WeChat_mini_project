@@ -1,0 +1,19 @@
+<view class="_article data-v-4d6edf48">
+    <article-subject bind:__l="__l" bind:clickImage="__e" bind:clickTitle="__e" bind:follow="__e" bind:subscribe="__e" class="data-v-4d6edf48" data-event-opts="{{[ [ '^clickImage',[ [ '$emit',['go-to-subject'] ] ] ],[ '^clickTitle',[ [ '$emit',['go-to-subject'] ] ] ],[ '^follow',[ [ '$emit',['follow-subject'] ] ] ],[ '^subscribe',[ [ '$emit',['subscribe-subject'] ] ] ] ]}}" followerCount="{{subject.followerCount}}" following="{{subject.following}}" id="{{subject.id}}" image="{{subject.image}}" introduction="{{subject.introduction}}" isSubscribable="{{subject.isSubscribable}}" isSubscribed="{{isSubscribed}}" isTopic="{{isTopic}}" subscribeCount="{{subject.subscribeCount}}" title="{{subject.title}}" vueId="1"></article-subject>
+    <article-header author="{{article.displayAuthor||article.prettyDisplayAuthor}}" bind:__l="__l" class="data-v-4d6edf48" time="{{article.manualUpdatedAt*1000}}" title="{{article.title}}" vueId="2"></article-header>
+    <article-summary bind:__l="__l" class="data-v-4d6edf48" summary="{{summary}}" vueId="3" wx:if="{{summary}}"></article-summary>
+    <stock-group-container bind:__l="__l" class="data-v-4d6edf48" stocks="{{article.stocks}}" vueId="4" wx:if="{{!article.contentRefused&&article.stocks}}"></stock-group-container>
+    <article-explained-article articles="{{article.explainedInfos}}" bind:__l="__l" class="data-v-4d6edf48" vueId="5" wx:if="{{article.explainedInfos}}"></article-explained-article>
+    <view class="article-premium-media-wrapper _div data-v-4d6edf48" wx:if="{{article.mediaUrl}}">
+        <article-premium-media bind:__l="__l" class="data-v-4d6edf48" info="{{$root.a0}}" medias="{{[ {type:article.mediaType,url:article.mediaUrl} ]}}" vueId="6"></article-premium-media>
+    </view>
+    <view class="article-premium-media-wrapper _div data-v-4d6edf48" wx:if="{{article.premiumMedias}}">
+        <article-premium-media bind:__l="__l" class="data-v-4d6edf48" info="{{$root.a1}}" medias="{{article.premiumMedias}}" vueId="7"></article-premium-media>
+    </view>
+    <article-content bind:__l="__l" bind:clickLink="__e" class="data-v-4d6edf48" content="{{content}}" data-event-opts="{{[ [ '^clickLink',[ ['e0'] ] ] ]}}" fromSubject="{{article.fromSubject}}" vueId="8" wx:if="{{content}}"></article-content>
+    <article-image bind:__l="__l" bind:previewImage="__e" class="data-v-4d6edf48" data-event-opts="{{[ [ '^previewImage',[ [ '$emit',['preview-image','$0'],['article.image'] ] ] ] ]}}" image="{{article.image}}" vueId="9" wx:if="{{article.image&&!article.content&&!article.mediaUrl}}"></article-image>
+    <article-source-link bind:__l="__l" class="data-v-4d6edf48" source="{{article.source}}" url="{{article.originalUrl}}" vueId="10" wx:if="{{showSourceink}}"></article-source-link>
+    <article-explain-article articles="{{article.explainInfos}}" bind:__l="__l" class="data-v-4d6edf48" vueId="11" wx:if="{{article.explainInfos}}"></article-explain-article>
+    <article-purchase-action bind:__l="__l" bind:click="__e" class="data-v-4d6edf48" data-event-opts="{{[ [ '^click',[ [ '$emit',['purchase'] ] ] ] ]}}" vueId="12" wx:if="{{article.contentRefused}}"></article-purchase-action>
+    <article-related-subjects bind:__l="__l" bind:goToRelatedSubject="__e" class="data-v-4d6edf48" data-event-opts="{{[ [ '^goToRelatedSubject',[ ['e1'] ] ] ]}}" subjects="{{article.subjHashTags}}" vueId="13" wx:if="{{article.subjHashTags}}"></article-related-subjects>
+</view>

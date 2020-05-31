@@ -1,0 +1,21 @@
+<form bindsubmit="formSubmit" reportSubmit="true">
+    <button class="formButtonNone order-wrap" formType="submit">
+        <block wx:if="{{isSHowHeader&&requestApiName!=='doSearch'}}">
+            <view wx:if="{{headerOperMode==='search'}}">
+                <Search bindsort="showOperModeDialog" id="Search"></Search>
+            </view>
+            <view class="order-title" wx:else>
+                <view bindtap="orders" class="order" wx:if="{{!canSelected}}">
+                    <text class="{{order=='time'?'order-active':''}}">时间排序</text> / <text class="{{order=='name'?'order-active':''}}">名称排序</text>
+                </view>
+                <view class="order-tip-flex" wx:if="{{canSwitchMode}}">
+                    <SwitchButton bind:switch="onSwitchMode" id="switchButton"></SwitchButton>
+                </view>
+            </view>
+        </block>
+        <view style="height:20rpx" wx:else></view>
+        <include src="./listSearch.wxml" wx:if="{{requestApiName==='doSearch'}}"></include>
+        <include src="./listNormal.wxml" wx:else></include>
+    </button>
+    <view class="load-tips" style="{{showTips?'display:block':'display:none'}}">加载中...</view>
+</form>

@@ -1,0 +1,6 @@
+<view class="group _ul data-v-47c2f332">
+    <view bindtap="__e" class="stock _li data-v-47c2f332" data-event-opts="{{[ [ 'tap',[ [ 'clickStock',['$0'],[ [ ['stocksWidthRate','symbol',stock.symbol,'symbol'] ] ] ] ] ] ]}}" wx:for="{{stocksWidthRate}}" wx:for-index="__i0__" wx:for-item="stock" wx:key="symbol">
+        <label class="_span data-v-47c2f332">{{stock.name}}</label>
+        <percent-number bind:__l="__l" class="data-v-47c2f332" num="{{stock.rate.pxChangeRate}}" vueId="{{'1-'+__i0__}}" wx:if="{{stock.rate}}"></percent-number>
+    </view>
+</view>

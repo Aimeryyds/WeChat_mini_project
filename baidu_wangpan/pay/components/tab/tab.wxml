@@ -1,0 +1,30 @@
+<view class="product-tab">
+    <view bindtap="{{item.type==='svip'?'clickSvip':'clickVip'}}" class="product-tab-title {{chooseType===item.type?'active':''}}" wx:for="{{vipTab}}" wx:key="index">
+        {{item.titleName}}
+        <view class="choose-identification {{item.type}}-active" wx:if="{{chooseType===item.type}}"></view>
+    </view>
+</view>
+<view class="product-note" wx:if="{{productType==='vip'}}">
+    <text class="privilege-note">手机/电脑/网页同时享有{{chooseType==='svip'?'超级':''}}会员</text>
+    <view class="price-note">
+        <view bindtap="showPriceNoteDialog" style="display: inline-block;">
+            价格说明
+            <image class="product-note-icon" src="https://staticiot.cdn.bcebos.com/union%2Fstaticwx%2Fic_enter.png"></image>
+        </view>
+    </view>
+</view>
+<view catchtouchmove="move" class="bottom-modal-container {{isDialogShow?'':'hidden-modal'}}">
+    <view bindtap="hidePriceNoteDialog" class="modal-background"></view>
+    <view class="modal-content fc-black">
+        <text class="item-title">价格说明</text>
+        <view bindtap="hidePriceNoteDialog" class="hide-dialog-dom">
+            <image class="hide-dialog-icon" src="https://staticiot.cdn.bcebos.com/union%2Fstaticwx%2Fpopup_close.png"></image>
+        </view>
+        <view class="item-wrap" wx:for="{{dialogList}}" wx:key="index">
+            <view>
+                <view class="item-point"></view>
+            </view>
+            <text class="item-text">{{item.text}}</text>
+        </view>
+    </view>
+</view>

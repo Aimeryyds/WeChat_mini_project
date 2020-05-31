@@ -1,0 +1,26 @@
+<template name="manageritem">
+    <view bindtap="directToManager" class="manageritem-view" data-id="{{managerCode}}">
+        <view class="manageritem-left">
+            <view class="{{aceVaule=='--'?'':aceVaule<0?'maingreen':'mainred'}}">
+                <text class="text1">{{aceVaule}}</text>
+                <text class="text2">{{aceUnit}}</text>
+            </view>
+            <view class="text3">{{aceName}}</view>
+        </view>
+        <view class="manageritem-right">
+            <view class="img-view">
+                <image src="../../../img/tx_small.png" wx:if="{{!headPhoto}}"></image>
+                <view class="imageview" style="background-image: url({{headPhoto}})" wx:else></view>
+            </view>
+            <view class="desc-view">
+                <view class="up-view">
+                    <text class="name-text">{{managerName}}</text>
+                </view>
+                <view class="down-view">
+                    <text class="fund-text">代表基金：</text>
+                    <text class="fund-text">{{bestReturnFundName||'--'}}</text>
+                </view>
+            </view>
+        </view>
+    </view>
+</template>

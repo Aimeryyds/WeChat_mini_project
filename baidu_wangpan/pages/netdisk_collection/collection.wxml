@@ -1,0 +1,17 @@
+<view style="position:relative">
+    <Navbar id="Navbar" titleText="{{title}}"></Navbar>
+    <NavbarPlaceholder></NavbarPlaceholder>
+</view>
+<view class="list-wrap" style="height: {{systemInfo.visualHeightRpx}}rpx;" wx:if="uuid">
+    <XList bind:cancelSelect="cancelSelect" bind:goback="goback" bind:longPress="setIsBatchTrue" bind:shareHandler="shareHandler" id="XList" leftTime="{{leftTime}}" msgCnt="{{msgCnt}}" title="{{title}}" uuid="{{uuid}}"></XList>
+</view>
+<view class="bttom-btnbar  {{!isBatch&&xListLen>0?'show':'hide'}}">
+    <BottomBtnBar barType="{{barType}}" bindbuttonFn="bottomBtnFn" count="{{count}}" id="bottomBtnBar" isAllDir="{{isAllDir}}">
+        <view class="save-btn-container">
+            <NativeButton bind:action="bottomBtnFn" type="small">
+                保存文件到网盘
+            </NativeButton>
+        </view>
+    </BottomBtnBar>
+</view>
+<Toast id="toast"></Toast>

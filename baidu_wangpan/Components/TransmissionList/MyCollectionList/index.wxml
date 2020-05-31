@@ -1,0 +1,16 @@
+<import src="/netdisk_templates/empty_list/emptyList.wxml"></import>
+<import src="/netdisk_templates/loading_list/loading_list.wxml"></import>
+<template is="loadingList" data wx:if="{{list.length===0&&loading}}"></template>
+<template is="emptyList" data="{{emptymod:'myCollectionList'}}" wx:elif="{{list.length===0&&loading===false}}"></template>
+<view class="wrap" wx:else>
+    <view class="wrap-content">
+        <TransListTip bindclose="hideTransListTip" btn="知道啦" tip="发送者删除文件后文件将消失，请及时保存" wx:if="{{showTransListTip}}"></TransListTip>
+        <scroll-view scrollY bindscrolltolower="loadMore" class="file-list-wrap {{showTransListTip?'has-tip':''}}" lowerThreshold="230">
+            <ListItem bindclick="handleClick" fileMeta="{{item}}" index="{{index}}" wx:for="{{list}}"></ListItem>
+        </scroll-view>
+        <view class="create-tran-btn-container">
+            <BlueButton isShowIcon bind:action="createCollection" class="create-tran-btn" iconClass="icon-share-button">新建收集</BlueButton>
+        </view>
+    </view>
+</view>
+<CreateTrans bindhide="hideCreateComp" show="{{showCreate}}"></CreateTrans>

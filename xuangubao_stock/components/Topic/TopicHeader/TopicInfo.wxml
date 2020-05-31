@@ -1,0 +1,11 @@
+<view class="subject-header_info _div data-v-206badd5" style="{{'background-image:'+'url('+displayImage+')'+';'}}">
+    <view class="mask _div data-v-206badd5"></view>
+    <view class="subject-header_info--inner _div data-v-206badd5">
+        <view class="_h1 data-v-206badd5">{{title}}</view>
+        <view class="subject-header_info--follow _p data-v-206badd5">{{subject.followerCount+'关注'}}</view>
+        <view bindtap="__e" class="subject-header_info--follow--action _div data-v-206badd5" data-event-opts="{{[ [ 'tap',[ [ '$emit',['follow'] ] ] ] ]}}">
+            <x-button bind:__l="__l" class="data-v-206badd5" size="small" type="primary" vueId="1" vueSlots="{{['default']}}" wx:if="{{!subject.following}}">关注</x-button>
+            <x-button bind:__l="__l" class="data-v-206badd5" size="small" type="primary" vueId="2" vueSlots="{{['default']}}" wx:if="{{subject.following}}">已关注</x-button>
+        </view>
+    </view>
+</view>

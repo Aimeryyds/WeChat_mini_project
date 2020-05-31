@@ -1,0 +1,90 @@
+.navbar {
+    position: fixed;
+    top: 0;
+    width: 100%;
+    background-color: #FFF;
+    z-index: 100;
+}
+
+.title-wrap {
+    position: relative;
+    display: flex;
+    align-items: center;
+    overflow: hidden;
+}
+
+.icon {
+    position: relative;
+    display: flex;
+    margin-left: 24rpx;
+    color: #eaeaea;
+    justify-content: space-around;
+    align-items: center;
+}
+
+.icon::after {
+    display: block;
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    border-radius: 100rpx;
+    border: 1px solid #eaeaea;
+    width: 200%;
+    height: 200%;
+    transform: scale(.5);
+    transform-origin: left top;
+}
+
+.navbar-home,.navbar-back {
+    padding: 32rpx 44rpx;
+    height: 100%;
+    background-size: 36rpx 36rpx;
+    background-position: center;
+    background-repeat: no-repeat;
+    z-index: 99;
+}
+
+.navbar-back {
+    position: relative;
+}
+
+.navbar-back::after {
+    content: '';
+    position: absolute;
+    left: auto;
+    bottom: auto;
+    right: 0;
+    top: 25%;
+    height: 36rpx;
+    width: 1px;
+    transform: scaleX(0.5);
+    background-color: #e8e8e8;
+    display: block;
+    transform-origin: 50% 100%;
+}
+
+.text {
+    position: absolute;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    text-align: center;
+    justify-content: center;
+    align-items: center;
+    color: #000;
+    z-index: 9;
+}
+
+.text-sub {
+    margin: 0 auto;
+    width: 260rpx;
+    font-size: 38rpx;
+    font-weight: bold;
+    text-align: center;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+    overflow: hidden;
+}

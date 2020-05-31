@@ -1,0 +1,32 @@
+<view class="usercenter-wrap">
+    <view class="userinfo-wrap">
+        <view class="avatar-wrap" style="background-image:url({{isGuideUser?userWxInfo.avatarUrl:avatar}})">
+            <view class="{{isGuideUser?'avatar-wx-logo':'avatar-logo'}}"></view>
+        </view>
+        <view class="userinfo {{isGuideUser?'usercenter-guide':''}}">
+            <view class="userinfo-title">
+                <text class="userinfo-name">{{isGuideUser||!isGuideUser&&!hasLogin?userWxInfo.nickName:name}}</text>
+                <view class="userinfo-typeIcon userinfo-typeIcon{{memberType}}" wx:if="{{!isGuideUser&&hasLogin}}"></view>
+            </view>
+            <view class="quota-wrap" wx:if="{{!isGuideUser&&hasLogin}}">
+                <view class="quota-default">
+                    <view class="{{quotaUsageRate<=60?'quota-e':quotaUsageRate>90?'quota-t':'quota-n'}}" style="width:{{quotaUsageRate}}%"></view>
+                </view>
+                <view class="quota-des">容量（{{quotaSize.usedQuota}} / {{quotaSize.totalQuota}} {{quotaUsageRate}}%）</view>
+            </view>
+            <view class="quota-des" wx:else>绑定百度帐号，享受超大空间</view>
+        </view>
+    </view>
+    <MemberEntry memberType="{{memberType}}" wx:if="{{!isGuideUser&&isAndroid}}"></MemberEntry>
+    <view class="bind-button-wrap" wx:if="{{isGuideUser&&hasLogin}}">
+        <BlueButton bind:action="blueBtnClick" id="BlueButton">绑定百度帐号</BlueButton>
+    </view>
+    <navigator bindtap="_click" bindtouchend="_touchEnd" bindtouchstart="_touchStart" class="feedbackWrap" style="{{contactTouchStyle}}" url="/pages/netdisk_helppage/helppage">
+        <text>帮助与反馈</text>
+        <view class="feedbackMore"></view>
+    </navigator>
+    <view bindtap="unbindWechat" class="unbindWrap" wx:if="{{!isGuideUser&&hasLogin}}">
+        <text>切换帐号</text>
+    </view>
+    <ActivityBanner activity="{{banner}}" show="{{banner.isValid}}"></ActivityBanner>
+</view>

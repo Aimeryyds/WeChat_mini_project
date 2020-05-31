@@ -1,0 +1,34 @@
+<import src="/netdisk_templates/loading_list/loading_list.wxml"></import>
+<import src="/netdisk_templates/empty_list/emptyList.wxml"></import>
+<form bindsubmit="formSubmit" hidden="{{!isShow}}" reportSubmit="true">
+    <button class="formButtonNone" formType="submit">
+        <template is="loadingList" data wx:if="{{isLoading}}"></template>
+        <view class="share-list-wrap" wx:else>
+            <template is="emptyList" data="{{emptymod:'sharelist',isGuideUser:isGuideUser,hasLogin:hasLogin}}" wx:if="{{list.length===0&&isLoading===false||!hasLogin}}"></template>
+            <scroll-view scrollY bindscrolltolower="_scrollToLower" class="share-list {{isGuideUser?'list-bottom':''}}" lowerThreshold="120" wx:elif="{{list.length>0}}">
+                <view class="share-list-item" wx:for="{{list}}" wx:for-item="listItem" wx:key="{{listItem.fid}}">
+                    <view bindtouchend="_touchEnd" bindtouchstart="_touchStart" class="share-list-item-wrap" data-index="{{index}}" style="{{listItem.style}}">
+                        <view bindtap="_click" class="list-item-main" data-index="{{index}}">
+                            <view class="group-avatar-wrap">
+                                <GroupAvatar avator="{{listItem.avator}}"></GroupAvatar>
+                            </view>
+                            <view class="description">
+                                <view class="title">
+                                    <text class="text">{{listItem.server_filename}}</text>
+                                </view>
+                                <view class="subtitle">
+                                    <text class="member-and-date">{{listItem.group_num}}个群成员 · {{listItem.server_mtime_split}}</text>
+                                </view>
+                            </view>
+                        </view>
+                        <view bindtap="_touchMore" class="list-item-more" data-index="{{index}}">
+                            <view class="more-icon"></view>
+                        </view>
+                    </view>
+                </view>
+                <ShareHelp shareType="{{2}}" wx:if="{{!hasOwner&&list.length>0}}"></ShareHelp>
+            </scroll-view>
+        </view>
+    </button>
+    <view class="load-tips" style="{{showTips?'display:block':'display:none'}}">加载中...</view>
+</form>

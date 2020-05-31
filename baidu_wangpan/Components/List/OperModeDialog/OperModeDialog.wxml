@@ -1,0 +1,14 @@
+<view bindtap="hide" catchtouchmove="move" class="bottom-modal-container {{isShow?'':'hidden-modal'}}">
+    <view class="modal-background"></view>
+    <view class="modal-content fc-black">
+        <view class="item-wrap" wx:for="{{list}}" wx:for-item="litem" wx:key="{{index}}">
+            <view class="item-title font-24 fc-dark-gray">{{litem.title}}</view>
+            <view class="litem-wrap">
+                <view catchtap="emitEvent" class="litem-wrap-item font-28 {{item.value===order||item.value===mode?'fc-blue active':''}}" data-eventname="{{item.eventName}}" data-value="{{item.value}}" wx:for="{{litem.items}}" wx:key="{{item.value}}">
+                    <view class="icon icon-{{item.value}}"></view>
+                    <view>{{item.name}}</view>
+                </view>
+            </view>
+        </view>
+    </view>
+</view>

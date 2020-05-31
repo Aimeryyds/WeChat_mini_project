@@ -1,0 +1,20 @@
+<view style="height:{{height}}px"></view>
+<view class="batch-edit-holder" style="display: {{isAll?'block':'flex'}};">
+    <view class="bacth-bound bottom-shadow">
+        <view bindtap="selectedAll" class="info-tab blue">{{isAll?'取消全选':'全选'}}</view>
+        <view class="info-tab" style="font-weight: 900">已选中{{count}}个文件</view>
+        <view bindtap="goBack" class="info-tab blue right">取消</view>
+    </view>
+    <view class="batch-content" style="height:{{boxHeight}}rpx;">
+        <XList bind:select="select" canSelected="{{true}}" canSwitchMode="{{false}}" id="XList" showLoading="{{true}}" whenEmpty="batchEditList"></XList>
+    </view>
+    <view class="foot-erea {{count>0?'show':''}}" wx:if="{{isOnlyShare}}">
+        <BlueButton bind:action="bottomBtnFn" iconClass="icon-share-button" isShowIcon="{{true}}" type="small">发送给朋友</BlueButton>
+    </view>
+    <view wx:else>
+        <BottomBtnBar barType="{{barType}}" bgColor="#06A7FF" bindbuttonFn="bottomBtnFn" count="{{count}}" id="bottomBtnBar" isAllDir="{{isAllDir}}" isBatch="true"></BottomBtnBar>
+    </view>
+</view>
+<Toast id="toast"></Toast>
+<FileNameDialog id="dialog"></FileNameDialog>
+<ShowDialog id="showDialog"></ShowDialog>

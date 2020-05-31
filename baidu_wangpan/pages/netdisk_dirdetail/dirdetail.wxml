@@ -1,0 +1,27 @@
+<Navbar bind:back="goback" id="Navbar" isBatch="{{isBatch}}" showBack="{{!isHideBack}}" titleText="{{serverFilename}}" wx:if="{{!isBatch}}"></Navbar>
+<view style="height:{{height}}px"></view>
+<view style="position: {{isBatch?'static':'relative'}};">
+    <TopTip bindretry="handleUploadRetry" id="topTip"></TopTip>
+    <view style="height: {{systemInfo.visualHeightRpx-(isBatch?0:112)}}rpx;">
+        <XList bind:dirAddFiles="showAddModalDialog" bind:goback="goback" bind:longPress="setIsBatchTrue" bind:select="select" bind:switchMode="switchMode" bindisEmpty="onListEmpty" canSelected="{{isBatch}}" canSwitchMode="{{!isBatch}}" fromPage="dirdetail" headerOperMode="search" id="XList" isSHowHeader="{{!shareButtonShow}}" isShowBottomBtn="{{!shareButtonShow}}" showLoading="{{true}}" whenEmpty="{{isBatch?'batchEditList':'dirlist'}}"></XList>
+    </view>
+</view>
+<view wx:if="{{!isBatch&&(!isListEmpty||xListLen>0)&&!shareButtonShow}}">
+    <BottomBtnBar barType="{{isBatch?'fileDetailBatch':'fileDetail'}}" bgColor="{{isBatch?'#06A7FF':'#FCFCFC'}}" bindbuttonFn="bottomBtnFn" count="{{count}}" id="bottomBtnBar" isAllDir="{{isAllDir}}" isBatch="{{isBatch}}">
+        <view wx:if="{{!isBatch}}">
+            <BlueButton bind:action="bottomBtnFn" iconClass="icon-share-button" isShowIcon="{{true}}" type="small">
+            分享文件
+        </BlueButton>
+        </view>
+    </BottomBtnBar>
+</view>
+<view class="foot-erea {{count>0?'show':''}}" wx:if="{{shareButtonShow}}">
+    <BlueButton bind:action="bottomBtnFn" iconClass="icon-share-button" isShowIcon="{{true}}" type="small">发送给朋友</BlueButton>
+</view>
+<TipPopup id="tipPopup"></TipPopup>
+<ModalDialog from="dirdetail" id="modalDialog"></ModalDialog>
+<Toast id="toast"></Toast>
+<FileNameDialog id="dialog"></FileNameDialog>
+<ComfirmDialog bind:cancelEvent="_cancelEvent" bind:confirmEvent="_confirmEvent" id="comfirmDialog"></ComfirmDialog>
+<ShowDialog id="showDialog"></ShowDialog>
+<GuideMember bindclose="handleGuideMemberClose" config="{{guideMemberTip}}" wx:if="{{showGuideMember}}"></GuideMember>

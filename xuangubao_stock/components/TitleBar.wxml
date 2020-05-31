@@ -1,0 +1,14 @@
+<view class="titleBar-wrapper data-v-7fd065f4">
+    <view class="placeHolder data-v-7fd065f4" style="{{'height:'+titleBarHeight+'rpx'+';'}}"></view>
+    <view class="loading _div data-v-7fd065f4" style="{{'height:'+titleBarHeight+'rpx'+';'}}" wx:if="{{showLoading}}">
+        <label class="_span data-v-7fd065f4"></label>
+        <label class="_span data-v-7fd065f4"></label>
+        <label class="_span data-v-7fd065f4"></label>
+        <label class="_span data-v-7fd065f4"></label>
+        <label class="_span data-v-7fd065f4"></label>
+    </view>
+    <view class="titleBar data-v-7fd065f4" style="{{'height:'+titleBarHeight+'rpx'+';'}}">
+        <slot></slot>
+        <title bind:__l="__l" class="title data-v-7fd065f4" vueId="1" vueSlots="{{['default']}}">{{title}}</title>
+    </view>
+</view>

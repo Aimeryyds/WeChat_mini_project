@@ -1,0 +1,75 @@
+.help_container {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    height: calc(100% - 100rpx);
+}
+
+.help_poster {
+    border-radius: 10rpx;
+    width: 686rpx;
+    height: 594rpx;
+    background-color: rgba(0,0,0,0.1);
+}
+
+.video_cover {
+    border-radius: 10rpx;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: relative;
+    margin-top: -594rpx;
+    width: 686rpx;
+    height: 594rpx;
+    background-color: rgba(0,0,0,0);
+}
+
+.showVideo_step {
+    margin-top: 32rpx;
+    color: #999;
+    font-size: 24rpx;
+}
+
+.video_cover .image {
+    width: 98rpx;
+    height: 98rpx;
+}
+
+.help_container_text {
+    text-align: center;
+    position: relative;
+    margin-top: 48rpx;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.help_container_text .text {
+    position: relative;
+    font-size: 28rpx;
+    color: #999;
+}
+
+.help_container_text .text:before {
+    display: block;
+    content: '';
+    background-image: url(https://staticwx.cdn.bcebos.com/mini-program/images/ic_video_help.png);
+    background-size: contain;
+    width: 48rpx;
+    height: 48rpx;
+    position: absolute;
+    left: -60rpx;
+    top: -3rpx;
+}
+
+.empty-wx-bt {
+    margin: 0 auto;
+    width: 686rpx;
+    height: 100rpx;
+    margin-top: 84rpx;
+}
+
+.empty-wx-bt::after {
+    border: none;
+}

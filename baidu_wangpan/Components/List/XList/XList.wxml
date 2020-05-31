@@ -1,0 +1,13 @@
+<import src="/netdisk_templates/empty_list/emptyList.wxml"></import>
+<import src="/netdisk_templates/loading_list/loading_list.wxml"></import>
+<template is="loadingList" data wx:if="{{showLoading&&isLoading}}"></template>
+<template is="emptyList" data="{{emptymod:whenEmpty,isGuideUser:isGuideUser}}" wx:elif="{{list.length===0&&isLoading===false}}"></template>
+<block wx:else>
+    <block wx:if="{{useScroll&&fromPage!=='dirdetail'}}">
+        <SelectAll bindgoback="goback" bindselectAll="handleSelectAll" count="{{selectedCount}}" isSelectedAll="{{isSelectedAll}}" wx:if="{{canSelectAll}}"></SelectAll>
+        <scroll-view scrollY bindscrolltolower="loadMore" class="file-list-wrap {{canSelectAll?'is-select-all':''}}" lowerThreshold="230">
+            <include src="./List.wxml"></include>
+        </scroll-view>
+    </block>
+    <include src="./List.wxml" wx:else></include>
+</block>

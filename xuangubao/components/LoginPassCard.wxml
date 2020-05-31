@@ -1,0 +1,16 @@
+<view class="passcard-wrapper _div data-v-44b7d698" wx:if="{{wscnAccounts&&wscnAccounts.length}}">
+    <view class="passcard-wrapper-header _div data-v-44b7d698">
+        <view class="name _p data-v-44b7d698">账号合并</view>
+        <view class="desc _p data-v-44b7d698">因业务发展需要，您在选股宝的账号将迁移至华尔街见闻。</view>
+    </view>
+    <view class="passcard-wrapper-body _div data-v-44b7d698">
+        <view class="desc _p data-v-44b7d698">请选择您在华尔街见闻的账号进行合并：</view>
+        <view class="account-list _ul data-v-44b7d698">
+            <pass-card-account account="{{account}}" bind:__l="__l" bind:chooseAccount="__e" checked="{{activeWscnAccount&&activeWscnAccount.account.uid===account.account.uid}}" class="account-list-item data-v-44b7d698" data-event-opts="{{[ [ '^chooseAccount',[ ['chooseAccount'] ] ] ]}}" vueId="{{'1-'+index}}" wx:for="{{wscnAccounts}}" wx:for-item="account" wx:key="index"></pass-card-account>
+        </view>
+    </view>
+    <view class="passcard-wrapper-footer _div data-v-44b7d698">
+        <view class="desc _p data-v-44b7d698">账号合并后不会影响您在两边的产品使用。</view>
+        <view bindtap="__e" class="{{['_p data-v-44b7d698','merge-btn',activeWscnAccount?'active':'']}}" data-event-opts="{{[ [ 'tap',[ [ 'mergeAccounts',['$event'] ] ] ] ]}}">合并账号</view>
+    </view>
+</view>

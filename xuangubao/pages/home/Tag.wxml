@@ -1,0 +1,19 @@
+<view class="tag _li data-v-8e19a200" id="tag" wx:if="{{stocks&&stocks.length}}">
+    <view bindtap="__e" class="tag-meta _div data-v-8e19a200 vue-ref" data-event-opts="{{[ [ 'tap',[ [ 'goToBkj',['$0'],['tag.id'] ] ] ] ]}}" data-ref="tag-meta">
+        <label class="name _span data-v-8e19a200">{{tag.name}}</label>
+        <label class="pcp _span data-v-8e19a200" style="{{'background:'+$root.m0+';'}}" wx:if="{{tag.pcp!=undefined}}">{{$root.g0+'%'}}</label>
+        <view class="reason _p data-v-8e19a200">{{tag.description}}</view>
+    </view>
+    <view class="table-container _div data-v-8e19a200">
+        <view class="head-table _div data-v-8e19a200">
+            <sort-tab bind:__l="__l" bind:sort="__e" class="data-v-8e19a200" customStyle="justify-content: flex-start;" data-event-opts="{{[ [ '^sort',[ ['handleSort'] ] ] ]}}" hideSort="{{true}}" label="股票" sortRule="{{sortRule}}" vueId="1"></sort-tab>
+            <sort-tab bind:__l="__l" bind:sort="__e" class="data-v-8e19a200" data-event-opts="{{[ [ '^sort',[ ['handleSort'] ] ] ]}}" label="现价" sortRule="{{sortRule}}" targetProp="curPrice" vueId="2"></sort-tab>
+            <sort-tab bind:__l="__l" bind:sort="__e" class="data-v-8e19a200" data-event-opts="{{[ [ '^sort',[ ['handleSort'] ] ] ]}}" label="涨跌" sortRule="{{sortRule}}" targetProp="pxChangeRate" vueId="3"></sort-tab>
+            <sort-tab bind:__l="__l" bind:sort="__e" class="data-v-8e19a200" data-event-opts="{{[ [ '^sort',[ ['handleSort'] ] ] ]}}" label="涨停时间" sortRule="{{sortRule}}" targetProp="enterTime" vueId="4"></sort-tab>
+            <sort-tab bind:__l="__l" bind:sort="__e" class="data-v-8e19a200" customStyle="justify-content: flex-end;" data-event-opts="{{[ [ '^sort',[ ['handleSort'] ] ] ]}}" label="流通市值" sortRule="{{sortRule}}" targetProp="circulationValue" vueId="5"></sort-tab>
+        </view>
+        <view class="_ul data-v-8e19a200">
+            <stock-item bind:__l="__l" bind:goToStock="__e" class="data-v-8e19a200" data-event-opts="{{[ [ '^goToStock',[ ['goToStock'] ] ] ]}}" stock="{{i}}" vueId="{{'6-'+idx}}" wx:for="{{stocks}}" wx:for-index="idx" wx:for-item="i" wx:key="idx"></stock-item>
+        </view>
+    </view>
+</view>

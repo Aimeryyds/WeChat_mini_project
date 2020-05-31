@@ -1,0 +1,32 @@
+<view class="_div data-v-4281dcae" wx:if="{{activeSubjectSubItem}}">
+    <view class="buy-subject-succeed _div data-v-4281dcae">
+        <title-bar bind:__l="__l" class="data-v-4281dcae" title="支付成功" vueId="1" vueSlots="{{['default']}}">
+            <view class="action-btn-capsule data-v-4281dcae">
+                <label bindtap="__e" class="action-btn _span data-v-4281dcae" data-event-opts="{{[ [ 'tap',[ [ 'backhandler',['$event'] ] ] ] ]}}">
+                    <view class="iconfont icon-xiaochengxuqietu-4 action-btn-img _i data-v-4281dcae"></view>
+                </label>
+                <view class="split-line _div data-v-4281dcae"></view>
+                <label bindtap="__e" class="action-btn _span data-v-4281dcae" data-event-opts="{{[ [ 'tap',[ [ 'homehandler',['$event'] ] ] ] ]}}">
+                    <view class="iconfont icon-xiaochengxuqietu-3 action-btn-img _i data-v-4281dcae"></view>
+                </label>
+            </view>
+        </title-bar>
+        <view class="buy-subject-succeed_success _p data-v-4281dcae">支付成功</view>
+        <view class="buy-subject-succeed_price _p data-v-4281dcae">
+            <price-text bind:__l="__l" class="data-v-4281dcae" price="{{preferentialPrice>=0?preferentialPrice:activeSubjectSubItem.discountPrice}}" type="normal" vueId="2"></price-text>
+        </view>
+        <view class="buy-subject-succeed_subject _p data-v-4281dcae">
+            <label class="_span data-v-4281dcae">{{subject.title}}</label>
+            <label class="_span data-v-4281dcae">{{'（'+activeSubjectSubItem.name+'）'}}</label>
+        </view>
+        <view class="buy-subject-succeed_class _div data-v-4281dcae" wx:if="{{subject.subscribeType===2}}">
+            <view class="_p data-v-4281dcae">加群：备注手机号与购买课程名加群，审核通过后即可享受课程主讲人实时指导</view>
+            <view class="flex-center-all _div data-v-4281dcae">
+                <view class="layout-left _div data-v-4281dcae">微信号：xuangubaobao</view>
+            </view>
+        </view>
+        <view class="buy-subject-succeed_action _p data-v-4281dcae">
+            <full-width-button bind:__l="__l" bind:click="__e" class="data-v-4281dcae" data-event-opts="{{[ [ '^click',[ ['refreshSubject'] ] ] ]}}" vueId="3" vueSlots="{{['default']}}">{{'返回 '+(message?message.title:subject.title)}}</full-width-button>
+        </view>
+    </view>
+</view>

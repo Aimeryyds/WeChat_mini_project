@@ -1,0 +1,13 @@
+<view class="user-center _div data-v-512891cd">
+    <title-bar-capsule bind:__l="__l" class="data-v-512891cd" title="已购" vueId="1"></title-bar-capsule>
+    <navigator class="my-subscribe-entry data-v-512891cd" hoverClass="none" openType="navigate" url="/pages/UserCenter/Subscribe/main">
+        <view class="_p data-v-512891cd">{{'我的订阅（'+subjTotal+'）'}}</view>
+        <view class="_p data-v-512891cd">
+            <image class="subscribe-item-avatar _img data-v-512891cd" src="{{subject.subjectImage}}" wx:for="{{subscribeColumn}}" wx:for-index="__i0__" wx:for-item="subject" wx:key="subjectId"></image>
+        </view>
+        <view class="iconfont icon-xiaochengxuqietu-10 _i data-v-512891cd"></view>
+    </navigator>
+    <view class="article-list _div data-v-512891cd">
+        <article-timeline articles="{{articles}}" bind:__l="__l" class="data-v-512891cd" vueId="2"></article-timeline>
+    </view>
+</view>

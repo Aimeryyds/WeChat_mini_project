@@ -1,0 +1,40 @@
+<view class="confirm-order _div data-v-04fea838">
+    <title-bar bind:__l="__l" class="data-v-04fea838" title="确认订单" vueId="1" vueSlots="{{['default']}}">
+        <view bindtap="__e" class="back-arrow _div data-v-04fea838" data-event-opts="{{[ [ 'tap',[ [ '$emit',['clickBack'] ] ] ] ]}}">
+            <view class="iconfont icon-xiaochengxuqietu-4 action-btn-img _i data-v-04fea838"></view>
+        </view>
+    </title-bar>
+    <view bindtap="__e" class="address-wrapper _div data-v-04fea838" data-event-opts="{{[ [ 'tap',[ [ 'goToAddressPage',['$event'] ] ] ] ]}}">
+        <view class="address _div data-v-04fea838" wx:if="{{activeAddress}}">
+            <view class="_div data-v-04fea838">
+                <view class="_p data-v-04fea838">{{activeAddress.name+' '+activeAddress.mobile}}</view>
+                <view class="_p data-v-04fea838">{{activeAddress.city+activeAddress.address}}</view>
+            </view>
+            <view class="iconfont icon-xiaochengxuqietu-10 _i data-v-04fea838"></view>
+        </view>
+        <view class="no-address _div data-v-04fea838" wx:else>
+            <view class="_p data-v-04fea838">添加收货地址</view>
+        </view>
+    </view>
+    <view class="main-info _div data-v-04fea838">
+        <image alt class="_img data-v-04fea838" src="{{selectedItem.image}}"></image>
+        <view class="_div data-v-04fea838">
+            <view class="name _p data-v-04fea838">{{selectedItem.name}}</view>
+            <view class="price _p data-v-04fea838">
+                <label class="_span data-v-04fea838">{{'¥ '+bargainOrder.totalMoney/100}}</label>
+                <label class="_span data-v-04fea838">{{selectedSubItem.name}}</label>
+            </view>
+        </view>
+    </view>
+    <view class="total-cost _div data-v-04fea838">
+        <view class="_p data-v-04fea838">总金额</view>
+        <view class="_p data-v-04fea838">{{'¥ '+bargainOrder.remainMoneyToPay/100}}</view>
+    </view>
+    <view class="action-bar _div data-v-04fea838">
+        <view class="_div data-v-04fea838">
+            <view class="_p data-v-04fea838">实付</view>
+            <view class="_p data-v-04fea838">{{'¥ '+bargainOrder.remainMoneyToPay/100}}</view>
+        </view>
+        <view bindtap="__e" class="_div data-v-04fea838" data-event-opts="{{[ [ 'tap',[ [ 'createNewOrder',['$event'] ] ] ] ]}}">提交订单</view>
+    </view>
+</view>

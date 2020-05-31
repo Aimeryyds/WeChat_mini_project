@@ -1,0 +1,24 @@
+<import src="/netdisk_templates/empty_list/emptyList.wxml"></import>
+<import src="/netdisk_templates/loading_list/loading_list.wxml"></import>
+<template is="loadingList" data wx:if="{{showLoading&&isLoading}}"></template>
+<template is="emptyList" data="{{emptymod:whenEmpty,isGuideUser:isGuideUser,hasLogin:hasLogin}}" wx:elif="{{list.length===0&&isLoading===false||!hasLogin}}"></template>
+<view class="wrap" wx:else>
+    <view class="batch-edit-holder" wx:if="{{canSelected}}">
+        <view class="bacth-bound bottom-shadow">
+            <view bindtap="selectedAll" class="info-tab blue">{{isSelectedAll?'取消全选':'全选'}}</view>
+            <view class="info-tab" style="font-weight: 900">已选中{{selectedCount}}个文件</view>
+            <view bindtap="goback" class="info-tab blue right">取消</view>
+        </view>
+    </view>
+    <view class="wrap-content {{canSelected?isShowBottomBtn?'selected':'selected-hide-bottombtn':'normal'}}">
+        <scroll-view scrollY bindscrolltolower="loadMore" class="file-list-wrap" lowerThreshold="230">
+            <slot name="header"></slot>
+            <include src="./ListTemplate.wxml"></include>
+            <slot name="footer"></slot>
+        </scroll-view>
+    </view>
+</view>
+<view class="footer" wx:if="{{isShowBottomBtn&&canSelected}}">
+    <BottomBtnBar barType="{{barType}}" bgColor="#06A7FF" bindbuttonFn="bottomBtnFn" count="{{selectedCount}}" id="bottomBtnBar" isAllDir="{{isAllDir}}" isBatch="{{true}}"></BottomBtnBar>
+</view>
+<OperModeDialog bind:hideOperModeDialog="hideOperModeDialog" bind:nameSortEvent="orders" bind:switchGridEvent="onSwitchMode" bind:switchListEvent="onSwitchMode" bind:timeSortEvent="orders" id="operModeDialog"></OperModeDialog>

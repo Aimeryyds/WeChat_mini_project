@@ -1,0 +1,17 @@
+<view bindtap="__e" class="stock-item _li data-v-09fe8c2f" data-event-opts="{{[ [ 'tap',[ [ '$emit',['goToStock','$0'],['stock.code'] ] ] ] ]}}">
+    <view class="stock-item-real _div data-v-09fe8c2f">
+        <view class="stock-attr _p data-v-09fe8c2f">
+            <label class="name _span data-v-09fe8c2f">{{stock.prodName}}</label>
+            <label class="symbol _span data-v-09fe8c2f">{{stock.code}}</label>
+        </view>
+        <view class="stock-attr _p data-v-09fe8c2f">{{formatPrice}}</view>
+        <view class="stock-attr _p data-v-09fe8c2f">
+            <percent-number bind:__l="__l" class="data-v-09fe8c2f" num="{{stock.pxChangeRate*100}}" vueId="1"></percent-number>
+        </view>
+        <view class="stock-attr _p data-v-09fe8c2f">{{timeString}}</view>
+        <view class="stock-attr _p data-v-09fe8c2f">{{formatCir}}</view>
+    </view>
+    <view class="stock-item-detail _p data-v-09fe8c2f">
+        <label class="_span data-v-09fe8c2f" wx:if="{{stock.mDaysNBoards}}">{{stock.mDaysNBoards}}</label>
+        <label class="_span data-v-09fe8c2f" wx:if="{{withinAYear}}">{{withinAYear+'上市'}}</label>{{''+stock.description+''}}</view>
+</view>

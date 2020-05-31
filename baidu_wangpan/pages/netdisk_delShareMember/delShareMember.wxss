@@ -1,0 +1,88 @@
+.goback {
+    position: fixed;
+    top: 0;
+    width: 196rpx;
+    padding-left: 32rpx;
+    font-size: 30rpx;
+    color: #000;
+    font-weight: bold;
+    z-index: 110;
+}
+
+.list-item-wrap {
+    display: flex;
+    height: 142rpx;
+    padding: 0 32rpx;
+    flex-flow: row nowrap;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.list-item-wrap.press-down,.list-item-wrap.is-selected {
+    background-color: #F9F9F9;
+}
+
+.item-left {
+    display: flex;
+    width: 100%;
+    height: 82rpx;
+}
+
+.item-left .member-head {
+    width: 82rpx;
+    height: 82rpx;
+    border-radius: 50%;
+    background-size: cover;
+}
+
+.item-left .member-head.is-selected {
+    background: url('https://staticwx.cdn.bcebos.com/mini-program/images/ic_large_select_v2.png') no-repeat center;
+    background-size: 82rpx 80rpx;
+}
+
+.item-left .member-uname {
+    overflow: hidden;
+    width: calc(100% - 146rpx);
+    height: 82rpx;
+    margin-left: 32rpx;
+    color: #212121;
+    font-size: 30rpx;
+    font-weight: bold;
+    line-height: 82rpx;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+}
+
+.foot-erea {
+    display: flex;
+    position: fixed;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    padding: 32rpx 0;
+    z-index: 10;
+    justify-content: center;
+    background-color: #FFF;
+}
+
+.op-select-wrap {
+    display: flex;
+    margin-top: 14rpx;
+    font-size: 26rpx;
+    color: #999;
+}
+
+.op-select-wrap .op-select {
+    position: relative;
+    top: 5rpx;
+    width: 34rpx;
+    height: 34rpx;
+    margin-right: 12rpx;
+    background: url('https://staticwx.cdn.bcebos.com/mini-program/images/ic_select_normal_new.png') no-repeat center;
+    background-size: 34rpx;
+}
+
+.op-select-wrap .op-select.active {
+    background: url('https://staticwx.cdn.bcebos.com/mini-program/images/ic_select_pressed.png') no-repeat center;
+    background-size: 34rpx;
+}

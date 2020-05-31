@@ -1,0 +1,28 @@
+<view class="subscribe-center _div data-v-477158bb">
+    <title-bar-capsule bind:__l="__l" class="data-v-477158bb" title="我的订阅" vueId="1"></title-bar-capsule>
+    <view class="total-count _div data-v-477158bb" wx:if="{{subjTotal}}">{{'共 '+subjTotal+' 项订阅'}}</view>
+    <view class="subject-list-wrapper _ul data-v-477158bb">
+        <view catchtap="__e" class="subject-item _li data-v-477158bb" data-event-opts="{{[ [ 'tap',[ [ 'goToSubject',['$0'],[ [ ['subjectlist','id',subject.id,'id'] ] ] ] ] ] ]}}" wx:for="{{subjectlist}}" wx:for-item="subject" wx:key="id">
+            <view class="subject-item-info _div data-v-477158bb">
+                <image class="_img data-v-477158bb" src="{{subject.image}}"></image>
+                <view class="title-wrapper _div data-v-477158bb">
+                    <view class="title _p data-v-477158bb">{{subject.title}}</view>
+                    <view class="time _p data-v-477158bb">
+                        <label class="{{['_span data-v-477158bb',subject.remainingDays<7?'limit':'']}}" wx:if="{{subject.remainingDays!=undefined&&subject.remainingDays>0}}">{{subject.remainingDays+'天后到期'}}</label>
+                        <block wx:else>
+                            <label class="overperiod _span data-v-477158bb" wx:if="{{subject.remainingDays!=undefined}}">已过期</label>
+                        </block>
+                    </view>
+                </view>
+                <view class="subscribe _div data-v-477158bb">续订</view>
+            </view>
+            <view catchtap="__e" class="subject-item-desc _p data-v-477158bb" data-event-opts="{{[ [ 'tap',[ [ 'goToArticle',['$0','$1'],[ [ ['subjectlist','id',subject.id,'latestMsgId'] ],[ ['subjectlist','id',subject.id,'id'] ] ] ] ] ] ]}}">
+                <label class="_span data-v-477158bb"></label>
+                <block wx:if="{{subject.latestMsgId}}">
+                    <label class="{{['_span data-v-477158bb','time',isToday[index]?'color-red':'']}}">{{timePoints[index]+''}}</label>
+                    <label class="_span data-v-477158bb">{{subject.latestMsgTitle}}</label>
+                </block>
+            </view>
+        </view>
+    </view>
+</view>

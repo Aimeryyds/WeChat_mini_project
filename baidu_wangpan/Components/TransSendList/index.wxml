@@ -1,0 +1,14 @@
+<view class="empty-wrap" wx:if="{{list.length===0}}">
+    <InfoComp icon="{{emptyIcon}}" iconClass="enpty-icon" tip="还未发出任何内容" tipClass="empty-tip" tipClassText="empty-tip-text"></InfoComp>
+    <TransHelp from="sendList"></TransHelp>
+</view>
+<view class="send-list-container" wx:else>
+    <TransListTip bindclose="hideTransListTip" btn="知道啦" tip="对方未保存前，请不要删除你网盘里的源文件" wx:if="{{showTransListTip&&!canSelected}}"></TransListTip>
+    <SelectAll bindgoback="goback" bindselectAll="handleSelectAll" count="{{selectedCount}}" isSelectedAll="{{isSelectedAll}}" wx:if="{{canSelected}}"></SelectAll>
+    <scroll-view scrollY bindscrolltolower="loadMore" class="send-list-wrap {{showTransListTip&&!canSelected?'has-tip':''}} {{canSelected?'has-select':''}}" lowerThreshold="120">
+        <ListItem isLongPressEntrySelection isTransAssisList bind:longPress="longPress" bind:select="handleSelect" bindclick="handleClick" canSelected="{{canSelected}}" fileMeta="{{item}}" index="{{index}}" isSelect="{{selectListMap[item.tid]}}" isShowMore="{{false}}" itemKey="tid" wx:if="{{item.send_status!==3}}" wx:for="{{list}}" wx:key="tid"></ListItem>
+    </scroll-view>
+</view>
+<view class="footer" wx:if="{{canSelected}}">
+    <BottomBtnBar isBatch barType="transSendlList" bgColor="#06A7FF" bindbuttonFn="withdraw" count="{{selectedCount}}" id="bottomBtnBar"></BottomBtnBar>
+</view>

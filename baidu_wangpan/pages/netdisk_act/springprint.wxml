@@ -1,0 +1,30 @@
+<Navbar id="Navbar" titleText="全家福免费送到家"></Navbar>
+<view style="height: {{height}}"></view>
+<view bindtap="refresh" class="page-error" wx:if="{{pageError}}">
+    页面走丢了,<text class="retry">请重试</text>
+</view>
+<view bindtouchmove="touchmove" class="active-wrap" style="background-color: {{bgColor}}" wx:else>
+    <image class="active-image" mode="widthFix" src="{{bgSrc}}"></image>
+    <view class="family-position">
+        <view class="family-wrap">
+            <view class="family-prize">
+                <button bindgetuserinfo="getuserinfo" class="family-prize-con" openType="getUserInfo" wx:if="{{!userStatus}}"></button>
+                <view bindtap="myPrize" class="family-prize-con" wx:else></view>
+                <button class="family-prize-share" id="pagetop" openType="share"></button>
+            </view>
+        </view>
+        <view bindtap="rules" class="rules">
+            <image src="{{assistData.rulesImg}}"></image>
+        </view>
+        <Assist assistData="{{assistData}}" bindopenRules="rules"></Assist>
+        <Seckill seckillData="{{seckillData}}"></Seckill>
+    </view>
+</view>
+<Rule id="rule"></Rule>
+<Dialog bindbtn1Event="hideDialog" id="dialog">
+    <view class="dialog-content" slot="content" style="color: {{resultModal.color}}">
+        <text>{{dialogContent}}</text>
+    </view>
+</Dialog>
+<Toast id="toast"></Toast>
+<Confirm bindmyevent="getuserinfo" id="confirm"></Confirm>

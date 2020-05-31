@@ -1,0 +1,8 @@
+<view class="_div">
+    <title-bar-with-capsule bind:__l="__l" title="{{title}}" vueId="1"></title-bar-with-capsule>
+    <view class="_div" wx:if="{{subject}}">
+        <topic-header bind:__l="__l" subject="{{subject}}" vueId="2"></topic-header>
+    </view>
+    <topic-type-selector bind:__l="__l" bind:change="__e" data-event-opts="{{[ [ '^change',[ ['changeFlowType'] ] ] ]}}" type="{{flowType}}" vueId="3"></topic-type-selector>
+    <subject-timeline bind:__l="__l" timeline="{{timeline}}" vueId="4"></subject-timeline>
+</view>

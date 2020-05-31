@@ -1,0 +1,30 @@
+<BlueButton bind:action="save" disabled="{{disabled}}" type="small">
+    <slot></slot>
+</BlueButton>
+<Toast id="toast"></Toast>
+<Dialog bind:cancel="lookUpCopiedFiles" bind:confirm="lookUpProgress" cancelValue="查看已复制文件" confirmValue="查询进度" id="popup-progress" title="正在复制文件">
+    由于文件较大或数量较多，请耐心等待，可以点击查询复制进度。
+</Dialog>
+<Dialog bind:cancel="saveByNewCopy" bind:close="close" bind:confirm="saveByOverwrite" btnCancelColor="fc-blue" cancelValue="保留全部" confirmValue="替换文件" id="popup-repeat" isShowCloseBtn="{{true}}" title="已经存在同名文件">
+    <view>
+        <view class="popup-repeat-item" wx:for="{{duplicateFiles}}" wx:key="{{item.fileTime}}">
+            <view class="repeat-item-title">{{item.title}}</view>
+            <view class="repeat-item-content">
+                <view class="icon">
+                    <image class="icon" src="{{item.icon}}"></image>
+                </view>
+                <view class="content">
+                    <view class="file-name ellipsis">{{item.fileName}}</view>
+                    <view class="time">
+                        <view>{{item.fileTime}}</view>
+                        <view>{{item.fileSize}}</view>
+                    </view>
+                </view>
+            </view>
+        </view>
+        <view class="popup-repeat-item">
+        共 {{count}} 个同名文件，请选择操作
+        </view>
+    </view>
+</Dialog>
+<GuideMember bindclose="handleGuideMemberClose" config="{{guideMemberTip}}" wx:if="{{showGuideMember}}"></GuideMember>

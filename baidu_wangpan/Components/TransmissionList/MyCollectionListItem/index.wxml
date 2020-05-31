@@ -1,0 +1,20 @@
+<view bindtap="_click" class="list-item-wrap" data-index="{{index}}">
+    <view class="file-icon">
+        <image class="normal" src="{{categoryImage}}"></image>
+    </view>
+    <view class="file-des">
+        <view class="file-name">
+            <text class="text">{{fileMeta.title}}</text>
+            <view class="file-msg-cnt" wx:if="{{fileMeta.msg_cnt}}">{{fileMeta.msg_cnt}}</view>
+        </view>
+        <view class="file-desc">
+            <text class="text text-left">{{fileMeta.uid_cnt}}/{{fileMeta.uid_limit}}已发送</text>
+            <text class="text">{{fileMeta.countDown}}</text>
+        </view>
+        <view class="file-time">
+            <text class="text">{{fileMeta.createTime}}</text>
+            <view catchtap="shareHandler" class="file-time-btn active" wx:if="{{!!fileMeta.left_time}}">再次分享</view>
+            <view class="file-time-btn" wx:else>停止收集</view>
+        </view>
+    </view>
+</view>

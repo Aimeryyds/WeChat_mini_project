@@ -1,0 +1,14 @@
+<view class="container {{isIpx?'container-ipx':''}}" hidden="{{!isShow}}">
+    <view class="success-tip">
+        <image alt="saveSuccess" src="https://staticwx.cdn.bcebos.com/mini-program%2Fimages%2FsaveSuccess.png"></image>
+        <text>保存成功！</text>
+    </view>
+    <view class="operation">
+        <button appParameter="{{schema}}" binderror="launchErr" bindlaunchapp="launchSuccess" class="bp-dowmload__btn" openType="launchApp">
+            打开App查看
+        </button>
+        <view bindtap="show" class="close-btn">
+            <image alt="close" src="https://staticiot.cdn.bcebos.com/union%2Fnetdisk-bp-smartprogram%2Fic_prompt_cancel.png"></image>
+        </view>
+    </view>
+</view>

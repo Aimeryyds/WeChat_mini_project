@@ -1,0 +1,15 @@
+<view class="bargain-detail _div data-v-dbd0716c" wx:if="{{bargainInfo}}">
+    <title-bar bind:__l="__l" class="data-v-dbd0716c" title="股民限定T恤活动" vueId="1"></title-bar>
+    <countdown bind:__l="__l" class="data-v-dbd0716c" finish="{{!!bargainInfo.paymentOrderNo}}" leftMinSeconds="{{leftMinSeconds}}" vueId="2"></countdown>
+    <view class="goods-info-wrapper _div data-v-dbd0716c">
+        <goods-info bind:__l="__l" class="data-v-dbd0716c" goodsInfo="{{goodsInfo}}" imgs="{{goodsSwiperImgs}}" userInfo="{{bargainInfo.ownerUserInfo}}" vueId="3"></goods-info>
+    </view>
+    <view class="bargain-card-wrapper _div data-v-dbd0716c">
+        <bargain-card activityState="{{activityState}}" bargainMoney="{{bargainMoney}}" bargainState="{{bargainState}}" bind:__l="__l" bind:createBargain="__e" bind:helpBargain="__e" class="data-v-dbd0716c" data-event-opts="{{[ [ '^helpBargain',[ ['helpBargain'] ] ],[ '^createBargain',[ ['createBargainOrder'] ] ] ]}}" finish="{{!!bargainInfo.paymentOrderNo}}" originalPrice="{{originalPrice}}" vueId="4"></bargain-card>
+    </view>
+    <view class="bargain-history _div data-v-dbd0716c">
+        <bargain-history bargainHelpText="{{activityInfo&&activityInfo.bargainHelpText}}" bargainRecord="{{bargainInfo&&bargainInfo.bargainLogs}}" bind:__l="__l" bind:clickMore="__e" class="data-v-dbd0716c" data-event-opts="{{[ [ '^clickMore',[ ['clickMore'] ] ] ]}}" ellipseMaskColor="rgb(255, 110, 83)" vueId="5"></bargain-history>
+    </view>
+    <help-bargain-share bind:__l="__l" bind:close="__e" bind:confirm="__e" class="data-v-dbd0716c" data-event-opts="{{[ [ '^close',[ ['closeShare'] ] ],[ '^confirm',[ ['createBargainOrder'] ] ] ]}}" price="{{helpBargainPrice}}" vueId="6" wx:if="{{showHelpBargainShare&&helpBargainPrice}}"></help-bargain-share>
+    <help-bargain-buy bind:__l="__l" bind:close="__e" bind:confirm="__e" class="data-v-dbd0716c" data-event-opts="{{[ [ '^close',[ ['closeHelpBargainBuy'] ] ],[ '^confirm',[ ['createBargainOrder'] ] ] ]}}" price="{{helpBargainPrice}}" vueId="7" wx:if="{{showHelpBargainBuy&&helpBargainPrice&&!showHelpBargainShare}}"></help-bargain-buy>
+</view>

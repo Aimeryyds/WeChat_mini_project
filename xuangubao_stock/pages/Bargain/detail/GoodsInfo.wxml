@@ -1,0 +1,18 @@
+<view class="goods-info _div data-v-22445523">
+    <view class="user-detail _div data-v-22445523" wx:if="{{userInfo}}">
+        <image class="_img data-v-22445523" src="{{userInfo.avatar}}" wx:if="{{userInfo.avatar}}"></image>
+        <label class="_span data-v-22445523">{{userInfo.nickName+' 邀请您帮忙一起砍价'}}</label>
+    </view>
+    <view class="goods-detail _div data-v-22445523">
+        <view class="swipper _div data-v-22445523">
+            <goods-swiper bind:__l="__l" class="good-detail-swiper data-v-22445523" height="440" imgs="{{imgs}}" vueId="1"></goods-swiper>
+        </view>
+        <view class="_div data-v-22445523">
+            <view class="_p data-v-22445523">{{goodsInfo.desc}}</view>
+            <view class="_p data-v-22445523">
+                <label class="price _span data-v-22445523">{{goodsInfo.price}}</label>
+                <label class="count _span data-v-22445523">{{goodsInfo.sellCount+'人已付款'}}</label>
+            </view>
+        </view>
+    </view>
+</view>

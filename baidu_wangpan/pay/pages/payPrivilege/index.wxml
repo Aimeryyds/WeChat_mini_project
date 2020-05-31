@@ -1,0 +1,6 @@
+<Navbar id="Navbar" isShowBarBtn="{{true}}" showBack="{{true}}" showHome="{{false}}" theme="translate-white" titleText="特权对比"></Navbar>
+<NavbarPlaceholder></NavbarPlaceholder>
+<PrivilegeTab bind:changeTab="onChangeTab" chooseType="{{type}}"></PrivilegeTab>
+<PrivilegeContent chooseType="{{type}}"></PrivilegeContent>
+<PrivilegeButton bind:clickPrivilegeButton="clickPrivilegeButton" chooseType="{{type}}" identity="{{identity}}"></PrivilegeButton>
+<view class="background-color {{type}}"></view>

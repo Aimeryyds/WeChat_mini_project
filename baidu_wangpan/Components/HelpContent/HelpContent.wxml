@@ -1,0 +1,19 @@
+<view class="help-list">
+    <view class="list-item" wx:for="{{questionData}}" wx:key="{{index}}">
+        <view class="question">{{item.title}}</view>
+        <block wx:for="{{item.contentList}}" wx:for-item="innerItem" wx:key="{{index}}">
+            <view wx:if="{{innerItem.contentType==='text'}}">
+                <text class="answer">{{innerItem.content}} </text>
+            </view>
+            <view class="content-image" wx:elif="{{innerItem.contentType==='image'}}">
+                <image src="{{innerItem.content}}" style="width:{{innerItem.imgWidth}};height:{{innerItem.imgHeight}}"></image>
+            </view>
+            <view style="{{innerItem.style}}" wx:elif="{{innerItem.contentType==='html'}}">
+                <rich-text class="answer" nodes="{{innerItem.content}}"></rich-text>
+            </view>
+            <view class="content-btn" wx:elif="{{innerItem.contentType==='btn'}}">
+                <BlueButton bind:action="clearMini" class="clearBtn" type="">{{innerItem.content}}</BlueButton>
+            </view>
+        </block>
+    </view>
+</view>

@@ -1,0 +1,30 @@
+<view bindlongpress="_longPress" bindtouchend="_touchEnd" bindtouchstart="_touchStart" class="list-item-wrap {{isSelect?'press-down':pressDownClass}} {{!canSelected?'item-wrap-padding':''}} {{fileMeta.isPlaceholder?'is-placeholder':''}} {{fileMeta.highlight?'is-highlight':''}}" data-index="{{index}}" wx:if="{{!isJumpItem}}">
+    <view class="item-placeholder-cover" wx:if="{{fileMeta.isPlaceholder}}"></view>
+    <view bindtap="_click" class="file-item-main {{sharePage?'share-main':''}} {{canSelected?'select-status item-wrap-padding':''}}" data-index="{{index}}">
+        <view class="file-icon {{canSelected?(isSelect?'':'not-')+'selected':''}}">
+            <image class="normal" src="{{categoryImage}}" wx:if="{{fileMeta.isdir-0===1}}"></image>
+            <block wx:else>
+                <view class="normalImgWrap" wx:if="{{!!thumbnail}}">
+                    <view class="normalImg {{canSelected?'selected':''}}" style="background-image: url({{thumbnail}});"></view>
+                </view>
+                <image class="normal" src="{{categoryImage}}" wx:elif="{{categoryImage&&!fileMeta.isPlaceholder}}"></image>
+            </block>
+            <view catchtap="_select" class="op-select" data-index="{{index}}" wx:if="{{canSelected}}"></view>
+        </view>
+        <view class="file-des {{isCollectionList||isTransAssisList?'trans-assis-list':''}} {{isTransAssisList?'trans-send-list':''}}">
+            <view class="file-name">
+                <text class="text">{{fileMeta.server_filename}}</text>
+                <text class="text-tip" wx:if="{{fileMeta.status-0===1}}">已保存</text>
+                <text class="text-tip" wx:if="{{fileMeta.send_status-0===2}}">对方已保存</text>
+            </view>
+            <view class="file-time">
+                <text class="text">{{fileMeta.server_mtime}}</text>
+                <text class="text file-sender-name" wx:if="{{isCollectionList}}">来自{{fileMeta.sender_name}}</text>
+                <text class="text file-size" wx:if="{{fileMeta.isdir-0!==1}}">{{fileMeta.size}}</text>
+            </view>
+        </view>
+    </view>
+    <view class="file-operator" wx:if="{{isShowMore&&!sharePage&&!canSelected}}">
+        <view bindtap="_showMore" class="op-more" data-index="{{index}}" wx:if="{{!canSelected}}"></view>
+    </view>
+</view>

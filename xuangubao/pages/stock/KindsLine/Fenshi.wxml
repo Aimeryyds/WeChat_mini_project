@@ -1,0 +1,19 @@
+<view class="fenshi _div data-v-4c1a977a">
+    <view class="tip-info _div data-v-4c1a977a">
+        <view class="_ul data-v-4c1a977a" wx:if="{{toolTipInfo}}">
+            <view class="_li data-v-4c1a977a">
+                <label class="label _span data-v-4c1a977a">均价:</label>
+                <percent-number bind:__l="__l" class="data-v-4c1a977a" customStyle="color:rgb(230, 150, 5)!important;" num="{{toolTipInfo.avgPx||'--'}}" options="{{$root.a0}}" process="{{toFixedLocal}}" vueId="1"></percent-number>
+            </view>
+            <view class="{{['_li data-v-4c1a977a',toolTipInfo.pxChangeRate>=0?'color-red':'color-green']}}">
+                <label class="label _span data-v-4c1a977a">数值:</label>
+                <label class="_span data-v-4c1a977a">{{toolTipInfo.closePx}}</label>
+                <percent-number bind:__l="__l" class="data-v-4c1a977a" num="{{toolTipInfo.pxChangeRate}}" vueId="2"></percent-number>
+                <approx-number bind:__l="__l" class="data-v-4c1a977a" classes="{{toolTipInfo.pxChangeRate>=0?'color-red':'color-green'}}" num="{{toolTipInfo.turnoverValue}}" vueId="3"></approx-number>
+                <view class="unit _i data-v-4c1a977a">元</view>
+            </view>
+        </view>
+    </view>
+    <canvas canvasId="fenshi-line" class="fenshi-line data-v-4c1a977a" style="width:704rpx;height:604rpx;"></canvas>
+    <canvas bindlongtap="__e" bindtouchcancel="__e" bindtouchend="__e" bindtouchmove="__e" bindtouchstart="__e" canvasId="tool-tip" class="tool-tip data-v-4c1a977a" data-event-opts="{{[ [ 'touchstart',[ [ 'touchstart',['$event'] ] ] ],[ 'touchmove',[ [ 'touchmove',['$event'] ] ] ],[ 'touchend',[ [ 'touchend',['$event'] ] ] ],[ 'touchcancel',[ [ 'touchcancel',['$event'] ] ] ],[ 'longtap',[ [ 'longtap',['$event'] ] ] ] ]}}" disableScroll="{{false}}" style="width:704rpx;height:604rpx;"></canvas>
+</view>

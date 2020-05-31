@@ -1,0 +1,87 @@
+<template name="emptyList">
+    <view class="empty-list-wrap normal-empty-dir-wrap" wx:if="{{emptymod==='dirlist'}}">
+        <view class="empty-icon"></view>
+        <view class="empty-text">
+            文件夹空空的
+        </view>
+        <view class="empty-add-file">
+            <BlueButton bind:action="dirAddFiles" type="small">添加文件</BlueButton>
+        </view>
+    </view>
+    <view class="empty-list-wrap share-empty-dir-wrap" wx:if="{{emptymod==='sharedirlist'}}">
+        <view class="empty-icon"></view>
+        <view class="empty-text">
+            文件夹空空的
+        </view>
+        <view class="empty-add-file" wx:if="{{!isGuideUser}}">
+            <BlueButton bind:action="shareDirAddFiles" type="small">添加文件</BlueButton>
+        </view>
+        <BindBtn id="BindBtn" innerText="绑定百度帐号，解锁更多精彩功能" wx:if="{{isGuideUser}}"></BindBtn>
+    </view>
+    <view class="empty-list-wrap normal-empty-dir-wrap {{isGuideUser||!isGuideUser&&!hasLogin?'share-empty-list-wrap':''}}" wx:if="{{emptymod==='mainlist'}}">
+        <view class="empty-icon"></view>
+        <view wx:if="{{!isGuideUser&&hasLogin}}">
+            <view class="empty-text">
+                网盘空空的
+            </view>
+            <view class="empty-add-file">
+                <BlueButton bind:action="dirAddFiles" type="small">添加文件</BlueButton>
+            </view>
+        </view>
+        <view class="empty-text" wx:else>
+            <text>绑定百度帐号后，享受海量存
+</text>
+            <text>储，便捷查看文件服务</text>
+            <view class="empty-wx-bt" wx:if="{{hasLogin}}">
+                <BlueButton bind:action="tplClick">绑定百度帐号</BlueButton>
+            </view>
+        </view>
+    </view>
+    <view class="empty-list-wrap upload-empty-list-wrap" wx:if="{{emptymod==='selectList'}}">
+        <view class="empty-icon"></view>
+        <view class="empty-text">
+            文件夹空空的
+        </view>
+        <view class="empty-add-file">
+            <BlueButton bind:action="localUpload" type="small">添加本地文件</BlueButton>
+        </view>
+    </view>
+    <view class="empty-list-wrap upload-empty-list-wrap" wx:if="{{emptymod==='batchEditList'}}">
+        <view class="empty-icon"></view>
+        <view class="empty-text">
+            文件夹空空的
+        </view>
+    </view>
+    <view class="empty-list-wrap share-empty-list-wrap share-empty-list-wrap-guide" wx:if="{{emptymod==='sharelist'}}">
+        <ShareHelp hasLogin="{{hasLogin}}" isGuideUser="{{isGuideUser}}" shareType="{{1}}"></ShareHelp>
+    </view>
+    <view class="empty-list-wrap upload-empty-list-wrap" wx:if="{{emptymod==='shareList'}}">
+        <view class="empty-icon"></view>
+        <view class="empty-text">
+            文件夹空空的
+        </view>
+    </view>
+    <view class="empty-list-wrap upload-empty-list-wrap empty-center" wx:if="{{emptymod==='seachList'}}">
+        <view class="empty-text">
+            无相关内容
+        </view>
+    </view>
+    <view class="empty-list-wrap mycollection-empty-list-wrap" wx:if="{{emptymod==='myCollectionList'}}">
+        <view class="empty-icon"></view>
+        <view class="empty-add">
+            <BlueButton bind:action="createCollection" iconClass="icon-share-button" isShowIcon="{{true}}" type="big">新建收集</BlueButton>
+        </view>
+        <TransHelp from="collectionList"></TransHelp>
+    </view>
+    <view class="empty-list-wrap collection-empty-list-wrap" wx:if="{{emptymod==='collectionList'}}">
+        <view class="empty-icon"></view>
+        <block wx:if="{{!!leftTime}}">
+            <view class="empty-text">还未收到任何内容，再次分享给朋友收集</view>
+            <view bindtap="shareHandler" class="empty-add">再次分享</view>
+        </block>
+        <block wx:else>
+            <view class="empty-text">还未收到任何内容</view>
+            <view class="empty-add empty-stop">已停止收集</view>
+        </block>
+    </view>
+</template>

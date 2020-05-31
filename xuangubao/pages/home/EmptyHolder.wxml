@@ -1,0 +1,21 @@
+<view class="root-wrapper _div data-v-a60b5eea">
+    <view class="main-wrapper _div data-v-a60b5eea" wx:if="{{loading}}">
+        <view class="_div data-v-a60b5eea">
+            <view class="spinner spinner--rotate-square-2 _div data-v-a60b5eea"></view>
+        </view>
+    </view>
+    <block wx:else>
+        <view class="main-wrapper _div data-v-a60b5eea" wx:if="{{rushWorking}}">
+            <view class="_div data-v-a60b5eea">
+                <image alt class="_img data-v-a60b5eea" src="{{img2}}"></image>
+            </view>
+            <view class="_p data-v-a60b5eea">小编正在赶工中...</view>
+        </view>
+        <view class="main-wrapper _div data-v-a60b5eea" wx:else>
+            <view class="_div data-v-a60b5eea">
+                <image alt class="_img data-v-a60b5eea" src="{{img1}}"></image>
+            </view>
+            <view class="_p data-v-a60b5eea">该日暂无大涨股</view>
+        </view>
+    </block>
+</view>

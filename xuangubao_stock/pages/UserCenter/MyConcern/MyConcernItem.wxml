@@ -1,0 +1,18 @@
+<view class="concern-item _li data-v-578307f5">
+    <image class="concern-item-image _img data-v-578307f5" mode="aspectFill" src="{{subject.image}}"></image>
+    <view class="concern-item-info _div data-v-578307f5">
+        <view class="concern-item-info-name _p data-v-578307f5">
+            <label catchtap="__e" class="name _span data-v-578307f5" data-event-opts="{{[ [ 'tap',[ [ 'goToSubject',['$event'] ] ] ] ]}}">
+                <view class="topic-icon color-red _i data-v-578307f5" wx:if="{{subject.type===1}}">#</view>
+                <label class="_span data-v-578307f5">{{subject.title}}</label>
+            </label>
+            <label catchtap="__e" class="action-btn _span data-v-578307f5" data-event-opts="{{[ [ 'tap',[ [ '$emit',['clickActionBtn'] ] ] ] ]}}">
+                <view class="iconfont icon-quanbufenlei-zhutitouzi- _i data-v-578307f5"></view>
+            </label>
+        </view>
+        <view catchtap="__e" class="concern-item-info-desc _p data-v-578307f5" data-event-opts="{{[ [ 'tap',[ [ 'goToMessage',['$event'] ] ] ] ]}}">
+            <view class="{{['_i data-v-578307f5','time',isToday?'color-red':'']}}" wx:if="{{timePoint}}">{{timePoint+''}}</view>
+            <label class="_span data-v-578307f5" wx:if="{{message}}">{{message&&message.title}}</label>
+        </view>
+    </view>
+</view>

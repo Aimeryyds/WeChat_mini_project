@@ -1,0 +1,53 @@
+.share-button-item {
+    overflow: hidden;
+    position: fixed;
+    left: 0;
+    right: 0;
+    bottom: -32rpx;
+    margin: 0 auto;
+    width: 252rpx;
+    height: 82rpx;
+    background-color: #fff;
+    border-radius: 82rpx;
+    line-height: 82rpx;
+    text-align: center;
+    color: #FFF;
+    font-size: 28rpx;
+    opacity: 0;
+    transition: bottom 0.4s,opacity 0.4s;
+    z-index: 1;
+}
+
+.share-button-item.active {
+    bottom: 32rpx;
+    opacity: 1;
+}
+
+.share-button-item .share-button-bg {
+    background-color: #3888ff;
+}
+
+.share-button-item .share-button-bg.touch-start {
+    opacity: 0.8;
+}
+
+.share-button-item .share-button-bg.disabled {
+    background-color: #D4D7DC;
+}
+
+.share-button-item .op-icon {
+    position: absolute;
+    top: 4rpx;
+    left: 46rpx;
+    bottom: 0;
+    margin: auto;
+    width: 40rpx;
+    height: 40rpx;
+    background-image: url(https://staticwx.cdn.bcebos.com/mini-program/images/ic_wx_logo.png);
+    background-size: 40rpx;
+    background-repeat: no-repeat;
+}
+
+.share-button-item .text {
+    margin-left: 56rpx;
+}

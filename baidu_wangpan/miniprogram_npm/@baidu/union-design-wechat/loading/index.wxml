@@ -1,0 +1,8 @@
+<view class="u-class u-loading {{'u-loading-'+size}} {{fix?'u-loading-fix':''}}">
+    <view class="u-loading-icon-box" wx:if="{{!custom}}">
+        <view class="u-loading-icon"></view>
+    </view>
+    <view class="u-loading-custom-content" wx:else>
+        <slot></slot>
+    </view>
+</view>

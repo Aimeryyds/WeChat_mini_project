@@ -1,0 +1,4 @@
+<view class="topic-header _header">
+    <topic-info bind:__l="__l" bind:follow="__e" data-event-opts="{{[ [ '^follow',[ [ 'toggleFollowsubject',['$0'],['subject'] ] ] ] ]}}" subject="{{subject}}" vueId="1"></topic-info>
+    <topic-bkj bind:__l="__l" bind:clickPlate="__e" bind:clickStock="__e" data-event-opts="{{[ [ '^clickStock',[ ['clickStock'] ] ],[ '^clickPlate',[ ['clickPlate'] ] ] ]}}" subject="{{subject}}" vueId="2" wx:if="{{subject.subjBkjInfo}}"></topic-bkj>
+</view>

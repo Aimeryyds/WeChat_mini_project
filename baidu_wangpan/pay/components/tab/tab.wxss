@@ -1,0 +1,139 @@
+.product-tab {
+    text-align: center;
+    margin-top: 40rpx;
+    display: flex;
+    font-weight: bold;
+    font-size: 32rpx;
+    color: #9E9E9E;
+}
+
+.product-tab-title {
+    flex: 1;
+}
+
+.active {
+    color: #212121;
+}
+
+.choose-identification {
+    border-radius: 3rpx;
+    width: 50rpx;
+    height: 6rpx;
+    margin: 6rpx auto 0;
+}
+
+.product-tab-title .svip-active {
+    background: #E5C789;
+}
+
+.product-tab-title .vip-active {
+    background: #FF7070;
+}
+
+.product-note {
+    display: flex;
+    padding: 36rpx 36rpx 35rpx 40rpx;
+}
+
+.privilege-note {
+    flex: 1;
+    font-family: PingFangSC-Regular;
+    font-size: 22rpx;
+    color: #212121;
+}
+
+.price-note {
+    flex: 1;
+    font-weight: bold;
+    font-size: 24rpx;
+    color: #9E9E9E;
+    text-align: right;
+}
+
+.product-note-icon {
+    width: 10rpx;
+    height: 18rpx;
+    margin-left: 12rpx;
+}
+
+.bottom-modal-container {
+    position: fixed;
+    z-index: 110;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    visibility: visible;
+}
+
+.bottom-modal-container.hidden-modal {
+    visibility: hidden;
+}
+
+.bottom-modal-container .modal-background {
+    position: relative;
+    width: 100%;
+    height: 100%;
+    z-index: 110;
+    background-color: rgba(0,0,0,0.4);
+    transition: all 0.3s;
+    opacity: 1;
+}
+
+.bottom-modal-container.hidden-modal .modal-background {
+    opacity: 0;
+}
+
+.bottom-modal-container.hidden-modal .modal-content {
+    visibility: hidden;
+    bottom: -100%;
+}
+
+.bottom-modal-container .modal-content {
+    position: absolute;
+    bottom: 0;
+    padding: 60rpx 40rpx 40rpx;
+    background-color: #F7F7F7;
+    z-index: 111;
+    border-radius: 24rpx 24rpx 0 0;
+    font-family: PingFangSC-Regular;
+    font-size: 26rpx;
+    color: #9E9E9E;
+}
+
+.bottom-modal-container .modal-content .item-title {
+    margin-bottom: 40rpx;
+    font-weight: bold;
+    font-size: 36rpx;
+    color: #212121;
+    display: block;
+    text-align: center;
+}
+
+.bottom-modal-container .modal-content .hide-dialog-dom {
+    position: absolute;
+    top: 34rpx;
+    right: 34rpx;
+    width: 50rpx;
+    height: 50rpx;
+    line-height: 50rpx;
+    text-align: center;
+}
+
+.bottom-modal-container .modal-content .hide-dialog-icon {
+    width: 22rpx;
+    height: 22rpx;
+}
+
+.bottom-modal-container .modal-content .item-wrap {
+    display: flex;
+    margin-bottom: 30rpx;
+}
+
+.bottom-modal-container .modal-content .item-wrap .item-point {
+    width: 10rpx;
+    height: 10rpx;
+    background: #BABABA;
+    border-radius: 50%;
+    margin: 13rpx 20rpx 0 0;
+}

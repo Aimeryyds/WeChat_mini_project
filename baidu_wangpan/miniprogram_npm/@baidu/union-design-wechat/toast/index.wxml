@@ -1,0 +1,7 @@
+<view bindtap="closeToast" class="u-toast-mask" wx:if="{{visible&&mask}}"></view>
+<view class="u-class u-toast {{place==='center'?'u-center':''}}" style="top: {{place==='top'?offset+'rpx':''}}; bottom: {{place==='bottom'?offset+'rpx':''}}" wx:if="{{visible}}">
+    <view class="u-toast-icon-box" wx:if="{{icon}}">
+        <u-icon color="#fff" size="{{34}}" type="{{icon}}" uClass="u-toast-icon {{icon==='loading'?'u-toast-icon-loading':''}}"></u-icon>
+    </view>
+    <view class="u-toast-content" wx:if="{{content}}">{{content}}</view>
+</view>

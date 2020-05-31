@@ -1,0 +1,15 @@
+<view class="container">
+    <view class="feed">
+        <view class="feed-gap"></view>
+        <view class="feed-header">
+            <view class="feed-title">更多精彩</view>
+            <view bindtap="handleClose" class="feed-close">
+                <image class="feed-close-img" src="{{closeIcon}}"></image>
+            </view>
+        </view>
+        <block wx:for="{{activities}}" wx:key="{{item.activityid}}">
+            <ActivityBanner activity="{{item}}" bindactivityClick="handleActivityClick" data-activity="{{item}}" show="{{item.isValid}}" wx:if="{{item.pop_type===14}}"></ActivityBanner>
+            <ActivityFeedIcon activity="{{item}}" bindactivityClick="handleActivityClick" data-activity="{{item}}" show="{{item.isValid}}" wx:if="{{item.pop_type===15}}"></ActivityFeedIcon>
+        </block>
+    </view>
+</view>

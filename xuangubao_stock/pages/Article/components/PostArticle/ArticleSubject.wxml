@@ -1,0 +1,31 @@
+<view class="subject flex-center-all _div data-v-9684c2f0">
+    <view bindtap="__e" class="left _div data-v-9684c2f0" data-event-opts="{{[ [ 'tap',[ [ '$emit',['click-image'] ] ] ] ]}}">
+        <image alt="文章所属话题背景图" class="_img data-v-9684c2f0" src="{{displayImage}}"></image>
+    </view>
+    <view bindtap="__e" class="middle _div data-v-9684c2f0" data-event-opts="{{[ [ 'tap',[ [ '$emit',['click-title'] ] ] ] ]}}" style="{{'flex:'+1+';'}}">
+        <view class="meta _div data-v-9684c2f0">
+            <view class="_header data-v-9684c2f0">{{(isTopic?'#':'')+title}}</view>
+            <label class="_span data-v-9684c2f0" wx:if="{{!isSubscribable}}">{{formattedFollowerCount+'关注'}}</label>
+            <label class="_span data-v-9684c2f0" wx:else>{{formattedSubscribeCount+'订阅'}}</label>
+        </view>
+        <view class="info _div data-v-9684c2f0">
+            <view class="_div data-v-9684c2f0" wx:if="{{!isSubscribable}}"></view>
+            <block wx:else>
+                <view class="_div data-v-9684c2f0" wx:if="{{introduction}}">
+                    <label class="line-clamp _span data-v-9684c2f0">{{introduction}}</label>
+                </view>
+            </block>
+        </view>
+    </view>
+    <view class="_div data-v-9684c2f0">
+        <view bindtap="__e" class="_div data-v-9684c2f0" data-event-opts="{{[ [ 'tap',[ [ '$emit',['follow'] ] ] ] ]}}" wx:if="{{!isSubscribable}}">
+            <x-button bind:__l="__l" class="data-v-9684c2f0" size="small" type="info" vueId="1" vueSlots="{{['default']}}" wx:if="{{following}}">已关注</x-button>
+            <x-button plain bind:__l="__l" class="data-v-9684c2f0" size="small" type="primary" vueId="2" vueSlots="{{['default']}}" wx:if="{{!following}}">关注</x-button>
+        </view>
+        <view class="_div data-v-9684c2f0" wx:else>
+            <x-button bind:__l="__l" bind:click="__e" class="data-v-9684c2f0" data-event-opts="{{[ [ '^click',[ [ '$emit',['subscribe'] ] ] ] ]}}" size="small" vueId="3" vueSlots="{{['default']}}" wx:if="{{!isSubscribed}}">订阅</x-button>
+            <x-button bind:__l="__l" bind:click="__e" class="data-v-9684c2f0" data-event-opts="{{[ [ '^click',[ [ '$emit',['subscribe'] ] ] ] ]}}" size="small" vueId="4" vueSlots="{{['default']}}" wx:if="{{isSubscribed&&subject.remainingDays>0}}">已订阅</x-button>
+            <x-button bind:__l="__l" bind:click="__e" class="data-v-9684c2f0" data-event-opts="{{[ [ '^click',[ [ '$emit',['subscribe'] ] ] ] ]}}" size="small" vueId="5" vueSlots="{{['default']}}" wx:if="{{isSubscribed&&subject.remainingDays<1}}">续订</x-button>
+        </view>
+    </view>
+</view>

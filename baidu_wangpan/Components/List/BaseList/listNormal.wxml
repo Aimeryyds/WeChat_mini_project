@@ -1,0 +1,11 @@
+<block wx:if="{{viewMode==='list'}}">
+    <ListItem bind:longPress="longPress" bind:select="selectItem" canSelected="{{canSelected}}" fileMeta="{{item}}" index="{{index}}" isLongPressEntrySelection="{{!canSelected}}" isSelect="{{item.isSelect}}" shareDirPage="{{shareDirPage}}" sharePage="{{sharePage}}" wx:for="{{list}}" wx:key="{{item.fs_id}}"></ListItem>
+</block>
+<block wx:else>
+    <view class="grid-box" wx:if="{{list[0].isdir===1}}">
+        <GridItem bind:longPress="longPress" bind:select="selectItem" canSelected="{{canSelected}}" fileMeta="{{item}}" filter="{{'dir'}}" index="{{index}}" isLongPressEntrySelection="{{!canSelected}}" isSelect="{{item.isSelect}}" shareDirPage="{{shareDirPage}}" wx:for="{{list}}" wx:key="{{item.fs_id}}"></GridItem>
+    </view>
+    <view class="grid-box" wx:if="{{list[list.length-1].isdir===0}}">
+        <GridItem bind:longPress="longPress" bind:select="selectItem" canSelected="{{canSelected}}" fileMeta="{{item}}" filter="{{'file'}}" index="{{index}}" isLongPressEntrySelection="{{!canSelected}}" isSelect="{{item.isSelect}}" shareDirPage="{{shareDirPage}}" wx:for="{{list}}" wx:key="{{item.fs_id}}"></GridItem>
+    </view>
+</block>

@@ -1,0 +1,92 @@
+<view class="page">
+    <view class="tipsview">
+        <image src="../../img/prompt_day.png" style="width:46rpx;height:26rpx"></image>
+        <text>提示：受限于小程序推送政策，暂时开放订阅1只基金的净值更新通知。点击右边的开关开启净值更新通知！</text>
+    </view>
+    <view class="button-container" wx:if="{{list.length}}">
+        <view bindtap="gotonews" class="news-btn">
+            <image src="../../img/news.png" style="width:36rpx;height:38rpx"></image>
+            <text>新闻</text>
+        </view>
+        <view bindtap="gotoannouncement" class="announcement-btn">
+            <image src="../../img/Notice.png" style="width:39rpx;height:38rpx"></image>
+            <text>公告</text>
+        </view>
+    </view>
+    <view class="items">
+        <view class="item" wx:for="{{list}}" wx:key="{{index}}">
+            <form bindsubmit="getformid" reportSubmit="true">
+                <button class="nobtn fundbtn" formType="submit" hoverClass="other-button-hover">
+                    <view bindlongtap="longtap" bindtouchend="touchE" bindtouchmove="touchM" bindtouchstart="touchS" class="inner" data-index="{{index}}" style="{{item.txtStyle}}">
+                        <view class="inner-row">
+                            <view bindtap="gotoPortfolio" class="content" data-index="{{index}}" wx:if="{{!item.fundType}}">
+                                <text class="fund-type" style="background-color:#FBA52F;">组</text>
+                                <text class="fund-name" style="font-size:{{item.fundName.length>14?14:17}}px; margin-left:{{item.fundName.length>14?5:10}}px">{{item.fundName}}</text>
+                                <text class="fund-code" style="margin-left:{{item.fundName.length>14?5:10}}px">{{item.fundCodeShow}}</text>
+                            </view>
+                            <view bindtap="gotoItem" class="content" data-index="{{index}}" wx:elif="{{item.fundType=='01'}}">
+                                <text class="fund-type" style="background-color:#FBA52F;">货</text>
+                                <text class="fund-name" style="font-size:{{item.fundName.length>14?14:17}}px; margin-left:{{item.fundName.length>14?5:10}}px">{{item.fundName}}</text>
+                                <text class="fund-code" style="margin-left:{{item.fundName.length>14?5:10}}px">{{item.fundCodeShow}}</text>
+                            </view>
+                            <view bindtap="gotoItem" class="content" data-index="{{index}}" wx:else>
+                                <text class="fund-type" style="background-color:#41a5ef;">普</text>
+                                <text class="fund-name" style="font-size:{{item.fundName.length>14?14:17}}px; margin-left:{{item.fundName.length>14?5:10}}px">{{item.fundName}}</text>
+                                <text class="fund-code" style="margin-left:{{item.fundName.length>14?5:10}}px">{{item.fundCodeShow}}</text>
+                            </view>
+                            <view wx:if="{{item.fundType}}">
+                                <switch bindchange="switch1Change" checked="{{index==currentIndex}}" data-index="{{index}}"></switch>
+                            </view>
+                            <view style="visibility:hidden" wx:else>
+                                <switch bindchange="switch1Change" checked="{{index==currentIndex}}" data-index="{{index}}"></switch>
+                            </view>
+                        </view>
+                        <view bindtap="gotoPortfolio" class="inner-row down" data-index="{{index}}" wx:if="{{!item.fundType}}">
+                            <view class="newpleft">
+                                <text class="text-lable">最新净值</text>
+                                <text>
+                                    <text class="text-lable-larger">{{item.latestUnit?item.latestUnit:'--'}}</text>
+                                    <text class="text-lable">（{{item.navDate?item.navDate:'--'}}）</text>
+                                </text>
+                            </view>
+                            <view class="newpright">
+                                <text class="text-lable">年化收益</text>
+                                <text class="text-value {{item.annualyeild<0?'maingreen':'mainred'}}" style="padding-left:{{item.navIncrease<0?0:4}}px;">{{item.annualyeild}}%</text>
+                            </view>
+                        </view>
+                        <view bindtap="gotoItem" class="inner-row down" data-index="{{index}}" wx:elif="{{item.fundType=='01'}}">
+                            <view class="newpleft">
+                                <text class="text-lable">万份收益</text>
+                                <text>
+                                    <text class="text-lable-larger">{{item.mmfUnityield}}</text>
+                                    <text class="text-lable">（{{item.navDate}}）</text>
+                                </text>
+                            </view>
+                            <view class="newpright">
+                                <text class="text-lable">七日年化</text>
+                                <text class="text-value {{item.mmfAnnualizedYield<0?'maingreen':'mainred'}}" style="padding-left:{{item.navIncrease<0?0:4}}px;">{{item.mmfAnnualizedYield}}%</text>
+                            </view>
+                        </view>
+                        <view bindtap="gotoItem" class="inner-row down" data-index="{{index}}" wx:else>
+                            <view class="newpleft">
+                                <text class="text-lable">最新净值</text>
+                                <text>
+                                    <text class="text-lable-larger">{{item.latestUnit?item.latestUnit:'--'}}</text>
+                                    <text class="text-lable">（{{item.navDate?item.navDate:'--'}}）</text>
+                                </text>
+                            </view>
+                            <view class="newpright">
+                                <text class="text-lable">最新涨幅</text>
+                                <text class="text-value {{item.navIncrease<0?'maingreen':'mainred'}}" style="padding-left:{{item.navIncrease<0?0:4}}px;">{{item.navIncrease?item.navIncrease+'%':'--'}}</text>
+                            </view>
+                        </view>
+                    </view>
+                    <view bindtap="delItem" class="inner-box del" data-index="{{index}}" style="width:{{delBtnWidth}}px;">删除</view>
+                </button>
+            </form>
+        </view>
+        <view bindtap="gotoSearch" class="item add-item" wx:if="{{showadditem}}">
+            <image src="../../img/add.png"></image>
+        </view>
+    </view>
+</view>

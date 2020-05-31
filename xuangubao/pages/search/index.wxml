@@ -1,0 +1,10 @@
+<view class="search-wrapper _div data-v-ecc6186a">
+    <header-bar-with-capsule bind:__l="__l" class="data-v-ecc6186a" title="搜索" vueId="1"></header-bar-with-capsule>
+    <view class="search-pane-wrapper _div data-v-ecc6186a" style="{{'top:'+titleBarHeight+'rpx'+';'}}">
+        <search-pane bind:__l="__l" bind:input="__e" bind:search="__e" class="data-v-ecc6186a" data-event-opts="{{[ [ '^search',[ ['search'] ] ],[ '^input',[ ['e0'] ] ] ]}}" keyword="{{keyword}}" vueId="2"></search-pane>
+    </view>
+    <view class="body _div data-v-ecc6186a">
+        <search-results bind:__l="__l" bind:clickPlate="__e" bind:clickStock="__e" class="data-v-ecc6186a" data-event-opts="{{[ [ '^clickStock',[ ['clickStockResult'] ] ],[ '^clickPlate',[ ['clickPlateResult'] ] ] ]}}" keyword="{{keyword}}" searchResults="{{searchResults}}" vueId="3" wx:if="{{searchResults||keyword}}"></search-results>
+        <search-history bind:__l="__l" bind:clickPlate="__e" bind:clickStock="__e" class="data-v-ecc6186a" data-event-opts="{{[ [ '^clickStock',[ ['clickStockHistory'] ] ],[ '^clickPlate',[ ['clickPlateHistory'] ] ] ]}}" searchRecords="{{searchRecords}}" vueId="4" wx:else></search-history>
+    </view>
+</view>

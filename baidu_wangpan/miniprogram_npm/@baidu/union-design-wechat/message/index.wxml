@@ -1,0 +1,9 @@
+<view catchtap="handleTap" class="u-class u-message u-message-{{type}} {{visible?'u-message-show':''}}" style="height: {{height}}rpx;{{place==='top'?'top:'+offset+'rpx;':''}};{{place==='bottom'?'bottom: '+offset+'rpx;':''}}{{background?'background: '+background:''}};{{background?'color: #fff':''}};">
+    <u-icon color="#fff" size="{{34}}" type="{{icon}}" uClass="u-message-reload-icon" wx:if="{{icon}}"></u-icon>
+    <image class="u-message-reload-img" src="https://staticiot.cdn.bcebos.com/union/staticwx/refresh.png" wx:if="{{iconImage}}"></image>
+    {{content}}
+    <block wx:if="{{showClose}}">
+        <image catchtap="handleClose" class="u-message-close-img" mode="aspectFit" src="{{closeImage}}" wx:if="{{closeImage}}"></image>
+        <u-icon catchtap="handleClose" color="#fff" size="{{32}}" type="close" uClass="u-message-close-icon" wx:else></u-icon>
+    </block>
+</view>

@@ -1,0 +1,20 @@
+<view class="info-container">
+    <view class="info-avatar">
+        <image class="info-avatar-img" src="{{transInfo.avatar}}"></image>
+    </view>
+    <block wx:if="{{pageType}}">
+        <view class="info-intro">
+            <view class="info-intro-name ellipsis">收集人：<text class="info-intro-user-name">{{transInfo.name}}</text>
+            </view>
+            <view class="info-time">{{transInfo.time||' '}}</view>
+        </view>
+        <view class="info-action">
+            <u-button bindclick="send" uClass="info-action-send-btn">再次发送</u-button>
+        </view>
+    </block>
+    <view class="info-intro" wx:else>
+        <view class="info-intro-name ellipsis">
+            <text class="info-intro-user-name">{{transInfo.name}}</text>的分享</view>
+        <view class="info-time">{{transInfo.time||' '}}</view>
+    </view>
+</view>

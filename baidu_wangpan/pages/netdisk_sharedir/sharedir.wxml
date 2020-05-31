@@ -1,0 +1,39 @@
+<Navbar id="Navbar" wx:if="{{!isBatch}}"></Navbar>
+<view style="height:{{height}}px"></view>
+<view class="join-fail" style="height: {{systemInfo?scrollHeight+'rpx':'auto'}}" wx:if="{{invalid}}">
+    <view class="join-fail-icon"></view>
+    <text>该共享已失效</text>
+</view>
+<view class="sharedir-container" style="height: {{systemInfo?scrollHeight+'rpx':'auto'}}" wx:elif="{{sharedirData.fileName}}">
+    <TopTip bindretry="handleUploadRetry" id="topTip"></TopTip>
+    <view class="batch-header-placehold" style="height: {{isBatch?height+'px':0}}; top: -{{height}}px"></view>
+    <view class="{{isBatch?'batch-header':'list-header'}}">
+        <view style="height: 4rpx;"></view>
+        <include src="./header.wxml"></include>
+    </view>
+    <scroll-view scrollY bindscroll="toCeiling" bindscrolltolower="loadMoreScrollLower" bindtouchstart="moveStart" class="sharedir-scroll-view {{isGuideUser?'list-bottom':''}}" lowerThreshold="72" style="height: {{scrollHeight+'rpx'}}">
+        <view wx:if="{{!isBatch}}">
+            <include src="./header.wxml"></include>
+        </view>
+        <XList bind:select="select" bind:shareDirAddFiles="showAddModalDialog" bind:switchMode="switchMode" bindisEmpty="onListEmpty" canSelected="{{isBatch}}" canSwitchMode="{{!isBatch}}" count="{{count}}" id="XList" shareDirPage="{{true}}" showLoading="{{true}}" useScroll="{{false}}" whenEmpty="sharedirlist"></XList>
+    </scroll-view>
+</view>
+<view wx:if="{{(!isListEmpty||xListLen>0)&&!shareButtonShow&&!invalid}}">
+    <BottomBtnBar barType="{{barType}}" bgColor="{{isBatch?'#06A7FF':'#FCFCFC'}}" bindbuttonFn="bottomBtnFn" count="{{count}}" id="bottomBtnBar" isAllFileOwner="{{isOwner||isAllFileOwner}}" isBatch="{{isBatch}}">
+        <view wx:if="{{!isBatch}}">
+            <BottomShareButton bind:action="bottomBtnFn" disabled="{{!isOwner}}" iconClass="icon-share-button" isShowIcon="{{true}}" type="small">
+                分享文件
+            </BottomShareButton>
+        </view>
+    </BottomBtnBar>
+</view>
+<view class="foot-erea {{count>0?'show':''}}" wx:if="{{shareButtonShow}}">
+    <BottomShareButton bind:action="bottomBtnFn" iconClass="icon-share-button" isShowIcon="{{true}}" type="small">发送给朋友</BottomShareButton>
+</view>
+<BindBtn id="BindBtn" innerText="绑定百度帐号，解锁更多精彩功能" wx:if="{{isGuideUser}}"></BindBtn>
+<ComfirmDialog bind:cancelEvent="_cancelEvent" bind:confirmEvent="_confirmEvent" id="comfirmDialog"></ComfirmDialog>
+<ModalDialog id="modalDialog"></ModalDialog>
+<Toast id="toast"></Toast>
+<FileNameDialog id="dialog"></FileNameDialog>
+<ShowDialog id="showDialog"></ShowDialog>
+<GuideMember bindclose="handleGuideMemberClose" config="{{guideMemberTip}}" wx:if="{{showGuideMember}}"></GuideMember>

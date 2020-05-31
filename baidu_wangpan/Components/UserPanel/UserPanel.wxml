@@ -1,0 +1,35 @@
+<view bindtap="" class="panel-wrap" hidden="{{!isShow}}">
+    <view catchtap="hide" class="panel-background"></view>
+    <view class="panel-content">
+        <view class="userinfo-wrap">
+            <view class="avatar-wrap" style="background-image:url({{avatar}})">
+                <view class="{{isGuideUser?'avatar-wx-logo':'avatar-logo'}}"></view>
+            </view>
+            <view class="userinfo" wx:if="{{!isGuideUser}}">
+                <view class="userinfo-title">
+                    <text class="userinfo-name">{{name}}</text>
+                    <view class="userinfo-typeIcon{{memberType}}"></view>
+                </view>
+                <view class="quota-wrap">
+                    <view class="quota-default">
+                        <view class="{{quotaUsageRate<=60?'quota-e':quotaUsageRate>90?'quota-t':'quota-n'}}" style="width:{{quotaUsageRate}}%"></view>
+                    </view>
+                    <view class="quota-des">{{quotaSize.usedQuota}} / {{quotaSize.totalQuota}}</view>
+                </view>
+            </view>
+            <text class="userinfo-guide-name" wx:else>{{name}}</text>
+        </view>
+        <button bindtap="_myPanClick" bindtouchend="_touchEnd" bindtouchstart="_touchStart" class="feedbackWrap" data-button="pan" style="{{panTouchStyle}}" wx:if="{{!isGuideUser}}">
+            <text>查看我的网盘</text>
+            <view class="feedbackMore"></view>
+        </button>
+        <button bindtap="_bindAccountClick" bindtouchend="_touchEnd" bindtouchstart="_touchStart" class="feedbackWrap" data-button="account" style="{{accountTouchStyle}}" wx:else>
+            <text>绑定网盘帐号</text>
+            <view class="feedbackMore"></view>
+        </button>
+        <button bindtouchend="_touchEnd" bindtouchstart="_touchStart" catchtap="hide" class="feedbackWrap" data-button="contact" openType="contact" style="{{contactTouchStyle}}">
+            <text>用户反馈</text>
+            <view class="feedbackMore"></view>
+        </button>
+    </view>
+</view>

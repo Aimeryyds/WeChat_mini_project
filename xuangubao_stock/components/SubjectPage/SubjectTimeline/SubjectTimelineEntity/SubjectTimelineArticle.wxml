@@ -1,0 +1,12 @@
+<view class="article-list-entity _div data-v-7e6e5e38">
+    <view class="_div data-v-7e6e5e38" style="height:10rpx;"></view>
+    <view class="article-title _div data-v-7e6e5e38">
+        <view bindtap="__e" class="_h4 data-v-7e6e5e38" data-event-opts="{{[ [ 'tap',[ [ 'goToArticle',['$0'],['article'] ] ] ] ]}}">{{article.title}}</view>
+    </view>
+    <view bindtap="__e" class="article-summary _div data-v-7e6e5e38" data-event-opts="{{[ [ 'tap',[ [ 'goToArticle',['$0'],['article'] ] ] ] ]}}" wx:if="{{article.summary}}">{{article.summary}}</view>
+    <view class="article-image _div data-v-7e6e5e38" wx:if="{{article.image}}">
+        <image bindtap="__e" class="_img data-v-7e6e5e38" data-event-opts="{{[ [ 'tap',[ [ 'previewImg',['$0'],['article.image'] ] ] ] ]}}" src="{{cropArticleImage}}"></image>
+    </view>
+    <article-list-item-purchase bind:__l="__l" bind:click="__e" class="data-v-7e6e5e38" data-event-opts="{{[ [ '^click',[ ['purchase'] ] ] ]}}" paidCount="{{article.paidCount}}" vueId="1" wx:if="{{!hidePremium&&article.contentRefused}}"></article-list-item-purchase>
+    <article-list-item-footer-container article="{{article}}" author="{{article.displayAuthor}}" bind:__l="__l" class="data-v-7e6e5e38" likeCount="{{article.likeCount}}" liked="{{article.liked}}" time="{{article.createdAt*1000}}" vueId="2"></article-list-item-footer-container>
+</view>

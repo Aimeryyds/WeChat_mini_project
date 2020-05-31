@@ -1,0 +1,20 @@
+<view animation="{{animationDataOpactiy}}" bindtap="__e" class="topgainer-catalog _div data-v-29c1cd6c" data-event-opts="{{[ [ 'tap',[ [ '$emit',['close'] ] ] ] ]}}" wx:if="{{tagsLocal&&tagsLocal.length}}">
+    <view animation="{{animationData}}" bindtap="__e" class="topgainer-catalog-content _div data-v-29c1cd6c" data-event-opts="{{[ [ 'tap',[ [ 'e0',['$event'] ] ] ] ]}}">
+        <view class="header _div data-v-29c1cd6c">
+            <view catchtap="__e" class="iconfont iconjuxingcopyx10 _i data-v-29c1cd6c" data-event-opts="{{[ [ 'tap',[ [ '$emit',['close'] ] ] ] ]}}"></view>
+            <view class="_h2 data-v-29c1cd6c">全部风口板块</view>
+            <label class="_span data-v-29c1cd6c">{{'共'+tagsLocal.length+'个板块'}}</label>
+        </view>
+        <view class="_ul data-v-29c1cd6c">
+            <view catchtap="__e" class="_li data-v-29c1cd6c" data-event-opts="{{[ [ 'tap',[ [ 'select',['$0'],[ [ ['tagsLocal','',idx,'name'] ] ] ] ] ] ]}}" wx:for="{{tagsLocal}}" wx:for-index="idx" wx:for-item="tag" wx:key="idx">
+                <view class="name _p data-v-29c1cd6c">{{tag.name}}</view>
+                <view class="stock-count _p data-v-29c1cd6c" wx:if="{{tag.stocks}}">
+                    <label class="number _span data-v-29c1cd6c">{{tag.stocks.length}}</label>
+                    <label class="unit _span data-v-29c1cd6c">家</label>
+                </view>
+                <view class="pcp _p data-v-29c1cd6c" style="{{'background:'+tag.pcpBg+';'}}" wx:if="{{tag.pcp}}">{{tag.pcpString}}</view>
+                <view class="pcp empty _p data-v-29c1cd6c" wx:else>--.--</view>
+            </view>
+        </view>
+    </view>
+</view>

@@ -1,0 +1,307 @@
+@import "../../../__wuBaseWxss__/2.wxss";
+
+@import "../../../netdisk_templates/loading_list/loading_list.wxss";
+
+@import "../../../netdisk_templates/empty_list/emptyList.wxss";
+
+@import "../../../__wuBaseWxss__/4.wxss";
+
+@import "../../../__wuBaseWxss__/5.wxss";
+
+@import "List.wxss";
+
+.share-list {
+    width: 100%;
+    height: 100%;
+    box-sizing: border-box;
+}
+
+.bindBtn {
+    width: calc(100% - 64rpx);
+    height: 100rpx;
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    padding: 32rpx;
+    background-color: #fff;
+    display: flex;
+    padding-top: 0;
+}
+
+.save-success {
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    line-height: 128rpx;
+    background-color: #FCFCFC;
+    padding-left: 32rpx;
+    padding-right: 32rpx;
+    box-sizing: border-box;
+    position: fixed;
+    bottom: 0;
+    left: 0;
+}
+
+.sharelist-saved-sharebutton {
+    color: #fff;
+    height: 64rpx;
+    line-height: 64rpx;
+    border-radius: 40rpx;
+    background-color: #02C160;
+    font-size: 26rpx;
+    margin: 33rpx 0 0 0;
+    border: none;
+}
+
+.sharelist-saved-sharebutton::after {
+    border: none;
+}
+
+.save-tip-wrap {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+}
+
+.save-tip-wrap-full {
+    width: 100%;
+}
+
+.save-tip {
+    font-size: 26rpx;
+    color: #333;
+}
+
+.operation {
+    font-size: 28rpx;
+    color: #06A7FF;
+    margin-left: 24rpx;
+}
+
+.sharelist-title {
+    box-sizing: border-box;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+    font-size: 28rpx;
+    padding-left: 32rpx;
+    padding-right: 32rpx;
+    line-height: 78rpx;
+    height: 78rpx;
+    overflow: hidden;
+    background: #F6F7F9;
+}
+
+.sharelist-title-new {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+    height: 140rpx;
+    width: 100%;
+    background: #FFF;
+}
+
+.sharelist-title-icon {
+    height: 88rpx;
+    width: 88rpx;
+    margin: 3rpx 20rpx 0 32rpx;
+    border-radius: 50%;
+    display: block;
+}
+
+.sharelist-title-middle {
+    flex: 1;
+}
+
+.sharelist-title-name {
+    color: #000;
+    font-size: 32rpx;
+    font-weight: bold;
+    display: inline-block;
+}
+
+.sharelist-title-name.has-icon {
+    background-size: 40rpx auto;
+    background-repeat: no-repeat;
+    background-position: center right;
+    padding-right: 55rpx;
+}
+
+.sharelist-title-name.is-vip {
+    background-image: url('https://staticwx.cdn.bcebos.com/mini-program/images/ic_member_v2.png');
+}
+
+.sharelist-title-name.is-svip {
+    background-image: url('https://staticwx.cdn.bcebos.com/mini-program/images/ic_super_member_v2.png');
+}
+
+.sharelist-title-intro {
+    color: #999;
+    font-size: 24rpx;
+}
+
+.sharelist-title-tail {
+    color: #06A7FF;
+    font-size: 24rpx;
+    margin-right: 32rpx;
+}
+
+.list-info {
+    color: #06A7FF;
+}
+
+.invalid-wrap {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.invalid {
+    width: 100%;
+    height: calc(100% - 406rpx);
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+.invalid-icon {
+    width: 297rpx;
+    background: url('https://staticwx.cdn.bcebos.com/mini-program/images/bg_netdisc_blank.png') no-repeat center top;
+    height: 236rpx;
+    background-size: 297rpx 236rpx;
+    padding-bottom: 30rpx;
+}
+
+.invalid-text {
+    font-size: 28rpx;
+    color: #8F949F;
+    line-height: 50rpx;
+    padding-left: 40rpx;
+    padding-right: 40rpx;
+    display: inline-block;
+}
+
+.invalid-remind {
+    border-radius: 72rpx;
+    font-size: 24rpx;
+    font-weight: bold;
+    padding: 20rpx 35rpx;
+    margin-top: 50rpx;
+}
+
+.save-disable {
+    height: 100rpx;
+    margin: 0 auto;
+    border-radius: 8rpx;
+    line-height: 100rpx;
+    display: flex;
+    flex-flow: row wrap;
+    justify-content: center;
+    background-color: rgba(56,136,255,.5);
+    color: #FFF;
+    font-size: 34rpx;
+    flex-grow: 1;
+}
+
+.complaint {
+    margin-left: 24rpx;
+    font-size: 28rpx;
+    color: #06A7FF;
+}
+
+.sharelist-sharebutton {
+    padding: 0;
+    margin: 0;
+    font-size: 32rpx;
+    line-height: 100rpx;
+}
+
+.others-sharebutton {
+    width: 331rpx;
+    margin-right: 24rpx;
+}
+
+.hover-opacity {
+    opacity: 0.6;
+}
+
+.own-sharebutton {
+    width: 100%;
+}
+
+.ic-wechat {
+    width: 36rpx;
+    height: 31rpx;
+    margin-bottom: -2rpx;
+}
+
+.sharelist-sharebutton::after {
+    border: none;
+}
+
+.sharelist-savebutton {
+    flex-grow: 1;
+}
+
+.load-tips {
+    display: none;
+    height: 92rpx;
+    font-size: 24rpx;
+    line-height: 92rpx;
+    color: #9E9E9E;
+    text-align: center;
+}
+
+.story-info-wrap {
+    padding: 32rpx 32rpx 24rpx;
+}
+
+.story-info-wrap .story-title {
+    width: 100%;
+    margin-bottom: 6rpx;
+    color: #212121;
+    font-size: 48rpx;
+    font-weight: bold;
+}
+
+.story-info-wrap .story-info {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    color: #212121;
+    font-size: 24rpx;
+}
+
+.story-info-wrap .story-info .story-share-people {
+    width: 70%;
+    color: #9E9E9E;
+    text-align: right;
+}
+
+.ellipsis {
+    overflow: hidden;
+    display: block;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+}
+
+.sharelist-login-cover-container {
+    position: relative;
+}
+
+.sharelist-login-cover {
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+}
+
+.sharelist-login-cover.list-item-cover {
+    top: 98rpx;
+}

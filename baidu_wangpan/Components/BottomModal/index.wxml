@@ -1,0 +1,19 @@
+<view bindtap="hide" class="bottom-modal-container" wx:if="{{show}}">
+    <view class="modal-background"></view>
+    <view catchtap class="modal-content">
+        <view class="modal-title-wrap" wx:if="{{title}}">
+            <view class="modal-title">
+                <text>{{title}}</text>
+            </view>
+            <view bindtap="hide" class="modal-close">
+                <image class="modal-close-img" src="{{closeIcon}}"></image>
+            </view>
+        </view>
+        <slot name="header"></slot>
+        <slot></slot>
+        <view catchtap="hide" class="modal-cancel" wx:if="{{cancelText}}">
+            <text>{{cancelText}}</text>
+        </view>
+        <slot name="footer"></slot>
+    </view>
+</view>

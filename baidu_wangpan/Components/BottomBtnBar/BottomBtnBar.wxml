@@ -1,0 +1,9 @@
+<view class="bottom_btn_bar_container {{isIpx?'isIpx':''}}" style="background: {{bgColor}}">
+    <view class="{{barType}} bar_style">
+        <view bindtap="buttonFn" class="{{item.btnClass}} btn" data-spec-type="{{item.specType}}" id="{{item.intro}}" wx:for="{{list}}" wx:key="text">
+            <view class="{{item.icon}} button_icon {{item.isNew?'is-new':''}}"></view>
+            <view style="color: {{item.fontColor||'#212121'}}">{{item.text}}</view>
+        </view>
+        <slot></slot>
+    </view>
+</view>

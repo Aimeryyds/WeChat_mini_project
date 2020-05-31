@@ -1,0 +1,6 @@
+<view class="privilege-tab">
+    <view bindtap="clickPrivilegeTab" class="product-tab-title {{chooseType===item.type?'active':''}}" data-type="{{item.type}}" wx:for="{{privilegeTab}}" wx:key="index">
+        {{item.titleName}}
+        <view class="choose-identification" wx:if="{{chooseType===item.type}}"></view>
+    </view>
+</view>

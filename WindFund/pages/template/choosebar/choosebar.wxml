@@ -1,0 +1,54 @@
+<template name="commonlist">
+    <view bindtap="commonlistitemtap" class="commonlist-item flex {{isSingle?checkIndex==index?'checked':'':item.checked?'checked':''}}" data-index="{{index}}" data-value="{{item.value}}" wx:for="{{list}}" wx:key="{{index}}">
+        <view class="choosebox flex">
+            <text></text>
+        </view>
+        <view class="choosename">{{item.text}}</view>
+    </view>
+</template>
+<template name="abcdTags">
+    <view class="abcdTags" style="width:30px;height: {{letters.length*15}}px;">
+        <view bindtap="abcdTagTap" class="tagitem" data-tag="{{item}}" wx:for="{{letters}}">{{item}}</view>
+    </view>
+</template>
+<template name="wxSortPickerViewItem">
+    <view bindtap="companylistitemtap" class="commonlist-item flex {{child.checked?'checked':''}}" data-code="{{child.value}}" data-tag="{{item.tag}}" wx:for="{{item.textArray}}" wx:for-item="child" wx:key="{{index}}">
+        <view class="choosebox flex">
+            <text></text>
+        </view>
+        <view class="choosename">{{child.text}}</view>
+    </view>
+</template>
+<template name="companylist">
+    <scroll-view class="wxSortPickerViewList" scrollIntoView="{{tag}}" scrollY="true" style="height: {{scroolheight}}px;">
+        <block wx:if="{{item.textArray.length>0}}" wx:for="{{list}}">
+            <view class="company-tag" id="{{item.tag}}">{{item.tag}}</view>
+            <template is="wxSortPickerViewItem" data="{{item:item}}"></template>
+        </block>
+    </scroll-view>
+    <template is="abcdTags" data="{{letters:letters}}"></template>
+</template>
+<template name="choosebar">
+    <view class="choose-view {{left.show||right.show?'fullscreen':''}}">
+        <view class="choose-bar flex">
+            <view bindtap="lefttap" class="{{left.active?'active':''}}">{{left.name}}<text class="tri-style {{left.show?'tri-up':'tri-down'}}"></text>
+            </view>
+            <view bindtap="righttap" class="{{right.active?'active':''}}">{{right.name}}<text class="tri-style {{right.show?'tri-up':'tri-down'}}"></text>
+            </view>
+        </view>
+        <view class="selection-view" wx:if="{{left.show||right.show}}">
+            <view class="left-view" wx:if="{{left.show}}">
+                <template is="{{left.type}}" data="{{...left}}"></template>
+            </view>
+            <view class="right-view" wx:if="{{right.show}}">
+                <template is="{{right.type}}" data="{{...right}}"></template>
+            </view>
+            <view class="btn-view flex">
+                <view bindtap="choosereset" hoverClass="btn-hover">重置</view>
+                <view bindtap="chooseconfirm" class="confirm" hoverClass="confirm-btn-hover">确定</view>
+            </view>
+        </view>
+    </view>
+    <view bindtap="choosehide" class="blackscreen" wx:if="{{left.show||right.show}}"></view>
+</template>
+<import src="../../template/wxSortPickerView/wxSortPickerView.wxml"></import>

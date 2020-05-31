@@ -1,0 +1,21 @@
+<view class="section-view" id="bond-view" wx:if="{{holddata}}">
+    <view class="section-title">
+        <text>{{holddata.name}}</text>
+    </view>
+    <view class="section-content">
+        <view class="section-item {{holddata.isThreeColumn?'threeColumn':''}}" wx:for="{{holddata.list}}" wx:key="{{index}}">
+            <block wx:if="{{index===0}}">
+                <view class="section-item-desc">{{item.text}}</view>
+                <view class="section-item-mid" wx:if="{{item.minc}}">{{item.minc}}</view>
+                <view class="section-item-value">{{item.value}}</view>
+            </block>
+            <block wx:else>
+                <view class="section-item-desc">{{item.text}}</view>
+                <view class="section-item-mid {{item.minc=='--'?'mainhardgray':item.minc<0?'maingreen':'mainred'}}" wx:if="{{item.minc}}">{{item.minc}}{{item.minc!='--'?'%':''}}</view>
+                <view class="section-item-value">{{item.value}}{{item.value!='--'?'%':''}}
+          <image class="arrowclass" src="../../../img/arrow_{{item.increase=='1'?'up':'down'}}.png" wx:if="{{index!=0&&item!=='0'&&item.increase}}"></image>
+                </view>
+            </block>
+        </view>
+    </view>
+</view>

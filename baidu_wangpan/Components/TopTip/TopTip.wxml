@@ -1,0 +1,24 @@
+<view bindtap="handleContainerClick" class="toptip-container toptip-kind-{{kind}} toptip-action-{{action}}" hidden="{{!status}}">
+    <block wx:if="{{status==='uploading'}}">
+        <image class="toptip-icon" src="{{staticName}}mini-program/images/ic_toast_uploading.png"></image>
+        <text class="toptip-text">上传中...</text>
+    </block>
+    <block wx:if="{{status==='success'}}">
+        <image class="toptip-icon" src="{{staticName}}mini-program/images/ic_toast_success.png"></image>
+        <text class="toptip-text">上传成功</text>
+    </block>
+    <block wx:if="{{status==='caution'}}">
+        <image class="toptip-icon" src="{{staticName}}mini-program/images/ic_toast_failure.png"></image>
+        <text class="toptip-text">{{errMsg}}</text>
+    </block>
+    <block wx:if="{{status==='cloudUploading'}}">
+        <image class="toptip-icon" src="{{staticName}}mini-program/images/ic_toast_failure.png"></image>
+        <text class="toptip-text">{{numTip}}</text>
+    </block>
+    <text class="toptip-text" wx:if="{{status==='localUploading'}}">{{numTip}}</text>
+    <text class="toptip-text" wx:if="{{status==='cloudUploadingExceed'}}">容量不足，上传失败</text>
+    <view catchtap="handleClose" class="toptip-close-icon">
+        <image class="toptip-close-icon-img" src="{{closeIcon}}" wx:if="{{showClose}}"></image>
+    </view>
+</view>
+<GuideMember bindclose="handleGuideMemberClose" config="{{guideMemberTip}}" wx:if="{{showGuideMember}}"></GuideMember>

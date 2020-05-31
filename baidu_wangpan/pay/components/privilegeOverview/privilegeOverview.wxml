@@ -1,0 +1,11 @@
+<view class="privilege-ovewview-title">
+    <text class="title-note">{{chooseType==='svip'?'超级':''}}会员尊享特权</text>
+    <view bindtap="goToPrivilegeContrastPage" class="privilege-contrast-door">
+        特权对比
+        <image class="door-icon" src="https://staticiot.cdn.bcebos.com/union%2Fstaticwx%2Fic_enter.png"></image>
+    </view>
+</view>
+<view bindtap="log">
+    <image class="privilege-contrast-img {{chooseType!=='svip'?'hide':''}}" mode="widthFix" src="https://staticiot.cdn.bcebos.com/union%2Fstaticwx%2Fsvip-ic.png"></image>
+    <image class="privilege-contrast-img {{chooseType!=='vip'?'hide':''}}" mode="widthFix" src="https://staticiot.cdn.bcebos.com/union%2Fstaticwx%2Fvip-ic.png"></image>
+</view>

@@ -1,0 +1,32 @@
+<view style="position:relative">
+    <Navbar id="Navbar" titleText="传输助手"></Navbar>
+    <NavbarPlaceholder></NavbarPlaceholder>
+    <view class="swiper-tab">
+        <form bindsubmit="formSubmit" reportSubmit="true" style="width: 100%">
+            <button class="formButtonNone" formType="submit">
+                <view bindtap="switchNav" class="tab-item {{currentTab==0?'on':''}}" data-current="0">
+                    我收集的
+                    <view class="on-line"></view>
+                </view>
+                <view bindtap="switchNav" class="tab-item {{currentTab==1?'on':''}}" data-current="1">
+                    我发出的
+                    <view class="on-line"></view>
+                </view>
+            </button>
+        </form>
+    </view>
+</view>
+<swiper bindanimationfinish="changeTab" class="swiper-box" current="{{currentTab}}" duration="300" style="height: {{systemInfo.visualHeightRpx}}rpx">
+    <swiper-item>
+        <view style="height: 100%; margin-top: 112rpx;">
+            <XList id="XList"></XList>
+        </view>
+    </swiper-item>
+    <swiper-item>
+        <view style="height: 100%; margin-top: 112rpx;">
+            <TransSendList></TransSendList>
+        </view>
+    </swiper-item>
+</swiper>
+<Toast id="toast"></Toast>
+<ShowDialog id="showDialog"></ShowDialog>

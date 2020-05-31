@@ -1,0 +1,18 @@
+<template name="fundlist">
+    <view class="weui-panel weui-panel_access" hidden="{{!resultShowed}}">
+        <view class="weui-panel__hd">{{title}}</view>
+        <view class="weui-panel__bd">
+            <view class="weui-media-box weui-media-box_small-appmsg">
+                <view class="weui-cells weui-cells_in-small-appmsg">
+                    <view bindtap="gotoSinglePage" class="weui-cell weui-cell_access" data-index="{{index}}" hoverClass="weui-cell_active" wx:for="{{list}}" wx:key="{{index}}">
+                        <view class="weui-cell__hd fundcode">{{item.fundCode}}</view>
+                        <view class="weui-cell__bd weui-cell_primary">
+                            <view>{{item.fundName}}</view>
+                        </view>
+                        <view class="weui-cell__ft weui-cell__ft_in-access"></view>
+                    </view>
+                </view>
+            </view>
+        </view>
+    </view>
+</template>

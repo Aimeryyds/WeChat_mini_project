@@ -1,0 +1,8 @@
+<TopTipSimple bindclose="hideTopTip" bindtap="handleRetry" kind="{{topTipKind}}" showClose="{{topTipShowClose}}" text="{{topTipText}}" wx:if="{{showTopTip}}"></TopTipSimple>
+<view class="open-local-mask" wx:if="{{status==='uploading'||status==='sending'}}"></view>
+<view class="open-local-modal">
+    <u-button bindclick="handleOpenLocalModal" uClass="open-local-modal-btn" wx:if="{{hasLogin}}">选择本机/微信文件</u-button>
+    <u-button bindgetuserinfo="getUserInfo" openType="getUserInfo" uClass="open-local-modal-btn" wx:else>选择本机/微信文件</u-button>
+</view>
+<ModalDialog bindaddLocalFile="addLocalFile" bindaddMessageFile="addMessageFile" bindaddVideo="addVideo" from="transAssistant" id="modalDialog"></ModalDialog>
+<GuideMember bindclose="handleGuideMemberClose" config="{{guideMemberTip}}" wx:if="{{showGuideMember}}"></GuideMember>

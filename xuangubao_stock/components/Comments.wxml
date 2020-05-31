@@ -1,0 +1,3 @@
+<view class="_ul">
+    <comment-container avatar="{{comment.userInfo.portrait}}" bind:__l="__l" bind:click="__e" bind:clickReply="__e" comment="{{comment}}" content="{{comment.content}}" data-event-opts="{{[ [ '^click',[ [ '$emit',['click','$0'],[ [ ['comments','',index] ] ] ] ] ],[ '^clickReply',[ ['e0'] ] ] ]}}" isAuthor="{{comment.isAuthor}}" likeCount="{{comment.likeCount}}" liked="{{comment.liked}}" name="{{comment.userInfo.nickName}}" repliedBy="{{comment.repliedBy}}" time="{{comment.createdAt*1000}}" vueId="{{'1-'+index}}" wx:for="{{comments}}" wx:for-item="comment" wx:key="index"></comment-container>
+</view>

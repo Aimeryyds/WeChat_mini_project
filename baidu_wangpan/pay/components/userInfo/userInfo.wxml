@@ -1,0 +1,38 @@
+<view>
+    <view class="placeholder" style="height: {{height}}" wx:if="{{hasWxUserInfo&&!isGuideUser}}"></view>
+    <view bindtap="closeOverlay" class="user" wx:if="{{hasWxUserInfo&&!isGuideUser}}">
+        <image class="userPhoto" src="{{userInfo.photo}}"></image>
+        <view class="userInfo">
+            <view class="nameWrap">
+                <view class="name">{{userInfo.username}}</view>
+                <view class="icon svip" wx:if="{{userShowStatus.svipLeaveDay!==0}}"></view>
+                <view class="icon vip" wx:elif="{{userShowStatus.vipLeaveDay!==0}}"></view>
+                <view class="icon default" wx:else></view>
+            </view>
+            <view catchtap="changeOverlay" class="timeWrap" wx:if="{{userShowStatus.svipLeaveDay!==0||userShowStatus.vipLeaveDay!==0}}">
+                <view class="time">
+                    <view wx:if="{{userShowStatus.svipLeaveDay!==0}}">超级会员至：{{userShowStatus.svipLeaveDay}}</view>
+                    <view wx:if="{{userShowStatus.svipLeaveDay===0&&userShowStatus.vipLeaveDay!==0}}">会员至：{{userShowStatus.vipLeaveDay}}</view>
+                </view>
+                <view class="arrow" wx:if="{{userShowStatus.svipLeaveDay!==0&&userShowStatus.vipLeaveDay!==0}}">
+                    <view class="content" wx:if="{{userShowStatus.overlayShow}}">
+                        <view>超级会员至：{{userShowStatus.svipLeaveDay}}</view>
+                        <view>会员至：{{userShowStatus.vipLeaveDay}}</view>
+                    </view>
+                </view>
+            </view>
+        </view>
+    </view>
+    <Authorize class="fullScreen" id="Authorize" redirectQuery="{{redirectQuery}}" redirectUrl="{{redirectUrl}}" style="display: {{hasWxUserInfo?'none':'block'}}"></Authorize>
+    <view class="fullScreen" wx:if="{{isGuideUser}}">
+        <view class="bdauth-icon"></view>
+        <view class="bdauth-text">
+            <text>绑定百度帐号后，享受海量存
+</text>
+            <text>储，便捷查看文件服务</text>
+            <view class="bdauth-btn">
+                <BlueButton bind:action="goAuthorizeBd">绑定百度帐号</BlueButton>
+            </view>
+        </view>
+    </view>
+</view>

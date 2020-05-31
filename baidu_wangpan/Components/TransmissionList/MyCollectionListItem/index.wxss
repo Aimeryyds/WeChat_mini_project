@@ -1,0 +1,105 @@
+.list-item-wrap {
+    display: flex;
+    flex-flow: row nowrap;
+    justify-content: space-between;
+    align-items: center;
+    height: 180rpx;
+}
+
+.list-item-wrap .file-icon {
+    position: relative;
+    margin-left: 32rpx;
+    width: 82rpx;
+    height: 82rpx;
+    order: 0;
+    flex-grow: 0;
+}
+
+.file-icon .normal {
+    width: 82rpx;
+    height: 82rpx;
+}
+
+.list-item-wrap .file-des {
+    margin-left: 32rpx;
+    display: inline-block;
+    order: 1;
+    flex-grow: 1;
+    height: 180rpx;
+    width: calc(100% - 194rpx);
+}
+
+.file-des .file-name {
+    margin-top: 26rpx;
+    width: 100%;
+    height: 42rpx;
+    font-size: 30rpx;
+    font-weight: bold;
+    line-height: 42rpx;
+    color: #333;
+}
+
+.file-name .text {
+    float: left;
+    overflow: hidden;
+    display: block;
+    width: calc(100% - 186rpx);
+    white-space: nowrap;
+    text-overflow: ellipsis;
+}
+
+.file-name .file-msg-cnt {
+    float: right;
+    margin-top: 6rpx;
+    margin-right: 42rpx;
+    border-radius: 15rpx;
+    min-width: 30rpx;
+    height: 30rpx;
+    font-size: 22rpx;
+    line-height: 30rpx;
+    color: #fff;
+    background: #FF436A;
+    text-align: center;
+}
+
+.file-des .file-desc {
+    height: 33rpx;
+    font-size: 24rpx;
+    line-height: 33rpx;
+    color: #9E9E9E;
+}
+
+.file-desc .text {
+    float: left;
+}
+
+.file-desc .text-left {
+    margin-right: 40rpx;
+}
+
+.file-des .file-time {
+    height: 40rpx;
+    line-height: 40rpx;
+}
+
+.file-time .text {
+    float: left;
+    font-size: 22rpx;
+    color: #9E9E9E;
+}
+
+.file-time-btn {
+    float: right;
+    border-radius: 20rpx;
+    margin-right: 32rpx;
+    width: 114rpx;
+    font-size: 20rpx;
+    text-align: center;
+    background: #FAFAFB;
+    color: #BDBDBD;
+}
+
+.file-time-btn.active {
+    background: #E1F4FF;
+    color: #06A7FF;
+}

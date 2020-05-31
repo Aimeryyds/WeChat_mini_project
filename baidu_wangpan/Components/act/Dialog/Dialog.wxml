@@ -1,0 +1,16 @@
+<view catchtouchmove="_touch" class="dialog_container" hidden="{{!isShow}}">
+    <form bindsubmit="formSubmit" reportSubmit="true">
+        <button class="formButtonNone" formType="submit">
+            <view class="mask"></view>
+            <view class="dialog" style="background-image:url({{mpBgSrc}});width: {{width}}rpx;height: {{height}}rpx">
+                <view bindtap="hide" class="dialog-shut" formType="submit"></view>
+                <slot name="content"></slot>
+                <slot name="footer" wx:if="{{footerShow}}"></slot>
+                <view class="dialog-button" wx:else>
+                    <button catchtap="_btnEvent" class="{{className}}" data-btn="btn1" formType="submit" openType="{{btn1.openType}}" style="background-image:url('{{btn1.btnBg}}');color: {{btn1.btnColor}}" wx:if="{{btn1.isShow-0===1}}">{{btn1.btnText}}</button>
+                    <button catchtap="_btnEvent" class="{{className}}" data-btn="btn2" formType="submit" openType="{{btn2.openType}}" style="background-image:url('{{btn2.btnBg}}');color: {{btn2.btnColor}}" wx:if="{{btn2.isShow-0===1}}">{{btn2.btnText}}</button>
+                </view>
+            </view>
+        </button>
+    </form>
+</view>

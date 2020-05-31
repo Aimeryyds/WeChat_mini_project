@@ -1,0 +1,12 @@
+<view class="today-hot-article _div data-v-e80ed376">
+    <view class="today-hot-article-title _div data-v-e80ed376">
+        <view class="title _div data-v-e80ed376">今日热文</view>
+        <view bindtap="__e" class="btn _div data-v-e80ed376" data-event-opts="{{[ [ 'tap',[ [ 'jumpToMoreArticles',['$event'] ] ] ] ]}}">
+            <text class="data-v-e80ed376">更多热文</text>
+            <view class="iconfont icon-xiaochengxuqietu-7 _i data-v-e80ed376"></view>
+        </view>
+    </view>
+    <view class="today-hot-article-list _ul data-v-e80ed376">
+        <article-item bind:__l="__l" class="data-v-e80ed376" index="{{index+1}}" info="{{item}}" vueId="{{'1-'+index}}" wx:for="{{articleEntities}}" wx:key="index"></article-item>
+    </view>
+</view>

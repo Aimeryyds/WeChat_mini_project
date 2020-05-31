@@ -1,0 +1,32 @@
+<import src="../../netdisk_templates/snapShootList/snapShootList.wxml"></import>
+<Navbar id="Navbar"></Navbar>
+<view style="height:{{height}}px"></view>
+<view class="snapshot-wrap">
+    <image class="share-member-tip {{memberType===2?'is-svip':''}}" mode="widthFix" src="{{staticPath}}/share-{{memberType===2?'svip':'vip'}}-tip.png" wx:if="{{!!memberType}}"></image>
+    <view class="shot-wrap-bg list" style="{{mediaBgStyle}}" wx:if="{{isMedia}}">
+        <view class="media-shot-wrap">
+            <image class="shot-show" src="{{showThumb}}" style="{{thumbStyle}}"></image>
+            <view class="media-more" wx:if="{{isMediaMore==true}}"></view>
+        </view>
+    </view>
+    <view class="shot-wrap-bg list" wx:else>
+        <template is="snapShootList" data="{{fileListTabData:fileListTabData,surl:surl}}"></template>
+    </view>
+    <view class="shot-name-wrap">
+        <view class="shot-tip">{{!surl?'邀请好友加入':'向好友分享'}}</view>
+        <text class="shot-name">{{serverFilename}}</text>
+    </view>
+    <view class="bottom-wrap">
+        <view class="shot-share-button" wx:if="{{!surl}}">
+            <BlueButton iconClass="icon-share-button" isShowIcon="{{true}}" openType="share">{{!surl?'发送给':'分享至'}}微信群/好友</BlueButton>
+        </view>
+        <view class="shot-share-buttonBlock {{ispc?'share-buttonBlock__ispc':''}}" wx:if="{{surl}}">
+            <BlueButton bgColor="wathet-blue" bind:action="shareToCircle" class="shareBtn" fontColor="blue" iconClass="icon-share-circle-blue" isShowIcon="{{true}}" wx:if="{{!ispc}}">分享至朋友圈</BlueButton>
+            <BlueButton class="shareBtn" iconClass="icon-share-button" isShowIcon="{{true}}" openType="share">分享至好友</BlueButton>
+        </view>
+        <view class="shot-warn-tips">{{!surl?'链接24小时内有效，请履行监管义务，确保成员不传播违法内容':'严禁上传、传播违法信息，一经发现严格依法处理'}}</view>
+    </view>
+</view>
+<SharePoster id="SharePoster"></SharePoster>
+<Toast id="toast"></Toast>
+<ShowDialog id="showDialog"></ShowDialog>

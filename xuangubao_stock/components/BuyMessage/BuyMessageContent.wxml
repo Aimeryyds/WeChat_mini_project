@@ -1,0 +1,16 @@
+<view class="buy-message-popup _div data-v-18a257ca">
+    <view class="buy-message-popup_price _div data-v-18a257ca">
+        <price-text bind:__l="__l" class="data-v-18a257ca" price="{{preferentialPrice}}" vueId="1"></price-text>
+    </view>
+    <view class="buy-message-popup_balance _div data-v-18a257ca" wx:if="{{activeCoupon}}">
+        <price-text bind:__l="__l" class="data-v-18a257ca" customstyle="color: rgb(163,163,163);font-weight:normal;font-size:28rpx!important;text-decoration:line-through;" price="{{message.price}}" size1="14" size2="14" vueId="2"></price-text>
+    </view>
+    <view class="buy-message-popup_title _div data-v-18a257ca vue-ref" data-ref="title">{{message.title}}</view>
+    <view class="buy-message-popup_coupon _div data-v-18a257ca">
+        <coupon-tip bind:__l="__l" class="data-v-18a257ca" vueId="3"></coupon-tip>
+    </view>
+    <view class="buy-message-popup_action _div data-v-18a257ca">
+        <paying-action bind:__l="__l" bind:clickPay="__e" class="data-v-18a257ca" costType="article" data-event-opts="{{[ [ '^clickPay',[ ['purchaseMessage'] ] ] ]}}" vueId="4"></paying-action>
+    </view>
+    <view bindtap="__e" class="buy-message-popup_discount _div data-v-18a257ca" data-event-opts="{{[ [ 'tap',[ [ 'selectSubject',['$event'] ] ] ] ]}}" wx:if="{{subject&&activeSubjectSubItem}}">订阅「<label class="active-subject _span data-v-18a257ca">{{subject.title}}</label>」 立省更多</view>
+</view>

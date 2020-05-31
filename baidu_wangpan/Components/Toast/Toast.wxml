@@ -1,0 +1,10 @@
+<view class="self-wetoast {{memberType===2?'is-svip':''}}" hidden="{{!isShow}}">
+    <view class="toast-mask"></view>
+    <view class="toast-wrap">
+        <view animation="{{toastAnimationData}}" bindanimationend="animationend" class="{{outClass?outClass:'toast-content-wrap'}}" style="width:{{width}}">
+            <view class="toast-icon" wx:if="{{loading}}"></view>
+            <image class="toast-member-icon" mode="widthFix" src="{{memberIcon}}" wx:if="{{memberType}}"></image>
+            {{content}}
+        </view>
+    </view>
+</view>

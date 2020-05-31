@@ -1,0 +1,60 @@
+.topTab {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    overflow: hidden;
+}
+
+.topTab .tabs {
+    height: 76rpx;
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+    background-color: white;
+    position: fixed;
+    z-index: 5;
+}
+
+.topTab .scrolling {
+    box-shadow: 1px 1px 20px #D7D7D7;
+}
+
+.topTab .noscrolling {
+    border-bottom: solid 2rpx #E9E9E9;
+}
+
+.topTab .tabs .tab {
+    width: 50%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+.topTab .tabs .tab .name {
+    padding: 0rpx 30rpx;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    font-size: 30rpx;
+}
+
+.topTab .tabs .tab.actived .name {
+    border-bottom: solid 5rpx #ff9800;
+    color: #ff9800;
+}
+
+.topTab .content {
+    width: 100%;
+    height: 100%;
+    padding-top: 76rpx;
+    z-index: 4;
+    overflow-x: hidden;
+    overflow-y: auto;
+}

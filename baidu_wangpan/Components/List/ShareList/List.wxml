@@ -1,0 +1,25 @@
+<view class="order-title" wx:if="{{canSwitchMode||!canSelected}}">
+    <view bindtap="orders" class="order" wx:if="{{!canSelected}}">
+        <text class="{{order===item.value?'order-active':''}}" wx:for="{{orderTab}}" wx:key="{{index}}">{{item.name}} {{item.sign}} </text>
+    </view>
+    <view class="order-tip-flex" wx:if="{{canSwitchMode}}">
+        <SwitchButton bind:switch="onSwitchMode" id="switchButton"></SwitchButton>
+    </view>
+</view>
+<view style="height:20rpx" wx:else></view>
+<block wx:if="{{viewMode==='list'}}">
+    <block wx:if="{{list[0].isdir===1}}">
+        <ListItem bind:longPress="longPress" bind:select="selectItem" canSelected="{{canSelected}}" fileMeta="{{item}}" imagetype="{{imagetype}}" index="{{index}}" isLongPressEntrySelection="{{!btn.owner}}" isSelect="{{item.isSelect}}" sharePage="{{true}}" shareUrlInfo="{{shareUrlInfo}}" surl="{{surl}}" wx:if="{{item.isdir===1}}" wx:for="{{list}}" wx:key="{{item.fs_id}}"></ListItem>
+    </block>
+    <block wx:if="{{list[list.length-1].isdir===0}}">
+        <ListItem bind:longPress="longPress" bind:select="selectItem" canSelected="{{canSelected}}" fileMeta="{{item}}" imagetype="{{imagetype}}" index="{{index}}" isLongPressEntrySelection="{{!btn.owner}}" isSelect="{{item.isSelect}}" sharePage="{{true}}" shareUrlInfo="{{shareUrlInfo}}" surl="{{surl}}" wx:if="{{item.isdir===0}}" wx:for="{{list}}" wx:key="{{item.fs_id}}"></ListItem>
+    </block>
+</block>
+<block wx:else>
+    <view class="grid-box" wx:if="{{list[0].isdir===1}}">
+        <GridItem bind:longPress="longPress" bind:select="selectItem" canSelected="{{canSelected}}" fileMeta="{{item}}" filter="{{'dir'}}" imagetype="{{imagetype}}" index="{{index}}" isLongPressEntrySelection="{{!btn.owner}}" isSelect="{{item.isSelect}}" sharePage="{{true}}" shareUrlInfo="{{shareUrlInfo}}" surl="{{surl}}" wx:for="{{list}}" wx:key="{{item.fs_id}}"></GridItem>
+    </view>
+    <view class="grid-box" wx:if="{{list[list.length-1].isdir===0}}">
+        <GridItem bind:longPress="longPress" bind:select="selectItem" canSelected="{{canSelected}}" fileMeta="{{item}}" filter="{{'file'}}" imagetype="{{imagetype}}" index="{{index}}" isLongPressEntrySelection="{{!btn.owner}}" isSelect="{{item.isSelect}}" sharePage="{{true}}" shareUrlInfo="{{shareUrlInfo}}" surl="{{surl}}" wx:for="{{list}}" wx:key="{{item.fs_id}}"></GridItem>
+    </view>
+</block>

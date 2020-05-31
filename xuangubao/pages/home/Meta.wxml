@@ -1,0 +1,49 @@
+<view class="top-gainer-meta-wrapper _div data-v-47cfd8be">
+    <catalog bind:__l="__l" bind:close="__e" bind:selectPlate="__e" class="data-v-47cfd8be" data-event-opts="{{[ [ '^selectPlate',[ ['selectPlate'] ] ],[ '^close',[ ['closeCatalog'] ] ] ]}}" tags="{{tags}}" vueId="1" wx:if="{{showCataLog}}"></catalog>
+    <view class="top-gainer-meta-list _ul data-v-47cfd8be">
+        <view class="top-gainer-meta-listitem _li data-v-47cfd8be">
+            <view class="_p data-v-47cfd8be">
+                <percent-number bind:__l="__l" class="data-v-47cfd8be" isDown="{{isDown}}" isUp="{{isUp}}" num="{{marketInfo.temperature}}" options="{{$root.a0}}" vueId="2"></percent-number>
+            </view>
+            <view class="_p data-v-47cfd8be">市场热度</view>
+        </view>
+        <view class="top-gainer-meta-listitem _li data-v-47cfd8be">
+            <view class="_p data-v-47cfd8be" wx:if="{{marketInfo.up!=undefined&&marketInfo.down!=undefined}}">
+                <label class="up color-red _span data-v-47cfd8be">{{marketInfo.up}}</label>
+                <label class="_span data-v-47cfd8be" style="margin:0 4rpx;">:</label>
+                <label class="down color-green _span data-v-47cfd8be">{{marketInfo.down}}</label>
+            </view>
+            <view class="_p data-v-47cfd8be">涨跌停对比</view>
+        </view>
+        <view class="top-gainer-meta-listitem _li data-v-47cfd8be">
+            <view class="_p data-v-47cfd8be">
+                <percent-number bind:__l="__l" class="data-v-47cfd8be" classes="color-black" num="{{marketInfo.zbl}}" options="{{$root.a1}}" vueId="3"></percent-number>
+            </view>
+            <view class="_p data-v-47cfd8be">炸板率</view>
+        </view>
+        <view class="top-gainer-meta-listitem _li data-v-47cfd8be">
+            <view class="_p data-v-47cfd8be">
+                <percent-number bind:__l="__l" class="data-v-47cfd8be" num="{{marketInfo.performance}}" options="{{$root.a2}}" vueId="4"></percent-number>
+            </view>
+            <view class="_p data-v-47cfd8be">昨涨停今表现</view>
+        </view>
+    </view>
+    <view class="top-gainer-meta-plates _ul data-v-47cfd8be" wx:if="{{tags}}">
+        <view bindtap="__e" class="_li data-v-47cfd8be" data-event-opts="{{[ [ 'tap',[ [ 'selectPlate',['$0'],[ [ ['topFiveTags','',index,'name'] ] ] ] ] ] ]}}" wx:for="{{topFiveTags}}" wx:for-item="tag" wx:key="index">
+            <view class="plate-name _p data-v-47cfd8be">{{tag.name}}</view>
+            <view class="plate-stocks-amount _p data-v-47cfd8be" wx:if="{{tag.stocks}}">
+                <view class="_i data-v-47cfd8be">{{tag.stocks.length}}</view>家</view>
+        </view>
+        <view bindtap="__e" class="_li data-v-47cfd8be" data-event-opts="{{[ [ 'tap',[ [ 'selectPlate',['$0'],['tags.__$n5.name'] ] ] ] ]}}" wx:if="{{tags.length===6&&tags[5]}}">
+            <view class="plate-name _p data-v-47cfd8be">{{tags[5].name}}</view>
+            <view class="plate-stocks-amount _p data-v-47cfd8be" wx:if="{{tags[5].stocks}}">
+                <view class="_i data-v-47cfd8be">{{tags[5].stocks.length}}</view>家</view>
+        </view>
+        <block wx:else>
+            <view bindtap="__e" class="plate-more _li data-v-47cfd8be" data-event-opts="{{[ [ 'tap',[ [ 'openCatalog',['$event'] ] ] ] ]}}" wx:if="{{tags.length>6}}">
+                <view class="iconfont iconjuxingcopyx8 _i data-v-47cfd8be"></view>
+                <view class="_p data-v-47cfd8be">查看全部板块</view>
+            </view>
+        </block>
+    </view>
+</view>

@@ -1,0 +1,15 @@
+<view catchtouchmove="preventD" class="popup-basic" hidden="{{!isShow}}">
+    <view class="popup-background"></view>
+    <view class="popup-container {{position}}">
+        <view catchtap="close" class="close" wx:if="{{isShowCloseBtn}}"></view>
+        <view class="popup-title font-40 fc-black">
+            <slot name="title"></slot>
+        </view>
+        <view class="popup-content font-32 fc-dark-gray {{textAlignClassName}}">
+            <slot name="content"></slot>
+        </view>
+        <view class="popup-button-container font-32 bg-gray-white">
+            <slot name="buttons"></slot>
+        </view>
+    </view>
+</view>

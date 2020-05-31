@@ -1,0 +1,161 @@
+.sharedir-scroll-view {
+    height: 100%;
+}
+
+.list-header {
+    opacity: 0;
+    height: 0;
+}
+
+.batch-header-placehold {
+    position: absolute;
+    width: 100%;
+    background: #FFF;
+    z-index: 100;
+    top: 0;
+}
+
+.sharedir-header {
+    padding: 0 60rpx 12rpx;
+    text-align: center;
+    transition: all 1s;
+    margin-top: 0rpx;
+    background: #FFF;
+}
+
+.sharedir-header .description-title {
+    overflow: hidden;
+    width: 100%;
+    margin: 32rpx 0;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+    color: #212121;
+    font-size: 48rpx;
+    font-weight: bold;
+    line-height: 48rpx;
+}
+
+.sharedir-header .description-subtitle {
+    color: #9E9E9E;
+    font-size: 24rpx;
+    line-height: 24rpx;
+    margin-bottom: 40rpx;
+}
+
+.sharedir-header .avator-wrap {
+    padding-left: 10rpx;
+    height: 70rpx;
+    margin-bottom: 34rpx;
+}
+
+.sharedir-header .avator-wrap .avator-item-wrap {
+    display: inline-block;
+}
+
+.sharedir-header .avator-wrap .avator-item {
+    display: inline-block;
+    width: 62rpx;
+    height: 62rpx;
+    margin-left: -10rpx;
+    background-repeat: no-repeat;
+    background-size: 62rpx;
+    background-position: center;
+    border-radius: 100%;
+    border: 4rpx #fff solid;
+}
+
+.sharedir-header .avator-wrap .avator-item.avator-add {
+    margin-left: 4rpx;
+    padding: 0;
+    background-image: url(https://staticwx.cdn.bcebos.com/mini-program/images/ic_add_people_small_v2.png);
+    box-sizing: content-box;
+    color: rgba(0,0,0,0);
+    background-color: rgba(0,0,0,0);
+}
+
+.sharedir-header .avator-wrap .avator-item.avator-add.button-hover {
+    color: rgba(0,0,0,0);
+    background-color: rgba(0,0,0,0);
+}
+
+.sharedir-header .avator-wrap .avator-item.avator-add::after {
+    content: none;
+}
+
+.list-bottom {
+    padding-bottom: 80rpx;
+}
+
+.join-fail {
+    width: 100%;
+    font-size: 32rpx;
+    color: #999;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+.join-fail-icon {
+    background: url('https://staticwx.cdn.bcebos.com/mini-program/images/bg_netdisc_blank.png') no-repeat center center;
+    width: 297rpx;
+    height: 236rpx;
+    background-size: 297rpx 236rpx;
+    margin-bottom: 40rpx;
+}
+
+.sharedir-container {
+    position: relative;
+}
+
+.batch-edit-holder {
+    display: flex;
+    justify-content: start;
+    flex-direction: column;
+}
+
+.batch-edit-holder .bacth-bound {
+    z-index: 10;
+    height: 112rpx;
+    line-height: 112rpx;
+    display: flex;
+    padding: 0 32rpx;
+    color: #212121;
+    font-weight: bold;
+    align-items: center;
+    justify-content: space-between;
+    background-color: #fff;
+}
+
+.batch-edit-holder .bacth-bound .info-tab {
+    font-size: 34rpx;
+}
+
+.batch-edit-holder .bacth-bound .info-tab.blue {
+    width: 120rpx;
+    font-size: 28rpx;
+    color: #06A7FF;
+}
+
+.batch-edit-holder .bacth-bound .info-tab.right {
+    text-align: right;
+}
+
+.foot-erea {
+    position: fixed;
+    width: 284rpx;
+    left: 0;
+    right: 0;
+    bottom: -100rpx;
+    margin: auto;
+    z-index: 1000;
+    transition: bottom .3s,opacity .3s;
+}
+
+.foot-erea.show {
+    bottom: 32rpx;
+}
+
+.ceiling {
+    margin-top: -284rpx;
+}

@@ -1,0 +1,30 @@
+<form bindsubmit="formSubmit" reportSubmit="true">
+    <button class="formButtonNone order-wrap" formType="submit">
+        <view class="order-title" wx:if="{{canSwitchMode||isShow&&!canSelected}}">
+            <view bindtap="orders" class="order" wx:if="{{isShow&&!canSelected}}">
+                <text class="{{order=='time'?'order-active':''}}">时间排序</text> / <text class="{{order=='name'?'order-active':''}}">名称排序</text>
+            </view>
+            <view class="order-tip-flex" wx:if="{{canSwitchMode}}">
+                <SwitchButton bind:switch="onSwitchMode" id="switchButton"></SwitchButton>
+            </view>
+        </view>
+        <view style="height:20rpx" wx:else></view>
+        <block wx:if="{{viewMode==='list'}}">
+            <block wx:if="{{list[0].isdir===1}}">
+                <ListItem bind:select="_selectItem" canSelected="{{canSelected}}" fileMeta="{{item}}" index="{{index}}" isSelect="{{item.isSelect}}" shareDirPage="{{shareDirPage}}" sharePage="{{sharePage}}" wx:if="{{item.isdir===1}}" wx:for="{{innerList}}" wx:key="fs_id"></ListItem>
+            </block>
+            <block wx:if="{{list[list.length-1].isdir===0}}">
+                <ListItem bind:select="_selectItem" canSelected="{{canSelected}}" fileMeta="{{item}}" index="{{index}}" isSelect="{{item.isSelect}}" shareDirPage="{{shareDirPage}}" sharePage="{{sharePage}}" wx:if="{{item.isdir===0}}" wx:for="{{innerList}}" wx:key="fs_id"></ListItem>
+            </block>
+        </block>
+        <block wx:else>
+            <view class="grid-box" wx:if="{{list[0].isdir===1}}">
+                <GridItem bind:select="_selectItem" canSelected="{{canSelected}}" fileMeta="{{item}}" filter="{{'dir'}}" index="{{index}}" isSelect="{{item.isSelect}}" shareDirPage="{{shareDirPage}}" wx:for="{{list}}" wx:key="fs_id"></GridItem>
+            </view>
+            <view class="grid-box" wx:if="{{list[list.length-1].isdir===0}}">
+                <GridItem bind:select="_selectItem" canSelected="{{canSelected}}" fileMeta="{{item}}" filter="{{'file'}}" index="{{index}}" isSelect="{{item.isSelect}}" shareDirPage="{{shareDirPage}}" wx:for="{{list}}" wx:key="fs_id"></GridItem>
+            </view>
+        </block>
+    </button>
+    <view class="load-tips" style="{{showTips?'display:block':'display:none'}}">加载中...</view>
+</form>

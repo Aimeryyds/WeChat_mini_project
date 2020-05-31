@@ -1,0 +1,9 @@
+<view class="send-detail-wrap" style="height: {{systemInfo.visualHeightRpx}}rpx">
+    <TransInfo pageType="{{type}}" transInfo="{{transInfo}}"></TransInfo>
+    <view class="empty-wrap" wx:if="{{loaded&&!list.length}}">
+        <InfoComp icon="{{emptyIcon}}" tip="文件夹空空的"></InfoComp>
+    </view>
+    <scroll-view scrollY bindscrolltolower="loadMore" class="send-detail-list-wrap" lowerThreshold="120" wx:else>
+        <ListItem imgHideShare isSingleItem bind:longPress="longPress" bind:select="selectItem" bindclick="handleClick" canNavDir="{{false}}" fileMeta="{{item}}" index="{{index}}" isSelect="{{item.isSelect}}" isShowMore="{{false}}" previewCate="{{previewCateMap[type]}}" wx:for="{{list}}" wx:key="fs_id"></ListItem>
+    </scroll-view>
+</view>

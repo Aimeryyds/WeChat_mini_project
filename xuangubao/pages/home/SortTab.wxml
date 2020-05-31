@@ -1,0 +1,9 @@
+<view bindtap="__e" class="{{['_li data-v-09c34a51',isSorting&&!hideSort?'sorting':'']}}" data-event-opts="{{[ [ 'tap',[ [ 'startSort',['$event'] ] ] ] ]}}" style="{{customStyle}}">
+    <view class="label _p data-v-09c34a51">{{label}}</view>
+    <view class="arrow-container _p data-v-09c34a51" wx:if="{{!hideSort}}">
+        <label class="{{['_span data-v-09c34a51',sortRule.targetProp!==targetProp||sortRule.mode==='default'?'':sortRule.mode]}}">
+            <view class="upangle _i data-v-09c34a51"></view>
+            <view class="downangle _i data-v-09c34a51"></view>
+        </label>
+    </view>
+</view>

@@ -1,0 +1,49 @@
+<view class="shopping" wx:if="{{list&&list.length>0}}">
+    <view class="shop-title">
+        <text class="shop-title-text" wx:if="{{!isVip}}">内容商城有海量内容任你挑选</text>
+        <view class="shop-title-text" wx:else>你可免费畅享<image class="shop-title-img" src="https://staticwx.cdn.bcebos.com/mini-program/images/shop_title.png"></image>优质内容</view>
+        <view bindtap="goDetail" class="shop-title-btn">{{isVip?'查看特权':'去看看'}}</view>
+    </view>
+    <view class="shop-content">
+        <view bindtap="shops" data-url="{{computed.mallUrl(item.type,item.prod_type,item.pid,item.porigin)}}" wx:for="{{list}}" wx:key="{{item.type}}">
+            <view class="shop-img {{item.type>2?'shop-text-wrap':''}}" style="background-image:url({{item.thumb_info[0].url}})">
+                <view class="shop-img-text" wx:if="{{item.type>2||item.type<1}}">{{item.type===4?'文档':'其他'}}</view>
+                <view class="shop-img-media {{item.type===1?'':'shop-img-audio'}}" wx:if="{{item.type===1||item.type===2}}"></view>
+                <view class="shop-img-audiobg" wx:if="{{item.type===2}}"></view>
+            </view>
+            <view class="shop-cont">
+                <text class="shop-cont-name">{{computed.isFree(item.price,isVip)}}</text>
+                <text class="shop-cont-money" wx:if="{{item.old_price>0}}">{{computed.prices(item.old_price)}}</text>
+            </view>
+        </view>
+    </view>
+</view>
+<wxs module="computed">
+module.exports = ({
+    isFree: (function(price, isVip) {
+        if (price === 0 || isVip) {
+            return (isVip ? '免费畅享' : '免费')
+        } else {
+            return ('¥' + Number(price / 100).toFixed(2))
+        }
+    }),
+    prices: (function(price) {
+        return ('¥' + Number(price / 100).toFixed(2))
+    }),
+    mallUrl: (function(type, prod_type, pid, porigin) {
+        var mall = 'https://pan.baidu.com/mall/wap/home/';
+        var shops = '';
+        if (type === 1) {
+            shops = 'video'
+        };
+        if (type === 2) {
+            shops = prod_type === 1 ? 'albumList' : 'albumDetail'
+        };
+        if (type === 4) {
+            shops = 'universal'
+        };
+        var link = mall + shops + '?pid\x3d' + pid + '\x26porigin\x3d' + porigin;
+        return (link)
+    }),
+});
+</wxs>

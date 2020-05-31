@@ -1,0 +1,12 @@
+<scroll-view scrollY bindscroll="scrollEvent" style="height: 100%;">
+    <Navbar id="Navbar" titleText="我的会员"></Navbar>
+    <UserInfo bind:updateUserVipStatus="updateUserVipStatus"></UserInfo>
+    <Tab bind:changeTab="onChangeTab" chooseType="{{chooseType}}" productType="{{productType}}"></Tab>
+    <VipProductList bind:changeProduct="changeProduct" bind:payCallback="payCallback" chooseType="{{chooseType}}" productType="{{productType}}" userVipStatus="{{userVipStatus}}"></VipProductList>
+    <view class="cut-line" id="cut-line"></view>
+    <PrivilegeOverview chooseType="{{chooseType}}" userVipStatus="{{userVipStatus}}"></PrivilegeOverview>
+    <view bindtap="goProtocol" class="protocol">《百度网盘会员协议》</view>
+    <view style="height: 140rpx;"></view>
+</scroll-view>
+<cashierBottomBtn bind:payCallback="payCallback" chooseType="{{chooseType}}" productId="{{productId}}" productIdCanBuy="{{productIdCanBuy}}" productName="{{productName}}" productPrice="{{productPrice}}" productPriceNote="{{productPriceNote}}" showBottomBtn="{{showBottomBtn}}" userVipStatus="{{userVipStatus}}"></cashierBottomBtn>
+<Toast id="toast"></Toast>

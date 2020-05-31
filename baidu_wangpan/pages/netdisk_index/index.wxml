@@ -1,0 +1,78 @@
+<view style="position:relative">
+    <Navbar id="Navbar" isShowBarBtn="{{false}}" titleText="百度网盘"></Navbar>
+    <view style="height:{{height}}px"></view>
+    <view catchtap="hideXLisOperModeDialog" class="show-oper-mode-dialog {{!isHideOperModeDialog?'show':''}}"></view>
+    <view wx:if="{{!isBatch}}">
+        <view class="swiper-tab {{isHideOperModeDialog?'bottom-shadow':''}}">
+            <TopTip bindretry="handleUploadRetry" id="topTip"></TopTip>
+            <form bindsubmit="formSubmit" reportSubmit="true" style="width: 100%">
+                <button class="formButtonNone" formType="submit">
+                    <view bindtap="switchNav" class="tab-item {{currentTab==0?'on':''}}" data-current="0">
+                            网盘文件
+                            <view class="on-line"></view>
+                    </view>
+                    <view bindtap="switchNav" class="tab-item {{currentTab==1?'on':''}}" data-current="1">
+                            共享文件
+                            <view class="on-line"></view>
+                    </view>
+                    <view bindtap="switchNav" class="tab-item {{currentTab==2?'on':''}}" data-current="2">
+                            我
+                            <view class="on-line"></view>
+                    </view>
+                </button>
+            </form>
+        </view>
+        <view class="swiper-tab-replace"></view>
+    </view>
+</view>
+<swiper bindanimationfinish="changeTab" class="swiper-box" current="{{currentTab}}" duration="300" style="height: {{systemInfo.visualHeightRpx-(isBatch?0:112)}}rpx">
+    <swiper-item>
+        <view style="height: {{isBatch?'100%':systemInfo.visualHeightRpx-224+'rpx'}}">
+            <XList bind:dirAddFiles="showAddModalDialog" bind:goback="goback" bind:hideOperModeDialog="hideOperModeDialog" bind:isEmpty="isListEmpty" bind:longPress="setIsBatchTrue" bind:select="select" bind:showOperModeDialog="showOperModeDialog" bind:switchMode="switchMode" canSelected="{{isBatch}}" canSwitchMode="{{!isBatch}}" hasLogin="{{hasLogin}}" headerOperMode="search" id="XList" isSHowHeader="{{!shareButtonShow}}" isShowBottomBtn="{{!shareButtonShow}}" showLoading="{{true}}" whenEmpty="mainlist"></XList>
+        </view>
+    </swiper-item>
+    <swiper-item>
+        <XShareList hasLogin="{{hasLogin}}" id="XShareList"></XShareList>
+    </swiper-item>
+    <swiper-item>
+        <UserCenter hasLogin="{{hasLogin}}" id="UserCenter"></UserCenter>
+    </swiper-item>
+</swiper>
+<BindBtn id="BindBtn" innerText="绑定百度帐号，解锁更多精彩功能" wx:if="{{currentTab==1&&isGuideUser&&xsharelist>0}}"></BindBtn>
+<view class="group-symbol-box" wx:if="{{currentTab==1&&!isGuideUser&&hasLogin}}">
+    <NativeButton bind:action="handleTapCreateShareDir" iconClass="icon-add-group-symbol" isShowIcon="{{true}}">
+            创建共享
+        </NativeButton>
+</view>
+<view class="bttom-btnbar {{(isHideOperModeDialog?!isBatch:false)&&currentTab===0&&!isGuideUser&&hasLogin&&!shareButtonShow&&xListLen>0?'show':'hide'}}">
+    <BottomBtnBar barType="{{barType}}" bindbuttonFn="bottomBtnFn" count="{{count}}" id="bottomBtnBar" isAllDir="{{isAllDir}}">
+        <NativeButton bind:action="bottomBtnFn" iconClass="icon-share-button" isShowIcon="{{true}}" type="small" wx:if="{{!isListEmpty}}">
+                分享文件
+            </NativeButton>
+    </BottomBtnBar>
+</view>
+<view class="foot-erea {{count>0?'show':''}}" wx:if="{{shareButtonShow}}">
+    <NativeButton bind:action="bottomBtnFn" iconClass="icon-share-button" isShowIcon="{{true}}" type="small">
+            发送给朋友
+        </NativeButton>
+</view>
+<Authorize isIndexPage id="Authorize" redirectQuery="{{redirectQuery}}" redirectUrl="{{redirectUrl}}"></Authorize>
+<ActivityBtn activity="{{icon}}" bindiconCancel="handleIconCancel" id="activitybtn" show="{{icon.isValid&&(currentTab===0||currentTab===1)}}"></ActivityBtn>
+<ModalDialog from="dirindex" id="modalDialog"></ModalDialog>
+<FileNameDialog id="dialog"></FileNameDialog>
+<Toast id="toast"></Toast>
+<ErrorPage bind:retry="retry" height="{{systemInfo?systemInfo.windowHeightRpx-74-height+'rpx':'100%'}}" isOnError="{{isOnError}}"></ErrorPage>
+<Popup bind:confirm="" confirmValue="我知道了" id="popup-diffall" isHideCancel="{{true}}">
+    <view class="diffall-wrap" slot="content">
+        <view class="diffall-item" wx:for="{{diffallInfoList}}" wx:key="{{item.filename}}">
+            <text>[</text>
+            <text class="ellipsis">{{item.filename}}</text>
+            <text>]</text>
+        </view>
+    </view>
+</Popup>
+<GuidLayer id="guidLayer" top="{{height}}"></GuidLayer>
+<ShowDialog id="showDialog"></ShowDialog>
+<ComfirmDialog bind:cancelEvent="_cancelEvent" bind:confirmEvent="_confirmEvent" id="comfirmDialog"></ComfirmDialog>
+<GuideMember bindclose="handleGuideMemberClose" config="{{guideMemberTip}}" wx:if="{{showGuideMember}}"></GuideMember>
+<JumpPage hasLogin="{{hasLogin}}" isGuideUser="{{isGuideUser}}" jumpInfo="{{jumpInfo}}"></JumpPage>

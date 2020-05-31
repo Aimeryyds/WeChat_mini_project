@@ -1,0 +1,92 @@
+@import "../../../__wuBaseWxss__/2.wxss";
+
+.confirm-wrap {
+    position: absolute;
+    top: 0;
+    width: 100%;
+    height: 100%;
+}
+
+.confirm-wrap .mask {
+    position: fixed;
+    top: 0;
+    right: 0;
+    left: 0;
+    bottom: 0;
+    z-index: 100;
+    background: rgba(0,0,0,.4);
+}
+
+.confirm-wrap .confirm-content {
+    width: 570rpx;
+    border-radius: 8rpx;
+    background: #fff;
+    position: fixed;
+    top: 50%;
+    transform: translate(-285rpx,-300rpx);
+    z-index: 101;
+    left: 50%;
+}
+
+.confirm-wrap .confirm-content .title {
+    text-align: center;
+    color: #333;
+    font-size: 38rpx;
+    padding: 40rpx 0;
+    font-weight: bold;
+    box-sizing: border-box;
+}
+
+.confirm-wrap .confirm-content .content {
+    padding-bottom: 40rpx;
+    box-sizing: border-box;
+    color: #999;
+    font-size: 26rpx;
+    text-align: center;
+    border-bottom: 1rpx solid #ebebeb;
+}
+
+.confirm-wrap .confirm-content .button-wrap {
+    height: 100rpx;
+    display: flex;
+}
+
+.confirm-wrap .confirm-content .button-wrap button {
+    background: #fff;
+    border: none;
+    outline: none;
+    border-color: #fff;
+    padding: 0;
+    line-height: 100rpx;
+    color: #3888ff;
+    font-size: 32rpx;
+    border-radius: 8rpx;
+    flex-grow: 1;
+    text-align: center;
+    display: block;
+    flex-basis: 50%;
+}
+
+.confirm-wrap .confirm-content .button-wrap button::after {
+    content: none;
+}
+
+.confirm-content .main {
+    padding: 32rpx 0 20rpx 0;
+    font-size: 32rpx;
+    color: #333;
+}
+
+.confirm-content .icon {
+    width: 76rpx;
+    height: 58rpx;
+    background-image: url('https://staticwx.cdn.bcebos.com/mini-program/images/bd_icon.png');
+    background-repeat: no-repeat;
+    background-size: cover;
+    margin: 0 auto;
+}
+
+.confirm-wrap .confirm-content .button-wrap .confirm-btn {
+    font-size: 32rpx;
+    color: #2cb922;
+}

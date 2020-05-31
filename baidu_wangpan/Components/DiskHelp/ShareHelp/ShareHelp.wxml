@@ -1,0 +1,13 @@
+<view class="help_container" wx:if="{{shareType===1}}">
+    <image class="help_poster" src="{{poster}}"></image>
+    <view bindtap="showVideo" class="video_cover">
+        <image class="image" src="https://staticwx.cdn.bcebos.com/mini-program/images/ic_video_play_button.png"></image>
+    </view>
+    <view class="empty-wx-bt" wx:if="{{isGuideUser&&hasLogin}}">
+        <BlueButton bind:action="tplClick">绑定百度帐号</BlueButton>
+    </view>
+</view>
+<view bindtap="showVideo" class="help_container_text" wx:if="{{shareType===2}}">
+    <text class="text">快速了解文件共享功能</text>
+</view>
+<SVideoDialog autoplay="{{true}}" bind:closeVideo="closeVideo" shareType="{{shareType}}" video="{{video}}" wx:if="{{showVideo}}"></SVideoDialog>

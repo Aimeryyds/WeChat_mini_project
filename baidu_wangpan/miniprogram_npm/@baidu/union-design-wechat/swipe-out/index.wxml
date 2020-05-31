@@ -1,0 +1,27 @@
+<view class="u-class u-swipe-wrap">
+    <view bindtouchend="handleTouchEnd" bindtouchmove="handleTouchMove" bindtouchstart="handleTouchStart" class="u-swipe-body" style="{{parse.setPosition(position)}}">
+        <view class="u-swipe-content">
+            <slot name="content"></slot>
+        </view>
+        <view catchtouchend="catchHandler" class="u-swipe-btn-group" wx:if="{{actions.length>0}}">
+            <view bindtap="handleButtonTap" class="u-swipe-btn-item" data-index="{{index}}" style="{{parse.setStyle(item)}}" wx:for="{{actions}}" wx:key="{{index}}">
+                <u-icon color="{{item.color}}" size="{{item.fontsize}}" type="{{item.icon}}" wx:if="{{item.icon}}"></u-icon>
+                {{item.name}}
+            </view>
+        </view>
+        <view catchtap="handleCustomTap" catchtouchend="catchHandler" class="u-swipe-btn-group" wx:if="{{actions.length===0}}">
+            <slot name="button"></slot>
+        </view>
+    </view>
+</view>
+<wxs module="parse">
+module.exports = ({
+    setStyle: (function(item) {
+        var defaultBackColor = '#f7f7f7';
+        return ('background-color: ' + (item.background ? item.background : defaultBackColor) + '; color: ' + item.color + '; width: ' + item.width + 'px;')
+    }),
+    setPosition: (function(position) {
+        return ('transform: translateX(' + position.pageX + 'px);')
+    }),
+});
+</wxs>

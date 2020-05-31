@@ -1,0 +1,13 @@
+<view class="today-article-item _li">
+    <view class="info _div">
+        <image class="_img" src="{{'/static/images/hot-article-'+index+'.png'}}"></image>
+        <label bindtap="__e" class="title _span" data-event-opts="{{[ [ 'tap',[ [ 'jumpToArticle',['$event'] ] ] ] ]}}">{{info.title}}</label>
+        <navigator class="navigator" hoverClass="none" openType="navigate" url="{{'/pages/Subject/main?subjectId='+subject.id}}">
+            <label class="theme _span">
+                <text wx:if="{{isTopic}}">#</text>
+                <text>{{subject.title}}</text>
+            </label>
+        </navigator>
+    </view>
+    <image class="column-img _img" mode="aspectFill" src="{{imgSrc}}"></image>
+</view>

@@ -1,0 +1,105 @@
+@import "../../../../../__wuBaseWxss__/4.wxss";
+
+@import "../../../../../__wuBaseWxss__/5.wxss";
+
+.fc-white {
+    color: #FFF;
+}
+
+.btn-container {
+    overflow: hidden;
+    font-weight: bold;
+    position: relative;
+}
+
+.btn-container.big {
+    height: 100rpx;
+    border-radius: 50rpx;
+}
+
+.btn-container.small {
+    height: 82rpx;
+    border-radius: 41rpx;
+}
+
+.btn-container.mini {
+    height: 48rpx;
+    border-radius: 24rpx;
+}
+
+.btn-container .btn {
+    width: 100%;
+    height: 100%;
+    padding: 0;
+    border: none;
+    transition: opacity 0.4s;
+}
+
+.btn-container .btn.btn-shade {
+    position: absolute;
+    top: 0;
+    left: 0;
+    opacity: .2;
+    background-color: #FFF;
+    z-index: -1;
+}
+
+.btn-container .btn.btn-shade-origin {
+    background-color: transparent;
+}
+
+.btn-container .btn.press-down {
+    opacity: 0.6;
+}
+
+.btn-container.big .btn {
+    line-height: 100rpx;
+    border-radius: 50rpx;
+    font-size: 32rpx;
+}
+
+.btn-container.small .btn {
+    line-height: 82rpx;
+    border-radius: 41rpx;
+    font-size: 28rpx;
+}
+
+.btn-container.mini .btn {
+    line-height: 48rpx;
+    font-size: 24rpx;
+}
+
+.btn-container .btn::after {
+    content: none;
+}
+
+.btn-container .btn-content {
+    display: flex;
+    padding: 0 46rpx;
+    height: 100%;
+    justify-content: center;
+    align-items: center;
+    align-content: center;
+}
+
+.btn-container.mini .btn-content {
+    padding: 0;
+}
+
+.btn-container .btn-content.disabled {
+    background-color: rgba(189,189,189,.3);
+}
+
+.btn-container .item {
+    display: inline-block;
+    height: 100%;
+}
+
+.btn-container .icon {
+    width: 40rpx;
+    height: 40rpx;
+    margin-right: 12rpx;
+    background-size: 40rpx 40rpx;
+    background-repeat: no-repeat;
+    background-position: center;
+}

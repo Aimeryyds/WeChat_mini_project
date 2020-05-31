@@ -1,0 +1,49 @@
+<Navbar id="Navbar"></Navbar>
+<view style="height:{{height}}px"></view>
+<view class="preview-audio-wrap">
+    <view class="top-gap"></view>
+    <view class="audio-bg-wrap">
+        <view class="audio-bg {{isPlay===true?'active':''}}"></view>
+    </view>
+    <view class="audio-name">
+        <view class="marquee_container" style="--marqueeWidth--:{{-marquee.width}}em">
+            <view class="{{isMarquee?'marquee_text':'audio-text'}}">{{audioName}}</view>
+        </view>
+    </view>
+    <view class="audio-size">{{audioSize}}</view>
+    <view class="audio-control-wrap">
+        <view class="audio-duration-wrap">
+            <text class="audio-currenttime">{{currentTime}}</text>
+            <view class="duration-bg">
+                <view class="duration-border"></view>
+                <view class="duration-now" style="width: {{audioProgress}}%;"></view>
+                <view bindtouchend="durationEnd" bindtouchmove="durationMove" bindtouchstart="durationStart" class="duration-node" style="left: {{audioProgress}}%;"></view>
+            </view>
+            <text class="audio-endtime">{{endTime}}</text>
+        </view>
+        <view class="audio-control">
+            <view bindtap="previousPlay" bindtouchend="previousTouchE" bindtouchstart="previousTouchS" class="previous-track" style="{{snapshootPreviousBtnStyle}}"></view>
+            <view bindtap="audioPlay" bindtouchend="snapshootTouchE" bindtouchstart="snapshootTouchS" class="{{isPlay===true?'play':'pause'}}" style="{{snapshootBtnStyle}}"></view>
+            <view bindtap="nextPlay" bindtouchend="nextTouchE" bindtouchstart="nextTouchS" class="next-track" style="{{snapshootNextBtnStyle}}"></view>
+        </view>
+        <view class="p-code">
+            <MediaPCode appParameter="{{appParameter}}" bindpCode="pCode" canOpenApp="{{fromNa}}" pwd="{{pwd}}" saved="{{saved}}" shareUk="{{shareUk}}" shareid="{{shareid}}" surl="{{surl}}" text="打开百度网盘App听该音频" textClass="audio-p-code-text" wx:if="{{!ispc}}"></MediaPCode>
+        </view>
+    </view>
+    <view class="shareToFriends" style="position:absolute;bottom:18px;" wx:if="{{showButton}}">
+        <BlueButton bind:action="share" iconClass="icon-share-button" isShowIcon="{{true}}">发送给微信群/好友</BlueButton>
+    </view>
+    <view class="shareToFriends" style="position:absolute;bottom:18px;" wx:if="{{isOwner}}">
+        <BlueButton bgColor="light-green" bind:action="share" fontColor="green" iconClass="icon-share-green" isShowIcon="{{true}}">发送给朋友</BlueButton>
+    </view>
+    <view class="bindBtn" wx:if="{{showShareView&&!isOwner}}">
+        <view class="sharelist-sharebutton others-sharebutton">
+            <BlueButton bgColor="light-green" bind:action="share" fontColor="green" iconClass="icon-share-green" isShowIcon="{{true}}">发送给朋友</BlueButton>
+        </view>
+        <view class="sharelist-savebutton">
+            <TransferBtn btnTxt="保存到我的网盘" fsId="{{fs_id}}" owner="{{isOwner}}" shareId="{{shareid}}" shareUk="{{shareUk}}" surl="{{surl}}" type="audio"></TransferBtn>
+        </view>
+    </view>
+</view>
+<Toast id="toast"></Toast>
+<ShowDialog id="showDialog"></ShowDialog>

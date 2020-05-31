@@ -1,0 +1,14 @@
+<Popup id="popup">
+    <view slot="title">
+        <text>{{title}}</text>
+    </view>
+    <view slot="content">
+        <view class="wx-dialog-content">{{content}}</view>
+    </view>
+    <view slot="buttons">
+        <view class="wx-dialog-footer">
+            <view catchtap="cancelEvent" class="wx-dialog-btn btn-text">{{cancelText}}</view>
+            <button appParameter="{{appParameter}}" binderror="lauchError" bindlaunchapp="lauchSuccess" bindtap="launchCal" class="wx-dialog-btn btn-app" hoverClass="none" openType="launchApp">{{confirmText}}</button>
+        </view>
+    </view>
+</Popup>

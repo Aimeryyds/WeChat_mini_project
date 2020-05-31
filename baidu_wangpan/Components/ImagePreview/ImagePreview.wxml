@@ -1,0 +1,29 @@
+<view class="image-preview-container">
+    <view class="image-preview-top">
+        <view style="height:{{statusHeight}}px"></view>
+        <view class="top_detail">
+            <navigator class="goToIndex" hoverClass="goToIndex-hover" url="/pages/netdisk_index/index" wx:if="{{!fromPreview}}">我的网盘</navigator>
+            <view class="navigateBack">
+                <navigator class="back-navigate" hoverClass="goToback-hover" openType="navigateBack" wx:if="{{fromPreview}}">
+                    <image class="navigateBackImg" src="https://staticwx.cdn.bcebos.com/mini-program/images/ic_return_preview.png"></image>
+                </navigator>
+            </view>
+            <view class="currentInfo" wx:if="{{imageList.length>1}}"> {{currentIndex+1}} / {{imageList.length}}</view>
+            <view class="currentInfo blank_view"></view>
+        </view>
+    </view>
+    <scroll-view class="swiper-item-scroll swiper-item-scroll-single" scrollY="true" wx:if="{{imageList.length===1}}">
+        <ImageContainer bindchangeToOrigin="changeToOrigin" bindimgError="handleImageError" bindimgLoad="handleImageLoad" bindpreviewImage="previewImage" bindshowActionsheet="showActionsheet" checkSizeFn="{{checkSizeFn}}" data-index="{{0}}" filename="{{imageList[0].server_filename}}" imgsize="{{imageList[0].size}}" originSrc="{{imageList[0].dlink}}" thumbSrc="{{swiperImg[0]}}"></ImageContainer>
+    </scroll-view>
+    <swiper bindchange="onSlideChangeEnd" class="swiper-image " current="{{currentIndex}}" wx:else>
+        <swiper-item class="swiper-item" id="{{index}}" wx:for="{{imageList}}" wx:key="{{index}}">
+            <scroll-view class="swiper-item-scroll swiper-item-scroll-multi" scrollY="true">
+                <ImageContainer bindchangeToOrigin="changeToOrigin" bindimgError="handleImageError" bindimgLoad="handleImageLoad" bindpreviewImage="previewImage" bindshowActionsheet="showActionsheet" checkSizeFn="{{checkSizeFn}}" data-index="{{index}}" filename="{{item.server_filename}}" imgsize="{{item.size}}" originSrc="{{item.dlink}}" thumbSrc="{{swiperImg[index]}}"></ImageContainer>
+            </scroll-view>
+        </swiper-item>
+    </swiper>
+</view>
+<slot></slot>
+<NaDialog appParameter="{{appParameter}}" bindconfirm="handleConfirm" cancelText="{{sizeDialog.cancelText}}" confirmText="{{sizeDialog.confirmText}}" content="{{sizeDialog.content}}" id="sizeDialog" openApp="{{fromNa}}"></NaDialog>
+<ActivityBtn activity="{{activity}}" activityClass="activity-btn-class" bottom="auto" show="{{activity.isValid}}" showCancel="{{false}}" top="{{statusBarHeightRpx+120}}rpx"></ActivityBtn>
+<GuideMember bindclose="handleGuideMemberClose" config="{{guideMemberTip}}" wx:if="{{showGuideMember}}"></GuideMember>

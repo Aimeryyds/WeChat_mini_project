@@ -1,0 +1,18 @@
+<overlay bind:__l="__l" class="data-v-6440d2f8" vueId="1" vueSlots="{{['default']}}">
+    <popup bind:__l="__l" bind:close="__e" class="data-v-6440d2f8 vue-ref" data-event-opts="{{[ [ '^close',[ [ '$emit',['close'] ] ] ] ]}}" data-ref="popup" title="订阅栏目" vueId="{{'2'+','+'1'}}" vueSlots="{{['default']}}">
+        <view class="buy-subject _div data-v-6440d2f8">
+            <view class="buy-subject_price _div data-v-6440d2f8">
+                <price-text bind:__l="__l" class="data-v-6440d2f8" price="{{preferentialPrice>=0?preferentialPrice:activeSubjectSubItem.discountPrice}}" vueId="{{'3'+','+'2'}}"></price-text>
+            </view>
+            <view class="buy-subject_balance _div data-v-6440d2f8">
+                <balance-text balance="{{balance}}" bind:__l="__l" class="data-v-6440d2f8" vueId="{{'4'+','+'2'}}"></balance-text>
+            </view>
+            <view class="buy-subject_meta flex-center-all _div data-v-6440d2f8">
+                <choose-item bind:__l="__l" class="data-v-6440d2f8" img="{{subject.image}}" name="{{activeSubjectSubItem.name}}" title="{{subject.title}}" vueId="{{'5'+','+'2'}}"></choose-item>
+            </view>
+            <view class="buy-subject_action _div data-v-6440d2f8">
+                <paying-action bind:__l="__l" bind:clickPay="__e" class="data-v-6440d2f8" costType="subject" data-event-opts="{{[ [ '^clickPay',[ ['purchaseSubject'] ] ] ]}}" vueId="{{'6'+','+'2'}}"></paying-action>
+            </view>
+        </view>
+    </popup>
+</overlay>

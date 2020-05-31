@@ -1,0 +1,12 @@
+<view class="pay-btn-dom simple" wx:if="{{styleType==='simple'}}">
+    <button bindtap="clickPayBtn" class="pay-btn {{chooseType}}-btn">
+        立即{{btnText}}
+    </button>
+</view>
+<view class="pay-btn-dom" wx:else>
+    <button bindtap="clickPayBtn" class="pay-btn {{chooseType}}-btn">
+        立即以{{choosedProductPrice}}元{{btnText}}
+    </button>
+</view>
+<Dialog confirmValue="知道啦" id="riskManagementDialog" isHideCancel="true" title="购买提示"></Dialog>
+<view class="overlay" wx:if="{{showOverlay}}"></view>

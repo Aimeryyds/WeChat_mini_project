@@ -1,0 +1,4 @@
+<view class="p-code-wrap">
+    <button appParameter="{{saved?appParameter:shareAppParam}}" binderror="launchErr" bindlaunchapp="lauchSuccess" bindtap="launchCal" class="{{fontColor}} font-30 p-code-txt launch-btn text-class" openType="launchApp" wx:if="{{canOpenApp}}">{{text}}</button>
+    <text bindtap="pCode" class="{{fontColor}} font-30 p-code-txt text-class" wx:else>{{text}}</text>
+</view>

@@ -1,0 +1,11 @@
+<view class="container {{isIndexPage?'is-index-page':''}}" wx:if="{{show}}">
+    <block wx:if="{{!isIndexPage}}">
+        <image class="logo" src="https://staticwx.cdn.bcebos.com/mini-program/images/netdisk_logo.png"></image>
+        <view class="btnWrap"></view>
+        <view class="title">一键上传微信文件，快速分享至好友</view>
+    </block>
+    <AuthorizeBtn bgColor="green" bind:getuserinfo="dialogCb" iconClass="icon-share-button" isShowIcon="{{true}}" type="big">
+        授权登录
+    </AuthorizeBtn>
+    <view class="tips {{isIPhoneX?'IPhoneX':''}}" wx:if="{{!isIndexPage}}">为提供更好更安全的服务，百度网盘需要微信授权</view>
+</view>

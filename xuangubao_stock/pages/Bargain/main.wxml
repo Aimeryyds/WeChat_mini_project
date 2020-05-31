@@ -1,0 +1,28 @@
+<view class="bargain-wrapper _div data-v-4257995f">
+    <title-bar bind:__l="__l" class="data-v-4257995f" title="股民限定T恤活动" vueId="1"></title-bar>
+    <countdown avatar="{{userInfo.avatarUrl||userInfo.portrait}}" bind:__l="__l" class="data-v-4257995f" finish="{{!!bargainInfo.paymentOrderNo}}" leftMinSeconds="{{leftMinSeconds}}" vueId="2"></countdown>
+    <view class="good-detail _section data-v-4257995f">
+        <goods-swiper bind:__l="__l" class="good-detail-swiper data-v-4257995f" imgs="{{goodsSwiperImgs}}" vueId="3"></goods-swiper>
+        <view class="good-detail-info _div data-v-4257995f">
+            <view class="good-detail-info-title _p data-v-4257995f">{{goodsInfo.desc}}</view>
+            <view class="good-detail-info-hot _p data-v-4257995f">
+                <label class="price _span data-v-4257995f">{{goodsInfo.price}}</label>
+                <label class="buy-count _span data-v-4257995f">
+                    <view class="_i data-v-4257995f">{{goodsInfo.sellCount}}</view>人已付款</label>
+            </view>
+        </view>
+    </view>
+    <view class="bargain-card-wrapper _div data-v-4257995f">
+        <bargain-card activityState="{{activityState}}" bargainMoney="{{bargainMoney}}" bargainState="{{bargainState}}" bind:__l="__l" bind:createBargain="__e" bind:immediatelyBuy="__e" class="data-v-4257995f" data-event-opts="{{[ [ '^immediatelyBuy',[ ['immediatelyBuy'] ] ],[ '^createBargain',[ ['createBargainOrder'] ] ] ]}}" originalPrice="{{originalPrice}}" paymentOrderNo="{{bargainInfo.paymentOrderNo}}" vueId="4"></bargain-card>
+    </view>
+    <view class="bargain-history _div data-v-4257995f">
+        <bargain-history bargainHelpText="{{activityInfo&&activityInfo.bargainHelpText}}" bargainRecord="{{bargainInfo&&bargainInfo.bargainLogs}}" bind:__l="__l" bind:clickMore="__e" class="data-v-4257995f" data-event-opts="{{[ [ '^clickMore',[ ['clickMore'] ] ] ]}}" vueId="5"></bargain-history>
+    </view>
+    <goods-detail-image bind:__l="__l" class="data-v-4257995f" goodsDetailImages="{{goodsDetailImages}}" vueId="6"></goods-detail-image>
+    <button class="action-btn-wrapper data-v-4257995f" openType="share" wx:if="{{bargainState!=='bargainover'&&originalPrice-bargainMoney>0}}">
+        <image alt class="_img data-v-4257995f" src="https://image.xuangubao.cn/FrCOQ8crFBm6MrhgIaU4i4b2TVBx"></image>
+    </button>
+    <bargain-deal-modal bind:__l="__l" bind:close="__e" class="data-v-4257995f" data-event-opts="{{[ [ '^close',[ ['e0'] ] ] ]}}" price="{{bargainDealModalPrice}}" vueId="7" wx:if="{{showBargainDealModal&&bargainDealModalPrice}}"></bargain-deal-modal>
+    <choose-model-modal bargainOrder="{{bargainInfo}}" bind:__l="__l" bind:cancel="__e" bind:ok="__e" bind:select="__e" bind:selectSubItem="__e" class="data-v-4257995f" data-event-opts="{{[ [ '^ok',[ ['confirm'] ] ],[ '^select',[ ['e1'] ] ],[ '^selectSubItem',[ ['e2'] ] ],[ '^cancel',[ ['e3'] ] ] ]}}" items="{{productionsList}}" selectedItem="{{selectedItem}}" selectedSubItem="{{selectedSubItem}}" vueId="8" wx:if="{{selectedItem&&showDownloadModal}}"></choose-model-modal>
+    <confirm-order bargainOrder="{{bargainInfo}}" bind:__l="__l" bind:clickBack="__e" class="data-v-4257995f" data-event-opts="{{[ [ '^clickBack',[ ['e4'] ] ] ]}}" selectedItem="{{selectedItem}}" selectedSubItem="{{selectedSubItem}}" vueId="9" wx:if="{{selectedItem&&selectedSubItem&&confirmOrder}}"></confirm-order>
+</view>

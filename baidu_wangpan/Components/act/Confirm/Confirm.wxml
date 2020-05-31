@@ -1,0 +1,17 @@
+<view class="confirm-wrap" hidden="{{!isShow}}">
+    <view class="mask"></view>
+    <view class="confirm-content">
+        <view class="title" wx:if="{{title!=''}}">{{title}}</view>
+        <view class="content">
+            <view class="icon"></view>
+            <view>
+                <view class="main">{{content}}</view>
+                <text class="txt">{{text}}</text>
+            </view>
+        </view>
+        <view class="button-wrap">
+            <button style="border-right: 1rpx solid #ebebeb" wx:if="{{showCancel==true}}">{{cancelText}}</button>
+            <button bindgetuserinfo="_setUserWxInfo" class="confirm-btn" openType="getUserInfo">{{confirmText}}</button>
+        </view>
+    </view>
+</view>

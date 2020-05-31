@@ -1,0 +1,27 @@
+<view bindlongpress="_longPress" bindtouchend="_touchEnd" bindtouchstart="_touchStart" class="list-item-wrap {{fileMeta.isdir==1?'dir-item-wrap':'file-item-wrap'}} {{pressDownClass}}" data-index="{{index}}" wx:if="{{filter==='dir'&&fileMeta.isdir===1||filter==='file'&&fileMeta.isdir===0}}">
+    <view catchtap="_click" class="file-item-main" data-index="{{index}}">
+        <block wx:if="{{fileMeta.isdir===1}}">
+            <view catchtap="_select" class="select-box {{isSelect?'active':''}}" wx:if="{{canSelected}}">
+                <image class="normal" src="{{categoryImage}}" wx:if="{{!isSelect}}"></image>
+            </view>
+            <image class="normal" src="{{categoryImage}}" wx:else></image>
+        </block>
+        <view class="normal {{isVideo?'video-file':'not-video-file'}} {{categoryImage&&!thumbnail?'system-file-icon':''}}" wx:else>
+            <image class="over-mask" src="{{staticName}}mini-program/images/slice_v2.png" wx:if="{{isVideo}}"></image>
+            <block wx:if="{{canSelected}}">
+                <view catchtap="_select" class="over-mask {{isSelect?'active':'sleepy'}}"></view>
+                <view class="over-mask-bg" hidden="{{!isSelect}}"></view>
+            </block>
+            <view class="file-icon-box" wx:if="{{error}}">
+                <image class="file-icon" src="{{categoryImage}}"></image>
+            </view>
+            <image binderror="error" class="thumbnail" lazyLoad="{{true}}" mode="aspectFill" src="{{thumbnail}}" wx:elif="{{!!thumbnail}}"></image>
+            <view class="file-icon-box" wx:elif="{{categoryImage}}">
+                <image class="file-icon " src="{{categoryImage}}"></image>
+            </view>
+        </view>
+        <view class="file-name {{fileMeta.isdir===1?'file-dir':''}}" wx:if="{{!isVideo&&!thumbnail}}">
+            <view class="file-name-txt">{{fileMeta.server_filename}}</view>
+        </view>
+    </view>
+</view>

@@ -1,0 +1,40 @@
+<template name="button">
+    <u-button long bindtap="handleClickItem" data-index="{{index}}" type="ghost">
+        <view class="u-modal-btn-loading" wx:if="{{item.loading}}"></view>
+        <u-icon type="{{item.icon}}" uClass="u-modal-btn-icon" wx:if="{{item.icon}}"></u-icon>
+        <view class="u-modal-btn-text" style="{{item.color?'color: '+item.color:''}}">{{item.name}}</view>
+    </u-button>
+</template>
+<view class="u-modal-mask u-class-mask {{visible?'u-modal-mask-show':''}}"></view>
+<view class="u-class u-modal {{visible?'u-modal-show':''}}">
+    <view class="u-modal-main">
+        <view class="u-modal-content">
+            <view class="u-modal-title" wx:if="{{title}}">{{title}}</view>
+            <view class="u-modal-body">
+                <slot></slot>
+            </view>
+            <view class="u-modal-actions" wx:if="{{actions.length}}">
+                <u-grid uClass="u-modal-grid" wx:if="{{actionMode==='horizontal'}}">
+                    <u-grid-item uClass="{{actions.length===index+1?'u-modal-grid-item-last':'u-modal-grid-item'}}" wx:for="{{actions}}" wx:key="{{ item.name }}">
+                        <template is="button" data="{{item:item,index:index}}"></template>
+                    </u-grid-item>
+                </u-grid>
+                <block wx:else>
+                    <view class="u-modal-action-vertical" wx:for="{{actions}}" wx:key="{{ item.name }}">
+                        <template is="button" data="{{item:item,index:index}}"></template>
+                    </view>
+                </block>
+            </view>
+            <view class="u-modal-actions" wx:else>
+                <u-grid uClass="u-modal-grid" wx:if="{{showOk||showCancel}}">
+                    <u-grid-item uClass="u-modal-grid-item" wx:if="{{showCancel}}">
+                        <u-button long bindtap="handleClickCancel" type="ghost" uClass="u-modal-btn-cancel">{{cancelText}}</u-button>
+                    </u-grid-item>
+                    <u-grid-item uClass="u-modal-grid-item-last" wx:if="{{showOk}}">
+                        <u-button long bindtap="handleClickOk" type="ghost" uClass="u-modal-btn-ok">{{okText}}</u-button>
+                    </u-grid-item>
+                </u-grid>
+            </view>
+        </view>
+    </view>
+</view>

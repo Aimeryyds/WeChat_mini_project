@@ -1,0 +1,19 @@
+<Navbar id="navbar" titleText="添加网盘文件"></Navbar>
+<NavbarPlaceholder></NavbarPlaceholder>
+<view class="scroll-wrap" style="height: {{windowHeight-navHeight-(showAction&&isTransAssistant?ipxBottomHeight:0)-(showAction?actionHeight:0)+1}}px">
+    <XList bind:select="select" bind:upload="localUpload" bindgoback="goback" canSelectAll="{{canSelectAll}}" canSelected="{{true}}" canSwitchMode="{{false}}" id="XList" showLoading="{{true}}" whenEmpty="{{whenEmpty}}"></XList>
+</view>
+<view class="bottom-action {{isIpx?'is-ipx':''}}" hidden="{{!showAction}}">
+    <view wx:if="{{isTransAssistant}}">
+        <u-button bindclick="handleTransAssistantClick" type="primary" uClass="trans-assistant-btn">
+            <view class="trans-assistant-icon">
+                <image class="trans-assistant-icon-img" src="{{shareIcon}}"></image>
+            </view>
+            <view class="trans-assistant-btn-text">分享文件</view>
+        </u-button>
+    </view>
+    <view bindtap="commitUpload" class="commit-btn" wx:else>添加({{count}})</view>
+</view>
+<view class="ipx-placeholder" hidden="{{!isTransAssistant||!isIpx||!showAction}}"></view>
+<ShowDialog id="showDialog"></ShowDialog>
+<Toast id="toast"></Toast>

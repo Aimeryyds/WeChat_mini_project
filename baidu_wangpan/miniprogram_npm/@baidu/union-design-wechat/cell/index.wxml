@@ -1,0 +1,14 @@
+<view bindtap="handleTap" class="u-class u-cell {{isLastCell?'u-cell-last':''}} {{isLink?'u-cell-access':''}}">
+    <view class="u-cell-icon">
+        <slot name="icon"></slot>
+    </view>
+    <view class="u-cell-bd">
+        <view class="u-cell-text" wx:if="{{title}}">{{title}}</view>
+        <view class="u-cell-desc" wx:if="{{label}}">{{label}}</view>
+        <slot></slot>
+    </view>
+    <view catchtap="navigateTo" class="u-cell-ft">
+        <block wx:if="{{value}}">{{value}}</block>
+        <slot name="footer" wx:else></slot>
+    </view>
+</view>

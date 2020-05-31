@@ -1,0 +1,49 @@
+<view class="image-preview-container">
+    <scroll-view class="swiper-item-scroll" scrollY="true" style="width:100vw;height:100vh;" wx:if="{{imageList.length===1}}">
+        <view bindtap="playVideoHandle" class="swiper-item-video" data-index="0" wx:if="{{imageList[0].category===1}}">
+            <image src="https://staticiot.cdn.bcebos.com/union/staticwx/preview_play.png"></image>
+        </view>
+        <view bindtap="previewImage" class="image-box" id="0" style="width:100vw;height:{{sizeList[0].height||0}}rpx" wx:if="{{sizeList[0].height>screenHeightRpx}}">
+            <image bindload="imageLoad" class="image-preview" id="0" mode="{{mode}}" src="{{currentImg[0]}}" style="width:{{sizeList[0].width||0}}rpx;height:{{sizeList[0].height||0}}rpx"></image>
+            <view class="watermark" style="width:{{sizeList[0].width||0}}rpx;height:{{sizeList[0].height||0}}rpx;background-image: url('{{watermarkImage}}')" wx:if="{{showWatermark}}"></view>
+        </view>
+        <view bindtap="previewImage" class="image-box" id="0" style="width:100vw;height:100%" wx:else>
+            <image bindload="imageLoad" class="image-preview" id="0" mode="{{mode}}" src="{{currentImg[0]}}" style="width:{{sizeList[0].width||0}}rpx;height:{{sizeList[0].height||0}}rpx"></image>
+            <view class="watermark" style="width:{{sizeList[0].width||0}}rpx;height:{{sizeList[0].height||0}}rpx;background-image: url('{{watermarkImage}}')" wx:if="{{showWatermark}}"></view>
+        </view>
+    </scroll-view>
+    <swiper skipHiddenItemLayout bindchange="onSlideChangeEnd" class="swiper-image " current="{{currentIndex}}" wx:else>
+        <swiper-item class="swiper-item" id="{{index}}" wx:for="{{imageList}}" wx:key="{{index}}">
+            <scroll-view class="swiper-item-scroll" scrollY="true" style="width:100vw;height:100%;">
+                <view bindtap="playVideoHandle" class="swiper-item-video" data-index="{{index}}" wx:if="{{item.category===1}}">
+                    <image src="https://staticiot.cdn.bcebos.com/union/staticwx/preview_play.png"></image>
+                </view>
+                <view bindtap="previewImage" class="image-box" id="{{'img'+index}}" style="width:100vw;height:{{sizeList[index].height||0}}rpx" wx:if="{{sizeList[index].height>screenHeightRpx}}">
+                    <image binderror="imageError" bindload="imageLoad" class="silde-image image-preview" id="{{'img'+index}}" mode="{{mode}}" src="{{swiperImg[index]}}" style="width:{{sizeList[index].width||0}}rpx;height:{{sizeList[index].height||0}}rpx"></image>
+                    <view class="watermark" style="width:{{sizeList[0].width||0}}rpx;height:{{sizeList[0].height||0}}rpx;;background-image:url('{{watermarkImage}}');" wx:if="{{showWatermark}}"></view>
+                </view>
+                <view bindtap="previewImage" class="image-box" id="{{'img'+index}}" style="width:100vw;height:100%" wx:else>
+                    <image binderror="imageError" bindload="imageLoad" class="silde-image image-preview" id="{{'img'+index}}" mode="{{mode}}" src="{{swiperImg[index]}}" style="width:{{sizeList[index].width||0}}rpx;height:{{sizeList[index].height||0}}rpx"></image>
+                    <view class="watermark" style="width:{{sizeList[0].width||0}}rpx;height:{{sizeList[0].height||0}}rpx;;background-image:url('{{watermarkImage}}');" wx:if="{{showWatermark}}"></view>
+                </view>
+                <view style="color: #fff;height: 1px;"></view>
+            </scroll-view>
+        </swiper-item>
+    </swiper>
+    <view class="translucent-dialog" wx:if="{{showOrigin}}">
+        <view wx:if="{{showText[currentIndex]!=='complete'&&imageList[currentIndex].category===3}}">
+            <view bindtap="changeToOrigin" class="viewOriginImg" style="{{parse.getBack( progress[currentIndex] )}}">
+                <text wx:if="{{!progress[currentIndex]}}">{{showText[currentIndex]}}</text>
+                <text wx:else>{{progress[currentIndex]}}%</text>
+            </view>
+        </view>
+    </view>
+</view>
+<slot></slot>
+<wxs module="parse">
+module.exports = ({
+    getBack: (function(percent) {
+        return (!percent ? '' : 'background: linear-gradient(90deg, rgba(255, 255, 255, .5),  rgba(255, 255, 255, .5)' + percent + '%, transparent ' + percent + '%, transparent 100%);')
+    }),
+});
+</wxs>

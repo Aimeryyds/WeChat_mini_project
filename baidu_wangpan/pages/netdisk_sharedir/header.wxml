@@ -1,0 +1,21 @@
+<view class="sharedir-header bottom-shadow {{isMove&&isBatch?'ceiling':''}}">
+    <view catchtap="goToSettingPage" class="description-title">
+        <text>{{sharedirData.fileName}}</text>
+    </view>
+    <view class="description-subtitle">
+        <text>{{sharedirData.memberNum}}个群成员 · {{sharedirData.updateTime}}</text>
+    </view>
+    <view class="avator-wrap">
+        <view catchtap="goToSettingPage" class="avator-item-wrap">
+            <view class="avator-item" style="background-image: url({{item}})" wx:if="{{index<5}}" wx:for="{{sharedirData.avator}}" wx:key="index"></view>
+        </view>
+        <button catchtap="sharedirAddPeople" class="avator-item avator-add" wx:if="{{sharedirData.isRoot}}"></button>
+    </view>
+</view>
+<view class="batch-edit-holder" wx:if="{{isBatch}}">
+    <view class="bacth-bound bottom-shadow">
+        <view bindtap="selectedAll" class="info-tab blue">{{isAll?'取消全选':'全选'}}</view>
+        <view class="info-tab" style="font-weight: 900">已选中{{count}}个文件</view>
+        <view bindtap="goback" class="info-tab blue right">取消</view>
+    </view>
+</view>

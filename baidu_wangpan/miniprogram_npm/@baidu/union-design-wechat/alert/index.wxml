@@ -1,0 +1,15 @@
+<view class="u-class u-alert {{'u-alert-'+type}} {{showIcon?'u-alert-with-icon':''}} {{desc?'u-alert-with-desc':''}}" wx:if="{{!closed}}">
+    <view class="u-alert-icon" wx:if="{{showIcon}}">
+        <u-icon color="#fff" size="{{desc?48:32}}" type="message" wx:if="{{type==='info'}}"></u-icon>
+        <u-icon color="#fff" size="{{desc?48:32}}" type="success-tips" wx:if="{{type==='success'}}"></u-icon>
+        <u-icon color="#fff" size="{{desc?48:32}}" type="warning" wx:if="{{type==='warning'}}"></u-icon>
+        <u-icon color="#fff" size="{{desc?48:32}}" type="delete" wx:if="{{type==='error'}}"></u-icon>
+    </view>
+    <slot></slot>
+    <view class="u-alert-desc">
+        <slot name="desc"></slot>
+    </view>
+    <view bindtap="handleTap" class="u-alert-close" wx:if="{{closable}}">
+        <u-icon color="#fff" size="32" type="close"></u-icon>
+    </view>
+</view>

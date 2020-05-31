@@ -1,0 +1,7 @@
+<view class="user-center _div data-v-378ff0de">
+    <title-bar-capsule bind:__l="__l" class="data-v-378ff0de" showLoading="{{showLoading}}" title="我的订单" vueId="1"></title-bar-capsule>
+    <view class="order-list _ul data-v-378ff0de">
+        <order-item bind:__l="__l" class="data-v-378ff0de" orderDetail="{{order}}" vueId="{{'2-'+__i0__}}" wx:for="{{orderList}}" wx:for-index="__i0__" wx:for-item="order" wx:key="id"></order-item>
+        <view class="no-order _li data-v-378ff0de" wx:if="{{!orderList||!orderList.length}}">暂无订单</view>
+    </view>
+</view>

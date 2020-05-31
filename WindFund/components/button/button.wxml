@@ -1,0 +1,36 @@
+<template name="button">
+    <view class="wux-backdrop--transparent" wx:if="{{backdrop&&opened}}"></view>
+    <view bindtap="{{toggle}}" class="wux-speed-dial {{className}} {{animateCss}} {{opened?'wux-speed-dial--opened':''}}" data-opened="{{opened}}" wx:if="{{visible}}">
+        <view class="wux-speed-dial__action" hoverClass="wux-speed-dial__action--hover">
+            <text class="wux-speed-dial__text"></text>
+        </view>
+        <view class="wux-speed-dial__buttons" wx:if="{{buttons.length}}">
+            <block wx:for="{{buttons}}">
+                <button catchtap="{{buttonClicked}}" class="wux-speed-dial__button {{showlabel?'showlabel':''}} {{item.className}}" data-index="{{index}}" data-label="{{item.label}}" hoverClass="wux-speed-dial__button--hover" openType="share" wx:if="{{item.isshare}}">
+                    <view class="wux-button-icon">
+                        <image class="wux-speed-dial__icon" src="{{item.icon}}"></image>
+                    </view>
+                    <view class="wux-button-intro">
+                        <text>{{item.label}}</text>
+                    </view>
+                </button>
+                <button catchtap="{{buttonClicked}}" class="wux-speed-dial__button {{showlabel?'showlabel':''}} {{item.className}}" data-index="{{index}}" data-label="{{item.label}}" hoverClass="wux-speed-dial__button--hover" openType="contact" wx:elif="{{item.iscontact}}">
+                    <view class="wux-button-icon">
+                        <image class="wux-speed-dial__icon" src="{{item.icon}}"></image>
+                    </view>
+                    <view class="wux-button-intro">
+                        <text>{{item.label}}</text>
+                    </view>
+                </button>
+                <view catchtap="{{buttonClicked}}" class="wux-speed-dial__button {{showlabel?'showlabel':''}} {{item.className}}" data-index="{{index}}" data-label="{{item.label}}" hoverClass="wux-speed-dial__button--hover" wx:else>
+                    <view class="wux-button-icon">
+                        <image class="wux-speed-dial__icon" src="{{item.icon}}"></image>
+                    </view>
+                    <view class="wux-button-intro">
+                        <text>{{item.label}}</text>
+                    </view>
+                </view>
+            </block>
+        </view>
+    </view>
+</template>

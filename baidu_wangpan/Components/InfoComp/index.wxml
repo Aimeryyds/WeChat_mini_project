@@ -1,0 +1,16 @@
+<view class="info-comp">
+    <view class="info-comp-icon">
+        <image class="info-comp-icon-img icon-class {{status==='fail'?'error-icon-img':''}}" src="{{icon}} " wx:if="{{icon}}"></image>
+    </view>
+    <view class="info-comp-title" wx:if="{{title}}">{{title}}</view>
+    <view class="info-comp-tip tip-class {{title?'has-title':''}}" wx:if="{{tip}}">
+        <text decode class="tip-class-text">{{tip}}</text>
+    </view>
+    <view class="info-comp-action-text action-text-class" style="{{actionWidth?'width: '+actionWidth:''}}" wx:if="{{actionText}}">
+        <u-button bindclick="handleActionTextClick" bindgetuserinfo="getUserInfo" openType="{{actionOpenType}}" type="primary" uClass="info-comp-action-text-body">{{actionText}}</u-button>
+    </view>
+    <view class="info-comp-btn btn-class" wx:if="{{btnText}}">
+        <u-button bindclick="handleBtnClick" type="primary" uClass="info-comp-u-btn">{{btnText}}</u-button>
+    </view>
+    <slot></slot>
+</view>

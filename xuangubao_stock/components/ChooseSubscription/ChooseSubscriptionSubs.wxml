@@ -1,0 +1,9 @@
+<view class="buy-subject-subs _div data-v-2482301f">
+    <view class="_header data-v-2482301f">
+        <view class="_p data-v-2482301f">订阅</view>
+        <view class="_p data-v-2482301f">普通单篇购买<price-text bind:__l="__l" class="data-v-2482301f" customstyle="color: rgb(163, 163, 163);font-weight:normal;" price="{{subject.basePrice}}" size1="{{14}}" size2="{{14}}" vueId="1"></price-text>/月</view>
+    </view>
+    <view class="_ul data-v-2482301f">
+        <subject-sub-item activeSubjectSubItem="{{activeSubjectSubItem}}" bind:__l="__l" bind:click="__e" class="data-v-2482301f" data-event-opts="{{[ [ '^click',[ [ '$emit',['selectSubjectSubItem','$0'],[ [ ['subjectSubItems','id',item.id] ] ] ] ] ] ]}}" item="{{item}}" subscribeType="{{subject.subscribeType}}" vueId="{{'2-'+__i0__}}" wx:for="{{subjectSubItems}}" wx:for-index="__i0__" wx:key="id"></subject-sub-item>
+    </view>
+</view>

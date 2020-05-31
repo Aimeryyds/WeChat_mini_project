@@ -1,0 +1,26 @@
+<Navbar id="navbar"></Navbar>
+<view style="height:{{height}}px"></view>
+<view class="createshare-wrap">
+    <view class="title">修改共享名称</view>
+    <view bindtap="clearErrorText" class="input-wrap">
+        <input bindblur="bindKeyBlur" bindinput="bindKeyInput" class="dialog-input" confirmType="done" focus="true" maxlength="255" placeholder="请输入共享的名称" placeholderClass="dialog-input-placeholder" selectionEnd="{{dialogData.selectionEnd}}" selectionStart="0" type="text" value="{{dialogData.value}}">
+            <view catchtap="handleClearInput" class="input-cancel" data-btn="clear"></view>
+        </input>
+    </view>
+    <view class="input-subline"></view>
+    <view class="dialog-subtitle error" wx:if="{{dialogData.errorText!=='legal'&&dialogData.showErrorText}}">
+        <text>{{dialogData.errorText}}</text>
+    </view>
+    <view class="dialog-subtitle" wx:else>
+        <text>举例：学习资料、新西兰之旅、家有萌宝等</text>
+    </view>
+    <view class="create-operate">
+        <view class="create-cancel">
+            <NativeButton bgColor="{{'light-blue'}}" bind:action="cancelCreateGroup" fontColor="{{'blue'}}">取消创建</NativeButton>
+        </view>
+        <view class="create-confirm">
+            <NativeButton bind:action="handleInputConfirm" data-buttonfrom="createGroup" openType="{{dialogData.errorText==='legal'?'share':''}}">邀请好友</NativeButton>
+        </view>
+    </view>
+</view>
+<Toast id="toast"></Toast>

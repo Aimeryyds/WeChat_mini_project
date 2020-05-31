@@ -1,0 +1,7 @@
+<view class="u-class u-tabbar-item">
+    <u-badge count="{{count}}" dot="{{dot}}">
+        <u-icon color="{{current?currentColor:'#000'}}" size="44" type="{{current?currentIcon:icon}}" wx:if="{{icon}}"></u-icon>
+        <image class="u-tabbar-item-img" src="{{current?currentImg:img}}" wx:else></image>
+        <view class="u-tabbar-title {{current?'u-tabbar-title-current':''}}" style="{{current&&currentColor?'color:'+currentColor:''}};font-size: {{fontSize}}rpx;">{{title}}</view>
+    </u-badge>
+</view>

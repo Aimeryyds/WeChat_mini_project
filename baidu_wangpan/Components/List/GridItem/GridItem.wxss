@@ -1,0 +1,169 @@
+.active {
+    background-image: url(https://staticwx.cdn.bcebos.com/mini-program/images/ic_large_select_v2.png);
+    background-size: 82rpx 80rpx;
+    background-position: center;
+    background-repeat: no-repeat;
+}
+
+.list-item-wrap.press-down {
+    background-color: transparent;
+}
+
+.dir-item-wrap {
+    margin: 0 0 16rpx 16rpx;
+    width: 335rpx;
+    height: 112rpx;
+    font-size: 28rpx;
+    font-weight: bold;
+    color: #212121;
+    border-radius: 8rpx;
+    background-color: #F9F9F9;
+}
+
+.dir-item-wrap .file-item-main {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    height: 100%;
+}
+
+.dir-item-wrap .select-box {
+    display: flex;
+    width: 82rpx;
+    height: 82rpx;
+    margin: 0 24rpx;
+    background-color: rgba(189,189,189,.2);
+    border-radius: 50%;
+    align-items: center;
+    justify-content: center;
+}
+
+.dir-item-wrap .select-box.active {
+    background-color: transparent;
+}
+
+.dir-item-wrap .normal {
+    width: 82rpx;
+    height: 82rpx;
+    margin: 0 8rpx;
+}
+
+.dir-item-wrap .select-box .normal {
+    width: 82rpx;
+    height: 82rpx;
+    margin: 0;
+}
+
+.file-item-wrap {
+    overflow: hidden;
+    position: relative;
+    margin: 0 0 16rpx 16rpx;
+    width: 218rpx;
+    height: 218rpx;
+    font-size: 24rpx;
+    color: #212121;
+    text-align: center;
+    border-radius: 4rpx;
+}
+
+.file-item-wrap .file-item-main {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    height: 100%;
+    background-color: #F9F9F9;
+}
+
+.file-item-wrap .normal {
+    width: 218rpx;
+    height: 218rpx;
+}
+
+.file-item-wrap .system-file-icon {
+    height: 160rpx;
+}
+
+.file-item-wrap .file-icon-box {
+    display: flex;
+    width: 100%;
+    height: 100%;
+    align-items: center;
+    justify-content: center;
+}
+
+.file-item-wrap .file-icon {
+    width: 82rpx;
+    height: 82rpx;
+}
+
+.file-item-wrap .over-mask-bg {
+    position: absolute;
+    left: 0;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    background-color: rgba(255,255,255,0.6);
+    z-index: 10;
+}
+
+.file-item-wrap .over-mask {
+    position: absolute;
+    bottom: 10rpx;
+    right: 10rpx;
+    width: 42rpx;
+    height: 42rpx;
+    z-index: 9;
+}
+
+.file-item-wrap .over-mask.active {
+    top: 0;
+    right: 0;
+    left: 0;
+    bottom: 0;
+    width: 82rpx;
+    height: 82rpx;
+    margin: auto;
+    z-index: 11;
+}
+
+.file-item-wrap .thumbnail {
+    width: 100%;
+    height: 100%;
+    border-radius: 4rpx;
+}
+
+.file-item-wrap .file-name {
+    position: absolute;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    width: auto;
+    height: 58rpx;
+    padding: 0 16rpx;
+    line-height: 58rpx;
+    background-color: rgba(189,189,189,0.16);
+}
+
+.file-name {
+    width: 205rpx;
+}
+
+.file-name.file-dir {
+    width: 194rpx;
+}
+
+.file-name-txt {
+    overflow: hidden;
+    height: 100%;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+
+.video-file .sleepy,.not-video-file .sleepy {
+    top: 68rpx;
+    left: 68rpx;
+    width: 82rpx;
+    height: 82rpx;
+    background-image: url(https://staticwx.cdn.bcebos.com/mini-program/images/ic_large_select_normal_v2.png);
+    background-size: contain;
+}

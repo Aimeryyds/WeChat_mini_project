@@ -1,0 +1,33 @@
+<view class="_ul data-v-1e7d7211">
+    <view class="_li data-v-1e7d7211">
+        <label class="_span data-v-1e7d7211">{{dataLocal.timeString}}</label>
+    </view>
+    <view class="_li data-v-1e7d7211">
+        <label class="label _span data-v-1e7d7211">收</label>
+        <percent-number bind:__l="__l" class="val data-v-1e7d7211" classes="{{dataLocal.closePx>dataLocal.preclosePx?'color-red':dataLocal.closePx<dataLocal.preclosePx?'color-green':''}}" num="{{dataLocal.closePx||'--'}}" options="{{$root.a0}}" process="{{toFixedLocal}}" vueId="1"></percent-number>
+    </view>
+    <view class="_li data-v-1e7d7211">
+        <label class="label _span data-v-1e7d7211">高</label>
+        <percent-number bind:__l="__l" class="val data-v-1e7d7211" classes="{{dataLocal.highPx>dataLocal.preclosePx?'color-red':dataLocal.highPx<dataLocal.preclosePx?'color-green':''}}" num="{{dataLocal.highPx}}" options="{{$root.a1}}" process="{{toFixedLocal}}" vueId="2"></percent-number>
+    </view>
+    <view class="_li data-v-1e7d7211">
+        <label class="label _span data-v-1e7d7211">额</label>
+        <label class="val _span data-v-1e7d7211">{{dataLocal.turnoverValueString}}</label>
+    </view>
+    <view class="_li data-v-1e7d7211">
+        <label class="label _span data-v-1e7d7211">幅</label>
+        <percent-number bind:__l="__l" class="val data-v-1e7d7211" num="{{dataLocal.pxChangeRate}}" vueId="3"></percent-number>
+    </view>
+    <view class="_li data-v-1e7d7211">
+        <label class="label _span data-v-1e7d7211">开</label>
+        <percent-number bind:__l="__l" class="val data-v-1e7d7211" classes="{{dataLocal.openPx>dataLocal.preclosePx?'color-red':dataLocal.openPx<dataLocal.preclosePx?'color-green':''}}" num="{{dataLocal.openPx}}" options="{{$root.a2}}" process="{{toFixedLocal}}" vueId="4"></percent-number>
+    </view>
+    <view class="_li data-v-1e7d7211">
+        <label class="label _span data-v-1e7d7211">低</label>
+        <percent-number bind:__l="__l" class="val data-v-1e7d7211" classes="{{dataLocal.lowPx>dataLocal.preclosePx?'color-red':dataLocal.lowPx<dataLocal.preclosePx?'color-green':''}}" num="{{dataLocal.lowPx}}" options="{{$root.a3}}" process="{{toFixedLocal}}" vueId="5"></percent-number>
+    </view>
+    <view class="_li data-v-1e7d7211">
+        <label class="label _span data-v-1e7d7211">量</label>
+        <label class="val _span data-v-1e7d7211">{{dataLocal.turnoverVolumeString}}</label>
+    </view>
+</view>

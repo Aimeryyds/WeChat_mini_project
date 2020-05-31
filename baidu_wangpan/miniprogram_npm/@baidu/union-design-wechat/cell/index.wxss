@@ -1,0 +1,77 @@
+.u-cell {
+    position: relative;
+    padding: 24rpx 30rpx;
+    display: flex;
+    background: #fff;
+    align-items: center;
+    line-height: 1.4;
+    font-size: 28rpx;
+    overflow: hidden;
+}
+
+.u-cell::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    width: 200%;
+    height: 200%;
+    transform: scale(.5);
+    transform-origin: 0 0;
+    pointer-events: none;
+    box-sizing: border-box;
+    border: 0 solid #e9eaec;
+    border-bottom-width: 2rpx;
+    left: 30rpx;
+    right: 0;
+}
+
+.u-cell-last::after {
+    display: none;
+}
+
+.u-cell-icon {
+    margin-right: 10rpx;
+}
+
+.u-cell-icon:empty {
+    display: none;
+}
+
+.u-cell-bd {
+    flex: 1;
+}
+
+.u-cell-text {
+    line-height: 48rpx;
+    font-size: 28rpx;
+}
+
+.u-cell-desc {
+    line-height: 1.2;
+    font-size: 24rpx;
+    color: #80848f;
+}
+
+.u-cell-ft {
+    position: relative;
+    text-align: right;
+    color: #495060;
+}
+
+.u-cell-access .u-cell-ft {
+    padding-right: 26rpx;
+}
+
+.u-cell-access .u-cell-ft::after {
+    content: " ";
+    display: inline-block;
+    width: 12rpx;
+    height: 12rpx;
+    position: absolute;
+    top: 50%;
+    right: 4rpx;
+    border-width: 4rpx 4rpx 0 0;
+    border-color: #dddee1;
+    border-style: solid;
+    transform: translateY(-50%) matrix(0.71,0.71,-0.71,0.71,0,0);
+}

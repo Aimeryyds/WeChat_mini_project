@@ -1,0 +1,39 @@
+@import "../../../../../__wuBaseWxss__/4.wxss";
+
+.one-btn .popup-btn {
+    width: 100%;
+}
+
+.one-btn .popup-btn::after {
+    display: none;
+}
+
+.popup-btn {
+    position: absolute;
+    bottom: 0;
+    width: 50%;
+    height: 100%;
+}
+
+.popup-cancel {
+    left: 0;
+}
+
+.popup-confirm {
+    right: 0;
+}
+
+.popup-cancel::after {
+    content: '';
+    position: absolute;
+    left: auto;
+    bottom: auto;
+    right: 0;
+    top: 25%;
+    height: 58rpx;
+    width: 2px;
+    background-color: #BDBDBD;
+    opacity: 0.2;
+    transform: scaleX(0.5);
+    transform-origin: 50% 100%;
+}

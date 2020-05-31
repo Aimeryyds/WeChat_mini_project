@@ -1,0 +1,19 @@
+<BottomModal bindhide="handleHideModal" cancelText="" show="{{show}}" title="设置当前收集" wx:if="{{show}}">
+    <view class="create-body">
+        <view class="create-form">
+            <view class="create-title">
+                <input focus bindconfirm="changeTitle" bindinput="changeTitle" class="create-title-input" cursorSpacing="10" placeholder="请输入收文件的名称" placeholderClass="create-title-placeholder" value="{{title}}"></input>
+                <image bindtap="clearTitle" class="create-title-clear" src="{{closeIconCircle}}"></image>
+            </view>
+            <view class="form-item period">
+                <inputPicker bindchange="changePeriod" index="{{periodIndex}}" label="有 效 期" labelClass="period-label" range="{{periodRange}}" unit="天" value="{{period}}"></inputPicker>
+            </view>
+            <view class="form-item limit">
+                <inputPicker bindchange="changeLimit" index="{{limitIndex}}" label="人数上限" range="{{limitRange}}" unit="人" value="{{limit}}"></inputPicker>
+            </view>
+        </view>
+        <view class="create-btn">
+            <BlueButton bind:action="handleCreate">确认新建收集</BlueButton>
+        </view>
+    </view>
+</BottomModal>

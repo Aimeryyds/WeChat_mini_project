@@ -1,0 +1,14 @@
+<view bindtap="__e" class="{{['subject-class-sub-item flex-center-all _li data-v-3566ba74',activeSubjectSubItem&&activeSubjectSubItem.id===item.id?'is-active':'']}}" data-event-opts="{{[ [ 'tap',[ [ '$emit',['click'] ] ] ] ]}}">
+    <view class="layout-left _div data-v-3566ba74">
+        <view class="iconfont icon-dingyuexuanzhong _i data-v-3566ba74" wx:if="{{activeSubjectSubItem&&activeSubjectSubItem.id===item.id}}"></view>
+        <view class="iconfont icon-dingyueweixuanzhong _i data-v-3566ba74" wx:else></view>
+    </view>
+    <view class="layout-middle _div data-v-3566ba74">
+        <view class="_p data-v-3566ba74">{{item.name}}</view>
+        <view class="_p data-v-3566ba74">{{item.desc}}</view>
+    </view>
+    <view class="layout-right _div data-v-3566ba74">
+        <class-sub-item-price bind:__l="__l" class="data-v-3566ba74" price="{{item.discountPrice}}" vueId="1" wx:if="{{subscribeType&&subscribeType===2}}"></class-sub-item-price>
+        <normal-sub-item-price bind:__l="__l" class="data-v-3566ba74" name="月" price="{{item.amountPerMonth||item.discountPrice/item.days/30}}" vueId="2" wx:else></normal-sub-item-price>
+    </view>
+</view>

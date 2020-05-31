@@ -1,0 +1,20 @@
+<view class="column-action _div data-v-31e89b4e">
+    <view class="column-action_mask _div data-v-31e89b4e" style="{{'background-image:'+'url('+displayImage+')'+';'}}"></view>
+    <view class="column-action_inner _div data-v-31e89b4e">
+        <view class="layout-left _div data-v-31e89b4e">
+            <image alt="{{subject.title}}" class="_img data-v-31e89b4e" mode="aspectFill" src="{{displaySquareImage}}"></image>
+        </view>
+        <view class="layout-right _div data-v-31e89b4e">
+            <view bindtap="__e" class="_div data-v-31e89b4e" data-event-opts="{{[ [ 'tap',[ [ '$emit',['follow'] ] ] ] ]}}" style="display:inline-block;">
+                <x-button plain bind:__l="__l" class="data-v-31e89b4e" size="large" type="primary" vueId="1" vueSlots="{{['default']}}" wx:if="{{!subject.following}}">关注</x-button>
+                <x-button plain bind:__l="__l" class="data-v-31e89b4e" size="large" type="primary" vueId="2" vueSlots="{{['default']}}" wx:if="{{subject.following}}">已关注</x-button>
+            </view>
+            <label class="_span data-v-31e89b4e"></label>
+            <view class="_div data-v-31e89b4e" style="display:inline-block;" wx:if="{{subject.isSubscribable&&subject.subjSubscribeItems}}">
+                <x-button bind:__l="__l" bind:click="__e" class="data-v-31e89b4e" data-event-opts="{{[ [ '^click',[ [ '$emit',['subscribe'] ] ] ] ]}}" size="large" vueId="3" vueSlots="{{['default']}}" wx:if="{{!subject.isSubscribed}}">订阅</x-button>
+                <x-button bind:__l="__l" bind:click="__e" class="data-v-31e89b4e" data-event-opts="{{[ [ '^click',[ [ '$emit',['subscribe'] ] ] ] ]}}" size="large" vueId="4" vueSlots="{{['default']}}" wx:if="{{subject.isSubscribed&&subject.remainingDays<1}}">续订</x-button>
+                <x-button bind:__l="__l" bind:click="__e" class="data-v-31e89b4e" data-event-opts="{{[ [ '^click',[ [ '$emit',['subscribe'] ] ] ] ]}}" size="large" vueId="5" vueSlots="{{['default']}}" wx:if="{{subject.isSubscribed&&subject.remainingDays>0}}">已订阅</x-button>
+            </view>
+        </view>
+    </view>
+</view>

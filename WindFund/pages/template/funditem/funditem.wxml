@@ -1,0 +1,74 @@
+<template name="monetaryfund">
+    <view bindtap="directToSingle" class="funditem-view" data-item="{{item.fundCode}}">
+        <view class="funditem-left">
+            <view class="funditem-name">{{item.fundName}}</view>
+            <view class="funditem-code">{{item.fundCodeShow}}</view>
+        </view>
+        <view class="funditem-mid">
+            <view class="funditem-value">{{item.mmfUnityield}}</view>
+            <view class="funditem-date">{{formatTime(item.navDate)}}</view>
+        </view>
+        <view class="funditem-right {{item.mmfAnnualizedYield=='--'?'':item.mmfAnnualizedYield<0?'maingreen':'mainred'}}">{{item.mmfAnnualizedYield}}%</view>
+    </view>
+</template>
+<template name="thisYearBenifit">
+    <view bindtap="directToSingle" class="funditem-view" data-item="{{item.fundCode}}">
+        <template is="funditemleft" data="{{item:item}}"></template>
+        <view class="funditem-right {{item.thisYearBenifit=='--'?'':item.thisYearBenifit<0?'maingreen':'mainred'}}">{{item.thisYearBenifit}}%</view>
+    </view>
+</template>
+<template name="benifitToNow">
+    <view bindtap="directToSingle" class="funditem-view" data-item="{{item.fundCode}}">
+        <template is="funditemleft" data="{{item:item}}"></template>
+        <view class="funditem-right {{item.benifitToNow=='--'?'':item.benifitToNow<0?'maingreen':'mainred'}}">{{item.benifitToNow}}%</view>
+    </view>
+</template>
+<template name="latestYearBenifit">
+    <view bindtap="directToSingle" class="funditem-view" data-item="{{item.fundCode}}">
+        <template is="funditemleft" data="{{item:item}}"></template>
+        <view class="funditem-right {{item.latestYearBenifit=='--'?'':item.latestYearBenifit<0?'maingreen':'mainred'}}">{{item.latestYearBenifit}}%</view>
+    </view>
+</template>
+<template name="latest6MonthBenifit">
+    <view bindtap="directToSingle" class="funditem-view" data-item="{{item.fundCode}}">
+        <template is="funditemleft" data="{{item:item}}"></template>
+        <view class="funditem-right {{item.latest6MonthBenifit=='--'?'':item.latest6MonthBenifit<0?'maingreen':'mainred'}}">{{item.latest6MonthBenifit}}%</view>
+    </view>
+</template>
+<template name="latest3MonthBenifit">
+    <view bindtap="directToSingle" class="funditem-view" data-item="{{item.fundCode}}">
+        <template is="funditemleft" data="{{item:item}}"></template>
+        <view class="funditem-right {{item.latest3MonthBenifit=='--'?'':item.latest3MonthBenifit<0?'maingreen':'mainred'}}">{{item.latest3MonthBenifit}}%</view>
+    </view>
+</template>
+<template name="latestMonthBenifit">
+    <view bindtap="directToSingle" class="funditem-view" data-item="{{item.fundCode}}">
+        <template is="funditemleft" data="{{item:item}}"></template>
+        <view class="funditem-right {{item.latestMonthBenifit=='--'?'':item.latestMonthBenifit<0?'maingreen':'mainred'}}">{{item.latestMonthBenifit}}%</view>
+    </view>
+</template>
+<template name="latestWeekBenifit">
+    <view bindtap="directToSingle" class="funditem-view" data-item="{{item.fundCode}}">
+        <template is="funditemleft" data="{{item:item}}"></template>
+        <view class="funditem-right {{item.latestWeekBenifit=='--'?'':item.latestWeekBenifit<0?'maingreen':'mainred'}}">{{item.latestWeekBenifit}}%</view>
+    </view>
+</template>
+<template name="navIncrease">
+    <view bindtap="directToSingle" class="funditem-view" data-item="{{item.fundCode}}">
+        <template is="funditemleft" data="{{item:item}}"></template>
+        <view class="funditem-right {{item.navIncrease=='--'?'':item.navIncrease<0?'maingreen':'mainred'}}">{{item.navIncrease}}%</view>
+    </view>
+</template>
+<template name="funditemleft">
+    <view class="funditem-left">
+        <view class="funditem-name">{{item.fundName}}</view>
+        <view class="funditem-code">{{item.fundCodeShow}}</view>
+    </view>
+    <view class="funditem-mid">
+        <view class="funditem-value">{{item.navUnit}}</view>
+        <view class="funditem-date">{{formatTime(item.navDate)}}</view>
+    </view>
+</template>
+<template name="fundranklist">
+    <template is="{{type}}" data="{{item:item}}" wx:for="{{fundlist}}" wx:key="index"></template>
+</template>

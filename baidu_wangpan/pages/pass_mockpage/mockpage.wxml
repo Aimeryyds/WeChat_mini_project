@@ -1,0 +1,19 @@
+<text>这是模拟产品线的页面，登录成功后会跳转到这里，在storage中会新种bduss，stoken,waimai_stoekn字段</text>
+<button bindtap="jumpLogin" type="default"> 跳登录页 </button>
+<button bindtap="guideLogin" type="default"> 游客帐号正常化 </button>
+<button bindtap="setWechatUnbind" type="default"> 解绑微信 </button>
+<button bindtap="searchBbuss" type="default"> 查看BDUSS </button>
+<input placeholder="身份证输入键盘" type="idcard"></input>
+<input placeholder="带小数点的数字键盘" type="digit"></input>
+<view class="section">
+    <input placeholder="number" type="number"></input>
+</view>
+<view class="section">
+    <input pattern="/^[a-z0-9]+$/i" placeholder="text" type="text"></input>
+</view>
+<view>
+    <text>微信解绑状态：{{wechatBindStatus}}</text>
+</view>
+<view>
+    <text>解绑后BDUSS：{{updateBduss}}</text>
+</view>

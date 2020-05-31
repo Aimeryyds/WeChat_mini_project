@@ -1,0 +1,18 @@
+<view class="assist-wrap">
+    <view class="assist-text" style="color: {{color}}">{{text}}</view>
+    <view bindtap="clickButton" class="assist-btn-wrap">
+        <form bindsubmit="formSubmit" reportSubmit="true">
+            <image class="assist-btn-info" mode="widthFix" src="{{btnInfo}}" wx:if="{{tipShow}}"></image>
+            <button bindgetuserinfo="getuserinfo" bindtap="{{shareEve}}" class="assist-btn" formType="submit" id="assist" openType="{{openType}}" style="background-image:url('{{btnSrc}}');color: {{btnColor}}">{{btnText}}</button>
+        </form>
+    </view>
+    <view class="invite-layer">
+        <button bindgetuserinfo="getuserinfo" class="invite-item" id="{{'assist'+index}}" openType="{{openType}}" wx:for="{{inviteUsers}}" wx:key="{{index}}">
+            <view class="user-header" style="border-color: {{inviterInfo.faceBdColor}}">
+                <image class="user-icon" src="{{item.user_icon||inviterInfo.faceSrc}}"></image>
+            </view>
+            <text class="user-name" style="color: {{inviterInfo.color}}" wx:if="{{item}}">好友{{index+1}}</text>
+            <text class="user-name" style="color: {{inviterInfo.color}}" wx:else>邀请好友</text>
+        </button>
+    </view>
+</view>

@@ -1,0 +1,214 @@
+.list-item-wrap {
+    display: flex;
+    flex-flow: row nowrap;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.list-item-wrap.is-placeholder {
+    height: 0.1rpx;
+    overflow: hidden;
+    background-color: transparent;
+    position: relative;
+}
+
+.list-item-wrap.is-highlight {
+    background-color: #F0FAFF;
+}
+
+.item-placeholder-cover {
+    position: absolute;
+    top: 0;
+    left: 0;
+    bottom: 0;
+    right: 0;
+    background-color: #fff;
+    z-index: 1;
+}
+
+.item-wrap-padding {
+    padding: 30rpx 0 30rpx 32rpx;
+}
+
+.list-item-wrap.press-down {
+    background-color: #F0FAFF;
+}
+
+.list-item-wrap .file-item-main {
+    display: flex;
+    height: 82rpx;
+    width: calc(100% - 100rpx);
+    order: 0;
+    flex-grow: 0;
+}
+
+.list-item-wrap .file-item-main.select-status,.list-item-wrap .file-item-main.share-main {
+    width: calc(100% - 50rpx);
+}
+
+.list-item-wrap .file-icon {
+    position: relative;
+    width: 82rpx;
+    height: 82rpx;
+    order: 0;
+    flex-grow: 0;
+}
+
+.list-item-wrap .file-icon .normal {
+    width: 82rpx;
+    height: 82rpx;
+}
+
+.list-item-wrap .file-icon .normalImg {
+    height: 82rpx;
+    width: 82rpx;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+    border-radius: 8rpx;
+    background-color: rgba(189,189,189,.28);
+}
+
+.list-item-wrap .file-icon .normalImgWrap {
+    height: 82rpx;
+    width: 82rpx;
+    border-radius: 8rpx;
+}
+
+.list-item-wrap .file-des {
+    display: inline-block;
+    order: 1;
+    flex-grow: 1;
+    height: 82rpx;
+    width: calc(100% - 200rpx);
+    margin-left: 32rpx;
+}
+
+.list-item-wrap .file-des .file-name {
+    width: 100%;
+    margin-bottom: 3rpx;
+    font-weight: bold;
+    color: #212121;
+    font-size: 30rpx;
+    box-sizing: border-box;
+    line-height: 150%;
+}
+
+.file-des .file-name .text {
+    overflow: hidden;
+    display: block;
+    width: 100%;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+    line-height: 150%;
+}
+
+.file-des.trans-assis-list .file-name {
+    overflow: hidden;
+}
+
+.file-des.trans-assis-list .file-name .text {
+    float: left;
+    max-width: calc(100% - 96rpx);
+    width: auto;
+}
+
+.file-des.trans-send-list .file-name .text {
+    max-width: calc(100% - 140rpx);
+}
+
+.file-name .text-tip {
+    display: none;
+    float: left;
+    margin-top: 8rpx;
+    margin-left: 20rpx;
+    width: 76rpx;
+    height: 28rpx;
+    font-size: 18rpx;
+    line-height: 28rpx;
+    background-color: #F0FAFF;
+    text-align: center;
+    border-radius: 6rpx;
+    overflow: hidden;
+    color: #06A7FF;
+}
+
+.trans-send-list .file-name .text-tip {
+    width: 120rpx;
+    background-color: #E6F6FF;
+    height: 30rpx;
+    line-height: 30rpx;
+    border-radius: 8rpx;
+}
+
+.trans-assis-list .file-name .text-tip {
+    display: block;
+}
+
+.list-item-wrap .file-des .file-time {
+    color: #9E9E9E;
+    font-size: 24rpx;
+    line-height: 150%;
+}
+
+.file-time .file-sender-name {
+    margin-left: 40rpx;
+}
+
+.file-size {
+    padding-left: 20rpx;
+}
+
+.list-item-wrap .file-operator {
+    order: 2;
+    flex-grow: 0;
+    width: 100rpx;
+    height: 82rpx;
+}
+
+.list-item-wrap .file-operator .op-more {
+    background: url('data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACIAAAAICAYAAAHrdx0EAAAAAXNSR0IArs4c6QAAARdJREFUOBG1kzFWwzAMhm1PydoNHmvGpFtnrlEOwiE4CFyDmY1kzNi+dmNNNqPPsfJEX92peLB+6f9lyXLiXF7DMJyA4zg+OXUI9H3/7gnEGB+6rvM5GL3357ZtH0UQiSVlSheMJTMRsnFAELufpulAMNs9WE/3OSMFIbQceC2D49yHcC+Ay5xQ1/UrBEt6/FnQslvf6ixG4+l/nucvufSnVtKDqCii56qqdk3THDV+mcN1lsksimLLt67J0NZFVXUs1tg1iy7Its6BtlVosdXAWx+dzuRbZrLRA1Qogq2dhfJ5JnfNCflh/jRBQRqD0+LW/kdO4OuwRSwucaU4uSWuFNec9E8yavmr3nhwJfiurz0LPOveOb80evz1HfCdkgAAAABJRU5ErkJggg==') no-repeat;
+    width: 100rpx;
+    height: 100%;
+    background-size: 34rpx;
+    background-position: center;
+}
+
+.list-item-wrap .file-icon .op-select {
+    position: absolute;
+    top: 0;
+    right: 0;
+    left: 0;
+    bottom: 0;
+    margin: auto;
+    border-radius: 50%;
+    z-index: 1;
+}
+
+.list-item-wrap .file-icon.selected .op-select {
+    background: url('https://staticwx.cdn.bcebos.com/mini-program/images/ic_large_select_v2.png') no-repeat center;
+    background-size: 82rpx 80rpx;
+}
+
+.list-item-wrap .file-icon.not-selected::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(189,189,189,.2);
+    border-radius: 50%;
+    z-index: -1;
+}
+
+.list-item-wrap .file-icon .normalImg.selected {
+    height: 46rpx;
+    width: 46rpx;
+    margin: 18rpx;
+    border-radius: 8rpx;
+}
+
+.list-item-wrap .file-icon.selected .normalImg.selected {
+    display: none;
+}

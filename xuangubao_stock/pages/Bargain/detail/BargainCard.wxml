@@ -1,0 +1,64 @@
+<form bindsubmit="__e" class="bargain-card data-v-30d45d53" data-event-opts="{{[ [ 'submit',[ [ 'formSubmit',['$event'] ] ] ] ]}}" reportSubmit="{{true}}">
+    <view class="bargain-card-tip _div data-v-30d45d53" wx:if="{{bargainState==='ongoing'||finish}}">
+        <view class="already _p data-v-30d45d53">已砍<label class="_span data-v-30d45d53">{{$root.g0}}</label>元</view>
+        <view class="still _p data-v-30d45d53" wx:if="{{originalPrice-bargainMoney>0&&!finish}}">还差<label class="_span data-v-30d45d53">{{$root.g1}}</label>元</view>
+        <view class="still _p data-v-30d45d53" wx:else>
+            <label class="finish _span data-v-30d45d53">砍单完成</label>
+            <image class="finish _img data-v-30d45d53" src="https://image.xuangubao.cn/FumwKP68NrSbcRmV7zBDywXZxgmY"></image>
+        </view>
+    </view>
+    <view class="bargain-card-tip-error _div data-v-30d45d53" wx:else>
+        <view class="_p data-v-30d45d53" wx:if="{{bargainState==='alreadybargain'&&activityState==='ongoing'}}">已帮好友砍价，你也可以发起砍价</view>
+        <block wx:else>
+            <view class="_p data-v-30d45d53" wx:if="{{bargainState==='alreadybargain'&&activityState!=='ongoing'}}">已帮砍</view>
+            <view class="_p data-v-30d45d53" wx:else>未在24小时内完成，砍价已结束</view>
+        </block>
+    </view>
+    <view class="loading-wrapper _div data-v-30d45d53">
+        <view class="process-loading _div data-v-30d45d53" style="{{'background-image:'+(bargainState==='bargainover'&&activityState==='activityover'&&!finish?'linear-gradient(to right,rgb(223,223,223),rgb(223,223,223))':'linear-gradient(to right,rgb(255, 144, 91),rgb(230, 57, 77))')+';'}}">
+            <view class="white-mask _div data-v-30d45d53" style="{{'left:'+$root.g2+'%'+';'}}"></view>
+        </view>
+        <view class="process-price _div data-v-30d45d53">
+            <label class="_span data-v-30d45d53" wx:for="{{processPrice}}" wx:for-index="__i0__" wx:for-item="i" wx:key="*this">{{'¥'+i}}</label>
+        </view>
+    </view>
+    <view class="finish _div data-v-30d45d53" wx:if="{{finish}}">
+        <image class="activityover _img data-v-30d45d53" src="https://image.xuangubao.cn/Fp8JItSscPz6HIoCld8esSgvjM1v" wx:if="{{activityState==='activityover'}}"></image>
+        <button class="data-v-30d45d53" formType="submit" wx:else>
+            <image class="create _img data-v-30d45d53" src="https://image.xuangubao.cn/FuH435iLH9GJE1sOzCLfizfj6W7r"></image>
+        </button>
+    </view>
+    <block wx:else>
+        <button bindtap="__e" class="ongoing data-v-30d45d53" data-event-opts="{{[ [ 'tap',[ [ '$emit',['helpBargain'] ] ] ] ]}}" wx:if="{{bargainState==='ongoing'&&(phoneNumber||!token)&&originalPrice-bargainMoney>0}}">
+            <image class="_img data-v-30d45d53" src="https://image.xuangubao.cn/FsePk4T5axSRq23_HYkkhtLHyInR"></image>
+        </button>
+        <block wx:else>
+            <button class="alreadybargain data-v-30d45d53" formType="submit" wx:if="{{bargainState==='ongoing'&&(phoneNumber||!token)&&originalPrice-bargainMoney<=0&&activityState!=='activityover'}}">
+                <image class="_img data-v-30d45d53" src="https://image.xuangubao.cn/FuH435iLH9GJE1sOzCLfizfj6W7r"></image>
+            </button>
+            <block wx:else>
+                <button class="activityover data-v-30d45d53" wx:if="{{bargainState==='ongoing'&&(phoneNumber||!token)&&originalPrice-bargainMoney<=0&&activityState==='activityover'}}">
+                    <image class="_img data-v-30d45d53" src="https://image.xuangubao.cn/Fp8JItSscPz6HIoCld8esSgvjM1v"></image>
+                </button>
+                <block wx:else>
+                    <button bindgetphonenumber="__e" class="ongoing data-v-30d45d53" data-event-opts="{{[ [ 'getphonenumber',[ [ 'getUserPhone',['$event'] ] ] ] ]}}" openType="getPhoneNumber" wx:if="{{bargainState==='ongoing'&&!phoneNumber&&token}}">
+                        <image class="_img data-v-30d45d53" src="https://image.xuangubao.cn/FsePk4T5axSRq23_HYkkhtLHyInR"></image>
+                    </button>
+                    <block wx:else>
+                        <button class="bargainover data-v-30d45d53" formType="submit" wx:if="{{bargainState==='bargainover'&&activityState!=='activityover'}}">
+                            <image class="_img data-v-30d45d53" src="https://image.xuangubao.cn/FuH435iLH9GJE1sOzCLfizfj6W7r"></image>
+                        </button>
+                        <block wx:else>
+                            <button class="alreadybargain data-v-30d45d53" formType="submit" wx:if="{{bargainState==='alreadybargain'&&activityState!=='activityover'}}">
+                                <image class="_img data-v-30d45d53" src="https://image.xuangubao.cn/FuH435iLH9GJE1sOzCLfizfj6W7r"></image>
+                            </button>
+                            <view class="activityover _div data-v-30d45d53" wx:else>
+                                <image class="_img data-v-30d45d53" src="https://image.xuangubao.cn/Fp8JItSscPz6HIoCld8esSgvjM1v"></image>
+                            </view>
+                        </block>
+                    </block>
+                </block>
+            </block>
+        </block>
+    </block>
+</form>

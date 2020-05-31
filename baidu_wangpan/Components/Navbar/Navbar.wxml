@@ -1,0 +1,12 @@
+<view class="navbar {{theme}}">
+    <view style="height:{{statusBarHeight}}px"></view>
+    <view class="title-wrap" style="height:{{totalHeight}}px">
+        <view class="icon" wx:if="{{isShowBarBtn}}">
+            <view bindtap="navigateBack" class="navbar-back {{showHome===true?'':'hide-devider'}}" wx:if="{{showBack}}"></view>
+            <view bindtap="home" class="navbar-home" wx:if="{{showHome}}"></view>
+        </view>
+        <view class="text">
+            <view class="text-sub">{{titleText}}</view>
+        </view>
+    </view>
+</view>

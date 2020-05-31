@@ -1,0 +1,27 @@
+<view class="hom-wrapper _div data-v-e15089c0">
+    <header-bar-with-title bind:__l="__l" class="data-v-e15089c0" theme="red" title="选股宝大涨股" vueId="1" vueSlots="{{['default']}}">
+        <view class="time-reminder _p data-v-e15089c0">{{timeStrng}}</view>
+    </header-bar-with-title>
+    <view class="tip-image _div data-v-e15089c0" wx:if="{{!hideCollectTip}}">
+        <image class="_img data-v-e15089c0" mode="widthFix" src="/static/image/collectiontip.png"></image>
+        <view bindtap="__e" class="btn _i data-v-e15089c0" data-event-opts="{{[ [ 'tap',[ [ 'hideTip',['$event'] ] ] ] ]}}"></view>
+    </view>
+    <view class="body _div data-v-e15089c0">
+        <search-pane bind:__l="__l" bind:search="__e" class="data-v-e15089c0" data-event-opts="{{[ [ '^search',[ [ 'search',['Top'] ] ] ] ]}}" hotSearchTip="{{hotSearchTip}}" vueId="2"></search-pane>
+        <view class="meta-wrapper _div data-v-e15089c0">
+            <meta bind:__l="__l" bind:closeCatalog="__e" bind:openCatalog="__e" bind:selectPlate="__e" class="data-v-e15089c0" data-event-opts="{{[ [ '^selectPlate',[ ['selectPlate'] ] ],[ '^openCatalog',[ [ 'openCateLog',['Top'] ] ] ],[ '^closeCatalog',[ ['e0'] ] ] ]}}" marketInfo="{{marketInfo}}" showCataLog="{{showCataLog}}" tags="{{tagsList}}" vueId="3"></meta>
+        </view>
+        <tags bind:__l="__l" class="data-v-e15089c0" tags="{{tagsList}}" vueId="4"></tags>
+        <view class="placeholder _div data-v-e15089c0" wx:if="{{!tagsList||!tagsList.length}}">
+            <empty-holder bind:__l="__l" class="data-v-e15089c0" loading="{{!firstLoadingEnd}}" tradingDay="{{todayisTradingDay}}" vueId="5"></empty-holder>
+        </view>
+        <view class="footer _div data-v-e15089c0" wx:if="{{firstLoadingEnd&&tagsList.length}}">
+            <bottom-tip bind:__l="__l" class="data-v-e15089c0" vueId="6"></bottom-tip>
+        </view>
+    </view>
+    <view class="action-bar-wrapper _div data-v-e15089c0" wx:if="{{showActionBar}}">
+        <action-bar bind:__l="__l" bind:catelog="__e" bind:scrollTop="__e" bind:search="__e" class="data-v-e15089c0" data-event-opts="{{[ [ '^scrollTop',[ ['scrollTop'] ] ],[ '^search',[ [ 'search',['LowerRightCorner'] ] ] ],[ '^catelog',[ [ 'openCateLog',['LowerRightCorner'] ] ] ] ]}}" vueId="7"></action-bar>
+    </view>
+    <open-app bind:__l="__l" bind:openApp="__e" class="data-v-e15089c0" data-event-opts="{{[ [ '^openApp',[ ['openApp'] ] ] ]}}" path="{{'https://xuangubao.cn/top-gainer?date='+daynumber}}" vueId="8" wx:if="{{firstLoadingEnd&&day}}"></open-app>
+    <share-home bind:__l="__l" bind:finishDrawCard="__e" class="data-v-e15089c0 vue-ref" data-event-opts="{{[ [ '^finishDrawCard',[ ['finishDrawCard'] ] ] ]}}" data-ref="card" tags="{{$root.g0}}" vueId="9" wx:if="{{tagsList.length&&!shareCard}}"></share-home>
+</view>

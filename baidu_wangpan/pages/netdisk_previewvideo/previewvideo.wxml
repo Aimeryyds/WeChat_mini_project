@@ -1,0 +1,79 @@
+<Navbar id="Navbar" theme="translate-white"></Navbar>
+<view class="video-wrap {{videoMode}}">
+    <view class="content-wrap">
+        <view class="content loading" wx:if="{{videoStatus==='loading'}}">
+            <view>
+                <view class="spinning-icon" hidden="false"></view>
+                <view class="loading-text">
+                    <text>正在获取视频信息...</text>
+                </view>
+            </view>
+        </view>
+        <view class="content playing" wx:if="{{videoStatus==='playing'}}">
+            <video autoplay="{{true}}" bindended="onEnd" binderror="playError" bindpause="onPause" bindplay="starPlay" class="video-item" controls="{{videoMode!=='portrait'||videoMode==='portrait'&&!isEnd}}" enablePlayGesture="{{true}}" id="videoComp" objectFit="{{videoMode==='landscape'?'contain':'cover'}}" playBtnPosition="bottom" showCenterPlayBtn="{{false}}" showPlayBtn="{{true}}" showProgress="{{true}}" src="{{playSrc}}"></video>
+            <view bindtap="play" class="pause-btn" wx:if="{{isPause||isEnd}}">
+                <image class="{{isPause?'pause':'end'}}" src="{{isPause?'https://staticwx.cdn.bcebos.com/mini-program%2Fimages%2F%E6%92%AD%E6%94%BEicon.png':'https://staticwx.cdn.bcebos.com/mini-program%2Fimages%2F%E9%87%8D%E6%96%B0%E6%92%AD%E6%94%BE.png'}}"></image>
+                <text wx:if="{{isEnd}}">重新播放</text>
+            </view>
+        </view>
+        <view class="content error-retry" wx:if="{{videoStatus==='manualRetry'}}">
+            <view>
+                <view class="error-text">
+                    <text>视频信息获取失败</text>
+                </view>
+                <view class="retry-button">
+                    <BlueButton bind:action="retryPlayVideo" type="small">点击重试</BlueButton>
+                </view>
+            </view>
+        </view>
+        <view class="content error-retry" wx:if="{{videoStatus==='manualTranscode'}}">
+            <view>
+                <view class="error-text">
+                    <text>视频后台处理中，请稍后查询进度</text>
+                </view>
+                <view class="retry-button">
+                    <BlueButton bind:action="retryPlayVideo" type="small">查询进度</BlueButton>
+                </view>
+            </view>
+        </view>
+        <view class="content in-retry" wx:if="{{videoStatus==='transcode'||videoStatus==='errorRetry'||videoStatus==='ready'}}">
+            <view class="error-text">
+                <text>视频加载中，请稍候...</text>
+            </view>
+        </view>
+        <view class="content error-not-support" wx:if="{{videoStatus==='errorNotSupport'}}">
+            <view class="error-text">
+                <text>该视频无法播放，请在app内下载后查看</text>
+            </view>
+        </view>
+        <view class="content mobile-data-tip" style="background-image: url({{thumbs}})" wx:if="{{videoStatus==='mobileDataTip'}}">
+            <view class="play-button">
+                <BlueButton bind:action="playVideoBy4G" type="small">
+                    <image class="icon-triangle" src="https://staticiot.bj.bcebos.com/union/netdisk-bp-smartprogram/sanjiao.png"></image>用流量播放（{{size}}）
+                </BlueButton>
+            </view>
+        </view>
+    </view>
+</view>
+<view class="operate">
+    <view class="open-app" style="{{isEnd?'width:233rpx':''}}">
+        <MediaPCode appParameter="{{appParameter}}" bindpCode="pCode" canOpenApp="{{fromNa}}" fontColor="fc-white" pwd="{{pwd}}" saved="{{saved}}" shareUk="{{shareUk}}" shareid="{{shareid}}" surl="{{surl}}" text="打开App"></MediaPCode>
+    </view>
+    <view class="shareToFriends {{videoMode==='portrait'&&!isEnd?'bottom_bar_gap':''}}" wx:if="{{showButton}}">
+        <BlueButton bgColor="{{videoMode==='landscape'?'gray-v2':'gray-v1'}}" bind:action="share" fontColor="white" iconClass="icon-share-button" isShade="{{true}}" isShowIcon="{{true}}">发送给微信群/好友</BlueButton>
+    </view>
+    <view class="shareToFriends {{videoMode==='portrait'&&!isEnd?'bottom_bar_gap':''}}" style="position:absolute;bottom:18px;" wx:if="{{isOwner}}">
+        <BlueButton bgColor="{{videoMode==='landscape'?'gray-v2':'gray-v1'}}" bind:action="share" fontColor="white" iconClass="icon-share-button" isShade="{{true}}" isShowIcon="{{true}}">发送给朋友</BlueButton>
+    </view>
+    <view class="bindBtn {{videoMode==='portrait'&&!isEnd?'bottom_bar_gap':''}}" wx:if="{{showShareView&&!isOwner}}">
+        <view class="sharelist-sharebutton others-sharebutton">
+            <BlueButton bgColor="{{videoMode==='landscape'?'gray-v2':'gray-v1'}}" bind:action="share" fontColor="white" iconClass="icon-share-button" isShade="{{true}}" isShowIcon="{{true}}">发送给朋友</BlueButton>
+        </view>
+        <view class="sharelist-savebutton">
+            <TransferBtn btnTxt="转存到我的网盘" fsId="{{fs_id}}" owner="{{isOwner}}" shareId="{{shareid}}" shareUk="{{shareUk}}" surl="{{surl}}" type="video"></TransferBtn>
+        </view>
+    </view>
+</view>
+<view class="bg" wx:if="{{videoStatus==='mobileDataTip'}}"></view>
+<Toast id="toast"></Toast>
+<ShowDialog id="showDialog"></ShowDialog>

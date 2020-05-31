@@ -1,0 +1,5 @@
+<view class="_div">
+    <verify-mobile bind:__l="__l" bind:close="__e" data-event-opts="{{[ [ '^close',[ ['clearOverlayStack'] ] ] ]}}" vueId="1" wx:if="{{isVerifingMobile}}"></verify-mobile>
+    <verify-mobile-succeeded bind:__l="__l" bind:close="__e" data-event-opts="{{[ [ '^close',[ ['clearOverlayStack'] ] ] ]}}" vueId="2" wx:if="{{isVerifiedAndSuccedded}}"></verify-mobile-succeeded>
+    <verify-mobile-conflict bind:__l="__l" bind:close="__e" data-event-opts="{{[ [ '^close',[ ['clearOverlayStack'] ] ] ]}}" vueId="3" wx:if="{{isDealingVerifyConflict}}"></verify-mobile-conflict>
+</view>

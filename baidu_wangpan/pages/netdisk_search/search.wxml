@@ -1,0 +1,27 @@
+<Navbar id="Navbar" titleText="百度网盘"></Navbar>
+<view style="height:{{height}}px"></view>
+<view class="search" wx:if="{{!isBatch}}">
+    <input bindconfirm="confirm" bindfocus="focus" bindinput="input" class="search-input" confirmType="search" focus="true" maxlength="255" placeholder="搜索网盘文件" placeholderStyle="color:#c2c2c2;font-weight:bold;" type="search" value="{{value}}">
+        <view bindtap="clear" class="ser-cancel" wx:if="{{value&&show}}"></view>
+    </input>
+    <view bindtap="{{value?'search':'cancel'}}" class="ser-btn" wx:if="{{show}}">{{value?'搜索':'取消'}}</view>
+</view>
+<view class="ser-num" wx:if="{{!show&&xListLen}}">搜索结果（{{xListLen}}）</view>
+<view class="search-wrap" wx:if="{{show&&his.length>0}}">
+    <view class="his-title">
+        <text>搜索历史</text>
+        <text bindtap="clearAll" class="his-del"></text>
+    </view>
+    <view class="his-loc">
+        <view bindtap="fastSearch" class="his-item" data-item="{{item}}" wx:for="{{his}}" wx:key="{{index}}">{{item}}</view>
+    </view>
+</view>
+<view class="result" hidden="{{show}}">
+    <view class="seach-lsit" style="height: {{systemInfo.windowHeightRpx-2*height-(isBatch?0:142)-72}}rpx">
+        <BaseList bind:goback="goback" bind:longPress="setIsBatchTrue" bind:switchMode="switchMode" id="XList" isSHowHeader="{{false}}" requestApiName="doSearch" showLoading="{{true}}" whenEmpty="seachList"></BaseList>
+    </view>
+</view>
+<ModalDialog from="search" id="modalDialog"></ModalDialog>
+<FileNameDialog id="dialog"></FileNameDialog>
+<Toast id="toast"></Toast>
+<ShowDialog id="showDialog"></ShowDialog>

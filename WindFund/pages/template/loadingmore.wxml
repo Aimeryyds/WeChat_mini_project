@@ -1,0 +1,11 @@
+<template name="loadingmore">
+    <view class="loading-more" wx:if="{{showmore}}">
+        <view wx:if="{{!isloading&&!isover}}">继续推动查看更多</view>
+        <view wx:else>
+            <view wx:if="{{!isover}}">
+                <image src="../../../img/loading.gif" style="width:12px;height:12px;"></image>
+      正在加载更多详情</view>
+            <view wx:else></view>
+        </view>
+    </view>
+</template>

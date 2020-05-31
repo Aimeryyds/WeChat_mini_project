@@ -1,0 +1,26 @@
+<view class="search-results _div data-v-7090ecf4">
+    <view class="block plate _div data-v-7090ecf4" wx:if="{{plates&&plates.length}}">
+        <view class="title _div data-v-7090ecf4">板块</view>
+        <view class="_ul data-v-7090ecf4">
+            <view bindtap="__e" class="_li data-v-7090ecf4" data-event-opts="{{[ [ 'tap',[ [ '$emit',['clickPlate','$0'],[ [ ['plates','key',plate.key] ] ] ] ] ] ]}}" wx:for="{{plates}}" wx:for-index="__i0__" wx:for-item="plate" wx:key="key">
+                <high-lightkeyword bind:__l="__l" class="name data-v-7090ecf4" keyword="{{keyword}}" originalString="{{plate.name}}" vueId="{{'1-'+__i0__}}"></high-lightkeyword>
+                <percent-number bind:__l="__l" class="data-v-7090ecf4" num="{{plate.pxChangeRate*100}}" vueId="{{'2-'+__i0__}}"></percent-number>
+            </view>
+        </view>
+    </view>
+    <view class="block stock _div data-v-7090ecf4" wx:if="{{stocks&&stocks.length&&stocksPrice}}">
+        <view class="title _div data-v-7090ecf4">股票</view>
+        <view class="_ul data-v-7090ecf4">
+            <view bindtap="__e" class="_li data-v-7090ecf4" data-event-opts="{{[ [ 'tap',[ [ '$emit',['clickStock','$0'],[ [ ['stocks','key',stock.key] ] ] ] ] ] ]}}" wx:for="{{stocks}}" wx:for-index="__i1__" wx:for-item="stock" wx:key="key">
+                <view class="_div data-v-7090ecf4">
+                    <high-lightkeyword bind:__l="__l" class="name data-v-7090ecf4" keyword="{{keyword}}" originalString="{{stock.name}}" vueId="{{'3-'+__i1__}}"></high-lightkeyword>
+                    <high-lightkeyword bind:__l="__l" class="symbol data-v-7090ecf4" keyword="{{keyword}}" originalString="{{stock.key}}" vueId="{{'4-'+__i1__}}"></high-lightkeyword>
+                </view>
+                <percent-number bind:__l="__l" class="data-v-7090ecf4" compareNum="{{stock.pxChangeRate}}" num="{{stocksPrice[stock.key].price}}" process="{{toFixed}}" vueId="{{'5-'+__i1__}}" wx:if="{{stocksPrice[stock.key]}}"></percent-number>
+                <percent-number bind:__l="__l" class="data-v-7090ecf4" num="{{stock.pxChangeRate*100}}" vueId="{{'6-'+__i1__}}"></percent-number>
+            </view>
+        </view>
+    </view>
+    <view class="no-result-data _div data-v-7090ecf4" wx:if="{{!stocks.length&&!plates.length}}">抱歉，无结果！</view>
+    <bottom-tip bind:__l="__l" class="data-v-7090ecf4" vueId="7" wx:else></bottom-tip>
+</view>

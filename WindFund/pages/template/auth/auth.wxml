@@ -1,0 +1,16 @@
+<template name="wxauth">
+    <form bindsubmit="__AuthModal__confirm" reportSubmit="true" wx:if="{{showModal}}">
+        <view class="modal-mask"></view>
+        <view class="modal-dialog">
+            <view class="modal-title">{{title||'小程序授权登录'}}</view>
+            <view class="modal-content">
+                <view>{{content||'基金小程序将获取以下授权'}}</view>
+                <view>{{content2||'· 获得您的公开信息（昵称、头像等）'}}</view>
+            </view>
+            <view class="modal-footer">
+                <button bindtap="__AuthModal__Cancel" class="btn-cancel" wx:if="{{showcancel}}">{{cancelTxt||'取消'}}</button>
+                <button bindgetuserinfo="__AuthModal__Submit" class="btn-confirm" openType="getUserInfo">{{confirmTxt||'授权'}}</button>
+            </view>
+        </view>
+    </form>
+</template>

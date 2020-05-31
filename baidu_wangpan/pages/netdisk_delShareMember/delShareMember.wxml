@@ -1,0 +1,26 @@
+<Navbar id="Navbar" isShowBarBtn="{{flase}}" titleText="选择成员"></Navbar>
+<view style="height:{{height}}px"></view>
+<view catchtap="goback" class="goback" style="height:{{height}}px">
+    <view style="width:100%;height:{{statusBarHeight}}px;"></view>
+    <view style="width:100%;height:{{totalHeight}}px;line-height:{{totalHeight}}px">取消</view>
+</view>
+<scroll-view scrollY="true" style="width:100%;height:{{systemInfo.visualHeightRpx-100-64}}rpx;">
+    <view class="member-wrap">
+        <view bindtap="selectMember" class="list-item-wrap {{item.isSelected?'is-selected':''}}" data-index="{{index}}" hoverClass="press-down" wx:if="{{owerUk!=item.uk}}" wx:for="{{member}}" wx:key="{{item.uk}}">
+            <view class="item-left">
+                <view class="member-head is-selected" wx:if="{{item.isSelected}}"></view>
+                <view class="member-head" style="background-image:url({{item.avator}})" wx:else></view>
+                <view class="member-uname">{{item.uname}}</view>
+            </view>
+        </view>
+    </view>
+</scroll-view>
+<view class="foot-erea">
+    <BlueButton bind:action="showDelMemberDialog" disabled="{{count<=0}}" type="big">
+        确认移除（{{count}}）
+    </BlueButton>
+</view>
+<Dialog bind:cancel="" bind:confirm="deleteMember" confirmValue="继续" id="del-member-dialog" textAlignClassName="left" title="移除成员">
+    <view>对方被移除后，将无法查看和管理群组文件，是否继续？</view>
+</Dialog>
+<Toast id="toast"></Toast>

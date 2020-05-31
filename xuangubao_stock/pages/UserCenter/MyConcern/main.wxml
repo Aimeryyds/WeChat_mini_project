@@ -1,0 +1,6 @@
+<view class="user-center _div">
+    <title-bar-capsule bind:__l="__l" title="我的关注" vueId="1"></title-bar-capsule>
+    <view class="_ul">
+        <my-concern-item bind:__l="__l" bind:clickActionBtn="__e" data-event-opts="{{[ [ '^clickActionBtn',[ [ 'clickActionBtn',['$0'],[ [ ['concernItems','',index] ] ] ] ] ] ]}}" subject="{{item}}" vueId="{{'2-'+index}}" wx:for="{{concernItems}}" wx:key="index"></my-concern-item>
+    </view>
+</view>

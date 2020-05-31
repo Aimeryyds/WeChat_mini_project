@@ -1,0 +1,29 @@
+<view class="count-down-wrpper _div data-v-62871098">
+    <image alt="avatar" class="_img data-v-62871098" src="{{avatar}}" wx:if="{{avatar}}"></image>
+    <view class="time-section _div data-v-62871098" wx:if="{{finish}}">
+        <view class="_p data-v-62871098">砍单已完成</view>
+    </view>
+    <block wx:else>
+        <view class="time-section _div data-v-62871098" wx:if="{{formatLeftTimeStyle}}">
+            <view class="time-item-list _p data-v-62871098">
+                <label class="number _span data-v-62871098">{{formatLeftTimeStyle.hh[0]}}</label>
+                <label class="number _span data-v-62871098">{{formatLeftTimeStyle.hh[1]}}</label>
+                <label class="separator _span data-v-62871098">:</label>
+                <label class="number _span data-v-62871098">{{formatLeftTimeStyle.mm[0]}}</label>
+                <label class="number _span data-v-62871098">{{formatLeftTimeStyle.mm[1]}}</label>
+                <label class="separator _span data-v-62871098">:</label>
+                <label class="number _span data-v-62871098">{{formatLeftTimeStyle.ss[0]}}</label>
+                <label class="number _span data-v-62871098">{{formatLeftTimeStyle.ss[1]}}</label>
+                <label class="separator _span data-v-62871098">:</label>
+                <label class="number _span data-v-62871098">{{formatLeftTimeStyle.ms[0]}}</label>
+                <label class="number _span data-v-62871098">{{formatLeftTimeStyle.ms[1]}}</label>
+            </view>
+            <view class="_p data-v-62871098">后结束</view>
+        </view>
+        <view class="time-section _div data-v-62871098" wx:else>
+            <view class="_p data-v-62871098">砍价已结束</view>
+        </view>
+    </block>
+    <view bindtap="__e" class="activity-link _div data-v-62871098" data-event-opts="{{[ [ 'tap',[ [ 'e0',['$event'] ] ] ] ]}}">活动规则</view>
+    <bargain-rules bind:__l="__l" bind:close="__e" class="data-v-62871098" data-event-opts="{{[ [ '^close',[ ['e1'] ] ] ]}}" vueId="1" wx:if="{{showBargainRules}}"></bargain-rules>
+</view>

@@ -1,0 +1,25 @@
+<Navbar id="Navbar" titleText="传输助手"></Navbar>
+<NavbarPlaceholder></NavbarPlaceholder>
+<View class="trans-assistant {{load.fail?'trans-load-fail':''}} {{check.fail?'trans-check-fail':''}} {{success.show?'trans-success':''}}">
+    <InfoComp actionOpenType="{{hasLogin?'':'getUserInfo'}}" actionText="{{hasLogin?'刷新':'授权登录查看收集信息'}}" actionWidth="{{hasLogin?214:384}}rpx" bindactionTextClick="handleRefresh" bindgetUserInfo="getUserInfo" icon="{{load.icon}}" status="fail" tip="页面加载失败，请刷新后再试" wx:if="{{load.fail}}"></InfoComp>
+    <InfoComp icon="{{check.icon}}" status="fail" tip="{{check.msg}}" wx:elif="{{check.fail}}"></InfoComp>
+    <InfoComp bindbtnClick="handleSuccessSelect" btnText="继续添加文件" icon="{{success.icon}}" iconClass="trans-success-icon" status="success" tip="文件已经提交至&nbsp;&nbsp;{{title}}" title="文件提交成功" wx:elif="{{success.show}}">
+        <view bindtap="gohome" class="trans-success-go-home">{{btnText}}</view>
+    </InfoComp>
+    <InfoComp actionTextClass="trans-info-action-text" actionOpenType="{{hasLogin?'':'getUserInfo'}}" actionText="{{hasLogin?'选择网盘文件':'登录网盘账号选文件'}}" actionWidth="{{hasLogin?268:368}}rpx" bindactionTextClick="handleSelect" bindgetUserInfo="getUserInfo" icon="{{infoIcon}}" iconClass="trans-info-icon" tip="有效期至：{{expireTime}}" title="{{title}}" wx:else>
+        <LocalFile bindgetUserInfo="getUserInfo" bindlocalTransSuccess="handleLocalTransSuccess" bindopenLocalModal="handleOpenLocalModal" hasLogin="{{hasLogin}}" id="localFile" surl="{{surl}}"></LocalFile>
+    </InfoComp>
+</View>
+<View class="page-info" wx:if="{{!(success.show||load.fail||check.fail)}}">
+    <View bindtap="_clickQuestion" class="page-info-text">
+        <image class="page-info-img" src="https://staticwx.cdn.bcebos.com/mini-program/images/ic_trans_explain.png"></image>
+        这是什么功能？
+    </View>
+</View>
+<View class="page-info" wx:if="{{success.show}}">
+    <View bindtap="_clickQuestion" class="page-info-text">
+        可在【百度网盘小程序-上传-传输助手】中管理已发送文件
+    </View>
+</View>
+<Toast id="toast"></Toast>
+<ShowDialog id="showDialog"></ShowDialog>

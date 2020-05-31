@@ -1,0 +1,27 @@
+<view class="login-wrapper data-v-3b276fd8">
+    <title-bar-capsule bind:__l="__l" class="data-v-3b276fd8" title="手机号登录" vueId="1"></title-bar-capsule>
+    <image class="title-logo _img data-v-3b276fd8" src="/static/images/logo-2.png"></image>
+    <view class="mian-body data-v-3b276fd8">
+        <view class="title data-v-3b276fd8">{{afterSentCode?'输入6位验证码':'请输入手机号'}}</view>
+        <view class="tip-title data-v-3b276fd8" wx:if="{{afterSentCode}}">{{'我们向 '+phoneNumber+' 发送了一个验证码，请在下方输入'}}</view>
+        <view class="sub-title-wrapper data-v-3b276fd8">
+            <view class="sub-title color-red data-v-3b276fd8">{{afterSentCode?'验证码':'手机号码'}}</view>
+            <view bindtap="__e" class="{{['data-v-3b276fd8','sub-title','code-count-down-tip',sentCodeCountDown>0?'':'color-red']}}" data-event-opts="{{[ [ 'tap',[ [ 'regetCode',['$event'] ] ] ] ]}}" wx:if="{{afterSentCode}}">{{sentCodeCountDown>0?sentCodeCountDown+'s':'重新获取'}}</view>
+        </view>
+        <view class="phone-input-wrapper data-v-3b276fd8" wx:if="{{!afterSentCode}}">
+            <picker bindchange="__e" class="data-v-3b276fd8" data-event-opts="{{[ [ 'change',[ [ 'bindprefixChange',['$event'] ] ] ] ]}}" range="{{prefixArray}}" value="{{phonePrefix}}">
+                <view class="phone-prefix data-v-3b276fd8">{{phonePrefix}}</view>
+            </picker>
+            <view class="iconfont icon-xiaochengxuqietu- phone-prefix-img _i data-v-3b276fd8"></view>
+            <input bindinput="__e" class="phone-input data-v-3b276fd8" cursorSpacing="248rpx" data-event-opts="{{[ [ 'input',[ [ '__set_model',[ '','phoneNumber','$event',[] ] ] ] ] ]}}" focus="{{true}}" maxlength="{{11}}" type="number" value="{{phoneNumber}}"></input>
+        </view>
+        <view class="code-input-wrapper data-v-3b276fd8" wx:else>
+            <input bindblur="__e" bindinput="__e" class="inputCode-hidden data-v-3b276fd8" data-event-opts="{{[ [ 'input',[ [ 'inputCode',['$event'] ] ] ],[ 'blur',[ [ 'tapcodeInputBlur',['$event'] ] ] ] ]}}" focus="{{tapcodeInputFocus}}" maxlength="{{6}}" type="number"></input>
+            <view bindtap="__e" class="inputcode-wrapper data-v-3b276fd8" data-event-opts="{{[ [ 'tap',[ [ 'tapcodeInput',['$event'] ] ] ] ]}}" wx:if="{{afterSentCode}}">
+                <view class="{{['data-v-3b276fd8','inputcode',codeCursor===index?'inputcode-active':'']}}" wx:for="{{6}}" wx:key="*this">{{codeArray[index]}}</view>
+            </view>
+        </view>
+        <view bindtap="__e" class="{{['data-v-3b276fd8','getcode-btn',canGetCode&&sentCodeCountDown<=0?'active':'']}}" data-event-opts="{{[ [ 'tap',[ [ 'getCode',['$event'] ] ] ] ]}}" wx:if="{{!afterSentCode}}">获取验证码</view>
+    </view>
+    <login-pass-card bind:__l="__l" class="data-v-3b276fd8" delta="{{2}}" vueId="2"></login-pass-card>
+</view>

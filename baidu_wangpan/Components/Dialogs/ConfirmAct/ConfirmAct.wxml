@@ -1,0 +1,18 @@
+<Popup id="popup">
+    <view slot="title">
+        <text>{{title}}</text>
+    </view>
+    <view class="content" slot="content">
+        <view class="icon"></view>
+        <view>
+            <text class="txt">{{content}}</text>
+        </view>
+    </view>
+    <view slot="buttons">
+        <view bindtap="jumpToMiniProgram" class="button-wrap">
+            <navigator appId="wx4150e878e2194395" bindfail="backhome" bindsuccess="goActMini" class="confirm-btn" hoverClass="none" openType="navigate" path="{{url}}" target="miniProgram" version="develop">
+                {{confirmText}}
+            </navigator>
+        </view>
+    </view>
+</Popup>

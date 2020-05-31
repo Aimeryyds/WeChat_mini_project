@@ -1,0 +1,23 @@
+<view bindtap="hide" catchtouchmove="move" class="bottom-modal-container {{isShow?'':'hidden-modal'}}">
+    <view class="modal-background"></view>
+    <view class="modal-content {{mode}}-col">
+        <view class="modal-title-wrap" wx:if="{{title}}">
+            <view class="title-icon {{isThumb?'thumb':''}}" style="background-image: url({{titleIcon}});" wx:if="{{titleIcon}}"></view>
+            <view class="modal-title modal-name">
+                <text>{{title}}</text>
+            </view>
+        </view>
+        <view class="modal-tips modal-title" wx:else>
+            <text>严禁上传、传播违法信息，一经发现严格依法处理</text>
+        </view>
+        <view class="modal-op-box">
+            <button catchtap="_handleTapBottomModalItem" class="formButtonNone modal-item" data-tapfunc="{{item.tapFunc}}" data-type="{{item.type}}" hoverClass="press-down" openType="{{item.openType?item.openType:''}}" wx:if="{{!(ispc&&item.tapFunc==='addMessageFile')}}" wx:for="{{buttons}}" wx:key="text">
+                <view class="op-icon {{item.icon}} {{iconSize}} {{item.isNew?'ic_new':''}}"></view>
+                {{item.text}}
+            </button>
+        </view>
+        <view catchtap="hide" class="modal-cancel">
+            <text>取消</text>
+        </view>
+    </view>
+</view>

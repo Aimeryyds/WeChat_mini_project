@@ -1,0 +1,13 @@
+<view catchtouchmove="_touch" class="active-rules-detail" wx:if="{{isShow}}">
+    <view class="pop-container" style="background-color:{{bgColor}};background-image:url({{bgSrc}})">
+        <view class="header-area">
+            <form bindsubmit="formSubmit" reportSubmit="true">
+                <button bindtap="hide" class="formButtonNone close-icon" formType="submit" style="background-image:url({{close}})"></button>
+            </form>
+            <view class="title" style="color: {{color}}">{{title}}</view>
+        </view>
+        <scroll-view scrollY class="content">
+            <rich-text nodes="{{content}}"></rich-text>
+        </scroll-view>
+    </view>
+</view>

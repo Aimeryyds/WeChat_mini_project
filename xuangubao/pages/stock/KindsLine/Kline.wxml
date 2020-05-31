@@ -1,0 +1,15 @@
+<view class="fenshi _div data-v-7d4dc743">
+    <view class="tip-info _div data-v-7d4dc743">
+        <view class="_ul data-v-7d4dc743" wx:if="{{toolTipInfo}}">
+            <view class="_li data-v-7d4dc743">MA 5:<percent-number bind:__l="__l" class="data-v-7d4dc743" customStyle="color:rgb(255,0,209)!important;" num="{{toolTipInfo.ma5&&toolTipInfo.ma5>-999999?toolTipInfo.ma5:'--'}}" options="{{$root.a0}}" process="{{toFixedLocal}}" vueId="1"></percent-number>
+            </view>
+            <view class="_li data-v-7d4dc743">10:<percent-number bind:__l="__l" class="data-v-7d4dc743" customStyle="color:rgb(54,134,242)!important;" num="{{toolTipInfo.ma10&&toolTipInfo.ma10>-999999?toolTipInfo.ma10:'--'}}" options="{{$root.a1}}" process="{{toFixedLocal}}" vueId="2"></percent-number>
+            </view>
+            <view class="_li data-v-7d4dc743">20:<percent-number bind:__l="__l" class="data-v-7d4dc743" customStyle="color:rgb(255,170,0)!important;" num="{{toolTipInfo.ma20&&toolTipInfo.ma20>-999999?toolTipInfo.ma20:'--'}}" options="{{$root.a2}}" process="{{toFixedLocal}}" vueId="3"></percent-number>
+            </view>
+        </view>
+        <view class="_p data-v-7d4dc743">前复权</view>
+    </view>
+    <canvas canvasId="k-line" class="k-line data-v-7d4dc743" style="width:704rpx;height:604rpx;"></canvas>
+    <canvas bindlongtap="__e" bindtouchcancel="__e" bindtouchend="__e" bindtouchmove="__e" bindtouchstart="__e" canvasId="tool-tip" class="tool-tip data-v-7d4dc743" data-event-opts="{{[ [ 'touchstart',[ [ 'touchstart',['$event'] ] ] ],[ 'touchmove',[ [ 'touchmove',['$event'] ] ] ],[ 'touchend',[ [ 'touchend',['$event'] ] ] ],[ 'touchcancel',[ [ 'touchcancel',['$event'] ] ] ],[ 'longtap',[ [ 'longtap',['$event'] ] ] ] ]}}" disableScroll="{{false}}" style="width:704rpx;height:604rpx;"></canvas>
+</view>

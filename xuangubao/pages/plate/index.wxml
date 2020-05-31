@@ -1,0 +1,35 @@
+<view class="plate-wrapper _div data-v-21eaa92c">
+    <header-bar-with-capsule bind:__l="__l" class="data-v-21eaa92c" theme="dark" title="{{plateInfo&&plateInfo.plateName}}" vueId="1"></header-bar-with-capsule>
+    <view class="body _div data-v-21eaa92c" wx:if="{{plateInfo}}">
+        <view class="header _div data-v-21eaa92c">
+            <main-info bind:__l="__l" class="data-v-21eaa92c" info="{{plateInfo}}" vueId="2"></main-info>
+            <view class="canvas-wrapper _div data-v-21eaa92c">
+                <view class="rodrigo _div data-v-21eaa92c">
+                    <view class="tabs _div data-v-21eaa92c">
+                        <view bindtap="__e" class="{{['_p data-v-21eaa92c',cavasType==='fenshi'?'active':'']}}" data-event-opts="{{[ [ 'tap',[ [ 'e0',['$event'] ] ] ] ]}}">分时</view>
+                        <view bindtap="__e" class="{{['_p data-v-21eaa92c',cavasType==='kline'?'active':'']}}" data-event-opts="{{[ [ 'tap',[ [ 'e1',['$event'] ] ] ] ]}}">日K</view>
+                    </view>
+                    <view class="mark _div data-v-21eaa92c">- 沪深300</view>
+                </view>
+                <fen-shi bind:__l="__l" class="data-v-21eaa92c" fenshi="{{fenshi}}" vueId="3" wx:if="{{cavasType==='fenshi'&&fenshi}}"></fen-shi>
+                <block wx:else>
+                    <k-line bind:__l="__l" class="data-v-21eaa92c" kline="{{kline}}" vueId="4" wx:if="{{cavasType==='kline'&&kline}}"></k-line>
+                    <image class="placeholder-img _img data-v-21eaa92c" src="https://image.xuangubao.cn/Fk2ons9DcgsMOHlrsNviRsk2unqh" wx:else></image>
+                </block>
+            </view>
+        </view>
+        <login-btn bind:__l="__l" bind:clicklogin="__e" class="data-v-21eaa92c" data-event-opts="{{[ [ '^clicklogin',[ ['login'] ] ] ]}}" vueId="5" wx:if="{{!token}}"></login-btn>
+        <block wx:else>
+            <premium-count-down bind:__l="__l" bind:timeover="__e" bind:unlock="__e" class="data-v-21eaa92c" data-event-opts="{{[ [ '^timeover',[ ['timeover'] ] ],[ '^unlock',[ ['unlockPlate'] ] ] ]}}" payInfo="{{payInfo}}" vueId="6" wx:if="{{payInfo&&payInfo.needPay}}"></premium-count-down>
+            <block wx:else>
+                <stocks-list bind:__l="__l" bind:goToPlate="__e" bind:goToStock="__e" class="data-v-21eaa92c vue-ref" data-event-opts="{{[ [ '^goToStock',[ ['goToStock'] ] ],[ '^goToPlate',[ ['goToPlate'] ] ] ]}}" data-ref="stocklist" specialPlate="{{specialPlate}}" stocks="{{stocksWithInfo}}" vueId="7" wx:if="{{payInfo&&!payInfo.needPay}}"></stocks-list>
+            </block>
+        </block>
+    </view>
+    <view class="_div data-v-21eaa92c" style="height:100rpx;" wx:if="{{token&&payInfo&&!payInfo.needPay}}">
+        <bottom-tip bind:__l="__l" class="data-v-21eaa92c" vueId="8"></bottom-tip>
+    </view>
+    <open-app bind:__l="__l" bind:openApp="__e" class="data-v-21eaa92c" data-event-opts="{{[ [ '^openApp',[ ['openApp'] ] ] ]}}" path="{{'https://xuangubao.cn/plates/'+plateId}}" vueId="9"></open-app>
+    <login-pass-card bind:__l="__l" class="data-v-21eaa92c" vueId="10"></login-pass-card>
+    <share-plate bind:__l="__l" bind:finishDrawCard="__e" class="data-v-21eaa92c vue-ref" data-event-opts="{{[ [ '^finishDrawCard',[ ['finishDrawCard'] ] ] ]}}" data-ref="card" plateInfo="{{plateInfo}}" stocks="{{shareStocks}}" vueId="11" wx:if="{{!shareCard&&stocksWithInfo.length&&plateInfo}}"></share-plate>
+</view>

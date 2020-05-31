@@ -1,0 +1,49 @@
+<view class="table-container _div data-v-72be114c">
+    <view class="head-table _div data-v-72be114c" style="{{'top:'+titleBarHeight+'rpx'+';'}}">
+        <view bindtap="__e" class="longtou-switch _li data-v-72be114c" data-event-opts="{{[ [ 'tap',[ [ 'filterLongtouHandler',['$event'] ] ] ] ]}}">
+            <view class="{{['_i data-v-72be114c','iconfont',filterLongtou?'iconjuxingcopyx7':'iconjuxingcopyx']}}"></view>只看龙头</view>
+        <sort-tab bind:__l="__l" bind:sort="__e" class="data-v-72be114c" data-event-opts="{{[ [ '^sort',[ ['handleSort'] ] ] ]}}" label="现价" sortRule="{{sortRule}}" targetProp="price" vueId="1"></sort-tab>
+        <sort-tab bind:__l="__l" bind:sort="__e" class="data-v-72be114c" data-event-opts="{{[ [ '^sort',[ ['handleSort'] ] ] ]}}" label="涨跌幅" sortRule="{{sortRule}}" targetProp="changePercent" vueId="2"></sort-tab>
+        <block wx:if="{{specialPlate==='fpg'}}">
+            <sort-tab bind:__l="__l" bind:sort="__e" class="data-v-72be114c" data-event-opts="{{[ [ '^sort',[ ['handleSort'] ] ] ]}}" label="复牌日期" sortRule="{{sortRule}}" targetProp="resumptionDate" vueId="3"></sort-tab>
+            <sort-tab bind:__l="__l" bind:sort="__e" class="data-v-72be114c" customStyle="justify-content: flex-end;" data-event-opts="{{[ [ '^sort',[ ['handleSort'] ] ] ]}}" label="至今涨幅" sortRule="{{sortRule}}" targetProp="pcpSinceResume" vueId="4"></sort-tab>
+        </block>
+        <block wx:else>
+            <block wx:if="{{specialPlate==='stg'}}">
+                <sort-tab bind:__l="__l" bind:sort="__e" class="data-v-72be114c" data-event-opts="{{[ [ '^sort',[ ['handleSort'] ] ] ]}}" label="带帽日期" sortRule="{{sortRule}}" targetProp="specialTreatedDate" vueId="5"></sort-tab>
+                <sort-tab bind:__l="__l" bind:sort="__e" class="data-v-72be114c" customStyle="justify-content: flex-end;" data-event-opts="{{[ [ '^sort',[ ['handleSort'] ] ] ]}}" label="最新净利" sortRule="{{sortRule}}" targetProp="latestNetProfit" vueId="6"></sort-tab>
+            </block>
+            <block wx:else>
+                <block wx:if="{{specialPlate==='stzm'}}">
+                    <sort-tab bind:__l="__l" bind:sort="__e" class="data-v-72be114c" data-event-opts="{{[ [ '^sort',[ ['handleSort'] ] ] ]}}" label="摘帽日期" sortRule="{{sortRule}}" targetProp="revokedDate" vueId="7"></sort-tab>
+                    <sort-tab bind:__l="__l" bind:sort="__e" class="data-v-72be114c" customStyle="justify-content: flex-end;" data-event-opts="{{[ [ '^sort',[ ['handleSort'] ] ] ]}}" label="至今涨幅" sortRule="{{sortRule}}" targetProp="pcpSinceRevoked" vueId="8"></sort-tab>
+                </block>
+                <block wx:else>
+                    <block wx:if="{{specialPlate==='cxg'}}">
+                        <sort-tab bind:__l="__l" bind:sort="__e" class="data-v-72be114c" data-event-opts="{{[ [ '^sort',[ ['handleSort'] ] ] ]}}" label="开板天数" sortRule="{{sortRule}}" targetProp="openBoardDay" vueId="9"></sort-tab>
+                        <sort-tab bind:__l="__l" bind:sort="__e" class="data-v-72be114c" customStyle="justify-content: flex-end;" data-event-opts="{{[ [ '^sort',[ ['handleSort'] ] ] ]}}" label="至今涨幅" sortRule="{{sortRule}}" targetProp="accumulatedPcp" vueId="10"></sort-tab>
+                    </block>
+                    <block wx:else>
+                        <block wx:if="{{specialPlate==='gsz'}}">
+                            <sort-tab bind:__l="__l" bind:sort="__e" class="data-v-72be114c" data-event-opts="{{[ [ '^sort',[ ['handleSort'] ] ] ]}}" label="送转比例" sortRule="{{sortRule}}" targetProp="bonusShareRatio" vueId="11"></sort-tab>
+                            <sort-tab bind:__l="__l" bind:sort="__e" class="data-v-72be114c" customStyle="justify-content: flex-end;" data-event-opts="{{[ [ '^sort',[ ['handleSort'] ] ] ]}}" label="送后涨幅" sortRule="{{sortRule}}" targetProp="pcpAfterAdvance" vueId="12"></sort-tab>
+                        </block>
+                        <block wx:else>
+                            <block wx:if="{{specialPlate==='gsztq'}}">
+                                <sort-tab bind:__l="__l" bind:sort="__e" class="data-v-72be114c" data-event-opts="{{[ [ '^sort',[ ['handleSort'] ] ] ]}}" label="填权日期" sortRule="{{sortRule}}" targetProp="exDiviDate" vueId="13"></sort-tab>
+                                <sort-tab bind:__l="__l" bind:sort="__e" class="data-v-72be114c" customStyle="justify-content: flex-end;" data-event-opts="{{[ [ '^sort',[ ['handleSort'] ] ] ]}}" label="至今涨幅" sortRule="{{sortRule}}" targetProp="pcpAfterDivi" vueId="14"></sort-tab>
+                            </block>
+                            <block wx:else>
+                                <sort-tab bind:__l="__l" bind:sort="__e" class="data-v-72be114c" data-event-opts="{{[ [ '^sort',[ ['handleSort'] ] ] ]}}" label="资金流向" sortRule="{{sortRule}}" targetProp="fundFlow" vueId="15"></sort-tab>
+                                <sort-tab bind:__l="__l" bind:sort="__e" class="data-v-72be114c" customStyle="justify-content: flex-end;" data-event-opts="{{[ [ '^sort',[ ['handleSort'] ] ] ]}}" label="流通市值" sortRule="{{sortRule}}" targetProp="nonRestrictedCapital" vueId="16"></sort-tab>
+                            </block>
+                        </block>
+                    </block>
+                </block>
+            </block>
+        </block>
+    </view>
+    <view class="_ul data-v-72be114c">
+        <stock-item bind:__l="__l" bind:goToPlate="__e" bind:goToStock="__e" bind:packUp="__e" class="data-v-72be114c" data-event-opts="{{[ [ '^goToStock',[ [ '$emit',['goToStock','$0'],[ [ ['sortStock','',index,'symbol'] ] ] ] ] ],[ '^goToPlate',[ ['e0'] ] ],[ '^packUp',[ ['packUpDesc'] ] ] ]}}" specialPlate="{{specialPlate}}" stock="{{stock}}" vueId="{{'17-'+index}}" wx:for="{{sortStock}}" wx:for-item="stock" wx:key="index"></stock-item>
+    </view>
+</view>

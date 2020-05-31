@@ -1,0 +1,12 @@
+<view class="product-list">
+    <view bindtap="changeProduct" class="product-item {{choosedProductId===item.product_id?chooseType+'-active':''}}" data-can-buy="{{item.can_buy}}" data-product-id="{{item.product_id}}" data-product-name="{{item.product_name}}" data-product-price="{{item.price}}" data-product-price-note="{{item.priceNote}}" style="margin-left: {{index===0?'0':'20rpx'}}" wx:for="{{chooseType==='svip'?svipList:vipList}}" wx:key="index">
+        <image class="chaozhi-icon" src="https://staticiot.cdn.bcebos.com/union%2Fstaticwx%2Flabel_chaozhi.png" wx:if="{{item.showJiaobiao}}"></image>
+        <view class="product-name">{{item.duration}}</view>
+        <view class="product-price {{chooseType}}-color}}">
+            <text class="price-icon-note">￥</text>{{item.price}}</view>
+        <view class="product-note" wx:if="{{item.priceNote}}">
+            仅{{item.priceNote}}元/月
+        </view>
+    </view>
+</view>
+<purchase bind:paycheck="payCheck" chooseType="{{chooseType}}" choosedProductIdCanBuy="{{choosedProductIdCanBuy}}" choosedProductPrice="{{choosedProductPrice}}" choosenProduct="{{choosedProductId}}" styleType="normal" userVipStatus="{{userVipStatus}}"></purchase>

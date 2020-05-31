@@ -1,0 +1,11 @@
+<view class="choose-coupon _div data-v-7628b465">
+    <title-bar bind:__l="__l" class="data-v-7628b465" title="优惠劵" vueId="1" vueSlots="{{['default']}}">
+        <view bindtap="__e" class="user-center-btn _div data-v-7628b465" data-event-opts="{{[ [ 'tap',[ [ 'removeOverlay',['$event'] ] ] ] ]}}">
+            <view class="iconfont icon-xiaochengxuqietu-4 _i data-v-7628b465"></view>
+        </view>
+    </title-bar>
+    <view bindtap="__e" class="nouse-coupon _div data-v-7628b465" data-event-opts="{{[ [ 'tap',[ [ 'clickCoupon',[null] ] ] ] ]}}">不使用优惠劵</view>
+    <view class="coupons-wrapper _ul data-v-7628b465">
+        <coupon-tip-item bind:__l="__l" bind:clickCoupon="__e" class="coupon data-v-7628b465" couponItem="{{coupon}}" data-event-opts="{{[ [ '^clickCoupon',[ ['clickCoupon'] ] ] ]}}" vueId="{{'2-'+index}}" wx:for="{{coupons}}" wx:for-item="coupon" wx:key="index"></coupon-tip-item>
+    </view>
+</view>

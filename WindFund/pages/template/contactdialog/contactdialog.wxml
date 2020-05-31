@@ -1,0 +1,15 @@
+<view class="wx_dialog_container" hidden="{{!isShow}}">
+    <view catchtap="_cancelEvent" class="wx-mask"></view>
+    <view class="wx-dialog">
+        <view class="wx-dialog-title">回复<b class="wx-dialog-title-strong">“{{inputContext}}”</b>
+        </view>
+        <view class="wx-dialog-title" wx:if="{{productType!=='stib'}}"> {{disContent}}</view>
+        <view class="wx-dialog-title stib-desc" wx:else>回复<b class="wx-dialog-title-strong">“{{inputContext}}”</b>,关注<b class="wx-dialog-title-strong">【万得财富】</b>公众号，我们才能向您推送开售提醒哦~</view>
+        <view class="wx-dialog-content-container">
+            <image mode="aspectFit" src="{{img}}" style="width:560rpx;height: 560rpx;"></image>
+        </view>
+        <view class="wx-dialog-footer-btn">
+            <button catchtap="_confirmEvent" class="wx-dialog-btn-contact" openType="contact">{{confirmText}}</button>
+        </view>
+    </view>
+</view>

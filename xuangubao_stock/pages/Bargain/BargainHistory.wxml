@@ -1,0 +1,25 @@
+<view class="bargain-history _div data-v-e9a675ac">
+    <view class="title _div data-v-e9a675ac">
+        <view class="_p data-v-e9a675ac">帮砍记录</view>
+    </view>
+    <view class="body _div data-v-e9a675ac">
+        <view class="_ul data-v-e9a675ac">
+            <view class="_li data-v-e9a675ac" wx:for="{{records}}" wx:for-item="recoed" wx:key="index">
+                <image class="_img data-v-e9a675ac" src="{{recoed.bargainUserInfo.avatar||'/static/images/avatar-default.png'}}"></image>
+                <view class="friend-info _p data-v-e9a675ac">
+                    <label class="name _span data-v-e9a675ac">{{recoed.bargainUserInfo.nickName}}</label>
+                    <label class="desc _span data-v-e9a675ac">{{bargainHelpText||'分享给好友，T恤0元领'}}</label>
+                </view>
+                <view class="friend-bargain _p data-v-e9a675ac">
+                    <label class="_span data-v-e9a675ac">砍掉</label>
+                    <label class="amount _span data-v-e9a675ac">{{recoed.bargainMoney/100}}</label>
+                    <label class="unit _span data-v-e9a675ac">元</label>
+                </view>
+            </view>
+            <view class="no-record _li data-v-e9a675ac" wx:if="{{!bargainRecord||!bargainRecord.length}}">暂无记录</view>
+        </view>
+        <view bindtap="__e" class="show-more _p data-v-e9a675ac" data-event-opts="{{[ [ 'tap',[ [ 'clickMore',['$event'] ] ] ] ]}}" wx:if="{{bargainRecord.length>2&&records.length<3}}">查看更多</view>
+    </view>
+    <view class="ellipse-mask left _i data-v-e9a675ac" style="{{'background:'+ellipseMaskColor+';'}}"></view>
+    <view class="ellipse-mask right _i data-v-e9a675ac" style="{{'background:'+ellipseMaskColor+';'}}"></view>
+</view>

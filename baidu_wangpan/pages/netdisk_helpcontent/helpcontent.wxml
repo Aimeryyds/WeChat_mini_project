@@ -1,0 +1,26 @@
+<Navbar id="navbar"></Navbar>
+<view style="height:{{height}}px"></view>
+<scroll-view scrollY style="height: {{systemInfo?systemInfo.windowHeightRpx-146+'rpx':'auto'}};">
+    <block wx:if="{{contentType==='1'}}">
+        <HelpContent questionData="{{currentQuestionData}}"></HelpContent>
+        <FeedBack></FeedBack>
+    </block>
+    <view wx:elif="{{contentType==='2'}}">type2 图文</view>
+    <block wx:elif="{{contentType==='3'}}">
+        <view class="video-title">
+            <view class="title">请查看视频教程</view>
+            <view class="sub-title">了解共享功能如何使用</view>
+        </view>
+        <view class="video-wrap">
+            <view class="help_container">
+                <image class="help_poster" src="{{poster}}"></image>
+                <view bindtap="showVideo" class="video_cover">
+                    <image src="https://staticwx.cdn.bcebos.com/mini-program/images/ic_video_play_button.png"></image>
+                </view>
+            </view>
+        </view>
+    </block>
+</scroll-view>
+<SVideoDialog autoplay="{{true}}" bind:closeVideo="closeVideo" shareType="{{shareType}}" video="{{video}}" wx:if="{{showVideo}}"></SVideoDialog>
+<Toast id="toast"></Toast>
+<ShowDialog id="showDialog"></ShowDialog>

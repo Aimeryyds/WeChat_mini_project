@@ -1,0 +1,19 @@
+<view bindtap="closeModal" class="modal-container" wx:if="{{show}}">
+    <view class="modal-background"></view>
+    <view catchtap="emptyTap" class="modal-content">
+        <view bindtap="closeModal" class="modal-close-icon">
+            <image class="modal-close-icon-img" src="{{closeIcon}}"></image>
+        </view>
+        <view class="modal-desc-icon-container">
+            <image class="modal-desc-icon" mode="widthFix" src="{{config.icon}}"></image>
+        </view>
+        <view class="modal-desc-text">{{config.desc}}</view>
+        <view class="modal-title">{{config.title}}</view>
+        <u-button bindclick="handleNav" uClass="modal-action-btn {{config.type==='vip'?'is-vip':''}}">
+            <view>
+                <text class="modal-action-title">{{config.actionTitle}}</text>
+                <text class="modal-action-desc">{{config.actionDesc}}</text>
+            </view>
+        </u-button>
+    </view>
+</view>

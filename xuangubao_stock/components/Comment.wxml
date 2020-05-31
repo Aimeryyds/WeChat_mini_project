@@ -1,0 +1,30 @@
+<view bindtap="__e" class="comment _li data-v-03056e36" data-event-opts="{{[ [ 'tap',[ [ '$emit',['click'] ] ] ] ]}}">
+    <view class="left _div data-v-03056e36">
+        <view class="avatar _div data-v-03056e36">
+            <image alt="avatar" class="_img data-v-03056e36" src="{{avatar}}"></image>
+        </view>
+    </view>
+    <view class="right _div data-v-03056e36">
+        <view class="meta _div data-v-03056e36">
+            <view class="left _div data-v-03056e36">
+                <view class="author _div data-v-03056e36">{{''+name+''}}<label class="_span data-v-03056e36" wx:if="{{isAuthor}}">作者</label>
+                </view>
+                <view class="time _time data-v-03056e36">{{displayTime}}</view>
+            </view>
+            <view class="right _div data-v-03056e36">
+                <view catchtap="__e" class="like _div data-v-03056e36" data-event-opts="{{[ [ 'tap',[ [ '$emit',['toggleStar'] ] ] ] ]}}">
+                    <label class="_span data-v-03056e36" style="{{'color:'+(liked?'#e62e4d':'#a3a3a3;')+';'}}">{{likeCount+''}}</label>
+                    <label class="_span data-v-03056e36">
+                        <view class="iconfont icon-weibiaoti-1 _i data-v-03056e36" style="color:#e62e4d;" wx:if="{{liked}}"></view>
+                        <view class="iconfont icon-weibiaoti-1 _i data-v-03056e36" wx:else></view>
+                    </label>
+                </view>
+            </view>
+        </view>
+        <view class="content _div data-v-03056e36">{{content}}</view>
+        <slot wx:if="{{$slots.default}}"></slot>
+        <block wx:else>
+            <reply-comments bind:__l="__l" bind:clickReply="__e" class="data-v-03056e36" comments="{{repliedBy}}" data-event-opts="{{[ [ '^clickReply',[ ['e0'] ] ] ]}}" vueId="1" wx:if="{{repliedBy&&repliedBy.length}}"></reply-comments>
+        </block>
+    </view>
+</view>

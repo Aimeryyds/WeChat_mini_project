@@ -1,0 +1,112 @@
+.self-wetoast {
+    position: fixed;
+    width: 100%;
+    z-index: 110;
+}
+
+.self-wetoast.is-svip .toast-content-wrap,.self-wetoast.is-svip .toastOut {
+    color: #FDE0A1;
+}
+
+.self-wetoast .toast-wrap {
+    position: fixed;
+    display: flex;
+    width: 100%;
+    top: 50%;
+    left: 0;
+    transform: translateY(-100rpx);
+}
+
+.self-wetoast .toast-mask {
+    position: fixed;
+    top: 0;
+    right: 0;
+    left: 0;
+    bottom: 0;
+}
+
+.toast-icon {
+    padding: 17rpx;
+    margin-right: 12rpx;
+    background: url(https://staticwx.cdn.bcebos.com/mini-program/images/loading.gif)no-repeat;
+    background-position: center;
+    background-size: cover;
+    border-radius: 50%;
+}
+
+.self-wetoast .toast-content-wrap,.self-wetoast .toastOut {
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+    height: 98rpx;
+    padding: 0 46rpx;
+    text-align: center;
+    background: rgba(33,33,33,.9);
+    color: #fff;
+    font-size: 28rpx;
+    border-radius: 49rpx;
+    font-weight: bold;
+    margin: 0 auto;
+}
+
+.self-wetoast .toast-content-wrap {
+    animation: spin ease .4s;
+}
+
+.self-wetoast .toastOut {
+    animation: outer ease-in .4s;
+    animation-fill-mode: forwards;
+}
+
+.toast-member-icon {
+    width: 36rpx;
+    margin-right: 12rpx;
+}
+
+@-webkit-keyframes spin {
+    from {
+        opacity: 0;
+        transform: scale(.5);
+    }
+
+    to {
+        opacity: 1;
+        transform: scale(1);
+    }
+}
+
+@keyframes spin {
+    from {
+        opacity: 0;
+        transform: scale(.5);
+    }
+
+    to {
+        opacity: 1;
+        transform: scale(1);
+    }
+}
+
+@-webkit-keyframes outer {
+    from {
+        opacity: 1;
+        transform: scale(1);
+    }
+
+    to {
+        opacity: 0;
+        transform: scale(.5);
+    }
+}
+
+@keyframes outer {
+    from {
+        opacity: 1;
+        transform: scale(1);
+    }
+
+    to {
+        opacity: 0;
+        transform: scale(.5);
+    }
+}

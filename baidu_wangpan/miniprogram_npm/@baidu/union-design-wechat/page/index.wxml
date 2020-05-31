@@ -1,0 +1,18 @@
+<view class="u-class u-page">
+    <view class="u-page-prev" wx:if="{{mode==='button'}}">
+        <u-button bindclick="handlePrev" disabled="{{current===1}}" type="ghost" uClass="u-page-button">
+            <slot name="prev"></slot>
+        </u-button>
+    </view>
+    <view class="u-page-number" wx:if="{{mode!=='pointer'&&!simple}}">
+        <view class="u-page-number-current">{{current}}</view>/{{total}}
+    </view>
+    <view class="u-page-pointer" wx:if="{{mode==='pointer'}}">
+        <view class="u-page-pointer-dot {{index+1===current?'current':''}}" wx:for="{{total}}" wx:key="index"></view>
+    </view>
+    <view class="u-page-next" wx:if="{{mode==='button'}}">
+        <u-button bindclick="handleNext" disabled="{{current===total}}" type="ghost" uClass="u-page-button">
+            <slot name="next"></slot>
+        </u-button>
+    </view>
+</view>

@@ -1,0 +1,39 @@
+<view class="wrapper _div">
+    <title-bar bind:__l="__l" title="编辑收货地址" vueId="1" vueSlots="{{['default']}}">
+        <navigator class="back-arrow" hoverClass="none" openType="navigateBack">
+            <view bindtap="__e" class="iconfont icon-xiaochengxuqietu-4 action-btn-img _i" data-event-opts="{{[ [ 'tap',[ [ 'close',['$event'] ] ] ] ]}}"></view>
+        </navigator>
+    </title-bar>
+    <form>
+        <view class="form-item _div">
+            <view class="_p">姓名</view>
+            <input bindinput="__e" data-event-opts="{{[ [ 'input',[ [ '__set_model',[ '$0','name','$event',[] ],['localAddress'] ] ] ] ]}}" placeholder="请输入收货人姓名" type="text" value="{{localAddress.name}}"></input>
+        </view>
+        <view class="form-item _div">
+            <view class="_p">手机号</view>
+            <input bindinput="__e" data-event-opts="{{[ [ 'input',[ [ '__set_model',[ '$0','mobile','$event',[] ],['localAddress'] ] ] ] ]}}" placeholder="请输入收货人手机号" type="text" value="{{localAddress.mobile}}"></input>
+        </view>
+        <view class="form-item _div">
+            <view class="_p">地区</view>
+            <picker bindchange="__e" class="picker" data-event-opts="{{[ [ 'change',[ [ 'bindRegionChange',['$event'] ] ] ] ]}}" mode="region" value="{{localAddress.city}}">
+                <view class="_p">
+                    <label class="_span" wx:if="{{localAddress.city}}">{{localAddress.city}}</label>
+                    <label class="placeholder _span" wx:else>选择省/市/区</label>
+                </view>
+            </picker>
+        </view>
+        <view class="form-item _div">
+            <view class="_p">详细地址</view>
+            <input bindinput="__e" data-event-opts="{{[ [ 'input',[ [ '__set_model',[ '$0','address','$event',[] ],['localAddress'] ] ] ] ]}}" placeholder="街道门牌、楼层房间号等信息" type="text" value="{{localAddress.address}}"></input>
+        </view>
+        <view class="form-item _div">
+            <view class="_p">设为默认地址</view>
+            <view bindtap="__e" class="{{['_p','checkbox',localAddress.isDefault?'active':'']}}" data-event-opts="{{[ [ 'tap',[ [ 'toggleSetDefault',['$event'] ] ] ] ]}}">
+                <label class="_span"></label>
+            </view>
+        </view>
+    </form>
+    <view class="confirm _div">
+        <view bindtap="__e" class="_p" data-event-opts="{{[ [ 'tap',[ [ 'save',['$event'] ] ] ] ]}}">保存</view>
+    </view>
+</view>

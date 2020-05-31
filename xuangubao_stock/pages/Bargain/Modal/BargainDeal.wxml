@@ -1,0 +1,18 @@
+<modal-tip bind:__l="__l" bind:close="__e" class="bargain-deal data-v-71792799" data-event-opts="{{[ [ '^close',[ [ '$emit',['close'] ] ] ] ]}}" vueId="1" vueSlots="{{['default']}}">
+    <view class="_div data-v-71792799">恭喜！砍价成功</view>
+    <view class="_div data-v-71792799">您已经砍下</view>
+    <view class="_div data-v-71792799">
+        <label class="price _span data-v-71792799">{{$root.g0}}</label>
+        <label class="unit _span data-v-71792799">元</label>
+    </view>
+    <view class="_div data-v-71792799">
+        <view class="process-loading _p data-v-71792799"></view>
+        <view class="process-flag _p data-v-71792799">
+            <label class="_span data-v-71792799" wx:for="{{processPrice}}" wx:for-index="__i0__" wx:for-item="i" wx:key="*this">{{'¥'+i}}</label>
+        </view>
+    </view>
+    <view class="_div data-v-71792799">不能再砍啦，立即免费领取</view>
+    <view class="_div data-v-71792799">
+        <image bindtap="__e" class="_img data-v-71792799" data-event-opts="{{[ [ 'tap',[ [ '$emit',['close'] ] ] ] ]}}" src="https://image.xuangubao.cn/FkGSUyHdLXVWiRYf-nllXlyDHFpI"></image>
+    </view>
+</modal-tip>

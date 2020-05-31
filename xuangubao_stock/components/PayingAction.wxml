@@ -1,0 +1,7 @@
+<full-width-button bind:__l="__l" bind:click="__e" class="data-v-5caa9658" data-event-opts="{{[ [ '^click',[ [ '$emit',['clickPay'] ] ] ] ]}}" type="primary" vueId="1" vueSlots="{{['default']}}">
+    <label class="_span data-v-5caa9658" wx:if="{{payType==='ye'}}">余额支付<price-text bind:__l="__l" class="data-v-5caa9658" customstyle="color: white;font-weight:normal;font-size:28rpx!important;" price="{{preferentialPrice}}" size1="14" size2="14" vueId="{{'2'+','+'1'}}"></price-text>
+    </label>
+    <label class="_span data-v-5caa9658" wx:if="{{payType==='wx'}}">
+        <view class="iconfont icon-xiaochengxuqietu-1 _i data-v-5caa9658"></view>微信支付<price-text bind:__l="__l" class="data-v-5caa9658" customstyle="color: white;font-weight:normal;font-size:28rpx!important;" price="{{costType==='article'?messageDifference:subjectDifference}}" size1="14" size2="14" unit="元" vueId="{{'3'+','+'1'}}"></price-text>
+    </label>
+</full-width-button>

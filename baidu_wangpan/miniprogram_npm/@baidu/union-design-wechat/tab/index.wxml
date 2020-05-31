@@ -1,0 +1,9 @@
+<view class="u-class u-tabs-tab {{scroll?'u-tabs-tab-scroll':''}} {{current?'u-tabs-tab-current':''}}">
+    <u-badge count="{{dot?0:count}}" dot="{{dot}}">
+        <view bindtap="handleClickItem">
+            <view class="u-tabs-tab-title {{current?'u-tabs-tab-title-current':''}}" style="color: {{currentColor}}" wx:if="{{current&&currentColor}}">{{title}}</view>
+            <view class="u-tabs-tab-title {{current?'u-tabs-tab-title-current':''}}" wx:else>{{title}}</view>
+        </view>
+    </u-badge>
+    <view class="u-tabs-tab-bar" style="background: {{currentColor}}" wx:if="{{current}}"></view>
+</view>

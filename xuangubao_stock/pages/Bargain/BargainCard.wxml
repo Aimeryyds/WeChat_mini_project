@@ -1,0 +1,46 @@
+<form bindsubmit="__e" class="bargain-card data-v-36d80224" data-event-opts="{{[ [ 'submit',[ [ 'formSubmit',['$event'] ] ] ] ]}}" reportSubmit="{{true}}">
+    <view class="bargain-card-tip _div data-v-36d80224" wx:if="{{bargainState==='ongoing'||bargainState==='alreadybargain'}}">
+        <view class="already _p data-v-36d80224">已砍<label class="_span data-v-36d80224">{{$root.g0}}</label>元</view>
+        <view class="still _p data-v-36d80224" wx:if="{{originalPrice-bargainMoney>0&&!paymentOrderNo}}">还差<label class="_span data-v-36d80224">{{$root.g1}}</label>元</view>
+        <view class="still _p data-v-36d80224" wx:else>
+            <label class="finish _span data-v-36d80224">砍单完成</label>
+            <image class="finish _img data-v-36d80224" src="https://image.xuangubao.cn/FumwKP68NrSbcRmV7zBDywXZxgmY"></image>
+        </view>
+    </view>
+    <view class="bargain-card-tip-error _div data-v-36d80224" wx:else>
+        <view class="_p data-v-36d80224" wx:if="{{bargainState==='bargainover'&&activityState==='ongoing'}}">未在24小时内完成，砍价已结束</view>
+        <view class="_p data-v-36d80224" wx:else>活动已结束</view>
+    </view>
+    <view class="loading-wrapper _div data-v-36d80224">
+        <view class="process-loading _div data-v-36d80224" style="{{'background-image:'+(bargainState==='bargainover'&&activityState==='activityover'?'linear-gradient(to right,rgb(223,223,223),rgb(223,223,223))':'linear-gradient(to right,rgb(255, 144, 91),rgb(230, 57, 77))')+';'}}">
+            <view class="white-mask _div data-v-36d80224" style="{{'left:'+$root.g2+'%'+';'}}"></view>
+        </view>
+        <view class="process-price _div data-v-36d80224">
+            <label class="_span data-v-36d80224" wx:for="{{processPrice}}" wx:for-index="__i0__" wx:for-item="i" wx:key="*this">{{'¥'+i}}</label>
+        </view>
+    </view>
+    <view class="alreadybargain _div data-v-36d80224" wx:if="{{paymentOrderNo}}">
+        <image bindtap="__e" class="_img data-v-36d80224" data-event-opts="{{[ [ 'tap',[ [ 'jumpToOrderList',['$event'] ] ] ] ]}}" src="https://image.xuangubao.cn/FkWYJ59QrtIEmfcK6odNYxux5mHh"></image>
+    </view>
+    <block wx:else>
+        <view class="action _div data-v-36d80224" wx:if="{{bargainState!=='bargainover'&&originalPrice-bargainMoney>0}}">
+            <view bindtap="__e" class="buy _p data-v-36d80224" data-event-opts="{{[ [ 'tap',[ [ '$emit',['immediatelyBuy'] ] ] ] ]}}">立即购买</view>
+            <button class="data-v-36d80224" openType="share">
+                <image bindtap="__e" class="_img data-v-36d80224" data-event-opts="{{[ [ 'tap',[ [ '$emit',['shareFriends'] ] ] ] ]}}" src="https://image.xuangubao.cn/FpHJQjOMnSGRP_9fhHO075UsTBiK"></image>
+            </button>
+        </view>
+        <block wx:else>
+            <view class="alreadybargain _div data-v-36d80224" wx:if="{{bargainState!=='bargainover'&&originalPrice-bargainMoney<=0}}">
+                <image bindtap="__e" class="_img data-v-36d80224" data-event-opts="{{[ [ 'tap',[ [ '$emit',['immediatelyBuy'] ] ] ] ]}}" src="https://image.xuangubao.cn/FiQmqVRs_jAs4IU-TwP8mHh-oL1E"></image>
+            </view>
+            <block wx:else>
+                <view class="alreadybargain _div data-v-36d80224" wx:if="{{activityState!=='activityover'&&bargainState==='bargainover'}}">
+                    <image bindtap="__e" class="_img data-v-36d80224" data-event-opts="{{[ [ 'tap',[ [ '$emit',['createBargain'] ] ] ] ]}}" src="https://image.xuangubao.cn/Fklib7_lUVp_rblQDv0_PZXbhsqm"></image>
+                </view>
+                <view class="activityover _div data-v-36d80224" wx:else>
+                    <image class="_img data-v-36d80224" src="https://image.xuangubao.cn/Fp8JItSscPz6HIoCld8esSgvjM1v"></image>
+                </view>
+            </block>
+        </block>
+    </block>
+</form>

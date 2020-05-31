@@ -1,0 +1,234 @@
+page {
+    height: 100%;
+    position: relative;
+}
+
+.video-wrap {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.video-wrap.landscape {
+    background-color: #000;
+}
+
+.video-wrap .title {
+    color: #333333;
+    font-size: 40rpx;
+    padding: 104rpx 24rpx 48rpx;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.video-wrap .content-wrap {
+    height: 520rpx;
+    width: 100%;
+}
+
+.video-wrap.portrait .content-wrap {
+    height: 100%;
+}
+
+.video-wrap .content-wrap .content {
+    width: 100%;
+    height: 100%;
+    overflow: hidden;
+    text-align: center;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: #000;
+}
+
+.video-wrap .content-wrap .loading .spinning-icon {
+    width: 68rpx;
+    height: 68rpx;
+    margin: 180rpx auto 48rpx;
+    background: url('https://staticwx.cdn.bcebos.com/mini-program/images/loading.gif') no-repeat 0 0;
+    display: block;
+    background-size: 68rpx auto;
+    background-position: center;
+}
+
+.video-wrap .content-wrap .loading .loading-text {
+    font-size: 32rpx;
+    color: #FFFFFF;
+}
+
+.video-wrap .content-wrap .error-retry .error-text,.error-not-support .error-text,.in-retry .error-text {
+    color: #ffffff;
+    font-size: 32rpx;
+    margin: 180rpx 0 48rpx;
+}
+
+.video-wrap .content-wrap .error-not-support .error-text,.in-retry .error-text {
+    margin: 250rpx 0 48rpx;
+}
+
+.video-wrap .content-wrap .error-retry .retry-button {
+    width: 214rpx;
+    margin: 0 auto;
+}
+
+.video-wrap .content-wrap .mobile-data-tip {
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: contain;
+}
+
+.video-wrap .content-wrap .mobile-data-tip .play-button {
+    width: 400rpx;
+    height: 82rpx;
+    margin: auto;
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    z-index: 99;
+}
+
+.mobile-data-tip .icon-triangle {
+    height: 25rpx;
+    width: 20rpx;
+    display: inline-block;
+    padding-right: 20rpx;
+}
+
+.video-wrap .content-wrap .playing .video-item {
+    width: 100%;
+    height: 100%;
+    position: relative;
+}
+
+.pause-btn {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%,-50%);
+}
+
+.pause-btn .end {
+    height: 48rpx;
+    width: 48rpx;
+}
+
+.pause-btn text {
+    font-size: 28rpx;
+    color: #FFFFFF;
+    display: block;
+}
+
+.pause-btn .pause {
+    height: 92rpx;
+    width: 92rpx;
+}
+
+.video-wrap .bottom {
+    position: fixed;
+    bottom: 0;
+    width: 100%;
+    height: 100rpx;
+    text-align: center;
+}
+
+.video-wrap .bottom .netdisk-logo {
+    display: inline-block;
+    vertical-align: middle;
+    width: 48rpx;
+    height: 100%;
+    margin-right: 20rpx;
+    background: url(https://staticwx.cdn.bcebos.com/mini-program/images/ic_logo.png) no-repeat center center;
+    background-size: 48rpx 38rpx;
+}
+
+.operate .open-app {
+    position: absolute;
+    box-sizing: border-box;
+    width: 174rpx;
+    height: 82rpx;
+    right: -2rpx;
+    bottom: 253rpx;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 41rpx 0 0 41rpx;
+    padding: 0;
+    font-size: 28rpx;
+    color: #fff!important;
+    background-color: #06A7FF;
+}
+
+.shareToFriends {
+    position: absolute;
+    bottom: 12rpx;
+    width: 686rpx;
+    height: 100rpx;
+    margin-left: calc((100% - 686rpx) / 2);
+}
+
+.share-icon {
+    background-image: url(https://staticwx.cdn.bcebos.com/mini-program/images/ic_wx_logo.png);
+}
+
+.bindBtn {
+    width: calc(100% - 64rpx);
+    height: 100rpx;
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    padding: 32rpx;
+    display: flex;
+}
+
+.bottom_bar_gap {
+    bottom: 70rpx!important;
+}
+
+.sharelist-sharebutton {
+    padding: 0;
+    margin: 0;
+    font-size: 32rpx;
+    line-height: 100rpx;
+}
+
+.others-sharebutton {
+    width: 331rpx;
+    margin-right: 24rpx;
+}
+
+.hover-opacity {
+    opacity: 0.6;
+}
+
+.own-sharebutton {
+    width: 100%;
+}
+
+.ic-wechat {
+    width: 36rpx;
+    height: 31rpx;
+    margin-bottom: -2rpx;
+}
+
+.sharelist-sharebutton::after {
+    border: none;
+}
+
+.sharelist-savebutton {
+    flex-grow: 1;
+}
+
+.bg {
+    opacity: 0.4;
+    background: #000000;
+    position: absolute;
+    left: 0;
+    top: 0;
+    height: 100%;
+    width: 100%;
+}

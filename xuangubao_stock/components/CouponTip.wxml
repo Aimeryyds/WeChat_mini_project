@@ -1,0 +1,9 @@
+<view catchtap="__e" class="{{['_div data-v-f33c460e','coupon-wrapper',coupons&&coupons.length?'active':'']}}" data-event-opts="{{[ [ 'tap',[ [ 'chooseCoupon',['$event'] ] ] ] ]}}">
+    <view class="iconfont icon-weibiaoti--4 _i data-v-f33c460e"></view>
+    <label class="_span data-v-f33c460e" wx:if="{{coupons&&coupons.length&&!activeCoupon}}">您有优惠劵可用</label>
+    <block wx:else>
+        <label class="_span data-v-f33c460e" wx:if="{{coupons&&coupons.length&&activeCoupon}}">{{activeCoupon.primaryField}}</label>
+        <label class="_span data-v-f33c460e" wx:else>暂无优惠券可用</label>
+    </block>
+    <view class="iconfont icon-xiaochengxuqietu-10-copy _i data-v-f33c460e"></view>
+</view>

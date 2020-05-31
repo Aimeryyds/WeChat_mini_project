@@ -1,0 +1,91 @@
+<import src="/netdisk_templates/empty_list/emptyList.wxml"></import>
+<import src="/netdisk_templates/loading_list/loading_list.wxml"></import>
+<view class="batch-edit-holder" wx:if="{{canSelected}}">
+    <view class="bacth-bound bottom-shadow">
+        <view bindtap="selectedAll" class="info-tab blue">{{isSelectedAll?'取消全选':'全选'}}</view>
+        <view class="info-tab" style="font-weight: 900">已选中{{selectedCount}}个文件</view>
+        <view bindtap="goback" class="info-tab blue right">取消</view>
+    </view>
+</view>
+<view class="invalid-wrap" style="height: {{systemInfo?systemInfo.visualHeightRpx+'rpx':'auto'}}" wx:if="{{newErr.hasErr||invalid}}">
+    <view class="invalid">
+        <view class="invalid-icon"></view>
+        <text class="invalid-text">{{newErr.msg||errTxt}}</text>
+        <view bindtap="handleRemind" class="invalid-remind" style="background-color: {{remindMap[remindStatus].bgColor}};color: {{remindMap[remindStatus].txtColor}}" wx:if="{{remindStatus!=='none'}}">
+            {{remindMap[remindStatus].txt}}
+        </view>
+    </view>
+    <ActivityBanner activity="{{failBanner}}" show="{{failBanner.isValid}}"></ActivityBanner>
+</view>
+<block wx:else>
+    <scroll-view scrollY bindscrolltolower="loadMore" class="share-list" lowerThreshold="72" style="height: {{systemInfo?scrollListHeight+'rpx':'auto'}}">
+        <block wx:if="{{isStory}}">
+            <view class="story-info-wrap">
+                <view class="story-title ellipsis">{{storyTitle}}</view>
+                <view class="story-info">
+                    <view class="story-time">{{storyTime}}</view>
+                    <view class="story-share-people ellipsis" wx:if="{{storySharePeople}}">{{storySharePeople}}分享的故事</view>
+                </view>
+            </view>
+            <view class="sharelist-login-cover-container">
+                <view bindtap="shareListLoginCoverTap" class="sharelist-login-cover" wx:if="{{!hasLogin}}"></view>
+                <StoryList coverInfo="{{coverInfo}}" imagetype="{{imagetype}}" list="{{list}}" shareUrlInfo="{{shareUrlInfo}}" surl="{{surl}}"></StoryList>
+            </view>
+        </block>
+        <block wx:else>
+            <view class="sharelist-title-new bottom-shadow" wx:if="{{!canSelected}}">
+                <view>
+                    <image class="sharelist-title-icon" src="{{avatar}}"></image>
+                </view>
+                <view class="sharelist-title-middle">
+                    <view class="sharelist-title-name {{vipType?'has-icon':''}} {{vipType==='vip'?'is-vip':''}} {{vipType==='svip'?'is-svip':''}}">{{uname||'好友'}}的分享</view>
+                    <view class="sharelist-title-intro">{{fileNums}}个文件 / {{expired}}</view>
+                </view>
+                <view bindtap="complaint" class="sharelist-title-tail">举报</view>
+            </view>
+            <form bindsubmit="formSubmit" reportSubmit="true">
+                <button class="formButtonNone" formType="submit">
+                    <template is="loadingList" data wx:if="{{showLoading&&isLoading}}"></template>
+                    <template is="emptyList" data="{{emptymod:'shareList'}}" wx:elif="{{list.length===0&&isLoading===false}}"></template>
+                    <ImgCard fileMeta="{{list[0]}}" name="{{list[0].server_filename}}" size="{{list[0].size}}" src="{{list[0].thumbs.url3}}" wx:elif="{{list.length===1&&list[0].category-0===3}}"></ImgCard>
+                    <view class="sharelist-login-cover-container" wx:else>
+                        <view bind:longpress="shareListLoginCoverTap" bindtap="shareListLoginCoverTap" class="sharelist-login-cover list-item-cover" wx:if="{{!hasLogin}}"></view>
+                        <include src="./List.wxml"></include>
+                    </view>
+                </button>
+            </form>
+            <ShareSubscribe hasDir="{{hasDir}}" shareUrlInfo="{{shareUrlInfo}}"></ShareSubscribe>
+            <ActivityFeed activities="{{feedActivities}}" bindclose="handleFeedClose" wx:if="{{showActivityFeed}}"></ActivityFeed>
+        </block>
+        <view class="load-tips" style="{{showTips?'display:block':'display:none'}}">加载中...</view>
+    </scroll-view>
+    <view class="footer" wx:if="{{canSelected}}">
+        <BottomBtnBar barType="shareBatch" bgColor="#06A7FF" bindbuttonFn="bottomBtnFn" count="{{selectedCount}}" id="bottomBtnBar" isBatch="true"></BottomBtnBar>
+    </view>
+    <view class="bindBtn" wx:elif="{{list&&list.length>0&&(btn.saveBtn||!btn.saveBtn)}}">
+        <view class="sharelist-sharebutton own-sharebutton" wx:if="{{btn.owner}}">
+            <BlueButton bgColor="green" bind:action="share" iconClass="icon-share-button" isShowIcon="{{true}}">发送给朋友</BlueButton>
+        </view>
+        <view class="sharelist-sharebutton others-sharebutton" wx:else>
+            <BlueButton bgColor="light-green" bind:action="share" fontColor="green" iconClass="icon-share-green" isShowIcon="{{true}}">发送给朋友</BlueButton>
+        </view>
+        <view class="sharelist-savebutton" wx:if="{{!btn.owner}}">
+            <BlueButton bind:action="saveToMe">保存到我的网盘</BlueButton>
+        </view>
+    </view>
+    <view class="save-success" wx:elif="{{btn.saveBtn===false}}">
+        <view class="save-tip-wrap {{btn.saveState!==1?'save-tip-wrap-full':''}}">
+            <view class="save-tip">
+                {{btn.text}}
+            </view>
+            <view bindtap="handleOperation" class="operation">{{btn.resTxt}}</view>
+        </view>
+        <button class="sharelist-saved-sharebutton" data-type="transfered" hoverClass="hover-opacity" openType="share" wx:if="{{btn.saveState===1}}">分享至好友</button>
+    </view>
+    <view>
+        <LaunchBtn appParameter="{{!btn.owner&&!btn.saveState?shareAppParameter:appParameter}}" bindlaunchCal="launchCal" id="launchBtn" wx:if="{{fromNa}}"></LaunchBtn>
+    </view>
+</block>
+<Dialog bindconfirm="saveLimitDialogConfirm" cancelValue="取消" confirmValue="批量选择" id="saveLimitDialog" title="转存超限"></Dialog>
+<GuideMember bindclose="handleGuideMemberClose" config="{{guideMemberTip}}" wx:if="{{showGuideMember}}"></GuideMember>
+<ActivityBtn activity="{{newErr.hasErr||invalid?failActivity:successActivity}}" bindiconCancel="handleIconCancel" bottom="{{newErr.hasErr||invalid?'450rpx':'360rpx'}}" show="{{newErr.hasErr||invalid?failActivity.isValid:successActivity.isValid}}"></ActivityBtn>

@@ -1,0 +1,15 @@
+<view class="section">
+    <picker bindchange="bindPickerChange" range="{{pathTypes}}" value="{{index}}">
+        <view class="picker">
+      卡片：{{pathMaps[index].name}}
+    </view>
+    </picker>
+</view>
+<input bindinput="bindKeyInput" placeholder="请输入卡片path" value="{{sharePath}}"></input>
+<button bindtap="setShare" openType="share" type="primary">分享成微信卡片</button>
+<button bindtap="gotoPath" type="default">打开对应path</button>
+<button bindgetuserinfo="onGotUserInfo" lang="zh_CN" openType="getUserInfo" type="default">获取用户信息</button>
+<button bindtap="getMessageFile">获取会话列表文件</button>
+<button bindtap="getVideo">获取视频</button>
+<button bindtap="getImg">获取图片&base64</button>
+<button bindtap="panOrder">外链文件盘口令</button>

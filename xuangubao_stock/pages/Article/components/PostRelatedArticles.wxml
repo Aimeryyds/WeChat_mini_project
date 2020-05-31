@@ -1,0 +1,8 @@
+<view class="recommendations _div data-v-3f409238">
+    <view class="_h3 data-v-3f409238">相关推荐</view>
+    <view class="_div data-v-3f409238">
+        <view class="article-recommendation _div data-v-3f409238">
+            <post-related-article bind:__l="__l" bind:click="__e" class="data-v-3f409238" data-event-opts="{{[ [ '^click',[ [ '$emit',[ 'go-to-related-article',[ 'o',['articleId',article.id],['subjectId',article.fromSubject.id] ] ] ] ] ] ]}}" image="{{article.image||article.fromSubject.image}}" subjectTitle="{{article.fromSubject.title}}" time="{{article.createdAt*1000}}" title="{{article.title}}" vueId="{{'1-'+__i0__}}" wx:for="{{articles}}" wx:for-index="__i0__" wx:for-item="article" wx:key="id"></post-related-article>
+        </view>
+    </view>
+</view>

@@ -1,0 +1,62 @@
+<view class="stock-header _div data-v-46a71e9e" wx:if="{{stockInfo}}">
+    <view class="real _div data-v-46a71e9e">
+        <view class="price _p data-v-46a71e9e">
+            <percent-number bind:__l="__l" class="data-v-46a71e9e" compareNum="{{stockInfo.pxChangeRate}}" num="{{stockInfo.lastPx||'--'}}" options="{{$root.a0}}" process="{{toFixedLocal}}" vueId="1"></percent-number>
+        </view>
+        <view class="change _p data-v-46a71e9e">
+            <percent-number bind:__l="__l" class="data-v-46a71e9e" num="{{stockInfo.pxChange!=undefined?stockInfo.pxChange:'--'}}" process="{{toFixedLocal}}" vueId="2"></percent-number>
+            <percent-number bind:__l="__l" class="data-v-46a71e9e" num="{{stockInfo.pxChangeRate!=undefined?stockInfo.pxChangeRate:'--'}}" vueId="3"></percent-number>
+        </view>
+        <view class="tags _div data-v-46a71e9e">
+            <label class="tag jiaoyizhong _span data-v-46a71e9e" wx:if="{{stockInfo.tradeStatus==='TRADE'}}">交易中</label>
+            <block wx:else>
+                <label class="tag xiushi _span data-v-46a71e9e" wx:if="{{stockInfo.tradeStatus==='BREAK'}}">休市</label>
+                <block wx:else>
+                    <label class="tag other _span data-v-46a71e9e" wx:if="{{TRADE_STATUS[stockInfo.tradeStatus]}}">{{TRADE_STATUS[stockInfo.tradeStatus]}}</label>
+                </block>
+            </block>
+            <label class="tag rong _span data-v-46a71e9e" wx:if="{{otherStockInfo.rong}}">融</label>
+            <label class="tag gang _span data-v-46a71e9e" wx:if="{{otherStockInfo.gang}}">港</label>
+        </view>
+    </view>
+    <view class="detail _div data-v-46a71e9e">
+        <view class="_ul data-v-46a71e9e">
+            <view class="_li data-v-46a71e9e">
+                <label class="label _span data-v-46a71e9e">最高</label>
+                <percent-number bind:__l="__l" class="value data-v-46a71e9e" classes="{{stockInfo.highPx>=stockInfo.preclosePx?'color-red':'color-green'}}" num="{{stockInfo.highPx||'--'}}" options="{{$root.a1}}" process="{{toFixedLocal}}" vueId="4"></percent-number>
+            </view>
+            <view class="_li data-v-46a71e9e" wx:if="{{isZhishu}}">
+                <label class="label _span data-v-46a71e9e">开盘</label>
+                <percent-number bind:__l="__l" class="value data-v-46a71e9e" classes="{{stockInfo.openPx>=stockInfo.preclosePx?'color-red':'color-green'}}" num="{{stockInfo.openPx||'--'}}" options="{{$root.a2}}" process="{{toFixedLocal}}" vueId="5"></percent-number>
+            </view>
+            <view class="_li data-v-46a71e9e" wx:else>
+                <label class="label _span data-v-46a71e9e">换手率</label>
+                <percent-number bind:__l="__l" class="value data-v-46a71e9e" classes="color-black" num="{{stockInfo.turnoverRatio||'--'}}" options="{{$root.a3}}" vueId="6"></percent-number>
+            </view>
+            <view class="_li data-v-46a71e9e">
+                <label class="label _span data-v-46a71e9e">成交额</label>
+                <approx-number bind:__l="__l" class="value data-v-46a71e9e" num="{{stockInfo.turnoverValue}}" vueId="7"></approx-number>
+            </view>
+            <view class="_li data-v-46a71e9e">
+                <label class="label _span data-v-46a71e9e">最低</label>
+                <percent-number bind:__l="__l" class="value data-v-46a71e9e" classes="{{stockInfo.lowPx>=stockInfo.preclosePx?'color-red':'color-green'}}" num="{{stockInfo.lowPx||'--'}}" options="{{$root.a4}}" process="{{toFixedLocal}}" vueId="8"></percent-number>
+            </view>
+            <view class="_li data-v-46a71e9e" wx:if="{{isZhishu}}">
+                <label class="label _span data-v-46a71e9e">昨收</label>
+                <percent-number bind:__l="__l" class="value data-v-46a71e9e" classes="color-black" num="{{stockInfo.preclosePx||'--'}}" options="{{$root.a5}}" process="{{toFixedLocal}}" vueId="9"></percent-number>
+            </view>
+            <view class="_li data-v-46a71e9e" wx:else>
+                <label class="label _span data-v-46a71e9e">PEttm</label>
+                <percent-number bind:__l="__l" class="value data-v-46a71e9e" classes="color-black" num="{{stockInfo.peRate!=undefined?stockInfo.peRate!==0?stockInfo.peRate:'亏损':'--'}}" options="{{$root.a6}}" process="{{toFixedLocal}}" vueId="10"></percent-number>
+            </view>
+            <view class="_li data-v-46a71e9e" wx:if="{{isZhishu}}">
+                <label class="label _span data-v-46a71e9e">成交量</label>
+                <approx-number bind:__l="__l" class="value data-v-46a71e9e" num="{{stockInfo.turnoverVolume/100}}" vueId="11"></approx-number>
+            </view>
+            <view class="_li data-v-46a71e9e" wx:else>
+                <label class="label _span data-v-46a71e9e">流通值</label>
+                <approx-number bind:__l="__l" class="value data-v-46a71e9e" num="{{stockInfo.circulationValue}}" vueId="12"></approx-number>
+            </view>
+        </view>
+    </view>
+</view>

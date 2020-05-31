@@ -1,0 +1,12 @@
+<view class="cashier-bottom-btn {{showBottomBtn?'show-bottom-btn':''}}">
+    <view class="cb-note">
+        <view class="cb-name">{{name[productName]}}</view>
+        <view>
+            <text class="cb-price {{chooseType}}-price">￥{{productPrice}}</text>
+            <text class="cb-price-note" wx:if="{{productPriceNote}}">{{productPriceNote}}元/月</text>
+        </view>
+    </view>
+    <view class="cb-btn">
+        <purchase bind:paycheck="payCheck" chooseType="{{chooseType}}" choosedProductIdCanBuy="{{productIdCanBuy}}" choosedProductPrice="{{productPrice}}" choosenProduct="{{productId}}" styleType="simple" userVipStatus="{{userVipStatus}}"></purchase>
+    </view>
+</view>

@@ -1,0 +1,13 @@
+<view bindtap="handleEntryTap" class="entry-container">
+    <view class="entry-left">
+        <image class="entry-vip-icon" mode="widthFix" src="{{svipIcon}}"></image>
+        <view class="entry-vip-title">
+            <view class="entry-vip-title-text {{tip.subTitle?'':'no-sub'}}">{{tip.title}}</view>
+            <view class="entry-vip-title-desc" wx:if="{{tip.subTitle}}">{{tip.subTitle}}</view>
+        </view>
+    </view>
+    <view class="entry-right">
+        <view class="entry-vip-desc">{{tip.desc}}</view>
+        <image class="entry-nav-icon" mode="widthFix" src="{{rightArrowIcon}}"></image>
+    </view>
+</view>

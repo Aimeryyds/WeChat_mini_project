@@ -1,0 +1,8 @@
+<view class="_div data-v-cd8477bc">
+    <view bindtap="__e" class="audio-wrapper _div data-v-cd8477bc" data-event-opts="{{[ [ 'tap',[ [ 'clickAudio',['$event'] ] ] ] ]}}" wx:if="{{audio}}">
+        <audio controls author="{{info.author}}" class="audio data-v-cd8477bc" id="audio" name="{{info.name}}" poster="{{info.poster}}" src="{{audio.validUrl||audio.url}}"></audio>
+    </view>
+    <view class="_div data-v-cd8477bc" wx:if="{{videos&&videos.length}}">
+        <video class="video data-v-cd8477bc" src="{{v.validUrl||v.url}}" wx:for="{{videos}}" wx:for-index="idx" wx:for-item="v" wx:key="idx"></video>
+    </view>
+</view>

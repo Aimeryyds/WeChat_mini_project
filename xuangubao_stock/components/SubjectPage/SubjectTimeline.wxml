@@ -1,0 +1,6 @@
+<view class="_div">
+    <view class="_div" entity="{{entity}}" wx:for="{{timeline}}" wx:for-index="idx" wx:for-item="entity" wx:key="idx">
+        <subject-timeline-article article="{{entity.value}}" bind:__l="__l" vueId="{{'1-'+idx}}" wx:if="{{entity.type==='message'}}"></subject-timeline-article>
+        <subject-timeline-related bind:__l="__l" subjects="{{entity.value}}" vueId="{{'2-'+idx}}" wx:if="{{entity.type==='related_subjects'}}"></subject-timeline-related>
+    </view>
+</view>

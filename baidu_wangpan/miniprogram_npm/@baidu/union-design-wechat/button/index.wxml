@@ -1,0 +1,4 @@
+<button appParameter="{{appParameter}}" bindcontact="bindcontact" binderror="binderror" bindgetphonenumber="bindgetphonenumber" bindgetuserinfo="bindgetuserinfo" bindlaunchapp="bindlaunchapp" bindopensetting="bindopensetting" bindtap="handleTap" class="u-class u-btn {{type?'u-btn-'+type:''}} {{long?'u-btn-long':''}} {{'u-btn-'+size}} {{disabled?'u-btn-disabled':''}} {{inline?'u-btn-inline':''}} {{circle?'u-btn-circle':''}} {{loading?'u-btn-loading':''}}" disabled="{{disabled}}" formType="{{formType}}" hoverClass="u-btn-hover" hoverStartTime="{{hoverStartTime}}" hoverStayTime="{{hoverStayTime}}" hoverStopPropagation="{{hoverStopPropagation}}" openType="{{openType}}" plain="true" sendMessageImg="{{sendMessageImg}}" sendMessagePath="{{sendMessagePath}}" sendMessageTitle="{{sendMessageTitle}}" sessionFrom="{{sessionFrom}}" showMessageCard="{{showMessageCard}}">
+    <view class="u-btn-loading-icon" wx:if="{{loading}}"></view>
+    <slot></slot>
+</button>

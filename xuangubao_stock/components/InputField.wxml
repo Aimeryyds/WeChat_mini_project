@@ -1,0 +1,16 @@
+<view class="input-field flex-center-all _div data-v-d8bfc378">
+    <view class="layout-left _div data-v-d8bfc378" wx:if="{{icon}}">
+        <view class="{{['_i data-v-d8bfc378','iconfont',icon]}}"></view>
+    </view>
+    <view class="{{['layout-right flex-center-all _div data-v-d8bfc378',isFocused?'is-focus':'']}}">
+        <view class="layout-left _div data-v-d8bfc378">
+            <input bindblur="__e" bindfocus="__e" bindinput="__e" class="data-v-d8bfc378" data-event-opts="{{[ [ 'focus',[ [ 'toggleFocus',['$event'] ] ] ],[ 'blur',[ [ 'toggleFocus',['$event'] ] ] ],[ 'input',[ [ '__set_model',[ '','val','$event',[] ] ] ] ] ]}}" placeholder="{{placeholder}}" type="text" value="{{val}}"></input>
+        </view>
+        <view class="layout-right _div data-v-d8bfc378" wx:if="{{showAction}}">
+            <label catchtap="__e" class="_span data-v-d8bfc378" data-event-opts="{{[ [ 'tap',[ [ 'sendCode',['$event'] ] ] ] ]}}">
+                <block wx:if="{{!disabled}}">发送验证码</block>
+                <block wx:else>{{countdown+' 秒'}}</block>
+            </label>
+        </view>
+    </view>
+</view>

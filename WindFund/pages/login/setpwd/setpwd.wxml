@@ -1,0 +1,29 @@
+<view class="page">
+    <view class="form-panel">
+        <view class="weui-cells weui-cells_after-title">
+            <view class="weui-cell weui-cell_input">
+                <view class="weui-cell__hd">
+                    <view class="weui-label">密码</view>
+                </view>
+                <view class="weui-cell__bd">
+                    <input bindinput="bindPwdInput" class="weui-input" maxlength="20" placeholder="4到20个字符，区分大小写" type="password"></input>
+                </view>
+            </view>
+            <view class="weui-cell weui-cell_input">
+                <view class="weui-cell__hd">
+                    <view class="weui-label">确认密码</view>
+                </view>
+                <view class="weui-cell__bd">
+                    <input bindinput="bindPwd2Input" class="weui-input" maxlength="20" placeholder="请重复输入密码" type="password"></input>
+                </view>
+            </view>
+        </view>
+    </view>
+    <view class="form-panel">
+        <view class="weui-msg__opr-area">
+            <view class="weui-btn-area">
+                <button bindtap="commit" class="weui-btn btn-common" type="primary">确认</button>
+            </view>
+        </view>
+    </view>
+</view>

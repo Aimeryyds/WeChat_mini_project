@@ -1,0 +1,12 @@
+<view class="btn-container {{type||'big'}}">
+    <button appParameter="{{parameter}}" catchtap="tap" class="btn bg-{{bgColor}} {{isShade?'btn-shade-origin':''}}" disabled="{{disabled}}" hoverClass="press-down" openType="{{openType}}" wx:if="{{openType&&parameter}}">
+        <include src="buttonContent.wxml"></include>
+    </button>
+    <button catchtap="tap" class="btn bg-{{bgColor}} {{isShade?'btn-shade-origin':''}}" disabled="{{disabled}}" hoverClass="press-down" openType="{{openType}}" wx:elif="{{openType}}">
+        <include src="buttonContent.wxml"></include>
+    </button>
+    <button catchtap="tap" class="btn bg-{{bgColor}} {{isShade?'btn-shade-origin':''}}" disabled="{{disabled}}" hoverClass="press-down" wx:else>
+        <include src="buttonContent.wxml"></include>
+    </button>
+    <button class="btn bg-white btn-shade" wx:if="{{isShade}}"></button>
+</view>

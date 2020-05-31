@@ -1,0 +1,19 @@
+<template name="dialog">
+    <view class="wux-backdrop {{animateCss}}" wx:if="{{visible}}"></view>
+    <view class="wux-dialog {{animateCss}}" wx:if="{{visible}}">
+        <view class="wux-dialog__hd" wx:if="{{title}}">
+            <view class="wux-dialog__title">{{title}}</view>
+        </view>
+        <view class="wux-dialog__bd" wx:if="{{content}}">
+            <view class="wux-dialog__content">{{content}}</view>
+            <input bindblur="{{bindinput}}" class="wux-dialog__input" maxlength="{{maxlength}}" password="{{prompt.password}}" placeholder="{{prompt.placeholder}}" type="{{prompt.fieldtype}}" value="{{prompt.response}}" wx:if="{{prompt}}"></input>
+        </view>
+        <view class="wux-dialog__ft {{verticalButtons?'wux-dialog__btns--vertical':''}}" wx:if="{{buttons.length}}">
+            <block wx:for="{{buttons}}">
+                <button bindtap="{{buttonTapped}}" class="wux-dialog__btn wux-dialog__btn--default" data-index="{{index}}" openType="share" wx:if="{{item.isshare}}">{{item.text}}</button>
+                <button bindtap="{{buttonTapped}}" class="wux-dialog__btn wux-dialog__btn--default" data-index="{{index}}" openType="contact" wx:elif="{{item.iscontact}}">{{item.text}}</button>
+                <view bindtap="{{buttonTapped}}" class="wux-dialog__btn wux-dialog__btn--default {{item.type}} {{item.bold?'wux-dialog__btn--bold':''}}" data-index="{{index}}" wx:else>{{item.text}}</view>
+            </block>
+        </view>
+    </view>
+</template>

@@ -1,0 +1,15 @@
+<view class="nav-wrap">
+    <view class="navbar">
+        <view style="height:{{statusBarHeight}}px"></view>
+        <view class="title-wrap" style="height:{{totalHeight}}px">
+            <view class="icon" wx:if="{{isShowBarBtn}}">
+                <view bindtap="navigateBack" class="navbar-back" style="background-image: url({{backIcon}})" wx:if="{{showBack}}"></view>
+                <view bindtap="home" class="navbar-home" style="background-image: url({{homeIcon}})"></view>
+            </view>
+            <view class="text">
+                <view class="text-sub">{{titleText}}</view>
+            </view>
+        </view>
+    </view>
+    <view style="height:{{navHeight}}px"></view>
+</view>

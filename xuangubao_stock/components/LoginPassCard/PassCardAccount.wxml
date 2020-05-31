@@ -1,0 +1,20 @@
+<view bindtap="__e" class="{{['_li data-v-0fe3066a','passcard-item-wrapper',checked?'active':'']}}" data-event-opts="{{[ [ 'tap',[ [ '$emit',['chooseAccount','$0'],['account'] ] ] ] ]}}">
+    <image class="_img data-v-0fe3066a" src="{{account.account.avatar}}"></image>
+    <view class="account _div data-v-0fe3066a">
+        <view class="account-type _p data-v-0fe3066a">见闻账号</view>
+        <view class="account-name _p data-v-0fe3066a">{{account.account.display_name}}</view>
+        <view class="account-form account-last-login _p data-v-0fe3066a">
+            <label class="label _span data-v-0fe3066a">最后登录：</label>
+            <label class="content _span data-v-0fe3066a">{{lastLoginTime}}</label>
+        </view>
+        <view class="account-form account-user-level _p data-v-0fe3066a">
+            <label class="label _span data-v-0fe3066a">会员身份：</label>
+            <label class="content _span data-v-0fe3066a">{{account.vip||'普通会员'}}</label>
+        </view>
+        <view class="account-form account-subscribe-subject _p data-v-0fe3066a">
+            <label class="label _span data-v-0fe3066a">订阅中的产品：</label>
+            <label class="content _span data-v-0fe3066a">{{paidProduct}}</label>
+        </view>
+        <view class="{{['_i data-v-0fe3066a','iconfont',checked?'icon-dingyuexuanzhong':'icon-dingyueweixuanzhong']}}"></view>
+    </view>
+</view>

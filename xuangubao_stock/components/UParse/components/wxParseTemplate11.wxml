@@ -1,0 +1,35 @@
+<block wx:if="{{node.node=='element'}}">
+    <button class="{{[node.classStr]}}" size="mini" style="{{node.styleStr}}" type="default" wx:if="{{node.tag=='button'}}"></button>
+    <block wx:else>
+        <view bindtap="__e" class="{{[node.classStr]}}" data-event-opts="{{[ [ 'tap',[ [ 'wxParseATap',['$event'] ] ] ] ]}}" data-href="{{node.attr.href}}" style="{{node.styleStr}}" wx:if="{{node.tag=='a'}}">
+            <block wx:for="{{node.nodes}}" wx:for-item="node" wx:key="index"></block>
+        </view>
+        <block wx:else>
+            <view class="{{[node.classStr]}}" style="{{node.styleStr}}" wx:if="{{node.tag=='li'}}">
+                <block wx:for="{{node.nodes}}" wx:for-item="node" wx:key="index"></block>
+            </view>
+            <block wx:else>
+                <weixin-parse-table bind:__l="__l" class="{{[node.classStr]}}" node="{{node}}" style="{{node.styleStr}}" vueId="1" wx:if="{{node.tag=='table'}}"></weixin-parse-table>
+                <block wx:else>
+                    <text wx:if="{{node.tag=='br'}}">
+</text>
+                    <block wx:else>
+                        <weixin-parse-video bind:__l="__l" node="{{node}}" vueId="2" wx:if="{{node.tag=='video'}}"></weixin-parse-video>
+                        <block wx:else>
+                            <weixin-parse-audio bind:__l="__l" node="{{node}}" vueId="3" wx:if="{{node.tag=='audio'}}"></weixin-parse-audio>
+                            <block wx:else>
+                                <weixin-parse-img bind:__l="__l" node="{{node}}" vueId="4" wx:if="{{node.tag=='img'}}"></weixin-parse-img>
+                                <view class="{{[node.classStr]}}" style="{{node.styleStr}}" wx:else>
+                                    <block wx:for="{{node.nodes}}" wx:for-item="node" wx:key="index"></block>
+                                </view>
+                            </block>
+                        </block>
+                    </block>
+                </block>
+            </block>
+        </block>
+    </block>
+</block>
+<block wx:else>
+    <block wx:if="{{node.node=='text'}}">{{node.text}}</block>
+</block>

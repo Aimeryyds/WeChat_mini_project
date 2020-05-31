@@ -1,0 +1,34 @@
+<view class="container _div">
+    <title-bar bind:__l="__l" showLoading="{{showPullDownLoading}}" title="选股宝股票" vueId="1" vueSlots="{{['default']}}">
+        <view bindtap="__e" class="user-center-btn _div" data-event-opts="{{[ [ 'tap',[ [ 'jumpToUserCenter',['$event'] ] ] ] ]}}" wx:if="{{token}}">
+            <image class="avatar _img" src="{{avatar}}"></image>
+        </view>
+    </title-bar>
+    <view class="{{['_div','keep-tip-container',showKeepTip?'':'disappear']}}">
+        <image class="tip-image _img" src="/static/images/keep-tip-2.png"></image>
+        <view bindtap="__e" class="tip-close _div" data-event-opts="{{[ [ 'tap',[ [ 'hidetipImage',['$event'] ] ] ] ]}}"></view>
+    </view>
+    <view class="card-wrapper _div">
+        <login-header bind:__l="__l" vueId="2" wx:if="{{!token}}"></login-header>
+        <today-article bind:__l="__l" hotMessages="{{hotMessages}}" vueId="3"></today-article>
+    </view>
+    <view class="body-wrapper _div">
+        <hot-recommend bind:__l="__l" items="{{items}}" vueId="4"></hot-recommend>
+        <view class="_div" style="height:112rpx;" wx:if="{{bottomLoading||showNextRoundTip||!hasMore}}">
+            <view bindtap="__e" class="nextRound _div" data-event-opts="{{[ [ 'tap',[ [ 'nextRound',['$event'] ] ] ] ]}}" wx:if="{{showNextRoundTip}}">
+                <view class="btn _div">
+                    <image class="_img" src="/static/images/spinner.png"></image>
+                    <label class="_span">到底啦～点一下看新的</label>
+                </view>
+            </view>
+            <view class="loading _div" wx:else>
+                <label class="_span" wx:if="{{bottomLoading}}">内容加载中...</label>
+                <block wx:else>
+                    <label class="_span" wx:if="{{!hasMore}}">到底啦～</label>
+                </block>
+            </view>
+        </view>
+    </view>
+    <paying-flow bind:__l="__l" vueId="5" wx:if="{{showPayFlow}}"></paying-flow>
+    <auth-flow bind:__l="__l" vueId="6" wx:if="{{showPayFlow}}"></auth-flow>
+</view>

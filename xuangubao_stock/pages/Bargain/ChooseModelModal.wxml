@@ -1,0 +1,27 @@
+<view bindtap="__e" class="selector-mask _div data-v-39e1d869" data-event-opts="{{[ [ 'tap',[ [ '$emit',['cancel'] ] ] ] ]}}">
+    <view catchtap="__e" class="content _div data-v-39e1d869" data-event-opts="{{[ [ 'tap',[ [ 'e0',['$event'] ] ] ] ]}}">
+        <view class="preview _div data-v-39e1d869">
+            <image class="_img data-v-39e1d869" src="{{selectedItem.image}}"></image>
+            <label class="_span data-v-39e1d869" wx:if="{{bargainOrder}}">{{'￥ '+bargainOrder.remainMoneyToPay/100}}</label>
+            <label class="_span data-v-39e1d869" wx:if="{{selectedSubItem}}">{{'￥ '+selectedSubItem.price}}</label>
+        </view>
+        <view class="options _div data-v-39e1d869">
+            <view class="_p data-v-39e1d869">款式选择</view>
+            <view class="_ul data-v-39e1d869">
+                <view bindtap="__e" class="{{['_li data-v-39e1d869',item.id===selectedItem.id?'active':'']}}" data-event-opts="{{[ [ 'tap',[ [ 'selectItem',['$0'],[ [ ['items','id',item.id] ] ] ] ] ] ]}}" wx:for="{{items}}" wx:for-index="__i0__" wx:key="id">
+                    <image class="_img data-v-39e1d869" src="{{item.image}}"></image>
+                    <label class="_span data-v-39e1d869">{{mapNames[item.id]}}</label>
+                </view>
+            </view>
+        </view>
+        <view class="options _div data-v-39e1d869">
+            <view class="_p data-v-39e1d869">颜色尺码</view>
+            <view class="_ul data-v-39e1d869">
+                <view bindtap="__e" class="{{['_li data-v-39e1d869',item.id===selectedSubItem.id?'active':'']}}" data-event-opts="{{[ [ 'tap',[ [ 'selectSubItem',['$0'],[ [ ['subItems','',idx] ] ] ] ] ] ]}}" wx:for="{{subItems}}" wx:for-index="idx" wx:key="idx">
+                    <label class="_span data-v-39e1d869">{{item.name}}</label>
+                </view>
+            </view>
+        </view>
+        <view bindtap="__e" class="confirm _div data-v-39e1d869" data-event-opts="{{[ [ 'tap',[ [ '$emit',['ok'] ] ] ] ]}}">确定</view>
+    </view>
+</view>

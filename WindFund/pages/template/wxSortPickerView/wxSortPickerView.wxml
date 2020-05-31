@@ -1,0 +1,19 @@
+<template name="wxSortPickerViewTemTags">
+    <view class="wxSortPickerViewTemTags" style="width:30px;height: {{wxSortPickerData.view.scrollHeight}}px;">
+        <view bindtap="wxSortPickerViewTemTagTap" class="wxSortPickerViewTemTag" data-tag="{{item}}" wx:for="{{['A','B','C','D','E','F','G','H','I','J','K','L','M','N','O','P','Q','R','S','T','U','V','W','X','Y','Z','#']}}">{{item}}</view>
+    </view>
+</template>
+<template name="wxSortPickerViewItem">
+    <view bindtap="wxSortPickerViewItemTap" class="wxSortPickerViewItem" data-code="{{item.ids[index]}}" wx:for="{{item.textArray}}" wx:for-item="child" wx:key="{{index}}">
+        <text>{{child}}</text>
+    </view>
+</template>
+<template name="wxSortPickerView">
+    <scroll-view bindscrolltolower="wxSortPickerViewLower" bindscrolltoupper="wxSortPickerViewUpper" class="wxSortPickerViewList" scrollIntoView="{{wxSortPickerData.wxSortPickerViewtoView}}" scrollY="true" style="height: {{wxSortPickerData.view.scrollHeight}}px;">
+        <block wx:if="{{item.textArray.length>0}}" wx:for="{{wxSortPickerData.textData}}">
+            <view class="wxSortPickerViewTag" id="{{item.tag}}">{{item.tag}}</view>
+            <template is="wxSortPickerViewItem" data="{{item:item}}"></template>
+        </block>
+    </scroll-view>
+    <template is="wxSortPickerViewTemTags" data></template>
+</template>

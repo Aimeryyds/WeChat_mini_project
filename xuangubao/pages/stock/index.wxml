@@ -1,0 +1,39 @@
+<view class="_div data-v-4f94d86c">
+    <header-bar-with-capsule bind:__l="__l" class="data-v-4f94d86c" title="{{stockInfo&&stockInfo.prodName+'('+stockInfo.symbol+')'}}" vueId="1"></header-bar-with-capsule>
+    <view class="main-body _div data-v-4f94d86c" wx:if="{{stockInfo}}">
+        <stock-header bind:__l="__l" class="data-v-4f94d86c" otherStockInfo="{{otherStockInfo}}" stockInfo="{{stockInfo}}" vueId="2"></stock-header>
+        <view class="kinds-line _div data-v-4f94d86c">
+            <view class="tip-wrapper _div data-v-4f94d86c">
+                <view class="tabs _ul data-v-4f94d86c" wx:if="{{!focusingKlineData}}">
+                    <view bindtap="__e" class="{{['_li data-v-4f94d86c','normal',cavasType==='fenshi'?'active':'']}}" data-event-opts="{{[ [ 'tap',[ [ 'e0',['$event'] ] ] ] ]}}">分时</view>
+                    <view bindtap="__e" class="{{['_li data-v-4f94d86c','normal',cavasType==='kline'&&kLineType===86400?'active':'']}}" data-event-opts="{{[ [ 'tap',[ [ 'e1',['$event'] ] ] ] ]}}">日K</view>
+                    <view bindtap="__e" class="{{['_li data-v-4f94d86c','normal',cavasType==='kline'&&kLineType===604800?'active':'']}}" data-event-opts="{{[ [ 'tap',[ [ 'e2',['$event'] ] ] ] ]}}">周K</view>
+                    <view bindtap="__e" class="{{['_li data-v-4f94d86c','normal',cavasType==='kline'&&kLineType===2592000?'active':'']}}" data-event-opts="{{[ [ 'tap',[ [ 'e3',['$event'] ] ] ] ]}}">月K</view>
+                </view>
+                <kline-tip bind:__l="__l" class="data-v-4f94d86c" kdata="{{focusingKlineData}}" vueId="3" wx:if="{{focusingKlineData}}"></kline-tip>
+            </view>
+            <view class="canvas-wrapper _div data-v-4f94d86c">
+                <fenshi bind:__l="__l" class="data-v-4f94d86c" fenshi="{{fenshiData}}" stockInfo="{{stockInfo}}" vueId="4" wx:if="{{cavasType==='fenshi'&&fenshiData}}"></fenshi>
+                <kline bind:__l="__l" bind:focusing="__e" class="data-v-4f94d86c" data-event-opts="{{[ [ '^focusing',[ ['focusingKline'] ] ] ]}}" kLineType="{{kLineType}}" kline="{{klineData}}" stockInfo="{{stockInfo}}" vueId="5" wx:if="{{cavasType==='kline'}}"></kline>
+            </view>
+        </view>
+        <view class="stock-labels _ul data-v-4f94d86c" wx:if="{{otherStockInfo&&otherStockInfo.labels}}">
+            <view class="{{['_li data-v-4f94d86c',label.effect>0?'color-red':'',label.effect<0?'color-green':'']}}" wx:for="{{otherStockInfo.labels}}" wx:for-index="idx" wx:for-item="label" wx:key="idx">
+                <view class="iconfont iconjuxingcopyx3 _i data-v-4f94d86c"></view>
+                <label class="_span data-v-4f94d86c">{{label.labelName}}</label>
+            </view>
+        </view>
+        <view class="realted-plates _div data-v-4f94d86c" wx:if="{{sortRelatedPlates&&sortRelatedPlates.length}}">
+            <view class="title _p data-v-4f94d86c">{{'相关板块 '+sortRelatedPlates.length}}</view>
+            <view class="plates-list _ul data-v-4f94d86c">
+                <view bindtap="__e" class="_li data-v-4f94d86c" data-event-opts="{{[ [ 'tap',[ [ 'goToBkj',['$0'],[ [ ['sortRelatedPlates','',idx,'plateId'] ] ] ] ] ] ]}}" wx:for="{{sortRelatedPlates}}" wx:for-index="idx" wx:for-item="plate" wx:key="idx">
+                    <label class="name _span data-v-4f94d86c">{{plate.plateName}}</label>
+                    <percent-number bind:__l="__l" class="change data-v-4f94d86c" num="{{relatedPlatesData[plate.plateId].coreAvgPcp*100}}" vueId="{{'6-'+idx}}" wx:if="{{relatedPlatesData[plate.plateId]}}"></percent-number>
+                </view>
+            </view>
+        </view>
+        <view class="footer _div data-v-4f94d86c">
+            <bottom-tip bind:__l="__l" class="data-v-4f94d86c" vueId="7"></bottom-tip>
+        </view>
+    </view>
+</view>

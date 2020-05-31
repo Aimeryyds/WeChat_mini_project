@@ -1,0 +1,25 @@
+<import src="../../template/loadingmore.wxml"></import>
+<import src="../../template/footer1.wxml"></import>
+<view>
+    <view class="announcement-title-view flex">
+      {{aaa}}
+        <view bindtap="switchAnnouncementType" class="{{announcementindex==0?'active':''}}" data-index="0">全部</view>
+        <view bindtap="switchAnnouncementType" class="{{announcementindex==1?'active':''}}" data-index="1">发行公告</view>
+        <view bindtap="switchAnnouncementType" class="{{announcementindex==2?'active':''}}" data-index="2">定期报告</view>
+        <view bindtap="switchAnnouncementType" class="{{announcementindex==3?'active':''}}" data-index="3">其他</view>
+    </view>
+    <view class="announcement-list-view">
+        <view wx:for="{{annolist}}" wx:for-item="group" wx:key="{{index0}}">
+            <view class="year-view">{{group.year}}</view>
+            <view bindtap="announcementTap" class="announcement-item flex" data-index="{{index}}" wx:for="{{group.list}}" wx:key="{{index}}">
+                <view class="left flex-column-center">
+                    <view>{{item.publistdate}}</view>
+                </view>
+                <view class="right flex-directioncolumn-center">
+              {{item.title}}
+            </view>
+            </view>
+        </view>
+    </view>
+    <template is="loadingmore" data="{{...loadingmore}}"></template>
+</view>

@@ -1,0 +1,17 @@
+<view>
+    <ImagePreview id="ImagePreview">
+        <view class="translucent-detail" wx:if="{{preview==='share'}}">
+            <button bindtap="downLoad" class="button downLoad" hoverClass="downLoad-hover">下载</button>
+            <button bindtap="saveFile" class="button saveFile" hoverClass="saveFile-hover" wx:if="{{!owner}}">全部转存</button>
+            <button bindtap="showModalDialog" class="button share" hoverClass="share-hover">全部分享</button>
+        </view>
+        <view class="translucent-detail" wx:else>
+            <button bindtap="shareToOther" class="button share" hoverClass="share-hover" wx:if="{{!isHideShare}}">分享</button>
+            <button bindtap="downLoad" class="button downLoad" hoverClass="downLoad-hover" wx:if="{{showDownload}}">下载</button>
+        </view>
+    </ImagePreview>
+</view>
+<Toast id="toast"></Toast>
+<ShowDialog id="showDialog"></ShowDialog>
+<SharePoster id="SharePoster"></SharePoster>
+<ShareDialog from="imagePreview" id="ShareDialog"></ShareDialog>

@@ -1,0 +1,9 @@
+<view class="u-class u-noticebar" style="color: {{color}}; background-color: {{backgroundcolor}}" wx:if="{{show}}">
+    <u-icon class="u-noticebar-icon" color="{{color}}" size="24" type="{{icon}}" wx:if="{{icon}}"></u-icon>
+    <view class="u-noticebar-content-wrap">
+        <view animation="{{animationData}}" class="u-noticebar-content {{loop?'u-noticebar-content-loop':''}}">
+            <slot></slot>
+        </view>
+    </view>
+    <u-icon bindtap="handleClose" class="u-noticebar-operation" color="{{color}}" size="28" type="close" wx:if="{{closable}}"></u-icon>
+</view>

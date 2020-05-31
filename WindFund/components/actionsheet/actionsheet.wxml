@@ -1,0 +1,22 @@
+<template name="actionsheet">
+    <view catchtap="{{cancel}}" class="wux-actionsheet {{theme==='wx'?'wux-actionsheet--theme-wx':''}} {{className}} {{animateCss[1]}}" style="background-color:rgba(0, 0, 0, {{nobg?'0':'0.4'}});" wx:if="{{visible}}">
+        <view class="wux-actionsheet__backdrop {{animateCss[0]}}">
+            <view class="wux-actionsheet__content">
+                <view class="wux-actionsheet__group wux-actionsheet__group--options">
+                    <view class="wux-actionsheet__title" wx:if="{{titleText}}">{{titleText}}</view>
+                    <button catchtap="{{buttonClicked}}" class="wux-actionsheet__button wux-actionsheet__button--option {{item.classNmae}}" data-index="{{index}}" hoverClass="wux-actionsheet__button--hover" openType="{{item.isshare?'share':item.isconnect?'':''}}" wx:for="{{buttons}}">
+							{{item.text}}
+						</button>
+                    <view class="wux-actionsheet__title actionsheet-input-view" wx:if="{{showinput}}">
+                        <input bindinput="{{inputTyping}}" catchtap="{{inputClicked}}" class="wux-actionsheet__button wux-actionsheet__button--option" maxlength="{{maxlength}}" placeholder="{{placeholder}}"></input>
+                        <text catchtap="{{inputDone}}" class="input-confirm">确认</text>
+                    </view>
+                    <button catchtap="{{destructiveButtonClicked}}" class="wux-actionsheet__button wux-actionsheet__button--destructive" wx:if="{{destructiveText}}">{{destructiveText}}</button>
+                </view>
+                <view class="wux-actionsheet__group wux-actionsheet__group--cancel" wx:if="{{cancelText}}">
+                    <button catchtap="{{cancel}}" class="wux-actionsheet__button wux-actionsheet__button--cancel" hoverClass="wux-actionsheet__button--hover">{{cancelText}}</button>
+                </view>
+            </view>
+        </view>
+    </view>
+</template>

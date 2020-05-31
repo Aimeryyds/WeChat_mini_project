@@ -1,0 +1,17 @@
+<view class="buy-subject-footer _footer data-v-9852e0a2">
+    <view class="buy-subject-footer_placeholder _div data-v-9852e0a2"></view>
+    <view class="buy-subject-footer_inner flex-center-all _div data-v-9852e0a2">
+        <view class="layout-left _div data-v-9852e0a2">
+            <view class="_p data-v-9852e0a2">
+                <price-text bind:__l="__l" class="data-v-9852e0a2" price="{{preferentialPrice>=0?preferentialPrice:activeSubjectSubItem.discountPrice}}" size1="{{22}}" size2="{{12}}" vueId="1"></price-text>
+                <label class="_span data-v-9852e0a2">| 已省</label>
+                <price-text bind:__l="__l" class="data-v-9852e0a2" customstyle="color: rgb(163, 163, 163);font-weight:normal;" price="{{activeSubjectSubItem.originPrice-(preferentialPrice>=0?preferentialPrice:activeSubjectSubItem.discountPrice)}}" size1="{{12}}" size2="{{12}}" vueId="2"></price-text>
+            </view>
+            <view class="_p data-v-9852e0a2">付款即表示同意<label bindtap="__e" class="_span data-v-9852e0a2" data-event-opts="{{[ [ 'tap',[ [ 'goToWebview',['$event'] ] ] ] ]}}">《选股宝订阅协议》</label>
+            </view>
+        </view>
+        <view class="layout-right _div data-v-9852e0a2">
+            <view bindtap="__e" class="_div data-v-9852e0a2" data-event-opts="{{[ [ 'tap',[ [ '$emit',['choose'] ] ] ] ]}}">选好了</view>
+        </view>
+    </view>
+</view>

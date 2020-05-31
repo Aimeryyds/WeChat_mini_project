@@ -1,0 +1,120 @@
+@import "../../../__wuBaseWxss__/2.wxss";
+
+@import "../../../netdisk_templates/loading_list/loading_list.wxss";
+
+@import "../../../netdisk_templates/empty_list/emptyList.wxss";
+
+.wrap {
+    position: relative;
+    width: 100%;
+    height: 100%;
+}
+
+.wrap-content {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+}
+
+.wrap-content.selected {
+    top: 112rpx;
+    bottom: 112rpx;
+}
+
+.wrap-content.selected-hide-bottombtn {
+    top: 112rpx;
+}
+
+.file-list-wrap {
+    width: 100%;
+    height: 100%;
+    box-sizing: border-box;
+}
+
+.scroll-view-list {
+    overflow-y: auto;
+    overflow-x: hidden;
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    margin: auto;
+}
+
+.grid-box {
+    display: flex;
+    margin-bottom: 52rpx;
+    padding: 0 16rpx 16rpx;
+    flex-wrap: wrap;
+}
+
+.order-tip-flex {
+    height: 98rpx;
+    font-weight: bold;
+}
+
+.order {
+    flex: 1;
+    height: 98rpx;
+    font-size: 24rpx;
+    font-weight: bold;
+}
+
+.order-active {
+    font-size: 28rpx;
+    color: #212121;
+}
+
+.load-tips {
+    display: none;
+    height: 92rpx;
+    font-size: 24rpx;
+    line-height: 92rpx;
+    color: #9E9E9E;
+    text-align: center;
+}
+
+.order-title {
+    display: flex;
+    height: 98rpx;
+    padding-left: 32rpx;
+    line-height: 98rpx;
+    font-size: 28rpx;
+    color: #9E9E9E;
+}
+
+.batch-edit-holder {
+    display: flex;
+    justify-content: start;
+    flex-direction: column;
+    background-color: #000;
+}
+
+.batch-edit-holder .bacth-bound {
+    height: 112rpx;
+    line-height: 112rpx;
+    display: flex;
+    padding: 0 32rpx;
+    color: #212121;
+    font-weight: bold;
+    align-items: center;
+    justify-content: space-between;
+    background-color: #fff;
+}
+
+.batch-edit-holder .bacth-bound .info-tab {
+    font-size: 34rpx;
+}
+
+.batch-edit-holder .bacth-bound .info-tab.blue {
+    width: 120rpx;
+    font-size: 28rpx;
+    color: #06A7FF;
+}
+
+.batch-edit-holder .bacth-bound .info-tab.right {
+    text-align: right;
+}

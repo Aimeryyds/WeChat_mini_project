@@ -1,0 +1,7 @@
+<view class="reply _div data-v-08f5e2f4">
+    <view class="_ul data-v-08f5e2f4">
+        <reply-comment bind:__l="__l" bind:click="__e" class="data-v-08f5e2f4" content="{{comment.content}}" data-event-opts="{{[ [ '^click',[ [ '$emit',['clickReply','$0'],[ [ ['visibleComments','id',comment.id] ] ] ] ] ] ]}}" name="{{comment.userInfo.nickName}}" vueId="{{'1-'+__i0__}}" wx:for="{{visibleComments}}" wx:for-index="__i0__" wx:for-item="comment" wx:key="id"></reply-comment>
+    </view>
+    <view class="total _div data-v-08f5e2f4" wx:if="{{comments.length>2}}">{{'共'+comments.length+'条回复'}}<view class="iconfont icon-xiangyou _i data-v-08f5e2f4"></view>
+    </view>
+</view>

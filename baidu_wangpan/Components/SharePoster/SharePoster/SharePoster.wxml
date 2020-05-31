@@ -1,0 +1,6 @@
+<view bindtap="cancel" class="preview" wx:if="{{isShow}}">
+    <view style="margin-top:{{statusHeight+100}}rpx">
+        <MakePoster bind:getImage="eventGetImage" bind:hide="hide" canvasInfo="{{canvasData}}" class="poster" id="makePoster"></MakePoster>
+    </view>
+    <view class="saveBtn" wx:if="{{showBtn}}">二维码已保存到手机，赶快分享到朋友圈吧！</view>
+</view>

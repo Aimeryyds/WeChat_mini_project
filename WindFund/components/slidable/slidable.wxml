@@ -1,0 +1,8 @@
+<view class="slidable">
+    <movable-area style="width:100%;height:100%">
+        <movable-view bindtouchend="onSlideEnd" bindtouchmove="onSlide" bindtouchstart="onSlideStart" class="slidable-area" direction="horizontal" inertia="true" style="{{contentStyle}}">
+            <slot name="content"></slot>
+        </movable-view>
+    </movable-area>
+    <slot name="menus"></slot>
+</view>

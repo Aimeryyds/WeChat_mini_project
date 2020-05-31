@@ -1,0 +1,7 @@
+<view class="_div" wx:if="{{!devicePlatformIOS}}">
+    <buy-message bind:__l="__l" bind:close="__e" data-event-opts="{{[ [ '^close',[ ['closeBuyMessage'] ] ] ]}}" vueId="1" wx:if="{{!isChoosingSubscription&&(isPayingMessage||isChooseCoupon)}}"></buy-message>
+    <choose-subscription bind:__l="__l" bind:close="__e" data-event-opts="{{[ [ '^close',[ ['closeChooseSubscription'] ] ] ]}}" vueId="2" wx:if="{{isChoosingSubscription}}"></choose-subscription>
+    <choose-coupon bind:__l="__l" vueId="3" wx:if="{{isChooseCoupon}}"></choose-coupon>
+    <buy-subject bind:__l="__l" bind:close="__e" data-event-opts="{{[ [ '^close',[ ['closeBuySubject'] ] ] ]}}" vueId="4" wx:if="{{isPayingSubject}}"></buy-subject>
+    <buy-subject-success bind:__l="__l" bind:close="__e" data-event-opts="{{[ [ '^close',[ ['closeBuySubject'] ] ] ]}}" vueId="5" wx:if="{{isSucceededInBuyingSubject}}"></buy-subject-success>
+</view>

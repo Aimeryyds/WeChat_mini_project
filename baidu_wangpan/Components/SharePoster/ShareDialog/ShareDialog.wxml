@@ -1,0 +1,14 @@
+<view bindtap="hide" catchtouchmove="move" class="bottom-modal-container {{isShow?'':'hidden-modal'}}">
+    <view class="modal-background"></view>
+    <view class="modal-content {{mode}}-col">
+        <view class="modal-op-box">
+            <button catchtap="_handleTapBottomModalItem" class="formButtonNone modal-item" data-tapfunc="{{item.tapFunc}}" hoverClass="press-down" openType="{{item.openType?item.openType:''}}" wx:for="{{buttons}}" wx:key="text">
+                <view class="op-icon {{item.icon}} {{iconSize}} {{item.isNew?'ic_new':''}}"></view>
+                {{item.text}}
+            </button>
+        </view>
+        <view catchtap="hide" class="modal-cancel" wx:if="{{isShowCancle}}">
+            <text>取消</text>
+        </view>
+    </view>
+</view>

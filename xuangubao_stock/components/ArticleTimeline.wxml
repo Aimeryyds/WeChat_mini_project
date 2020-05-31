@@ -1,0 +1,20 @@
+<view class="article-timeline _ul data-v-44c42ef2" wx:if="{{articles&&articles.length}}">
+    <view class="article-timeline-item _li data-v-44c42ef2" wx:for="{{articles}}" wx:for-item="article" wx:key="index">
+        <article-timeline-item-subject-info bind:__l="__l" bind:clickSubjectImage="__e" bind:clickTitle="__e" bind:follow="__e" class="data-v-44c42ef2" data-event-opts="{{[ [ '^follow',[ [ 'toggleFollowsubject',['$0'],[ [ ['articles','',index,'fromSubject'] ] ] ] ] ],[ '^clickTitle',[ [ 'goToSubject',['$0'],[ [ ['articles','',index,'fromSubject'] ] ] ] ] ],[ '^clickSubjectImage',[ [ 'goToSubject',['$0'],[ [ ['articles','',index,'fromSubject'] ] ] ] ] ] ]}}" following="{{article.fromSubject.following}}" image="{{article.fromSubject.image}}" isTopic="{{article.fromSubject.type===1}}" title="{{article.fromSubject.title}}" vueId="{{'1-'+index}}"></article-timeline-item-subject-info>
+        <view class="article-title _div data-v-44c42ef2">
+            <view bindtap="__e" class="_h4 data-v-44c42ef2" data-event-opts="{{[ [ 'tap',[ [ 'goToArticle',['$0'],[ [ ['articles','',index] ] ] ] ] ] ]}}">{{article.title}}</view>
+        </view>
+        <view bindtap="__e" class="article-summary _div data-v-44c42ef2" data-event-opts="{{[ [ 'tap',[ [ 'goToArticle',['$0'],[ [ ['articles','',index] ] ] ] ] ] ]}}" wx:if="{{article.summary}}">{{article.summary}}</view>
+        <view bindtap="__e" class="article-image _div data-v-44c42ef2" data-event-opts="{{[ [ 'tap',[ [ 'previewImg',['$0'],[ [ ['articles','',index] ] ] ] ] ] ]}}" wx:if="{{article.image}}">
+            <image class="_img data-v-44c42ef2" mode="aspectFill" src="{{cropedImageList[index]}}"></image>
+            <view class="play-icon _div data-v-44c42ef2" wx:if="{{article.mediaType===2&&article.mediaUrl}}">
+                <view class="triangle _div data-v-44c42ef2"></view>
+            </view>
+        </view>
+        <stock-group-container bind:__l="__l" class="data-v-44c42ef2" stocks="{{article.stocks}}" vueId="{{'2-'+index}}" wx:if="{{!article.contentRefused&&article.stocks&&article.stocks.length}}"></stock-group-container>
+        <article-list-item-purchase bind:__l="__l" bind:click="__e" class="data-v-44c42ef2" data-event-opts="{{[ [ '^click',[ [ 'purchase',['$0'],[ [ ['articles','',index] ] ] ] ] ] ]}}" paidCount="{{article.paidCount}}" vueId="{{'3-'+index}}" wx:if="{{article.contentRefused}}"></article-list-item-purchase>
+        <article-timeline-item-comments bind:__l="__l" class="data-v-44c42ef2" comments="{{article.comments}}" vueId="{{'4-'+index}}" wx:if="{{article.comments&&article.comments.length}}"></article-timeline-item-comments>
+        <article-list-item-footer author="{{article.displayAuthor}}" bind:__l="__l" bind:toggleLikeMessage="__e" class="data-v-44c42ef2" data-event-opts="{{[ [ '^toggleLikeMessage',[ [ 'toggleLikeMessage',['$0'],[ [ ['articles','',index] ] ] ] ] ] ]}}" likeCount="{{article.likeCount}}" liked="{{article.liked}}" time="{{article.createdAt*1000}}" vueId="{{'5-'+index}}"></article-list-item-footer>
+    </view>
+    <full-screen-video bind:__l="__l" bind:close="__e" class="data-v-44c42ef2" data-event-opts="{{[ [ '^close',[ ['e0'] ] ] ]}}" videoSrc="{{videoSrc}}" vueId="6" wx:if="{{showFullVideo&&videoSrc}}"></full-screen-video>
+</view>

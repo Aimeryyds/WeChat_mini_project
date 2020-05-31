@@ -1,0 +1,6 @@
+<view class="u-class u-tab-bar {{fixed?'u-tab-bar-fixed':''}}" style="{{paddingBottom?'padding-bottom:'+paddingBottom+'rpx':''}}">
+    <slot></slot>
+    <view class="u-tab-bar-list">
+        <view bindtap="hancleItemClick" class="u-tab-bar-item" data-key="{{item}}" style="width: {{100/list.length}}%" wx:for="{{list}}" wx:key="{{item}}"></view>
+    </view>
+</view>

@@ -1,0 +1,15 @@
+<view class="search-history _div data-v-3e450b11" wx:if="{{plates.length||stocks.length}}">
+    <view class="title _p data-v-3e450b11">浏览历史</view>
+    <view class="block _div data-v-3e450b11" wx:if="{{plates.length}}">
+        <view class="_p data-v-3e450b11">板块</view>
+        <view class="card-list _ul data-v-3e450b11">
+            <history-card bind:__l="__l" bind:clickCard="__e" class="data-v-3e450b11" data-event-opts="{{[ [ '^clickCard',[ [ '$emit',['clickPlate','$0'],[ [ ['plates','key',item.key] ] ] ] ] ] ]}}" name="{{item.name}}" value="{{platesData[item.key]&&platesData[item.key].coreAvgPcp*100}}" vueId="{{'1-'+__i0__}}" wx:for="{{plates}}" wx:for-index="__i0__" wx:key="key"></history-card>
+        </view>
+    </view>
+    <view class="block _div data-v-3e450b11" wx:if="{{stocks.length}}">
+        <view class="_p data-v-3e450b11">股票</view>
+        <view class="card-list _ul data-v-3e450b11">
+            <history-card bind:__l="__l" bind:clickCard="__e" class="data-v-3e450b11" data-event-opts="{{[ [ '^clickCard',[ [ '$emit',['clickStock','$0'],[ [ ['stocks','key',item.key] ] ] ] ] ] ]}}" name="{{item.name}}" type="stock" value="{{item.key}}" vueId="{{'2-'+__i1__}}" wx:for="{{stocks}}" wx:for-index="__i1__" wx:key="key"></history-card>
+        </view>
+    </view>
+</view>

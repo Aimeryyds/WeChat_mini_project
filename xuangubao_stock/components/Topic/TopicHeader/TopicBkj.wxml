@@ -1,0 +1,8 @@
+<view bindtap="__e" class="subject-bkj-wrapper _div data-v-68ecd2aa" data-event-opts="{{[ [ 'tap',[ [ '$emit',['clickPlate'] ] ] ] ]}}">
+    <view class="subject-bkj _div data-v-68ecd2aa">
+        <topic-bkj-header bind:__l="__l" class="data-v-68ecd2aa" corePcp="{{bkjInfo&&bkjInfo.corePcp}}" id="{{subject.subjBkjInfo.bkjId}}" subjBkjInfo="{{subject.subjBkjInfo}}" vueId="1" wx:if="{{subject.subjBkjInfo&&subject.subjBkjInfo.bkjId}}"></topic-bkj-header>
+        <view class="subject-bkj-stocks _div data-v-68ecd2aa">
+            <stock-cards bind:__l="__l" bind:clickStock="__e" class="data-v-68ecd2aa" data-event-opts="{{[ [ '^clickStock',[ ['e0'] ] ] ]}}" stocks="{{longtou}}" vueId="2" wx:if="{{longtou}}"></stock-cards>
+        </view>
+    </view>
+</view>

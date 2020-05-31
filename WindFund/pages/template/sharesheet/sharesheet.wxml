@@ -1,0 +1,27 @@
+<view>
+    <view catchtap="_cancelShareSheet" class="commodity_screen" wx:if="{{showModalStatus}}"></view>
+    <view animation="{{animationData}}" class="commodity_attr_box" wx:if="{{showModalStatus}}">
+        <view class="section">
+            <view class="section__title">分享</view>
+            <view class="share-content flex-wrp" style="flex-direction:row;">
+                <view class="flex-item">
+                    <button class="share-btn" openType="share">
+                        <view class="share-img">
+                            <image mode="scaleToFill" src="../../../img/wx.png" style="width: 80rpx; height: 80rpx;"></image>
+                        </view>
+                        <view class="share-txt">好友和微信群</view>
+                    </button>
+                </view>
+                <view class="flex-item">
+                    <button catchtap="_confirmCreatePic" class="share-btn">
+                        <view class="share-img">
+                            <image mode="scaleToFill" src="../../../img/pyq.png" style="width: 80rpx; height: 80rpx;"></image>
+                        </view>
+                        <view class="share-txt">生成专属图片</view>
+                    </button>
+                </view>
+            </view>
+            <view catchtap="_cancelShareSheet" class="section__bottom">取消</view>
+        </view>
+    </view>
+</view>

@@ -1,0 +1,7 @@
+<view class="comments _div">
+    <view class="comments-body _div">
+        <view class="_h3">评论</view>
+        <comments bind:__l="__l" bind:click="__e" comments="{{comments}}" data-event-opts="{{[ [ '^click',[ [ '$emit',['go-to-comment'] ] ] ] ]}}" vueId="1" wx:if="{{comments&&comments.length}}"></comments>
+    </view>
+    <view bindtap="__e" class="_footer" data-event-opts="{{[ [ 'tap',[ [ '$emit',['go-to-comment'] ] ] ] ]}}">{{'全部评论('+total+')'}}</view>
+</view>

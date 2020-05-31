@@ -1,0 +1,23 @@
+<Popup bind:close="close" id="popup" isShowCloseBtn="{{isShowCloseBtn}}" position="{{position}}" textAlignClassName="{{textAlignClassName}}">
+    <view slot="title">
+        <view>
+            <text>{{title}}</text>
+        </view>
+    </view>
+    <view slot="content">
+        <view wx:if="{{content}}">
+            <text>{{content}}</text>
+        </view>
+        <slot wx:else></slot>
+    </view>
+    <view slot="buttons">
+        <view class="btn-con {{isHideCancel||isHideConfirm?'one-btn':''}}">
+            <view catchtap="cancel" class="popup-btn popup-cancel {{btnCancelColor}}" wx:if="{{isHideCancel===false}}">
+                <text>{{cancelValue}}</text>
+            </view>
+            <view catchtap="ok" class="popup-btn popup-confirm {{btnConfirmColor}}" wx:if="{{isHideConfirm===false}}">
+                <text>{{confirmValue}}</text>
+            </view>
+        </view>
+    </view>
+</Popup>

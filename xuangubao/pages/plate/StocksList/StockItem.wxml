@@ -1,0 +1,115 @@
+<view class="stock-item _li data-v-4cd1c0d7">
+    <view class="_div data-v-4cd1c0d7" wx:if="{{stock&&!stock.extraInfo.needPay}}">
+        <view bindtap="__e" class="common-info _div data-v-4cd1c0d7" data-event-opts="{{[ [ 'tap',[ [ '$emit',['goToStock'] ] ] ] ]}}">
+            <view class="name _p data-v-4cd1c0d7">
+                <label class="_span data-v-4cd1c0d7">{{stock.stockChiName}}</label>
+                <label class="_span data-v-4cd1c0d7">
+                    <view class="new-tag _i data-v-4cd1c0d7" wx:if="{{stock.extraInfo&&stock.extraInfo.isNew}}">新增</view>{{''+stock.symbol+''}}</label>
+            </view>
+            <view class="price _p data-v-4cd1c0d7">
+                <percent-number bind:__l="__l" class="data-v-4cd1c0d7" compareNum="{{stock.changePercent}}" num="{{stock.price||'--'}}" vueId="1" wx:if="{{stock.price}}"></percent-number>
+                <label class="_span data-v-4cd1c0d7" wx:else>--</label>
+            </view>
+            <view class="change-percent _p data-v-4cd1c0d7">
+                <label class="last-limit-up _span data-v-4cd1c0d7" wx:if="{{stock.limitStatus===1&&lastLimitUp}}">{{lastLimitUp}}</label>
+                <percent-number bind:__l="__l" class="{{['data-v-4cd1c0d7',stock.limitStatus===1?'small':'']}}" num="{{stock.changePercent!=undefined?stock.changePercent*100:'--'}}" vueId="2" wx:if="{{stock.price}}"></percent-number>
+                <label class="_span data-v-4cd1c0d7" wx:else>--</label>
+            </view>
+            <block wx:if="{{specialPlate==='fpg'}}">
+                <view class="third _p data-v-4cd1c0d7">
+                    <label class="_span data-v-4cd1c0d7">{{resumptionDate}}</label>
+                </view>
+                <view class="forth _p data-v-4cd1c0d7">
+                    <percent-number bind:__l="__l" class="data-v-4cd1c0d7" num="{{stock.pcpSinceResume!=undefined?stock.pcpSinceResume*100:'--'}}" vueId="3"></percent-number>
+                </view>
+            </block>
+            <block wx:else>
+                <block wx:if="{{specialPlate==='stg'}}">
+                    <view class="third _p data-v-4cd1c0d7">
+                        <label class="_span data-v-4cd1c0d7">{{specialTreatedDate}}</label>
+                    </view>
+                    <view class="forth _p data-v-4cd1c0d7">
+                        <label class="_span data-v-4cd1c0d7">{{latestNetProfit}}</label>
+                    </view>
+                </block>
+                <block wx:else>
+                    <block wx:if="{{specialPlate==='stzm'}}">
+                        <view class="third _p data-v-4cd1c0d7">
+                            <label class="_span data-v-4cd1c0d7">{{revokedDate}}</label>
+                        </view>
+                        <view class="forth _p data-v-4cd1c0d7">
+                            <percent-number bind:__l="__l" class="data-v-4cd1c0d7" num="{{stock.pcpSinceRevoked!=undefined?stock.pcpSinceRevoked*100:'--'}}" vueId="4"></percent-number>
+                        </view>
+                    </block>
+                    <block wx:else>
+                        <block wx:if="{{specialPlate==='cxg'}}">
+                            <view class="third _p data-v-4cd1c0d7">
+                                <label class="_span data-v-4cd1c0d7">{{stock.openBoardDay}}</label>
+                            </view>
+                            <view class="forth _p data-v-4cd1c0d7">
+                                <percent-number bind:__l="__l" class="data-v-4cd1c0d7" num="{{stock.accumulatedPcp!=undefined?stock.accumulatedPcp*100:'--'}}" vueId="5"></percent-number>
+                            </view>
+                        </block>
+                        <block wx:else>
+                            <block wx:if="{{specialPlate==='gsz'}}">
+                                <view class="third bonusShareRatio _p data-v-4cd1c0d7">
+                                    <label class="_span data-v-4cd1c0d7" wx:if="{{stock.bonusShareRatio!=undefined}}">
+                                        <view class="_i data-v-4cd1c0d7" wx:if="{{stock.bonusShareRatio||stock.tranAddShareRatio}}">10</view>
+                                        <view class="_i data-v-4cd1c0d7" wx:else>--</view>
+                                        <view class="_i data-v-4cd1c0d7" wx:if="{{stock.bonusShareRatio}}">{{'送'+stock.bonusShareRatio}}</view>
+                                        <view class="_i data-v-4cd1c0d7" wx:if="{{stock.tranAddShareRatio}}">{{'转'+stock.tranAddShareRatio}}</view>
+                                    </label>
+                                    <label class="_span data-v-4cd1c0d7" wx:else>--</label>
+                                </view>
+                                <view class="forth _p data-v-4cd1c0d7">
+                                    <percent-number bind:__l="__l" class="data-v-4cd1c0d7" num="{{stock.pcpAfterAdvance!=undefined?stock.pcpAfterAdvance*100:'--'}}" vueId="6"></percent-number>
+                                </view>
+                            </block>
+                            <block wx:else>
+                                <block wx:if="{{specialPlate==='gsztq'}}">
+                                    <view class="third _p data-v-4cd1c0d7">
+                                        <label class="_span data-v-4cd1c0d7">{{exDiviDate}}</label>
+                                    </view>
+                                    <view class="forth _p data-v-4cd1c0d7">
+                                        <percent-number bind:__l="__l" class="data-v-4cd1c0d7" num="{{stock.pcpAfterDivi!=undefined?stock.pcpAfterDivi*100:'--'}}" vueId="7"></percent-number>
+                                    </view>
+                                </block>
+                                <block wx:else>
+                                    <view class="turnover-value _p data-v-4cd1c0d7">
+                                        <percent-number bind:__l="__l" class="data-v-4cd1c0d7" compareNum="{{stock.fundFlow}}" num="{{formatFundFlow}}" vueId="8" wx:if="{{stock.price}}"></percent-number>
+                                        <label class="_span data-v-4cd1c0d7" wx:else>--</label>
+                                    </view>
+                                    <view class="non-restricted-ccapital _p data-v-4cd1c0d7">
+                                        <label class="_span data-v-4cd1c0d7">{{formatNonRestrictedCapital}}</label>
+                                    </view>
+                                </block>
+                            </block>
+                        </block>
+                    </block>
+                </block>
+            </block>
+        </view>
+        <view bindtap="__e" class="desc-info _div data-v-4cd1c0d7" data-event-opts="{{[ [ 'tap',[ [ 'togglePackUp',['$event'] ] ] ] ]}}" style="{{packUp?'display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical;':''}}" wx:if="{{showDesc}}">
+            <label class="tags _span data-v-4cd1c0d7" wx:if="{{stock.limitUpDays}}">{{stock.limitUpDays>1?stock.limitUpDays+'连板':'首板'}}</label>
+            <label class="tags _span data-v-4cd1c0d7" wx:if="{{stock.nearlyNewBreakDays}}">次新</label>
+            <label class="longtou _span data-v-4cd1c0d7" wx:if="{{stock.renqilongtou}}">{{'人气龙头'+stock.renqilongtou}}</label>
+            <label class="longtou _span data-v-4cd1c0d7" wx:if="{{stock.jinrilongtou}}">{{'今日龙头'+stock.jinrilongtou}}</label>
+            <label class="longtou _span data-v-4cd1c0d7" wx:if="{{stock.hangyelongtou}}">{{'行业龙头'+stock.hangyelongtou}}</label>
+            <label class="desc _span data-v-4cd1c0d7" wx:if="{{stock.desc}}">{{stock.desc}}</label>
+        </view>
+        <view class="realted-plate _ul data-v-4cd1c0d7" wx:if="{{stock.realtedPlates&&stock.realtedPlates.length}}">
+            <view class="label _li data-v-4cd1c0d7">叠加风口</view>
+            <view bindtap="__e" class="plate _li data-v-4cd1c0d7" data-event-opts="{{[ [ 'tap',[ [ '$emit',['goToPlate','$0'],[ [ ['stock.realtedPlates','plateId',i.plateId,'plateId'] ] ] ] ] ] ]}}" wx:for="{{stock.realtedPlates}}" wx:for-index="__i0__" wx:for-item="i" wx:key="plateId">{{i.plateName}}</view>
+        </view>
+    </view>
+    <view class="need-pay _div data-v-4cd1c0d7" wx:if="{{stock&&stock.extraInfo.needPay}}">
+        <view class="_p data-v-4cd1c0d7">
+            <label class="_span data-v-4cd1c0d7">最先挖掘纯正标的，潜在板块小龙头</label>
+            <label class="_span data-v-4cd1c0d7" style="display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;">{{stock.extraInfo.premiumDesc}}</label>
+        </view>
+        <view bindtap="__e" class="_p data-v-4cd1c0d7" data-event-opts="{{[ [ 'tap',[ [ '$emit',['goToStock'] ] ] ] ]}}">
+            <image alt class="_img data-v-4cd1c0d7" src="https://image.xuangubao.cn/FgTrOpuwKTkiw9h15oLqbOXoirh3"></image>
+            <label class="_span data-v-4cd1c0d7">立即解锁</label>
+        </view>
+    </view>
+</view>

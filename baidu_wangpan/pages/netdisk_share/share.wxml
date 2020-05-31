@@ -1,0 +1,31 @@
+<view style="display: {{showAuth?'none':'block'}}">
+    <view wx:if="{{needExtractCode}}">
+        <Navbar id="Navbar" titleText="百度网盘分享"></Navbar>
+        <NavbarPlaceholder></NavbarPlaceholder>
+        <ExtractCode bind:getFileList="getFileListByPwd" id="ExtractCode" shareUrlInfo="{{shareUrlInfo}}" sharedUser="{{sharedUser}}"></ExtractCode>
+    </view>
+    <view wx:else>
+        <view wx:if="{{isImage===1}}">
+            <ImagePreview bind:authorize="handleChildAuth" hasLogin="{{hasLogin}}" id="ImagePreview">
+                <view class="translucent-detail">
+                    <button bindtap="downLoad" class="downLoad button" hoverClass="downLoad-hover">下载</button>
+                    <button bindtap="saveFile" class="saveFile button" hoverClass="saveFile-hover" wx:if="{{!owner}}">转存</button>
+                    <button bindtap="showModalDialog" class="share button" hoverClass="share-hover">分享</button>
+                </view>
+            </ImagePreview>
+        </view>
+        <view wx:elif="{{isImage===-1}}">
+            <Navbar id="Navbar" titleText="百度网盘分享"></Navbar>
+            <view style="height:{{height}}px"></view>
+            <ShareList bind:authorize="handleChildAuth" bind:remind="handleRemind" bind:share="showModalDialog" bind:transSuccess="transSuccess" hasLogin="{{hasLogin}}" id="ShareList" isStory="{{story}}" newErr="{{newErr}}" shareUrlInfo="{{shareUrlInfo}}" showLoading="{{true}}"></ShareList>
+        </view>
+    </view>
+</view>
+<Authorize id="Authorize" redirectQuery="{{redirectQuery}}" redirectUrl="{{redirectUrl}}"></Authorize>
+<UserPanel id="userPanel"></UserPanel>
+<ComfirmDialog bind:cancelEvent="_cancelEvent" bind:confirmEvent="_confirmEvent" id="comfirmDialog"></ComfirmDialog>
+<Toast id="toast"></Toast>
+<GuidButton guideText="添加我的小程序，访问更便捷" id="guidButton" top="{{height}}"></GuidButton>
+<ShowDialog id="showDialog"></ShowDialog>
+<ShareDialog from="imagePreview" id="ShareDialog"></ShareDialog>
+<SharePoster id="SharePoster"></SharePoster>

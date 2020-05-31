@@ -1,0 +1,13 @@
+<view class="input-picker">
+    <view class="form-label label-class" wx:if="{{label}}">{{label}}</view>
+    <view class="input-container">
+        <picker bindchange="pickerChange" range="{{range}}" value="{{index}}">
+            <view class="input-val">{{range[index]}}</view>
+            <view class="input-actions">
+                <image class="input-action up" src="{{arrowUpIcon}}"></image>
+                <image class="input-action down" src="{{arrowDownIcon}}"></image>
+            </view>
+        </picker>
+    </view>
+    <view class="form-unit" wx:if="{{unit}}">{{unit}}</view>
+</view>

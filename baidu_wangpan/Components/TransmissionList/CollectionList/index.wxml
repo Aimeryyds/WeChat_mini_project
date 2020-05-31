@@ -1,0 +1,22 @@
+<import src="/netdisk_templates/empty_list/emptyList.wxml"></import>
+<import src="/netdisk_templates/loading_list/loading_list.wxml"></import>
+<template is="loadingList" data wx:if="{{loading}}"></template>
+<template is="emptyList" data="{{emptymod:'collectionList',leftTime:leftTime}}" wx:elif="{{list.length===0&&loading===false}}"></template>
+<view class="wrap" wx:else>
+    <view class="batch-edit-holder" wx:if="{{canSelected}}">
+        <view class="bacth-bound bottom-shadow">
+            <view bindtap="selectedAll" class="info-tab blue">{{isSelectedAll?'取消全选':'全选'}}</view>
+            <view class="info-tab" style="font-weight: 900">已选中{{selectedCount}}个文件</view>
+            <view bindtap="goback" class="info-tab blue right">取消</view>
+        </view>
+    </view>
+    <view class="wrap-content {{canSelected?isShowBottomBtn?'selected':'selected-hide-bottombtn':'normal'}}">
+        <TransListTip bindclose="hideTransListTip" btn="知道啦" tip="发送者删除文件后文件将消失，请及时保存" wx:if="{{showTransListTip&&!canSelected}}"></TransListTip>
+        <scroll-view scrollY bindscrolltolower="loadMore" class="file-list-wrap {{showTransListTip&&!canSelected?'has-tip':''}}" lowerThreshold="230">
+            <ListItem bind:longPress="handleLongPress" bind:select="moreSelectItem" bindclick="handleClick" canSelected="{{canSelected}}" fileMeta="{{item}}" index="{{index}}" isCollectionList="{{true}}" isLongPressEntrySelection="{{!canSelected}}" isSelect="{{item.isSelect}}" shareDirPage="{{shareDirPage}}" sharePage="{{sharePage}}" wx:for="{{list}}" wx:key="tid"></ListItem>
+        </scroll-view>
+    </view>
+</view>
+<view class="footer" wx:if="{{canSelected}}">
+    <BottomBtnBar barType="{{barType}}" bgColor="#06A7FF" bindbuttonFn="bottomBtnFn" count="{{selectedCount}}" id="bottomBtnBar" isAllDir="{{isAllDir}}" isBatch="{{true}}"></BottomBtnBar>
+</view>

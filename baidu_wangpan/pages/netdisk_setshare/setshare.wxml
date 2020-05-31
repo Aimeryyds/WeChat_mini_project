@@ -1,0 +1,50 @@
+<Navbar id="Navbar"></Navbar>
+<view style="height:{{height}}px"></view>
+<scroll-view scrollY="{{true}}" style="height:{{systemInfo.visualHeightRpx+'rpx'}}">
+    <view class="setshare-wrap">
+        <view class="setshare-top">
+            <view class="avator bottom-shadow">
+                <view class="avator-row {{rowIndex===divideRow.length-1?'last-row':''}}" wx:for="{{divideRow}}" wx:for-index="rowIndex" wx:for-item="rowItem" wx:key="rowIndex">
+                    <view class="avator-item {{avatorItem.itemClass}}" wx:for="{{rowItem}}" wx:for-index="avatorIndex" wx:for-item="avatorItem" wx:key="avatorIndex">
+                        <view class="avator-item-img" style="background-image: url({{avatorItem.avator}})" wx:if="{{avatorItem.avator}}"></view>
+                        <button bindtap="{{avatorItem.handle}}" class="avator-item-img" wx:else></button>
+                        <view class="avator-item-name" wx:if="{{avatorItem.uname}}">
+                            <text>{{avatorItem.uname}}</text>
+                        </view>
+                    </view>
+                </view>
+                <view bindtap="handleShowAllAvator" class="avator-more" wx:if="{{!showAllAvator}}">
+                    <text>查看更多群成员</text>
+                    <view class="more-icon"></view>
+                </view>
+            </view>
+            <view class="group-name">
+                <view class="group-name-title">
+                    <text>文件夹名称</text>
+                </view>
+                <view bindtap="renameShareDir" class="group-name-text">
+                    <text class="file-name">{{sharedirData.fileName}}</text>
+                    <view class="icon-sharedir-rename" wx:if="{{isOwner===1}}"></view>
+                </view>
+            </view>
+            <view class="oper-button-gap"></view>
+        </view>
+    </view>
+    <view class="setshare-bottom bg-gray-white {{bottomFixed?'fixed':''}}">
+        <view bindtap="dismissShareDir" class="bottom-button" wx:if="{{gpIsOwner===1}}">解散该共享</view>
+        <view bindtap="signOutShareDir" class="bottom-button" wx:else>退出该共享</view>
+    </view>
+</scroll-view>
+<FileNameDialog id="dialog"></FileNameDialog>
+<Dialog bind:cancel="" bind:confirm="dismissSuccess" confirmValue="继续" id="popup-dismiss" title="解散共享">
+    解散共享后，他人将无法查看文件，是否继续？
+</Dialog>
+<Dialog bind:cancel="" bind:confirm="signOutSuccess" confirmValue="退出" id="popup-signout" textAlignClassName="left" title="退出共享">
+    <view class="fc-black">确认退出共享吗？退出后将无法查看和管理文件。</view>
+    <view class="op-select-wrap">
+        <view bindtap="select" class="op-select {{isSelect?'active':''}}"></view>
+        <text>同时删除我共享的文件</text>
+    </view>
+</Dialog>
+<Toast id="toast"></Toast>
+<ShowDialog id="showDialog"></ShowDialog>

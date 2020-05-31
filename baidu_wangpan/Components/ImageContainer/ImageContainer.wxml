@@ -1,0 +1,17 @@
+<view class="image-box">
+    <image binderror="imageError" bindload="imageLoad" bindlongpress="showActionsheet" bindtap="previewImage" class=" image-preview" id="showImg" mode="{{mode}}" src="{{showSrc}}" style="width:{{width}}rpx;"></image>
+    <view class="translucent-dialog">
+        <view wx:if="{{!isOrigin&&originImage}}">
+            <view bindtap="changeToOrigin" class="viewOriginImg">
+                <view class="{{isLoadingOrigin?'loading':''}}">{{showSize}}</view>
+                <view class="viewOriginImg-process" wx:if="{{isLoadingOrigin}}">
+                    <view class="viewOriginImg-loading-font"> {{loadingProcess}}%</view>
+                    <view class="viewOriginImg-loading" style="width:{{loadingProcess}}%"></view>
+                </view>
+            </view>
+        </view>
+    </view>
+</view>
+<view class="image-box image-box-origin">
+    <image binderror="imageError" bindload="imageLoad" class="image-preview image-preview-origin" id="origin" mode="{{mode}}" src="{{loadImg}}" style="width:{{width}}rpx"></image>
+</view>

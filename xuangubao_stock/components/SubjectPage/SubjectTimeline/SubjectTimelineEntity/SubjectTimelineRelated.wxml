@@ -1,0 +1,8 @@
+<view class="subject-timeline-related _div data-v-6e0e69f0">
+    <scroll-view scrollX class="scroll-view_H data-v-6e0e69f0" style="width:100%;">
+        <view bindtap="__e" class="subject-timeline-related-item _div data-v-6e0e69f0" data-event-opts="{{[ [ 'tap',[ [ 'handleClick',['$event'] ] ] ] ]}}" id="{{subject.id}}" style="{{'background-image:'+'url('+subject.image+')'+';'}}" wx:for="{{subjects}}" wx:for-index="__i0__" wx:for-item="subject" wx:key="id">
+            <x-mask bind:__l="__l" class="data-v-6e0e69f0" vueId="{{'1-'+__i0__}}"></x-mask>
+            <view class="subject-timeline-related-inner _div data-v-6e0e69f0">{{subject.title}}</view>
+        </view>
+    </scroll-view>
+</view>

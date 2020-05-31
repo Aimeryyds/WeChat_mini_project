@@ -1,0 +1,19 @@
+<view class="seckill-container">
+    <image class="seckill-image" mode="widthFix" src="{{seckillData.seckillContent.bgSrc}}"></image>
+    <view class="seckill-wrap">
+        <rich-text class="sec-already" nodes="{{receiveText}}" style="color:{{receiveColor}}"></rich-text>
+        <view bindtap="clickButton">
+            <button bindgetuserinfo="authorizeCallback" bindtap="{{loginInfo?'btnClick':''}}" class="sec-btn" openType="{{!loginInfo?'getUserInfo':''}}">
+                <view class="sec-btnText" wx:if="{{pageStatus==='fresh_not_have'}}">{{timeText}}</view>
+                <image alt="" class="sec-btnBg" src="{{btn.bgSrc}}"></image>
+                <image alt="" class="sec-floating" src="{{btnTip}}" wx:if="{{pageStatus==='fresh_not_have'}}"></image>
+            </button>
+        </view>
+    </view>
+</view>
+<Dialog bindbtn1Event="dialogFn" bindhide="dialogHide" id="dialog">
+    <view class="dialog-content" slot="content">
+        <view>{{dialogText[0]}}</view>
+        <view>{{dialogText[1]}}</view>
+    </view>
+</Dialog>

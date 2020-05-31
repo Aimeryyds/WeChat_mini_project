@@ -1,0 +1,23 @@
+<view class="main-info _div data-v-1ab3e93c" wx:if="{{info}}">
+    <view class="pcp _div data-v-1ab3e93c">
+        <percent-number bind:__l="__l" class="num data-v-1ab3e93c" num="{{info.coreAvgPcp*100}}" vueId="1"></percent-number>
+    </view>
+    <view class="detail _div data-v-1ab3e93c">
+        <view class="_p data-v-1ab3e93c">
+            <percent-number bind:__l="__l" class="data-v-1ab3e93c" compareNum="{{info.fundFlow}}" num="{{formatCir}}" vueId="2"></percent-number>
+            <label class="label _span data-v-1ab3e93c">净流入</label>
+        </view>
+        <view class="_p data-v-1ab3e93c">
+            <label class="up _span data-v-1ab3e93c">{{info.riseCount}}</label>
+            <label class="label _span data-v-1ab3e93c">涨</label>
+        </view>
+        <view class="_p data-v-1ab3e93c">
+            <label class="flat _span data-v-1ab3e93c">{{info.stayCount}}</label>
+            <label class="label _span data-v-1ab3e93c">平</label>
+        </view>
+        <view class="_p data-v-1ab3e93c">
+            <label class="down _span data-v-1ab3e93c">{{info.fallCount}}</label>
+            <label class="label _span data-v-1ab3e93c">跌</label>
+        </view>
+    </view>
+</view>

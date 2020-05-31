@@ -1,0 +1,26 @@
+<view bindtap="hide" class="u-class bottom-modal-container {{isShow?'':'hidden-modal'}}">
+    <view class="modal-background"></view>
+    <view class="modal-content {{mode}}-col">
+        <view class="modal-title-wrap" wx:if="{{title}}">
+            <view class="title-icon" style="background-image: url({{titleIcon}});" wx:if="{{titleIcon}}"></view>
+            <view class="modal-title modal-name">
+                <text>{{title}}</text>
+            </view>
+        </view>
+        <slot name="header"></slot>
+        <view class="modal-op-box">
+            <view class="modal-item-wrap" style="width: {{gridWidth}}" wx:for="{{buttons}}" wx:key="text">
+                <u-button long catchtap="_handleTapBottomModalItem" data-tapfunc="{{item.tapFunc}}" hoverClass="press-down" openType="{{item.openType?item.openType:''}}" uClass="formButtonNone modal-item">
+                    <view class="op-icon {{iconSize}} {{item.isNew?'ic_new':''}}" wx:if="{{item.icon||item.img}}">
+                        <image mode="aspectFit" src="{{item.img}}" wx:if="{{item.img}}"></image>
+                        <u-icon size="40" type="{{item.icon}}" wx:else></u-icon>
+                    </view>
+                    {{item.text}}
+                </u-button>
+            </view>
+        </view>
+        <view catchtap="hide" class="modal-cancel">
+            <text>取消</text>
+        </view>
+    </view>
+</view>

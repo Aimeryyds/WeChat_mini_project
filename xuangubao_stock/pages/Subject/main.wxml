@@ -1,0 +1,6 @@
+<view class="_div" wx:if="{{subject}}">
+    <column bind:__l="__l" subject="{{subject}}" timeline="{{timeline}}" title="{{title}}" vueId="1" wx:if="{{subject.type===2}}"></column>
+    <topic bind:__l="__l" subject="{{subject}}" timeline="{{timeline}}" title="{{title}}" vueId="2" wx:if="{{subject.type===1}}"></topic>
+    <paying-flow bind:__l="__l" vueId="3" wx:if="{{showPayFlow}}"></paying-flow>
+    <auth-flow bind:__l="__l" vueId="4" wx:if="{{showPayFlow}}"></auth-flow>
+</view>

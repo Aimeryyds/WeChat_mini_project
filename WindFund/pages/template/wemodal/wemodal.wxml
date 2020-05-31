@@ -1,0 +1,16 @@
+<template name="wemodal">
+    <form bindsubmit="__WeModal__confirm" reportSubmit="true" wx:if="{{showModal}}">
+        <view class="modal-mask"></view>
+        <view class="modal-dialog">
+            <view class="modal-title">{{title}}</view>
+            <view class="modal-content">
+                <view>{{content}}</view>
+                <view>{{content2}}</view>
+            </view>
+            <view class="modal-footer">
+                <button bindtap="__WeModal__cancel" class="btn-cancel" wx:if="{{showcancel}}">{{cancelTxt||'取消'}}</button>
+                <button class="btn-confirm" formType="submit">{{confirmTxt||'确定'}}</button>
+            </view>
+        </view>
+    </form>
+</template>

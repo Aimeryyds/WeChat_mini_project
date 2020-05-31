@@ -1,0 +1,22 @@
+<view class="choose-subscription _div data-v-26e550b6">
+    <title-bar bind:__l="__l" class="data-v-26e550b6" title="{{subject.title}}" vueId="1" vueSlots="{{['default']}}">
+        <view bindtap="__e" class="user-center-btn _div data-v-26e550b6" data-event-opts="{{[ [ 'tap',[ [ 'removeOverlay',['$event'] ] ] ] ]}}">
+            <view class="iconfont icon-xiaochengxuqietu-4 _i data-v-26e550b6"></view>
+        </view>
+    </title-bar>
+    <choose-subscription-header bind:__l="__l" class="data-v-26e550b6" subject="{{subject}}" vueId="2"></choose-subscription-header>
+    <choose-subscription-subs activeSubjectSubItem="{{activeSubjectSubItem}}" bind:__l="__l" bind:selectSubjectSubItem="__e" class="data-v-26e550b6" data-event-opts="{{[ [ '^selectSubjectSubItem',[ ['selectSubjectSubscribeItem'] ] ] ]}}" subject="{{subject}}" vueId="3"></choose-subscription-subs>
+    <view bindtap="__e" class="coupon-tip _div data-v-26e550b6" data-event-opts="{{[ [ 'tap',[ [ 'chooseCoupon',['$event'] ] ] ] ]}}" wx:if="{{activeSubjectSubItem}}">
+        <view class="label _div data-v-26e550b6">优惠券</view>
+        <view class="tip _div data-v-26e550b6">
+            <label class="hascoupon _span data-v-26e550b6" wx:if="{{activeSubjectSubItem.couponCount&&!activeCoupon}}">
+                <view class="iconfont icon-weibiaoti--4 _i data-v-26e550b6"></view>您有优惠劵可用</label>
+            <block wx:else>
+                <label class="active normal _span data-v-26e550b6" wx:if="{{activeSubjectSubItem.couponCount&&activeCoupon}}">{{activeCoupon.primaryField}}</label>
+                <label class="normal _span data-v-26e550b6" wx:else>暂无优惠券可用</label>
+            </block>
+            <view class="iconfont icon-xiaochengxuqietu-10-copy _i data-v-26e550b6"></view>
+        </view>
+    </view>
+    <choose-subscription-footer activeSubjectSubItem="{{activeSubjectSubItem}}" bind:__l="__l" bind:choose="__e" class="data-v-26e550b6" data-event-opts="{{[ [ '^choose',[ ['openPaySubjectOverlay'] ] ] ]}}" subject="{{subject}}" vueId="4"></choose-subscription-footer>
+</view>

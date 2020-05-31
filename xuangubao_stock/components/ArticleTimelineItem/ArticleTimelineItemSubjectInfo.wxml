@@ -1,0 +1,14 @@
+<view class="flex-center-all subject-info _div data-v-58bec914">
+    <view class="isColumn _div data-v-58bec914" wx:if="{{!isTopic}}">
+        <image alt="{{title}}" bindtap="__e" class="_img data-v-58bec914" data-event-opts="{{[ [ 'tap',[ [ '$emit',['click-subject-image'] ] ] ] ]}}" src="{{displayImage}}"></image>
+        <view bindtap="__e" class="_header data-v-58bec914" data-event-opts="{{[ [ 'tap',[ [ '$emit',['click-title'] ] ] ] ]}}">{{title}}</view>
+    </view>
+    <view class="isTopic _div data-v-58bec914" wx:if="{{isTopic}}">
+        <image bindtap="__e" class="_img data-v-58bec914" data-event-opts="{{[ [ 'tap',[ [ '$emit',['click-subject-image'] ] ] ] ]}}" src="/static/images/topic-avatar.png"></image>
+        <view bindtap="__e" class="_header data-v-58bec914" data-event-opts="{{[ [ 'tap',[ [ '$emit',['click-title'] ] ] ] ]}}">{{title}}</view>
+    </view>
+    <view bindtap="__e" class="_div data-v-58bec914" data-event-opts="{{[ [ 'tap',[ [ 'follow',['$event'] ] ] ] ]}}" style="font-size:0;">
+        <view class="button isSmall isInfo _div data-v-58bec914" wx:if="{{following}}">已关注</view>
+        <view class="button isSmall isInfo _div data-v-58bec914" style="color:#E62E4D;" wx:else>关注</view>
+    </view>
+</view>

@@ -1,0 +1,75 @@
+<view>
+    <view class="user-info">
+        <view class="user-avator">
+            <open-data mode="aspectFit" type="userAvatarUrl"></open-data>
+        </view>
+        <view class="user-name">
+            <open-data lang="zh_CN" type="userNickName"></open-data>
+        </view>
+    </view>
+    <view class="func-list">
+        <view bindtap="showcontactDialog" class="func-item" data-dialogType="asset">
+            <view class="item-icon">
+                <image mode="aspectFit" src="../../img/indexicon/zichan.png" style="width: 40rpx; height: 40rpx;"></image>
+            </view>
+            <view class="item-name">我的资产</view>
+            <view class="item-operate">
+                <image mode="aspectFit" src="../../img/arrowright.png" style="width: 32rpx; height: 32rpx;"></image>
+            </view>
+        </view>
+        <view bindtap="showcontactDialog" class="func-item" data-dialogType="record">
+            <view class="item-icon">
+                <image mode="aspectFit" src="../../img/indexicon/jiaoyi.png" style="width: 40rpx; height: 40rpx;"></image>
+            </view>
+            <view class="item-name">交易记录</view>
+            <view class="item-operate">
+                <image mode="aspectFit" src="../../img/arrowright.png" style="width: 32rpx; height: 32rpx;"></image>
+            </view>
+        </view>
+        <view class="func-item">
+            <button class="nobtn contact-btn" openType="contact" sendMessagePath="" sendMessageTitle="我来自首页">
+                <view class="item-icon">
+                    <image mode="aspectFit" src="../../img/indexicon/ke.png" style="width: 40rpx; height: 40rpx;"></image>
+                </view>
+                <view class="item-name">联系客服</view>
+                <view class="item-operate">
+                    <image mode="aspectFit" src="../../img/arrowright.png" style="width: 32rpx; height: 32rpx;"></image>
+                </view>
+            </button>
+        </view>
+        <view class="func-item">
+            <navigator hoverClass="none" style="display:flex; width:100%;" url="../static/process/process">
+                <view class="item-icon">
+                    <image mode="aspectFit" src="../../img/indexicon/licheng.png" style="width: 40rpx; height: 40rpx;"></image>
+                </view>
+                <view class="item-name">心路历程</view>
+                <view class="item-operate">
+                    <image mode="aspectFit" src="../../img/arrowright.png" style="width: 32rpx; height: 32rpx;"></image>
+                </view>
+            </navigator>
+        </view>
+        <view class="func-item">
+            <navigator hoverClass="none" style="display:flex; width:100%" url="../static/about/about">
+                <view class="item-icon">
+                    <image mode="aspectFit" src="../../img/indexicon/guanyu.png" style="width: 40rpx; height: 40rpx;"></image>
+                </view>
+                <view class="item-name">关于我们</view>
+                <view class="item-operate">
+                    <image mode="aspectFit" src="../../img/arrowright.png" style="width: 32rpx; height: 32rpx;"></image>
+                </view>
+            </navigator>
+        </view>
+        <view class="func-item">
+            <navigator hoverClass="none" style="display:flex; width:100%" url="../static/setting/switch/switch">
+                <view class="item-icon">
+                    <image mode="aspectFit" src="../../img/indexicon/shezhi.png" style="width: 40rpx; height: 40rpx;"></image>
+                </view>
+                <view class="item-name">我的设置</view>
+                <view class="item-operate">
+                    <image mode="aspectFit" src="../../img/arrowright.png" style="width: 32rpx; height: 32rpx;"></image>
+                </view>
+            </navigator>
+        </view>
+    </view>
+</view>
+<contactdialog bind:cancelEvent="_cancelEvent" bind:confirmEvent="_confirmEvent" confirmText="知道了" content="{{tempCode}}" id="dialog" productType="{{'2'}}" title="查资产"></contactdialog>

@@ -1,0 +1,10 @@
+<view class="u-input__container">
+    <view class="u-input__title inline-block-middle full-height" wx:if="{{title}}">{{title}}</view>
+    <view class="u-input__body">
+        <view class="u-input__textarea-container full-height" wx:if="{{type==='textarea'}}">
+            <textarea adjustPosition="{{adjustPosition}}" autoHeight="{{autoHeight}}" bindblur="handleBlur" bindconfirm="handleConfirm" bindfocus="handleFocus" bindinput="handleInput" bindkeyboardheightchange="handleKeyboardHeightChange" bindlinechange="handleLinechange" class="u-input__input full-height u-input__input-textarea" cursorSpacing="{{cursorSpacing}}" disabled="{{disabled}}" maxlength="{{maxlength}}" placeholder="{{placeholder}}" placeholderStyle="{{placeholderStyle}}" style="border-radius: {{borderRadius}}rpx;{{backgroundColor?'background-color: '+backgroundColor+';':''}}" value="{{value}}"></textarea>
+        </view>
+        <input adjustPosition="{{adjustPosition}}" bindblur="handleBlur" bindconfirm="handleConfirm" bindfocus="handleFocus" bindinput="handleInput" bindkeyboardheightchange="handleKeyboardHeightChange" class="u-input__input full-height" cursorSpacing="{{cursorSpacing}}" disabled="{{disabled}}" maxlength="{{maxlength}}" password="{{type==='password'}}" placeholder="{{placeholder}}" placeholderStyle="{{placeholderStyle}}" style="border-radius: {{borderRadius}}rpx;{{backgroundColor?'background-color: '+backgroundColor+';':''}}" type="{{type==='password'?'text':type}}" value="{{value}}" wx:else></input>
+        <text class="u-input__error">{{errorMessage}}</text>
+    </view>
+</view>

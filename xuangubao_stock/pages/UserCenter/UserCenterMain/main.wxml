@@ -1,0 +1,18 @@
+<view class="user-center _div data-v-09cf579e">
+    <title-bar-capsule bind:__l="__l" class="data-v-09cf579e" title="个人中心" vueId="1"></title-bar-capsule>
+    <view class="user-info _div data-v-09cf579e">
+        <image class="user-info-bg _img data-v-09cf579e" src="/static/images/user-info-bg.jpg"></image>
+        <view class="user-info-info _div data-v-09cf579e">
+            <image class="user-info-avatar _img data-v-09cf579e" src="{{wxInfo?wxInfo.avatarUrl:userInfo?userInfo.portrait:'/static/images/avatar-default.png'}}"></image>
+            <view class="user-info-name _p data-v-09cf579e">{{wxInfo?wxInfo.nickName:userInfo&&userInfo.nickname}}</view>
+        </view>
+    </view>
+    <view class="action-list action-list-1 _ul data-v-09cf579e">
+        <action-item bind:__l="__l" bind:clickItem="__e" class="data-v-09cf579e" data-event-opts="{{[ [ '^clickItem',[ [ 'dataAnalytic',['profile_myconcern_click'] ] ] ] ]}}" icon="/static/images/concern.png" text="我的关注" url="../MyConcern/main" vueId="2"></action-item>
+        <action-item bind:__l="__l" bind:clickItem="__e" class="data-v-09cf579e" data-event-opts="{{[ [ '^clickItem',[ [ 'dataAnalytic',['profile_mylike_click'] ] ] ] ]}}" icon="/static/images/like.png" text="我的喜欢" url="../MyLike/main" vueId="3"></action-item>
+        <action-item bind:__l="__l" bind:clickItem="__e" class="data-v-09cf579e" data-event-opts="{{[ [ '^clickItem',[ [ 'dataAnalytic',['profile_mypremium_click'] ] ] ] ]}}" icon="/static/images/cost.png" text="我的付费" url="../MyCost/main" vueId="4" wx:if="{{!devicePlatformIOS}}"></action-item>
+    </view>
+    <view class="action-list action-list-2 _ul data-v-09cf579e">
+        <action-item bind:__l="__l" bind:clickItem="__e" class="data-v-09cf579e" data-event-opts="{{[ [ '^clickItem',[ ['switchUser'] ] ] ]}}" icon="/static/images/switch-user.png" text="切换账号" vueId="5"></action-item>
+    </view>
+</view>

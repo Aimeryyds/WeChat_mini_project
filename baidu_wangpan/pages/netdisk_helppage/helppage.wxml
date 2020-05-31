@@ -1,0 +1,13 @@
+<Navbar id="navbar"></Navbar>
+<view style="height:{{height}}px"></view>
+<view class="wrap-container">
+    <view class="box-shadow"></view>
+    <view class="help-list" wx:for="{{questionList}}" wx:key="{{item.id}}">
+        <button bindtap="_clickQuestion" class="quesition-btn" data-contenttype="{{item.contentType}}" data-questionid="{{item.id}}">
+            <text>{{item.text}}</text>
+            <view class="quesition-btn-detail"></view>
+        </button>
+    </view>
+    <FeedBack></FeedBack>
+</view>
+<ShowDialog id="showDialog"></ShowDialog>

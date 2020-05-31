@@ -1,0 +1,23 @@
+<view class="premium-count-down _div data-v-690ef072">
+    <view class="tip-header _p data-v-690ef072">离解锁还剩</view>
+    <view class="time-count _p data-v-690ef072" wx:if="{{countDownInfo}}">
+        <label class="_span data-v-690ef072">
+            <view class="_i data-v-690ef072">{{countDownInfo.hours}}</view>
+            <view class="_i data-v-690ef072">时</view>
+        </label>
+        <label class="_span data-v-690ef072">
+            <view class="_i data-v-690ef072">{{countDownInfo.minutes}}</view>
+            <view class="_i data-v-690ef072">分</view>
+        </label>
+        <label class="_span data-v-690ef072">
+            <view class="_i data-v-690ef072">{{countDownInfo.secs}}</view>
+            <view class="_i data-v-690ef072">秒</view>
+        </label>
+    </view>
+    <view class="tip-desc _p data-v-690ef072">
+        <label class="_span data-v-690ef072" wx:if="{{trading&&payInfo.riseCount}}">{{payInfo.riseCount+'只个股正在大涨，解锁查看'}}</label>
+        <block wx:else>解锁后可查看<label class="_span data-v-690ef072" wx:if="{{payInfo.hangYeLongTouStocksCount}}">{{payInfo.hangYeLongTouStocksCount+'只龙头股、'}}</label>
+            <label class="_span data-v-690ef072">{{payInfo.coreStocksCount}}</label>只本题材精准概念股</block>
+    </view>
+    <view bindtap="__e" class="subscribe-btn _p data-v-690ef072" data-event-opts="{{[ [ 'tap',[ [ '$emit',['unlock'] ] ] ] ]}}">订阅挖票宝，提前解锁</view>
+</view>

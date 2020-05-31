@@ -1,0 +1,9 @@
+<view class="container _div data-v-9fa7b1b2">
+    <scoped-slots-default bind:__l="__l" visibleArticles="{{visibleArticles}}" wx:if="{{$slots.default}}"></scoped-slots-default>
+    <block wx:else>
+        <explained-article bind:__l="__l" class="data-v-9fa7b1b2" time="{{msg.explainedMsgTime*1000}}" title="{{msg.explainedMsgTitle}}" vueId="{{'1-'+__i0__}}" wx:for="{{visibleArticles}}" wx:for-index="__i0__" wx:for-item="msg" wx:key="explainMsgId"></explained-article>
+    </block>
+    <view bindtap="__e" class="{{['_p data-v-9fa7b1b2','arrow',showAll?'show-all':'']}}" data-event-opts="{{[ [ 'tap',[ [ 'toggleShowAll',['$event'] ] ] ] ]}}" wx:if="{{this.articles&&this.articles.length>1}}">
+        <view class="iconfont icon-xiangxia _i data-v-9fa7b1b2"></view>
+    </view>
+</view>

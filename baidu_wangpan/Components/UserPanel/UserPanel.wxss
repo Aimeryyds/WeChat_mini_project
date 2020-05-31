@@ -1,0 +1,188 @@
+.panel-wrap {
+    position: fixed;
+    z-index: 110;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    visibility: visible;
+}
+
+.panel-background {
+    position: relative;
+    width: 100%;
+    height: 100%;
+    z-index: 110;
+    background-color: rgba(0,0,0,0.4);
+}
+
+.panel-content {
+    overflow: hidden;
+    position: absolute;
+    top: 250rpx;
+    right: 16rpx;
+    z-index: 111;
+    width: 506rpx;
+    background-color: #fff;
+    border-radius: 20rpx;
+}
+
+.userinfo-wrap {
+    width: 100%;
+    height: 168rpx;
+    background: #fff;
+    padding: 40rpx;
+    box-sizing: border-box;
+    display: flex;
+    flex-direction: row;
+    box-shadow: 0rpx 0rpx 28rpx 0rpx rgba(212,221,236,.4);
+    position: relative;
+    z-index: 2;
+}
+
+.userinfo-wrap .avatar-wrap {
+    width: 88rpx;
+    height: 88rpx;
+    border-radius: 50%;
+    margin-right: 20rpx;
+    background-position: center;
+    background-repeat: no-repeat;
+    position: relative;
+    background-size: 88rpx 88rpx;
+    background-color: #ebebeb;
+}
+
+.userinfo-wrap .avatar-wrap .avatar-wx-logo {
+    width: 38rpx;
+    height: 38rpx;
+    background-image: url('https://staticwx.cdn.bcebos.com/mini-program/images/wx_logo.png');
+    background-repeat: no-repeat;
+    background-size: 38rpx 38rpx;
+    border-radius: 50%;
+    position: absolute;
+    bottom: 0;
+    right: 0;
+}
+
+.userinfo-wrap .userinfo {
+    width: calc(100% - 108rpx);
+    height: 88rpx;
+    line-height: 100%;
+}
+
+.userinfo-wrap .userinfo .userinfo-title .userinfo-name,.userinfo-guide-name {
+    color: #333;
+    font-size: 32rpx;
+    font-weight: bold;
+}
+
+.userinfo-guide-name {
+    line-height: 88rpx;
+}
+
+.userinfo-wrap .userinfo .userinfo-title .userinfo-typeIcon0 {
+    width: 58rpx;
+    height: 26rpx;
+    background: url('https://staticwx.cdn.bcebos.com/mini-program/images/ic_non_member.png');
+    background-repeat: no-repeat;
+    background-size: 58rpx 26rpx;
+    display: inline-block;
+    margin-left: 24rpx;
+    vertical-align: middle;
+    margin-top: -3rpx;
+}
+
+.userinfo-wrap .userinfo .userinfo-title .userinfo-typeIcon1 {
+    width: 58rpx;
+    height: 26rpx;
+    background: url('https://staticwx.cdn.bcebos.com/mini-program/images/ic_member.png');
+    background-repeat: no-repeat;
+    background-size: 58rpx 26rpx;
+    display: inline-block;
+    margin-left: 24rpx;
+    vertical-align: middle;
+    margin-top: -3rpx;
+}
+
+.userinfo-wrap .userinfo .userinfo-title .userinfo-typeIcon2 {
+    width: 58rpx;
+    height: 26rpx;
+    background: url('https://staticwx.cdn.bcebos.com/mini-program/images/ic_super_member.png');
+    background-repeat: no-repeat;
+    background-size: 58rpx 26rpx;
+    display: inline-block;
+    margin-left: 24rpx;
+    vertical-align: middle;
+    margin-top: -3rpx;
+}
+
+.userinfo-wrap .userinfo .quota-des {
+    color: #333;
+    font-size: 24rpx;
+    margin-top: 12rpx;
+}
+
+.userinfo-wrap .userinfo .quota-wrap {
+    margin: 12rpx 0;
+}
+
+.userinfo-wrap .userinfo .quota-wrap .quota-default {
+    width: 100%;
+    height: 8rpx;
+    background-color: #F6F7F9;
+    border-radius: 10rpx;
+}
+
+.userinfo-wrap .userinfo .quota-wrap .quota-e {
+    width: 0.01%;
+    height: 8rpx;
+    background-color: #3888FF;
+    border-radius: 10rpx;
+    transition: width ease;
+}
+
+.userinfo-wrap .userinfo .quota-wrap .quota-n {
+    width: 0.01%;
+    height: 10rpx;
+    background-color: #fd9600;
+    border-radius: 10rpx;
+    transition: width ease;
+}
+
+.userinfo-wrap .userinfo .quota-wrap .quota-t {
+    width: 0.01%;
+    height: 10rpx;
+    background-color: #ff5455;
+    border-radius: 10rpx;
+    transition: width ease;
+}
+
+.feedbackWrap {
+    background: #fff;
+    border: none;
+    outline: none;
+    border-color: #fff;
+    text-align: inherit;
+    line-height: 128rpx;
+    width: 100%;
+    height: 120rpx;
+    padding: 0 40rpx;
+    box-sizing: border-box;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+    font-size: 32rpx;
+}
+
+.feedbackWrap::after {
+    content: none;
+}
+
+.feedbackWrap .feedbackMore {
+    width: 16rpx;
+    height: 28rpx;
+    background: url('https://staticwx.cdn.bcebos.com/mini-program/images/ic_mine_more.png') no-repeat;
+    background-size: 16rpx 28rpx;
+    display: inline-block;
+}

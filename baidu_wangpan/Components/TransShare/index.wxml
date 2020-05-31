@@ -1,0 +1,18 @@
+<view>
+    <view class="share-header">
+        <image class="share-header-bg" mode="widthFix" src="{{transBgImg}}"></image>
+        <view class="share-title ellipsis">『 {{title}} 』</view>
+    </view>
+    <view class="share-body">
+        <view class="share-body-title">该收集创建成功</view>
+        <view class="share-body-desc">快发送给好友收文件</view>
+    </view>
+    <view class="share-actions">
+        <view class="share-action">
+            <BlueButton isShowIcon bgColor="wathet-blue" bind:action="sendMoments" class="send-moments-btn" fontColor="blue" iconClass="icon-share-circle-blue">发送至朋友圈</BlueButton>
+        </view>
+        <view class="share-action friend">
+            <BlueButton isShowIcon bind:action="sendFriends" class="send-friend-btn" iconClass="icon-share-button" openType="share">发送至好友</BlueButton>
+        </view>
+    </view>
+</view>

@@ -1,0 +1,8 @@
+<view class="_div">
+    <title-bar-capsule bind:__l="__l" title="全部评论" vueId="1"></title-bar-capsule>
+    <view class="comment-wrapper _div">
+        <layout bind:__l="__l" comments="{{hotComments}}" title="{{'热门评论（'+hotComments.length+'）'}}" vueId="2" wx:if="{{articleId&&hotComments.length}}"></layout>
+        <layout bind:__l="__l" comments="{{newComments}}" title="{{'最新评论（'+totalComments+'）'}}" vueId="3" wx:if="{{articleId&&newComments.length}}"></layout>
+        <image class="no-comment _img" src="/static/images/no-comments.png" wx:else></image>
+    </view>
+</view>

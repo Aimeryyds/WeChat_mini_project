@@ -1,0 +1,16 @@
+<Dialog bind:cancel="hide" bind:confirm="dialogConfirm" id="dialog" position="top" title="{{title}}">
+    <view class="dialog-content">
+        <view class="dialog-input-wrap">
+            <input bindblur="bindInputBlur" bindinput="bindKeyInput" class="dialog-input" focus="{{isShow}}" maxlength="255" placeholder="{{placeholder}}" placeholderClass="dialog-input-placeholder" selectionEnd="{{selectionEnd}}" selectionStart="0" type="text" value="{{value}}"></input>
+            <view catchtap="handleClearInput" class="input-cancel"></view>
+        </view>
+        <view class="dialog-subtitle" wx:if="{{showErrorText||showExampleText}}">
+            <view class="error" wx:if="{{errorText&&showErrorText}}">
+                <text>{{errorText}}</text>
+            </view>
+            <view class="example" wx:if="{{exampleText&&showExampleText}}">
+                <text>{{exampleText}}</text>
+            </view>
+        </view>
+    </view>
+</Dialog>

@@ -1,0 +1,36 @@
+<view class="form-panel">
+    <view class="weui-cells weui-cells_after-title">
+        <view class="weui-cell weui-cell_input">
+            <view class="weui-cell__hd">
+                <view class="weui-label">手机号</view>
+            </view>
+            <view class="weui-cell__bd">
+                <input bindinput="bindMobileInput" class="weui-input" placeholder="请输入手机号" type="number"></input>
+            </view>
+        </view>
+        <view class="weui-cell weui-cell_input">
+            <view class="weui-cell__hd">
+                <view class="weui-label">验证码</view>
+            </view>
+            <view class="weui-cell__bd">
+                <input bindinput="bindSmsInput" class="weui-input" placeholder="请输入验证码" type="number"></input>
+            </view>
+            <view class="weui-cell__ft">
+                <view bindtap="getSMS" class="weui-vcode-btn">{{smsBtnContent}}</view>
+            </view>
+        </view>
+    </view>
+</view>
+<view class="form-panel">
+    <view class="weui-msg__opr-area">
+        <view class="weui-btn-area">
+            <button bindtap="commit" class="weui-btn" type="primary">下一步</button>
+            <view bindtap="showsmstips" class="nosms-tpis">无法收到验证码？</view>
+        </view>
+    </view>
+</view>
+<modal bindconfirm="listenerConfirm" confirmText="确认" hidden="{{hiddenModal}}" noCancel="true" title="无法收到验证码？">
+    <view>1、请核实手机是否已欠费停机或屏蔽了短信;</view>
+    <view>2、网络通讯异常可能会造成短信丢失,请尝试重新获取;</view>
+    <view>3、如尝试多次仍无法收到验证码，请致电客服400-799-1888;</view>
+</modal>
