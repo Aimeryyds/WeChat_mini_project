@@ -1,0 +1,19 @@
+<view class="container">
+    <view class="top">申请提现</view>
+    <view class="tixian">
+        <view class="title">我的可提现佣金</view>
+        <view class="money">￥{{commission_ok}}</view>
+        <view class="way">
+            <text class="TXway">提现方式</text>
+            <view class=" bracket ">
+                <picker bindchange="bindPickerChange" mode="selector" range="{{objectArray}}" value="{{index}}">
+                    <view class="picker">
+                        <text class="remain">{{objectArray[index]}}</text>
+                        <image src="https://tws.cnweisou.com/images/right.png" style="width: 50rpx;height: 50rpx;margin-top: 4rpx;"></image>
+                    </view>
+                </picker>
+            </view>
+        </view>
+    </view>
+    <button bindtap="clickNav" class="btn" type="primary">下一步</button>
+</view>

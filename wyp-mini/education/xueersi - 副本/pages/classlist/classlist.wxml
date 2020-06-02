@@ -1,0 +1,295 @@
+<view class="choose {{!filterHidden?'choose-fixed':''}}">
+    <view class="transparent-mask" wx:if="{{!transparentMask}}"></view>
+    <view class="top">
+        <view class="choose-type" hidden="{{streams.isHide}}">
+            <view bindtap="Jumpcity" class="region">
+                <text>{{screenInfo.city_name}}</text>
+                <image class="iconfont-darkblue" src="{{images.triangle}}" wx:if="{{isUser}}"></image>
+            </view>
+            <picker bindchange="bindMultiPickerChange" bindcolumnchange="bindMultiPickerColumnChange" bindtap="chooseGrade" class="choose-picker" mode="multiSelector" range="{{gradeArray}}" rangeKey="{{'name'}}" value="{{multiIndex}}">
+                <view class="choose-center">
+                    <text class="test">{{screenInfo.grd_name}}</text>
+                    <image class="iconfont-darkblue" src="{{images.actTriangle}}"></image>
+                </view>
+            </picker>
+            <view class="users">
+                <button bindgetuserinfo="getUserInfoFn" class="opent-btn" openType="getUserInfo" wx:if="{{isGetbtn}}">我</button>
+                <view class="user-mun {{addsumcont}}" wx:if="{{sumcont}}">
+                    <text>{{sumcont}}</text>
+                </view>
+                <image bindtap="tapHandler" bindtouchend="touchendHandler" bindtouchstart="touchstartHandler" class="user-logo" src="{{images.avatar}}"></image>
+            </view>
+        </view>
+        <view class="home-nav-list">
+            <view class="home-nav-left">
+                <picker bindchange="subjectChange" bindtap="tapSelector" class="home-nav-picker" data-wpytapselector-a="学科" mode="selector" range="{{subject}}" rangeKey="{{'name'}}" value="{{subIndex}}">
+                    <view class="home-nav-view">
+                        <text class="test">{{filter.subject==='不限'&&filter.subject?'学科':filter.subject}}</text>
+                        <image class="iconfont-darkblue" src="{{images.triangle}}"></image>
+                    </view>
+                </picker>
+                <picker bindchange="termChange" bindtap="tapSelector" class="home-nav-picker" data-wpytapselector-a="学期" range="{{term}}" rangeKey="{{'name'}}" value="{{termIndex}}">
+                    <view class="home-nav-view">
+                        <text class="test">{{filter.term==='不限'&&filter.term?'学期':filter.term}}</text>
+                        <image class="iconfont-darkblue" src="{{images.triangle}}"></image>
+                    </view>
+                </picker>
+                <picker bindchange="claChange" bindtap="tapSelector" class="home-nav-picker" data-wpytapselector-a="班次" range="{{cla}}" rangeKey="{{'name'}}" value="{{claIndex}}">
+                    <view class="home-nav-view">
+                        <text class="test">{{filter.level==='不限'&&filter.level?'班次':filter.level}}</text>
+                        <image class="iconfont-darkblue" src="{{images.triangle}}"></image>
+                    </view>
+                </picker>
+            </view>
+            <view class="home-nav-right">
+                <view bindtap="showFileter" class="flex-item">
+                    <text class="iconfont icon-shaixuan"></text>
+                    <text class="test">筛选</text>
+                </view>
+            </view>
+        </view>
+    </view>
+    <view class="home-centent">
+        <view class="refresh-top">
+            <view class="weui-loading"></view>
+            <view class="weui-loadmore__tips">下拉刷新</view>
+        </view>
+        <view class="swiper-container">
+            <swiper autoplay="{{swiperinfo.isAutoplay}}" bindchange="imgChange" circular="{{swiperinfo.circular}}" class="swiper" current="{{swiperinfo.current}}" indicatorActiveColor="{{swiperinfo.indicatorActiveColor}}" indicatorColor="{{swiperinfo.indicatorColor}}" indicatorDots="{{swiperinfo.isIndicatorDots}}" interval="{{swiperinfo.interval}}" wx:if="{{swiperinfo.isLoad}}">
+                <swiper-item bindtap="tapbanner" class="swiper-item" data-num="{{item.STATUS}}" data-wpytapbanner-a="{{_index}}" data-wpytapbanner-b="{{item.STATUS}}" wx:for="{{imgUrls}}" wx:for-index="_index" wx:key="swiperimg">
+                    <image binderror="ImgError" class="slide-image" data-wpyimgerror-a="{{_index}}" mode="scaleToFill" src="{{item.IMG}}"></image>
+                </swiper-item>
+            </swiper>
+        </view>
+        <view class="classlist" hidden="{{!cardInfo.length}}">
+            <view class="course-card-centers" wx:for="{{$card$cardInfo}}" wx:for-index="_index" wx:key="index">
+                <view bindtap="$card$goClassInfo" class="card-padding" data-wpygoclassinfo-a="{{item}}">
+                    <view class="card-top">
+                        <text class="card-title">{{item.className}}</text>
+                        <text class="back-view {{$card$classType[item.classType].class}}">{{$card$classType[item.classType].test}}</text>
+                    </view>
+                    <view class="icon-test">
+                        <text class="iconfont icon-home_classdetailpage"></text>
+                        <text class="text">{{item.classtimeNames}}</text>
+                    </view>
+                    <view class="icon-test" hidden="{{item.classType==1}}">
+                        <text class="iconfont icon-home_classdetailpage2"></text>
+                        <text class="text">{{item.districtName?item.districtName:''}}{{item.venueName}}</text>
+                    </view>
+                    <view class="card-state">
+                        <text class="date">{{item.startDate}} 至 {{item.endDate}}</text>
+                        <block wx:if="{{$card$bottomLine}}">
+                            <text class="state-btn {{$card$tipColor[item.claQuotaNum]}} " wx:if="{{item.classType!=1}}"> {{$card$tip[item.claQuotaNum]?$card$tip[item.claQuotaNum]:item.claQuotaNum}}</text>
+                        </block>
+                    </view>
+                    <view class="card-teachers">
+                        <view class="teachers-list">
+                            <view catchtap="$card$goDetail" class="teachers" data-wpygodetail-a="{{item.teachers}}" data-wpygodetail-b="0" wx:if="{{item.classType==4&&item.teachers.length>=2}}">
+                                <view class="parents">
+                                    <view class="teachers-info">
+                                        <image binderror="$card$minImgError" class="user-img" data-wpyminimgerror-a="{{_index}}" data-wpyminimgerror-b="0" mode="widthFix" src="{{item.teachers[0].teacherPictureUrl}}" wx:if="{{item.teachers[0].teacherPictureUrl}}"></image>
+                                        <image class="default-img" src="{{$card$DefaultImg}}" wx:else></image>
+                                    </view>
+                                </view>
+                                <view>
+                                    <view class="names">{{item.teachers[0].teacherName?item.teachers[0].teacherName:'待定'}}</view>
+                                    <view class="tea-label">授课</view>
+                                </view>
+                                <view class="parents">
+                                    <view class="teachers-info">
+                                        <image binderror="$card$minImgError" class="user-img" data-wpyminimgerror-a="{{_index}}" data-wpyminimgerror-b="1" mode="widthFix" src="{{item.teachers[1].teacherPictureUrl}}" wx:if="{{item.teachers[1].teacherPictureUrl}}"></image>
+                                        <image class="default-img" src="{{$card$DefaultImg}}" wx:else></image>
+                                    </view>
+                                </view>
+                                <view>
+                                    <view class="names">{{item.teachers[1].teacherName?item.teachers[1].teacherName:'待定'}}</view>
+                                    <view class="tea-label">授课</view>
+                                </view>
+                            </view>
+                            <view catchtap="$card$goDetail" class="teachers" data-wpygodetail-a="{{item.teachers}}" data-wpygodetail-b="0" wx:if="{{!item.strengTutor&&(item.teachers.length<2||item.classType!=4)}}">
+                                <view class="parents">
+                                    <view class="teachers-info">
+                                        <image binderror="$card$minImgError" class="user-img" data-wpyminimgerror-a="{{_index}}" data-wpyminimgerror-b="0" mode="widthFix" src="{{item.teachers[0].teacherPictureUrl}}" wx:if="{{item.teachers[0].teacherPictureUrl}}"></image>
+                                        <image class="default-img" src="{{$card$DefaultImg}}" wx:else></image>
+                                    </view>
+                                </view>
+                                <view>
+                                    <view class="names">{{item.teachers[0].teacherName?item.teachers[0].teacherName:'待定'}}</view>
+                                    <view class="tea-label">授课</view>
+                                </view>
+                            </view>
+                            <view catchtap="$card$goDetail" class="teachers" data-wpygodetail-a="{{item.tutors}}" data-wpygodetail-b="0" wx:if="{{item.classType==2}}">
+                                <view class="parents">
+                                    <view class="teachers-info">
+                                        <image binderror="$card$ImgError" class="user-img" data-wpyimgerror-a="{{_index}}" mode="widthFix" src="{{item.tutors[0].tutorPictureUrl}}" wx:if="{{item.tutors[0].tutorPictureUrl}}"></image>
+                                        <image class="default-img" src="{{$card$DefaultImg}}" wx:else></image>
+                                    </view>
+                                </view>
+                                <view>
+                                    <view class="names">{{item.tutors[0].tutorSysName?item.tutors[0].tutorSysName:'待定'}}</view>
+                                    <view class="tea-label">{{item.strengTutor?'老师':'辅导'}}</view>
+                                </view>
+                            </view>
+                            <view class="ellipsis" wx:if="{{item.teachers.length>=3}}">
+                                <text></text>
+                                <text></text>
+                                <text></text>
+                            </view>
+                        </view>
+                        <view class="card-price">
+                            <view>
+                                <text class="card-price-icon">￥</text>{{item.actualPrice}}</view>
+                            <view class="card-price-origin" wx:if="{{item.promotionPrice>0&&item.originPrice>item.promotionPrice}}">原价: <text class="origin-price">￥{{item.originPrice}}</text>
+                            </view>
+                        </view>
+                    </view>
+                </view>
+            </view>
+        </view>
+        <view class="no-list-tip" hidden="{{cardInfo.length}}">没有找到您心仪的班级，更换个条件试试吧</view>
+        <view class="weui-loadmore load">
+            <view class="weui-loading" wx:if="{{loadingWord==='正在加载'}}"></view>
+            <view class="weui-loadmore__tips">{{loadingWord}}</view>
+        </view>
+    </view>
+    <view class="filter">
+        <view bindtap="filter" class="mask" data-wpyfilter-a="" hidden="{{filterHidden}}"></view>
+        <view class="{{filterHidden?'container':'container show'}}">
+            <view class="class-type clearfix" wx:if="{{claCourseType.length}}">
+                <view class="class-title">课程类型</view>
+                <view bindtap="selectClass" class="type-item" data-wpyselectclass-a="{{index}}" data-wpyselectclass-b="{{item}}" wx:for="{{claCourseType}}" wx:key="index">
+                    <view class="default {{item.checked?'button-blue':''}}">{{item.type}}</view>
+                </view>
+            </view>
+            <view class="class-type time-type clearfix" wx:if="{{claTime.length}}">
+                <view class="class-title time-title">上课时间</view>
+                <view bindtap="selectTime" class="type-item" data-wpyselecttime-a="{{index}}" data-wpyselecttime-b="{{item}}" wx:for="{{claTime}}" wx:key="index">
+                    <view class="default time {{item.checked?'button-blue':''}}">{{item.name}}</view>
+                </view>
+            </view>
+            <view class="weui-cells weui-cells_after-title">
+                <view bindtap="classArea" class="weui-cell weui-cell_access" data-wpyclassarea-a="0" hoverClass="weui-cell_active" wx:if="{{address.length}}">
+                    <view class="weui-cell__bd">上课地点</view>
+                    <view class="weui-cell__ft weui-cell__ft_in-access">{{filter.classArea}}</view>
+                </view>
+                <view bindtap="teacher" class="weui-cell weui-cell_access" data-wpyteacher-a="0" hidden="{{indexData.length===0||strengTutor}}" hoverClass="weui-cell_active">
+                    <view class="weui-cell__bd">主讲老师</view>
+                    <view class="weui-cell__ft weui-cell__ft_in-access">{{filter.teacher}}</view>
+                </view>
+                <view bindtap="tutor" class="weui-cell weui-cell_access" data-wpytutor-a="0" hidden="{{indexData1.length===0}}" hoverClass="weui-cell_active">
+                    <view class="weui-cell__bd">{{strengTutor?'老师/辅导老师':'辅导老师'}}</view>
+                    <view class="weui-cell__ft weui-cell__ft_in-access">{{filter.tutor}}</view>
+                </view>
+                <view class="weui-cell weui-cell_access" wx:if="{{filter.classTypeId!=='1'}}">
+                    <view class="weui-cell__bd">显示满班</view>
+                    <view bindtap="tapShow" class="weui-cell__ft">
+                        <view class="weui-cell__hd weui-check__hd_in-checkbox">
+                            <icon class="weui-icon-checkbox_circle" size="23" type="circle" wx:if="{{filter.fullClass}}"></icon>
+                            <icon class="weui-icon-checkbox_success" color="#3D9BFC" size="23" type="success" wx:if="{{!filter.fullClass}}"></icon>
+                        </view>
+                    </view>
+                </view>
+            </view>
+            <view class="footer clearfix">
+                <view bindtap="reset" class="reset">重置</view>
+                <view bindtap="completeFilter" class="complete">完成</view>
+            </view>
+        </view>
+        <view class="{{classArea?'class-area':'class-area show'}}">
+            <view bindtap="classArea" class="back-button" data-wpyclassarea-a="true">
+                <view class="back"></view>
+            </view>
+            <view class="header">上课地点</view>
+            <view class="flex-wrp select-area" style="padding: 0rpx">
+                <view class="flex-item first-line">
+                    <scroll-view scrollY style="height: 1100rpx;">
+                        <view bindtap="addFirst" class="first-item {{item.checked?'first-select':''}}" data-wpyaddfirst-a="{{item}}" data-wpyaddfirst-b="{{index}}" wx:for="{{address}}" wx:key="index">{{item.name}}</view>
+                    </scroll-view>
+                </view>
+                <view class="flex-item second-line">
+                    <scroll-view scrollY style="height: 1100rpx;">
+                        <view bindtap="addSecond" class="second-item {{item.checked?'second-select':''}}" data-wpyaddsecond-a="{{item}}" data-wpyaddsecond-b="{{index}}" wx:for="{{secondAddress}}" wx:key="index">{{item.name}}</view>
+                    </scroll-view>
+                </view>
+                <view class="flex-item third-line">
+                    <scroll-view scrollY style="height: 1100rpx;">
+                        <view bindtap="addThird" class="third-item" data-wpyaddthird-a="{{item}}" data-wpyaddthird-b="{{index}}" wx:for="{{thirdAddress}}" wx:key="index">{{item.name}}<icon class="weui-icon-radio" color="#3D9BFC" size="16" type="success_no_circle" wx:if="{{item.checked}}"></icon>
+                        </view>
+                    </scroll-view>
+                </view>
+            </view>
+        </view>
+        <view class="{{mainTeacher?'main-teacher':'main-teacher show'}}">
+            <view bindtap="teacher" class="back-button" data-wpyteacher-a="true">
+                <view class="back"></view>
+            </view>
+            <view class="header">主讲老师</view>
+            <view class="indexList">
+                <scroll-view scrollY scrollTop="{{$indexlist$scrolltop}}" scrollWithAnimation="scroll-with-animation" style="height: 1100rpx;">
+                    <view class="weui-cells weui-cells_after-title">
+                        <view wx:for="{{$indexlist$title}}" wx:key="index">
+                            <view class="index-word">
+                        {{$indexlist$title[index]}}
+                    </view>
+                            <label bindtap="$indexlist$radioChange" class="weui-cell weui-check__label" data-wpyradiochange-a="{{$indexlist$title}}" data-wpyradiochange-b="{{index}}" data-wpyradiochange-c="{{idx}}" wx:for="{{$indexlist$indexData[ $indexlist$title[index] ]}}" wx:for-index="idx" wx:key="value">
+                                <radio class="weui-check"></radio>
+                                <view class="{{item.checked?'weui-cell__bd blue':'weui-cell__bd'}}">{{item.teaName}}</view>
+                                <view class="weui-cell__ft weui-cell__ft_in-radio" wx:if="{{item.checked}}">
+                                    <icon class="weui-icon-radio" color="#3D9BFC" size="16" type="success_no_circle"></icon>
+                                </view>
+                            </label>
+                        </view>
+                    </view>
+                </scroll-view>
+                <view class="index-title" style="flex-direction:column;">
+                    <view bindtap="$indexlist$go" data-wpygo-a="{{index}}" wx:for="{{$indexlist$title}}" wx:key="index">{{$indexlist$title[index]}}</view>
+                </view>
+            </view>
+        </view>
+        <view class="{{tutor?'main-teacher':'main-teacher show'}}">
+            <view bindtap="tutor" class="back-button" data-wpytutor-a="true">
+                <view class="back"></view>
+            </view>
+            <view class="header">{{strengTutor?'老师/辅导老师':'辅导老师'}}</view>
+            <view class="indexList">
+                <scroll-view scrollY scrollTop="{{$indexlist1$scrolltop}}" scrollWithAnimation="scroll-with-animation" style="height: 1100rpx;">
+                    <view class="weui-cells weui-cells_after-title">
+                        <view wx:for="{{$indexlist1$title}}" wx:key="index">
+                            <view class="index-word">
+                        {{$indexlist1$title[index]}}
+                    </view>
+                            <label bindtap="$indexlist1$radioChange" class="weui-cell weui-check__label" data-wpyradiochange-a="{{$indexlist1$title}}" data-wpyradiochange-b="{{index}}" data-wpyradiochange-c="{{idx}}" wx:for="{{$indexlist1$indexData[ $indexlist1$title[index] ]}}" wx:for-index="idx" wx:key="value">
+                                <radio class="weui-check"></radio>
+                                <view class="{{item.checked?'weui-cell__bd blue':'weui-cell__bd'}}">{{item.teaName}}</view>
+                                <view class="weui-cell__ft weui-cell__ft_in-radio" wx:if="{{item.checked}}">
+                                    <icon class="weui-icon-radio" color="#3D9BFC" size="16" type="success_no_circle"></icon>
+                                </view>
+                            </label>
+                        </view>
+                    </view>
+                </scroll-view>
+                <view class="index-title" style="flex-direction:column;">
+                    <view bindtap="$indexlist1$go" data-wpygo-a="{{index}}" wx:for="{{$indexlist1$title}}" wx:key="index">{{$indexlist1$title[index]}}</view>
+                </view>
+            </view>
+        </view>
+    </view>
+    <view class="select-tutor">
+        <view></view>
+    </view>
+    <view animation="{{$taltoast$animationData}}" class="tal-toast-container toast" style="top:{{$taltoast$vertical}}%;" wx:if="{{$taltoast$toastVisible}}">
+        <view class="tal-toast">
+            <text>{{$taltoast$toastMessage}}</text>
+        </view>
+    </view>
+    <view class="loading-center" hidden="{{$LoadingView$isLoading}}">
+        <view class="loading-animation">
+            <text></text>
+            <text></text>
+            <text></text>
+            <text></text>
+            <text></text>
+        </view>
+        <view class="loading-mask"></view>
+    </view>
+</view>

@@ -1,0 +1,23 @@
+<view class="bg_color">
+    <view class="list">
+        <block wx:if="{{lists.length>0}}">
+            <view class="item" wx:for="{{lists}}" wx:key="{{item.id}}">
+                <view class="item_t">
+                    <text>{{item.reason}}
+        </text>
+                </view>
+                <view class="item_c">
+                    <text>充值{{item.amount}}元</text>
+                    <text class="col1">{{item.amount}}</text>
+                </view>
+                <view class="item_b">
+                    <text class="col">{{item.created_time}}</text>
+                </view>
+            </view>
+        </block>
+        <view style="margin:20rpx;" wx:else>暂无交易明细</view>
+        <view class="pagebox" wx:if="{{total>lists.length}}">
+            <text>{{pager_tips}}</text>
+        </view>
+    </view>
+</view>

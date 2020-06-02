@@ -1,0 +1,57 @@
+<navigation-bar title="{{shortTitle}}"></navigation-bar>
+<view bindtap="pageReload" class="cplist_nodata" wx:if="{{requeseFail}}">{{requeseFailTips}}</view>
+<view wx:else>
+    <view class="headervideo" style="padding-top:{{barHeight}}px" wx:if="{{isVideocp}}">
+        <view class="vw" style="background:url({{articleDetail.video.img}}) center no-repeat;background-size:cover;width:750rpx;height:{{articleDetail.video.height/articleDetail.video.width*750}}rpx">
+            <video controls showFullscreenBtn autoplay="{{vAutoplay}}" customCache="{{false}}" id="myVideo" objectFit="cover" src="{{articleDetail.video.vendor_video}}" style="width:750rpx;height:{{articleDetail.video.height/articleDetail.video.width*750}}rpx"></video>
+        </view>
+    </view>
+    <view class="headerimg" style="background:url('{{articleDetail.cover_img.big}}') center no-repeat;background-size:cover;" wx:else></view>
+    <view class="c_c2" wx:if="{{articleDetail.title||articleDetail.favor_amount||articleDetail.viewed_amount}}">
+        <text class="title">{{articleDetail.title}}</text>
+        <text class="info">by {{articleDetail.user_info.nickname}}</text>
+    </view>
+    <view class="c_c3" wx:if="{{articleDetail.title||articleDetail.favor_amount||articleDetail.viewed_amount}}">
+        <rich-text class="rt" hidden="{{option.nocon}}" nodes="{{nodes}}"></rich-text>
+    </view>
+    <view bindtap="addXcc" class="addXccBtn" wx:if="{{articleDetail.title||articleDetail.favor_amount||articleDetail.viewed_amount}}">收藏到我的小程序</view>
+    <cover-view class="addXccbox" wx:if="{{showAddXcc}}">
+        <cover-image src="{{addXccimg}}" style="width:100%;height:auto;position:absolute;left:0px;top:{{barHeight}}px"></cover-image>
+        <button bindtap="hideAddXcc" class="hideXccboxbtn">我知道了</button>
+    </cover-view>
+    <cover-view class="dlbox" wx:if="{{showdlbox}}">
+        <cover-view bindtap="shutdlbox" class="dlbox_bg"></cover-view>
+        <cover-view class="dlbox_c">
+            <cover-view bindtap="shutdlbox" class="shutbtn">×</cover-view>
+            <cover-image class="dl_qrcode" src="/images/dlqrcode.png"></cover-image>
+            <cover-view class="dl_tips">
+                <cover-view class="text">截屏或点击下方按钮获取下载二维码</cover-view>
+                <cover-view class="text">也可进入应用市场搜索“美食杰”下载</cover-view>
+            </cover-view>
+            <cover-view bindtap="dlqrcode" class="btn {{dlsuccesstip?'btn_done':''}}">{{dlsuccesstip||'保存到手机相册'}}</cover-view>
+            <cover-view class="tips" wx:if="{{dlsuccesstip}}">请到相册查看二维码</cover-view>
+        </cover-view>
+    </cover-view>
+    <view class="favbtn_bottom_w" wx:if="{{requeseDone}}">
+        <button bindgetuserinfo="tapFavBtn" class="favbtn_bottom" openType="getUserInfo" wx:if="{{faved=='1'}}">
+            <image src="{{addfavedicon}}"></image>
+            <text>{{favorAmount==''?0:favorAmount}}</text>
+        </button>
+        <button bindgetuserinfo="tapFavBtn" class="favbtn_bottom" openType="getUserInfo" wx:else>
+            <image src="{{addfavicon}}"></image>
+            <text>{{favorAmount==''?0:favorAmount}}</text>
+        </button>
+        <button bindtap="tapShareBtn" class="share_bottom" openType="share">
+            <image src="{{shareicon}}"></image>
+            <text>{{shareAmount}}</text>
+        </button>
+    </view>
+    <view class="toastw" wx:if="{{showToast}}">
+        <view class="toast">
+            <rich-text nodes="{{toastTitle}}"></rich-text>
+        </view>
+    </view>
+</view>
+<loading hidden="{{requeseDone}}">
+ 加载中...
+</loading>

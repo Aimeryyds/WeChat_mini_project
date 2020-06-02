@@ -1,0 +1,26 @@
+<view class="container">
+    <map showLocation bindcontroltap="controltap" bindmarkertap="markertap" bindregionchange="regionchange" controls="{{controls}}" id="map" latitude="34.9219710362" longitude="111.4453125000" markers="{{markers}}" polyline="{{polyline}}" scale="5" style="width: 100%; height: 300px;"></map>
+    <view class="app-title">校区分布</view>
+    <view class="campus-list" wx:for="{{list}}" wx:key="*this">
+        <view class="campus-line">
+            <view class="campus-line-left">地　　区</view>
+            <view class="campus-line-right">{{item.city}}</view>
+        </view>
+        <view class="campus-line">
+            <view class="campus-line-left">名　　称</view>
+            <view class="campus-line-right">{{item.name}}</view>
+        </view>
+        <view class="campus-line">
+            <view class="campus-line-left">地　　址</view>
+            <view class="campus-line-right">{{item.address}}</view>
+        </view>
+        <view class="campus-line">
+            <view class="campus-line-left">联系方式</view>
+            <view class="campus-line-right">{{item.phone}}</view>
+        </view>
+        <view class="campus-line">
+            <view class="campus-line-left" wx:if="{{item.web}}">网　　址</view>
+            <view class="campus-line-right">{{item.web}}</view>
+        </view>
+    </view>
+</view>

@@ -1,0 +1,29 @@
+<view class="elist">
+    <navigator class="elist_item" url="../event_info/event_info?id={{item.id}}" wx:for="{{elist}}" wx:key="elist">
+        <view class="elist_c load">
+            <image class="elist_img" src="{{item.wappic}}"></image>
+        </view>
+        <view class="elist_detail">
+            <text class="elist_t">{{item.starttime}} - {{item.endtime}}</text>
+        </view>
+        <text class="elist_b green" wx:if="{{item.state=='will'}}">即将开始</text>
+        <text class="elist_b red" wx:if="{{item.state=='doing'}}">进行中</text>
+        <text class="elist_b" wx:if="{{item.state=='end'}}">已结束</text>
+    </navigator>
+</view>
+<view class="btn_do">
+    <form catchsubmit="shareSubmit" reportSubmit="true">
+        <button class="share" formType="submit" openType="share">
+            <image class="icon_fav" src="../../image/share.png"></image>
+            <text>分享给朋友</text>
+        </button>
+    </form>
+</view>
+<view class="loading" wx:if="{{loading}}">
+    <image class="loading_img" src="../../image/loading-32-32.gif"></image>
+</view>
+<view class="loading_end" wx:if="{{loading_end}}"></view>
+<view class="loading_fail" wx:if="{{loading_fail}}"></view>
+<view>　</view>
+<view>　</view>
+<view>　</view>

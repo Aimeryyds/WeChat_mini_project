@@ -1,0 +1,32 @@
+<view class="page">
+    <my-component bind:myevent="myEventListener" innerText="退押金"></my-component>
+    <view class="mains {{show?'show':' '}}"></view>
+    <view class="main" style=" margin-top: {{myHight}}px"></view>
+    <view wx:if="{{ReturnDeposit}}">
+        <view class="tit-top">
+            <text>{{requSM}}</text>
+        </view>
+        <view class="sm-list">
+            <view class="list-r" wx:for="{{retreatList}}" wx:key="index">
+                <view>
+                    <image class="r-icon" src="{{item.icon}}"></image>
+                    <text class="l-bon">{{item.bon}}</text>
+                </view>
+                <view class="r-cont-b">{{item.nocat}}</view>
+            </view>
+        </view>
+        <view class="r-fot">
+            <button bindtap="NoReturnDe" class="loginBtn">留下来</button>
+            <button bindtap="ReturnDe" class="loginBtn adbtn16">退押金</button>
+        </view>
+    </view>
+    <view class="frame  {{show?'show':' '}}">
+        <image src="/Content/Img/xing.png"></image>
+        <view class="succeed">
+            <view>申请成功</view>
+            <view>{{deposit}}元押金将在24小时内原路退回至 您的支付账户</view>
+            <view bindtap="goToProgress">查看进度 ></view>
+            <view bindtap="close" class="over">完成</view>
+        </view>
+    </view>
+</view>

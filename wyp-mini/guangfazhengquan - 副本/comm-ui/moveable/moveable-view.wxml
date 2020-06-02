@@ -1,0 +1,6 @@
+<view class="box {{moving?'moving-box':''}}" style="height:{{height}}rpx;display:flex;flex-direction:column;justify-content:center;width:100%;position:absolute;left:0;top:{{moving?moveY:height*index}}rpx;z-index:{{moving?11:10}};" wx:if="{{noBindEvent}}">
+    <slot></slot>
+</view>
+<view bindtouchend="touchend" bindtouchstart="touchstart" catchtouchmove="touchmove" class="box {{moving?'moving-box':''}}" style="height:{{height}}rpx;display:flex;flex-direction:column;justify-content:center;width:100%;position:absolute;left:0;top:{{moving?moveY:height*index}}rpx;z-index:{{moving?11:10}};" wx:else>
+    <slot></slot>
+</view>

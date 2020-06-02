@@ -1,0 +1,102 @@
+<view class="house-list" wx:if="{{listP==2}}">
+    <view bindtap="toSaleDetail" class="list-item flexbox" data-id="{{item.housesid}}" wx:for="{{taData.list}}" wx:key="index">
+        <view class="item-img">
+            <image src="{{item.imgurl==null||item.imgurl==''?'https://res.5i5j.com/cache/weixin/common/default_house_list_404.png':item.imgurl}}"></image>
+            <text class="zhenxuan" wx:if="{{item.housetag}}">甄选</text>
+            <view class="icon3d hz-3d" wx:if="{{item.flag3d==1}}">
+                <image src="/img/resources/icon3d.png"></image>
+            </view>
+            <view class="iconhz hz-3d" wx:if="{{item.flag3d==2}}">
+                <image src="/img/resources/iconhz.png"></image>
+            </view>
+        </view>
+        <view class="item-con flex1">
+            <text class="item-tit">{{item.housetitle}}</text>
+            <view class="item-info">
+                <text>{{item.bedroom+'室'+item.livingroom+'厅'+item.toilet+'卫'}}</text>
+                <text class="dian"></text>
+                <text>{{item.buildarea}}㎡</text>
+                <text class="dian"></text>
+                <text>{{item.heading}}</text>
+                <text class="dian"></text>
+                <text>{{item.communityname}}</text>
+            </view>
+            <view class="item-label" wx:if="{{item.tagwall!=''}}">
+                <text class="tag" wx:for="{{item.tagwall}}" wx:for-item="items" wx:key="index">{{items}}</text>
+            </view>
+            <view class="item-price">
+                <view class="wan-price">
+                    <text class="num">{{item.price+'万'}}</text>
+                </view>
+                <text class="ping">{{item.unitprice+'元/㎡'}}</text>
+            </view>
+        </view>
+    </view>
+</view>
+<view class="house-list" wx:if="{{listP==1}}">
+    <view bindtap="toRentDetail" class="list-item flexbox" data-id="{{item.housesid}}" wx:for="{{taData}}" wx:key="index">
+        <view class="item-img">
+            <image src="{{item.imgurl==null||item.imgurl==''?'https://res.5i5j.com/cache/weixin/common/default_house_list_404.png':item.imgurl}}"></image>
+            <text class="zhenxuan" wx:if="{{item.housetag}}">甄选</text>
+            <view class="icon3d hz-3d" wx:if="{{item.flag3d==1}}">
+                <image src="/img/resources/icon3d.png"></image>
+            </view>
+            <view class="iconhz hz-3d" wx:if="{{item.flag3d==2}}">
+                <image src="/img/resources/iconhz.png"></image>
+            </view>
+        </view>
+        <view class="item-con flex1">
+            <text class="item-tit">{{item.housetitle}}</text>
+            <view class="item-info">
+                <text>{{item.bedroom+'室'+item.livingroom+'厅'+item.toilet+'卫'}}</text>
+                <text class="dian"></text>
+                <text>{{item.buildarea}}㎡</text>
+                <text class="dian"></text>
+                <text>{{item.heading}}</text>
+                <text class="dian"></text>
+                <text>{{item.communityname}}</text>
+            </view>
+            <view class="item-label" wx:if="{{item.tagwall!=''}}">
+                <text class="tag" wx:for="{{item.tagwall}}" wx:for-item="items" wx:key="index">{{items}}</text>
+            </view>
+            <view class="item-price">
+                <view class="wan-price">
+                    <text class="num">{{item.price+'元/月'}}</text>
+                    <text class="leixing" wx:if="{{item.rentmodename}}">{{item.rentmodename}}</text>
+                </view>
+            </view>
+        </view>
+    </view>
+</view>
+<view class="house-list" wx:if="{{listP==3}}">
+    <view bindtap="toNewDetail" class="list-item flexbox" data-id="{{item.estateID}}" data-propertytypeid="{{item.propertyTypeID}}" wx:for="{{taData.results}}" wx:key="index">
+        <view class="item-img">
+            <image src="{{item.coverImageName==null||item.coverImageName==''?'/img/resources/default_house_list_404.png':item.coverImageName}}"></image>
+            <text class="zhenxuan" wx:if="{{item.housetag}}">甄选</text>
+            <view class="icon3d hz-3d" wx:if="{{item.flag3d==1}}">
+                <image src="/img/resources/icon3d.png"></image>
+            </view>
+            <view class="iconhz hz-3d" wx:if="{{item.flag3d==2}}">
+                <image src="/img/resources/iconhz.png"></image>
+            </view>
+        </view>
+        <view class="item-con flex1">
+            <text class="item-tit">{{item.estateName}}</text>
+            <view class="item-info">
+                <text>{{item.propertyTypeName}}</text>
+                <text class="dian"></text>
+                <text>{{item.estateAreaName}}</text>-
+        <text>{{item.estateAddress}}</text>
+            </view>
+            <view class="item-label" wx:if="{{item.tagList!=''}}">
+                <text class="tag" wx:for="{{item.tagList}}" wx:for-item="items" wx:key="index">{{items}}</text>
+            </view>
+            <view class="item-price">
+                <view class="wan-price">
+                    <text class="num">{{item.show_price}}</text>
+                </view>
+                <text class="ping">建面 {{item.minBuildArea}}-{{item.maxBuildArea}}㎡</text>
+            </view>
+        </view>
+    </view>
+</view>

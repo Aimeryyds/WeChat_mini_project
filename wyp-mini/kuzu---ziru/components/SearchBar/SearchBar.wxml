@@ -1,0 +1,41 @@
+<view class="_div data-v-0a11bea4">
+    <view class="search-bar-wrapper fixed shadow _div data-v-0a11bea4" id="searchBar">
+        <view bindtap="__e" class="city-selector _div data-v-0a11bea4" data-event-opts="{{[ [ 'tap',[ [ 'handleSelectCity',['$event'] ] ] ] ]}}" wx:if="{{isHomepage}}">{{''+cityName+''}}<view class="iconfont icon-zrk_ic_triangle_norm select-icon _i data-v-0a11bea4"></view>
+        </view>
+        <view bindtap="__e" class="search-bar _div data-v-0a11bea4" data-event-opts="{{[ [ 'tap',[ [ 'handleJumpSearch',['$event'] ] ] ] ]}}">
+            <view class="iconfont icon-zm_ic_title_searchsv search-icon _i data-v-0a11bea4"></view>
+            <view class="fake-input-holder _div data-v-0a11bea4">{{placeholder}}</view>
+        </view>
+    </view>
+    <view class="{{['modal-wrapper city-select-wrapper _div data-v-0a11bea4',isModalShow?modalActive:isModalShow?'active':'']}}" wx:if="{{isModalShow?isModalShow:modalActive}}">
+        <view class="header _div data-v-0a11bea4">
+            <view bindtap="__e" class="iconfont icon-close _i data-v-0a11bea4" data-event-opts="{{[ [ 'tap',[ [ 'handleClose',['$event'] ] ] ] ]}}"></view>
+        </view>
+        <scroll-view class="content data-v-0a11bea4">
+            <view class="padding-area _div data-v-0a11bea4">
+                <view class="modal-block _div data-v-0a11bea4">
+                    <view class="modal-title s _h3 data-v-0a11bea4">定位城市</view>
+                    <view class="location-wrapper mt10 _div data-v-0a11bea4" wx:if="{{!locateFail}}">
+                        <label bindtap="__e" class="{{['zr-tag location-city-tag _span data-v-0a11bea4',isNotAvailable?'disabled':'']}}" data-event-opts="{{[ [ 'tap',[ ['handleUseCity'] ] ] ]}}">
+                            <view class="iconfont icon-zm_ic_address _i data-v-0a11bea4"></view>{{currentCity}}</label>
+                        <label class="text _span data-v-0a11bea4" wx:if="{{isNotAvailable}}">(抱歉，本城市暂未开通自如服务)</label>
+                        <label bindtap="__e" class="retry _span data-v-0a11bea4" data-event-opts="{{[ [ 'tap',[ [ 'handleRetry',['$event'] ] ] ] ]}}" wx:if="{{!isNotAvailable&&showRetry}}">
+                            <view class="iconfont icon-shuaxin _i data-v-0a11bea4"></view>重新定位</label>
+                    </view>
+                    <view class="location-wrapper location-off _div data-v-0a11bea4" wx:else>
+                        <view class="_h1 data-v-0a11bea4">定位服务已关闭<label bindtap="__e" class="mcolor _span data-v-0a11bea4" data-event-opts="{{[ [ 'tap',[ [ 'handleJumpSetting',['$event'] ] ] ] ]}}">去设置</label>
+                        </view>
+                        <view class="_p data-v-0a11bea4" wx:if="{{isIOS}}">请到设置>隐私>定位服务中打开定位权限</view>
+                        <view class="_p data-v-0a11bea4" wx:else>若小程序定位已打开，请检查系统定位功能是否关闭</view>
+                    </view>
+                </view>
+                <view class="modal-block _div data-v-0a11bea4">
+                    <view class="modal-title s _h3 data-v-0a11bea4">已开通城市</view>
+                    <view class="city-wrapper mt10 _div data-v-0a11bea4">
+                        <label bindtap="__e" class="zr-tag city-tag _span data-v-0a11bea4" data-event-opts="{{[ [ 'tap',[ [ 'handleUseCity',['$0','$1'],[ [ ['cityList','code',item.code,'name'] ],[ ['cityList','code',item.code,'code'] ] ] ] ] ] ]}}" wx:for="{{cityList}}" wx:for-index="__i0__" wx:key="code">{{item.name}}</label>
+                    </view>
+                </view>
+            </view>
+        </scroll-view>
+    </view>
+</view>

@@ -1,0 +1,39 @@
+<template name="6ca957c3">
+    <view class="_view 6ca957c3">
+        <view class="_view 6ca957c3 content home">
+            <view class="_view 6ca957c3 mg-flex home-header mg-flex_sa_center">
+                <view bindtap="handleProxy" class="_view 6ca957c3 search-label" data-comkey="{{$k}}" data-eventid="{{'6ca957c3-0'}}">
+                    <text class="_text 6ca957c3 mg-txt-middle">{{currentCity.cityName}}</text>
+                    <text class="_text 6ca957c3 mg-txt-middle mgic-angle-b"></text>
+                </view>
+                <view bindtap="handleProxy" class="_view 6ca957c3 mg-flex-col search-input" data-comkey="{{$k}}" data-eventid="{{'6ca957c3-1'}}">
+                    <text class="_text 6ca957c3 mg-txt-top mgic-search"></text>
+                    <text class="_text 6ca957c3 mg-txt-top">小区、商圈、地铁站</text>
+                </view>
+                <image bindtap="handleProxy" class="_image 6ca957c3" data-comkey="{{$k}}" data-eventid="{{'6ca957c3-2'}}" src="https://assets.mgzf.com/appimg/db4ac5c943a0889caa7b65732d749b3d.png" style="width: 46rpx;height: 42rpx;margin-left: 34rpx"></image>
+            </view>
+            <view class="_view 6ca957c3 mg-flex mg-flex_avg home-entry">
+                <view bindtap="handleProxy" class="_view 6ca957c3 mg-flex mg-flex-v entry-row" data-comkey="{{$k}}" data-eventid="{{'6ca957c3-3-'+k}}" key="{{k}}" wx:for="{{entrys}}" wx:for-index="k" wx:key="k">
+                    <image class="_image 6ca957c3 entry-img" lazyLoad="{{true}}" size="mini" src="{{item.icon}}"></image>
+                    <view class="_view 6ca957c3 mg-txt_h5">{{item.title}}</view>
+                </view>
+            </view>
+            <view class="_view 6ca957c3 flex-tab-box">
+                <view bindtap="handleProxy" class="_view 6ca957c3 flex-tab" data-comkey="{{$k}}" data-eventid="{{'6ca957c3-4-'+index}}" key="{{index}}" wx:for="{{primarys}}" wx:key="index">
+                    <view class="_view 6ca957c3 title">{{item.title}}</view>
+                    <view class="_view 6ca957c3 sub-title">{{item.desc}}</view>
+                    <image class="_image 6ca957c3 flex-tab-image" src="{{item.icon}}"></image>
+                </view>
+            </view>
+            <template is="3adba4a9" data="{{...$root['0'],...$root[$kk+'6ca957c3-0'],$root:$root}}"></template>
+            <template is="0dc1bf93" data="{{...$root['0'],...$root[$kk+'6ca957c3-2'],$root:$root,$slotdefault:'6ca957c3-default-6ca957c3-2'}}" wx:if="{{homeSubjects&&homeSubjects.length}}"></template>
+            <template is="0dc1bf93" data="{{...$root['0'],...$root[$kk+'6ca957c3-5'],$root:$root,$slotdefault:'6ca957c3-default-6ca957c3-5'}}" wx:if="{{homeBrands&&homeBrands.length}}"></template>
+            <template is="0dc1bf93" data="{{...$root['0'],...$root[$kk+'6ca957c3-6'],$root:$root}}"></template>
+        </view>
+        <template is="4acf755c" data="{{...$root['0'],...$root[$kk+'6ca957c3-7'],$root:$root}}"></template>
+    </view>
+</template>
+<import src="/components/swiper/promote.vue.wxml"></import>
+<import src="/components/mgBlock.vue.wxml"></import>
+<import src="/components/mgImage.vue.wxml"></import>
+<import src="/components/listCollection.vue.wxml"></import>

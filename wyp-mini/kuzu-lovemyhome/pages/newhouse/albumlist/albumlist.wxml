@@ -1,0 +1,36 @@
+<view>
+    <view class="album-list-tab">
+        <scroll-view>
+            <view bindtap="tabclick" class="album-item" data-id="{{'album_'+index}}" data-index="{{index}}" wx:for="{{albumnew}}" wx:key="{{item.count}}">
+        {{item.mainAlbumName}}({{item.count}})
+        <view class="bottom-line" wx:if="{{tabindex==index}}"></view>
+            </view>
+        </scroll-view>
+    </view>
+    <view class="album-list">
+        <scroll-view scrollY scrollIntoView="{{albumid}}">
+            <view id="{{'album_'+index}}" wx:for="{{albumnew}}">
+                <view wx:if="{{item.mainAlbumName=='VR'}}">
+                    <view wx:for="{{item.photo}}">
+                        <view class="album-type-name">{{item.albumName}}</view>
+                        <view style="overflow:hidden;">
+                            <view bindtap="imageClick" class="album-image" wx:for="{{item.photo}}">
+                                <image lazyLoad src="{{item.imageName}}"></image>
+                                <image catchtap="vrclick" class="icon-3d" data-targeturl="{{item.tagUrl3D}}" src="/img/resources/icon3d.png" wx:if="{{item.tagUrl3D!=''}}"></image>
+                            </view>
+                        </view>
+                    </view>
+                </view>
+                <view wx:if="{{item.mainAlbumName!='VR'}}">
+                    <view class="album-type-name">{{item.mainAlbumName}}</view>
+                    <view style="overflow:hidden;">
+                        <view bindtap="imageClick" class="album-image" wx:for="{{item.photo}}">
+                            <image lazyLoad src="{{item.imageName}}"></image>
+                            <image catchtap="vrclick" class="icon-3d" data-targeturl="{{item.tagUrl3D}}" src="/img/resources/icon3d.png" wx:if="{{item.tagUrl3D!=''}}"></image>
+                        </view>
+                    </view>
+                </view>
+            </view>
+        </scroll-view>
+    </view>
+</view>

@@ -1,0 +1,8 @@
+<view class="house-desc-wrapper house-detail hz-style _div data-v-475cd370" wx:if="{{houseDesc}}">
+    <view class="title hz-style _h3 data-v-475cd370">{{houseDesc.isTurn?'转租推荐理由':'房源介绍'}}</view>
+    <view class="content hz-style _p data-v-475cd370">{{desc}}</view>
+    <view class="look-more _div data-v-475cd370" wx:if="{{isTooLong}}">
+        <label bindtap="__e" class="text mcolor _span data-v-475cd370" data-event-opts="{{[ [ 'tap',[ [ 'handleSwitchShow',['$event'] ] ] ] ]}}">{{isFull?'收起':'展开'}}</label>
+    </view>
+    <map-img bind:__l="__l" class="map data-v-475cd370" height="200" lat="{{houseTraffic.resblock.lat}}" lng="{{houseTraffic.resblock.lng}}" vueId="1" width="800"></map-img>
+</view>

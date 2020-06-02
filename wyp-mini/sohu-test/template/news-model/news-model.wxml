@@ -1,0 +1,78 @@
+<template name="news-model">
+    <block wx:for="{{newsList}}" wx:key="newsId">
+        <view catchtap="onAdClick" class="news-item" data-appid="{{item.appletId}}" data-forward-type="{{item.forwardType}}" data-link="{{item.link}}" data-name="{{item.name}}" wx:if="{{item.isAppletAd}}">
+            <view class="news-ad news-imgtext">
+                <view class="pic">
+                    <image class="news-imgtext-img" lazyLoad="true" mode="aspectFill" src="{{item.image}}"></image>
+                </view>
+                <view class="detail t-right">
+                    <view class="title">{{item.name}}</view>
+                    <view class="source">
+                        <view class="ad-icon">广告</view>
+                    </view>
+                </view>
+            </view>
+        </view>
+        <form bindsubmit="onSubmit" catchtap="gotoArticle" class="news-item {{dissList[item.newsId]==item.newsId?'displayNone':''}} {{clickedList[item.newsId]==item.newsId?'clicked':''}}" data-index="{{index}}" data-is-moment="{{item.mountingType==1}}" data-link="{{item.link}}" data-local="{{item.local||''}}" data-newsid="{{item.newsId}}" data-newstype="{{item.newsType}}" data-pics="{{item.pics}}" data-recominfo="{{item.recominfo}}" data-templatetype="{{item.templateType}}" reportSubmit="true" wx:elif="{{item.templateType==1}}">
+            <button formType="submit">
+                <view class="news-imgtext">
+                    <view class="pic" wx:if="{{item.pics}}">
+                        <image class="news-imgtext-img" lazyLoad="true" mode="aspectFill" src="{{item.pics[0]}}"></image>
+                    </view>
+                    <view class="detail{{item.pics?' t-right':' t-center'}}">
+                        <view class="title">{{item.title}}</view>
+                        <view class="source">
+                            <view class="local" wx:if="{{item.mountingType===1}}">话题</view>
+                            <view class="local" wx:if="{{item.local}}">{{item.local}}</view>
+                            <view class="media" wx:if="{{item.bindAnotherTitle}}">#{{item.bindAnotherTitle}}#</view>
+                            <view class="media" wx:else>{{item.media}}</view>
+                        </view>
+                    </view>
+                </view>
+            </button>
+            <view catchtap="dissNews" class="item-close" data-newsid="{{item.newsId}}">
+                <image src="../../images/close.png"></image>
+            </view>
+        </form>
+        <form bindsubmit="onSubmit" catchtap="gotoArticle" class="news-item {{dissList[item.newsId]==item.newsId?'displayNone':''}} {{clickedList[item.newsId]==item.newsId?'clicked':''}}" data-index="{{index}}" data-link="{{item.link}}" data-local="{{item.local||''}}" data-newsid="{{item.newsId}}" data-newstype="{{item.newsType}}" data-recominfo="{{item.recominfo}}" data-templatetype="{{item.templateType}}" reportSubmit="true" wx:elif="{{item.templateType==2}}">
+            <button formType="submit">
+                <view class="news-photos">
+                    <view class="title">{{item.title}}</view>
+                    <view class="pic">
+                        <view class="content" wx:for="{{item.pics}}" wx:for-item="pic" wx:key="*this">
+                            <image class="pic-item" lazyLoad="true" mode="aspectFill" src="{{pic}}"></image>
+                        </view>
+                    </view>
+                    <view class="source">
+                        <view class="local" wx:if="{{item.local}}">{{item.local}}</view>
+                        <view class="media">{{item.media}}</view>
+                    </view>
+                </view>
+            </button>
+            <view catchtap="dissNews" class="item-close" data-newsid="{{item.newsId}}">
+                <image src="../../images/close.png"></image>
+            </view>
+        </form>
+        <form bindsubmit="onSubmit" catchtap="gotoVideo" class="news-item {{dissList[item.newsId]==item.newsId?'displayNone':''}} {{clickedList[item.newsId]==item.newsId?'clicked':''}}" data-index="{{index}}" data-link="{{item.link}}" data-newsid="{{item.newsId}}" data-newstype="{{item.newsType}}" data-recominfo="{{item.recominfo}}" data-templatetype="{{item.templateType}}" reportSubmit="true" wx:elif="{{item.templateType==37}}">
+            <button formType="submit">
+                <view class="news-video">
+                    <view class="title">{{item.title}}</view>
+                    <view class="poster" wx:if="{{item.pics}}">
+                        <image class="cover" src="../../images/icon-home-item-play-dark.png"></image>
+                        <image class="img" lazyLoad="true" mode="aspectFill" src="{{item.pics[0]}}"></image>
+                    </view>
+                    <view class="source">
+                        <view class="media">{{item.sourceName}}</view>
+                    </view>
+                </view>
+            </button>
+            <view catchtap="dissNews" class="item-close" data-newsid="{{item.newsId}}">
+                <image src="../../images/close.png"></image>
+            </view>
+        </form>
+        <view catchtap="onRefreshBarClick" class="refresh-bar" hidden="{{index!=lastIndex}}">
+      上次看到这里 , 点击刷新
+      <image class="icon" src="../../images/icon-refresh.png"></image>
+        </view>
+    </block>
+</template>

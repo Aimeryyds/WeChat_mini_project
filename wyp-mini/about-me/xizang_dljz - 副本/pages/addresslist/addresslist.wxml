@@ -1,0 +1,44 @@
+<import src="../../component/icon/icon.wxml"></import>
+<view class="container">
+    <view class="address-list">
+        <view bindtap="{{choose?'chooseAddr':'editAddr'}}" class="address-item" id="{{index}}" wx:for="{{list}}">
+            <view class="item-top" style="{{choose==1?'':'padding-left:26rpx;'}}">
+                <block wx:if="{{choose==1}}">
+                    <view class="choose-wrap" wx:if="{{chooseId==item.id}}">
+                        <template is="icon" data="{{width:'32rpx',height:'32rpx',icon:'/images/settle/radio_sel.png'}}"></template>
+                    </view>
+                    <view class="choose-wrap" wx:else>
+                        <template is="icon" data="{{width:'32rpx',height:'32rpx',icon:'/images/settle/radio_nor.png'}}"></template>
+                    </view>
+                </block>
+                <view class="item-right">
+                    <view class="right-top">
+                        <view class="user-info">
+                            <text>{{item.username}}</text>
+                            <text class="phone">{{item.phone}}</text>
+                        </view>
+                        <view catchtap="deleteAddr" data-idx="{{index}}" id="{{item.id}}">
+                            <template is="icon" data="{{width:'20rpx',height:'20rpx',icon:'/images/icon_delete.png'}}"></template>
+                        </view>
+                    </view>
+                    <text class="address-info">{{item.province}}{{item.city}}{{item.district}}{{item.address}}</text>
+                </view>
+            </view>
+            <view class="item-bottom">
+                <view class="btn-wrap" style="{{choose==1?'':'margin-left:26rpx;width:auto;'}}">
+                    <view class="default-addr" wx:if="{{item.isDefault==1}}">当前默认地址</view>
+                    <view catchtap="setAddrDefault" class="default-btn" id="{{item.id}}" wx:else>设置为默认</view>
+                </view>
+                <view catchtap="editAddr" class="edit-wrap" id="{{index}}">
+                    <image src="../../images/settle/btn_edit.png"></image>
+                </view>
+            </view>
+        </view>
+        <navigator url="../addaddress/addaddress">
+            <view class="add-btn">
+                <image src="../../images/settle/icon_plus.png"></image>
+                <text>添加收货地址</text>
+            </view>
+        </navigator>
+    </view>
+</view>

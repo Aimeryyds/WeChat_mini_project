@@ -1,0 +1,37 @@
+<view class="newhouse-search">
+    <view class="input-box">
+        <view class="input-wrap">
+            <input bindinput="getinputvalue" placeholder="请输入小区或商圈名称" value="{{value}}"></input>
+            <image bindtap="delsearch" src="/img/resources/del-search.png" wx:if="{{value}}"></image>
+        </view>
+        <view bindtap="backpage">取消</view>
+    </view>
+    <view class="hot-search" wx:if="{{hotkeywords!=''}}">
+        <text>热门搜索</text>
+    </view>
+    <view class="hotkeywords" wx:if="{{hotkeywords!=''}}">
+        <view bindtap="hotkeywordsclick" data-cityid="{{item.cityid}}" data-estateid="{{item.estateID}}" data-name="{{item.keyword}}" data-properytypeid="{{item.propertyTypeID}}" wx:for="{{hotkeywords}}">{{item.keyword}}</view>
+    </view>
+    <view class="hot-search" wx:if="{{history.length>0}}">
+        <text>历史搜索</text>
+    </view>
+    <view class="history">
+        <view bindtap="routergo" data-cityid="{{item.cityid}}" data-properttypeid="{{item.properytypeid}}" data-searchid="{{item.estateid}}" data-type="{{item.type}}" wx:for="{{history}}">{{item.name}}</view>
+    </view>
+</view>
+<view class="mind-search" wx:if="{{value}}">
+    <view class="scroll-wrap" wx:if="{{mindsearchdata&&mindsearchdata!='empty'}}">
+        <scroll-view>
+            <view bindtap="routergo" class="mind-search-list" data-name="{{item.name}}" data-properttypeid="{{item.propertyTypeID}}" data-searchid="{{item.searchId}}" data-type="{{item.type}}" wx:for="{{mindsearchdata}}">
+                <text>{{item.name}}</text>
+                <text wx:if="{{item.type==3}}">[{{item.typeName[0]}}]</text>
+                <text wx:if="{{item.type==1}}">{{item.typeName[0]}}</text>
+                <text wx:if="{{item.price}}">{{item.price}}</text>
+                <text wx:if="{{item.count}}">{{item.count}}个</text>
+            </view>
+        </scroll-view>
+    </view>
+    <view class="search-empty" wx:if="{{mindsearchdata=='empty'}}">
+    没有找到相关数据
+  </view>
+</view>

@@ -1,0 +1,23 @@
+<view class="refresh-result" hidden="{{refreshTips.refreshResultHidden}}">
+    <view class="detail">
+        <view class="info-text">
+            <text>已为您推荐{{refreshTips.count}}条资讯</text>
+        </view>
+        <view class="info-img">
+            <image src="../../images/loadicon.png"></image>
+        </view>
+    </view>
+</view>
+<import src="../../template/news-model/video-model.wxml"></import>
+<view bindtouchend="touchEnd" bindtouchstart="touchStart" class="container" hidden="{{!loadhidden}}" style="padding-bottom: 125rpx;">
+    <view class="container-info">
+        <template is="video-model" data="{{videosList:videosList,clickedList:clickedList}}"></template>
+    </view>
+</view>
+<import src="../../components/tab/template.wxml"></import>
+<view>
+    <template is="tab" data="{{tabData:tabData}}"></template>
+</view>
+<view class="loading-begin" hidden="{{loadhidden}}">
+    <image mode="widthFix" src="../../images/loading-video-list.jpg"></image>
+</view>

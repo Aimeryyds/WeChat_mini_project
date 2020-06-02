@@ -1,0 +1,53 @@
+<view class="ask-stock-container _54c7d3e">
+    <view class="network _32f532b _54c7d3e" wx:if="{{$net$hasNet}}">
+        <image class="_32f532b" src="../../images/network.png"></image>
+        <text class="_32f532b">网络不可用，请检查网络设置</text>
+        <view class="net-text font28 animated flash infinite _32f532b">正在尝试重新连接...</view>
+    </view>
+    <view class="ask-stock-box _54c7d3e">
+        <view class="input-container _54c7d3e">
+            <view class="textarea-box _54c7d3e">
+                <textarea bindinput="refeshVal" class="_54c7d3e" maxlength="-1" placeholder="请输入您的问题描述" placeholderStyle="color:#ccc;" style="color:#333" value="{{textValue}}" wx:if="{{isText}}"></textarea>
+                <view class="_dt _54c7d3e" wx:else>{{deVal}}</view>
+            </view>
+            <view class="question_box _54c7d3e">
+                <view bindtap="saveQuestion" class="question_btn _54c7d3e">
+                        提问
+                    </view>
+            </view>
+        </view>
+    </view>
+    <view class="recod-list _54c7d3e">
+        <block wx:for="{{columnist}}">
+            <view class="recod-list-box de-bg _54c7d3e" wx:if="{{!item.name}}"></view>
+            <view catchtap="goArtice" class="recod-list-box _54c7d3e" data-wpygoartice-a="{{item}}" wx:else>
+                <image class="_54c7d3e" src="{{item.image||defaultImg}}"></image>
+                <view class="mask-title _54c7d3e">{{item.name}}</view>
+                <view class="bottom_box _54c7d3e">
+                    <view class="tis font30 _54c7d3e">{{item.desc}}</view>
+                    <view class="date _54c7d3e">{{item.update_des}}</view>
+                    <view class="per _54c7d3e">{{item.subscribe_num}}人定制</view>
+                </view>
+            </view>
+        </block>
+    </view>
+    <view class="_54c7d3e" wx:if="{{isShow}}">
+        <view catchtouchmove="$tailorSuc$true" class="_0080fd0 _54c7d3e">
+            <view class="common-default-mask _95fb186 _0080fd0"></view>
+            <view class="common-fullscreen _0080fd0">
+                <view class="suc-box _0080fd0">
+                    <view class="bg _0080fd0">
+                        <image class="_0080fd0" mode="" src="http://jfinfo.oss-cn-beijing.aliyuncs.com/jugupiao/images/enter/suc.png"></image>
+                    </view>
+                    <view class="common-slot-text-word font30 _54c7d3e">
+              提问成功，我的提问中查看老师的解答
+          </view>
+                    <button bindtap="back" class="common-slot-close-btn font34 _54c7d3e">关闭</button>
+                </view>
+            </view>
+        </view>
+    </view>
+    <view catchtap="$backHome$goHome" class="box animated bounceIn _97a9f08 _54c7d3e" wx:if="{{$backHome$isShow}}">
+        <image class="_97a9f08" lazyLoad="false" mode="scaleToFill" src="https://jfinfo.oss-cn-beijing.aliyuncs.com/jugupiao/images/share/home.png"></image>
+    </view>
+</view>

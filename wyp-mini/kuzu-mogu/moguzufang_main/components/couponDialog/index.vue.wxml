@@ -1,0 +1,19 @@
+<template name="e0bfbfde">
+    <transition class="_transition data-v-310a7a98" name="fade">
+        <view class="_view data-v-310a7a98" wx:if="{{couponVisible}}">
+            <view bindtap="handleProxy" class="_view data-v-310a7a98 bg" data-comkey="{{$k}}" data-eventid="{{'e0bfbfde-0'}}"></view>
+            <view class="_view data-v-310a7a98 couponDialog">
+                <view class="_view data-v-310a7a98 couponDialog-header">
+                    <image bindtap="handleProxy" class="_image data-v-310a7a98 close" data-comkey="{{$k}}" data-eventid="{{'e0bfbfde-1'}}" src="https://assets.mgzf.com/appimg/058b7f7263c95f64cb1dc241abd7867e.png"></image>
+                    <view class="_view data-v-310a7a98 h2">领券</view>
+                </view>
+                <scroll-view class="_scroll-view data-v-310a7a98" scrollY="true">
+                    <view class="_view data-v-310a7a98 coupon-scroll">
+                        <template is="76e25bad" data="{{...$root['0'],...$root[$kk+'e0bfbfde-0-'+index],$root:$root}}" wx:for="{{activity.landlordCoupons}}" wx:key="index"></template>
+                    </view>
+                </scroll-view>
+            </view>
+        </view>
+    </transition>
+</template>
+<import src="/components/couponDialog/ticket.vue.wxml"></import>

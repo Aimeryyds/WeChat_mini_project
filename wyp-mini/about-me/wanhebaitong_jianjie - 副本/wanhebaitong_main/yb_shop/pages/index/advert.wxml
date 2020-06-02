@@ -1,0 +1,15 @@
+<view class="index_cube02" wx:if="{{item.list.length!=0}}">
+    <view style="{{'position:relative;width:'+val.width+'%;height:'+item.high+'px;overflow: hidden;float:left;background:'+item.bg_color}}" wx:for="{{item.list}}" wx:for-item="val">
+        <form reportSubmit bindsubmit="formSubmit">
+            <image class="advimg" mode="" src="{{val.imgurl}}" style="{{'width:100%;height:'+item.high+'px;overflow: hidden;float:left;'}}"></image>
+            <input name="key" style="display:none" value="{{val.key?val.key:1}}"></input>
+            <input name="appid" style="display:none" value="{{val.appid}}"></input>
+            <input name="path" style="display:none" value="{{val.path}}"></input>
+            <input name="url" style="display:none" value="{{val.url}}"></input>
+            <input name="phone" style="display:none" value="{{val.phone}}"></input>
+            <input name="lat" style="display:none" value="{{val.lat}}"></input>
+            <input name="lng" style="display:none" value="{{val.lng}}"></input>
+            <button class="test_button" formType="submit" style="{{'width:100%;height:'+item.high+'px;overflow: hidden;'}}"></button>
+        </form>
+    </view>
+</view>

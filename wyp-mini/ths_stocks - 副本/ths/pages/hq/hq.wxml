@@ -1,0 +1,23 @@
+<view>
+    <view>
+        <web-view src="{{webSrc}}"></web-view>
+    </view>
+    <cover-view class="{{['btmWrap',iPhoneX?'iPhoneX':'']}}">
+        <cover-view bindtap="__e" class="deal" data-event-opts="{{[ [ 'tap',[ [ 'jumpBackWash',['$event'] ] ] ] ]}}">
+            <cover-image class="bgBtn" src="../../static/jyBtn.png"></cover-image>
+            <cover-view class="text">交易</cover-view>
+        </cover-view>
+        <cover-view wx:if="{{!isIndex}}">
+            <cover-view bindtap="__e" class="zx item" data-event-opts="{{[ [ 'tap',[ [ 'optionChange',['$event'] ] ] ] ]}}">
+                <cover-image class="icon" src="{{optionIcon}}"></cover-image>
+                <cover-view class="text">自选</cover-view>
+                <button bindgetphonenumber="__e" data-event-opts="{{[ [ 'getphonenumber',[ [ 'getPhone',['$event'] ] ] ] ]}}" id="btnLogin" openType="getPhoneNumber" style="{{'background-color:'+'transparent'+';'+'color:'+'transparent'+';'}}" type="primary" wx:if="{{!loginInfo.account}}">登录</button>
+            </cover-view>
+        </cover-view>
+        <cover-view class="share item">
+            <cover-image class="icon" src="../../static/share.png"></cover-image>
+            <cover-view class="text">分享</cover-view>
+            <button class="artBotShareBtn" openType="share">分享</button>
+        </cover-view>
+    </cover-view>
+</view>

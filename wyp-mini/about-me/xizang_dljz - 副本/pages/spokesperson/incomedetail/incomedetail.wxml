@@ -1,0 +1,21 @@
+<view class="container">
+    <view class="empty-wrap" wx:if="{{!list||list.length==0}}">
+        <image src="../../../images/empty/img_dingdan.png"></image>
+        <view class="text">
+            <text>暂无收益</text>
+        </view>
+    </view>
+    <view class="list">
+        <view class="item" wx:for="{{list}}" wx:key="*this">
+            <view class="item-left">
+                <view wx:if="{{item.source<3}}">{{item.username}}{{item.source==1?'客户':'代言人'}}分润</view>
+                <view wx:if="{{item.source==3}}">提现至{{payway_arr[item.payway-1]}}</view>
+                <text>{{item.createTime}}</text>
+            </view>
+            <view class="item-right">{{item.type==1?'+':'-'}} {{item.amount}}</view>
+        </view>
+        <view class="load-more" wx:if="{{showMore}}">
+            <text>继续拖动，查看更多</text>
+        </view>
+    </view>
+</view>

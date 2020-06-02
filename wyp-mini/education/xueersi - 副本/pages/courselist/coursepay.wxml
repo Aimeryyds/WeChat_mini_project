@@ -1,0 +1,189 @@
+<view class="coursepay">
+    <view class="no-course-pay" wx:if="{{isLoading&&!filterCourses.length}}">
+            购课单是空的，快去选课吧
+        </view>
+    <view class="top-tips" wx:if="{{isTips}}">
+        <image mode="aspectFit" src="https://static-xesapi.speiyou.cn/xesFeProject/xesFeSource/xesImagesLibrary/yyt_order_tips_icon.png"></image>
+        <text>部分课程会分为多个订单支付</text>
+    </view>
+    <view class="{{isTips?'list-scroll':'list-scroll-active'}}">
+        <block wx:if="{{filterCourses.length}}" wx:for="{{filterCourses}}" wx:key="item">
+            <view class="course-box" wx:if="{{!ishow}}">
+                <view class="inner-box" wx:for="{{item.items}}" wx:for-index="itemsIndex" wx:for-item="_item" wx:key="_item">
+                    <view bindtap="jointCourse" class="discount-box" data-wpyjointcourse-a="{{item}}" wx:if="{{item.havePromotion&&itemsIndex===0}}">
+                        <view class="discount-left-wrap">
+                            <image class="shg" src="../../common/img/xsg.png"></image>
+                            <view class="discout-course">{{item.promotionDescription}}</view>
+                        </view>
+                        <view class="discount-right-wrap">
+                            <view class="more-course">更多课程</view>
+                            <view class="image-box">
+                                <image mode="aspectFit" src="https://cdninsight.speiyou.com/1514358979695_arrow_right_black_order.png"></image>
+                            </view>
+                        </view>
+                    </view>
+                    <view class="total-box">
+                        <view catchtap="navigate" class="navigate" data-wpynavigate-a="{{index}}" data-wpynavigate-b="{{itemsIndex}}">
+                            <view class="course-info-wrap">
+                                <view class="title">
+                                    <text class="'course-type-icon' {{$CourseInfo$classType[_item.classInfo.courseType].icon}}" hidden="{{!_item.classInfo.courseType}}">{{$CourseInfo$classType[_item.classInfo.courseType].text}}</text>
+                                    <text class="class-name">{{_item.classInfo.className}}</text>
+                                </view>
+                                <view class="info-list">
+                                    <view class="item" hidden="{{_item.classInfo.courseType===1||!_item.classInfo.address}}">
+                                        <image class="icon" mode="widthFix" src="../../common/img/address.png"></image>
+                                        <view class="text-right">{{_item.classInfo.address}}</view>
+                                    </view>
+                                    <view class="item" hidden="{{!_item.classInfo.classTime}}">
+                                        <image class="icon" mode="widthFix" src="../../common/img/time.png"></image>
+                                        <view class="text-right">{{_item.classInfo.classTime}}</view>
+                                    </view>
+                                    <view class="item" hidden="{{!_item.classInfo.timeArea}}">
+                                        <image class="icon" mode="widthFix" src="../../common/img/date.png"></image>
+                                        <view class="text-right">{{_item.classInfo.timeArea}}</view>
+                                    </view>
+                                    <view class="item" wx:if="{{_item.classInfo.teacherList||_item.classInfo.tutorList}}">
+                                        <image class="icon" mode="widthFix" src="../../common/img/person.png"></image>
+                                        <view class="text-right">
+                                            <view class="text-right-block" wx:if="{{_item.classInfo.teacherList.length&&!_item.classInfo.strengTutor}}">
+                                                <text class="teacher-title">授课:</text>
+                                                <text class="teacher-item" wx:for="{{_item.classInfo.teacherList}}" wx:for-index="_mun1" wx:for-item="_tea1" wx:key="_mun1">{{_tea1.name}}</text>
+                                            </view>
+                                            <view class="text-right-block" wx:if="{{_item.classInfo.tutorList.length&&_item.classInfo.classType!==4}}">
+                                                <text class="teacher-title">{{_item.classInfo.strengTutor?'老师':'辅导'}}:</text>
+                                                <text class="teacher-item" wx:for="{{_item.classInfo.tutorList}}" wx:for-index="_mun2" wx:for-item="_tea2" wx:key="_tea2">{{_tea2.name}}</text>
+                                            </view>
+                                        </view>
+                                    </view>
+                                </view>
+                                <view class="price-wrap">
+                                    <text class="info-price" wx:if="{{_item.classInfo.coursePrice}}">{{_item.classInfo.coursePrice}}</text>
+                                    <text class="surplus-class" wx:if="{{_item.classInfo.surplusClassNum}}">剩余{{_item.classInfo.surplusClassNum}}节课</text>
+                                </view>
+                            </view>
+                        </view>
+                        <view catchtap="deleteClass" class="delete-btn fr" data-wpydeleteclass-a="{{index}}" data-wpydeleteclass-b="{{itemsIndex}}" hidden="{{_item.isContinueClass}}">删除
+                            </view>
+                    </view>
+                    <view class="period-wrap">
+                        <block wx:if="{{!item.stageInfo.length}}">
+                            <view bindtap="chooseClass" class="checked-items-cen" data-wpychooseclass-a="{{index}}" data-wpychooseclass-b="{{itemsIndex}}" data-wpychooseclass-c="{{period_index}}" wx:if="{{_item.checked===0&&!period_item.disabled}}" wx:for="{{_item.stageInfo}}" wx:for-index="period_index" wx:for-item="period_item" wx:key="period_index">
+                                <view class="checked-items">
+                                    <image src="https://static-xesapi.speiyou.cn/xesFeProject/xesFeSource/xesImagesLibrary/1583745944000.png" wx:if="{{period_index===0}}"></image>
+                                </view>
+                                <view class="course-period-item {{period_item.disabled?'disabled':''}} _2a75096">
+                                    <view class="info-left _2a75096">
+                                        <view class="period-name _2a75096">
+                                            <text class="_2a75096">{{period_item.stagesName}}</text>
+                                        </view>
+                                        <view class="date-bottom _2a75096">
+                                            <text class="text _2a75096">{{period_item.startDate}} - {{period_item.endDate}}</text>
+                                        </view>
+                                        <view class="_2a75096">
+                                            <text class="tips _2a75096" wx:if="{{period_item.disabled&&period_item.startPayTime}}">支付开始时间: {{period_item.startPayTime}}</text>
+                                        </view>
+                                    </view>
+                                    <view class="price-right price-end _2a75096" wx:if="{{$PeriodItem$entry&&period_item.disabled}}">已结课</view>
+                                    <view class="price-right _2a75096" wx:else>{{period_item.price}}</view>
+                                </view>
+                            </view>
+                            <view bindtap="chooseClass" class="checked-items-cen" data-wpychooseclass-a="{{index}}" data-wpychooseclass-b="{{itemsIndex}}" data-wpychooseclass-c="{{period_index}}" wx:if="{{_item.checked===1&&!period_item.disabled}}" wx:for="{{_item.stageInfo}}" wx:for-index="period_index" wx:for-item="period_item" wx:key="period_index">
+                                <view class="checked-items">
+                                    <image src="https://static-xesapi.speiyou.cn/xesFeProject/xesFeSource/xesImagesLibrary/1583745911669.png" wx:if="{{period_index===0}}"></image>
+                                </view>
+                                <view class="course-period-item {{period_item.disabled?'disabled':''}} _2a75096">
+                                    <view class="info-left _2a75096">
+                                        <view class="period-name _2a75096">
+                                            <text class="_2a75096">{{period_item.stagesName}}</text>
+                                        </view>
+                                        <view class="date-bottom _2a75096">
+                                            <text class="text _2a75096">{{period_item.startDate}} - {{period_item.endDate}}</text>
+                                        </view>
+                                        <view class="_2a75096">
+                                            <text class="tips _2a75096" wx:if="{{period_item.disabled&&period_item.startPayTime}}">支付开始时间: {{period_item.startPayTime}}</text>
+                                        </view>
+                                    </view>
+                                    <view class="price-right price-end _2a75096" wx:if="{{$PeriodItem$entry&&period_item.disabled}}">已结课</view>
+                                    <view class="price-right _2a75096" wx:else>{{period_item.price}}</view>
+                                </view>
+                            </view>
+                        </block>
+                    </view>
+                    <view class="new-period-wrap">
+                        <block wx:if="{{!item.stageInfo.length}}">
+                            <view class="checked-items-cen" wx:if="{{period_item.disabled}}" wx:for="{{_item.stageInfo}}" wx:for-index="period_index" wx:for-item="period_item" wx:key="period_index">
+                                <view class="course-period-item {{period_item.disabled?'disabled':''}} _2a75096">
+                                    <view class="info-left _2a75096">
+                                        <view class="period-name _2a75096">
+                                            <text class="_2a75096">{{period_item.stagesName}}</text>
+                                        </view>
+                                        <view class="date-bottom _2a75096">
+                                            <text class="text _2a75096">{{period_item.startDate}} - {{period_item.endDate}}</text>
+                                        </view>
+                                        <view class="_2a75096">
+                                            <text class="tips _2a75096" wx:if="{{period_item.disabled&&period_item.startPayTime}}">支付开始时间: {{period_item.startPayTime}}</text>
+                                        </view>
+                                    </view>
+                                    <view class="price-right price-end _2a75096" wx:if="{{$PeriodItem$entry&&period_item.disabled}}">已结课</view>
+                                    <view class="price-right _2a75096" wx:else>{{period_item.price}}</view>
+                                </view>
+                            </view>
+                        </block>
+                    </view>
+                    <view class="pointMes" wx:if="{{_item.continueRegist}}">
+                        <view class="xubaoMes">【续报】</view>
+                        <view class="pointMessage">{{_item.showMes}}</view>
+                    </view>
+                    <view class="pointMes" wx:elif="{{_item.needRxcs}}">
+                        <view class="pointMessage">{{_item.showMes}}</view>
+                    </view>
+                </view>
+            </view>
+        </block>
+        <view class="blank"></view>
+    </view>
+</view>
+<view class="pay-box {{isiPhoneX?'iphoneX':''}}" wx:if="{{filterCourses.length!==0}}">
+    <view class="total-class">
+        <text>总计班级（{{now}}）</text>
+        <text class="price">{{totalprice}}</text>
+    </view>
+    <button bindtap="count" class="save-btn {{saving?'disabledClass':''}}" disabled="{{ban}}" loading="{{saving}}">去结算
+        </button>
+</view>
+<view animation="{{$taltoast$animationData}}" class="tal-toast-container" style="top:{{$taltoast$vertical}}%;" wx:if="{{$taltoast$toastVisible}}">
+    <view class="tal-toast">
+        <text>{{$taltoast$toastMessage}}</text>
+    </view>
+</view>
+<view class="app-cen" wx:if="{{$appmask$isHide}}">
+    <view class="app-mask"></view>
+    <view class="app-center">
+        <view class="app-con">
+            <view class="title">每一位学而思家长的必备APP</view>
+            <image src="http://static-xesapi.speiyou.cn/1536045641131.png"></image>
+            <view class="test" wx:if="{{$appmask$SystemInfo}}">
+                <view>请在App Store内搜索“学而思”</view>
+                <view>下载学而思APP</view>
+            </view>
+            <view class="test" wx:else>
+                <view>请在各大应用商店内搜索“学而思”</view>
+                <view>（应用宝、360手机助手、华为应用市场等）下载学而思APP</view>
+            </view>
+            <view bindtap="$appmask$goHide" class="btn">知道了</view>
+        </view>
+    </view>
+</view>
+<view bindtap="$gohome$backfunc" class="goHome" wx:if="{{isShare}}">
+    <text class="iconfont icon-home"></text>
+</view>
+<view class="loading-center" hidden="{{$LoadingView$isLoading}}">
+    <view class="loading-animation">
+        <text></text>
+        <text></text>
+        <text></text>
+        <text></text>
+        <text></text>
+    </view>
+    <view class="loading-mask"></view>
+</view>

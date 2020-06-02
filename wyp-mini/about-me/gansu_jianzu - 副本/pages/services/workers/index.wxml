@@ -1,0 +1,12 @@
+<view class="container">
+    <view class="workers-list">
+        <navigator class="workers-list__item" data-id="{{item.id}}" openType="redirect" url="/pages/services/worker_detail/index?shopId={{shopId}}&workerId={{item.id}}" wx:for="{{list}}">
+            <image class="workers-list__item__avatar" mode="scaleToFit" src="{{item.headImg}}"></image>
+            <view class="workers-list__item__detail">
+                <view class="workers-list__item__detail__name">{{item.serverName}}</view>
+                <view class="workers-list__item__detail__desc">{{item.jobTitle}}</view>
+                <view class="workers-list__item__detail__number" wx:if="{{item.showNum==1}}">已有{{item.num}}人预约</view>
+            </view>
+        </navigator>
+    </view>
+</view>

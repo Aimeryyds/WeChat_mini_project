@@ -1,0 +1,28 @@
+<view class="house-resblock house-detail _div data-v-4fd74320" wx:if="{{resblock}}">
+    <view class="block-title _h2 data-v-4fd74320">小区介绍<label bindtap="__e" class="more-btn _span data-v-4fd74320" data-event-opts="{{[ [ 'tap',[ [ 'handleJumpResblock',['$0'],['resblock.id'] ] ] ] ]}}">小区详情<view class="iconfont icon-zrk_ic_arrowright _i data-v-4fd74320"></view>
+        </label>
+    </view>
+    <view class="resblock-info _div data-v-4fd74320">
+        <image alt class="image _img data-v-4fd74320" src="{{resblock.photos[0]}}" wx:if="{{resblock.photos&&resblock.photos[0]}}"></image>
+        <view class="info _div data-v-4fd74320">
+            <view class="name _h5 data-v-4fd74320">{{resblock.name}}</view>
+            <view class="location _p data-v-4fd74320" wx:if="{{bizcircle}}">{{bizcircle}}</view>
+            <view class="tag-list _div data-v-4fd74320" wx:if="{{resblock.tags&&resblock.tags.length>0}}">
+                <label class="zr-tag _span data-v-4fd74320" wx:for="{{resblock.tags}}" wx:for-index="__i0__" wx:for-item="tag" wx:key="*this">{{tag}}</label>
+            </view>
+        </view>
+    </view>
+    <scroll-view class="data-v-4fd74320" scrollX="{{true}}">
+        <view class="card-list _div data-v-4fd74320" wx:if="{{resblock.score_list&&resblock.score_list.length>0}}">
+            <view class="card _div data-v-4fd74320" wx:for="{{resblock.score_list}}" wx:for-index="__i1__" wx:key="title">
+                <view class="project-title _h4 data-v-4fd74320">{{item.title}}</view>
+                <view class="project-content _p data-v-4fd74320" wx:for="{{item.project}}" wx:for-index="__i2__" wx:for-item="project" wx:key="name">
+                    <label class="name _span data-v-4fd74320">{{project.name}}</label>
+                    <label class="value _span data-v-4fd74320">{{project.value}}</label>
+                </view>
+            </view>
+        </view>
+    </scroll-view>
+    <view bindtap="__e" class="resblock-more _div data-v-4fd74320" data-event-opts="{{[ [ 'tap',[ [ 'handleJumpResblockList',['$event'] ] ] ] ]}}" wx:if="{{showButton}}">同小区在租<label class="mcolor _span data-v-4fd74320">{{''+resblock.house_num+''}}</label>套房源</view>
+    <view class="tips _p data-v-4fd74320">{{resblock.tips}}</view>
+</view>

@@ -1,0 +1,172 @@
+<view class="loading" wx:if="{{loading1}}">
+    <image class="loading_img" src="../../image/loading-32-32.gif"></image>
+</view>
+<view class="loading_fail" wx:if="{{loading1_fail}}"></view>
+<view class="{{loading1_ok?'':'hidden'}}">
+    <scroll-view scrollX class="navs" scrollIntoView="{{tag<4?'navs0':'navs'+tag-3}}" scrollWithAnimation="true">
+        <view bindtap="tagtag_info" class="navs_item" data-n="{{index}}" id="navs{{index}}" style="width:{{100/navs.length}}%" wx:for="{{navs}}" wx:key="navs">
+            <view class="navs_default {{tag==index?'navs_red':''}}">{{item.subject}}</view>
+        </view>
+    </scroll-view>
+    <swiper bindchange="swiper_list_change" class="swiper_list" current="{{tag}}" duration="300" skipHiddenItemLayout="true" style="height:{{height}}px;">
+        <swiper-item wx:for="{{navs}}" wx:key="navs">
+            <scroll-view bindscrolltolower="loadMore" bindtouchend="handletouchend" bindtouchstart="handletouchtart" enableBackToTop="true" scrollY="true">
+                <view class="infos" style="height:80rpx;"></view>
+                <view class="refresh {{tag==index&&refresh?'':'out'}}">加载中...</view>
+                <block wx:if="{{item.worktype=='index'}}">
+                    <image class="banner" src="{{wappic}}"></image>
+                    <view class="event_head">
+                        <text style="float:left">{{hdstime}} - {{hdetime}}</text>
+                        <text style="float:right">{{joinnum}}人参与</text>
+                    </view>
+                    <view class="event_index height1" wx:if="{{show_data==1}}">
+                        <text>{{descr}}</text>
+                    </view>
+                    <view class="event_index" wx:else>
+                        <text>{{descr}}</text>
+                    </view>
+                    <view bindtap="message_show" class="event_show" wx:if="{{show_data>0}}">
+                        <block wx:if="{{show_data==1}}">
+                            <text>查看全部</text>
+                            <image src="/image/down.png"></image>
+                        </block>
+                        <block wx:if="{{show_data==2}}">
+                            <text>收起</text>
+                            <image src="/image/up.png"></image>
+                        </block>
+                    </view>
+                    <view class="feed_list">
+                        <view class="feed_item" wx:for="{{list[index]}}" wx:key="list[index]">
+                            <block wx:if="{{item.icon=='post_recipe'}}">
+                                <navigator class="feed_img_u" url="/pages/space/space?uid={{item.template_data.uid}}">
+                                    <image class="feed_img_avatar" src="{{item.template_data.avatar}}"></image>
+                                    <image class="vip_icon" src="/image/vip_icon.png" wx:if="{{item.vip}}"></image>
+                                </navigator>
+                                <navigator class="feed_c" url="/pages/recipe_info/recipe_info?id={{item.template_data.recipe_id}}">
+                                    <view class="feed_line_1">
+                                        <view>{{item.template_data.username}}<text class="a1"> 发布了新菜谱</text>
+                                        </view>
+                                        <text class="a2">{{item.template_data.timeline}}</text>
+                                    </view>
+                                    <view class="feed_line_1">
+                                        <view class="bold">{{item.template_data.recipe_name}}</view>
+                                        <view class="a2">{{item.template_data.summary}}</view>
+                                    </view>
+                                    <view class="feed_line_img">
+                                        <image class="feed_img_0 load" src="{{item.template_data.recipe_bigimg}}"></image>
+                                    </view>
+                                </navigator>
+                            </block>
+                            <block wx:if="{{item.icon=='post_pai'}}">
+                                <navigator class="feed_img_u" url="/pages/space/space?uid={{item.template_data.uid}}">
+                                    <image class="feed_img_avatar" src="{{item.template_data.avatar}}"></image>
+                                    <image class="vip_icon" src="/image/vip_icon.png" wx:if="{{item.vip}}"></image>
+                                </navigator>
+                                <navigator class="feed_c" url="/pages/pai_info/pai_info?id={{item.template_data.pai_id}}">
+                                    <view class="feed_line_1">
+                                        <view>{{item.template_data.username}}<text class="a1"> 发布了新帖子</text>
+                                        </view>
+                                        <text class="a2">{{item.template_data.timeline}}</text>
+                                    </view>
+                                    <view class="feed_line_1">
+                                        <view class="b1" wx:if="{{item.template_data.pai_name}}">{{item.template_data.pai_name}}</view>
+                                        <text class="a3" wx:if="{{item.template_data.summary}}">{{item.template_data.summary}}</text>
+                                    </view>
+                                    <view class="feed_line_img" wx:if="{{item.template_data.pai_img_num>0}}">
+                                        <image class="feed_img_1 load" mode="widthFix" src="{{item.template_data.photolist[0].pic}}" style="width:{{item.template_data.photolist[0].width}}rpx" wx:if="{{item.template_data.photolist.length==1}}"></image>
+                                        <block wx:if="{{item.template_data.photolist.length==2}}">
+                                            <image class="feed_img_2 load" src="{{item.template_data.photolist[0].pic}}"></image>
+                                            <image class="feed_img_2 load" src="{{item.template_data.photolist[1].pic}}"></image>
+                                        </block>
+                                        <block wx:if="{{item.template_data.photolist.length==3}}">
+                                            <image class="feed_img_3 load" src="{{item.template_data.photolist[0].pic}}"></image>
+                                            <image class="feed_img_3 load" src="{{item.template_data.photolist[1].pic}}"></image>
+                                            <image class="feed_img_3 load" src="{{item.template_data.photolist[2].pic}}"></image>
+                                        </block>
+                                        <block wx:if="{{item.template_data.photolist.length>3}}">
+                                            <image class="feed_img_2 load" src="{{item.template_data.photolist[0].pic}}"></image>
+                                            <view class="feed_img_2">
+                                                <image class="feed_img_41 load" src="{{item.template_data.photolist[1].pic}}"></image>
+                                                <image class="feed_img_41 load" src="{{item.template_data.photolist[2].pic}}"></image>
+                                                <view class="feed_img_42">
+                                                    <image class="load" src="{{item.template_data.photolist[3].pic}}"></image>
+                                                    <view class="feed_img_num" wx:if="{{item.template_data.pai_img_num>4}}">{{item.template_data.pai_img_num}}</view>
+                                                </view>
+                                            </view>
+                                        </block>
+                                    </view>
+                                </navigator>
+                            </block>
+                        </view>
+                    </view>
+                </block>
+                <view class="rlist" wx:elif="{{item.worktype=='recipe'}}">
+                    <navigator class="rlist_item" url="../recipe_info/recipe_info?id={{item.id}}" wx:for="{{list[index]}}" wx:key="list[index]">
+                        <image class="rlist_img r4{{open_v==1?item.r4:''}}" src="{{item.fcover}}"></image>
+                        <view class="rlist_detail">
+                            <text class="rlist_t">{{item.title}}</text>
+                            <text class="rlist_c">{{item.mainingredient}}</text>
+                            <text class="rlist_n" wx:if="{{item.collnum>0}}">{{item.collnum}}人收藏</text>
+                        </view>
+                    </navigator>
+                </view>
+                <view class="plist" wx:elif="{{item.worktype=='pai'}}">
+                    <view class="plist_item" wx:for="{{list[index]}}" wx:key="list[index]">
+                        <view class="plist_item_u">
+                            <view class="plist_nu">
+                                <image class="plist_img_u" src="{{item.avatar}}"></image>
+                                <image class="vip_icon" src="/image/vip_icon.png" wx:if="{{item.vip}}"></image>
+                            </view>
+                            <view class="plist_nu2">{{item.username}}</view>
+                            <view class="plist_item_time">{{item.dateline}}<text wx:if="{{item.city}}">，{{item.city}}</text>
+                            </view>
+                        </view>
+                        <navigator class="plist_item_c" url="/pages/pai_info/pai_info?id={{item.id}}">
+                            <view class="plist_item_t">
+                                <block wx:if="{{item.title}}">
+                                    <view class="plist_item_b">
+                                        <text class="plist_tip2" wx:if="{{item.digest==2}}">精</text>
+                                        <text class="plist_tip" wx:if="{{item.type==2}}">问答</text>
+                                        <text class="plist_tip" wx:if="{{item.type==3}}">投票</text>
+                                        <text>{{item.title}}</text>
+                                    </view>
+                                    <text>{{item.subject}}</text>
+                                </block>
+                                <block wx:else>
+                                    <text class="plist_tip2" wx:if="{{item.digest==2}}">精</text>
+                                    <text class="plist_tip" wx:if="{{item.type==2}}">问答</text>
+                                    <text class="plist_tip" wx:if="{{item.type==3}}">投票</text>
+                                    <text>{{item.subject}}</text>
+                                </block>
+                            </view>
+                            <view class="plist_item_pic">
+                                <image src="{{photo.pic}}" wx:if="{{index<3}}" wx:for="{{item.photo}}" wx:for-item="photo" wx:key="photo"></image>
+                                <view class="plist_item_num" wx:if="{{item.photo.length>3}}">{{item.photo.length}}</view>
+                            </view>
+                        </navigator>
+                        <view class="plist_item_ac">
+{{item.likenum}}个喜欢，{{item.replynum}}条评论<block wx:if="{{item.type==3}}">，{{item.partnum}}人投票</block>
+                        </view>
+                    </view>
+                </view>
+                <view class="loading_end" wx:if="{{loading_end[index]}}"></view>
+                <view class="loading" wx:if="{{tag==index&&loading&&index!=0}}">
+                    <image class="loading_img" src="../../image/loading-32-32.gif"></image>
+                </view>
+                <view class="loading_fail" wx:if="{{tag==index&&loading_fail}}"></view>
+            </scroll-view>
+            <block wx:if="{{index==0}}">
+                <button bindtap="pai_rule" class="add_rule">奖项与规则</button>
+                <button bindtap="pai_draw" class="add_pai" wx:if="{{drawurl}}">获奖名单</button>
+                <block wx:else>
+                    <block wx:if="{{state=='doing'}}">
+                        <button bindtap="pai_do" class="add_pai" wx:if="{{haveuid}}">参与活动</button>
+                        <button bindgetuserinfo="clickinfo" class="add_pai" openType="getUserInfo" wx:else>参与活动</button>
+                    </block>
+                    <button class="add_pai will" wx:if="{{state=='will'}}">即将开始</button>
+                    <button class="add_pai will" wx:if="{{state=='end'}}">平选中</button>
+                </block>
+            </block>
+        </swiper-item>
+    </swiper>
+</view>

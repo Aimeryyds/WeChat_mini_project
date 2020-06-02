@@ -1,0 +1,52 @@
+<view class="top">
+    <image class="head" src="{{member.avatarUrl?member.avatarUrl:'/yb_shop/static/images/noface.png'}}"></image>
+    <text class="nick" wx:if="{{haslogin}}">{{member.nickName}}</text>
+    <button bindgetuserinfo="onGotUserInfo" class="login" lang="zh_CN" openType="getUserInfo" wx:else>点击登录</button>
+    <view class="vips">
+        <text class="expire" wx:if="{{member.isvip}}">VIP有效期:{{member.expire_day}}</text>
+        <text class="expire" wx:else>您还不是VIP</text>
+        <text bindtap="dobuy" class="buybtn">{{member.isvip?'续费VIP':'成为VIP'}}</text>
+    </view>
+</view>
+<view class="menus">
+    <navigator class="menu" hoverClass="none" url="/yb_shop/pages/paycontent/userorder/index">
+        <image src="/yb_shop/static/images/pay_record.png"></image>
+        <text>消费记录</text>
+    </navigator>
+    <navigator class="menu" hoverClass="none" url="/yb_shop/pages/paycontent/userlike/index">
+        <image src="/yb_shop/static/images/user_likes.png"></image>
+        <text>我的喜欢</text>
+    </navigator>
+</view>
+<view bindtap="hidebuy" class="dobuy" wx:if="{{dobuy}}">
+    <view catchtap="true" class="skus">
+        <view class="price_type">
+            <text class="title">资费类型:</text>
+            <view class="sku">
+                <text bindtap="choose_sku" class="{{now_sku.id==item.id?'active':''}}" data-index="{{index}}" wx:for="{{skus}}">{{item.name}}         </text>
+            </view>
+        </view>
+        <view class="price_type buy_num" style="margin-top: 8px;">
+            <text class="title">购买数量:</text>
+            <view class="sku buy_num">
+                <input bindblur="inputing" bindfocus="inputing" bindinput="num_change" class="num" placeholder="购买数量" type="number" value="{{num}}"></input>
+                <view class="price">￥{{now_sku.price}}</view>
+            </view>
+        </view>
+        <view class="price_type mark_line" style="margin-top: 20px;">
+            <text class="mark">使用说明:</text>
+            <view style="color:#999999;margin-right: 12px;">{{now_sku.info}}</view>
+        </view>
+    </view>
+    <view catchtap="true" class="pay_line">
+        <view class="tprice">
+      合计:
+      <text>￥{{nowprice}}</text>
+        </view>
+        <view bindtap="tobuy" class="pay_btn">支付</view>
+    </view>
+</view>
+<block wx:if="{{showtabbar}}">
+    <view style="height:100rpx"></view>
+    <include src="/yb_shop/pages/common/menu.wxml"></include>
+</block>

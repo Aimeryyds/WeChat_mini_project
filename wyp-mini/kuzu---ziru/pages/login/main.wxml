@@ -1,0 +1,16 @@
+<view class="login-wrapper _div data-v-0eb42c7a">
+    <image alt="logo" class="logo _img data-v-0eb42c7a" src="{{$root.m0}}"></image>
+    <button bindgetphonenumber="__e" class="wx-login-btn data-v-0eb42c7a" data-event-opts="{{[ [ 'getphonenumber',[ [ 'handleWxLogin',['$event'] ] ] ] ]}}" openType="getPhoneNumber">微信授权一键登录</button>
+    <button bindtap="__e" class="phone-login-btn data-v-0eb42c7a" data-event-opts="{{[ [ 'tap',[ [ 'handleGotoPhoneLogin',['$event'] ] ] ] ]}}">手机号登录/注册</button>
+    <view class="tips _p data-v-0eb42c7a">若您没有自如账号，登录后会自动创建</view>
+    <view class="aggrement _p data-v-0eb42c7a">登录代表您已同意<label bindtap="__e" class="_span data-v-0eb42c7a" data-event-opts="{{[ [ 'tap',[ [ 'handleJumpH5',['https://special.ziroom.com/2018/tpl201810/index.html?id=2216'] ] ] ] ]}}">《酷租用户服务协议》</label>
+        <label bindtap="__e" class="_span data-v-0eb42c7a" data-event-opts="{{[ [ 'tap',[ [ 'handleJumpH5',['https://special.ziroom.com/2018/tpl201810/index.html?id=1568'] ] ] ] ]}}">《自如网隐私政策》</label>
+    </view>
+    <popup-wrapper backgroundColor="#fff" bind:__l="__l" class="data-v-0eb42c7a vue-ref" data-ref="requestPermissionPopup" height="40%" maskClick="{{true}}" maskShow="{{true}}" style="text-align:left;" transition="slider" type="bottom" vueId="1" vueSlots="{{['default']}}">
+        <view class="user-info _div data-v-0eb42c7a">
+            <view class="login-tips data-v-0eb42c7a">请完成微信授权以继续登录</view>
+            <button bindgetuserinfo="__e" class="userinfo-btn data-v-0eb42c7a" data-event-opts="{{[ [ 'getuserinfo',[ [ 'handleGetUserInfo',['$event'] ] ] ] ]}}" openType="getUserInfo">
+                <image class="img_weixin data-v-0eb42c7a" mode="widthFix" src="https://static8.ziroom.com/yezhuNew/miniprogram/images/icon/weixin.png"></image>授权获取微信用户信息</button>
+        </view>
+    </popup-wrapper>
+</view>

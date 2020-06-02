@@ -1,0 +1,9 @@
+<view class="bg_color">
+    <form bindsubmit="submitEdit" reportSubmit="true">
+        <view class="content">
+            <input bindinput="changeForm" data-ftype="name" name="name" placeholder="请输入店铺名称" placeholderClass="place" type="type" value="{{datas.name}}"></input>
+            <textarea autoHeight="true" bindinput="changeForm" data-ftype="desc" maxlength="-1" name="desc" placeholder="请输入店铺描述" placeholderClass="place" value="{{datas.desc}}"></textarea>
+            <button formType="submit">修改</button>
+        </view>
+    </form>
+</view>

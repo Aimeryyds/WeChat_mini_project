@@ -1,0 +1,19 @@
+<view bindtap="makemap" class="zan-panel  zan-panel__no-margin-top" data-item="{{item}}" wx:for="{{list}}">
+    <view class="zan-card" style="padding-top: 20rpx;display: flex;align-items: center;">
+        <view class="" style="width:116rpx;">
+            <image class="" mode="{{scaleToFill}}" src="{{item.logo||'http://imgcdnali.wfenxiao.com.cn/xcx/c/icons/brand.png'}}" style="width:116rpx;height: 108rpx;"></image>
+        </view>
+        <view class="" style="flex:1;margin-left: 16rpx;">
+            <view class="">
+                <view class="zan-card__left-col" style="font-size:28rpx;margin-bottom: 14rpx;">
+                    <text>{{item.brandName}}</text>
+                </view>
+            </view>
+            <view class=" " style="margin-bottom:0;height:66rpx;">
+                <view class="" style="font-size: 24rpx;color: #999999;">
+                    <text class="zan-ellipsis--l2" style="line-height: 150%;">{{item.description}}</text>
+                </view>
+            </view>
+        </view>
+    </view>
+</view>

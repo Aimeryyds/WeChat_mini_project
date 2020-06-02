@@ -1,0 +1,75 @@
+<view class="container">
+    <view class="refresh-wrap {{is_refreshing?'refreshing':''}}">
+        <view class="circle-wrap r">
+            <view></view>
+        </view>
+        <view class="circle-wrap l">
+            <view></view>
+        </view>
+    </view>
+    <view class="refresh-arrow-wrap" wx:if="{{!is_refreshing}}">
+        <image class="arrow" src="/images/arrow_down.png" style="transform: rotate({{arrow_deg}}deg); opacity: {{arrow_opc}}"></image>
+    </view>
+    <swiper bindchange="scrollContent" class="content-view" current="{{selected}}">
+        <swiper-item>
+            <view class="cnt cnt1" id="cnt1" style="transition: all 0.25s; transform: translateY({{is_refreshing?'60px':'0'}})">
+                <scroll-view bindscrolltolower="loadmore" lowerThreshold="200" scrollTop="{{list_top}}" scrollY="true">
+                    <image class="banner" mode="widthFix" src="{{bannerPics}}" style="margin-top: 20rpx;display:block" wx:if="{{bannerPics}}"></image>
+                    <view bindtap="goToDetail" class="bargain-item {{item.status!=1?'disbaled':''}}" data-status="{{item.status}}" data-url="../bargain-detail/bargain-detail?id={{item.id}}" wx:for="{{list}}">
+                        <image src="{{item.thumb}}"></image>
+                        <view class="item__mid">
+                            <view>
+                                <view class="item__name">{{item.name}}</view>
+                            </view>
+                            <view class="item__oprice">
+                                <text>原价: ¥ {{item.purchasePrice}}</text>
+                            </view>
+                            <view class="item__nprice">底价: ¥ <text>{{item.marketPriceMin}}</text>
+                            </view>
+                        </view>
+                        <view class="item__right">
+                            <text>剩{{item.stock}}件</text>
+                            <view>我要砍价</view>
+                            <image class="tag-image" src="/images/bargain/svg/icon_expired.svg" wx:if="{{item.status==3||item.status==-1}}"></image>
+                            <image class="tag-image" src="/images/bargain/svg/mark_empty.svg" wx:if="{{item.status==2}}"></image>
+                            <image class="tag-image" src="/images/bargain/png/mark_remove.png" wx:if="{{item.status==4}}"></image>
+                        </view>
+                    </view>
+                    <view class="nomore" wx:if="{{is_nomore}}">已经到底啦~</view>
+                </scroll-view>
+            </view>
+        </swiper-item>
+        <swiper-item>
+            <view class="cnt cnt2" id="cnt2" style="transition: all 0.25s; transform: translateY({{is_refreshing?'60px':'0'}})">
+                <scroll-view bindscrolltolower="loadmore" lowerThreshold="200" scrollY="true">
+                    <view bindtap="goToDetail" class="bargain-item {{item.status!=1?'disbaled':''}}" data-status="{{item.status}}" data-url="../bargain-detail/bargain-detail?id={{item.bargainId}}&order_id={{item.id}}" wx:for="{{list2}}">
+                        <image src="{{item.thumb}}"></image>
+                        <view class="item__mid">
+                            <view>
+                                <view class="item__name">{{item.name}}</view>
+                            </view>
+                            <view class="item__oprice">
+                                <text>原价: {{item.purchasePrice}}</text>
+                            </view>
+                            <view class="item__nprice">底价: ¥ <text>{{item.marketPriceMin}}</text>
+                            </view>
+                        </view>
+                        <view class="item__right">
+                            <text>剩{{item.stock}}件</text>
+                            <view>查看详情</view>
+                            <image class="tag-image" src="/images/bargain/svg/icon_expired.svg" wx:if="{{item.status==3||item.status==-1}}"></image>
+                            <image class="tag-image" src="/images/bargain/svg/mark_empty.svg" wx:if="{{item.status==2}}"></image>
+                        </view>
+                    </view>
+                    <view class="nomore" wx:if="{{is_nomore2}}">已经到底啦~</view>
+                </scroll-view>
+            </view>
+        </swiper-item>
+    </swiper>
+    <view class="tabbar">
+        <view catchtap="clickTag" class="{{selected==index?'selected':'unselected'}}" id="{{index}}" wx:for="{{tabs}}" wx:key="tab">
+            <image src="/images/bargain/png/{{selected==index?item.sel:item.nor}}"></image>
+            <text>{{item.name}}</text>
+        </view>
+    </view>
+</view>

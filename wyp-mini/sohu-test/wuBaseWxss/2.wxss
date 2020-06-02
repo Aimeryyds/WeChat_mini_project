@@ -1,0 +1,72 @@
+button::after {
+    border-top-style: none;
+    border-right-style: none;
+    border-bottom-style: none;
+    border-left-style: none;
+    webkit-tap-highlight-color: transparent;
+}
+
+.share-bar {
+    position: fixed;
+    left: 50%;
+    bottom: 40rpx;
+    transform: translate(-50%,0);
+    background-color: rgba(255,255,255,.9);
+    text-align: center;
+    border-radius: 45rpx;
+    box-shadow: 5rpx 5px 10rpx rgba(51,51,51,.2);
+    z-index: 9999;
+    text-align: center;
+    width: 530rpx;
+}
+
+.share-bar:after {
+    content: '';
+    position: absolute;
+    left: 48%;
+    top: 0;
+    width: 1px;
+    height: 100%;
+    background-color: #dcdcdb;
+}
+
+.share-bar .btn {
+    background-color: transparent;
+    color: #f57157;
+    font-size: 30rpx;
+    position: relative;
+    line-height: 50rpx;
+    height: 50rpx;
+    text-align: center;
+    float: left;
+    padding: 18rpx 0;
+    padding-left: 60rpx;
+    position: relative;
+}
+
+.share-bar .share-friend {
+    margin-left: 25rpx;
+    height: auto;
+}
+
+.share-bar .generate-poster {
+    margin-left: 60rpx;
+}
+
+.share-bar .btn image {
+    width: 46rpx;
+    height: 46rpx;
+    position: absolute;
+    left: 0;
+    top: 50%;
+    transform: translate(0,-50%);
+}
+
+.share-bar .btn-circle image {
+    right: 45rpx;
+    left: auto;
+}
+
+.share-bar .btn text {
+    display: inline-block;
+}

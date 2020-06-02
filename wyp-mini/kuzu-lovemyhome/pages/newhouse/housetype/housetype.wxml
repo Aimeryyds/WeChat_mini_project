@@ -1,0 +1,25 @@
+<view class="housetype-tab">
+    <scroll-view>
+        <view bindtap="selectType" class="{{selectIndex==index?'selected':''}}" data-index="{{index}}" wx:for="{{housetype}}">
+      {{item.label}}({{item.count}})
+    </view>
+    </scroll-view>
+</view>
+<view class="housetype-list">
+    <scroll-view>
+        <view bindtap="toDetailPage" class="housetype-item" data-housetypeid="{{item.houseTypeID}}" wx:for="{{listctn.data}}">
+            <view class="houseimg">
+                <image src="{{item.houseTypeImageName}}"></image>
+            </view>
+            <view class="houseinfo">
+                <view class="type-name">
+                    <view>{{item.houseTypeLabel}}</view>
+                    <view class="{{item.saleStatus_desc!='在售'?'saleout':''}}">{{item.saleStatus_desc}}</view>
+                </view>
+                <view class="house-area">{{item.buildArea}}</view>
+                <view class="house-aspect">{{item.aspect}}</view>
+                <view class="house-price">{{item.houseTypePrice}}</view>
+            </view>
+        </view>
+    </scroll-view>
+</view>

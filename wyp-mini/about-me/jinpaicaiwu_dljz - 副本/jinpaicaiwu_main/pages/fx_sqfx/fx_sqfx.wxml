@@ -1,0 +1,53 @@
+<view class="main" wx:if="{{fill_addr=='1'||check_phone=='1'}}">
+    <view class="form-box">
+        <view class="sq_title">请填写以下资料后完成申请</view>
+        <form bindsubmit="formSubmit">
+            <view bindtap="choosearea" class="border_bottom medium_font choose-prov" style="position:relative;" wx:if="{{fill_addr=='1'}}">
+                <text>选择地区：</text>
+                <input disabled="true" value="{{address.province}}"></input>
+                <view style="position:absolute;width:80%;left:20%;top:0;height:90rpx;z-index:100;"></view>
+            </view>
+            <view class="border_bottom medium_font" wx:if="{{fill_addr=='1'}}">
+                <text>详细地址：</text>
+                <input bindinput="bindDetail" placeholder="请输入详细地址" value="{{address.detail}}"></input>
+            </view>
+            <view class="border_bottom medium_font" style="display:flex;align-items:center;" wx:if="{{check_phone=='1'}}">
+                <image bindtap="freshCaptcha" class="captcha" src="{{captcha}}"></image>
+                <input bindinput="bindImgCaptcha" name="imgcaptcha" placeholder="  请输入图形验证码" type="number" value=""></input>
+            </view>
+            <view class="border_bottom medium_font getcode" wx:if="{{check_phone=='1'}}">
+                <input bindinput="bindPhone" placeholder="请输入合法手机号码" value="{{address.name}}"></input>
+                <button bindtap="bindcode" disabled="{{disabled}}">{{timetips}}</button>
+            </view>
+            <view class="border_bottom medium_font" wx:if="{{check_phone=='1'}}">
+                <input bindinput="bindCaptcha" placeholder="请输入验证码" type="number" value="{{address.phone}}"></input>
+            </view>
+            <button class="cart_bg_color2" formType="submit">成为分销商</button>
+            <button bindtap="toBack">取消</button>
+        </form>
+    </view>
+    <view class="pickerConfirm" wx:if="{{isShow}}">
+        <text bindtap="onCancel">取消</text>
+        <text bindtap="onConfirm">确定</text>
+    </view>
+    <picker-view bindchange="bindChange" class="picker-view" indicatorStyle="height: 40px;" style="width: 100%; height: 500rpx;" value="{{value}}" wx:if="{{isShow}}">
+        <picker-view-column>
+            <view class="addr-item" wx:for="{{proviceData}}" wx:key="key">{{item.fullNameDot}}</view>
+        </picker-view-column>
+        <picker-view-column>
+            <view class="addr-item" wx:for="{{cityData}}" wx:key="key">{{item.fullNameDot}}</view>
+        </picker-view-column>
+        <picker-view-column wx:if="{{showDistrict}}">
+            <view class="addr-item" wx:for="{{districtData}}" wx:key="key">{{item.fullNameDot}}</view>
+        </picker-view-column>
+    </picker-view>
+</view>
+<view class="body" wx:if="{{fill_addr=='0'&&check_phone=='0'}}">
+    <view class="content">
+        <view class="T-text">温馨提示：</view>
+        <view class="T-content">{{reviewstr}}</view>
+        <view class="B-button">
+            <button bindtap="surebtn">确定</button>
+        </view>
+    </view>
+</view>

@@ -1,0 +1,36 @@
+<import src="../../../../../wxParse/wxParse.wxml"></import>
+<scroll-view bindscrolltolower="bottom" scrollY="true" style="height: {{height}}rpx;">
+    <block wx:if="{{list}}">
+        <view class="Social_commentary" wx:for="{{list}}">
+            <view class="top">
+                <image bindtap="toPerson" class="img" data-id="{{item.id}}" src="{{item.avatar}}"></image>
+                <view class="top_wrap">
+                    <view class="nickname">{{item.nickname}}</view>
+                    <view style="font-size: 27rpx;letter-spacing: 1rpx;">{{item.createtime}}</view>
+                </view>
+            </view>
+            <view bindtap="toTopic" class="body" data-bid="{{bid}}" data-pid="{{item.id}}">
+                <view class="title">
+                    <view class="jin">精</view>{{item.title}}</view>
+                <view class="content" style="">
+                    <template is="wxParse" data="{{ wxParseData:replyTemArray[index] }}"></template>
+                </view>
+                <view class="img_wrap" wx:if="{{item.images}}">
+                    <image mode="widthFix" src="{{item}}" style="width: 33%;" wx:for="{{item.images}}"></image>
+                </view>
+            </view>
+            <view class="footer">
+                <view bindtap="toTopic" class="goodcount" data-bid="{{bid}}" data-pid="{{item.id}}">
+                    <image class="icon" src="https://tws.cnweisou.com/images/yu.png" style="width:28rpx;height:28rpx;"></image>({{item.postcount}})</view>
+                <view bindtap="toTopic" class="goodcount" data-bid="{{bid}}" data-pid="{{item.id}}">
+                    <image class="icon" src="https://tws.cnweisou.com/images/good2Z.png"></image>({{item.goodcount}})</view>
+            </view>
+        </view>
+    </block>
+    <view style="width:100%;height:{{height-200}}rpx;display:flex;flex-direction:row;justify-content:center;align-items:center" wx:else>
+        <view class="no_comment">
+            <image src="https://tws.cnweisou.com/images/talk2Z.png" style="width: 120rpx;height: 120rpx;margin: 30rpx 0;"></image>
+            <view>暂时没有任何精华</view>
+        </view>
+    </view>
+</scroll-view>

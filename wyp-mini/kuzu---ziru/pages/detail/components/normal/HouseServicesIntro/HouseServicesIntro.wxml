@@ -1,0 +1,41 @@
+<view class="house-services-intro house-detail _div data-v-83799500" wx:if="{{services&&services.length}}">
+    <view class="block-title _h2 data-v-83799500">服务及承诺</view>
+    <view class="intro _div data-v-83799500">
+        <view class="intro-tags _div data-v-83799500">
+            <label bindtap="__e" class="{{['tag _span data-v-83799500',currentSelect===index?'active':'']}}" data-event-opts="{{[ [ 'tap',[ [ 'handleSelect',[index] ] ] ] ]}}" wx:for="{{services}}" wx:key="title">{{''+item.title+''}}</label>
+            <label bindtap="__e" class="all mcolor _span data-v-83799500" data-event-opts="{{[ [ 'tap',[ [ 'handleOpenModal',['$event'] ] ] ] ]}}">全部<view class="iconfont icon-arrowforward _i data-v-83799500"></view>
+            </label>
+        </view>
+        <view bindtap="__e" class="intro-content _div data-v-83799500" data-event-opts="{{[ [ 'tap',[ [ 'handleOpenModalOrJump',['$0'],['currentSelect'] ] ] ] ]}}" wx:if="{{services[currentSelect]}}">
+            <image alt class="image _img data-v-83799500" src="{{services[currentSelect].img}}" wx:if="{{services[currentSelect].img}}"></image>
+            <view class="info _div data-v-83799500" wx:if="{{services[currentSelect].tag}}">
+                <view class="line _p data-v-83799500" wx:for="{{services[currentSelect].tag}}" wx:for-index="__i0__" wx:for-item="l" wx:key="*this">{{l}}</view>
+            </view>
+            <view class="iconfont icon-arrowforward _i data-v-83799500"></view>
+        </view>
+        <view class="tips _p data-v-83799500" wx:if="{{type==='zz4'&&bottom_notice}}">{{bottom_notice}}</view>
+    </view>
+    <popup-wrapper backgroundColor="#fff" bind:__l="__l" class="data-v-83799500 vue-ref" data-ref="servicesPopup" height="75%" maskClick="{{true}}" maskShow="{{true}}" popupId="{{1}}" transition="slider" type="bottom" vueId="1" vueSlots="{{['default']}}">
+        <view class="_div data-v-83799500" wx:if="{{services}}">
+            <view class="modal-block _div data-v-83799500" wx:for="{{services}}" wx:for-index="i" wx:key="i">
+                <view class="modal-title _h3 data-v-83799500">{{item.title+''}}<view bindtap="__e" class="more _p data-v-83799500" data-event-opts="{{[ [ 'tap',[ [ 'handleJumpH5',['$0'],[ [ ['services','',i,'url'] ] ] ] ] ] ]}}" wx:if="{{item.url}}">查看更多 ></view>
+                </view>
+                <view class="modal-content _div data-v-83799500">
+                    <view class="modal-line bb1 _div data-v-83799500" wx:for="{{item.item}}" wx:for-index="j" wx:for-item="l" wx:key="j">{{''+l.desc+''}}<view bindtap="__e" class="link mcolor _p data-v-83799500" data-event-opts="{{[ [ 'tap',[ [ 'handleJumpH5',['$0'],[ [ ['services','',i],['item','',j,'url'] ] ] ] ] ] ]}}" wx:if="{{l.url}}">了解更多 ></view>
+                    </view>
+                </view>
+            </view>
+        </view>
+        <view class="_div data-v-83799500" wx:else>
+            <view class="skeleton s h _div data-v-83799500"></view>
+            <view class="skeleton l _div data-v-83799500"></view>
+            <view class="skeleton s _div data-v-83799500"></view>
+            <view class="skeleton l _div data-v-83799500"></view>
+            <view class="skeleton l _div data-v-83799500"></view>
+            <view class="skeleton s _div data-v-83799500"></view>
+            <view class="skeleton l _div data-v-83799500"></view>
+            <view class="skeleton l _div data-v-83799500"></view>
+            <view class="skeleton _div data-v-83799500"></view>
+        </view>
+    </popup-wrapper>
+</view>

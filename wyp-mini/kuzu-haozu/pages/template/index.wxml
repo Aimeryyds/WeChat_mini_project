@@ -1,0 +1,11 @@
+<template name="box">
+    <view id="box" style="z-index:5;background-color:rgba(0, 0, 0, .5);position:fixed;top:0;left:0;width:100%;height:100vh;" wx:if="{{hidden_template}}">
+        <view style="text-align:center;border-radius:10rpx;width:70%;height:270rpx;background-color:#fff;position:fixed;top:50%;left:50%;transform:translate(-50%,-50%);">
+            <view style="height:170rpx;width:100%;line-height:170rpx;">{{msg_template}}</view>
+            <view style="display:flex;border-top:1rpx solid #ccc;">
+                <view catchtap="backFn_template" style="border-right:1rpx solid #ccc;height:100rpx;line-height:100rpx;width:49%;">取消</view>
+                <view catchtap="sureFn_template" style="height:100rpx;line-height:100rpx;width:49%;color:#ff9900">{{sure_template}}</view>
+            </view>
+        </view>
+    </view>
+</template>

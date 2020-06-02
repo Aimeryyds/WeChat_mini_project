@@ -1,0 +1,90 @@
+<view class="v v-quote-plate">
+    <view class="status">
+        <view class="left">
+      {{plate.marketStatus}} {{plate.date}} {{plate.time}} {{plate.location}}
+    </view>
+        <view class="right">
+            <view class="icon {{item.className}}" wx:for="{{plate.tagList}}" wx:key="index">
+        {{item.text}}
+      </view>
+            <view class="tip" wx:if="{{type==8}}">延时15分钟</view>
+        </view>
+    </view>
+    <view class="basic">
+        <view class="info">
+            <view class="left">
+                <view class="now" style="color: {{plate.data.now.color}}; font-size: {{plate.data.now.size}};">
+          {{plate.data.now.text}}
+        </view>
+                <view class="change-rise c-fs-16" wx:if="{{stop}}">
+                    <text>停牌</text>
+                </view>
+                <view class="change-rise" wx:else>
+                    <view class="change" style="color: {{plate.data.change.color}}; ">
+            {{plate.data.change.text}}
+          </view>
+                    <view class="rise" style="color: {{plate.data.rise.color}}; ">
+            {{plate.data.rise.text}}
+          </view>
+                </view>
+            </view>
+            <view class="right {{type==1?'index':''}}">
+                <view class="msg">
+                    <view class="row">
+                        <view class="cell">
+                            <view class="cell-0">最　高</view>
+                            <view class="cell-1" style="color: {{plate.data.high.color}}; font-size: {{plate.data.high.size}};">
+                {{plate.data.high.text}}
+              </view>
+                        </view>
+                        <view class="cell ">
+                            <view class="cell-0">今　开</view>
+                            <view class="cell-1" style="color: {{plate.data.open.color}}; font-size: {{plate.data.open.size}};">
+                {{plate.data.open.text}}
+              </view>
+                        </view>
+                    </view>
+                    <view class="row">
+                        <view class="cell">
+                            <view class="cell-0">最　低</view>
+                            <view class="cell-1" style="color: {{plate.data.low.color}}; font-size: {{plate.data.low.size}};">
+                {{plate.data.low.text}}
+              </view>
+                        </view>
+                        <view class="cell">
+                            <view class="cell-0">昨　收</view>
+                            <view class="cell-1" style="color: {{plate.data.pclose.color}}; font-size: {{plate.data.pclose.size}};">
+                {{plate.data.pclose.text}}
+              </view>
+                        </view>
+                    </view>
+                    <view class="row">
+                        <view class="cell">
+                            <view class="cell-0">成交量</view>
+                            <view class="cell-1" style="font-size: {{plate.data.volume.size}};">
+                {{plate.data.volume.text}}
+              </view>
+                        </view>
+                        <view class="cell">
+                            <view class="cell-0">成交额</view>
+                            <view class="cell-1" style="font-size: {{plate.data.amount.size}};">
+                {{plate.data.amount.text}}
+              </view>
+                        </view>
+                    </view>
+                </view>
+                <view class="show-more" wx:if="{{type!='1'}}">
+                    <view class="icon-more"></view>
+                </view>
+            </view>
+        </view>
+    </view>
+    <view catchtouchmove="stopPropagation">
+        <view class="more mask c-ta-right" wx:if="{{plate.more}}">
+            <view class="wrapper" style="height:{{plate.moreHeight}}px;">
+                <canvas canvasId="moreCvs" class="more-cvs"></canvas>
+                <canvas canvasId="lineCvs" class="line-cvs"></canvas>
+            </view>
+        </view>
+    </view>
+</view>

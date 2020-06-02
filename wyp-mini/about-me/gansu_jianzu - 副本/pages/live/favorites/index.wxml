@@ -1,0 +1,4 @@
+<view class="container">
+    <live-list bind:removefavorite="handleRemoveFavorite" liveList="{{liveList}}" wx:if="{{liveList&&liveList.length>0}}"></live-list>
+    <wxc-abnor bind:abnortap="onNoDataTap" button="查看更多直播活动" title="还没有收藏直播活动" type="DATA" wx:if="{{liveList&&liveList.length==0}}"></wxc-abnor>
+</view>

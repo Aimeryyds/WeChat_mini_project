@@ -1,0 +1,153 @@
+page {
+    height: 100%;
+    overflow: hidden;
+}
+
+.warpper {
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+}
+
+.header {
+    background-image: url(http://statics.itc.cn/miniprograms/shw/author_background.jpg);
+    background-position: center;
+    background-size: cover;
+    padding: 0 0 24rpx 0;
+    flex-shrink: 0;
+}
+
+.author-info {
+    display: flex;
+    padding: 0 20rpx 20rpx;
+}
+
+.author-info .avatar {
+    width: 130rpx;
+    height: 130rpx;
+    border-radius: 50%;
+    border: solid 4rpx #ffffff;
+    overflow: hidden;
+    flex-shrink: 0;
+    position: absolute;
+}
+
+.author-info .avatar image {
+    width: 130rpx;
+    height: 130rpx;
+    background-color: #f3f3f3;
+}
+
+.author-info .info {
+    display: flex;
+    flex-direction: column;
+    min-width: 0;
+    margin-left: 156rpx;
+}
+
+.author-info .info .status {
+    display: flex;
+}
+
+.author-info .info .status .group:not(:last-child) {
+    margin-right: 22rpx;
+}
+
+.author-info .info .status .label {
+    margin-right: 12rpx;
+}
+
+.author-info .info .status .number {
+    font-weight: 600;
+}
+
+.author-info .description {
+    display: flex;
+    margin-top: 12rpx;
+    align-items: center;
+    min-height: 34rpx;
+}
+
+.author-info .description.expand {
+    flex-direction: column;
+    align-items: flex-end;
+}
+
+.author-info .description.expand .arrow {
+    transform: rotate(180deg);
+}
+
+.break {
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+}
+
+.arrow {
+    width: 17rpx;
+    height: 17rpx;
+    flex-shrink: 0;
+}
+
+.body {
+    margin-top: -12px;
+    background-color: #FFFFFF;
+    border-top-left-radius: 24rpx;
+    border-top-right-radius: 24rpx;
+    padding: 38rpx 0 0;
+    flex-grow: 1;
+    display: flex;
+    flex-direction: column;
+}
+
+.body .tab-bar {
+    padding: 0 28rpx 14rpx;
+    flex-shrink: 0;
+}
+
+.body .tab-bar .item {
+    font-size: 30rpx;
+    position: relative;
+}
+
+.body .tab-bar .item.active::after {
+    content: "";
+    position: absolute;
+    width: 38rpx;
+    height: 6rpx;
+    background-color: #FDBE00;
+    left: 50%;
+    bottom: -8rpx;
+    transform: translateX(-50%);
+    border-radius: 3rpx;
+}
+
+.body .item-list {
+    flex-grow: 1;
+    position: relative;
+}
+
+.body .item-list-scroll {
+    position: absolute;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+}
+
+.loading {
+    padding: 20rpx 0;
+    text-align: center;
+    font-size: 30rpx;
+    color: #a4a4a4;
+}
+
+.text-info {
+    font-size: 24rpx;
+    color: #DCDDDE;
+}
+
+.text-default {
+    font-size: 15px;
+    color: #FFFFFF;
+}

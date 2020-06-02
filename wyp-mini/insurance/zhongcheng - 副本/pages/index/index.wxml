@@ -1,0 +1,28 @@
+<view class="container">
+    <view class="banner">
+        <view class="banner-swiper">
+            <form bindsubmit="miniProgram" data-type="{{item.type}}" reportSubmit="true" wx:for="{{imgUrls}}" wx:key="url">
+                <view>
+                    <button class="index_item" formType="submit">
+                        <view class="swiper-inner">
+                            <view class="caption">
+                                <view class="view-image" style="background-color:{{item.bg}}">
+                                    <image class="slide-image" src="{{item.img}}"></image>
+                                </view>
+                                <view class="txt">
+                                    <view class="p1">{{item.name}}</view>
+                                    <view class="p2">
+                                        <view class="content">{{item.msg}}</view>
+                                    </view>
+                                    <view class="p3">
+                                        <button class="caption-btn">立即查看</button>
+                                    </view>
+                                </view>
+                            </view>
+                        </view>
+                    </button>
+                </view>
+            </form>
+        </view>
+    </view>
+</view>

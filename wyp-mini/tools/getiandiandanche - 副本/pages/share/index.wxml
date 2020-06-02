@@ -1,0 +1,35 @@
+<view class="page">
+    <my-component innerText="分享"></my-component>
+    <view>
+        <image class="img-bg" src="{{shareImg}}"></image>
+        <view class="f-img19" style="top: 160px;">
+            <image class="f-gimg" src="{{shareG}}"></image>
+            <image class="f-gimb" mode="widthFix" src="{{shareB}}"></image>
+        </view>
+        <view>
+            <image bindtap="bindtapcontent" class="f-q" mode="widthFix" src="{{shareQ}}"></image>
+        </view>
+        <view class="f-sm19">
+            <view class="f-sm-t">邀请好友注册</view>
+            <view class="f-sm-b">各得10元</view>
+            <view bindtap="shareCont" class="ad-con29">用户邀请奖励说明</view>
+        </view>
+    </view>
+    <view class="footer">
+        <view class="text">
+            <view class="line"></view>
+            <view class="txt line">分享给好友</view>
+            <view class="line"></view>
+        </view>
+        <view class="way">
+            <view bindtap="bindtapWX">
+                <button openType="share" style="background: none">
+                    <view class="iconfont icon-weixin1">
+                        <image src="{{wxImg}}"></image>
+                    </view>
+                    <text>微信好友</text>
+                </button>
+            </view>
+        </view>
+    </view>
+</view>

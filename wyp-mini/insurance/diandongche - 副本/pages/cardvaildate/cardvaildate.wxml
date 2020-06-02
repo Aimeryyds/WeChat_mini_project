@@ -1,0 +1,27 @@
+<form>
+    <view class="cu-card case ">
+        <view class="cu-item shadow">
+            <view class="image">
+                <image mode="widthFix" src="{{cardzm}}"></image>
+                <image mode="widthFix" src="{{cardfm}}"></image>
+            </view>
+        </view>
+    </view>
+    <view class="cu-form-group">
+        <view class="title">E保卡卡号</view>
+        <input bindinput="getInputValue" id="qrcode" placeholder="请填写E保卡卡号" value="{{qrcode}}"></input>
+        <view bindtap="goScanCard" class="cu-item text-xxl">
+            <text class="cuIcon-scan lg text-blue"></text>
+        </view>
+    </view>
+    <view class="cu-form-group">
+        <view class="title">E保卡密码</view>
+        <input bindinput="getInputValue" id="cardpasswd" placeholder="请填写E保卡密码" type="password"></input>
+    </view>
+</form>
+<view class="padding flex flex-direction">
+    <button bindtap="validateCard" class="cu-btn bg-blue margin-tb-sm lg">下一步</button>
+    <view class="cu-load load-modal" wx:if="{{loadModal}}">
+        <view class="gray-text">验卡中...</view>
+    </view>
+</view>

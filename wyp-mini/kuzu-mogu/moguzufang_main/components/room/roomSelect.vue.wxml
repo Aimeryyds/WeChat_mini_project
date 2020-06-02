@@ -1,0 +1,36 @@
+<template name="401023eb">
+    <view class="_view 401023eb {{passClass+'roomSelect'}}" wx:if="{{roomSelect&&roomSelect.roomNo&&roomSelect.flatRooms&&roomSelect.flatRooms.length>0}}">
+        <view bindtap="handleProxy" class="_view 401023eb h1" data-comkey="{{$k}}" data-eventid="{{'401023eb-0'}}">
+            <text class="_text 401023eb var-text">已选房源</text>
+            <text class="_text 401023eb var-text var">{{roomSelect.roomNo}}</text>
+            <text class="_text 401023eb mgic-angle-r"></text>
+        </view>
+        <transition class="_transition 401023eb" name="fade">
+            <view bindtap="handleProxy" class="_view 401023eb bg" data-comkey="{{$k}}" data-eventid="{{'401023eb-5'}}" id="bottom-mask" wx:if="{{roomTypeVisible}}">
+                <view class="_view 401023eb roomSelectDialog">
+                    <view bindtap="handleProxy" class="_view 401023eb mgic-chahao" data-comkey="{{$k}}" data-eventid="{{'401023eb-1'}}" id="close-icon"></view>
+                    <view class="_view 401023eb h3">
+                        <template is="0e24a461" data="{{...$root['0'],...$root[$kk+'401023eb-0'],$root:$root}}"></template>
+                        <view class="_view 401023eb p">{{mainTitle}}<text class="_text 401023eb var">{{activeRoom.payPrice}}</text>
+                        </view>
+                    </view>
+                    <view class="_view 401023eb h2">付款</view>
+                    <view class="_view 401023eb payType">
+                        <text bindtap="handleProxy" class="_text 401023eb span {{[item.value==(activeRoom&&activeRoom.payType)?'active':'']}}" data-comkey="{{$k}}" data-eventid="{{'401023eb-2-'+index}}" key="{{index}}" wx:for="{{roomSelect.payTypes}}" wx:key="index">{{item.value}}</text>
+                    </view>
+                    <view class="_view 401023eb h2">可选户型</view>
+                    <scroll-view class="_scroll-view 401023eb roomSelect-scroll" scrollY="true">
+                        <view class="_view 401023eb ul">
+                            <view bindtap="handleProxy" class="_view 401023eb li {{[activeRoom.roomId==item.roomId?'active':'',activeRoom&&activeRoom.payType!==item.roomPayTypes[0].payType?'disabled':'']}}" data-comkey="{{$k}}" data-eventid="{{'401023eb-3-'+index}}" key="{{index}}" wx:for="{{roomSelect.flatRooms}}" wx:key="index">{{item.roomName}}</view>
+                        </view>
+                    </scroll-view>
+                    <view class="_view 401023eb">
+                        <template is="aa10e628" data="{{...$root['0'],...$root[$kk+'401023eb-1'],$root:$root,$slotdefault:'401023eb-default-401023eb-1'}}"></template>
+                    </view>
+                </view>
+            </view>
+        </transition>
+    </view>
+</template>
+<import src="/components/mgImage.vue.wxml"></import>
+<import src="/components/mgButton.vue.wxml"></import>

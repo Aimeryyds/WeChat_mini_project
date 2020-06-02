@@ -1,0 +1,22 @@
+<view class="page">
+    <my-component bind:myevent="myEventListener" innerText="登录"></my-component>
+    <view class="main" style=" margin-top: {{myHight}}px"></view>
+    <view class="tit">{{loginReg}}</view>
+    <form bindreset="formReset" bindsubmit="NextStepTrue">
+        <view class="log-cont">
+            <view class="u-tit">{{phoneTit}}</view>
+            <view class="username section">
+                <view>
+                    <input bindinput="bindKeyInput" name="username" placeholder="请输入手机号" type="number" value="{{username}}"></input>
+                </view>
+            </view>
+            <view class="fot-btn">
+                <button class="loginBtn" formType="submit">{{btnName}}</button>
+            </view>
+            <view class="bot-fot">
+                <view>注册即表示阅读并同意 <text bindtap="userP" style="color:#333333">《小呗用户协议》</text>
+                </view>
+            </view>
+        </view>
+    </form>
+</view>

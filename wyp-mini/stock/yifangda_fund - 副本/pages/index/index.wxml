@@ -1,0 +1,97 @@
+<view class="allicon">
+    <view class="haibao">
+        <swiper autoplay="{{autoplay}}" duration="{{duration}}" indicatorDots="{{indicatorDots}}" interval="{{interval}}" style="height:80px;">
+            <swiper-item wx:for="{{imgUrls}}">
+                <image class="slide-image" data-index="{{index}}" src="{{item}}" style="width:100%;height:100%;"></image>
+            </swiper-item>
+        </swiper>
+    </view>
+    <view class="zhengwen">
+        <view>您可通过以下方式查询易方达旗下基金2020年一季报:</view>
+        <view>1、通过基金代码查询</view>
+    </view>
+    <form bindsubmit="formSubmit">
+        <view class="Search-section">
+            <view class="Search-pancel">
+                <input class="Search-input" maxlength="6" name="id" placeholder="请输入易方达旗下基金代码" type="digit"></input>
+                <button class="Search-button" formType="submit" plain="true" size="mini">
+                    <view class="find">搜索</view>
+                </button>
+            </view>
+        </view>
+    </form>
+    <view class="zhengwen">
+        <view>2、通过基金经理查询</view>
+    </view>
+    <view class="line"></view>
+    <view class="select_box">
+        <view catchtap="selectTap" class="select">
+            <text class="select_text">请点击选择易方达基金经理</text>
+        </view>
+        <view class="option_box" style="height:{{selectShow?selectData.length>5?388:selectData.length*65:0}}rpx;">
+            <text catchtap="optionTap" class="option" data-index="{{index}}" wx:for="{{selectData}}" wx:key="this">{{item}}</text>
+        </view>
+    </view>
+    <view class="line"></view>
+    <view class="zhengwen">
+        <view>3、通过基金类型查询</view>
+    </view>
+    <view class="nav">
+        <view bindtap="gotostock" class="nav-item">
+            <view>
+                <image src="../image/style_icon/stock.jpg" style="width:25px;height:23px;"></image>
+            </view>
+            <view>股票型</view>
+        </view>
+        <view bindtap="gotomixed" class="nav-item">
+            <view>
+                <image src="../image/style_icon/mixed.jpg" style="width:25px;height:23px;"></image>
+            </view>
+            <view>混合型</view>
+        </view>
+        <view bindtap="gotoindex" class="nav-item">
+            <view>
+                <image src="../image/style_icon/index.jpg" style="width:25px;height:23px;"></image>
+            </view>
+            <view>指数型</view>
+        </view>
+        <view bindtap="gotobond" class="nav-item">
+            <view>
+                <image src="../image/style_icon/bond.jpg" style="width:25px;height:23px;"></image>
+            </view>
+            <view>债券型</view>
+        </view>
+    </view>
+    <view class="nav">
+        <view bindtap="gotomonetary" class="nav-item2">
+            <view>
+                <image src="../image/style_icon/monetary.jpg" style="width:25px;height:23px;"></image>
+            </view>
+            <view>货币型</view>
+        </view>
+        <view bindtap="gotocommodity" class="nav-item2">
+            <view>
+                <image src="../image/style_icon/commodity.jpg" style="width:25px;height:23px;"></image>
+            </view>
+            <view>商品型</view>
+        </view>
+        <view bindtap="gotoqdii" class="nav-item2">
+            <view>
+                <image src="../image/style_icon/qdii.jpg" style="width:25px;height:23px;"></image>
+            </view>
+            <view>QDII</view>
+        </view>
+        <view bindtap="gotofof" class="nav-item2">
+            <view>
+                <image src="../image/style_icon/fof.jpg" style="width:25px;height:23px;"></image>
+            </view>
+            <view>FOF</view>
+        </view>
+    </view>
+    <view class="shuoming">
+        <view>说明:</view>
+        <view>1、请在输入框输入易方达旗下基金的6位基金代码查询，例如：“110011”。</view>
+        <view>2、易方达旗下基金经理及其所管理基金情况来源于季报，最新情况请以基金公告为准。</view>
+        <view>3、本小程序中显示的易方达基金均成立于2020年4月20日前，该日期之后成立的基金未进行统计。</view>
+    </view>
+</view>

@@ -1,0 +1,8 @@
+<view class="loading" wx:if="{{isShow}}">
+    <view class="loading__image loading__box" style="background-image: url({{image}})" wx:if="{{image&&slip}}">
+        <view class="loading__slip loading__box" style="background-image: url({{slip}})"></view>
+    </view>
+    <view class="loading__image--{{type}} loading__image loading__box" wx:else>
+        <view class="loading__slip--{{type}} loading__slip loading__box"></view>
+    </view>
+</view>

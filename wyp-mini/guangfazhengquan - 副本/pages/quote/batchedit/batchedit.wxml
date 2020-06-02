@@ -1,0 +1,44 @@
+<view class="v v-batchedit">
+    <view class="header">
+        <view bindtap="showGroups" class="selected-group">
+            <view class="select-text">
+        {{myselectedGrp.name}}
+        <view class="select-icon {{selectedGroup?'unSelect-icon':''}}"></view>
+            </view>
+        </view>
+    </view>
+    <view class="options">
+        <view class="groups" hidden="{{!selectedGroup}}">我的分组</view>
+        <view bindtap="selectGroups" class="option {{myselectedGrp.gid==item.gid?'chose-color':''}}" data-id="{{item.gid}}" data-name="{{item.cname}}" hidden="{{!selectedGroup}}" wx:for="{{groups}}" wx:key="{{item.gid}}">
+      {{item.cname}}
+      <view class="chose-icon" wx:if="{{myselectedGrp.gid==item.gid}}"></view>
+        </view>
+        <view class="model" hidden="{{!selectedGroup}}"></view>
+    </view>
+    <view class="body {{isIphoneX?'fix-iphonex-body':''}}" hidden="{{!stocks.length||selectedGroup}}">
+        <table bind:checkedchange="selectStocks" bind:iconclick="tableIconClick" bind:move="tableMove" columns="{{columns}}" dataSource="{{stocks}}" moveable="{{true}}" noHeader="{{true}}" perRowHeight="{{perItemHeight}}"></table>
+    </view>
+    <view class="no-stocks" wx:if="{{!stocks.length&&canShowNoRecord}}">暂无数据</view>
+    <view class="footer {{isIphoneX?'fix-iphonex-button':''}}" wx:if="{{!selectedGroup}}">
+        <view bindtap="selAllStock" class="sel-all">
+            <view class="icon-all {{selectStock.choseAll?'bg-icon':''}}"></view>
+      全部
+    </view>
+        <view bindtap="batchMove" class="remove" wx:if="{{selectStocksLength}}">移动({{selectStocksLength}})</view>
+        <view class="remove default-color" wx:else>移动</view>
+        <view bindtap="delStock" class="delete delete-color" wx:if="{{selectStocksLength}}">删除</view>
+        <view class="delete" wx:else>删除</view>
+    </view>
+    <zxgroup-selector id="selector"></zxgroup-selector>
+    <modal contentPadding="0" id="modal_includeOtherGroup">
+        <view></view>
+        <view class="content" slot="content">
+            <view bindtap="choseOtherGroup" wx:if="{{chose}}">
+                <view class="icon {{choseGroup}}"></view>
+        其他分组内也同时删除
+      </view>
+        </view>
+    </modal>
+</view>
+<include src="../../../components/circus/toast/toast.wxml"></include>
+<include src="../../../components/circus/loading/loading.wxml"></include>

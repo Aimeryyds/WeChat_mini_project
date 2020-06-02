@@ -1,0 +1,19 @@
+<import src="../../libs/calendar/index.wxml"></import>
+<import src="../../libs/timepicker/index.wxml"></import>
+<import src="../../libs/templates/module.wxml"></import>
+<import src="../../libs/templates/footer.wxml"></import>
+<import src="../../libs/templates/cusService.wxml"></import>
+<import src="../../libs/templates/tabBar.wxml"></import>
+<view class="wxapp_body">
+    <view class="main">
+        <view class="moduleContainer">
+            <template is="module" data="{{moduleInfoList:moduleInfoList,globalColor:globalColor}}"></template>
+        </view>
+    </view>
+    <template is="footer" data="{{flag:flag,isOem:isOem,agentAcct:agentAcct}}" wx:if="{{flag.footerOpen}}"></template>
+    <template is="cusservice" data="{{cusService:cusService,flag:flag}}" wx:if="{{flag.cusServiceOpen||cusService.supportOpen}}"></template>
+    <view class="cusTabBarPosition" wx:if="{{showTabBar}}"></view>
+    <template is="tabbar" data="{{tabbar:tabbar}}" wx:if="{{showTabBar}}"></template>
+</view>
+<template is="calendar" data="{{globalColor:globalColor,...calendar}}"></template>
+<template is="timepicker" data="{{globalColor:globalColor,...timepicker}}"></template>

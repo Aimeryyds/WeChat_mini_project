@@ -1,0 +1,169 @@
+<scroll-view scrollY class="scroll-view-wrap">
+    <view class="lesson-list">
+        <view class="lesson-group" wx:for="{{filterGroups}}" wx:key="index">
+            <view class="order_activity_cell_wrap" wx:if="{{item.havePromotion}}">
+                <text class="act_label">{{item.promotionName}}</text>
+                <text class="act_content">{{item.promotionDescription}}</text>
+            </view>
+            <block wx:for="{{item.classes}}" wx:for-index="_index" wx:for-item="_item" wx:key="_index">
+                <view class="new-card">
+                    <view class="course-info-wrap">
+                        <view class="title">
+                            <text class="'course-type-icon' {{$CourseInfo$classType[_item.courseType].icon}}" hidden="{{!_item.courseType}}">{{$CourseInfo$classType[_item.courseType].text}}</text>
+                            <text class="class-name">{{_item.className}}</text>
+                        </view>
+                        <view class="info-list">
+                            <view class="item" hidden="{{_item.courseType===1||!_item.address}}">
+                                <image class="icon" mode="widthFix" src="../../common/img/address.png"></image>
+                                <view class="text-right">{{_item.address}}</view>
+                            </view>
+                            <view class="item" hidden="{{!_item.classTime}}">
+                                <image class="icon" mode="widthFix" src="../../common/img/time.png"></image>
+                                <view class="text-right">{{_item.classTime}}</view>
+                            </view>
+                            <view class="item" hidden="{{!_item.timeArea}}">
+                                <image class="icon" mode="widthFix" src="../../common/img/date.png"></image>
+                                <view class="text-right">{{_item.timeArea}}</view>
+                            </view>
+                            <view class="item" wx:if="{{_item.teacherList||_item.tutorList}}">
+                                <image class="icon" mode="widthFix" src="../../common/img/person.png"></image>
+                                <view class="text-right">
+                                    <view class="text-right-block" wx:if="{{_item.teacherList.length&&!_item.strengTutor}}">
+                                        <text class="teacher-title">授课:</text>
+                                        <text class="teacher-item" wx:for="{{_item.teacherList}}" wx:for-index="_mun1" wx:for-item="_tea1" wx:key="_mun1">{{_tea1.name}}</text>
+                                    </view>
+                                    <view class="text-right-block" wx:if="{{_item.tutorList.length&&_item.classType!==4}}">
+                                        <text class="teacher-title">{{_item.strengTutor?'老师':'辅导'}}:</text>
+                                        <text class="teacher-item" wx:for="{{_item.tutorList}}" wx:for-index="_mun2" wx:for-item="_tea2" wx:key="_tea2">{{_tea2.name}}</text>
+                                    </view>
+                                </view>
+                            </view>
+                        </view>
+                        <view class="price-wrap">
+                            <text class="info-price" wx:if="{{_item.coursePrice}}">{{_item.coursePrice}}</text>
+                            <text class="surplus-class" wx:if="{{_item.surplusClassNum}}">剩余{{_item.surplusClassNum}}节课</text>
+                        </view>
+                    </view>
+                </view>
+                <view class="period-wrap">
+                    <view class="course-period-item {{period_item.disabled?'disabled':''}} _2a75096" wx:for="{{_item.stageInfo}}" wx:for-index="period_index" wx:for-item="period_item" wx:key="period_index">
+                        <view class="info-left _2a75096">
+                            <view class="period-name _2a75096">
+                                <text class="_2a75096">{{period_item.stagesName}}</text>
+                            </view>
+                            <view class="date-bottom _2a75096">
+                                <text class="text _2a75096">{{period_item.startDate}} - {{period_item.endDate}}</text>
+                            </view>
+                            <view class="_2a75096">
+                                <text class="tips _2a75096" wx:if="{{period_item.disabled&&period_item.startPayTime}}">支付开始时间: {{period_item.startPayTime}}</text>
+                            </view>
+                        </view>
+                        <view class="price-right price-end _2a75096" wx:if="{{$PeriodItem$entry&&period_item.disabled}}">已结课</view>
+                        <view class="price-right _2a75096" wx:else>{{period_item.price}}</view>
+                    </view>
+                </view>
+                <view bindtap="$coupon$coupon" class="coupon" data-com-index="{{_index}}" data-wpycoupon-a="{{_item}}" data-wpycoupon-b="{{index}}" wx:if="{{!isDisabled}}">
+                    <view class="price">
+                        <view wx:if="{{_item.coupons.length}}">优惠<text class="mun">{{_item.coupons[0].actualValue}}</text>元</view>
+                        <text wx:else>使用优惠券</text>
+                    </view>
+                    <image mode="aspectFill" src="https://cdninsight.speiyou.com/1512996326099_arrow_right_black_order.png"></image>
+                </view>
+            </block>
+        </view>
+    </view>
+    <block wx:if="{{orderInfo.shouldMail}}">
+        <navigator class="address-wrap" url="/pages/personcenter/addressmanage?from=order_detail" wx:if="{{!isDisabled}}">
+            <view class="com-bom">
+                <view class="address-left-wrap">
+                    <text class="address-text">收货地址</text>
+                </view>
+                <view class="address-right-wrap">
+                    <text>讲义收货地址</text>
+                    <image mode="aspectFill" src="https://cdninsight.speiyou.com/1512996326099_arrow_right_black_order.png"></image>
+                </view>
+            </view>
+        </navigator>
+        <view class="address-wrap" wx:else>
+            <view class="com-bom">
+                <view class="address-left-wrap">
+                    <text class="address-text">收货地址</text>
+                </view>
+                <view class="address-right-wrap">
+                    <text>讲义收货地址</text>
+                </view>
+            </view>
+        </view>
+        <view class="address-bd">
+            <view class="address-title">
+                <text class="address-name">{{orderAddr.recipientName}}</text>
+                <text class="address-phone">{{orderAddr.mobilephoneNumber}}</text>
+            </view>
+            <view class="address-detail">{{orderAddr.provinceName}}{{orderAddr.cityName}}{{orderAddr.countyName}}{{orderAddr.detailAddress}}</view>
+        </view>
+    </block>
+    <view class="expense-detail-wrap">
+        <view class="tab-title">费用明细</view>
+        <view class="expense-detail-bd">
+            <view class="{{expense.positive?'expense-cell':'expense-cell-discount'}}" wx:for="{{orderExpense}}" wx:for-index="expenseIndex" wx:for-item="expense" wx:key="expenseIndex">
+                <text class="expense-name">{{expense.name}}</text>
+                <text class="expense-number">
+                    <text wx:if="{{!expense.positive}}">-</text>¥{{expense.price}}</text>
+            </view>
+        </view>
+    </view>
+    <view class="payment-wrap">
+        <view class="tab-title">支付方式</view>
+        <view class="payment-cell">
+            <radio-group>
+                <label wx:for="{{paymentType}}" wx:key="id">
+                    <view class="payment-left-wrap">
+                        <image mode="aspectFill" src="https://cdninsight.speiyou.com/1513565298578_icon_weixin%2520%25403x.png"></image>
+                        <text class="payment-type-name">{{item.label}}</text>
+                    </view>
+                    <view class="icon iconfont icon-duigou1"></view>
+                </label>
+            </radio-group>
+        </view>
+    </view>
+    <view class="agreement-fix">
+        <checkbox-group bindchange="agreementChange" class="agreement-wrap">
+            <label class="{{item.checked?'label_checked':''}}" wx:for="{{agreement}}" wx:key="id">
+                <icon color="#3699ff" size="15" type="success_no_circle" wx:if="{{item.checked}}"></icon>
+                <checkbox checked="{{item.checked}}" value="{{item.id}}"></checkbox>
+            </label>
+            <navigator class="tips" url="/pages/alreadypay/userProtocol">同意报名退费协议</navigator>
+        </checkbox-group>
+    </view>
+</scroll-view>
+<view class="pay-box {{isiPhoneX?'iphoneX':''}}">
+    <view class="total-class">
+        <text>应付金额（{{payCount}}个）</text>
+        <text class="price">{{orderPrice.lastPrice}}</text>
+    </view>
+    <button bindtap="pay" class="save-btn {{saving?'disabledClass':''}}" loading="{{saving}}">缴费
+        </button>
+</view>
+<view animation="{{$talToast$animationData}}" class="tal-toast-container" style="top:{{$talToast$vertical}}%;" wx:if="{{$talToast$toastVisible}}">
+    <view class="tal-toast">
+        <text>{{$talToast$toastMessage}}</text>
+    </view>
+</view>
+<view class="app-cen" wx:if="{{$appmask$isHide}}">
+    <view class="app-mask"></view>
+    <view class="app-center">
+        <view class="app-con">
+            <view class="title">每一位学而思家长的必备APP</view>
+            <image src="http://static-xesapi.speiyou.cn/1536045641131.png"></image>
+            <view class="test" wx:if="{{$appmask$SystemInfo}}">
+                <view>请在App Store内搜索“学而思”</view>
+                <view>下载学而思APP</view>
+            </view>
+            <view class="test" wx:else>
+                <view>请在各大应用商店内搜索“学而思”</view>
+                <view>（应用宝、360手机助手、华为应用市场等）下载学而思APP</view>
+            </view>
+            <view bindtap="$appmask$goHide" class="btn">知道了</view>
+        </view>
+    </view>
+</view>

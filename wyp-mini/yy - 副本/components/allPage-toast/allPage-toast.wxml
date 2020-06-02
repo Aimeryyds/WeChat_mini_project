@@ -1,0 +1,21 @@
+<view class="allPage-toast">
+    <view bindtap="hideToast" class="wrapper" wx:if="{{addMiniAppToast}}">
+        <view class="add-miniprogram" style="margin:{{statusBar.height}}px">
+            <view class="tri"></view>
+            <view>点击
+                <image class="add-dot" src="./images/add-dot.png"></image>
+                添加到我的小程序
+                <image class="close-btn" src="./images/close-btn.png"></image>
+            </view>
+        </view>
+    </view>
+    <view class="inform-wrapper" wx:if="{{informToast}}">
+        <view class="inform-toast">
+            <image class="inform-bg" src="./images/inform-bg.png"></image>
+            <view class="inform-tips">{{informTips}}</view>
+            <view class="inform-bth">
+                <button catchtap="informBtn" class="btn-{{item.type}}" data-type="{{item.type}}" wx:for="{{informInfo}}" wx:key="index">{{item.value}}</button>
+            </view>
+        </view>
+    </view>
+</view>

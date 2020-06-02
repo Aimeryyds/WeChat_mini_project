@@ -1,0 +1,11 @@
+<template name="searchBar">
+    <form bindsubmit="searchButtonPressed">
+        <view class="search-bar">
+            <view class="search-background">
+                <image class="search-icon" mode="aspectFill" src="/images/home_search_icon.png"></image>
+                <input bindconfirm="searchConfirm" class="search-input" name="searchinput" placeholder="{{placeholderText}}" placeholderClass="search-placeholder" value="{{value}}"></input>
+            </view>
+            <button class="search-button" formType="submit">搜索</button>
+        </view>
+    </form>
+</template>

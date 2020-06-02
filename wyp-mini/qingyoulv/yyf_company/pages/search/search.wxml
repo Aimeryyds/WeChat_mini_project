@@ -1,0 +1,31 @@
+<view class="news">
+    <view class="news-div">
+        <view class="news-item" style="margin-bottom:8rpx;" wx:if="{{list!=''}}" wx:for="{{list}}" wx:key="{{index1}}">
+            <view class="news-item-content1" wx:if="{{item.type!='6'}}">
+                <view class="news-item-title1 {{hide_time=='1'?'w100':''}}">
+                    <navigator url="{{item.url}}">
+                        <text>{{item.title}}</text>
+                    </navigator>
+                </view>
+                <view class="news-item-other1" wx:if="{{hide_time=='0'}}">{{item.addtime}}</view>
+            </view>
+            <view bindtap="listNavApp" class="news-item-content1" data-address="{{item.pageaddress}}" data-appid="{{item.appid}}" wx:else>
+                <view class="news-item-title1 {{hide_time=='1'?'w100':''}}">
+                    <text>{{item.title}}</text>
+                </view>
+                <view class="news-item-other1" wx:if="{{hide_time=='0'}}">{{item.addtime}}</view>
+            </view>
+        </view>
+        <view class="{{isData?'hide':''}}" style="font-size:13px; color:#666">没有相关内容</view>
+    </view>
+</view>
+<view class="copyright {{blist.copyright.copyright==''?'mt0':''}}">
+    <block wx:if="{{blist.copyright.copyright!=''}}">
+        <import src="../public/copy.wxml"></import>
+        <template is="copy" data="{{blist:blist}}"></template>
+    </block>
+</view>
+<block wx:if="{{hide_tabbar=='0'}}">
+    <import src="../public/foot.wxml"></import>
+    <template is="foot" data="{{blist:blist}}"></template>
+</block>

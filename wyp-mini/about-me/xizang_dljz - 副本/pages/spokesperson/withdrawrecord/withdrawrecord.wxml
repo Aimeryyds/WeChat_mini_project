@@ -1,0 +1,16 @@
+<view class="container">
+    <view class="list">
+        <view class="item" wx:for="{{list}}" wx:key="*this">
+            <image src="/images/spokesperson/withdraw/icon_complete.png" wx:if="{{item.status==2}}"></image>
+            <image src="/images/spokesperson/withdraw/icon_loading.png" wx:else></image>
+            <view class="info">
+                <view>{{item.remark}}</view>
+                <text>{{item.applyTime}}</text>
+            </view>
+            <view class="price">-{{item.amount}}</view>
+        </view>
+    </view>
+    <view class="load-more" wx:if="{{showMore}}">
+        <text>继续拖动，查看更多</text>
+    </view>
+</view>

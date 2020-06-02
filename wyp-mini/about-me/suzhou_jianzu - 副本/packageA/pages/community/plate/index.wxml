@@ -1,0 +1,28 @@
+<view class="container" style="height:{{height}}rpx;overflow: hidden;">
+    <view style="width: 200rpx;background-color: #e5e5e5;">
+        <view bindtap="tab" class="item {{index==1?'active':''}}" data-id="{{item.id}}" data-index="{{index}}" wx:for="{{left}}">{{item.name}}</view>
+    </view>
+    <view class="right">
+        <view class="view_search" style="padding: 0 20rpx;">
+            <form bindsubmit="formSubmit" class="view_searchbg">
+                <label>
+                    <view class="img_wrap" style=""></view>
+                    <button hidden class="img_btn" formType="submit" name="Search" style=""></button>
+                </label>
+                <input bindconfirm="formSubmit" name="keyword" placeholder="请输入关键字..." style="position: absolute;left: 100rpx;top: 0;height: 50rpx;background-color: #fff;font-size: 28rpx;line-height: 50rpx;" type="text"></input>
+            </form>
+        </view>
+        <view bindtap="toList" class="Section" data-bid="{{item.id}}" wx:for="{{right}}">
+            <view class="left">
+                <image class="img" src="{{item.logo}}"></image>
+                <view style="margin-left: 20rpx;">
+                    <view class="line" style="margin-bottom: 14rpx;padding-top: 4rpx;">{{item.title}}</view>
+                    <view class="line">话题数：{{item.postcount}}  关注数：{{item.followcount}}</view>
+                </view>
+            </view>
+            <view style="display: flex;flex-direction: row;justify-content: space-between;align-items:center;">
+                <image src="http://tws.cnweisou.com/images/rightArrow.png" style="width:18rpx;height:26rpx;"></image>
+            </view>
+        </view>
+    </view>
+</view>

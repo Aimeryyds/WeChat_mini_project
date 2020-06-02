@@ -1,0 +1,30 @@
+<view class="phoneloginpage">
+    <form bindreset="formReset" bindsubmit="formSubmit">
+        <view class="section">
+            <text>手机号码</text>
+            <input bindinput="getPhoneNumber" class="inpsty inpphone" maxlength="11" name="loginname" placeholder="请输入有效手机号" type="number" value="{{phoneNumber}}"></input>
+            <button bindtap="{{isSend?'':'sendMessage'}}" class="codebtn {{isSend?'addcode':''}}">{{isSend?secend+'s':time}}</button>
+        </view>
+        <view class="section">
+            <text>验证码</text>
+            <input bindinput="shuru" class="inpsty" name="scode" placeholder="输入六位验证码" type="number" value="{{srYzm}}"></input>
+        </view>
+        <view class="btn-area">
+            <button class="phoneloginbtn" formType="submit">登录</button>
+        </view>
+    </form>
+    <form bindsubmit="codeSubmit">
+        <view class="ruleZhezhao {{isRuleTrue?'isRuleShow':'isRuleHide'}}">
+            <view class="ruleZhezhaoContent">
+                <text class="toptit">请输入以下图形验证码</text>
+                <view class="ruleZhezhaoText">
+                    <input class="inpcode" name="tuxingcode" placeholder="请输入图形验证码" value="{{tuxingcode}}"></input>
+                    <view class="tuma">
+                        <image bindtap="uptCode" src="{{checkCode}}"></image>
+                    </view>
+                </view>
+                <button class="phoneloginbtn" formType="submit">确定</button>
+            </view>
+        </view>
+    </form>
+</view>

@@ -1,0 +1,15 @@
+<template name="list-item">
+    <view class="global-list-item">
+        <view class="left-box">
+            <view class="icon">
+                <template is="icon" data="{{width:width,height:height,icon:icon}}"></template>
+            </view>
+            <text class="label">{{title}}</text>
+        </view>
+        <view class="desc">{{desc}}</view>
+        <view class="arrow" wx:if="{{arrow}}">
+            <template is="icon" data="{{width:'7px',height:'14px',icon:'/images/arrow@2x.png'}}"></template>
+        </view>
+    </view>
+</template>
+<import src="../../component/icon/icon.wxml"></import>

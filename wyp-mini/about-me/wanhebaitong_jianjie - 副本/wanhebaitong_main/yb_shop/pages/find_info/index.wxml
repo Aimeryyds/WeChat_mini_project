@@ -1,0 +1,26 @@
+<import src="/yb_shop/utils/wxParse/wxParse.wxml"></import>
+<view class="page_content" wx:if="{{show}}">
+    <view class="case_tit">{{detail.title}}</view>
+    <view class="case_time">发布时间：{{detail.create_time}} 浏览量：{{detail.click}}</view>
+    <view class="wxParse case_content">
+        <template is="wxParse" data="{{wxParseData:wxParseData.nodes}}"></template>
+    </view>
+</view>
+<view class="fui-loading empty" style="width:60%;" wx:if="{{detail.goods.length>0}}">
+    <view class="text">相关商品</view>
+</view>
+<block wx:if="{{detail.goods.length>0}}">
+    <navigator hoverClass="none" url="/yb_shop/pages/goods/detail/index?id={{item.goods_id}}" wx:for="{{detail.goods}}">
+        <view class="goods_box">
+            <image class="goods_pic" src="{{item.pic.img_cover}}"></image>
+            <text class="goods_name">{{item.goods_name}}</text>
+            <text class="goods_intro">{{item.introduction}}</text>
+            <text class="goods_price">￥{{item.price}}</text>
+            <image class="goods_buy" src="/yb_shop/static/images/goods_buy.png"></image>
+        </view>
+    </navigator>
+</block>
+<block wx:if="{{showtabbar}}">
+    <view style="height:100rpx"></view>
+    <include src="/yb_shop/pages/common/menu.wxml"></include>
+</block>

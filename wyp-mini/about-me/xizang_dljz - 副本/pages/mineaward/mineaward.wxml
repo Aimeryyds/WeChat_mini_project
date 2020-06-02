@@ -1,0 +1,105 @@
+<view class="container">
+    <view class="tag-view">
+        <view catchtap="clickTag" class="{{selected==index?'selected':'unselected'}}" id="{{index}}" wx:for="{{tags}}" wx:key="tag">
+            <text>{{item}}</text>
+        </view>
+    </view>
+    <swiper bindchange="scrollContent" class="content-view" current="{{current}}">
+        <swiper-item>
+            <view class="cnt cnt1" id="cnt1">
+                <scroll-view scrollY="true">
+                    <view class="empty-wrap" wx:if="{{coupon_awards.length==0}}">
+                        <image src="../../images/empty/img_youhuiquan.png"></image>
+                        <view class="text">
+                            <text>暂无优惠券中奖记录</text>
+                        </view>
+                        <navigator class="btn" url="../couponcenter/couponcenter">去领券</navigator>
+                    </view>
+                    <view class="coupon-item {{item.hasDue?'dis':''}}" wx:for="{{coupon_awards}}">
+                        <image class="item-bg" src="../../images/coupon/bg_frame.png"></image>
+                        <view class="item-left">
+              ¥ <text class="price">{{item.awardAmount}}</text>
+                        </view>
+                        <view class="item-right">
+                            <view class="item-title">
+                                <text>订单满{{item.limitAmount}}元可用</text>
+                                <text class="time">有效期至: {{item.overTime}}</text>
+                            </view>
+                            <view class="item-bottom">
+                                <image class="coupon-tag" src="../../images/coupon/tag_used.png" wx:if="{{item.userCoupon.isUsed==1}}"></image>
+                                <image class="coupon-tag" src="../../images/coupon/tag.png" wx:elif="{{item.hasDue}}"></image>
+                                <navigator class="btn" openType="switchTab" url="../index/index" wx:elif="{{item.userCoupon.isUsed==0}}">
+                                    <image src="/images/lottery/btn_op.png"></image>
+                  立即使用
+                </navigator>
+                            </view>
+                        </view>
+                    </view>
+                </scroll-view>
+            </view>
+        </swiper-item>
+        <swiper-item>
+            <view class="cnt cnt2" id="cnt2">
+                <scroll-view scrollY="true">
+                    <view class="empty-wrap" wx:if="{{goods_awards.length==0}}">
+                        <image src="../../images/empty/img_youhuiquan.png"></image>
+                        <view class="text">
+                            <text>暂无实物奖品</text>
+                        </view>
+                    </view>
+                    <view class="award-item {{item.hasDue?'dis':''}}" wx:for="{{goods_awards}}">
+                        <view class="item-left">
+                            <image src="{{item.awardPic}}"></image>
+                            <view class="item-info">
+                                <view class="item-title">{{item.ext}}</view>
+                                <view class="item-price">市场价:
+                  <view class="price-wrap">¥ <text class="price">{{item.awardAmount}}</text>
+                                    </view>
+                                </view>
+                                <view class="item-price time">有效期至: {{item.overTime}}</view>
+                            </view>
+                        </view>
+                        <view class="item-right">
+                            <navigator class="btn" style="color:green" url="../orderdetail/orderdetail?orderNo={{item.extId}}" wx:if="{{item.isUsed==1&&item.extId}}">
+                                <text style="margin-bottom:10rpx;">查看</text>
+                                <text>订单</text>
+                            </navigator>
+                            <view class="btn" wx:elif="{{item.hasDue}}">
+                                <text>已过期</text>
+                            </view>
+                            <navigator class="btn" url="../lotterysettle/lotterysettle?lotteryId={{item.id}}" wx:elif="{{item.isUsed==0}}">
+                                <text style="margin-bottom:10rpx;">立即</text>
+                                <text>领取</text>
+                            </navigator>
+                        </view>
+                    </view>
+                </scroll-view>
+            </view>
+        </swiper-item>
+        <swiper-item>
+            <view class="cnt cnt3" id="cnt3">
+                <scroll-view scrollY="true">
+                    <view class="empty-wrap" wx:if="{{cash_awards.length==0}}">
+                        <image src="../../images/empty/img_youhuiquan.png"></image>
+                        <view class="text">
+                            <text>暂无现金红包中奖记录</text>
+                        </view>
+                    </view>
+                    <view class="wallet-item exce {{item.hasDue?'dis':''}}" wx:for="{{cash_awards}}">
+                        <view class="item-left">
+              ¥ <text class="price">{{item.awardAmount}}</text>
+                        </view>
+                        <view class="item-right" wx:if="{{item.isUsed==1}}">
+                            <image src="/images/lottery/icon_cun.png"></image>
+                            <text>已存入您的微信零钱账户</text>
+                        </view>
+                        <view class="item-right" wx:else>
+                            <image src="/images/lottery/icon_yichang.png"></image>
+                            <text style="color: #de6944;">发放异常请联系管理员</text>
+                        </view>
+                    </view>
+                </scroll-view>
+            </view>
+        </swiper-item>
+    </swiper>
+</view>

@@ -1,0 +1,33 @@
+<template name="form">
+    <view class="form_div">
+        <view wx:if="{{form.t1show==1}}">
+            <input bindinput="t1" class="mobile" placeholder="{{form.t1name}}" placeholderClass="pclass"></input>
+        </view>
+        <view wx:if="{{form.t2show==1}}">
+            <input bindinput="t2" class="mobile" placeholder="{{form.t2name}}" placeholderClass="pclass"></input>
+        </view>
+        <view wx:if="{{form.t3show==1}}">
+            <input bindinput="t3" class="mobile" placeholder="{{form.t3name}}" placeholderClass="pclass"></input>
+        </view>
+        <view wx:if="{{form.t4show==1}}">
+            <input bindinput="t4" class="mobile" placeholder="{{form.t4name}}" placeholderClass="pclass"></input>
+        </view>
+    </view>
+    <view class="radio_div" wx:if="{{form.rshow==1}}">
+        <radio-group bindchange="radioChange" class="radio-group">
+            <view class="radio" wx:for="{{form.rvalue}}" wx:key="{{index1}}">
+                <radio value="{{item}}"></radio>{{item}}
+        </view>
+        </radio-group>
+    </view>
+    <view class="radio_div" wx:if="{{form.cshow==1}}">
+        <checkbox-group bindchange="checkChange" class="radio-group">
+            <view class="radio" wx:for="{{form.cvalue}}" wx:key="{{index1}}">
+                <checkbox value="{{item}}"></checkbox>{{item}}
+        </view>
+        </checkbox-group>
+    </view>
+    <view class="textarea_div" wx:if="{{form.ashow==1}}">
+        <textarea bindinput="textareaBlur" class="content" placeholder="{{form.aname}}" placeholderClass="pclass"></textarea>
+    </view>
+</template>

@@ -1,0 +1,65 @@
+<view class="body_bg">
+    <view class="top cart_bg_color2">
+        <text wx:if="{{order.status_str}}">订单{{order.status_str}}</text>
+        <text wx:else>订单已完成</text>
+    </view>
+    <view class="diandan_item">
+        <view class="diandan_item_t">
+            <view class="flex">
+                <text>订单编号：{{order.out_trade_no}}</text>
+            </view>
+        </view>
+        <view class="diandan_item_c flex">
+            <view class="diandan_item_c_l">
+                <image mode="aspectFit" src="{{order.thumbnail}}"></image>
+            </view>
+            <view class="diandan_item_c_r">
+                <text>{{order.title}}</text>
+                <text>预约时间：{{order.service_time}}</text>
+            </view>
+        </view>
+        <view class="fle">
+            <text>金额:</text>
+            <text class="col">￥{{order.total_price}}</text>
+        </view>
+    </view>
+    <view class="list">
+        <view class="list_item">
+            <text class="iteml">支付方式</text>
+            <text class="itemr">{{order.payment_type=='1'||order.payment_type=='4'?'在线支付':'到店支付'}}</text>
+        </view>
+        <view class="list_item" wx:if="{{disass.yhjprice>0}}">
+            <text>优惠劵</text>
+            <text class="te">-￥{{disass.yhjprice||'0.00'}}</text>
+        </view>
+        <view class="list_item" wx:if="{{disass.yhmoney>0}}">
+            <text>优惠码</text>
+            <text class="te">-￥{{disass.yhmoney||'0.00'}}</text>
+        </view>
+        <view class="list_item" wx:if="{{disass.jfprice>0}}">
+            <text>积分</text>
+            <text class="te">-￥{{disass.jfprice||'0.00'}}</text>
+        </view>
+        <view class="list_item" wx:if="{{disass.yeprice>0}}">
+            <text>余额</text>
+            <text class="te">￥{{disass.yeprice||'0.00'}}</text>
+        </view>
+        <view class="list_item">
+            <text>实际付款</text>
+            <text class="te">￥{{disass.total_price}}</text>
+        </view>
+        <view class="list_item" wx:for="{{order.userinfo}}" wx:key="{{index}}">
+            <text class="iteml">{{item.key}}</text>
+            <text class="itemr">{{item.val}}</text>
+        </view>
+    </view>
+    <view class="diandan_item_b">
+        <block wx:if="{{order.status_no==1||order.status_no==2}}">
+            <text bindtap="cancelOrders" class="btn1" data-oid="{{order.id}}">取消订单</text>
+            <text bindtap="payOrders" class="btn2 col1" data-oid="{{order.id}}" wx:if="{{order.status_no==1}}">付款</text>
+        </block>
+        <text bindtap="deleteOrderList" class="btn1" data-oid="{{order.id}}" wx:elif="{{order.status_no==4}}">删除订单</text>
+        <text bindtap="confirmOrders" class="btn1" data-oid="{{order.id}}" wx:elif="{{order.status_no==7}}">确认服务</text>
+        <text bindtap="goPage" class="btn2 col1 cart_bg_color2" data-id="{{order.aid}}" data-img="{{order.thumbnail}}" data-oid="{{order.id}}" data-page="appoint_ratings" wx:elif="{{order.status_no=='3'||order.status_no=='8'}}">评价</text>
+    </view>
+</view>

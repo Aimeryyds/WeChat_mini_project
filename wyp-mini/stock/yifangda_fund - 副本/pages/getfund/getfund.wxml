@@ -1,0 +1,51 @@
+<view bindtap="back" class="goback">
+    <view>
+        <image src="../image/back.jpg" style="width:25px;height:20px;"></image>
+    </view>
+    <view class="bk">返回</view>
+</view>
+<view class="top"></view>
+<view wx:if="{{code!==0}}">
+    <view class="firsttitle">易方达旗下持有{{stockname}}({{code}})的基金有：</view>
+    <view class="table">
+        <view class="trtitle">
+            <view class="tdone">基金代码</view>
+            <view class="tdtwo">基金名称</view>
+            <view class="tdthree">第N大重仓</view>
+            <view class="tdfour">持仓比例 ↓</view>
+        </view>
+        <view wx:if="{{item.stockcode===code}}" wx:for="{{get_fund}}" wx:for-index="idx">
+            <view class="tr">
+                <view class="tdone">{{item.fundcode}}</view>
+                <view class="tdtwo">{{item.fundname}}</view>
+                <view class="tdthree">{{item.fundsort}}</view>
+                <view class="tdfour">{{item.fundhold}}</view>
+            </view>
+        </view>
+    </view>
+</view>
+<view wx:elif="{{code===0}}">
+    <block wx:for="{{Arr}}" wx:for-index="idx" wx:for-item="array">
+        <view class="firsttitle">易方达旗下持有{{array.arrstockname}}({{array.arrstockcode}})的基金有：
+  </view>
+        <view class="table">
+            <view class="trtitle">
+                <view class="tdone">基金代码</view>
+                <view class="tdtwo">基金名称</view>
+                <view class="tdthree">第N大重仓</view>
+                <view class="tdfour">持仓比例 ↓</view>
+            </view>
+        </view>
+        <view wx:for="{{get_fund}}">
+            <view wx:if="{{item.stockcode===array.arrstockcode}}">
+                <view class="tr">
+                    <view class="tdone">{{item.fundcode}}</view>
+                    <view class="tdtwo">{{item.fundname}}</view>
+                    <view class="tdthree">{{item.fundsort}}</view>
+                    <view class="tdfour">{{item.fundhold}}</view>
+                </view>
+            </view>
+        </view>
+    </block>
+    <view class="notall" wx:if="{{Arr.length>=5}}">由于篇幅限制，未能显示全部持有基金，请输入股票全称或股票代码进行查询。</view>
+</view>

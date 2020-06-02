@@ -1,0 +1,20 @@
+<template name="1b955417">
+    <view class="_div data-v-67bc4ebc bookplan-wrapper plan-reward" style=" {{'background-image:'+'url('+coverUrl+')'+';'}}" wx:if="{{coverUrl}}">
+        <view class="_div data-v-67bc4ebc img-overlay"></view>
+        <view class="_div data-v-67bc4ebc logo"></view>
+        <view class="_div data-v-67bc4ebc bookplan-instruction">
+            <view class="_div data-v-67bc4ebc title">计划完成奖励</view>
+            <view class="_div data-v-67bc4ebc description">书籍进度100%+完成天数100%，即为完成计划</view>
+            <view class="_div data-v-67bc4ebc sub-title">奖励内容：</view>
+            <view class="_div data-v-67bc4ebc item" key="{{reward.id}}" wx:for="{{rewards}}" wx:for-item="reward" wx:key="reward.id">
+                <view class="_div data-v-67bc4ebc item-number">{{reward.id}}.</view>
+                <view class="_div data-v-67bc4ebc item-content">{{reward.content}}</view>
+            </view>
+            <view class="_div data-v-67bc4ebc sub-title">你需要做的：</view>
+            <view class="_div data-v-67bc4ebc item" key="{{todo.id}}" wx:for="{{todos}}" wx:for-item="todo" wx:key="todo.id">
+                <view class="_div data-v-67bc4ebc item-number">{{todo.id}}.</view>
+                <view class="_div data-v-67bc4ebc item-content">{{todo.content}}</view>
+            </view>
+        </view>
+    </view>
+</template>

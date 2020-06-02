@@ -1,0 +1,21 @@
+<view class="tab">
+    <scroll-view class="tab__navbar" scrollLeft="{{move*2}}" scrollWithAnimation="{{animate}}" scrollX="{{true}}" wx:if="{{type==='simple'}}">
+        <view class="tab__navbar-wrap">
+            <view bindtap="onSwitch" class="tab__navbar-item tab__navbar-item--default" data-idx="{{index}}" data-key="{{tab.key}}" style="width: {{width}}%; color:{{index===activeKey?activeTextColor:textColor}}" wx:for="{{tabs}}" wx:for-item="tab">
+                <label class="tab__navbar-title">{{tab.label}}</label>
+            </view>
+            <view class="tab__line {{!animate?'':'tab__line--animate'}}" style="left:{{move}}%; width: {{width}}%; background-color: {{activeLineColor}};"></view>
+        </view>
+    </scroll-view>
+    <scroll-view class="tab__navbar" scrollLeft="{{move*2}}" scrollWithAnimation="{{animate}}" scrollX="{{true}}">
+        <view class="tab__navbar-wrap">
+            <slot name="tablabel"></slot>
+            <view class="tab__line {{!animate?'':'tab__line--animate'}}" style="left:{{move}}%; width: {{width}}%; background-color: {{activeLineColor}};"></view>
+        </view>
+    </scroll-view>
+    <view class="tab__content-wrap" style="border-top: 2rpx solid {{lineColor}};">
+        <view class="tab__content">
+            <slot></slot>
+        </view>
+    </view>
+</view>

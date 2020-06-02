@@ -1,0 +1,148 @@
+<form>
+    <view class="cu-form-group">
+        <view class="title">保险公司</view>{{insureName}}
+  </view>
+    <view class="cu-form-group">
+        <view class="title">保费</view>¥ {{productPrice}}
+  </view>
+    <view class="cu-form-group margin-top">
+        <view class="title">
+            <text class="cuIcon-title text-blue"></text>投保人信息</view>
+    </view>
+    <view class="cu-form-group">
+        <view class="title">投保人</view>
+        <input bindinput="getInputValue" id="policyName" placeholder="请填写投保人姓名" value="{{policyName}}"></input>
+    </view>
+    <view class="cu-form-group">
+        <view class="title">证件类型</view>
+        <input disabled bindinput="getInputValue" id="policyCardType" value="{{cardTypeArray}}"></input>
+    </view>
+    <view class="cu-form-group">
+        <view class="title">证件号码</view>
+        <input bindinput="getInputValue" id="policyCard" placeholder="请填写证件号码" value="{{policyCard}}"></input>
+    </view>
+    <view class="cu-form-group">
+        <view class="title">手机号码</view>
+        <input bindinput="getInputValue" id="policyPhone" placeholder="请输入手机号码" type="number" value="{{policyPhone}}"></input>
+        <view class="cu-capsule radius">
+            <view class="cu-tag bg-blue">
+        电话
+      </view>
+            <view class="cu-tag line-blue">
+        中国大陆
+      </view>
+        </view>
+    </view>
+    <view class="cu-form-group">
+        <view class="title">为谁投保</view>
+        <picker bindchange="relationPickerChange" id="relation" range="{{relationArray}}">
+            <view class="picker">
+        {{relationIndex?relationArray[relationIndex]:'请选择'}}
+      </view>
+        </picker>
+    </view>
+    <view class="cu-form-group margin-top">
+        <view class="title">
+            <text class="cuIcon-title text-blue"></text>被保险人信息</view>
+    </view>
+    <view class="cu-form-group">
+        <view class="title">被保险人</view>
+        <input bindinput="getInputValue" id="insuredName" placeholder="请填写被保人姓名" value="{{insuredName}}"></input>
+    </view>
+    <view class="cu-form-group">
+        <view class="title">证件类型</view>
+        <input disabled bindinput="getInputValue" id="insuredCardType" value="{{cardTypeArray}}"></input>
+    </view>
+    <view class="cu-form-group">
+        <view class="title">证件号码</view>
+        <input bindinput="getInputValue" id="insuredCard" placeholder="请填写证件号码" value="{{insuredCard}}"></input>
+    </view>
+    <view class="cu-form-group">
+        <view class="title">手机号码</view>
+        <input bindinput="getInputValue" id="insuredPhone" placeholder="请输入手机号码" type="number" value="{{insuredPhone}}"></input>
+        <view class="cu-capsule radius">
+            <view class="cu-tag bg-blue">
+        电话
+      </view>
+            <view class="cu-tag line-blue">
+        中国大陆
+      </view>
+        </view>
+    </view>
+    <view class="cu-form-group margin-top">
+        <view class="title">
+            <text class="cuIcon-title text-blue"></text>车辆信息</view>
+        <view bindtap="goScan" class="cu-item text-xxl">
+            <text class="cuIcon-scan lg text-blue"></text>
+        </view>
+    </view>
+    <view class="cu-form-group">
+        <view class="title">车牌号</view>
+        <input bindinput="getInputValue" id="plateNumber" placeholder="请填写车牌号"></input>
+    </view>
+    <view class="cu-form-group">
+        <view class="title">厂牌型号</view>
+        <input bindinput="getInputValue" id="modelNumber" placeholder="请填写厂牌型号" value="{{modelNumber}}"></input>
+    </view>
+    <view class="cu-form-group">
+        <view class="title">电机号码</view>
+        <input bindinput="getInputValue" id="machineryNumber" placeholder="请填写电机号码" value="{{machineryNumber}}"></input>
+    </view>
+    <view class="cu-form-group">
+        <view class="title">车架号</view>
+        <input bindinput="getInputValue" id="frameNumber" placeholder="请填写车架号" value="{{frameNumber}}"></input>
+    </view>
+    <view class="cu-form-group">
+        <view class="title">车辆颜色</view>
+        <input bindinput="getInputValue" id="veichelColor" placeholder="请填写车辆颜色" value="{{veichelColor}}"></input>
+    </view>
+    <view class="cu-form-group">
+        <view class="title">生产日期</view>
+        <picker bindchange="DateChange" id="productionDate" mode="date">
+            <view class="picker">
+        {{productionDate}}
+      </view>
+        </picker>
+    </view>
+    <view class="cu-form-group">
+        <view class="title">购买日期</view>
+        <picker bindchange="DateChange" id="buyDate" mode="date" value="{{buyDate}}">
+            <view class="picker">
+        {{buyDate}}
+      </view>
+        </picker>
+    </view>
+    <view class="cu-form-group text-left">
+        <checkbox catchtap="chooseRead" class="round orange"></checkbox>
+        <text class="text-grey text-left text-sm">我已阅读并同意</text>
+        <text bindtap="readDetail" class="text-blue text-left text-sm" data-type="notice">《投保须知》</text>
+        <text bindtap="readDetail" class="text-blue text-left text-sm" data-type="clause">《保险条款》</text>
+        <text bindtap="readDetail" class="text-blue text-left text-sm" data-type="statement">《投保声明》</text>
+    </view>
+    <view class="cu-bar btn-group margin-top margin-bottom">
+        <button bindtap="goHome" class="cu-btn text-blue line-blue ">返回</button>
+        <button catchtap="submitInsuranceForm" class="cu-btn bg-blue">确认提交</button>
+    </view>
+    <view class="cu-load load-modal" wx:if="{{loadModal}}">
+        <view class="gray-text">提交中...</view>
+    </view>
+</form>
+<view class="cu-modal {{modalName=='ProposalModal'?'show':''}}">
+    <view class="cu-dialog">
+        <view class="cu-bar bg-white justify-end">
+            <view class="content">确定投保</view>
+            <view bindtap="hideModal" class="action">
+                <text class="cuIcon-close text-red"></text>
+            </view>
+        </view>
+        <view class="padding-xl">
+      内容。
+    </view>
+        <view class="cu-bar bg-white">
+            <view bindtap="hideModal" class="action margin-0 flex-sub text-green ">
+                <text class="cuIcon-moneybag"></text>去支付</view>
+            <view bindtap="hideModal" class="action margin-0 flex-sub text-green solid-left">取消</view>
+            <view bindtap="hideModal" class="action margin-0 flex-sub  solid-left">确定</view>
+        </view>
+    </view>
+</view>

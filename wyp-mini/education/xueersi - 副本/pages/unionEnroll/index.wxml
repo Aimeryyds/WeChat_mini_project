@@ -1,0 +1,310 @@
+<view class="union-enroll-wrap">
+    <block wx:if="{{countDown===0}}">
+        <view class="head-img" wx:if="{{activityInfo.promotion_id}}">
+            <image bindbinderror="handleImgLoadError" class="real-img" src="{{activityInfo.activity_image_url}}" wx:if="{{activityInfo.activity_image_url&&!headImgError}}"></image>
+            <image class="default-img" mode="widthFix" src="../../common/img/logo.png" wx:else></image>
+        </view>
+        <view catchtouchmove="$FilterNav$true" class="{{$FilterNav$navFixed?'nav-fixed':''}}" hidden="{{!activityInfo.promotion_id}}">
+            <view bindtap="$FilterNav$toggleGradeSelect" class="select-wrap" hidden="{{!$FilterNav$showGradeSelect}}">
+                <scroll-view class="grade-tree-select" scrollY="true">
+                    <view bindtap="$FilterNav$onGradeClick" class="'item ' {{$FilterNav$gradeActiveIndex===index?'active':''}}" data-wpyongradeclick-a="{{item}}" data-wpyongradeclick-b="{{index}}" wx:for="{{$FilterNav$navInfo.gradeList}}" wx:key="item.gradeId">
+                        {{item.gradeName}}
+                    </view>
+                </scroll-view>
+            </view>
+            <view class="{{$FilterNav$showGradeSelect&&$FilterNav$courseCount<=1?'to-top':''}}">
+                <view class="nav-pos">
+                    <scroll-view class="nav-wrap" hidden="{{!$FilterNav$navInfo.subject.length}}" scrollX="true">
+                        <view class="nav" hidden="{{$FilterNav$showGradeSelect}}">
+                            <view bindtap="$FilterNav$handleSubjectClick" class="'subject-item' {{$FilterNav$subjectActiveIndex===index?'active':''}}" data-wpyhandlesubjectclick-a="{{item}}" data-wpyhandlesubjectclick-b="{{index}}" wx:for="{{$FilterNav$navInfo.subject}}" wx:key="item.subjectId">{{item.subjectName}}</view>
+                        </view>
+                    </scroll-view>
+                    <view bindtap="$FilterNav$toggleGradeSelect" class="'grade-btn ' {{$FilterNav$showGradeSelect?'active':''}}">
+                    {{$FilterNav$navInfo.gradeList[$FilterNav$gradeActiveIndex].gradeName}}
+                    <image class="arrow" src="{{$FilterNav$arrowImg}}"></image>
+                    </view>
+                </view>
+                <view class="nav-pos" hidden="{{$FilterNav$navInfo.class_type.length<=1}}">
+                    <view class="type-nav">
+                        <view bindtap="$FilterNav$handleTypeClick" class="'type-item ' {{$FilterNav$typeActiveIndex===index?'active':''}}" data-wpyhandletypeclick-a="{{item}}" data-wpyhandletypeclick-b="{{index}}" wx:for="{{$FilterNav$navInfo.class_type}}" wx:key="index">{{item.text}}</view>
+                    </view>
+                </view>
+            </view>
+        </view>
+        <view class="bottom-cart-wrap" hidden="{{!courseList.length}}">
+            <view class="left-cart">
+                <view bindtap="$BottomCart$toCoursePay">
+                    <image class="cart-icon" src="../../common/img/cart.png"></image>
+                    <view animation="{{$BottomCart$textAnimation}}" class="'spot-num '{{$BottomCart$numClass}}" hidden="{{!$BottomCart$count}}">{{$BottomCart$count}}</view>
+                    <view>购课单</view>
+                </view>
+                <button bindgetuserinfo="$BottomCart$Login$getUserInfoFn" class="opent-btn" openType="getUserInfo" wx:if="{{$BottomCart$Login$isShow}}">我</button>
+            </view>
+            <view class="right-box">
+                <view class="center-box" hidden="{{!$BottomCart$cartList.length}}">
+                    <view class="total-price">¥{{$BottomCart$priceInfo.actualPrice}}</view>
+                    <view class="bottom-text">已优惠<text class="discount-price">¥{{$BottomCart$priceInfo.discountAmount}}</text>
+                    </view>
+                </view>
+                <view bindtap="$BottomCart$toOrderDetail" class="'buy-btn '{{!$BottomCart$cartList.length?'disabled':''}}">立即购买</view>
+            </view>
+            <view animation="{{$BottomCart$taltoast$animationData}}" class="tal-toast-container" style="top:{{$BottomCart$taltoast$vertical}}%;" wx:if="{{$BottomCart$taltoast$toastVisible}}">
+                <view class="tal-toast">
+                    <text>{{$BottomCart$taltoast$toastMessage}}</text>
+                </view>
+            </view>
+        </view>
+        <view class="'content-wrap '{{navInfo.class_type_list.length<=1?'no-type-list':''}}">
+            <scroll-view class="course-list" hidden="{{!courseList.length}}" scrollY="true">
+                <view class="course-item" wx:for="{{courseList}}" wx:key="item.classId">
+                    <image class="full-class-icon" hidden="{{item.surplusPersons!==0}}" src="../../common/img/full_class.png"></image>
+                    <view bindtap="goClassInfo" class="info-wrap" data-wpygoclassinfo-a="{{item}}">
+                        <view class="course-info-wrap">
+                            <view class="title">
+                                <text class="'course-type-icon' {{$CourseInfo$classType[item.courseType].icon}}" hidden="{{!item.courseType}}">{{$CourseInfo$classType[item.courseType].text}}</text>
+                                <text class="class-name">{{item.className}}</text>
+                            </view>
+                            <view class="info-list">
+                                <view class="item" hidden="{{item.courseType===1||!item.address}}">
+                                    <image class="icon" mode="widthFix" src="../../common/img/address.png"></image>
+                                    <view class="text-right">{{item.address}}</view>
+                                </view>
+                                <view class="item" hidden="{{!item.classTime}}">
+                                    <image class="icon" mode="widthFix" src="../../common/img/time.png"></image>
+                                    <view class="text-right">{{item.classTime}}</view>
+                                </view>
+                                <view class="item" hidden="{{!item.timeArea}}">
+                                    <image class="icon" mode="widthFix" src="../../common/img/date.png"></image>
+                                    <view class="text-right">{{item.timeArea}}</view>
+                                </view>
+                                <view class="item" wx:if="{{item.teacherList||item.tutorList}}">
+                                    <image class="icon" mode="widthFix" src="../../common/img/person.png"></image>
+                                    <view class="text-right">
+                                        <view class="text-right-block" wx:if="{{item.teacherList.length&&!item.strengTutor}}">
+                                            <text class="teacher-title">授课:</text>
+                                            <text class="teacher-item" wx:for="{{item.teacherList}}" wx:for-index="_mun1" wx:for-item="_tea1" wx:key="_mun1">{{_tea1.name}}</text>
+                                        </view>
+                                        <view class="text-right-block" wx:if="{{item.tutorList.length&&item.classType!==4}}">
+                                            <text class="teacher-title">{{item.strengTutor?'老师':'辅导'}}:</text>
+                                            <text class="teacher-item" wx:for="{{item.tutorList}}" wx:for-index="_mun2" wx:for-item="_tea2" wx:key="_tea2">{{_tea2.name}}</text>
+                                        </view>
+                                    </view>
+                                </view>
+                            </view>
+                            <view class="price-wrap">
+                                <text class="info-price" wx:if="{{item.coursePrice}}">{{item.coursePrice}}</text>
+                                <text class="surplus-class" wx:if="{{item.surplusClassNum}}">剩余{{item.surplusClassNum}}节课</text>
+                            </view>
+                        </view>
+                    </view>
+                    <view class="bottom-box">
+                        <view class="left">
+                            <text class="price">{{item.actualPrice}}</text>
+                            <text>/{{item.classCount}}课时</text>
+                        </view>
+                        <view class="bottom-box-islogin">
+                            <view bindtap="addToCart" class="'add-btn' {{item.registered===1||item.surplusPersons===0?'disabled':''}}" data-wpyaddtocart-a="{{item}}" data-wpyaddtocart-b="{{index}}">
+                                <block wx:if="{{item.registered===1}}">已加购课单</block>
+                                <block wx:else>加入购课单</block>
+                            </view>
+                            <button bindgetuserinfo="$Login$getUserInfoFn" class="opent-btn" data-com-index="{{index}}" openType="getUserInfo" wx:if="{{isLogin}}">我</button>
+                        </view>
+                    </view>
+                </view>
+            </scroll-view>
+            <view class="empty-content" hidden="{{!noList}}">
+                <image src="../../common/img/empty_content.png"></image>
+                <view>暂无合适的课程</view>
+            </view>
+            <view class="view-more-btn" hidden="{{!courseList.length}}">
+                <text bindtap="viewMoreCourse">
+                    <block wx:if="{{hasMore}}">查看更多班级</block>
+                    <block wx:else>查看全部班级</block>
+                </text>
+                <image class="arrow" hidden="{{!hasMore}}" src="../../common/img/arrow_gray.png"></image>
+            </view>
+            <view class="bottom-wrap" hidden="{{!courseList.length||!activityInfo.course_image_url}}">
+                <view class="desc">
+                        ——— 活动介绍 ———
+                    </view>
+                <image class="bottom-img" mode="widthFix" src="{{activityInfo.course_image_url}}"></image>
+            </view>
+            <view animation="{{$TalAcSheet$aniMain}}" class="action_sheet_wrap _2b254a0 action-sheet" wx:if="{{$TalAcSheet$visible}}">
+                <view class="close-center _2b254a0">
+                    <text bindtap="$TalAcSheet$closes" class="iconfont icon-home_classdetail_clo _2b254a0"></text>
+                </view>
+                <view class="action-padding _2b254a0">
+                    <view class="select-tutor-title _2b254a0">
+                        <text class="text _2b254a0">选择辅导老师</text>
+                    </view>
+                    <scroll-view scrollY class="scroll-box _2b254a0">
+                        <radio-group bindchange="$TalAcSheet$selectChange" class="_2b254a0">
+                            <label class="tutor-cell _2b254a0" wx:for="{{$TalAcSheet$teacherList}}" wx:key="index">
+                                <view class="tutor-avatar-wrap _2b254a0">
+                                    <image binderror="$TalAcSheet$loadErrorImg" class="_2b254a0" data-wpyloaderrorimg-a="{{index}}" mode="aspectFill" src="{{item.picture_url?item.picture_url:$TalAcSheet$imgList.defaultImg}}"></image>
+                                </view>
+                                <view class="tutor-content-wrap _2b254a0">
+                                    <view class="tutor-content-top _2b254a0">
+                                        <text class="tutor-name _2b254a0">{{item.teacher?item.teacher:'待定'}}</text>
+                                        <text class="tutor-count _2b254a0">剩余{{item.left}}</text>
+                                    </view>
+                                    <view class="tutor-content-bottom _2b254a0">{{item.school?item.school:''}}</view>
+                                </view>
+                                <radio checked="{{item.checked}}" class="weui-check _2b254a0" value="{{index}}"></radio>
+                                <view class="icon-box _2b254a0" wx:if="{{item.left}}">
+                                    <image class="_2b254a0" src="{{item.checked?$TalAcSheet$imgList.checkType:$TalAcSheet$imgList.notCheckType}}"></image>
+                                </view>
+                            </label>
+                        </radio-group>
+                    </scroll-view>
+                    <view bindtap="$TalAcSheet$tutorDone" class="{{$TalAcSheet$tutorDisable?'select-done-btn':'select-done-btn-active'}} _2b254a0">完成</view>
+                </view>
+            </view>
+            <view animation="{{$TalAcSheet$aniMask}}" bindtap="$TalAcSheet$concealFrame" class="action_sheet_mask _2b254a0" wx:if="{{$TalAcSheet$visible}}"></view>
+            <view class="turn-class-centent">
+                <view animation="{{$turnclass$aniMain}}" class="turn-class-con">
+                    <view class="turn-padding">
+                        <view class="title">
+                            <view class="iocns">
+                                <text bindtap="$turnclass$click_hide" class="iconfont icon-home_classdetail_clo"></text>
+                            </view>
+                            <text class="title-bar">转班</text>
+                        </view>
+                        <view class="explain">您已报名同类型班级，若继续报名，将会自动从原来的班级转入当前报名的班级，请慎重选择！</view>
+                        <scroll-view class="scroll-view" scrollY="{{$turnclass$isScroll}}">
+                            <view class="nav">原班级</view>
+                            <view class="card-information">
+                                <view bindtap="$turnclass$oldFiche$goClassInfo" class="card-padding" data-wpygoclassinfo-a="{{item}}" wx:for="{{$turnclass$oldFiche$cardInfo}}" wx:key="index">
+                                    <view class="card-title">
+                                        <text class="iocnt-text {{item.cla_class_type===2?'sh-back':item.cla_class_type===4?'ms-back':''}}">{{$turnclass$oldFiche$classType[item.cla_class_type]}}</text>
+                                        <text class="h2">{{item.cla_name}}</text>
+                                    </view>
+                                    <view class="card-block">
+                                        <text class="iconfont icon-home_classdetail_cal"></text>
+                                        <text class="test">{{item.cla_start_date}} 至 {{item.cla_end_date}}</text>
+                                    </view>
+                                    <view class="card-block">
+                                        <text class="iconfont icon-home_classdetailpage"></text>
+                                        <text class="test">{{item.cla_classtime_names}}</text>
+                                    </view>
+                                    <view class="card-block" hidden="{{item.cla_class_type===1}}">
+                                        <text class="iconfont icon-home_classdetailpage2"></text>
+                                        <text class="test">地点：{{item.cla_area_name?item.cla_area_name:''}}{{item.cla_venue_name}} </text>
+                                    </view>
+                                    <view class="card-block" wx:if="{{item.cla_class_type!==2}}">
+                                        <block wx:for="{{item.show_teacher_list}}" wx:for-item="itemName" wx:key="index">
+                                            <text class="iconfont icon-home_classdetail_mai"></text>
+                                            <text class="test">主讲老师：{{itemName.name?itemName.name:'待定'}}</text>
+                                        </block>
+                                    </view>
+                                    <view class="card-block" wx:else>
+                                        <text class="iconfont icon-home_classdetail_mai"></text>
+                                        <text class="test">主讲老师：{{item.cla_teacher_names}}</text>
+                                    </view>
+                                    <view class="card-block" wx:if="{{item.cla_class_type===2}}">
+                                        <text class="iconfont icon-home_classdetail_coa"></text>
+                                        <text class="test">辅助老师：{{item.cla_tutor_real_name?item.cla_tutor_real_name:'待定'}}</text>
+                                    </view>
+                                </view>
+                            </view>
+                            <view class="nav">转入班级 <text class="iconfont icon-CombinedShapex"></text>
+                            </view>
+                            <view class="card-information">
+                                <view bindtap="$turnclass$newFiche$goClassInfo" class="card-padding" data-wpygoclassinfo-a="{{item}}" wx:for="{{$turnclass$newFiche$cardInfo}}" wx:key="index">
+                                    <view class="card-title">
+                                        <text class="iocnt-text {{item.cla_class_type===2?'sh-back':item.cla_class_type===4?'ms-back':''}}">{{$turnclass$newFiche$classType[item.cla_class_type]}}</text>
+                                        <text class="h2">{{item.cla_name}}</text>
+                                    </view>
+                                    <view class="card-block">
+                                        <text class="iconfont icon-home_classdetail_cal"></text>
+                                        <text class="test">{{item.cla_start_date}} 至 {{item.cla_end_date}}</text>
+                                    </view>
+                                    <view class="card-block">
+                                        <text class="iconfont icon-home_classdetailpage"></text>
+                                        <text class="test">{{item.cla_classtime_names}}</text>
+                                    </view>
+                                    <view class="card-block" hidden="{{item.cla_class_type===1}}">
+                                        <text class="iconfont icon-home_classdetailpage2"></text>
+                                        <text class="test">地点：{{item.cla_area_name?item.cla_area_name:''}}{{item.cla_venue_name}} </text>
+                                    </view>
+                                    <view class="card-block" wx:if="{{item.cla_class_type!==2}}">
+                                        <block wx:for="{{item.show_teacher_list}}" wx:for-item="itemName" wx:key="index">
+                                            <text class="iconfont icon-home_classdetail_mai"></text>
+                                            <text class="test">主讲老师：{{itemName.name?itemName.name:'待定'}}</text>
+                                        </block>
+                                    </view>
+                                    <view class="card-block" wx:else>
+                                        <text class="iconfont icon-home_classdetail_mai"></text>
+                                        <text class="test">主讲老师：{{item.cla_teacher_names}}</text>
+                                    </view>
+                                    <view class="card-block" wx:if="{{item.cla_class_type===2}}">
+                                        <text class="iconfont icon-home_classdetail_coa"></text>
+                                        <text class="test">辅助老师：{{item.cla_tutor_real_name?item.cla_tutor_real_name:'待定'}}</text>
+                                    </view>
+                                </view>
+                            </view>
+                            <view class="{{$turnclass$change_course?'attention':'attention-none'}}">
+                                <text>注意：转班后所有未上课次的调课都会被取消!</text>
+                            </view>
+                        </scroll-view>
+                        <view bindtap="$turnclass$submitfunc" class="determine">确定转班</view>
+                    </view>
+                </view>
+                <view bindtap="$turnclass$click_hide" class="turn-class-mask" wx:if="{{!$turnclass$visible}}"></view>
+            </view>
+        </view>
+    </block>
+    <view class="countDown" wx:if="{{countDown>0}}">
+        <view class="countDown-wrap">
+            <view class="countDown-wrap-title">活动暂未开始</view>
+            <view class="countDown-wrap-content">
+                <view class="countDown-wrap-time">
+                    <view class="countDown-wrap-time-common">{{$CountDown$hour}}</view>
+                </view>
+                <view class="countDown-wrap-time countDown-wrap-min">
+                    <view class="countDown-wrap-time-common">{{$CountDown$min}}</view>
+                </view>
+                <view class="countDown-wrap-time countDown-wrap-sec countDown-wrap-content-last">
+                    <view class="countDown-wrap-time-common">{{$CountDown$sec}}</view>
+                </view>
+            </view>
+        </view>
+        <image class="countDown-img-bottom" src="../../common/img/union-enroll-3.png"></image>
+        <image class="countDown-img-top" src="../../common/img/union-enroll-1.png"></image>
+        <image class="countDown-img-middle" src="../../common/img/union-enroll-2.png"></image>
+    </view>
+    <view class="specialState" wx:if="{{!cityMatch||isFinished}}">
+        <view class="specialState-wrap">
+            <view class="container">
+                <image class="img" src="../../common/img/union-enroll-4.png"></image>
+            </view>
+            <view class="describe">{{$SpecialState$describe}}</view>
+            <view class="container">
+                <view bindtap="$SpecialState$goMoreCourse" class="btn">查看更多好课</view>
+            </view>
+        </view>
+    </view>
+    <view class="app-cen" wx:if="{{$appmask$isHide}}">
+        <view class="app-mask"></view>
+        <view class="app-center">
+            <view class="app-con">
+                <view class="title">每一位学而思家长的必备APP</view>
+                <image src="http://static-xesapi.speiyou.cn/1536045641131.png"></image>
+                <view class="test" wx:if="{{$appmask$SystemInfo}}">
+                    <view>请在App Store内搜索“学而思”</view>
+                    <view>下载学而思APP</view>
+                </view>
+                <view class="test" wx:else>
+                    <view>请在各大应用商店内搜索“学而思”</view>
+                    <view>（应用宝、360手机助手、华为应用市场等）下载学而思APP</view>
+                </view>
+                <view bindtap="$appmask$goHide" class="btn">知道了</view>
+            </view>
+        </view>
+    </view>
+    <view animation="{{$taltoast$animationData}}" class="tal-toast-container" style="top:{{$taltoast$vertical}}%;" wx:if="{{$taltoast$toastVisible}}">
+        <view class="tal-toast">
+            <text>{{$taltoast$toastMessage}}</text>
+        </view>
+    </view>
+</view>

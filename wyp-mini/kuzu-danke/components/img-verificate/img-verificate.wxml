@@ -1,0 +1,18 @@
+<view class="img-veri-content" wx:if="{{showimgVerifi}}">
+    <view class="img-veri-container">
+        <image catchtap="__e" class="close-btn" data-event-opts="{{[ [ 'tap',[ [ 'closeVer',['$event'] ] ] ] ]}}" src="https://zhuanti.danke.com.cn/image/close.png"></image>
+        <view class="veri-title">{{imgTitle}}</view>
+        <view class="inp-img-con">
+            <input bindinput="__e" class="veri-input" data-event-opts="{{[ [ 'input',[ [ '__set_model',[ '','imgVerificaValue','$event',[] ] ],[ 'bindImgVerificaValue',['$event'] ] ] ] ]}}" focus="{{true}}" maxlength="4" placeholder="请输入" placeholderClass="inpVeri-placehoder" type="text" value="{{imgVerificaValue}}"></input>
+            <view class="img-wrap">
+                <image bindtap="__e" class="inp-img" data-event-opts="{{[ [ 'tap',[ [ 'changeImg',['$event'] ] ] ] ]}}" src="{{imgVerificaUrl}}" wx:if="{{imgVerificaUrl}}"></image>
+                <view bindtap="__e" class="inp-img inp-txt-btn" data-event-opts="{{[ [ 'tap',[ [ 'changeImg',['$event'] ] ] ] ]}}" wx:else>图像获取失败</view>
+            </view>
+        </view>
+        <view bindtap="__e" class="{{['veri-confirm',imgVerificaValue?'confirm_bg':'']}}" data-event-opts="{{[ [ 'tap',[ [ 'confirmVeri',['$event'] ] ] ] ]}}">确认</view>
+        <view bindtap="__e" class="veri-reload" data-event-opts="{{[ [ 'tap',[ [ 'changeImg',['$event'] ] ] ] ]}}">
+            <image class="reload-img" src="https://public.danke.com.cn/public-20191219-FlcSaht5-s4_kpVTul6YMGSw-5G3"></image>
+            <view>点击获取新的验证码</view>
+        </view>
+    </view>
+</view>

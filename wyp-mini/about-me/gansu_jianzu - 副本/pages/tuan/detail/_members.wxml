@@ -1,0 +1,11 @@
+<template name="members">
+    <view class="jointuan-info__user">
+        <block wx:for="{{members}}" wx:key="index">
+            <view class="jointuan-info__head" wx:if="{{item.isSponsor}}">
+                <image class="jointuan-info__head-img" src="{{item.avatarUrl}}"></image>
+                <view class="jointuan-info__lable">团长</view>
+            </view>
+            <image class="jointuan-info__member-img" src="{{item.avatarUrl}}" style="margin-left:{{index==1?'0rpx':'-24rpx'}}" wx:else></image>
+        </block>
+    </view>
+</template>

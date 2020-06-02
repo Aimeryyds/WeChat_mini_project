@@ -1,0 +1,15 @@
+<view class="i-class i-alert {{'i-alert-'+type}} {{showIcon?'i-alert-with-icon':''}} {{desc?'i-alert-with-desc':''}}" wx:if="{{!closed}}">
+    <view class="i-alert-icon" wx:if="{{showIcon}}">
+        <i-icon size="{{desc?24:16}}" type="prompt" wx:if="{{type==='info'}}"></i-icon>
+        <i-icon size="{{desc?24:16}}" type="success" wx:if="{{type==='success'}}"></i-icon>
+        <i-icon size="{{desc?24:16}}" type="warning" wx:if="{{type==='warning'}}"></i-icon>
+        <i-icon size="{{desc?24:16}}" type="delete" wx:if="{{type==='error'}}"></i-icon>
+    </view>
+    <slot></slot>
+    <view class="i-alert-desc">
+        <slot name="desc"></slot>
+    </view>
+    <view bindtap="handleTap" class="i-alert-close" wx:if="{{closable}}">
+        <i-icon type="close"></i-icon>
+    </view>
+</view>

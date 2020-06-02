@@ -1,0 +1,35 @@
+<view class="container">
+    <view class="number">
+        <view class="number_top">
+            <view class="nb_lf">
+                <text class="ph_tx">卡号:{{cardN}}</text>
+            </view>
+            <view class="nb_rg">
+                <image src=".https://tws.cnweisou.com/images/tx.png" style=" height: 25px;width: 25px; margin-top:15px;"></image>
+            </view>
+        </view>
+        <view class="number_bt">
+      {{title}}
+    </view>
+    </view>
+    <view class="xiantiao"></view>
+    <view class="chongzhi">
+        <view class="cz_huafei">
+            <view clsss="hf" style="width:90%;margin-left: 5%; ">
+                <text style="font-size:14px;color: #9a9a9a;">充会员</text>
+            </view>
+            <view class="kuang_hf" wx:for="{{dataMoney}}">
+                <view bindtap="merberCZ" class="hf_one" data-index="{{index}}">
+                    <block wx:if="{{item.grant_rate}} === '0'">
+                        <view class="priceTwo">{{item.money}}元</view>
+                        <view class="new_price"></view>
+                    </block>
+                    <block wx:else>
+                        <view class="price">{{item.money}}元</view>
+                        <view class="new_price">赠送{{item.grant_rate}}</view>
+                    </block>
+                </view>
+            </view>
+        </view>
+    </view>
+</view>

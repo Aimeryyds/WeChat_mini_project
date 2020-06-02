@@ -1,0 +1,33 @@
+<import src="/dist/toast/index.wxml"></import>
+<import src="/dist/toptips/index.wxml"></import>
+<template is="zan-toast" data="{{zanToast:zanToast}}"></template>
+<template is="zan-toptips" data="{{zanTopTips:zanTopTips}}"></template>
+<view class="container">
+    <form bindsubmit="formSubmit">
+        <view class="zan-panel logistics-info__select">
+            <view class="zan-cell zan-cell--access">
+                <view class="zan-cell__bd" style="flex:none;">物流快递</view>
+                <view class="zan-cell__ft" style="flex:1;">
+                    <picker bindchange="bindPickerChange" range="{{objectArray}}" rangeKey="name" value="{{index}}">
+                        <view class="picker" wx:if="{{logisticsData.name}}">{{logisticsData.name}}</view>
+                        <view class="picker" wx:else>请选择</view>
+                    </picker>
+                </view>
+            </view>
+        </view>
+        <view class="logistics-info">
+            <view class="zan-cell zan-form__item" style="margin-bottom:32rpx">
+                <text class="zan-form__title">物流单号：</text>
+                <input class="zan-form__input zan-cell__bd" maxlength="30" name="expressNo" placeholder="请输入物流单号" value="{{expressNo?expressNo:''}}"></input>
+            </view>
+            <view class="zan-cell zan-form__item">
+                <text class="zan-form__title">备注：</text>
+                <textarea autoHeight class="zan-form__input zan-cell__bd" maxlength="200" name="expressRemark" placeholder="不得超过200字" style="min-height:36rpx; height:36rpx;" value="{{expressRemark?expressRemark:''}}"></textarea>
+            </view>
+        </view>
+        <view class="logistics-summit__btn">
+            <button disabled="{{disabled}}" formType="submit" loading="{{loading}}" plain="{{plain}}" type="warn"> 提交 </button>
+        </view>
+    </form>
+    <template is="zan-toast" data="{{zanToast:zanToast}}"></template>
+</view>

@@ -1,0 +1,13 @@
+<import src="/dist/loadmore/index.wxml"></import>
+<view class="container" wx:if="{{isShow}}">
+    <view style="display:flex;font-size: 28rpx;padding: 10rpx 30rpx; align-items: center; background-color:#fff;margin-bottom: 6rpx;">
+        <text style="color: #8C8C8C; margin-right: 30rpx; ">当前定位</text>
+        <text style="padding:8rpx; border: 1rpx solid #d9d9d9; border-radius: 8rpx; font-size:24rpx;color:#8C8C8C;" wx:if="{{cityName}}">{{cityName}}</text>
+    </view>
+    <scroll-view enableBackToTop scrollY bindscrolltolower="lower" scrollTop="{{scrollTop}}" style="width:100%;height: calc(100vh - 68rpx)">
+        <include src="/pages/templates/map/brandlist.wxml"></include>
+        <view id="loadmore">
+            <template is="zan-loadmore" data="{{loading:loadmore}}"></template>
+        </view>
+    </scroll-view>
+</view>

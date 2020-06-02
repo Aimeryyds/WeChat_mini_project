@@ -1,0 +1,9 @@
+<view class="wp_content form_textarea_content" style="{{box_align}}" wx:if="{{param.skin=='default'}}">
+    <textarea bindinput="onInput" class="wxtext" name="{{layerid}}" placeholder="{{param.inpval}}" placeholderStyle="{{placeholder_style}}" style="{{inner_style}}" value="{{value}}"></textarea>
+</view>
+<view class="wp_content form_textarea_content" style="{{box_align}};" wx:else>
+    <label class="labbox">
+        <text class="labtext" style="{{label_style}}">{{param.labtext}}</text>
+        <textarea bindinput="onInput" class="wxtext" name="{{layerid}}" placeholder="{{param.inpval}}" placeholderStyle="{{placeholder_style}}" style="{{inner_style}}" value="{{value}}"></textarea>
+    </label>
+</view>

@@ -1,0 +1,20 @@
+<view class="class-tab">
+    <text bindtap="tabClick" class="{{tabClasss[0]}}" data-index="0">未使用</text>
+    <text bindtap="tabClick" class="{{tabClasss[1]}}" data-index="1">已使用</text>
+    <text bindtap="tabClick" class="{{tabClasss[2]}}" data-index="2">已过期</text>
+</view>
+<view class="order-item{{types}}" wx:for="{{coupons}}">
+    <view class="carts-item">
+        <view class="item-left">
+            <text class="text-value">￥{{item.money}}</text>
+            <text class="text-date">使用期:{{item.use_end_time}}</text>
+        </view>
+        <view class="item-right">
+            <text class="text-hint">消费满</text>
+            <text class="text-hint">{{item.condition}}使用</text>
+            <view class="view-btn{{types}}">
+                <text class="text-btn">￥{{item.money}}元</text>
+            </view>
+        </view>
+    </view>
+</view>

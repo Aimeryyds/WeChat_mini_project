@@ -1,0 +1,391 @@
+.phonePop_bg {
+    position: fixed;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0,0,0,.5);
+    z-index: 99;
+}
+
+.phonePop {
+    background: #fff;
+    width: 560rpx;
+    height: 250rpx;
+    border-radius: 10rpx;
+    text-align: center;
+    position: fixed;
+    left: 50%;
+    top: 50%;
+    margin: -125rpx 0 0 -280rpx;
+    z-index: 100;
+}
+
+.phonePop_num {
+    height: 150rpx;
+    line-height: 150rpx;
+    border-bottom: 1rpx #d2d3d5 solid;
+    font-size: 36rpx;
+    font-family: 'Arial';
+    display: block;
+}
+
+.phonePop_operate {
+    font-size: 0;
+}
+
+.phonePop_cancel {
+    display: inline-block;
+    width: 280rpx;
+    height: 99rpx;
+    line-height: 99rpx;
+    font-size: 36rpx;
+    border-right: 1rpx #d2d3d5 solid;
+}
+
+.phonePop_call {
+    display: inline-block;
+    width: 279rpx;
+    height: 99rpx;
+    line-height: 99rpx;
+    font-size: 36rpx;
+    color: #f90;
+}
+
+.loadingWrap {
+    text-align: center;
+    font-size: 0;
+    color: #999;
+    position: fixed;
+    width: 100%;
+    bottom: 0;
+    background: #fff;
+    box-sizing: border-box;
+    overflow: hidden;
+}
+
+.loadingWrap_Box {
+    padding-top: 20rpx;
+}
+
+.loadingWrap image {
+    display: inline-block;
+    width: 52rpx;
+    height: 52rpx;
+    margin-right: 24rpx;
+    animation: loading 2.2s linear infinite;
+}
+
+@-webkit-keyframes loading {
+    from {
+        transform: rotate(0);
+    }
+
+    to {
+        transform: rotate(360deg);
+    }
+}
+
+@keyframes loading {
+    from {
+        transform: rotate(0);
+    }
+
+    to {
+        transform: rotate(360deg);
+    }
+}
+
+.loadingWrap text {
+    vertical-align: top;
+    display: inline-block;
+    line-height: 52rpx;
+    font-size: 24rpx;
+}
+
+scroll-view {
+    height: 100%;
+}
+
+.botFixed {
+    position: fixed;
+    width: 100%;
+    left: 0;
+    bottom: 0;
+    height: 150rpx;
+    z-index: 6;
+}
+
+.botTel {
+    background: #ffbb15;
+    height: 80rpx;
+    width: 190rpx;
+    padding-left: 20rpx;
+    position: absolute;
+    left: 0;
+    top: 0;
+    border-top-right-radius: 68rpx;
+    border-bottom-right-radius: 68rpx;
+}
+
+.botTel text {
+    display: inline-block;
+    line-height: 80rpx;
+    color: #fff;
+    font-size: 26rpx;
+}
+
+.botTel .iconTelphone {
+    position: absolute;
+    right: 6rpx;
+    top: 6rpx;
+    width: 68rpx;
+    height: 68rpx;
+}
+
+.botTel .iconTelphone image {
+    display: block;
+    width: 68rpx;
+    height: 68rpx;
+}
+
+.btSort {
+    position: absolute;
+    top: 0;
+    right: 142rpx;
+    width: 80rpx;
+    height: 80rpx;
+    border-radius: 80rpx;
+    background: rgba(0,0,0,.5);
+    text-align: center;
+}
+
+.btSort image {
+    display: inline-block;
+    width: 36rpx;
+    height: 44rpx;
+    margin-top: 18rpx;
+}
+
+.orderWrap {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0,0,0,.5);
+    z-index: 11;
+    display: none;
+}
+
+.orderWrap.dialog_show {
+    display: block;
+}
+
+.orderWrap.default {
+    display: none;
+}
+
+.orderList {
+    background: #fff;
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+}
+
+.orderList view {
+    display: block;
+    text-align: center;
+    border-bottom: 1rpx #f1f1f1 solid;
+    height: 100rpx;
+    line-height: 100rpx;
+    font-size: 30rpx;
+    color: #333;
+}
+
+.orderList view:last-child {
+    border-bottom: 0;
+}
+
+.orderList view.cur {
+    color: #f90;
+}
+
+.btToTop {
+    position: fixed;
+    right: 32rpx;
+    bottom: 70rpx;
+    width: 80rpx;
+    height: 80rpx;
+    border-radius: 80rpx;
+    background: rgba(0,0,0,.5);
+    text-align: center;
+    z-index: 999;
+}
+
+.btToTop image {
+    display: inline-block;
+    width: 25rpx;
+    height: 57rpx;
+    margin-top: 14rpx;
+}
+
+page {
+    height: 100%;
+}
+
+picker-view {
+    display: block;
+}
+
+picker-view-column {
+    flex: 1;
+    position: relative;
+    height: 100%;
+    overflow: hidden;
+}
+
+.filterMask.hidden {
+    display: none;
+}
+
+.filterMask {
+    position: fixed;
+    left: 0;
+    width: 750rpx;
+    height: 100%;
+    background: rgba(0,0,0,.5);
+    z-index: 10;
+    transition: all 2s;
+}
+
+.filterCon {
+    width: 100%;
+    height: 800rpx;
+    background: #fff;
+}
+
+.filterCon .cur {
+    display: block;
+}
+
+.filterCon .default {
+    display: none;
+}
+
+.filterPosTop {
+    padding: 40rpx 0 30rpx;
+    text-align: center;
+    height: 70rpx;
+    background: #f9f9f9;
+    font-size: 0;
+    border-top: 1rpx #f1f1f1 solid;
+}
+
+.filterPosTop .SLtab {
+    display: inline-block;
+    width: 400rpx;
+    height: 70rpx;
+    margin: 0 auto;
+}
+
+.filterPosTop .SLtab view {
+    display: inline-block;
+    width: 200rpx;
+    height: 70rpx;
+    line-height: 70rpx;
+    font-size: 24rpx;
+    background: #fff;
+    color: #666;
+    vertical-align: top;
+}
+
+.filterPosTop .SLtab view.active {
+    background: #f90;
+    color: #fff;
+}
+
+.filterPosTop .SLtab view:first-child {
+    border-top-left-radius: 10rpx;
+    border-bottom-left-radius: 10rpx;
+}
+
+.filterPosTop .SLtab view:last-child {
+    border-top-right-radius: 10rpx;
+    border-bottom-right-radius: 10rpx;
+}
+
+.filterPosList {
+    zoom: 1;
+    background: #fff;
+}
+
+.filterPosList.active {
+    display: block;
+}
+
+.leftPosition {
+    float: left;
+    display: inline;
+    width: 375rpx;
+    height: 660rpx;
+    overflow-y: auto;
+    overflow-x: hidden;
+}
+
+.filterLeft {
+    border-right: 1rpx #f1f1f1 solid;
+    background: #f9f9f9;
+    min-height: 670rpx;
+}
+
+.filterLeft view.priceTab {
+    padding-left: 0;
+}
+
+.filterLeft view,.filterRight view {
+    display: block;
+    height: 85rpx;
+    line-height: 85rpx;
+    padding-left: 40rpx;
+    font-size: 28rpx;
+    color: #666;
+}
+
+.filterLeft view.cur,.filterLeft view.active,.filterRight view.cur,.filterRight view.active {
+    background: #fff;
+    color: #f90;
+    width: 336rpx;
+}
+
+.filterRight view.cur {
+    width: auto;
+}
+
+.filterRight {
+    height: 660rpx;
+    overflow-y: auto;
+}
+
+.listMeasure view {
+    display: block;
+    padding-left: 40rpx;
+    border-bottom: 1rpx #f1f1f1 solid;
+    font-size: 28rpx;
+    color: #666;
+    height: 100rpx;
+    line-height: 100rpx;
+}
+
+.listMeasure view.cur,.listMeasure view.active {
+    color: #f90;
+}
+
+.clearfix:after {
+    content: "\0020";
+    display: block;
+    clear: both;
+    height: 0;
+    visibility: hidden;
+}

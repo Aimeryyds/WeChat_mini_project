@@ -1,0 +1,25 @@
+<view class="company_pic">
+    <image mode="aspectFit" src="/yb_shop/static/images/contact.png"></image>
+</view>
+<view class="contact_space"></view>
+<view class="qr_box">
+    <view class="contact_box">
+        <view bindtap="navigate" class="contact_li">
+            <image class="contact_icon" mode="aspectFit" src="/yb_shop/static/images/position_icon.png"></image>
+            <text class="text01">{{info.address}}</text>
+            <view class="cl"></view>
+        </view>
+        <view bindtap="calling" class="contact_li" data-phone="{{info.phone}}">
+            <image class="contact_icon" mode="aspectFit" src="/yb_shop/static/images/phone_icon.png"></image>
+            <text class="text01">{{info.phone}}</text>
+            <view class="cl"></view>
+        </view>
+    </view>
+    <view class="wechat_code">
+        <image bindtap="previewImage" src="{{info.qrcode}}"></image>
+    </view>
+    <view class="wechat_code_info">
+        <text>{{info.desc}}</text>
+    </view>
+</view>
+<view class="contact_main"></view>

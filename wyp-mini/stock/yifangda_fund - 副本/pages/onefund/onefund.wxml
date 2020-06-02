@@ -1,0 +1,1070 @@
+<view bindtap="back" class="goback">
+    <view>
+        <image src="../image/back.jpg" style="width:25px;height:20px;"></image>
+    </view>
+    <view class="bk">返回</view>
+</view>
+<view class="top"></view>
+<view class="firsttitle">一、基本信息</view>
+<view class="table">
+    <view wx:if="{{item.code===code}}" wx:for="{{allfund}}">
+        <view class="tr2">
+            <view class="tdone">基金名称</view>
+            <view class="tdtwo">{{item.allname}}</view>
+        </view>
+        <view class="tr2">
+            <view class="tdone">基金代码</view>
+            <view class="tdtwo">{{item.subcode}}</view>
+        </view>
+        <view class="tr2">
+            <view class="tdone">基金类型</view>
+            <view class="tdtwo">{{item.type}}</view>
+        </view>
+        <view class="tr2">
+            <view class="tdone">基金经理</view>
+            <view class="tdtwo">{{item.manager}}</view>
+        </view>
+        <view class="tr2">
+            <view class="tdone">基金成立日</view>
+            <view class="tdtwo">{{item.date}}</view>
+        </view>
+        <view class="tr">
+            <view class="tdone">投资比例</view>
+            <view class="tdtwo">{{item.invratio}}</view>
+        </view>
+        <view class="tr">
+            <view class="tdone">业绩比较基准</view>
+            <view class="tdtwo">{{item.benchmark}}</view>
+        </view>
+    </view>
+</view>
+<view wx:if="{{item.code===code}}" wx:for="{{allfund}}">
+    <view wx:if="{{item.income==='0.0000'||item.income==='A类：0.0000，B类：0.0000'||item.income==='A类：0.0000，C类：0.0000'||item.income==='I类：0.0000，E类：0.0000'}}">
+        <view class="nopub">本基金基金合同生效不足两个月，根据法律文件可不编制当期季度报告。</view>
+    </view>
+    <view wx:else>
+        <view class="firsttitle">二、财务指标</view>
+        <view class="table">
+            <view class="asset2">
+                <view class="tdone">类别</view>
+                <view class="tdtwo">数值</view>
+            </view>
+            <view class="tr2">
+                <view class="tdone">报告期末基金份额总额（亿份）</view>
+                <view class="tdtwo">{{item.share}}</view>
+            </view>
+            <view class="tr2">
+                <view class="tdone">本期已实现收益（亿元）</view>
+                <view class="tdtwo">{{item.income}}</view>
+            </view>
+            <view class="tr2">
+                <view class="tdone">本期利润（亿元）</view>
+                <view class="tdtwo">{{item.profit}}</view>
+            </view>
+            <view class="tr2">
+                <view class="tdone">加权平均基金份额本期利润</view>
+                <view class="tdtwo">{{item.shareprofit}}</view>
+            </view>
+            <view class="tr2">
+                <view class="tdone">期末基金资产净值（亿元）</view>
+                <view class="tdtwo">{{item.netasset}}</view>
+            </view>
+            <view class="tr2">
+                <view class="tdone">期末基金份额净值</view>
+                <view class="tdtwo">{{item.netshare}}</view>
+            </view>
+        </view>
+        <view class="firsttitle">三、业绩表现</view>
+        <view class="desc">{{item.description}}</view>
+        <view class="firsttitle">四、投资组合</view>
+        <view class="secondtitle">✔ 资产配置（占基金总资产的比例）</view>
+        <view class="table">
+            <view class="asset2">
+                <view class="tdone2">资产类别</view>
+                <view class="tdtwo2">占比</view>
+            </view>
+            <view wx:if="{{item.stock_ass&&item.stock_ass!=='0.00%'}}">
+                <view class="asset">
+                    <view class="tdone2">股票资产</view>
+                    <view class="tdtwo2">{{item.stock_ass}}</view>
+                </view>
+            </view>
+            <view wx:if="{{item.bond_ass&&item.bond_ass!=='0.00%'}}">
+                <view class="asset">
+                    <view class="tdone2">债券资产</view>
+                    <view class="tdtwo2">{{item.bond_ass}}</view>
+                </view>
+            </view>
+            <view wx:if="{{item.fund_ass&&item.fund_ass!=='0.00%'}}">
+                <view class="asset">
+                    <view class="tdone2">基金资产</view>
+                    <view class="tdtwo2">{{item.fund_ass}}</view>
+                </view>
+            </view>
+            <view wx:if="{{item.metal_ass&&item.metal_ass!=='0.00%'}}">
+                <view class="asset">
+                    <view class="tdone2">贵金属资产</view>
+                    <view class="tdtwo2">{{item.metal_ass}}</view>
+                </view>
+            </view>
+            <view wx:if="{{item.deposit_ass&&item.deposit_ass!=='0.00%'}}">
+                <view class="asset">
+                    <view class="tdone2">银行存款</view>
+                    <view class="tdtwo2">{{item.deposit_ass}}</view>
+                </view>
+            </view>
+            <view wx:if="{{item.other_ass&&item.other_ass!=='0.00%'}}">
+                <view class="asset">
+                    <view class="tdone2">其他</view>
+                    <view class="tdtwo2">{{item.other_ass}}</view>
+                </view>
+            </view>
+            <view wx:if="{{item.M_bond&&item.M_bond!=='0.00%'}}">
+                <view class="asset">
+                    <view class="tdone2">债券投资</view>
+                    <view class="tdtwo2">{{item.M_bond}}</view>
+                </view>
+            </view>
+            <view wx:if="{{item.M_buy_sell&&item.M_buy_sell!=='0.00%'}}">
+                <view class="asset">
+                    <view class="tdone2">买入返售金融资产</view>
+                    <view class="tdtwo2">{{item.M_buy_sell}}</view>
+                </view>
+            </view>
+            <view wx:if="{{item.M_deposit&&item.M_deposit!=='0.00%'}}">
+                <view class="asset">
+                    <view class="tdone2">银行存款和结算备付金合计</view>
+                    <view class="tdtwo2">{{item.M_deposit}}</view>
+                </view>
+            </view>
+            <view wx:if="{{item.M_other&&item.M_other!=='0.00%'}}">
+                <view class="asset">
+                    <view class="tdone2">其他</view>
+                    <view class="tdtwo2">{{item.M_other}}</view>
+                </view>
+            </view>
+        </view>
+        <view wx:if="{{item.type=='商品型'&&item.stock_ass!='0.00%'}}">
+            <view class="secondtitle">✔ 在各个国家（地区）投资分布（占基金资产净值比例）</view>
+            <view class="table">
+                <view class="asset2">
+                    <view class="tdone2">国家（地区）</view>
+                    <view class="tdtwo2">占比</view>
+                </view>
+                <view wx:if="{{item.countryHK!='0.00%'}}">
+                    <view class="asset">
+                        <view class="tdone2">香港</view>
+                        <view class="tdtwo2">{{item.countryHK}}</view>
+                    </view>
+                </view>
+                <view wx:if="{{item.countryUSA!='0.00%'}}">
+                    <view class="asset">
+                        <view class="tdone2">美国</view>
+                        <view class="tdtwo2">{{item.countryUSA}}</view>
+                    </view>
+                </view>
+                <view wx:if="{{item.countryCAN!='0.00%'}}">
+                    <view class="asset">
+                        <view class="tdone2">加拿大</view>
+                        <view class="tdtwo2">{{item.countryCAN}}</view>
+                    </view>
+                </view>
+                <view wx:if="{{item.countryAUS!='0.00%'}}">
+                    <view class="asset">
+                        <view class="tdone2">澳大利亚</view>
+                        <view class="tdtwo2">{{item.countryAUS}}</view>
+                    </view>
+                </view>
+                <view wx:if="{{item.countrySK!='0.00%'}}">
+                    <view class="asset">
+                        <view class="tdone2">韩国</view>
+                        <view class="tdtwo2">{{item.countrySK}}</view>
+                    </view>
+                </view>
+                <view wx:if="{{item.countryUK!='0.00%'}}">
+                    <view class="asset">
+                        <view class="tdone2">英国</view>
+                        <view class="tdtwo2">{{item.countryUK}}</view>
+                    </view>
+                </view>
+                <view wx:if="{{item.countryS!='0.00%'}}">
+                    <view class="asset">
+                        <view class="tdone2">新加坡</view>
+                        <view class="tdtwo2">{{item.countryS}}</view>
+                    </view>
+                </view>
+                <view wx:if="{{item.countryIN!='0.00%'}}">
+                    <view class="asset">
+                        <view class="tdone2">印度尼西亚</view>
+                        <view class="tdtwo2">{{item.countryIN}}</view>
+                    </view>
+                </view>
+                <view wx:if="{{item.countryR!='0.00%'}}">
+                    <view class="asset">
+                        <view class="tdone2">瑞士</view>
+                        <view class="tdtwo2">{{item.countryR}}</view>
+                    </view>
+                </view>
+                <view wx:if="{{item.countryI!='0.00%'}}">
+                    <view class="asset">
+                        <view class="tdone2">印度</view>
+                        <view class="tdtwo2">{{item.countryI}}</view>
+                    </view>
+                </view>
+                <view wx:if="{{item.countryT!='0.00%'}}">
+                    <view class="asset">
+                        <view class="tdone2">泰国</view>
+                        <view class="tdtwo2">{{item.countryT}}</view>
+                    </view>
+                </view>
+                <view wx:if="{{item.other_country!='0.00%'}}">
+                    <view class="asset">
+                        <view class="tdone2">其他</view>
+                        <view class="tdtwo2">{{item.other_country}}</view>
+                    </view>
+                </view>
+            </view>
+        </view>
+        <view wx:if="{{item.ind_ratio1}}">
+            <view wx:if="{{item.subtype!=='增强指数股票型'}}">
+                <view class="secondtitle">✔ 行业配置(占基金资产净值比例）</view>
+                <view class="table">
+                    <view class="asset2">
+                        <view class="tdone2">行业名称</view>
+                        <view class="tdtwo2">占比</view>
+                    </view>
+                    <view class="asset">
+                        <view class="tdone2">{{item.industry1}}</view>
+                        <view class="tdtwo2">{{item.ind_ratio1}}</view>
+                    </view>
+                    <view wx:if="{{item.ind_ratio2}}">
+                        <view class="asset">
+                            <view class="tdone2">{{item.industry2}}</view>
+                            <view class="tdtwo2">{{item.ind_ratio2}}</view>
+                        </view>
+                    </view>
+                    <view wx:if="{{item.ind_ratio3}}">
+                        <view class="asset">
+                            <view class="tdone2">{{item.industry3}}</view>
+                            <view class="tdtwo2">{{item.ind_ratio3}}</view>
+                        </view>
+                    </view>
+                    <view wx:if="{{item.ind_ratio4}}">
+                        <view class="asset">
+                            <view class="tdone2">{{item.industry4}}</view>
+                            <view class="tdtwo2">{{item.ind_ratio4}}</view>
+                        </view>
+                    </view>
+                    <view wx:if="{{item.ind_ratio5}}">
+                        <view class="asset">
+                            <view class="tdone2">{{item.industry5}}</view>
+                            <view class="tdtwo2">{{item.ind_ratio5}}</view>
+                        </view>
+                    </view>
+                    <view wx:if="{{item.ind_ratio6}}">
+                        <view class="asset">
+                            <view class="tdone2">{{item.industry6}}</view>
+                            <view class="tdtwo2">{{item.ind_ratio6}}</view>
+                        </view>
+                    </view>
+                    <view wx:if="{{item.ind_ratio7}}">
+                        <view class="asset">
+                            <view class="tdone2">{{item.industry7}}</view>
+                            <view class="tdtwo2">{{item.ind_ratio7}}</view>
+                        </view>
+                    </view>
+                    <view wx:if="{{item.ind_ratio8}}">
+                        <view class="asset">
+                            <view class="tdone2">{{item.industry8}}</view>
+                            <view class="tdtwo2">{{item.ind_ratio8}}</view>
+                        </view>
+                    </view>
+                    <view wx:if="{{item.ind_ratio9}}">
+                        <view class="asset">
+                            <view class="tdone2">{{item.industry9}}</view>
+                            <view class="tdtwo2">{{item.ind_ratio9}}</view>
+                        </view>
+                    </view>
+                    <view wx:if="{{item.ind_ratio10}}">
+                        <view class="asset">
+                            <view class="tdone2">{{item.industry10}}</view>
+                            <view class="tdtwo2">{{item.ind_ratio10}}</view>
+                        </view>
+                    </view>
+                </view>
+            </view>
+        </view>
+        <view wx:if="{{item.subtype=='增强指数股票型'}}">
+            <view class="secondtitle">✔ 积极投资按行业分类(占基金资产净值比例）</view>
+            <view class="table">
+                <view class="asset2">
+                    <view class="tdone2">行业名称</view>
+                    <view class="tdtwo2">占比</view>
+                </view>
+                <view class="asset">
+                    <view class="tdone2">{{item.jiji_industry1}}</view>
+                    <view class="tdtwo2">{{item.jiji_ind_ratio1}}</view>
+                </view>
+                <view wx:if="{{item.jiji_ind_ratio2}}">
+                    <view class="asset">
+                        <view class="tdone2">{{item.jiji_industry2}}</view>
+                        <view class="tdtwo2">{{item.jiji_ind_ratio2}}</view>
+                    </view>
+                </view>
+                <view wx:if="{{item.jiji_ind_ratio3}}">
+                    <view class="asset">
+                        <view class="tdone2">{{item.jiji_industry3}}</view>
+                        <view class="tdtwo2">{{item.jiji_ind_ratio3}}</view>
+                    </view>
+                </view>
+                <view wx:if="{{item.jiji_ind_ratio4}}">
+                    <view class="asset">
+                        <view class="tdone2">{{item.jiji_industry4}}</view>
+                        <view class="tdtwo2">{{item.jiji_ind_ratio4}}</view>
+                    </view>
+                </view>
+                <view wx:if="{{item.jiji_ind_ratio5}}">
+                    <view class="asset">
+                        <view class="tdone2">{{item.jiji_industry5}}</view>
+                        <view class="tdtwo2">{{item.jiji_ind_ratio5}}</view>
+                    </view>
+                </view>
+                <view wx:if="{{item.jiji_ind_ratio6}}">
+                    <view class="asset">
+                        <view class="tdone2">{{item.jiji_industry6}}</view>
+                        <view class="tdtwo2">{{item.jiji_ind_ratio6}}</view>
+                    </view>
+                </view>
+                <view wx:if="{{item.jiji_ind_ratio7}}">
+                    <view class="asset">
+                        <view class="tdone2">{{item.jiji_industry7}}</view>
+                        <view class="tdtwo2">{{item.jiji_ind_ratio7}}</view>
+                    </view>
+                </view>
+                <view wx:if="{{item.jiji_ind_ratio8}}">
+                    <view class="asset">
+                        <view class="tdone2">{{item.jiji_industry8}}</view>
+                        <view class="tdtwo2">{{item.jiji_ind_ratio8}}</view>
+                    </view>
+                </view>
+                <view wx:if="{{item.jiji_ind_ratio9}}">
+                    <view class="asset">
+                        <view class="tdone2">{{item.jiji_industry9}}</view>
+                        <view class="tdtwo2">{{item.jiji_ind_ratio9}}</view>
+                    </view>
+                </view>
+                <view wx:if="{{item.jiji_ind_ratio10}}">
+                    <view class="asset">
+                        <view class="tdone2">{{item.jiji_industry10}}</view>
+                        <view class="tdtwo2">{{item.jiji_ind_ratio10}}</view>
+                    </view>
+                </view>
+            </view>
+            <view class="secondtitle">✔ 指数投资按行业分类（占基金资产净值比例）</view>
+            <view class="table">
+                <view class="asset2">
+                    <view class="tdone2">行业名称</view>
+                    <view class="tdtwo2">占比</view>
+                </view>
+                <view class="asset">
+                    <view class="tdone2">{{item.index_industry1}}</view>
+                    <view class="tdtwo2">{{item.index_ind_ratio1}}</view>
+                </view>
+                <view wx:if="{{item.index_ind_ratio2}}">
+                    <view class="asset">
+                        <view class="tdone2">{{item.index_industry2}}</view>
+                        <view class="tdtwo2">{{item.index_ind_ratio2}}</view>
+                    </view>
+                </view>
+                <view wx:if="{{item.index_ind_ratio3}}">
+                    <view class="asset">
+                        <view class="tdone2">{{item.index_industry3}}</view>
+                        <view class="tdtwo2">{{item.index_ind_ratio3}}</view>
+                    </view>
+                </view>
+                <view wx:if="{{item.index_ind_ratio4}}">
+                    <view class="asset">
+                        <view class="tdone2">{{item.index_industry4}}</view>
+                        <view class="tdtwo2">{{item.index_ind_ratio4}}</view>
+                    </view>
+                </view>
+                <view wx:if="{{item.index_ind_ratio5}}">
+                    <view class="asset">
+                        <view class="tdone2">{{item.index_industry5}}</view>
+                        <view class="tdtwo2">{{item.index_ind_ratio5}}</view>
+                    </view>
+                </view>
+                <view wx:if="{{item.index_ind_ratio6}}">
+                    <view class="asset">
+                        <view class="tdone2">{{item.index_industry6}}</view>
+                        <view class="tdtwo2">{{item.index_ind_ratio6}}</view>
+                    </view>
+                </view>
+                <view wx:if="{{item.index_ind_ratio7}}">
+                    <view class="asset">
+                        <view class="tdone2">{{item.index_industry7}}</view>
+                        <view class="tdtwo2">{{item.index_ind_ratio7}}</view>
+                    </view>
+                </view>
+                <view wx:if="{{item.index_ind_ratio8}}">
+                    <view class="asset">
+                        <view class="tdone2">{{item.index_industry8}}</view>
+                        <view class="tdtwo2">{{item.index_ind_ratio8}}</view>
+                    </view>
+                </view>
+                <view wx:if="{{item.index_ind_ratio9}}">
+                    <view class="asset">
+                        <view class="tdone2">{{item.index_industry9}}</view>
+                        <view class="tdtwo2">{{item.index_ind_ratio9}}</view>
+                    </view>
+                </view>
+                <view wx:if="{{item.index_ind_ratio10}}">
+                    <view class="asset">
+                        <view class="tdone2">{{item.index_industry10}}</view>
+                        <view class="tdtwo2">{{item.index_ind_ratio10}}</view>
+                    </view>
+                </view>
+            </view>
+        </view>
+        <view wx:if="{{item.bond_ass&&item.bond_ass!=='0.00%'}}">
+            <view class="secondtitle">✔ 券种配置（占基金资产净值比例）</view>
+            <view class="table">
+                <view class="asset2">
+                    <view class="tdone2">券种名称</view>
+                    <view class="tdtwo2">占比</view>
+                </view>
+                <view wx:if="{{item.guozhai&&item.guozhai!=='0.00%'}}">
+                    <view class="asset">
+                        <view class="tdone2">国家债券</view>
+                        <view class="tdtwo2">{{item.guozhai}}</view>
+                    </view>
+                </view>
+                <view wx:if="{{item.yangpiao&&item.yangpiao!=='0.00%'}}">
+                    <view class="asset">
+                        <view class="tdone2">央行票据</view>
+                        <view class="tdtwo2">{{item.yangpiao}}</view>
+                    </view>
+                </view>
+                <view wx:if="{{item.qiyezhai&&item.qiyezhai!=='0.00%'}}">
+                    <view class="asset">
+                        <view class="tdone2">企业债券</view>
+                        <view class="tdtwo2">{{item.qiyezhai}}</view>
+                    </view>
+                </view>
+                <view wx:if="{{item.duanrong&&item.duanrong!=='0.00%'}}">
+                    <view class="asset">
+                        <view class="tdone2">企业短期融资券</view>
+                        <view class="tdtwo2">{{item.duanrong}}</view>
+                    </view>
+                </view>
+                <view wx:if="{{item.jinrongzhai&&item.jinrongzhai!=='0.00%'}}">
+                    <view class="asset">
+                        <view class="tdone2">金融债券</view>
+                        <view class="tdtwo2">{{item.jinrongzhai}}</view>
+                    </view>
+                </view>
+                <view wx:if="{{item.zhongpiao&&item.zhongpiao!=='0.00%'}}">
+                    <view class="asset">
+                        <view class="tdone2">中期票据</view>
+                        <view class="tdtwo2">{{item.zhongpiao}}</view>
+                    </view>
+                </view>
+                <view wx:if="{{item.kezhuanzhai&&item.kezhuanzhai!=='0.00%'}}">
+                    <view class="asset">
+                        <view class="tdone2">可转债</view>
+                        <view class="tdtwo2">{{item.kezhuanzhai}}</view>
+                    </view>
+                </view>
+                <view wx:if="{{item.cundan&&item.cundan!=='0.00%'}}">
+                    <view class="asset">
+                        <view class="tdone2">同业存单</view>
+                        <view class="tdtwo2">{{item.cundan}}</view>
+                    </view>
+                </view>
+                <view wx:if="{{item.qita&&item.qita!=='0.00%'}}">
+                    <view class="asset">
+                        <view class="tdone2">其他</view>
+                        <view class="tdtwo2">{{item.qita}}</view>
+                    </view>
+                </view>
+            </view>
+        </view>
+        <view wx:if="{{item.stock_ass&&item.stock_ass!=='0.00%'}}">
+            <view wx:if="{{item.subtype!=='增强指数股票型'}}">
+                <view class="secondtitle">✔ 重仓股票（占基金资产净值比例）</view>
+                <view class="table">
+                    <view class="asset2">
+                        <view class="td5_1">序号</view>
+                        <view class="td5_2">名称</view>
+                        <view class="td5_3">数量(万股)</view>
+                        <view class="td5_4">占比</view>
+                        <view class="td5_5">较上季度变动(万股)</view>
+                    </view>
+                    <view class="asset">
+                        <view class="td5_1">1</view>
+                        <view class="td5_2">{{item.stock1}}</view>
+                        <view class="td5_3">{{item.stock_num1}}</view>
+                        <view class="td5_4">{{item.stock_ratio1}}</view>
+                        <view class="td5_5">{{item.stock_delta1}}</view>
+                    </view>
+                    <view wx:if="{{item.stock_ratio2}}">
+                        <view class="asset">
+                            <view class="td5_1">2</view>
+                            <view class="td5_2">{{item.stock2}}</view>
+                            <view class="td5_3">{{item.stock_num2}}</view>
+                            <view class="td5_4">{{item.stock_ratio2}}</view>
+                            <view class="td5_5">{{item.stock_delta2}}</view>
+                        </view>
+                    </view>
+                    <view wx:if="{{item.stock_ratio3}}">
+                        <view class="asset">
+                            <view class="td5_1">3</view>
+                            <view class="td5_2">{{item.stock3}}</view>
+                            <view class="td5_3">{{item.stock_num3}}</view>
+                            <view class="td5_4">{{item.stock_ratio3}}</view>
+                            <view class="td5_5">{{item.stock_delta3}}</view>
+                        </view>
+                    </view>
+                    <view wx:if="{{item.stock_ratio4}}">
+                        <view class="asset">
+                            <view class="td5_1">4</view>
+                            <view class="td5_2">{{item.stock4}}</view>
+                            <view class="td5_3">{{item.stock_num4}}</view>
+                            <view class="td5_4">{{item.stock_ratio4}}</view>
+                            <view class="td5_5">{{item.stock_delta4}}</view>
+                        </view>
+                    </view>
+                    <view wx:if="{{item.stock_ratio5}}">
+                        <view class="asset">
+                            <view class="td5_1">5</view>
+                            <view class="td5_2">{{item.stock5}}</view>
+                            <view class="td5_3">{{item.stock_num5}}</view>
+                            <view class="td5_4">{{item.stock_ratio5}}</view>
+                            <view class="td5_5">{{item.stock_delta5}}</view>
+                        </view>
+                    </view>
+                    <view wx:if="{{item.stock_ratio6}}">
+                        <view class="asset">
+                            <view class="td5_1">6</view>
+                            <view class="td5_2">{{item.stock6}}</view>
+                            <view class="td5_3">{{item.stock_num6}}</view>
+                            <view class="td5_4">{{item.stock_ratio6}}</view>
+                            <view class="td5_5">{{item.stock_delta6}}</view>
+                        </view>
+                    </view>
+                    <view wx:if="{{item.stock_ratio7}}">
+                        <view class="asset">
+                            <view class="td5_1">7</view>
+                            <view class="td5_2">{{item.stock7}}</view>
+                            <view class="td5_3">{{item.stock_num7}}</view>
+                            <view class="td5_4">{{item.stock_ratio7}}</view>
+                            <view class="td5_5">{{item.stock_delta7}}</view>
+                        </view>
+                    </view>
+                    <view wx:if="{{item.stock_ratio8}}">
+                        <view class="asset">
+                            <view class="td5_1">8</view>
+                            <view class="td5_2">{{item.stock8}}</view>
+                            <view class="td5_3">{{item.stock_num8}}</view>
+                            <view class="td5_4">{{item.stock_ratio8}}</view>
+                            <view class="td5_5">{{item.stock_delta8}}</view>
+                        </view>
+                    </view>
+                    <view wx:if="{{item.stock_ratio9}}">
+                        <view class="asset">
+                            <view class="td5_1">9</view>
+                            <view class="td5_2">{{item.stock9}}</view>
+                            <view class="td5_3">{{item.stock_num9}}</view>
+                            <view class="td5_4">{{item.stock_ratio9}}</view>
+                            <view class="td5_5">{{item.stock_delta9}}</view>
+                        </view>
+                    </view>
+                    <view wx:if="{{item.stock_ratio10}}">
+                        <view class="asset">
+                            <view class="td5_1">10</view>
+                            <view class="td5_2">{{item.stock10}}</view>
+                            <view class="td5_3">{{item.stock_num10}}</view>
+                            <view class="td5_4">{{item.stock_ratio10}}</view>
+                            <view class="td5_5">{{item.stock_delta10}}</view>
+                        </view>
+                    </view>
+                </view>
+            </view>
+            <view wx:if="{{item.index_stock_ass!=='0.00%'}}">
+                <view wx:if="{{item.subtype=='增强指数股票型'}}">
+                    <view class="secondtitle">✔ 指数投资重仓股票（占基金资产净值比例）</view>
+                    <view class="table">
+                        <view class="asset2">
+                            <view class="td5_1">序号</view>
+                            <view class="td5_2">名称</view>
+                            <view class="td5_3">数量(万股)</view>
+                            <view class="td5_4">占比</view>
+                            <view class="td5_5">较上季度变动(万股)</view>
+                        </view>
+                        <view class="asset">
+                            <view class="td5_1">1</view>
+                            <view class="td5_2">{{item.index_stock1}}</view>
+                            <view class="td5_3">{{item.index_stock_num1}}</view>
+                            <view class="td5_4">{{item.index_stock_ratio1}}</view>
+                            <view class="td5_5">{{item.index_stock_delta1}}</view>
+                        </view>
+                        <view wx:if="{{item.index_stock_ratio2}}">
+                            <view class="asset">
+                                <view class="td5_1">2</view>
+                                <view class="td5_2">{{item.index_stock2}}</view>
+                                <view class="td5_3">{{item.index_stock_num2}}</view>
+                                <view class="td5_4">{{item.index_stock_ratio2}}</view>
+                                <view class="td5_5">{{item.index_stock_delta2}}</view>
+                            </view>
+                        </view>
+                        <view wx:if="{{item.index_stock_ratio3}}">
+                            <view class="asset">
+                                <view class="td5_1">3</view>
+                                <view class="td5_2">{{item.index_stock3}}</view>
+                                <view class="td5_3">{{item.index_stock_num3}}</view>
+                                <view class="td5_4">{{item.index_stock_ratio3}}</view>
+                                <view class="td5_5">{{item.index_stock_delta3}}</view>
+                            </view>
+                        </view>
+                        <view wx:if="{{item.index_stock_ratio4}}">
+                            <view class="asset">
+                                <view class="td5_1">4</view>
+                                <view class="td5_2">{{item.index_stock4}}</view>
+                                <view class="td5_3">{{item.index_stock_num4}}</view>
+                                <view class="td5_4">{{item.index_stock_ratio4}}</view>
+                                <view class="td5_5">{{item.index_stock_delta4}}</view>
+                            </view>
+                        </view>
+                        <view wx:if="{{item.index_stock_ratio5}}">
+                            <view class="asset">
+                                <view class="td5_1">5</view>
+                                <view class="td5_2">{{item.index_stock5}}</view>
+                                <view class="td5_3">{{item.index_stock_num5}}</view>
+                                <view class="td5_4">{{item.index_stock_ratio5}}</view>
+                                <view class="td5_5">{{item.index_stock_delta5}}</view>
+                            </view>
+                        </view>
+                        <view wx:if="{{item.index_stock_ratio6}}">
+                            <view class="asset">
+                                <view class="td5_1">6</view>
+                                <view class="td5_2">{{item.index_stock6}}</view>
+                                <view class="td5_3">{{item.index_stock_num6}}</view>
+                                <view class="td5_4">{{item.index_stock_ratio6}}</view>
+                                <view class="td5_5">{{item.index_stock_delta6}}</view>
+                            </view>
+                        </view>
+                        <view wx:if="{{item.index_stock_ratio7}}">
+                            <view class="asset">
+                                <view class="td5_1">7</view>
+                                <view class="td5_2">{{item.index_stock7}}</view>
+                                <view class="td5_3">{{item.index_stock_num7}}</view>
+                                <view class="td5_4">{{item.index_stock_ratio7}}</view>
+                                <view class="td5_5">{{item.index_stock_delta7}}</view>
+                            </view>
+                        </view>
+                        <view wx:if="{{item.index_stock_ratio8}}">
+                            <view class="asset">
+                                <view class="td5_1">8</view>
+                                <view class="td5_2">{{item.index_stock8}}</view>
+                                <view class="td5_3">{{item.index_stock_num8}}</view>
+                                <view class="td5_4">{{item.index_stock_ratio8}}</view>
+                                <view class="td5_5">{{item.index_stock_delta8}}</view>
+                            </view>
+                        </view>
+                        <view wx:if="{{item.index_stock_ratio9}}">
+                            <view class="asset">
+                                <view class="td5_1">9</view>
+                                <view class="td5_2">{{item.index_stock9}}</view>
+                                <view class="td5_3">{{item.index_stock_num9}}</view>
+                                <view class="td5_4">{{item.index_stock_ratio9}}</view>
+                                <view class="td5_5">{{item.index_stock_delta9}}</view>
+                            </view>
+                        </view>
+                        <view wx:if="{{item.index_stock_ratio10}}">
+                            <view class="asset">
+                                <view class="td5_1">10</view>
+                                <view class="td5_2">{{item.index_stock10}}</view>
+                                <view class="td5_3">{{item.index_stock_num10}}</view>
+                                <view class="td5_4">{{item.index_stock_ratio10}}</view>
+                                <view class="td5_5">{{item.index_stock_delta10}}</view>
+                            </view>
+                        </view>
+                    </view>
+                    <view class="secondtitle">✔ 积极投资重仓股票（占基金资产净值比例）</view>
+                    <view class="table">
+                        <view class="asset2">
+                            <view class="td5_1">序号</view>
+                            <view class="td5_2">名称</view>
+                            <view class="td5_3">数量(万股)</view>
+                            <view class="td5_4">占比</view>
+                            <view class="td5_5">较上季度变动(万股)</view>
+                        </view>
+                        <view class="asset">
+                            <view class="td5_1">1</view>
+                            <view class="td5_2">{{item.jiji_stock1}}</view>
+                            <view class="td5_3">{{item.jiji_stock_num1}}</view>
+                            <view class="td5_4">{{item.jiji_stock_ratio1}}</view>
+                            <view class="td5_5">{{item.jiji_stock_delta1}}</view>
+                        </view>
+                        <view wx:if="{{item.jiji_stock_ratio2}}">
+                            <view class="asset">
+                                <view class="td5_1">2</view>
+                                <view class="td5_2">{{item.jiji_stock2}}</view>
+                                <view class="td5_3">{{item.jiji_stock_num2}}</view>
+                                <view class="td5_4">{{item.jiji_stock_ratio2}}</view>
+                                <view class="td5_5">{{item.jiji_stock_delta2}}</view>
+                            </view>
+                        </view>
+                        <view wx:if="{{item.jiji_stock_ratio3}}">
+                            <view class="asset">
+                                <view class="td5_1">3</view>
+                                <view class="td5_2">{{item.jiji_stock3}}</view>
+                                <view class="td5_3">{{item.jiji_stock_num3}}</view>
+                                <view class="td5_4">{{item.jiji_stock_ratio3}}</view>
+                                <view class="td5_5">{{item.jiji_stock_delta3}}</view>
+                            </view>
+                        </view>
+                        <view wx:if="{{item.jiji_stock_ratio4}}">
+                            <view class="asset">
+                                <view class="td5_1">4</view>
+                                <view class="td5_2">{{item.jiji_stock4}}</view>
+                                <view class="td5_3">{{item.jiji_stock_num4}}</view>
+                                <view class="td5_4">{{item.jiji_stock_ratio4}}</view>
+                                <view class="td5_5">{{item.jiji_stock_delta4}}</view>
+                            </view>
+                        </view>
+                        <view wx:if="{{item.jiji_stock_ratio5}}">
+                            <view class="asset">
+                                <view class="td5_1">5</view>
+                                <view class="td5_2">{{item.jiji_stock5}}</view>
+                                <view class="td5_3">{{item.jiji_stock_num5}}</view>
+                                <view class="td5_4">{{item.jiji_stock_ratio5}}</view>
+                                <view class="td5_5">{{item.jiji_stock_delta5}}</view>
+                            </view>
+                        </view>
+                    </view>
+                </view>
+            </view>
+        </view>
+        <view wx:if="{{item.bond_ass&&item.bond_ass!=='0.00%'||item.M_bond&&item.M_bond!=='0.00%'}}">
+            <view class="secondtitle">✔ 重仓债券（占基金资产净值比例）</view>
+            <view class="table">
+                <view class="asset2">
+                    <view class="td5_1">序号</view>
+                    <view class="td5_2">名称</view>
+                    <view class="td5_3">数量(万张)</view>
+                    <view class="td5_4">占比</view>
+                    <view class="td5_5">较上季度变动(百张)</view>
+                </view>
+                <view class="asset">
+                    <view class="td5_1">1</view>
+                    <view class="td5_2">{{item.bond1}}</view>
+                    <view class="td5_3">{{item.bond_num1}}</view>
+                    <view class="td5_4">{{item.bond_ratio1}}</view>
+                    <view class="td5_5">{{item.bond_delta1}}</view>
+                </view>
+                <view wx:if="{{item.bond_ratio2&&item.bond_num2!=='0.00'}}">
+                    <view class="asset">
+                        <view class="td5_1">2</view>
+                        <view class="td5_2">{{item.bond2}}</view>
+                        <view class="td5_3">{{item.bond_num2}}</view>
+                        <view class="td5_4">{{item.bond_ratio2}}</view>
+                        <view class="td5_5">{{item.bond_delta2}}</view>
+                    </view>
+                </view>
+                <view wx:if="{{item.bond_ratio3&&item.bond_num3!=='0.00'}}">
+                    <view class="asset">
+                        <view class="td5_1">3</view>
+                        <view class="td5_2">{{item.bond3}}</view>
+                        <view class="td5_3">{{item.bond_num3}}</view>
+                        <view class="td5_4">{{item.bond_ratio3}}</view>
+                        <view class="td5_5">{{item.bond_delta3}}</view>
+                    </view>
+                </view>
+                <view wx:if="{{item.bond_ratio4&&item.bond_num4!=='0.00'}}">
+                    <view class="asset">
+                        <view class="td5_1">4</view>
+                        <view class="td5_2">{{item.bond4}}</view>
+                        <view class="td5_3">{{item.bond_num4}}</view>
+                        <view class="td5_4">{{item.bond_ratio4}}</view>
+                        <view class="td5_5">{{item.bond_delta4}}</view>
+                    </view>
+                </view>
+                <view wx:if="{{item.bond_ratio5&&item.bond_num5!=='0.00'}}">
+                    <view class="asset">
+                        <view class="td5_1">5</view>
+                        <view class="td5_2">{{item.bond5}}</view>
+                        <view class="td5_3">{{item.bond_num5}}</view>
+                        <view class="td5_4">{{item.bond_ratio5}}</view>
+                        <view class="td5_5">{{item.bond_delta5}}</view>
+                    </view>
+                </view>
+                <view wx:if="{{item.bond_ratio6&&item.bond_num6!=='0.00'}}">
+                    <view class="asset">
+                        <view class="td5_1">6</view>
+                        <view class="td5_2">{{item.bond6}}</view>
+                        <view class="td5_3">{{item.bond_num6}}</view>
+                        <view class="td5_4">{{item.bond_ratio6}}</view>
+                        <view class="td5_5">{{item.bond_delta6}}</view>
+                    </view>
+                </view>
+                <view wx:if="{{item.bond_ratio7&&item.bond_num7!=='0.00'}}">
+                    <view class="asset">
+                        <view class="td5_1">7</view>
+                        <view class="td5_2">{{item.bond7}}</view>
+                        <view class="td5_3">{{item.bond_num7}}</view>
+                        <view class="td5_4">{{item.bond_ratio7}}</view>
+                        <view class="td5_5">{{item.bond_delta7}}</view>
+                    </view>
+                </view>
+                <view wx:if="{{item.bond_ratio8&&item.bond_num8!=='0.00'}}">
+                    <view class="asset">
+                        <view class="td5_1">8</view>
+                        <view class="td5_2">{{item.bond8}}</view>
+                        <view class="td5_3">{{item.bond_num8}}</view>
+                        <view class="td5_4">{{item.bond_ratio8}}</view>
+                        <view class="td5_5">{{item.bond_delta8}}</view>
+                    </view>
+                </view>
+                <view wx:if="{{item.bond_ratio9&&item.bond_num9!=='0.00'}}">
+                    <view class="asset">
+                        <view class="td5_1">9</view>
+                        <view class="td5_2">{{item.bond9}}</view>
+                        <view class="td5_3">{{item.bond_num9}}</view>
+                        <view class="td5_4">{{item.bond_ratio9}}</view>
+                        <view class="td5_5">{{item.bond_delta9}}</view>
+                    </view>
+                </view>
+                <view wx:if="{{item.bond_ratio10&&item.bond_num10!=='0.00'}}">
+                    <view class="asset">
+                        <view class="td5_1">10</view>
+                        <view class="td5_2">{{item.bond10}}</view>
+                        <view class="td5_3">{{item.bond_num10}}</view>
+                        <view class="td5_4">{{item.bond_ratio10}}</view>
+                        <view class="td5_5">{{item.bond_delta10}}</view>
+                    </view>
+                </view>
+            </view>
+        </view>
+        <view wx:if="{{item.fund_ass&&item.fund_ass!=='0.00%'}}">
+            <view class="secondtitle">✔ 重仓基金（占基金资产净值比例）</view>
+            <view class="table">
+                <view class="asset2">
+                    <view class="td3_1">序号</view>
+                    <view class="td3_2">名称</view>
+                    <view class="td3_3">占比</view>
+                </view>
+                <view class="asset">
+                    <view class="td3_1">1</view>
+                    <view class="td3_2">{{item.fund1}}</view>
+                    <view class="td3_3">{{item.fund_ratio1}}</view>
+                </view>
+                <view wx:if="{{item.fund_ratio2}}">
+                    <view class="asset">
+                        <view class="td3_1">2</view>
+                        <view class="td3_2">{{item.fund2}}</view>
+                        <view class="td3_3">{{item.fund_ratio2}}</view>
+                    </view>
+                </view>
+                <view wx:if="{{item.fund_ratio3}}">
+                    <view class="asset">
+                        <view class="td3_1">3</view>
+                        <view class="td3_2">{{item.fund3}}</view>
+                        <view class="td3_3">{{item.fund_ratio3}}</view>
+                    </view>
+                </view>
+                <view wx:if="{{item.fund_ratio4}}">
+                    <view class="asset">
+                        <view class="td3_1">4</view>
+                        <view class="td3_2">{{item.fund4}}</view>
+                        <view class="td3_3">{{item.fund_ratio4}}</view>
+                    </view>
+                </view>
+                <view wx:if="{{item.fund_ratio5}}">
+                    <view class="asset">
+                        <view class="td3_1">5</view>
+                        <view class="td3_2">{{item.fund5}}</view>
+                        <view class="td3_3">{{item.fund_ratio5}}</view>
+                    </view>
+                </view>
+                <view wx:if="{{item.fund_ratio6}}">
+                    <view class="asset">
+                        <view class="td3_1">6</view>
+                        <view class="td3_2">{{item.fund6}}</view>
+                        <view class="td3_3">{{item.fund_ratio6}}</view>
+                    </view>
+                </view>
+                <view wx:if="{{item.fund_ratio7}}">
+                    <view class="asset">
+                        <view class="td3_1">7</view>
+                        <view class="td3_2">{{item.fund7}}</view>
+                        <view class="td3_3">{{item.fund_ratio7}}</view>
+                    </view>
+                </view>
+                <view wx:if="{{item.fund_ratio8}}">
+                    <view class="asset">
+                        <view class="td3_1">8</view>
+                        <view class="td3_2">{{item.fund8}}</view>
+                        <view class="td3_3">{{item.fund_ratio8}}</view>
+                    </view>
+                </view>
+                <view wx:if="{{item.fund_ratio9}}">
+                    <view class="asset">
+                        <view class="td3_1">9</view>
+                        <view class="td3_2">{{item.fund9}}</view>
+                        <view class="td3_3">{{item.fund_ratio9}}</view>
+                    </view>
+                </view>
+                <view wx:if="{{item.fund_ratio10}}">
+                    <view class="asset">
+                        <view class="td3_1">10</view>
+                        <view class="td3_2">{{item.fund10}}</view>
+                        <view class="td3_3">{{item.fund_ratio10}}</view>
+                    </view>
+                </view>
+            </view>
+        </view>
+        <view wx:if="{{item.metal_ass&&item.metal_ass!=='0.00%'}}">
+            <view class="secondtitle">✔ 重仓贵金属（占基金资产净值比例）</view>
+            <view class="table">
+                <view class="asset2">
+                    <view class="td5_1">序号</view>
+                    <view class="td5_2">名称</view>
+                    <view class="td5_3">数量(万份)</view>
+                    <view class="td5_4">占比</view>
+                    <view class="td5_5">较上季度变动(百份)</view>
+                </view>
+                <view class="asset">
+                    <view class="td5_1">1</view>
+                    <view class="td5_2">{{item.metal1}}</view>
+                    <view class="td5_3">{{item.metal_num1}}</view>
+                    <view class="td5_4">{{item.metal_ratio1}}</view>
+                    <view class="td5_5">{{item.metal_delta1}}</view>
+                </view>
+                <view wx:if="{{item.metal_ratio2}}">
+                    <view class="asset">
+                        <view class="td5_1">2</view>
+                        <view class="td5_2">{{item.metal2}}</view>
+                        <view class="td5_3">{{item.metal_num2}}</view>
+                        <view class="td5_4">{{item.metal_ratio2}}</view>
+                        <view class="td5_5">{{item.metal_delta2}}</view>
+                    </view>
+                </view>
+                <view wx:if="{{item.metal_ratio3}}">
+                    <view class="asset">
+                        <view class="td5_1">3</view>
+                        <view class="td5_2">{{item.metal3}}</view>
+                        <view class="td5_3">{{item.metal_num3}}</view>
+                        <view class="td5_4">{{item.metal_ratio3}}</view>
+                        <view class="td5_5">{{item.metal_delta3}}</view>
+                    </view>
+                </view>
+                <view wx:if="{{item.metal_ratio4}}">
+                    <view class="asset">
+                        <view class="td5_1">4</view>
+                        <view class="td5_2">{{item.metal4}}</view>
+                        <view class="td5_3">{{item.metal_num4}}</view>
+                        <view class="td5_4">{{item.metal_ratio4}}</view>
+                        <view class="td5_5">{{item.metal_delta4}}</view>
+                    </view>
+                </view>
+                <view wx:if="{{item.metal_ratio5}}">
+                    <view class="asset">
+                        <view class="td5_1">5</view>
+                        <view class="td5_2">{{item.metal5}}</view>
+                        <view class="td5_3">{{item.metal_num5}}</view>
+                        <view class="td5_4">{{item.metal_ratio5}}</view>
+                        <view class="td5_5">{{item.metal_delta5}}</view>
+                    </view>
+                </view>
+            </view>
+        </view>
+        <view wx:if="{{item.type=='货币型'||item.type=='短期理财'}}">
+            <view class="secondtitle">✔ 组合平均剩余期限基本情况</view>
+            <view class="table">
+                <view class="asset2">
+                    <view class="td3_1">序号</view>
+                    <view class="td3_2">项目</view>
+                    <view class="td3_3">天数</view>
+                </view>
+                <view class="asset">
+                    <view class="td3_1">1</view>
+                    <view class="td3_2">组合平均剩余期限</view>
+                    <view class="td3_3">{{item.average}}</view>
+                </view>
+                <view class="asset">
+                    <view class="td3_1">2</view>
+                    <view class="td3_2">组合平均剩余期限最高值</view>
+                    <view class="td3_3">{{item.average_max}}</view>
+                </view>
+                <view class="asset">
+                    <view class="td3_1">3</view>
+                    <view class="td3_2">组合平均剩余期限最低值</view>
+                    <view class="td3_3">{{item.average_min}}</view>
+                </view>
+            </view>
+            <view class="secondtitle">✔ 组合平均剩余期限分布比例</view>
+            <view class="table">
+                <view class="asset2">
+                    <view class="td3_1">序号</view>
+                    <view class="td3_2">剩余期限区间</view>
+                    <view class="td3_3">占比</view>
+                </view>
+                <view class="asset">
+                    <view class="td3_1">1</view>
+                    <view class="td3_2">30天以内</view>
+                    <view class="td3_3">{{item.period30}}</view>
+                </view>
+                <view class="asset">
+                    <view class="td3_1">2</view>
+                    <view class="td3_2">30天（含）—60天</view>
+                    <view class="td3_3">{{item.period30_60}}</view>
+                </view>
+                <view class="asset">
+                    <view class="td3_1">3</view>
+                    <view class="td3_2">60天（含）—90天</view>
+                    <view class="td3_3">{{item.period60_90}}</view>
+                </view>
+                <view class="asset">
+                    <view class="td3_1">4</view>
+                    <view class="td3_2">90天（含）—120天</view>
+                    <view class="td3_3">{{item.period90_120}}</view>
+                </view>
+                <view class="asset">
+                    <view class="td3_1">5</view>
+                    <view class="td3_2">120天（含）—397天（含）</view>
+                    <view class="td3_3">{{item.period120_397}}</view>
+                </view>
+            </view>
+            <view class="secondtitle">✔ “影子定价”与“摊余成本法”确定的基金资产净值的偏离</view>
+            <view class="table">
+                <view class="asset2">
+                    <view class="td3_1">序号</view>
+                    <view class="td3_2">剩余期限区间</view>
+                    <view class="td3_3">偏离次数及占比</view>
+                </view>
+                <view class="asset">
+                    <view class="td3_1">1</view>
+                    <view class="td3_2">偏离度的绝对值在0.25(含)-0.5%间的次数</view>
+                    <view class="td3_3">{{item.deviate_time}}</view>
+                </view>
+                <view class="asset">
+                    <view class="td3_1">2</view>
+                    <view class="td3_2">偏离度的最高值</view>
+                    <view class="td3_3">{{item.deviate_max}}</view>
+                </view>
+                <view class="asset">
+                    <view class="td3_1">3</view>
+                    <view class="td3_2">偏离度的最低值</view>
+                    <view class="td3_3">{{item.deviate_min}}</view>
+                </view>
+                <view class="asset">
+                    <view class="td3_1">4</view>
+                    <view class="td3_2">每个工作日偏离度的绝对值的简单平均值</view>
+                    <view class="td3_3">{{item.deviate_ave}}</view>
+                </view>
+            </view>
+        </view>
+        <view class="tishi">风险提示及重要说明：本材料数据均来自基金定期报告。本基金过往投资业绩和基金管理人管理的其它基金的过往业绩均不预示本基金的未来表现。我国基金运作时间较短，不能反映股市发展的所有阶段。基金有风险，投资需谨慎。</view>
+    </view>
+</view>

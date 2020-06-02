@@ -1,0 +1,15 @@
+<navigationTopbar bindtap="MethodComponent" id="mineTopBar" navTxt="{{navTxtStr}}" navtype="2" showWhiteBackground="{{navTopBackShow}}"></navigationTopbar>
+<view class="page_container" style="top:{{navHeight}}px;">
+    <view class="contribution_con" style="min-height: {{pageHeight}}px;">
+        <view class="contribution_item" wx:for="{{consumeList}}">
+            <image class="icon" src="./../../images/star_c.png"></image>
+            <view class="msg">
+                <view class="msg_name">小星星</view>
+                <text class="msg_time">{{item.transTime}}</text>
+            </view>
+            <view class="num">
+                <text class="num_txt">{{item.tokenAmountStr}}</text>个</view>
+        </view>
+    </view>
+    <view class="none" wx:if="{{!consumeList||consumeList&&consumeList.length<=0}}">这里什么都没有</view>
+</view>

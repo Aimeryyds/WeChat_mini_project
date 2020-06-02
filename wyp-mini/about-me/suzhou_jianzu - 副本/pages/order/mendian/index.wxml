@@ -1,0 +1,55 @@
+<scroll-view bindscrolltolower="bottom" scrollY="true" style="height: 100%;">
+    <view class="view_search" style="background-color: RGB(247, 247, 249);padding: {{data.style.paddingtop}}px ,{{data.style.paddingleft}}px;">
+        <form bindsubmit="formSubmit" class="view_searchbg">
+            <label>
+                <view class="img_wrap" style=""></view>
+                <button hidden class="img_btn" formType="submit" name="Search" style=""></button>
+            </label>
+            <input bindconfirm="formSubmit" name="keyword" placeholder="请输入门店关键字..." style="position: absolute;left: 100rpx;top: 0;height: 60rpx;background-color: #fff;font-size: 28rpx;" type="text"></input>
+        </form>
+    </view>
+    <view class="list">
+        <view bindtap="down" class="item {{navindex==1?'active':''}}" id="1">
+            <view style="justify-content:center;display: flex;">附近
+		<image src="https://tws.cnweisou.com/images/down.png" style="width:32rpx;height: 30rpx;margin-top: 20rpx;"></image>
+            </view>
+        </view>
+        <view bindtap="down" class="item {{navindex==2?'active':''}}" id="2" style="border-left: 2rpx solid #d5d5d5;border-right: 2rpx solid #d5d5d5;">
+            <view style="justify-content:center;display: flex;">今日推荐<image src="https://tws.cnweisou.com/images/down.png" style="width:32rpx;height: 30rpx;margin-top: 20rpx;"></image>
+            </view>
+        </view>
+        <view bindtap="sort" class="item {{navindex==3?'active':''}}" id="3">
+            <view style="justify-content:center;display: flex;">智能排序<image src="https://tws.cnweisou.com/images/down.png" style="width:32rpx;height: 30rpx;margin-top: 20rpx;"></image>
+            </view>
+        </view>
+    </view>
+    <block wx:if="{{data}}">
+        <view class="t_list" wx:for="{{data}}">
+            <image class="t_img" src="{{item.logo}}"></image>
+            <view bindtap="merch" class="t_font" data-address="{{item.address}}" data-moblie="{{item.tel}}" data-realname="{{item.realname}}" data-storename="{{item.storename}}" id="{{item.id}}">
+                <view class="t_right" style="font-weight: bolder;color:#262626;padding-bottom: 13rpx;">{{item.storename}}</view>
+                <view class="t_right" style="padding-bottom: 4rpx;">地址：{{item.address}}</view>
+                <view class="t_right" style="padding-bottom: 4rpx;">电话：{{item.tel}}</view>
+                <view class="t_right" style="padding-bottom: 4rpx;" wx:if="{{item.fetchtime}}">营业时间：{{item.fetchtime}}</view>
+                <view class="t_right" style="color:#1f7828;padding-bottom: 25rpx;">距离您:{{item.distance}}km</view>
+            </view>
+            <view class="t_addr">
+                <image bindtap="phone" data-index="{{item.tel}}" src="https://tws.cnweisou.com/images/phone1.png" style="width: 50rpx;height: 50rpx;padding-left: 40rpx;padding-top: 50rpx;"></image>
+                <image bindtap="addr" data-lat="{{item.lat}}" data-lng="{{item.lng}}" data-name="{{item.storename}}" src="https://tws.cnweisou.com/images/addr1.png" style="width: 50rpx;height: 50rpx;padding-left: 40rpx;padding-top: 30rpx;"></image>
+            </view>
+        </view>
+    </block>
+    <block wx:if="{{navindex}}">
+        <view class="list_bd" wx:if="{{navindex=='1'}}">
+            <view class="list_t">
+                <view bindtap="distance" class="list_item" data-index="1">附近</view>
+                <view bindtap="distance" class="list_item" data-index="0.5">500米</view>
+                <view bindtap="distance" class="list_item" data-index="1">1000米</view>
+                <view bindtap="distance" class="list_item" data-index="2">2000米</view>
+                <view bindtap="distance" class="list_item" data-index="5">5000米</view>
+                <view bindtap="distance" class="list_item" data-index="100" style="border-bottom: none;">5000米以上</view>
+            </view>
+            <view bindtap="list_bd" class="list_b"></view>
+        </view>
+    </block>
+</scroll-view>

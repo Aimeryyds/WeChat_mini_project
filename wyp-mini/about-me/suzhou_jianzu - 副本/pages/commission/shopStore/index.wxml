@@ -1,0 +1,33 @@
+<scroll-view bindscrolltolower="bottom" scrollY="true" style="height: {{height}}rpx;">
+    <image class="top" src="https://tws.cnweisou.com/images/bg.jpg" style="background-size: 100% 100%;"></image>
+    <view class="m_top">
+        <image class="m_img" src="{{top.imgUrl}}"></image>
+        <view class="m_wrap">
+            <view bindtap="QRcode" class="m_item">
+                <image class="icon" src="https://tws.cnweisou.com/images/code.png"></image>
+                <text>二维码</text>
+            </view>
+            <view class="m_item" style="border:none;">
+                <text class="icon">{{total}}</text>
+                <text>全部宝贝</text>
+            </view>
+        </view>
+    </view>
+    <view class="list_top">
+        <view class="recommend">
+            <image class="t_img" src="https://tws.cnweisou.com/images/fire1.png"></image>
+            <text>为您推荐</text>
+        </view>
+    </view>
+    <view class="list_bd">
+        <view bindtap="toSell" class="item" data-id="{{item.id}}" wx:for="{{data}}">
+            <image class="item_img" src="{{item.thumb}}"></image>
+            <text class="title">{{item.title}}</text>
+            <view class="wrap">
+                <text wx:if="{{item.marketprice==0}}">￥{{0.01}}</text>
+                <text wx:else>￥{{item.marketprice}}</text>
+            </view>
+        </view>
+    </view>
+</scroll-view>
+<loading wx:if="{{loading}}"></loading>

@@ -1,0 +1,7 @@
+<import src="footer-view.wxml"></import>
+<import src="../../common/template.wxml"></import>
+<view bindscrolltolower="nextPage" scrollY="true" style="height:100%;">
+    <include src="item-dynamic.wxml" wx:for="{{articles}}" wx:key="Id"></include>
+    <template is="footerView" data="{{errorMsg:errorMsg}}"></template>
+    <template is="bottomlogo" data="{{AgentConfig:AgentConfig}}"></template>
+</view>

@@ -1,0 +1,291 @@
+@import "../../../../app.wxss";
+
+.products-container {
+    overflow: hidden;
+}
+
+.content-container {
+    display: -webkit-flex;
+    height: 100%;
+    box-sizing: border-box;
+}
+
+.classify-container {
+    width: 188rpx;
+    background: #eee;
+    height: 100%;
+}
+
+.classify-container .classify {
+    height: 100rpx;
+    text-align: center;
+    border-bottom: 1px solid #dcdcdc;
+    display: flex;
+    flex-direction: row;
+}
+
+.classify-container .classify .name {
+    font-size: 24rpx;
+    padding: 0 10rpx;
+    color: #666;
+    line-height: 1.2;
+    text-align: left;
+    pointer-events: none;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    height: 100rpx;
+    align-items: center;
+}
+
+.classify-container .classify .long-name {
+    font-size: 24rpx;
+    padding: 0 10rpx;
+    color: #666;
+    text-align: left;
+    pointer-events: none;
+    flex-direction: column;
+    justify-content: center;
+    height: 100rpx;
+    max-height: 80rpx;
+    line-height: 40rpx;
+    margin-top: 10rpx;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+}
+
+.classify-container .classify .active {
+    color: #F22222;
+}
+
+.classify-container .default {
+    color: #646464;
+}
+
+.classify-container .secondclassify {
+    height: 100rpx;
+    text-align: center;
+    border-bottom: 1px solid #f4f4f4;
+    background: #fff;
+    display: flex;
+    flex-direction: row;
+}
+
+.classify-container .secondclassify .name {
+    font-size: 24rpx;
+    padding: 0 10rpx;
+    color: #868686;
+    text-align: left;
+    pointer-events: none;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    height: 100rpx;
+}
+
+.classify-container .secondclassify .long-name {
+    font-size: 24rpx;
+    padding: 0 10rpx;
+    color: #868686;
+    text-align: left;
+    pointer-events: none;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    height: 100rpx;
+    max-height: 80rpx;
+    line-height: 40rpx;
+    margin-top: 10rpx;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+}
+
+.left-line {
+    line-height: 1.2;
+    width: 6rpx;
+    color: #fff;
+}
+
+.left-active-line {
+    background: #F22222;
+    color: #F22222;
+}
+
+.classify-container .secondclassify .active_name {
+    color: #F22222;
+}
+
+.goods-container {
+    -webkit-flex: 1;
+    background: #fff;
+    height: 100%;
+}
+
+.goods-container .right-classify-name {
+    padding: 20rpx 20rpx;
+    width: 100%;
+    text-align: left;
+    border-top: 1px solid #f4f4f4;
+    border-left: 1px solid #f4f4f4;
+    color: #000000;
+    background: #fff;
+    font-size: 28rpx;
+    opacity: 0.43;
+}
+
+.goods-container .title {
+    padding: 20rpx 25rpx;
+    color: #646464;
+    font-size: 30rpx;
+    line-height: 30rpx;
+    background: #f7f7f7;
+}
+
+.goods-container .goods {
+    padding: 24rpx;
+    border-bottom: 1px solid #f7f7f7;
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+}
+
+.goods-container .goods .pic {
+    float: left;
+    width: 145rpx;
+    height: 145rpx;
+    margin-right: 20rpx;
+    border-radius: 5px;
+}
+
+.goods-container .goods .name {
+    width: 360rpx;
+    display: flex;
+    align-items: center;
+}
+
+.goods-name {
+    flex: 1;
+    color: #000;
+    font-size: 28rpx;
+}
+
+.goods-container .goods .sold {
+    color: #989898;
+    font-size: 24rpx;
+    line-height: 46rpx;
+}
+
+.price-box {
+    display: flex;
+    flex-direction: row;
+}
+
+.goods-container .goods .price {
+    color: #f45044;
+    font-size: 28rpx;
+    line-height: 35rpx;
+}
+
+.price-label {
+    color: #f45044;
+    font-size: 24rpx;
+    line-height: 35rpx;
+}
+
+.goods-end {
+    font-size: 22rpx;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin: 20rpx 0;
+}
+
+.goods-end text {
+    color: #c9c9c9;
+    padding: 0 15rpx;
+}
+
+.goods-end .goods-end-border {
+    width: 40rpx;
+    border-top: 1rpx #c9c9c9 solid;
+}
+
+.no-pro {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: #f2f2f2;
+    margin-top: 300rpx;
+}
+
+.no-pro-img {
+    width: 81rpx;
+    height: 96rpx;
+    margin-bottom: 31rpx;
+}
+
+.no-pro-text {
+    font-size: 28rpx;
+    color: #999;
+    text-align: center;
+}
+
+.goods-list__btn {
+    align-self: flex-end;
+    width: 116rpx;
+    height: 48rpx;
+    font-size: 24rpx;
+    background: #f22222;
+    color: #fff;
+    text-align: center;
+    line-height: 48rpx;
+    border-radius: 8rpx;
+}
+
+.tuan-tag {
+    display: flex;
+    height: 28rpx;
+    line-height: 28rpx;
+    padding: 0 10rpx;
+    background: linear-gradient(to right,#cb58e9,#de56c3,#fa548d);
+    font-size: 16rpx;
+    color: #fff;
+    border-radius: 4rpx;
+}
+
+.seckill-tag {
+    width: 68rpx;
+    height: 28rpx;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: #f22222;
+    color: #fff;
+    font-size: 20rpx;
+    font-style: italic;
+    border-radius: 4rpx;
+}
+
+.seckill-tag image {
+    width: 14rpx;
+    height: 22rpx;
+    margin-right: 4rpx;
+}
+
+.manjian-tag {
+    width: 48rpx;
+    height: 28rpx;
+    line-height: 28rpx;
+    background: #9A6BFF;
+    font-size: 20rpx;
+    color: #fff;
+    text-align: center;
+    border-radius: 4rpx;
+}

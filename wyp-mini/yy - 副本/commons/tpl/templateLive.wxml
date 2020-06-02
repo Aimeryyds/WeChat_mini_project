@@ -1,0 +1,83 @@
+<template name="searchRecomend-tpl">
+    <view class="anchor-live-list">
+        <button bindtap="getuserinfo" class="anchor-live-item" data-index="{{index}}" data-sid="{{item.sid}}" data-ssid="{{item.ssid}}" data-uid="{{item.uid}}" data-url="/pages/room/room?sid={{item.sid}}&ssid={{item.ssid}}&uid={{item.uid}}&snapshot={{item.snapshot||item.posterUrl||item.img}}" hoverClass="none" wx:for="{{list}}" wx:key="index">
+            <view class="item-avatar">
+                <image class="item-avatar__img" src="{{item.img||item.thumb||'/images/default-anchor.png'}}"></image>
+                <view class="item-avatar__icon">直播中</view>
+            </view>
+            <view class="item-info">
+                <view>
+                    <text class="item-info__title">{{item.desc||item.liveTitle||item.name}}</text>
+                    <text class="item-info__id">直播间ID：{{item.asid||item.sid}}
+                        </text>
+                </view>
+                <view class="item-info__viewer">
+                    <image class="item-info__viewer__icon" src="../../images/viewer_icon2.png"></image>
+                    <text class="item-info__viewer__amount">{{item.users}}</text>
+                </view>
+            </view>
+        </button>
+    </view>
+</template>
+<template name="searchLive-tpl">
+    <view class="anchor-live-list">
+        <button bindtap="getuserinfo" class="anchor-live-item" data-url="/pages/room/room?sid={{item.sid}}&ssid={{item.ssid}}&uid={{item.uid}}&snapshot={{item.snapshot||item.posterUrl||item.img}}" hoverClass="none" wx:for="{{list}}" wx:key="index">
+            <view class="item-avatar">
+                <image class="item-avatar__img" src="{{item.img||item.thumb||'/images/default-anchor.png'}}"></image>
+                <view class="item-avatar__icon" wx:if="{{item.liveOn}}">直播中</view>
+            </view>
+            <view class="item-info">
+                <view>
+                    <text class="item-info__title">{{item.liveTitle||item.desc||item.name||'YY直播'}}</text>
+                    <text class="item-info__id">直播间ID：{{item.asid||item.sid}}
+                        </text>
+                </view>
+                <view class="item-info__viewer" hidden="{{!item.liveOn}}">
+                    <image class="item-info__viewer__icon" src="../../images/viewer_icon2.png"></image>
+                    <text class="item-info__viewer__amount">{{item.users}}</text>
+                </view>
+            </view>
+        </button>
+    </view>
+</template>
+<template name="liveList-tpl">
+    <view class="live-list clear-float">
+        <block wx:for="{{list}}" wx:key="index">
+            <view bindtap="test" class="adunit-main" wx:if="{{isIndexPage&&!isAdError1&&index==4}}">
+                <image class="adunit-placeholder" src="../../pages/index/images/ad-default1.png" wx:if="{{showAdDefault}}"></image>
+                <ad binderror="adError1" bindload="adLoad1" unitId="adunit-a8aa800517db4387"></ad>
+            </view>
+            <view bindtap="test" class="adunit-main" wx:if="{{isIndexPage&&!isAdError2&&index==10}}">
+                <image class="adunit-placeholder" src="../../pages/index/images/ad-default2.png" wx:if="{{showAdDefault}}"></image>
+                <ad binderror="adError2" bindload="adLoad2" unitId="adunit-617448324c1c2a18"></ad>
+            </view>
+            <button bindtap="getuserinfo" class="live-list_button" data-aiTagId="{{item.aiTagId}}" data-following="{{item.following}}" data-index="{{index}}" data-isvisited="{{item._isvisited}}" data-modules="{{module}}" data-sid="{{item.sid}}" data-ssid="{{item.ssid}}" data-uid="{{item.uid}}" data-url="/pages/room/room?sid={{item.sid}}&ssid={{item.ssid}}&uid={{item.uid}}&snapshot={{item.img}}" hoverClass="none" type="default">
+                <view class="live-item">
+                    <view class="live-item__nav">
+                        <view class="live-item__mask"></view>
+                        <image class="live-item__img {{item.show?'live-item__active':' '}}" lazyLoad="true" src="{{item.show?item.img:'../../images/1x1.png'}}" wx:if="{{isIndexPage}}"></image>
+                        <image class="live-item__img live-item__otherImg" lazyLoad="true" src="{{item.img}}" wx:else></image>
+                        <view class="live-item__tag__nor--wrap" wx:if="{{!item.following&&!item._isvisited&&item.aiTagId&&module===0}}">
+                            <image class="live-item__tag--nor" src="/images/live_tag_nor.png"></image>
+                            <view class="live-item__tag__txt--nor">{{item.aiTagId==1?'正在跳舞':'正在唱歌'}}</view>
+                        </view>
+                        <view class="live-item__tag__special--wrap" wx:if="{{item.following&&module===0}}">
+                            <image class="live-item__tag--special" src="/images/live_tag_special.png"></image>
+                            <view class="live-item__tag__txt--special">关注的主播</view>
+                        </view>
+                        <view class="live-item__tag__special--wrap" wx:if="{{!item.following&&item._isvisited&&module===0}}">
+                            <image class="live-item__tag--special" src="/images/live_tag_special.png"></image>
+                            <view class="live-item__tag__txt--special">上次看过</view>
+                        </view>
+                        <view class="view-info">
+                            <image class="view-info__icon" src="../../images/viewer_icon.png"></image>
+                            <text class="view-info__count">{{item.users}}</text>
+                        </view>
+                        <image class="mac-icon" src="../../images/lianmai_icon.png" wx:if="{{item.linkMic}}"></image>
+                    </view>
+                    <view class="live-item__title">{{item.desc||item.name}}</view>
+                </view>
+            </button>
+        </block>
+    </view>
+</template>

@@ -1,0 +1,21 @@
+<template name="moremp$958924a2">
+    <view class="_div data-v-1575f79f mp-more" style=" {{'padding-top:'+paddingTop+'px'+';'}}">
+        <template is="nav-bar$6acec6f9" data="{{...$root[$kk+'0'],$root:$root}}"></template>
+        <navigator class="_navigator data-v-1575f79f mp-card" url="/pages/lucky-wheel/main">
+            <image class="_img data-v-1575f79f logo {{[isNew?'new':'']}}" src="https://media-image1.baydn.com/storage_media_image/ccdbwr/84e8fd863496bc9dc85b5de249b113ee.241f0fb77a44ad6185ae426e9e0cb6c2.png"></image>
+            <view class="_div data-v-1575f79f description">
+                <view class="_div data-v-1575f79f title">每日幸运转盘</view>
+                <view class="_div data-v-1575f79f text">每天转动转盘，赢取丰厚奖品</view>
+            </view>
+        </navigator>
+        <view class="_div data-v-1575f79f sep"> — 更多小程序推荐 — </view>
+        <navigator appId="{{mp.item.miniprogram_id}}" bindsuccess="handleProxy" class="_navigator data-v-1575f79f mp-card" data-comkey="{{$k}}" data-eventid="{{'0-'+index}}" id="{{mp.item.miniprogram_id}}" key="{{mp.item.miniprogram_id}}" target="miniProgram" wx:for="{{mps}}" wx:for-item="mp" wx:key="mp.item.miniprogram_id">
+            <image class="_img data-v-1575f79f logo" src="{{mp.item.image_urls[0]}}"></image>
+            <view class="_div data-v-1575f79f description">
+                <view class="_div data-v-1575f79f title">{{mp.item.title}}</view>
+                <view class="_div data-v-1575f79f text">{{mp.item.description}}</view>
+            </view>
+        </navigator>
+    </view>
+</template>
+<import src="nav-bar$6acec6f9"></import>

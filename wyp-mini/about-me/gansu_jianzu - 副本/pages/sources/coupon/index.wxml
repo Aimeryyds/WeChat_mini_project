@@ -1,0 +1,15 @@
+<view class="container" style="background-color:#fff" wx:if="{{isShow}}">
+    <scroll-view enableBackToTop scrollY bindscrolltolower="lower" scrollTop="{{scrollTop}}" style="width:100%;height: 100vh;" wx:if="{{couponList&&couponList.length>0}}">
+        <view class="coupons_coupon-list">
+            <view class="coupons-list_coupon-item" data-item="{{item}}" ontap="choosecoupon" wx:for="{{couponList}}">
+                <coupon color="{{couponcolor}}" coupon="{{startTime:item.sendTime,endTime:item.sendEndTime,rangeOfUse:item.rangeOfUse,useThreshold:item.useThreshold,value:item.value,overTime:item.overTime}}" type="type4"></coupon>
+            </view>
+        </view>
+        <wxc-loadmore icon="{{true}}" text="正在努力加载中..." wx:if="{{loadingmore}}"></wxc-loadmore>
+    </scroll-view>
+    <view class="coupons_no-coupon" wx:else>
+        <image src="http://imgcdnali.wfenxiao.com.cn/xcx/c/no_coupon.png" style="margin-top:100px;width:214rpx;height:150rpx"></image>
+        <text style="margin-top:20px;font-size:32rpx;color:#bbb;font-weight:bold">暂无可用优惠券</text>
+        <text style="margin-top:20px;font-size:28rpx;color:#ccc;">获取方式,可留意店家信息</text>
+    </view>
+</view>

@@ -1,0 +1,22 @@
+<import src="/pages/templates/news/news.wxml"></import>
+<import src="/dist/loadmore/index.wxml"></import>
+<view class="container" wx:if="{{isShow}}">
+    <view class="news-search">
+        <view bindtap="handlesearch" class="news-search-wrap">
+            <view class="news-search-box">
+                <image class="news-search__img" src="http://imgcdnali.wfenxiao.com.cn/xcx/c/icons/ic_search.png"></image>
+                <view class="news-search__text">{{keyword||'搜索'}}</view>
+            </view>
+        </view>
+        <picker bindchange="bindMultiPickerChange" bindcolumnchange="bindMultiPickerColumnChange" mode="multiSelector" range="{{multiArray}}" rangeKey="{{'name'}}" value="{{multiIndex}}" wx:if="{{!(type=='group')}}">
+            <image class="news-search-category" src="http://imgcdnali.wfenxiao.com.cn/xcx/c/icons/pro-type1.png" style=""></image>
+        </picker>
+    </view>
+    <scroll-view enableBackToTop scrollY bindscroll="handlescroll" bindscrolltolower="lower" class="newsinfo-list" scrollTop="{{scrollTop}}" style="width:100%;height: 100vh;" wx:if="{{list.length>0}}">
+        <template is="news" data="{{id:item.id,title:item.title,imgsrc:item.cover,time:item.publishTime}}" wx:for="{{list}}"></template>
+        <view id="loadmore">
+            <template is="zan-loadmore" data="{{loading:loadingmore}}"></template>
+        </view>
+    </scroll-view>
+    <view class="no-newsinfo" wx:if="{{list.length==0}}">暂无符合条件的新闻资讯信息</view>
+</view>

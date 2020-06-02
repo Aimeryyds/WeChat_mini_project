@@ -1,0 +1,131 @@
+lu-popup-wrapper {
+    position: absolute;
+}
+
+.lu-popup-wrapper {
+    position: fixed;
+    z-index: 998;
+    left: 0;
+    right: 0;
+    top: 0;
+    bottom: 0;
+    height: 100%;
+    width: 100%;
+    display: -webkit-box;
+    display: -webkit-flex;
+    display: flex;
+    -webkit-box-orient: horizontal;
+    -webkit-box-direction: normal;
+    flex-flow: row nowrap;
+    -webkit-box-pack: center;
+    justify-content: center;
+    -webkit-box-align: center;
+    align-items: center;
+    display: none;
+    overflow: hidden;
+    transform: translateZ(1);
+}
+
+.lu-popup-wrapper.lu-popup-active {
+    display: -webkit-box;
+    display: -webkit-flex;
+    display: flex;
+}
+
+.lu-popup-wrapper.lu-popup-left {
+    -webkit-box-pack: start;
+    justify-content: flex-start;
+}
+
+.lu-popup-wrapper.lu-popup-left .lu-popup-transition-slider {
+    transform: translate3d(-100%,0,0);
+}
+
+.lu-popup-wrapper.lu-popup-right {
+    -webkit-box-pack: end;
+    justify-content: flex-end;
+}
+
+.lu-popup-wrapper.lu-popup-right .lu-popup-transition-slider {
+    transform: translate3d(100%,0,0);
+}
+
+.lu-popup-wrapper.lu-popup-top {
+    -webkit-box-align: start;
+    align-items: flex-start;
+}
+
+.lu-popup-wrapper.lu-popup-top .lu-popup-transition-slider {
+    transform: translate3d(0,-100%,0);
+}
+
+.lu-popup-wrapper.lu-popup-bottom {
+    -webkit-box-align: end;
+    align-items: flex-end;
+}
+
+.lu-popup-wrapper.lu-popup-bottom .lu-popup-transition-slider {
+    transform: translate3d(0,100%,0);
+}
+
+.lu-popup-wrapper .lu-popup-content {
+    position: relative;
+    z-index: 2;
+    height: 100%;
+    width: 100%;
+    transform: translateZ(0) scale(1);
+    opacity: 1;
+    overflow: scroll;
+    transition: opacity .3s ease-in-out,-webkit-transform .3s ease-in-out;
+    transition: transform .3s ease-in-out,opacity .3s ease-in-out;
+    transition: transform .3s ease-in-out,opacity .3s ease-in-out,-webkit-transform .3s ease-in-out;
+}
+
+.lu-popup-wrapper .lu-popup-content.lu-popup-transition-fade {
+    transform: translateZ(0) scale(.3);
+    opacity: 0;
+}
+
+.lu-popup-wrapper .lu-popup-content .header {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 40px;
+}
+
+.lu-popup-wrapper .lu-popup-content .header .icon-close {
+    font-size: 14px;
+    padding: 10px 15px;
+}
+
+.lu-popup-wrapper .lu-popup-content .content {
+    position: absolute;
+    top: 40px;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    padding: 0 40rpx 40rpx;
+    box-sizing: border-box;
+}
+
+.lu-popup-wrapper .lu-popup-content .content.no-pb {
+    padding-bottom: 0;
+}
+
+.lu-popup-wrapper .lu-popup-mask {
+    position: absolute;
+    z-index: 1;
+    left: 0;
+    right: 0;
+    top: 0;
+    bottom: 0;
+    height: 100%;
+    width: 100%;
+    background-color: rgba(0,0,0,.5);
+    transition: background .3s ease-in-out;
+}
+
+.lu-popup-wrapper .lu-popup-mask.lu-popup-mask-fade {
+    background-color: transparent;
+}

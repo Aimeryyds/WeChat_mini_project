@@ -1,0 +1,26 @@
+<view class="house-recommend-wrapper house-detail bb1 _div data-v-413c63f0" wx:if="{{!!houseRecommend&&!!houseRecommend.length}}">
+    <view class="title _h3 data-v-413c63f0">为您推荐</view>
+    <view class="content _div data-v-413c63f0">
+        <swiper class="swiper data-v-413c63f0" duration="500" nextMargin="30rpx">
+            <view class="_div data-v-413c63f0" wx:for="{{$root.l0}}" wx:key="index">
+                <swiper-item class="data-v-413c63f0">
+                    <view bindtap="__e" class="item-wrapper _div data-v-413c63f0" data-event-opts="{{[ [ 'tap',[ [ 'handleJumpHouse',['$0','$1'],[ [ ['houseRecommend','',index,'id'] ],[ ['houseRecommend','',index,'house_id'] ] ] ] ] ] ]}}">
+                        <image alt="photo" binderror="__e" class="item-image _img data-v-413c63f0" data-event-opts="{{[ [ 'error',[ [ 'handleError',[index] ] ] ] ]}}" src="{{item.m0}}"></image>
+                        <view class="info _div data-v-413c63f0">
+                            <label class="_span data-v-413c63f0">￥</label>
+                            <price bind:__l="__l" class="data-v-413c63f0" offset="{{16.82}}" priceObj="{{item[$orig].price}}" vueId="{{'1-'+index}}" width="11px"></price>
+                            <label class="name _span data-v-413c63f0">{{item[$orig].name}}</label>
+                        </view>
+                        <view class="subway _div data-v-413c63f0">
+                            <view class="iconfont icon-M_ic_add _i data-v-413c63f0"></view>
+                            <label class="info-item _span data-v-413c63f0">{{item[$orig].subway_station_info}}</label>
+                        </view>
+                        <view class="tags _div data-v-413c63f0">
+                            <label class="zr-tag _span data-v-413c63f0" wx:for="{{item[$orig].tips}}" wx:for-index="j" wx:for-item="tag" wx:key="j">{{tag.title}}</label>
+                        </view>
+                    </view>
+                </swiper-item>
+            </view>
+        </swiper>
+    </view>
+</view>

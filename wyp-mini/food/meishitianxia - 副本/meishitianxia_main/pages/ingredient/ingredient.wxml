@@ -1,0 +1,42 @@
+<view class="main">
+    <scroll-view class="tag_left" scrollIntoView="{{on<8?'leftitem0':'leftitem'+on-8}}" scrollWithAnimation="true" scrollY="true" style="height: {{height}}px;">
+        <view bindtap="on_tag_main" class="tag_main  {{on==index?'on':''}}" data-idx="{{index}}" id="leftitem{{index}}" wx:for="{{llist}}" wx:key="llist">
+            <text>{{item}}</text>
+        </view>
+    </scroll-view>
+    <scroll-view bindscroll="scroll" class="tag_right" scrollIntoView="{{toView}}" scrollWithAnimation="true" scrollY="true" style="height: {{height}}px;">
+        <view class="tag_right_item" id="item0">
+            <view style="height:10rpx;width:100%;"></view>
+            <view class="tag_txt" wx:for="{{bestIngredient}}" wx:key="bestIngredient">
+                <navigator url="../ingredient_info/ingredient_info?id={{item.id}}&title={{item.title}}">
+                    <text>{{item.title?item.title:'　'}}</text>
+                </navigator>
+            </view>
+            <view style="height:40rpx;width:100%;"></view>
+        </view>
+        <view class="tag_right_item" id="item{{idx}}" wx:if="{{idx>0}}" wx:for="{{rlist}}" wx:for-index="idx" wx:key="rlist">
+            <view class="tag_head">
+                <text>{{llist[idx]}}</text>
+            </view>
+            <block wx:for="{{item}}" wx:for-index="idx2" wx:for-item="item2" wx:key="rlist2">
+                <view class="tag_txt {{more[idx]==0&&idx2>16&&item.length!=18?'hidden':''}}" wx:if="{{item2.cover}}">
+                    <view bindtap="open_tag" data-id="{{item2.id}}" data-name="{{item2.name}}">
+                        <text>{{item2.name}}</text>
+                    </view>
+                </view>
+                <view class="tag_txt {{more[idx]==0&&idx2>16?'hidden':''}}" wx:else>
+                    <view bindtap="open_tag" data-id="{{item2.id}}" data-name="{{item2.name}}">
+                        <text>{{item2.name}}</text>
+                    </view>
+                </view>
+                <view class="{{more[idx]==0&&idx2>16?'hidden':''}}" style="height:40rpx;width:100%;" wx:if="{{(idx2+1)%9==0||idx2<18&&idx2==item.length-1}}"></view>
+            </block>
+            <block wx:if="{{rlist[idx].length>18}}">
+                <view bindtap="show_more" class="tag_txt" data-idx="{{idx}}">
+                    <text class="more">{{more[idx]==1?'收起':'更多'}}</text>
+                </view>
+                <view style="height:40rpx;width:100%;"></view>
+            </block>
+        </view>
+    </scroll-view>
+</view>

@@ -1,0 +1,9 @@
+<template name="tab">
+    <view class="tab{{tabData.isIphoneX?' bottom-Higher':''}}">
+        <view capture-catch:tap="onTabClick" class="panel news{{item.active?' active':''}}" data-panel="{{item.panel}}" wx:for="{{tabData.tabs}}" wx:key="panel">
+            <image class="icon" src="{{item.iconRefresh}}" wx:if="{{item.showRefresh}}"></image>
+            <image class="icon" src="{{item.active?item.picActive:item.pic}}" wx:else></image>
+        {{item.name}}
+      </view>
+    </view>
+</template>

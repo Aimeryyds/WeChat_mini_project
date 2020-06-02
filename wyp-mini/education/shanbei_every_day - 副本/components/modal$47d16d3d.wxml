@@ -1,0 +1,24 @@
+<template name="modal$47d16d3d">
+    <view catchtouchmove="handleProxy" class="_div data-v-37f499a6 wrapper" data-comkey="{{$k}}" data-eventid="{{'3'}}" id="wrapper" style=" {{'background:'+'rgba(0,0,0,'+option.opacity+')'+';'}}" wx:if="{{show}}">
+        <view class="_div data-v-37f499a6 inner">
+            <view class="_div data-v-37f499a6 content">
+                <view class="_div data-v-37f499a6 text-title">
+                    <view class="_div data-v-37f499a6" name="content-title">{{option.title}}</view>
+                </view>
+                <view class="_div data-v-37f499a6 text-content">
+                    <view class="_div data-v-37f499a6" name="content-content">{{option.content}}</view>
+                </view>
+            </view>
+            <view class="_div data-v-37f499a6 footer">
+                <view class="_div data-v-37f499a6 btn-wrapper">
+                    <button hoverStopPropagation bindtap="handleProxy" class="_button data-v-37f499a6 cancel" data-comkey="{{$k}}" data-eventid="{{'0'}}" id="cancel" wx:if="{{option.showCancel}}">{{option.cancelText}}</button>
+                </view>
+                <view class="_div data-v-37f499a6 separator"></view>
+                <view class="_div data-v-37f499a6 btn-wrapper">
+                    <button bindtap="handleProxy" class="_button data-v-37f499a6 confirm" data-comkey="{{$k}}" data-eventid="{{'2'}}" id="confirm" openType="contact" wx:if="{{option.contact}}">{{option.confirmText}}</button>
+                    <button bindtap="handleProxy" class="_button data-v-37f499a6 confirm" data-comkey="{{$k}}" data-eventid="{{'1'}}" id="confirm" wx:else>{{option.confirmText}}</button>
+                </view>
+            </view>
+        </view>
+    </view>
+</template>

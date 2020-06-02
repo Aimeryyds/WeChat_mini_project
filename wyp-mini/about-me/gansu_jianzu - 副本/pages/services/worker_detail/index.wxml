@@ -1,0 +1,68 @@
+<view class="container" style="padding-bottom: 120rpx;">
+    <view class="zan-panel zan-panel__no-margin-top">
+        <view class="worker__item" data-id="{{item.id}}">
+            <image class="worker__item__avatar" mode="scaleToFit" src="{{projectdetail.headImg}}"></image>
+            <view class="worker__item__detail">
+                <view class="worker__item__detail__name">{{projectdetail.serverName}}</view>
+                <view class="worker__item__detail__desc">{{projectdetail.jobTitle}}</view>
+                <view class="worker__item__detail__number" wx:if="{{projectdetail.showNum==1}}">已有{{projectdetail.num}}人预约</view>
+            </view>
+            <view class="worker__item__share">
+                <button class="btn-share" openType="share">
+                    <image src="http://imgcdnali.wfenxiao.com.cn/xcx/c/icons/share.png" style="width:30rpx; height: 30rpx"></image>
+                    <view class="share">分享</view>
+                </button>
+            </view>
+        </view>
+        <view class="worker__desc">
+            <view class="worker__desc-title">
+        简介
+      </view>
+            <view class="worker__desc-content-{{showDescExpand&&descCollspand?'collspand':'default'}}">
+        {{projectdetail.brief}}
+      </view>
+            <view bindtap="toggleDescExpand" class="worker__desc-expand" wx:if="{{showDescExpand}}">
+                <text>{{descCollspand?'更多':'收起'}}</text>
+                <image class="worker__desc-expand__arrow" mode="scaleToFill" src="{{descCollspand?'http://imgcdnali.wfenxiao.com.cn/xcx/c/arrow-down.png':'http://imgcdnali.wfenxiao.com.cn/xcx/c/arrow-up.png'}}"></image>
+            </view>
+        </view>
+    </view>
+    <view class="zan-panel services-list" wx:if="{{serviceList&&serviceList.length>0}}">
+        <view class="services-list__title">
+      服务项目价目表
+    </view>
+        <view class="services-list__item" data-id="{{item.id}}" wx:for="{{serviceList}}">
+            <image class="services-list__item__avatar" mode="aspectFill" src="{{item.imgUrl}}"></image>
+            <view class="services-list__item__name">{{item.serviceName}}</view>
+            <text class="services-list__item__price">¥{{item.price}}</text>
+        </view>
+        <view class="worker__desc-expand" style="display:none">
+            <text>更多</text>
+            <image class="worker__desc-expand__arrow" mode="scaleToFill" src="http://imgcdnali.wfenxiao.com.cn/xcx/c/arrow-down.png"></image>
+        </view>
+    </view>
+    <view class="zan-panel" wx:if="{{projectdetail.openEvaluate==1}}">
+        <navigator hoverClass="none" url="/pages/pingjia/productevaluate/index?sType=3&sid={{projectdetail.id}}&storeId={{projectdetail.storeId}}">
+            <view class="zan-cell zan-cell--access">
+                <view class="zan-cell__bd">评价（{{projectdetail.reviewsNum}}）</view>
+                <view class="zan-cell__ft" style="color:#f22222;">{{projectdetail.goodReviewsRate}}%好评</view>
+            </view>
+        </navigator>
+    </view>
+    <view class="zan-panel services-list">
+        <view class="services-list__title">
+      商户信息
+    </view>
+        <view class="store" data-id="{{item.id}}">
+            <view class="store__detail">
+                <view class="store__detail-name">{{projectdetail.store.brandName}}</view>
+                <view class="store__detail-address">{{projectdetail.store.provinceName}}{{projectdetail.store.cityName}}{{projectdetail.store.areaName}}</view>
+            </view>
+            <image mode="scaleToFill" ontap="phoneCall" src="http://imgcdnali.wfenxiao.com.cn/xcx/c/phone.png" style="width: 44rpx;height: 44rpx;"></image>
+        </view>
+    </view>
+    <view bindtap="createOrder">
+        <button class="zan-btn zan-btn--large zan-btn--danger order-btn">立即预约</button>
+    </view>
+    <phonemodal handclick="handclick" showModal="{{showModal}}" url="/pages/login/login"></phonemodal>
+</view>

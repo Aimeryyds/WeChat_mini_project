@@ -1,0 +1,35 @@
+<view class="search">
+    <view class="search-content">
+        <image src="http://tws.cnweisou.com/images/search1.png"></image>
+        <input bindchange="bindChange" class="input_search" placeholder="搜索关键字" placeholderStyle="color:#999"></input>
+    </view>
+    <text bindtap="search">筛选</text>
+</view>
+<dl class="menu">
+    <dt bindtap="tapMainMenu" class="{{parm.menu_type==0?'highlight':''}}" data-menu_type="0">全部</dt>
+    <dt bindtap="tapMainMenu" class="{{parm.menu_type==1?'highlight':''}}" data-menu_type="1">分类</dt>
+    <dd class="{{menu_subtype==1?'show':'hidden'}}">
+        <ul>
+            <li bindtap="tapSubMenu" class="{{parm.menu_id==item.id?'highlight':''}}" data-menu_id="{{item.id}}" wx:for="{{getCategorys}}">{{item.category_name}}</li>
+        </ul>
+    </dd>
+    <dt></dt>
+    <dt></dt>
+</dl>
+<view class="goodsList carts-list" wx:if="{{lists.length}}">
+    <view bindtap="tapLists" class="carts-item" data-object-id="{{item.id}}" wx:for="{{lists}}" wx:key="objectId">
+        <view>
+            <image class="carts-image" mode="aspectFill" src="{{item.resp_img}}"></image>
+        </view>
+        <view class="carts-text">
+            <text class="carts-title">{{item.article_title}}</text>
+            <view class="goods-score">
+                <text>分类:{{item.category_name}}</text>
+                <text>日期:{{item.article_date_v}}</text>
+            </view>
+        </view>
+    </view>
+</view>
+<view class="view-empty" wx:else>
+    <text>抱歉暂时没有相关结果,换个筛选条试试吧!</text>
+</view>

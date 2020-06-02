@@ -1,0 +1,310 @@
+.container {
+    height: 100%;
+}
+
+.tag-view {
+    height: 80rpx;
+    background: #fff;
+    position: fixed;
+    left: 0;
+    right: 0;
+    top: 0;
+    display: flex;
+    font-size: 32rpx;
+    color: #333;
+    border-bottom: 1px solid #eee;
+    z-index: 10;
+}
+
+.tag-view>view {
+    flex: 1 0 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: relative;
+}
+
+.tag-view>view text {
+    display: inline-block;
+    height: 100%;
+    line-height: 80rpx;
+    text-align: center;
+}
+
+.tag-view>view text {
+    border-bottom: 2px solid transparent;
+    transition: all ease-out 0.2s;
+    font-size: 28rpx;
+    color: #7e7e85;
+}
+
+.tag-view>view.selected text {
+    border-bottom-color: #373745;
+    font-weight: bold;
+    color: #373745;
+}
+
+.tag-view>view.unselected {
+    border-bottom: none;
+}
+
+.content-view {
+    width: 100%;
+    height: calc(100% - 80rpx);
+    white-space: nowrap;
+    overflow: hidden;
+    margin-top: 80rpx;
+}
+
+.content-view .cnt {
+    width: 100%;
+    height: 100%;
+    display: inline-block;
+}
+
+.content-view .cnt scroll-view {
+    height: 100%;
+    padding-bottom: 100rpx;
+}
+
+.content-view .cnt .coupon-item {
+    width: 698rpx;
+    height: 200rpx;
+    position: relative;
+    margin: 26rpx auto 0;
+    display: flex;
+    align-items: center;
+}
+
+.content-view .cnt .coupon-item.dis {
+    opacity: 0.5;
+}
+
+.content-view .cnt .coupon-item .item-bg {
+    position: absolute;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    z-index: -1;
+}
+
+.content-view .cnt .coupon-item .item-left {
+    width: 196rpx;
+    height: 122rpx;
+    line-height: 122rpx;
+    font-size: 32rpx;
+    flex: 0 0 196rpx;
+    text-align: center;
+    color: #d94a0d;
+}
+
+.content-view .cnt .coupon-item .item-left .price {
+    font-size: 52rpx;
+    font-weight: bold;
+}
+
+.content-view .cnt .coupon-item .item-right {
+    margin: 0 32rpx;
+    height: 122rpx;
+    display: flex;
+    flex: 1;
+    flex-direction: column;
+    justify-content: space-between;
+}
+
+.content-view .cnt .coupon-item .item-right .item-title {
+    font-size: 30rpx;
+    display: flex;
+    color: #363636;
+    flex-direction: column;
+}
+
+.content-view .cnt .coupon-item .item-right .item-title .time {
+    font-size: 22rpx;
+    color: #939393;
+    margin-top: 16rpx;
+}
+
+.content-view .cnt .coupon-item .item-right .item-bottom {
+    font-size: 22rpx;
+    color: #7e7e85;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    position: relative;
+}
+
+.content-view .cnt .coupon-item .item-right .item-bottom image.coupon-tag {
+    width: 120rpx;
+    height: 120rpx;
+    position: absolute;
+    top: -110rpx;
+    right: 0;
+}
+
+.content-view .cnt .coupon-item .item-right .item-bottom .btn {
+    font-size: 24rpx;
+    color: #d94a0d;
+    border-radius: 52rpx;
+    display: flex;
+    align-items: center;
+}
+
+.content-view .cnt .coupon-item .item-right .item-bottom .btn image {
+    width: 24rpx;
+    height: 24rpx;
+    margin-right: 12rpx;
+}
+
+.content-view .cnt .award-item {
+    width: 698rpx;
+    height: 196rpx;
+    background: #fff;
+    border: #efeff0;
+    margin: 26rpx auto 0;
+    display: flex;
+}
+
+.content-view .cnt .award-item .item-left {
+    height: 100%;
+    display: flex;
+    align-items: center;
+    padding: 26rpx;
+    flex: 1;
+}
+
+.content-view .cnt .award-item .item-left image {
+    width: 142rpx;
+    height: 142rpx;
+}
+
+.content-view .cnt .award-item .item-left .item-info {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    height: 100%;
+    margin-left: 26rpx;
+}
+
+.content-view .cnt .award-item .item-left .item-info .item-title {
+    font-size: 28rpx;
+    color: #363636;
+    width: 350rpx;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    display: -webkit-box;
+    word-break: break-all;
+    -webkit-box-orient: vertical;
+    -webkit-line-clamp: 1;
+}
+
+.content-view .cnt .award-item .item-left .item-info .item-price {
+    font-size: 22rpx;
+    color: #636363;
+    display: flex;
+    align-items: center;
+}
+
+.content-view .cnt .award-item .item-left .item-info .item-price .price-wrap {
+    font-size: 26rpx;
+    color: #363636;
+    display: flex;
+    align-items: center;
+    margin-left: 16rpx;
+}
+
+.content-view .cnt .award-item .item-left .item-info .item-price .price-wrap .price {
+    font-size: 38rpx;
+    margin-left: 10rpx;
+}
+
+.content-view .cnt .award-item .item-right {
+    flex: 0 0 132rpx;
+    height: 100%;
+}
+
+.content-view .cnt .award-item .item-right .btn {
+    width: 132rpx;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 30rpx;
+    color: #d94a0d;
+    position: relative;
+    flex: 0 0 132rpx;
+    flex-direction: column;
+}
+
+.content-view .cnt .award-item .item-right .btn image {
+    width: 24rpx;
+    height: 24rpx;
+    margin-bottom: 16rpx;
+}
+
+.content-view .cnt .award-item .item-right .btn::before {
+    content: '';
+    position: absolute;
+    left: 0;
+    top: 26rpx;
+    bottom: 26rpx;
+    width: 2rpx;
+    border-left: 2rpx dotted #d5d5d5;
+}
+
+.content-view .cnt .award-item.dis {
+    opacity: 0.42;
+}
+
+.content-view .cnt .award-item.dis .btn {
+    color: #636363;
+    font-size: 24rpx;
+}
+
+.content-view .cnt .wallet-item {
+    width: 698rpx;
+    height: 104rpx;
+    border: 1px solid #efeff0;
+    background: #fff;
+    display: flex;
+    margin: 26rpx auto 0;
+    align-items: center;
+}
+
+.content-view .cnt .wallet-item .item-left {
+    width: 186rpx;
+    font-size: 32rpx;
+    flex: 0 0 196rpx;
+    text-align: center;
+    color: #d94a0d;
+    height: 52rpx;
+    border-right: 1px dotted #d5d5d5;
+}
+
+.content-view .cnt .wallet-item .item-left .price {
+    font-size: 52rpx;
+    font-weight: bold;
+}
+
+.content-view .cnt .wallet-item .item-right {
+    display: flex;
+    align-items: center;
+    font-size: 24rpx;
+    color: #363636;
+}
+
+.content-view .cnt .wallet-item .item-right image {
+    width: 24rpx;
+    height: 24rpx;
+    margin-left: 32rpx;
+    margin-right: 14rpx;
+}
+
+.dis-tag {
+    width: 120rpx;
+    height: 120rpx;
+    position: absolute;
+    right: 0;
+    bottom: 0;
+}

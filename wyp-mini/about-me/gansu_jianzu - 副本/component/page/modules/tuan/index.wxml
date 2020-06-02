@@ -1,0 +1,8 @@
+<import src="./tuanlist.wxml"></import>
+<view class="zan-panel zan-panel__no-margin-top zan-panel__no-border">
+    <view bindtap="makedataSource" class="zan-panel--header-title" data-options="{{module.options}}" data-type="tuan">
+        <view style="flex:1">拼团</view>
+        <view class="zan-panel--header-subtitle"> 查看全部{{module.total}}个> </view>
+    </view>
+    <template is="tuanlist" data="{{tuanItem:item,isShowStoreName:isShowStoreName}}" wx:for="{{module.data}}" wx:key="{{index}}"></template>
+</view>

@@ -1,0 +1,146 @@
+<view class="body_bg">
+    <view class="top cart_bg_color2">
+        <view class="center">
+            <view class="top_t">
+                <view>
+                    <text class="line"></text>
+                </view>
+                <view class="bg">
+                    <text class="iconfont icon-jiaoyiguanbi icon cart_color" wx:if="{{order.order_status==4||order.order_status==5}}"></text>
+                    <text class="iconfont icon-daishouhuo icon cart_color" wx:elif="{{order.pay_status==4}}"></text>
+                    <text class="iconfont icon-jiaqian icon cart_color" wx:elif="{{order.pay_status==1}}"></text>
+                    <text class="iconfont icon-daifahuo icon cart_color" wx:elif="{{order.pay_status==2&&order.delivery_status==1}}"></text>
+                    <text class="iconfont icon-daishouhuo icon cart_color" wx:elif="{{order.pay_status==2&&order.delivery_status==2&&order.ori_status!=3}}"></text>
+                    <text class="iconfont icon-daipingjia icon cart_color" wx:elif="{{order.pay_status==2&&order.delivery_status==4}}"></text>
+                    <text class="iconfont icon-jiaoyiguanbi icon cart_color" wx:elif="{{order.pay_status==3||order.delivery_status==3}}"></text>
+                    <text class="iconfont icon-jiaoyichenggong icon cart_color" wx:else></text>
+                </view>
+            </view>
+            <view class="top_b">
+                <text wx:if="{{order.order_status==4||order.order_status==5}}">交易关闭</text>
+                <text wx:elif="{{order.pay_status==4}}">等待卖家待退款</text>
+                <text wx:elif="{{order.pay_status==1}}">等待买家付款</text>
+                <text wx:elif="{{order.pay_status==2&&order.delivery_status==1}}">等待卖家待发货</text>
+                <text wx:elif="{{order.pay_status==2&&order.delivery_status==2&&order.ori_status!=3}}">等待买家收货</text>
+                <text wx:elif="{{order.pay_status==2&&order.delivery_status==4}}">{{trade_status}}</text>
+                <text wx:elif="{{order.pay_status==3}}">卖家已退款</text>
+                <text wx:elif="{{order.delivery_status==3}}">已退货</text>
+                <text wx:else>交易成功</text>
+                <text class="li" wx:if="{{order.order_status==5}}">主动取消订单</text>
+            </view>
+        </view>
+    </view>
+    <view class="dress" wx:if="{{address.detail&&dis_title.key>1}}">
+        <text class="iconfont icon-dingwei bg_light"></text>
+        <view class="flx_t">
+            <view class="flx_c">
+                <text>收货人：{{address.name}}</text>
+                <text>{{address.phone}}</text>
+            </view>
+            <text class="flx_dre">{{address.detail}}</text>
+        </view>
+    </view>
+    <view class="content">
+        <view class="title">
+            <text>订单编号：{{order.oid}}</text>
+            <text bindtap="copyOrderId" class="fz">复制</text>
+        </view>
+        <view class="item">
+            <view class="detail_c" wx:for="{{product}}" wx:key="{{index}}">
+                <view class="deta_img">
+                    <image mode="aspectFill" src="{{item.product_thumb}}"></image>
+                </view>
+                <view class="cc_add">
+                    <view class="cc_addt">
+                        <text class="cc_text">{{item.product_name}}</text>
+                        <view class="flx_txt">
+                            <text class="te1">￥{{item.price}}</text>
+                        </view>
+                    </view>
+                    <view class="cc_addc">
+                        <view>
+                            <text class="cc_text1"></text>
+                            <text class="cc_text1"></text>
+                        </view>
+                        <view>
+                            <text class="te2">x{{item.amount}}</text>
+                        </view>
+                    </view>
+                    <view class="back"></view>
+                </view>
+            </view>
+        </view>
+    </view>
+    <view class="input_list">
+        <view class="list_item">
+            <text>支付方式</text>
+            <text>{{cash.title}}</text>
+        </view>
+        <view class="list_item">
+            <text>配送方式</text>
+            <text class="te">{{dis_title.title}}+￥{{order.ifee}}</text>
+        </view>
+        <view class="list_item" wx:if="{{order.res_title}}">
+            <text>配送时间</text>
+            <text class="te">{{order.res_title}}</text>
+        </view>
+        <view class="list_item">
+            <text>优惠劵</text>
+            <text class="te">-￥{{disass.yhjprice||'0.00'}}</text>
+        </view>
+        <view class="list_item">
+            <text>优惠码</text>
+            <text class="te">-￥{{disass.yhmoney||'0.00'}}</text>
+        </view>
+        <view class="list_item">
+            <text>积分</text>
+            <text class="te">-￥{{disass.jfprice||'0.00'}}</text>
+        </view>
+        <view class="list_item">
+            <text>余额</text>
+            <text class="te">-￥{{disass.yeprice||'0.00'}}</text>
+        </view>
+        <view class="list_item">
+            <text>实际付款(含运费)</text>
+            <text class="te">￥{{order.total_amount_new}}</text>
+        </view>
+        <view class="list_item">
+            <text>下单备注</text>
+            <text>{{order.message}}</text>
+        </view>
+    </view>
+    <view class="input_list bor-top" wx:if="{{order.inv_title}}">
+        <view class="list_item1">
+            <text>发标类型</text>
+            <text wx:if="{{order.invoice.ovat==0}}">普通发票</text>
+            <text wx:elif="{{order.invoice.ovat==1}}">增值税发票</text>
+        </view>
+        <view class="list_item1" wx:if="{{order.invoice.fax_rate}}">
+            <text>税率</text>
+            <text>{{order.invoice.fax_rate}}%</text>
+        </view>
+        <view class="list_item1" wx:if="{{order.inv_title.fpname}}">
+            <text>发标抬头</text>
+            <text>{{order.inv_title.fpname}}</text>
+        </view>
+    </view>
+    <view class="btn_group">
+        <block wx:if="{{order.pay_status==1&&order.order_status!=5&&order.order_status!=4}}">
+            <text bindtap="cancelOrders" class="bgp1 ri" data-oid="{{order.oid}}">取消订单</text>
+            <text bindtap="payOrders" class="bgp1 ri cart_bg_color2" data-oid="{{order.oid}}" wx:if="{{cash.key!='0'&&cash.paraval.paytype!='0'}}">付款</text>
+        </block>
+        <block wx:elif="{{order.pay_status==2&&order.delivery_status==1}}">
+            <text bindtap="remind" class="bgp1 ri cart_bg_color2" data-oid="{{order.id}}">提醒发货</text>
+            <text bindtap="refund" class="bgp1 ri cart_bg_color2" data-oid="{{order.id}}" wx:if="{{show_refundbtn}}">申请退款</text>
+        </block>
+        <text bindtap="deleteOrderList" class="bgp1 ri" data-oid="{{order.oid}}" wx:elif="{{order.order_status==5}}">删除订单</text>
+        <block wx:elif="{{order.pay_status==2&&order.delivery_status==2&&order.ori_status!=3}}">
+            <text bindtap="confirmOrders" class="bgp1 ri cart_bg_color2" data-oid="{{order.id}}">确认收货</text>
+            <text bindtap="viewLogistics" class="bgp1 ri cart_bg_color2" data-oid="{{order.id}}" data-orderid="{{order.oid}}" wx:if="{{dis_title.key!='0'}}">查看物流</text>
+        </block>
+        <text bindtap="rating" class="bgp1 ri cart_bg_color2" data-oid="{{order.id}}" wx:elif="{{order.pay_status==2&&order.delivery_status==4}}">我的评价</text>
+        <block wx:else>
+            <text bindtap="refund" class="bgp1 ri cart_bg_color2" data-oid="{{order.id}}" wx:if="{{show_refundbtn}}">申请退款</text>
+        </block>
+    </view>
+</view>

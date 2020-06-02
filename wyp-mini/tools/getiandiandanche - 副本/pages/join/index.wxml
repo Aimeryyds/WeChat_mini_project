@@ -1,0 +1,44 @@
+<view class="page-box">
+    <my-component bind:myevent="myEventListener" innerText="合作加盟"></my-component>
+    <view class="main" style=" margin-top: {{myHight}}px"></view>
+    <view class="page">
+        <image mode="widthFix" src="../../Content/images/joinin/banner.png"></image>
+        <view class="box">
+            <view class="textcenter mg-b-10">— 目前已有
+      <span class="red men">{{people}}</span>人获取项目资料 —</view>
+            <view class="mg-b-10">您的姓名</view>
+            <view class="inputboder mg-b-10">
+                <input bindinput="namePut" class="name" type="text" value="{{name}}"></input>
+            </view>
+            <view class="mg-b-10">目前从事行业</view>
+            <view class="mg-b-10">
+                <radio-group bindchange="hangyeChange" class="radio-group" name="lib">
+                    <label class="radio" key="label-{{index}}" wx:for="{{items}}">
+                        <radio checked="{{hangye==item.name}}" value="{{item.name}}"></radio>
+                        <text class="radio-text">{{item.value}}</text>
+                    </label>
+                </radio-group>
+            </view>
+            <view class="mg-b-10">您的投资预算</view>
+            <view class="mg-b-10">
+                <radio-group bindchange="touziChange" class="radio-group" name="lib">
+                    <label class="radio" key="label-{{index}}" wx:for="{{items1}}">
+                        <radio checked="{{touzi==item.name}}" value="{{item.name}}"></radio>
+                        <text class="radio-text">{{item.value}}</text>
+                    </label>
+                </radio-group>
+            </view>
+            <view class="mg-b-10">您的联系方式</view>
+            <view class="inputboder mg-b-10">
+                <input bindinput="telPut" class="tel" type="text" value="{{tel}}"></input>
+            </view>
+            <view class="mg-b-10">手机验证</view>
+            <view class="inputboder mg-b-10" style="display: flex;position: relative;">
+                <input bindinput="codePut" class="code" style="width: 70%;" type="text" value="{{code}}"></input>
+                <view bindtap="getcode" class="textcenter getCode getcode" wx:if="{{getTime}}">发送验证码</view>
+                <view class="time" wx:if="{{!getTime}}">{{codeTime}}</view>
+            </view>
+            <view bindtap="submi" class="btn mg-b-10 submi">获取加盟商资料</view>
+        </view>
+    </view>
+</view>

@@ -1,0 +1,37 @@
+<navigationTopbar bindtap="MethodComponent" id="mineTopBar" navTxt="{{navTxtStr}}" navtype="2" showWhiteBackground="{{navTopBackShow}}"></navigationTopbar>
+<view class="page_container" style="top:{{navHeight}}px;">
+    <view class="no_history" style="height: {{pageHeight}}px;" wx:if="{{hasHistory===2}}">
+        <view class="defult">
+            <image src="./../../images/history_default.png"></image>
+            <view>暂无观看历史</view>
+            <view>快去寻找你心爱的主播吧～</view>
+            <view bindtap="toHome">返回首页</view>
+        </view>
+        <view class="recommend_con" style="padding-bottom: {{padBottom}}rpx;">
+            <view class="recommend_title">推荐直播</view>
+            <view class="threeList">
+                <view bindtap="toPageRoom" class="three_item" data-item="{{item}}" data-str="recommend" style="margin-right: {{itemLeft}}px;" wx:for="{{recommendList}}" wx:key="index">
+                    <image class="img" src="{{item.userUrls.large_url}}"></image>
+                    <view class="top" wx:if="{{item.live_state===0}}">
+                        <image src="./../../images/video_icon.png"></image>
+                    </view>
+                    <view class="bottom">{{item.name}}</view>
+                </view>
+            </view>
+        </view>
+    </view>
+    <view class="has_history" wx:elif="{{hasHistory===1}}">
+        <view class="history_con" wx:for="{{historyList}}" wx:key="index">
+            <view class="list_title">{{item.timeit}}</view>
+            <view class="threeList">
+                <view bindtap="toPageRoom" class="three_item" data-item="{{item}}" style="margin-right: {{itemLeft}}px;" wx:for="{{item.list}}" wx:key="indexStr">
+                    <image class="img" src="{{item.head.large_url}}"></image>
+                    <view class="top" wx:if="{{item.living===1}}">
+                        <image src="./../../images/video_icon.png"></image>
+                    </view>
+                    <view class="bottom">{{item.name}}</view>
+                </view>
+            </view>
+        </view>
+    </view>
+</view>

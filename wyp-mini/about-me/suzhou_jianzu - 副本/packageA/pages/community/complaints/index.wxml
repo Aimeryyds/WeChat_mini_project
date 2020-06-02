@@ -1,0 +1,27 @@
+<view class="wrap">
+    <text class="mb" style="font-size: 32rpx;font-weight: bolder;">我要投诉</text>
+    <text class="mb">请您选择投诉类别</text>
+    <view class="mb" style="display: flex;flex-direction: row;flex-wrap: wrap;">
+        <view class="block active">其他</view>
+    </view>
+</view>
+<form bindsubmit="bindFormSubmit">
+    <textarea class="text" cols="30" id="" name="content" rows="10"></textarea>
+    <view class="select">
+        <view bindtap="show" data-index="2">图片</view>
+    </view>
+    <view style="height: 300rpx;margin:20rpx">
+        <view class="gallery">
+            <view class="item" wx:for="{{images}}">
+                <image bindtap="previewImage" mode="aspectFill" src=" {{item}}" style="width: 100rpx; height: 100rpx"></image>
+                <view bindtap="delete" class="delete" data-index="{{index}}">
+                    <image src="https://tws.cnweisou.com/images/icon_delete.png" style="left: 33%;"></image>
+                </view>
+            </view>
+            <view class="item">
+                <image bindtap="chooseImage" class="button-upload" src="https://tws.cnweisou.com/images/icon_add.png" style=""></image>
+            </view>
+        </view>
+    </view>
+    <button class="upload" formType="submit" type="primary"> 提交 </button>
+</form>

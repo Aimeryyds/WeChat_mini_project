@@ -1,0 +1,23 @@
+<template name="53266cce">
+    <view bindtap="handleProxy" class="_div data-v-a683deb8 {{[plan.book_plan_id===selectedPlan.book_plan_id?'plan-item scaled':'plan-item']}}" data-comkey="{{$k}}" data-eventid="{{'0'}}">
+        <view class="_div data-v-a683deb8 {{[plan.book_plan_id===selectedPlan.book_plan_id?'plan-wrap plan-highlight':'plan-wrap']}}" style=" {{'background-image:'+'url('+plan.cover_url+')'+';'}}">
+            <view class="_div data-v-a683deb8">
+                <view class="_div data-v-a683deb8 title">{{plan.total_days+'天·'+plan.title}}</view>
+                <view class="_div data-v-a683deb8 desc">{{plan.description}}</view>
+                <view class="_div data-v-a683deb8 price" wx:if="{{isAndroid}}">{{formattedPrice}}</view>
+            </view>
+            <view class="_div data-v-a683deb8 {{[plan.book_plan_id===selectedPlan.book_plan_id?'select flex-vhc select-highlight':'select flex-vhc']}}">{{selectedPlan.book_plan_id===plan.book_plan_id?'已选':'选择'}}</view>
+            <view class="_div data-v-a683deb8 status center" wx:if="{{plan.status===2}}">内测中</view>
+        </view>
+        <view class="_div data-v-a683deb8 book-card">
+            <view class="_div data-v-a683deb8 book" key="{{book.name_cn}}" wx:for="{{plan.books}}" wx:for-item="book" wx:key="book.name_cn">
+                <view class="_div data-v-a683deb8 name">《{{book.name_cn}}》</view>
+                <view class="_div data-v-a683deb8 article-amount">共{{book.article_amount}}章</view>
+            </view>
+        </view>
+        <view class="_div data-v-a683deb8 tip" wx:if="{{plan.daily_amount>1}}">
+            <label ariaLabel="xxxxx" class="_span data-v-a683deb8" role="img">👆</label>该计划
+        <view class="_div data-v-a683deb8 highlight">每天需读{{plan.daily_amount}}章</view>才可以完成
+    </view>
+    </view>
+</template>

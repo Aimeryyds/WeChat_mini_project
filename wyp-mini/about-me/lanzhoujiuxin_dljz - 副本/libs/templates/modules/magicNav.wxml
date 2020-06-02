@@ -1,0 +1,96 @@
+<template name="magicNavModule">
+    <view class="magic-square-module">
+        <view class="moduleTitle" wx:if="{{moduleInfo.pattern.e}}">
+            <text class="lines left-lines"></text>
+            <text>{{moduleInfo.content.title}}</text>
+            <text class="lines right-lines"></text>
+        </view>
+        <view class="magic-square-container" style="{{moduleInfo.pattern.magicNavContainerStyle}}">
+            <view class="magic-style-one column-{{moduleInfo.content.colNum}}" wx:if="{{moduleInfo.content.style==0}}">
+                <view class="nav-icon" wx:if="{{!navData.h}}" wx:for="{{moduleInfo.content.navList}}" wx:for-item="navData" wx:key="navData.id">
+                    <button bindtap="jumpCtrl" class="nav-link-btn" data-jinfo="{{navData.jInfo}}" openType="{{navData.jInfo&&navData.jInfo.t==5?'share':navData.jInfo.t==7?'contact':''}}">
+                        <view class="nav-icon-bg" style="{{navData.iconBgStyle}}">
+                            <view class="magic-icon faisco-icons default-icon" wx:if="{{navData.i.t==0||navData.i.t==2&&!navData.i.f}}"></view>
+                            <view class="faisco-icons magic-icon {{fontIconClass.getFontIconClass(navData.i.ifc)}}" style="{{navData.iconStyle}}" wx:elif="{{navData.i.t==2&&navData.i.ifi}}"></view>
+                            <view class="magic-icon" style="{{navData.iconStyle}}" wx:else></view>
+                        </view>
+                        <view class="nav-icon-text" style="{{navData.titleStyle}}" wx:if="{{!navData.te}}">{{navData.t}}</view>
+                    </button>
+                </view>
+            </view>
+            <view class="magic-style-two" wx:elif="{{moduleInfo.content.style==1}}">
+                <view class="magic-nav-icon {{hideIconBg.getHideIconBg(navData.bg.t)}}" style="{{navData.iconBgStyle}}" wx:if="{{!navData.h}}" wx:for="{{moduleInfo.content.navList}}" wx:for-item="navData" wx:key="navData.id">
+                    <button bindtap="jumpCtrl" class="nav-link-btn {{hideIconClass.getHideIconClass(navData.i.t,navData.te,navData.ste)}}" data-jinfo="{{navData.jInfo}}" openType="{{navData.jInfo&&navData.jInfo.t==5?'share':navData.jInfo.t==7?'contact':''}}">
+                        <view class="title-wrap">
+                            <view class="main-title" style="{{navData.titleStyle}}" wx:if="{{!navData.te}}">{{navData.t}}</view>
+                            <view class="sub-heading" style="{{navData.subHeadingStyle}}" wx:if="{{!navData.ste}}">{{navData.st}}</view>
+                        </view>
+                        <view class="material-icon default-icon" wx:if="{{navData.i.t==0||navData.i.t==2&&!navData.i.f}}"></view>
+                        <view class="material-icon faisco-icons {{fontIconClass.getFontIconClass(navData.i.ifc)}}" style="{{navData.iconStyle}}" wx:elif="{{navData.i.t==2&&navData.i.ifi}}"></view>
+                        <view class="material-icon" style="{{navData.iconStyle}}" wx:else></view>
+                    </button>
+                </view>
+            </view>
+            <view class="magic-style-three" wx:elif="{{moduleInfo.content.style==2}}">
+                <view class="magic-nav-icon {{hideIconBg.getHideIconBg(navData.bg.t)}}" style="{{navData.iconBgStyle}}" wx:if="{{!navData.h}}" wx:for="{{moduleInfo.content.navList}}" wx:for-item="navData" wx:key="navData.id">
+                    <button bindtap="jumpCtrl" class="nav-link-btn {{hideIconClass.getHideIconClass(navData.i.t,navData.te,navData.ste)}}" data-jinfo="{{navData.jInfo}}" openType="{{navData.jInfo&&navData.jInfo.t==5?'share':navData.jInfo.t==7?'contact':''}}">
+                        <view class="title-wrap">
+                            <view class="main-title" style="{{navData.titleStyle}}" wx:if="{{!navData.te}}">{{navData.t}}</view>
+                            <view class="sub-heading" style="{{navData.subHeadingStyle}}" wx:if="{{!navData.ste}}">{{navData.st}}</view>
+                        </view>
+                        <view class="material-icon faisco-icons default-icon" wx:if="{{navData.i.t==0||navData.i.t==2&&!navData.i.f}}"></view>
+                        <view class="material-icon faisco-icons {{fontIconClass.getFontIconClass(navData.i.ifc)}}" style="{{navData.iconStyle}}" wx:elif="{{navData.i.t==2&&navData.i.ifi}}"></view>
+                        <view class="material-icon" style="{{navData.iconStyle}}" wx:else></view>
+                    </button>
+                </view>
+            </view>
+            <view class="magic-style-four" wx:elif="{{moduleInfo.content.style==3}}">
+                <view class="magic-nav-icon {{hideIconBg.getHideIconBg(navData.bg.t)}}" wx:if="{{!navData.h}}" wx:for="{{moduleInfo.content.navList}}" wx:for-item="navData" wx:key="navData.id">
+                    <button bindtap="jumpCtrl" class="nav-link-btn {{hideIconClass.getHideIconClass(navData.i.t,navData.te,navData.ste)}}" data-jinfo="{{navData.jInfo}}" openType="{{navData.jInfo&&navData.jInfo.t==5?'share':navData.jInfo.t==7?'contact':''}}">
+                        <view class="material-part material-text" style="{{navData.iconBgStyle}}">
+                            <view class="title-wrap">
+                                <view class="main-title" style="{{navData.titleStyle}}" wx:if="{{!navData.te}}">{{navData.t}}</view>
+                                <view class="sub-heading" style="{{navData.subHeadingStyle}}" wx:if="{{!navData.ste}}">{{navData.st}}</view>
+                            </view>
+                        </view>
+                        <view class="material-part default-icon" wx:if="{{navData.i.t==0||navData.i.t==2&&!navData.i.f}}"></view>
+                        <view class="material-part faisco-icons {{fontIconClass.getFontIconClass(navData.i.ifc)}}" style="{{navData.iconStyle}}" wx:elif="{{navData.i.t==2&&navData.i.ifi}}"></view>
+                        <view class="material-part" style="{{navData.iconStyle}}" wx:else></view>
+                    </button>
+                </view>
+            </view>
+        </view>
+    </view>
+</template>
+<wxs module="fontIconClass">
+var getFontIconClass = (function(val) {
+    return (" " + val)
+});
+module.exports.getFontIconClass = getFontIconClass;
+</wxs>
+<wxs module="hideIconClass">
+var getHideIconClass = (function(iconType, te, ste) {
+    var classes = "";
+    classes += " flex-wrap";
+    if (iconType == 1) {
+        classes += " hide-icon"
+    };
+    if (te && ste) {
+        classes += " hide-all-title"
+    } else if (te) {
+        classes += " hide-main-title"
+    };
+    return (classes)
+});
+module.exports.getHideIconClass = getHideIconClass;
+</wxs>
+<wxs module="hideIconBg">
+var getHideIconBg = (function(bgType) {
+    var classes = "";
+    if (bgType == 1) {
+        classes += " hide-icon-bg"
+    };
+    return (classes)
+});
+module.exports.getHideIconBg = getHideIconBg;
+</wxs>

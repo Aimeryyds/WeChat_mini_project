@@ -1,0 +1,130 @@
+<loading hidden="{{show}}">正在加载</loading>
+<view class="page navbar" wx:if="{{show}}">
+    <view class="fui-list bg" style="background:{{config.selectedColor!='#000000'?config.selectedColor:config.background}};color:{{config.selectedColor=='#000000'&&config.font_color=='black'?'#000000':'#ffffff'}};">
+        <view class="fui-list-inner">
+            <view class="row">
+                <view class="">
+                    <view class="statuscss">
+                        <view wx:if="{{info.order_status==0}}">待付款 </view>
+                        <view wx:elif="{{info.order_status==1}}"> 待发货 </view>
+                        <view wx:elif="{{info.order_status==2}}"> 已发货 </view>
+                        <view wx:elif="{{info.order_status==3}}"> 已完成 </view>
+                        <view wx:elif="{{info.order_status==4}}"> 退款中 </view>
+                        <view wx:elif="{{info.order_status==5}}"> 已退款 </view>
+                        <view wx:elif="{{info.order_status==-1}}"> 已取消 </view>
+                        <view wx:else> 未知状态 </view>
+                    </view>
+                </view>
+            </view>
+            <view class="order-price">订单金额(含运费):￥
+        <text>{{info.pay_money}}</text>
+            </view>
+        </view>
+        <view class="">
+            <image class="round image-88" src="/yb_shop/static/images/icon-white/money01.png"></image>
+        </view>
+    </view>
+    <view class="fui-list-group-title02">
+        <text class="shop">订单信息</text>
+    </view>
+    <view class="fui-cell-group">
+        <view class="fui-cell-group">
+            <view class="order-info">
+                <view class="fui-cell-label">订单编号：
+          <text class="fui-cell-label">{{info.order_no}}</text>
+                </view>
+                <view class="fui-cell-label">创建时间：
+          <text class="fui-cell-label">{{info.create_time}}</text>
+                </view>
+                <view class="fui-cell-label" wx:if="{{info.pay_time}}">支付时间：
+          <text class="fui-cell-label">{{info.pay_time}}</text>
+                </view>
+                <view class="fui-cell-label" wx:if="{{info.finish_time}}">完成时间：
+          <text class="fui-cell-label">{{info.finish_time}}</text>
+                </view>
+                <view class="fui-cell-label" wx:if="{{info.pay_status==1}}">支付方式：
+          <text class="fui-cell-label">微信</text>
+                </view>
+                <view class="fui-cell-label02">收货地址：
+        </view>
+                <view class="fui-cell-label">
+                    <text class="fui-cell-label" style="display:block;">{{info.receiver_name}} {{info.receiver_mobile}}</text>
+                    <text class="fui-cell-label" style="display:block;">{{info.address.province+info.address.city+info.address.district+' '+info.receiver_address}}</text>
+                </view>
+            </view>
+        </view>
+    </view>
+    <view class="fui-list-group-title02">
+        <text class="shop">订单商品</text>
+    </view>
+    <view class="fui-cell-group">
+        <navigator bindtap="url" data-id="{{info.bargain_id}}" hoverClass="none">
+            <view class="goods_li" style="background:#ffffff;">
+                <view class="fui-list goods-item">
+                    <view class="fui-list-media">
+                        <image class="round goods_img" src="{{info.pic.img_cover}}"></image>
+                    </view>
+                    <view class="fui-list-inner">
+                        <view class="text">{{info.bargain_name}}</view>
+                        <view class="goods_desc"></view>
+                    </view>
+                    <view class="price text-right">
+                        <view class="text-right" style="color:#181a19;">￥
+              <text>{{info.original_price}}</text>
+                        </view>
+                        <view class="text-right">x
+              <text>{{info.total}}</text>
+                        </view>
+                    </view>
+                </view>
+            </view>
+        </navigator>
+    </view>
+    <view class="fui-cell-group {{toggleCode?'toggleSend-group':''}}" wx:if="{{order.virtual>0&&order.virtual_str!=''}}">
+        <view bindtap="toggle" class="fui-cell" data-id="{{toggleCode}}" data-type="toggleCode">
+            <view class="fui-cell-text">发货信息</view>
+            <view class="fui-cell-remark"></view>
+        </view>
+        <view class="send-code send-code1">
+      {{order.virtual_str}}
+    </view>
+    </view>
+    <view class="fui-cell-group {{toggleCode1?'toggleSend-group':''}}" wx:if="{{order.isvirtualsend>0&&order.virtualsend_info!=null}}">
+        <view bindtap="toggle" class="fui-cell" data-id="{{toggleCode1}}" data-type="toggleCode1">
+            <view class="fui-cell-text">发货信息</view>
+            <view class="fui-cell-remark"></view>
+        </view>
+        <view class="send-code">
+      {{order.virtualsend_info}}
+    </view>
+    </view>
+    <view class="fui-list-group-title02">
+        <text class="shop">订单金额</text>
+    </view>
+    <view class="fui-cell-group price-cell-group">
+        <view class="fui-cell">
+            <view class="fui-cell-label">商品小计</view>
+            <view class="fui-cell-info"></view>
+            <view class="fui-cell-remark noremark">¥ {{info.order_money}}</view>
+        </view>
+        <view class="fui-cell">
+            <view class="fui-cell-label">运费</view>
+            <view class="fui-cell-info"></view>
+            <view class="fui-cell-remark noremark">¥ {{info.shipping_money}}</view>
+        </view>
+        <view class="fui-cell">
+            <view class="fui-cell-label" style="width:auto;">实付费(含运费)</view>
+            <view class="fui-cell-info"></view>
+            <view class="fui-cell-remark noremark">
+                <text class="text-danger">
+                    <text style="font-size:32rpx">¥ {{info.pay_money}}</text>
+                </text>
+            </view>
+        </view>
+        <view class="fui-cell">
+            <view class="fui-cell-label">留言</view>
+            <view class="fui-cell-info"></view>
+            <view class="fui-cell-remark noremark">{{info.buyer_message!=''?info.buyer_message:'无'}}</view>
+        </view>
+    </view>
+</view>

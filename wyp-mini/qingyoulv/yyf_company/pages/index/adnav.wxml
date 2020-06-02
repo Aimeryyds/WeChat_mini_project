@@ -1,0 +1,15 @@
+<template name="adnav">
+    <block wx:for="{{adNav}}" wx:for-index="fidx" wx:key="{{fidx}}">
+        <view bindtap="adAction" class="ad" data-adfloat="left" data-id="{{fidx}}" data-position="nav" style="margin-top:{{item.topmargin}}px;margin-bottom:{{item.bottommargin}}px;" wx:if="{{item.style==0}}">
+            <image mode="widthFix" src="{{item.imgurl1}}"></image>
+        </view>
+        <view class="ad1" style="margin-top:{{item.topmargin}}px;margin-bottom:{{item.bottommargin}}px;" wx:if="{{item.style==1}}">
+            <view bindtap="adAction" data-adfloat="left" data-id="{{fidx}}" data-position="nav">
+                <image mode="widthFix" src="{{item.imgurl1}}"></image>
+            </view>
+            <view bindtap="adAction" data-adfloat="right" data-id="{{fidx}}" data-position="nav">
+                <image mode="widthFix" src="{{item.imgurl2}}"></image>
+            </view>
+        </view>
+    </block>
+</template>

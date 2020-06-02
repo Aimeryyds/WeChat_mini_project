@@ -1,0 +1,6 @@
+<menu bind:handleClick="handleIndexChange" currentIndex="{{currentIndex}}" list="{{list}}"></menu>
+<swiper autoplay="{{false}}" bindanimationfinish="animationfinish" bindchange="handleIndexChange" class="feed-swiper-wrapper" current="{{currentIndex}}" duration="{{animationDuration}}" indicatorDots="{{false}}" wx:if="{{list&&isGetDataList.length}}">
+    <swiper-item wx:for="{{list}}" wx:key="id">
+        <feed-list-pack bind:adError="handleErrorAd" bind:adLoad="handleLoadAd" bind:feedExposure="feedExposure" index="{{index}}" isGetData="{{isGetDataList[index]}}" options="{{item.options}}" pvId="{{pvId}}" regionId="{{item.id}}" spmB="{{spmB}}" spmC="{{item.spmCCode}}" type="{{2}}"></feed-list-pack>
+    </swiper-item>
+</swiper>

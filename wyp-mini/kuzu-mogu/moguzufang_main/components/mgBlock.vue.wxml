@@ -1,0 +1,11 @@
+<template name="default"></template>
+<template name="0dc1bf93">
+    <view class="_view 0dc1bf93 mg-block">
+        <view class="_view 0dc1bf93 mg-flex mg-block-header">
+            <view class="_view 0dc1bf93 mg-flex-col mg-ellipsis mg-block-title">{{title}}</view>
+            <view bindtap="handleProxy" class="_view 0dc1bf93 mgic-angle-r" data-comkey="{{$k}}" data-eventid="{{'0dc1bf93-0'}}" wx:if="{{hasClick}}"></view>
+        </view>
+        <template is="{{$slotdefault||'default'}}" data="{{...$root['0'],...$root[$k],$root:$root}}"></template>
+    </view>
+</template>
+<import src="/common/slots.wxml"></import>

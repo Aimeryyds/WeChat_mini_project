@@ -1,0 +1,118 @@
+<import src="/yb_shop/utils/wxParse/wxParse.wxml"></import>
+<view class="page_content" wx:if="{{show&&detail.paycontent_type=='0'&&(detail.free==1||detail.price==0&&isvip||detail.price>0&&detail.isbuy)}}">
+    <video autoplay="true" src="{{detail.video_url}}" style="width:100%;" wx:if="{{detail.video_url}}"></video>
+    <view class="wxParse case_content">
+        <rich-text nodes="{{detail.content}}" wx:if="{{!use_wxParse}}"></rich-text>
+        <template is="wxParse" data="{{wxParseData:wxParseData.nodes}}" wx:if="{{use_wxParse}}"></template>
+    </view>
+    <view class="tool" style="margin-top:12px;">
+        <view class="num">
+            <image mode="aspectFit" src="/yb_shop/static/images/play.png"></image>{{detail.group.view_count}}   
+    </view>
+        <view class="shares">
+            <image bindtap="dolike" class="like" mode="aspectFit" src="/yb_shop/static/images/collect{{liked?'1':''}}.png"></image>
+            <button class="share" openType="share"></button>
+        </view>
+    </view>
+</view>
+<block wx:if="{{show&&detail.paycontent_type=='1'&&(detail.free==1||detail.price==0&&isvip||detail.price>0&&detail.isbuy)}}">
+    <view class="page_content">
+        <view class="mp3">
+            <image class="poster {{isplay?'music-on':''}}" mode="aspectFill" src="{{detail.image}}"></image>
+            <view class="timeline">
+                <image bindtap="play_status_change" class="control" src="{{isplay?'/yb_shop/static/images/dostop.png':'/yb_shop/static/images/doplay.png'}}"></image>
+                <text>{{nowtime}}</text>
+                <slider bindchange="timechange" bindchanging="timechanging" blockSize="12" max="{{duration}}" value="{{currecttime}}"></slider>
+                <text>{{endtime}}</text>
+            </view>
+        </view>
+    </view>
+    <view class="tool" style="padding:10px 12px;border-top: 1rpx solid #eeeeee;">
+        <view class="num">
+            <image mode="aspectFit" src="/yb_shop/static/images/play.png"></image>{{detail.group.view_count}}   
+    </view>
+        <view class="shares">
+            <image bindtap="dolike" class="like" mode="aspectFit" src="/yb_shop/static/images/collect{{liked?'1':''}}.png"></image>
+            <button class="share" openType="share"></button>
+        </view>
+    </view>
+</block>
+<view class="page_content" wx:if="{{show&&detail.paycontent_type=='2'&&(detail.free==1||detail.price==0&&isvip||detail.price>0&&detail.isbuy)}}">
+    <video autoplay="true" src="{{detail.video_url}}" style="width:100%;" wx:if="{{detail.video_url}}"></video>
+    <view class="tool">
+        <view class="num">
+            <image mode="aspectFit" src="/yb_shop/static/images/play.png"></image>{{detail.group.view_count}}   
+    </view>
+        <view class="shares">
+            <image bindtap="dolike" class="like" mode="aspectFit" src="/yb_shop/static/images/collect{{liked?'1':''}}.png"></image>
+            <button class="share" openType="share"></button>
+        </view>
+    </view>
+</view>
+<view class="nobuy" wx:if="{{detail.free==0&&(detail.price==0&&!isvip||detail.price>0&&!detail.isbuy)}}">
+    <view class="top">
+        <image class="cover" mode="aspectFill" src="{{detail.group.img}}"></image>
+        <view class="txtinfo">
+            <text class="title">{{detail.title}}</text>
+            <view>有<text class="buycount">{{detail.group.buy_count}}人</text>购买</view>
+            <button bindtap="dobuy">购买</button>
+            <view class="views">
+                <view class="num">
+                    <image mode="aspectFit" src="/yb_shop/static/images/play.png"></image>{{detail.group.view_count}}</view>
+                <view class="num">
+                    <image mode="aspectFit" src="/yb_shop/static/images/collect.png"></image>{{detail.group.like_count}}</view>
+            </view>
+        </view>
+    </view>
+    <text class="info">{{detail.group.info}}</text>
+</view>
+<view class="line"></view>
+<view class="groups">
+    <text>所属合集:{{detail.group.name?detail.group.name:'无'}}</text>
+    <text>共:{{detail.group.same_count}}集</text>
+</view>
+<navigator class="same" url="/yb_shop/pages/paycontent/info/index?id={{item.id}}" wx:for="{{samegroup}}">
+    <view class="cover">
+        <view class="lock" wx:if="{{item.free==0&&(item.price==0&&!isvip||item.price>0&&!item.isbuy)}}">
+            <image mode="aspectFit" src="/yb_shop/static/images/lock.png"></image>
+        </view>
+        <image class="img" mode="aspectFill" src="{{item.image}}"></image>
+    </view>
+    <view class="info">
+        <text class="title">{{item.title}}</text>
+        <view class="num">
+            <image mode="aspectFit" src="/yb_shop/static/images/play.png"></image>{{item.view}}</view>
+    </view>
+</navigator>
+<view bindtap="hidebuy" class="dobuy" wx:if="{{dobuy}}">
+    <view catchtap="true" class="skus">
+        <view class="price_type">
+            <text class="title">资费类型:</text>
+            <view class="sku">
+                <text bindtap="choose_sku" class="{{now_sku.id==item.id?'active':''}}" data-index="{{index}}" wx:for="{{skus}}">{{item.name}}         </text>
+            </view>
+        </view>
+        <view class="price_type buy_num" style="margin-top: 8px;">
+            <text class="title">购买{{now_sku.id>0?'数量':'金额'}}:</text>
+            <view class="sku buy_num">
+                <input bindblur="inputing" bindfocus="inputing" bindinput="num_change" class="num" placeholder="购买数量" type="number" value="1" wx:if="{{now_sku.id>0}}"></input>
+                <view class="price">￥{{now_sku.price}}</view>
+            </view>
+        </view>
+        <view class="price_type mark_line" style="margin-top: 20px;">
+            <text class="mark">使用说明:</text>
+            <view style="color:#999999;margin-right: 12px;">{{now_sku.info}}</view>
+        </view>
+    </view>
+    <view catchtap="true" class="pay_line">
+        <view class="tprice">
+      合计:
+      <text>￥{{nowprice}}</text>
+        </view>
+        <view bindtap="tobuy" class="pay_btn">支付</view>
+    </view>
+</view>
+<block wx:if="{{showtabbar}}">
+    <view style="height:100rpx"></view>
+    <include src="/yb_shop/pages/common/menu.wxml"></include>
+</block>

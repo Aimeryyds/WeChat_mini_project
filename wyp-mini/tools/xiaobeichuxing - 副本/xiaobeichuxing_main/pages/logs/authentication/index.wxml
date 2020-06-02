@@ -1,0 +1,20 @@
+<view class="page">
+    <my-component bind:myevent="myEventListener" innerText="实名认证"></my-component>
+    <view class="main" style=" margin-top: {{myHight}}px"></view>
+    <form bindsubmit="formSubmit">
+        <view class="log-cont">
+            <view class="inp-list" wx:for="{{listInpu}}" wx:key="index">
+                <view class="name">{{item.callname}} : </view>
+                <view>
+                    <input class="l-inp" name="{{item.name}}" placeholder="{{item.placeholder}}" type="{{item.type}}"></input>
+                </view>
+            </view>
+            <view class="prompt">
+                <view>{{Explain1}}</view>
+            </view>
+            <view class="fot-btn">
+                <button class="sub" formType="submit">认证</button>
+            </view>
+        </view>
+    </form>
+</view>

@@ -1,0 +1,53 @@
+<import src="/pages/templates/shop/shopheader.wxml"></import>
+<import src="/dist/loadmore/index.wxml"></import>
+<import src="/dist/toast/index.wxml"></import>
+<view class="container">
+    <view style="position:fixed;top:0;left:0;width:100%;z-index: 9999;">
+        <template is="shopheader" data="{{logo:store.logo||'http://imgcdnali.wfenxiao.com.cn/xcx/c/icons/brand.png',brandName:store.brandName,storeName:store.storeName,deliveryFee:store.deliveryFee,storeid:store.id,hasCoupons:store.hasCoupons,orderNum:store.orderNum,fullreductionMsg:store.fullreductionMsg,categoryNum:store.categoryNum}}"></template>
+    </view>
+    <view class="products-fixedbar store-products__fixefbar">
+        <view bindtap="onSearch" class="search-wrap">
+            <view class="products-search">
+                <image class="products-search__img" src="http://imgcdnali.wfenxiao.com.cn/xcx/c/icons/ic_search.png"></image>
+                <view class="products-search__text">搜索商品名称</view>
+            </view>
+        </view>
+        <view class="products-tab">
+            <view bindtap="handleSwitchSort" data-sort="commission" style="color:{{sort=='commission'?'#F32828':''}}">佣金</view>
+            <view bindtap="handleSwitchSort" data-sort="saleNum" style="color:{{sort=='saleNum'?'#F32828':''}}">销量</view>
+            <view bindtap="handleSwitchSort" data-sort="goods" style="color:{{sort=='goods'?'#F32828':''}}">新品</view>
+            <view class="">
+                <text bindtap="handleSwitchSort" data-sort="price" style="color:{{sort=='price'?'#F32828':''}}">价格</text>
+                <image class="products-sort-img" src="http://imgcdnali.wfenxiao.com.cn/xcx/c/icons/ic_price_sort_default.png" wx:if="{{sort!='price'}}"></image>
+                <image class="products-sort-img" src="http://imgcdnali.wfenxiao.com.cn/xcx/c/icons/ic_price_sort_up.png" wx:elif="{{order=='ascend'}}"></image>
+                <image class="products-sort-img" src="http://imgcdnali.wfenxiao.com.cn/xcx/c/icons/ic_price_sort_down.png" wx:else></image>
+            </view>
+        </view>
+    </view>
+    <scroll-view enableBackToTop scrollY bindscrolltolower="lower" scrollTop="{{scrollTop}}" style="width:100%;height: 100vh;">
+        <view class="products-wrap">
+            <view bindtap="showProductDetail" class="products-list" data-id="{{item.id}}" wx:for="{{goodList}}">
+                <image class="products-list__img" src="{{item.imgUrl}}"></image>
+                <view class="products-list__info">
+                    <view class="products-list__name">{{item.name}}</view>
+                    <view class="products-list__cont">
+                        <text class="products-list__extendPrice">专享价:  ¥{{item.sharePrice}}</text>
+                        <text class="products-list__costPrice">原价:  ¥{{item.price}}</text>
+                    </view>
+                    <view>佣金:  ¥{{item.commission}} ({{item.commissionRate}}%)</view>
+                    <div catchtap="collection" class="products-list__collection" data-id="{{item.id}}" data-index="{{index}}" data-type="{{list[index]}}">
+                        <image class="products-list__joinImg" src="http://imgcdnali.wfenxiao.com.cn/xcx/c/join-icon.png" wx:if="{{list[index]}}"></image>
+                        <image class="products-list__joinImg" src="http://imgcdnali.wfenxiao.com.cn/xcx/c/join-icon2.png" wx:else></image>
+                        <view class="products-list__joinText" wx:if="{{list[index]}}">已收藏</view>
+                        <view class="products-list__joinText" wx:else>收藏</view>
+                    </div>
+                </view>
+            </view>
+            <view class="noData" wx:if="{{goodList.length==0}}">暂无数据</view>
+            <view id="loadmore">
+                <template is="zan-loadmore" data="{{loading:loadingmore}}"></template>
+            </view>
+        </view>
+    </scroll-view>
+</view>
+<template is="zan-toast" data="{{zanToast:zanToast}}"></template>

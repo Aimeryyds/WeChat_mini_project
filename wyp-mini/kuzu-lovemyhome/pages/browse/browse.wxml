@@ -1,0 +1,104 @@
+<view class="tab-box">
+    <text bindtap="tabFn" class="{{tabCur==2?'tab-cur':''}}" data-typenum="2">二手房</text>
+    <text bindtap="tabFn" class="{{tabCur==1?'tab-cur':''}}" data-typenum="1">租房</text>
+</view>
+<view class="browse-list" hidden="{{listHidden}}">
+    <view wx:for="{{list}}">
+        <view bindtap="toDetail" bindtouchend="drawEnd" bindtouchmove="drawMove" bindtouchstart="drawStart" class="list-item flexbox" data-index="{{index}}" style="right:{{item.right}}rpx" wx:if="{{item.infostate==''}}">
+            <view class="item-img">
+                <image binderror="imgError" data-index="{{index}}" lazyLoad="true" src="{{item.imgurl==null||item.imgurl==''?'https://res.5i5j.com/cache/weixin/common/default_house_list_404.png':item.imgurl}}"></image>
+                <text class="zhenxuan" wx:if="{{item.housetag}}">甄选</text>
+                <text class="xiangyu" wx:if="{{item.othertypeid==3}}">相寓</text>
+                <view class="icon3d hz-3d" wx:if="{{item.flag3d==1}}">
+                    <image src="/img/resources/icon3d.png"></image>
+                </view>
+                <view class="iconhz hz-3d" wx:if="{{item.flag3d==2}}">
+                    <image src="/img/resources/iconhz.png"></image>
+                </view>
+            </view>
+            <view class="item-con flex1">
+                <text class="item-tit">{{item.housetitle}}</text>
+                <view class="item-info">
+                    <text>{{item.bedroom+'室'+item.livingroom+'厅'+item.toilet+'卫'}}</text>
+                    <text class="dian"></text>
+                    <text wx:if="{{typeNum==2}}">{{item.buildarea}}㎡</text>
+                    <text wx:if="{{typeNum==1}}">{{item.area}}㎡</text>
+                    <text class="dian"></text>
+                    <text>{{item.heading}}</text>
+                    <text class="dian"></text>
+                    <text>{{item.communityname}}</text>
+                </view>
+                <view class="item-label" wx:if="{{item.tagwall!=''}}">
+                    <text class="tag" wx:for="{{item.tagwall}}" wx:for-item="items" wx:key="index">{{items}}</text>
+                </view>
+                <view class="item-price" wx:if="{{typeNum==2}}">
+                    <view class="wan-price">
+                        <text class="num">{{item.price}}</text>
+                        <text class="wan">万</text>
+                    </view>
+                    <text class="ping">{{item.unitprice}}元/㎡</text>
+                </view>
+                <view class="item-price" wx:if="{{typeNum==1}}">
+                    <view class="wan-price">
+                        <text class="num">{{item.price}}</text>
+                        <text class="wan">元/月</text>
+                    </view>
+                    <text class="rent-type" wx:if="{{item.rentmodename&&item.othertypeid!=3}}">{{item.rentmodename}}</text>
+                </view>
+            </view>
+            <view catchtap="delItemFn" class="del-item" data-houseid="{{item.housesid}}">删除</view>
+        </view>
+        <view bindtap="xiajiaFn" bindtouchend="drawEnd" bindtouchmove="drawMove" bindtouchstart="drawStart" class="list-item flexbox xiajia-item" data-index="{{index}}" style="right:{{item.right}}rpx" wx:if="{{item.infostate=='已下架'}}">
+            <view class="item-img">
+                <image binderror="imgError" data-index="{{index}}" lazyLoad="true" src="{{item.imgurl==null||item.imgurl==''?'https://res.5i5j.com/cache/weixin/common/default_house_list_404.png':item.imgurl}}"></image>
+                <text class="zhenxuan" wx:if="{{item.housetag}}">甄选</text>
+                <text class="xiangyu" wx:if="{{item.othertypeid==3}}">相寓</text>
+                <text class="xiajia" wx:if="{{item.infostate}}">已下架</text>
+                <view class="icon3d hz-3d" wx:if="{{item.flag3d==1}}">
+                    <image src="/img/resources/icon3d.png"></image>
+                </view>
+                <view class="iconhz hz-3d" wx:if="{{item.flag3d==2}}">
+                    <image src="/img/resources/iconhz.png"></image>
+                </view>
+            </view>
+            <view class="item-con flex1">
+                <text class="item-tit">{{item.housetitle}}</text>
+                <view class="item-info">
+                    <text>{{item.bedroom+'室'+item.livingroom+'厅'+item.toilet+'卫'}}</text>
+                    <text class="dian"></text>
+                    <text wx:if="{{typeNum==2}}">{{item.buildarea}}㎡</text>
+                    <text wx:if="{{typeNum==1}}">{{item.area}}㎡</text>
+                    <text class="dian"></text>
+                    <text>{{item.heading}}</text>
+                    <text class="dian"></text>
+                    <text>{{item.communityname}}</text>
+                </view>
+                <view class="item-label" wx:if="{{item.tagwall!=''}}">
+                    <text class="tag" wx:for="{{item.tagwall}}" wx:for-item="items" wx:key="index">{{items}}</text>
+                </view>
+                <view class="item-price" wx:if="{{typeNum==2}}">
+                    <view class="wan-price">
+                        <text class="num">{{item.price}}</text>
+                        <text class="wan">万</text>
+                    </view>
+                    <text class="ping">{{item.unitprice}}元/㎡</text>
+                </view>
+                <view class="item-price" wx:if="{{typeNum==1}}">
+                    <view class="wan-price">
+                        <text class="num">{{item.price}}</text>
+                        <text class="wan">元/月</text>
+                    </view>
+                    <text class="rent-type" wx:if="{{item.rentmodename&&item.othertypeid!=3}}">{{item.rentmodename}}</text>
+                </view>
+            </view>
+            <view catchtap="delItemFn" class="del-item" data-houseid="{{item.housesid}}">删除</view>
+        </view>
+    </view>
+</view>
+<view class="data-no" hidden="{{houseNo}}">
+    <image src="https://res.5i5j.com/cache/weixin/common/no-house.png"></image>
+    <text>没有浏览的房源</text>
+</view>
+<view class="loading" hidden="{{loadinghide}}">
+    <image class="loading-img" src="/img/resources/load.png"></image>
+</view>

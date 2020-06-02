@@ -1,0 +1,8 @@
+<template name="bottomlogo">
+    <view class="bottomtxt" wx:if="{{AgentConfig.IsOpenAdv==1}}">
+        <image mode="widthFix" src="{{AgentConfig.LogoImgUrl}}" style="margin-bottom:12rpx;max-width:80rpx"></image>
+        <view class="" wx:if="{{AgentConfig.isdefaul==1}}">{{AgentConfig.LogoText}}</view>
+        <view class="" wx:if="{{AgentConfig.isdefaul==0}}">{{AgentConfig.LogoText[0]}}</view>
+        <view class="" wx:if="{{AgentConfig.isdefaul==0}}">{{AgentConfig.LogoText[2]}}</view>
+    </view>
+</template>

@@ -1,0 +1,44 @@
+<view class="my-page">
+    <allPage-toast statusBar="{{statusBar}}"></allPage-toast>
+    <view style="position:fixed;background:#fff;z-index:9;width:100%;top:0;height:{{statusBar.height+'px'}}"></view>
+    <status-bar statusBar="{{statusBar}}"></status-bar>
+    <view class="my-main" style="padding-top:{{statusBar.height+'px'}}">
+        <view class="my-head" wx:if="{{hasLogin}}">
+            <image class="my-head__bg" src="./images/my_head_bg.png"></image>
+            <view class="my-head__info">
+                <image class="my-head__avatar" src="{{udbInfo.partnerImage||'./images/default_mine.png'}}"></image>
+                <text class="my-head__nickname">{{udbInfo.partnerNickname}}</text>
+                <text class="my-head__yynum">YY号：{{udbInfo.yy_num}}</text>
+            </view>
+        </view>
+        <view class="my-head my-head-login" wx:else>
+            <view class="my-head__info">
+                <image class="my-head__avatar" src="images/default_mine.png"></image>
+                <button bindgetuserinfo="getuserinfoLogin" openType="getUserInfo">快速登录</button>
+            </view>
+        </view>
+        <view class="my-list">
+            <button bindgetuserinfo="getuserinfoLogin" class="my-item" data-url="/pages/visited/visited" hoverClass="none" openType="getUserInfo">
+                <image class="my-item__left" src="./images/last_view_icon.png"></image>
+                <view class="my-item__right">
+                    <text class="my-item__right__txt">最近访问</text>
+                    <image class="my-item__right__arrow" src="../../images/arrow_right_icon.png"></image>
+                </view>
+            </button>
+            <button class="my-item contact-btn" openType="contact">
+                <image class="my-item__left" src="./images/contact_icon.png"></image>
+                <view class="my-item__right">
+                    <text class="my-item__right__txt">联系我们</text>
+                    <image class="my-item__right__arrow" src="../../images/arrow_right_icon.png"></image>
+                </view>
+            </button>
+            <button class="my-item" hoverClass="none" openType="feedback">
+                <image class="my-item__left" src="./images/icon_feedback.png"></image>
+                <view class="my-item__right">
+                    <text class="my-item__right__txt">意见反馈</text>
+                    <image class="my-item__right__arrow" src="../../images/arrow_right_icon.png"></image>
+                </view>
+            </button>
+        </view>
+    </view>
+</view>

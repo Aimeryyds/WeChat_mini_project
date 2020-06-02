@@ -1,0 +1,18 @@
+<view class="teacher _e42ebe7">
+    <view class="network _32f532b _e42ebe7" wx:if="{{$net$hasNet}}">
+        <image class="_32f532b" src="../../images/network.png"></image>
+        <text class="_32f532b">网络不可用，请检查网络设置</text>
+        <view class="net-text font28 animated flash infinite _32f532b">正在尝试重新连接...</view>
+    </view>
+    <view class="top _e42ebe7">
+        <image class="_e42ebe7" src="{{datas.image_url}}"></image>
+        <view class="v_html _e42ebe7">
+            <view class="_e42ebe7">{{datas.name}}</view>
+            <view class="_e42ebe7">{{datas.summary}}</view>
+        </view>
+    </view>
+    <view class="content _e42ebe7">{{datas.introduction}}</view>
+    <view catchtap="$backHome$goHome" class="box animated bounceIn _97a9f08 _e42ebe7" wx:if="{{$backHome$isShow}}">
+        <image class="_97a9f08" lazyLoad="false" mode="scaleToFill" src="https://jfinfo.oss-cn-beijing.aliyuncs.com/jugupiao/images/share/home.png"></image>
+    </view>
+</view>

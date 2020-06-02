@@ -1,0 +1,163 @@
+<view class="section">
+    <view class="section__ctn">
+        <image mode="{{imgModeWidthFix}}" src="{{imgurl.topImgUrl}}" style="width: 200px; height: 200px; background-color: #eeeeee;"></image>
+        <view>dgdfgds</view>
+    </view>
+    <view class="section">
+        <view class="flex-row header">
+            <view class="title">保障计划</view>
+            <view class="blue pull-right">查看详情</view>
+        </view>
+        <view class="flex-row content has-pdtop">
+            <view>一般医疗保障金<text bindtap="toggle" class="qst" data-qst="yby">?</text>
+            </view>
+            <view class="pull-right">300万</view>
+        </view>
+        <view class="flex-row content detail" wx:if="{{yby}}">般医疗保障般医疗保障般医疗保障般医疗保障般医疗保障般医疗保障般医疗保障般医疗保障般医疗保障
+    </view>
+        <view class="flex-row content">
+            <view>恶性肿瘤保障金<text bindtap="toggle" class="qst" data-qst="exz">?</text>
+            </view>
+            <view class="pull-right">300万</view>
+        </view>
+        <view class="flex-row content detail" wx:if="{{exz}}">般医疗保障般医疗保障般医疗保障般医疗保障般医疗保障般医疗保障般医疗保障般医疗保障般医疗保障
+    </view>
+        <view class="flex-row content">
+            <view>年免赔额<text bindtap="toggle" class="qst" data-qst="nmp">?</text>
+            </view>
+            <view class="pull-right">1万</view>
+        </view>
+        <view class="flex-row content detail" wx:if="{{nmp}}">般医疗保障般医疗保障般医疗保障般医疗保障般医疗保障般医疗保障般医疗保障般医疗保障般医疗保障
+    </view>
+        <view class="flex-row content">
+            <view>保障区域</view>
+            <view class="pull-right">中国大陆（不含港澳台）</view>
+        </view>
+        <view class="flex-row content">
+            <view>医院范围</view>
+            <view class="pull-right">二级以上(含二级)公立医院普通部</view>
+        </view>
+        <view class="flex-row content has-pdbottom">
+            <view>保障期间</view>
+            <view class="pull-right">1年</view>
+        </view>
+        <view class="flex-row baofei">
+            <view class="orange title">￥174元/年起</view>
+            <view class="blue pull-right">查看保费</view>
+        </view>
+        <view class="stand"></view>
+    </view>
+    <view>
+        <view class="flex-row {{menuFixed?'fixed':''}} fixNav" id="navmenu">
+            <view bindtap="selectNav" class="{{navselect=='cpxq'?'active':''}}" data-navselect="cpxq">产品详情</view>
+            <view bindtap="selectNav" class="{{navselect=='cjwt'?'active':''}}" data-navselect="cjwt">常见问题</view>
+            <view bindtap="selectNav" class="{{navselect=='wytb'?'active':''}}" data-navselect="wytb">我要投保</view>
+        </view>
+        <view class="" id="cpxq">aaa
+      <image id="cpxq1" mode="{{imgModeWidthFix}}" src="{{imgurl.cpxq1}}"></image>
+        </view>
+        <view class="" id="cjwt">bbb
+      <image mode="{{imgModeWidthFix}}" src="{{imgurl.cpxq1}}"></image>
+        </view>
+        <view class="txxx" id="wytb">ccc
+      <view class="header">
+                <view class="title">填写投保信息</view>
+                <view>
+                    <text class="qst">1</text>本人信息（投保人）
+        </view>
+                <view class="flex-row">
+                    <view>姓名</view>
+                    <view>
+                        <input placeholder="请输入您的姓名"></input>
+                    </view>
+                </view>
+                <view class="flex-row">
+                    <view>身份证</view>
+                    <view>
+                        <input placeholder="身份证"></input>
+                    </view>
+                </view>
+                <view class="flex-row">
+                    <view>手机号码</view>
+                    <view>
+                        <input placeholder="手机号码"></input>
+                    </view>
+                </view>
+                <view>
+                    <text class="qst">2</text>为谁投保
+        </view>
+                <view>
+                    <radio-group bindchange="relationChange" class="radio-group">
+                        <label class="radio {{item.checked?'active':''}}" id="{{value}}" wx:for="{{relations}}" wx:key="value">
+                            <radio checked="{{item.checked}}" value="{{item.value}}"></radio>
+              {{item.name}}
+              <image class="checked" src="{{imgurl.checkedImg}}" wx:if="{{item.checked}}"></image>
+                        </label>
+                    </radio-group>
+                </view>
+                <view class="bbr">
+                    <view class="flex-row">
+                        <view>姓名</view>
+                        <view>
+                            <input placeholder="请输入您的姓名"></input>
+                        </view>
+                    </view>
+                    <view class="flex-row">
+                        <view>身份证</view>
+                        <view>
+                            <input placeholder="身份证"></input>
+                        </view>
+                    </view>
+                </view>
+                <view>
+                    <text class="qst">3</text>被保人社保情况
+       </view>
+                <view class="plan">
+                    <radio-group bindchange="planChange" class="radio-group">
+                        <label class="radio {{item.checked?'active':''}}" id="{{value}}" wx:for="{{plans}}" wx:key="value">
+                            <radio checked="{{item.checked}}" value="{{item.value}}"></radio>
+              {{item.name}}
+              <image class="checked" src="{{imgurl.checkedImg}}" wx:if="{{item.checked}}"></image>
+                        </label>
+                    </radio-group>
+                </view>
+                <view>
+                    <text class="qst">4</text>选择保障计划
+       </view>
+                <view class="plan">
+                    <radio-group bindchange="planChange" class="radio-group">
+                        <label class="radio {{item.checked?'active':''}}" id="{{value}}" wx:for="{{plans}}" wx:key="value">
+                            <radio checked="{{item.checked}}" value="{{item.value}}"></radio>
+              {{item.name}}
+              <image class="checked" src="{{imgurl.checkedImg}}" wx:if="{{item.checked}}"></image>
+                        </label>
+                    </radio-group>
+                </view>
+                <view class="bottom">
+                    <view class="provisions">
+                        <checkbox-group bindchange="agreeChange">
+                            <label class="checkbox" wx:for="{{agreeItems}}">
+                                <checkbox checked="{{item.checked}}" color="#fc611d" value="{{item.name}}"></checkbox>我已阅读并了解
+              </label>
+                            <text class="blue">《保险条款》</text>和<text class="blue">《重要声明》</text>
+                        </checkbox-group>
+                    </view>
+                    <view class="btm-nav">
+                        <view class="icon">
+                            <image mode="widthFix" src="{{imgurl.icon1}}" style="width: 50rpx;"></image>
+                        </view>
+                        <view bindtap="kefu" class="icon">
+                            <image mode="widthFix" src="{{imgurl.icon2}}" style="width: 50rpx;"></image>
+                        </view>
+                        <view class="price">
+              ￥{{price}}
+            </view>
+                        <view bindtap="buy" class="buy">
+              立即投保
+            </view>
+                    </view>
+                </view>
+            </view>
+        </view>
+    </view>
+</view>

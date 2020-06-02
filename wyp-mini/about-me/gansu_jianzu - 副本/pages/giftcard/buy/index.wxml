@@ -1,0 +1,115 @@
+<import src="/pages/giftcard/templates/card/big.wxml"></import>
+<import src="./_quantity.wxml"></import>
+<import src="/dist/toptips/index.wxml"></import>
+<import src="/pages/giftcard/templates/storelist/index.wxml"></import>
+<view class="giftcard-buy__top">
+    <template is="big-giftcard" data="{{text:giftDetail.name,imgUrl:selectedImgUrl}}"></template>
+</view>
+<template is="zan-toptips" data="{{zanTopTips:zanTopTips}}"></template>
+<view class="giftcard-buy__mian">
+    <view class="giftcard-style">
+        <view class="giftcard-style_title">选择样式</view>
+        <view class="giftcard-style__list">
+            <view bindtap="selectImgUrl" class="giftcard-style__item" data-index="{{index}}" data-item="{{item}}" style="border:1px solid {{item.selected?'#FF5757':'#E4E4E4'}}" wx:for="{{imgUrlList}}">
+                <view class="giftcard-style__item-bg">
+                    <image src="{{item.imgUrl}}"></image>
+                </view>
+                <view class="giftcard-style__item-text zan-ellipsis">{{giftDetail.name}}</view>
+            </view>
+        </view>
+    </view>
+    <view class="giftcard-num">
+        <view class="giftcard-style_title">选择礼品</view>
+        <view class="giftcard-num__list">
+            <view catchtap="quantityOn" class="{{item.selected?'giftcard-num__wrap giftcard-num__wrap--select':'giftcard-num__wrap'}}" data-index="{{index}}" data-max="{{item.max}}" data-min="{{item.min}}" data-total="{{item.total}}" wx:for="{{quantityList}}">
+                <view class="giftcard-num__price">
+                    <text style="margin-top:30rpx;font-size:28rpx;">{{item.originalPrice}}元</text>
+                    <text style="margin-top:38rpx;font-size:20rpx;">（售价：{{item.price}}元）</text>
+                    <text style="margin-left:18rpx; font-size:20rpx;max-width:160rpx;margin:auto">{{item.message}}</text>
+                </view>
+                <view class="giftcard-num__counter" style="display:{{item.selected?'flex':'none'}}">
+                    <template is="quantity" data="{{...quantityList[index],componentId:index}}"></template>
+                </view>
+                <view class="quantity__normal" style="display:{{item.selected?'none':'inline-block'}}">
+                    <image src="{{item.total>0?'http://imgcdnali.wfenxiao.com.cn/xcx/c/giftcard/plus-icon.png':'http://imgcdnali.wfenxiao.com.cn/xcx/c/1120/plus-disable-icon.png'}}"></image>
+                </view>
+            </view>
+        </view>
+    </view>
+    <view class="giftcard-form">
+        <view wx:if="{{giftDetail.platformRange==2}}">
+            <view class="giftcard-form__item">
+                <text>兑换商品:</text>
+                <view class="giftcard-form__item-cont">{{giftDetail.brandGoodsName}}</view>
+            </view>
+            <view class="giftcard-form__item">
+                <text>提示:</text>
+                <view class="giftcard-form__item-cont" style="margin-bottom:10rpx">{{giftDetail.prompt}}</view>
+            </view>
+        </view>
+        <view class="giftcard-form__item" wx:else>
+            <text>适用门店:</text>
+            <view bindtap="toggleStoreDialog" class="giftcard-form__link">{{giftDetail.platformRange==1?'全平台':'查看全部门店>'}}</view>
+        </view>
+        <view class="giftcard-form__item">
+            <text>有效期限:</text>
+            <view class="giftcard-form__item-cont">{{giftDetail.forever==1?'永久':'购买后'+giftDetail.validNumMonth+'月有效'}}</view>
+        </view>
+        <view class="giftcard-form__item">
+            <text>使用须知:</text>
+            <view class="giftcard-form__item-cont">{{giftDetail.remark}}</view>
+        </view>
+    </view>
+</view>
+<view class="giftcard-buy__total-container" wx:if="{{cards.sumNum(quantityList)>0}}">
+    <view class="giftcard-buy__total-num">共{{cards.sumNum(quantityList)}}件</view>
+    <view class="giftcard-buy__total-price">￥{{cards.totalOriginalPrice(quantityList)}}</view>
+</view>
+<view bindtap="buyCard" class="giftcard-buy__btn" wx:if="{{giftDetail.totalNum>0}}">购买礼品卡 {{cards.totalPrice(quantityList)>0?cards.totalPrice(quantityList):''}}</view>
+<view class="giftcard-buy__btn giftcard-buy__btn--recevie" wx:else>已售罄</view>
+<phonemodal showModal="{{showModal}}" url="{{url}}"></phonemodal>
+<view>
+    <template is="storelist" data="{{show:isStorelistShow,list:giftDetail.storeList}}"></template>
+</view>
+<wxs module="cards">
+function totalPrice(cardList) {
+    var sumPrice = 0.00;
+    if (cardList) {
+        cardList.forEach((function(i) {
+            if (i.selected) {
+                sumPrice += i.quantity * i.price
+            }
+        }))
+    };
+    return (sumPrice.toFixed(2))
+};
+
+function totalOriginalPrice(cardList) {
+    var sumOriginalPricePrice = 0.00;
+    if (cardList) {
+        cardList.forEach((function(i) {
+            if (i.selected) {
+                sumOriginalPricePrice += i.quantity * i.originalPrice
+            }
+        }))
+    };
+    return (sumOriginalPricePrice.toFixed(2))
+};
+
+function sumNum(cardList) {
+    var sum = 0;
+    if (cardList) {
+        cardList.forEach((function(i) {
+            if (i.selected) {
+                sum += i.quantity
+            }
+        }))
+    };
+    return (sum)
+};
+module.exports = ({
+    totalPrice: totalPrice,
+    totalOriginalPrice: totalOriginalPrice,
+    sumNum: sumNum,
+});
+</wxs>

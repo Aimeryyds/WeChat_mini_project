@@ -1,0 +1,59 @@
+<import src="/dist/toptips/index.wxml"></import>
+<import src="/dist/toast/index.wxml"></import>
+<template is="zan-toptips" data="{{zanTopTips:zanTopTips}}"></template>
+<template is="zan-toast" data="{{zanToast:zanToast}}"></template>
+<view class="container">
+    <form bindreset="formReset" bindsubmit="formSubmit">
+        <view class="evaluate-form">
+            <view wx:for="{{evaluateFormData.info}}">
+                <view class="evaluate-form__ctrl">
+                    <image class="evaluate-form__img" src="{{item.imgs}}" wx:if="{{item.imgs}}"></image>
+                    <view class="evaluate-form__cont">
+                        <view wx:if="{{item.name}}">{{item.name}}</view>
+                        <view class="evaluate-form__desc" wx:if="{{item.properties}}">{{item.properties}}</view>
+                    </view>
+                </view>
+                <view class="evaluate-form__radio-group" wx:if="{{evaluateFormData.evaluateCount==1&&type!=3&&type!=5}}">
+                    <view bindtap="onEvaluateType" class="evaluate-form__radio" data-index="{{index}}" data-type="{{type.index}}" wx:for="{{evaluateItems}}" wx:for-index="typeindex" wx:for-item="type">
+                        <view class="evaluate-form__radio--select" style="border:1px solid {{type.index===item.evaluate?'#f22222':'#d2d2d2'}}">
+                            <view class="{{type.index===item.evaluate?'evaluate-form__radio--selectOn':''}}"></view>
+                        </view>
+              {{type.title}}
+            </view>
+                </view>
+                <view>
+                    <textarea autoHeight bindinput="onChangeValue" class="evaluate-form__textarea" data-index="{{index}}" maxlength="150" name="{{evaluateFormData.evaluateCount==1?firstEvaluateContent:secondEvaluateContent}}" placeholder="请输入评价内容（1-150个字符）" value="{{evaluateFormData.evaluateCount==1?item.firstEvaluateContent:item.secondEvaluateContent}}"></textarea>
+                </view>
+                <view class="apply-form__upload">
+                    <view class="apply-form__upload-img">
+                        <view class="apply-form__upload-proofUrl" wx:for="{{evaluateFormData.evaluateCount==1?evaluateFormData.info[index].firstEvaluateImgs:evaluateFormData.info[index].secondEvaluateImgs}}" wx:for-index="imgindex">
+                            <image bindtap="onTapPic" data-imgindex="{{imgindex}}" data-index="{{index}}" data-link="{{item}}" mode="scaleToFill" src="{{item}}" style="width:160rpx;height:160rpx"></image>
+                            <image class="apply-form__upload-handleRemoveImg" data-imgindex="{{imgindex}}" data-index="{{index}}" mode="scaleToFill" ontap="handleRemoveImg" src="http://imgcdnali.wfenxiao.com.cn/xcx/c/gongqiu/delete.png"></image>
+                        </view>
+                        <view class="apply-form__upload-handleChooseImg" data-index="{{index}}" ontap="handleChooseImg" wx:if="{{evaluateFormData.evaluateCount==1?!evaluateFormData.info[index].firstEvaluateImgs||evaluateFormData.info[index].firstEvaluateImgs.length<5:!evaluateFormData.info[index].secondEvaluateImgs||evaluateFormData.info[index].secondEvaluateImgs.length<5}}">
+                            <image mode="scaleToFill" src="http://imgcdnali.wfenxiao.com.cn/xcx/c/1120/img-upload.png" style="width:48rpx;height:44rpx"></image>
+                            <view class="apply-form__upload-handleChooseImg-style">(最多5张)</view>
+                        </view>
+                        <input hidden name="firstEvaluateImgs" type="hidden" value="{{evaluateFormData.evaluateCount==1?evaluateFormData.info[index].firstEvaluateImgs:evaluateFormData.info[index].secondEvaluateImgs}}"></input>
+                    </view>
+                </view>
+            </view>
+            <view class="evaluate-form__score" wx:if="{{evaluateFormData.evaluateCount==1}}">
+                <view class="evaluate-form__item">
+                    <view>商家打分</view>
+                    <view class="evaluate-form__score-img">
+                        <image bindtap="evaluateScroe" data-item="{{item}}" src="{{item<=evaluateFormData.businessScore?'http://imgcdnali.wfenxiao.com.cn/xcx/c/1120/pingjia.png':'http://imgcdnali.wfenxiao.com.cn/xcx/c/1120/pingjia-no.png'}} " wx:for="{{[2,4,6,8,10]}}"></image>
+                    </view>
+                    <view style="margin-left:10rpx;color:rgba(0,0,0,0.65)" wx:if="{{evaluateFormData.businessScore}}">{{evaluateFormData.businessScore==2?'非常差':evaluateFormData.businessScore==4?'差':evaluateFormData.businessScore==6?'一般':evaluateFormData.businessScore==8?'好':'非常好'}}</view>
+                </view>
+                <view class="evaluate-form__item">
+                    <view>匿名评价</view>
+                    <view style="margin-left:36rpx;">
+                        <switch bindchange="onSwitch" checked="{{formData.isMemberRechargeChecked}}" color="#f22222"></switch>
+                    </view>
+                </view>
+            </view>
+        </view>
+        <button class="evaluate-release__btn" formType="submit" loading="{{loading}}" style="border-radius:0;" type=""> 发布 </button>
+    </form>
+</view>

@@ -1,0 +1,16 @@
+<view class="index_top_nav icon_no{{item.style_type}}" style="background:{{item.bg_color}};" wx:if="{{item.list.length!=0}}">
+    <view style="position:relative;" wx:for="{{item.list}}" wx:for-item="val">
+        <form reportSubmit bindsubmit="formSubmit">
+            <image src="{{val.imgurl}}" style="border-radius:{{item.radian}}%;"></image>
+            <view class="index_nav_name" style="color:{{item.text_color}};font-size:{{item.font_size*2}}rpx;" wx:if="{{val.name!=''}}">{{val.name}}</view>
+            <input name="key" style="display:none" value="{{val.key?val.key:1}}"></input>
+            <input name="appid" style="display:none" value="{{val.appid}}"></input>
+            <input name="path" style="display:none" value="{{val.path}}"></input>
+            <input name="url" style="display:none" value="{{val.url}}"></input>
+            <input name="phone" style="display:none" value="{{val.phone}}"></input>
+            <input name="lat" style="display:none" value="{{val.lat}}"></input>
+            <input name="lng" style="display:none" value="{{val.lng}}"></input>
+            <button class="test_button" formType="submit" style="width:100%; height: 80rpx;"></button>
+        </form>
+    </view>
+</view>

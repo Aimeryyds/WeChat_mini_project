@@ -1,0 +1,57 @@
+<import src="/dist/loadmore/index.wxml"></import>
+<view class="container">
+    <view class="hotel-search_container" id="hotel-search">
+        <navigator url="{{'/pages/citys/citys?from=hotel&isLocation='+isLocation+'&city='+query.cityName}}">
+            <text class="zan-ellipsis">{{location||''}}</text>
+        </navigator>
+        <view bindtap="bindhotlesearch" class="hotel-search">
+            <image class="hotel-search__img" src="http://imgcdnali.wfenxiao.com.cn/xcx/c/icons/ic_search.png"></image>
+            <view class="hotel-search__input">{{query.storeName||'输入搜索的酒店名'}}</view>
+        </view>
+    </view>
+    <tab bindquery="handleTabQuery" id="hotel-tab" intime="{{intime}}"></tab>
+    <view class="no-hotel" hidden="{{hotels&&hotels.length>0||loading?true:false}}">
+        <view class="text">暂无符合条件的酒店信息</view>
+    </view>
+    <scroll-view enableBackToTop bindscrolltolower="lower" scrollY="true" style="width:100%;height:{{scrollHeight}}px">
+        <view bindtap="gotoDetail" class="a-hotel" data-id="{{item.id}}" wx:for="{{hotels}}" wx:key="{{index}}">
+            <image class="a-hotle_icon" mode="aspectFill" src="{{item.imgUrl}}" wx:if="{{item.imgUrl}}"></image>
+            <image class="a-hotle_icon" src="http://imgcdnali.wfenxiao.com.cn/xcx/c/hotel/hotel_default.png" wx:else></image>
+            <view class="a-hotle_content">
+                <view class="zan-ellipsis" style="font-size:26rpx">{{item.brandName}}-{{item.storeName}}</view>
+                <view class="hotel_middle">
+                    <text class="zan-ellipsis">距您{{formatdistance.format(item.distance)}} | {{item.areaName}}</text>
+                    <view class="hotel_price-content" style="width:290rpx;display:flex; flex-direction: row-reverse" wx:if="{{item.price>0}}">
+                        <text style="font-size: 22rpx;color: #1A1616;margin-left:4rpx;margin-top:6rpx">起</text>
+                        <wxc-price _pid="{{_pid}}" class="hotel_price" icon="sub">{{item.price}}</wxc-price>
+                    </view>
+                    <view style="width:130rpx;display:flex; flex-direction: row-reverse" wx:else>
+                        <text style="font-size: 22rpx;color: #1A1616;margin-left:4rpx;margin-top:6rpx">暂无报价</text>
+                    </view>
+                </view>
+                <view>
+                    <text class="hotel_score" wx:if="{{item.evaluateScore>=0}}">{{item.evaluateScore}}分</text>
+                    <text class="hotel_score" wx:else>暂无评分</text>
+                    <text class="hotel_evaluate">{{item.commentNum}}评价</text>
+                </view>
+            </view>
+        </view>
+        <view id="loadmore">
+            <template is="zan-loadmore" data="{{loading:loadmore}}"></template>
+        </view>
+    </scroll-view>
+</view>
+<wxs module="formatdistance">
+function format(distance) {
+    var distanceString = '';
+    if (distance >= 1000) {
+        distanceString = (distance / 1000).toFixed(2) + 'km'
+    } else {
+        distanceString = distance + 'm'
+    };
+    return (distanceString)
+};
+module.exports = ({
+    format: format,
+});
+</wxs>

@@ -1,0 +1,95 @@
+<template name="serviceModule">
+    <view class="serviceList-module">
+        <view class="moduleTitle" wx:if="{{moduleInfo.pattern.e}}">
+            <view class="titleText ellipsis">{{moduleInfo.content.title}}</view>
+            <view bindtap="toBookPage" class="moreText" wx:if="{{moduleInfo.pattern.sm}}">查看全部<view class="iconfont icon-turn  view-more"></view>
+            </view>
+        </view>
+        <view class="emptyModule" style="background-color:{{moduleInfo.pattern.bg.t==1?moduleInfo.pattern.bg.c:''}}" wx:if="{{moduleInfo.content.selectedList.length==0}}">
+            <view class="emptyModuleText">咦，没有发现任何服务哦~</view>
+        </view>
+        <view class="serviceList-container" style="background-color:{{moduleInfo.pattern.bg.t==1?moduleInfo.pattern.bg.c:'#fff'}}" wx:else>
+            <view class="big-pic-style" wx:if="{{moduleInfo.content.style==0}}">
+                <view bindtap="toBookDetailPage" class="service-item item-wrapper {{moduleInfo.pattern.sd===1?'sd-show':''}} {{service.status==1?'has-out':''}}" data-sid="{{service.id}}" wx:for="{{moduleInfo.content.selectedList}}" wx:for-item="service" wx:key="service.id">
+                    <view class="img-wrapper {{moduleInfo.pattern.bd?'bd-show':''}} {{moduleInfo.pattern.sd===0?'sd-show':''}}" style="{{moduleInfo.pattern.ht.t==1?'height:'+moduleInfo.pattern.ht.n*2+'rpx':''}}">
+                        <image class="item-img" mode="{{moduleInfo.pattern.is==2?'aspectFit':moduleInfo.pattern.is==1?'aspectFill':''}}" src="{{service.pic.url}}"></image>
+                    </view>
+                    <view class="service-info">
+                        <view class="title two-line-dot">{{service.name}}</view>
+                        <view class="desc two-line-dot">{{service.summary}}</view>
+                        <view class="price-wrapper">
+                            <text class="price" style="color: {{service.status==1?'':globalColor}}" wx:if="{{service.promotionPrice==0}}">￥{{service.price}}</text>
+                            <block wx:else>
+                                <text class="price" style="color: {{service.status==1?'':globalColor}}">￥{{service.promotionPrice}}</text>
+                                <text class="promotion">￥{{service.price}}</text>
+                            </block>
+                            <view class="booking-btn" style="background-color: {{service.status==1?'':globalColor}}">立即预约</view>
+                        </view>
+                    </view>
+                    <view class="iconfont icon-promotion" wx:if="{{service.promotionPrice!=0}}"></view>
+                </view>
+            </view>
+            <view class="swipe-style" wx:elif="{{moduleInfo.content.style==1}}">
+                <scroll-view>
+                    <view class="scroll-wrapper" style="width:{{moduleInfo.content.selectedList.length*495}}rpx; ">
+                        <view bindtap="toBookDetailPage" class="service-item item-wrapper {{moduleInfo.pattern.sd===1?'sd-show':''}} {{service.status==1?'has-out':''}}" data-sid="{{service.id}}" wx:for="{{moduleInfo.content.selectedList}}" wx:for-item="service" wx:key="service.id">
+                            <view class="img-wrapper {{moduleInfo.pattern.bd?'bd-show':''}} {{moduleInfo.pattern.sd===0?'sd-show':''}}" style="{{moduleInfo.pattern.t==1?'height:'+moduleInfo.pattern.ht.n*2+'rpx':''}}">
+                                <image class="item-img" mode="{{moduleInfo.pattern.is==2?'aspectFit':moduleInfo.pattern.is==1?'aspectFill':''}}" src="{{service.pic.url}}"></image>
+                            </view>
+                            <view class="service-info">
+                                <view class="title two-line-dot">{{service.name}}</view>
+                                <view class="desc two-line-dot">{{service.summary}}</view>
+                                <view class="price-wrapper">
+                                    <text class="price" style="color: {{service.status==1?'':globalColor}}" wx:if="{{service.promotionPrice==0}}">￥{{service.price}}</text>
+                                    <block wx:else>
+                                        <text class="price" style="color: {{service.status==1?'':globalColor}}">￥{{service.promotionPrice}}</text>
+                                        <text class="promotion">￥{{service.price}}</text>
+                                    </block>
+                                </view>
+                            </view>
+                            <view class="iconfont icon-promotion" wx:if="{{service.promotionPrice!=0}}"></view>
+                        </view>
+                    </view>
+                </scroll-view>
+            </view>
+            <view class="small-pic-style" wx:elif="{{moduleInfo.content.style==2}}">
+                <view bindtap="toBookDetailPage" class="service-item item-wrapper {{moduleInfo.pattern.sd===1?'sd-show':''}} {{service.status==1?'has-out':''}}" data-sid="{{service.id}}" wx:for="{{moduleInfo.content.selectedList}}" wx:for-item="service" wx:key="service.id">
+                    <view class="img-wrapper {{moduleInfo.pattern.bd?'bd-show':''}} {{moduleInfo.pattern.sd===0?'sd-show':''}}" style="{{moduleInfo.pattern.ht.t==1?'height:'+moduleInfo.pattern.ht.n*2+'rpx':''}}">
+                        <image class="item-img" mode="{{moduleInfo.pattern.is==2?'aspectFit':moduleInfo.pattern.is==1?'aspectFill':''}}" src="{{service.pic.url}}"></image>
+                    </view>
+                    <view class="service-info">
+                        <view class="title two-line-dot">{{service.name}}</view>
+                        <view class="desc two-line-dot">{{service.summary}}</view>
+                        <view class="price-wrapper">
+                            <text class="price" style="color: {{service.status==1?'':globalColor}}" wx:if="{{service.promotionPrice==0}}">￥{{service.price}}</text>
+                            <block wx:else>
+                                <text class="price" style="color: {{service.status==1?'':globalColor}}">￥{{service.promotionPrice}}</text>
+                                <text class="promotion">￥{{service.price}}</text>
+                            </block>
+                        </view>
+                    </view>
+                    <view class="iconfont icon-promotion" wx:if="{{service.promotionPrice!=0}}"></view>
+                </view>
+            </view>
+            <view class="small-block-style" wx:elif="{{moduleInfo.content.style==3}}">
+                <view bindtap="toBookDetailPage" class="service-item {{moduleInfo.pattern.sd===1?'sd-show':''}} {{service.status==1?'has-out':''}}" data-sid="{{service.id}}" wx:for="{{moduleInfo.content.selectedList}}" wx:for-item="service" wx:key="service.id">
+                    <view class="img-wrapper {{moduleInfo.pattern.bd?'bd-show':''}} {{moduleInfo.pattern.sd===0?'sd-show':''}}" style="{{moduleInfo.pattern.ht.t==1?'height:'+moduleInfo.pattern.ht.n*2+'rpx':''}}">
+                        <image class="item-img" mode="{{moduleInfo.pattern.is==2?'aspectFit':moduleInfo.pattern.is==1?'aspectFill':''}}" src="{{service.pic.url}}"></image>
+                    </view>
+                    <view class="service-info">
+                        <view class="title two-line-dot">{{service.name}}</view>
+                        <view class="desc two-line-dot">{{service.summary}}</view>
+                        <view class="price-wrapper">
+                            <text class="price" style="color: {{service.status==1?'':globalColor}}" wx:if="{{service.promotionPrice==0}}">￥{{service.price}}</text>
+                            <block wx:else>
+                                <text class="price" style="color: {{service.status==1?'':globalColor}}">￥{{service.promotionPrice}}</text>
+                                <text class="promotion">￥{{service.price}}</text>
+                            </block>
+                        </view>
+                    </view>
+                    <view class="iconfont icon-promotion" wx:if="{{service.promotionPrice!=0}}"></view>
+                </view>
+            </view>
+        </view>
+    </view>
+</template>

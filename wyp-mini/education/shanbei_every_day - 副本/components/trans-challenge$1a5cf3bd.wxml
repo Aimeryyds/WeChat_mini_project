@@ -1,0 +1,67 @@
+<template name="trans-challenge$1a5cf3bd">
+    <view class="_div data-v-a472d066  challenge" style=" {{'padding-top:'+paddingTop+'px'+';'}}">
+        <template is="nav-bar$6acec6f9" data="{{...$root[$kk+'0'],$root:$root}}"></template>
+        <swiper autoplay="{{true}}" class="_swiper data-v-a472d066 swiper" indicatorDots="{{false}}" interval="{{5000}}" style=" {{'top:'+paddingTop-60+'px'+';'}}" wx:if="{{adList.length>0}}">
+            <swiper-item class="_swiper-item data-v-a472d066" key="{{item.id}}" wx:for="{{adList}}" wx:key="item.id">
+                <navigator appId="{{item.appid}}" class="_navigator data-v-a472d066 nav" path="{{item.path}}" target="miniProgram" wx:if="{{item.path_type==='OTHERS'}}">
+                    <image class="_img data-v-a472d066" src="{{item.image_urls&&item.image_urls[0]}}"></image>
+                </navigator>
+                <navigator target class="_navigator data-v-a472d066 nav" url="{{item.path}}" wx:elif="{{item.path_type==='OWN'}}">
+                    <image class="_img data-v-a472d066" src="{{item.image_urls&&item.image_urls[0]}}"></image>
+                </navigator>
+                <button class="_button data-v-a472d066" openType="contact" wx:else>
+                    <image class="_img data-v-a472d066" src="{{item.image_urls&&item.image_urls[0]}}"></image>
+                </button>
+            </swiper-item>
+        </swiper>
+        <template is="challenge$72dfb01a" data="{{...$root[$kk+'2-'+index],$root:$root}}" wx:for="{{challengeList}}" wx:key="item.id"></template>
+        <view catchtouchmove="handleProxy" class="_div data-v-a472d066 modal" data-comkey="{{$k}}" data-eventid="{{'3'}}" wx:if="{{showLoveModal}}">
+            <view class="_div data-v-a472d066 inner">
+                <image bindtap="handleProxy" class="_img data-v-a472d066 close-modal" data-comkey="{{$k}}" data-eventid="{{'0'}}" src="/static/img/close-grey.png"></image>
+                <image class="_img data-v-a472d066 avatar" src="{{translation.userinfo&&translation.userinfo.avatar}}"></image>
+                <view class="_div data-v-a472d066 title">{{translation.userinfo&&translation.userinfo.nickname}}的翻译</view>
+                <view class="_div data-v-a472d066 content">
+                    <view class="_div data-v-a472d066 title ">- 原句 -</view>
+                    <view class="_div data-v-a472d066  sentence ">{{challenge.content}}</view>
+                    <view class="_div data-v-a472d066 from">{{challenge.source}}</view>
+                    <view class="_div data-v-a472d066 title ">- 翻译 -</view>
+                    <view class="_div data-v-a472d066 sentence "> {{translation.content}}</view>
+                    <view class="_div data-v-a472d066 author">@{{translation.userinfo&&translation.userinfo.nickname}}</view>
+                    <view class="_div data-v-a472d066 line"></view>
+                    <view bindtap="handleProxy" class="_div data-v-a472d066 love-btn" data-comkey="{{$k}}" data-eventid="{{'1'}}" style=" {{'background-color:'+(translation.is_liked?'#fe6135':'#f5f5f5')+';'+'color:'+(translation.is_liked?'#ffffff':'#fe6135')+';'}}">
+                        <label class="_span data-v-a472d066" style=" {{'color:'+(translation.is_liked?'#fff':'#999999')+';'}}">{{translation.like}}</label>
+                        <image class="_img data-v-a472d066" src="{{translation.is_liked?'/static/img/love-inactive-m.png':'/static/img/love-active-m.png'}}"></image>
+                    </view>
+                    <view class="_div data-v-a472d066 tip">{{translation.is_liked?'谢谢你的鼓励':'给我点个赞吧'}}</view>
+                </view>
+                <view bindtap="handleProxy" class="_div data-v-a472d066 login-btn" data-comkey="{{$k}}" data-eventid="{{'2'}}">随便逛逛</view>
+            </view>
+        </view>
+        <template is="modal$47d16d3d" data="{{...$root[$kk+'3'],$root:$root}}"></template>
+        <view catchtouchmove="handleProxy" class="_div data-v-a472d066 tips-modal" data-comkey="{{$k}}" data-eventid="{{'8'}}" wx:if="{{showTipsModal}}">
+            <view class="_div data-v-a472d066 tip1" hidden="{{!(tipIndex===1)}}">
+                <view class="_div data-v-a472d066 spotlight" style=" {{'top:'+spotTop+'px'+';'}}"></view>
+                <image class="_img data-v-a472d066" src="https://media-image1.baydn.com/storage_media_image/vryjyo/6e71c841b01d0f7a2ea831280815fc6e.c16594158044066f975325b7050491dd.gif" style=" {{'top:'+tip1GifTop+'px'+';'}}"></image>
+                <view class="_div data-v-a472d066 step">Step 1:点击<label class="_span data-v-a472d066">菜单栏</label>
+                </view>
+                <view bindtap="handleProxy" class="_div data-v-a472d066 next-btn" data-comkey="{{$k}}" data-eventid="{{'5'}}">下一步</view>
+            </view>
+            <view class="_div data-v-a472d066 tip2" hidden="{{!(tipIndex===2)}}">
+                <view class="_div data-v-a472d066 step">Step 2: 点击<label class="_span data-v-a472d066">添加到我的小程序</label>
+                </view>
+                <view bindtap="handleProxy" class="_div data-v-a472d066 next-btn" data-comkey="{{$k}}" data-eventid="{{'6'}}">下一步</view>
+                <image class="_img data-v-a472d066 pic" src="https://media-image1.baydn.com/storage_media_image/vryjyo/a83b2c3bfcac6e9a581f79553cce9465.d61bf446729040ba9fb7ccbdf9b6b78a.jpg?x-oss-process=image/quality,q_80"></image>
+                <image class="_img data-v-a472d066 pointer" src="https://media-image1.baydn.com/storage_media_image/vryjyo/ebb8cd642e7fa687664a17ddc8e50e57.3aa77d14a019bacb336d3752ad5b8a68.gif"></image>
+            </view>
+            <view class="_div data-v-a472d066 tip3" hidden="{{!(tipIndex===3)}}">
+                <image class="_img data-v-a472d066 pic" src="https://media-image1.baydn.com/storage_media_image/vryjyo/28fac934bbaa146fd79c983aaf39b3fd.0fc5dbb62d93ad0cd5feef93c3e203f6.jpg?x-oss-process=image/quality,q_80"></image>
+                <image class="_img data-v-a472d066 pointer" src="https://media-image1.baydn.com/storage_media_image/vryjyo/2693edca21267861c4712966e80ec915.9ea680819a9d8ab006c2074ba347e0dd.gif"></image>
+                <view class="_div data-v-a472d066 step">Step 3: 用力下拉微信聊天页面，就可以从<label class="_span data-v-a472d066">“我的小程序”</label>进入扇贝每日一句啦～</view>
+                <view bindtap="handleProxy" class="_div data-v-a472d066 next-btn" data-comkey="{{$k}}" data-eventid="{{'7'}}">知道啦</view>
+            </view>
+        </view>
+    </view>
+</template>
+<import src="nav-bar$6acec6f9"></import>
+<import src="challenge$72dfb01a"></import>
+<import src="modal$47d16d3d"></import>

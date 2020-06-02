@@ -1,0 +1,10 @@
+<import src="./_mytuan.wxml"></import>
+<import src="./_opentuan.wxml"></import>
+<import src="/dist/toptips/index.wxml"></import>
+<view class="container">
+    <template is="zan-toptips" data="{{zanTopTips:zanTopTips}}"></template>
+    <template is="mytuan" data="{{...detail}}" wx:if="{{detail.currentUserStatus==1}}"></template>
+    <template is="opentuan" data="{{...detail}}" wx:else></template>
+    <cart-popup bindcreateTuan="handleCreateTuan" currentGood="{{currentGood}}" id="cartpop" showDialog="{{showDialog}}" type="tuan"></cart-popup>
+    <phonemodal showModal="{{showModal}}" url="{{url}}"></phonemodal>
+</view>

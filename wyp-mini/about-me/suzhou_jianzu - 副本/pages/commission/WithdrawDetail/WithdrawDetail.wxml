@@ -1,0 +1,21 @@
+<view class="container">
+    <view class="box" wx:if="{{data}}" wx:for="{{data}}" wx:for-item="i">
+        <view class="top">
+            <text>订单编号:{{i.ordersn}}</text>
+            <text>订单金额:{{i.price}}元</text>
+            <text>申请佣金:{{i.ordercommission}}元</text>
+            <text>审核佣金:{{i.orderpay}}元</text>
+        </view>
+        <view class="list" wx:if="{{i.goods}}" wx:for="{{i.goods}}">
+            <image src="{{item.thumb}}"></image>
+            <view class="title">
+                <text class="title1">{{item.title}}</text>
+                <text class="title2">佣金:{{item.commission}}元</text>
+            </view>
+            <view class="right">
+                <text class="rank">{{item.level}}级</text>
+                <text class="rank2">{{item.statusstr}}</text>
+            </view>
+        </view>
+    </view>
+</view>

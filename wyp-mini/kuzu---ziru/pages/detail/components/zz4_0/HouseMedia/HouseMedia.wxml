@@ -1,0 +1,19 @@
+<view class="{{['house-media data-v-ea541572',skeletonFlag?'active':'']}}" wx:if="{{videoLink||hxImage}}">
+    <swiper bindchange="__e" circular="{{true}}" class="preview-swiper data-v-ea541572" current="{{current}}" data-event-opts="{{[ [ 'change',[ [ 'handleSwiperChange',['$event'] ] ] ] ]}}">
+        <swiper-item bindtap="__e" class="media-item data-v-ea541572" data-event-opts="{{[ [ 'tap',[ [ 'handleJumpH5',['$0'],['videoLink'] ] ] ] ]}}" wx:if="{{videoLink}}">
+            <image binderror="__e" class="slide-image data-v-ea541572" data-event-opts="{{[ [ 'error',[ [ 'handleImageError',[0] ] ] ] ]}}" mode="aspectFill" src="{{previewImage}}" wx:if="{{!isImageError[0]&&previewImage}}"></image>
+            <image class="slide-image error data-v-ea541572" mode="aspectFill" src="{{errorImageSrc}}" wx:else></image>
+            <view class="image-center-wrapper data-v-ea541572">
+                <view class="{{['iconfont _i data-v-ea541572',videoLink?'icon-videoplay':'']}}"></view>
+            </view>
+        </swiper-item>
+        <swiper-item bindtap="__e" class="data-v-ea541572" data-event-opts="{{[ [ 'tap',[ [ 'handlePreviewImg',['$0'],['hxImage'] ] ] ] ]}}" wx:if="{{hxImage}}">
+            <image binderror="__e" class="slide-image data-v-ea541572" data-event-opts="{{[ [ 'error',[ [ 'handleImageError',[1] ] ] ] ]}}" mode="aspectFill" src="{{hxImage}}" wx:if="{{!isImageError[1]}}"></image>
+            <image class="slide-image error data-v-ea541572" mode="aspectFill" src="{{errorImageSrc}}" wx:else></image>
+        </swiper-item>
+    </swiper>
+    <view class="swiper-navigator data-v-ea541572">
+        <label bindtap="__e" class="{{['swiper-item _span data-v-ea541572',current===0?'active':'']}}" data-event-opts="{{[ [ 'tap',[ [ 'handleSwipeTo',[0] ] ] ] ]}}" wx:if="{{videoLink}}">视频</label>
+        <label bindtap="__e" class="{{['swiper-item _span data-v-ea541572',current===(videoLink?1:0)?'active':'']}}" data-event-opts="{{[ [ 'tap',[ [ 'handleSwipeTo',[videoLink?1:0] ] ] ] ]}}" wx:if="{{hxImage}}">户型</label>
+    </view>
+</view>

@@ -1,0 +1,31 @@
+<view class="container">
+    <view class="search-wrap" style="margin-bottom: 6rpx;">
+        <view class="search-cont">
+            <image src="http://imgcdnali.wfenxiao.com.cn/xcx/c/icons/ic_search.png" style="width: 32rpx; height: 32rpx;"></image>
+            <input bindconfirm="handleSearch" class="search-input" confirmType="搜索" placeholder="{{placeholder}}" value="{{keyword}}"></input>
+        </view>
+    </view>
+    <view style="margin-top:50rpx;font-size:28rpx;text-align:center;" wx:if="{{data.length==0}}">
+    暂无符合搜索条件的商品
+  </view>
+    <view class="pro-panel" wx:for="{{data}}" wx:key="{{index}}">
+        <view bindtap="makeproduct" class="pro-card" data-good="{{item}}">
+            <image class="pro-card__img" src="{{item.imgUrl}}"></image>
+            <view class="pro-card__detail">
+                <view class="zan-ellipsis--l2 pro-card__style">
+          {{item.name}}
+        </view>
+                <view class="pro-card__num">
+          已售{{item.saleNum}}件
+        </view>
+                <view class="pro-card__price">
+                    <text style="font-size: 22rpx;">¥</text>{{item.price}}</view>
+            </view>
+        </view>
+    </view>
+    <view class="search-end" wx:if="{{data.length>0}}">
+        <view class="search-end-border"></view>
+        <text>已经到底了</text>
+        <view class="search-end-border"></view>
+    </view>
+</view>

@@ -1,0 +1,26 @@
+<template name="0ee00906">
+    <view class="_div data-v-575a560f container">
+        <button appParameter="wechat" binderror="handleProxy" class="_button data-v-575a560f toApp" data-comkey="{{$k}}" data-eventid="{{'1_0'}}" openType="launchApp"></button>
+        <view bindtap="handleProxy" class="_div data-v-575a560f back" data-comkey="{{$k}}" data-eventid="{{'1_1'}}">
+            <image alt class="_img data-v-575a560f" src="https://static.xyzq.cn/activity/mp-images/mp-home/back2.png"></image>
+        </view>
+        <view class="_div data-v-575a560f musk-box" wx:if="{{isShow}}">
+            <view class="_div data-v-575a560f pop-up">
+                <view class="_div data-v-575a560f musk-p">
+                    <view class="_p data-v-575a560f">系统检测到您未安装优理宝APP，<view class="_br data-v-575a560f"></view>是否要下载并安装?</view>
+                </view>
+                <view bindtap="handleProxy" class="_div data-v-575a560f musk-click musk-click1" data-comkey="{{$k}}" data-eventid="{{'3_2'}}">取消</view>
+                <view bindtap="handleProxy" class="_div data-v-575a560f musk-click musk-click2" data-comkey="{{$k}}" data-eventid="{{'3_3'}}">下载并安装</view>
+            </view>
+        </view>
+        <view class="_div data-v-575a560f musk-box" wx:if="{{isIos}}">
+            <view class="_div data-v-575a560f pop-up-ios">
+                <view bindtap="handleProxy" class="_div data-v-575a560f closeMusk" data-comkey="{{$k}}" data-eventid="{{'3_4'}}"></view>
+                <view class="_p data-v-575a560f">如需下载,请长按网址复制后使用<view class="_br data-v-575a560f"></view>浏览器访问</view>
+                <view class="_h4 data-v-575a560f">
+                    <text bindtap="handleProxy" class="_text data-v-575a560f" data-comkey="{{$k}}" data-eventid="{{'4_5'}}" selectable="true">https://wap.xyzq.com.cn/</text>
+                </view>
+            </view>
+        </view>
+    </view>
+</template>

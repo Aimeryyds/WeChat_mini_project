@@ -1,0 +1,36 @@
+<import src="../../templates/orders/orderitemlistmoreproducts.wxml"></import>
+<import src="../../templates/orders/orderitemstate.wxml"></import>
+<import src="/dist/loadmore/index.wxml"></import>
+<import src="/dist/toptips/index.wxml"></import>
+<import src="/dist/toast/index.wxml"></import>
+<template is="zan-toast" data="{{zanToast:zanToast}}"></template>
+<template is="zan-toptips" data="{{zanTopTips:zanTopTips}}"></template>
+<view class="container orders-container">
+    <view class="no-order" hidden="{{orderList&&orderList.length>0||loading?true:false}}">
+        <image class="no-order-img" src="http://imgcdnali.wfenxiao.com.cn/xcx/c/icons/no_order.png"></image>
+        <view class="text">暂无订单</view>
+    </view>
+    <view class="order-list" hidden="{{!orderList||loading?true:false}}">
+        <view class="a-order" wx:for="{{orderList}}" wx:key="{{index}}">
+            <view bindtap="gotoshop" class="return-order-store" data-id="{{item.storeId}}">
+                <image src="http://imgcdnali.wfenxiao.com.cn/xcx/c/icons/store.png" style="width:34rpx; height:34rpx"></image>
+                <text class="return-order-store-name">{{item.brandName}}-{{item.storeName}}</text>
+            </view>
+            <navigator url="{{'/pages/returngoods/applydetail/index?id='+item.refundId}}">
+                <view class="orders-goods" data-id="{{item.id}}">
+                    <template is="order-more-goods" data="{{goods:item.goodsList,goodsTotal:item.goodsTotal,totalPrice:item.total,giveawayList:item.giveawayList||[],isReturnGoods:true}}"></template>
+                    <view class="return-order-action-content">
+                        <view class="return-order-type">{{item.refundType=='1'?'申请退款':'申请退货退款'}}</view>
+                        <view class="return-order-state">
+                            <image src="{{item.refundStatus=='0'?'http://imgcdnali.wfenxiao.com.cn/xcx/c/1120/apply-no.png':item.refundStatus=='70'?'http://imgcdnali.wfenxiao.com.cn/xcx/c/1120/apply-ok.png':'http://imgcdnali.wfenxiao.com.cn/xcx/c/1120/apply-ing.png'}}" style="width:26rpx; height:26rpx; margin-top:6rpx"></image>
+                            <view style="margin-left:10rpx;opacity:0.43;">{{item.refundStatus=='0'?'退款关闭':item.refundStatus=='70'?'退款成功':'退款中'}}</view>
+                        </view>
+                    </view>
+                </view>
+            </navigator>
+        </view>
+        <view id="loadmore">
+            <template is="zan-loadmore" data="{{loading:loadmore}}"></template>
+        </view>
+    </view>
+</view>

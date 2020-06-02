@@ -1,0 +1,40 @@
+<view class="{{['house-roommates house-detail data-v-d483933a',skeletonFlag?'active':'']}}" wx:if="{{roomData&&roommates&&roommates.length}}">
+    <view class="block-title _h2 data-v-d483933a">房屋信息</view>
+    <view class="list-wrap data-v-d483933a">
+        <block wx:for="{{roommates}}" wx:for-index="__i0__" wx:key="room_id">
+            <view bindtap="__e" class="available-item data-v-d483933a" data-event-opts="{{[ [ 'tap',[ [ 'handleJumpHouse',[ [ 'o',['id',item.room_id],['house_id',item.house_id] ] ] ] ] ] ]}}" wx:if="{{item.status===0}}">
+                <image class="image data-v-d483933a" mode="widthFix" src="{{item.photo}}"></image>
+                <view class="info data-v-d483933a">
+                    <view class="top data-v-d483933a">
+                        <view class="name-tag _div data-v-d483933a">
+                            <label class="name _span data-v-d483933a">{{item.title}}</label>
+                            <view class="{{['png-icon png-tag _i data-v-d483933a','icon-room-status-'+item.status_id||'0']}}"></view>
+                        </view>
+                        <label class="price _span data-v-d483933a">￥<label class="price-n _span data-v-d483933a" style="{{'width:'+'9px'+';'+'height:'+'12px'+';'+'background-image:'+'url('+item.price[0]+')'+';'+'background-size:'+'auto '+'12px'+';'+'background-position:'+'-'+p*12+'px'+';'}}" wx:for="{{item.price[1]}}" wx:for-index="i" wx:for-item="p" wx:key="i"></label>{{''+item.price_unit+''}}</label>
+                    </view>
+                    <view class="bottom data-v-d483933a">
+                        <label class="_span data-v-d483933a" wx:if="{{item.area}}">{{''+item.area+'㎡'}}<label class="split _span data-v-d483933a" wx:if="{{item.face||item.feature}}">|</label>
+                        </label>
+                        <label class="_span data-v-d483933a" wx:if="{{item.face}}">{{''+item.face+''}}<label class="split _span data-v-d483933a" wx:if="{{item.feature}}">|</label>
+                        </label>
+                        <label class="_span data-v-d483933a" wx:if="{{item.feature}}">{{item.feature}}</label>
+                    </view>
+                </view>
+            </view>
+            <view class="item data-v-d483933a" wx:else>
+                <image class="image data-v-d483933a" mode="widthFix" src="{{item.avatar}}"></image>
+                <view class="room-info data-v-d483933a">
+                    <view class="left data-v-d483933a">{{item.title}}<label class="_span data-v-d483933a" wx:if="{{item.checkin}}">{{'·'+item.checkin}}</label>
+                    </view>
+                    <view class="right data-v-d483933a">
+                        <label class="_span data-v-d483933a" wx:if="{{item.roommate_gender}}">{{''+item.roommate_gender+''}}<label class="split _span data-v-d483933a" wx:if="{{item.roommate_horoscope||item.roommate_profession}}">|</label>
+                        </label>
+                        <label class="_span data-v-d483933a" wx:if="{{item.roommate_horoscope}}">{{''+item.roommate_horoscope+''}}<label class="split _span data-v-d483933a" wx:if="{{item.roommate_profession}}">|</label>
+                        </label>
+                        <label class="_span data-v-d483933a" wx:if="{{item.roommate_profession}}">{{item.roommate_profession}}</label>
+                    </view>
+                </view>
+            </view>
+        </block>
+    </view>
+</view>

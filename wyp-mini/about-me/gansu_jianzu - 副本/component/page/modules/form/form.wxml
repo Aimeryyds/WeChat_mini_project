@@ -1,0 +1,194 @@
+<template name="textarea">
+    <view class="label {{!validations.presence.allowEmpty?'required':''}}">
+        {{label}}
+        <block wx:if="{{error}}">[<text class="error">{{error}}</text>]</block>
+    </view>
+    <view class="cell">
+        <view class="cell__bd">
+            <textarea bindinput="handleFieldChange" class="textarea" data-index="{{fieldIndex}}" name="{{name}}" placeholder="{{placeholder}}" placeholderStyle="color:#bfbfbf" value="{{value}}"></textarea>
+        </view>
+    </view>
+</template>
+<template name="upload">
+    <view class="label {{!validations.presence.allowEmpty?'required':''}}">
+        {{label}}
+        <block wx:if="{{error}}">[<text class="error">{{error}}</text>]</block>
+    </view>
+    <view class="cell">
+        <view class="cell__bd">
+            <view class="upload">
+                <input hidden name="{{name}}" type="hidden" value="{{value}}"></input>
+                <view class="upload--img-container" wx:for="{{value}}" wx:for-item="image" wx:key="{{index}}">
+                    <image mode="scaleToFill" src="{{image}}" style="width:200rpx;height:200rpx"></image>
+                    <image class="upload--remove" data-imgindex="{{index}}" data-index="{{fieldIndex}}" mode="scaleToFill" ontap="handleRemoveImg" src="http://imgcdnali.wfenxiao.com.cn/xcx/c/gongqiu/delete.png"></image>
+                </view>
+                <view class="upload--action" data-index="{{fieldIndex}}" ontap="handleChooseImg" wx:if="{{!value||!validations.length.maximum||value.length<validations.length.maximum}}">
+                    <image mode="scaleToFill" src="http://imgcdnali.wfenxiao.com.cn/xcx/c/gongqiu/upload.png" style="width:80rpx;height:80rpx"></image>
+                </view>
+            </view>
+        </view>
+    </view>
+</template>
+<template name="location">
+    <view class="label {{!validations.presence.allowEmpty?'required':''}}">
+        {{label}}
+        <block wx:if="{{error}}">[<text class="error">{{error}}</text>]</block>
+    </view>
+    <view class="cell">
+        <view class="cell__bd">
+            <view style="position:relative">
+                <input bindinput="handleFieldChange" class="text" data-index="{{fieldIndex}}" name="{{name}}" placeholder="{{placeholder}}" placeholderStyle="color:#bfbfbf" style="padding-right:80rpx" value="{{value}}"></input>
+                <view style="position:absolute;top:0;right:0;display:flex;justify-content:center;align-items:center;width:60rpx;height:80rpx;z-index:9">
+                    <image bindtap="handleGetLocation" data-index="{{fieldIndex}}" mode="scaleToFill" src="http://imgcdnali.wfenxiao.com.cn/xcx/c/address-grey.png" style="width:36rpx;height:48rpx"></image>
+                </view>
+            </view>
+        </view>
+    </view>
+</template>
+<template name="date">
+    <view class="label {{!validations.presence.allowEmpty?'required':''}}">
+        {{label}}
+        <block wx:if="{{error}}">[<text class="error">{{error}}</text>]</block>
+    </view>
+    <view class="cell" wx:if="{{mode=='time'}}">
+        <view class="cell__bd">
+            <picker bindchange="handleSelecteTime" data-index="{{fieldIndex}}" mode="time">
+                <input disabled class="text" name="{{name}}" placeholder="请选择时间" placeholderStyle="color:#bfbfbf" value="{{value}}"></input>
+            </picker>
+        </view>
+    </view>
+    <view class="cell" wx:else>
+        <view bindtap="showDatePicker" class="cell__bd" data-date="{{value}}" data-enabletime="{{mode=='datetime'}}" data-index="{{fieldIndex}}">
+            <input disabled class="text" name="{{name}}" placeholder="{{placeholder}}" placeholderStyle="color:#bfbfbf" value="{{value}}"></input>
+        </view>
+    </view>
+</template>
+<template name="checkbox">
+    <view class="label {{!validations.presence.allowEmpty?'required':''}}">
+        {{label}}
+        <block wx:if="{{error}}">[<text class="error">{{error}}</text>]</block>
+    </view>
+    <checkbox-group bindchange="handleFieldChange" data-index="{{fieldIndex}}" style="width:100%" wx:if="{{mode=='text'}}">
+        <view class="cell" wx:for="{{options}}" wx:for-item="option" wx:key="index">
+            <label class="cell__bd" style="display:flex;align-items:center">
+                <checkbox checked="{{option.checked}}" name="{{name}}" style="margin-right:12rpx" value="{{option.id}}"></checkbox>
+                <view style="flex:1">{{option.value}}</view>
+            </label>
+        </view>
+    </checkbox-group>
+    <view class="cell" style="padding-bottom: 0rpx" wx:elif="{{mode=='image'}}">
+        <view class="cell__bd">
+            <checkbox-group bindchange="handleFieldChange" data-index="{{fieldIndex}}" style="width:100%">
+                <view class="img-container">
+                    <label wx:for="{{options}}" wx:for-item="option" wx:key="index">
+                        <checkbox hidden checked="{{option.checked}}" name="{{name}}" value="{{option.id}}"></checkbox>
+                        <view class="cover" wx:if="{{option.checked}}">
+                            <image mode="scaleToFill" src="http://imgcdnali.wfenxiao.com.cn/xcx/c/order/order-success.png" style="z-index:9;width:60rpx;height:60rpx"></image>
+                        </view>
+                        <image class="thumb" mode="scaleToFill" src="{{option.imgUrl}}"></image>
+                        <view class="name">{{option.value}}</view>
+                    </label>
+                </view>
+            </checkbox-group>
+        </view>
+    </view>
+</template>
+<template name="radio">
+    <view class="label {{!validations.presence.allowEmpty?'required':''}}">
+        {{label}}
+        <block wx:if="{{error}}">[<text class="error">{{error}}</text>]</block>
+    </view>
+    <radio-group bindchange="handleFieldChange" data-index="{{fieldIndex}}" style="width:100%" wx:if="{{mode=='text'}}">
+        <view class="cell" wx:for="{{options}}" wx:for-item="option" wx:key="index">
+            <label class="cell__bd" style="display:flex;align-items:center">
+                <radio checked="{{option.checked}}" name="{{name}}" style="margin-right:12rpx" value="{{option.id}}"></radio>
+                <view style="flex:1">{{option.value}}</view>
+            </label>
+        </view>
+    </radio-group>
+    <view class="cell" style="padding-bottom: 0rpx" wx:elif="{{mode=='image'}}">
+        <view class="cell__bd">
+            <radio-group bindchange="handleFieldChange" class="img-container" data-index="{{fieldIndex}}">
+                <label wx:for="{{options}}" wx:for-item="option" wx:key="index">
+                    <radio hidden checked="{{option.checked}}" name="{{name}}" value="{{option.id}}"></radio>
+                    <view class="cover" wx:if="{{option.checked}}">
+                        <image mode="scaleToFill" src="http://imgcdnali.wfenxiao.com.cn/xcx/c/order/order-success.png" style="z-index:9;width:60rpx;height:60rpx"></image>
+                    </view>
+                    <image class="thumb" mode="scaleToFill" src="{{option.imgUrl}}"></image>
+                    <view class="name">{{option.value}}</view>
+                </label>
+            </radio-group>
+        </view>
+    </view>
+</template>
+<template name="picker">
+    <view class="label {{!validations.presence.allowEmpty?'required':''}}">
+        {{label}}
+        <block wx:if="{{error}}">[<text class="error">{{error}}</text>]</block>
+    </view>
+    <view class="cell">
+        <view class="cell__bd">
+            <picker bindchange="handleFieldChange" data-index="{{fieldIndex}}" range="{{options}}" rangeKey="value" value="{{selectedIndex}}">
+                <view style="position:relative">
+                    <input disabled class="text" data-index="{{fieldIndex}}" name="{{name}}" placeholder="{{placeholder}}" placeholderStyle="color:#bfbfbf" style="padding-right:80rpx" value="{{options[selectedIndex].value}}"></input>
+                    <view style="position:absolute;top:0;right:0;display:flex;justify-content:center;align-items:center;width:60rpx;height:80rpx;z-index:9">
+                        <view style="width:0;height:0;border-top:16rpx solid #e5e5e5;border-right:12rpx solid transparent;border-left:12rpx solid transparent;"></view>
+                    </view>
+                </view>
+            </picker>
+        </view>
+    </view>
+</template>
+<template name="number">
+    <view class="label {{!validations.presence.allowEmpty?'required':''}}">
+        {{label}}
+        <block wx:if="{{error}}">[<text class="error">{{error}}</text>]</block>
+    </view>
+    <view class="cell">
+        <view class="cell__bd">
+            <input bindinput="handleFieldChange" class="text" data-index="{{fieldIndex}}" name="{{name}}" placeholder="{{placeholder}}" placeholderStyle="color:#bfbfbf" type="digit" value="{{value}}" wx:if="{{!validations.numericality.onlyInteger}}"></input>
+            <input bindinput="handleFieldChange" class="text" data-index="{{fieldIndex}}" name="{{name}}" placeholder="{{placeholder}}" placeholderStyle="color:#bfbfbf" type="number" value="{{value}}" wx:else></input>
+        </view>
+    </view>
+</template>
+<template name="text">
+    <view class="label {{!validations.presence.allowEmpty?'required':''}}">
+        {{label}}
+        <block wx:if="{{error}}">[<text class="error">{{error}}</text>]</block>
+    </view>
+    <view class="cell">
+        <view class="cell__bd">
+            <input bindinput="handleFieldChange" class="text" data-index="{{fieldIndex}}" name="{{name}}" placeholder="{{placeholder}}" placeholderStyle="color:#bfbfbf" type="idcard" value="{{value}}" wx:if="{{validations.idcard}}"></input>
+            <input bindinput="handleFieldChange" class="text" data-index="{{fieldIndex}}" name="{{name}}" placeholder="{{placeholder}}" placeholderStyle="color:#bfbfbf" type="number" value="{{value}}" wx:elif="{{validations.cellphone}}"></input>
+            <input bindinput="handleFieldChange" class="text" data-index="{{fieldIndex}}" name="{{name}}" placeholder="{{placeholder}}" placeholderStyle="color:#bfbfbf" type="text" value="{{value}}" wx:else></input>
+        </view>
+    </view>
+</template>
+<toast show="{{toast.show}}" title="{{toast.title}}"></toast>
+<view class="c-form" wx:if="{{form.fields&&form.fields.length>0}}">
+    <view class="zan-dialog {{datePicker.showDatePicker?'zan-dialog--show':'zan-dialog--hide'}}">
+        <view bindtap="hideDatePicker" class="zan-dialog__mask"></view>
+        <view class="zan-dialog__container">
+            <date-picker bindonselectdate="handleSelecteDate" data-index="{{datePicker.fieldIndex}}" date="{{datePicker.currDate}}" enableTime="{{datePicker.enableTime}}" show="{{datePicker.showDatePicker}}"></date-picker>
+        </view>
+    </view>
+    <view class="header">{{form.name}}</view>
+    <form bindsubmit="handleFormSubmit">
+        <view class="row" wx:for="{{form.fields}}" wx:for-item="field" wx:key="index">
+            <template is="text" data="{{...field,fieldIndex:index}}" wx:if="{{field.type=='text'}}"></template>
+            <template is="picker" data="{{...field,fieldIndex:index}}" wx:if="{{field.type=='picker'}}"></template>
+            <template is="radio" data="{{...field,fieldIndex:index}}" wx:elif="{{field.type=='radio'}}"></template>
+            <template is="checkbox" data="{{...field,fieldIndex:index}}" wx:elif="{{field.type=='checkbox'}}"></template>
+            <template is="date" data="{{...field,fieldIndex:index}}" wx:elif="{{field.type=='date'}}"></template>
+            <template is="location" data="{{...field,fieldIndex:index}}" wx:elif="{{field.type=='location'}}"></template>
+            <template is="upload" data="{{...field,fieldIndex:index}}" wx:elif="{{field.type=='upload'}}"></template>
+            <template is="textarea" data="{{...field,fieldIndex:index}}" wx:elif="{{field.type=='textarea'}}"></template>
+            <template is="number" data="{{...field,fieldIndex:index}}" wx:elif="{{field.type=='number'}}"></template>
+        </view>
+        <view class="row submitRow">
+            <button class="submitBtn" formType="submit" style="background-color:{{form.submit.backgroundColor}};color:{{form.submit.fontColor}}" type="primary">
+        {{form.submit.name}}
+      </button>
+        </view>
+    </form>
+</view>

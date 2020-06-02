@@ -1,0 +1,67 @@
+<view class="todayPlateWrap data-v-61cf9d9c">
+    <view class="titleWrap data-v-61cf9d9c">
+        <view class="plate data-v-61cf9d9c">今日板块</view>
+        <view bindtap="__e" class="jumpMore data-v-61cf9d9c" data-event-opts="{{[ [ 'tap',[ [ 'jumpMore',['$event'] ] ] ] ]}}">查看全部板块</view>
+    </view>
+    <scroll-view class="contentWrap data-v-61cf9d9c" scrollX="true" showScrollbar="false">
+        <view class="itemWrap data-v-61cf9d9c">
+            <view class="plateWrap data-v-61cf9d9c">
+                <view class="smallTit data-v-61cf9d9c">热门概念</view>
+                <view class="plateContent data-v-61cf9d9c">
+                    <view bindtap="__e" class="{{['plateItemWrap data-v-61cf9d9c','plate_'+index]}}" data-event-opts="{{[ [ 'tap',[ [ 'jumpBlockDetail',['$0'],[ [ ['hotConcept','blockName',item[$orig].blockName] ] ] ] ] ] ]}}" wx:for="{{$root.l0}}" wx:key="blockName">
+                        <view class="topWrap item data-v-61cf9d9c">
+                            <view class="name data-v-61cf9d9c">
+                                <text class="data-v-61cf9d9c">{{item.f0}}</text>
+                            </view>
+                            <view class="{{['rate data-v-61cf9d9c',item[$orig].blockGain<0?'low':'up']}}">{{item.f1}}</view>
+                        </view>
+                        <view class="btmWrap item data-v-61cf9d9c">
+                            <view class="name data-v-61cf9d9c">{{item.f2}}</view>
+                            <view class="{{['rate data-v-61cf9d9c',item[$orig].sharesGain<0?'low':'up']}}">{{item.f3}}</view>
+                        </view>
+                    </view>
+                    <view class="line line_one data-v-61cf9d9c"></view>
+                    <view class="line line_two data-v-61cf9d9c"></view>
+                </view>
+            </view>
+        </view>
+        <view class="itemWrap data-v-61cf9d9c">
+            <view class="plateWrap data-v-61cf9d9c">
+                <view class="smallTit data-v-61cf9d9c">热门行业</view>
+                <view class="plateContent data-v-61cf9d9c">
+                    <view bindtap="__e" class="{{['plateItemWrap data-v-61cf9d9c','plate_'+index]}}" data-event-opts="{{[ [ 'tap',[ [ 'jumpBlockDetail',['$0'],[ [ ['hotIndustry','blockName',item[$orig].blockName] ] ] ] ] ] ]}}" wx:for="{{$root.l1}}" wx:key="blockName">
+                        <view class="topWrap item data-v-61cf9d9c">
+                            <view class="name data-v-61cf9d9c">{{item.f4}}</view>
+                            <view class="{{['rate data-v-61cf9d9c',item[$orig].blockGain<0?'low':'up']}}">{{item.f5}}</view>
+                        </view>
+                        <view class="btmWrap item data-v-61cf9d9c">
+                            <view class="name data-v-61cf9d9c">{{item.f6}}</view>
+                            <view class="{{['rate data-v-61cf9d9c',item[$orig].sharesGain<0?'low':'up']}}">{{item.f7}}</view>
+                        </view>
+                    </view>
+                    <view class="line line_one data-v-61cf9d9c"></view>
+                    <view class="line line_two data-v-61cf9d9c"></view>
+                </view>
+            </view>
+        </view>
+        <view class="itemWrap data-v-61cf9d9c">
+            <view class="plateWrap data-v-61cf9d9c">
+                <view class="smallTit data-v-61cf9d9c">5日持续热度板块</view>
+                <view class="plateContent data-v-61cf9d9c">
+                    <view bindtap="__e" class="{{['plateItemWrap data-v-61cf9d9c','plate_'+index]}}" data-event-opts="{{[ [ 'tap',[ [ 'jumpBlockDetail',['$0'],[ [ ['maximumHeatInFiveDays','blockName',item[$orig].blockName] ] ] ] ] ] ]}}" wx:for="{{$root.l2}}" wx:key="blockName">
+                        <view class="topWrap item data-v-61cf9d9c">
+                            <view class="name data-v-61cf9d9c">{{item.f8}}</view>
+                            <view class="{{['rate data-v-61cf9d9c',item[$orig].blockGain<0?'low':'up']}}">{{item.f9}}</view>
+                        </view>
+                        <view class="btmWrap item data-v-61cf9d9c">
+                            <view class="name data-v-61cf9d9c">{{item.f10}}</view>
+                            <view class="{{['rate data-v-61cf9d9c',item[$orig].sharesGain<0?'low':'up']}}">{{item.f11}}</view>
+                        </view>
+                    </view>
+                    <view class="line line_one data-v-61cf9d9c"></view>
+                    <view class="line line_two data-v-61cf9d9c"></view>
+                </view>
+            </view>
+        </view>
+    </scroll-view>
+</view>

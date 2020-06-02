@@ -1,0 +1,45 @@
+<template name="cate_list">
+    <view class="container">
+        <scroll-view class="cate-menu" scrollX="true">
+            <view bindtap="switchCate" class="{{cid==item.id?'selected':'unselected'}}" data-idx="{{index}}" id="{{item.id}}" wx:for="{{categories}}">{{item.name}}</view>
+        </scroll-view>
+        <view class="empty-wrap" wx:if="{{goods_list.length==0}}">
+            <image src="../../images/empty/img_dingdan.png"></image>
+            <view class="text">
+                <text>暂无该分类商品</text>
+            </view>
+        </view>
+        <view class="content" wx:else>
+            <view class="recommon-wrap tabbarTop">
+                <view class="recommon-grid" wx:if="{{cateExt.goodsType==1}}">
+                    <view bindtap="go2Detail" class="recommon-item" id="{{item.goodsSn}}" wx:for="{{goods_list}}">
+                        <image class="{{item.groupMarket?'is_group':''}}" src="{{item.thumb}}"></image>
+                        <view class="item-footer">
+                            <view class="item-left">
+                                <text class="item-title">{{item.name}}</text>
+                                <text class="item-price">¥ {{item.price}}</text>
+                            </view>
+                        </view>
+                    </view>
+                </view>
+                <view class="recommon-list tabbarTop" wx:if="{{cateExt.goodsType==2}}">
+                    <navigator class="recommon-item" url="../shopdetail/shopdetail?goodsSn={{item.goodsSn}}" wx:for="{{goods_list}}">
+                        <image class="item-image" src="{{item.thumb}}"></image>
+                        <view class="item-right">
+                            <text class="item-title">{{item.name}}</text>
+                            <view class="item-bottom">
+                                <text class="item-price">¥ {{item.price}}</text>
+                                <view catchtap="join2Cart" class="join-btn" id="{{item.goodsSn}}">
+                                    <image src="../../images/icon_cart.png"></image>
+                                </view>
+                            </view>
+                        </view>
+                    </navigator>
+                </view>
+            </view>
+        </view>
+        <view class="load-more" wx:if="{{showMore}}">
+            <text>继续拖动，查看更多</text>
+        </view>
+    </view>
+</template>

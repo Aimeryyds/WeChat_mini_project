@@ -1,0 +1,16 @@
+<view class="integral">我的积分：{{credit}}</view>
+<view bindtap="torecording" class="item" wx:for="{{data.list}}">
+    <image class="left" src="{{item.thumb}}"></image>
+    <view class="center">
+        <view style="overflow: hidden;text-overflow:ellipsis;white-space: nowrap;">{{item.title}}</view>
+        <view style="font-size: 24rpx;margin-top: 12rpx;">我是时间</view>
+    </view>
+    <view class="right">
+        <view style="color:rgb(205, 121, 140)">-{{item.credit}}积分</view>
+        <view style="margin-top: 12rpx;">
+            <block wx:if="{{item.status=='1'&&item.paystatus=='0'}}">待支付</block>
+            <block wx:elif="{{item.status=='2'}}">待发货</block>
+            <block wx:elif="{{item.status=='2'&&item.paystatus=='2'}}">已完成</block>
+        </view>
+    </view>
+</view>

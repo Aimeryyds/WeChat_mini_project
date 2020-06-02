@@ -1,0 +1,9 @@
+<view class="form_tit" wx:if="{{f_item.title}}">{{f_item.title}}<text class="ture_color">*</text>
+</view>
+<view class="form_li">
+    <radio-group class="radio-group" name="{{f_item.name}}">
+        <label class="radio" wx:for="{{f_item.list}}" wx:for-index="key" wx:for-item="val">
+            <radio checked="{{val.checked}}" class="zoom_80" color="{{config.font_color=='#ffffff'?config.background:'green'}}" disabled="{{val.disabled}}" value="{{val.value}}"></radio>{{val.value}} 
+  </label>
+    </radio-group>
+</view>

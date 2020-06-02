@@ -1,0 +1,14 @@
+<view class="{{'timezone-wrapper '+(props.showTimezonePicker?'show':'')}}" wx:if="{{$taroCompReady}}">
+    <view bindtap="anonymousFunc0" class="mask"></view>
+    <view class="timezone-picker">
+        <view class="controller">
+            <view bindtap="anonymousFunc1" class="cancel">取消</view>
+            <view bindtap="anonymousFunc2" class="confirm">确定</view>
+        </view>
+        <picker-view bindtap="anonymousFunc3" class="timezone-picker-body" indicatorStyle="height: 50px;" style="width: 100%; height: 250px;" value="{{timezoneLabelSelected}}">
+            <picker-view-column>
+                <view style="line-height: 50px" wx:for="{{props.defaultTimezoneArray}}" wx:for-index="idx" wx:key="idx">{{item}}</view>
+            </picker-view-column>
+        </picker-view>
+    </view>
+</view>

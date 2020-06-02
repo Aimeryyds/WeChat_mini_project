@@ -1,0 +1,16 @@
+<template name="shop-item">
+    <navigator class="shop-item" hoverClass="hover" openType="redirect" url="../shopdetail/shopdetail?goodsSn={{item.goodsSn}}">
+        <image mode="widthFix" src="{{item.thumb}}" style="background: lightgray"></image>
+        <text class="shop-item__title">{{item.name}}</text>
+        <view class="shop-item__footer">
+            <view class="shop-item__price">
+                <text class="main-price">¥{{item.groupMarket.groupMarketPrice}}</text>
+                <text class="delete-price">¥{{item.price}}</text>
+            </view>
+            <view class="shop-footer__buttons">
+                <view>{{item.groupMarket.attendNum}}人团</view>
+                <view>去开团</view>
+            </view>
+        </view>
+    </navigator>
+</template>

@@ -1,0 +1,29 @@
+<navigation-bar title="{{cdDetail.info.title}}"></navigation-bar>
+<view bindtap="pageReload" class="cplist_nodata" wx:if="{{requeseFail}}">{{requeseFailTips}}</view>
+<view style="padding-top:{{barHeight}}px" wx:else>
+    <view class="cdtitle">{{cdDetail.info.title}}<view class="cd_am">{{cdDetail.info.amount}}篇菜谱</view>
+    </view>
+    <view class="auinfo">
+        <image src="{{cdDetail.info.author.avatar_url}}"></image>
+        <view class="aun">{{cdDetail.info.author.nickname}}</view>
+    </view>
+    <view class="cd_des" wx:if="{{cdDetail.info.description}}">{{cdDetail.info.description}}</view>
+    <view class="cpw">
+        <view class="cpitem" wx:for="{{cdDetail.items}}" wx:key="key">
+            <navigator hoverClass="navigator-hover" url="/pages/content/content?id={{item.id}}">
+                <view class="imgw">
+                    <image src="{{item.img}}"></image>
+                </view>
+                <view class="cpn">{{item.title}}</view>
+            </navigator>
+        </view>
+    </view>
+    <view class="bottombar">
+        <image src="{{shareicon}}"></image>
+        <text>分享</text>
+        <button class="share_bottom" openType="share"></button>
+    </view>
+</view>
+<loading hidden="{{requeseDone}}">
+ 加载中...
+</loading>

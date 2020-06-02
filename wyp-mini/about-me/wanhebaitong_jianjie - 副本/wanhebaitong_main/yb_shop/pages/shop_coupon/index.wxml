@@ -1,0 +1,25 @@
+<view wx:if="{{show}}">
+    <view class="coupon_box{{item.is_get==1?'1':''}}" wx:for="{{list}}">
+        <view class="coupon_no">
+            <text>余{{item.rem_count}}/{{item.count}}</text>
+        </view>
+        <view class="coupon_price">
+            <text class="price01">￥</text>
+            <text class="price02">{{item.discount_money}}</text>
+        </view>
+        <view class="coupon_time">
+            <text>满{{item.satisfy_money}}可用 有效期：{{item.endtime}}</text>
+        </view>
+        <view bindtap="{{item.is_get==1?'':'getCoupon'}}" class="receive_btn" data-endtime="{{item.end_time}}" data-id="{{item.id}}"></view>
+        <view class="coupon_receive">
+            <text>立即领劵</text>
+        </view>
+    </view>
+    <view class="fui-loading empty" wx:if="{{list.length==0&&loaded}}">
+        <view class="text">暂无优惠券</view>
+    </view>
+</view>
+<block wx:if="{{showtabbar}}">
+    <view style="height:100rpx"></view>
+    <include src="/yb_shop/pages/common/menu.wxml"></include>
+</block>

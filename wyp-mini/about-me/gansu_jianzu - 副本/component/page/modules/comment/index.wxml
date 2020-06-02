@@ -1,0 +1,35 @@
+<wxc-toast icon="{{toast.icon}}" iconColor="#ff5777" isShow="{{toast.isShow}}" text="{{toast.text}}"></wxc-toast>
+<view class="zan-panel index-module comment-panel " style="margin-bottom: {{module.options.gap||''}}rpx; ">
+    <form bindsubmit="onSubmitComment">
+        <view class="row">
+            <view class="label required">姓 名</view>
+            <view class="comment-input">
+                <input bindinput="onCommentChange" confirmType="next" id="name" name="name" placeholderClass="colorGrey" value="{{comment.name}}"></input>
+            </view>
+        </view>
+        <view class="row">
+            <view class="label required">手机号</view>
+            <view class="comment-input">
+                <input bindinput="onCommentChange" confirmType="next" id="phone" maxlength="11" name="phone" placeholderClass="colorGrey" type="number" value="{{comment.phone}}"></input>
+            </view>
+        </view>
+        <view class="row">
+            <view class="label">QQ/微信</view>
+            <view class="comment-input">
+                <input bindinput="onCommentChange" confirmType="next" id="weixin" name="weixin" placeholderClass="colorGrey" value="{{comment.weixin}}"></input>
+            </view>
+        </view>
+        <view class="row">
+            <view class="label required">咨询内容</view>
+            <view class="comment-input">
+                <input bindinput="onCommentChange" confirmType="done" id="content" name="content" placeholderClass="colorGrey" value="{{comment.content}}"></input>
+            </view>
+        </view>
+        <view class="row" style="margin-bottom:0">
+            <view class="label"></view>
+            <view class="comment-input">
+                <button class="submitBtn" formType="submit" size="mini" style="background: {{pageCommon.bgcolor}}" type="primary">提 交</button>
+            </view>
+        </view>
+    </form>
+</view>

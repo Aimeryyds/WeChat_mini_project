@@ -1,0 +1,35 @@
+<template name="621b76e2">
+    <view class="_div data-v-83146012 container" style=" {{'background-image:'+'url('+bookplanInfo.cover_url+')'+';'}}" wx:if="{{articleKnowledges.length}}">
+        <view class="_div data-v-83146012 img-overlay"></view>
+        <view class="_div data-v-83146012 logo"></view>
+        <view class="_div data-v-83146012 article-tabs">
+            <view bindtap="handleProxy" class="_div data-v-83146012 tab" data-comkey="{{$k}}" data-eventid="{{'0-'+index}}" key="{{book.bookId}}" wx:for="{{books}}" wx:for-item="book" wx:key="book.bookId">
+                <label class="_span data-v-83146012">{{book.title}}</label>
+                <view class="_div data-v-83146012 border" wx:if="{{book.bookId===currentBookId}}"></view>
+            </view>
+        </view>
+        <view class="_div data-v-83146012 cards-area">
+            <scroll-view scrollWithAnimation scrollY class="_scroll-view data-v-83146012 article-list list" scrollIntoView="{{currentArticleId}}">
+                <view bindtap="handleProxy" class="_div data-v-83146012 item {{[card.article_id===currentArticleId?'active':'']}}" data-comkey="{{$k}}" data-eventid="{{'1-'+index}}" id="{{card.article_id}}" key="{{card.article_id}}" wx:for="{{articleKnowledges}}" wx:for-item="card" wx:key="card.article_id">第{{index+1}}章</view>
+            </scroll-view>
+            <scroll-view scrollWithAnimation scrollY class="_scroll-view data-v-83146012 card-list list" scrollIntoView="{{articleKnowledges[currentArticleIndex].article_knowledges[0].id}}">
+                <view class="_div data-v-83146012 item-card" id="{{card.id}}" key="{{cardIndex}}" wx:for="{{articleKnowledges[currentArticleIndex].article_knowledges}}" wx:for-index="cardIndex" wx:for-item="card" wx:key="cardIndex">
+                    <view class="_div data-v-83146012 card-meta">
+                        <view class="_div data-v-83146012">
+                            <view class="_div data-v-83146012 title title-en">{{card.title_en}}</view>
+                            <view class="_div data-v-83146012 title title-cn">
+                                <label class="_span data-v-83146012">{{card.title_cn}}</label>
+                                <view class="_div data-v-83146012 border"></view>
+                            </view>
+                        </view>
+                        <button bindtap="handleProxy" class="_button data-v-83146012 btn-save" data-comkey="{{$k}}" data-eventid="{{'2-'+cardIndex}}">
+                            <view class="_div data-v-83146012 download"></view>保存精美卡片
+                    </button>
+                    </view>
+                    <view class="_div data-v-83146012 definition">{{card.content_cn}}</view>
+                    <image class="_img data-v-83146012 img" mode="widthFix" src="{{card.image_url}}" wx:if="{{card.image_url}}"></image>
+                </view>
+            </scroll-view>
+        </view>
+    </view>
+</template>

@@ -1,0 +1,29 @@
+<template name="checkin$5d8ab9ac">
+    <view class="_div data-v-04a16dbc checkin">
+        <template is="nav-bar$6acec6f9" data="{{...$root[$kk+'0'],$root:$root}}"></template>
+        <view class="_div data-v-04a16dbc checkin-count">
+            <view class="_div data-v-04a16dbc count">
+                <view class="_div data-v-04a16dbc num">{{userInfo.checkin_count}}</view>
+                <view class="_div data-v-04a16dbc des">签到总天数</view>
+            </view>
+        </view>
+        <view class="_div data-v-04a16dbc calendar">
+            <view class="_div data-v-04a16dbc month">— {{currentMonth}} —</view>
+            <view class="_div data-v-04a16dbc week">
+                <label class="_span data-v-04a16dbc">SUN</label>
+                <label class="_span data-v-04a16dbc">MON</label>
+                <label class="_span data-v-04a16dbc">TUE</label>
+                <label class="_span data-v-04a16dbc">WED</label>
+                <label class="_span data-v-04a16dbc">THU</label>
+                <label class="_span data-v-04a16dbc">FRI</label>
+                <label class="_span data-v-04a16dbc">SAT</label>
+            </view>
+            <swiper bindchange="handleProxy" class="_swiper data-v-04a16dbc swiper" current="{{currentIndex}}" data-comkey="{{$k}}" data-eventid="{{'0'}}" indicatorDots="{{false}}" vertical="{{true}}">
+                <swiper-item class="_swiper-item data-v-04a16dbc" key="{{ind}}" wx:for="{{calendar}}" wx:for-index="ind" wx:for-item="month" wx:key="ind">
+                    <view class="_div data-v-04a16dbc day {{[day&&day.today?'today':'',day&&day.checkin?'checkin':'']}}" key="{{day}}" wx:for="{{month.days}}" wx:for-item="day" wx:key="day">{{day?day.day:''}}</view>
+                </swiper-item>
+            </swiper>
+        </view>
+    </view>
+</template>
+<import src="nav-bar$6acec6f9"></import>

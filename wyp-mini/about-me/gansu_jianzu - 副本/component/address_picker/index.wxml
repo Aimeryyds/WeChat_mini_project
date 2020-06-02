@@ -1,0 +1,22 @@
+<view class="container">
+    <view class="zan-panel zan-panel__no-margin-top">
+        <view class="zan-cell zan-cell--access" data-province="{{item}}" ontap="handleProvinceTap" wx:if="{{current=='provinces'}}" wx:for="{{provinces}}" wx:key="id">
+            <view class="zan-cell__bd">{{item.fullName}}</view>
+            <view class="zan-cell__ft" style="min-height:16rpx;min-width:16rpx">
+                <image mode="scaleToFill" src="http://imgcdnali.wfenxiao.com.cn/xcx/c/order/order-result.png" style="width:40rpx;height:40rpx" wx:if="{{provinceCode==item.code}}"></image>
+            </view>
+        </view>
+        <view class="zan-cell zan-cell--access" data-city="{{item}}" ontap="handleCityTap" wx:if="{{current=='cities'}}" wx:for="{{cities}}" wx:key="id">
+            <view class="zan-cell__bd">{{item.fullName}}</view>
+            <view class="zan-cell__ft" style="min-height:16rpx;min-width:16rpx">
+                <image mode="scaleToFill" src="http://imgcdnali.wfenxiao.com.cn/xcx/c/order/order-result.png" style="width:40rpx;height:40rpx" wx:if="{{cityCode==item.code}}"></image>
+            </view>
+        </view>
+        <view bindtap="handleDistrictTap" class="zan-cell zan-cell--access" data-district="{{item}}" wx:if="{{current=='districts'}}" wx:for="{{districts}}" wx:key="id">
+            <view class="zan-cell__bd">{{item.fullName}}</view>
+            <view class="zan-cell__ft" style="min-height:16rpx;min-width:16rpx">
+                <image mode="scaleToFill" src="http://imgcdnali.wfenxiao.com.cn/xcx/c/order/order-result.png" style="width:40rpx;height:40rpx" wx:if="{{districtCode==item.code}}"></image>
+            </view>
+        </view>
+    </view>
+</view>

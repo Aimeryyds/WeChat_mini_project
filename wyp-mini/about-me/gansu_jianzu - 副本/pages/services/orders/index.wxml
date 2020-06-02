@@ -1,0 +1,51 @@
+<view class="container">
+    <wxc-tab _pid="{{_pid}}" activeLineColor="#f22222" animate="{{true}}" bind:tabchange="onClick" class="service-orders-tab" componentId="c3" defaultIndex="{{activeKey}}">
+        <view class="service-orders-top" slot="tablabel">
+            <wxc-tab-label _pid="{{_pid}}" componentId="c3" tabIndex="{{index}}" wx:for="{{tabs}}" wx:for-item="tab" wx:key="{{tab.title}}">
+                <view class="service-orders-tab__label">
+                    <view class="service-orders-tab__text {{activeKey===index?'service-orders-tab--active':''}}">
+            {{tab.title}}
+          </view>
+                </view>
+            </wxc-tab-label>
+        </view>
+    </wxc-tab>
+    <view style="margin-top:110rpx" wx:if="{{orders&&orders.length>0&&!loading}}">
+        <view class="order__info" wx:for="{{orders}}">
+            <navigator style="display:flex;flex-direction: column" url="/pages/services/order_detail/index?id={{item.id}}">
+                <view class="order__item__titile">
+                    <text style="font-size: 30rpx;color: #000000;">{{item.brandName}}-{{item.storeName}}</text>
+                    <view class="order__link">{{item.status==1?'待使用':item.status==10?'待付款':item.status==2||item.status==3?'已取消':item.status==70&&item.evaluateCount==1?'待评价':'已评价'}}
+            <image class="order__link__img" src="http://imgcdnali.wfenxiao.com.cn/xcx/c/icons/arrow_right.png"></image>
+                    </view>
+                </view>
+                <service_order_project serviceList="{{item.serviceList}}"></service_order_project>
+                <view class="order__item">
+                    <view class="item__top">
+                        <text class="order__lablel">到店时间：</text>
+                        <view class="order__cont">{{item.arrviedFullTime}}</view>
+                    </view>
+                    <view class="item__top">
+                        <text class="order__lablel">到店人数：</text>
+                        <view class="order__cont">{{item.appointmentPeople}}人</view>
+                    </view>
+                    <view class="item__bottom">
+                        <text class="order__lablel">合    计：</text>
+                        <view class="order__cont" style="color:#f22222">￥{{item.price}} </view>
+                        <text class="order__lablel" style="margin-left:160rpx" wx:if="{{item.status!=10}}">已支付：</text>
+                        <view class="order__cont" style="color:#f22222;margin-right:20rpx" wx:if="{{item.status!=10}}">￥{{item.total}} </view>
+                        <wxc-label typeColor="#F87E27" wx:if="{{item.status!=10}}">{{item.prePayMsg}}</wxc-label>
+                    </view>
+                </view>
+            </navigator>
+            <order_action actionList="{{item.actionList}}" bindordercanceled="onOrderCanceled" bindorderpaied="onOrderPaid" bindordertailpaied="onOrderTailPaid" orderType="{{item.orderType}}" orderid="{{item.id}}" showType="list"></order_action>
+            <view class="evaluate-ctrl" wx:if="{{item.evaluateCount!=0}}">
+                <navigator class="evaluate-ctrl__btn" hoverClass="none" url="/pages/pingjia/evaluateform/index?orderNo={{item.orderNo}}&type=2">{{item.evaluateCount==1?'去评价':item.evaluateCount==2?'写追评':''}}</navigator>
+            </view>
+        </view>
+    </view>
+    <view style="display:flex;flex-direction:column;align-items:center" wx:if="{{orders&&orders.length==0&&!loading}}">
+        <image src="http://imgcdnali.wfenxiao.com.cn/xcx/c/icons/no_order.png" style="margin-top:100px;width:150rpx;height:150rpx"></image>
+        <text style="margin-top:20px;font-size:28rpx;color:#bbb">暂无预约订单</text>
+    </view>
+</view>

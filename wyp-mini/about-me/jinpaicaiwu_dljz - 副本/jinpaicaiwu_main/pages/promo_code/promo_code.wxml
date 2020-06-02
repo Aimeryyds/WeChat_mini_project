@@ -1,0 +1,57 @@
+<import src="../../common/package/prompt.wxml"></import>
+<view class="promo">
+    <view class="promo-nav medium_font">
+        <view bindtap="changActive" class="{{activeIndex=='nouse'?'active':''}}" data-id="nouse">正在进行</view>
+        <view bindtap="changActive" class="{{activeIndex=='overdue'?'active':''}}" data-id="overdue">
+      已经失效
+      <text catchtap="get_query_info" class="help_query">?</text>
+        </view>
+    </view>
+    <view class="promo-box">
+        <template is="prompt" data="{{prompt:prompt}}"></template>
+        <view class="promo-list coupon" wx:for="{{promo_codes}}" wx:key="{{index}}">
+            <block wx:if="{{activeIndex=='nouse'}}">
+                <view class="jagged"></view>
+                <view class="coupon_count">
+                    <view class="coupon_c">
+                        <view class="t1">
+                            <text>{{item.title}}</text>
+                        </view>
+                        <view class="t2">
+                            <text class="d"></text>
+                            <text>{{item.code}}</text>
+                        </view>
+                        <view class="t2">
+                            <text class="d"></text>
+                            <text>有效期:{{item.start_date}}--{{item.end_date}}</text>
+                        </view>
+                    </view>
+                    <view class="coupon_r top">
+                        <text bindtap="copy_{{activeIndex=='nouse'||item.isused=='promo_canuse'?'nouse':''}}" data-promo="{{item.code}}">复制</text>
+                    </view>
+                </view>
+            </block>
+            <block wx:if="{{activeIndex=='overdue'}}">
+                <view class="jagged3"></view>
+                <view class="coupon_count">
+                    <view class="coupon_c">
+                        <view class="t1 gq">
+                            <text>{{item.title}}</text>
+                        </view>
+                        <view class="t2 gq">
+                            <text class="d hs_bg"></text>
+                            <text>{{item.code}}</text>
+                        </view>
+                        <view class="t2 gq">
+                            <text class="d hs_bg"></text>
+                            <text>有效期:{{item.start_date}}--{{item.end_date}}</text>
+                        </view>
+                    </view>
+                    <view class="coupon_r top {{activeIndex!='overdue'||item.isused=='promo_canuse'?'':'gq'}}">
+                        <text bindtap="copy_{{activeIndex=='nouse'||item.isused=='promo_canuse'?'nouse':''}}" data-promo="{{item.code}}">复制</text>
+                    </view>
+                </view>
+            </block>
+        </view>
+    </view>
+</view>

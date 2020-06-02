@@ -1,0 +1,11 @@
+<template name="4a406b5c">
+    <view class="_div data-v-26aad2b2 avenger-list">
+        <navigator appId="{{avenger.item.miniprogram_id}}" class="_navigator data-v-26aad2b2 avenger" extraData="{{avenger.query_string}}" key="{{avenger.id}}" openType="navigate" path="{{avenger.path}}" target="miniProgram" version="release" wx:for="{{avengerList}}" wx:for-item="avenger" wx:key="avenger.id">
+            <image class="_img data-v-26aad2b2 app-icon" src="{{avenger.item.image_urls[0]}}"></image>
+            <view class="_div data-v-26aad2b2 meta">
+                <view class="_div data-v-26aad2b2 title">{{avenger.item.title}}</view>
+                <view class="_div data-v-26aad2b2 description">{{avenger.item.description}}</view>
+            </view>
+        </navigator>
+    </view>
+</template>

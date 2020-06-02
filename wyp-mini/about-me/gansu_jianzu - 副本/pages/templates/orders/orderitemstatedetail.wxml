@@ -1,0 +1,20 @@
+<template name="order-item-state-detail">
+    <view class="order-state-detail-box">
+        <view class="left-box">
+            <image class="list_icon" src="{{item.orderStatus==10?'http://imgcdnali.wfenxiao.com.cn/xcx/c/order/pay_order_select.png':'http://imgcdnali.wfenxiao.com.cn/xcx/c/order/store_order_select.png'}}"></image>
+            <view class="line"></view>
+        </view>
+        <view catchtap="logisticsDetail" class="right-box" data-iscanshow="{{item.orderStatus==61}}" data-orderid="{{item.id}}">
+            <view class="content">
+                <view class="head">
+                    <view class="order-no_text">{{item.orderStatusName}}</view>
+                    <view class="time">{{item.timeShow}}</view>
+                </view>
+                <view class="{{item.orderStatus==61?'state-wuliu':'state-desc'}}">{{item.currentStatus.desc}}</view>
+            </view>
+            <view class="order_arrow-left">
+                <text></text>
+            </view>
+        </view>
+    </view>
+</template>

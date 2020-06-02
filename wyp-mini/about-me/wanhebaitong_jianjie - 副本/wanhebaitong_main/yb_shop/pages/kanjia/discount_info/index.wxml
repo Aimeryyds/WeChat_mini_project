@@ -1,0 +1,84 @@
+<block wx:if="{{show}}">
+    <view class="index_swiper">
+        <swiper autoplay="{{autoplay}}" circular="true" duration="{{duration}}" indicatorDots="{{indicatorDots}}" interval="{{interval}}" style="height:11.5rem;">
+            <swiper-item wx:for="{{bargain_info.pic_arr}}">
+                <image class="slide-image" mode="aspectFill" src="{{item}}"></image>
+            </swiper-item>
+        </swiper>
+    </view>
+    <view class="page_info02">
+        <view class="index_info_tit">{{bargain_info.bargain_name}}</view>
+        <view class="goods_stock">当前库存：{{bargain_info.bargain_inventory}}
+      <text class="o_color">【库存为0时，所有砍价将停止】</text>
+        </view>
+    </view>
+    <view class="page_info02">
+        <view class="speed_tit">
+            <image class="image" style="background:url({{user_info.user_headimg}}) no-repeat center center;background-size: cover;"></image>
+            <text>砍价进度：原价{{user_info.original_price}}元，已砍至{{user_info.current_price}}元。</text>
+            <view class="clear"></view>
+        </view>
+        <view class="speed_price_box">
+            <view class="speed_price_f">
+                <view class="speed_price01" style="left:calc({{(user_info.original_price-user_info.current_price)/(user_info.original_price-user_info.lowest_price)*100}}% - 2.3rem);">
+                    <text>￥{{user_info.current_price}}</text>
+                </view>
+            </view>
+            <view class="speed_price_line_box">
+                <view class="speed_price_line_bg">
+                    <view class="speed_price_line" style="width:{{(user_info.original_price-user_info.current_price)/(user_info.original_price-user_info.lowest_price)*100}}%;"></view>
+                </view>
+            </view>
+            <view class="speed_price_bottom">
+                <text>￥{{user_info.original_price}}</text>
+                <text class="speed_price02">￥{{user_info.lowest_price}}</text>
+            </view>
+        </view>
+    </view>
+    <view class="countdown" wx:if="{{show_time}}">活动结束倒计时：
+    <text class="y_color">{{countDownDay}}天{{countDownHour}}小时{{countDownMinute}}分{{countDownSecond}}秒</text>
+    </view>
+    <view class="countdown" wx:if="{{user_info.current_price-user_info.lowest_price<=0&&overtime==2}}">消费截止时间： <text class="y_color">{{bargain_info.cons_time}}</text>
+    </view>
+    <view class="countdown" wx:if="{{user_info.current_price-user_info.lowest_price<=0&&overtime==1}}">该活动已过期
+  </view>
+    <view class="float_btn">
+        <view class="bottom_btn_box" wx:if="{{user_info.current_price-user_info.lowest_price>0}}">
+            <button class="bottom_btn" openType="share">
+     召唤好友帮我砍价
+    </button>
+            <view bindtap="record" class="bottom_btn">
+                <text>帮砍记录</text>
+            </view>
+        </view>
+        <view class="bottom_btn_box" wx:if="{{user_info.current_price-user_info.lowest_price<=0}}">
+            <view bindtap="buyNow" class="bottom_btn03">
+                <text>立即购买</text>
+            </view>
+            <view bindtap="record" class="bottom_btn03">
+                <text>帮砍记录</text>
+            </view>
+        </view>
+    </view>
+    <view class="pop_bg" wx:if="{{popup}}">
+        <view class="pop_box">
+            <view class="pop_price_bg">
+                <view class="pop_price_no">
+                    <text>{{info}}元</text>
+                </view>
+            </view>
+            <view class="pop_price">
+                <text>砍掉{{info}}元</text>
+            </view>
+            <view class="pop_user_name">
+                <text>系统 帮您砍了第一刀</text>
+            </view>
+            <view class="pop_btn">
+                <view bindtap="tankuang" class="close_btn">
+                    <text>确定</text>
+                </view>
+            </view>
+        </view>
+    </view>
+</block>
+<view style="height:4.2rem; line-height: 4.2rem;"></view>

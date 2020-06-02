@@ -1,0 +1,39 @@
+<view class="container">
+    <view class="withdraw-detail__info">
+        <view class="withdraw-detail__item">
+            <text>提现金额:</text>
+            <view>
+                <text style="font-size: 38rpx;font-weight: 600;">{{wdDetailData.amount}}</text>元</view>
+        </view>
+        <view class="withdraw-detail__item">
+            <text>提现状态:</text>
+            <view>{{wdDetailData.status==1?'审核中':wdDetailData.status==2?'未打款':wdDetailData.status==4?'已打款':'提现失败'}}</view>
+        </view>
+        <view class="withdraw-detail__item">
+            <text class="withdraw-detail--letterSp8">收款人:</text>
+            <view>{{wdDetailData.accountName}}</view>
+        </view>
+        <view class="withdraw-detail__item">
+            <text class="withdraw-detail--letterSp8">银行卡:</text>
+            <view>{{wdDetailData.cardNo}}</view>
+        </view>
+        <view class="withdraw-detail__item">
+            <text class="withdraw-detail--letterSp5">提交时间:</text>
+            <view>{{wdDetailData.createdTime}}</view>
+        </view>
+        <view class="withdraw-detail__item">
+            <text>提现流水号:</text>
+            <view>{{wdDetailData.applyNo}}</view>
+        </view>
+    </view>
+    <view class="withdraw-detail__order" wx:for="{{wdDetailData.orderList}}" wx:key="index">
+        <view class="withdraw-detail__orderinfo">
+            <text>订单编号:</text>
+            <view>{{item.orderNo}}</view>
+        </view>
+        <view class="withdraw-detail__orderinfo">
+            <text>佣金:</text>
+            <view>{{item.amount}} 元</view>
+        </view>
+    </view>
+</view>

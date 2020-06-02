@@ -1,0 +1,30 @@
+<view class="container">
+    <view class="cate">
+        <scroll-view scrollX class="scroll_view">
+            <view bindtap="catClick" class="cate-item {{currentTabsIndex==item.id?'hover':''}}" data-catkey="{{catkey}}" data-cid="{{item.id}}" data-fid="{{item.fid}}" style="{{currentTabsIndex==item.id?'border-color:'+tcolor+';color:'+tcolor:''}}" wx:for="{{cats}}" wx:for-index="catkey" wx:key="unique"> {{item.name}} </view>
+        </scroll-view>
+    </view>
+    <view class="case-bg">
+        <view class="case-div" style="background:#f6f5f3">
+            <view class="case-item" style="height:{{imgView_height}}px;width:{{thumb_width}}px;" wx:for="{{list}}" wx:key="{{index1}}">
+                <navigator url="{{item.url}}">
+                    <view class="case-img" style="height:{{thumb_height}}px">
+                        <image src="{{item.thumb}}"></image>
+                    </view>
+                    <view class="case-text"> {{item.title}} </view>
+                </navigator>
+            </view>
+        </view>
+        <view bindtap="loadMore" class="loadMore" data-lastid="{{lastid}}">加载更多</view>
+        <view class="copyright {{blist.copyright.copyright==''?'mt0':''}}">
+            <block wx:if="{{blist.copyright.copyright!=''}}">
+                <import src="../public/copy.wxml"></import>
+                <template is="copy" data="{{blist:blist}}"></template>
+            </block>
+        </view>
+    </view>
+</view>
+<block wx:if="{{hide_tabbar=='0'}}">
+    <import src="../public/foot.wxml"></import>
+    <template is="foot" data="{{blist:blist}}"></template>
+</block>

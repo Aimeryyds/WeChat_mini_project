@@ -1,0 +1,338 @@
+<view class="poster-con" wx:if="{{liveAction}}">
+    <image class="poster" mode="{{'aspectFit'}}" src="{{liveCoverImg}}"></image>
+</view>
+<view class="player-area">
+    <live-player autoplay binderror="error" bindstatechange="statechange" class="livePlayer" id="player" maxCache="10" mode="live" objectFit="fillCrop" src="{{liveSrc}}" style="top:{{liveTop}}px;left:{{live.liveLeft}}px;width:{{live.liveWidth}}px;height:{{live.liveHeight}}px;">
+        <cover-image class="liveSkin" src="../../images/live/videoSkin.png"></cover-image>
+    </live-player>
+</view>
+<view class="sendGift-area">
+    <view catchtap="touchMaskHandler" class="sendGiftNum">
+        <view animation="{{sg3Left}}" class="sg3v" style="will-change:{{kValues3}};" wx:if="{{sg3Show}}">
+            <image class="giftBg" src="../../images/live/liveGiftBg.png"></image>
+            <image class="userImg" src="{{sg3UserImg}}"></image>
+            <view class="giftName">{{sg3GiftName}}</view>
+            <image class="giftImg" src="{{sg3GiftImg}}"></image>
+            <view class="sgNumBg">{{sg3GiftCount}}</view>
+            <view class="sgNum">{{sg3GiftCount}}</view>
+        </view>
+        <view animation="{{sg2Left}}" class="sg2v" style="will-change:{{kValues2}};" wx:if="{{sg2Show}}">
+            <image class="giftBg" src="../../images/live/liveGiftBg.png"></image>
+            <image class="userImg" src="{{sg2UserImg}}"></image>
+            <view class="giftName">{{sg2GiftName}}</view>
+            <image class="giftImg" src="{{sg2GiftImg}}"></image>
+            <view class="sgNumBg">{{sg2GiftCount}}</view>
+            <view class="sgNum">{{sg2GiftCount}}</view>
+        </view>
+        <view animation="{{sg1Left}}" class="sg1v" style="will-change:{{kValues1}};" wx:if="{{sg1Show}}">
+            <image class="giftBg" src="../../images/live/liveGiftBg.png"></image>
+            <image class="userImg" src="{{sg1UserImg}}"></image>
+            <view class="giftName">{{sg1GiftName}}</view>
+            <image class="giftImg" src="{{sg1GiftImg}}"></image>
+            <view class="sgNumBg">{{sg1GiftCount}}</view>
+            <view class="sgNum">{{sg1GiftCount}}</view>
+        </view>
+    </view>
+</view>
+<view animation="{{animationPk}}" class="livePk" style="top:{{pk.pkTop}}px;" wx:if="{{isLivePk}}">
+    <view class="rightLine"></view>
+    <view animation="{{animationPkOneResult}}" class="leftLine" style="width:{{pk.leftLine}}px;"></view>
+    <image animation="{{animationPkStar}}" class="pkStar" src="../../images/live/pkStar.png" style="left:{{pk.leftLine}}px;"></image>
+    <view class="showPkData">
+        <view class="left">
+            <view class="leftName" hidden="{{!isPkEnd}}">我方</view>
+            <image class="leftResult" hidden="{{isPkEnd}}" src="{{leftResultUrl}}"></image>
+        </view>
+        <view class="leftStarCount">{{pk.starOne}}</view>
+        <view class="statusBar">
+            <view class="title">剩余</view>
+            <view class="time">{{pk.countDown}}</view>
+        </view>
+        <view class="rightStarCount">{{pk.starTwo}}</view>
+        <view class="right">
+            <view class="rightName" hidden="{{!isPkEnd}}">对方</view>
+            <image class="rightResult" hidden="{{isPkEnd}}" src="{{rightResultUrl}}"></image>
+        </view>
+    </view>
+</view>
+<view animation="{{userCheckInLeft}}" class="checkInLib" style="top:{{userCheckInTop}}px;background-color:{{check.checkInBgColor0}};" wx:if="{{checkInShow}}">
+    <view class="checkInBg" style="background-color:{{check.checkInBgColor1}};">
+        <image class="icon" src="{{check.iconUrl}}"></image>
+        <view class="level">{{check.iconLevel}}</view>
+        <view class="line"></view>
+        <view class="name">{{check.checkName}}</view>
+        <view class="checkStr">进入直播间</view>
+    </view>
+</view>
+<canvas binderror="canvasIdErrorCallback" canvasId="msgCanvas" class="msgCanvas">
+    <cover-view catchtap="touchMaskHandler" class="touchMask">
+        <button bindtap="getStarZhiBo" class="gift-contact-btn" style="top:{{giftStarsTop}}px;" wx:if="{{giftAdShow}}">a</button>
+        <button bindtap="showWfy" class="wfy-action-btn" style="top:{{wfyTop}}px;" wx:if="{{wfyBtnShow}}">a</button>
+        <cover-view animation="{{liveFollowMove}}" bindtap="liveFocusAction" class="liveFollow" wx:if="{{liveFollowShow}}">
+            <cover-image class="liveFollowBg" src="../../images/live/liveFollowBg.png"></cover-image>
+            <cover-image class="liveFollowHead" src="{{nav.userHeadUrl}}"></cover-image>
+            <cover-image class="liveFollowHeadMask" src="../../images/live/liveFollowHeadMask.png"></cover-image>
+        </cover-view>
+    </cover-view>
+    <cover-view class="liveControl" hidden="{{inputBtnShow}}">
+        <cover-view bindtap="bindButtonTap" class="inputLiveMsg">想要说点什么...</cover-view>
+        <cover-image class="btnShare" src="../../images/live/live_share.png"></cover-image>
+        <cover-image catchtap="jumpChat" class="btnChat" src="../../images/live/live_chat.png" style="opacity:{{alphaMsg}};"></cover-image>
+        <cover-image animation="{{animationBtnGift}}" catchtap="showGiftLayer" class="btnGift" src="../../images/live/live_gift2.png" wx:if="{{btnGiftShow}}"></cover-image>
+        <button class="share-btn" openType="share">b</button>
+        <cover-view class="giftBagControl" style="opacity: {{giftBagOpacity}};" wx:if="{{giftBagBtnShow}}">
+            <cover-image class="giftBagImg" src="../../images/live/live_bag.png"></cover-image>
+            <button catchtap="iosOpenBag" class="openBag-btn">b</button>
+        </cover-view>
+        <button bindgetphonenumber="getUserPhoneNumber" class="btnBind" openType="getPhoneNumber" wx:if="{{btnBindShow}}">a</button>
+    </cover-view>
+    <cover-view class="liveMsg" hidden="{{inputShow}}" style="bottom:{{input_bottom}}rpx;">
+        <cover-view class="msgBg"></cover-view>
+        <cover-view class="btnSend">发送</cover-view>
+        <button bindtap="chatInputSendTextMessage" class="btnSendInputMsg">s</button>
+    </cover-view>
+</canvas>
+<cover-image bindtap="onOnepay" class="onePay" src="../../images/live/onePay.png" wx:if="{{onePayShow}}"></cover-image>
+<canvas animation="{{aGiftBottom}}" binderror="canvasIdErrorCallback" canvasId="sendGiftCanvas" class="sendGiftCanvas" style="bottom:{{giftBottom}}px;">
+    <cover-view catchtap="bagAction" class="gift_title">
+        <cover-view class="gift_t_g">礼物</cover-view>
+        <cover-view class="gift_t_line"></cover-view>
+        <cover-view class="gift_t_b">背包</cover-view>
+    </cover-view>
+    <cover-view class="gift_title_loc"></cover-view>
+    <cover-view class="gift_title_line"></cover-view>
+    <cover-view class="gift_bottom">
+        <cover-view class="bag_gift_multiple {{actionMul==1?'active':''}}">
+            <cover-view class="bag_gift_multiple_number" style="width:{{multipleWidth}}px;">x{{bagGiftNum}}</cover-view>
+        </cover-view>
+        <button bindtap="selectBagMultiple" class="bag_gift_multiple_btn">b</button>
+        <cover-view bindtap="toPayment" class="amount_con">
+            <cover-view class="amount_txt">余额</cover-view>
+            <cover-image class="amount_icon" src="../../images/guo.png"></cover-image>
+            <cover-view class="amount" style="width:{{amountWidth}}px;">{{remainRenrenGuo}}</cover-view>
+        </cover-view>
+    </cover-view>
+    <cover-view class="gift_page">
+        <cover-view class="page_item {{_giftNum==item.date?'active':''}}" data-num="{{item.str}}" wx:for="{{giftPageList}}" wx:key="index"></cover-view>
+    </cover-view>
+    <cover-view bindtap="giftClick" bindtouchend="tGiftEnd" bindtouchstart="tGiftStart" class="actionGift"></cover-view>
+</canvas>
+<cover-view animation="{{animationRank}}" class="rankListView" wx:if="{{rankShow}}">
+    <cover-view class="topTitleView">
+        <cover-image class="topTitleIcon" src="../../images/live/cell_rank_title.png"></cover-image>
+        <cover-view class="topTitleLabel">排行榜</cover-view>
+    </cover-view>
+    <cover-view class="rankcellList" wx:if="{{rankCellList&&rankCellList.length>0}}">
+        <cover-view class="rankCell" wx:for="{{rankCellList}}" wx:key="index">
+            <cover-image class="cellRank" src="../../images/live/cell_rank_{{index+1}}.png" wx:if="{{index<3}}"></cover-image>
+            <cover-view class="cellRankLabel" wx:if="{{index>=3}}">{{index+1}}</cover-view>
+            <cover-image class="cellHeader" src="{{item.userUrls.tiny_url}}"></cover-image>
+            <cover-view class="cellLevelRect" style="background:{{item.backgroundcolor}};">
+                <cover-image class="cellLevelIcon" src="{{item.iconUrl}}"></cover-image>
+                <cover-view class="cellLevel">{{item.userStarLevelInfoMessage.level}}</cover-view>
+            </cover-view>
+            <cover-view class="cellName">{{item.userName}}</cover-view>
+            <cover-view class="cellSubCount">{{item.giftStars}}</cover-view>
+            <cover-image class="cellStarIcon" src="../../images/live/cell_stars.png"></cover-image>
+            <cover-view class="rankCellBottomLine"></cover-view>
+        </cover-view>
+    </cover-view>
+    <cover-view class="noRankList" wx:else>
+        <cover-image class="noRankListIcon" src="../../images/live/norankListicon.png"></cover-image>
+        <cover-view class="noRankListText">暂时还没人送礼呢</cover-view>
+    </cover-view>
+</cover-view>
+<cover-view animation="{{animationPay}}" class="liveshow_pay_box" wx:if="{{payShow}}">
+    <cover-view class="liveshow_pay_title">果充值</cover-view>
+    <cover-view class="liveShow_pay_amount">
+        <cover-view>余额</cover-view>
+        <cover-view class="yellow">{{remainRenrenGuo}}</cover-view>
+        <cover-view class="gray">果</cover-view>
+    </cover-view>
+    <cover-view class="pay_con">
+        <cover-view bindtap="payClick" class="pay_item {{index==nowCss?'active':''}}" data-index="{{index}}" data-item="{{item}}" wx:for="{{productInfoList}}" wx:key="index">
+            <cover-image class="tag" src="./../../images/youhui.png" wx:if="{{item.activityAmount}}"></cover-image>
+            <cover-view class="item_first">{{item.tokensCount}}果</cover-view>
+            <cover-view class="item_third" wx:if="{{!item.activityAmount}}">
+            ¥{{item.unitPrice}}
+          </cover-view>
+            <cover-view class="item_second" wx:if="{{item.activityAmount}}">
+                <cover-view class="item_price">¥{{item.unitPrice}}</cover-view>
+                <cover-view class="item_red">赠{{item.activityAmount}}果</cover-view>
+            </cover-view>
+        </cover-view>
+        <cover-view bindtap="toPayment" class="pay_item pay_more">更多充值</cover-view>
+    </cover-view>
+</cover-view>
+<cover-view animation="{{animationIosBag}}" class="bag_ios_box" wx:if="{{bagIosShow}}">
+    <cover-view class="bag_ios_title">我的背包</cover-view>
+    <cover-view class="bag_ios_title_line"></cover-view>
+    <cover-view class="bag_ios_control_bg"></cover-view>
+    <cover-view class="bag_ios_container">
+        <cover-view bindtap="goStar" class="bag_gift">
+            <cover-image class="bag_gift_img" src="https://fmn.rrimg.com/fmn071/20170212/0935/original_djOD_9223000de48b1e83.png"></cover-image>
+            <cover-view class="bag_gift_name">星尘</cover-view>
+            <cover-view class="bag_gift_num">剩余{{starNum}}</cover-view>
+        </cover-view>
+        <cover-view class="bag_gift_line"></cover-view>
+        <cover-view bindtap="goLittleStar" class="bag_gift">
+            <cover-image class="bag_gift_img" src="https://fmn.rrimg.com/fmn079/20170212/0935/original_3Jbo_c62e000a0e0a1e84.png"></cover-image>
+            <cover-view class="bag_gift_name">小星星</cover-view>
+            <cover-view class="bag_gift_num">剩余{{littleStarNum}}</cover-view>
+        </cover-view>
+        <cover-view class="bag_gift_line"></cover-view>
+    </cover-view>
+    <cover-view class="bag_ios_button_bg">
+        <cover-view class="bag_ios_button_dj">获取道具</cover-view>
+        <cover-view class="bag_ios_button_line"></cover-view>
+        <cover-view bindtap="myContributionClick" class="bag_ios_button_gx">我的贡献</cover-view>
+    </cover-view>
+    <cover-view bindtap="selectBagMultiple" class="bag_gift_multiple">
+        <cover-view class="bag_gift_multiple_number" style="width:{{multipleWidth}}px;">x{{bagGiftNum}}</cover-view>
+    </cover-view>
+    <button bindtap="selectBagMultiple" class="bag_gift_multiple_btn">b</button>
+    <button class="bag-contact-btn" openType="contact" sessionFrom="{\"source\":\"{{daoju}}\",\"open_param\":\"daoju\",\"userId\":\"{{userInfo.uid}}\",\"nickName\":\"{{userInfo.nickName}}\",\"avatarUrl\":\"{{userInfo.avatarUrl}}\"}">a</button>
+</cover-view>
+<cover-view animation="{{animationBag}}" class="bag_box" wx:if="{{bagShow}}">
+    <cover-view catchtap="showGiftLayer" class="bag_title">
+        <cover-view class="bag_t_g">礼物</cover-view>
+        <cover-view class="bag_t_line"></cover-view>
+        <cover-view class="bag_t_b">背包</cover-view>
+    </cover-view>
+    <cover-view class="bag_title_loc"></cover-view>
+    <cover-view class="bag_title_line"></cover-view>
+    <cover-view class="bag_control_bg"></cover-view>
+    <cover-view bindtap="myBillClick" class="bag_button_gx">我的账单</cover-view>
+    <cover-view class="bag_container">
+        <cover-view bindtap="goStar" class="bag_gift">
+            <cover-image class="bag_gift_img" src="http://fmn.rrimg.com/fmn071/20170212/0935/original_djOD_9223000de48b1e83.png"></cover-image>
+            <cover-view class="bag_gift_name">星尘</cover-view>
+            <cover-view class="bag_gift_num">剩余{{starNum}}</cover-view>
+        </cover-view>
+        <cover-view class="bag_gift_line"></cover-view>
+        <cover-view bindtap="goLittleStar" class="bag_gift">
+            <cover-image class="bag_gift_img" src="https://fmn.rrimg.com/fmn079/20170212/0935/original_3Jbo_c62e000a0e0a1e84.png"></cover-image>
+            <cover-view class="bag_gift_name">小星星</cover-view>
+            <cover-view class="bag_gift_num">剩余{{littleStarNum}}</cover-view>
+        </cover-view>
+        <cover-view class="bag_gift_line"></cover-view>
+    </cover-view>
+    <cover-view class="bag_gift_multiple {{actionMul==1?'active':''}}">
+        <cover-view class="bag_gift_multiple_number" style="width:{{multipleWidth}}px;">x{{bagGiftNum}}</cover-view>
+    </cover-view>
+    <button bindtap="selectBagMultiple" class="bag_gift_multiple_btn">b</button>
+</cover-view>
+<cover-view class="bag_multiple_layer" wx:if="{{bagMultipleShow}}">
+    <cover-view class="bag_multiple_con">
+        <cover-view bindtap="bagMultipleClick" class="btn_item {{_num==8?'active':''}}" data-num="8">x1314</cover-view>
+        <cover-view bindtap="bagMultipleClick" class="btn_item {{_num==7?'active':''}}" data-num="7">x888</cover-view>
+        <cover-view bindtap="bagMultipleClick" class="btn_item {{_num==6?'active':''}}" data-num="6">x666</cover-view>
+        <cover-view bindtap="bagMultipleClick" class="btn_item {{_num==5?'active':''}}" data-num="5">x520</cover-view>
+        <cover-view bindtap="bagMultipleClick" class="btn_item {{_num==4?'active':''}}" data-num="4">x233</cover-view>
+        <cover-view bindtap="bagMultipleClick" class="btn_item {{_num==3?'active':''}}" data-num="3">x66</cover-view>
+        <cover-view bindtap="bagMultipleClick" class="btn_item {{_num==2?'active':''}}" data-num="2">x6</cover-view>
+        <cover-view bindtap="bagMultipleClick" class="btn_item {{_num==1?'active':''}}" data-num="1">x1</cover-view>
+    </cover-view>
+    <cover-image class="multipleBgArrow" src="../../images/live/multipleBgArrow.png"></cover-image>
+</cover-view>
+<cover-view animation="{{animationEnd}}" class="liveEnd" wx:if="{{endShow}}">
+    <cover-view class="liveEndTitle">
+        <cover-view class="t1">人人直播</cover-view>
+        <cover-view class="t2">{{liveDuration}}</cover-view>
+    </cover-view>
+    <cover-view class="liveEndMain">
+        <cover-view class="liveEndCount">
+            <cover-view class="c1">
+                <cover-view class="t">观看</cover-view>
+                <cover-view class="num">{{nav.viewCount}}</cover-view>
+            </cover-view>
+            <cover-view class="line"></cover-view>
+            <cover-view class="c2">
+                <cover-view class="t">星月票</cover-view>
+                <cover-view class="num">{{nav.starMoonCount}}</cover-view>
+            </cover-view>
+            <cover-view class="line"></cover-view>
+            <cover-view class="c3">
+                <cover-view class="t">星光值</cover-view>
+                <cover-view class="num">{{nav.starCount}}</cover-view>
+            </cover-view>
+        </cover-view>
+        <cover-view catchtap="closeLive" class="liveEndBtnBack">返回首页</cover-view>
+        <cover-view catchtap="focusAction" class="liveEndBtnFollow">
+            <cover-image class="bg" src="../../images/live/liveEndBtnFollow.png"></cover-image>
+            <cover-view class="txt">{{endFocusText}}</cover-view>
+        </cover-view>
+    </cover-view>
+</cover-view>
+<cover-view catchtap="closeLive" class="backArrow" style="top:{{navigationBarHeight}}px;">
+    <cover-image class="backArrow-img" src="../../images/live/navigation_back.png"></cover-image>
+</cover-view>
+<cover-view animation="{{animationNav}}" class="navigation" style="top:{{navigationBarHeight}}px;">
+    <cover-view class="navContainer">
+        <cover-view class="avatar">
+            <cover-view class="icon">
+                <cover-image bindtap="gotoHomePage" class="head" src="{{nav.userHeadUrl}}" wx:if="{{nav.userHeadUrl}}"></cover-image>
+                <cover-image class="vj" src="{{nav.vj}}" wx:if="{{nav.vj}}"></cover-image>
+            </cover-view>
+            <cover-view bindtap="gotoHomePage" class="content">
+                <cover-view class="name">{{nav.userName}}</cover-view>
+                <cover-view class="count">
+                    <cover-view class="number">{{nav.viewCount}}人</cover-view>
+                    <cover-view class="watch">观看</cover-view>
+                </cover-view>
+            </cover-view>
+            <cover-view bindtap="focusAction" class="focusBtn {{_focus==1?'active':''}}">{{focusInfo}}</cover-view>
+            <cover-view class="line"></cover-view>
+            <cover-view class="guard">
+                <cover-image class="g1" src="{{user1}}" wx:if="{{user1}}"></cover-image>
+                <cover-image class="g2" src="{{user2}}" wx:if="{{user2}}"></cover-image>
+            </cover-view>
+        </cover-view>
+    </cover-view>
+</cover-view>
+<cover-view class="charm" style="top:{{charmTop}}px;">
+    <cover-view class="cline"></cover-view>
+    <cover-view class="charm-content">
+        <cover-image class="star" src="../../images/live/live_stars.png"></cover-image>
+        <cover-view class="starName">星光值</cover-view>
+        <cover-view class="start-number">{{nav.starCount}}</cover-view>
+        <cover-view class="line"></cover-view>
+        <cover-image class="moon" src="../../images/live/cell_moon.png"></cover-image>
+        <cover-view class="moonName">星月票</cover-view>
+        <cover-view class="moon-number">{{nav.starMoonCount}}</cover-view>
+    </cover-view>
+    <cover-view bindtap="gotoPeiwan" class="partner-content" wx:if="{{isPartner}}">
+        <cover-image class="partner-icon" src="../../images/live/G.png"></cover-image>
+        <cover-view class="partner-text">约Ta陪玩</cover-view>
+    </cover-view>
+</cover-view>
+<cover-view bindtap="jumpPlayer" class="jumpPlayer" style="top:{{pk.pkJump}}px;opacity: {{pk.pkJumpAlpha}};" wx:if="{{showJumpPlayer}}">
+    <cover-image class="jumpImg" src="../../images/live/jumpPlayer.png"></cover-image>
+</cover-view>
+<cover-view class="rightControl">
+    <cover-image class="right_Control_img" src="../../images/live/rightControl3.png"></cover-image>
+    <button bindtap="dingyue" class="dingyue-btn">b</button>
+    <button class="contact-btn" openType="contact" sessionFrom="{\"source\":\"{{huodongStr}}\",\"userId\":\"{{userInfo.uid}}\",\"nickName\":\"{{userInfo.nickName}}\",\"avatarUrl\":\"{{userInfo.avatarUrl}}\"}">a</button>
+    <button bindtap="showRank" class="rank-btn">b</button>
+    <button bindtap="nextLiveAction" class="next-btn">c</button>
+</cover-view>
+<cover-view animation="{{animationWfy}}" bindtap="closeWfy" class="waiting-for-you" wx:if="{{showWfy}}">
+    <cover-image class="wfy" src="http://a.xnimg.cn/wap/mobile/wxMiniApp/zhiboNewWxMiniApp/images/live/waiting_for_you.png"></cover-image>
+    <button class="wfy-btn" openType="contact" sessionFrom="{\"source\":\"{{huodongStr}}\",\"userId\":\"{{userInfo.uid}}\",\"nickName\":\"{{userInfo.nickName}}\",\"avatarUrl\":\"{{userInfo.avatarUrl}}\"}">a</button>
+</cover-view>
+<cover-view animation="{{animationNext}}" catchtap="clickNextMask" class="nextMask" wx:if="{{nextAction}}">
+    <cover-image class="liveTransition" src="../../images/live/liveTransition.png"></cover-image>
+</cover-view>
+<input adjustPosition="true" bindblur="bindblur" bindconfirm="chatInputSendTextMessage" bindfocus="bindKeyInput" bindinput="chatInputGetValueEvent" class="userInput" confirmType="send" cursorSpacing="0" focus="{{focus}}" hidden="{{inputShow}}" maxlength="100" placeholder="想要说点什么..." type="text" value="{{inputStr}}"></input>
+<signIn bind:closeSign="oncloseSign" bind:signShare="onaSignShare" bind:success="onasignsuccess" id="signInCon"></signIn>
+<cover-view class="yiyuan" wx:if="{{yiyuanShow}}">
+    <cover-image class="bg" src="./../../images/yiyuan/bg.png"></cover-image>
+    <cover-view class="title">首次购买1元礼包奖励多多呦，仅需1元即可获得价值50元的大礼包，内含丰富奖励，快快行动吧！</cover-view>
+    <cover-view class="btns">
+        <cover-view bindtap="onCYiyuan" class="btn">我再想想</cover-view>
+        <cover-view bindtap="onBuyYiyuan" class="btn">
+            <cover-image class="btn_img" src="./../../images/yiyuan/btn.png"></cover-image>
+            <cover-view class="btn_txt">1元购买!</cover-view>
+        </cover-view>
+    </cover-view>
+</cover-view>

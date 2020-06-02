@@ -1,0 +1,13 @@
+<template name="25507231">
+    <view class="_view 25507231 {{'roomConfig'+passClass}}" wx:if="{{roomConfig.length>0}}">
+        <view class="_view 25507231 h1">房源配置</view>
+        <view class="_view 25507231 {{'ul '+(more?'more':'')}}">
+            <view class="_view 25507231 {{'li '+(item.highlight?'highligt':'')}}" key="{{index}}" wx:for="{{roomConfig}}" wx:key="index">
+                <template is="0e24a461" data="{{...$root['0'],...$root[$kk+'25507231-0-'+index],$root:$root}}"></template>{{item.value}}</view>
+        </view>
+        <view class="_view 25507231 p" wx:if="{{roomConfig.length>10}}">
+            <text bindtap="handleProxy" class="_text 25507231 span" data-comkey="{{$k}}" data-eventid="{{'25507231-0'}}">{{more?'收起':'更多'}}</text>
+        </view>
+    </view>
+</template>
+<import src="/components/mgImage.vue.wxml"></import>

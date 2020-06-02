@@ -1,0 +1,42 @@
+<view>
+    <view>
+        <view class="fault-header">
+            <text style="color:#555;font-size: 36rpx">上报车辆</text>
+            <view class="input-title">
+                <view style="display:flex;padding:20rpx">
+                    <text bindtap="openScanCode" class="iconfont icon-scan " style="color:{{mainColor}};font-size: 46rpx"></text>
+                </view>
+                <input bindinput="inputTitle" maxlength="9" placeholder="扫码或手动输入车辆编号" style="flex: 1" type="number" value="{{machineNO}}"></input>
+            </view>
+        </view>
+        <view class="fault-body">
+            <view style="color:#555;font-size: 36rpx">请选择故障类型</view>
+            <view class="fault-type">
+                <view bindtap="selectFault" data-remark="有电车不走" style="{{select=='有电车不走'?'border-color:'+mainColor+';color:'+mainColor:''}}">
+          有电车不走
+        </view>
+                <view bindtap="selectFault" data-remark="刹车不灵" style="{{select=='刹车不灵'?'border-color:'+mainColor+';color:'+mainColor:''}}">
+          刹车不灵
+        </view>
+                <view bindtap="selectFault" data-remark="座垫损坏" style="{{select=='座垫损坏'?'border-color:'+mainColor+';color:'+mainColor:''}}">
+          座垫损坏
+        </view>
+            </view>
+            <view class="fault-type">
+                <view bindtap="selectFault" data-remark="车撑损坏" style="{{select=='车撑损坏'?'border-color:'+mainColor+';color:'+mainColor:''}}">
+          车撑损坏
+        </view>
+                <view bindtap="selectFault" data-remark="二维码损坏" style="{{select=='二维码损坏'?'border-color:'+mainColor+';color:'+mainColor:''}}">
+          二维码损坏
+        </view>
+                <view bindtap="selectFault" data-remark="其他" style="{{select=='其他'?'border-color:'+mainColor+';color:'+mainColor:''}}">
+          其他
+        </view>
+            </view>
+        </view>
+        <view class="fault-remark">
+            <textarea bindinput="bindTextAreaBlur" class="inputContent" placeholder="您可以添加备注说明" value="{{fault}}"></textarea>
+        </view>
+        <button bindtap="commitFault" style="margin: 36rpx;background-color:{{mainColor}};color: {{textColor}}">提交</button>
+    </view>
+</view>

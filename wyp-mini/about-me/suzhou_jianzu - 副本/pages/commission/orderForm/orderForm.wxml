@@ -1,0 +1,23 @@
+<view class="container">
+    <view class="Commission">
+        <text class="left">累计佣金</text>
+        <text class="right">+{{totalprice}}元</text>
+    </view>
+    <view class="tabClass">
+        <text bindtap="tabClick" class="normalClass {{index==0?'selectClass':''}}" data-index="0">所有</text>
+        <text bindtap="tabClick" class="normalClass {{index==1?'selectClass':''}}" data-index="1">已付款</text>
+        <text bindtap="tabClick" class="normalClass {{index==2?'selectClass':''}}" data-index="2">待收货</text>
+        <text bindtap="tabClick" class="normalClass {{index==3?'selectClass':''}}" data-index="3">已完成</text>
+    </view>
+    <view class="list" wx:if="{{data1}}" wx:for="{{data1}}">
+        <view class="listLeft">
+            <text>{{item.ordersn}}</text>
+            <text class="time">{{item.createtime}}</text>
+        </view>
+        <view class="listRight">
+            <text>+{{item.commission}}</text>
+            <text>{{item.status}}</text>
+        </view>
+    </view>
+</view>
+<loading wx:if="{{loading}}"></loading>

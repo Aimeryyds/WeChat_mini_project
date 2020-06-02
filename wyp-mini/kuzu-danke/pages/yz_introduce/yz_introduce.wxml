@@ -1,0 +1,93 @@
+<view class="page">
+    <view class="swiper-tab">
+        <view bindtap="__e" class="{{['swiper-tab-list',currentTab==0?'on':'']}}" data-current="0" data-event-opts="{{[ [ 'tap',[ [ 'swichNav',['$event'] ] ] ] ]}}">甩手掌柜<view class="{{['borderLine',currentTab==0?'active':'']}}"></view>
+        </view>
+        <view bindtap="__e" class="{{['swiper-tab-list',currentTab==1?'on':'']}}" data-current="1" data-event-opts="{{[ [ 'tap',[ [ 'swichNav',['$event'] ] ] ] ]}}">安心无忧<view class="{{['borderLine',currentTab==1?'active':'']}}"></view>
+        </view>
+        <view bindtap="__e" class="{{['swiper-tab-list',currentTab==2?'on':'']}}" data-current="2" data-event-opts="{{[ [ 'tap',[ [ 'swichNav',['$event'] ] ] ] ]}}">品牌有保障<view class="{{['borderLine',currentTab==2?'active':'']}}"></view>
+        </view>
+    </view>
+    <view class="aq" wx:if="{{isShow==0}}">
+        <image class="aq_idx" mode="widthFix" src="https://public.danke.com.cn/public-20180830-Fm25XduVM_6wh086agA-SVnIOjOw"></image>
+        <view class="aq-part">
+            <view class="aq-sm">
+                <image class="wthd" src="https://public.danke.com.cn/public-20190703-FkxuzKa-V6YBTLj9ITD9o-1GGhPQ"></image>
+                <view class="sm-title">多样风格 量身设计</view>
+            </view>
+            <view class="aq-detail">房屋实地勘测，专业产品研发设计团队，根据房间构造匹配最合适的装修风格。目前，蛋壳公寓产品形态涵盖合租公寓、整租公寓等，设计产品及风格已升级至4.0，独创的“共享一居室”空间设计理念，丰富了合租和整租的产品功能，满足都市年轻白领多元化的居住需求。</view>
+            <image class="aq_sm_img1" src="https://public.danke.com.cn/public-20180814-FhQkeTfSlX6usufMvF2QqvAVwQqf"></image>
+            <view class="aq-sm">
+                <image class="wthd" src="https://public.danke.com.cn/public-20190703-FkxuzKa-V6YBTLj9ITD9o-1GGhPQ"></image>
+                <view class="sm-title">租金按时到达 专属管家管理</view>
+            </view>
+            <view class="aq-detail">房屋升级改造，配置全套家具、家电，实现房屋资产的高额增值。蛋壳公寓与业主签署合同后按照合同约定及时打款。</view>
+            <image class="aq_sm_img2" src="https://public.danke.com.cn/public-20180814-Flq5tzdtP4oBZfUEshIDBQiaW1rn"></image>
+            <view class="aq-detail">在整个租期内，有专属蛋壳管家协助管理，省心省力，让业主坐享收益。</view>
+        </view>
+    </view>
+    <view class="ax" wx:if="{{isShow==1}}">
+        <image class="aq_idx" mode="widthFix" src="https://public.danke.com.cn/public-20180726-FpyeDToAkYI0PXi9FC7fRoV8tHgq"></image>
+        <view class="aq-part">
+            <view class="aq-sm">
+                <image class="wthd" src="https://public.danke.com.cn/public-20190703-FkxuzKa-V6YBTLj9ITD9o-1GGhPQ"></image>
+                <view class="sm-title">高学历租客，年轻化白领</view>
+            </view>
+            <view class="aq-detail">据蛋壳公寓数据显示，蛋壳租户多为22~29岁的高学历青年白领群体，主要从事互联网、金融等领域工作。每间房间最多不超过2人，严格控制居住人数。租约合同对白领租客有年龄及不带小孩宠物等相关要求，确保房间安全整洁。</view>
+            <image class="ax_sm_img1" src="https://public.danke.com.cn/public-20180814-FmBz0YUIRHV1lm99YP7iZ1FW0ihk"></image>
+            <view class="aq-sm">
+                <image class="wthd" src="https://public.danke.com.cn/public-20190703-FkxuzKa-V6YBTLj9ITD9o-1GGhPQ"></image>
+                <view class="sm-title">月度双次保洁</view>
+            </view>
+            <view class="aq-detail">针对托管房屋，蛋壳公寓保洁人员定期上门打扫房屋，始终保持房屋干净、卫生。</view>
+            <image class="ax_sm_img2" src="https://public.danke.com.cn/public-20190603-FnndVZMK1JwSVmaYXOSakAtNM88Q"></image>
+            <view class="aq-sm">
+                <image class="wthd" src="https://public.danke.com.cn/public-20190703-FkxuzKa-V6YBTLj9ITD9o-1GGhPQ"></image>
+                <view class="sm-title">维护房屋设施</view>
+            </view>
+            <view class="aq-detail">当房屋内出现任何损坏，租客可在蛋壳公寓APP内报修，蛋壳管家及专业持证维修人员受理第一时间上门维修。</view>
+        </view>
+    </view>
+    <view class="pp" wx:if="{{isShow==2}}">
+        <image class="aq_idx" mode="widthFix" src="https://public.danke.com.cn/public-20180802-FgXK4jNqCmkZ8iQCdZvewxLqJp57"></image>
+        <view style="position:absolute;top:210rpx;left:30rpx;color:#fff;">
+            <view style="font-size:42rpx;">品牌有保障</view>
+            <view style="font-size:24rpx;margin-top:10rpx;">我国知名的长租公寓品牌</view>
+            <view style="font-size:24rpx;margin-top:10rpx;">已入住13大城市</view>
+        </view>
+        <view class="aq-part">
+            <view class="name">高靖</view>
+            <view class="job">蛋壳公寓CEO</view>
+            <view class="sm">资深互联网创始者，曾任职于百度、好乐买和糯米网，先后担任好乐买总裁助理、糯米网BI&BA和新业务负责人，之前曾任职于百姓网，作为团队创始成员担任北京分公司总经理，2014年创办互联网广告公司获蓝色光标投资。</view>
+            <view class="sm2">拥有超十年的互联网领域从业经验。</view>
+            <view class="line"></view>
+            <view class="aq-sm">
+                <image class="yh" src="https://public.danke.com.cn/public-20190704-Fg-y6ACBV8bjuR0qFqK3XFZZA0tZ"></image>
+                <view class="yh-title">洞见 - 互联网的网络协同及数据智能，将带来未来房产租赁行业颠覆性转变。</view>
+            </view>
+            <view class="sm" style="margin-bottom:80rpx;">蛋壳公寓基于互联网模式，利用数据智能体系提供个性化服务，制定规范化产品研发体系标准，依据年轻人生活方式对房屋进行产品设计、装配及迭代升级；除此以外，互联网可提升管理效率和风险规避能力，从而带动房屋评估和供应链管理能力大幅度提升，最后通过满足需求、提升服务品质，给租户良好居住体验。</view>
+            <view class="aq-sm">
+                <image class="wthd" src="https://public.danke.com.cn/public-20190703-FkxuzKa-V6YBTLj9ITD9o-1GGhPQ"></image>
+                <view class="sm-title">部分品牌荣誉</view>
+            </view>
+            <image class="pp_sm_img1" src="https://public.danke.com.cn/public-20180814-FgYZ78N_Y8CE0MSGiE3zP09NSN6T"></image>
+            <image class="pp_sm_img2" src="https://public.danke.com.cn/public-20180814-FpS0F5xAzk_rYkfQsHfHmq_I10A9"></image>
+            <view class="aq-sm">
+                <image class="wthd" src="https://public.danke.com.cn/public-20190703-FkxuzKa-V6YBTLj9ITD9o-1GGhPQ"></image>
+                <view class="sm-title">公司介绍</view>
+            </view>
+            <view class="aq-detail">蛋壳公寓是中国领先的互联网长租公寓运营商。公司成立于 2015 年初，是一家以数据驱动为核心，提供高品质租住生活的资产管理和居住服务平台。</view>
+            <view class="aq-detail">致力于用互联网方式改造传统的住房租赁行业，产品形态涵盖合租公寓、整租公寓等，满足都市年轻白领多元化的居住需求。</view>
+            <view class="aq-detail">在长租公寓行业权威研究机构迈点研究院发布的最新一期《中国长租公寓品牌风云榜》中，蛋壳公寓力压其他长租公寓品牌，高居榜首。</view>
+            <view class="aq-sm">
+                <image class="wthd" src="https://public.danke.com.cn/public-20190703-FkxuzKa-V6YBTLj9ITD9o-1GGhPQ"></image>
+                <view class="sm-title">入驻城市及规模</view>
+            </view>
+            <image class="pp_sm_img4" src="https://public.danke.com.cn/public-20180814-Fp4xNhyozPoh_Tmfi3pnYRXnGnSe"></image>
+            <view class="aq-detail">以“让租房变得简单快乐”的居住理念面向广大业主和租客。三年来，蛋壳公寓已入驻北京、上海、广州、深圳、杭州、天津、武汉、南京等13大城市。</view>
+        </view>
+    </view>
+    <view class="js_bottom">
+        <view bindtap="__e" class="wxzx" data-event-opts="{{[ [ 'tap',[ [ 'wtzx',['$event'] ] ] ] ]}}">委托咨询</view>
+        <view bindtap="__e" class="zxwt" data-event-opts="{{[ [ 'tap',[ [ 'zxwt',['$event'] ] ] ] ]}}">在线委托</view>
+    </view>
+</view>

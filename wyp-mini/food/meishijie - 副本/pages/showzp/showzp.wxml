@@ -1,0 +1,68 @@
+<navigation-bar enable="{{enable}}" title="晒美食"></navigation-bar>
+<view class="container" style="padding-top:{{barHeight}}px">
+    <view class="postw">
+        <view class="textareaw">
+            <textarea bindinput="inputing" class="ta" maxlength="1500" placeholder="此刻，你想说点什么......"></textarea>
+        </view>
+        <view class="imgset">
+            <view class="videoitem" wx:for="{{chooseVideoset}}" wx:for-index="i" wx:key="key">
+                <video autoplay="{{false}}" controls="{{false}}" enableProgressGesture="{{false}}" muted="{{true}}" showCenterPlayBtn="{{false}}" showFullscreenBtn="{{false}}" showPlayBtn="{{false}}" src="{{item}}" style="max-height:100%;max-width:100%;"></video>
+                <cover-view bindtap="removeVideo" class="delbtn" data-index="{{i}}">
+                    <cover-view class="i">×</cover-view>
+                </cover-view>
+            </view>
+            <view class="imgitem" wx:for="{{chooseImgset}}" wx:for-index="i" wx:key="key">
+                <image class="img" mode="aspectFill" src="{{item}}"></image>
+                <view bindtap="removeImg" class="delbtn" data-index="{{i}}">
+                    <view class="i">×</view>
+                </view>
+            </view>
+            <view bindtap="addimg" class="addVideobtn" wx:if="{{chooseVideoset.length+chooseImgset.length<9}}">
+                <view class="addicon">
+                    <image class="ic" src="{{addimgicon}}"></image>
+                </view>
+                <view class="t">添加图片</view>
+            </view>
+            <view bindtap="addVideo" class="addImgbtn" wx:if="{{chooseVideoset.length==0&&chooseImgset.length<9}}">
+                <view class="addicon">
+                    <image class="ic" src="{{addvideoicon}}"></image>
+                </view>
+                <view class="t">添加视频</view>
+            </view>
+        </view>
+        <view class="selectitems">
+            <navigator bindtap="addtopic" class="select_topic" url="/pages/showzp_checktopic/showzp_checktopic">
+                <view class="c1">
+                    <image class="i" src="../../images/topicicon1_2.png"></image>
+                    <view class="t">{{checkedTopic=='不参加任何话题'||checkedTopic=='选择话题'?'选择话题':checkedTopic}}</view>
+                    <image class="arrow" src="{{arrowicon}}"></image>
+                    <view class="tt">去选择</view>
+                </view>
+                <view class="tip" wx:if="{{checkedTopic=='选择话题'||checkedTopic=='不参加任何话题'}}">选择话题，让大家更容易关注到你！</view>
+            </navigator>
+            <view style="position:relative;">
+                <navigator bindtap="addrecipe" class="select_topic" url="/pages/showzp_checkrecipe/showzp_checkrecipe">
+                    <view class="c1">
+                        <image class="i" src="../../images/topicicon2_2.png"></image>
+                        <view class="t">{{checkedRecipe=='关联菜谱'?'关联菜谱':checkedRecipe}}</view>
+                        <block wx:if="{{checkedRecipe=='关联菜谱'}}">
+                            <image class="arrow" src="{{arrowicon}}"></image>
+                            <view class="tt">去选择</view>
+                        </block>
+                    </view>
+                    <view class="tip" wx:if="{{checkedRecipe=='关联菜谱'}}">是照着哪个菜谱做的？</view>
+                </navigator>
+                <view bindtap="removerecipe" class="removerecipeicon" wx:if="{{checkedRecipe!='关联菜谱'}}">
+                    <view class="i">×</view>
+                </view>
+            </view>
+        </view>
+        <view class="submitw">
+            <button bindtap="postZp" class="submitbtn able" wx:if="{{canpost}}">发布</button>
+            <button class="submitbtn" wx:else>发布</button>
+        </view>
+    </view>
+</view>
+<loading hidden="{{requeseDone||requeseFail||noData}}">
+发布中...
+</loading>

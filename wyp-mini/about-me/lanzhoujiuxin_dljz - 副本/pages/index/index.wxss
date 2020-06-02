@@ -1,0 +1,73 @@
+@import "../../libs/wxParse/wxParse.wxss";
+
+@import "../../libs/templates/module.wxss";
+
+.card-entrance {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    text-align: center;
+    opacity: 0;
+    z-index: 999;
+}
+
+.card-entrance .wrapper {
+    display: inline-flex;
+    padding: 15rpx 30rpx;
+    background-color: #fff;
+    border-radius: 16rpx;
+    align-items: center;
+    position: relative;
+    color: #333;
+    box-shadow: 0 0 20rpx 0 rgba(0,0,0,0.1);
+}
+
+.card-entrance .name {
+    margin-left: 15rpx;
+    margin-right: 2rpx;
+    font-size: 24rpx;
+    flex-shrink: 0;
+}
+
+.card-entrance image {
+    width: 70rpx;
+    height: 70rpx;
+    border-radius: 50%;
+    flex-shrink: 0;
+    border: 1rpx solid #eee;
+}
+
+.card-entrance .btn {
+    width: 162rpx;
+    height: 54rpx;
+    line-height: 54rpx;
+    margin-top: 1rpx;
+    margin-left: 32rpx;
+    text-align: center;
+    border: 1rpx solid #babec1;
+    border-radius: 5rpx;
+    font-size: 26rpx;
+    flex-shrink: 0;
+    color: #525252;
+}
+
+.close-btn {
+    position: absolute;
+    width: 46rpx;
+    height: 46rpx;
+    line-height: 46rpx;
+    background-color: #fff;
+    right: -19rpx;
+    top: -16rpx;
+    border-radius: 50%;
+    font-size: 18rpx;
+    text-align: center;
+    color: #848891;
+    box-shadow: 1rpx -7rpx 15rpx 0 rgba(0,0,0,0.05);
+}
+
+.icon-close:before {
+    content: "\e917";
+    display: inline;
+}

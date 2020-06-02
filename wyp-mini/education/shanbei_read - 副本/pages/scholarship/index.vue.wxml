@@ -1,0 +1,37 @@
+<template name="aae1480e">
+    <view class="_div data-v-0b9368ce scholarship">
+        <view class="_div data-v-0b9368ce bookplan-header" style=" {{'background-image:'+'url('+bookplanInfo.cover_url+')'+';'}}" wx:if="{{bookplanInfo.cover_url}}">
+            <view class="_div data-v-0b9368ce meta-bg"></view>
+            <view class="_div data-v-0b9368ce meta">
+                <view class="_div data-v-0b9368ce logo"></view>
+                <view class="_div data-v-0b9368ce title">奖学金</view>
+                <view class="_div data-v-0b9368ce slogan">/奖励你的坚持，养成阅读好习惯/</view>
+            </view>
+        </view>
+        <view class="_div data-v-0b9368ce card rule">
+            <view class="_div data-v-0b9368ce title">奖学金说明:</view>
+            <view class="_ul data-v-0b9368ce">
+                <view class="_li data-v-0b9368ce">
+                1.计划有效期内，坚持学习
+                <label class="_span data-v-0b9368ce highlight">{{bookplanInfo.least_days}}</label>天，即可获得奖学金
+            </view>
+                <view class="_li data-v-0b9368ce" wx:if="{{is50percent}}">2.奖学金是计划金额的50%哦～</view>
+                <view class="_li data-v-0b9368ce" wx:else>2.奖学金是计划金额的100%哦～</view>
+            </view>
+            <view class="_div data-v-0b9368ce tip">*提前读完书籍可以通过回看书籍继续学习。</view>
+        </view>
+        <view class="_div data-v-0b9368ce card book-list" wx:if="{{bookplanInfo.status===3}}">
+            <view class="_div data-v-0b9368ce title">书籍回看</view>
+            <view class="_ul data-v-0b9368ce" key="{{book.book_id}}" wx:for="{{books}}" wx:for-item="book" wx:key="book.book_id">
+                <view class="_li data-v-0b9368ce review-item {{[index===books.length-1?'no-margin':'']}}">
+                    <view class="_div data-v-0b9368ce">{{book.name_cn}}</view>
+                    <view bindtap="handleProxy" class="_div data-v-0b9368ce review" data-comkey="{{$k}}" data-eventid="{{'0-'+index}}">回看</view>
+                </view>
+            </view>
+        </view>
+        <view class="_div data-v-0b9368ce card {{[bookplanInfo.status!==3?'offset':'']}}">
+            <view class="_div data-v-0b9368ce title">如何领取奖学金？</view>
+            <view class="_div data-v-0b9368ce tip">【扇贝阅读】微信公众号-回复【返现】。如有疑问，可以在小程序-我的-联系我们中向我们反馈</view>
+        </view>
+    </view>
+</template>

@@ -1,0 +1,45 @@
+<view class="page">
+    <my-component bind:myevent="myEventListener" innerText="退押金详情"></my-component>
+    <view class="main" style=" margin-top: {{myHight}}px"></view>
+    <view class="touBu">
+        <view>押金</view>
+        <view>{{card.amount}}元</view>
+    </view>
+    <view class="card">
+        <view>
+            <view>退款说明</view>
+            <view>押金退款至{{card.cardtypeWhat}}</view>
+        </view>
+        <view>
+            <view>退款到</view>
+            <view>{{card.cardtypeWhere}}</view>
+        </view>
+        <view>
+            <view>创建时间</view>
+            <view>{{card.applytime}}</view>
+        </view>
+        <view>
+            <view>订单号</view>
+            <view>{{card.payno}}</view>
+        </view>
+    </view>
+    <view class="progress">
+        <view class="main" wx:for="{{progress}}">
+            <view class="left  {{item.step?'yes':'no'}}"></view>
+            <view class="right">
+                <view class="{{item.step?'yesTwo':'noTwo'}} {{item.suecces?'':'sueccesNo'}}">{{item.name}}</view>
+                <view wx:if="{{item.step}}">{{item.time}}</view>
+            </view>
+        </view>
+    </view>
+    <view class="isSucceed" wx:if="{{refund}}">
+		温馨提示：平台退款成功后，根据不同银行的处理进度，预计1-7 个工作日到账，请您注意查收。
+	</view>
+    <view class="btn" wx:else>
+        <view bindtap="cancel">取消退押金</view>
+        <view bindtap="gotoRefund">填写申请</view>
+    </view>
+    <view class="isSucceedTwo" wx:if="{{!refund}}">
+		平台退款失败原因：1、银行卡号错误或非用户本人名下；2、银行 卡已被冻结或注销，无法转账。
+	</view>
+</view>

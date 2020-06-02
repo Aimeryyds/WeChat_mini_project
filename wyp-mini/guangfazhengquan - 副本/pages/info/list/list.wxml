@@ -1,0 +1,5 @@
+<view class="page">
+    <list-view bind:loadmoredata="loadData" id="listview" loading="{{loading}}" noMore="{{noMore}}">
+        <card abstract="{{item.abstract}}" attachments="{{item.attachments}}" author="{{item.authors}}" bindtap="handleGoDetail" extra="{{item.fPublishTime}}" label="{{item.stats.readCnt}}" messageType="{{item.messageType}}" tag="{{item.media}}" timeLength="{{item.timeLength}}" title="{{item.title}}" url="/pages/info/detail/detail?id={{item.id}}&type={{item.messageType}}" wx:for="{{newList}}" wx:key="{{id}}"></card>
+    </list-view>
+</view>

@@ -1,0 +1,29 @@
+<view class="page">
+    <my-component bind:myevent="myEventListener" innerText="优惠券"></my-component>
+    <view class="main" style=" margin-top: {{myHight}}px"></view>
+    <view class="cou-list">
+        <view class="no-list" wx:if="{{couList.length==0&&couListOut.length==0}}">暂无优惠券...</view>
+        <view class="list-cont" wx:for="{{couList}}" wx:key="item.id">
+            <view class="box">
+                <view class="l-left">{{item.type}}元</view>
+                <view class="l-rig">
+                    <view class="l-tit">{{item.remark}}</view>
+                    <view class="sm-l15">使用区域:{{item.arearname}}</view>
+                    <view class="sm-l15">有效期:{{item.stime}}至{{item.etime}}</view>
+                </view>
+            </view>
+            <image src="/Content/images/yhx.png"></image>
+        </view>
+        <view class="list-cont out-list-12" data-id="{{item.id}}" wx:for="{{couListOut}}" wx:key="{{item.id}}">
+            <view class="box">
+                <view class="l-left">{{item.type}}元</view>
+                <view class="l-rig">
+                    <view class="l-tit">{{item.remark}}</view>
+                    <view class="sm-l15">使用区域:{{item.arearname}}</view>
+                    <view class="sm-l15">有效期:{{item.stime}}至{{item.etime}}</view>
+                </view>
+            </view>
+            <image src="/Content/images/yhx-out.png"></image>
+        </view>
+    </view>
+</view>

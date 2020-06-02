@@ -1,0 +1,41 @@
+<template name="hot-model-smallpic">
+    <block wx:for="{{articleList}}" wx:key="newsId">
+        <form bindsubmit="onSubmit" bindtap="gotoArticle" class="hot-item-smallpic hot-tv" data-index="{{index}}" data-is-video="{{true}}" data-link="{{item.link}}" data-newsid="{{item.newsId}}" data-newstype="{{item.newsType}}" data-recominfo="{{item.recominfo}}" data-templatetype="{{item.templateType}}" reportSubmit="true" wx:if="{{item.templateType==107&&index>2}}">
+            <button formType="submit">
+                <view class="news-pic">
+                    <image class="pic" lazyLoad="true" mode="aspectFill" src="{{item.pics&&item.pics.length&&item.pics[0]||item.smallPic}}"></image>
+                    <image class="icon-tv" src="../../images/icon-play.png"></image>
+                </view>
+                <view class="title">
+                    <view class="index{{index>2?'':' top'}}">
+            {{index+1}}
+          </view>
+          {{item.title}}
+        </view>
+                <view class="bottom"></view>
+            </button>
+        </form>
+        <form bindsubmit="onSubmit" bindtap="gotoArticle" class="hot-item-smallpic{{index==0?' first-item':''}}" data-index="{{index}}" data-is-moment="{{item.mountingType==1}}" data-is-video="{{item.templateType==107}}" data-link="{{item.link}}" data-newsid="{{item.newsId}}" data-newstype="{{item.newsType}}" data-recominfo="{{item.recominfo}}" data-templatetype="{{item.templateType}}" reportSubmit="true" wx:else>
+            <button formType="submit">
+                <view class="news-pic">
+                    <image class="pic" lazyLoad="true" mode="aspectFill" src="{{item.smallPic}}"></image>
+                    <image class="icon-tv" src="../../images/icon-play.png" wx:if="{{item.templateType==107}}"></image>
+                </view>
+                <view class="title" style="{{clickedMap[item.newsId]==item.newsId?'color: #999999;':''}}">
+                    <view class="index{{index>2?'':' top'}}">
+            {{index+1}}
+          </view>
+          {{item.title}}
+        </view>
+                <view class="summary">{{item.summary}}</view>
+                <view class="bottom">
+                    <text class="is-moment" wx:if="{{item.mountingType===1}}">话题</text>
+                    <text class="moment-title" wx:if="{{item.bindAnotherTitle}}">#{{item.bindAnotherTitle}}#</text>
+                </view>
+            </button>
+        </form>
+    </block>
+    <view class="bottom-tip">
+        <text>热点新闻已读完，分享一下吧~</text>
+    </view>
+</template>

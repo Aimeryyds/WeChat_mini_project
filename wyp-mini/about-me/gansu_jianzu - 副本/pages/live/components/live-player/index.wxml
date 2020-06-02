@@ -1,0 +1,19 @@
+<live-player backgroundMute autoplay="{{false}}" binderror="error" bindstatechange="statechange" class="player {{fullScreen?'player-fullscreen':''}};" id="livePlayer" mode="live" src="{{live.playUrl.rtmpUrl}}" wx:if="{{live}}">
+    <cover-view class="tips" style="display: {{showTips?'':'none'}}">
+        <cover-view class="title">{{live.tip}}</cover-view>
+        <cover-view catch:tap="startLive" class="btn {{live.status==1?'btn-disabled':''}}" wx:if="{{state=='waiting'||state=='error'}}">观看直播</cover-view>
+    </cover-view>
+    <cover-view bind:tap="handleTapPlayer" class="mask {{fullScreen?'mask-fullscreen':''}}" wx:if="{{!showTips}}">
+        <cover-view animation="{{animationData}}" class="controls {{fullScreen?'controls-fullscreen':''}}">
+            <cover-view class="controls-footer">
+                <cover-view catch:tap="{{state=='playing'?'stopLive':'startLive'}}" class="footer-action">
+                    <cover-image class="footer-icon" src="http://imgcdnali.wfenxiao.com.cn/xcx/c/live/ic_pause.png" wx:if="{{state=='playing'}}"></cover-image>
+                    <cover-image class="footer-icon" src="http://imgcdnali.wfenxiao.com.cn/xcx/c/live/ic_play.png" wx:if="{{state=='pause'}}"></cover-image>
+                </cover-view>
+                <cover-view catch:tap="toggleFullScreen" class="footer-action">
+                    <cover-image class="footer-icon" src="http://imgcdnali.wfenxiao.com.cn/xcx/c/live/{{fullScreen?'ic_fullscreen_quit':'ic_fullscreen'}}.png"></cover-image>
+                </cover-view>
+            </cover-view>
+        </cover-view>
+    </cover-view>
+</live-player>

@@ -1,0 +1,68 @@
+<view class="container">
+    <view class="hotel-phoneDetail">
+        <view class="hotel-phoneDetail__item">
+            <image class="hotel-phoneDetail__img" src="http://imgcdnali.wfenxiao.com.cn/xcx/c/hotel/hotel.png"></image>
+            <view style="flex:1">{{phoneDetailData.brandName}}-{{phoneDetailData.storeName}}</view>
+        </view>
+        <view class="hotel-phoneDetail__item">
+            <image class="hotel-phoneDetail__address-img" src="http://imgcdnali.wfenxiao.com.cn/xcx/c/icons/about/location.png"></image>
+            <view class="hotel-phoneDetail--fontstyle">{{phoneDetailData.provinceName}}{{phoneDetailData.cityName}}{{phoneDetailData.areaName}}{{phoneDetailData.detailAddress}}</view>
+        </view>
+        <view bindtap="callTab" class="hotel-phoneDetal__btn">联系商家</view>
+    </view>
+    <view class="hotel-serviceDetail" wx:if="{{phoneDetailData.facilities.length>0}}">
+        <view class="hotel-serviceDetail__title">
+            <image class="hotel-serviceDetail__img" src="http://imgcdnali.wfenxiao.com.cn/xcx/c/hotel/service-icon.png"></image>
+            <view>可供服务</view>
+        </view>
+        <view class="hotel-serviceDetail__list">
+            <block wx:if="{{phoneDetailData.facilities.length>12&&showMore1}}">
+                <view class="hotel-serviceDetail__item zan-ellipsis" wx:for="{{phoneDetailData.moreData}}" wx:key="index">{{item.name}}</view>
+            </block>
+            <block wx:else>
+                <view class="hotel-serviceDetail__item zan-ellipsis" wx:for="{{phoneDetailData.facilities}}" wx:key="index">{{item.name}}</view>
+            </block>
+        </view>
+        <view bindtap="moreSource1" class="view-more" wx:if="{{phoneDetailData.facilities.length>12&&showMore1}}">
+            <text>查看更多</text>
+            <image class="view-more--img" src="http://imgcdnali.wfenxiao.com.cn/xcx/c/arrow-down.png"></image>
+        </view>
+        <view bindtap="moreSource1Hidden" class="view-more" wx:if="{{phoneDetailData.facilities.length>12&&!showMore1}}">
+            <text>收起</text>
+            <image class="view-more--img" src="http://imgcdnali.wfenxiao.com.cn/xcx/c/arrow-up.png"></image>
+        </view>
+    </view>
+    <view class="hotel-info">
+        <view class="hotel-info__title">酒店介绍</view>
+        <view class="hotel-info__form">
+            <view class="hotel-info__form-item">
+                <view class="hotel-info__label">装修时间:</view>
+                <view class="hotel-indo__cont">{{phoneDetailData.decoratedTime}}</view>
+            </view>
+            <view class="hotel-info__form-item">
+                <view class="hotel-info__label">开业时间:</view>
+                <view class="hotel-indo__cont">{{phoneDetailData.openedTime}}</view>
+            </view>
+            <view class="hotel-info__form-item">
+                <view class="hotel-info__label">楼层高度:</view>
+                <view class="hotel-indo__cont">{{phoneDetailData.floor}}</view>
+            </view>
+            <view class="hotel-info__form-item">
+                <view class="hotel-info__label">房间总数:</view>
+                <view class="hotel-indo__cont">{{phoneDetailData.roomTotal}}</view>
+            </view>
+        </view>
+        <view class="hotel-info__detail" wx:if="{{phoneDetailData.brief.length>50&&showMore}}">
+            <wxc-elip line="4">{{phoneDetailData.brief}}</wxc-elip>
+        </view>
+        <view class="hotel-info__detail" wx:else>{{phoneDetailData.brief}}</view>
+        <view bindtap="moreSource" class="view-more" wx:if="{{phoneDetailData.brief.length>50&&showMore}}">
+            <text>查看更多</text>
+            <image class="view-more--img" src="http://imgcdnali.wfenxiao.com.cn/xcx/c/arrow-down.png"></image>
+        </view>
+        <view bindtap="moreSourceHidden" class="view-more" wx:if="{{phoneDetailData.brief.length>50&&!showMore}}">
+            <text>收起</text>
+            <image class="view-more--img" src="http://imgcdnali.wfenxiao.com.cn/xcx/c/arrow-up.png"></image>
+        </view>
+    </view>
+</view>

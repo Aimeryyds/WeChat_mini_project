@@ -1,0 +1,48 @@
+<view class="search">
+    <view class="search-content">
+        <image src="http://tws.cnweisou.com/images/search1.png"></image>
+        <input bindchange="bindChange" class="input_search" placeholder="搜索关键字" placeholderStyle="color:#999"></input>
+    </view>
+    <text bindtap="search">筛选</text>
+</view>
+<dl class="menu">
+    <dt bindtap="tapMainMenu" class="{{menu[0]}}" data-index="0">价格</dt>
+    <dd class="{{subMenuDisplay[0]}}">
+        <ul>
+            <li bindtap="tapSubMenu" class="{{subMenuHighLight[0][0]}}" data-index="0-0">从高到低</li>
+            <li bindtap="tapSubMenu" class="{{subMenuHighLight[0][1]}}" data-index="0-1">从低到高</li>
+        </ul>
+    </dd>
+    <dt bindtap="tapMainMenu" class="{{menu[2]}}" data-index="2">最新</dt>
+    <dt bindtap="tapMainMenu" class="{{menu[3]}}" data-index="3">推荐</dt>
+    <dt bindtap="styleSelect" class="{{showL?'highlight2 ':'highlight1'}}" data-index="4">排列</dt>
+</dl>
+<view class="goodsList carts-list" wx:if="{{!empty&&style}}">
+    <view bindtap="tapGoods" class="carts-item" data-object-id="{{item.id}}" wx:for="{{goods}}" wx:key="objectId">
+        <view>
+            <image class="carts-image" mode="aspectFill" src="{{item.thumb}}"></image>
+        </view>
+        <view class="carts-text">
+            <text class="carts-title">{{item.title}}</text>
+            <view>
+                <text class="carts-price">￥{{item.price}}元</text>
+                <image class="carts-img" src="https://tws.cnweisou.com/images/myCart1.png"></image>
+            </view>
+        </view>
+    </view>
+</view>
+<view class="goodsList1 carts-list1" wx:if="{{!empty&&!style}}">
+    <view bindtap="tapGoods" class="carts-item1" data-object-id="{{item.id}}" style="height:400rpx;" wx:for="{{goods}}" wx:key="objectId">
+        <view class="imgView">
+            <image class="carts-image1" mode="aspectFill" src="{{item.thumb}}"></image>
+        </view>
+        <view class="carts-text1">
+            <text class="carts-title1">{{item.title}}</text>
+            <text class="carts-price1">￥{{item.price}}元</text>
+            <image class="carts-img1" src="https://tws.cnweisou.com/images/myCart1.png"></image>
+        </view>
+    </view>
+</view>
+<view class="view-empty" wx:if="{{empty}}">
+    <text>抱歉暂时没有相关结果,换个筛选条试试吧!</text>
+</view>

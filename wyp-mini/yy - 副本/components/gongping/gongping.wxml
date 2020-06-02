@@ -1,0 +1,53 @@
+<import src="./template/danmu-landscape/danmu-landscape.wxml"></import>
+<import src="./template/danmu-portrait/danmu-portrait.wxml"></import>
+<import src="./template/gongping-tool/gongping-tool.wxml"></import>
+<import src="./template/happy-fight/happy-fight.wxml"></import>
+<view class="landscape-wrapper" wx:if="{{ratio>=1}}">
+    <template is="happy-fight" data="{{happyFightInfo:happyFightInfo,happyFightRemainTime:happyFightRemainTime}}" wx:if="{{ishappyFight}}"></template>
+    <template is="danmu-landscape" data="{{gongpingInfo:gongpingInfo,xModel:xModel,bottomPosition:bottomPosition,sourceA:sourceA,sourceB:sourceB,gongpingUI:gongpingUI,gongpingHeight:gongpingHeight,submodules:submodules,ishappyFight:ishappyFight}}"></template>
+</view>
+<cover-view bindtap="hideChatInput" class="gongping portrait-gongping" style="bottom:{{xModel?134:90}}rpx;" wx:if="{{ratio<1&&hasReady}}">
+    <template is="danmu-portrait" data="{{gongpingInfo:gongpingInfo,bottomPosition:bottomPosition,sourceA:sourceA,sourceB:sourceB,submodules:submodules}}"></template>
+</cover-view>
+<cover-view class="gongping-chat" id="BottomSign" style="bottom: {{xModel?54:10}}rpx;" wx:if="{{submodules.chat&&isHideChatInput&&hasReady}}">
+    <template is="gongping-tool" data="{{isHideChatInput:isHideChatInput,chatInputValue:chatInputValue,hasAccredit:hasAccredit,isGiftReady:isGiftReady,systemType:systemType,flowerGiftNum:flowerGiftNum,showGiftTimer:showGiftTimer,shareInfo:shareInfo}}"></template>
+</cover-view>
+<cover-view class="room-activity-area" style="bottom: {{xModel?144:100}}rpx;" wx:if="{{hasReady&&(switchAppLaunch||activityData)}}">
+    <cover-view class="open-app" wx:if="{{switchAppLaunch}}">
+        <button appParameter="{{appParameter}}" binderror="launchAppError" bindtap="launchAppClick" class="open-app-btn" openType="launchApp">
+            打开APP
+        </button>
+        <cover-image class="ico_right" src="./images/ico_right.png"></cover-image>
+    </cover-view>
+    <cover-image catchtap="activityLinkClick" class="room-activity-img" data-action="{{activityData.action}}" data-type="{{activityData.actionType}}" src="{{activityData.image}}" wx:if="{{activityData}}"></cover-image>
+</cover-view>
+<cover-view class="service-toast" hidden="{{hideService}}" wx:if="{{hasReady}}">
+    <cover-view class="service-toast-tips">请前往客服会话，回复“1”下载【YY直播APP】</cover-view>
+    <cover-view class="service-toast-btn">
+        <button bindtap="closeServiceToast" class="service-btn-cancle" data-type="0">取消</button>
+        <button bindtap="closeServiceToast" data-type="1" openType="contact">打开客服会话</button>
+    </cover-view>
+</cover-view>
+<view class="chat-main" hidden="{{isHideChatInput}}">
+    <view class="input-box">
+        <input bindblur="touchmove" bindconfirm="clickSendDanmuBtn" bindinput="changeDanmuInput" focus="{{chatFocusStatus}}" id="danmuInput" name="msg" placeholder="快跟ta互动吧" showConfirmBar="false" value="{{chatInputValue}}"></input>
+    </view>
+    <view bindtap="clickSendDanmuBtn" class="send-chat {{chatInputValue?'hasValue':''}}">发送</view>
+</view>
+<cover-view class="ios-gift-animation" wx:if="{{hasReady&&showIosGiftAnimation}}">
+    <cover-view class="ios-animation__wrap">
+        <cover-image class="ios-animation-wrap__img" src="/components/gongping/template/gongping-tool/images/flower_small.png"></cover-image>
+    </cover-view>
+</cover-view>
+<wxs module="pannel">
+var formatePrice = (function(price) {
+    price = price / 100;
+    if (price >= 10000 && price < 10000000) {
+        price = (price / 10000).toFixed(1) + '万'
+    } else if (price >= 10000000) {
+        price = (price / 10000).toFixed(0) + '万'
+    };
+    return (price)
+});
+module.exports.formatePrice = formatePrice;
+</wxs>

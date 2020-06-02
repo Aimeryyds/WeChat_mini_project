@@ -1,0 +1,12 @@
+<view class="zan-loadmore">
+    <block wx:if="{{type==='loading'}}">
+        <view class="zan-loading"></view>
+        <view class="zan-loadmore__tips">加载中...</view>
+    </block>
+    <block wx:elif="{{type==='text'}}">
+        <view class="zan-loadmore__line"></view>
+        <text class="zan-loadmore__text" wx:if="{{text}}">{{text}}</text>
+        <view class="zan-loadmore__dot" wx:else></view>
+        <view class="zan-loadmore__line"></view>
+    </block>
+</view>

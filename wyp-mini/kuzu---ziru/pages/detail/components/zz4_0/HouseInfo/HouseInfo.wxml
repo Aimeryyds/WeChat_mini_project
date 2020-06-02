@@ -1,0 +1,67 @@
+<view class="{{['house-info house-detail data-v-1798c3a6',skeletonFlag?'active':'']}}" wx:if="{{roomData}}">
+    <view class="house-title data-v-1798c3a6">
+        <view class="name _h1 data-v-1798c3a6">{{roomData.name}}</view>
+        <view bindtap="__e" class="png-icon icon-map _i data-v-1798c3a6" data-event-opts="{{[ [ 'tap',[ [ 'handleOpenLocation',['$event'] ] ] ] ]}}"></view>
+    </view>
+    <view class="price-wrap data-v-1798c3a6" wx:if="{{priceObj}}">
+        <view class="price-row data-v-1798c3a6">
+            <label class="price _span data-v-1798c3a6">
+                <label class="symbol _span data-v-1798c3a6">￥</label>
+                <price bind:__l="__l" class="data-v-1798c3a6" fontSize="20px" offset="{{21}}" priceObj="{{priceObj.price}}" vueId="1" width="14px"></price>
+                <label class="unit _span data-v-1798c3a6">{{price}}</label>
+            </label>
+        </view>
+        <view class="price-desc data-v-1798c3a6">
+            <label class="desc _span data-v-1798c3a6">{{payment.text}}</label>
+            <label bindtap="__e" class="payment-way _span data-v-1798c3a6" data-event-opts="{{[ [ 'tap',[ [ 'handleOpenModal',['$event'] ] ] ] ]}}">{{payment.entre_text+''}}<view class="iconfont icon-zrk_ic_arrowright _i data-v-1798c3a6"></view>
+            </label>
+        </view>
+    </view>
+    <view class="promotion-banner data-v-1798c3a6" wx:if="{{zz_4_feature_top}}">
+        <image bindtap="__e" class="img _img data-v-1798c3a6" data-event-opts="{{[ [ 'tap',[ [ 'handleJumpH5',[zz_4_feature_top.parameter&&zz_4_feature_top.parameter.url] ] ] ] ]}}" src="{{zz_4_feature_top.img}}"></image>
+    </view>
+    <view class="detail-info data-v-1798c3a6" wx:if="{{focus_base.length}}">
+        <block wx:for="{{focus_base}}" wx:key="index">
+            <view class="item data-v-1798c3a6">
+                <view class="name _h4 data-v-1798c3a6">{{item.name}}</view>
+                <view class="value _h3 data-v-1798c3a6">{{item.value}}</view>
+            </view>
+            <view class="split-line data-v-1798c3a6" wx:if="{{index!==focus_base.length-1}}"></view>
+        </block>
+    </view>
+    <view bindtap="__e" class="zr-btn plain data-v-1798c3a6" data-event-opts="{{[ [ 'tap',[ [ 'handleJumpToTarget',['house-detail'] ] ] ] ]}}">查看更多详情信息</view>
+    <popup-wrapper backgroundColor="#fff" bind:__l="__l" class="data-v-1798c3a6 vue-ref" data-ref="pricePopup" height="75%" maskClick="{{true}}" maskShow="{{true}}" transition="slider" type="bottom" vueId="2" vueSlots="{{['default']}}">
+        <view class="_div data-v-1798c3a6" wx:if="{{!modalData}}">
+            <view class="skeleton s h _div data-v-1798c3a6"></view>
+            <view class="skeleton l _div data-v-1798c3a6"></view>
+            <view class="skeleton s _div data-v-1798c3a6"></view>
+            <view class="skeleton l _div data-v-1798c3a6"></view>
+            <view class="skeleton l _div data-v-1798c3a6"></view>
+            <view class="skeleton s _div data-v-1798c3a6"></view>
+            <view class="skeleton l _div data-v-1798c3a6"></view>
+            <view class="skeleton l _div data-v-1798c3a6"></view>
+            <view class="skeleton _div data-v-1798c3a6"></view>
+        </view>
+        <view class="_div data-v-1798c3a6" wx:else>
+            <view class="modal-block pay-modal _div data-v-1798c3a6">
+                <view class="modal-title _h3 data-v-1798c3a6">付款方式</view>
+                <view class="modal-content _div data-v-1798c3a6" wx:if="{{modalData}}">
+                    <view bindtap="__e" class="modal-line bb1 _div data-v-1798c3a6" data-event-opts="{{[ [ 'tap',[ [ 'handleJumpH5',['$0'],[ [ ['modalData.details','',i,'more_link'] ] ] ] ] ] ]}}" wx:for="{{modalData.details}}" wx:for-index="i" wx:key="i">
+                        <view class="top _div data-v-1798c3a6">
+                            <label class="way _span data-v-1798c3a6">{{''+item.title+''}}<view class="iconfont icon-aui-icon-question mcolor _i data-v-1798c3a6" wx:if="{{item.more_link}}"></view>
+                            </label>
+                            <label class="price-d _span data-v-1798c3a6">￥<price bind:__l="__l" class="data-v-1798c3a6" offset="{{17}}" priceObj="{{item.rent_fee}}" vueId="{{'3-'+i+','+'2'}}" width="12px"></price>{{''+item.rent_fee_unit+''}}</label>
+                        </view>
+                        <view class="bottom _div data-v-1798c3a6">押金： ￥<price bind:__l="__l" class="data-v-1798c3a6" fontSize="14px" offset="{{14.8333}}" priceObj="{{item.deposit}}" vueId="{{'4-'+i+','+'2'}}"></price>{{''+item.deposit_unit+'， 服务费： ￥'}}<price bind:__l="__l" class="data-v-1798c3a6" fontSize="14px" offset="{{14.8333}}" priceObj="{{item.service_fee}}" vueId="{{'5-'+i+','+'2'}}"></price>{{''+item.service_fee_unit+''}}</view>
+                    </view>
+                </view>
+            </view>
+            <view class="modal-block pay-modal _div data-v-1798c3a6">
+                <view class="modal-title _h3 data-v-1798c3a6">说明</view>
+                <view class="modal-content _div data-v-1798c3a6" wx:if="{{modalData}}">
+                    <view class="desc _p data-v-1798c3a6" wx:for="{{modalData.reminder}}" wx:for-index="i" wx:key="i">{{''+item+''}}</view>
+                </view>
+            </view>
+        </view>
+    </popup-wrapper>
+</view>

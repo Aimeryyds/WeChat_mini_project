@@ -1,0 +1,13 @@
+<view class="wp_content form_input_content" wx:if="{{param.skin=='default'}}">
+    <input bindblur="onBlur" bindinput="onInput" class="wxinp" name="{{layerid}}" placeholder="{{param.inpval}}" placeholderStyle="{{param.placeholderstylestr}}" style="{{inner_style}}margin-right:{{param.required?'-6rpx':0}};" type="{{itype}}" value="{{value}}"></input>
+    <text class="required" style="margin-left:12rpx;right:auto;" wx:if="{{param.required}}">*</text>
+    <icon class="warn" size="20" style="top:calc(50% - 26rpx);right:4rpx;" type="warn" wx:if="{{haswarn}}"></icon>
+</view>
+<view class="wp_content form_input_content" wx:else>
+    <label class="labbox">
+        <text class="labtext" style="{{label_style}}">{{param.labtext}}</text>
+        <input bindblur="onBlur" bindinput="onInput" class="wxinp" name="{{layerid}}" placeholder="{{param.inpval}}" placeholderStyle="{{param.placeholderstylestr}}" style="{{inner_style}}margin-right:{{param.required?'-6rpx':0}};" type="{{itype}}" value="{{value}}"></input>
+    </label>
+    <text class="required" style="margin-left:12rpx;right:auto;" wx:if="{{param.required}}">*</text>
+    <icon class="warn" size="20" style="top:calc(50% - 26rpx);right:4rpx;" type="warn" wx:if="{{haswarn}}"></icon>
+</view>

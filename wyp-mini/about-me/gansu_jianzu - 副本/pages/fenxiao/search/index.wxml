@@ -1,0 +1,28 @@
+<import src="/dist/toast/index.wxml"></import>
+<template is="zan-toast" data="{{zanToast:zanToast}}"></template>
+<view class="container">
+    <view class="search-wrap">
+        <view class="products-search">
+            <image class="products-search__img" src="http://imgcdnali.wfenxiao.com.cn/xcx/c/icons/ic_search.png"></image>
+            <input bindconfirm="handleSearch" class="products-search__text" confirmType="搜索" placeholder="{{placeholder}}" value="{{keyword}}"></input>
+        </view>
+    </view>
+    <view class="products-wrap">
+        <view bindtap="showProductDetail" class="products-list" data-id="{{item.id}}" wx:for="{{goodList}}">
+            <image class="products-list__img" src="{{item.imgUrl}}"></image>
+            <view class="products-list__info">
+                <view class="products-list__name">{{item.name}}</view>
+                <view class="products-list__cont">
+                    <text class="products-list__extendPrice">推广价:  ¥{{item.sharePrice}}</text>
+                    <text class="products-list__costPrice">原价:  ¥{{item.price}}</text>
+                </view>
+                <view>佣金:  ¥{{item.commission}} ({{item.commissionRate}}%)</view>
+                <div bindtap="collection" class="products-list__collection" data-id="{{item.id}}" data-type="{{item.isShare}}">
+                    <image class="products-list__joinImg" src="http://imgcdnali.wfenxiao.com.cn/xcx/c/join-icon.png" wx:if="{{item.isShare}}"></image>
+                    <image class="products-list__joinImg" src="http://imgcdnali.wfenxiao.com.cn/xcx/c/join-icon2.png" wx:else></image>
+                </div>
+            </view>
+        </view>
+        <view class="noData" wx:if="{{goodList.length==0}}">没有找到相关商品</view>
+    </view>
+</view>

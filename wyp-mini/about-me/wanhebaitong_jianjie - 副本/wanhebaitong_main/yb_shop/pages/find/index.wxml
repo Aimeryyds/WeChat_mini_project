@@ -1,0 +1,49 @@
+<block wx:if="{{show}}">
+    <view class="class_box">
+        <scroll-view scrollLeft="{{scroll_left}}" scrollX="true" style=" white-space: nowrap;">
+            <view class="cate {{class_id==''?'active':''}}">
+                <text bindtap="cate_select" data-id="" data-index="" data-level="1">全部</text>
+            </view>
+            <view class="cate {{class_id1==item.class_id?'active':''}}" wx:for="{{cate}}">
+                <text bindtap="cate_select" data-class_style="{{item.class_style}}" data-id="{{item.class_id}}" data-index="{{index}}" data-level="{{item.level}}">{{item.name}}</text>
+            </view>
+        </scroll-view>
+        <view class="class_view" wx:if="{{cate2.length>0}}">
+            <view class="class_li {{class_id2==item.class_id?'active':''}}" wx:for="{{cate2}}">
+                <text bindtap="cate_select" data-class_style="{{item.class_style}}" data-id="{{item.class_id}}" data-index="{{index}}" data-level="{{item.level}}">{{item.name}}</text>
+            </view>
+        </view>
+        <view class="clear"></view>
+    </view>
+    <view class="case_list" wx:if="{{class_style==2}}">
+        <view class="case_li" wx:for="{{list}}">
+            <navigator bindtap="to_url" data-id="{{item.article_id}}" data-link="{{item.link}}" data-name="{{item.title}}">
+                <view class="case_pic">
+                    <image src="{{item.image}}"></image>
+                </view>
+                <view class="case_tit">{{item.title}}</view>
+            </navigator>
+        </view>
+        <view class="fui-loading empty" wx:if="{{loaded}}">
+            <view class="text">没有更多内容了</view>
+        </view>
+    </view>
+    <view class="index_advan_list" wx:if="{{class_style==1}}">
+        <view class="advan_li" wx:for="{{list}}">
+            <navigator bindtap="to_url" data-id="{{item.article_id}}" data-link="{{item.link}}" data-name="{{item.title}}">
+                <image mode="aspectFill" src="{{item.image}}"></image>
+                <view class="advan_info">
+                    <view class="advan_tit">{{item.title}}</view>
+                    <view class="advan_memo">{{item.short_title}}</view>
+                    <view class="advan_memo">{{item.create_time}}</view>
+                </view>
+                <view class="clear"></view>
+            </navigator>
+        </view>
+        <view class="load_info" wx:if="{{loaded}}">没有更多内容了</view>
+    </view>
+    <block wx:if="{{showtabbar}}">
+        <view style="height:100rpx"></view>
+        <include src="/yb_shop/pages/common/menu.wxml"></include>
+    </block>
+</block>

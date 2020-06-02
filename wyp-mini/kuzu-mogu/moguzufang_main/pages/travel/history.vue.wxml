@@ -1,0 +1,30 @@
+<template name="9ed206fa">
+    <view class="_view 9ed206fa history-container">
+        <view class="_view 9ed206fa history-title">看房历史<view class="_view 9ed206fa subtitle">您有{{page.total}}个看房历史</view>
+        </view>
+        <template is="2769dfa9" data="{{...$root['0'],...$root[$kk+'9ed206fa-0'],$root:$root}}" wx:if="{{queryList.length<1}}"></template>
+        <view class="_view 9ed206fa history-ul">
+            <view class="_view 9ed206fa history-li" key="{{index}}" wx:for="{{queryList}}" wx:key="index">
+                <view class="_view 9ed206fa title">
+                    <view class="_i 9ed206fa"></view>看房时间<text class="_text 9ed206fa date-text">{{item.timeText}}</text>
+                </view>
+                <view bindtap="handleProxy" class="_view 9ed206fa area-house" data-comkey="{{$k}}" data-eventid="{{'9ed206fa-0-'+index}}">
+                    <view class="_view 9ed206fa image-box" style=" {{'background-image:'+'url('+item.image+')'+';'}}"></view>
+                    <view class="_view 9ed206fa area-house-title text-ellipsis">{{item.title}}</view>
+                    <view class="_view 9ed206fa area-house-subtitle text-ellipsis">{{item.subTitle}}</view>
+                    <text class="_text 9ed206fa price">{{item.showPrice}}<text class="_text 9ed206fa price-unit">元/月</text>
+                    </text>
+                </view>
+                <view class="_view 9ed206fa footer">
+                    <view bindtap="handleProxy" class="_view 9ed206fa footer-btn" data-comkey="{{$k}}" data-eventid="{{'9ed206fa-1-'+index}}" hidden="{{!item.mobile}}">电话咨询</view>
+                </view>
+            </view>
+        </view>
+        <view class="_view 9ed206fa" hidden="{{!(isLoading&&!isEmpty)}}">
+            <template is="49b8e2ad" data="{{...$root['0'],...$root[$kk+'9ed206fa-1'],$root:$root}}"></template>
+        </view>
+        <view class="_view 9ed206fa noMore" hidden="{{!(!hasMore&&!isEmpty)}}">--- 没有更多数据 ---</view>
+    </view>
+</template>
+<import src="/components/common/empty.vue.wxml"></import>
+<import src="/components/mgMoreLoading.vue.wxml"></import>

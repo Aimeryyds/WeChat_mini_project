@@ -1,0 +1,93 @@
+<import src="../../../wxParse/wxParse.wxml"></import>
+<view class="topInfo">
+    <view class="continuity">
+        <text class="card">连续打卡</text>
+        <text class="day">{{orderday}}天</text>
+    </view>
+    <view class="personInfo">
+        <view class="userinfo">
+            <image backgroundSize="cover" bindtap="chooseImage" class="userinfo-avatar" src="{{userInfo.avatar}}"></image>
+            <text class="userinfo-nickname">{{userInfo.nickname}}</text>
+        </view>
+        <view class="myIntegral">我的积分：{{credit1}}积分</view>
+        <view class="signCard">
+            <button bindtap="cardSign" wx:if="{{signed==0}}">今日打卡</button>
+            <button bindtap="cardSignAgain" wx:else>今日已打卡</button>
+        </view>
+    </view>
+    <view class="total">
+        <text bindtap="detailRecord" class="detial">详细记录</text>
+        <text class="toalCard">总打卡</text>
+        <text class="day">{{sum}}天</text>
+    </view>
+</view>
+<view class="distance"></view>
+<view class="calendar">
+    <view class="time">
+        <view bindtap="showMonth">
+            <text class="t_blue">{{currYear}}年{{currMonth}}月</text>
+        </view>
+        <view bindtap="cardRule" class="t_blueTitle" style="text-align: right;line-height:30rpx;">
+      打卡规则
+    </view>
+    </view>
+    <view class="box-flex">
+        <view class="flex-item" data-index="{{index}}" wx:for="{{currMouthDay}}" wx:for-index="key" wx:for-item="currDay" wx:key="{{key}}">
+            <view class="item-content bk-color-day" wx:if="{{nowMonth==currMonth&&nowYear==currYear&&today==currDay.day}}">{{today}}
+<view class="{{signed==1?'signed':''}}"></view>
+            </view>
+            <view class="item-content" wx:elif="{{currDay.day==0}}"></view>
+            <view bindtap="pastTday" class="item-content" wx:elif="{{currDay.day<today}}">{{currDay.day}}
+<view class="{{currDay.signed==1?'signed':''}}"></view>
+            </view>
+            <view bindtap="pastTday" class="item-content" wx:elif="{{currDay==signIn}}">{{currDay.day}}
+<view class="signed"></view>
+            </view>
+            <view class="item-content" wx:else>{{currDay.day}}</view>
+        </view>
+    </view>
+</view>
+<view class="bgtypeList" wx:if="{{showType}}">
+    <scroll-view scrollY class="yearMonthscroll">
+        <view class="typeList" wx:for="{{yearMonthList}}">
+            <view bindtap="chooseDate" class="yearAndMonth" data-index="{{index}}">{{item.year}}年{{item.month}}月</view>
+        </view>
+    </scroll-view>
+</view>
+<view class="bgtypeList" wx:if="{{cardFirst}}">
+    <view class="cardFirstType">
+            {{message}}
+    <view bindtap="returnIndexFirst" class="determine">
+    确定
+    </view>
+    </view>
+</view>
+<view class="bgtypeList" wx:if="{{cardAgain}}">
+    <view class="cardAgainType">
+            今日已经签到过了喔
+    <view bindtap="returnIndex" class="determineAgin">
+    确定
+    </view>
+    </view>
+</view>
+<view class="bgtypeList" wx:if="{{cardRule}}">
+    <view class="cardRule">
+        <view class="determineRuleTitle">
+    打卡规则
+    </view>
+        <template is="wxParse" data="{{wxParseData:article.nodes}}"></template>
+        <view bindtap="ruleReturnIndex" class="determineRule">
+    我知道了
+    </view>
+    </view>
+</view>
+<view class="bgtypeList" wx:if="{{isCard}}">
+    <view class="cardAgainType">
+            {{noCard}}
+
+    <view bindtap="isCard" class="determineAgin">
+    确定
+    </view>
+    </view>
+</view>
+<loading wx:if="{{loading}}"></loading>

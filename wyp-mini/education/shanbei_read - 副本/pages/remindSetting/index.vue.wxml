@@ -1,0 +1,22 @@
+<template name="70e41522">
+    <view class="_div data-v-bdcf7e92">
+        <view class="_div data-v-bdcf7e92 container">
+            <view class="_div data-v-bdcf7e92 open-remind">
+                <view class="_div data-v-bdcf7e92 open-remind-main">
+                    <label class="_span data-v-bdcf7e92 open-remind-title">开启提醒</label>
+                    <switch bindchange="handleProxy" checked="{{isChecked}}" class="_switch data-v-bdcf7e92" color="#7fb845" data-comkey="{{$k}}" data-eventid="{{'0'}}" disabled="{{!enable}}" style=" {{'transform:'+'scale(0.8)'+';'}}"></switch>
+                    <view bindtap="handleProxy" class="_div data-v-bdcf7e92 open-remind-cover" data-comkey="{{$k}}" data-eventid="{{'1'}}" wx:if="{{!enable}}"></view>
+                </view>
+                <view class="_p data-v-bdcf7e92 open-remind-description">阅读提醒功能目的是帮助用户养成阅读习惯</view>
+                <view class="_p data-v-bdcf7e92 open-remind-description">把书籍加入书桌后才能设置提醒时间</view>
+            </view>
+            <view class="_div data-v-bdcf7e92" wx:if="{{isChecked}}">
+                <view class="_div data-v-bdcf7e92 set-remind">
+                    <label class="_span data-v-bdcf7e92 set-remind-time">提醒时间</label>
+                    <picker bindchange="handleProxy" class="_picker data-v-bdcf7e92 set-remind-picker" data-comkey="{{$k}}" data-eventid="{{'2'}}" mode="selector" range="{{range}}" value="{{index}}">{{remindTime}}</picker>
+                </view>
+                <view class="_p data-v-bdcf7e92 notice">提醒时间以北京时间为准</view>
+            </view>
+        </view>
+    </view>
+</template>

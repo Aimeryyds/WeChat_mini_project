@@ -1,0 +1,38 @@
+<view class="lgnbindmob">
+    <view class="m-form m-errorForm {{errmsg!==''?'m-form-current':''}}">
+    {{errmsg}}
+  </view>
+    <view class="m-form m-lgnbindmob {{errmsg===''&&curStep==='sms_down'?'m-form-current':''}}">
+        <view class="form-item form-input flexbox">
+            <view class="m-xTextbox flex1">
+                <input bindinput="bindMobileInput" class="m-textbox" placeholder="请输入手机号" type="text" value="{{mobile}}"></input>
+            </view>
+        </view>
+        <view class="form-item mt10 form-input flexbox">
+            <view class="m-xTextbox flex1">
+                <input bindinput="bindVcodeKeyInput" class="m-textbox" maxlength="30" placeholder="请输入验证码" type="text" value="{{vcode}}"></input>
+            </view>
+            <button bindtap="sendVcode" class="m-button {{vcodeLock?'m-button-disabled':''}}" id="lgnBindSendBtn">{{vcodeLock?'重新获取'+delay+'s':'获取验证码'}}</button>
+        </view>
+        <view class="opra">
+            <button catchtap="bind" class="m-button {{locked?'m-button-disabled':''}}" id="lgnBindBtn">{{locked?'验证中...':downBtnTxt}}</button>
+        </view>
+    </view>
+    <view class="m-form m-bindMobileUVerify {{errmsg===''&&curStep==='sms_up'?'m-form-current':''}}">
+        <view class="form-item form-text">请使用手机发短信，然后点击"我已发送"按钮。</view>
+        <view class="form-item form-message mt10">
+            <view class="up-label">编辑短信：</view>
+            <view class="up-message">{{upcontent}}</view>
+        </view>
+        <view class="form-item form-gateway mt10">
+            <view class="up-label">发送到：</view>
+            <view class="up-gateway">{{gateway}}</view>
+        </view>
+        <view class="form-item form-tip mt10 clearfix">
+            <view nodeName="formTip">短信费用一般为0.1元/条，全部由运营商收取。</view>
+        </view>
+        <view class="opra">
+            <button catchtap="bind" class="m-button {{locked?'m-button-disabled':''}}" id="lgnBindBtn2">{{locked?'验证中...':upBtnTxt}}</button>
+        </view>
+    </view>
+</view>

@@ -1,0 +1,41 @@
+<import src="../../templates/couponorder/couponorderitemlist.wxml"></import>
+<import src="../../templates/orders/orderaddress.wxml"></import>
+<import src="../../templates/orders/ordero2obtns.wxml"></import>
+<import src="../../templates/score/index.wxml"></import>
+<import src="../../templates/scorestorelist/index.wxml"></import>
+<template is="zan-toast" data="{{zanToast:zanToast}}"></template>
+<template is="storelist" data="{{show:showDialog,list:orderDetail.goods.coupon.storeList||orderDetail.goods.card.storeList}}"></template>
+<view class="container" hidden="{{loading}}">
+    <view hidden="{{!isTipVisible}}" style="color:#e31719; padding: 20rpx; font-size: 28rpx; background:#ffffff; width:100%">支付完成！消耗积分{{orderDetail.total}}，剩余积分{{orderDetail.remainPoints}}.</view>
+    <view class="{{orderDetail.actionList&&orderDetail.actionList.length>0?'container_bottom':''}}">
+        <view class="zan-card order2-detail-state" style="background-color:{{color||'#FF9300'}}; height: 200rpx">
+            <image class="order2-detail-state-icon" src="{{orderDetail.orderStatus==10?'http://imgcdnali.wfenxiao.com.cn/xcx/c/order/order2_pay.png':orderDetail.orderStatus==50?'http://imgcdnali.wfenxiao.com.cn/xcx/c/order/order2_deliver.png':orderDetail.orderStatus==60?'http://imgcdnali.wfenxiao.com.cn/xcx/c/order/order2_take.png':orderDetail.orderStatus==70?'http://imgcdnali.wfenxiao.com.cn/xcx/c/order/order2_done.png':'http://imgcdnali.wfenxiao.com.cn/xcx/c/order/order2_close.png'}}"></image>
+            <view class="order-detail-state-text">
+                <view class="order2-state-text1">{{orderDetail.orderStatus==10?'等待买家付款':orderDetail.orderStatus==20?'待发货':orderDetail.orderStatus==30?'已发货':'交易完成'}}</view>
+            </view>
+        </view>
+        <view style="margin-bottom:20rpx;" wx:if="{{orderDetail.goods.type==0}}">
+            <template is="orders-address" data="{{addressData:orderDetail.consignee,fromorder:true}}"></template>
+        </view>
+        <view class="">
+            <view wx:if="{{orderDetail.goods}}">
+                <template is="coupon_order-goods" data="{{item:orderDetail.goods,num:orderDetail.goodsCount}}"></template>
+            </view>
+            <view style="margin-bottom:20rpx;" wx:if="{{orderDetail.goods.type!=0}}">
+                <template is="score" data="{{type:orderDetail.goods.type,coupon:orderDetail.goods.coupon,card:orderDetail.goods.card}}"></template>
+                <view class="score-item__link" wx:if="{{orderDetail.goods.type==1}}">兑换的优惠券可到"我的优惠券"中 <navigator style="color:#c41412" url="/pages/mine/coupons/coupons">查看</navigator>
+                </view>
+                <view class="score-item__link" wx:if="{{orderDetail.goods.type==2}}">兑换的礼品卡可到"我的礼品卡"中 <navigator style="color:#c41412" url="/pages/giftcard/mygiftcard/index">查看</navigator>
+                </view>
+            </view>
+            <view class="zan-card  view-direction-between coupon_line_top">
+                <view class="order2-text1">合计</view>
+                <view class="order2-text1" style="color:#e31719;">{{orderDetail.total}}积分</view>
+            </view>
+            <view class="view-direction-row">
+                <view class="order2-text1">支付方式：</view>
+                <view class="order2-text1">{{orderDetail.payTypeName}}</view>
+            </view>
+        </view>
+    </view>
+</view>

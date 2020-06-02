@@ -1,0 +1,58 @@
+<view>
+    <view class="orderPay-page" wx:if="{{!successFlag&&loadFlag}}">
+        <view class="orderPay-top">
+            <view class="orderPay-top-money">{{'￥'+orderPayData.data.total_origin_money}}</view>
+            <view class="orderPay-top-status">未支付</view>
+        </view>
+        <view class="cut-off-rule">
+            <view class="roundness-left"></view>
+            <view class="line-middle"></view>
+            <view class="roundness-right"></view>
+        </view>
+        <view class="orderPay-content">
+            <view class="orderPay-content-list" wx:for="{{orderPayData.data.bill_list}}" wx:key="index">
+                <view class="orderPay-content-item">
+                    <view class="item-title">{{item.title}}</view>
+                    <view class="item-money">{{'￥'+item.origin_money}}</view>
+                    <view class="item-content" wx:if="{{item.start_date!=''&&firstPaymentFlag}}">{{'租约周期: '+item.start_date+'至'+item.end_date}}</view>
+                    <view class="item-content" wx:if="{{item.should_date==''||item.should_date==undefined?false:true}}">{{'应缴日期:\n\t\t\t\t\t\t'+item.should_date}}</view>
+                </view>
+            </view>
+            <view bindtap="__e" class="orderPay-coupon" data-event-opts="{{[ [ 'tap',[ [ 'toCoupon',['$event'] ] ] ] ]}}" wx:if="{{serviceFlag&&firstPaymentFlag}}">
+                <view class="coupon-title">优惠券</view>
+                <view class="coupon-money">
+                    <view class="coupon-money-num">{{'-￥'+(orderPayData.data.coupon_info.coupon_price?orderPayData.data.coupon_info.coupon_price:0)}}</view>
+                    <image class="coupon-money-arrow" src="https://public.danke.com.cn/public-20190716-FhzQf6_v49Rft4_cqMoBxRuYXGNt" wx:if="{{firstPaymentFlag}}"></image>
+                </view>
+            </view>
+            <view class="orderPay-coupon new-ac-money" wx:if="{{orderPayData.data.is_support_pre_grant}}">
+                <view class="coupon-title">应付款</view>
+                <view class="coupon-money">
+                    <view class="coupon-money-num">{{'￥'+orderPayData.data.total_money}}</view>
+                    <image class="coupon-money-arrow" src="https://public.danke.com.cn/public-20190716-FhzQf6_v49Rft4_cqMoBxRuYXGNt" wx:if="{{firstPaymentFlag}}"></image>
+                </view>
+            </view>
+        </view>
+        <view class="orderPay-foot" wx:if="{{!orderPayData.data.is_support_pre_grant}}">
+            <view class="foot-check-money">
+                <view class="foot-money-num">{{'￥'+orderPayData.data.total_money}}</view>
+            </view>
+            <view bindtap="__e" class="{{[checkflagArr.length>0?'foot-pay-btn payOn':'foot-pay-btn']}}" data-event-opts="{{[ [ 'tap',[ [ 'submitPay',['$event'] ] ] ] ]}}">付款</view>
+        </view>
+        <bottom-button bind:__l="__l" leftStyle="background: #3DBCC6;color:#FFFFFF;" onLeftTap="toPreGrant" onRightTap="submitPay" rightStyle="background: #EFFEFC;color:#3DBCC6;" text_left="预授权" text_main="去支付" type="2" vueId="8e72cc00-1" wx:else></bottom-button>
+    </view>
+    <view class="pre-grant-tip" wx:if="{{orderPayData.data.is_support_pre_grant}}">押金支持资金或信用预授权冻结，结算时从您的冻结资金中解冻或扣款</view>
+    <view class="orderPay-success" wx:if="{{successFlag}}">
+        <view class="orderPay-success-img">
+            <image src="https://public.danke.com.cn/public-20190109-FmmvZKOfqdbEeHNueP9PcIRtmVaQ"></image>
+        </view>
+        <view class="orderPay-success-content">
+            <view class="success-text">支付成功</view>
+            <view class="success-text2">您已完成支付</view>
+            <view class="success-text2">谢谢您对蛋壳的支持!</view>
+        </view>
+        <view bindtap="__e" class="orderPay-success-btn" data-event-opts="{{[ [ 'tap',[ [ 'backToUser',['$event'] ] ] ] ]}}">知道了</view>
+    </view>
+    <view class="back" wx:if="{{successFlag}}"></view>
+    <view class="backgray" wx:if="{{!successFlag}}"></view>
+</view>

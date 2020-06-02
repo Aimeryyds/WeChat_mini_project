@@ -1,0 +1,188 @@
+<include src="../../../components/circus/network/network.wxml"></include>
+<view class="v v-quote-explore">
+    <view class="section indexs">
+        <include src="../components/indexs/indexs.wxml"></include>
+    </view>
+    <view class="section newshares">
+        <view bindtap="moreNewShares" class="header">
+            <view class="title">
+                <view class="left-box">
+                    <view class="newshares-img"></view>
+                    <view class="newshares-info" wx:if="{{newshare.newShareTips}}">
+            {{newshare.newShareTips}}
+          </view>
+                </view>
+                <view class="one-stock" wx:if="{{newshare.stocks.length==1}}">
+          {{newshare.stocks[0].secuabbr}} {{newshare.stocks[0].tradingcode}}
+        </view>
+            </view>
+            <view class="more"></view>
+        </view>
+        <view class="content" wx:if="{{newshare.stocks.length>1}}">
+            <view class="stock-list c-line-top">
+                <view bindtap="moreNewShares" class="stock-item" data-code="{{item.tradingcode}}" wx:for="{{newshare.stocks}}" wx:key="tradingcode">
+          {{item.secuabbr}} {{item.tradingcode}}
+        </view>
+            </view>
+        </view>
+    </view>
+    <view class="section charts">
+        <view class="header">
+            <view style="color:{{charts.fall.color}}">
+                <text class="bold">{{charts.fall.count}}</text>只下跌</view>
+            <view class="line-chart">
+                <view class="line" style="background-color:{{charts.fall.color}};width:{{charts.fall.width}}"></view>
+                <view class="line" style="background-color:{{charts.unchanged.color}};width:{{charts.unchanged.width}}"></view>
+                <view class="line" style="background-color:{{charts.rise.color}};width:{{charts.rise.width}}"></view>
+            </view>
+            <view style="color:{{charts.rise.color}}">上涨<text class="bold">{{charts.rise.count}}</text>只</view>
+        </view>
+        <view class="content c-line-top">
+            <view class="column-item" wx:for="{{charts.riseFall}}" wx:key="{{index}}">
+                <view class="column-count" style="top:{{item.top}};color:{{item.color}}">
+          {{item.count}}
+        </view>
+                <view class="column-chart" style="transform:{{item.scale}};background-color:{{item.color}}"></view>
+                <view class="column-text">{{item.text}}</view>
+            </view>
+        </view>
+    </view>
+    <view class="section boards">
+        <view bindtap="moreBoards" class="header">
+            <view class="title">热门板块</view>
+            <view class="more"></view>
+        </view>
+        <view class="content c-line-top">
+            <view bindtap="goRanks" class="cell c-line-right c-line-top" data-code="{{item.board.code}}" data-name="{{item.board.name}}" wx:for="{{boards}}" wx:key="id">
+                <view class="board-name">{{item.board.name}}</view>
+                <view class="board-rise" style="color: {{item.board.rise.color}}">
+          {{item.board.rise.text}}
+        </view>
+                <view class="stock-name">{{item.stock.name}}</view>
+                <view class="stock-now-rise">
+                    <view class="stock-now" style="color: {{item.stock.now.color}}">
+            {{item.stock.now.text}}
+          </view>
+                    <view class="stock-rise" style="color: {{item.stock.rise.color}}">
+            {{item.stock.rise.text}}
+          </view>
+                </view>
+            </view>
+            <view class="v-paging" wx:if="{{boards.length==0}}">
+                <view class="loading" wx:if="{{loadings.boards.status=='loading'}}">
+                    <view class="icon-loading"></view>
+                    <view class="text">加载中</view>
+                </view>
+                <view bindtap="reloadBoards" class="fail" wx:if="{{loadings.boards.status=='fail'}}">
+          出错啦，点击重试
+        </view>
+            </view>
+        </view>
+    </view>
+    <view class="section ranks">
+        <view bindtap="moreRanks" class="header" data-prop="rises">
+            <view class="title">涨幅榜</view>
+            <view class="more"></view>
+        </view>
+        <view class="content c-line-top">
+            <view class="v-quote-stocks" wx:if="{{rises.length>0}}">
+                <view class="head">
+                    <view class="cell stock-name">名称</view>
+                    <view class="cell stock-now">当前价</view>
+                    <view class="cell stock-rise">涨跌幅</view>
+                </view>
+                <view class="body">
+                    <view bindtap="goStock" class="row c-line-top" data-code="{{item.code}}" data-market="{{item.market}}" data-name="{{item.name}}" wx:for="{{rises}}" wx:key="id">
+                        <view class="cell stock-name-code">
+                            <view class="stock-name">{{item.name}}</view>
+                            <view class="stock-code">{{item.code}}</view>
+                        </view>
+                        <view class="cell stock-now" style="color: {{item.now.color}}">{{item.now.text}}</view>
+                        <view class="cell stock-rise" style="color: {{item.rise.color}}">
+              {{item.rise.text}}
+            </view>
+                    </view>
+                </view>
+            </view>
+            <view class="v-paging shift" wx:if="{{rises.length==0}}">
+                <view class="loading" wx:if="{{loadings.rises.status=='loading'}}">
+                    <view class="icon-loading"></view>
+                    <view class="text">加载中</view>
+                </view>
+                <view bindtap="reloadRanks" class="fail" data-prop="rises" wx:if="{{loadings.rises.status=='fail'}}">
+          出错啦，点击重试
+        </view>
+            </view>
+        </view>
+    </view>
+    <view class="section ranks">
+        <view bindtap="moreRanks" class="header" data-prop="drops">
+            <view class="title">跌幅榜</view>
+            <view class="more"></view>
+        </view>
+        <view class="content c-line-top">
+            <view class="v-quote-stocks" wx:if="{{drops.length>0}}">
+                <view class="head">
+                    <view class="cell stock-name">名称</view>
+                    <view class="cell stock-now">当前价</view>
+                    <view class="cell stock-rise">涨跌幅</view>
+                </view>
+                <view class="body">
+                    <view bindtap="goStock" class="row c-line-top" data-code="{{item.code}}" data-market="{{item.market}}" data-name="{{item.name}}" wx:for="{{drops}}" wx:key="id">
+                        <view class="cell stock-name-code">
+                            <view class="stock-name">{{item.name}}</view>
+                            <view class="stock-code">{{item.code}}</view>
+                        </view>
+                        <view class="cell stock-now" style="color: {{item.now.color}}">{{item.now.text}}</view>
+                        <view class="cell stock-rise" style="color: {{item.rise.color}}">
+              {{item.rise.text}}
+            </view>
+                    </view>
+                </view>
+            </view>
+            <view class="v-paging shift" wx:if="{{drops.length==0}}">
+                <view class="loading" wx:if="{{loadings.drops.status=='loading'}}">
+                    <view class="icon-loading"></view>
+                    <view class="text">加载中</view>
+                </view>
+                <view bindtap="reloadRanks" class="fail" data-prop="drops" wx:if="{{loadings.drops.status=='fail'}}">
+          出错啦，点击重试
+        </view>
+            </view>
+        </view>
+    </view>
+    <view class="section ranks">
+        <view bindtap="moreRanks" class="header" data-prop="handovers">
+            <view class="title">换手率榜</view>
+            <view class="more"></view>
+        </view>
+        <view class="content c-line-top">
+            <view class="v-quote-stocks" wx:if="{{handovers.length>0}}">
+                <view class="head">
+                    <view class="cell stock-name">名称</view>
+                    <view class="cell stock-now">当前价</view>
+                    <view class="cell stock-rise">换手率</view>
+                </view>
+                <view class="body">
+                    <view bindtap="goStock" class="row c-line-top" data-code="{{item.code}}" data-market="{{item.market}}" data-name="{{item.name}}" wx:for="{{handovers}}" wx:key="id">
+                        <view class="cell stock-name-code">
+                            <view class="stock-name">{{item.name}}</view>
+                            <view class="stock-code">{{item.code}}</view>
+                        </view>
+                        <view class="cell stock-now" style="color: {{item.now.color}}">{{item.now.text}}</view>
+                        <view class="cell stock-handover">{{item.handover.text}}</view>
+                    </view>
+                </view>
+            </view>
+            <view class="v-paging shift" wx:if="{{handovers.length==0}}">
+                <view class="loading" wx:if="{{loadings.handovers.status=='loading'}}">
+                    <view class="icon-loading"></view>
+                    <view class="text">加载中</view>
+                </view>
+                <view bindtap="reloadRanks" class="fail" data-prop="handovers" wx:if="{{loadings.handovers.status=='fail'}}">
+          出错啦，点击重试
+        </view>
+            </view>
+        </view>
+    </view>
+</view>

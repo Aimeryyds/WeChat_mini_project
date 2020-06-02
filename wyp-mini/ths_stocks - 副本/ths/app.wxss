@@ -1,0 +1,43 @@
+[is="components/jyf-parser/jyf-parser"] {
+    display: block;
+    overflow: scroll;
+    -webkit-overflow-scrolling: touch;
+}
+
+[is="components/jyf-parser/libs/trees"] {
+    display: inherit;
+    float: inherit;
+}
+
+page {
+    color: #323232;
+}
+
+page::after {
+    position: fixed;
+    content: '';
+    left: -1000px;
+    top: -1000px;
+    animation: shadow-preload .1s;
+    animation-delay: 3s;
+}
+
+@-webkit-keyframes shadow-preload {
+    0% {
+        background-image: url(https://cdn.dcloud.net.cn/img/shadow-grey.png);
+    }
+
+    100% {
+        background-image: url(https://cdn.dcloud.net.cn/img/shadow-grey.png);
+    }
+}
+
+@keyframes shadow-preload {
+    0% {
+        background-image: url(https://cdn.dcloud.net.cn/img/shadow-grey.png);
+    }
+
+    100% {
+        background-image: url(https://cdn.dcloud.net.cn/img/shadow-grey.png);
+    }
+}

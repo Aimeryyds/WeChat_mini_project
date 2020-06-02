@@ -1,0 +1,20 @@
+<view>
+    <view class="search-header" style="background: {{headTipColor}}">
+        <view class="search-input">
+            <icon color="#a0a0a0" size="20" style="margin-right: 10rpx" type="search"></icon>
+            <input focus bindinput="inputSearch" placeholder="请输入搜索目的地" value="{{keyword}}"></input>
+        </view>
+        <view bindtap="toMap" style="color: {{textColor}}">取消</view>
+    </view>
+    <view>
+        <view bindtap="toTargetMap" class="suggest-item" data-aim="{{item}}" wx:for="{{suggest}}" wx:key="index">
+            <view>
+                <image style="height: 60rpx;width: 60rpx"></image>
+            </view>
+            <view>
+                <view>{{item.title}}</view>
+                <view style="font-size: 28rpx;color: #888">{{item.addr}}</view>
+            </view>
+        </view>
+    </view>
+</view>

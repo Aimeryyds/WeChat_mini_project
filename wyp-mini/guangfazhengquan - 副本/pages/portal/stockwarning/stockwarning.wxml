@@ -1,0 +1,55 @@
+<view class="stwarning">
+    <view class="stwarning-section {{isIphoneX?'stwarning-iphonex':''}}">
+        <view class="stwarning-top">
+            <view class="stwarning-top-left">{{name}}</view>
+            <view class="stwarning-top-right" style="color:{{colors}}">
+                <view class="stwarning-new">最新价</view>
+                <view class="stwarning-now">{{now}}</view>
+                <view class="stwarning-change">涨跌幅</view>
+                <view>{{roc}}</view>
+            </view>
+        </view>
+        <view class="stwarning-content">
+            <view class="stwarning-setting">
+                <view class="stwarning-settings">设置</view>
+                <view bindtap="allwarn" class="stwarning-remind">
+                    <view class="allwarning-left">全部提醒</view>
+                    <view class="allwarning-right">
+                        <image class="allwarning" src="./right.png"></image>
+                    </view>
+                </view>
+            </view>
+            <view class="stwarning-content-title" data-index="{{index}}" wx:for="{{list}}" wx:key="1">
+                <view class="stwarning-content-confirm" style="top:{{item.ptop}}" wx:if="{{item.show}}">
+          {{item.infor}}
+        </view>
+                <view>{{item.name}}</view>
+                <view class="stwarning-content-yuan">
+                    <input bindblur="blur" bindinput="handle" class="color:{{item.blooean?'black':'gray'}}" data-msg="{{item.title}}" id="{{index}}" maxlength="10" name="{{item.title}}" style="color:{{item.normal?'#f91a1a':''}}" type="digit" value="{{item.inputText}}"></input>
+          {{item.company}}
+          <switch bindchange="switchChange" checked="{{item.blooean}}" color="#3f7de5" id="{{index}}" name="{{item.title}}"></switch>
+                </view>
+            </view>
+        </view>
+        <view class="stwarning-tc"></view>
+        <view class="stwarning-sceond {{isIphoneX?'stwarning-sceond-iphonex':''}}">
+      免责声明：以上服务由广发证券免费提供，提醒服务通过微信形式发送至定制客户微信。
+    广发证券将会尽最大努力使客户能够及时收到微信内容，但不排除由于不可抗力
+    （包括洪水、地震及其它自然灾 害、战争、骚乱、火灾、政府征用、没收、法律变化、突发停电或其它突发事件、银行清算系统故障、证券交易所非正常暂停或停止交易等），
+    或者第三方（运营商）通信网络出现故障造成的产品（服务）延误或丢失等其他广发证券无法控制的原因，导致客户未能及时或者未收到定制微信服务，
+    或者微信内容乱码、断缺、内容表意不清、不完整等情况。客户需自行承担由此可能产生的损失和风险，广发证券将不承担任何责任。
+    客户在发现微信内容缺失或微信接收不正常时请直接在微信反映或拨打95575热线。
+    </view>
+    </view>
+    <view class="mask-box" style="display:{{visable}}">
+        <view class="mask"></view>
+        <view class="mask-content">
+            <view class="mask-header">{{msg}}</view>
+            <view bindtap="handleWrite" class="mask-footer">重新输入</view>
+        </view>
+    </view>
+    <button bindtap="formSubmit" class="stwarning-save {{isIphoneX?'stwarning-save-iphonex':''}}" name="button" style="background:{{onoff?'#3f7de5':'#b0b0b0'}}">
+    保存
+  </button>
+</view>
+<include src="../../../components/circus/toast/toast.wxml"></include>

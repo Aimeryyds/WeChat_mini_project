@@ -1,0 +1,40 @@
+<import src="../template/toast.wxml"></import>
+<import src="../template/loading.wxml"></import>
+<scroll-view class="scroll-view-x" scrollLeft="{{scrollLeft}}" scrollWithAnimation="true" scrollX="true">
+    <view bindtap="switchNav" class="scroll-view-item {{cid==0?'on':''}}" data-cid="0">全部</view>
+    <view bindtap="switchNav" class="scroll-view-item {{cid==item.id?'on':''}}" data-cid="{{item.id}}" wx:for="{{category}}" wx:key="unique">{{item.name}}</view>
+</scroll-view>
+<scroll-view bindscrolltolower="scrolltolower" class="scroll-view-y" lowerThreshold="50" scrollTop="{{scrollTop}}" scrollWithAnimation="true" scrollY="true" style="height: {{windowHeight-42}}px;">
+    <view>
+        <view class="child-group bg-fff">
+            <view bindtap="showList" class="child-cate-item mt-20" data-id="{{item.id}}" wx:for="{{childCate}}" wx:key="unique">
+                <view class="icon">
+                    <image mode="aspectFill" src="{{item.img}}"></image>
+                </view>
+                <view class="child-cate-name mt-20">{{item.name}}</view>
+            </view>
+        </view>
+        <view class="goods-group" style="margin-top: 14rpx;">
+            <view bindtap="showGoodsDetial" class="goods-item-2 bg-fff" data-id="{{item.id}}" wx:for="{{goodsList}}" wx:key="unique">
+                <image mode="aspectFill" src="{{item.img}}"></image>
+                <view class="goods_info">
+                    <view class="goods-title">{{item.name}}</view>
+                    <view class="goods_sale"> 已团<text class="goods-sale">{{item.saleNum}}</text>{{item.unit}}</view>
+                    <view class="goods_sale"> 单独购买¥{{item.price}}</view>
+                    <view class="goods_btn">
+                        <view class="goods-price">
+                            <text style="">¥</text> {{item.gprice}}
+          </view>
+                        <view class="goods_groupNum">{{item.groupNum}}人团</view>
+                    </view>
+                </view>
+                <view class="btn text-center goods_btns" style="border:0;font-size:30rpx;">去开团
+                <image class="btn_arrow" src="../../resource/left.png"></image>
+                </view>
+                <view class="clearfix"></view>
+            </view>
+        </view>
+    </view>
+    <template is="toast" data="{{toast:toast}}"></template>
+    <template is="loading" data="{{loading:loading}}"></template>
+</scroll-view>

@@ -1,0 +1,26 @@
+<template name="carddetail">
+    <view class="giftcard-detail">
+        <image class="giftcard-status__img" src="http://imgcdnali.wfenxiao.com.cn/xcx/c/giftcard/card-status1.png" wx:if="{{status==10}}"></image>
+        <image class="giftcard-status__img" src="http://imgcdnali.wfenxiao.com.cn/xcx/c/giftcard/card-status20.png" wx:if="{{status==20}}"></image>
+        <image class="giftcard-status__img" src="http://imgcdnali.wfenxiao.com.cn/xcx/c/giftcard/card-status30.png" wx:if="{{status==30||status==31}}"></image>
+        <image class="giftcard-status__img" src="http://imgcdnali.wfenxiao.com.cn/xcx/c/giftcard/card-status40.png" wx:if="{{status==40}}"></image>
+        <image class="giftcard-status__img" src="http://imgcdnali.wfenxiao.com.cn/xcx/c/giftcard/card-status5.png" wx:if="{{status==50}}"></image>
+        <image class="giftcard-status__img" src="http://imgcdnali.wfenxiao.com.cn/xcx/c/giftcard/card-status8.png" wx:if="{{status==60}}"></image>
+        <image class="giftcard-status__img" src="http://imgcdnali.wfenxiao.com.cn/xcx/c/giftcard/card-status7.png" wx:if="{{status==70}}"></image>
+        <image class="giftcard-status__img" src="http://imgcdnali.wfenxiao.com.cn/xcx/c/giftcard/card-status6.png" wx:if="{{status==80}}"></image>
+        <view class="giftcard-detail__item">
+            <template is="giftcard" data="{{text:text,imgUrl:imgUrl}}"></template>
+            <view class="giftcard-detail__item-text" wx:if="{{showType=='detail'}}">
+                <view>{{text}}</view>
+                <view>{{price}}元</view>
+                <view>剩余：{{balance}}元</view>
+            </view>
+            <view class="giftcard-detail__item-text" wx:else>
+                <view>{{price}}元</view>
+                <view>有效期限:{{forever==1?'无限期':forever==0?validTime:''}}</view>
+                <view>使用范围:{{range==0?'部分门店':range==1?'全部门店':range==2?'指定商品':''}}</view>
+            </view>
+        </view>
+    </view>
+</template>
+<import src="/pages/giftcard/templates/card/index.wxml"></import>

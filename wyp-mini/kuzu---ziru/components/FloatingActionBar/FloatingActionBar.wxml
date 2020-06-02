@@ -1,0 +1,10 @@
+<view class="fab-wrapper _div data-v-1615740b">
+    <view bindtap="__e" class="{{['activity _div data-v-1615740b',!item[$orig].title?'image-btn':'',item[$orig].title?'btn':'']}}" data-event-opts="{{[ [ 'tap',[ [ 'handleJumpH5',['$0','$1'],[ [ ['floatingActionData','',index,'parameter.url'] ],[ ['floatingActionData','',index,'parameter.params'] ] ] ] ] ] ]}}" wx:if="{{floatingActionData&&floatingActionData.length&&item[$orig].tag&&item.g0}}" wx:for="{{$root.l0}}" wx:key="index">
+        <image alt="fab-activity" class="icon _img data-v-1615740b" src="{{item[$orig].img}}"></image>
+        <view class="text _p data-v-1615740b" wx:if="{{item[$orig].title}}">{{item[$orig].title}}</view>
+    </view>
+    <view bindtap="__e" class="btn homepage _div data-v-1615740b" data-event-opts="{{[ [ 'tap',[ [ 'jumpToHomepage',['$event'] ] ] ] ]}}" wx:if="{{canWeakUpApp||showHomeBtn}}">
+        <image alt="icon_home" class="icon _img data-v-1615740b" src="{{$root.m0}}"></image>
+        <view class="text _p data-v-1615740b">首页</view>
+    </view>
+</view>

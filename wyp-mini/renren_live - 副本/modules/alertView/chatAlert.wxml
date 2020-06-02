@@ -1,0 +1,18 @@
+<view class="drawer_screen" wx:if="{{showModalStatus}}"></view>
+<view class="drawer_box" wx:if="{{showModalStatus}}">
+    <block wx:if="{{hasSubTitle}}">
+        <view class="drawer_title">{{titleString}}</view>
+        <view class="drawer_subtitle">{{subTitleString}}</view>
+    </block>
+    <view class="drawer_title_2" wx:if="{{!hasSubTitle}}">{{titleString}}</view>
+    <view class="btnContainer" wx:if="{{hasCancelBtn}}">
+        <view bindtap="btnCancelAction" class="btn_cancel">{{cancelTitleString}}</view>
+        <view bindtap="btnOkAction" class="btn_ok">{{okTitleString}}</view>
+    </view>
+    <view class="btnContainer" wx:if="{{!hasCancelBtn}}">
+        <view bindtap="btnOkAction" class="btn_ok_only">{{okTitleString}}</view>
+    </view>
+    <view bindtap="btnCloseAction" class="btn_close" hidden="{{closeIsHidden}}">
+        <image class="img_close" mode="center" src="../../images/btn_close.png"></image>
+    </view>
+</view>

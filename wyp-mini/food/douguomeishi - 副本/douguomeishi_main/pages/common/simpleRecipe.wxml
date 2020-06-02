@@ -1,0 +1,83 @@
+<template name="ipad-recommend-simple-recipe">
+    <view class="ipad-recipe-simple-item" wx:if="{{item.type==1}}">
+        <view bindtap="recipeItemPressed" class="ipad-recipe-simple-content" data-recipe-id="{{item.recipe.id}}">
+            <image class="ipad-recipe-simple-image" mode="aspectFill" src="{{item.recipe.img}}"></image>
+            <view class="ipad-recipe-simple-detail">
+                <view class="ipad-recipe-simple-title">{{item.recipe.n}}</view>
+                <view class="ipad-recipe-simple-ingredients">
+                    <a wx:for="{{item.recipe.major}}" wx:key="key">{{item.recipe.title}} </a>
+                </view>
+                <view class="ipad-recipe-simple-nickname">{{item.recipe.a.n}}</view>
+                <view class="ipad-recipe-simple-favo">
+                    <a wx:if="{{item.recipe.fc}}">{{item.recipe.fc}}收藏 </a>
+                    <a wx:if="{{item.recipe.dc}}">{{item.recipe.dc}}作品</a>
+                </view>
+            </view>
+        </view>
+    </view>
+    <view class="ipad_ad_container_item" wx:if="{{item.type==2}}">
+        <view class="ipad_ad_container">
+            <ad unitId="{{item.wx_commercial}}"></ad>
+        </view>
+    </view>
+</template>
+<template name="search-simple-recipe">
+    <view class="recipe-simple-item" wx:if="{{item.r!=null}}">
+        <view bindtap="recipeItemPressed" class="recipe-simple-content" data-recipe-id="{{item.r.id}}">
+            <view class="recipe-simple-image-view" style="background-image:url({{item.r.img}})">
+                <image class="recipe-simple-video-image" src="/images/recipe_button_play.png" wx:if="{{item.r.vu.length>0||item.r.vfurl.length>0}}"></image>
+            </view>
+            <view class="recipe-simple-detail">
+                <view class="recipe-simple-title">{{item.r.n}}</view>
+                <view class="recipe-simple-ingredients">
+                    <a wx:for="{{item.r.major}}" wx:key="key">{{item.title}} </a>
+                </view>
+                <view class="recipe-simple-nickname">{{item.r.a.n}}</view>
+                <view class="recipe-simple-favo">
+                    <a wx:if="{{item.r.fc}}">{{item.r.fc}}收藏 </a>
+                    <a wx:if="{{item.r.dc}}">{{item.r.dc}}作品</a>
+                </view>
+            </view>
+        </view>
+    </view>
+</template>
+<template name="menu-simple-recipe">
+    <view class="recipe-simple-item" wx:if="{{item!=null}}">
+        <view bindtap="recipeItemPressed" class="recipe-simple-content" data-recipe-id="{{item.id}}">
+            <view class="recipe-simple-image-view" style="background-image:url({{item.img}})">
+                <image class="recipe-simple-video-image" src="/images/recipe_button_play.png" wx:if="{{item.vu.length>0||item.vfurl.length>0}}"></image>
+            </view>
+            <view class="recipe-simple-detail">
+                <view class="recipe-simple-title">{{item.n}}</view>
+                <view class="recipe-simple-ingredients">
+                    <a wx:for="{{item.major}}" wx:key="key">{{item.title}} </a>
+                </view>
+                <view class="recipe-simple-nickname">{{item.a.n}}</view>
+                <view class="recipe-simple-favo">
+                    <a wx:if="{{item.fc}}">{{item.fc}}收藏 </a>
+                    <a wx:if="{{item.dc}}">{{item.dc}}作品</a>
+                </view>
+            </view>
+        </view>
+    </view>
+</template>
+<template name="collection-simple-recipe">
+    <view class="recipe-simple-item" wx:if="{{item!=null}}">
+        <view bindtap="recipeItemPressed" class="recipe-simple-content" data-recipe-id="{{item.cook_id}}">
+            <view class="recipe-simple-image-view" style="background-image:url({{item.cook_image}})">
+                <image class="recipe-simple-video-image" src="/images/recipe_button_play.png" wx:if="{{item.vu.length>0||item.vfurl.length>0}}"></image>
+            </view>
+            <view class="recipe-simple-detail">
+                <view class="recipe-simple-title">{{item.name}}</view>
+                <view class="recipe-simple-ingredients">
+                    <a wx:for="{{item.major}}" wx:key="key">{{item.title}} </a>
+                </view>
+                <view class="recipe-simple-nickname">{{item.author}}</view>
+                <view class="recipe-simple-favo">
+                    <a wx:if="{{item.favo_counts}}">{{item.favo_counts}}收藏 </a>
+                    <a wx:if="{{item.dish_count}}">{{item.dish_count}}作品</a>
+                </view>
+            </view>
+        </view>
+    </view>
+</template>

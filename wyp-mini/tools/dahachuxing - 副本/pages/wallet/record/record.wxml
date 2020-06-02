@@ -1,0 +1,17 @@
+<view class="coupon">
+    <view class="coupon-item" style="border-bottom-color: {{mainColor}}" wx:for="{{historyRecord}}" wx:key="index">
+        <view class="mask" wx:if="{{item.isUse}}">
+            <image src="../../images/shixiao.png"></image>
+        </view>
+        <view class="coupon-title">
+            <view class="coupon-money" style="color: {{mainColor}}">
+                <text style="font-size: 70rpx;font-weight: 700;">{{item.money/100}}</text>
+                <text style="font-size: 38rpx;">元</text>
+            </view>
+            <view class="coupon-suggest">
+                <text style="font-size: 28rpx;margin-top: 10rpx">兑换日期 {{item.useTime}}</text>
+            </view>
+        </view>
+    </view>
+    <view class="none" wx:if="{{historyRecord.length==0}}">暂无记录</view>
+</view>

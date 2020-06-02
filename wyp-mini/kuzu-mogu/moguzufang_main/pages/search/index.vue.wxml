@@ -1,0 +1,19 @@
+<template name="7d09b48f">
+    <view class="_view 7d09b48f">
+        <view class="_view 7d09b48f search-header">
+            <view class="_view 7d09b48f search-box">
+                <text class="_text 7d09b48f iconfont mgic-search"></text>
+                <input bindinput="handleProxy" class="_input 7d09b48f search-input" data-comkey="{{$k}}" data-event="sousuo_morensousuo" data-eventid="{{'7d09b48f-0'}}" focus="true" placeholder="小区、商圈、地铁站" value="{{searchWord}}"></input>
+            </view>
+            <text bindtap="handleProxy" class="_text 7d09b48f search-btn" data-comkey="{{$k}}" data-eventid="{{'7d09b48f-1'}}">搜索</text>
+        </view>
+        <view class="_view 7d09b48f hot-tag">
+            <view class="_view 7d09b48f select-header" wx:if="{{tags.length>0}}">热门标签</view>
+            <view class="_view 7d09b48f tags">
+                <view bindtap="handleProxy" class="_view 7d09b48f tag-btn" data-comkey="{{$k}}" data-eventid="{{'7d09b48f-2-'+index}}" key="{{tag.id}}" wx:for="{{tags}}" wx:for-item="tag" wx:key="tag.id">{{tag.paraName}}</view>
+            </view>
+        </view>
+        <template is="5f906bd3" data="{{...$root['0'],...$root[$kk+'7d09b48f-0'],$root:$root}}"></template>
+    </view>
+</template>
+<import src="/pages/search/imagine.vue.wxml"></import>

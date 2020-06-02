@@ -1,0 +1,253 @@
+<template name="manjian">
+    <view class="manjian-panel">
+        <view style="margin-top:4rpx">
+            <template is="manjian-tag" data></template>
+        </view>
+        <view class="manjian-content">{{goods.fullreductionMsg||''}}</view>
+    </view>
+</template>
+<template name="productDistributeHeader">
+    <view class="product-header">
+        <view class="name zan-ellipsis--l2">{{goods.name}}</view>
+        <view style="margin-top:12rpx">
+            <text style="font-size: 12px;">专享价: </text>
+            <text class="product-header__price-label">￥</text>
+            <text class="product-header__price">{{goods.sharePrice||'0.00'}}</text>
+        </view>
+        <view class="product-header__num" style="margin-top:12rpx">零售价: ￥{{goods.price||'0'}}</view>
+        <view class="btn-share">
+            <image mode="scaleToFill" src="http://imgcdnali.wfenxiao.com.cn/xcx/c/join-icon{{goods.isShare?'2':''}}.png" style="width:64rpx; height: 64rpx"></image>
+        </view>
+    </view>
+</template>
+<template name="productTuanHeader">
+    <view class="product-header">
+        <view class="name zan-ellipsis--l2">{{goods.name}}</view>
+        <view style="margin-top:12rpx">
+            <text class="product-header__price-label">￥</text>
+            <text class="product-header__price">{{goods.price||'0.00'}}</text>
+            <text class="product-header__price-label" style="color:#ccc;margin-left: 24rpx;text-decoration: line-through">
+      ￥{{goods.originalPrice||'0.00'}}</text>
+        </view>
+        <view style="display:flex;align-items: center;justify-content: center;margin-top: 12rpx;">
+            <template is="tuan-tag" data="{{num:goods.groupEvent.limitPeople}}"></template>
+            <view class="product-header__num" style="margin-left:24rpx;color:#ccc">已团{{goods.groupEvent.boughtNum||'0'}}件</view>
+        </view>
+        <button class="btn-share" openType="share">
+            <image mode="scaleToFill" src="http://imgcdnali.wfenxiao.com.cn/xcx/c/share1.png" style="padding:8rpx;background-color: #e5e5e5;border-radius: 50%;width:48rpx; height: 48rpx"></image>
+        </button>
+    </view>
+</template>
+<template name="secKillHeader">
+    <view class="product-header">
+        <view class="name zan-ellipsis--l2">{{goods.name}}</view>
+        <view style="margin-top:12rpx" wx:if="{{goods.limitedCount&&goods.limitedCount>0}}">
+            <text class="product-header__price-label">活动期间每人限购{{goods.limitedCount}}件</text>
+        </view>
+        <view class="product-header__num" style="margin-top:12rpx">已售{{goods.saleNum||'0'}}件</view>
+        <button class="btn-share" openType="share">
+            <image mode="scaleToFill" src="http://imgcdnali.wfenxiao.com.cn/xcx/c/share1.png" style="padding:8rpx;background-color: #e5e5e5;border-radius: 50%;width:48rpx; height: 48rpx"></image>
+        </button>
+    </view>
+</template>
+<template name="productHeader">
+    <view class="product-header">
+        <view class="name zan-ellipsis--l2">{{goods.name}}</view>
+        <view style="margin-top:12rpx">
+            <text class="product-header__price-label">￥</text>
+            <text class="product-header__price">{{goods.price||'0.00'}}</text>
+            <text class="product-header__originalprice">￥{{goods.originalPrice||'0.00'}}</text>
+            <text class="product-header__price-label" style="margin-left: 24rpx;" wx:if="{{goods.limitedCount&&goods.limitedCount>0}}">活动期间每人限购{{goods.limitedCount}}件</text>
+        </view>
+        <view class="product-header__num" style="margin-top:12rpx">已售{{goods.saleNum||'0'}}件</view>
+        <button class="btn-share" openType="share">
+            <image mode="scaleToFill" src="http://imgcdnali.wfenxiao.com.cn/xcx/c/share1.png" style="padding:8rpx;background-color: #e5e5e5;border-radius: 50%;width:48rpx; height: 48rpx"></image>
+        </button>
+    </view>
+</template>
+<template name="miaosha">
+    <view class="miaosha">
+        <view class="miaosha-left">
+            <view style="margin-left:20rpx;font-size: 36rpx;align-self:flex-end;margin-bottom:6rpx">￥</view>
+            <view style="font-size: 64rpx">{{goods.price||'0.00'}}</view>
+            <view style="margin-left: 12rpx">
+                <view>{{goods.tag||'限时秒杀'}}</view>
+                <view style="text-decoration:line-through">￥{{goods.originalPrice||'0.00'}}</view>
+            </view>
+        </view>
+        <view class="miaosha-right">
+            <view>距离开始</view>
+            <view>
+                <text class="counter">{{goods.leftTime.days}}</text> 天
+        <text class="counter">{{goods.leftTime.hours}}</text> :
+        <text class="counter">{{goods.leftTime.minutes}}</text> :
+        <text class="counter">{{goods.leftTime.seconds}}</text>
+            </view>
+        </view>
+    </view>
+</template>
+<template name="miaoshaing">
+    <view class="miaosha miaoshaing">
+        <view class="miaosha-left">
+            <view style="margin-left:20rpx;font-size: 24rpx;align-self:flex-end;margin-bottom:6rpx">￥</view>
+            <view style="font-size: 40rpx">{{goods.price||'0.00'}}</view>
+            <view style="margin-bottom:6rpx;align-self:flex-end;margin-left: 12rpx">
+                <view style="text-decoration:line-through">￥{{goods.originalPrice||'0.00'}}</view>
+            </view>
+            <view style="font-size:20rpx;margin-left:24rpx;border-radius: 20rpx;background-color: #D14323;padding:4rpx 16rpx;">{{goods.tag||'限时秒杀'}}</view>
+        </view>
+        <view class="miaosha-right">
+            <view>距离结束</view>
+            <view>
+                <text class="counter">{{goods.leftTime.days}}</text> 天
+        <text class="counter">{{goods.leftTime.hours}}</text> :
+        <text class="counter">{{goods.leftTime.minutes}}</text> :
+        <text class="counter">{{goods.leftTime.seconds}}</text>
+            </view>
+        </view>
+    </view>
+</template>
+<import src="../../templates/products/carousel.wxml"></import>
+<import src="/dist/quantity/index.wxml"></import>
+<import src="/dist/tab/index.wxml"></import>
+<import src="/dist/toptips/index.wxml"></import>
+<import src="/dist/toast/index.wxml"></import>
+<import src="../../../utils/wxParse/wxParse.wxml"></import>
+<import src="../../templates/tag/tuan.wxml"></import>
+<import src="../../../component/open_tuan/index.wxml"></import>
+<import src="/pages/templates/tag/manjian.wxml"></import>
+<import src="./_footer.wxml"></import>
+<view class="container" style="padding-bottom:120rpx;display:{{loading?'none':''}};position:{{showDialog?'fixed':''}}">
+    <template is="zan-toptips" data="{{zanTopTips:zanTopTips}}"></template>
+    <template is="zan-toast" data="{{zanToast:zanToast}}"></template>
+    <template is="carousel" data="{{images:goods.images,height:height}}"></template>
+    <block wx:if="{{from&&(from=='distribution'||from=='share')}}"></block>
+    <template is="miaosha" data="{{goods:goods}}" wx:elif="{{goods.activityType==1&&(goods.seckillStatus==1||goods.seckillStatus==3)}}"></template>
+    <template is="miaoshaing" data="{{goods:goods}}" wx:elif="{{goods.activityType==1&&goods.seckillStatus==2}}"></template>
+    <view class="zan-panel zan-panel__no-margin-top">
+        <template is="productDistributeHeader" data="{{goods:goods}}" wx:if="{{goods.isDist&&goods.isDist==1&&from&&(from=='distribution'||from=='share')}}"></template>
+        <template is="productTuanHeader" data="{{goods:goods}}" wx:elif="{{goods.activityType==2}}"></template>
+        <template is="secKillHeader" data="{{goods:goods}}" wx:elif="{{goods.activityType==1}}"></template>
+        <template is="productHeader" data="{{goods:goods}}" wx:else></template>
+    </view>
+    <view class="zan-panel" wx:if="{{goods.activityType==2&&goods.sponsoredNum>0}}">
+        <template is="openTuanList" data="{{goods:goods}}"></template>
+    </view>
+    <template is="manjian" data="{{goods:goods}}" wx:if="{{goods.activityType==3}}"></template>
+    <view bindtap="toogleSpecDialog" class="zan-panel">
+        <view class="product-show-spec-container">
+            <view class="product-show-spec-left">
+                <view class="product-show-spec-text {{formData.num&&formData.num.hasSelect?'product-show-spec-text-width':''}}">{{formData.num&&formData.num.hasSelect?'已选':'规格/数量'}}</view>
+                <view class="product-show-spec-value" wx:if="{{formData.selectSkuText}}">{{formData.selectSkuText}}</view>
+                <view class="product-show-spec-num" wx:if="{{formData.num&&formData.num.hasSelect}}">{{formData.num.quantity}}件</view>
+            </view>
+            <image class="product-show-array" src="http://imgcdnali.wfenxiao.com.cn/xcx/c/icons/arrow_right.png"></image>
+        </view>
+    </view>
+    <view class="zan-panel" wx:if="{{store.storeType!=6&&store.storeType!=1}}">
+        <view class="product-show-spec-left" style="border-bottom: 1rpx solid #e5e5e5">
+            <view class="product-show-spec-text product-show-spec-text-width">配送</view>
+            <view class="product-show-spec-value">{{goods.distributionRange||'全国'}}</view>
+        </view>
+        <view class="product-show-spec-left">
+            <view class="product-show-spec-text product-show-spec-text-width">运费</view>
+            <view class="product-show-spec-value">￥{{goods.freightFee||'0.00'}}</view>
+        </view>
+    </view>
+    <view class="zan-panel" wx:if="{{store.storeType!=6}}">
+        <view class="product-store-container">
+            <view bindtap="gotoshop" class="store-left">
+                <view class="product-show-spec-text-width">
+                    <image src="http://imgcdnali.wfenxiao.com.cn/xcx/c/icons/store.png" style="width:42rpx; height: 42rpx"></image>
+                </view>
+                <view class="product-show-spec-value" style="margin-left: 24rpx;">{{store.brandName}}-{{store.storeName}}</view>
+            </view>
+            <image bindtap="call" src="http://imgcdnali.wfenxiao.com.cn/xcx/c/icons/phone.png" style="width:40rpx; height: 40rpx"></image>
+        </view>
+    </view>
+    <view class="zan-panel" wx:if="{{goods.openEvaluate==1}}">
+        <navigator hoverClass="none" url="/pages/pingjia/productevaluate/index?sType=1&sid={{goods.id}}&storeId={{goods.storeId}}">
+            <view class="zan-cell zan-cell--access">
+                <view class="zan-cell__bd">评价（{{goods.reviewsNum}}）</view>
+                <view class="zan-cell__ft" style="color:#f22222;">{{goods.goodReviewsRate}}%好评</view>
+            </view>
+        </navigator>
+    </view>
+    <view class="product-show-tab">
+        <template is="zan-tab" data="{{tab:tabs,componentId:'tabs'}}"></template>
+    </view>
+    <view style="padding:5px;background:white" wx:if="{{tabs.selectedId=='1'}}">
+        <template is="wxParse" data="{{wxParseData:content.nodes,wxParseTagATap:wxParseTagATap}}"></template>
+    </view>
+    <view class="product-show-tab" wx:if="{{goods.shopNotice!==''}}">
+        <template is="zan-tab" data="{{tab:tabs2,componentId:'tabs2'}}"></template>
+    </view>
+    <view style="padding:5px;background:white" wx:if="{{goods.shopNotice!==''}}">
+        <template is="wxParse" data="{{wxParseData:shopNotice.nodes,wxParseTagATap:wxParseTagATap}}"></template>
+    </view>
+    <template is="productFooter" data="{{isService:isService,from:from,goods:goods,sku:formData.sku,store:store,bottomMenu:config.bottomMenu}}"></template>
+    <view class="zan-dialog {{showDialog?'zan-dialog--show':''}}" style="width: 100%;">
+        <view bindtap="hideDialog" class="zan-dialog__mask"></view>
+        <view class="zan-dialog__container">
+            <view class="product-show-spec-dialog">
+                <view class="product-show-spec-dialog-header">
+                    <image class="product-show-spec-dialog-img" src="{{goods.coverImg}}"></image>
+                    <image bindtap="hideDialog" class="product-show-spec-dialog-close" src="http://imgcdnali.wfenxiao.com.cn/xcx/c/icons/ic_spec_close.png"></image>
+                    <view class="product-show-spec-dialog-infos">
+                        <view class="product-show-spec-dialog-price">￥{{goods.activityType==2&&(action==6||action==1)?formData.sku.groupPrice:formData.sku.price||'0.00'}}</view>
+                        <view class="product-show-spec-dialog-store">库存{{formData.sku.quantity||'0'}}件</view>
+                        <view class="product-show-spec-dialog-store" wx:if="{{skustexts!='数量'}}">已选 {{formData.selectSkuText}}</view>
+                    </view>
+                </view>
+                <view enableBackToTop class="product-show-spec-dialog-spec" scrollY="true" style="max-height:600rpx;overflow-y:auto;">
+                    <view class="product-show-spec-dialog-spec-item" wx:for="{{goods.specs}}">
+                        <view class="product-show-spec-dialog-spec-item-name">{{item.name}}</view>
+                        <view class="product-show-spec-dialog-spec-item-values">
+                            <view bindtap="handleSpecClick" class="{{item1.disabled?'product-show-spec-dialog-spec-item-value-disabled':item1.selected?'product-show-spec-dialog-spec-item-value-selected':'product-show-spec-dialog-spec-item-value'}}" data-disabled="{{item1.disabled}}" data-id="{{item1.id}}" data-name="{{item1.name}}" data-pid="{{item.id}}" wx:for="{{item.specsList}}" wx:for-item="item1">{{item1.name}}</view>
+                        </view>
+                    </view>
+                    <view class="product-show-spec-dialog-number">
+                        <view class="product-show-spec-left">
+                            <view class="product-show-spec-dialog-number-label">购买数量</view>
+                            <view class="product-show-spec-dialog-number-label" style="margin-left:14rpx" wx:if="{{formData.sku&&formData.sku.minBuy>0}}">{{formData.sku.minBuy}}件起售</view>
+                            <view class="product-show-spec-dialog-number-label" style="margin-left:14rpx" wx:elif="{{goods.minBuy>0&&(!goods.skus||goods.skus.length==0)&&(!goods.storeItem||goods.storeItem.length==0)}}">{{goods.minBuy}}件起售</view>
+                            <view class="product-show-spec-dialog-number-label" style="margin-left:14rpx" wx:if="{{formData.sku&&formData.sku.maxBuy>0}}"> 最多购买{{formData.sku.maxBuy}}件</view>
+                            <view class="product-show-spec-dialog-number-label" style="margin-left:14rpx" wx:elif="{{goods.maxBuy>0&&(!goods.skus||goods.skus.length==0)&&(!goods.storeItem||goods.storeItem.length==0)}}"> 最多购买{{goods.maxBuy}}件</view>
+                        </view>
+                        <template is="zan-quantity" data="{{...formData.num,componentId:'num',size:'small'}}"></template>
+                    </view>
+                </view>
+                <view>
+                    <view class="product-show-spec-dialog-footer" wx:if="{{goods.status&&goods.status==2}}">
+                        <view class="product-show-foot-empty">已下架</view>
+                    </view>
+                    <view class="product-show-spec-dialog-footer" wx:elif="{{goods.gstock==0||formData.sku.quantity==0}}">
+                        <view class="product-show-foot-empty">暂无库存</view>
+                    </view>
+                    <view wx:else>
+                        <view class="product-show-spec-dialog-footer" wx:if="{{goods.gstock>0&&action==1}}">
+                            <block wx:if="{{goods.activityType==1&&goods.seckillStatus==2}}">
+                                <view bindtap="handleAddCart" class="product-show-add-cart" wx:if="{{!isService}}">加入购物车</view>
+                                <view bindtap="handleMiaoShaBuyNow" class="product-show-buy-now">立即购买</view>
+                            </block>
+                            <block wx:elif="{{goods.activityType==2}}">
+                                <view bindtap="handleBuyNow" class="product-show-add-cart">单独购买</view>
+                                <view bindtap="handleOpenTuan" class="product-show-buy-now">一键开团</view>
+                            </block>
+                            <view bindtap="handleFenXiaoBuyNow" class="product-show-buy-now" wx:elif="{{goods.isDist==1&&(from=='distribution'||from=='share')}}">立即购买</view>
+                            <block wx:else>
+                                <view bindtap="handleAddCart" class="product-show-add-cart" wx:if="{{!isService}}">加入购物车</view>
+                                <view bindtap="handleBuyNow" class="product-show-buy-now" wx:if="{{store.storeType!=6}}">立即购买</view>
+                            </block>
+                        </view>
+                        <view class="product-show-spec-dialog-footer" wx:if="{{action==2||action==3||action==4||action==5||action==6}}">
+                            <view bindtap="handleMakeSure" class="product-show-buy-now">确定</view>
+                        </view>
+                    </view>
+                </view>
+            </view>
+        </view>
+    </view>
+</view>
+<phonemodal showModal="{{showModal}}" url="{{url}}"></phonemodal>
+<template is="openTuanPopup" data="{{show:showOpenTuanDialog,openTuan:openTuan}}"></template>

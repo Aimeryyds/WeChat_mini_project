@@ -1,0 +1,48 @@
+<template name="0916acb8">
+    <view class="_div data-v-a74f94fa">
+        <view class="_div data-v-a74f94fa desk" wx:if="{{!isLoading}}">
+            <view class="_div data-v-a74f94fa desk-container empty" wx:if="{{deskIsEmpty}}">
+                <view class="_div data-v-a74f94fa desk-empty"></view>
+                <view class="_div data-v-a74f94fa">书桌上还没有书籍哦</view>
+                <view class="_div data-v-a74f94fa desk-empty-tip">快去选本书吧～</view>
+            </view>
+            <view class="_div data-v-a74f94fa desk-container not-empty" wx:else>
+                <navigator class="_navigator data-v-a74f94fa button" url="/pages/bookshelf/main">
+                    <view class="_div data-v-a74f94fa label-all">
+                    我的全部图书
+                    <view class="_i data-v-a74f94fa ib ib-chevron-right chevron" style="color: #c0c0c0;"></view>
+                        <view class="_i data-v-a74f94fa ib ib-chevron-right chevron" style="color: #dedede;margin-left:-8px"></view>
+                    </view>
+                </navigator>
+                <swiper bindchange="handleProxy" class="_swiper data-v-a74f94fa swiper" current="{{currentIndex}}" data-comkey="{{$k}}" data-eventid="{{'3'}}" nextMargin="80px" previousMargin="80px">
+                    <swiper-item bindtap="handleProxy" class="_swiper-item data-v-a74f94fa item" data-comkey="{{$k}}" data-eventid="{{'1-'+index}}" key="{{index}}" wx:for="{{books}}" wx:for-item="book" wx:key="index">
+                        <form reportSubmit bindsubmit="handleProxy" class="_form data-v-a74f94fa" data-comkey="{{$k}}" data-eventid="{{'0-'+index}}">
+                            <button class="_button data-v-a74f94fa" formType="submit">
+                                <template is="9afe1ab4" data="{{...$root[$kk+'0-'+index],$root:$root}}"></template>
+                            </button>
+                        </form>
+                    </swiper-item>
+                    <swiper-item bindtap="handleProxy" class="_swiper-item data-v-a74f94fa item special" data-comkey="{{$k}}" data-eventid="{{'2'}}" wx:if="{{total>3}}">
+                        <view class="_div data-v-a74f94fa">
+                            <view class="_div data-v-a74f94fa cover {{[currentIndex===3?'active':'']}}">
+                                <image class="_img data-v-a74f94fa cover-img" src="{{lastBook.imgUrl}}"></image>
+                                <view class="_div data-v-a74f94fa mask"></view>
+                                <view class="_div data-v-a74f94fa more">
+                                    <view class="_div data-v-a74f94fa more-icon">···</view>
+                                    <view class="_div data-v-a74f94fa total">全部{{total}}本</view>
+                                </view>
+                            </view>
+                            <view class="_div data-v-a74f94fa shadow {{[currentIndex===3?'active':'']}}"></view>
+                        </view>
+                    </swiper-item>
+                </swiper>
+                <view class="_div data-v-a74f94fa title_en" wx:if="{{currentIndex<3}}">{{currentSlide.book.name_en}}</view>
+                <view class="_div data-v-a74f94fa title_cn" wx:if="{{currentIndex<3}}">{{currentSlide.book.name_cn}}</view>
+                <view class="_div data-v-a74f94fa reading-time" wx:if="{{currentIndex<3}}">{{currentSlide.timeStr}}</view>
+            </view>
+        </view>
+        <template is="6309aa41" data="{{...$root[$kk+'3'],$root:$root,$for:{default:'data-v-a74f94fa-default-3'},$slotdefault:'data-v-a74f94fa-default-3'}}" wx:if="{{isShowLoginModal}}"></template>
+    </view>
+</template>
+<import src="/components/BookCover.vue.wxml"></import>
+<import src="/components/Login.vue.wxml"></import>

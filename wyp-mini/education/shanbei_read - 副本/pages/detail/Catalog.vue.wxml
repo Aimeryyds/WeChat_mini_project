@@ -1,0 +1,11 @@
+<template name="75998cd2">
+    <view bindtap="handleProxy" class="_div data-v-679d64e2 catalog" data-comkey="{{$k}}" data-eventid="{{'0'}}">
+        <view class="_div data-v-679d64e2 catalog-right">
+            <view class="_div data-v-679d64e2 has-read" wx:if="{{is_finished}}"></view>
+            <view class="_div data-v-679d64e2 not-read" wx:else></view>
+            <view class="_div data-v-679d64e2 title {{[!hasPurchased&&status===0?'unreadable':'']}}">{{title_cn}}</view>
+        </view>
+        <view class="_div data-v-679d64e2 length" wx:if="{{hasPurchased||status===1}}">{{length}}词</view>
+        <view class="_div data-v-679d64e2 lock" wx:else></view>
+    </view>
+</template>

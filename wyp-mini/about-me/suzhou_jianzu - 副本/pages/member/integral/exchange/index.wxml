@@ -1,0 +1,60 @@
+<view style="height:{{width*2}}rpx;overflow: hidden;">
+    <view bindtap="addressSelect" class="addr" wx:if="{{address}}">
+        <view style="display: flex;flex-direction: column;width: 450rpx;">
+            <view>收货人：{{address.realname}}</view>
+            <view style="overflow: hidden;text-overflow:ellipsis;white-space: nowrap;">收货地址：{{address.province}} {{address.city}} {{address.area}}</view>
+        </view>
+        <view class="view-addressright">
+            <text class="text-mobile" style="overflow: hidden;text-overflow:ellipsis;white-space: nowrap;">{{address.mobile}}</text>
+            <image src="https://tws.cnweisou.com/images/right.png"></image>
+        </view>
+    </view>
+    <view bindtap="addressSelect" class="addr" style="line-height: 80rpx;background-color: #fff" wx:else>
+        <view style="display: flex;flex-direction: column;">
+            <view>收货地址</view>
+        </view>
+        <view class="view-addressright">
+            <text class="text-mobile" style="color:#ccc;">请选择收货地址</text>
+            <image src="https://tws.cnweisou.com/images/right.png"></image>
+        </view>
+    </view>
+    <view class="list">
+        <view class="title">自营店铺</view>
+        <view bindtap="todetail" class="item" data-id="{{data.id}}">
+            <image class="left" src="{{data.thumb}}"></image>
+            <view class="center">
+                <view style="overflow: hidden;text-overflow:ellipsis;white-space: nowrap;">{{data.title}}</view>
+            </view>
+            <view class="right">
+                <view style="">{{data.credit}}积分</view>
+                <view style="margin-top: 12rpx;">× 1</view>
+            </view>
+        </view>
+    </view>
+    <view class="store_list">
+        <view class="item">
+            <view>商品小计</view>
+            <view>{{data.credit}}积分 <block wx:if="{{data.money>'0.00'}}">+ ￥{{data.money}}</block>
+            </view>
+        </view>
+        <view class="item">
+            <view>运费</view>
+            <view wx:if="{{data.dispatch>'0.00'}}">￥{{data.dispatch}}</view>
+            <view wx:else>包邮</view>
+        </view>
+    </view>
+    <view class="bottom">
+        <view class="left">需付：<text style="color:red">{{data.credit}}积分<block wx:if="{{sum}}"> + ￥{{sum}}</block>
+            </text>
+        </view>
+        <view bindtap="top" class="right">立即支付</view>
+    </view>
+</view>
+<view animation="{{animationData}}" class="contain" style="bottom:-{{width}}px;">
+    <image class="img" src="http://tws.cnweisou.com/images/tiwen.png"></image>
+    <view class="text">确认要兑换吗</view>
+    <view bindtap="toSuccess" class="btn">确定</view>
+    <view bindtap="bottom" class="btn" style="margin-top:20rpx;background-color:rgb(247, 247, 247);color:black;">取消</view>
+</view>
+<view class="yin" wx:if="{{show==1}}">{{strA}}</view>
+<loading wx:if="{{loading}}"></loading>

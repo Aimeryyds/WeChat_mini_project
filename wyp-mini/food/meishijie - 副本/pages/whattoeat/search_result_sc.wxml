@@ -1,0 +1,30 @@
+<navigation-bar title="{{words}}"></navigation-bar>
+<view class="cplistw">
+    <view bindtap="pageReload" class="cplist_nodata" wx:if="{{requeseFail}}">{{requeseFailTips}}</view>
+    <view class="cplist_nodata" wx:if="{{noData}}">
+        <image src="https://s1.st.meishij.net/p2/20190620/20190620111311_870.jpg" style="display:block;width:100%;height:344rpx;margin-top:280rpx;"></image>
+        <view style="font-size:28rpx;color:#999;line-height:42rpx;text-align:center;">暂无相关食材</view>
+        <view style="font-size:28rpx;color:#999;line-height:42rpx;text-align:center;">您可以换个关键词试试</view>
+    </view>
+    <view style="padding-top:{{barHeight}}px" wx:else>
+        <view wx:for="{{searchResult}}" wx:key="key">
+            <view class="sc_listitem">
+                <navigator class="sc_listitem_link" url="/pages/whattoeat/whattoeat_sc_content?sc_id={{item.id}}&scene_id={{option.scene_id}}">
+                    <view class="imgw" style="background:#f2f2f2 url({{item.img}}) center no-repeat;background-size:cover;"></view>
+                    <view class="infow">
+                        <view class="t">{{item.title}}</view>
+                        <view class="des {{item.jy.tag=='能吃'?'des1':item.jy.tag=='适量吃'?'des2':'des3'}}">
+                            <view class="des_t">
+                                <image class="i" src="../../images/caneat_sc_icon{{item.jy.tag=='能吃'?'1':item.sc_tag=='适量吃'?'2':'3'}}.png"></image>饮食建议：{{item.jy.tag}}</view>
+                            <view class="des_c">{{item.jy.desc}}</view>
+                        </view>
+                    </view>
+                </navigator>
+                <view class="line"></view>
+            </view>
+        </view>
+    </view>
+</view>
+<loading hidden="{{requeseDone||!hasNextPage||requeseFail||noData}}">
+ 加载中...
+</loading>

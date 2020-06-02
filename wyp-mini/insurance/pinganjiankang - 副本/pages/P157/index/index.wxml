@@ -1,0 +1,196 @@
+<pa-sticky bindstickyscroll="getScrollTop" scroll="{{curNodes}}">
+    <view slot="stickychild">
+        <view style="margin-bottom:4vw;">
+            <view class="section__ctn">
+                <image mode="widthFix" src="{{imgurl.topImgUrl}}" style="padding-bottom:18rpx; background-color: #eeeeee;"></image>
+            </view>
+            <view class="section">
+                <view class="flex-row header">
+                    <view class="title">投保方案</view>
+                </view>
+                <view class="flex-row content has-pdtop">
+                    <view>保障计划
+      </view>
+                    <view class="pull-right">200万元</view>
+                </view>
+                <view class="flex-row content has-pdtop">
+                    <view>被保人年龄
+      </view>
+                    <view class="pull-right">28天-50周岁</view>
+                </view>
+                <view class="flex-row content has-pdtop">
+                    <view>保障期间
+      </view>
+                    <view class="pull-right">1年(保证续保6年)</view>
+                </view>
+                <view class="flex-row content has-pdtop">
+                    <view>缴费方式
+      </view>
+                    <view class="pull-right">年缴</view>
+                </view>
+            </view>
+            <view class="section">
+                <view class="flex-row header">
+                    <view class="title">保障范围</view>
+                    <view bindtap="seePlan" class="blue pull-right blue-end">查看详情</view>
+                </view>
+                <view class="flex-row content has-pdtop" wx:for="{{insuredAreasData}}" wx:key="item">
+                    <view>{{item.name}}
+                </view>
+                    <view class="pull-right">{{item.value}}</view>
+                </view>
+                <view class="flex-row baofei">
+                    <view class="orange title">￥{{price}}</view>
+                    <view bindtap="openPdf" class="blue pull-right blue-end" data-pdfurl="/mgr/makePdf.do?filename=A100000014-14.pdf">查看保费        </view>
+                </view>
+                <view class="stand"></view>
+            </view>
+        </view>
+        <pa-flex paClass="pa-nav-flex">
+            <view bindtap="getNavIndex" class="pa-nav-li {{navcur==index?'pa-active':''}}" data-index="{{index}}" slot="flexchild" wx:for="{{navlist}}" wx:key="navlist">
+                <text>{{item}}</text>
+            </view>
+        </pa-flex>
+        <view class="paNodes" id="cpxq">
+            <image mode="widthFix" src="{{imgurl.cpxq}}"></image>
+            <image bindtap="openPdf" data-pdfurl="/mgr/makePdf.do?filename=A100000014-14.pdf" mode="widthFix" src="{{imgurl.cpxq2}}"></image>
+            <image mode="widthFix" src="{{imgurl.cpxq3}}"></image>
+            <image bindtap="openPdf" data-pdfurl="/mgr/makePdf.do?filename=A100000014-10.pdf" mode="widthFix" src="{{imgurl.cpxq4}}"></image>
+            <image mode="widthFix" src="{{imgurl.cpxq5}}"></image>
+        </view>
+        <view class="paNodes" id="cjwt">
+            <image mode="widthFix" src="{{imgurl.cjwt}}"></image>
+            <image bindtap="openPdf" data-pdfurl="/mgr/makePdf.do?filename=A100000014-10.pdf" mode="widthFix" src="{{imgurl.cjwt2}}"></image>
+            <image mode="widthFix" src="{{imgurl.cjwt3}}"></image>
+        </view>
+        <view class="txxx paNodes" id="wytb">
+            <view class="header">
+                <view class="title">填写投保信息</view>
+            </view>
+            <view>
+                <text class="qst">1</text>本人信息（投保人）
+        </view>
+            <view class="bbr">
+                <view class="flex-row">
+                    <view>姓名</view>
+                    <view>
+                        <input adjustPosition="{{false}}" bindblur="bindAname" maxlength="32" placeholder="请输入您的姓名" value="{{applicant.name}}"></input>
+                    </view>
+                </view>
+                <view class="flex-row">
+                    <view>身份证</view>
+                    <view>
+                        <input adjustPosition="{{false}}" bindblur="bindAidno" maxlength="18" placeholder="身份证" type="idcard" value="{{applicant.idno}}"></input>
+                    </view>
+                </view>
+                <view class="flex-row">
+                    <view>手机号码</view>
+                    <view>
+                        <input adjustPosition="{{false}}" bindblur="bindAmobile" maxlength="11" placeholder="手机号码" type="idcard" value="{{applicant.contactInfo.mobile}}"></input>
+                    </view>
+                </view>
+            </view>
+            <view>
+                <text class="qst">2</text>为谁投保（被保人）
+        </view>
+            <view>
+                <radio-group bindchange="relationChange" class="radio-group">
+                    <label class="radio {{item.checked?'active':''}}" id="{{value}}" wx:for="{{relations}}" wx:key="value">
+                        <radio checked="{{item.checked}}" value="{{item.value}}"></radio> {{item.name}}
+              <image class="checked" src="{{imgurl.checkedImg}}" wx:if="{{item.checked}}"></image>
+                    </label>
+                </radio-group>
+            </view>
+            <view class="bbr" wx:if="{{relationshipWithApplicant!=1}}">
+                <view class="flex-row">
+                    <view>姓名</view>
+                    <view>
+                        <input adjustPosition="{{false}}" bindblur="bindBname" maxlength="32" placeholder="请输入姓名" value="{{beibaoren.name}}"></input>
+                    </view>
+                </view>
+                <view class="flex-row">
+                    <view>身份证</view>
+                    <view>
+                        <input adjustPosition="{{false}}" bindblur="bindBidno" maxlength="18" placeholder="身份证" type="idcard" value="{{beibaoren.idno}}"></input>
+                    </view>
+                </view>
+            </view>
+            <view>
+                <text class="qst">3</text>被保人社保情况
+        </view>
+            <view class="">
+                <radio-group bindchange="socialSecuritysChange" class="radio-group">
+                    <label class="radio {{item.checked?'active':''}}" id="{{value}}" wx:for="{{socialSecuritys}}" wx:key="value">
+                        <radio checked="{{item.checked}}" value="{{item.value}}"></radio> {{item.name}}
+              <image class="checked" src="{{imgurl.checkedImg}}" wx:if="{{item.checked}}"></image>
+                    </label>
+                </radio-group>
+            </view>
+            <image mode="widthFix" src="{{imgurl.copyRightUrl}}" style="margin-top:30rpx;"></image>
+        </view>
+        <view class="bottom">
+            <view class="provisions">
+                <checkbox-group bindchange="agreeChange">
+                    <label class="checkbox" wx:for="{{agreeItems}}" wx:key="value">
+                        <checkbox checked="{{item.checked}}" color="#fc611d" value="{{item.value}}"></checkbox>我已阅读并了解
+          </label>
+                    <text bindtap="openPdf" class="blue" data-pdfurl="/mgr/makePdf.do?filename=A100000014-17.pdf">《保险条款及重要文档》</text>和
+          <text bindtap="openPdf" class="blue" data-pdfurl="/mgr/makePdf.do?filename=A100000014-7.pdf">《责任免除》</text>
+                </checkbox-group>
+            </view>
+            <view class="btm-nav">
+                <view bindtap="toIndex" class="icon">
+                    <image src="{{imgurl.icon1}}" style="width: 50rpx;"></image>
+                </view>
+                <view class="icon">
+                    <button openType="contact">
+                        <image src="{{imgurl.icon2}}" style="width: 50rpx;"></image>
+                    </button>
+                </view>
+                <view class="price">
+          ￥{{totalPrem}}
+        </view>
+                <view bindtap="buy" class="buy">
+          立即投保
+        </view>
+            </view>
+        </view>
+    </view>
+</pa-sticky>
+<input placeholder="请不要删除，不然会有bug" style="visibility:hidden;height:1px;"></input>
+<view class="share">
+    <button hoverClass="none" openType="share">
+        <image src="{{imgurl.share}}"></image>
+    </button>
+</view>
+<view class="add-duty-des" wx:if="{{showDes}}">
+    <view>
+        <view>质子重离子医疗保险金</view>
+        <view class="age">
+            <text>投保年龄：28天-60周岁</text>
+        </view>
+        <view>免赔额0元，赔付比例100%，床位费限1500元/天</view>
+        <view>被保险人在等待期30天后因其本人自出生以来初次被确诊罹患恶性肿瘤，在上海质子重离子医院，暨复旦大学附属肿瘤医院质子重离子中心接受质子重离子治疗的，治疗期间所发生的质子重离子医疗费用，平安健康险按照约定进行报销，包括床位费、膳食费、护理费、医生费、检查检验费、治疗费、药品费，但不包括化学疗法、放射疗法、肿瘤免疫疗法、肿瘤内分泌疗法和肿瘤靶向疗法所产生的医疗费用。</view>
+        <view bindtap="closeModal">
+            <text>我知道了</text>
+        </view>
+    </view>
+</view>
+<view class="add-duty-des" wx:if="{{showAsia}}">
+    <view>
+        <view>亚洲海外特定医疗保险金</view>
+        <view class="age">
+            <text>投保年龄：28天-60周岁</text>
+        </view>
+        <view>免赔额0元，赔付比例70%（直付）</view>
+        <view>
+            <view>被保险人在等待期90天后因其本人自出生以来初次被确诊罹患保障内疾病，经平安健康险指定的授权服务商确认，接受授权服务商安排的在除中国（含大陆及港澳台地区）以外的亚洲国家或地区进行治疗的，在约定的保障范围内按约定比例给付保险金。</view>
+            <view>疾病种类及单项保额限制：</view>
+            <view>1.恶性肿瘤治疗单项疾病保额限600万；</view>
+            <view>2.冠状动脉旁路移植手术（冠状动脉搭桥手术）、心脏瓣膜置换或修复、神经外科手术、活体器官移植术、骨髓移植术五项疾病保额合计限300万。</view>
+        </view>
+        <view bindtap="closeModal">
+            <text>我知道了</text>
+        </view>
+    </view>
+</view>

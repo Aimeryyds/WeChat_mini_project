@@ -1,0 +1,93 @@
+<import src="../../components/wxParse/wxParse.wxml"></import>
+<view class="recordDetails _0040e52">
+    <view class="network _32f532b _0040e52" wx:if="{{$net$hasNet}}">
+        <image class="_32f532b" src="../../images/network.png"></image>
+        <text class="_32f532b">网络不可用，请检查网络设置</text>
+        <view class="net-text font28 animated flash infinite _32f532b">正在尝试重新连接...</view>
+    </view>
+    <view class="product_img _0040e52">
+        <image class="_0040e52" lazyLoad="true" src="https://jfinfo.oss-cn-beijing.aliyuncs.com/jugupiao/images/record/hsit.png"></image>
+        <view class="_0040e52">{{res.title}}</view>
+    </view>
+    <view class="container-box _0040e52">
+        <view class="middel-box _0040e52">
+            <view class="area-title flex _0040e52">
+                    「 最新回顾 」
+                </view>
+            <view class="date-box flex font30 _0040e52">
+                <image class="_0040e52" lazyLoad="true" src="https://jfinfo.oss-cn-beijing.aliyuncs.com/jugupiao/images/record/date.png"></image>
+                    推荐日期{{res.recommend_date}}
+                </view>
+            <view class="flex stock-con _0040e52">
+                <view catchtap="goIndustry" class="stock-name flex-column _0040e52" data-wpygoindustry-a="{{res}}">
+                    <view class="stock-name-o _0040e52">股票名称</view>
+                    <view class="stock-name-t _0040e52">{{res.stock_name}}</view>
+                    <view class="stock-name-h _0040e52">{{res.stock}}</view>
+                </view>
+                <view class="stock-up flex-column _0040e52">
+                    <view class="stock-up-o _0040e52">累计涨幅</view>
+                    <view class="stock-up-p _0040e52" style="color: {{res.gain<0?'#07B351':''}}">{{res.gain>0?'+':''}}{{res.gain}}{{res.gain?'%':''}}</view>
+                </view>
+            </view>
+            <view class="souce font30 _0040e52">来源: {{res.columnists_name}}</view>
+            <view class="introduce font28 _0040e52">
+                <view class="font30 _0040e52" style="color:#010101;margin-bottom: 20rpx;font-weight:bold;" wx:if="{{res.description}}">{{res.description}}</view>
+                <block wx:if="{{res.content}}">
+                    <import src="../../components/wxParse/wxParse.wxml"></import>
+                    <view class="_0040e52">
+                        <template is="wxParse" data="{{wxParseData:article.nodes}}"></template>
+                    </view>
+                </block>
+            </view>
+            <view class="area-title flex _0040e52" style="margin-top:20rpx">
+                    「 【{{res.columnists_name}}】详解 」
+                </view>
+            <view class="sub flex _0040e52">
+                <text class="_0040e52" wx:for="{{res.columnists_subscribe_num}}">{{item}}</text>人已订阅
+                </view>
+            <view class="souce font30 _0040e52">
+                <view class="_0040e52" style="font-weight:bold;color:#333;font-size:32rpx;">{{res.columnists_biref_desc}}</view>
+                <view class="_0040e52">{{res.columnists_desc}}</view>
+                <template is="wxParse" data="{{wxParseData:aaa.nodes}}"></template>
+            </view>
+            <view class="area-title flex _0040e52">
+                    「  如何第一时间抓住机会  」
+                </view>
+            <video controls class="vid-bxo _0040e52" customCache="{{false}}" poster="{{res.videoCover}}" src="{{res.videoUrlReal}}" wx:if="{{res.video_url}}">
+                <cover-view bindtap="play" class="play _0040e52" wx:if="{{res.video_name}}">
+                        {{res.video_name}}
+                    </cover-view>
+            </video>
+            <view class="img-ind flex _0040e52">
+                <view class="_0040e52">
+                    <image class="_0040e52" lazyLoad="true" src="https://jfinfo.oss-cn-beijing.aliyuncs.com/jugupiao/images/record/1%402x.png"></image>
+                </view>
+                <view class="_0040e52">
+                    <image class="_0040e52" lazyLoad="true" src="https://jfinfo.oss-cn-beijing.aliyuncs.com/jugupiao/images/record/2%402x.png"></image>
+                </view>
+                <view class="_0040e52">
+                    <image class="_0040e52" lazyLoad="true" src="https://jfinfo.oss-cn-beijing.aliyuncs.com/jugupiao/images/record/3%402x.png"></image>
+                </view>
+            </view>
+            <view class="_0040e52" wx:if="{{res.stock_history_img}}">
+                <view class="area-title flex _0040e52">
+                      「  历史战绩回顾  」
+                  </view>
+                <image catchtap="preview" class="res-im-p _0040e52" data-wpypreview-a="{{res.stock_history_img}}" lazyLoad="true" mode="widthFix" src="{{res.stock_history_img}}"></image>
+                <view class="des _0040e52">
+                      *以上数据为部分历史战绩，不构成未来投资建议，据此操作，风险自担。
+                  </view>
+                <view class="des _0040e52" style="padding-bottom: 20rpx;">
+                      投资有风险，入市需谨慎。
+                  </view>
+            </view>
+        </view>
+        <image class="staci-box {{isListEnter?'':'mt30'}} _0040e52" lazyLoad="true" mode="widthFix" src="https://jfinfo.oss-cn-beijing.aliyuncs.com/jugupiao/images/record/static.png"></image>
+    </view>
+    <view bindtap="goMoreZj" class="more-re-j _0040e52" style="bottom: {{scrollSite?'0':'-88rpx'}}" wx:if="{{isListEnter}}">
+           更多战绩推荐
+        </view>
+    <view catchtap="$backHome$goHome" class="box animated bounceIn _97a9f08 _0040e52" wx:if="{{$backHome$isShow}}">
+        <image class="_97a9f08" lazyLoad="false" mode="scaleToFill" src="https://jfinfo.oss-cn-beijing.aliyuncs.com/jugupiao/images/share/home.png"></image>
+    </view>
+</view>

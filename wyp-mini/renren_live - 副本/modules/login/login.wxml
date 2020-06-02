@@ -1,0 +1,28 @@
+<view class="login_box" wx:if="{{loginPop}}">
+    <view class="login_body" style="width:{{dengluW}}rpx;" wx:if="{{dengluShow}}">
+        <image class="img" src="./../../images/home_login.png"></image>
+        <view class="name">人人直播</view>
+        <view class="title">该程序将获取以下授权：</view>
+        <view class="msg">. 获得您的公开信息（昵称、头像等）</view>
+        <view class="btns">
+            <view bindtap="closeLogin" class="btn no_btn">忽略</view>
+            <view class="btn is_btn">
+                <form bindsubmit="onformSubmit" reportSubmit="true">
+                    <button bindgetuserinfo="ongetAuthor" class="login_btn" formType="submit" hoverClass="new-button-hover" openType="getUserInfo">登录</button>
+                </form>
+            </view>
+        </view>
+    </view>
+    <view class="login_body phone" style="width:{{phoneW}}rpx;" wx:if="{{phoneShow}}">
+        <image class="img" src="./../../images/home_login.png"></image>
+        <view class="name">人人直播</view>
+        <view class="tip1">一键绑定手机号，<text class="txt">账户更安全，信息不丢失！</text>
+        </view>
+        <view class="btns">
+            <view bindtap="closeLogin" class="btn no_btn">忽略</view>
+            <view class="btn is_btn">
+                <button bindgetphonenumber="getPhoneNumber" bindtap="closePhone" class="login_btn" hoverClass="new-button-hover" openType="getPhoneNumber">绑定</button>
+            </view>
+        </view>
+    </view>
+</view>

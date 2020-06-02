@@ -1,0 +1,7 @@
+<view class="container">
+    <share bCode="{{bCode}}" bindhandleClick="clickShare" class="share" pvId="{{pvId}}" shareInfo="{{shareInfo}}" type="{{pageConfig.shareConfig.type}}"></share>
+    <feed-swiper bind:feedExposure="feedExposure" currentIdx="{{currentIdx}}" list="{{navList}}" pvId="{{pvId}}" spmB="{{bCode}}" wx:if="{{!pageConfig.noSwiper}}"></feed-swiper>
+    <view wx:if="{{pageConfig.noSwiper}}">
+        <feed-tt-index bind:feedExposure="feedExposure" currentIdx="{{currentIdx}}" list="{{navList}}" pvId="{{pvId}}" spmB="{{bCode}}"></feed-tt-index>
+    </view>
+</view>

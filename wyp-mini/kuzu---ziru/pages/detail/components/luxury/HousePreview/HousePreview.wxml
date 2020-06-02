@@ -1,0 +1,15 @@
+<view class="_div data-v-012f918a">
+    <view class="house-preview-wrapper hz-style _div data-v-012f918a" wx:if="{{housePreview}}">
+        <view class="img-wrapper _div data-v-012f918a">
+            <image alt="photos_big" bindtap="__e" bindtouchend="__e" bindtouchstart="__e" class="hz-img _img data-v-012f918a" data-event-opts="{{[ [ 'tap',[ ['handlePreviewImg'] ] ],[ 'touchstart',[ [ 'handleTouchStart',['$event'] ] ] ],[ 'touchend',[ [ 'handleTouchEnd',['$event'] ] ] ] ]}}" mode="aspectFill" src="{{previewImage}}"></image>
+            <view bindtap="__e" class="image-center-wrapper _div data-v-012f918a" data-event-opts="{{[ [ 'tap',[ [ 'handleJumpH5',[hasVR?housePreview.vr:housePreview.video,!hasVR&&hasVideo] ] ] ] ]}}" wx:if="{{hasVR||hasVideo}}">
+                <view class="{{['iconfont _i data-v-012f918a',hasVR?'icon-vr':'',!hasVR&&hasVideo?'icon-videoplay':'']}}"></view>
+            </view>
+            <view class="image-right-top-wrapper _div data-v-012f918a" wx:if="{{hasVR&&hasVideo}}">
+                <view catchtap="__e" class="iconfont icon-videoplay1 _i data-v-012f918a" data-event-opts="{{[ [ 'tap',[ [ 'handleJumpH5',['$0',true],['housePreview.video'] ] ] ] ]}}"></view>
+            </view>
+        </view>
+        <view class="top-shadow _div data-v-012f918a"></view>
+    </view>
+    <view class="house-preview-skeleton _div data-v-012f918a" wx:else></view>
+</view>

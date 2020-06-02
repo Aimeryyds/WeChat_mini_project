@@ -1,0 +1,35 @@
+<navigation-bar enable="{{enable}}" title="视频菜谱"></navigation-bar>
+<view class="sancanlistw" style="padding-top:{{barHeight}}px">
+    <view>
+        <view bindtap="pageReload" class="cplist_nodata" wx:if="{{requeseFail}}">{{requeseFailTips}}</view>
+        <view class="topvideo" style="margin:0rpx 32rpx 32rpx;position:relative;" wx:if="{{videoitem.video_info.id>0}}">
+            <view class="vw" style="background:url({{videoitem.video_info.video.img_test}}) center no-repeat;background-size:cover;width:686rpx;height:{{videoitem.video_info.video.height/videoitem.video_info.video.width*686}}rpx;position:relative;overflow:hidden;">
+                <video autoplay="{{vAutoplay}}" controls="{{!vAutoplay}}" customCache="{{false}}" id="myVideo1" loop="{{true}}" muted="{{true}}" objectFit="cover" showFullscreenBtn="{{false}}" src="{{videoitem.video_info.video.vendor_video}}" style="width:686rpx;height:{{videoitem.video_info.video.height/videoitem.video_info.video.width*686}}rpx;position:absolute;left:0rpx;top:50%;transform: translate(0%, -50%);-webkit-transform: translate(0%, -50%);"></video>
+            </view>
+            <cover-view bindtap="go_videoCp" class="vmasker"></cover-view>
+        </view>
+        <view class="videolistitem" wx:for="{{videoResult}}" wx:for-index="fi_i" wx:key="key">
+            <view wx:if="{{fi_i==3}}">
+                <view class="caidan_ad">
+                    <ad unitId="adunit-e8540252fe051b7c"></ad>
+                </view>
+            </view>
+            <navigator hoverClass="navigator-hover" url="/pages/article/article?id={{item.id}}&&act=2">
+                <view class="vw" style="background:rgba(0,0,0,0.05) url({{item.img}}) center no-repeat;background-size:cover;">
+                    <view class="v_cover"></view>
+                </view>
+                <view class="vinfo">
+                    <view class="title">{{item.title}}</view>
+                    <view class="au">
+                        <view class="imgw" style="background:url({{item.author.avatar_url}}) center no-repeat;background-size:cover;"></view>
+                        <view class="n">{{item.author.nickname}}</view>
+                    </view>
+                </view>
+            </navigator>
+        </view>
+        <view class="bottomline" wx:if="{{!hasNextPage}}">- 这就是我的底线了 -</view>
+    </view>
+</view>
+<loading hidden="{{requeseDone||requeseFail||noData}}">
+ 加载中...
+</loading>

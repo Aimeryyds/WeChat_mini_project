@@ -1,0 +1,28 @@
+<template name="challenge$72dfb01a">
+    <view class="_div data-v-024ff5e3 challenge-item" hoverClass="hover">
+        <view class="_div data-v-024ff5e3 header">
+            <view class="_div data-v-024ff5e3 publisher">
+                <image hoverStopPropagation catchtap="handleProxy" class="_img data-v-024ff5e3 avatar" data-comkey="{{$k}}" data-eventid="{{'0'}}" src="{{challenge.avatar_img_urls&&challenge.avatar_img_urls[0]}}"></image>
+                <view hoverStopPropagation catchtap="handleProxy" class="_div data-v-024ff5e3 info" data-comkey="{{$k}}" data-eventid="{{'1'}}">
+                    <view class="_div data-v-024ff5e3 nickname">{{challenge.publisher}}</view>
+                    <view class="_div data-v-024ff5e3 publish-date">{{challenge.release_time}}</view>
+                </view>
+            </view>
+            <button hoverStopPropagation catchtap="handleProxy" class="_button data-v-024ff5e3 share" data-comkey="{{$k}}" data-eventid="{{'2'}}" id="{{challenge.id}}" openType="share">邀请好友</button>
+        </view>
+        <form bindsubmit="handleProxy" class="_form data-v-024ff5e3" data-comkey="{{$k}}" data-eventid="{{'3'}}" hoverClass="hover" reportSubmit="{{true}}">
+            <button class="_button data-v-024ff5e3" formType="submit">
+                <view class="_div data-v-024ff5e3 message">{{challenge.message}}</view>
+                <view class="_div data-v-024ff5e3 content-btn">
+                    <image class="_img data-v-024ff5e3 content-img" src="{{challenge.background_img_urls&&challenge.background_img_urls[0]}}"></image>
+                </view>
+                <view class="_div data-v-024ff5e3 bottom" hoverClass="hover">
+                    <image class="_img data-v-024ff5e3 hot-icon" src="/static/img/hot-icon.png"></image>
+                    <label class="_span data-v-024ff5e3">{{challenge.join_num}}人发布作品</label>
+                    <label class="_span data-v-024ff5e3 nav-detail">点击查看></label>
+                </view>
+            </button>
+        </form>
+        <view class="_div data-v-024ff5e3 sperator"></view>
+    </view>
+</template>

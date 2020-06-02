@@ -1,0 +1,20 @@
+<template name="tuanlist">
+    <view bindtap="makeTuan" class="tuan-list" data-tuan="{{tuanItem}}">
+        <image class="tuan-list__img" src="{{tuanItem.imgUrl}}"></image>
+        <view class="tuan-list__cont">
+            <view class="tuan-list__title zan-ellipsis">{{tuanItem.goodsName}}</view>
+            <view class="tuan-list__storeadress" style="font-size:24rpx">{{tuanItem.brandName}} - {{tuanItem.storeName}}</view>
+            <view class="tuan-list__priceInfo">
+                <view style="flex:1">
+                    <view style="display:flex; align-items:flex-end;margin-bottom:14rpx;">
+                        <view class="tuan-list__price">
+                            <text>￥</text>{{tuanItem.price}}</view>
+                        <view class="tuan-list__num">已团{{tuanItem.boughtNum}}件</view>
+                    </view>
+                    <view class="services__desc" style="font-size:24rpx; color:rgba(0,0,0,0.43)">{{tuanItem.reviewsNum}}条评价  {{tuanItem.goodReviewsRate}}%好评</view>
+                </view>
+                <view class="tuan-list__btn">去开团</view>
+            </view>
+        </view>
+    </view>
+</template>

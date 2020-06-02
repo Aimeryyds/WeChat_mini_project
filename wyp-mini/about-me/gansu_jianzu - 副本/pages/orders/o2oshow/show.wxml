@@ -1,0 +1,165 @@
+<import src="../../templates/orders/orderitemlistmoreproducts.wxml"></import>
+<import src="../../templates/orders/orderaddress.wxml"></import>
+<import src="../../templates/orders/ordero2obtns.wxml"></import>
+<import src="/dist/toptips/index.wxml"></import>
+<import src="/dist/toast/index.wxml"></import>
+<template is="zan-toast" data="{{zanToast:zanToast}}"></template>
+<template is="zan-toptips" data="{{zanTopTips:zanTopTips}}"></template>
+<view class="container" hidden="{{loading}}">
+    <view class="{{orderDetail.actionList&&orderDetail.actionList.length>0?'container_bottom':''}}">
+        <view bindtap="showStatesDetail" class="zan-panel" data-id="{{orderDetail.id}}">
+            <view class="zan-card order-detail-state">
+                <image class="order-detail-state-icon" src="{{orderDetail.orderStatus==10?'http://imgcdnali.wfenxiao.com.cn/xcx/c/order/pay_order_select.png':orderDetail.orderStatus==50?'http://imgcdnali.wfenxiao.com.cn/xcx/c/order/submit_order_select.png':orderDetail.orderStatus==60?'http://imgcdnali.wfenxiao.com.cn/xcx/c/order/deliver_order_select.png':orderDetail.orderStatus==61?'http://imgcdnali.wfenxiao.com.cn/xcx/c/order/deliver_order_select.png':'http://imgcdnali.wfenxiao.com.cn/xcx/c/order/cancel_order_select.png'}}"></image>
+                <view class="order-detail-state-text">
+                    <view class="state-text1">{{orderDetail.orderStatusName}}</view>
+                    <view class="state-text2">{{orderDetail.currentStatus.desc}}</view>
+                </view>
+                <view class="order-detail-state-time">
+                    <view class="state-text1">{{orderDetail.createdTime}}</view>
+                    <view class="state-more">更多状态></view>
+                </view>
+            </view>
+        </view>
+        <view bindtap="gotoshop" class="zan-panel zan-card order-detail-store">
+            <view class="state-text1">{{orderDetail.brandName}}-{{orderDetail.storeName}}</view>
+            <image class="order-detail-store-arrow" src="http://imgcdnali.wfenxiao.com.cn/xcx/c/icons/arrow-right.png"></image>
+        </view>
+        <view wx:if="{{orderDetail.goodsList}}">
+            <template is="order-more-goods" data="{{ goods:orderDetail.goodsList,goodsTotal:orderDetail.goodsTotal,showName:true,giveawayList:orderDetail.giveawayList||[] }}"></template>
+        </view>
+        <order-refund-action actionList="{{orderDetail.actionList}}" orderid="{{orderDetail.id}}" refundId="{{orderDetail.refundId}}"></order-refund-action>
+        <view class="zan-panel zan-card  order-detail-store">
+            <view>
+                <view class="state-text1">商品金额</view>
+                <view class="state-text1" style="margin-top: 20rpx" wx:if="{{orderDetail.distributionType!=1}}">{{orderDetail.distributionType==2?'配送费：':'运费：'}}</view>
+            </view>
+            <view>
+                <view class="state-text1">￥{{orderDetail.goodsTotalMoney}}</view>
+                <view class="state-text1" style="margin-top: 20rpx" wx:if="{{orderDetail.distributionType!=1}}">{{orderDetail.freight&&orderDetail.freight>0?'￥'+orderDetail.freight:'免配送费'}}</view>
+            </view>
+        </view>
+        <view class="zan-card view-direction-between" wx:if="{{orderDetail.fullMoney}}">
+            <view class="state-value">满减：</view>
+            <view class="state-label" style="color:#ff0000">-￥{{orderDetail.fullMoney||'0.00'}}</view>
+        </view>
+        <view class="zan-card view-direction-row-reverse" wx:if="{{orderDetail.fullMoney}}">
+            <view class="state-label" style="color:#ff0000">+{{orderDetail.fullPoint||0}}积分</view>
+        </view>
+        <view class="zan-card view-direction-between">
+            <view class="state-value">会员折扣：</view>
+            <view class="state-label" style="color:#999999" wx:if="{{orderDetail.isDiscountShare==2}}">{{orderDetail.activityType==2?'团购':orderDetail.activityType==1?'秒杀':''}}商品不能与其他优惠共享</view>
+            <view class="state-label" style="color:#ff0000" wx:elif="{{orderDetail.cardDiscount&&orderDetail.cardDiscount>0}}">-￥{{orderDetail.cardDiscount}}</view>
+            <view class="state-label" style="color:#ff0000" wx:else>+{{orderDetail.cardPoint}}积分</view>
+        </view>
+        <view class="zan-card view-direction-between">
+            <view class="state-value">优惠券：</view>
+            <view class="state-label" style="color:#999999" wx:if="{{orderDetail.isDiscountShare==2}}">{{orderDetail.activityType==2?'团购':orderDetail.activityType==1?'秒杀':''}}商品不能与其他优惠共享</view>
+            <view class="state-label" style="color:#ff0000" wx:else>-￥{{orderDetail.couponDiscount||'0.00'}}</view>
+        </view>
+        <view class="zan-card view-direction-between">
+            <view class="order-direction-row">
+                <view class="state-value">礼品卡：</view>
+            </view>
+            <view class="state-label" style="color:#ff0000">-￥{{orderDetail.giftCardDiscount||'0.00'}}</view>
+        </view>
+        <view class="zan-card view-direction-between" wx:if="{{orderDetail.couponFee&&orderDetail.couponFee>0}}">
+            <view class="order-direction-row">
+                <view class="state-value">代金券:</view>
+            </view>
+            <view class="state-label" style="color:#ff0000">-￥{{orderDetail.couponFee||'0.00'}}</view>
+        </view>
+        <view class="zan-card view-direction-between">
+            <view class="order-direction-row">
+                <view class="state-value">储值抵扣</view>
+            </view>
+            <view class="state-label" style="color:#ff0000">-￥{{orderDetail.rechargeAmount||'0.00'}}</view>
+        </view>
+        <view class="zan-card  order-detail-store">
+            <view class="view-direction-row">
+                <view class="state-label">应付：</view>
+                <view class="state-value">￥{{orderDetail.total}}</view>
+            </view>
+            <view class="view-direction-row">
+                <view class="state-label">实付：</view>
+                <view class="state-value">￥{{orderDetail.total}}</view>
+            </view>
+        </view>
+        <view wx:if="{{orderDetail.distributionType==1}}">
+            <view class="block-title">自提信息</view>
+            <view class="order-no_state">
+                <view class="state-label2">自提门店：</view>
+                <view class="state-value">{{orderDetail.brandName}}-{{orderDetail.storeName}}</view>
+            </view>
+            <view class="order-no_state">
+                <view class="state-label2">提货时间：</view>
+                <view class="state-value">{{orderDetail.distributionDate}} {{distributionTime}}</view>
+            </view>
+            <view class="order-no_state">
+                <view class="state-label2">提货人：</view>
+                <view class="state-value"> {{orderDetail.pickupman}}</view>
+            </view>
+            <view class="order-no_state">
+                <view class="state-label2">联系方式：</view>
+                <view class="state-value">{{orderDetail.pickupmanMobile}}</view>
+            </view>
+        </view>
+        <view hidden="{{orderDetail.distributionType==1}}">
+            <view class="block-title">配送信息</view>
+            <view class="order-no_state" wx:if="{{orderDetail.distributionType==2}}">
+                <view class="state-label2">送达时间：</view>
+                <view class="state-value">{{orderDetail.distributionDate}} {{distributionTime}}</view>
+            </view>
+            <view class="order-no_state">
+                <view class="state-label2">收货地址：</view>
+                <view>
+                    <view class="state-value">{{orderDetail.consignee.name}} {{orderDetail.consignee.phone}}</view>
+                    <view class="state-value">{{orderDetail.consignee.province}}{{orderDetail.consignee.city}}{{orderDetail.consignee.district}}{{orderDetail.consignee.title}}{{orderDetail.consignee.address}}</view>
+                </view>
+            </view>
+            <view class="order-no_state" wx:if="{{orderDetail.idCard}}">
+                <view class="state-label2">收件人身份证号：</view>
+                <view class="state-value">{{orderDetail.idCard}}</view>
+            </view>
+        </view>
+        <view class="block-title">订单信息</view>
+        <view class="order-no_state">
+            <view class="state-label2">订单号：</view>
+            <view class="state-value"> {{orderDetail.orderNo}}</view>
+        </view>
+        <view class="order-no_state">
+            <view class="state-label2">下单时间：</view>
+            <view class="state-value">{{orderDetail.createdTime}}</view>
+        </view>
+        <view class="order-no_state">
+            <view class="state-label2">支付方式：</view>
+            <view class="state-value">{{orderDetail.payType==1?'微信支付':'其他'}}</view>
+        </view>
+        <view class="order-no_state" wx:if="{{orderDetail.leaveMessage&&orderDetail.leaveMessage.length>0}}" wx:for="{{orderDetail.leaveMessage}}">
+            <view class="state-label2">{{item.fieldname}}：</view>
+            <view class="state-value">{{item.value||'无'}}</view>
+        </view>
+        <view class="order-no_state" wx:if="{{orderDetail.leaveMessage.length==0}}">
+            <view class="state-label2">订单备注：</view>
+            <view class="state-value">{{orderDetail.userMsg}}</view>
+        </view>
+    </view>
+    <view class="o2o-extra" wx:if="{{orderDetail.actionList&&orderDetail.actionList.length>0}}">
+        <template is="orders-o2o-btns" data="{{order:orderDetail}}"></template>
+    </view>
+    <wxc-dialog _pid="{{_pid}}" bindcancel="onCancel" bindconfirm="onConfirm" class="wxc-dialog" confirmText="我知道了" title="以下商品购买数量超过限制">
+        <view wx:for="{{errGoodList}}" wx:key="{{index}}">
+            <view class="reject-reason">
+                <image class="reject-reason-image" src="{{item.img}}"></image>
+                <view class="reject-reason-content">
+                    <wxc-elip line="2">
+                        <text style="font-size:24rpx">{{item.goodsName}}</text>
+                    </wxc-elip>
+                    <view class="reject-reason-price">
+                        <text style="color:#ff2222; font-size:24rpx">￥{{item.price}}</text>
+                        <text style="color:#cccccc; font-size:24rpx">X{{item.quantity}}</text>
+                    </view>
+                </view>
+            </view>
+        </view>
+    </wxc-dialog>
+</view>

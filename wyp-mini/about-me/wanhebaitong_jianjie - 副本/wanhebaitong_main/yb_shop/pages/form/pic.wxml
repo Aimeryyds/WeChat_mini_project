@@ -1,0 +1,11 @@
+<view class="form_tit" wx:if="{{f_item.title}}">
+{{f_item.title}}
+<text class="ture_color" wx:if="{{f_item.empty}}">*</text>
+</view>
+<view class="join_pic_list">
+    <view class="join_pic_li">
+        <image catchtap="chooseImageTap1" data-id="{{f_item.name}}" mode="aspectFill" src="{{form_data[f_item.name]?form_data[f_item.name]:default_pic}}"></image>
+    </view>
+    <view class="clear"></view>
+</view>
+<input name="{{f_item.name}}" style="display:none" value="{{form_data[f_item.name]}}"></input>

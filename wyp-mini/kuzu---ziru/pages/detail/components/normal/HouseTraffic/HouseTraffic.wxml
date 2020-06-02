@@ -1,0 +1,11 @@
+<view class="house-traffic _div data-v-1f2eb2d4" wx:if="{{resblock}}">
+    <view class="block-title _div data-v-1f2eb2d4">周边及交通</view>
+    <image bindtap="__e" class="transport-time data-v-1f2eb2d4" data-event-opts="{{[ [ 'tap',[ [ 'handleAlertApp',['$event'] ] ] ] ]}}" mode="widthFix" src="{{transportImg}}"></image>
+    <view class="content _div data-v-1f2eb2d4">
+        <map-img bind:__l="__l" class="data-v-1f2eb2d4" height="320" lat="{{resblock.lat}}" lng="{{resblock.lng}}" vueId="1" zoom="16" wx:if="{{resblock}}"></map-img>
+        <view class="subway-list _div data-v-1f2eb2d4" wx:if="{{resblock.subway}}">
+            <view class="subway _p data-v-1f2eb2d4" wx:for="{{resblock.subway}}" wx:for-index="i" wx:key="i">{{'· '+item}}</view>
+        </view>
+    </view>
+    <view class="tips _p data-v-1f2eb2d4">* 数据来源于百度地图，仅供参考</view>
+</view>

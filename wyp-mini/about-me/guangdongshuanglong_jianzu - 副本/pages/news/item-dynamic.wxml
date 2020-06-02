@@ -1,0 +1,10 @@
+<view catchtap="onItemClick" class="border-box item-cell flex" data-index="{{index}}">
+    <text class="wx-title">{{item.Title}}</text>
+    <text class="wx-time">{{item.Createdate||item.Lastdate}}</text>
+    <image class="wx-image" mode="widthFix" src="{{item.ImgUrl||item.LitleImgUrl||'/images/ic_error_state.png'}}" style="width:100%"></image>
+    <text class="wx-desc">{{item.Content}}</text>
+    <view class="flex wx-navigation">
+        <text>阅读全文</text>
+        <image src="/images/icon_arrow_right.png"></image>
+    </view>
+</view>

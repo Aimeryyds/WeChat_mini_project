@@ -1,0 +1,19 @@
+<view class="loading" wx:if="{{loading}}">
+    <image class="loading_img" src="../../image/loading-32-32.gif"></image>
+</view>
+<view class="loading_fail" wx:if="{{loading_fail}}"></view>
+<view class="{{loading_ok?'':'hidden'}}">
+    <swiper class="" current="{{current}}" duration="300" style="height:{{height-140}}px;">
+        <swiper-item wx:for="{{steps}}" wx:for-index="idx" wx:key="steps">
+            <image class="sv load" mode="widthFix" src="{{item.bigpic}}" wx:if="{{item.bigpic!=''}}"></image>
+            <view class="no_step" wx:else>无步骤图</view>
+            <view class="svt">
+                <text style="color:#ff6767">{{idx+1}}</text>
+                <text style="color:#777">/</text>
+                <text>{{steps.length}}</text>
+{{item.note}}
+</view>
+        </swiper-item>
+    </swiper>
+</view>
+<ad unitId="adunit-94b9b0b38858f9f4"></ad>

@@ -1,0 +1,86 @@
+<view class="choose">
+    <view class="top">
+        <view class="page-section-spacing">
+            <view class="flex-wrp" style="flex-direction:row;">
+                <picker bindchange="termChange" range="{{term}}" rangeKey="{{'name'}}" value="{{termIndex}}">
+                    <view class="weui-input flex-item">{{term[termIndex].name}}<view class="triangle"></view>
+                    </view>
+                </picker>
+                <picker bindchange="gradeChange" range="{{grade}}" rangeKey="{{'name'}}" value="{{gradeIndex}}">
+                    <view class="weui-input flex-item">{{grade[gradeIndex].name}}<view class="triangle"></view>
+                    </view>
+                </picker>
+                <picker bindchange="subjectChange" range="{{subject}}" rangeKey="{{'name'}}" value="{{subIndex}}">
+                    <view class="weui-input flex-item">{{subject[subIndex].name}}<view class="triangle"></view>
+                    </view>
+                </picker>
+                <picker bindchange="claChange" range="{{cla}}" rangeKey="{{'name'}}" value="{{claIndex}}">
+                    <view class="weui-input flex-item">{{cla[claIndex].name}}<view class="triangle"></view>
+                    </view>
+                </picker>
+            </view>
+        </view>
+    </view>
+    <view>
+        <view class="refresh-top">
+            <view class="weui-loading"></view>
+            <view class="weui-loadmore__tips">下拉刷新</view>
+        </view>
+        <view class="act-content">
+            <view class="act-name">{{actContent.activity_type_name}}</view>
+            <view class="act-content">{{actContent.activity_desc}}</view>
+        </view>
+        <view class="classlist" hidden="{{!cardInfo.length}}">
+            <view class="card class-item" wx:for="{{$card$cardInfo}}" wx:key="index">
+                <view bindtap="$card$goClassInfo" class="desc" data-wpygoclassinfo-a="{{item}}">
+                    <image class="class-type" src="{{$card$classType[item.classType]}}"></image>
+                    <view class="teachers clearfix">
+                        <scroll-view class="teacher fl" scrollX="true">
+                            <view catchtap="$card$goDetail" class="one-teacher {{item.classType==='2'?'display-none':''}}" data-wpygodetail-a="{{itemName}}" wx:for="{{item.teachers}}" wx:for-item="itemName" wx:key="index">
+                                <image class="avatar" src="{{itemName.teacherPictureUrl?itemName.teacherPictureUrl:'http://wxcp-img.oss-cn-beijing.aliyuncs.com/1513669644100_default_avatar.png'}}"></image>
+                                <text class="teacher-name">{{itemName.teacherName?itemName.teacherName:'待定'}}{{item.classType==='1'?'+辅导老师':''}}</text>
+                            </view>
+                            <view catchtap="$card$goDetail" class="one-teacher {{item.classType==='2'?'':'display-none'}}" data-wpygodetail-a="{{itemName}}" wx:for="{{item.tutors}}" wx:for-item="itemNamea" wx:key="index">
+                                <image class="avatar" src="{{itemNamea.tutorPictureUrl?item.domain+itemNamea.tutorPictureUrl:'http://wxcp-img.oss-cn-beijing.aliyuncs.com/1513669644100_default_avatar.png'}}"></image>
+                                <text class="teacher-name">{{itemNamea.tutorSysName?itemNamea.tutorSysName:'待定'}}</text>
+                            </view>
+                        </scroll-view>
+                        <view class="price fr">¥<text class="price-number">{{item.actualPrice}}</text>
+                        </view>
+                    </view>
+                    <view class="class-title">{{item.className}}</view>
+                    <view class="time">
+                        <image class="icon-time" src="https://cdninsight.speiyou.com/1512121935416_icon_time.png"></image>
+                        <text class="date">{{item.startDate}} 至 {{item.endDate}}</text>
+                        <view class="date-time">{{item.classtimeNames}}</view>
+                    </view>
+                    <view class="area {{item.classType==='1'?'display-none':''}}">
+                        <image class="icon-area" src="https://cdninsight.speiyou.com/1512121927359_icon_address.png"></image>
+                        <text class="address">{{item.districtName?item.districtName:''}}{{item.servicecenterName}}{{item.venueName}}</text>
+                    </view>
+                    <view class="people {{item.classType==='1'||item.classType==='4'?'display-none':''}}">
+                        <image class="icon-teacher" src="https://cdninsight.speiyou.com/1512121931832_icon_teacher.png"></image>
+                        <text class="lecture">主讲老师：{{item.cla_teacher_names}}</text>
+                    </view>
+                </view>
+                <view class="bottom clearfix" wx:if="{{$card$bottomLine}}">
+                    <view class="cases fl {{item.classType==='1'?'display-none':''}}">
+                        <view class="case {{$card$tipColor[item.claQuotaNum]}}">
+                    {{$card$tip[item.claQuotaNum]?$card$tip[item.claQuotaNum]:item.claQuotaNum}}
+                </view>
+                    </view>
+                </view>
+            </view>
+        </view>
+        <view class="no-list-tip" hidden="{{cardInfo.length}}">没有找到您心仪的班级，更换个条件试试吧</view>
+        <view class="weui-loadmore load">
+            <view class="weui-loading" hidden="{{!bottomLoadShow}}" wx:if="{{loadingWord!=='没有更多了'}}"></view>
+            <view class="weui-loadmore__tips" hidden="{{!bottomLoadShow}}">{{loadingWord}}</view>
+        </view>
+    </view>
+    <view animation="{{$taltoast$animationData}}" class="tal-toast-container toast" style="top:{{$taltoast$vertical}}%;" wx:if="{{$taltoast$toastVisible}}">
+        <view class="tal-toast">
+            <text>{{$taltoast$toastMessage}}</text>
+        </view>
+    </view>
+</view>

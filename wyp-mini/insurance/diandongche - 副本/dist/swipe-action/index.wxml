@@ -1,0 +1,19 @@
+<template name="actions">
+    <view catchtap="onTap" class="{{classes.action}} {{action.className}}" data-index="{{index}}" data-type="{{type}}" data-value="{{action}}" style="{{action.style}}" wx:for="{{actions}}" wx:for-item="action">
+        <view class="{{classes.text}}">{{action.text}}</view>
+    </view>
+</template>
+<view class="wux-class {{classes.wrap}}">
+    <view bindtouchstart="onClose" class="{{classes.cover}}" hidden="{{!showCover}}" style="{{offsetStyle}}"></view>
+    <view catchtap="onAcitons" class="{{classes.left}}" wx:if="{{useSlots||left.length>0}}">
+        <template is="actions" data="{{classes:classes,actions:left,type:'left'}}" wx:if="{{!useSlots}}"></template>
+        <slot name="left" wx:else></slot>
+    </view>
+    <view catchtap="onAcitons" class="{{classes.right}}" wx:if="{{useSlots||right.length>0}}">
+        <template is="actions" data="{{classes:classes,actions:right,type:'right'}}" wx:if="{{!useSlots}}"></template>
+        <slot name="right" wx:else></slot>
+    </view>
+    <view bindtouchstart="onTouchStart" capture-bind:touchmove="onTouchMove" catchtouchend="onTouchEnd" catchtouchmove="{{swiping?'noop':''}}" class="{{classes.content}}" style="{{offsetStyle}}">
+        <slot></slot>
+    </view>
+</view>

@@ -1,0 +1,85 @@
+<view class="loading" wx:if="{{loading}}">
+    <image class="loading_img" src="../../image/loading-32-32.gif"></image>
+</view>
+<view class="loading_fail" wx:if="{{loading_fail}}"></view>
+<view class="{{loading_ok?'':'hidden'}}">
+    <view class="title_h1 mt20">{{title}}</view>
+    <block wx:if="{{quote}}">
+        <view class="event_index height1" wx:if="{{show_data==1}}">
+            <text>{{quote}}</text>
+        </view>
+        <view class="event_index" wx:else>
+            <text>{{quote}}</text>
+        </view>
+        <view bindtap="message_show" class="event_show" wx:if="{{show_data>0}}">
+            <block wx:if="{{show_data==1}}">
+                <text>查看全部</text>
+                <image src="/image/down.png"></image>
+            </block>
+            <block wx:if="{{show_data==2}}">
+                <text>收起</text>
+                <image src="/image/up.png"></image>
+            </block>
+        </view>
+        <view class="mt20" wx:if="{{show_data==0}}"></view>
+    </block>
+    <block wx:if="{{mflist}}" wx:for="{{mflist}}" wx:key="mflist">
+        <view wx:if="{{item.info.subtype=='recipe'}}">
+            <view class="s2_1" wx:if="{{item.info.subject&&mflist.length>1}}">{{item.info.subject}}</view>
+            <view class="mf_message" wx:if="{{item.info.message}}">
+                <text>{{item.info.message}}</text>
+            </view>
+            <view class="rlist" style="padding:0 0 0 40rpx">
+                <navigator class="rlist_item {{idx>3&&recipe_show[index]==1?'hidden':''}}" url="../recipe_info/recipe_info?id={{item.id}}" wx:for="{{item.infoin}}" wx:for-index="idx" wx:key="mf_recipelist">
+                    <image class="rlist_img r4{{open_v==1?item.r4:''}}" src="{{item.fcover}}"></image>
+                    <view class="rlist_detail">
+                        <text class="rlist_t">{{item.title}}</text>
+                        <text class="rlist_c">{{item.mainingredient}}</text>
+                        <text class="rlist_n" wx:if="{{item.collnum>0}}">{{item.collnum}}人收藏</text>
+                    </view>
+                </navigator>
+            </view>
+            <view bindtap="recipe_show" class="recipe_show" data-index="{{index}}" data-v="1" wx:if="{{recipe_show[index]==1}}">
+                <text>查看更多</text>
+                <image src="/image/down.png"></image>
+            </view>
+            <view bindtap="recipe_show" class="recipe_show" data-index="{{index}}" data-v="2" wx:if="{{recipe_show[index]==2}}">
+                <text>收起</text>
+                <image src="/image/up.png"></image>
+            </view>
+        </view>
+    </block>
+</view>
+<view class=" btn_do2" style="padding-bottom:{{statusBarHeight>30?'40':'0'}}rpx">
+    <form catchsubmit="formSubmit" reportSubmit="true">
+        <button bindtap="do_backhome" formType="submit" plain="true">
+            <image class="icon_fav" src="../../image/home2.png"></image>
+            <text>回首页</text>
+        </button>
+        <block wx:if="{{haveuid}}">
+            <button bindtap="do_fav" data-type="fav_done" formType="submit" plain="true" wx:if="{{isfav==1}}">
+                <image class="icon_fav" src="../../image/fav2_on.png"></image>
+                <text style="color:#ff6767">收藏</text>
+            </button>
+            <button bindtap="do_fav" data-type="fav_do" formType="submit" plain="true" wx:else>
+                <image class="icon_fav" src="../../image/fav2.png"></image>
+                <text>收藏</text>
+            </button>
+        </block>
+        <button bindgetuserinfo="clickinfo" data-type="fav" openType="getUserInfo" plain="true" wx:else>
+            <image class="icon_fav" src="../../image/fav2.png"></image>
+            <text>收藏</text>
+        </button>
+        <button formType="submit" openType="share" plain="true">
+            <image class="icon_fav" src="../../image/share2.png"></image>
+            <text>分享</text>
+        </button>
+        <button bindtap="fulishe" formType="submit" plain="true">
+            <image class="icon_fav" src="../../image/fulishe2_on.png"></image>
+            <text style="color:#ff6767">福利社</text>
+        </button>
+    </form>
+</view>
+<view>　</view>
+<view>　</view>
+<view>　</view>

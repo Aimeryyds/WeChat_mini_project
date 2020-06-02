@@ -1,0 +1,28 @@
+<view class="view-head">
+    <view class="view-moneyinfo">
+        <text class="text-money-prefix">账户余额</text>
+        <text class="text-money">￥{{moneys}}</text>
+        <text class="text-money" style="margin-bottom:6rpx;margin-left:2rpx;">元</text>
+    </view>
+</view>
+<view class="account-item" wx:for="{{accounts}}">
+    <view class="info-item">
+        <view class="info-left">
+            <view style="position: relative;">
+                <view style="position: absolute;">
+                    <view class="lline"></view>
+                </view>
+                <view class="yuan" style="position:relative;top:90rpx;left:-8rpx" wx:if="{{index==0}}"></view>
+                <view class="yuan1" style="position:relative;top:90rpx;left:-8rpx" wx:else></view>
+            </view>
+        </view>
+        <view class="info-right">
+            <view class="info-first">
+                <text>金额:</text>
+                <text style="color:red">{{item.user_money}}</text>
+            </view>
+            <text>{{item.change_time}}</text>
+            <text>{{item.desc}}</text>
+        </view>
+    </view>
+</view>

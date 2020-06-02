@@ -1,0 +1,32 @@
+<swiper autoplay="true" duration="1000" indicatorDots="true" interval="5000">
+    <swiper-item catchtap="getToPage" data-link="{{item.linkurl==''?'index':item.linkurl}}" wx:for="{{data.advs}}">
+        <image class="swiper-image" src="{{item.thumb}}" style="width:100%;height:100%;"></image>
+    </swiper-item>
+</swiper>
+<view class="func-area" style="background-color:{{data.style.background}}">
+    <view bindtap="toplate" class="menu_view" data-id="{{item.id}}" style="width:25%;" wx:for="{{data.category}}">
+        <image class="orange" mode="aspectFill" src="{{item.thumb}}" style="border-radius:50%;"></image>
+        <text>{{item.name}}</text>
+    </view>
+</view>
+<view class="Section">
+    <view bindtap="plate" class="top">
+        <view>推荐版块</view>
+        <view style="display: flex;flex-direction: row;justify-content: space-between;align-items:center;">
+            <text style="font-size: 28rpx;color: #ccc;line-height:80rpx;margin-right:20rpx">全部     </text>
+            <image src="http://tws.cnweisou.com/images/rightArrow.png" style="width:18rpx;height:26rpx;"></image>
+        </view>
+    </view>
+    <view bindtap="toList" class="item" data-id="{{item.id}}" wx:for="{{data.recommands}}">
+        <view class="left">
+            <image class="img" src="{{item.logo}}"></image>
+            <view style="margin-left: 20rpx;">
+                <view class="line" style="margin-bottom: 20rpx;">{{item.title}}</view>
+                <view class="line">话题数：{{item.postcount}} 关注数：{{item.followcount}}</view>
+            </view>
+        </view>
+        <view class="right" style="display: flex;flex-direction: row;justify-content: space-between;align-items:center;">
+            <image src="http://tws.cnweisou.com/images/rightArrow.png" style="width:18rpx;height:26rpx;"></image>
+        </view>
+    </view>
+</view>

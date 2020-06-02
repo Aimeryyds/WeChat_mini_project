@@ -1,0 +1,19 @@
+<block wx:if="{{form.templet=='0'}}">
+    <import src="tem0.wxml"></import>
+    <template is="form" data="{{form:form}}"></template>
+</block>
+<block wx:if="{{form.templet=='1'}}">
+    <import src="tem1.wxml"></import>
+    <template is="form" data="{{form:form}}"></template>
+</block>
+<button bindtap="submitClick" class="fb-btn" style="background-color:{{tcolor}}">提交</button>
+<view class="copyright {{blist.copyright.copyright==''?'mt0':''}}">
+    <block wx:if="{{blist.copyright.copyright!=''}}">
+        <import src="../public/copy.wxml"></import>
+        <template is="copy" data="{{blist:blist}}"></template>
+    </block>
+</view>
+<block wx:if="{{hide_tabbar=='0'}}">
+    <import src="../public/foot.wxml"></import>
+    <template is="foot" data="{{blist:blist}}"></template>
+</block>

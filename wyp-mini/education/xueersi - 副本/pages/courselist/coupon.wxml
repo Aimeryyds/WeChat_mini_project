@@ -1,0 +1,73 @@
+<loading wx:if="{{loadingStatus}}">加载中</loading>
+<view class="coupon-box">
+    <view bindtap="showModal" class="coupon-add-box clearfix">
+        <span class="left">
+            <image class="icon" src="https://static-xesapi.speiyou.cn/xesFeProject/xesFeSource/xesImagesLibrary/1586430862910.png"></image>
+        </span>
+        <span class="middle">录入优惠券</span>
+        <span class="right">
+            <image class="icon" src="https://static-xesapi.speiyou.cn/xesFeProject/xesFeSource/xesImagesLibrary/1586430899889.png"></image>
+        </span>
+    </view>
+    <view class="{{item.status==true?'coupon-item clearfix':'coupon-item clearfix on'}}" wx:for="{{couponListArr}}" wx:key="item">
+        <view class="circle-box1"></view>
+        <view class="circle-cover1"></view>
+        <view class="circle-box2"></view>
+        <view class="circle-cover2"></view>
+        <view catchtap="handleClickSelect" class="coupon-item-up" data-wpyhandleclickselect-a="{{index}}">
+            <view class="item-left" wx:if="{{item.status==true}}">
+                <image class="icon" src="https://static-xesapi.speiyou.cn/xesFeProject/xesFeSource/xesImagesLibrary/1586430939678.png" wx:if="{{item.select}}"></image>
+                <image class="icon" src="https://static-xesapi.speiyou.cn/xesFeProject/xesFeSource/xesImagesLibrary/1586430968748.png" wx:else></image>
+            </view>
+            <view class="item-left" wx:else>
+                <image class="icon" src="https://static-xesapi.speiyou.cn/xesFeProject/xesFeSource/xesImagesLibrary/1586431065235.png"></image>
+            </view>
+            <view class="item-middle">
+                <view class="up">{{item.name}}</view>
+                <view class="down">{{item.time}}<span class="name">{{item.typeName}}</span>
+                </view>
+            </view>
+            <view class="item-right">
+                <view class="up">
+                    <span class="text1">￥</span>
+                    <span class="text2">{{item.discount}}</span>
+                </view>
+                <view class="down" wx:if="{{item.use_condition_flag==0}}">支持叠加使用</view>
+            </view>
+        </view>
+        <view class="line"></view>
+        <view catchtap="handleClickDetail" class="coupon-item-down" data-wpyhandleclickdetail-a="{{index}}">
+            <view class="title clearfix">
+                <span class="left" wx:if="{{!item.show}}">详细信息</span>
+                <span class="right">
+                    <image class="icon" src="https://static-xesapi.speiyou.cn/xesFeProject/xesFeSource/xesImagesLibrary/1586431097675.png" wx:if="{{!item.show}}"></image>
+                    <image class="icon" src="https://static-xesapi.speiyou.cn/xesFeProject/xesFeSource/xesImagesLibrary/1586431121049.png" wx:else></image>
+                </span>
+            </view>
+            <view class="detail" hidden="{{!item.show}}">{{item.apply_type}}</view>
+        </view>
+    </view>
+    <view class="bottom-box clearfix">
+        <span class="left">已勾选{{selectCount}}张<span wx:if="{{selectMoney!=0}}">,优惠{{selectMoney>=classPrice?classPrice:selectMoney}}元</span>
+        </span>
+        <span catchtap="handleConfirm" class="right">确定</span>
+    </view>
+</view>
+<view>
+    <view animation="{{$couponModal$animationData}}" bindtap="$couponModal$hideModal" class="modal_mask" wx:if="{{$couponModal$visible}}"></view>
+    <view animation="{{$couponModal$animationData}}" class="modal_wrap" wx:if="{{$couponModal$visible}}">
+        <view class="modal_header">{{$couponModal$modalTitle}}</view>
+        <view class="modal_body">
+            <input bindconfirm="$couponModal$submit" bindinput="$couponModal$inputUpdate" class="modal_input" cursorSpacing="100" value="{{$couponModal$inputValue}}"></input>
+            <view class="modal_error_msg" hidden="{{!$couponModal$errorMessage}}">{{$couponModal$errorMessage}}</view>
+        </view>
+        <view class="modal_footer">
+            <button plain bindtap="$couponModal$submit" disabled="{{$couponModal$btnLoading}}" loading="{{$couponModal$btnLoading}}" size="mini">{{$couponModal$btnText}}</button>
+        </view>
+    </view>
+</view>
+<view animation="{{$talToast$animationData}}" class="tal-toast-container" style="top:{{$talToast$vertical}}%;" wx:if="{{$talToast$toastVisible}}">
+    <view class="tal-toast">
+        <text>{{$talToast$toastMessage}}</text>
+    </view>
+</view>

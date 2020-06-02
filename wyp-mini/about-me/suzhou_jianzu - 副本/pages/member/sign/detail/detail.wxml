@@ -1,0 +1,9 @@
+<view class="signCard" wx:for="{{detailList}}">
+    <view class="left">
+        <view class="cardRecord">{{item.log}}</view>
+        <view class="nowTime">
+            <text>已打卡</text>{{item.date}}</view>
+    </view>
+    <view class="right">+{{item.credit}}</view>
+</view>
+<loading wx:if="{{loading}}"></loading>

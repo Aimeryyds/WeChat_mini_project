@@ -1,0 +1,93 @@
+.apply-btn {
+    width: 100%;
+    height: 90rpx;
+    background: #fff;
+    position: fixed;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    text-align: center;
+    line-height: 90rpx;
+    font-size: 30rpx;
+    color: #bb3333;
+    border-top: 1px solid #c5c5c9;
+    z-index: 10;
+    border-radius: 0;
+}
+
+.pcolor {
+    color: #cfcfd3;
+}
+
+.detail_list {
+    width: 100%;
+    padding-bottom: 90rpx;
+}
+
+.form .form__bg {
+    position: fixed;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    background-color: #000;
+    z-index: 1;
+    opacity: .4;
+}
+
+.form .form__view {
+    z-index: 999;
+    position: fixed;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: #fff;
+    transition: all 0.25s;
+}
+
+.form .form__view .form__row {
+    display: flex;
+    align-items: center;
+    height: 96rpx;
+    padding: 0 30rpx;
+    font-size: 30rpx;
+    justify-content: space-between;
+    position: relative;
+}
+
+.form .form__view .form__row::after {
+    content: '';
+    position: absolute;
+    left: 30rpx;
+    bottom: 0;
+    right: 0;
+    height: 1px;
+    background: rgba(239,239,240,1);
+}
+
+.form .form__view .form__row:nth-last-child(2)::after {
+    content: none;
+}
+
+.form .form__view text {
+    display: inline-block;
+    width: 7em;
+    color: #7e7e85;
+}
+
+.form .form__view .form__row input {
+    flex: 1;
+    text-align: right;
+    color: #373745;
+}
+
+.form .form__view .comfirm-btn {
+    height: 90rpx;
+    text-align: center;
+    line-height: 90rpx;
+    font-size: 30rpx;
+    color: #373745;
+    border-top: 1px solid rgba(229,229,220,1);
+}
+
+@import "../../../wxParse/wxParse.wxss";

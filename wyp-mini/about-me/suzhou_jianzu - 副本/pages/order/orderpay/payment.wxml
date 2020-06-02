@@ -1,0 +1,45 @@
+<view style="border-top:1rpx solid #f3f3f3;border-bottom:1rpx solid #f3f3f3;width:100%;font-size: 30rpx;margin-bottom: 40rpx;">
+    <view style="width:94%;margin:0 3%;border-bottom:1rpx solid #f3f3f3;line-height:70rpx;display:flex;flex-direction:row;justify-content: space-between;">
+        <view>订单编号</view>
+        <view>{{order.ordersn}} </view>
+    </view>
+    <view style="width:94%;margin:0 3%;line-height:70rpx;display:flex;flex-direction:row;justify-content: space-between;">
+        <view>订单金额</view>
+        <view>￥ {{order.price}}</view>
+    </view>
+</view>
+<form bindsubmit="toweixin" data-id="{{order.id}}" reportSubmit="true" wx:if="{{order.creditpay=='1'}}">
+    <view bindtap="toweixin" data-id="{{order.id}}" style="{{order.price!=0?'border-top:1rpx solid #f3f3f3;border-bottom:1rpx solid #f3f3f3;width:100%;font-size: 30rpx;':''}}">
+        <view data-id="{{order.id}}" style="width:94%;margin:0 3%;display:flex;flex-direction:row;justify-content: space-between;" wx:if="{{order.price!=0}}">
+            <view style="display: flex;flex-direction: row;">
+                <image class="img" src="https://tws.cnweisou.com/images/weixin.png"></image>
+                <view class="submitMy" style="margin-top: 20rpx;line-height: 50rpx;margin-left: 20rpx;">
+                    <button data-id="{{order.id}}" formType="submit">余额支付</button>
+                    <button data-id="{{order.id}}" formType="submit">使用余额安全支付</button>
+                </view>
+            </view>
+            <view style="display: flex;flex-direction: row;justify-content: center;align-items: center;">
+                <view style="margin-right: 20rpx;">{{order.creditinfo}}</view>
+                <image src="https://tws.cnweisou.com/images/rightArrow.png" style="width: 30rpx;height: 40rpx;"></image>
+            </view>
+        </view>
+        <view style="width:95%;margin:100rpx auto 0;" wx:else>
+            <button data-id="{{order.id}}" formType="submit" style="width:100%;background:#ff4242;color:#fff">会员卡支付</button>
+        </view>
+    </view>
+</form>
+<form bindsubmit="toweixin" data-id="{{order.id}}" reportSubmit="true" wx:else>
+    <view bindtap="toweixin" data-id="{{order.id}}">
+        <view style="width:95%;margin:100rpx auto 0;" wx:if="{{order.price==0}}">
+            <button data-id="{{order.id}}" formType="submit" style="width:100%;background:#ff4242;color:#fff">会员卡支付</button>
+        </view>
+    </view>
+</form>
+<view class="view-orderinfo" wx:if="{{order.price!=0}}">
+    <button bindtap="pay" type="primary" wx:if="{{paydata.weixin_app}}">微信支付</button>
+    <block wx:else>
+        <image class="weixin_app_payimg" src="{{paydata.weixin_app_payimg}}"></image>
+        <text>{{paydata.weixin_app_paycon}}</text>
+    </block>
+</view>
+<loading wx:if="{{loading}}"></loading>

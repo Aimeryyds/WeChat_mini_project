@@ -1,0 +1,25 @@
+<view class="container">
+    <view class="search-wrap " style="margin-bottom:6rpx;">
+        <view class="search-cont" style="margin-right: 10rpx;">
+            <image src="http://imgcdnali.wfenxiao.com.cn/xcx/c/icons/ic_search.png" style="width: 32rpx; height: 32rpx;margin-right:4rpx;"></image>
+            <input bindconfirm="searchCtiy" bindinput="handleChangeValue" confirmType="搜索" placeholder="搜索地址"></input>
+        </view>
+        <view bindtap="searchCtiy" class="search-button">
+            <text>搜索</text>
+        </view>
+    </view>
+    <view class="search-list zan-panel " style="margin-top: 78rpx; background-color: #fff;">
+        <view bindtap="bindaddress" class="zan-cell zan-cell--access search-item" data-item="{{item}}" wx:if="{{addlist.length>0}}" wx:for="{{addlist}}">
+            <view class="zan-cell__bd" style="display:flex; align-items: center ;">
+                <view class="addr-img" style="margin-right: 20rpx;width:30rpx">
+                    <image src="http://imgcdnali.wfenxiao.com.cn/xcx/c/icons/ico-addr.png" style="width:30rpx; height: 30rpx;"></image>
+                </view>
+                <view class="item-content" style="flex:1;">
+                    <view class="item-title" style="font-size:28rpx;">{{item.title}} </view>
+                    <view class="item-address" style="font-size: 24rpx;color: #999;">{{item.address}}</view>
+                </view>
+            </view>
+        </view>
+    </view>
+    <view style="margin-top: 200rpx;font-size: 28rpx;text-align:center;" wx:if="{{addlist&&addlist.length==0}}">暂无地址信息，请确认后重新输入</view>
+</view>

@@ -1,0 +1,31 @@
+<template name="card_detail">
+    <view style="padding: 40rpx">
+        <template is="card" data="{{type:'big',cardName:card.cardName,platformName:card.platformName,cardNo:card.cardNo,termOfValidity:card.termOfValidity,logo:card.logo,status:card.status,cover:card.cover,coverValue:card.coverValue}}"></template>
+    </view>
+    <view class="zan-panel">
+        <view class="zan-cell zan-cell--access card_detail-title">
+            <view class="zan-cell__bd">
+                <view class="menu-name">会员卡详情</view>
+            </view>
+        </view>
+        <view class="zan-cell zan-cell--access score-header_list-title">
+            <view class="zan-cell__bd card_detail-desc">
+                <view class="menu-name card_detail-key">特权说明： </view>
+                <view class="card_detail-value">{{card.privileged}}</view>
+            </view>
+        </view>
+        <view class="zan-cell zan-cell--access score-header_list-title">
+            <view class="zan-cell__bd card_detail-desc">
+                <view class="menu-name card_detail-key">有效日期： </view>
+                <view class="card_detail-value">{{card.termOfValidity==1?'永久有效':card.startTime+'~'+card.endTime}}</view>
+            </view>
+        </view>
+        <view class="zan-cell zan-cell--access score-header_list-title">
+            <view class="zan-cell__bd card_detail-desc">
+                <view class="menu-name card_detail-key">使用须知： </view>
+                <view class="card_detail-value">{{card.instructionsForUse}}</view>
+            </view>
+        </view>
+    </view>
+</template>
+<import src="../card/card.wxml"></import>

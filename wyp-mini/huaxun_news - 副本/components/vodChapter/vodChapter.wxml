@@ -1,0 +1,20 @@
+<view class="chapterMain" style="height: {{lheight}}px;">
+    <view class="hasChapter" wx:if="{{condition}}">
+        <view class="chapterItem">
+            <view class="itemNum tHead">序号</view>
+            <view class="itemTitle tHead">标题</view>
+            <view class="itemTime tHead">时间</view>
+        </view>
+        <view bindtap="goSeek" class="{{item.starttimestamp<currentTime&&item.stoptimestamp>currentTime?'chapterItem choose':'chapterItem'}}" data-start="{{item.starttimestamp}}" data-stop="{{item.stoptimestamp}}" name="{{currentTime}}" wx:for="{{chapterList}}">
+            <view class="itemNum">{{index+1}}</view>
+            <view class="itemTitle">{{item.title}}</view>
+            <view class="itemTime">{{item.timeLong}}</view>
+        </view>
+    </view>
+    <view class="nochat" wx:else>
+        <view class="noChat-img">
+            <image class="noChat-img2" src="../../assets/images/noChapter.png"></image>
+        </view>
+        <text class="noChat-text">无章节</text>
+    </view>
+</view>

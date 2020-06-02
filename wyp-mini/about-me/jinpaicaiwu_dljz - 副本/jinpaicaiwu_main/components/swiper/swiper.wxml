@@ -1,0 +1,5 @@
+<swiper autoplay="{{param.autoplay}}" circular="true" indicatorActiveColor="{{param['indicator-active-color']}}" indicatorColor="{{param['indicator-color']}}" indicatorDots="{{param['indicator-dots']}}" interval="{{param.interval}}">
+    <swiper-item wx:for="{{param.items}}" wx:key="{{index}}">
+        <image bindtap="redirectTo" data-url="{{item.url}}" mode="aspectFit" src="{{item.src}}"></image>
+    </swiper-item>
+</swiper>

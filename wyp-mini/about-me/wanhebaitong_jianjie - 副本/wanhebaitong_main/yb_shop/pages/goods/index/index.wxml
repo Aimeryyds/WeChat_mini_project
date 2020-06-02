@@ -1,0 +1,91 @@
+<template name="tpl_list">
+    <view class="fui-goods-item" wx:for="{{list}}">
+        <navigator hoverClass="none" url="/yb_shop/pages/goods/detail/index?id={{item.goods_id}}">
+            <view class="pic_box">
+                <image class="goods_pic" mode="aspectFill" src="{{item.pic.img_cover}}"></image>
+            </view>
+            <view class="detail">
+                <view class="name">{{item.goods_name}}</view>
+                <view class="goods_desc">{{item.introduction}}</view>
+                <view class="price">
+                    <view class="text">￥{{item.price}}</view>
+                </view>
+            </view>
+        </navigator>
+    </view>
+</template>
+<view class="page header-sort navbar">
+    <view class="fui-header">
+        <view class="searchbar">
+            <icon size="18" type="search"></icon>
+            <input bindconfirm="bindSearch" name="search" placeholder="输入关键字进行搜索" value="{{defaults.keywords}}"></input>
+        </view>
+        <view bindtap="bindback" class="cancel" wx:if="{{fromsearch}}">取消</view>
+    </view>
+    <view class="sort" wx:if="{{!fromsearch}}">
+        <view bindtap="bindSort" class="item {{defaults.order==''||!defaults.order?'on':''}}" data-order="">
+            <view class="text">综合</view>
+        </view>
+        <view bindtap="bindSort" class="item {{defaults.order=='sales'?'on':''}}" data-order="sales">
+            <view class="text">销量</view>
+        </view>
+        <view bindtap="bindSort" class="item item-price {{defaults.order=='price'?'on':''}}" data-order="price">
+            <view class="text">价格
+      <block wx:if="{{defaults.order=='price'}}">
+                    <image class="icon" src="/yb_shop/static/images/icon/listsortasc.png" wx:if="{{defaults.by=='asc'}}"></image>
+                    <image class="icon" src="/yb_shop/static/images/icon/listsortdesc.png" wx:if="{{defaults.by=='desc'}}"></image>
+                </block>
+                <image class="icon" src="/yb_shop/static/images/icon/listsort.png" wx:if="{{defaults.order!='price'}}"></image>
+            </view>
+        </view>
+        <view bindtap="showFilter" class="item {{isfilter?'on':''}}">
+            <view class="text">筛选
+        <image class="icon small" src="/yb_shop/static/images/icon/filter.png"></image>
+            </view>
+        </view>
+    </view>
+    <view class="fui-goods-group {{listmode}}" wx:if="{{!fromsearch&&!isFilterShow}}">
+        <template is="tpl_list" data="{{list:list}}"></template>
+    </view>
+    <view class="fui-loading" wx:if="{{loading}}">
+        <view class="icon"></view>
+        <view class="text">正在加载...</view>
+    </view>
+    <view class="fui-loading empty" wx:if="{{list.length<10&&list.length>0}}">
+        <view class="text">没有更多了</view>
+    </view>
+    <view class="fui-loading empty" wx:if="{{list.length<=0&&!loading&&!fromsearch}}">
+        <view class="text">暂时没有任何商品</view>
+    </view>
+    <view class="screen {{isFilterShow?'in':''}}">
+        <view class="attribute">
+            <view class="item on">
+                <view bindtap="btnFilterBtns" class="btn block {{defaults.isrecommand?'btn-danger-oo':''}}" data-type="isrecommand">推荐商品</view>
+            </view>
+            <view class="item">
+                <view bindtap="btnFilterBtns" class="btn block {{defaults.isnew?'btn-danger-oo':''}}" data-type="isnew">新品上市
+        </view>
+            </view>
+            <view class="item">
+                <view bindtap="btnFilterBtns" class="btn block {{defaults.ishot?'btn-danger-oo':''}}" data-type="ishot">热卖商品</view>
+            </view>
+        </view>
+        <view class="title">选择分类</view>
+        <view class="cate">
+            <view class="item">
+                <view wx:for="{{category}}">
+                    <nav bindtap="bindCategoryEvents" class="{{defaults.cate_id==item.cate_id?'on':''}}" data-id="{{item.cate_id}}">{{item.cate_name}}</nav>
+                </view>
+            </view>
+        </view>
+        <view class="btns">
+            <view bindtap="bindFilterCancel" class="cancel">取消</view>
+            <view bindtap="bindFilterSubmit" class="confirm">确认</view>
+        </view>
+    </view>
+    <block wx:if="{{showtabbar}}">
+        <view style="height:100rpx"></view>
+        <include src="/yb_shop/pages/common/menu.wxml"></include>
+    </block>
+</view>
+<view bindtap="showFilter" class="fui-mask hide"></view>

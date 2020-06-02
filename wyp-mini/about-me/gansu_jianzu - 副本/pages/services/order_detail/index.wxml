@@ -1,0 +1,75 @@
+<view class="container">
+    <view class="order-verification">
+        <text>核销码</text>
+        <view class="order-verification_text">{{order.orderCode}}</view>
+    </view>
+    <view class="order-call_margin">
+        <service_store_address bindhandlephone="call" store="{{order.store}}"></service_store_address>
+    </view>
+    <service_order_project appointmentPeople="{{order.appointmentPeople}}" serviceList="{{order.serviceList}}"></service_order_project>
+    <view class="order__info">
+        <view class="order__item">
+            <view class="item__top" wx:if="{{order.appointmentTime}}">
+                <text class="order__lablel">到店时间:</text>
+                <view class="order__cont">{{order.appointmentTime}}</view>
+            </view>
+            <view class="item__top" wx:if="{{order.appointmentPeople}}">
+                <text class="order__lablel">到店人数:</text>
+                <view class="order__cont">{{order.appointmentPeople}}人</view>
+            </view>
+            <view class="item__top" wx:if="{{order.servicePeople}}">
+                <text class="order__lablel">{{order.servicePeopleTitle}}:</text>
+                <view class="order__cont">{{order.servicePeople}}</view>
+            </view>
+            <view class="item__top" wx:if="{{order.mark}}">
+                <text class="order__lablel">备注:</text>
+                <view class="order__cont">{{order.mark}}</view>
+            </view>
+            <view wx:if="{{order.bookerInfo}}" wx:for="{{order.bookerInfo}}" wx:for-index="InfoIndex" wx:for-item="Info" wx:key="{{index}}">
+                <view class="item__top_info" wx:if="{{Info.value&&Info.value.length}}">
+                    <text class="order__lablel">{{Info.label}}:</text>
+                    <view class="order__cont" wx:if="{{Info.type=='upload'}}" wx:for="{{Info.value}}" wx:for-item="img" wx:key="{{index}}">
+                        <image class="order_imgs" src="{{img}}"></image>
+                    </view>
+                    <view class="order__cont" wx:if="{{Info.type=='radio'||Info.type=='checkbox'}}" wx:for="{{Info.value}}" wx:key="{{index}}">
+                        <text class="order_checkbox">{{item}}</text>
+                    </view>
+                    <view class="order__cont" wx:if="{{Info.type=='text'||Info.type=='textarea'}}">
+                        <text class="order_checkbox">{{Info.value}}</text>
+                    </view>
+                </view>
+            </view>
+            <view class="item__bottom" wx:if="{{order.invalidTime}}">
+                <text class="order__lablel">失效时间: {{order.invalidTime}}</text>
+            </view>
+            <view class="item__total">
+                <text class="item__paytotal">合计:</text>
+                <view class="order__total">￥{{order.price}}</view>
+            </view>
+            <view class="item__bottom">
+                <text class="item__paytotal">已支付: </text>
+                <view class="order__total">
+                    <wxc-label typeColor="#F87E27" wx:if="{{order.prePayMsg}}">{{order.prePayMsg}}</wxc-label>
+                    <text class="order_money">￥{{order.total||0}}</text>
+                </view>
+            </view>
+        </view>
+    </view>
+    <view class="order__info_orderNo">
+        <view class="order__orderNo">
+            <view class="item__orderNo" wx:if="{{order.orderNo}}">
+                <text class="order__lablel">预约单号:</text>
+                <view class="order__cont">{{order.orderNo}}</view>
+            </view>
+            <view class="item__orderNo">
+                <text class="order__lablel">创建时间: {{order.createdTime}}</text>
+            </view>
+            <view class="item__orderNo" wx:if="{{order.cancelTime}}">
+                <text class="order__lablel">取消时间: {{order.cancelTime}}</text>
+            </view>
+        </view>
+    </view>
+    <view wx:if="{{order.actionList&&order.actionList.length>0}}">
+        <order_action actionList="{{order.actionList}}" bindordercanceled="onOrderCanceled" bindorderpaied="onOrderPaid" bindordertailpaied="onOrderTailPaid" orderNo="{{order.orderNo}}" orderType="{{order.orderType}}" orderid="{{order.id}}" showType="detail"></order_action>
+    </view>
+</view>

@@ -1,0 +1,77 @@
+<block wx:if="{{show}}">
+    <view class="page_top">
+        <image src="{{info.logo}}" wx:if="{{info.logo!=null}}"></image>
+        <text class="com_name_cn">{{info.name}}</text>
+        <text class="com_name_en">{{info.english_name}}</text>
+    </view>
+    <view class="en_tit">
+        <text>CONTACT US</text>
+    </view>
+    <view class="contact_box">
+        <view bindtap="calling" class="contact_li" data-phone="{{info.phone}}">
+            <view class="li_left">
+                <image src="/yb_shop/static/images/phone_icon.png"></image>
+            </view>
+            <view class="li_right">
+                <text class="s_tit">手机/微信</text>
+                <text class="b_tit">{{info.phone}}</text>
+            </view>
+            <view class="clear"></view>
+        </view>
+        <view class="contact_li">
+            <view class="li_left">
+                <image src="/yb_shop/static/images/qq_icon.png"></image>
+            </view>
+            <view class="li_right">
+                <text class="s_tit">QQ号码</text>
+                <text class="b_tit">{{info.qq}}</text>
+            </view>
+            <view class="clear"></view>
+        </view>
+        <view bindtap="navigate" class="contact_li">
+            <view class="li_left">
+                <image src="/yb_shop/static/images/nav_icon.png"></image>
+            </view>
+            <view class="li_right">
+                <text class="s_tit">公司地址</text>
+                <text class="b_tit">{{info.address}}</text>
+            </view>
+            <view class="clear"></view>
+        </view>
+    </view>
+    <view class="contact_btn" style="background:{{config.background}};color:{{config.font_color}};border:1px solid {{config.font_color}} ">
+        <view class="btn_box">
+            <contact-button sessionFrom="weapp" size="30" type="default-light"></contact-button>
+            <contact-button sessionFrom="weapp" size="30" type="default-light"></contact-button>
+            <contact-button sessionFrom="weapp" size="30" type="default-light"></contact-button>
+            <contact-button sessionFrom="weapp" size="30" type="default-light"></contact-button>
+            <contact-button sessionFrom="weapp" size="30" type="default-light"></contact-button>
+            <contact-button sessionFrom="weapp" size="30" type="default-light"></contact-button>
+            <contact-button sessionFrom="weapp" size="30" type="default-light"></contact-button>
+            <contact-button sessionFrom="weapp" size="30" type="default-light"></contact-button>
+            <contact-button sessionFrom="weapp" size="30" type="default-light"></contact-button>
+            <contact-button sessionFrom="weapp" size="30" type="default-light"></contact-button>
+            <contact-button sessionFrom="weapp" size="30" type="default-light"></contact-button>
+            <contact-button sessionFrom="weapp" size="30" type="default-light"></contact-button>
+            <contact-button sessionFrom="weapp" size="30" type="default-light"></contact-button>
+            <contact-button sessionFrom="weapp" size="30" type="default-light"></contact-button>
+            <contact-button sessionFrom="weapp" size="30" type="default-light"></contact-button>
+            <contact-button sessionFrom="weapp" size="30" type="default-light"></contact-button>
+            <contact-button sessionFrom="weapp" size="30" type="default-light"></contact-button>
+            <contact-button sessionFrom="weapp" size="30" type="default-light"></contact-button>
+            <contact-button sessionFrom="weapp" size="30" type="default-light"></contact-button>
+            <contact-button sessionFrom="weapp" size="30" type="default-light"></contact-button>
+            <contact-button sessionFrom="weapp" size="30" type="default-light"></contact-button>
+            <contact-button sessionFrom="weapp" size="30" type="default-light"></contact-button>
+            <contact-button sessionFrom="weapp" size="30" type="default-light"></contact-button>
+            <contact-button sessionFrom="weapp" size="30" type="default-light"></contact-button>
+            <contact-button sessionFrom="weapp" size="30" type="default-light"></contact-button>
+            <contact-button sessionFrom="weapp" size="30" type="default-light"></contact-button>
+            <contact-button sessionFrom="weapp" size="30" type="default-light"></contact-button>
+            <contact-button sessionFrom="weapp" size="30" type="default-light"></contact-button>
+        </view>立即咨询客服</view>
+    <block wx:if="{{showtabbar}}">
+        <view style="height:100rpx"></view>
+        <include src="/yb_shop/pages/common/menu.wxml"></include>
+    </block>
+</block>

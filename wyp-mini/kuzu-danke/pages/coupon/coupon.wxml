@@ -1,0 +1,66 @@
+<view class="page data-v-57b1dd72">
+    <web-view class="data-v-57b1dd72" src="https://www.danke.com/u/coupon/tip" wx:if="{{onoff}}"></web-view>
+    <view class="swiper-tab data-v-57b1dd72">
+        <view class="{{['swiper-tab-list data-v-57b1dd72',tab.isSelected?'on':'']}}" wx:for="{{tabDatas}}" wx:for-item="tab" wx:key="index">
+            <view bindtap="__e" class="borderLine data-v-57b1dd72" data-current="{{index}}" data-event-opts="{{[ [ 'tap',[ [ 'swichNav',['$event'] ] ] ] ]}}">{{tab.name}}</view>
+            <view class="{{['data-v-57b1dd72',tab.isSelected?'active':'']}}"></view>
+        </view>
+    </view>
+    <view class="noUse data-v-57b1dd72">
+        <view class="top_part data-v-57b1dd72" wx:if="{{type==='UNUSE'}}">
+            <view class="addCoupon data-v-57b1dd72">
+                <input bindinput="__e" class="inputstyle data-v-57b1dd72" data-event-opts="{{[ [ 'input',[ [ 'coupon',['$event'] ] ] ] ]}}" id="phoneNum" maxlength="20" placeholder="请输入优惠券码" type="text"></input>
+                <view catchtap="__e" class="{{['exchange data-v-57b1dd72',isInputed]}}" data-event-opts="{{[ [ 'tap',[ [ 'exchange',['$event'] ] ] ] ]}}">确认</view>
+            </view>
+            <view bindtap="__e" class="explain data-v-57b1dd72" data-event-opts="{{[ [ 'tap',[ [ 'explain',['$event'] ] ] ] ]}}">
+                <image class="data-v-57b1dd72" src="https://public.danke.com.cn/public-20190719-FqXcd-lz8DnFnFTM8fm6yP8IfMoC"></image>
+                <view class="data-v-57b1dd72">使用说明</view>
+            </view>
+        </view>
+        <view class="coupon_part data-v-57b1dd72">
+            <view class="noCoupon data-v-57b1dd72" wx:if="{{noCoupon}}">
+                <image class="data-v-57b1dd72" src="https://public.danke.com.cn/public-20190719-FhbOj5Ygg67PSRwy5vRMjICh1TkE"></image>
+                <view class="data-v-57b1dd72">您还没有优惠券</view>
+            </view>
+            <view class="noCoupon data-v-57b1dd72" wx:if="{{isServerError}}">
+                <image class="data-v-57b1dd72" src="https://public.danke.com.cn/public-20190719-FhbOj5Ygg67PSRwy5vRMjICh1TkE"></image>
+                <view class="data-v-57b1dd72">对不起，服务器跑丢了！</view>
+            </view>
+            <view class="{{['djq data-v-57b1dd72',computedBorder]}}" wx:for="{{all_list}}" wx:key="index">
+                <view class="coupon-top data-v-57b1dd72">
+                    <image class="pic expired-img data-v-57b1dd72" mode="widthFix" src="https://public.danke.com.cn/public-20191129-FknAbU0Tz6NXfJr884iqrklAjPqL" wx:if="{{item.useStatus==='EXPIRED'}}"></image>
+                    <image class="pic used-img data-v-57b1dd72" mode="widthFix" src="https://public.danke.com.cn/public-20191129-Fnqr9oTMHSk5rsLDZlhvnlAOO7_d" wx:if="{{item.useStatus==='USED'}}"></image>
+                    <view class="{{['coupon-name data-v-57b1dd72',computedClass]}}">
+                        <text class="{{['data-v-57b1dd72',computedClass]}}" wx:if="{{item.amountType=='VOUCHER'||item.amountType=='MONEY'}}">￥</text>
+                        <text class="{{['coupon-amount data-v-57b1dd72',computedClass]}}">{{item.amount}}</text>{{''+item.name+''}}</view>
+                    <view class="{{['one-text data-v-57b1dd72',computedClass]}}">{{item.summary}}</view>
+                    <view class="{{['scope data-v-57b1dd72',computedClass]}}">
+                        <block wx:if="{{item.labels.length>0}}">
+                            <view class="{{['scope-tit data-v-57b1dd72',computedClass]}}">适用范围：</view>
+                            <view class="scope-con data-v-57b1dd72">
+                                <view class="{{['data-v-57b1dd72',computedClass]}}" wx:for="{{item.labels}}" wx:for-index="idx" wx:for-item="label" wx:key="idx">{{label}}</view>
+                            </view>
+                        </block>
+                    </view>
+                </view>
+                <view class="coupon-middle data-v-57b1dd72">
+                    <view class="m-left data-v-57b1dd72"></view>
+                    <view class="m-line data-v-57b1dd72"></view>
+                    <view class="m-right data-v-57b1dd72"></view>
+                </view>
+                <view class="coupon-bottom data-v-57b1dd72">
+                    <view class="c-b-top data-v-57b1dd72">
+                        <view class="{{['end-date data-v-57b1dd72',computedClass]}}">{{'到期日：'+item.useEnd}}</view>
+                        <view bindtap="__e" class="{{['rule-part data-v-57b1dd72',computedClass]}}" data-event-opts="{{[ [ 'tap',[ [ 'checkRules',['$0'],[ [ ['all_list','',index,'id'] ] ] ] ] ] ]}}">
+                            <text class="{{['data-v-57b1dd72',computedClass]}}">使用规则</text>
+                            <text class="{{['arr data-v-57b1dd72',item.expend?'up-arr':'down-arr']}}"></text>
+                        </view>
+                    </view>
+                    <view class="rule-content data-v-57b1dd72" wx:if="{{item.expend}}">
+                        <view class="{{['rule-list data-v-57b1dd72',computedClass]}}">{{item.descr}}</view>
+                    </view>
+                </view>
+            </view>
+        </view>
+    </view>
+</view>

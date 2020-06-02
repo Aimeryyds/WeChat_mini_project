@@ -1,0 +1,24 @@
+<view bindtap="joinUserInfo" class="concent" data-index="{{index}}" wx:if="{{!isMylist}}" wx:for="{{concentList}}" wx:for-item="concentLists">
+    <view class="concentLeft">
+        <view class="day">{{concentLists.date.d}}</view>
+        <view class="month">{{concentLists.date.m}}月</view>
+        <text class="year">{{concentLists.date.y}}年</text>
+        <text class="type">{{concentLists.type}}</text>
+    </view>
+    <view class="concentRight">
+        <view bindtap="joinDetail" class="title">{{concentLists.title}}</view>
+        <view class="introduce" wx:if="{{concentLists.note}}">{{concentLists.note}}</view>
+        <scroll-view class="couponNum" scrollX="true">
+            <image class="channelImage" src="{{item.url}}" style="width: {{imageWidth}}px; height: {{imageWidth}}px" wx:for="{{concentLists.banner_imgs}}"></image>
+        </scroll-view>
+        <view class="person">
+            <view class="personImages"></view>
+            <view class="personNum">
+                <text>阅读</text>{{concentLists.views}}</view>
+        </view>
+    </view>
+</view>
+<view class="noActivity" wx:if="{{isMylist}}">
+没有发起活动，点击<text bindtap="joinCreatActivity">确定</text>，即可创建自己的专属活动喔
+<text bindtap="joinCreatActivity" class="creatActi">确定</text>
+</view>

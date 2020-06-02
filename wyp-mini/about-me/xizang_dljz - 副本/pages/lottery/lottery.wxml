@@ -1,0 +1,74 @@
+<view class="shared-box" wx:if="{{share_pop}}">
+    <image class="shared-tip" mode="aspectFit" src="../../image/shared-tip.png"></image>
+    <text class="center">邀请好友获得再抽一次的机会</text>
+    <text>1.点击右上角的按钮 ...</text>
+    <text>2.点击菜单分享给好友</text>
+    <image class="indicator-image" src="../../image/indicator.jpg"></image>
+    <image bindtap="closeSharePop" class="btn-close" src="../../image/close_white.png"></image>
+</view>
+<view wx:if="{{award_open}}">
+    <view bindtap="cancelPurchase" class="bg" disableScroll="true"></view>
+    <view class="wallet-open">
+        <image bindtap="closeAward" class="close" mode="aspectFit" src="../../images/lottery/btn_close.png"></image>
+        <image mode="aspectFit" src="../../images/lottery/bg_red pocket.png"></image>
+        <text class="title">恭喜获得{{prize_attrs[award.awardType]}}</text>
+        <block wx:if="{{award.awardType==1}}">
+            <text class="price-wrap">¥ <text class="price">{{award.awardAmount}}</text>
+            </text>
+            <view class="remark">
+                <text class="condition" wx:if="{{award.limitAmount&&award.limitAmount>0}}">(满{{award.limitAmount}}元可用)</text>
+                <text class="date">有效期至: {{award.overTime}}</text>
+            </view>
+            <view class="coupon-bottom">
+                <navigator class="button" openType="reLaunch" url="../index/index">去逛逛</navigator>
+            </view>
+        </block>
+        <block wx:elif="{{award.awardType==2}}">
+            <text class="price-wrap">¥ <text class="price">{{award.awardAmount}}</text>
+            </text>
+            <view class="redpack-bottom">
+                <text>稍后现金红包会自动存入您的微信零钱账户, 请注意查收</text>
+            </view>
+        </block>
+        <block wx:elif="award.awardType==3">
+            <text class="price-wrap">{{award.ext}}</text>
+            <image class="prize-image" mode="aspectFit" src="{{award.awardPic}}"></image>
+            <navigator class="coupon-bottom" url="../lotterysettle/lotterysettle?lotteryId={{award.id}}" wx:if="{{award.awardType==3}}">
+                <view class="button">马上去领取</view>
+            </navigator>
+        </block>
+    </view>
+</view>
+<view class="container">
+    <image class="content-bg" mode="widthFix" src="../../images/lottery/bg.png"></image>
+    <view class="content-wrap">
+        <image class="header-logo" src="../../images/lottery/img_header.png"></image>
+        <view class="lottery-box">
+            <block wx:for="{{prizes}}">
+                <view bindtap="draw" class="lottery-btn" wx:if="{{index==4}}">
+                    <text>立即抽奖</text>
+                    <text>剩: {{leftDrawNum}}次</text>
+                </view>
+                <view class="{{index==cur?'cur':''}}" wx:else>
+                    <image mode="aspectFit" src="{{item.pic}}" wx:if="{{item!=null}}"></image>
+                    <text wx:else>再接再厉</text>
+                </view>
+            </block>
+        </view>
+        <view class="footer">
+            <view class="footer-top">
+                <view bindtap="go2LotteryRule" class="btn">规则说明</view>
+                <navigator class="btn" url="../mineaward/mineaward?actId={{activity.id}}">我的奖品</navigator>
+            </view>
+            <button class="share-btn btn" openType="share">分享页面再抽一次</button>
+            <view class="info-box">已有{{activity.totalJoinNum+activity.joinNum}}人参与活动</view>
+            <view class="info-box record-box">
+                <text wx:if="{{award_list.length==0}}">暂无中奖记录</text>
+                <view style="top: {{top}}px;">
+                    <text wx:for="{{award_list}}">恭喜{{item.username}}抽中了{{prize_attrs[item.awardType]}}</text>
+                    <text wx:for="{{award_list}}">恭喜{{item.username}}抽中了{{prize_attrs[item.awardType]}}</text>
+                </view>
+            </view>
+        </view>
+    </view>
+</view>

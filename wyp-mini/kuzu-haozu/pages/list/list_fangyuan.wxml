@@ -1,0 +1,99 @@
+<view class="filterWrap">
+    <view bindtap="selectedFun" class="{{params.area_show?'':'default'}} tab-item" data-val="0">{{params.area_show?params.area_show:'面积'}}</view>
+    <view bindtap="selectedFun" class="{{comm.html_decode(params.avg_show)||params.price_show?'':'default'}} tab-item" data-val="1">{{tabArr.curEdIndex==0?comm.html_decode(params.avg_show)?comm.html_decode(params.avg_show):'价格':params.price_show?params.price_show:'价格'}}</view>
+</view>
+<view bindtap="closeFun" class="ul01 filterMask {{selected==0?'show':'hidden'}}">
+    <view catchtap="emptyFun" class="filterCon">
+        <view bindtap="tabFun" class=" listMeasure" data-key="curIndexA">
+            <view bindtap="goTap" class="{{tabArr.curIndexA==item.val?'active':''}}" data-area="{{item.val}}" data-id="{{item.val}}" wx:for="{{ul_areas}}" wx:key="id">{{item.show}}</view>
+        </view>
+    </view>
+</view>
+<view bindtap="closeFun" class="ul02 filterMask {{selected==1?'show':'hidden'}}">
+    <view catchtap="emptyFun" class="filterCon">
+        <view class="filterPriceList">
+            <view class="leftPosition">
+                <view class="filterLeft">
+                    <view bindtap="tabFun" class="priceTab" data-key="curEdIndex">
+                        <view class="{{tabArr.curEdIndex==0?'active':''}}" data-id="0" hoverClass="none">按单价</view>
+                        <view class="{{tabArr.curEdIndex==1?'active':''}}" data-id="1" hoverClass="none">按总价</view>
+                    </view>
+                </view>
+            </view>
+            <view class="{{tabArr.curEdIndex==2?'hide':'show'}}">
+                <view class="priceRightbox" wx:if="{{tabArr.curEdIndex==0}}">
+                    <view class=" rightPosition">
+                        <view bindtap="tabFun" class="filterRight" data-key="curAIndex">
+                            <view bindtap="goTap" class="{{tabArr.curAIndex==item.val?'active':''}}" data-avg_price="{{item.val}}" data-id="{{item.val}}" wx:for="{{avg_price}}" wx:key="val">{{comm.html_decode(item.show)}}</view>
+                        </view>
+                    </view>
+                </view>
+                <view class="priceRightbox" wx:if="{{tabArr.curEdIndex==1}}">
+                    <view class="rightPosition">
+                        <view bindtap="tabFun" class="filterRight" data-key="curPIndex">
+                            <view bindtap="goTap" class="{{tabArr.curPIndex==item.val?'active':''}}" data-id="{{item.val}}" data-price="{{item.val}}" wx:for="{{price}}" wx:key="val">{{item.show}}</view>
+                        </view>
+                    </view>
+                </view>
+            </view>
+        </view>
+    </view>
+</view>
+<scroll-view bindscroll="scrollTopFun" bindscrolltolower="upper" class="scroll_container" id="cont_scroll" scrollTop="{{scrollTop.scroll_top}}" scrollY="true" style="height:{{windowHeight}}px;">
+    <view class="leaseListWrap">
+        <text class="topCore">{{building.name}}所有写字楼出租房源</text>
+    </view>
+    <view class="nohouse" wx:if="{{nohouse}}">
+        <image src="../../images/no_data.png"></image>
+        <view class="v1">Sorry，暂无满足您筛选条件的房源</view>
+        <view class="v2">联系顾问：<text>{{msg_template}}</text>
+        </view>
+    </view>
+    <view bindtouchmove="move" class="listBuildingShow" wx:if="{{!nohouse}}">
+        <navigator class="listbox" data-id="{{item.id}}" url="../house/house?house_id={{item.id}}" wx:if="{{!nohouse}}" wx:for="{{building_items}}" wx:key="id">
+            <view class="listProLeft">
+                <image src="{{item.thumb_image}}"></image>
+            </view>
+            <view class="listProRight">
+                <view class="listProRight_top">
+                    <label>
+                        <text>{{item.area}}</text>㎡</label>
+                    <label>
+                        <text>{{item.rent_price}}</text>{{comm.html_decode(item.price_unit)}}</label>
+                    <label>
+                        <text>{{item.gongwei_number_min}}~{{item.gongwei_number_max}}</text>个工位</label>
+                </view>
+                <view class="listProRight_about">
+                    <text>总价:{{item.total_price}}{{comm.html_decode(item.total_price_unit)}}</text>
+                    <text>{{item.zhuangxiu}}</text>
+                </view>
+            </view>
+        </navigator>
+        <view class="nohouse" wx:if="{{nohouse}}">
+            <image src="../../images/no_data.png"></image>
+            <view class="v1">Sorry，暂无满足您筛选条件的房源</view>
+            <view class="v2">联系顾问：<text>{{msg_template}}</text>
+            </view>
+        </view>
+    </view>
+</scroll-view>
+<view class="botFixed">
+    <view catchtap="showFn" class="botTel">
+        <text>免费咨询</text>
+        <icon class="iconTelphone">
+            <image backgroundSize="cover" src="../../images/Telphone_icon.png"></image>
+        </icon>
+    </view>
+    <view bindtap="onClickButton" class="btSort" data-index="0">
+        <image backgroundSize="cover" src="../../images/btSort_icon.png"></image>
+    </view>
+    <view catchtap="goTopFun" class="btToTop">
+        <image backgroundSize="cover" src="../../images/backtop_icon.png"></image>
+    </view>
+</view>
+<view bindtap="closeFun" class="orderWrap {{showDialog?'dialog_show':''}}">
+    <view catchtap="emptyFun" class="orderList">
+        <view bindtap="goTap" class=" {{ordertype===item.val?'cur':''}}" data-listorder="{{item.val}}" hoverClass="none" wx:if="{{item.val!==3}}" wx:for="{{listorder}}" wx:key="val">{{item.show}}</view>
+    </view>
+</view>
+<wxs module="comm" src="../../utils/common.wxs" />

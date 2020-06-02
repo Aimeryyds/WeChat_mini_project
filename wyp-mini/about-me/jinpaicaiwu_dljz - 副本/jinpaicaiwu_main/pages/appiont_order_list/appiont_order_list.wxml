@@ -1,0 +1,66 @@
+<import src="../../common/package/prompt.wxml"></import>
+<view class="main">
+    <view class="swiper-tab  my-list-nav">
+        <view bindtap="clickTab" class="swiper-tab-item {{currentTab=='0'?'active':''}}" data-current="0">全部</view>
+        <view bindtap="clickTab" class="swiper-tab-item {{currentTab=='1'?'active':''}}" data-current="1">待付款</view>
+        <view bindtap="clickTab" class="swiper-tab-item {{currentTab=='2'?'active':''}}" data-current="2">待服务</view>
+        <view bindtap="clickTab" class="swiper-tab-item {{currentTab=='3'?'active':''}}" data-current="3">已拒单</view>
+        <view bindtap="clickTab" class="swiper-tab-item {{currentTab=='4'?'active':''}}" data-current="4">待评价</view>
+    </view>
+    <swiper bindchange="swiperTab" current="{{currentTab}}" duration="300" style="height:{{second_height-50}}px;width:710rpx;margin:0 auto">
+        <swiper-item data-index="{{oindex}}" wx:for="{{orders}}" wx:for-index="oindex" wx:for-item="itemOrder" wx:key="{{oindex}}">
+            <scroll-view scrollY="true" style="height:{{second_height-50}}px">
+                <view class="repeat">
+                    <view class="diandan_item" wx:for="{{itemOrder}}" wx:key="{{index}}">
+                        <view class="diandan_item_t">
+                            <view class="flex">
+                                <text>订单编号：{{item.out_trade_no}}</text>
+                                <text class="col cart_color" wx:if="{{item.status_str}}">{{item.status_str}}</text>
+                                <text class="col cart_color" wx:else>已完成</text>
+                            </view>
+                        </view>
+                        <view bindtap="goPage" class="diandan_item_c flex" data-arg="{{item.id}}" data-page="appiont_order_detail" data-param="oid">
+                            <view class="diandan_item_c_l">
+                                <image mode="aspectFit" src="{{item.thumbnail}}"></image>
+                            </view>
+                            <view class="diandan_item_c_r">
+                                <text>{{item.title}}</text>
+                                <text>预约时间：{{item.service_time}}</text>
+                                <view class="fle">
+                                    <text class="col">￥{{item.total_price}}</text>
+                                </view>
+                            </view>
+                        </view>
+                        <view class="diandan_item_b" wx:if="{{item.status_no==1||item.status_no==2}}">
+                            <text bindtap="cancelOrders" class="btn1" data-oid="{{item.id}}">取消订单</text>
+                            <text bindtap="payOrders" class="col1 btn2 cart_bg_color" data-index="{{index}}" data-oid="{{item.id}}" wx:if="{{item.status_no=='1'}}">付款</text>
+                        </view>
+                        <view class="diandan_item_b" wx:elif="{{item.status_no==4}}">
+                            <text bindtap="deleteOrderList" class="btn1" data-index="{{index}}" data-oid="{{item.id}}">删除订单</text>
+                        </view>
+                        <view class="diandan_item_b" wx:elif="{{item.status_no==7}}">
+                            <text bindtap="confirmOrders" class="col1 btn2 cart_bg_color" data-index="{{index}}" data-oid="{{item.id}}">确认完成</text>
+                        </view>
+                        <view class="diandan_item_b" wx:elif="{{item.status_no=='3'||item.status_no=='8'}}">
+                            <text bindtap="goPage" class="col1 btn2 cart_bg_color" data-id="{{item.aid}}" data-img="{{item.thumbnail}}" data-oid="{{item.id}}" data-page="appoint_ratings">评价</text>
+                        </view>
+                    </view>
+                </view>
+            </scroll-view>
+        </swiper-item>
+    </swiper>
+    <view class="no_more">
+        <text>没有更多订单了</text>
+    </view>
+    <block wx:if="{{showBar}}">
+        <view style="height:110rpx;"></view>
+        <view class="tabBar" style="color:{{tabs.color}};border-color:{{tabs.borderStyle}};background-color:{{tabs.backgroundColor}};border-top-color:{{tabs.borderTopColor}};">
+            <view class="barList" style="color:{{pageid==item.pagePath?tabs.selectedColor:tabs.color}}" wx:for="{{tabs.list}}" wx:key="{{index}}">
+                <view bindtap="switchTab" class="barList-content" data-tab="{{item}}" data-url="{{item.pagePath}}">
+                    <image class="icon" src="{{pageid==item.pagePath?item.selectedIconPath:item.iconPath}}"></image>
+                    <view>{{item.text}}</view>
+                </view>
+            </view>
+        </view>
+    </block>
+</view>

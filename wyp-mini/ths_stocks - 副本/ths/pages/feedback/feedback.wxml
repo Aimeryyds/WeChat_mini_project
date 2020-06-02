@@ -1,0 +1,6 @@
+<view>
+    <view class="textContent">
+        <textarea autoHeight="true" bindinput="__e" data-event-opts="{{[ [ 'input',[ [ '__set_model',[ '','content','$event',[] ] ],[ 'inputHandler',['$event'] ] ] ] ]}}" maxlength="140" value="{{content}}"></textarea>
+    </view>
+    <view bindtap="__e" class="{{['btn',inputComplete?'active':'']}}" data-event-opts="{{[ [ 'tap',[ [ 'submit',['$event'] ] ] ] ]}}">提交</view>
+</view>

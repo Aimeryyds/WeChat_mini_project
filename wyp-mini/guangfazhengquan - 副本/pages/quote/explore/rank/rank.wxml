@@ -1,0 +1,36 @@
+<include src="../../../../components/circus/network/network.wxml"></include>
+<view class="v v-quote-explore-rank">
+    <view class="v v-quote-stocks">
+        <view class="head">
+            <view class="cell stock-name">名称</view>
+            <view class="cell stock-now">当前价</view>
+            <view class="cell stock-rise" wx:if="{{options.sort==10}}">换手率</view>
+            <view class="cell stock-rise" wx:else>涨跌幅</view>
+        </view>
+        <view class="body c-line-top">
+            <view bindtap="goStock" class="row c-line-bottom" data-code="{{item.code}}" data-market="{{item.market}}" data-name="{{item.name}}" wx:for="{{stocks}}" wx:key="id">
+                <view class="cell stock-name-code">
+                    <view class="stock-name">{{item.name}}</view>
+                    <view class="stock-code">{{item.code}}</view>
+                </view>
+                <view class="cell stock-now" style="color: {{item.now.color}}">{{item.now.text}}</view>
+                <view class="cell stock-rise" style="color: {{item.sort.color}}">{{item.sort.text}}</view>
+            </view>
+            <view class="v-paging">
+                <view class="loading" wx:if="{{loadings.stocks.status=='loading'}}">
+                    <view class="icon-loading"></view>
+                    <view class="text">加载中</view>
+                </view>
+                <view bindtap="moreRanks" class="more" wx:if="{{loadings.stocks.status=='more'}}">
+          点击加载更多
+        </view>
+                <view class="done" wx:if="{{loadings.stocks.status=='done'}}">
+          没有更多了
+        </view>
+                <view bindtap="reloadRanks" class="fail" wx:if="{{loadings.stocks.status=='fail'}}">
+          出错啦，点击重试
+        </view>
+            </view>
+        </view>
+    </view>
+</view>

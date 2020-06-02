@@ -1,0 +1,12 @@
+<view class="list-view">
+    <slot></slot>
+    <view class="list-view__desc" wx:if="{{loading}}">
+        <load-more type="loading"></load-more>
+    </view>
+    <view class="list-view__desc" wx:if="{{noMore}}">
+        <load-more text="无更多数据" type="text"></load-more>
+    </view>
+    <view class="list-view__desc" wx:if="{{!hasChildren&&!loading}}">
+        <load-more text="暂无数据" type="text"></load-more>
+    </view>
+</view>

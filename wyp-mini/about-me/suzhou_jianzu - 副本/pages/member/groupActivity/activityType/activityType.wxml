@@ -1,0 +1,13 @@
+<view class="top"></view>
+<view class="type" data-id="{{item.id}}" wx:for="{{typeTitle}}">
+    <view class="typeTitle">
+{{item.desc}}
+</view>
+    <view class="typeCont">
+        <text catchtap="detailType" data-desc="{{item.desc}}" data-index="{{index}}" wx:for="{{item.child}}">{{item.desc}}</text>
+    </view>
+</view>
+<view class="typeBottom">
+    <p class="top">没找到适合的分类？</p>
+    <p bindtap="addTypeCont" class="bottom">点此添加</p>
+</view>

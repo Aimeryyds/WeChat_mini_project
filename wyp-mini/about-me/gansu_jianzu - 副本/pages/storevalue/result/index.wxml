@@ -1,0 +1,20 @@
+<import src="/dist/toptips/index.wxml"></import>
+<template is="zan-toptips" data="{{zanTopTips:zanTopTips}}"></template>
+<view class="page" wx:if="{{isShow}}">
+    <view class="zan-msg">
+        <view class="zan-msg__icon-area">
+            <icon size="56" type="success" wx:if="{{result==1}}"></icon>
+            <icon size="56" type="warn" wx:else></icon>
+            <view style="margin:10rpx; font-size:34rpx;">{{result==1?'支付成功':'支付失败'}}</view>
+            <view style="font-size:24rpx;" wx:if="{{result==1}}">成功入账{{data.accountAmount}}元</view>
+        </view>
+        <view class="zan-msg__text-area" wx:if="{{result==1}}">
+            <view class="zan-msg__desc">优惠券<text style="margin-right:20rpx" wx:for="{{data.couponList}}" wx:key="index">"{{item.name}}"</text>，会员卡"{{data.cardName}}"，{{data.integral}}积分已放到账户，请到"我的"菜单查看</view>
+        </view>
+        <view class="zan-msg__opr-area">
+            <view class="zan-btn-area">
+                <navigator class="goback_btn" hoverClass="none" openType="switchTab" url="/tabs/home/index">返回</navigator>
+            </view>
+        </view>
+    </view>
+</view>

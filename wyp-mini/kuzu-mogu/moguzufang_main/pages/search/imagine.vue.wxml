@@ -1,0 +1,24 @@
+<template name="5f906bd3">
+    <view class="_view data-v-24d891f5 dl">
+        <block wx:for="{{result}}" wx:for-index="key" wx:for-item="group">
+            <view class="_view data-v-24d891f5 dt" key="{{'dt'+key}}">{{group[0]['typeName']}}</view>
+            <block wx:for="{{group}}" wx:for-index="idx">
+                <view class="_view data-v-24d891f5 dd brand" key="{{item.type+idx}}" wx:if="{{item.type=='preferredBrand'}}">
+                    <view bindtap="handleProxy" class="_view data-v-24d891f5 a" data-comkey="{{$k}}" data-eventid="{{'5f906bd3-0-'+key+'-'+idx}}">
+                        <image class="_image data-v-24d891f5" src="{{item.logoImage}}"></image>
+                        <view class="_view data-v-24d891f5 p">
+                            <view class="_view data-v-24d891f5 var">{{item.roomCount}}套</view>
+                            <view class="_view data-v-24d891f5 span result-name">{{item.name}}</view>
+                        </view>
+                    </view>
+                </view>
+                <view class="_view data-v-24d891f5 dd unbrand" key="{{item.type+idx}}" wx:else>
+                    <view bindtap="handleProxy" class="_view data-v-24d891f5 a" data-comkey="{{$k}}" data-eventid="{{'5f906bd3-1-'+key+'-'+idx}}">
+                        <view class="_view data-v-24d891f5 var">{{item.roomCount}}套</view>
+                        <view class="_view data-v-24d891f5 span result-name">{{item.name}}</view>
+                    </view>
+                </view>
+            </block>
+        </block>
+    </view>
+</template>

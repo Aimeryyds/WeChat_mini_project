@@ -1,0 +1,26 @@
+<template name="video-model">
+    <view class="video-item {{clickedList[item.newsId]==item.newsId?'clicked':''}} {{item.vid==0?'':'displayNone'}}" wx:if="{{item.vid==0}}" wx:for="{{videosList}}" wx:key="index">
+        <form bindsubmit="onSubmit" catchtap="gotoVideo" class="news-video" data-index="{{index}}" data-link="{{item.link}}" data-newsid="{{item.newsId}}" data-newstype="{{item.newsType}}" data-recominfo="{{item.recominfo}}" data-templatetype="{{item.templateType}}" data-vid="{{item.vid}}" reportSubmit="true">
+            <button formType="submit">
+                <view class="tv-pic" wx:if="{{item.tvPic}}">
+                    <image class="cover" src="../../images/icon-play-gray.png"></image>
+                    <image class="content" data-index="{{index}}" lazyLoad="true" mode="aspectFill" src="{{item.tvPic}}" style="background-color:#f2f2f2;"></image>
+                    <view class="duration">{{item.playTime}}</view>
+                </view>
+                <view class="title">{{item.title}}</view>
+            </button>
+        </form>
+        <view class="source">
+            <view class="media">{{item.userInfo.name}}</view>
+            <view class="times">
+                <image src="../../images/icon-played.png"></image>
+          {{item.playNum}}
+        </view>
+            <view class="share">
+                <button appParameter="wechat" binderror="launchAppError" bindtap="onShareFriendClick" class="share-button" data-newsid="{{newsdata.newsId}}" openType="share">
+                    <image src="../../images/wxshare-grey.png"></image>
+                </button>
+            </view>
+        </view>
+    </view>
+</template>

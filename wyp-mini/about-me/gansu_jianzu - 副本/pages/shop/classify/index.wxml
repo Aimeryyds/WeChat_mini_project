@@ -1,0 +1,13 @@
+<view class="container">
+    <view calss="classify-brand__first" wx:for="{{categoryList}}" wx:for-item="first" wx:key="index">
+        <view bindtap="handleCheckClassify" class="zan-panel zan-cell zan-cell--access no-bottom-border" data-data="{{first}}" style="margin-top: 0;padding-left: 28rpx;border-bottom: 0; border-left: {{categoryId==first.id?'6rpx solid #F22222':''}};">
+            <view class="zan-cell__bd" style="font-size: 28rpx;color: {{categoryId==first.id?'#f22222':''}}">{{first.name}}</view>
+            <view class="zan-cell__ft"></view>
+        </view>
+        <view class="classify-second__list">
+            <view bindtap="handleCheckClassify" class="big-classify-second__item" data-data="{{second}}" wx:for="{{first.categoryList}}" wx:for-item="second" wx:key="index">
+                <view class="classify-second__item-name" style="border-bottom:{{categoryId==second.id?'6rpx solid #F22222':''}};">{{second.name}}</view>
+            </view>
+        </view>
+    </view>
+</view>

@@ -1,0 +1,18 @@
+<template name="2c51f5e4">
+    <view class="_div data-v-055477ef bundle">
+        <view bindtap="handleProxy" class="_div data-v-055477ef header" data-comkey="{{$k}}" data-eventid="{{'0'}}">
+            <view class="_div data-v-055477ef title">- {{group_title}} -</view>
+            <view class="_div data-v-055477ef next"></view>
+        </view>
+        <view class="_div data-v-055477ef simple-item" wx:if="{{format===1}}">
+            <view bindtap="handleProxy" class="_div data-v-055477ef" data-comkey="{{$k}}" data-eventid="{{'1-'+index}}" key="{{book.book_id}}" wx:for="{{objects}}" wx:for-item="book" wx:key="book.book_id">
+                <template is="29ce2813" data="{{...$root[$kk+'0-'+index],$root:$root}}"></template>
+            </view>
+        </view>
+        <view class="_div data-v-055477ef complex-item" wx:if="{{format===2}}">
+            <template is="694882de" data="{{...$root[$kk+'1-'+index],$root:$root}}" wx:for="{{objects}}" wx:for-item="book" wx:key="book.book_id"></template>
+        </view>
+    </view>
+</template>
+<import src="/components/SimpleBook.vue.wxml"></import>
+<import src="/components/ComplexBook.vue.wxml"></import>

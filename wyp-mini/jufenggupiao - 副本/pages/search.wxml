@@ -1,0 +1,27 @@
+<view class="search _fecc814">
+    <view class="network _32f532b _fecc814" wx:if="{{$net$hasNet}}">
+        <image class="_32f532b" src="../images/network.png"></image>
+        <text class="_32f532b">网络不可用，请检查网络设置</text>
+        <view class="net-text font28 animated flash infinite _32f532b">正在尝试重新连接...</view>
+    </view>
+    <view class="box _fecc814">
+        <image class="search_btn _fecc814" src="http://jfinfo.oss-cn-beijing.aliyuncs.com/jugupiao/images/live/search_btn.png"></image>
+        <input bindfocus focus adjustPosition="false" bindblur="blur" bindinput="search" class="_fecc814" maxlength="30" placeholder="{{source=='home'?'搜索股票名称/代码进行AI诊股':'搜索股票名称/代码'}}" type="text" value="{{defVal}}"></input>
+        <view class="del-btn _fecc814">
+            <i-icon catchtap="clear" class="flex _fecc814" color="#ccc" size="18" type="delete" wx:if="{{isinput}}"></i-icon>
+        </view>
+        <view bindtap="back" class="font28 _fecc814">取消</view>
+    </view>
+    <view class="shim-box _fecc814"></view>
+    <view catchtap="goDia" class="ls _fecc814" data-wpygodia-a="{{item}}" wx:for="{{list}}">
+        <view class="o font30 _fecc814">{{item.name}}</view>
+        <view class="t _fecc814" style="text-align: {{source!=='home'?'center':'right'}}">{{item.code}}</view>
+        <view catchtap="chooseAdd" class="ls-image _fecc814" data-wpychooseadd-a="{{item}}" wx:if="{{source!=='home'}}">
+            <image class="_fecc814" src="http://jfinfo.oss-cn-beijing.aliyuncs.com/jugupiao/images/stock/add.png" wx:if="{{!item.isChoose}}"></image>
+            <view class="alerdy_choose _fecc814" wx:elif="{{item.isChoose}}">
+                    已添加
+                    <image class="_fecc814" src="http://jfinfo.oss-cn-beijing.aliyuncs.com/jugupiao/images/stock/add2.png"></image>
+            </view>
+        </view>
+    </view>
+</view>

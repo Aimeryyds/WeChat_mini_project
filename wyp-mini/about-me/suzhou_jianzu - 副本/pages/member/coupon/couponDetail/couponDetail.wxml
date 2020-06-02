@@ -1,0 +1,117 @@
+<import src="/wxParse/wxParse.wxml"></import>
+<view class="container">
+    <view class="Img" wx:if="{{data}}">
+        <view class="wayTop"></view>
+        <image mode="aspectFill" src="{{data.thumb}}"></image>
+        <view class="center">
+            <text class="name">{{data.couponname}}</text>
+            <text class="time">
+                <block wx:if="{{data.timestr==0}}">
+              永久有效
+            </block>
+                <block wx:else>
+                    <block wx:if="{{data.timestr==1}}">
+                {{data.gettypestr}}日内{{data.timedays}}天有效
+              </block>
+                    <block wx:else>有效期{{data.timestr}}</block>
+                </block>
+            </text>
+        </view>
+        <view class="bottom">
+            <text class="consume">消费满￥{{data.enough}}</text>
+            <text class="reduce">
+                <block wx:if="{{data.backtype==0}}">
+            立减 ￥{{data.deduct}}元
+          </block>
+                <block wx:elif="{{data.backtype==1}}">
+            {{data.discount}}折
+          </block>
+                <block wx:elif="{{data.backtype==2}}">
+                    <block wx:if="{{data.backredpack!==''}}">
+              返{{data.backredpack}}元现金
+            </block>
+                </block>
+            </text>
+        </view>
+        <view class="wayBottom"></view>
+    </view>
+    <view class="order">
+        <view class="way ">
+            <text class="bold"> 获得方式</text>
+            <view class="orderRight red">
+                <block wx:if="{{data.getstatus==0}}">
+           {{data.credit}}积分+{{data.money}}元购买
+          </block>
+                <block wx:if="{{data.getstatus==1}}">
+            {{data.money}}元购买
+          </block>
+                <block wx:if="{{data.getstatus==2}}">
+            {{data.credit}}积分兑换
+          </block>
+                <block wx:if="{{data.getstatus==3}}">
+            免费领取
+          </block>
+            </view>
+        </view>
+        <view class="way">
+            <text class="bold">使用说明</text>
+            <view bindtap="showModal" class="orderRight readInfo" wx:if="{{desc.nodes.length!=0}}">查看详情</view>
+        </view>
+        <view class="way" wx:if="{{check==2}}">
+            <text class="bold">使用日期</text>
+            <text class="orderRight">{{useTime}}</text>
+        </view>
+        <view class="way" wx:if="{{check==2}}">
+            <text class="bold">订单编号</text>
+            <text class="orderRight">{{orderId}}</text>
+        </view>
+    </view>
+    <view class="order">
+        <view class="way">
+            <text class="bold">推荐商品 </text>
+        </view>
+        <view class="banner" wx:if="{{store_num>0}}">
+            <scroll-view class="banner_wrap" scrollX="true" style=" white-space: nowrap; ">
+                <block wx:for="{{swiper.list.list}}">
+                    <view bindtap="togoods" class="banner_one" data-objectId="{{item.id}}" wx:if="{{store_num!=index+1}}">
+                        <image class="banner_img" src="{{item.thumb}}"></image>
+                        <view class="banner_title">{{item.title}}</view>
+                        <view class="banner_detail">￥{{item.marketprice}}</view>
+                    </view>
+                    <view bindtap="togoods" class="banner_one" data-objectId="{{item.id}}" style="margin-right: 0;" wx:elif="{{store_num==index+1}}">
+                        <image class="banner_img" src="{{item.thumb}}"></image>
+                        <view class="banner_title">{{item.title}}</view>
+                        <view class="banner_detail">￥{{item.marketprice}}</view>
+                    </view>
+                </block>
+            </scroll-view>
+        </view>
+        <view class="way use">暂时没有同店推荐</view>
+    </view>
+    <view class="foot">
+        <view bindtap="toGoods" class="check" wx:if="{{check=='1'}}">立即使用</view>
+        <view class="check active" wx:elif="{{check=='2'}}">已经使用</view>
+        <view class="check active" wx:elif="{{check=='3'}}">已经过期</view>
+        <block wx:else>
+            <view class="footLeft" wx:if="{{data.cangetmax=='-2'}}">发放总数为空</view>
+            <block wx:elif="{{data.cangetmax=='-1'}}">
+                <view class="footLeft" wx:if="{{data.total=='-1'}}">无限领取</view>
+                <view class="footLeft" wx:else>剩余数量{{data.total}}</view>
+            </block>
+            <block wx:else>
+                <view class="footLeft" wx:if="{{data.canget}}">您还可以{{data.gettypestr}}{{data.cangetmax}}张</view>
+                <view class="footLeft" wx:else>您已{{data.gettypestr}}过</view>
+            </block>
+            <view bindtap="getCoupon" class="footRight" wx:if="{{data.canget}}">立即领取</view>
+            <view class="footRight active" wx:else>无法领取</view>
+        </block>
+    </view>
+</view>
+<loading wx:if="{{loading}}"></loading>
+<view catchtap="hideModal" catchtouchmove="noMove" class="modal" wx:if="{{useInstructions&&desc.nodes.length!=0}}">
+    <view catchtap="showModal" class="info">
+        <scroll-view>
+            <template is="wxParse" data="{{wxParseData:desc.nodes}}"></template>
+        </scroll-view>
+    </view>
+</view>

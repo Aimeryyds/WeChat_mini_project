@@ -1,0 +1,9 @@
+<view class="{{'sub-task '+(props.item.status>0?'completed':'')}}" wx:if="{{$taroCompReady}}">
+    <view bindtap="anonymousFunc0" style="padding: 0 auto; box-sizing: border-box;">
+        <view class="{{'icon '+(props.item.status===0?'icon-checkbox-0':'icon-checkbox-completed')}}" style="margin: 0 auto"></view>
+    </view>
+    <input bindblur="anonymousFunc1" bindfocus="funPrivatebczzz" class="sub-task-title" maxlength="{{512}}" type="text" value="{{props.item.title}}"></input>
+    <view bindtap="anonymousFunc2" class="delete-sub-task">
+        <view class="icon icon-delete-subtask"></view>
+    </view>
+</view>

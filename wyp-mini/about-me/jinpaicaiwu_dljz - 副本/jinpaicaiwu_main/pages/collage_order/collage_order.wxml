@@ -1,0 +1,93 @@
+<view class="phone">
+    <view class="p">
+        <text class="p2" wx:if="{{address.detail}}">{{address.detail+' '+address.reciever_name+' '+address.phone}}</text>
+        <text bindtap="addAddr" class="p1" wx:else>选择收货地址</text>
+        <text bindtap="addAddr" class="p1">更换</text>
+    </view>
+    <view class="icon">
+        <text class="iconfont2 icon-jiantou search bg_k"></text>
+    </view>
+</view>
+<view style="">
+    <view class="repeat">
+        <view class="item" wx:for="{{carts}}" wx:key="{{item.id}}">
+            <view class="detail_c">
+                <view class="deta_img">
+                    <image mode="aspectFill" src="{{item.image}}"></image>
+                </view>
+                <view class="cc_add">
+                    <view class="cc_addt">
+                        <text class="cc_text">{{item.title}}</text>
+                        <view class="flx_txt">
+                            <text class="te1">￥{{item.price}}</text>
+                        </view>
+                    </view>
+                    <view class="cc_addc">
+                        <text class="cc_text1" wx:if="{{item.skuchecked}}">{{item.skuchecked}}</text>
+                        <text class="cc_text1">合计：{{item.sum}}元</text>
+                    </view>
+                </view>
+            </view>
+        </view>
+        <view class="item_list">
+            <view class="phone1">
+                <view class="p">
+                    <text>配送方式：</text>
+                    <picker bindchange="bindModeChange" class="p1" range="{{delivery_mode}}" value="{{delivery_index}}">
+                        <view class="picker">
+                  {{delivery_mode[delivery_index]}}
+                  <view style="text-align:right;" wx:if="{{!delivery_mode[delivery_index]}}">请选择</view>
+                        </view>
+                    </picker>
+                </view>
+                <view class="icon">
+                    <text class="iconfont2 icon-jiantou search bg_k"></text>
+                </view>
+            </view>
+            <view class="phone1">
+                <view class="p">
+                    <text>配送日期：</text>
+                    <picker bindchange="bindDateChange" class="p1" end="{{end_date}}" mode="date" start="{{start_date}}" value="{{date}}">
+                        <view class="picker">
+                  {{delivery_date}}
+                  <view style="text-align:right;" wx:if="{{!delivery_date.length}}">请选择</view>
+                        </view>
+                    </picker>
+                </view>
+                <view class="icon">
+                    <text class="iconfont2 icon-jiantou search bg_k"></text>
+                </view>
+            </view>
+            <view class="phone1">
+                <view class="p">
+                    <text>配送时间：</text>
+                    <picker bindchange="bindTimeChange" class="p1" end="21:01" mode="time" start="09:01" value="{{time}}">
+                        <view class="picker">
+                {{delivery_time}}
+                  <view style="text-align:right;" wx:if="{{!delivery_time.length}}">请选择</view>
+                        </view>
+                    </picker>
+                </view>
+                <view class="icon">
+                    <text class="iconfont2 icon-jiantou search bg_k"></text>
+                </view>
+            </view>
+            <view class="phone1">
+                <text class="shop" style="line-height:1.4">给商家留言：</text>
+                <input autoHeight="true" bindblur="binkMessageConfirm" class="textarea" type="text"></input>
+            </view>
+        </view>
+    </view>
+</view>
+<view style="position: fixed;bottom: 0;width:100%">
+    <view class="button">
+        <view class="total_price">
+            <text class="mony" style="font-size:30rpx">实付款：{{total_price}}元</text>
+        </view>
+        <view>
+            <form bindsubmit="submitOrder" reportSubmit="true">
+                <button class="bt" formType="submit">提交订单</button>
+            </form>
+        </view>
+    </view>
+</view>

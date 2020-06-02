@@ -1,0 +1,70 @@
+<view class="parent">
+    <view class="view-order">
+        <view class="text-name">订单状态:{{result.order_status_desc}}
+          <block wx:if="{{result.order.status=='0'}}">待付款</block>
+            <block wx:elif="{{result.order.status=='1'}}">待发货</block>
+            <block wx:elif="{{result.order.status=='2'}}">待收货</block>
+            <block wx:elif="{{result.order.status=='3'}}">已完成</block>
+        </view>
+        <text class="text-address">订单金额（不含运费） : ￥{{result.order.price}}</text>
+    </view>
+    <view class="view-address" style="background:#ffffff">
+        <view class="view-addressleft">
+            <image src="http://tws.cnweisou.com/images/icon_address.png"></image>
+            <view class="view-addressleft-info">
+                <text class="text-name">收货人:{{result.address.realname}}</text>
+                <text class="text-address" style="width:600rpx">收货地址:{{result.address.province}}{{result.address.city}}{{result.address.area}}{{result.address.address}}</text>
+            </view>
+        </view>
+    </view>
+    <view class="view-title">
+        <image src="http://tws.cnweisou.com/images/payicon.png"></image>
+        <text style="margin-left:10rpx;">网站自营</text>
+    </view>
+    <view class="container carts-list">
+        <view class="carts-item">
+            <view>
+                <image class="carts-image" mode="aspectFill" src="{{result.good.thumb}}"></image>
+            </view>
+            <view class="carts-text">
+                <text class="carts-title">{{result.good.title}}</text>
+                <text class="carts-key-name">{{result.good.description}}</text>
+                <view class="carts-subtitle"></view>
+            </view>
+            <view class="carts-right" style="width: 200rpx;align-items:flex-end;font-size: 24rpx;">
+                <text class="text-red">￥{{result.order.price}}</text>
+                <text class="text-price"> x{{result.good.goodsnum}}</text>
+            </view>
+        </view>
+    </view>
+    <view style="background:#ffffff;border-bottom:1px solid #eee;">
+        <view>
+            <view class=" text_between">
+                <text>商品小计</text>
+                <text class="text_price">￥{{result.order.price}}</text>
+            </view>
+            <view class=" text_between">
+                <text>运费</text>
+                <text class="text_price">￥{{result.order.freight}}</text>
+            </view>
+            <view class=" text_between">
+                <text>实付费(不含运费)</text>
+                <text class="text_price">￥{{price}}</text>
+            </view>
+        </view>
+    </view>
+    <view style="background:#ffffff;border-bottom:1px solid #eee;">
+        <view class="text_order">
+            <text>订单编号：{{result.order.orderno}}</text>
+        </view>
+        <view class="text_order">
+            <text>创建时间：{{times}}</text>
+        </view>
+    </view>
+    <view class="seller" wx:if="{{refundMsg}}">
+        <view>退款详情:</view>
+        <view class="refundMsg">{{refundMsg}}</view>
+        <view class="refundReply" wx:if="{{refundReply}}">卖家回复:{{refundReply}}</view>
+    </view>
+</view>
+<loading wx:if="{{loading}}"></loading>

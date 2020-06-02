@@ -1,0 +1,9 @@
+<template name="7b864580">
+    <view class="_view 7b864580 {{'roomDesc'+passClass}}" wx:if="{{roomDesc}}">
+        <view class="_view 7b864580 h1">房源描述</view>
+        <view class="_view 7b864580 {{'div '+(more||roomDesc.length<=80?'more':'')}}">{{roomDesc}}</view>
+        <view class="_view 7b864580 p" wx:if="{{roomDesc.length>80}}">
+            <text bindtap="handleProxy" class="_text 7b864580 span" data-comkey="{{$k}}" data-eventid="{{'7b864580-0'}}">{{more?'收起':'更多'}}</text>
+        </view>
+    </view>
+</template>

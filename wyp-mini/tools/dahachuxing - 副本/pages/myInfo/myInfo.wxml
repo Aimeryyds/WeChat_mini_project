@@ -1,0 +1,86 @@
+<scroll-view scrollY bindscroll="headerAnimation" style="height: 100vh">
+    <view class="userinfo" style="background: {{headColor}}" wx:if="{{isLogin}}">
+        <view class="userinfo-avatar" style="box-shadow: 0 0 10rpx;">
+            <open-data class="active-avatar" type="userAvatarUrl"></open-data>
+        </view>
+        <view bindtap="nameAuth" class="userinfo-nickname">
+            <open-data style="color: {{headColor=='#ffffff'?'#000000':textColor}}" type="userNickName"></open-data>
+            <view class="auth" style="color: {{mainColor}}">{{nameAuth}}</view>
+        </view>
+    </view>
+    <view bindtap="toLogin" class="userinfo" style="background: {{headColor}}" wx:else>
+        <text class="iconfont icon-touxiang userinfo-avatar-icon" style="color: {{headColor=='#ffffff'?mainColor:'#ffffff'}}"></text>
+        <view class="userinfo-nickname" style="color: {{headColor=='#ffffff'?'#000000':textColor}}">点击登录账户</view>
+    </view>
+    <view class="content">
+        <view bindtap="toWallet" class="content-item img2">
+            <view>
+                <text class="iconfont icon-charge icon" style="color: {{mainColor}}"></text>
+                <text>我的钱包</text>
+            </view>
+            <view>
+                <text class="iconfont icon-you" style="color: {{mainColor}}"></text>
+            </view>
+        </view>
+        <view bindtap="toCoupon" class="content-item img2">
+            <view>
+                <text class="iconfont icon-youhuiquan icon" style="color: {{mainColor}}"></text>
+                <text>我的优惠券</text>
+            </view>
+            <view style="flex: 1">
+                <text class="iconfont icon-you" style="color: {{mainColor}}"></text>
+            </view>
+        </view>
+        <view bindtap="ridePackage" class="content-item img1" data-type="0">
+            <view>
+                <text class="iconfont icon-qixingtaocan icon" style="color: {{mainColor}}"></text>
+                <text>骑行套餐</text>
+            </view>
+            <view wx:if="{{!rideCardDate}}">
+                <text class="isAuth" style="font-size:25rpx;">骑行更划算!</text>
+                <text style="color:#ED532E;font-size: 30rpx">点击开通</text>
+            </view>
+            <view wx:else>
+                <text style="color:#f4383c;font-size:28rpx;">套餐到期日：{{rideCardDate}}</text>
+            </view>
+        </view>
+        <view bindtap="ridePackage" class="content-item img1" data-type="1">
+            <view>
+                <text class="iconfont icon-auth icon" style="color: {{mainColor}}"></text>
+                <text>免押套餐</text>
+            </view>
+            <view wx:if="{{!depositDate}}">
+                <text class="isAuth" style="font-size:25rpx;">免交押金!</text>
+                <text style="color:#ED532E;font-size: 30rpx">点击开通</text>
+            </view>
+            <view wx:else>
+                <text style="color:#f4383c;font-size:28rpx;">套餐到期日：{{depositDate}}</text>
+            </view>
+        </view>
+        <view bindtap="topUpDetail" class="content-item img1">
+            <text class="iconfont icon-record icon" style="color: {{mainColor}}"></text>
+            <text>账单明细</text>
+            <view>
+                <text class="iconfont icon-you" style="color: {{mainColor}}"></text>
+            </view>
+        </view>
+        <view bindtap="usingRecord" class="content-item img1">
+            <text class="iconfont icon-rideRecord icon" style="color: {{mainColor}}"></text>
+            <text>骑行记录</text>
+            <view>
+                <text class="iconfont icon-you" style="color: {{mainColor}}"></text>
+            </view>
+        </view>
+        <view bindtap="toAgreement" class="content-item img1">
+            <text class="iconfont icon-xieyi icon" style="color: {{mainColor}}"></text>
+            <text>用户协议</text>
+            <view>
+                <text class="iconfont icon-you" style="color: {{mainColor}}"></text>
+            </view>
+        </view>
+    </view>
+    <view class="quit-account-container" wx:if="{{isLogin}}">
+        <button bindtap="exit" class="quit-account" style="background: {{mainColor}};color: {{textColor}}">退出账号</button>
+    </view>
+    <view style="color: #A4A4A4;text-align: center;margin-bottom: 20rpx">{{version}}</view>
+</scroll-view>

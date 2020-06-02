@@ -1,0 +1,54 @@
+<template name="ordersList">
+    <view class="t" wx:if="{{ordersList.length>0}}">
+        <view class="order-group" wx:for="{{ordersList}}" wx:key="unique">
+            <view class="group-msg bg-fff pull-left">
+                <text class="order-num pull-left">订单编号：{{item.orderNum}}</text>
+                <text class="pull-right order-status">{{item.orderStatus}}</text>
+            </view>
+            <view bindtap="showOrderDetail" class="order-goods pull-left flex-row" data-id="{{item.id}}">
+                <view class="goods-img flex-grow-0">
+                    <image mode="aspectFill" src="{{item.goods.img}}"></image>
+                </view>
+                <view class="goods-right flex-grow-1">
+                    <view class="goods-title flex-row">
+            {{item.goods.name}}
+          </view>
+                    <view class="goods-info flex-row">
+                        <view class="goods-class flex-grow-1">
+                            <text class="goods-num">数量：{{item.goodsNum}} {{item.goods.unit}}</text>
+                        </view>
+                        <view class="flex-grow-0 info-money">
+              ￥{{item.goods.gprice}}
+            </view>
+                    </view>
+                </view>
+            </view>
+            <view class="order-price bg-fff flex-row">
+                <view class="flex-grow-1">
+          实付：
+          <text>¥{{item.totalPrice}}</text>(免运费)
+        </view>
+            </view>
+            <view class="user-option bg-fff" wx:if="{{item.orderStatus=='待付款'}}">
+                <view bindtap="toPay" class="btn btn-danger flex-grow-1" data-id="{{item.id}}" data-isGroup="{{item.isGroup}}">去支付</view>
+            </view>
+            <view class="user-option bg-fff" wx:if="{{item.orderStatus=='待成团'}}">
+                <view bindtap="toGroupDetail" class="btn btn-danger flex-grow-1" data-id="{{item.id}}">邀请好友开团</view>
+            </view>
+            <view class="user-option bg-fff" wx:if="{{item.orderStatus=='待收货'}}">
+                <view bindtap="confirmReceipt" class="btn btn-danger flex-grow-1" data-id="{{item.id}}">确认收货</view>
+            </view>
+            <view class="user-option bg-fff" wx:if="{{item.order_status==2||item.order_status==3||item.order_status==4}}">
+                <view bindtap="tuikuan" class="btn btn-danger flex-grow-1" data-id="{{item.id}}">申请退款</view>
+            </view>
+        </view>
+        <template is="loading" data="{{loading:loading}}"></template>
+    </view>
+    <view class="no-orders" wx:if="{{ordersList.length==0&&!loading}}">
+        <view class="text-center">
+            <image src="../../resource/no-orders.png"></image>
+            <view class="mt-20">您没有相关订单</view>
+        </view>
+    </view>
+</template>
+<import src="loading.wxml"></import>

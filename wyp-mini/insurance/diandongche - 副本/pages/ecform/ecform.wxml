@@ -1,0 +1,133 @@
+<form>
+    <view class="cu-bar bg-white solid-bottom margin-top">
+        <view class="action">
+            <text class="cuIcon-title text-blue"></text>
+            <text class="title text-bold">收件信息</text>
+        </view>
+    </view>
+    <view bindtap="showModal" class="cu-list menu sm-border" data-target="RadioModal">
+        <view class="cu-item">
+            <view class="action text-xxl">
+                <text class="cuIcon-locationfill text-orange"></text>
+            </view>
+            <view class="content padding-tb-sm padding-left">
+                <view>
+          {{name?name:'请选择收件信息'}}
+          <view class="text-gray text-sm padding-left">{{phone}}</view>
+                </view>
+                <view class="text-df">{{address}}</view>
+            </view>
+            <view class="action">
+                <text class="cuIcon-right text-grey "></text>
+            </view>
+        </view>
+    </view>
+    <view bindtap="hideModal" class="cu-modal {{modalName=='RadioModal'?'show':''}}">
+        <view catchtap class="cu-dialog margin-top-xl margin-bottom-xl">
+            <scroll-view scrollY class="scrollPage">
+                <radio-group class="block">
+                    <view class="cu-list menu text-left ">
+                        <view class="cu-item" wx:for="{{addressList}}">
+                            <label bindtap="ChooseRadio" class="flex justify-between align-center flex-sub" data-value="{{item}}">
+                                <view class="cu-item">
+                                    <view class="content padding-tb-sm padding-left">
+                                        <view>
+                      {{item.contacts}}
+                      <view class="text-gray text-sm padding-left">{{item.telephone}}</view>
+                                        </view>
+                                        <view class="text-sm padding-right-sm">{{item.address}}</view>
+                                    </view>
+                                </view>
+                                <view class="action padding-right-sm" wx:if="{{item.state=='0'}}">
+                                    <text class="cu-tag radius line-orange text-xs">默认</text>
+                                </view>
+                                <view wx:if="{{item.state=='0'}}">
+                                    <radio checked class="round"></radio>
+                                </view>
+                                <view wx:else>
+                                    <radio class="round"></radio>
+                                </view>
+                            </label>
+                        </view>
+                    </view>
+                </radio-group>
+            </scroll-view>
+            <view bindtap="goDealerAddrList" class="cu-list menu  padding-tb-sm padding-left text-lg">
+        管理收货地址 <text class="cuIcon-location text-orange"></text>
+            </view>
+        </view>
+    </view>
+    <view class="cu-bar bg-white solid-bottom margin-top">
+        <view class="action">
+            <text class="cuIcon-title text-blue"></text>
+            <text class="title text-bold">价格：</text>
+            <text class="title text-bold text-orange"> {{orderPrice}} 元</text>
+        </view>
+    </view>
+    <view class="cu-bar bg-white solid-bottom margin-top">
+        <view class="action">
+            <text class="cuIcon-title text-blue"></text>
+            <text class="title text-bold">商品信息</text>
+        </view>
+    </view>
+    <view class="cu-list menu-avatar">
+        <view class="cu-item ">
+            <image class="cu-avatar radius lg" src="{{cardzm}}"></image>
+            <view class="content">
+                <view class="text">
+                    <text class="text-cut">{{productName}}</text>
+                </view>
+                <view class="text-orange text-sm flex flex-direction">
+                    <text class="text-cut text-bold">￥{{orderPrice}}</text>
+                </view>
+            </view>
+        </view>
+    </view>
+    <view class="grid col-3 bg-white padding-sm">
+        <view class="padding-xs" wx:for="{{checkbox}}" wx:key="{{index}}">
+            <button bindtap="ChooseCheckbox" class="cu-btn orange lg block {{item.checked?'bg-orange':'line-orange'}}" data-value="{{item.value}}"> {{item.caseName}}
+        </button>
+        </view>
+    </view>
+    <view bindtap="hideModal" class="cu-modal bottom-modal {{modalName=='ChooseModal'?'show':''}}">
+        <view catchtap class="cu-dialog">
+            <view class="cu-bar bg-white">
+                <view bindtap="hideModal" class="action text-blue">取消</view>
+            </view>
+            <view class="grid col-3 padding-sm">
+                <view class="padding-xs" wx:for="{{checkbox}}" wx:key="{{index}}">
+                    <button bindtap="ChooseCheckbox" class="cu-btn orange lg block {{item.checked?'bg-orange':'line-orange'}}" data-value="{{item.value}}"> {{item.name}}
+            <view class="cu-tag sm round {{item.checked?'bg-white text-orange':'bg-orange'}}" wx:if="{{item.hot}}">HOT</view>
+                    </button>
+                </view>
+            </view>
+            <view class="padding">
+                <button disabled class="cu-btn margin-tb lg bottom_button" wx:if="{{checked_count==0}}">立即付款</button>
+                <button bindtap="goPay" class="cu-btn bg-orange margin-tb lg bottom_button" wx:else>立即付款 {{price}} 元</button>
+            </view>
+        </view>
+    </view>
+    <view class="cu-bar bg-white tabbar border shop bottom_footer">
+        <button class="action bg-white" openType="contact">
+            <view class="cuIcon-service text-blue">
+                <view class="cu-tag badge"></view>
+            </view>
+      在线客服
+    </button>
+        <view class="action padding-left-sm">
+            <view class="text-orange text-lg" wx:if="{{checked_count>0}}">价格：</view>
+        </view>
+        <view class="action">
+            <view class="text-orange text-lg" wx:if="{{checked_count>0}}">{{price}} 元</view>
+        </view>
+        <view class="btn-group">
+            <button bindtap="saveOrder" class="cu-btn bg-orange round shadow-blur bottom_button" data-target="ChooseModal">立即支付</button>
+        </view>
+    </view>
+    <view class="cu-load load-modal" wx:if="{{loadModal}}">
+        <view class="gray-text">提交中...</view>
+    </view>
+    <view class="cu-load load-modal" wx:if="{{onloadModal}}">
+        <view class="gray-text">加载中...</view>
+    </view>
+</form>

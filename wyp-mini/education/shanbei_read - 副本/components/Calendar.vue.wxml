@@ -1,0 +1,30 @@
+<template name="30d1c216">
+    <view class="_div data-v-781f816b calendar">
+        <view class="_div data-v-781f816b calendar-header">
+            <view class="_div data-v-781f816b" style="font-weight: bold">学习日历</view>
+            <view class="_div data-v-781f816b current">{{current.year}}年{{current.month}}月</view>
+            <view class="_div data-v-781f816b chevron">
+                <view bindtap="handleProxy" class="_i data-v-781f816b ib ib-chevron-left" data-comkey="{{$k}}" data-eventid="{{'0'}}"></view>
+                <view bindtap="handleProxy" class="_i data-v-781f816b ib ib-chevron-right" data-comkey="{{$k}}" data-eventid="{{'1'}}"></view>
+            </view>
+        </view>
+        <view class="_div data-v-781f816b calendar-body">
+            <view class="_ul data-v-781f816b week">
+                <view class="_li data-v-781f816b" key="{{index}}" wx:for="{{weekText}}" wx:for-item="day" wx:key="index">{{day}}</view>
+            </view>
+            <view class="_ul data-v-781f816b month">
+                <view class="_li data-v-781f816b" key="{{index}}" wx:for="{{days}}" wx:key="index">
+                    <label bindtap="handleProxy" class="_span data-v-781f816b {{[item.isFutureDay&&!item.isOtherMonthDay?'future-day':'',item.selected&&!item.isOtherMonthDay&&type==='BOOKPLAN'?'selected':'',item.isNotValid&&type==='BOOKPLAN'?'is-not-valid':'',item.checked&&type==='BOOKPLAN'?'plan-checked':'',item.checked&&type==='COURSE'?'course-checked':'',!item.checked&&type==='BOOKPLAN'?'unchecked':'',item.isOtherMonthDay?'other-month-day':'']}}" data-comkey="{{$k}}" data-eventid="{{'2-'+index}}">{{item.date===today?'今':item.day}}</label>
+                </view>
+            </view>
+        </view>
+        <view class="_div data-v-781f816b calendar-footer">
+            <view class="_div data-v-781f816b indicator-wrap">
+                <view class="_div data-v-781f816b indicator {{[type==='BOOKPLAN'?'plan-finished':'',type==='COURSE'?'course-finished':'']}}"></view>已学习
+        </view>
+            <view class="_div data-v-781f816b indicator-wrap" wx:if="{{type==='BOOKLPAN'}}">
+                <view class="_div data-v-781f816b indicator unfinished"></view>未学习
+        </view>
+        </view>
+    </view>
+</template>

@@ -1,0 +1,67 @@
+<template name="content">
+    <view class="content">
+        <view class="none" wx:if="{{!data}}">
+            <image class="status1" src="https://tws.cnweisou.com/images/new_noCoupon.png"></image>
+            <view class="warn">
+                <text>您还没有相关的优惠券</text>
+            </view>
+        </view>
+        <view bindtap="goDetail" class="coupon" data-id="{{item.id}}" wx:if="{{data}}" wx:for="{{data}}">
+            <image class="myImg" src="{{item.thumb}}"></image>
+            <view class="left">
+                <text>{{item.couponname}}</text>
+                <text class="leftTime">永久有效</text>
+            </view>
+            <view class="right">
+                <view class="money">￥
+              <text class="price">{{item._backmoney}}</text>
+                </view>
+                <text>{{item.backstr}}</text>
+            </view>
+        </view>
+    </view>
+</template>
+<view class="container">
+    <view class="tarbar">
+        <text bindtap="tarbar" class="normal {{cate==''?'select':''}}" data-check="1" data-index="{{''}}">未使用</text>
+        <text bindtap="tarbar" class="normal {{cate=='user'?'select':''}}" data-check="2" data-index="{{'user'}}">已使用</text>
+        <text bindtap="tarbar" class="normal {{cate=='past'?'select':''}}" data-check="3" data-index="{{'past'}}">已过期</text>
+    </view>
+    <view>
+        <view bindtap="ToCoupon" class="getCoupon">
+      领券中心
+    </view>
+        <block wx:if="{{data.list}}">
+            <view bindtap="toCouponDetail" class="couponItem" data-id="{{item.id}}" wx:for="{{data.list}}">
+                <view class="couponLeft">
+                    <view class="myCouponLeft"></view>
+                    <view class="couponText">￥
+              <text>{{item._backmoney}}</text>
+                    </view>
+                    <text>{{item.backstr}}</text>
+                </view>
+                <view class="couponRight" style="{{cate=='user'&&'background:url(\'https://tws.cnweisou.com/images/yishiyong.png\');background-repeat: no-repeat;background-size: 150rpx 150rpx;background-position: 230rpx 15rpx;'}}">
+                    <image class="item_img" mode="aspectFill" src="{{item.thumb}}"></image>
+                    <view class="item_nam">
+                        <text style="margin-bottom: 12rpx;">{{item.couponname}}</text>
+                        <view>
+                            <block wx:if="{{item.timestr==0}}">
+                  永久有效
+                </block>
+                            <block wx:else>
+                                <block wx:if="{{item.timestr==1}}">
+                    即{{item.gettypestr}}日内{{item.timedays}}天有效
+                  </block>
+                                <block wx:else>
+                    有效期{{item.timestr}}
+                  </block>
+                            </block>
+                        </view>
+                    </view>
+                </view>
+            </view>
+        </block>
+        <template is="content" data wx:else></template>
+    </view>
+</view>
+<loading wx:if="{{loading}}"></loading>

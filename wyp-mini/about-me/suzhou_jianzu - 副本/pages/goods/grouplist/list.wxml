@@ -1,0 +1,26 @@
+<loading wx:if="{{loading}}"></loading>
+<view class="category_title">
+    <view class="redline"></view>
+    <text class="caption">今日团购</text>
+</view>
+<view class="goodsList carts-list" wx:if="{{!empty}}">
+    <view bindtap="tapGoods" class="carts-item" data-object-id="{{item.goods_id}}" wx:for="{{goods}}" wx:key="objectId">
+        <view>
+            <image class="carts-image" mode="aspectFill" src="{{item.image}}"></image>
+        </view>
+        <view class="carts-text">
+            <text class="carts-title">{{item.goods_name}}</text>
+            <view class="goods-price">
+                <text class="text-redbtn">{{item.rebate}}折</text>
+                <text class="market-price">￥{{item.price}}元</text>
+                <text class="goodsprice">￥{{item.goods_price}}元</text>
+            </view>
+            <view class="goods-score">
+                <text>已售{{item.virtual_num}}件</text>
+            </view>
+            <view class="goods-score">
+                <text>截止日期:{{item.end_time}}</text>
+            </view>
+        </view>
+    </view>
+</view>

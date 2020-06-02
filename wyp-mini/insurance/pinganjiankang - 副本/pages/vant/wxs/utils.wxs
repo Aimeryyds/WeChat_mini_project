@@ -1,0 +1,8 @@
+var bem = require('p_./pages/vant/wxs/bem.wxs')().bem;
+var memoize = require('p_./pages/vant/wxs/memoize.wxs')().memoize;
+var addUnit = require('p_./pages/vant/wxs/add-unit.wxs')().addUnit;
+module.exports = ({
+    bem: memoize(bem),
+    memoize: memoize,
+    addUnit: addUnit,
+});

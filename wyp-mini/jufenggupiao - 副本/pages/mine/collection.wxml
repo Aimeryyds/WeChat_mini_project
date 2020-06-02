@@ -1,0 +1,65 @@
+<view class="collection _5acacbf">
+    <view class="network _32f532b _5acacbf" wx:if="{{$net$hasNet}}">
+        <image class="_32f532b" src="../../images/network.png"></image>
+        <text class="_32f532b">网络不可用，请检查网络设置</text>
+        <view class="net-text font28 animated flash infinite _32f532b">正在尝试重新连接...</view>
+    </view>
+    <view class="empty _dbd904a _5acacbf" wx:if="{{isHas}}">
+        <image class="robot _dbd904a" src="https://jfinfo.oss-cn-beijing.aliyuncs.com/jugupiao/images/ask/empty.png"></image>
+        <text class="text _dbd904a">{{$empty$text}}</text>
+        <button bindtap="goHome" class="button _5acacbf">随便看看</button>
+    </view>
+    <scroll-view scrollX class="scroll-header-tab _5acacbf" scrollWithAnimation="{{true}}" wx:if="{{list.length}}">
+        <view class="_5acacbf" style="width:{{allWidth}}rpx;display:flex;margin-left: 10rpx;">
+            <view catchtap="getArticle" class="con-tab _5acacbf" data-wpygetarticle-a="{{item}}" wx:for="{{list}}">
+                <text class="{{current_scroll==item.columnists_id?'cur':''}} _5acacbf">{{item.name}}</text>
+            </view>
+        </view>
+    </scroll-view>
+    <view class="_5acacbf" wx:if="{{isordinary}}">
+        <view catchtap="goArtice" class="img-p-box _5acacbf" data-wpygoartice-a="{{item}}" wx:for="{{articleData}}">
+            <view class="del-box _5acacbf">
+                <image catchtap="cancelCol" class="_5acacbf" data-wpycancelcol-a="{{item}}" mode="widthFix" src="https://jfinfo.oss-cn-beijing.aliyuncs.com/jugupiao/images/mine/close.png"></image>
+            </view>
+            <view class="middle-p-box _5acacbf">
+                <image class="_5acacbf" src="{{item.cover}}"></image>
+                <view class="right-box _5acacbf">
+                    <view class="right-box-t font34 _5acacbf">
+                  {{item.title}}
+                </view>
+                    <view class="bot-box _5acacbf">
+                        <view class="ti _5acacbf">{{item.name}}</view>
+                        <text class="_5acacbf">{{item.created_at}}</text>
+                    </view>
+                </view>
+            </view>
+        </view>
+    </view>
+    <view class="_5acacbf" wx:if="{{!isordinary}}">
+        <view class="list-box _5acacbf" wx:for="{{livaData}}">
+            <view class="del-box _5acacbf">
+                <image catchtap="cancelCol" class="_5acacbf" data-wpycancelcol-a="{{item}}" mode="widthFix" src="https://jfinfo.oss-cn-beijing.aliyuncs.com/jugupiao/images/mine/close.png"></image>
+            </view>
+            <view bindtap="check" class="box-t font32 _5acacbf" data-wpycheck-a="{{item}}" wx:if="{{!item.isCheck}}">
+                <rich-text class="_5acacbf" nodes="{{item.nodes}}"></rich-text>
+            </view>
+            <view bindtap="check" class="box-t2 font32 _5acacbf" data-wpycheck-a="{{item}}" wx:else>
+                <rich-text class="_5acacbf" nodes="{{item.nodes}}"></rich-text>
+            </view>
+            <scroll-view scrollX class="scroll-view_H _5acacbf" scrollWithAnimation="{{true}}" wx:if="{{item.content_image.length}}">
+                <view class="_5acacbf" style="width:{{item.imgBoxWidth}}rpx">
+                    <image catchtap="preview" class="tj_img _5acacbf" data-wpypreview-a="{{item.content_image}}" data-wpypreview-b="{{i}}" src="{{q}}" wx:for="{{item.content_image}}" wx:for-index="i" wx:for-item="q"></image>
+                </view>
+            </scroll-view>
+            <view class="foot-box _5acacbf">
+                <view class="star-box _5acacbf">
+                    <view class="ti _5acacbf">股市播报</view>
+                </view>
+                <text class="_5acacbf">{{item.created_at}}</text>
+            </view>
+        </view>
+    </view>
+    <i-modal loading bind:cancel="handleClose" bind:ok="handleOk" cancelText="关闭" class="_5acacbf" visible="{{visible2}}">
+        <view class="text-cancel-n _5acacbf">确定要取消收藏吗?</view>
+    </i-modal>
+</view>

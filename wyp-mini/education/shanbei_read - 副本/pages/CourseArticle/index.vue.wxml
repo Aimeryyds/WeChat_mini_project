@@ -1,0 +1,73 @@
+<template name="addf385c">
+    <view bindtap="handleProxy" class="_div data-v-4d76e132 {{[ 'course-article',[!isHideArticleGuide?'show-guide':''],[isIpx?'fix-iphonex':''] ]}}" data-comkey="{{$k}}" data-eventid="{{'13'}}" style=" {{'padding-bottom:'+(sentenceAudios.length?'256rpx':'')+';'}}">
+        <view class="_div data-v-4d76e132 title-en">{{titleEn}}</view>
+        <view class="_div data-v-4d76e132 title-cn">{{titleCn}}</view>
+        <view class="_div data-v-4d76e132 introduction">
+            <view class="_div data-v-4d76e132 label">·导读</view>
+            <view class="_div data-v-4d76e132 meta">
+                <view class="_div data-v-4d76e132 intro">{{introduction}}</view>
+            </view>
+        </view>
+        <view class="_div data-v-4d76e132 intro-question">
+            <view class="_div data-v-4d76e132 label">·带着问题读文章</view>
+            <view class="_div data-v-4d76e132 question">
+                <view class="_div data-v-4d76e132" key="{{index}}" wx:for="{{questionList}}" wx:for-item="qsn" wx:key="index">{{qsn.question}}</view>
+            </view>
+        </view>
+        <view class="_div data-v-4d76e132 paragraph" key="{{paraIdx}}" wx:for="{{paras}}" wx:for-index="paraIdx" wx:for-item="para" wx:key="paraIdx">
+            <label class="_span data-v-4d76e132 image" key="{{imageIdx}}" wx:for="{{para.img}}" wx:for-index="imageIdx" wx:for-item="image" wx:key="imageIdx">
+                <image class="_img data-v-4d76e132" mode="widthFix" src="{{image.url._text}}"></image>
+            </label>
+            <view class="_div data-v-4d76e132">
+                <label bindlongpress="handleProxy" catchtap="handleProxy" class="_span data-v-4d76e132 sent {{[currentAudioIndex!==-1&&sent._attributes.id===sentenceAudios[currentAudioIndex].sentence_id?'audio-highlight':'',sent.isHighlight?'highlight':'']}}" data-comkey="{{$k}}" data-eventid="{{'1-'+paraIdx+'-'+sentIdx}}" key="{{sentIdx}}" wx:for="{{para.sent}}" wx:for-index="sentIdx" wx:for-item="sent" wx:key="sentIdx">
+                    <label bindtap="handleProxy" class="_span data-v-4d76e132" data-comkey="{{$k}}" data-eventid="{{'0-'+paraIdx+'-'+sentIdx+'-'+wordIdx}}" key="{{wordIdx}}" wx:for="{{sent.words}}" wx:for-index="wordIdx" wx:for-item="word" wx:key="wordIdx">
+                        <label class="_span data-v-4d76e132 {{[word===currentWord&&sent._attributes.id===currentSentId&&wordIdx===currentWordIdx?'highlight':'']}}">{{word}}</label>
+                        <label class="_span data-v-4d76e132">{{' '}}</label>
+                    </label>
+                    <view class="_view data-v-4d76e132 bilingual-container" wx:if="{{sent.isShowBilingual}}">{{bilingual}}</view>
+                </label>
+            </view>
+        </view>
+        <view class="_div data-v-4d76e132 test">
+            <view class="_div data-v-4d76e132 label">·小测试</view>
+            <view class="_div data-v-4d76e132" key="{{index}}" wx:for="{{questionList}}" wx:for-item="qsn" wx:key="index">
+                <view class="_div data-v-4d76e132 question">{{qsn.question}}</view>
+                <view class="_div data-v-4d76e132 option-list">
+                    <view class="_div data-v-4d76e132" wx:if="{{qsn.user_answer_index!==null}}">
+                        <view bindtap="handleProxy" class="_div data-v-4d76e132 option {{qsn.correct_index===idx?'right':qsn.user_answer_index===idx?'wrong':''}}" data-comkey="{{$k}}" data-eventid="{{'2-'+index+'-'+idx}}" key="{{idx}}" wx:for="{{qsn.options}}" wx:for-index="idx" wx:for-item="opt" wx:key="idx">
+                            <view class="_div data-v-4d76e132">{{OPTIONS[idx]+'. '+opt}}</view>
+                            <view class="_i data-v-4d76e132 ib ib-check" style="font-weight:bold" wx:if="{{qsn.correct_index===idx}}"></view>
+                            <view class="_i data-v-4d76e132 ib ib-times" style="font-weight:bold" wx:if="{{qsn.user_answer_index===idx&&qsn.user_answer_index!==qsn.correct_index}}"></view>
+                        </view>
+                    </view>
+                    <view class="_div data-v-4d76e132" wx:else>
+                        <view bindtap="handleProxy" class="_div data-v-4d76e132 option" data-comkey="{{$k}}" data-eventid="{{'3-'+index+'-'+idx}}" key="{{idx}}" wx:for="{{qsn.options}}" wx:for-index="idx" wx:for-item="opt" wx:key="idx">{{OPTIONS[idx]+'. '+opt}}</view>
+                    </view>
+                </view>
+            </view>
+        </view>
+        <button bindtap="handleProxy" class="_button data-v-4d76e132 finish flex-vhc" data-comkey="{{$k}}" data-eventid="{{'4'}}">完成</button>
+        <view class="_div data-v-4d76e132 {{[ 'audio-control-container',[isIpx?'fix-iphonex':''] ]}}" wx:if="{{sentenceAudios.length}}">
+            <view class="_div data-v-4d76e132 progress">
+                <view class="_div data-v-4d76e132 number">{{currentAudioIndex+1}}/{{sentenceAudios.length}}</view>
+                <view class="_div data-v-4d76e132 bar">
+                    <view class="_div data-v-4d76e132 indicator" style=" {{'width:'+progress+'%'+';'}}">
+                        <view class="_div data-v-4d76e132 circle"></view>
+                    </view>
+                </view>
+                <image bindtap="handleProxy" class="_img data-v-4d76e132 replay" data-comkey="{{$k}}" data-eventid="{{'5'}}" src="https://media-image1.baydn.com/storage_media_image/kvhfgj/5fbe43f5242608cfeb7d594f9b093493.6475d5f63300151cba8938b1064b9cab.png"></image>
+            </view>
+            <view class="_div data-v-4d76e132 audio-control">
+                <image bindtap="handleProxy" class="_img data-v-4d76e132 prev" data-comkey="{{$k}}" data-eventid="{{'6'}}" src="https://media-image1.baydn.com/storage_media_image/kvhfgj/28eb6768941e2a50c5c00a01adb0cf6f.b9553d2b68765d46c09683a2be889317.png"></image>
+                <image bindtap="handleProxy" class="_img data-v-4d76e132 play" data-comkey="{{$k}}" data-eventid="{{'8'}}" src="https://media-image1.baydn.com/storage_media_image/kvhfgj/391fc4e60c58774ed0928d8c7907cf89.be87bcdec49be7a0714b39e625b8d8d3.png" wx:if="{{isPaused}}"></image>
+                <image bindtap="handleProxy" class="_img data-v-4d76e132 pause" data-comkey="{{$k}}" data-eventid="{{'7'}}" src="https://media-image1.baydn.com/storage_media_image/kvhfgj/b23ccf635d4b6707e5fb974138769776.367538b4b9b4aee1ca26257a8bc22b71.png" wx:else></image>
+                <image bindtap="handleProxy" class="_img data-v-4d76e132 next" data-comkey="{{$k}}" data-eventid="{{'9'}}" src="https://media-image1.baydn.com/storage_media_image/kvhfgj/1200891db53d512d4b94d1b0d4627320.9fb2504d541baa6d83cadb84301c7658.png"></image>
+            </view>
+        </view>
+        <template is="313fb023" data="{{...$root[$kk+'0'],$root:$root}}" wx:if="{{isWordModalShow}}"></template>
+        <template is="11b244cb" data="{{...$root[$kk+'1'],$root:$root}}" wx:if="{{isWordDetailShow}}"></template>
+        <image bindtap="handleProxy" class="_img data-v-4d76e132 guide" data-comkey="{{$k}}" data-eventid="{{'12'}}" src="https://media-image1.baydn.com/storage_media_image/kvhfgj/19388ec18343a4af84b36d4f0f12f794.d4fbeb7aa5aa7b716290f04b17ca5a65.png" wx:if="{{!isHideArticleGuide}}"></image>
+    </view>
+</template>
+<import src="/pages/CourseArticle/WordModal.vue.wxml"></import>
+<import src="/pages/CourseArticle/WordDetail.vue.wxml"></import>

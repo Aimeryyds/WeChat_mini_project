@@ -1,0 +1,63 @@
+<navigation-bar enable="{{enable}}" title="吃什么" wx:if="{{showTopbar}}"></navigation-bar>
+<view class="container">
+    <view bindtap="pageReload" class="cplist_nodata" wx:if="{{requeseFail}}">{{requeseFailTips}}</view>
+    <view class="csmxcc_main" wx:else>
+        <view class="csmxcc_top" style="padding-top:{{barHeight_nobar}}px">
+            <view class="t">适合吃什么？</view>
+            <view class="des">综合1000万用户数据研究，我们给您答案。</view>
+            <view class="bg"></view>
+        </view>
+        <view class="csmxcc_content">
+            <view class="csmxcc_item" wx:for="{{csm_index_data.data.items}}" wx:key="key">
+                <view class="t">
+                    <view class="dot1" style="background:{{item.items[0].color}}"></view>
+                    <view class="dot2" style="background:{{item.items[0].color}}"></view> {{item.title}} <view class="dot2" style="background:{{item.items[0].color}}"></view>
+                    <view class="dot1" style="background:{{item.items[0].color}}"></view>
+                </view>
+                <scroll-view scrollX class="csmxcc_item_scroller">
+                    <view class="csmxcc_item_scrollerw">
+                        <view class="subcj_item {{item.items.length==1?'subcj_item_long':''}}" wx:for="{{item.items}}" wx:for-item="item1" wx:key="key">
+                            <navigator class="title" style="background:url({{item1.img}}) center no-repeat;background-size:cover;" url="/pages/whattoeat/cj_cplist?scene_id={{item1.id}}&title={{item1.title}}">{{item1.title}}</navigator>
+                            <view class="btnw">
+                                <view class="btn">
+                                    <navigator class="link" style="border:2rpx solid {{item1.color}};color:{{item1.color}};" url="/pages/whattoeat/whattoeat_caneat_index?scene_id={{item1.id}}">能不能吃</navigator>
+                                </view>
+                                <view class="btn">
+                                    <navigator class="link" style="border:2rpx solid {{item1.color}};color:{{item1.color}};" url="/pages/whattoeat/cj_cplist?scene_id={{item1.id}}&title={{item1.title}}">推荐菜谱</navigator>
+                                </view>
+                            </view>
+                        </view>
+                    </view>
+                </scroll-view>
+            </view>
+        </view>
+        <view class="more_cj_tip" wx:if="{{csm_index_data.data.title}}">— 更多丰富场景敬请期待 —</view>
+    </view>
+</view>
+<loading hidden="{{requeseDone}}">
+ 加载中...
+</loading>
+<view class="tabbarw" style="padding-bottom:{{barHeight==88?'32px':'0px'}}">
+    <view class="tabbar" style="padding-bottom:{{barHeight==88?'32px':'0px'}}">
+        <navigator class="item" hoverClass="none" openType="redirect" url="/pages/index/index">
+            <image src="/images/i1.png"></image>
+            <text>推荐</text>
+        </navigator>
+        <navigator appId="wx93d17942795dec0e" class="item" hoverClass="none" target="miniProgram">
+            <image src="/images/i8.png"></image>
+            <text>好物</text>
+        </navigator>
+        <navigator class="item current" hoverClass="none" openType="redirect" url="/pages/whattoeat/whattoeat_xcc">
+            <image src="/images/i7_fill.png"></image>
+            <text>吃什么</text>
+        </navigator>
+        <navigator class="item" hoverClass="none" openType="redirect" url="/pages/foodshow/foodshow">
+            <image src="/images/i2.png"></image>
+            <text>食秀</text>
+        </navigator>
+        <navigator class="item" hoverClass="none" openType="redirect" url="/pages/mine/mine">
+            <image src="/images/i4.png"></image>
+            <text>我的</text>
+        </navigator>
+    </view>
+</view>

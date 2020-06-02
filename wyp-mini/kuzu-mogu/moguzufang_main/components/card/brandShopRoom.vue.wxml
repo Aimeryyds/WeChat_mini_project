@@ -1,0 +1,27 @@
+<template name="6befa859">
+    <view class="_view 6befa859 {{'card-room'+passClass}}">
+        <image class="_image 6befa859 card-room-loading" src="/static/blank/card-room.png" wx:if="{{!item||!item.title}}"></image>
+        <view bindtap="handleProxy" class="_view 6befa859 card-room-content" data-comkey="{{$k}}" data-eventid="{{'6befa859-0'}}" wx:if="{{item}}">
+            <view class="_view 6befa859 card-img">
+                <template is="0e24a461" data="{{...$root['0'],...$root[$kk+'6befa859-0'],$root:$root}}"></template>
+            </view>
+            <view class="_view 6befa859 card-room-desc">
+                <view class="_view 6befa859 card-row mg-ellipsis card-title">{{item.title}}</view>
+                <view class="_view 6befa859 card-row mg-ellipsis card-subtitle" wx:if="{{item.subTitle}}">{{item.subTitle}}</view>
+                <view class="_view 6befa859 card-row mg-ellipsis card-subtitle" wx:if="{{item.location}}">
+                    <text class="_text 6befa859 mgic-location"></text>{{item.location}}</view>
+                <view class="_view 6befa859 card-row mg-flex tags" wx:if="{{item.rentType}}">
+                    <text class="_text 6befa859 label-type2 tag-label" wx:if="{{item.rentType.key==1||item.rentType.key==2}}">合租</text>
+                    <text class="_text 6befa859 label-type3 tag-label" wx:if="{{item.rentType.key==3&&item.flatTag!=2}}">{{item.rentType.value}}</text>
+                    <text class="_text 6befa859 label-type4 tag-label" wx:if="{{item.flatTag==2}}">酒店式公寓</text>
+                    <text class="_text 6befa859 label-type-xyz tag-label" wx:if="{{item.monthlyPay==2&&item.sourceType!=1}}">信用租</text>
+                </view>
+                <view class="_view 6befa859 card-row">
+                    <text class="_text 6befa859 card-pirce">{{item.showPrice}}</text>
+                    <text class="_text 6befa859 card-unit">元/月{{item.isMaxShowPrice?'':'起'}}</text>
+                </view>
+            </view>
+        </view>
+    </view>
+</template>
+<import src="/components/mgImage.vue.wxml"></import>

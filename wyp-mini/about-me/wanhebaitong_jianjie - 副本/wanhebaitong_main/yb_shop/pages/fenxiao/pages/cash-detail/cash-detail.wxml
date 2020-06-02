@@ -1,0 +1,46 @@
+<view class="info">
+    <view class="info-title flex-row">
+        <view bindtap="select" class="flex-x-center   width" data-status="-1">
+            <view class="info-text {{status==-1?'active':''}}">全部</view>
+        </view>
+        <view bindtap="select" class="flex-x-center  width" data-status="0">
+            <view class="info-text {{status==0?'active':''}}">待审核</view>
+        </view>
+        <view bindtap="select" class="flex-x-center  width" data-status="1">
+            <view class="info-text {{status==1?'active':''}}">待打款</view>
+        </view>
+        <view bindtap="select" class="flex-x-center  width" data-status="2">
+            <view class="info-text {{status==2?'active':''}}">已打款</view>
+        </view>
+        <view bindtap="select" class="flex-x-center  width" data-status="3">
+            <view class="info-text {{status==3?'active':''}}">无效</view>
+        </view>
+    </view>
+    <view style="margin-top:100rpx;">
+        <view class="info-content" wx:for="{{list}}">
+            <view class="info-label flex-row">
+                <view class="info-left">
+                    <view class="info-up">提现 ￥ {{item.price}} </view>
+                    <view class="info-down">{{item.create_time}}</view>
+                </view>
+                <view class="info-right">
+                    <block wx:if="{{item.status==0}}">
+            待审核
+          </block>
+                    <block wx:elif="{{item.status==1}}">
+            待打款
+          </block>
+                    <block wx:elif="{{item.status==2}}">
+            已打款
+          </block>
+                    <block wx:else>
+            无效
+          </block>
+                </view>
+            </view>
+        </view>
+        <view class="fui-loading empty" style="margin-top:50rpx;" wx:if="{{list.length==0&&loaded}}">
+            <view class="text">暂无记录</view>
+        </view>
+    </view>
+</view>

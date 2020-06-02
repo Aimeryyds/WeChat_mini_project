@@ -1,0 +1,13 @@
+<import src="../../commons/tpl/templateAnchor.wxml"></import>
+<import src="../../commons/tpl/templateLive.wxml"></import>
+<import src="../../commons/tpl/templateNoData.wxml"></import>
+<form bindsubmit="submitForm" reportSubmit="true">
+    <view class="search-page" style="margin-top:{{statusBar.height+'px'}}">
+        <status-bar statusBar="{{statusBar}}"></status-bar>
+        <template is="noData-tpl" data="{{tips:pageType==='anchor'?'暂无主播列表~':'暂无直播间列表'}}" wx:if="{{anchorList.list.length<0||channelsList.list.length<0}}"></template>
+        <scroll-view scrollY class="search-main" wx:else>
+            <template is="searchAnchor-tpl" data="{{...anchorList}}" wx:if="{{pageType==='anchor'}}"></template>
+            <template is="searchLive-tpl" data="{{...channelsList}}" wx:else></template>
+        </scroll-view>
+    </view>
+</form>

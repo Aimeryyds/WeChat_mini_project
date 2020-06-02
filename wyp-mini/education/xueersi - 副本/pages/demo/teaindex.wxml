@@ -1,0 +1,47 @@
+<view class="top-c">老师a主页</view>
+<view>
+    <view class="appraise-wrap">
+        <view class="appraise-top-tags" wx:if="{{$appraise$totalCount>0}}">
+            <view class="multi">
+                <view class="count gray_tx">共有{{$appraise$totalCount}}条评价</view>
+                <view class="star-score">
+                    <view class="icon-star {{$appraise$star$size==='s'?'':'bigger'}} {{$appraise$star$score>_index+0.5?'get-one':$appraise$star$score>_index?'get-half':''}}" wx:for="{{5}}" wx:for-index="_index" wx:key="index"></view>
+                    <view class="score" wx:if="{{$appraise$star$showScore}}">{{$appraise$star$score}}</view>
+                </view>
+            </view>
+            <view class="tags-list">
+                <view bindtap="$appraise$tagChange" class="tag {{_index===$appraise$currentTagIndex?'active':''}}" data-wpytagchange-a="{{_index}}" wx:for="{{$appraise$evaluateTags}}" wx:for-index="_index" wx:key="index">
+              {{item.desc}}<text wx:if="{{item.count}}">（{{item.count}}）</text>
+                </view>
+            </view>
+        </view>
+        <view class="data-list" wx:if="{{$appraise$evaluateList.length}}">
+            <view class="item" wx:for="{{$appraise$evaluateList}}" wx:for-index="$appraise$index" wx:for-item="$appraise$Item" wx:key="$appraise$index">
+                <image binderror="$appraise$loadErrorImg" class="avator" data-wpyloaderrorimg-a="{{$appraise$index}}" src="{{$appraise$Item.stu_logo?$appraise$Item.stu_logo:$appraise$imgList.defaultImg}}"></image>
+                <view class="border-bottom">
+                    <view class="info">
+                        <view class="info-name">
+                            <text class="usr-name">{{$appraise$Item.stu_name}}</text>
+                            <view class="star-score">
+                                <view class="icon-star {{$appraise$star1$size==='s'?'':'bigger'}} {{$appraise$Item.star_num>_index+0.5?'get-one':$appraise$Item.star_num>_index?'get-half':''}}" wx:for="{{5}}" wx:for-index="_index" wx:key="index"></view>
+                                <view class="score" wx:if="{{$appraise$star1$showScore}}">{{$appraise$Item.star_num}}</view>
+                            </view>
+                        </view>
+                        <view class="grade gray_tx">{{$appraise$Item.cla_name}}</view>
+                        <view class="tags-list">
+                            <view class="tag" wx:for="{{$appraise$Item.tags}}" wx:for-index="$appraise$tIndex" wx:for-item="$appraise$tItem" wx:key="$appraise$index">{{$appraise$tItem}}</view>
+                        </view>
+                        <view class="usr-desc" wx:if="{{$appraise$Item.evaluate_content||!$appraise$Item.tags||$appraise$Item.tags.length==0}}">{{$appraise$Item.evaluate_content||'该用户没有对老师留下文字评论~'}}<text class="gray_tx" wx:if="{{$appraise$Item.is_audit==='Y'}}"> #家长旁听#</text>
+                        </view>
+                        <text class="reply" wx:if="{{$appraise$Item.reply}}">老师回复：{{$appraise$Item.reply}}</text>
+                        <text class="time gray_tx">{{$appraise$Item.evaluate_time}}</text>
+                    </view>
+                </view>
+            </view>
+        </view>
+        <view class="no-intro" wx:if="{{$appraise$totalCount===0}}">
+            <image class="no-intro-pic" src="https://static-xesapi.speiyou.cn/xesFeProject/xesFeSource/xesImagesLibrary/1584846827741.png"></image>
+            <text class="no-intro-text">还没有人评价过</text>
+        </view>
+    </view>
+</view>

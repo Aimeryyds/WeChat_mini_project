@@ -1,0 +1,66 @@
+<view class="container">
+    <view class="userinfo success_icon">
+        <image src="{{success}}"></image>
+        <text class="success_text">支付成功</text>
+        <text class="success_detail">订单详情，请按确定键进入</text>
+    </view>
+    <button bindtap="goOrder" class="confirm">确定</button>
+    <view class="text">
+        <image src="{{ewm}}"></image>
+        <view>下载平安健康官方APP，购买有惊喜！</view>
+    </view>
+</view>
+<van-popup bind:close="onClose" closeOnClickOverlay="true" customClass="vant-popup" overlay="{{true}}" position="center" show="{{show}}">
+    <view class="dialog_title">
+        <view>
+            <image class="warn" src="{{warn}}"></image>
+        </view>
+        <view> 开通自动缴费，保单到期日，我们会从银行卡中自动扣取您的保费，确保您的保障不间断。</view>
+    </view>
+    <view class="dialog_body">
+        <view>
+            <view class="left">开户姓名：</view>
+            <view class="right">
+                <input disabled placeholder="请输入开户姓名" value="{{holderName}}"></input>
+            </view>
+        </view>
+        <view>
+            <view class="left">开户银行：</view>
+            <view class="right">
+                <picker bindchange="bindPickerChange" range="{{bankArray}}" rangeKey="name" value="{{id}}">
+                    <text>{{bankArray[index].name}}</text>
+                </picker>
+            </view>
+        </view>
+        <view>
+            <view class="left">银行账号：</view>
+            <view class="right">
+                <input bindblur="accountIdBlur" maxlength="19" placeholder="请输入银行账号" type="number" value="{{accountId}}"></input>
+            </view>
+        </view>
+        <view wx:if="{{showYzm}}">
+            <view class="left">银行预留手机号：</view>
+            <view class="right">
+                <input bindblur="telphoneBlur" maxlength="11" placeholder="请输入手机号" type="number" value="{{telphone}}"></input>
+            </view>
+        </view>
+        <view wx:if="{{showYzm}}">
+            <view class="left">验证码：</view>
+            <view class="right">
+                <input bindblur="yzmBlur" maxlength="6" placeholder="验证码" type="number" value="{{yzm}}"></input>
+                <button bindtap="getVerificationCode" class="yzm" disabled="{{disabled}}" loading="{{false}}" plain="plain" type="primary">{{time}}</button>
+            </view>
+        </view>
+    </view>
+    <view class="agreement">
+        <checkbox-group bindchange="agreeChange">
+            <label class="checkbox" wx:for="{{agreeItems}}" wx:key="{{item.value}}">
+                <checkbox checked="{{item.checked}}" class="checkbox" color="#f60" value="{{item.name}}"></checkbox>
+            </label>
+        </checkbox-group>
+        <view class="text">我已阅读并了解<text bindtap="openPdf" class="blue" data-pdfurl="/mgr/makePdf.do?filename=A000000064-18.pdf">《自动缴费转账扣款客户须知》</text>
+        </view>
+    </view>
+    <button bind:tap="onConfirm" class="button-btm">确认开通</button>
+</van-popup>
+<van-toast id="van-toast"></van-toast>

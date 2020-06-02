@@ -1,0 +1,96 @@
+<view>
+    <scroll-view scrollY="true" style="height:{{Wheight-50}}px">
+        <view class="dress" style="background-color:rgba(0, 0, 0, 0)" wx:if="{{takeaway==2}}">
+            <view class="text" wx:if="{{delivery_addr}}">
+                <view class="people">
+                    <text>{{takeaway_address.reciever_name}}</text>
+                    <text>{{takeaway_address.phone}}</text>
+                </view>
+                <view wx:if="{{takeaway_address.detailed_addr.length>0}}">
+                    <text class="black">{{takeaway_address.detailed_addr}}</text>
+                    <text class="black" wx:if="{{takeaway_address.house_number}}">{{takeaway_address.house_number}}室</text>
+                </view>
+            </view>
+            <view class="dress_l" wx:else>请选择收货地址</view>
+            <view bindtap="addAddr" class="dress_r">
+                <text class="gh">更换</text>
+                <image src="jt.png"></image>
+            </view>
+        </view>
+        <view class="detail" wx:for="{{carts}}" wx:key="{{item}}">
+            <view class="detail_img">
+                <image mode="aspectFit" src="{{item.feature_img}}"></image>
+            </view>
+            <view class="detail_txt">
+                <text class="de1">{{item.name}}</text>
+                <text class="de2">
+                    <text wx:if="{{item.spec_id}}">规格:{{item.spec_id.name}}</text>
+                    <block wx:if="{{item.ingred_id.length}}">
+                        <text> 加料:</text>
+                        <text wx:for="{{item.ingred_id}}" wx:for-item="item1" wx:key="index">{{item1.name+'￥'+item1.price}} </text>
+                    </block>
+                    <block wx:if="{{item.taste_id}}">
+                        <text wx:for="{{item.taste_id}}" wx:for-item="item2" wx:key="index">{{item2.name+':'+item2.sel}} </text>
+                    </block>
+                </text>
+                <text class="de3">￥{{item.total_price}} X{{item.count}}</text>
+            </view>
+        </view>
+        <view class="count" wx:if="{{takeaway!=2}}">
+            <view class="count_money">总价:<text style="font-size:{{isAliApp?'0.35rem':'0.9rem'}}">￥{{cartsprice}}</text>
+            </view>
+            <view class="count_yun" wx:if="{{false}}">
+                <text>(含运费:￥0)</text>
+            </view>
+        </view>
+        <view class="lan" style="font-size:{{isAliApp?'0.35rem':'0.9rem'}}">
+            <view class="fx" wx:if="{{takeaway==2&&delivery_time}}">
+                <view style="flex:3;color:#b5b5b5">
+                    <text>预计送达时间:</text>
+                </view>
+                <view style="flex:5">{{delivery_time}}</view>
+            </view>
+            <view class="fx" wx:if="{{takeaway!=2}}">
+                <view style="flex:2;color:#b5b5b5">
+                    <text>取单时间:</text>
+                </view>
+                <view style="flex:5">{{getime_type}}</view>
+            </view>
+            <view class="fx" wx:if="{{takeaway==2&&false}}">
+                <view style="flex:3;color:#b5b5b5">
+                    <text>订单号:</text>
+                </view>
+                <view style="flex:5">1000000000000000</view>
+            </view>
+            <view class="fx" wx:for="{{detail}}">
+                <view style="flex:2;color:#b5b5b5">
+                    <text>{{item.t}}</text>
+                </view>
+                <view style="flex:5">
+                    <text>{{item.r}}</text>
+                </view>
+            </view>
+            <view class="fx">
+                <view style="flex:2;color:#b5b5b5">
+                    <text>买家留言:</text>
+                </view>
+                <view style="flex:5;padding-top:1em">
+                    <input bindblur="binkMessageConfirm" style="background-color:rgba(0, 0, 0, 0)" type="text"></input>
+                </view>
+            </view>
+        </view>
+    </scroll-view>
+    <view class="footer">
+        <view class="footer-ll" wx:if="{{takeaway==2}}">
+            <text>配送费:{{mealDelivery.price}}</text>
+            <text>实付款:{{cartsprice}}</text>
+        </view>
+        <view class="footer-l" wx:else>
+            <text>实付款:{{cartsprice}}</text>
+        </view>
+        <view bindtap="submitOrder" class="footer-r" wx:if="isAliApp">提交订单</view>
+        <view class="footer-r" wx:else>
+            <navigator bindtap="submitOrder">提交订单</navigator>
+        </view>
+    </view>
+</view>

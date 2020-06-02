@@ -1,0 +1,25 @@
+<view class="container">
+    <view class="Commission">
+        <text class="left">预计佣金</text>
+        <text class="right">{{commissioncount}}元</text>
+    </view>
+    <view class="tabClass">
+        <text bindtap="tabClick" class="normalClass {{index==0?'selectClass':''}} " data-index="0">所有</text>
+        <text bindtap="tabClick" class="normalClass {{index==1?'selectClass':''}}" data-index="1">待审核</text>
+        <text bindtap="tabClick" class="normalClass {{index==2?'selectClass':''}}" data-index="2">待打款</text>
+        <text bindtap="tabClick" class="normalClass {{index==3?'selectClass':''}}" data-index="3">已打款</text>
+        <text bindtap="tabClick" class="normalClass {{index==4?'selectClass':''}}" data-index="4">无效</text>
+    </view>
+    <view bindtap="detailClick" class="list" id="{{item.id}}" wx:if="{{data}}" wx:for="{{data}}">
+        <view class="listLeft">
+            <text class="num">编号:{{item.applyno}}</text>
+            <text>申请佣金:{{item.commission}},实际佣金:{{item.realmoney}},个人所得税:{{item.deductionmoney}}元</text>
+            <text>申请时间:{{item.dealtime}}</text>
+        </view>
+        <view class="listRight">
+            <text>+{{item.charge}}</text>
+            <text>{{item.statusstr}}</text>
+        </view>
+    </view>
+</view>
+<loading wx:if="{{loading}}"></loading>

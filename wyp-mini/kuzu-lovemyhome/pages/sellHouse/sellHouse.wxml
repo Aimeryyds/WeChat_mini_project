@@ -1,0 +1,88 @@
+<form bindsubmit="formSubmit">
+    <view class="num_1">
+        <view class="group_from">
+            <view class="group_lable_1">小区名称</view>
+            <view bindtap="toSearch" class="group_input_1 lookTime">
+                <input bindinput="getXiaoQu" disabled="{{true}}" placeholder="" placeholderStyle="color:#bababa;" value="{{xiaoQuName}}"></input>
+            </view>
+        </view>
+        <view class="group_from">
+            <view class="groupThree">
+                <view class="group_lable_s">楼号</view>
+                <view class="group_input_s">
+                    <input bindinput="getLouNum" placeholder="" placeholderStyle="color:#bababa;" type="text" value="{{louNmu}}"></input>
+                </view>
+            </view>
+            <view class="groupThree">
+                <view class="group_lable_s">单元</view>
+                <view class="group_input_s">
+                    <input bindinput="getDanNum" placeholder="" placeholderStyle="color:#bababa;" type="text" value="{{danNmu}}"></input>
+                </view>
+            </view>
+            <view class="groupThree">
+                <view class="group_lable_s">房间</view>
+                <view class="group_input_s">
+                    <input bindinput="getFangNum" placeholder="" placeholderStyle="color:#bababa;" type="text" value="{{fangNmu}}"></input>
+                </view>
+            </view>
+        </view>
+        <view bindtap="qiWang" class="group_from">
+            <view class="group_lable_1">期望售价</view>
+            <view class="group_input_1">
+                <input bindinput="getShouJia" class="shoujia" placeholder="请输入期望售价" placeholderStyle="color:#bababa;" type="digit" value="{{shouJia}}"></input>
+                <text class="danwei">万</text>
+            </view>
+        </view>
+        <view class="group_from">
+            <view class="group_lable_1">面积/㎡</view>
+            <view class="group_input_1">
+                <input bindinput="getmianJi" placeholder="请输入房源面积" placeholderStyle="color:#bababa;" type="digit" value="{{mianJi}}"></input>
+            </view>
+        </view>
+        <view bindtap="lookHouseTime" class="group_from">
+            <view class="group_lable_1">看房时间</view>
+            <view class="group_input_1 lookTime">
+                <input disabled="true" placeholder="" placeholderStyle="color:#bababa;" value="{{lookNeirong}}"></input>
+            </view>
+        </view>
+    </view>
+    <view class="num_2">
+        <view class="group_from">
+            <view class="group_lable_1">您的称呼</view>
+            <view class="group_input_1">
+                <input bindinput="getNiCheng" placeholder="请输入您的称呼" placeholderStyle="color:#bababa;" type="text" value="{{niCheng}}"></input>
+            </view>
+        </view>
+        <view class="group_from">
+            <view class="group_lable_1">手机号码</view>
+            <view class="group_input_1 yzmBox">
+                <input bindinput="getPhoneNumber" class="codeInput" maxlength="11" name="{{userInfo.loginname}}" placeholder="" placeholderStyle="color:#bababa;" type="idcard" value="{{userInfo.loginname}}"></input>
+                <button bindtap="{{isSend?'':'sendMessage'}}" class="codeBtn {{isSend?'addcode':''}}">{{isSend?secend+'秒后重发':time}}</button>
+            </view>
+        </view>
+        <view class="group_from">
+            <view class="group_lable_1">验证码</view>
+            <view class="group_input_1">
+                <input bindinput="getTelCode" placeholder="请输入验证码" placeholderStyle="color:#bababa;" type="number" value="{{scode}}"></input>
+            </view>
+        </view>
+    </view>
+    <view class="lookTimeWay" hidden="{{lookMask}}">
+        <view bindtap="lookContent" class="lookCon" data-num="{{item.nameIndex}}" data-text="{{item.name}}" wx:for="{{lookHouseNav}}" wx:key="index">{{item.name}}</view>
+        <view bindtap="lookCancel" class="cancel">取消</view>
+    </view>
+    <view bindtap="lookCancel" class="lookTimeWayMask" hidden="{{lookMask}}"></view>
+    <view bindtap="closeMask" class="fixedWorld" hidden="{{fixedWorld}}">
+        <text>发布成功后，我爱我家经纪人</text>
+        <text>将会尽快联系您</text>
+    </view>
+    <view bindtap="closeMask" class="opacityMask" hidden="{{fixedWorld}}"></view>
+    <view class="sellFoot mflex">
+        <view class="sellTel mfauto">
+            <text bindtap="tel" id="4008515515">电话卖房</text>
+        </view>
+        <view class="sellHouse mfauto">
+            <button formType="submit">发布房源</button>
+        </view>
+    </view>
+</form>

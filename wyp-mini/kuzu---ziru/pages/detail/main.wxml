@@ -1,0 +1,79 @@
+<scroll-view class="detail-wrapper data-v-69805e1e" scrollIntoView="{{scrollIntoView}}" scrollY="{{true}}">
+    <view class="data-v-69805e1e" id="topHook"></view>
+    <house-nav bind:__l="__l" bind:handleScrollToTarget="__e" class="data-v-69805e1e" data-event-opts="{{[ [ '^handleScrollToTarget',[ ['handleScrollToTarget'] ] ] ]}}" isOffline="{{isOffline}}" vueId="1"></house-nav>
+    <view class="normal _div data-v-69805e1e" wx:if="{{isNormal}}">
+        <house-preview bind:__l="__l" class="data-v-69805e1e" isOffline="{{isOffline}}" vueId="2"></house-preview>
+        <house-info bind:__l="__l" class="data-v-69805e1e" isOffline="{{isOffline}}" vueId="3"></house-info>
+        <house-desc bind:__l="__l" class="data-v-69805e1e" vueId="4"></house-desc>
+        <house-roommates bind:__l="__l" class="data-v-69805e1e" vueId="5"></house-roommates>
+        <house-keeper bind:__l="__l" class="data-v-69805e1e" houseKeeper="{{houseKeeper}}" shareId="{{shareId}}" vueId="6"></house-keeper>
+        <house-resblock bind:__l="__l" class="data-v-69805e1e" vueId="7"></house-resblock>
+        <house-traffic bind:__l="__l" class="data-v-69805e1e" vueId="8"></house-traffic>
+        <house-services-intro bind:__l="__l" class="data-v-69805e1e" vueId="9"></house-services-intro>
+        <view class="jump-hook data-v-69805e1e" id="recommend"></view>
+        <view class="nav-hook data-v-69805e1e" data-type="recommend"></view>
+        <house-recommend bind:__l="__l" class="data-v-69805e1e" houseRecommend="{{houseRecommend}}" isOffline="{{isOffline}}" vueId="10"></house-recommend>
+        <view class="tips tips-block _p data-v-69805e1e" wx:if="{{house.bottom_notice}}">{{house.bottom_notice}}</view>
+        <place-holder bind:__l="__l" class="data-v-69805e1e" height="144rpx" vueId="11"></place-holder>
+    </view>
+    <block wx:else>
+        <view class="luxury _div data-v-69805e1e" wx:if="{{isHZ}}">
+            <hz-house-preview bind:__l="__l" class="data-v-69805e1e" housePreview="{{housePreview}}" vueId="12"></hz-house-preview>
+            <hz-house-info bind:__l="__l" class="data-v-69805e1e" houseInfo="{{houseInfo}}" loadingFlag="{{loadingFlag}}" vueId="13"></hz-house-info>
+            <hz-house-banner banner="{{houseInfo.banner}}" bind:__l="__l" class="data-v-69805e1e" vueId="14" wx:if="{{houseInfo}}"></hz-house-banner>
+            <hz-house-designer bind:__l="__l" class="data-v-69805e1e" houseDesigner="{{house.designer}}" vueId="15" wx:if="{{house}}"></hz-house-designer>
+            <hz-house-desc bind:__l="__l" class="data-v-69805e1e" houseDesc="{{houseDesc}}" houseInfo="{{houseInfo}}" houseTraffic="{{houseTraffic}}" vueId="16"></hz-house-desc>
+            <hz-house-air bind:__l="__l" class="data-v-69805e1e" houseAir="{{house.air_report_detail}}" vueId="17" wx:if="{{house}}"></hz-house-air>
+            <hz-house-type bind:__l="__l" class="data-v-69805e1e" houseType="{{houseType}}" vueId="18"></hz-house-type>
+            <hz-house-resblock bind:__l="__l" class="data-v-69805e1e" houseResblock="{{houseResblock}}" vueId="19"></hz-house-resblock>
+            <hz-house-keeper bind:__l="__l" class="data-v-69805e1e" houseKeeper="{{houseKeeper}}" vueId="20"></hz-house-keeper>
+            <place-holder bind:__l="__l" class="data-v-69805e1e" height="144rpx" vueId="21"></place-holder>
+        </view>
+        <block wx:else>
+            <view class="zz4_0 _div data-v-69805e1e" wx:if="{{isZZ4_0}}">
+                <zz4-house-top-banner bind:__l="__l" class="data-v-69805e1e" id="top-banner" vueId="22"></zz4-house-top-banner>
+                <zz4-house-info bind:__l="__l" bind:handleScrollToTarget="__e" class="data-v-69805e1e" data-event-opts="{{[ [ '^handleScrollToTarget',[ ['handleScrollToTarget'] ] ] ]}}" vueId="23"></zz4-house-info>
+                <zz4-house-media bind:__l="__l" class="data-v-69805e1e" vueId="24"></zz4-house-media>
+                <view class="hr-line padding data-v-69805e1e"></view>
+                <zz4-house-space bind:__l="__l" class="data-v-69805e1e" vueId="25"></zz4-house-space>
+                <view class="hr-line padding data-v-69805e1e"></view>
+                <zz4-intro bind:__l="__l" class="data-v-69805e1e" vueId="26"></zz4-intro>
+                <view class="jump-hook data-v-69805e1e" id="house-detail"></view>
+                <zz4-house-detail bind:__l="__l" class="data-v-69805e1e" vueId="27"></zz4-house-detail>
+                <view class="nav-hook data-v-69805e1e" data-index="1"></view>
+                <house-traffic bind:__l="__l" class="data-v-69805e1e" vueId="28"></house-traffic>
+                <house-keeper bind:__l="__l" class="data-v-69805e1e" houseKeeper="{{houseKeeper}}" shareId="{{shareId}}" vueId="29"></house-keeper>
+                <zz4-house-resblock bind:__l="__l" class="data-v-69805e1e" vueId="30"></zz4-house-resblock>
+                <house-services-intro bind:__l="__l" class="data-v-69805e1e" type="zz4" vueId="31"></house-services-intro>
+                <view class="jump-hook data-v-69805e1e" id="recommend"></view>
+                <house-recommend bind:__l="__l" class="data-v-69805e1e" houseRecommend="{{houseRecommend}}" vueId="32"></house-recommend>
+                <view class="nav-hook data-v-69805e1e" data-index="2"></view>
+            </view>
+        </block>
+    </block>
+    <view bindtap="__e" class="network-modal-shadow _div data-v-69805e1e" data-event-opts="{{[ [ 'tap',[ [ 'handleRetry',['$event'] ] ] ] ]}}" wx:if="{{netError}}"></view>
+    <view bindtap="__e" class="network-modal _div data-v-69805e1e" data-event-opts="{{[ [ 'tap',[ [ 'handleRetry',['$event'] ] ] ] ]}}" wx:if="{{netError}}">
+        <view class="iconfont icon-shuaxin _i data-v-69805e1e"></view>
+        <label class="_span data-v-69805e1e">网络异常，点击重试</label>
+    </view>
+    <floating-action-bar bind:__l="__l" canWeakUpApp="{{canWeakUpApp}}" class="data-v-69805e1e" from="detail" showHomeBtn="{{showHomeBtn}}" vueId="33"></floating-action-bar>
+    <snapshot-toast bind:__l="__l" bind:handleScrollToTarget="__e" class="data-v-69805e1e" data-event-opts="{{[ [ '^handleScrollToTarget',[ ['handleScrollToTarget'] ] ] ]}}" isRecommendReady="{{houseRecommend&&houseRecommend.length}}" vueId="34"></snapshot-toast>
+    <view class="{{['button-group _div data-v-69805e1e',canWeakUpApp?'reverse':'']}}" wx:if="{{house&&(button||canWeakUpApp)}}">
+        <button appParameter="{{appParameter}}" binderror="__e" class="{{['btn data-v-69805e1e',isHZ?'hz-style':'',!button?'full':'']}}" data-event-opts="{{[ [ 'error',[ [ 'launchAppError',['$event'] ] ] ] ]}}" openType="launchApp" wx:if="{{canWeakUpApp}}">在APP中打开</button>
+        <block wx:if="{{isTurn}}">
+            <view bindtap="__e" class="{{['btn _div data-v-69805e1e',!canWeakUpApp?'full':'',button.is_valid===0?'disabled':'']}}" data-event-opts="{{[ [ 'tap',[ [ 'handleCall',['$0'],['house.turn.customer_phone'] ] ] ] ]}}" wx:if="{{button.type===BUTTON_TYPE.contact_ziroomer}}">{{button.text}}</view>
+            <block wx:else>
+                <view bindtap="__e" class="{{['btn _div data-v-69805e1e',!canWeakUpApp?'full':'',button.is_valid===0?'disabled':'']}}" data-event-opts="{{[ [ 'tap',[ [ 'showModal',[ [ 'o',['title','发起者休息中'],['content','转租发起者暂时关闭了咨询，建议您在App中打开并收藏房源，时刻关注房源状态'],['showCancel',false],['confirmText','我知道了'] ] ] ] ] ] ]}}" wx:if="{{button.type===BUTTON_TYPE.ziroomer_resting}}">{{button.text}}</view>
+                <block wx:else>
+                    <view class="{{['btn _div data-v-69805e1e',!canWeakUpApp?'full':'',button.is_valid===0?'disabled':'']}}" wx:if="{{button.type===BUTTON_TYPE.text}}">{{button.text}}</view>
+                </block>
+            </block>
+        </block>
+        <block wx:else>
+            <view bindtap="__e" class="{{['btn _div data-v-69805e1e',isHZ?'hz-style':'',!canWeakUpApp?'full':'',button.is_valid===0?'disabled':'']}}" data-event-opts="{{[ [ 'tap',[ [ 'handleCall',['$0'],['keeperPhone'] ] ] ] ]}}" wx:if="{{button.type===BUTTON_TYPE.contact_ziroomkeeper}}">{{''+button.text+''}}</view>
+            <block wx:else>
+                <view class="{{['btn _div data-v-69805e1e',!canWeakUpApp?'full':'',button.is_valid===0?'disabled':'']}}" wx:if="{{button.type===BUTTON_TYPE.text}}">{{button.text}}</view>
+            </block>
+        </block>
+    </view>
+</scroll-view>

@@ -1,0 +1,13 @@
+<template name="01697b00">
+    <view class="_view 01697b00 {{'buildingImages '+(fixed?'fixed':'')+passClass}}" wx:if="{{buildingImages&&buildingImages.length>0}}">
+        <view class="_view 01697b00 h1" wx:if="{{!fixed}}">大楼照片</view>
+        <scroll-view class="_scroll-view 01697b00 buildingImages-scroll" scrollX="true">
+            <view class="_view 01697b00 ul">
+                <view bindtap="handleProxy" class="_view 01697b00 li" data-comkey="{{$k}}" data-eventid="{{'01697b00-0-'+index}}" key="{{index}}" wx:for="{{buildingImages}}" wx:for-item="img" wx:key="index">
+                    <template is="0e24a461" data="{{...$root['0'],...$root[$kk+'01697b00-0-'+index],$root:$root}}"></template>
+                </view>
+            </view>
+        </scroll-view>
+    </view>
+</template>
+<import src="/components/mgImage.vue.wxml"></import>

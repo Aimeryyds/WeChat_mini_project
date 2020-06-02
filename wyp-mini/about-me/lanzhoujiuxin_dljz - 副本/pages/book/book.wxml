@@ -1,0 +1,41 @@
+<import src="../../libs/templates/book.wxml"></import>
+<import src="../../libs/templates/cusService.wxml"></import>
+<import src="../../libs/templates/footer.wxml"></import>
+<import src="../../libs/templates/tabBar.wxml"></import>
+<view class="main book-container">
+    <view class="nav-bar" wx:if="{{groupList.length>1}}">
+        <scroll-view scrollX class="nav-list {{showMoreBtn?'show-more':''}}" scrollIntoView="{{scrollTarget}}">
+            <view bindtap="handleClick" class="nav-item {{currentGroupId==group.id?'item-active':''}}" data-groupId="{{group.id}}" id="{{'nav'+group.id}}" style="{{currentGroupId==group.id?'color:'+globalColor:''}}" wx:for="{{groupList}}" wx:for-item="group" wx:key="group.id">
+          {{group.name}}
+          <view class="indicator" style="{{currentGroupId==group.id?'background-color:'+globalColor:''}}"></view>
+            </view>
+        </scroll-view>
+        <view bindtap="showAllCate" class="more-btn iconfont icon-turn" wx:if="{{showMoreBtn}}"></view>
+    </view>
+    <view class="bookListWrap">
+        <view class="bookList" wx:if="{{bookGroupInfoMap[currentGroupId]&&bookGroupInfoMap[currentGroupId].length>0}}" wx:for="{{bookGroupInfoMap[currentGroupId]}}" wx:for-item="bookInfo">
+            <template is="book" data="{{bookInfo:bookInfo,formItem:formItem,globalColor:globalColor}}"></template>
+        </view>
+    </view>
+    <view class="bookEmpty" wx:if="{{!bookGroupInfoMap[currentGroupId]||bookGroupInfoMap[currentGroupId].length==0}}">
+        <view class="imageWrap">
+            <image class="spread" src="http://qz.faisys.com/image/wxImage/empty-1.png"></image>
+        </view>
+        <view class="des">还没有相关的服务呢</view>
+    </view>
+    <template is="footer" data="{{flag:flag,isOem:isOem,agentAcct:agentAcct}}" wx:if="{{flag.footerOpen&&serviceList.length>0}}"></template>
+</view>
+<template is="cusservice" data="{{cusService:cusService,flag:flag}}" wx:if="{{flag.cusServiceOpen||cusService.supportOpen}}"></template>
+<view class="cusTabBarPosition" wx:if="{{showTabBar}}"></view>
+<template is="tabbar" data="{{tabbar:tabbar}}" wx:if="{{showTabBar}}"></template>
+<view class="editor-drawer" wx:if="{{showAllCateFlag}}">
+    <view class="cate-title-bar">
+        <view class="cate-title">所有分类</view>
+        <view bindtap="closeCateDrawer" class="cate-close iconfont icon-turn"></view>
+    </view>
+    <view class="cate-list-wrapper">
+        <view class="cate-list">
+            <a bindtap="handleClick" class="cate-item" data-groupId="{{group.id}}" wx:for="{{groupList}}" wx:for-item="group" wx:key="group.id">{{group.name}}</a>
+        </view>
+    </view>
+</view>

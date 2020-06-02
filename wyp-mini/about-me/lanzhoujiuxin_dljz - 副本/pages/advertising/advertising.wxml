@@ -1,0 +1,99 @@
+<import src="../../libs/wxParse/wxParse.wxml"></import>
+<view class="adver-main">
+    <view class="adver-content">
+        <view class="adver-knowme">
+            <view class="resume">
+                <text>新三板，专注企业服务</text>
+                <text class="specialText">7</text>
+                <text>年，累计注册用户</text>
+                <text class="specialText">1600</text>
+                <text>万</text>
+            </view>
+            <view class="product-name">
+                <image src="http://qz.faisys.com/image/wxImage/wxAd/name.png" style="width:646rpx;height:122rpx;"></image>
+            </view>
+        </view>
+        <view class="shadow-card shadow-card-top register-form">
+            <view class="shadow-card-before"></view>
+            <view class="shadow-card-after"></view>
+            <view class="shadow-card-wrapper">
+                <view class="shadow-card-title">
+                    <view class="title-dot small-dot"></view>
+                    <view class="title-dot"></view>
+                    <view class="title-text">马上注册体验</view>
+                    <view class="title-dot"></view>
+                    <view class="title-dot small-dot"></view>
+                </view>
+                <view class="shadow-card-content">
+                    <form bindsubmit="registerSubmit">
+                        <view class="reg-item">
+                            <view class="reg-item-name">手机</view>
+                            <input bindinput="phoneInput" class="reg-item-input" maxlength="11" name="phone" placeholder="请输入手机号码" type="number"></input>
+                        </view>
+                        <view class="reg-item">
+                            <view class="reg-item-name">密码</view>
+                            <input password class="reg-item-input" maxlength="20" name="password" placeholder="4-20 字符，区分大小写" type="text"></input>
+                        </view>
+                        <view class="reg-item">
+                            <view class="reg-item-name">验证码</view>
+                            <input class="reg-item-input code-input" maxlength="4" name="code" placeholder="请输入验证码" type="text"></input>
+                            <button bindtap="getCode" class="code-btn" disabled="{{codeBtnFlag}}" type="default">{{codeBtnText}}</button>
+                        </view>
+                        <view class="reg-item">
+                            <view class="reg-item-name">用途</view>
+                            <picker selector bindchange="bindPickerChange" class="reg-item-input item-picker" name="use" range="{{companyGoals}}" rangeKey="name" value="{{name}}">
+                                <view class="picker">
+                                    <view class="placeholder-text" wx:if="{{index==-1}}">请选择您的注册用途</view>{{companyGoals[index].name}}
+                </view>
+                            </picker>
+                        </view>
+                        <view class="agree">
+                            <checkbox-group name="agree">
+                                <label class="checkbox">
+                                    <checkbox checked="true" value="1"></checkbox>
+                                </label>
+                                <view class="agree-text">
+                    我同意<view bindtap="modalHandle" class="notice" data-type="service">“服务条款”</view>及<view bindtap="modalHandle" class="notice" data-type="law">“法律声明”</view>
+                                </view>
+                            </checkbox-group>
+                        </view>
+                        <button class="action-btn" formType="submit">免费注册</button>
+                    </form>
+                </view>
+            </view>
+        </view>
+    </view>
+</view>
+<view bindtap="hideModal" catchtouchmove="preventTouchMove" class="modal-mask" wx:if="{{showModal}}"></view>
+<view class="modal-dialog" wx:if="{{showModal}}">
+    <view class="modal-title">请填写图中验证码</view>
+    <view class="modal-content">
+        <view class="modal-input">
+            <input bindblur="picCodeIput" class="input" maxlength="4" placeholder="请输入验证码" placeholderClass="input-holder" type="text"></input>
+            <image bindtap="changePicCode" class="pic-code" src="{{picCodeUrl}}"></image>
+        </view>
+        <view class="pic-code-error" wx:if="{{picCodeErr}}">{{picCodeErrText}}</view>
+    </view>
+    <view class="modal-footer">
+        <button bindtap="onConfirm" class="btn-confirm" data-status="confirm" disabled="{{disableConfirm}}">确定</button>
+    </view>
+</view>
+<view bindtap="hideLayer" catchtouchmove="preventTouchMove" class="layer-mask" wx:if="{{showLayer}}"></view>
+<view class="layer-dialog" wx:if="{{showLayer}}">
+    <view class="layer-title">{{layerType}}<view bindtap="hideLayer" class="iconfont icon-close close-btn"></view>
+    </view>
+    <view class="layer-content">
+        <scroll-view scrollY class="scroll-content">
+            <template is="wxParse" data="{{wxParseData:layerContent.nodes}}"></template>
+        </scroll-view>
+    </view>
+</view>
+<view class="layer" wx:if="{{showLayerOpen}}">
+    <view class="layer-content">
+        <image src="http://qz.faisys.com/image/wxImage/wxAd/bg2.png" style="width:448rpx;height:370rpx;"></image>
+        <view class="info">恭喜你，注册成功</view>
+        <view class="tip">复制官网链接qz.fkw.com，到电脑登录马上制作自己的小程序</view>
+        <view bindtap="copySiteUrl" class="action-btn copy-btn">复制网址</view>
+        <view bindtap="hasKnow" class="action-btn confirm-btn">我知道了</view>
+    </view>
+</view>

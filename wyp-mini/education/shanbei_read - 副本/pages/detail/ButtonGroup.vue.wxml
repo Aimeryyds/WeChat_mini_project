@@ -1,0 +1,29 @@
+<template name="64f2faeb">
+    <view class="_div data-v-247088b6 wrapper {{[isIpx?'fix-iphonex':'']}}">
+        <form reportSubmit bindsubmit="handleProxy" class="_form data-v-247088b6 flex-vhc" data-comkey="{{$k}}" data-eventid="{{'4'}}" wx:if="{{status===4}}">
+            <button class="_button data-v-247088b6 unpublish" formType="submit">该书籍已下线</button>
+        </form>
+        <view class="_div data-v-247088b6 btn-wrapper" wx:else>
+            <form reportSubmit bindsubmit="handleProxy" class="_form data-v-247088b6" data-comkey="{{$k}}" data-eventid="{{'0'}}" wx:if="{{status!==4}}">
+                <button class="_button data-v-247088b6 desk-on {{[onDesk?'desk-out':'']}}" formType="submit">{{onDesk?'移出书桌':'加入书桌'}}</button>
+            </form>
+            <form reportSubmit bindsubmit="handleProxy" class="_form data-v-247088b6 flex-vhc" data-comkey="{{$k}}" data-eventid="{{'3'}}" wx:if="{{status===3}}">
+                <button class="_button data-v-247088b6 single-read basic-read-btn" formType="submit">开始阅读</button>
+            </form>
+            <view class="_div data-v-247088b6 horizontal-btns" wx:else>
+                <form reportSubmit bindsubmit="handleProxy" class="_form data-v-247088b6" data-comkey="{{$k}}" data-eventid="{{'1'}}">
+                    <button class="_button data-v-247088b6 read basic-read-btn" formType="submit">{{status!==2?'试读':'开始阅读'}}</button>
+                </form>
+                <form reportSubmit bindsubmit="handleProxy" class="_form data-v-247088b6" data-comkey="{{$k}}" data-eventid="{{'2'}}">
+                    <button class="_button data-v-247088b6 purchase" formType="submit">
+                        <view class="_div data-v-247088b6 unlock basic-read-btn" wx:if="{{status!==2}}">
+                            <view class="_div data-v-247088b6 unlock-img"></view>
+                            <view class="_div data-v-247088b6 unlock-text">解锁全书</view>
+                        </view>
+                        <view class="_div data-v-247088b6 upgrade basic-read-btn" wx:else>升级书籍服务</view>
+                    </button>
+                </form>
+            </view>
+        </view>
+    </view>
+</template>

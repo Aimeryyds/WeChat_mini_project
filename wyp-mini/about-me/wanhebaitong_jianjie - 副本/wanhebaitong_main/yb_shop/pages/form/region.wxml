@@ -1,0 +1,10 @@
+<view class="form_tit" wx:if="{{f_item.title}}">{{f_item.title}}<text class="ture_color" wx:if="{{f_item.empty}}">*</text>
+</view>
+<view class="form_li right_arrow">
+    <picker bindchange="bindPickerChange" customItem="{{customItem}}" data-type="region" id="{{f_item.name}}" mode="region" value="">
+        <view class="picker">
+      当前选择：{{form_data[f_item.name]?form_data[f_item.name]:'请选择'}}
+    </view>
+    </picker>
+</view>
+<input name="{{f_item.name}}" style="display:none" value="{{form_data[f_item.name]}}"></input>

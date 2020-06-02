@@ -1,0 +1,16 @@
+<template name="recommend">
+    <view class="custom-recommend">
+        <view class="title">{{album.title}}</view>
+        <view class="desc">{{album.subtitle}}</view>
+        <view class="shop-list">
+            <navigator class="shop-item" url="../shopdetail/shopdetail?goodsSn={{item.goodsSn}}" wx:for="{{album.list}}">
+                <view style="width: 100%; ">
+                    <image class="shop-image" mode="widthFix" src="{{item.thumb}}"></image>
+                    <view class="shop-price">¥ {{item.price}}</view>
+                    <view class="shop-title">{{item.name}}</view>
+                    <view catchtap="join2Cart" class="purchase-button" id="{{item.goodsSn}}">立即购买</view>
+                </view>
+            </navigator>
+        </view>
+    </view>
+</template>

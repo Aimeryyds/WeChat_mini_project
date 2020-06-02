@@ -1,0 +1,89 @@
+<view class="bg_color">
+    <view class="header">
+        <view class="header_top">
+            <view class="bg1"></view>
+            <view class="bg2"></view>
+            <view class="bg3"></view>
+            <view class="head_img" wx:if="{{canIUseAvatarUrl}}">
+                <open-data class="thumb" type="userAvatarUrl"></open-data>
+            </view>
+            <image class="head_img" src="{{headphoto}}" wx:else></image>
+            <view class="header_top_R">
+                <view class="b_l">
+                    <text class="m">￥{{datas.lastdealnum}}</text>
+                    <text class="t">最近一次消费</text>
+                </view>
+                <view class="line">
+                    <text>|</text>
+                </view>
+                <view class="b_r">
+                    <text class="m">￥{{datas.commission}}</text>
+                    <text class="t">累计佣金</text>
+                </view>
+            </view>
+        </view>
+        <view class="header_pos">
+            <view class="header_pos_T">
+                <view class="flx1">
+                    <text>可提佣金(元)</text>
+                    <text class="all">￥{{money}}</text>
+                </view>
+                <navigator url="../mydis_cashout/mydis_cashout">
+                    <view class="flx2">
+                        <button style="{{canIUseAvatarUrl?'':'padding:0 10px;'}}">立即提现</button>
+                    </view>
+                </navigator>
+            </view>
+        </view>
+    </view>
+    <view class="item_list">
+        <view class="item b_radio">
+            <view class="item_l">
+                <text class="iconfont icon-fenxiao icon_bg"></text>
+            </view>
+            <view bindtap="tosy" class="item_r">
+                <text>我的分销({{datas.fenxiao_num}})</text>
+                <text class="iconfont icon-jiantou"></text>
+            </view>
+        </view>
+        <navigator class="content_t_c" url="../mydis_sub/mydis_sub">
+            <view class="item t_radio">
+                <view class="item_l">
+                    <text class="iconfont icon-renqun icon_bg"></text>
+                </view>
+                <view class="item_r">
+                    <text>我的下级({{datas.subuser_num}})</text>
+                    <text class="iconfont icon-jiantou"></text>
+                </view>
+            </view>
+        </navigator>
+        <view class="top">
+            <navigator url="../mydis_record/mydis_record">
+                <view class="item top">
+                    <view class="item_l">
+                        <text class="iconfont icon-yue icon_bg"></text>
+                    </view>
+                    <view class="item_r">
+                        <text>提现记录</text>
+                        <text class="iconfont icon-jiantou"></text>
+                    </view>
+                </view>
+            </navigator>
+            <navigator hoverClass="bg" url="../mydis_edit/mydis_edit">
+                <view class="item top">
+                    <view class="item_l">
+                        <text class="iconfont icon-zhanghaoguanli icon_bg"></text>
+                    </view>
+                    <view class="item_r">
+                        <text>店铺设置</text>
+                        <text class="iconfont icon-jiantou"></text>
+                    </view>
+                </view>
+            </navigator>
+        </view>
+    </view>
+    <view class="back" wx:if="{{show_homeBar}}">
+        <text bindtap="backHome" class="backHome">首页</text>|
+  <text bindtap="backTop" class="backTop">顶部</text>
+    </view>
+</view>

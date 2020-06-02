@@ -1,0 +1,44 @@
+<toast show="{{toast.show}}" title="{{toast.title}}"></toast>
+<view class="cart-dialog {{showDialog?'cart-dialog--show':''}}">
+    <view bindtap="toggleDialog" class="cart-dialog__mask"></view>
+    <view class="cart-dialog__container">
+        <view class="cart_popup--header">
+            <image src="{{currentGood.imgUrl}}" style="width:120rpx;height:120rpx;"></image>
+            <view class="cart_popup--header-content">
+                <block wx:if="{{type=='tuan'}}">
+                    <view style="font-size: 28rpx">{{currentGood.name}}</view>
+                    <view style="font-size: 24rpx;color:red">￥{{currentGood.selectedSku?currentGood.selectedSku.price:currentGood.price}}</view>
+                    <view style="font-size: 24rpx;color:#ccc" wx:if="{{currentGood.skus.length>0}}">{{currentGood.selectedSpecValue?'已选择: '+currentGood.selectedSpecValue:'请选择规格'}}</view>
+                </block>
+                <block wx:else>
+                    <view style="font-size: 28rpx">{{currentGood.name}}</view>
+                    <view style="font-size: 24rpx;color:#ccc">已售{{currentGood.saleNum}}件</view>
+                </block>
+            </view>
+        </view>
+        <view style="min-height:200rpx;max-height:600rpx;overflow-y:auto;padding-bottom:24rpx;font-size:28rpx;">
+            <view class="cart_popup--spec" wx:for="{{currentGood.specs}}" wx:for-index="specIdx" wx:for-item="spec" wx:key="{{id}}">
+                <view style="padding: 6rpx 24rpx">{{spec.name}}</view>
+                <view class="cart_popup--spec-values">
+                    <view bindtap="handleSelectSpec" class="cart_popup--spec-value {{specValue.disabled?'spec-value--disabled':''}} {{specValue.selected?'spec-value--selected':''}}" data-specindex="{{specIdx}}" data-specvalueindex="{{specValueIdx}}" wx:for="{{spec.values}}" wx:for-index="specValueIdx" wx:for-item="specValue" wx:key="{{id}}">{{specValue.itemValue}}</view>
+                </view>
+            </view>
+            <view class="cart_popup--num">
+                <view style="padding: 6rpx 24rpx">数量</view>
+                <view class="cart_popup--num-content">
+                    <image bindtap="handleQuantityMinus" data-component-id="{{componentId}}" data-data="{{index:data.index,item:data.item}}" data-quantity="{{quantity}}" src="http://imgcdnali.wfenxiao.com.cn/xcx/c/{{currentGood.num<=1||currentGood.num<=(currentGood.selectedSku&&currentGood.selectedSku.minBuy?currentGood.selectedSku.minBuy:1)?'subtract-disabled':'subtract'}}.png" style="height:48rpx;width:48rpx"></image>
+                    <text class="cart_popup--num-quantity">{{currentGood.num||1}}</text>
+                    <image bindtap="handleQuantityPlus" data-component-id="{{componentId}}" data-data="{{index:data.index,item:data.item}}" data-quantity="{{quantity}}" src="{{currentGood.skus&&currentGood.skus.length>0&&currentGood.num<currentGood.selectedSku.quantity&&(currentGood.num<currentGood.selectedSku.maxBuy>0&&currentGood.num<currentGood.selectedSku.maxBuy||!currentGood.selectedSku.maxBuy)?'http://imgcdnali.wfenxiao.com.cn/xcx/c/plus1.png':'http://imgcdnali.wfenxiao.com.cn/xcx/c/plus-disable.png'}}" style="height:48rpx;width:48rpx"></image>
+                    <text style="margin-left:16rpx;font-size:20rpx">{{currentGood.buyMessage}}</text>
+                </view>
+            </view>
+        </view>
+        <button bindtap="handleCreateTuan" class="zan-btn zan-btn--large zan-btn--danger" disabled="{{currentGood.stock==0||currentGood.skus.length>0&&!currentGood.selectedSku}}" wx:if="{{type=='tuan'}}">
+      {{currentGood.stock==0?'商品库存不足':'确定'}}
+    </button>
+        <view class="cart_popup--footer" wx:else>
+            <text style="color: red">￥{{currentGood.selectedSku.price||currentGood.price}}</text>
+            <button bindtap="handleAddToCart" class="zan-btn zan-btn--danger cart_popup--footer-btn" disabled="{{currentGood.selectedSku?false:true}}">加入购物车</button>
+        </view>
+    </view>
+</view>

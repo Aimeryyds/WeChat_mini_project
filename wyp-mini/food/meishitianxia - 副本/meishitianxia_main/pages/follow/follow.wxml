@@ -1,0 +1,18 @@
+<view class="ulist">
+    <view class="ulist_item" wx:if="{{!item.hidden}}" wx:for="{{userlist}}" wx:key="userlist">
+        <navigator url="../space/space?uid={{item.uid}}">
+            <image class="ulist_img" src="{{item.avatar}}"></image>
+            <text class="ulist_t">{{item.username}}</text>
+        </navigator>
+        <view bindtap="do_unfollow" class="ulist_do" data-idx="{{index}}">取消关注</view>
+    </view>
+</view>
+<view class="loading" wx:if="{{loading}}">
+    <image class="loading_img" src="../../image/loading-32-32.gif"></image>
+</view>
+<view class="loading_end" wx:if="{{loading_end}}"></view>
+<view class="loading_fail" wx:if="{{loading_fail}}"></view>
+<view>　</view>
+<view>　</view>
+<view>　</view>
+<view>　</view>

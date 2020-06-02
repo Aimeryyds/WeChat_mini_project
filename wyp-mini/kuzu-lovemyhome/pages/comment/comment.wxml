@@ -1,0 +1,14 @@
+<view class="comment">
+    <view class="item" xmlns:wx="" wx:for="{{state.note_list}}" wx:key="brokerid">
+        <view class="esf-borker" data-id="{{item.brokerid}}">
+            <image src="{{item.headimg}}"></image>
+            <text>{{item.brokername}}</text>
+            <text>从业年限：{{item.level}}年</text>
+            <text>本房源带看次数：{{item.level}}次</text>
+            <image bindtap="_dispatch" data-bindtap="makePhoneCall" data-type="tel" data-value="{{item.tel}}" src="https://res.5i5j.com/cache/weixin/common/tel.jpg"></image>
+        </view>
+        <view class="esf-borker-note">
+            <text class="{{state.text_ellipsis?'text_ellipsis':''}}">{{item.note}}</text>
+        </view>
+    </view>
+</view>

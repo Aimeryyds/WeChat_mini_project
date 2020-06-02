@@ -1,0 +1,22 @@
+<form bindsubmit="formSubmit" class="view_search" wx:if="{{data}}">
+    <view class="view_searchbg">
+        <view class="view1">
+            <image src="https://tws.cnweisou.com/images/search.png"></image>
+        </view>
+        <input bindconfirm="formSubmit" class="input_search" name="keyword" placeholder="请输入关键字..." type="text" value="{{nowCont}}"></input>
+    </view>
+</form>
+<view bindtap="todetail" class="item" data-id="{{item.id}}" wx:for="{{data}}">
+    <image class="img" src="{{item.thumb}}"></image>
+    <view class="content">
+        <view class="title">{{item.advname}}</view>
+        <view class="wrap">
+            <view>{{item.create_time}}</view>
+            <view>
+                <image src="../../../images/icon_see.png" style="width:35rpx;height:20rpx;"></image>
+                <text> {{item.read_time}}</text>
+            </view>
+        </view>
+    </view>
+</view>
+<loading wx:if="{{loading}}"></loading>

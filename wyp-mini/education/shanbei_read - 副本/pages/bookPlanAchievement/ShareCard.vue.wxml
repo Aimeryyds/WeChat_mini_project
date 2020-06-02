@@ -1,0 +1,42 @@
+<template name="e73a055e">
+    <view class="_div data-v-1eb972a6 container {{[isSmall?'small':'']}}">
+        <view class="_div data-v-1eb972a6 banner" style=" {{'background-image:'+'url('+bookplanInfo.cover_url+')'+';'}}">
+            <view class="_div data-v-1eb972a6 brand">
+                <image class="_img data-v-1eb972a6 logo" src="https://media-image1.baydn.com/storage_media_image/kvhfgj/7e068960bc04ee22a04765e9dde28187.615db911797bdf922eccf658bafe78d7.png"></image>
+                <view class="_div data-v-1eb972a6 title">{{bookplanInfo.title}}</view>
+            </view>
+        </view>
+        <view class="_div data-v-1eb972a6 info">
+            <view class="_div data-v-1eb972a6 person">
+                <image class="_img data-v-1eb972a6 avatar" src="{{avatarUrl}}"></image>
+                <view class="_div data-v-1eb972a6 person-info-wrapper">
+                    <view class="_div data-v-1eb972a6 nickname">{{nickname}}</view>
+                    <view class="_div data-v-1eb972a6 slogan">参与「扇贝·读书计划」第{{bookplanInfo.completed_days}}天</view>
+                </view>
+            </view>
+            <view class="_div data-v-1eb972a6 reading-info">
+                <view class="_div data-v-1eb972a6">
+                    <view class="_div data-v-1eb972a6 item-title">今日阅读词数</view>
+                    <view class="_div data-v-1eb972a6 data">
+                        <view class="_div data-v-1eb972a6 number">{{todayTask.word_amount}}</view>
+                        <view class="_div data-v-1eb972a6 unit">词</view>
+                    </view>
+                </view>
+                <view class="_div data-v-1eb972a6">
+                    <view class="_div data-v-1eb972a6 item-title">今日学习时长</view>
+                    <view class="_div data-v-1eb972a6 data">
+                        <view class="_div data-v-1eb972a6 number">{{usedMinTime}}</view>
+                        <view class="_div data-v-1eb972a6 unit">min</view>
+                    </view>
+                </view>
+                <image class="_img data-v-1eb972a6 cover" src="{{currentBook.cover_url}}"></image>
+            </view>
+            <view class="_div data-v-1eb972a6 knowledge-card" wx:if="{{bookplanInfo.has_knowledge_card}}">
+                <view class="_div data-v-1eb972a6 title-en">{{card.title_en}}</view>
+                <view class="_div data-v-1eb972a6 title-cn">{{card.title_cn}}</view>
+                <view class="_div data-v-1eb972a6 content">{{card.content_cn}}</view>
+            </view>
+        </view>
+        <navigator class="_navigator data-v-1eb972a6 nav" url="/pages/articleKnowledges/main" wx:if="{{bookplanInfo.has_knowledge_card}}">查看全部知识卡片</navigator>
+    </view>
+</template>

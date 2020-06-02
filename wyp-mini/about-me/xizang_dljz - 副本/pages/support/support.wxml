@@ -1,0 +1,90 @@
+<view class="container">
+    <view catchtap="call" class="support-header">
+        <view class="support-title">微电铺小程序</view>
+        <view class="support-desc">小程序·大趋势 小商家·大生意</view>
+        <view class="phone-button">电话咨询</view>
+        <image class="support-bg" mode="widthFix" src="/images/support/mack-up.png"></image>
+    </view>
+    <view class="support-pro white-wrap">
+        <view class="model-title">产品 & 服务</view>
+        <view class="support-child">
+            <view class="child-title">
+                <image class="first" src="/images/support/4.png"></image>
+                <text class="text">大产品模块</text>
+            </view>
+            <view class="pro-model">
+                <view class="pro-item">
+                    <image class="pro-image" src="/images/support/icon_e-comere.png"></image>
+                    <text class="pro-text">电商零售</text>
+                </view>
+                <view class="pro-item">
+                    <image class="pro-image" src="/images/support/icon_building.png"></image>
+                    <text class="pro-text">企业展示</text>
+                </view>
+                <view class="pro-item">
+                    <image class="pro-image" src="/images/support/icon_diner.png"></image>
+                    <text class="pro-text">餐饮外卖</text>
+                </view>
+                <view class="pro-item">
+                    <image class="pro-image" src="/images/support/icon_store.png"></image>
+                    <text class="pro-text">智慧门店</text>
+                </view>
+            </view>
+        </view>
+        <view class="support-child">
+            <view class="child-title">
+                <image class="second" src="/images/support/32+.png"></image>
+                <text class="text">细分行业模板</text>
+            </view>
+            <view class="industry-model">
+                <view class="industry-item" wx:for="{{industries}}">{{item}}</view>
+            </view>
+        </view>
+        <view class="support-child">
+            <view class="child-title">
+                <image class="third" src="/images/support/180+.png"></image>
+                <text class="text">创意营销插件</text>
+            </view>
+            <view class="marketing-plug">
+                <view class="plug-item" wx:for="{{plugs}}">
+                    <image class="plug-image" src="/images/support/{{item.image}}"></image>
+                    <text class="plug-text">{{item.text}}</text>
+                </view>
+            </view>
+        </view>
+    </view>
+    <view class="idea-feature">
+        <view class="model-title">理念 & 特色</view>
+        <view class="feature-wrap">
+            <view class="feature-item">
+                <image class="feature-img" src="/images/support/01.png"></image>
+                <text class="feature-text">微电铺小程序致力于做最懂营销的小程序第三方平台,在提供工具平台的同时,还提供海量创新创意玩法营销插件,帮助小商家实现大生意梦。</text>
+            </view>
+            <view class="feature-item">
+                <image class="feature-img" src="/images/support/02.png"></image>
+                <text class="feature-text">微电铺小程序作为首批微信小程序SaaS云平台，我们非常注重每一位商户的平台安全性、稳定性以及数据保密性，让商户无后顾之忧。</text>
+            </view>
+            <view class="feature-item">
+                <image class="feature-img" src="/images/support/03.png"></image>
+                <text class="feature-text">微电铺小程序同时注重产品的用户体验度，除了丰富的模板与插件，我们针对不同行业、不同群体推出了强大的店铺自定义装修功能，让每一位商户的平台都拥有自己的特色。</text>
+            </view>
+            <view class="feature-item">
+                <image class="feature-img" src="/images/support/04.png"></image>
+                <text class="feature-text">未来我们将继续深入挖掘更多细分行业，提供软件、设计、营销、运营乃至行业结局方案等一条龙服务，与微电铺合作伙伴共同帮助更多商家解决难题，带来更多实际价值。</text>
+            </view>
+        </view>
+    </view>
+    <view class="support-footer">
+        <view class="footer-info">
+            <view class="info-left">
+                <view class="info-title">微电铺小程序</view>
+                <view class="info-tag">最懂营销的小程序第三方平台</view>
+                <view class="info-websize">www.bukepay.com</view>
+            </view>
+            <image class="logo-icon" mode="widthFix" src="/images/support/logo.jpg" style="width:160rpx;"></image>
+        </view>
+        <view catchtap="call" class="contact-info">
+      欢迎来电: {{serviceTel}}
+    </view>
+    </view>
+</view>

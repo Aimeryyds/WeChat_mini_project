@@ -1,0 +1,35 @@
+<view class=" map-tab">
+    <view class="tab">
+        <view class="tab-all">
+            <view class="tab-my">
+                <text class="circle"></text>
+                <input bindtap="__e" class="start" data-event-opts="{{[ [ 'tap',[ [ 'bindfocus',['$event'] ] ] ] ]}}" disabled="{{true}}" value="{{title}}"></input>
+            </view>
+            <view class="tab-dist">
+                <view class="circle"></view>
+                <input bindtap="__e" class="end" data-event-opts="{{[ [ 'tap',[ [ 'bindinput',['$event'] ] ] ] ]}}" disabled="{{true}}" value="{{map_address}}"></input>
+            </view>
+        </view>
+    </view>
+    <view bindtap="__e" class="change" data-event-opts="{{[ [ 'tap',[ [ 'changePosition',['$event'] ] ] ] ]}}">
+        <image src="https://zhuanti.danke.com.cn/change_icon.png"></image>
+    </view>
+    <map class="map" id="map" includePoints="{{includePoints}}" latitude="{{latitude}}" longitude="{{longitude}}" markers="{{markers}}" polyline="{{polyline}}" scale="12" style="{{'width: 100%;height: '+mapHeight}}">
+        <cover-view class="way">
+            <cover-view class="way-detail">
+                <cover-view class="detail-name">{{type_mode}}</cover-view>
+                <cover-view class="detail-info">{{'距离'+distance_res+'，'+duration_res}}</cover-view>
+            </cover-view>
+            <cover-view class="way-waylist">
+                <cover-view bindtap="__e" class="way-tab" data-event-opts="{{[ [ 'tap',[ [ 'getWay',['$event'] ] ] ] ]}}" data-index="{{index}}" data-type="{{item.id}}" wx:for="{{wayList}}" wx:key="index">
+                    <cover-view class="{{[isActive==index?'actives':'']}}">
+                        <cover-view class="way-info">
+                            <cover-image class="way-img" src="{{isActive==index?item.img2:item.img1}}"></cover-image>
+                            <cover-view class="way-name">{{item.way}}</cover-view>
+                        </cover-view>
+                    </cover-view>
+                </cover-view>
+            </cover-view>
+        </cover-view>
+    </map>
+</view>

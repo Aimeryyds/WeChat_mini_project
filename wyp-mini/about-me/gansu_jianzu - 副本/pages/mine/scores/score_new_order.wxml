@@ -1,0 +1,55 @@
+<import src="../../templates/couponorder/couponorderitemlist.wxml"></import>
+<import src="../../templates/orders/orderaddress.wxml"></import>
+<import src="/dist/quantity/index.wxml"></import>
+<import src="/dist/toptips/index.wxml"></import>
+<import src="/dist/toast/index.wxml"></import>
+<import src="../../templates/score/index.wxml"></import>
+<import src="../../templates/scorestorelist/index.wxml"></import>
+<form bindsubmit="gopay">
+    <view class="container">
+        <template is="zan-toptips" data="{{zanTopTips:zanTopTips}}"></template>
+        <view wx:if="{{order.goods.type==0}}">
+            <template is="orders-address" data="{{addressData:order.consignee,consigneeNew:order.consigneeNew}}"></template>
+        </view>
+        <template is="zan-toast" data="{{zanToast:zanToast}}"></template>
+        <view class="goods-list" wx:if="{{order.goods}}">
+            <template is="coupon_order-goods" data="{{item:order.goods}}"></template>
+        </view>
+        <view style="margin-bottom:20rpx;" wx:if="{{order.goods.type!=0}}">
+            <template is="score" data="{{type:order.goods.type,coupon:order.goods.coupon,card:order.goods.card}}"></template>
+        </view>
+        <view class="new_order_spec-dialog-number">
+            <view class="new_order_spec-dialog-number-label">购买数量</view>
+            <template is="zan-quantity" data="{{...num,componentId:'num',size:'small'}}"></template>
+        </view>
+        <view class="goods-info bottom-line">
+            <view class="new_order-row-box">
+                <view class="row-label">
+          合计
+        </view>
+                <view class="right-text">
+          {{total}}积分
+        </view>
+            </view>
+        </view>
+        <view class="new-score-order-direction-row bottom-line">
+            <view class="mark-label"> 备注：</view>
+            <input bindinput="bindUserMsgInput" class="remark" maxlength="30" placeholder="订单备注(30字以内)" type="text" value="{{formData.userMsg}}"></input>
+        </view>
+        <view class="new-score-order-direction-row bottom-line">
+            <view class="mark-label"> 微信号：</view>
+            <input bindinput="bindWeixinInput" class="remark" maxlength="30" placeholder="填写微信号，方便卖家与你联系" type="text" value="{{formData.weixin}}"></input>
+        </view>
+        <view class="jiesuan-box">
+            <view class="left-price">
+                <view class="total">
+                    <text style="font-size: 26rpx;color: #333333;">合计 </text> {{total}}积分
+      </view>
+            </view>
+            <button class="to-pay-btn" formType="submit">
+      积分支付
+    </button>
+        </view>
+        <template is="storelist" data="{{show:showDialog,list:order.goods.coupon.storeList||order.goods.card.storeList}}"></template>
+    </view>
+</form>

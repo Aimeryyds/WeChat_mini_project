@@ -1,0 +1,30 @@
+<view class="allicon">
+    <view class="haibao">
+        <swiper autoplay="{{autoplay}}" duration="{{duration}}" indicatorDots="{{indicatorDots}}" interval="{{interval}}" style="height:80px;">
+            <swiper-item wx:for="{{imgUrls}}">
+                <image class="slide-image" data-index="{{index}}" src="{{item}}" style="width:100%;height:100%;"></image>
+            </swiper-item>
+        </swiper>
+    </view>
+    <view class="zhengwen">
+        <view>您可以通过以下方式查询持股的易方达旗下基金:</view>
+        <view>1、无目标股票，只想随便看一下，请点击"<text bindtap="random" class="onlysee">这里</text>”。</view>
+        <view>2、有目标股票，请在搜索框中输入股票代码或股票名称，并点击“搜索”。</view>
+    </view>
+    <form bindsubmit="formSubmit">
+        <view class="Search-section">
+            <view class="Search-pancel">
+                <input class="Search-input" name="id" placeholder="请输入股票代码或股票名称"></input>
+                <button class="Search-button" formType="submit" plain="true" size="mini">
+                    <view class="find">搜索</view>
+                </button>
+            </view>
+        </view>
+    </form>
+    <view class="shuoming">
+        <view>说明:</view>
+        <view>1、随便浏览的案例为随机生成，不作为投资建议，股市有风险，投资需谨慎。</view>
+        <view>2、请在输入框输入股票名称，例如“贵州茅台”；或者股票代码，例如“600519”进行查询。</view>
+        <view>3、易方达旗下基金披露的公开季报未显示持有你输入内容的相关权益资产，并不代表不持有输入内容的相关权益资产，一种可能是因持有占比较低未达到披露条件而未进行披露。</view>
+    </view>
+</view>

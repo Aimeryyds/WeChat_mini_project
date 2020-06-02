@@ -1,0 +1,155 @@
+<import src="/dist/tab/index.wxml"></import>
+<import src="/component/quantity/index.wxml"></import>
+<import src="/dist/toptips/index.wxml"></import>
+<import src="../../templates/tag/manjian.wxml"></import>
+<view class="container" style="padding-bottom: '130rpx'; padding-top: {{shop.storeType==4?'100rpx':'0px'}}">
+    <template is="zan-toptips" data="{{zanTopTips:zanTopTips}}"></template>
+    <view style="z-index:99;position:fixed;top:0;left:0;background-color:#fff;border-bottom: 1px solid #e5e5e5;" wx:if="{{shop.storeType==4}}">
+        <template is="zan-tab" data="{{tab:tab,componentId:'tab'}}"></template>
+    </view>
+    <view class="zan-panel" wx:if="{{cartItems[tab.selectedId].items.valid&&cartItems[tab.selectedId].items.valid.length>0||cartItems[tab.selectedId].fullreduction&&cartItems[tab.selectedId].fullreduction.length>0}}">
+        <view class="cart-title">
+            <image bindtap="selectAll" class="cart-title--selection" src="http://imgcdnali.wfenxiao.com.cn/xcx/c/{{cartItems[tab.selectedId].allSelected?'selected':'unselected'}}.png"></image>
+            <text class="cart-title--text">全选（已选{{numTotal}}件)</text>
+            <image bindtap="clearCarts" class="cart-clear" src="http://imgcdnali.wfenxiao.com.cn/xcx/c/cart_clear.png"></image>
+            <text bindtap="clearCarts" class="cart-title--right">清空购物车</text>
+        </view>
+        <view class="cart-list" style="margin-bottom:{{cartItems[tab.selectedId].items.invalid&&cartItems[tab.selectedId].items.invalid.length>0?'0':'47px'}}">
+            <block wx:for="{{cartItems[tab.selectedId].fullreduction}}" wx:for-index="manjianIndex" wx:for-item="manjianitem">
+                <view class="cart-item-manjian-tag-container">
+                    <view style="margin-top:4rpx; min-width:48rpx">
+                        <template is="manjian-tag" data></template>
+                    </view>
+                    <view class="cart-item-manjian-tag-container-title">{{manjianitem.eventName}}</view>
+                </view>
+                <scroll-view wx:for="{{manjianitem.eventGoodsList}}" wx:for-index="manjianGoodIndex" wx:for-item="manjiangooditem" wx:key="{{id}}">
+                    <view style="width:850rpx;display:flex;justify-content:flex-start">
+                        <view class="cart-item" style="width:750rpx">
+                            <image bindtap="selectManjianGoodItem" class="cart-item--selection" data-manjiangoodindex="{{manjianGoodIndex}}" data-manjiangooditem="{{manjiangooditem}}" data-manjianindex="{{manjianIndex}}" src="http://imgcdnali.wfenxiao.com.cn/xcx/c/{{manjiangooditem.selected?'selected':'unselected'}}.png"></image>
+                            <image class="cart-item--thumb" src="{{manjiangooditem.imgUrl}}" style="border-radius: 8rpx"></image>
+                            <view class="cart-item--content">
+                                <view class="cart-item--content-name zan-ellipsis--l2">{{manjiangooditem.goodsName}}</view>
+                                <view style="color:#aaa;font-size: 24rpx;">{{cart.renderSku(manjiangooditem.propertiesName)}}</view>
+                                <view class="cart-item--content-desc">
+                                    <view class="cart-item--content-price">￥{{manjiangooditem.price}}</view>
+                                    <view class="cart-item--content-num">
+                                        <template is="quantity" data="{{ quantity:{quantity:manjiangooditem.quantity,max:manjiangooditem.stock},componentId:index,data:{manjianitem:manjianitem,manjiangooditem:manjiangooditem,manjianIndex:manjianIndex,manjianGoodIndex:manjianGoodIndex} }}"></template>
+                                    </view>
+                                </view>
+                            </view>
+                        </view>
+                        <view bindtap="handleTapManJianDelete" data-manjiangoodindex="{{manjianGoodIndex}}" data-manjiangooditem="{{manjiangooditem}}" data-manjianindex="{{manjianIndex}}" data-manjianitem="{{manjianitem}}" style="width:100rpx;background-color:red;display:flex;align-items:center;justify-content:center;font-size:28rpx;color:#fff">删除</view>
+                    </view>
+                </scroll-view>
+                <view class="cart-item" style="width:750rpx; background:#FFFAF7" wx:for="{{manjianitem.giveawayList}}">
+                    <image class="cart-item--selection" src="http://imgcdnali.wfenxiao.com.cn/xcx/c/select-disable.png"></image>
+                    <view class="cart-item--thumb" style="position: relative">
+                        <image src="{{item.imgUrl}}" style="border-radius: 8rpx; width:140rpx; height:140rpx"></image>
+                        <view style="position:absolute;width:140rpx; height:60rpx；left:0;bottom:0;background:rgba(255,91,91,0.6); color:#fff; display:flex;align-items: center; justify-content: center; border-radius: 0 0 4px 4px; font-size:24rpx">赠品</view>
+                    </view>
+                    <view class="cart-item--content" style="padding-right:42rpx">
+                        <view class="cart-item--gift-name zan-ellipsis--l2">{{item.giveawayName}}</view>
+                        <view class="cart-item--content-desc">
+                            <view class="cart-item--content-price">￥0</view>
+                            <view style="font-size: 28rpx;color: #191919;opacity: 0.43;">
+                X{{item.num}}
+              </view>
+                        </view>
+                    </view>
+                </view>
+            </block>
+            <view style=" border-top: 12rpx solid #e5e5e5;" wx:if="{{cartItems[tab.selectedId].items.valid&&cartItems[tab.selectedId].items.valid.length>0}}">
+                <scroll-view wx:for="{{cartItems[tab.selectedId].items.valid}}" wx:key="{{id}}">
+                    <view style="width:850rpx;display:flex;justify-content:flex-start">
+                        <view class="cart-item" style="width:750rpx">
+                            <image bindtap="selectItem" class="cart-item--selection" data-index="{{index}}" data-item="{{item}}" src="http://imgcdnali.wfenxiao.com.cn/xcx/c/{{item.selected?'selected':'unselected'}}.png"></image>
+                            <image class="cart-item--thumb" src="{{item.imgUrl}}" style="border-radius: 8rpx"></image>
+                            <view class="cart-item--content">
+                                <view class="cart-item--content-name zan-ellipsis--l2">{{item.goodsName}}</view>
+                                <view class="zan-ellipsis--l2" style="color:#aaa;font-size: 24rpx;">{{cart.renderSku(item.propertiesName)}}</view>
+                                <view class="cart-item--content-desc">
+                                    <view class="cart-item--content-price">￥{{item.price}}
+                    <text style="color:#666; font-size:24rpx;">{{item.minBuy?'最少'+item.minBuy+'件':''}}{{item.maxBuy?'最多'+item.maxBuy+'件':''}}</text>
+                                    </view>
+                                    <view class="cart-item--content-num">
+                                        <template is="quantity" data="{{ quantity:{quantity:item.quantity,max:item.stock},componentId:index,data:{item:item,index:index} }}"></template>
+                                        <view class="cart-item--content-num-miao" wx:if="{{item.activityType==1&&item.isBuyLimited==2}}">每人限购{{item.limitedCount}}件</view>
+                                    </view>
+                                </view>
+                            </view>
+                        </view>
+                        <view bindtap="handleTapDelete" data-index="{{index}}" data-item="{{item}}" style="width:100rpx;background-color:red;display:flex;align-items:center;justify-content:center;font-size:28rpx;color:#fff">删除</view>
+                    </view>
+                </scroll-view>
+            </view>
+        </view>
+    </view>
+    <view class="zan-panel" wx:if="{{cartItems[tab.selectedId].items.invalid&&cartItems[tab.selectedId].items.invalid.length>0}}">
+        <view class="cart-title" style="padding-left: 0rpx">
+            <text class="cart-title--text">失效商品</text>
+            <image bindtap="clearInvalid" class="cart-clear" src="http://imgcdnali.wfenxiao.com.cn/xcx/c/cart_clear.png"></image>
+            <text bindtap="clearInvalid" class="cart-title--right">清空失效商品</text>
+        </view>
+        <view class="cart-list" style="margin-bottom:47px">
+            <view class="cart-item" wx:for="{{cartItems[tab.selectedId].items.invalid}}" wx:key="{{id}}">
+                <image class="cart-item--selection" src="http://imgcdnali.wfenxiao.com.cn/xcx/c/select-disable.png"></image>
+                <view class="cart-item--thumb">
+                    <view class="cart-item--cover" wx:if="{{true}}">{{item.msg}}</view>
+                    <image class="cart-item--image" mode="" src="{{item.imgUrl}}"></image>
+                </view>
+                <view class="cart-item--content">
+                    <view class="cart-item--content-name zan-ellipsis--l2">{{item.goodsName}}</view>
+                    <view style="color:#aaa;font-size: 24rpx;">{{cart.renderSku(item.propertiesName)}}</view>
+                    <view class="cart-item--content-desc">
+                        <view class="cart-item--content-price">￥{{item.price}}</view>
+                        <view class="cart-item--content-num"></view>
+                    </view>
+                </view>
+            </view>
+        </view>
+    </view>
+    <cart action="checkout" bindchangesendfee="changeSendFee" bindcheckout="handleCheckout" id="cart" minSendFee="{{minSendFee}}" minSendFeeDifference="{{minSendFeeDifference}}" numTotal="{{numTotal}}" priceTotal="{{priceTotal}}" selectFullMoney="{{selectFullMoney}}" shopId="{{storeId}}"></cart>
+</view>
+<wxs module="cart">
+function countNum(cartList) {
+    var sum = 0;
+    if (cartList) {
+        cartList.forEach((function(i) {
+            if (i.selected) {
+                sum += 1
+            }
+        }))
+    };
+    return (sum)
+};
+
+function sumNum(cartList) {
+    var sum = 0;
+    if (cartList) {
+        cartList.forEach((function(i) {
+            if (i.selected) {
+                sum += i.quantity
+            }
+        }))
+    };
+    return (sum)
+};
+
+function renderSku(skuStr) {
+    var specs = skuStr.split(';');
+    var values = [];
+    for (var i = 0; i < specs.length; i++) {
+        var newspec = specs[((nt_0 = (i), null == nt_0 ? undefined : 'Number' === nt_0.constructor ? nt_0 : "" + nt_0))].split(':')[(1)];
+        if (newspec && newspec.length > 10) {
+            newspec = newspec.substring(0, 10) + '...'
+        };
+        values.push(newspec)
+    };
+    return (values.join(';'))
+};
+module.exports = ({
+    sumNum: sumNum,
+    countNum: countNum,
+    renderSku: renderSku,
+});
+</wxs>

@@ -1,0 +1,30 @@
+<view class="contain">
+    <view class="searchBox">
+        <form bindsubmit="formSubmit" class="view_searchbg">
+            <input bindconfirm="formSubmit" class="search" name="keyword" placeholder="搜索商品" style="font-size:13px;padding-left:42px;width:82%;line-height:52rpx;" type="text" value="{{input}}"></input>
+        </form>
+        <image src="http://tws.cnweisou.com/images/search.png" style="width:30rpx;height:30rpx;position:absolute;left:5%;top:40rpx;"></image>
+    </view>
+    <view class="conbox" style="">
+        <scroll-view class="sidebar" scrollY="true" style="display: inline-block;overflow: hidden;text-overflow:ellipsis;white-space: nowrap; ">
+            <view bindtap="tapTopCategory" class="{{highlight[index]}}" data-banner="{{item.name}}" data-id="{{item.id}}" data-index="{{index}}" style="display:block;width:160rpx;padding:0 10rpx;" wx:for="{{topCategories}}" wx:key="id">
+                <text>{{item.name}}</text>
+            </view>
+        </scroll-view>
+        <scroll-view bindscrolltolower="bottom" class="main" scrollY="true" style="display: inline-block;height: {{height}}rpx;overflow-y: scroll;">
+            <view class="gridview" wx:if="{{subCategorListG}}">
+                <dl bindtap="avatarDetail" data-object-id="{{item.id}}" wx:for="{{subCategorListG}}" wx:key="id">
+                    <dl>
+                        <dt>
+                            <image mode="scaleToFit" src="{{item.thumb}}"></image>
+                        </dt>
+                        <dd>
+                            <text>{{item.title}}</text>
+                        </dd>
+                    </dl>
+                </dl>
+                <view class="clear"></view>
+            </view>
+        </scroll-view>
+    </view>
+</view>

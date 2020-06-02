@@ -1,0 +1,40 @@
+<navigation-bar enable="{{enable}}" title="{{option.title}}" wx:if="{{showtopbar}}"></navigation-bar>
+<view class="container">
+    <view class="tabw" style="top:{{barHeight}}px">
+        <view bindtap="changtab" class="tabitem {{tab_current==tablist[0].id?'current':''}}" data-index="{{tablist[0].id}}" wx:if="{{tablist[0].title}}">
+            <view class="c">{{tablist[0].title}}</view>
+        </view>
+        <view bindtap="changtab" class="tabitem {{tab_current==tablist[1].id?'current':''}}" data-index="{{tablist[1].id}}" wx:if="{{tablist[1].title}}">
+            <view class="c">{{tablist[1].title}}</view>
+        </view>
+        <view bindtap="changtab" class="tabitem {{tab_current==tablist[2].id?'current':''}}" data-index="{{tablist[2].id}}" wx:if="{{tablist[2].title}}">
+            <view class="c">{{tablist[2].title}}</view>
+        </view>
+        <view bindtap="changtab" class="tabitem {{tab_current==tablist[3].id?'current':''}}" data-index="{{tablist[3].id}}" wx:if="{{tablist[3].title}}">
+            <view class="c">{{tablist[3].title}}</view>
+        </view>
+    </view>
+    <view class="cplist_nodata" style="width:100%;" wx:if="{{noData}}">
+        <image src="https://s1.st.meishij.net/p2/20190620/20190620111311_870.jpg" style="display:block;width:100%;height:344rpx;margin-top:380rpx;"></image>
+        <view style="font-size:28rpx;color:#999;line-height:42rpx;text-align:center;">这里暂无可食用食材哦~</view>
+    </view>
+    <view class="sc_listw" style="padding-top:{{list_pt}}px">
+        <view class="sc_listitem" wx:for="{{listdata.data.items}}" wx:for-index="i" wx:key="key">
+            <navigator class="sc_listitem_link" url="/pages/whattoeat/whattoeat_sc_content?sc_id={{item.id}}&scene_id={{option.scene_id}}">
+                <view class="imgw" style="background:#f2f2f2 url({{item.img}}) center no-repeat;background-size:cover;"></view>
+                <view class="infow">
+                    <view class="t">{{item.title}}</view>
+                    <view class="des" style="background-color:{{item.jy.color}}">
+                        <view class="des_t">
+                            <image class="i" src="{{item.jy.icon}}"></image>饮食建议：{{item.jy.tag}}</view>
+                        <view class="des_c">{{item.jy.desc}}</view>
+                    </view>
+                </view>
+            </navigator>
+            <view class="line"></view>
+        </view>
+    </view>
+</view>
+<loading hidden="{{requeseDone||requeseFail||noData}}">
+ 加载中...
+</loading>

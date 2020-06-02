@@ -1,0 +1,19 @@
+<template name="packModule">
+    <view class="packModule" wx:if="{{moduleInfo.style==5}}">
+        <view class="moduleTitle" wx:if="{{moduleInfo.pattern.e}}">
+            <text class="lines left-lines"></text>
+            <text>{{moduleInfo.content.title}}</text>
+            <text class="lines right-lines"></text>
+        </view>
+        <view class="subModuleContainer" style="{{moduleInfo.pattern.packStyle}}">
+            <view class="subModuleWrap {{item.subModuleInfo.style==4?'textModule':''}}" style="position:absolute; left:{{item.l}}rpx; top:{{item.t}}rpx" wx:for="{{moduleInfo.content.moduleList}}">
+                <template is="imgModule" data="{{item:item}}" wx:if="{{item.subModuleInfo.style==2}}"></template>
+                <template is="btnModule" data="{{item:item}}" wx:elif="{{item.subModuleInfo.style==3}}"></template>
+                <template is="textModule" data="{{item:item}}" wx:elif="{{item.subModuleInfo.style==4}}"></template>
+            </view>
+        </view>
+    </view>
+</template>
+<import src="./img.wxml"></import>
+<import src="./btn.wxml"></import>
+<import src="./text.wxml"></import>

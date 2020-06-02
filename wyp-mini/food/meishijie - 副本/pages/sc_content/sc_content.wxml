@@ -1,0 +1,52 @@
+<navigation-bar title="{{option.title}}"></navigation-bar>
+<view bindtap="pageReload" class="cplist_nodata" wx:if="{{requeseFail}}">{{requeseFailTips}}</view>
+<view style="padding-top:{{barHeight}}px" wx:else>
+    <view class="sc_topimg">
+        <image src="{{scDetail.img}}"></image>
+    </view>
+    <view class="sc_info1">
+        <view class="t">{{scDetail.title}}</view>
+        <view class="tagsw" wx:if="{{scDetail.heat_level||scDetail.gongxiao}}">
+            <view class="sc_tag sc_heat1" wx:if="{{scDetail.heat_level==1}}">{{scDetail.heat_word}}</view>
+            <view class="sc_tag sc_heat2" wx:elif="{{scDetail.heat_level==2}}">{{scDetail.heat_word}}</view>
+            <view class="sc_tag sc_heat3" wx:elif="{{scDetail.heat_level==3}}">{{scDetail.heat_word}}</view>
+            <view class="sc_tag" wx:for="{{scDetail.gongxiao}}" wx:key="key">{{item}}</view>
+        </view>
+    </view>
+    <view class="sc_info2" wx:for="{{scDetail.obj}}" wx:key="key">
+        <view class="c_mtr_t">{{item.title}}</view>
+        <view class="sc_info2_des" wx:for="{{item.content}}" wx:key="key">
+            <view class="txt" wx:if="{{item.tag==1}}">{{item.desc}}</view>
+            <view class="imgw" wx:elif="{{item.tag==2}}">
+                <image src="{{item.desc}}" style="height:{{item.height/item.width*690}}rpx"></image>
+            </view>
+        </view>
+    </view>
+    <view class="sc_info3" wx:if="{{scDetail.shiyi}}">
+        <view class="c_mtr_t c_mtr_t_yi">适宜搭配</view>
+        <scroll-view scrollX class="sc_svw">
+            <view class="sc_sv" wx:for="{{scDetail.shiyi}}" wx:key="key">
+                <navigator class="sc_yjitem" hoverClass="navigator-hover" url="/pages/searchRecipe/searchRecipe?keyword={{scDetail.title+' '+item.title}}">
+                    <image src="{{item.img}}"></image>
+                    <view class="t">{{item.title}}</view>
+                    <view class="desc">{{item.desc}}</view>
+                </navigator>
+            </view>
+        </scroll-view>
+    </view>
+    <view class="sc_info3" wx:if="{{scDetail.buyi}}">
+        <view class="c_mtr_t c_mtr_t_ji">不宜搭配</view>
+        <scroll-view scrollX class="sc_svw">
+            <view class="sc_sv" wx:for="{{scDetail.buyi}}" wx:key="key">
+                <view class="sc_yjitem">
+                    <image src="{{item.img}}"></image>
+                    <view class="t">{{item.title}}</view>
+                    <view class="desc">{{item.desc}}</view>
+                </view>
+            </view>
+        </scroll-view>
+    </view>
+</view>
+<loading hidden="{{requeseDone}}">
+ 加载中...
+</loading>

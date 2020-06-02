@@ -1,0 +1,35 @@
+<view style="text-align:center">
+    <view class="order" style="background-color: {{headColor}}">
+        <icon color="{{headColor=='#ffffff'?mainColor:'#ffffff'}}" size="100" type="success"></icon>
+        <view bindtap="detail" style="color: {{headColor=='#ffffff'?'#000000':textColor}};">金额: {{money}}元 <text class="detail" style="color: {{textColor}}">详情 ></text>
+        </view>
+    </view>
+    <view class="orderData">
+        <view class="using">
+            <label>
+                <text>车辆编号</text>
+            </label>
+            <text>{{machineNO}}</text>
+        </view>
+        <view class="using">
+            <label>
+                <text>骑行时间</text>
+            </label>
+            <text>{{time}}</text>
+        </view>
+        <view class="using">
+            <label>
+                <text>骑行里程</text>
+            </label>
+            <text>{{mileage}}km</text>
+        </view>
+        <view class="using">
+            <label>
+                <text>临时停车</text>
+            </label>
+            <text>{{stopTime}}</text>
+        </view>
+    </view>
+    <button bindtap="back" style="background-color: {{mainColor}};color: {{textColor}}; margin-bottom:20rpx;">返回</button>
+    <text bindtap="valuationRule" style="color:{{mainColor}};font-size:28rpx;">计费规则</text>
+</view>

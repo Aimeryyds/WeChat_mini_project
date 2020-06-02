@@ -1,0 +1,116 @@
+<include src="../../../components/circus/network/network.wxml"></include>
+<view class="v v-favourite">
+    <view class="guide-bar" wx:if="{{guideBar.show}}">
+    点击“
+    <view class="icon-addMini"></view>
+    ”添加到我的小程序，微信首页下拉即可快速访问。
+    <view bindtap="cancelAdd" class="icon-cancel"></view>
+    </view>
+    <view class="top-bar">
+        <view class="tab-bar">
+            <tab scroll bindtabchange="tabchange" id="tab" list="{{tabs.list}}" selectedId="{{tabs.selectedId}}"></tab>
+            <view bindtap="goGroup" class="icon-operate"></view>
+        </view>
+        <view bindtap="goSearch" class="search-bar">
+            <view class="icon-search"></view>
+            <view class="text">搜索</view>
+        </view>
+    </view>
+    <view class="sort-bar c-line-bottom">
+        <view class="cell stock-name">股票</view>
+        <view class="cell stock-now">
+            <view bindtap="handleSortByLastPrice" class="cell-box">
+                <text>最新价</text>
+                <view class="icon-up-down">
+                    <view>
+                        <m-icon on="{{sort.byLastPrice=='up'}}" size="16" styles="{{sort.styles}}" type="up"></m-icon>
+                    </view>
+                    <view>
+                        <m-icon on="{{sort.byLastPrice=='down'}}" size="16" styles="{{sort.styles}}" type="down"></m-icon>
+                    </view>
+                </view>
+            </view>
+        </view>
+        <view class="cell stock-rise">
+            <view bindtap="handleSortByIncrease" class="cell-box">
+                <text>涨跌幅</text>
+                <view class="icon-up-down">
+                    <view>
+                        <m-icon on="{{sort.byIncrease=='up'}}" size="16" styles="{{sort.styles}}" type="up"></m-icon>
+                    </view>
+                    <view>
+                        <m-icon on="{{sort.byIncrease=='down'}}" size="16" styles="{{sort.styles}}" type="down"></m-icon>
+                    </view>
+                </view>
+            </view>
+        </view>
+    </view>
+    <scroll-view scrollY class="v-quote-stocks stock-list {{showLoginLink?'padding-bottom':''}}" style="height: {{view.portHeight}}px;">
+        <view class="body" wx:if="{{stocks[group.gid].length}}">
+            <view bindlongtap="actionSheet" bindtap="goStock" class="row" data-code="{{item.code}}" data-exchange="{{item.exchange}}" data-name="{{item.name}}" data-top="{{item.top}}" wx:for="{{stocks[group.gid]}}" wx:key="id">
+                <view class="cell stock-name-code">
+                    <view class="stock-logo">
+                        <image binderror="onImageErr" class="logo" data-code="{{item.code}}" data-exchange="{{item.exchange}}" mode="aspectFit" src="{{item.logo}}"></image>
+                    </view>
+                    <view class="stock-info">
+                        <view class="stock-name" style="font-size:{{item.fontSize}}rpx">{{item.name}}</view>
+                        <view class="stock-code">
+                            <view class="{{tag.className}} icon" wx:for="{{item.tagList}}" wx:for-item="tag" wx:key="index">
+                {{tag.text}}
+              </view>
+              {{item.code}}
+            </view>
+                    </view>
+                </view>
+                <view class="cell stock-now" style="color: {{item.now.color}};font-size:{{item.now.fontSize}}rpx">{{item.now.text}}</view>
+                <view class="cell stock-rise">
+                    <view class="stock-rise-box" style="background-color: {{item.rise.color}}">
+            {{item.rise.text}}
+          </view>
+                </view>
+            </view>
+            <view bindtap="goSearch" class="add-favourite {{stocks[group.gid].length?'c-line-top':''}}">
+                <view class="add-row">
+                    <view class="icon-add"></view>
+                    <text class="icon-text">添加自选</text>
+                </view>
+            </view>
+        </view>
+        <view wx:if="{{!stocks[group.gid].length&&canShowNoRecord[group.gid]}}">
+            <view class="no-record">
+                <image src="./no-record.png"></image>
+                <view class="no-text">空空如也，添加感兴趣的股票吧</view>
+            </view>
+            <view bindtap="goSearch" class="add-favourite">
+                <view class="add-row">
+                    <view class="add-inbox">
+                        <view class="icon-add"></view>
+                        <text class="icon-text">添加自选</text>
+                    </view>
+                </view>
+            </view>
+        </view>
+    </scroll-view>
+    <modal contentPadding="0" id="modal_delete">
+        <view></view>
+        <view class="modal_content" slot="content">
+            <view bindtap="choseOtherGroup" wx:if="{{chose}}">
+                <view class="icon {{choseGroup}}"></view>
+        其他分组内也同时删除
+      </view>
+        </view>
+    </modal>
+    <view bindtap="handleSyncQuote" class="sync-favourite" wx:if="{{showLoginLink}}">
+        <navigator class="add-row" url="../../info/login/login">
+            <view class="icon-sync"></view>
+            <text class="icon-text">同步自选</text>
+        </navigator>
+    </view>
+</view>
+<modal contentPadding="0" id="modal_sync">
+    <view class="sync-box" slot="content" wx:if="{{stocks['0'].length>0||tabs.list.length>1}}">
+        <m-checkbox bind:change="onKeepWXchange" checked="{{keepWX}}" label="保留未同步前已有的自选股或分组" value="1"></m-checkbox>
+    </view>
+</modal>
+<include src="../../../components/circus/toast/toast.wxml"></include>
+<include src="../../../components/circus/loading/loading.wxml"></include>

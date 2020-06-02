@@ -1,0 +1,79 @@
+.top-item {
+    overflow: hidden;
+    display: block;
+}
+
+.top-item:after {
+    content: '';
+    display: block;
+    height: 2rpx;
+    margin: 0 30rpx;
+    background-color: #eeeeee;
+}
+
+.top-item .news-text {
+    display: flex;
+    flex-direction: row;
+    margin: 22rpx 30rpx;
+    position: relative;
+    padding-bottom: 25rpx;
+}
+
+.top-item .news-text .title {
+    font-size: 34rpx;
+    text-overflow: ellipsis;
+    display: -webkit-box;
+    -webkit-box-orient: vertical;
+    -webkit-line-clamp: 2;
+    overflow: hidden;
+    line-height: 40rpx;
+    max-height: 77rpx;
+    margin-bottom: 25rpx;
+}
+
+.top-item .news-text .source {
+    font-size: 24rpx;
+    color: #ccc;
+    position: absolute;
+    left: 0;
+    right: 0;
+    bottom: 0;
+}
+
+.top-item .news-text .source .media {
+    display: inline-block;
+}
+
+.top-item .source .set-top {
+    position: absolute;
+    right: -20rpx;
+    bottom: 0;
+    font-size: 24rpx;
+    color: #ef3d20;
+    margin-right: 30rpx;
+}
+
+.clicked .news-text .title {
+    color: #999999;
+}
+
+.top-item button {
+    text-align: left;
+    border-top-style: none;
+    border-right-style: none;
+    border-bottom-style: none;
+    border-left-style: none;
+    padding-left: 0;
+    padding-right: 0;
+    border-radius: 0;
+    background-color: transparent;
+    line-height: auto;
+}
+
+.top-item button::after {
+    border: none;
+}
+
+.top-item button.button-hover {
+    background-color: transparent;
+}

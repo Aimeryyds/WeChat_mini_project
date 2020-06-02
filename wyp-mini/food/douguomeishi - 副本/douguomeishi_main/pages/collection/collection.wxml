@@ -1,0 +1,22 @@
+<import src="../common/footer.wxml"></import>
+<import src="../common/simpleRecipe.wxml"></import>
+<taskbarGuide></taskbarGuide>
+<view class="login-container" hidden="{{logined?true:false}}" hoverClass="none">
+    <image class="login-logo" mode="aspectFit" src="../../images/login_background.png"></image>
+    <button bindgetuserinfo="loginButtonPressed" class="login-button" hidden="{{logined?true:false}}" hoverClass="none" openType="getUserInfo">
+        <view>点击登录</view>
+    </button>
+</view>
+<view class="page" hidden="{{logined?false:true}}">
+    <view class="space"></view>
+    <view class="user_container" hidden="{{logined?false:true}}">
+        <image mode="aspectFill" src="{{user.user_photo}}"></image>
+        <view class="user_info_container">
+            <text class="user_name">{{user.nick}}</text>
+            <text class="collection_text">收藏数量 {{total}}</text>
+        </view>
+    </view>
+    <view class="space"></view>
+    <template is="collection-simple-recipe" data="{{item:item}}" wx:for="{{array}}" wx:key="key"></template>
+    <template is="footer" data="{{footerState:footerState}}"></template>
+</view>

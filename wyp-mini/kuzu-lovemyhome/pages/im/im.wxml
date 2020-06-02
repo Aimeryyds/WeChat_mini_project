@@ -1,0 +1,130 @@
+<view class="im_box">
+    <scroll-view bindscroll="scroll" id="scroll" scrollTop="{{scrollTop}}" scrollY="true" style="height:{{h}}px">
+        <view class="main_box">
+            <view wx:for="{{list}}">
+                <view class="timeBox">
+                    <text>{{item.in_date}}</text>
+                </view>
+                <view class="tag_box clearfix" wx:if="{{item.conversation_type==2&&item.message_type==0}}">
+                    <view bindtap="toBroker" cityId="" class="talk_head lf">
+                        <image binderror="imgError" data-index="{{index}}" mode="widthFix" src="{{item.img?item.img:'https://res.5i5j.com/weixin/common/default_broker_404.png'}}"></image>
+                    </view>
+                    <view class="houseText lf">
+                        <rich-text nodes="{{item.message_text_content}}" space="nbsp"></rich-text>
+                    </view>
+                </view>
+                <view class="tag_box clearfix" wx:if="{{item.conversation_type==1&&item.message_type==0}}">
+                    <view class="talk_head rf">
+                        <image binderror="imgError" data-index="{{index}}" mode="widthFix" src="{{item.img?item.img:'https://res.5i5j.com/cache/weixin/common/moHead.png'}}"></image>
+                    </view>
+                    <view class="wordTag rf">
+                        <rich-text nodes="{{item.message_text_content}}" space="nbsp"></rich-text>
+                    </view>
+                </view>
+                <view bindtap="toHouseDetail" class="tag_box clearfix" data-cityId="{{item.payload.ext.HOUSE_INFO.cityId}}" data-houseType="{{item.payload.ext.HOUSE_INFO.houseType}}" data-id="{{item.payload.ext.HOUSE_INFO.houseID}}" wx:if="{{item.conversation_type==2&&item.message_type==1}}">
+                    <view bindtap="toBroker" class="talk_head lf">
+                        <image binderror="imgError" data-index="{{index}}" mode="widthFix" src="{{item.img?item.img:'https://res.5i5j.com/cache/weixin/common/moHead.png'}}"></image>
+                    </view>
+                    <view class="houseTag lf">
+                        <view class="houseImg">
+                            <image src="{{item.payload.ext.HOUSE_INFO.imgurl?item.payload.ext.HOUSE_INFO.imgurl:'https://res.5i5j.com/cache/weixin/common/default_house_detail_404.png'}}"></image>
+                        </view>
+                        <view class="houseInfos">
+                            <view class="housetitles">{{item.payload.ext.HOUSE_INFO.title}}</view>
+                            <view class="house_x">
+                                <text>{{item.payload.ext.HOUSE_INFO.area}}</text>
+                            </view>
+                            <view class="house_price">
+                                <view class="wan">{{item.payload.ext.HOUSE_INFO.price}}</view>
+                            </view>
+                        </view>
+                    </view>
+                </view>
+                <view bindtap="toHouseDetail" class="tag_box clearfix" data-cityId="{{item.payload.ext.HOUSE_INFO.cityId}}" data-houseType="{{item.payload.ext.HOUSE_INFO.houseType}}" data-id="{{item.payload.ext.HOUSE_INFO.houseID}}" wx:if="{{item.conversation_type==1&&item.message_type==1}}">
+                    <view class="talk_head rf">
+                        <image binderror="imgError" data-index="{{index}}" mode="widthFix" src="{{item.img?item.img:'https://res.5i5j.com/cache/weixin/common/moHead.png'}}"></image>
+                    </view>
+                    <view class="houseTag right40 rf">
+                        <view class="houseImg">
+                            <image src="{{item.payload.ext.HOUSE_INFO.imgurl?item.payload.ext.HOUSE_INFO.imgurl:'https://res.5i5j.com/cache/weixin/common/default_house_detail_404.png'}}"></image>
+                        </view>
+                        <view class="houseInfos">
+                            <view class="housetitles">{{item.payload.ext.HOUSE_INFO.title}}</view>
+                            <view class="house_x">
+                                <text>{{item.payload.ext.HOUSE_INFO.area}}</text>
+                            </view>
+                            <view class="house_price">
+                                <view class="wan">{{item.payload.ext.HOUSE_INFO.price}}</view>
+                            </view>
+                        </view>
+                    </view>
+                </view>
+                <view class="tag_box clearfix" wx:if="{{item.conversation_type==2&&item.message_type==4}}">
+                    <view bindtap="toBroker" class="talk_head lf">
+                        <image binderror="imgError" data-index="{{index}}" mode="widthFix" src="{{item.img?item.img:'https://res.5i5j.com/cache/weixin/common/moHead.png'}}"></image>
+                    </view>
+                    <view class="houseTag lf">
+                        <view>
+                            <image class="img" src="{{item.message_text_content}}"></image>
+                        </view>
+                    </view>
+                </view>
+                <view class="tag_box clearfix" wx:if="{{item.conversation_type==1&&item.message_type==4}}">
+                    <view class="talk_head rf">
+                        <image binderror="imgError" data-index="{{index}}" mode="widthFix" src="{{item.img?item.img:'https://res.5i5j.com/cache/weixin/common/moHead.png'}}"></image>
+                    </view>
+                    <view class="houseTag rf">
+                        <view class="houseImg">
+                            <image src="{{item.message_text_content}}"></image>
+                        </view>
+                    </view>
+                </view>
+            </view>
+        </view>
+    </scroll-view>
+    <view class="bottomBox">
+        <view class="talk_box clearfix">
+            <view class="phrase_box">
+                <text bindtap="phrase_list_ShowState">常用语</text>
+            </view>
+            <view class="input_box {{widthBig?'bigSty':''}}">
+                <view class="inputSty">
+                    <input bindblur="inputBlur" bindfocus="inputFocus" bindinput="bindKeyInput" cursorSpacing="16" placeholder="请输入消息..." placeholderClass="phcolor" value="{{inputText}}"></input>
+                </view>
+            </view>
+            <view class="tool_box">
+                <view bindtap="send" class="fsbutton {{showFas?'show':'hide'}}">发送</view>
+                <view bindtap="moreBtn" class="addBtn {{showButton?'show':'hide'}}">
+                    <image src="https://res.5i5j.com/cache/weixin/common/add-icon.png" wx:if="{{showMore==false}}"></image>
+                    <image src="https://res.5i5j.com/cache/weixin/common/add-icon2.png" wx:if="{{showMore==true}}"></image>
+                </view>
+            </view>
+        </view>
+        <view class="phrase_list  {{showList?'show':'hide'}}">
+            <view bindtap="sendOffen" class="phraseItem" data-index="{{index}}" wx:for="{{offen}}">{{item}}</view>
+        </view>
+        <view class="tool_main {{showMore?'show':'hide'}}">
+            <view bindtap="imageBtn" class="xcBtn">
+                <view class="btnIcon">
+                    <image src="https://res.5i5j.com/cache/weixin/common/img-icon.png"></image>
+                </view>
+                <view class="btnText">相册</view>
+            </view>
+            <view bindtap="picturesBtn" class="psBtn">
+                <view class="btnIcon">
+                    <image src="https://res.5i5j.com/cache/weixin/common/pho-icon.png"></image>
+                </view>
+                <view class="btnText">拍摄</view>
+            </view>
+            <view bindtap="toAttention" class="fzBtn">
+                <view class="btnIcon">
+                    <image src="https://res.5i5j.com/cache/weixin/common/house-icon.png"></image>
+                </view>
+                <view class="btnText">房子</view>
+            </view>
+        </view>
+    </view>
+    <view class="loading" hidden="{{loadinghide}}">
+        <image class="loading-img" src="/img/resources/load.png"></image>
+    </view>
+</view>

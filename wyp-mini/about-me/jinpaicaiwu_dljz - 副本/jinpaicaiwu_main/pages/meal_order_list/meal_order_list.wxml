@@ -1,0 +1,60 @@
+<import src="../../common/package/prompt.wxml"></import>
+<view class="body_bg">
+    <view class="swiper-tab my-list-nav">
+        <view bindtap="changActive" class="swiper-tab-item {{activeIndex=='all'?'active':''}}" data-id="all">全部</view>
+        <view bindtap="changActive" class="swiper-tab-item {{activeIndex=='nopay'?'active':''}}" data-id="nopay">待付款</view>
+        <view bindtap="changActive" class="swiper-tab-item {{activeIndex=='forService'?'active':''}}" data-id="forService">待接单</view>
+        <view bindtap="changActive" class="swiper-tab-item {{activeIndex=='refused'?'active':''}}" data-id="refused">已拒单</view>
+        <view bindtap="changActive" class="swiper-tab-item {{activeIndex=='hadpay'?'active':''}}" data-id="hadpay">已付款</view>
+    </view>
+    <template is="prompt" data="{{prompt:prompt}}"></template>
+    <view class="diandan_item" wx:for="{{orders}}" wx:key="index">
+        <view class="diandan_item_t">
+            <view class="flex">
+                <text>订单编号：{{item.out_trade_no}}</text>
+                <text class="col cart_color" wx:if="{{item.status_str}}">{{item.status_str}}</text>
+                <text class="col cart_color" wx:else>已完成</text>
+            </view>
+        </view>
+        <navigator class="orders-detail" url="../meal_order_detail/meal_order_detail?oid={{item.id}}">
+            <view class="diandan_item_c flex">
+                <view class="diandan_item_c_l">
+                    <image mode="aspectFit" src="{{item.feature_img}}"></image>
+                </view>
+                <view class="diandan_item_c_r">
+                    <text>{{item.product_name}}</text>
+                    <view class="fle" wx:for="{{item.pl}}" wx:for-item="items">
+                        <text>{{items.na}}</text>
+                        <text>X{{items.am}}</text>
+                    </view>
+                </view>
+            </view>
+        </navigator>
+        <view class="count">
+            <text>共{{item.amount}}件产品 实付</text>
+            <text class="cre cart_color">￥{{item.total_price}}</text>
+        </view>
+        <view class="diandan_item_b" wx:if="{{item.status_no==1}}">
+            <text bindtap="cancelOrders" class="btn1" data-oid="{{item.id}}">取消订单</text>
+            <text bindtap="payOrders" class="col1 btn2 cart_color car_border" data-index="{{index}}" data-oid="{{item.out_trade_no}}" wx:if="{{item.status_no=='1'}}">付款</text>
+        </view>
+        <view class="diandan_item_b" wx:elif="{{item.status_no==2}}">
+            <text bindtap="refund" class="btn1" data-index="{{index}}" data-oid="{{item.id}}">申请退款</text>
+            <text bindtap="confirmOrders" class="col1 btn2 cart_color car_border" data-index="{{index}}" data-oid="{{item.id}}">确认完成</text>
+        </view>
+        <view class="diandan_item_b" wx:elif="{{true}}">
+            <text bindtap="buyAgain" class="col1 btn2 cart_color car_border" data-oid="{{item.id}}">再来一单</text>
+        </view>
+    </view>
+    <block wx:if="{{showBar}}">
+        <view style="height:110rpx;"></view>
+        <view class="tabBar" style="color:{{tabs.color}};border-color:{{tabs.borderStyle}};background-color:{{tabs.backgroundColor}};border-top-color:{{tabs.borderTopColor}};">
+            <view class="barList" style="color:{{pageid==item.pagePath?tabs.selectedColor:tabs.color}}" wx:for="{{tabs.list}}" wx:key="{{index}}">
+                <view bindtap="switchTab" class="barList-content" data-url="{{item.pagePath}}">
+                    <image class="icon" src="{{pageid==item.pagePath?item.selectedIconPath:item.iconPath}}"></image>
+                    <view>{{item.text}}</view>
+                </view>
+            </view>
+        </view>
+    </block>
+</view>

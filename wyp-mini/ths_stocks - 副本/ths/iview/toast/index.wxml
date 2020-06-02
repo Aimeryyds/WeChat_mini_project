@@ -1,0 +1,22 @@
+<view>
+    <view bindtap="__e" class="i-toast-mask" data-event-opts="{{[ [ 'tap',[ [ 'handleHide',['$event'] ] ] ] ]}}" wx:if="{{visible&&mask}}"></view>
+    <view class="i-class i-toast" wx:if="{{visible}}">
+        <view class="i-toast-type" wx:if="{{type!=='default'}}">
+            <i-icon bind:__l="__l" iClass="i-toast-icon" type="success" vueId="476df99b-1" wx:if="{{type==='success'}}"></i-icon>
+            <block wx:else>
+                <i-icon bind:__l="__l" iClass="i-toast-icon" type="prompt" vueId="476df99b-2" wx:if="{{type==='warning'}}"></i-icon>
+                <block wx:else>
+                    <i-icon bind:__l="__l" iClass="i-toast-icon" type="delete" vueId="476df99b-3" wx:if="{{type==='error'}}"></i-icon>
+                    <block wx:else>
+                        <view class="i-toast-icon i-toast-loading" wx:if="{{type==='loading'}}"></view>
+                    </block>
+                </block>
+            </block>
+        </view>
+        <block wx:else>
+            <i-icon bind:__l="__l" iClass="i-toast-icon" type="{{icon}}" vueId="476df99b-4" wx:if="{{icon}}"></i-icon>
+            <image class="i-toast-image" mode="aspectFit" src="{{image}}" wx:if="{{image}}"></image>
+        </block>
+        <view class="i-toast-content" wx:if="{{content}}">{{content}}</view>
+    </view>
+</view>

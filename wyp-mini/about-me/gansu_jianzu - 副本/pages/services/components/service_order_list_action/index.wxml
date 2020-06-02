@@ -1,0 +1,28 @@
+<toast show="{{toast.show}}" title="{{toast.title}}"></toast>
+<view class="service-action-box" wx:if="{{actionList&&actionList.length>0}}">
+    <view wx:if="{{showType=='list'}}" wx:for="{{actionList}}" wx:key="{{index}}">
+        <view bindtap="toPayOrder" class="service-order-btn service-order-btn--primary" data-id="{{orderid}}" wx:if="{{item=='payPreBtn'}}">去支付</view>
+        <view bindtap="toPayOrder" class="service-order-btn service-order-btn--primary" data-id="{{orderid}}" wx:if="{{item=='payOnlineBtn'}}">去支付</view>
+        <view bindtap="toTailPayOrder" class="service-order-btn service-order-btn--primary" data-id="{{orderid}}" wx:if="{{item=='payTailBtn'}}">尾款支付</view>
+        <view bindtap="cancelOrder" class="service-order-btn service-order-btn--default" data-id="{{orderid}}" wx:if="{{item==='cancalBtn'}}">取消预约</view>
+    </view>
+    <view class="service-show-footer" wx:if="{{showType=='detail'}}">
+        <block wx:for="{{actionList}}" wx:key="{{index}}">
+            <view bindtap="cancelOrder" class="service-btn-primarydefault" data-id="{{orderid}}" wx:if="{{actionList.length==1&&item==='cancalBtn'}}">取消预约</view>
+            <view bindtap="cancelOrder" class="service-btn-default" data-id="{{orderid}}" wx:elif="{{item==='cancalBtn'}}">取消预约</view>
+        </block>
+        <block wx:for="{{actionList}}" wx:key="{{index}}">
+            <view bindtap="toPayOrder" class="service-btn-primary" data-id="{{orderid}}" wx:if="{{item=='payPreBtn'}}">去支付</view>
+            <view bindtap="toPayOrder" class="service-btn-primary" data-id="{{orderid}}" wx:if="{{item=='payOnlineBtn'}}">去支付</view>
+            <view bindtap="toTailPayOrder" class="service-btn-primary" data-id="{{orderid}}" wx:if="{{item=='payTailBtn'}}">尾款支付 </view>
+        </block>
+        <block wx:for="{{actionList}}" wx:key="{{index}}">
+            <navigator hoverClass="none" style="display:flex;width:100%;" url="/pages/pingjia/evaluateform/index?orderNo={{orderNo}}&type=2" wx:if="{{item=='firstEvaluate'}}">
+                <view class="service-btn-primarydefault">去评价</view>
+            </navigator>
+            <navigator hoverClass="none" style="display:flex;width:100%;" url="/pages/pingjia/evaluateform/index?orderNo={{orderNo}}&type=2" wx:if="{{item=='secondEvaluate'}}">
+                <view class="service-btn-primarydefault">写追评</view>
+            </navigator>
+        </block>
+    </view>
+</view>

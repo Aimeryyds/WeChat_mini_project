@@ -1,0 +1,393 @@
+@import "../../wuBaseWxss/12.wxss";
+
+.border-box {
+    box-sizing: border-box;
+}
+
+.modal_mask {
+    opacity: 0;
+    z-index: 1000;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0,0,0,0.6);
+}
+
+.modal_wrap {
+    opacity: 0;
+    z-index: 1001;
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%,-50%);
+    width: 558rpx;
+    height: 442rpx;
+    background-color: #fff;
+    border-radius: 8px;
+}
+
+.modal_wrap .modal_header {
+    margin-top: 48rpx;
+    text-align: center;
+    font-size: 32rpx;
+    font-family: PingFangSC-Medium,PingFang SC;
+    font-weight: 500;
+    color: #000;
+}
+
+.modal_wrap .modal_body {
+    margin-top: 70rpx;
+    position: relative;
+}
+
+.modal_wrap .modal_body .modal_input {
+    width: 402rpx;
+    height: 96rpx;
+    background: #f7f7f7;
+    border-radius: 48rpx;
+    padding: 0 20rpx;
+    line-height: 96rpx;
+    font-size: 26rpx;
+    margin-left: 56rpx;
+    text-align: center;
+}
+
+.modal_wrap .modal_body .modal_error_msg {
+    position: absolute;
+    width: 100%;
+    padding: 8rpx 0;
+    font-size: 28rpx;
+    color: #ff5d5d;
+    white-space: nowrap;
+    text-align: center;
+    bottom: -60rpx;
+}
+
+.modal_wrap .modal_footer {
+    width: 442rpx;
+    height: 80rpx;
+    background: #ffaa0a;
+    border-radius: 40rpx;
+    margin-top: 56rpx;
+    margin-left: 58rpx;
+    line-height: 80rpx;
+}
+
+.modal_wrap button[plain] {
+    width: 450rpx;
+    font-size: 32rpx;
+    height: 80rpx;
+    margin-left: -2rpx;
+    border-radius: 40rpx;
+    font-family: PingFangSC-Medium,PingFang SC;
+    font-weight: 500;
+    color: #fff;
+    border: none;
+    line-height: 80rpx;
+}
+
+page {
+    background-color: #fff;
+    overflow-x: hidden;
+}
+
+.coupon-add-box {
+    height: 112rpx;
+    background: #fff;
+    box-shadow: 0 4rpx 24rpx 0 rgba(0,0,0,0.05);
+    border-radius: 8rpx;
+    border: 1rpx solid rgba(151,151,151,0.25);
+    margin-top: 32rpx;
+    line-height: 112rpx;
+}
+
+.coupon-add-box span {
+    font-size: 28rpx;
+    font-weight: 400;
+    color: #333;
+    float: left;
+}
+
+.coupon-add-box .left {
+    width: 44rpx;
+    height: 32rpx;
+    line-height: 124rpx;
+    margin-left: 30rpx;
+    margin-right: 24rpx;
+}
+
+.coupon-add-box .left .icon {
+    width: 100%;
+    height: 100%;
+}
+
+.coupon-add-box .right {
+    float: right;
+    width: 12rpx;
+    height: 20rpx;
+    margin-right: 50rpx;
+}
+
+.coupon-add-box .right .icon {
+    width: 100%;
+    height: 100%;
+}
+
+.clearfix:after {
+    content: '';
+    display: block;
+    visibility: hidden;
+    height: 0;
+    line-height: 0;
+    clear: both;
+}
+
+.coupon-box {
+    padding-top: 8rpx;
+    margin-left: 30rpx;
+    width: 686rpx;
+    margin-right: 30rpx;
+    background: #fff;
+    padding-bottom: 174rpx;
+}
+
+.coupon-box .coupon-item {
+    background: #fff;
+    box-shadow: 0 4rpx 24rpx 0 rgba(0,0,0,0.05);
+    border: 1rpx solid rgba(151,151,151,0.25);
+    border-radius: 8rpx;
+    margin-top: 32rpx;
+    position: relative;
+}
+
+.coupon-box .coupon-item .circle-box1 {
+    height: 30rpx;
+    width: 30rpx;
+    border-radius: 30rpx;
+    border: 1rpx solid rgba(151,151,151,0.25);
+    position: absolute;
+    top: 162rpx;
+    left: -15rpx;
+    z-index: 1;
+    background-color: #fff;
+}
+
+.coupon-box .coupon-item .circle-cover1 {
+    position: absolute;
+    height: 32rpx;
+    width: 30rpx;
+    z-index: 2;
+    top: 162rpx;
+    border: 1rpx solid #fff;
+    left: -32rpx;
+    background-color: #fff;
+}
+
+.coupon-box .coupon-item .circle-box2 {
+    height: 30rpx;
+    width: 30rpx;
+    border-radius: 30rpx;
+    border: 1rpx solid rgba(151,151,151,0.25);
+    position: absolute;
+    top: 162rpx;
+    right: -15rpx;
+    z-index: 1;
+    background-color: #fff;
+}
+
+.coupon-box .coupon-item .circle-cover2 {
+    position: absolute;
+    height: 32rpx;
+    width: 30rpx;
+    z-index: 2;
+    top: 162rpx;
+    border: 1rpx solid #fff;
+    right: -32rpx;
+    background-color: #fff;
+}
+
+.coupon-box .coupon-item .line {
+    height: 1rpx;
+    border-top: 1rpx dotted #EAEAEAFF FF;
+    margin-top: 15rpx;
+    margin-left: 30rpx;
+    margin-right: 30rpx;
+}
+
+.coupon-box .coupon-item .coupon-item-up {
+    height: 162rpx;
+}
+
+.coupon-box .coupon-item .coupon-item-up .item-left {
+    float: left;
+    margin: 35rpx 0 0 28rpx;
+    width: 40rpx;
+    height: 40rpx;
+    padding: 0;
+}
+
+.coupon-box .coupon-item .coupon-item-up .item-left image {
+    width: 100%;
+    height: 100%;
+}
+
+.coupon-box .coupon-item .coupon-item-up .item-middle {
+    float: left;
+    margin-left: 30rpx;
+    width: 424rpx;
+    margin-top: 40rpx;
+}
+
+.coupon-box .coupon-item .coupon-item-up .item-middle .up {
+    font-size: 32rpx;
+    color: #333;
+    line-height: 32rpx;
+}
+
+.coupon-box .coupon-item .coupon-item-up .item-middle .down {
+    font-size: 24rpx;
+    font-weight: 400;
+    color: #626b80;
+    line-height: 24rpx;
+    margin-top: 20rpx;
+    text-align: left;
+}
+
+.coupon-box .coupon-item .coupon-item-up .item-middle .down .name {
+    height: 32rpx;
+    border-radius: 2rpx;
+    font-size: 22rpx;
+    color: #333;
+    padding: 4rpx 10rpx;
+    margin-left: 12rpx;
+    border: 1rpx solid #d7d7d7;
+}
+
+.coupon-box .coupon-item .coupon-item-up .item-right {
+    float: right;
+    margin-right: 28rpx;
+    margin-top: 30rpx;
+    text-align: right;
+}
+
+.coupon-box .coupon-item .coupon-item-up .item-right .up .text1 {
+    font-size: 30rpx;
+    font-weight: 500;
+    color: #ff6f0c;
+    line-height: 30rpx;
+}
+
+.coupon-box .coupon-item .coupon-item-up .item-right .up .text2 {
+    font-size: 60rpx;
+    font-weight: 500;
+    color: #ff6f0c;
+    line-height: 60rpx;
+}
+
+.coupon-box .coupon-item .coupon-item-up .item-right .down {
+    height: 20rpx;
+    font-size: 20rpx;
+    font-weight: 400;
+    color: #626b80;
+    line-height: 20rpx;
+    margin-top: 3rpx;
+}
+
+.coupon-box .coupon-item .coupon-item-down {
+    margin-top: 30rpx;
+}
+
+.coupon-box .coupon-item .coupon-item-down .title {
+    padding: 0 30rpx 24rpx 26rpx;
+}
+
+.coupon-box .coupon-item .coupon-item-down .title .left {
+    float: left;
+    font-size: 24rpx;
+    color: #a1a6b3;
+    line-height: 24rpx;
+}
+
+.coupon-box .coupon-item .coupon-item-down .title .right {
+    float: right;
+    width: 18rpx;
+    font-size: 24rpx;
+    height: 12rpx;
+    line-height: 24rpx;
+}
+
+.coupon-box .coupon-item .coupon-item-down .title .right image {
+    width: 100%;
+    height: 100%;
+}
+
+.coupon-box .coupon-item .coupon-item-down .detail {
+    font-size: 24rpx;
+    font-weight: 400;
+    color: #a1a6b3;
+    line-height: 36rpx;
+    padding: 0 72rpx 40rpx 26rpx;
+    margin-top: -20rpx;
+}
+
+.coupon-box .on .coupon-item-up .item-middle .up,.coupon-box .on .coupon-item-up .item-middle .down {
+    color: #d6dae3;
+}
+
+.coupon-box .on .coupon-item-up .item-middle .up .name,.coupon-box .on .coupon-item-up .item-middle .down .name {
+    color: #d6dae3;
+    border: 1rpx solid #d6dae3;
+}
+
+.coupon-box .on .coupon-item-up .item-right .up .text1,.coupon-box .on .coupon-item-up .item-right .up .text2 {
+    color: #d6dae3;
+}
+
+.coupon-box .on .coupon-item-up .item-right .down {
+    color: #d6dae3;
+}
+
+.coupon-box .on .coupon-item-down .title .left,.coupon-box .on .coupon-item-down .title .right {
+    color: #d6dae3;
+}
+
+.coupon-box .on .coupon-item-down .detail {
+    color: #d6dae3;
+}
+
+.coupon-box .bottom-box {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    height: 144rpx;
+    width: 100%;
+    background: #fff;
+    box-shadow: 0 -2rpx 0 0 #f2f6fb;
+    line-height: 144rpx;
+    z-index: 3;
+}
+
+.coupon-box .bottom-box .left {
+    float: left;
+    font-size: 32rpx;
+    font-weight: 400;
+    color: rgba(0,0,0,0.8);
+    margin-left: 32rpx;
+}
+
+.coupon-box .bottom-box .right {
+    float: right;
+    margin-right: 30rpx;
+    width: 244rpx;
+    height: 80rpx;
+    background: #ffaa0a;
+    border-radius: 40rpx;
+    line-height: 80rpx;
+    margin-top: 32rpx;
+    text-align: center;
+    font-size: 32rpx;
+    font-weight: 500;
+    color: #fff;
+}

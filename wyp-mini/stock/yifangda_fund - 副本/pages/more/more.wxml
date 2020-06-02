@@ -1,0 +1,31 @@
+<view class="wraper">
+    <view class="haibao">
+        <swiper autoplay="{{autoplay}}" duration="{{duration}}" indicatorDots="{{indicatorDots}}" interval="{{interval}}" style="height:80px;">
+            <swiper-item wx:for="{{imgUrls}}">
+                <image class="slide-image" data-index="{{index}}" src="{{item}}" style="width:100%;height:100%;"></image>
+            </swiper-item>
+        </swiper>
+    </view>
+    <view class="content">
+        <view>更多精彩内容，请关注：</view>
+        <view class="paragraph">1、蚂蚁财富号："<text class="colorletter">易方达基金财富号</text>"</view>
+        <view class="img">
+            <image bindtap="imgMore1" src="../image/caifuhao.jpg" style="width:100%;height:82px;"></image>
+        </view>
+        <view class="shuoming">（点击图片可查看操作流程）</view>
+        <text decode="{{true}}">&nbsp;</text>
+        <view class="paragraph">2、微信公众号："<text class="colorletter">易方达渠道服务</text>"、"<text class="colorletter">易方达微理财</text>"</view>
+    </view>
+    <view class="nav">
+        <view class="img">
+            <image bindtap="imgMore2" src="../image/qudaofw.jpg" style="width:150px;height:150px;"></image>
+        </view>
+        <view class="img">
+            <image bindtap="imgMore3" src="../image/weilicai.jpg" style="width:150px;height:150px;"></image>
+        </view>
+    </view>
+    <view class="shuoming">（点击图片可放大，保存后再扫码就可以啦～）</view>
+    <view class="copyright" style="padding-top:{{winHeight-490}}px">
+  © Copyright 2018-2020 E Fund,zhangdr
+</view>
+</view>

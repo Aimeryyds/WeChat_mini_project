@@ -1,0 +1,90 @@
+<form bindsubmit="formSubmitAll">
+    <view class="typeTitle">
+        <view bindtap="clickTitle" class="newTitle {{sub==index?'active':''}}" data-id="{{item.id}}" data-index="{{index}}" wx:for="{{list}}">{{item}}
+     </view>
+    </view>
+    <view class="contain">
+        <view class="mylist">
+            <view class="imageD">
+                <image class="name" src="https://tws.cnweisou.com/images/sdName.png"></image>
+            </view>
+            <text class="title">姓名</text>
+            <view class="myinput">
+                <input bindblur="pname" maxlength="20" placeholder="请填写姓名" placeholderStyle="color:#ccc;z-index:0;" value="{{pname}}"></input>
+            </view>
+            <view class="must">*</view>
+        </view>
+        <view class="mylist">
+            <view class="imageD">
+                <image src="https://tws.cnweisou.com/images/sdPhone.png"></image>
+            </view>
+            <text class="title">手机号</text>
+            <view class="myinput">
+                <input bindblur="phone" maxlength="11" placeholder="请填写您的手机号" placeholderStyle="color:#ccc;z-index:0;" type="number" value="{{phone}}"></input>
+            </view>
+            <view class="must">*</view>
+        </view>
+        <view class="mylist">
+            <view class="imageD">
+                <image class="type" src="https://tws.cnweisou.com/images/sdType.png"></image>
+            </view>
+            <text class="title">类型</text>
+            <view class="myinput">
+                <input bindfocus="type" placeholder="请选择发布类型" placeholderStyle="color:#ccc;z-index:0;" value="{{currtype}}"></input>
+            </view>
+            <view class="must">*</view>
+        </view>
+        <view class="mylist">
+            <view class="imageD">
+                <image class="position" src="https://tws.cnweisou.com/images/sdPosition.png"></image>
+            </view>
+            <text class="title">选择位置</text>
+            <view class="myinput">
+                <input bindtap="position" placeholder="请选择位置" placeholderStyle="color:#ccc;z-index:0;" value="{{positionAll}}"></input>
+            </view>
+        </view>
+        <view class="mylist">
+            <view class="imageD">
+                <image class="info" src="https://tws.cnweisou.com/images/sdInfo.png"></image>
+            </view>
+            <text class="title">发布内容</text>
+            <view class="must">*</view>
+        </view>
+        <view class="cont">
+            <textarea bindblur="areaCont" maxlength="300" placeholderStyle="text-indent:30rpx;font-size:28rpx;" value="{{cont}}"></textarea>
+        </view>
+    </view>
+    <view class="listMode">
+        <view class="imageD">
+            <image src="https://tws.cnweisou.com/images/supdemImages.png"></image>
+        </view>
+        <view class="title">图片</view>
+        <view class="formValue">
+            <view class="item" wx:for="{{images}}">
+                <image bindtap="previewImage" mode="aspectFill" src=" {{item}}" style="width:80rpx; height:80rpx;"></image>
+                <view bindtap="delete" class="delete" data-index="{{index}}">
+                    <image src="http://tws.cnweisou.com/images/icon_delete.png" style="left: {{imageWidth/2-10}}px;"></image>
+                </view>
+            </view>
+            <view class="item">
+                <image bindtap="chooseImage" class="button-upload" src="http://tws.cnweisou.com/images/icon_add.png" style="width:80rpx; height:80rpx;"></image>
+            </view>
+        </view>
+    </view>
+    <button class="createSubmit" disabled="{{!pname||!phone||!currtype||!cont}}" formType="submit" type="primary">发布</button>
+</form>
+<view class="bgtypeList" wx:if="{{cardAgain}}">
+    <view class="cardAgainType">
+            您输入有误，请重新输入
+    <view bindtap="returnIndex" class="determineAgin">
+    确定
+    </view>
+    </view>
+</view>
+<view class="bgtypeList1" wx:if="{{showType}}">
+    <scroll-view scrollY class="typebg">
+        <view class="typeList" wx:for="{{listType}}">
+            <view bindtap="chooseType" class="yearAndMonth" data-index="{{index}}">{{item}}</view>
+        </view>
+    </scroll-view>
+</view>

@@ -1,0 +1,107 @@
+<form bindsubmit="submitForm" class="form-wrap">
+    <view class="form-box">
+        <view bindtap="communityTap" class="form-item">
+            <text class="name">小区名称</text>
+            <view class="mid-cells">
+                <input disabled="disabled" name="communityname" type="text" value="{{communitynameVal}}"></input>
+                <input name="communityid" type="hidden" value="{{communityIdVal}}"></input>
+            </view>
+            <view class="right-cells">
+                <image class="arrow" src="/img/resources/right.png"></image>
+            </view>
+        </view>
+        <view class="form-item building">
+            <text class="name">楼号</text>
+            <input bindinput="verifyLouhao" name="building_number" type="text" value="{{louhaoVal}}"></input>
+            <text class="name">单元</text>
+            <input bindinput="verifyDanyuanhao" name="unit_number" type="text" value="{{danyuanhaoVal}}"></input>
+            <text class="name">房间</text>
+            <input bindinput="verifyFanghao" name="room_number" type="text" value="{{fanghaoVal}}"></input>
+        </view>
+        <view class="form-item">
+            <text class="name">期望租金</text>
+            <view class="mid-cells">
+                <input bindinput="verifyPrice" name="price" placeholder="请输入期望租金" placeholderClass="placeholder-inp" type="number" value="{{priceVal}}"></input>
+            </view>
+            <view class="right-cells">元/月</view>
+        </view>
+        <view class="form-item">
+            <text class="name">面积/㎡</text>
+            <view class="mid-cells">
+                <input bindinput="verifyBuildarea" name="buildarea" placeholder="请输入房源面积" placeholderClass="placeholder-inp" type="digit" value="{{buildareaVal}}"></input>
+            </view>
+        </view>
+        <view bindtap="rentmodeTap" class="form-item">
+            <text class="name">出租方式</text>
+            <view class="mid-cells waytime">
+                <text>{{rentmodeTxt}}</text>
+                <input name="rentmode" type="hidden" value="{{rentmodeVal}}"></input>
+            </view>
+            <view class="right-cells">
+                <image class="arrow" src="/img/resources/right.png"></image>
+            </view>
+        </view>
+        <view bindtap="kantimeTap" class="form-item">
+            <text class="name">看房时间</text>
+            <view class="mid-cells waytime">
+                <text>{{lookTimeTxt}}</text>
+                <input name="lookhousetime" type="hidden" value="{{lookTimeVal}}"></input>
+            </view>
+            <view class="right-cells">
+                <image class="arrow" src="/img/resources/right.png"></image>
+            </view>
+        </view>
+    </view>
+    <view class="form-box shuru-box">
+        <view class="form-item">
+            <text class="name">您的称呼</text>
+            <view class="mid-cells">
+                <input bindinput="verifyOwnername" name="owner_name" placeholder="请输入您的称呼" placeholderClass="placeholder-inp" type="text" value="{{ownernameVal}}"></input>
+            </view>
+        </view>
+        <view class="form-item">
+            <text class="name">手机号码</text>
+            <view class="mid-cells">
+                <input bindinput="getPhoneNumber" maxlength="11" name="phone" placeholder="请输入您的联系方式" placeholderClass="placeholder-inp" type="number" value="{{ownertelVal}}"></input>
+            </view>
+            <view class="right-cells">
+                <button bindtap="{{isSend?'':'sendMessage'}}" class="codebtn {{isSend?'addcode':''}}">{{isSend?secend+'s':time}}</button>
+            </view>
+        </view>
+        <view class="form-item">
+            <text class="name">验证码</text>
+            <view class="mid-cells">
+                <input bindinput="verifyCode" name="phonecode" placeholder="请输入验证码" placeholderClass="placeholder-inp" type="number" value="{{codeVal}}"></input>
+            </view>
+        </view>
+    </view>
+    <view class="bottom-box b-s">
+        <view bindtap="telTap" class="telrent b-s" id="4008515515">
+            <text>电话租房</text>
+        </view>
+        <view class="released b-s">
+            <button formType="submit">发布房源</button>
+        </view>
+    </view>
+    <view bindtap="rentmodeLayer" class="radio-layer-box" hidden="{{rentmodeHide}}">
+        <view class="radio-layer b-s">
+            <view bindtap="rentwapTap" class="radio-item" data-name="整租" data-val="1">整租</view>
+            <view bindtap="rentwapTap" class="radio-item" data-name="合租" data-val="2">合租</view>
+        </view>
+    </view>
+    <view bindtap="kantimeLayer" class="radio-layer-box" hidden="{{kantimeHide}}">
+        <view class="radio-layer b-s">
+            <view bindtap="kanfangTap" class="radio-item" data-name="随时看房" data-val="1">随时看房</view>
+            <view bindtap="kanfangTap" class="radio-item" data-name="周末看房" data-val="2">周末看房</view>
+            <view bindtap="kanfangTap" class="radio-item" data-name="下班后看房" data-val="3">下班后看房</view>
+            <view bindtap="kanfangTap" class="radio-item" data-name="电话预约" data-val="4">电话预约</view>
+        </view>
+    </view>
+    <view bindtap="noteLayerTap" class="bottom-note-box" hidden="{{noteHide}}">
+        <view class="bottom-note">
+            <text>发布成功后，我爱我家经纪人</text>
+            <text>将会尽快联系您</text>
+            <image class="bot-arrow" src="/img/resources/bot-arrow.png"></image>
+        </view>
+    </view>
+</form>

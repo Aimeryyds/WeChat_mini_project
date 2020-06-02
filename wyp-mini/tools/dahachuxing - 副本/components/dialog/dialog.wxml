@@ -1,0 +1,22 @@
+<view>
+    <view class="zhezao" wx:if="{{flag}}">
+        <view class="t_w">
+            <view bindtap="cancel" class="t_image">
+                <image class="t_image1" src="../../images/zhezhao/cross.png"></image>
+            </view>
+            <view class="tanchu_view">
+                <view>
+                    <view class="bg_view">遮罩层</view>
+                    <view class="txtys">
+                        <slot></slot>
+                    </view>
+                    <view class="txtsure">
+                        <view bindtap="cancel" class="txtsurebg">
+                            <text class="txtsurename">确定</text>
+                        </view>
+                    </view>
+                </view>
+            </view>
+        </view>
+    </view>
+</view>

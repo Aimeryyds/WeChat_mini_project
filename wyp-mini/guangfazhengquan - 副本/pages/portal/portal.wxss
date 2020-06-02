@@ -1,0 +1,488 @@
+.v-confirm {
+    position: fixed;
+    left: 0;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    background-color: rgba(0,0,0,0.3);
+    z-index: 9999;
+    color: #333;
+}
+
+.v-confirm .wrapper {
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    margin-left: -140px;
+    margin-top: -90px;
+    width: 280px;
+    height: 150px;
+    background-color: #fff;
+    border-radius: 5px;
+    overflow: hidden;
+}
+
+.v-confirm .wrapper .msg {
+    margin-top: 40px;
+    width: 100%;
+    text-align: center;
+    line-height: 24px;
+    font-size: 16px;
+}
+
+.v-confirm .wrapper .buttons {
+    position: absolute;
+    left: 0;
+    bottom: 0;
+    width: 100%;
+    height: 50px;
+}
+
+.v-confirm .wrapper .button {
+    display: inline-block;
+    width: 50%;
+    height: 100%;
+    font-size: 16px;
+    text-align: center;
+    line-height: 50px;
+}
+
+.v-confirm .wrapper .button.confirm {
+    background-color: #00a5f6;
+    color: #fff;
+}
+
+.v-toast .wrapper {
+    position: fixed;
+    width: 80%;
+    height: 20px;
+    top: 42%;
+    z-index: 9999;
+    text-align: center;
+    left: 10%;
+}
+
+.v-toast .text {
+    display: inline-block;
+    max-width: 80%;
+    min-width: 50%;
+    padding: 35rpx 50rpx;
+    background: rgba(40,40,40,0.85);
+    border-radius: 5px;
+    color: #fff;
+    font-size: 32rpx;
+}
+
+.v-network {
+    position: fixed;
+    top: -36px;
+    z-index: 9999;
+    width: 100%;
+    height: 36px;
+}
+
+.v-network>.notice {
+    position: absolute;
+    top: 0;
+    width: 100%;
+    height: 36px;
+}
+
+.v-network>.notice .icon {
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    margin-top: -10px;
+    width: 20px;
+    height: 20px;
+    background-size: cover;
+}
+
+.v-network>.notice .msg {
+    position: absolute;
+    left: 50%;
+    line-height: 36px;
+    font-size: 14px;
+    color: #fff;
+}
+
+.v-network .error {
+    background-color: #f70e22;
+}
+
+.v-network .error .icon {
+    margin-left: -90px;
+    background-image: url("data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACgAAAAoCAMAAAC7IEhfAAAAP1BMVEUAAAD///////////////////////////////////////////////////////////////////////////////9Du/pqAAAAFHRSTlMAwBBAgPBgMKBQIN9wsJDg0K9/zxAhu6QAAAFgSURBVDjLhZTptoMgDIQNEBZ327z/s9649JYRqPPDc0g+JgmoHcqk10aq+LKYQMqTZIot9sUnsBItcuidKpgdNMMxmXPZ+2lHN1PYaXTx2Inbt1rkosZcsbvfXf2N41Dre0TS6QSmPmHizMKqX9815EWGj4nOG/JUnPPlLDL/F3ZZIoh65J4kctQzLAscqKhugXg14RsgWr6FuwqIkVErq3EBEk7OQkdlvPpQgnEv4fSBKsEkYjtqgdiNV3BtgNCNU5Aewa4Juio4PIJWI+foz2Daj6d/Ar1IOO8HlGgyGJmED4Op+y1zIlHE/AaTiL9Gwo62GbsehA+rRbjHzjWBAfdx3uA1Vdmsw93wSsHgIzhC1jBYOKIAHyHlJ8/w9gK3GBxgrJ0gXf8aIMneOT+IrAFjgRWNEExvDU2mqBJFNcRke91m/bYveaz1bUlQ7Fp327v1S00esKIDOzpVCvfEH/IIGaXmZkJ1AAAAAElFTkSuQmCC");
+}
+
+.v-network .error .msg {
+    margin-left: -60px;
+}
+
+.v-network .recover {
+    background-color: #51c332;
+}
+
+.v-network .recover .icon {
+    margin-left: -60px;
+    background-image: url("data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACgAAAAoCAMAAAC7IEhfAAAAOVBMVEUAAAD///////////////////////////////////////////////////////////////////////8KOjVvAAAAEnRSTlMA8BAw0IDAYN+wn09AkCDgcKDpU9fDAAABQ0lEQVQ4y5WU25KtIAxECRAuguju///YY3ncpDDizPQLZbFI6Ehi7mq1MJfazKvKknApLWVGWSYcCuHzCQGHiO1jNAK21X0/3boBVHS4fGDRDIoHutgb50G7UdoJ3t45Zx7kLlK48eBsK4MU10nC0i895tXZSz8z+FCOvvkYm3nVBj7XHnqmAjoXHVCHLKfl9SdwxefM7CbbuRtHMqaBnrkFskFopiLMOMkUUM2OMOcE3A1DvCRvR07c8ABu8FY4BQb1qIST1GJGSOEErL08Qg5cL08vuJCacyD5hUIKJ17y+Wz9+KT1kPAo/y9QzavqZYOR3sEE/rZCfOMiyP6yuaK0a5q3a0L++wAwjZCeR0oCDeVqHhQ1Fwm+6bHn661+Ccj26TQ8yyBlD1Ccj+YUAnMIaRjNSjETLlGO5lWu8qGqavAPQikPkTu1TvcAAAAASUVORK5CYII=");
+}
+
+.v-network .recover .msg {
+    margin-left: -30px;
+}
+
+page {
+    height: 100%;
+}
+
+.v-portal .header {
+    position: relative;
+    width: 100%;
+    height: 60px;
+    border-top: 1px solid #f5f5f5;
+    background-color: #fff;
+}
+
+.v-portal .header .loginOut {
+    height: 68px;
+    line-height: 68px;
+    float: right;
+    margin-right: 15px;
+    font-size: 16px;
+    color: #999;
+}
+
+.v-portal .header .name {
+    font-size: 18px;
+    line-height: 60px;
+    margin-left: 67px;
+}
+
+.v-portal .header .unname {
+    color: #999;
+    background: none;
+    text-align: left;
+    padding-left: 0;
+}
+
+.v-portal .header button::after {
+    border: none;
+}
+
+.v-portal .header .portrait-box {
+    float: left;
+    margin: 9px auto 13px 15px;
+    height: 36px;
+    width: 36px;
+    border-radius: 18px;
+    border: 1px solid #fff;
+    box-shadow: 0 4px 4px rgba(0,0,0,0.08);
+}
+
+.v-portal .header .portrait-box .portrait {
+    float: left;
+    margin: .5px;
+    height: 35px;
+    width: 35px;
+    border-radius: 35px;
+}
+
+.v-portal .header .info {
+    float: left;
+    width: 30%;
+    position: relative;
+}
+
+.v-portal .header .info .login {
+    position: absolute;
+    top: 40px;
+    font-size: 13px;
+    color: #999;
+}
+
+.v-portal .header .info .teleNum {
+    position: absolute;
+    top: 40px;
+    font-size: 13px;
+    color: #999;
+}
+
+.v-portal .header .info .name {
+    position: absolute;
+    top: 13px;
+    width: 100%;
+    font-size: 18px;
+    color: #000;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+
+.v-portal .header .right {
+    float: right;
+    height: 68px;
+}
+
+.v-portal .header .right .text {
+    width: 130px;
+}
+
+.v-portal .header .sync {
+    float: right;
+    line-height: 68px;
+    margin-right: 40px;
+    font-size: 18px;
+    color: #999;
+}
+
+.v-portal .header .more {
+    position: absolute;
+    width: 8px;
+    height: 13px;
+    top: 28px;
+    right: 15px;
+    background-size: 8px 13px;
+}
+
+.v-portal .header .info .account {
+    margin-top: 10px;
+    font-size: 15px;
+    line-height: 15px;
+    height: 15px;
+}
+
+.v-portal .applications .app-title {
+    margin-left: 15px;
+    height: 45px;
+}
+
+.v-portal .applications .app-title .name {
+    display: inline-block;
+    margin-top: 19px;
+    margin-bottom: 12px;
+    font-size: 15px;
+    color: #666;
+}
+
+.v-portal .applications {
+    margin: 0 15px;
+    box-shadow: 0 4px 8px rgba(0,0,0,0.08);
+}
+
+.v-portal .applications .list {
+    background-color: #fff;
+    height: 88.5px;
+}
+
+.v-portal .applications .list .grouping {
+    position: relative;
+    margin-left: 15px;
+}
+
+.v-portal .applications .list .grouping .icon {
+    position: absolute;
+    top: 22px;
+    left: 3px;
+    width: 25px;
+    height: 25px;
+    background-size: 25px 25px;
+}
+
+.v-portal .applications .list .search {
+    margin-left: 15px;
+}
+
+.v-portal .applications .list .search .icon {
+    position: absolute;
+    top: 22px;
+    left: 3px;
+    width: 26px;
+    height: 29px;
+    background-size: 26px 29px;
+}
+
+.v-portal .applications .list .warn {
+    margin-left: 15px;
+}
+
+.v-portal .applications .list .warn .icon {
+    position: absolute;
+    top: 22px;
+    left: 3px;
+    width: 25px;
+    height: 25px;
+    background-size: 25px 25px;
+}
+
+.v-portal .applications .list .help {
+    position: relative;
+    margin: 0 15px;
+    height: 88.5px;
+}
+
+.v-portal .applications .list .help .icon {
+    position: absolute;
+    top: 15px;
+    left: 3px;
+    width: 50px;
+    height: 50px;
+    background-size: 50px 50px;
+    background-repeat: no-repeat;
+    box-shadow: 0 3px 5px rgba(0,0,0,0.08);
+    border-radius: 25px;
+}
+
+.v-portal .applications .list .myHelp {
+    position: relative;
+    margin-left: 15px;
+    height: 65px;
+}
+
+.v-portal .applications .list .myHelp .icon {
+    position: absolute;
+    top: 22px;
+    left: 3px;
+    width: 24px;
+    height: 24px;
+    background-size: 24px 24px;
+}
+
+.v-portal .applications .list .info {
+    position: relative;
+    top: 24px;
+    left: 74px;
+    width: 75%;
+}
+
+.v-portal .applications .list .info .title {
+    font-size: 16px;
+    color: #000;
+}
+
+.v-portal .applications .list .info .subtitle {
+    position: absolute;
+    top: 23px;
+    margin-top: 4px;
+    font-size: 14px;
+    color: #aaa;
+}
+
+.v-portal .applications .list .more {
+    position: absolute;
+    width: 8px;
+    height: 13px;
+    top: 50%;
+    margin-top: -6.5px;
+    right: 0;
+    background: url("data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAA8AAAAaCAYAAABozQZiAAAAGXRFWHRTb2Z0d2FyZQBBZG9iZSBJbWFnZVJlYWR5ccllPAAAA4ZpVFh0WE1MOmNvbS5hZG9iZS54bXAAAAAAADw/eHBhY2tldCBiZWdpbj0i77u/IiBpZD0iVzVNME1wQ2VoaUh6cmVTek5UY3prYzlkIj8+IDx4OnhtcG1ldGEgeG1sbnM6eD0iYWRvYmU6bnM6bWV0YS8iIHg6eG1wdGs9IkFkb2JlIFhNUCBDb3JlIDUuMy1jMDExIDY2LjE0NTY2MSwgMjAxMi8wMi8wNi0xNDo1NjoyNyAgICAgICAgIj4gPHJkZjpSREYgeG1sbnM6cmRmPSJodHRwOi8vd3d3LnczLm9yZy8xOTk5LzAyLzIyLXJkZi1zeW50YXgtbnMjIj4gPHJkZjpEZXNjcmlwdGlvbiByZGY6YWJvdXQ9IiIgeG1sbnM6eG1wTU09Imh0dHA6Ly9ucy5hZG9iZS5jb20veGFwLzEuMC9tbS8iIHhtbG5zOnN0UmVmPSJodHRwOi8vbnMuYWRvYmUuY29tL3hhcC8xLjAvc1R5cGUvUmVzb3VyY2VSZWYjIiB4bWxuczp4bXA9Imh0dHA6Ly9ucy5hZG9iZS5jb20veGFwLzEuMC8iIHhtcE1NOk9yaWdpbmFsRG9jdW1lbnRJRD0ieG1wLmRpZDowNTdlN2I3Ny1mYjUzLTQzNjQtOGJmMi05MzM2ODk2Y2I0MmUiIHhtcE1NOkRvY3VtZW50SUQ9InhtcC5kaWQ6NTQ2M0YwOERDMDcyMTFFODk4RDVFRjUyMzRDNzBEMzIiIHhtcE1NOkluc3RhbmNlSUQ9InhtcC5paWQ6NTQ2M0YwOENDMDcyMTFFODk4RDVFRjUyMzRDNzBEMzIiIHhtcDpDcmVhdG9yVG9vbD0iQWRvYmUgUGhvdG9zaG9wIENDIDIwMTcgKE1hY2ludG9zaCkiPiA8eG1wTU06RGVyaXZlZEZyb20gc3RSZWY6aW5zdGFuY2VJRD0ieG1wLmlpZDpkYjE2ZThhOC00YzdkLTQ4OTUtYmQwNS1hMzkxNTIwYTNhYjciIHN0UmVmOmRvY3VtZW50SUQ9ImFkb2JlOmRvY2lkOnBob3Rvc2hvcDpkMTdmOWQ5OC1kYmRkLTExN2ItOWZmOS1jNTNiNWFkMTEwY2IiLz4gPC9yZGY6RGVzY3JpcHRpb24+IDwvcmRmOlJERj4gPC94OnhtcG1ldGE+IDw/eHBhY2tldCBlbmQ9InIiPz6uJ7rCAAAAl0lEQVR42pzUYQqAIAwFYH14b9f9vFMFJYyx6ZuDfkz4XlauOsYob/Xy1VUS1X4oao0OwHtV1YvaBYXF3I0OgALpABiQCoDpUwFw1ugABKFUABaPtA3A5oUuA0B8zjCgkYdpHt+ueyTm4DZ9ZbE3PIJTyGw7hDu8hCu8hRGmoIdpaHEKapyGEx9B7+9JwzkY4gwAVY8AAwAYWzCfabs9oQAAAABJRU5ErkJggg==");
+    background-size: 8px 13px;
+}
+
+.v-portal .banner {
+    height: 300rpx;
+    background-size: 100%;
+    margin: 40rpx 30rpx 0 30rpx;
+    background-repeat: no-repeat;
+}
+
+.v-portal .setting .list {
+    background-color: #fff;
+}
+
+.v-portal .setting .list .topSetting {
+    position: relative;
+    padding-left: 15px;
+    height: 65px;
+}
+
+.v-portal .setting .list .topSetting .icon {
+    position: absolute;
+    top: 22px;
+    left: 18px;
+    width: 24px;
+    height: 24px;
+    background-size: 24px 24px;
+}
+
+.v-portal .setting .list .info {
+    position: relative;
+    top: 13px;
+    left: 44px;
+    width: 75%;
+}
+
+.v-portal .setting .list .info .title {
+    font-size: 18px;
+    color: #000;
+}
+
+.v-portal .setting .list .info .subtitle {
+    position: absolute;
+    top: 23px;
+    margin-top: 4px;
+    font-size: 13px;
+    color: #999;
+}
+
+.v-portal .setting .list .more {
+    position: absolute;
+    width: 8px;
+    height: 13px;
+    top: 50%;
+    margin-top: -6.5px;
+    right: 15px;
+    background-size: 8px 13px;
+}
+
+.v-portal .applets .applet-title {
+    margin-left: 15px;
+}
+
+.v-portal .applets .applet-title .name {
+    display: inline-block;
+    margin-top: 18px;
+    margin-bottom: 12px;
+    font-size: 15px;
+    color: #666;
+}
+
+.v-portal .applets .list {
+    height: 215px;
+}
+
+.v-portal .applets .list .answer {
+    display: inline-block;
+    margin-top: 30px;
+    margin-left: 40px;
+    text-align: center;
+}
+
+.v-portal .applets .list .answer .icon-answer {
+    width: 65px;
+    height: 65px;
+    background-size: 65px 65px;
+}
+
+.v-portal .applets .list .answer .title-answer {
+    margin-top: 20px;
+    font-size: 12px;
+    color: #000;
+}
+
+.v-portal .btns {
+    margin-top: 40px;
+    padding: 0 15px;
+}
+
+.v-portal .btns .btn-login {
+    color: #00a5f6;
+}
+
+.v-portal .btns .btn-login:after {
+    border: 1px solid #00a5f6;
+}
+
+.v-portal .btns .btn-quit {
+    color: #999;
+}

@@ -1,0 +1,20 @@
+<view class="header-container" style="top:0px;height:{{46+navigationBarHeight}}px; background-color:{{navigationBackColor}};" wx:if="{{showWhiteBackground}}">
+    <view class="top-area" style="height:46px; margin-top:{{navigationBarHeight}}px;">
+        <view bindtap="ClickBack" class="back-btn" hidden="{{!(navigationType==1||navigationType==2)}}" style="width:46px;height:46px;margin-left:0px;margin-top:0px;">
+            <image class="img" mode="aspectFit" src="{{navigationBackUrl}}" style="width:24px; height:24px;margin-top: 11px;margin-left:11px;"></image>
+        </view>
+        <view class="title-container" hidden="{{!(navigationType==0||navigationType==1)}}">
+            <view class="title-text" style="color:{{titleTextColor}};">{{navigationTitleText}}</view>
+        </view>
+    </view>
+</view>
+<cover-view class="header-opacity-container" style="top:0px;height:{{46+navigationBarHeight}}px;" wx:else>
+    <cover-view class="top-area" style="height:46px; margin-top:{{navigationBarHeight}}px;">
+        <cover-view bindtap="ClickBack" class="back-btn" hidden="{{!(navigationType==1||navigationType==2)}}" style="width:46px;height:46px;margin-left:0px;margin-top:0px;">
+            <cover-image class="img" mode="aspectFit" src="../../images/home_recommend_close.png" style="width:24px; height:24px;margin-top: 11px;margin-left:11px;"></cover-image>
+        </cover-view>
+        <cover-view class="title-container" hidden="{{!(navigationType==0||navigationType==1)}}">
+            <cover-view class="title-text">{{navigationTitleText}}</cover-view>
+        </cover-view>
+    </cover-view>
+</cover-view>

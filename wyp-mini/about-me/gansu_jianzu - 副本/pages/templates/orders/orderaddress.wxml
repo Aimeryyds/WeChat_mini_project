@@ -1,0 +1,40 @@
+<template name="orders-address">
+    <view class="zan-panel address-box" wx:if="{{fromorder}}">
+        <view>
+            <view class="name-tel">
+                <text>{{addressData.name}}</text>
+                <text style="margin-left:40rpx">{{addressData.phone}}</text>
+            </view>
+            <view class="addr-text">
+                <text>{{addressData.province}}{{addressData.city}}{{addressData.district}}{{addressData.title}}{{addressData.address}}</text>
+            </view>
+        </view>
+    </view>
+    <view wx:else>
+        <view class="address-box">
+            <view style="flex:1">
+                <view bindtap="addAddress" class="add-address" hidden="{{addressData&&addressData.id}}">
+                    <view>
+                        <view class="title">新建收货地址</view>
+                        <view class="title-tip" wx:if="{{consigneeNew==0}}">已有地址均不在配送范围</view>
+                    </view>
+                </view>
+                <view bindtap="selectAddress" hidden="{{!addressData||!addressData.id}}">
+                    <view>
+                        <view class="name-tel">
+                            <text>{{addressData.name}}</text>
+                            <text style="margin-left:40rpx">{{addressData.phone}}</text>
+                        </view>
+                        <view class="addr-text">
+                            <text>{{addressData.province}}{{addressData.city}}{{addressData.district}}{{addressData.title}}{{addressData.address}}</text>
+                        </view>
+                    </view>
+                </view>
+            </view>
+            <view>
+                <image class="arrow-right" src="http://imgcdnali.wfenxiao.com.cn/xcx/c/icons/arrow-right.png" wx:if="{{!fromorder}}"></image>
+            </view>
+        </view>
+        <view class="select_address_line"></view>
+    </view>
+</template>

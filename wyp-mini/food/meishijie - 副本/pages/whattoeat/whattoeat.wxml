@@ -1,0 +1,61 @@
+<view class="container">
+    <view bindtap="pageReload" class="cplist_nodata" wx:if="{{requeseFail}}">{{requeseFailTips}}</view>
+    <view class="csmi_top" style="padding-top:{{barHeight_nobar}}px">
+        <navigator class="searchw" hoverClass="navigator-hover" url="/pages/whattoeat/search">
+            <image class="img" src="../../images/searchicon_black.png"></image>{{csm_index_data.data.search_default}}
+			</navigator>
+        <view class="csmi_top_t1">{{csm_index_data.data.title}}</view>
+        <view class="csmi_top_t2">{{csm_index_data.data.desc}}</view>
+    </view>
+    <view class="csmi_content">
+        <block wx:for="{{csm_index_data.data.items}}" wx:for-index="i" wx:for-item="wraper" wx:key="key">
+            <view class="csmi_item" wx:if="{{wraper.items.length>0}}">
+                <navigator class="link" hoverClass="navigator-hover" url="/pages/whattoeat/whattoeat_cj?scene_id={{item.id}}" wx:for="{{wraper.items}}" wx:for-index="j" wx:key="key">
+                    <view class="c" style="background:url({{item.img}}) center no-repeat;background-size:cover;">
+                        <view class="t">{{wraper.title}}<view class="arrow"></view>
+                        </view>
+                        <view class="t1">{{item.title}}</view>
+                        <view class="info">
+                            <view class="tags">
+                                <view class="tag" wx:for="{{item.class}}" wx:for-index="k" wx:for-item="tag" wx:key="key">
+                                    <view class="dot"></view>{{tag}}</view>
+                            </view>
+                        </view>
+                    </view>
+                </navigator>
+            </view>
+            <view class="csmi_line" wx:if="{{wraper.items.length>0}}"></view>
+        </block>
+        <view class="more_show" wx:if="{{csm_index_data.data.items.length>0}}">
+            <view class="t">
+                <view class="i"></view>近期推荐</view>
+            <view class="c">
+                <view bindtap="showJQQD" class="item item1">
+                    <view class="t1">宝宝辅食</view>
+                    <view class="des">让宝宝更爱吃</view>
+                </view>
+                <view bindtap="showJQQD" class="item item2">
+                    <view class="t1">小儿腹泻</view>
+                    <view class="des">这样吃暖肠胃</view>
+                </view>
+                <view bindtap="showJQQD" class="item item3">
+                    <view class="t1">小儿咳嗽</view>
+                    <view class="des">这么吃最健康</view>
+                </view>
+                <view bindtap="showJQQD" class="item item4">
+                    <view class="t1">小儿便秘</view>
+                    <view class="des">肚肚不再硬邦邦</view>
+                </view>
+                <view bindtap="showJQQD" class="item item5">
+                    <view class="t1">痛风</view>
+                    <view class="des">低嘌呤饮食</view>
+                </view>
+                <view bindtap="showJQQD" class="item item6">
+                    <view class="t1">糖尿病</view>
+                    <view class="des">控制血糖最安全</view>
+                </view>
+            </view>
+        </view>
+        <view class="more_cj_tip" wx:if="{{csm_index_data.data.title}}">— 更多丰富场景敬请期待 —</view>
+    </view>
+</view>

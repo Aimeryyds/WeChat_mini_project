@@ -1,0 +1,8 @@
+<view class="bottom-btn">
+    <button bindtap="__e" class="{{['main',disabled_main?'disabled':'']}}" data-event-opts="{{[ [ 'tap',[ [ 'rightTap',['$event'] ] ] ] ]}}" disabled="{{disabled_main}}" type="primary" wx:if="{{type==1}}">{{text_main+''}}</button>
+    <block wx:if="{{type==2}}">
+        <button bindtap="__e" class="{{['double-button',disabled_left?'disabled':'']}}" data-event-opts="{{[ [ 'tap',[ [ 'leftTap',['$event'] ] ] ] ]}}" disabled="{{disabled_left}}" style="{{leftStyle}}" type="primary">{{text_left+''}}</button>
+        <button bindtap="__e" class="{{['double-button',disabled_main?'disabled':'']}}" data-event-opts="{{[ [ 'tap',[ [ 'rightTap',['$event'] ] ] ] ]}}" disabled="{{disabled_main}}" style="{{rightStyle}}" type="primary">{{text_main+''}}</button>
+    </block>
+    <slot></slot>
+</view>

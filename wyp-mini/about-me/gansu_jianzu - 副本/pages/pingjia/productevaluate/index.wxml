@@ -1,0 +1,19 @@
+<import src="/dist/loadmore/index.wxml"></import>
+<view class="container">
+    <view class="provaluate-baseInfo">
+        <image class="proevaluate-baseInfo__img" src="{{evaluateData.img}}"></image>
+        <view class="proevaluate-baseInfo__cont">
+            <view>{{evaluateData.brandName||evaluateData.brief}}</view>
+            <view class="proevaluate-baseIndo__name">{{evaluateData.name}}</view>
+            <view class="proevaluate--fontcolor">{{evaluateData.reviewsNum}}条评价  {{evaluateData.goodReviewsRate}}%好评</view>
+        </view>
+    </view>
+    <evaluate-tab bindonquery="evaluateTab" pingjiaArray="{{pingjiaArray}}"></evaluate-tab>
+    <scroll-view enableBackToTop scrollY bindscroll="handlescroll" bindscrolltolower="lower" scrollTop="{{scrollTop}}" style="width:100%;height:60vh;" wx:if="{{isShow}}">
+        <evaluatecontent evaluateData="{{evaluateData}}" sType="{{query.sType}}"></evaluatecontent>
+        <view id="loadmore">
+            <template is="zan-loadmore" data="{{loading:loadingmore}}"></template>
+        </view>
+        <wxc-abnor title="暂时没有数据" type="MESSAGE" wx:if="{{evaluateData.data.length==0}}"></wxc-abnor>
+    </scroll-view>
+</view>

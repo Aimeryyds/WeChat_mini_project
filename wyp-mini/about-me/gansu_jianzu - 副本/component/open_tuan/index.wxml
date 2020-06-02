@@ -1,0 +1,43 @@
+<template name="openTuanPopup">
+    <view class="zan-dialog {{show?'zan-dialog--show':''}}">
+        <view bindtap="toggleTuanDialog" class="zan-dialog__mask"></view>
+        <view class="zan-dialog__container" style="background-color: transparent;top:0">
+            <view class="tuan-dailog" style="margin: 160rpx 48rpx 64rpx 48rpx;border-radius: 20rpx">
+                <view class="tuan-dialog__title">正在开团</view>
+                <view class="tuanDtail-list tuanDialog-list" wx:for="{{openTuan}}">
+                    <image class="tuanDtail-list__img" src="{{item.avatarUrl?item.avatarUrl:'http://imgcdnali.wfenxiao.com.cn/xcx/c/money.png'}}"></image>
+                    <view class="tuanDtail-list__cont">
+                        <view class="tuanDtail-list__info">
+                            <view class="tuanDtail-list__title">{{item.nickName}}</view>
+                            <view class="tuanDtail-list__time">还差{{item.remainPeople}}人 剩余{{item.leftTime.days}}天 {{item.leftTime.hours}}:{{item.leftTime.minutes}}:{{item.leftTime.seconds}}</view>
+                        </view>
+                        <navigator class="tuanDtail-list__btn" hoverClass="none" url="{{'/pages/tuan/detail/index?id='+item.id}}">去参团</navigator>
+                    </view>
+                </view>
+                <view class="tuan-dialog__footer"></view>
+            </view>
+            <view style="text-align:center">
+                <image bindtap="toggleTuanDialog" mode="scaleToFill" src="http://imgcdnali.wfenxiao.com.cn/xcx/c/close.png" style="width:56rpx;height:56rpx"></image>
+            </view>
+        </view>
+    </view>
+</template>
+<template name="openTuanList">
+    <view class="tuan-detail">
+        <view class="tuan__title">
+            <view style="flex:1">{{goods.sponsoredNum}}人在拼团</view>
+            <view bindtap="handleTapTuanMore" class="tuan__title-link" data-id="{{goods.id}}" data-num="{{goods.sponsoredNum}}">查看全部{{goods.sponsoredNum}}个></view>
+        </view>
+        <view class="tuanDtail-list" wx:for="{{goods.groupEvent.sponsoringList}}">
+            <image class="tuanDtail-list__img" src="{{item.avatarUrl?item.avatarUrl:'http://imgcdnali.wfenxiao.com.cn/xcx/c/money.png'}}"></image>
+            <view class="tuanDtail-list__cont">
+                <view class="tuanDtail-list__info">
+                    <view class="tuanDtail-list__title">{{item.nickName}}</view>
+                    <view class="tuanDtail-list__time">还差{{item.remainPeople}}人 剩余
+            {{item.leftTime.days}}天 {{item.leftTime.hours}}:{{item.leftTime.minutes}}:{{item.leftTime.seconds}}</view>
+                </view>
+                <navigator class="tuanDtail-list__btn" hoverClass="none" url="{{'/pages/tuan/detail/index?id='+item.id}}">去参团</navigator>
+            </view>
+        </view>
+    </view>
+</template>

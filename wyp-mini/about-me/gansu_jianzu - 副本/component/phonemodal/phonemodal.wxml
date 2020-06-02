@@ -1,0 +1,10 @@
+<view bindtap="onCancel" class="modal-wrap" style="display: {{show?'block':'none'}}">
+    <view class="modal-container">
+        <view class="modal-header">{{title}}</view>
+        <view class="modal-body">更多服务登陆后即可体验</view>
+        <view class="modal-footer">
+            <phonebutton bind:changeuser="changeuser" bind:showtoast="showtoast" class="modal-footer" loginUrl="{{loginUrl}}"></phonebutton>
+        </view>
+    </view>
+</view>
+<toast show="{{toast.show}}" title="{{toast.title}}"></toast>

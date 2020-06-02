@@ -1,0 +1,79 @@
+<view class="page">
+    <view class="status">
+        <view class="part_1">
+            <view class="line1"></view>
+            <view class="circle1" wx:if="{{indetify1}}">1</view>
+            <view class="circle1" wx:if="{{indetify2}}">
+                <image src="https://public.danke.com.cn/public-20190805-Fv9s4-9Eoc5Do9fVFjrcqgE7yznD" style="width:29rpx;height:20rpx;"></image>
+            </view>
+            <view class="identity1">验证身份</view>
+        </view>
+        <view class="part_2" wx:if="{{indetify1}}">
+            <view class="line2"></view>
+            <view class="circle2">2</view>
+            <view class="identity2">验证新手机</view>
+        </view>
+        <view class="part_2" wx:if="{{indetify2}}">
+            <view class="line2" style="background:#3DBCC6;"></view>
+            <view class="circle2" style="color:#fff;background:#3DBCC6;" wx:if="{{indetify3}}">2</view>
+            <view class="circle2" style="color:#fff;background:#3DBCC6;" wx:if="{{indetify4}}">
+                <image src="https://public.danke.com.cn/public-20190805-Fv9s4-9Eoc5Do9fVFjrcqgE7yznD" style="width:29rpx;height:20rpx;"></image>
+            </view>
+            <view class="identity2" style="color:#3DBCC6;">验证新手机</view>
+        </view>
+    </view>
+    <view class="inp_part">
+        <input bindinput="__e" class="inputstyle" data-event-opts="{{[ [ 'input',[ [ 'new_phoneNumInput',['$event'] ] ] ] ]}}" id="phoneNum" maxlength="11" placeholder="请输入新手机号" placeholderClass="inpClass" type="num" wx:if="{{newPhone}}"></input>
+        <view class="present_phone" wx:if="{{oldPhone}}">
+            <text class="tit_num">当前手机号</text>
+            <text class="present_phoneNum">{{present_phoneNum}}</text>
+        </view>
+        <view wx:if="{{indetify1}}">
+            <input bindinput="__e" class="inputstyle" data-event-opts="{{[ [ 'input',[ [ 'new_yzmInput1',['$event'] ] ] ] ]}}" id="yzm" maxlength="4" placeholder="请输入验证码" placeholderClass="inpClass" type="num" value="{{inputVal}}"></input>
+            <button bindtap="__e" class="yzm" data-event-opts="{{[ [ 'tap',[ [ 'getVerificationCode1',['$event'] ] ] ] ]}}" data-id="2" disabled="{{disabled1}}" style="background:#fff;">{{''+time1+''}}</button>
+        </view>
+        <view wx:if="{{indetify2}}">
+            <input bindinput="__e" class="inputstyle" data-event-opts="{{[ [ 'input',[ [ 'new_yzmInput2',['$event'] ] ] ] ]}}" id="yzm" maxlength="4" placeholder="请输入验证码" placeholderClass="inpClass" type="num" value="{{inputVal}}"></input>
+            <button bindtap="__e" class="yzm" data-event-opts="{{[ [ 'tap',[ [ 'getVerificationCode2',['$event'] ] ] ] ]}}" data-id="3" disabled="{{disabled2}}" style="background:#fff;">{{''+time2+''}}</button>
+        </view>
+    </view>
+    <view class="err-info">
+        <text>{{errInfo}}</text>
+    </view>
+    <text class="no_yzm">收不到验证码，请拨打</text>
+    <text bindtap="__e" class="no_yzm_num" data-event-opts="{{[ [ 'tap',[ [ 'phonenum',['$event'] ] ] ] ]}}">4001-551-551</text>
+    <view bindtap="__e" class="next" data-event-opts="{{[ [ 'tap',[ [ 'confirm1',['$event'] ] ] ] ]}}" disabled="{{disable_con}}" style="{{'background:'+bg_con}}" wx:if="{{indetify1}}">下一步</view>
+    <view bindtap="__e" class="next" data-event-opts="{{[ [ 'tap',[ [ 'confirm2',['$event'] ] ] ] ]}}" disabled="{{disable_con}}" style="{{'background:'+bg_con}}" wx:if="{{indetify2}}">完成</view>
+    <view class="hidden" wx:if="{{indetify1&&flag}}">
+        <view class="yzm-img">
+            <view class="yzm-title">图片验证码</view>
+            <view class="inp-part">
+                <input bindinput="__e" class="inp_img" data-event-opts="{{[ [ 'input',[ [ 'new_yzmimgInput1',['$event'] ] ] ] ]}}" placeholder="请输入图片验证码" placeholderClass="inpYzm" value="{{yzmimgValue}}"></input>
+                <view catchtap="__e" class="yzmImage" data-event-opts="{{[ [ 'tap',[ [ 'changeImg1',['$event'] ] ] ] ]}}">
+                    <image src="{{yzmPhone1}}"></image>
+                    <view>看不清，换一张</view>
+                </view>
+            </view>
+            <view class="erryzmText">{{errImg}}</view>
+            <view bindtap="__e" class="yzm-qd" data-event-opts="{{[ [ 'tap',[ [ 'yzmqd1',['$event'] ] ] ] ]}}">
+                <text>确定</text>
+            </view>
+        </view>
+    </view>
+    <view class="hidden" wx:if="{{indetify2&&flag}}">
+        <view class="yzm-img">
+            <view class="yzm-title">图片验证码</view>
+            <view class="inp-part">
+                <input bindinput="__e" class="inp_img" data-event-opts="{{[ [ 'input',[ [ 'new_yzmimgInput2',['$event'] ] ] ] ]}}" placeholder="请输入图片验证码" placeholderClass="inpYzm" value="{{yzmimgValue}}"></input>
+                <view bindtap="__e" class="yzmImage" data-event-opts="{{[ [ 'tap',[ [ 'changeImg2',['$event'] ] ] ] ]}}">
+                    <image src="{{yzmPhone2}}"></image>
+                    <view>看不清，换一张</view>
+                </view>
+            </view>
+            <view class="erryzmText">{{errImg}}</view>
+            <view bindtap="__e" class="yzm-qd" data-event-opts="{{[ [ 'tap',[ [ 'yzmqd2',['$event'] ] ] ] ]}}">
+                <text>确定</text>
+            </view>
+        </view>
+    </view>
+</view>

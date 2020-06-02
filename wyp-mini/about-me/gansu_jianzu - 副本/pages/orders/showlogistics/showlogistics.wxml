@@ -1,0 +1,18 @@
+<import src="/dist/steps/index.wxml"></import>
+<view class="container" hidden="{{loading}}">
+    <view class="zan-panel">
+        <view class="zan-card">
+            <view class="order-no_text">物流状态：{{status}}</view>
+            <view class="order-no_text">物流公司：{{companyName?companyName:'暂无物流公司'}}</view>
+            <view class="order-no_text order-no_state">
+                <view>物流单号：</view>
+                <view class="zan-c-red">{{code?code:'暂无物流单号'}}</view>
+            </view>
+        </view>
+    </view>
+    <view class="zan-panel zan-cell--last-child" hidden="{{steps&&steps.length>0?false:true}}">
+        <view class="zan-cell__bd">
+            <template is="zan-steps" data="{{type:'vertical',hasDesc:true,steps:steps,className:'my-class'}}"></template>
+        </view>
+    </view>
+</view>

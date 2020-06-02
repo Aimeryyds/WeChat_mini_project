@@ -1,0 +1,68 @@
+<view bindtouchend="touchEnd" bindtouchmove="touchMove" bindtouchstart="touchStart" class="container" hidden="{{!isPageLoading}}" id="container">
+    <view class="top-video" hidden="{{vhidden&&!videodata.playUrl}}">
+        <video bindended="onVideoPlayEnded" controls="{{!playState.done}}" direction="{{videodata.newsType==76?'':90}}" hidden="{{!sharePoster.hidden}}" id="page-video-top" objectFit="contain" src="{{videodata.playUrl}}">
+            <cover-view class="no-wifi" hidden="{{playState.isWifi||playState.allowNoWifiPlay}}">
+                <cover-image class="bg" mode="aspectFill" src="{{videodata.tvPic}}"></cover-image>
+                <cover-view class="tip">当前为非WiFi网络，播放将产生流量费用</cover-view>
+                <cover-view bindtap="onNoWifiStartPlay" class="opt-play">
+          流量播放
+				</cover-view>
+            </cover-view>
+            <cover-view class="done-play" hidden="{{!playState.done}}" scrollTop="1">
+                <cover-view class="tip">视频已播放完成</cover-view>
+                <cover-view class="share">
+                    <cover-view class="txt">分享: </cover-view>
+                    <button appParameter="wechat" binderror="launchAppError" bindtap="onShareFriendClick" class="share-button" data-newsid="{{newsdata.newsId}}" openType="share">
+                        <cover-image class="share-friend-icon" src="../../images/wxshare-red.png"></cover-image>
+                    </button>
+                </cover-view>
+                <cover-view bindtap="onPlayAgain" class="play-again">
+                    <cover-image class="icon" src="../../images/icon-tab-refresh.png"></cover-image>
+                    <cover-view class="txt">再看一次</cover-view>
+                </cover-view>
+            </cover-view>
+        </video>
+    </view>
+    <view class="video-title">{{videodata.title}}</view>
+    <view class="video-detail">
+        <view class="media">{{videodata.userInfo.name}}</view>
+        <view class="times">
+            <image src="../../images/icon-played-dark.png"></image>
+      {{videodata.playNum}}
+    </view>
+    </view>
+    <block wx:if="{{recommendVideos.length>0}}">
+        <import src="../../template/relevant-model/video-relevant.wxml"></import>
+        <view class="relevant" hidden="{{corhidden}}">
+            <view class="com-tit">相关推荐</view>
+            <template is="video-relevant" data="{{videoList:recommendVideos}}"></template>
+        </view>
+    </block>
+    <view class="comment" hidden="{{nearCommentList.length<=0}}" style="width:100%">
+        <view class="com-tit">热门评论</view>
+        <view class="comment-detail">
+            <scroll-view lowerThreshold="20" scrollY="true" style="width:100%;;overflow:hidden;">
+                <block wx:if="{{nearCommentList.length>0}}">
+                    <import src="../../template/news-comment/comment.wxml"></import>
+                    <view>
+                        <template is="comment" data="{{commentList:nearCommentList}}"></template>
+                    </view>
+                </block>
+                <view class="no-com-tips" wx:else>
+                    <text>暂无评论</text>
+                </view>
+            </scroll-view>
+        </view>
+    </view>
+</view>
+<import src="../../components/share-bar/template.wxml"></import>
+<view hidden="{{!isPageLoading||!sharePoster.hidden}}">
+    <template is="share-bar" data="{{newsdata:videodata,shareBarHidden:shareBarHidden}}"></template>
+</view>
+<import src="../../components/share-poster/template.wxml"></import>
+<view hidden="{{sharePoster.hidden}}">
+    <template is="share-poster" data="{{sharePoster:sharePoster}}"></template>
+</view>
+<view class="bg_cont" hidden="{{isPageLoading}}">
+    <image mode="widthFix" src="../../images/loading-video.jpg" style="height: 1080rpx;"></image>
+</view>

@@ -1,0 +1,121 @@
+.header {
+    height: 90rpx;
+    background: #373745;
+    text-align: center;
+    line-height: 90rpx;
+    color: #fff;
+    font-size: 30rpx;
+    width: 100%;
+}
+
+.list {
+    width: 100%;
+    background: #fff;
+}
+
+.item {
+    display: flex;
+    padding: 30rpx;
+    border-bottom: 1px solid #f2f2f2;
+}
+
+.item>image {
+    width: 120rpx;
+    height: 120rpx;
+    flex: 0 0 auto;
+    border-radius: 50%;
+}
+
+.item .info {
+    display: flex;
+    flex-direction: column;
+    flex: 1;
+    margin-left: 30rpx;
+}
+
+.item .info>view {
+    font-size: 30rpx;
+    color: #373745;
+    display: flex;
+    align-items: center;
+    font-weight: 500;
+}
+
+.item .info>view .label {
+    font-size: 22rpx;
+    margin-left: 10rpx;
+    background: rgba(187,51,51,1);
+    padding: 4rpx;
+    color: #fff;
+    border-radius: 4rpx;
+    font-weight: normal;
+    border: 1px solid transparent;
+}
+
+.item .info>view .label.outline {
+    color: rgba(187,51,51,1);
+    background: #fff;
+    border-color: rgba(187,51,51,1);
+}
+
+.item .info>text {
+    margin-top: 20rpx;
+    font-size: 26rpx;
+    color: #373745;
+}
+
+.item .time {
+    font-size: 26rpx;
+    color: #7e7e85;
+}
+
+.filter-btn {
+    height: 60rpx;
+    background: #fff;
+    display: flex;
+    align-items: center;
+    padding: 0 20rpx 0 10rpx;
+    font-size: 26rpx;
+    box-shadow: 4.2rpx 4.2rpx 40rpx 0 rgba(55,55,69,0.2);
+    position: fixed;
+    border-radius: 30rpx;
+    right: 30rpx;
+    bottom: 30rpx;
+}
+
+.filter-btn image {
+    height: 40rpx;
+    width: 40rpx;
+    margin-right: 5rpx;
+}
+
+.form .form__bg {
+    position: fixed;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    background-color: #000;
+    z-index: 1;
+    opacity: .4;
+}
+
+.form .form__view {
+    z-index: 999;
+    position: fixed;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: #fff;
+    transition: all 0.25s;
+}
+
+.form .form__view .form__row {
+    display: flex;
+    align-items: center;
+    height: 120rpx;
+    font-size: 30rpx;
+    justify-content: center;
+    border-bottom: 1px solid #efeff0;
+    color: #373745;
+}

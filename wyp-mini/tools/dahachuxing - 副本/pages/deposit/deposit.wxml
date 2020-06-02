@@ -1,0 +1,16 @@
+<view>
+    <view class="userinfo">
+        <open-data class="userinfo-avatar" type="userAvatarUrl"></open-data>
+        <open-data class="userinfo-nickname" type="userNickName"></open-data>
+    </view>
+    <view class="authMoney">
+        <text class="text1">押金
+    </text>
+        <text class="text2" style="color: {{mainColor}}">¥{{money}}元</text>
+    </view>
+    <view class="explain">
+        <text class="text3">为确保合规骑车，需缴纳押金</text>
+        <text class="text4" style="color: #dd3262">可随时退回付款账户</text>
+    </view>
+    <button bindtap="deposit" disabled="{{disabled}}" style="background: {{mainColor}};color: {{textColor}}">立即缴纳</button>
+</view>

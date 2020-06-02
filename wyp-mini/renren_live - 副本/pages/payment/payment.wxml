@@ -1,0 +1,19 @@
+<navigationTopbar bindtap="MethodComponent" id="mineTopBar" navTxt="{{navTxtStr}}" navtype="2" showWhiteBackground="{{navTopBackShow}}"></navigationTopbar>
+<view class="page_container" style="top:{{navHeight}}px;">
+    <view class="pay_title">
+        <text class="pay_txt">账户余额</text>
+        <text class="amount">{{tokensAmount}}</text>果
+  </view>
+    <view class="pay_title">
+        <text class="pay_txt">充值果</text>
+    </view>
+    <view class="pay_con">
+        <view bindtap="payClick" class="pay_item {{index==nowCss?'active':''}}" data-index="{{index}}" data-item="{{item}}" wx:for="{{productInfoList}}" wx:key="index">
+            <image class="tag" src="./../../images/youhui.png" wx:if="{{item.activityAmount}}"></image>
+            <view class="item_first">{{item.tokensCount}}果</view>
+            <view class="item_second">¥{{item.unitPrice}}<text wx:if="{{item.activityAmount}}">赠{{item.activityAmount}}果</text>
+            </view>
+        </view>
+    </view>
+</view>
+<view class="bottom">【特别提示】充值用户须确认自己具有完全民事行为能力，已年满18周岁，或已年满16周岁且依靠自己的劳动收入作为主要生活来源。未成年用户使用充值服务，必须得到家长或其他监护人的同意。请未成年人用户监护人切实履行其监护义务。</view>

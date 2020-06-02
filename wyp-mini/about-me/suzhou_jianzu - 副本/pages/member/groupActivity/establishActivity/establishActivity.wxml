@@ -1,0 +1,116 @@
+<swiper autoplay="{{autoplay}}" class="swiper" duration="{{duration}}" indicatorDots="{{indicatorDots}}" interval="{{interval}}">
+    <swiper-item class="swiperitem" wx:for="{{imgUrls}}">
+        <image bindtap="joinImage" class="slide-image" mode="widthFix" src="{{item.url}}"></image>
+    </swiper-item>
+    <view class="readNum">阅读<text>{{views}}</text>
+    </view>
+    <view class="contSwiper">{{title}}</view>
+</swiper>
+<view class="participant">
+    <view class="participantLeft">
+参与者（<text>{{members}}</text>/{{limit_members}}）
+</view>
+    <view bindtap="joinUserInform" class="participantRight">
+所有人员
+<image src="http://tws.cnweisou.com/images/rightArrow.png"></image>
+    </view>
+</view>
+<view class="readImage">
+    <view class="readImageLeft">
+        <view class="joinNum" wx:for="{{membersList}}">
+            <view class="joinNumImage">
+                <image src="{{item.avatar}}"></image>
+            </view>
+            <text>{{item.nickname}}</text>
+        </view>
+    </view>
+</view>
+<view class="participant">
+    <view class="participantLeft">
+活动详情
+</view>
+    <view class="participantRight"></view>
+</view>
+<view class="allActivity1" wx:if="{{isallActivity}}">
+    <view class="allActivityTime">
+        <view class="allActivityImage">
+            <image src="http://tws.cnweisou.com/images/timeE.png"></image>
+        </view>
+        <text>{{sy}}年{{sm}}月{{sd}}日<text class="hourMin">{{sh}}：{{si}}</text>
+        </text>
+        <text class="startTime">开始时间</text>
+    </view>
+    <view class="allActivityTime">
+        <view class="allActivityImage">
+            <image src="http://tws.cnweisou.com/images/timeE.png"></image>
+        </view>
+        <text>{{ey}}年{{em}}月{{ed}}日<text class="hourMin">{{eh}}：{{ei}}</text>
+        </text>
+        <text class="startTime">结束时间</text>
+    </view>
+    <view class="allActivityPosition">
+        <view class="allActivityImage">
+            <image src="http://tws.cnweisou.com/images/position2Z.png"></image>
+        </view>
+        <text class="locate">{{locate}}</text>
+        <text bindtap="userNavigation" class="userNavigation">导航</text>
+        <image bindtap="userNavigation" class="allActivityPositionImage" src="http://tws.cnweisou.com/images/rightArrow.png"></image>
+    </view>
+    <view class="allActivityUser">
+        <view class="allActivityImage">
+            <image src="http://tws.cnweisou.com/images/icon_member.png"></image>
+        </view>
+        <text>{{mynickname}}</text>
+    </view>
+    <view class="allActivityUser">
+        <view class="allActivityImage">
+            <image src="http://tws.cnweisou.com/images/phoneA.png"></image>
+        </view>
+        <text>{{mobile}}</text>
+    </view>
+    <view class="allActivityType">
+        <view class="allActivityImage">
+            <image class="typeImg" src="http://tws.cnweisou.com/images/typeA.png"></image>
+        </view>
+        <text>{{type}}</text>
+        <text class="pointer">.</text>
+        <text>{{cost_type}}</text>
+    </view>
+    <view bindtap="clickOpen" class="allActivity2">
+收起
+</view>
+</view>
+<view bindtap="clickStop" class="allActivity2" wx:else>
+展开
+</view>
+<view class="division"></view>
+<view bindtap="joinActivity" class="joinChannel">
+参与活动
+</view>
+<view bindtap="showImages" class="bgtypeList" wx:if="{{showImage}}">
+    <swiper autoplay="{{autoplay}}" bindchange="currChange" circular="{{circular}}" class="slideImgs" duration="{{duration}}" indicatorDots="{{indicatorDots}}">
+        <swiper-item wx:for="{{imgUrls}}">
+            <image class="slide-image" src="{{item}}"></image>
+        </swiper-item>
+    </swiper>
+</view>
+<view bindtap="showImages" class="bgtypeList" wx:if="{{showImage}}">
+    <view class="Imagenum">
+        <text>{{currIndexImg}}</text>
+/
+<text>{{Imagenum}}</text>
+    </view>
+    <swiper autoplay="{{autoplay}}" bindchange="currChange" circular="{{circular}}" class="slideImgshow" duration="{{duration}}" indicatorDots="{{indicatorDots}}">
+        <swiper-item wx:for="{{imgUrls}}">
+            <image class="suolveimage" mode="widthFix" src="{{item.url}}"></image>
+        </swiper-item>
+    </swiper>
+</view>
+<view class="bgtypeListA" wx:if="{{cardAgain}}">
+    <view class="cardAgainType">
+            {{activityTop}}
+    <view bindtap="returnIndex" class="determineAgin">
+    确定
+    </view>
+    </view>
+</view>

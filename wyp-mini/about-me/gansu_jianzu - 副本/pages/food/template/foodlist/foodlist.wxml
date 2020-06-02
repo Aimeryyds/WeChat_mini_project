@@ -1,0 +1,45 @@
+<template name="foodlist">
+    <navigator style="display:flex;flex-direction: column" url="/pages/shop/products/products?storeid={{order.storeId}}">
+        <view class="food_order_row" data-id="{{order.id}}">
+            <view class="food_order_rowleft">
+                <image src="{{order.brandLogo}}"></image>
+                <view class="food_order_rowname">
+            {{order.brandName}} ({{order.storeName}})
+          </view>
+            </view>
+            <image src="http://imgcdnali.wfenxiao.com.cn/xcx/c/order/arrow-right.png" style="width:16rpx; height:24rpx; margin-left:20rpx;margin-top:5rpx;"></image>
+        </view>
+    </navigator>
+    <view class="food_product" wx:if="{{order.goodsList.length>0}}" wx:for="{{order.goodsList}}" wx:key="{{index}}">
+        <view class="food_productitem">
+            <image class="food_img" src="{{item.imgUrl}}"></image>
+            <view class="food_pro_info">
+                <view>{{item.name}}</view>
+                <view class="food_pro_num">
+                    <text class="food_pro_properties">{{item.properties}}</text> x{{item.num}}</view>
+            </view>
+        </view>
+        <view style="font-size:30rpx">￥{{item.price}}</view>
+    </view>
+    <view style="padding:0 22rpx">
+        <view class="food_youhui">
+            <view>会员折扣</view>
+            <view>减￥{{order.cardDiscount||0}}元</view>
+        </view>
+        <view class="food_youhui">
+            <view>优惠券</view>
+            <view>减￥{{order.couponDiscount||0}}元</view>
+        </view>
+        <view class="food_youhui" wx:if="{{show}}">
+            <view>代金券</view>
+            <view>减￥{{order.couponFee||0}}元</view>
+        </view>
+    </view>
+    <view class="total">
+        <view class="pricecolor">原价 ￥{{order.goodsTotalMoney||0}}</view>
+        <view class="pricecolor">优惠 ￥{{order.sumDiscount||0}}</view>
+      实付
+      <text class="payTotal_tag">￥</text>
+        <wxc-price class="paytotal" icon="sub">{{order.total||0}}</wxc-price>
+    </view>
+</template>

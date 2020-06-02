@@ -1,0 +1,45 @@
+<view class="search">
+    <view class="search-content">
+        <image src="http://tws.cnweisou.com/images/search1.png"></image>
+        <input bindchange="bindChange" class="input_search" placeholder="搜索关键字" placeholderStyle="color:#999"></input>
+    </view>
+    <text bindtap="search">筛选</text>
+</view>
+<dl class="menu">
+    <dt bindtap="tapMainMenu" class="{{menu[0]}}" data-index="0">价格</dt>
+    <dd class="{{subMenuDisplay[0]}}">
+        <ul>
+            <li bindtap="tapSubMenu" class="{{subMenuHighLight[0][0]}}" data-index="0-0">从高到低</li>
+            <li bindtap="tapSubMenu" class="{{subMenuHighLight[0][1]}}" data-index="0-1">从低到高</li>
+        </ul>
+    </dd>
+    <dt bindtap="tapMainMenu" class="{{menu[1]}}" data-index="1">销量</dt>
+    <dd class="{{subMenuDisplay[1]}}">
+        <ul>
+            <li bindtap="tapSubMenu" class="{{subMenuHighLight[1][0]}}" data-index="1-0">从多到少</li>
+            <li bindtap="tapSubMenu" class="{{subMenuHighLight[1][1]}}" data-index="1-1">从少到多</li>
+        </ul>
+    </dd>
+    <dt bindtap="tapMainMenu" class="{{menu[2]}}" data-index="2">最新</dt>
+    <dd class="{{subMenuDisplay[2]}}">
+        <ul>
+            <li bindtap="tapSubMenu" class="{{subMenuHighLight[2][0]}}" data-index="2-0">最新</li>
+            <li bindtap="tapSubMenu" class="{{subMenuHighLight[2][1]}}" data-index="2-1">非最新</li>
+        </ul>
+    </dd>
+    <dt bindtap="tapMainMenu" class="{{menu[3]}}" data-index="3">评价</dt>
+</dl>
+<view class="goodsList carts-list" wx:if="{{!empty}}">
+    <view bindtap="tapGoods" class="carts-item" data-object-id="{{item.goods_id}}" wx:for="{{goods}}" wx:key="objectId">
+        <view>
+            <image class="carts-image" mode="aspectFill" src="{{item.image}}"></image>
+        </view>
+        <view class="carts-text">
+            <text class="carts-title">{{item.goods_name}}</text>
+            <text class="carts-price">￥{{item.shop_price}}元</text>
+        </view>
+    </view>
+</view>
+<view class="view-empty" wx:else>
+    <text>抱歉暂时没有相关结果,换个筛选条试试吧!</text>
+</view>

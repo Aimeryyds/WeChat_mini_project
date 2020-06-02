@@ -1,0 +1,16 @@
+<template name="f4485d82">
+    <view class="_view f4485d82 {{'roomMates'+passClass}}" wx:if="{{roomMates&&roomMates.length>0}}">
+        <view class="_view f4485d82 h1">室友信息</view>
+        <view class="_view f4485d82 table">
+            <view bindtap="handleProxy" class="_view f4485d82 tr" data-comkey="{{$k}}" data-eventid="{{'f4485d82-0-'+index}}" key="{{index}}" wx:for="{{roomMates}}" wx:key="index">
+                <view class="_view f4485d82 td">{{item.column1}}</view>
+                <view class="_view f4485d82 td" style=" {{'color:'+item.column2Color+';'}}">{{item.column2}}</view>
+                <view class="_view f4485d82 td">{{item.column3}}</view>
+                <view class="_view f4485d82 td">{{item.column4}}</view>
+                <view class="_view f4485d82 td">
+                    <text class="_text f4485d82 iconfont icon-right_arrow" wx:if="{{item.roomId}}"></text>
+                </view>
+            </view>
+        </view>
+    </view>
+</template>

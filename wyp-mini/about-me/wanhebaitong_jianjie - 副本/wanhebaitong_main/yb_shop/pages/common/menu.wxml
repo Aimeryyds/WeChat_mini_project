@@ -1,0 +1,6 @@
+<cover-view class="fui-navbar" style="z-index:99999;background:{{menu.bg_color}};">
+    <cover-view bindtap="menu_url" class="nav-item {{route!=item.name||'active'}}" data-appid="{{item.appid}}" data-key="{{item.key?item.key:1}}" data-lat="{{item.lat}}" data-lng="{{item.lng}}" data-phone="{{item.phone}}" data-title="{{item.title}}" data-url="{{item.url}}" hoverClass="none" wx:for="{{menu.list}}">
+        <cover-image class="icon" src="{{index==tabbar_index?item.tabbar_select_icon:item.tabbar_icon}}"></cover-image>
+        <cover-view class="label" style="color:{{index==tabbar_index?menu.select_color:menu.text_color}}">{{item.name}}</cover-view>
+    </cover-view>
+</cover-view>

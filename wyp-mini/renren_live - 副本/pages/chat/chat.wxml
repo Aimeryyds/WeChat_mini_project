@@ -1,0 +1,35 @@
+<view class="navigation-container" style="top:0px;height:{{46+navStatusbarHeight}}px;">
+    <view class="navigation-area" style="height:46px; margin-top:{{navStatusbarHeight}}px;">
+        <view class="navigation-title-container">
+            <view class="navigation-title-refresh-loading" hidden="{{!navigationLoading}}"></view>
+            <text class="navigation-title-text">{{navigationTitleText}}</text>
+        </view>
+    </view>
+</view>
+<view class="chat-wrapper" style="margin-top:{{navStatusbarHeight+46}}px;" wx:if="{{isLogin}}">
+    <view class="chat-list" data-item="{{item}}" wx:for="{{recents}}" wx:key="that">
+        <view bindtouchend="touchEnd" bindtouchmove="touchMove" bindtouchstart="touchStart" class="item-info" data-index="{{index}}" style="left:{{item.left+'rpx'}}">
+            <view style=" float: left; width:20rpx;height: 100%; "></view>
+            <image binderror="errorFunction" bindtap="gotoChatDetail" class="item-avatar" data-errorimg="{{index}}" data-item="{{item}}" lazyLoad="true" mode="aspectFill" src="{{item.tiny_url==''||item.tiny_url==null?defaultImage:item.tiny_url}}"></image>
+            <view class="number" hidden="{{item.messageCount==null||item.messageCount==0}}">{{item.messageCount>99?'99+':item.messageCount}}</view>
+            <view class="item-message">
+                <view bindtap="gotoChatDetail" class="message" data-item="{{item}}" style="width:{{windowWidth-230}}px;">
+                    <text class="name">{{item.name}}</text>
+                    <text class="content">{{item.recent}}</text>
+                </view>
+            </view>
+            <view bindtap="toLiveShow" class="live_icon" data-index="{{index}}" data-item="{{item}}" wx:if="{{item.live_state===0}}">
+                <image class="live_img" src="./../../images/video_icon_new.png"></image>
+                <text>直播中</text>
+            </view>
+        </view>
+        <view class="item-oper">
+            <view catchtap="itemDelete" class="delete" data-index="{{index}}">删除</view>
+        </view>
+    </view>
+</view>
+<hintView id="hintView"></hintView>
+<chatList id="chatList"></chatList>
+<alertView bindalertViewCancelAction="alertViewCancelAction" bindalertViewOkAction="alertViewOkAction" closeIsHidden="true" id="alertView"></alertView>
+<view bindtap="onAll" class="all" wx:if="{{!isLogin}}"></view>
+<login bind:getUserInfo="getAuthor" id="login"></login>

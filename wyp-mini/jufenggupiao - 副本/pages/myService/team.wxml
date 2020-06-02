@@ -1,0 +1,30 @@
+<view class="team _8875b5c">
+    <view class="network _32f532b _8875b5c" wx:if="{{$net$hasNet}}">
+        <image class="_32f532b" src="../../images/network.png"></image>
+        <text class="_32f532b">网络不可用，请检查网络设置</text>
+        <view class="net-text font28 animated flash infinite _32f532b">正在尝试重新连接...</view>
+    </view>
+    <view class="des _8875b5c" hidden="{{!intro}}">
+        <view class="des-text _8875b5c">{{intro}}</view>
+        <view class="grey-box _8875b5c"></view>
+    </view>
+    <view class="persron _8875b5c" key="{{index}}" wx:for="{{datas}}">
+        <view class="persron-left _8875b5c">
+            <view class="avator _8875b5c">
+                <image class="_8875b5c" mode="scaleToFill" src="{{item.image_url}}"></image>
+            </view>
+            <view class="name _8875b5c">
+                <image class="_8875b5c" src="{{item.signature_img_url}}"></image>
+                <view class="_8875b5c">执笔投顾</view>
+            </view>
+        </view>
+        <view class="persron-right _8875b5c">
+            <view class="_8875b5c">{{item.certificate}}</view>
+            <view class="_8875b5c">执业证书号</view>
+        </view>
+    </view>
+    <view class="bt_des _8875b5c" wx:if="{{datas.length}}">以上排名不分先后</view>
+    <view catchtap="$backHome$goHome" class="box animated bounceIn _97a9f08 _8875b5c" wx:if="{{$backHome$isShow}}">
+        <image class="_97a9f08" lazyLoad="false" mode="scaleToFill" src="https://jfinfo.oss-cn-beijing.aliyuncs.com/jugupiao/images/share/home.png"></image>
+    </view>
+</view>

@@ -1,0 +1,17 @@
+<block wx:if="{{show}}">
+    <view class="none_info_box" wx:if="{{list.length==0}}">
+        <view class="none_info_img"></view>
+        <view class="none_info_text">暂无相关信息！</view>
+    </view>
+    <view class="record_li" wx:if="{{list.length>0}}" wx:for="{{list}}">
+        <image class="user_face" src="{{item.user_headimg}}"></image>
+        <view class="record_info">
+            <text class="y_color">{{item.nick_name}}</text>于{{item.create_time}}帮你砍掉了
+      <text class="y_color">{{item.bargain_price}}元</text>，砍后价格为
+      <text class="y_color">{{item.balance_price}}元</text>。
+    </view>
+    </view>
+    <view class="fui-loading empty">
+        <view class="text">没有更多了</view>
+    </view>
+</block>

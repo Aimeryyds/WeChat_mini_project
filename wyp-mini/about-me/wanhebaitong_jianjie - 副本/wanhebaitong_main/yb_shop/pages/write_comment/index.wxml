@@ -1,0 +1,34 @@
+<form bindreset="formReset" bindsubmit="formSubmit">
+    <view class="join_li join_li_p">
+        <view wx:for="{{score}}">
+            <image bindtap="score" data-index="{{index}}" src="{{item==1?gray_star:light_star}}" style="width:40px;height:40px;float:left"></image>
+        </view>
+    </view>
+    <view class="join_j_li">
+        <view class="join_info">
+            <textarea bindblur="bindTextAreaBlur" name="info" placeholder="亲，你对本店服务还满意吗？"></textarea>
+        </view>
+    </view>
+    <view class="join_k_li">
+        <view class="join_pic_list">
+            <view class="join_pic_li" wx:if="{{store_pic_array.length>0}}" wx:for="{{store_pic_array}}">
+                <image mode="aspectFill" src="{{item}}"></image>
+                <view bindtap="Image_del" class="close_icon" data-index="{{item}}"></view>
+            </view>
+            <view class="join_pic_li">
+                <image catchtap="chooseImageTap" mode="aspectFill" src="http://ddfwz.sssvip.net/asmce/diancan/add_pic.jpg"></image>
+            </view>
+            <view class="prompt_info">
+                <text class="prompt_tit">上传图片</text>
+                <text>有图有真相才更有说服力</text>
+            </view>
+            <view class="clear"></view>
+        </view>
+    </view>
+    <view class="b_btn_box">
+        <view class="bottom_btn_box">
+            <button class="bottom_btn" formType="submit" style="background:{{config.selectedColor!='#000000'?config.selectedColor:config.background}};color:{{config.selectedColor=='#000000'&&config.font_color=='black'?'#000000':'#ffffff'}};">确认提交</button>
+        </view>
+    </view>
+    <view class="bottom_space"></view>
+</form>

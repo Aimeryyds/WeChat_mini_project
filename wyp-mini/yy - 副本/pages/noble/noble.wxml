@@ -1,0 +1,24 @@
+<view class="noble-page">
+    <view style="position:fixed;background:#fff;z-index:9;width:100%;top:0;height:{{statusBar.height+'px'}}"></view>
+    <status-bar statusBar="{{statusBar}}"></status-bar>
+    <view class="noble-main" style="padding-top:{{statusBar.height+'px'}}">
+        <pull-refresh bind:refreshData="onRefreshData" hasPullReq="{{hasPullReq}}">
+            <view slot="slot1">
+                <view class="noble-title">7天贡献榜(1Y币=1000贡献值)</view>
+                <view class="noble-wrapper">
+                    <view class="noble-list" wx:for="{{sortedConsumesList}}" wx:key="index">
+                        <image class="noble-ranking" src="./images/noble-{{index+1}}.png" wx:if="{{index<=2}}"></image>
+                        <view class="noble-ranking" wx:else>{{index+1}}</view>
+                        <view class="noble-avatar">
+                            <image src="{{item[11003]||'./images/default.png'}}"></image>
+                        </view>
+                        <view class="noble-info">
+                            <view>{{item[7004]||'榜上无人'}}</view>
+                            <view class="noble-value">贡献值：{{item[8001]||0}}</view>
+                        </view>
+                    </view>
+                </view>
+            </view>
+        </pull-refresh>
+    </view>
+</view>

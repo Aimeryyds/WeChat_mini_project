@@ -1,0 +1,64 @@
+<scroll-view scrollY style="height:100%;width:100%;">
+    <view class="concent" data-index="{{index}}" wx:if="{{!isMylist}}" wx:for="{{concentList}}" wx:for-item="concentLists">
+        <image bindtap="toAllActivity" class="toAllActivity" src="https://tws.cnweisou.com/images/toAllActivity.png"></image>
+        <view class="concentLeft">
+            <view class="day">{{concentLists.date.d}}</view>
+            <view class="month">{{concentLists.date.m}}月</view>
+            <text class="year">{{concentLists.date.y}}年</text>
+            <text class="type">{{concentLists.type}}</text>
+            <view class="delete">
+                <image bindtap="deleteActivity" data-id="{{concentLists.id}}" data-index="{{index}}" src="https://tws.cnweisou.com/images/deleteActivity.png" wx:if="{{concentLists.isowner}}"></image>
+            </view>
+            <view class="eidt">
+                <image bindtap="eidtActivity" class="eidtimg" data-date="{{concentLists.date}}" data-id="{{concentLists.id}}" data-index="{{index}}" src="https://tws.cnweisou.com/images/sdEidt.png" wx:if="{{concentLists.isowner&&concentLists.isTime}}"></image>
+            </view>
+        </view>
+        <view bindtap="joinUserInfo" class="concentRight" data-id="{{concentLists.id}}" data-index="{{index}}">
+            <view class="title">{{concentLists.title}}</view>
+            <view class="introduce" wx:if="{{concentLists.note}}">
+{{concentLists.note}}
+</view>
+            <scroll-view class="couponNum" scrollX="true" style=" white-space: nowrap;">
+                <image class="channelImage" src="{{item.url}}" style="width: {{imageWidth}}px; height: {{imageWidth}}px" wx:for="{{concentLists.banner_imgs}}"></image>
+            </scroll-view>
+            <view class="person">
+                <view class="personImages"></view>
+                <view class="personNum">
+                    <text>阅读:</text>{{concentLists.views}}</view>
+            </view>
+        </view>
+    </view>
+</scroll-view>
+<image bindtap="toAllActivity" class="toAllActivity" src="https://tws.cnweisou.com/images/toAllActivity.png"></image>
+<view class="noActivity" wx:if="{{isMylist}}">
+您还没有自己的活动，点击<text bindtap="joinCreatActivity">确定</text>，即可创建自己的专属活动喔
+<text bindtap="joinCreatActivity" class="creatActi">确定</text>
+</view>
+<view class="bgtypeList" wx:if="{{isEidt&&isTime}}">
+    <form bindreset="eidtReset" bindsubmit="eidtSubmit">
+        <view class="container">
+            <view class="title">
+                <text>修改发布信息</text>
+                <image bindtap="closeEidt" src="https://tws.cnweisou.com/images/editReturn.png"></image>
+            </view>
+            <view class="eidtCont">
+                <text>主题</text>
+                <input bindinput="actItem" maxlength="30" name="actItem" placeholder="活动主题（不超过30个字）" placeholderStyle="font-size:27rpx;color:#666;" type="text" value="{{actItem}}"></input>
+            </view>
+            <view class="eidtCont">
+                <text>手机号</text>
+                <input bindblur="phone" maxlength="11" placeholder="请填写要修改的手机号" placeholderStyle="font-size:27rpx;color:#666;" type="number" value="{{myphone}}"></input>
+            </view>
+            <view class="eidtCont">
+                <text>地点</text>
+                <input bindinput="map" placeholder="请选择要修改的地点" placeholderStyle="font-size:27rpx;color:#666;" value="{{mapArea}}"></input>
+            </view>
+            <view class="areaD">
+                <text>活动介绍</text>
+                <textarea bindinput="eidtContArea" maxlength="300" placeholder="请填写要修改的活动介绍（不超过300个字）" placeholderStyle="font-size:27rpx;color:#666;vertical-align: middle;" value="{{cont}}"></textarea>
+            </view>
+            <button class="bottom" formType="submit">提交</button>
+        </view>
+    </form>
+</view>
+<loading wx:if="{{loading}}"></loading>

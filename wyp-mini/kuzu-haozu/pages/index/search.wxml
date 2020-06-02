@@ -1,0 +1,35 @@
+<view class="topSearch">
+    <view class="seachBox">
+        <image backgroundSize="cover" src="../../images/search_icon.png"></image>
+        <input autocomplete="off" bindconfirm="goSearch" bindinput="inputFun" confirmType="search" data-domain="{{domain}}" focus="true" id="sh_a" maxlength="100" name="keyword" placeholder="输入您想找的区域/商圈或者写字楼名称" type="text" value=""></input>
+    </view>
+</view>
+<view class="recentlyWrap" wx:if="{{historyList.length>0&&!seachFlag}}">
+    <view class="recently_title">最近搜索</view>
+    <view class="listRecently">
+        <navigator bindtap="saveLocal" data-sid="{{item.k}}" data-val="{{comm.decode(item.p)}}" url="../list/list?{{item.k?comm.buquan(item.k):'keyword='+item.p}}" wx:for="{{comm.reverse(historyList)}}" wx:key="t">{{comm.decode(item.p)}}</navigator>
+    </view>
+    <view catchtap="deleLocal" class="recently_detele">
+        <image src="../../images/detele_icon.png" type="search"></image>
+    </view>
+</view>
+<view class="recentlyWrap" wx:if="{{!seachFlag}}">
+    <view class="recently_title">大家都在找</view>
+    <view class="listRecently listLookFor">
+        <navigator bindtap="saveLocal" data-val="{{item}}" url="../list/list?keyword={{item}}" wx:for="{{commonList}}" wx:key="item">{{item}}</navigator>
+    </view>
+</view>
+<view class="resultWrap" wx:if="{{seachFlag&&!showSorry}}">
+    <navigator catchtap="saveLocal" class="resultList" data-sid="{{item.point_id?'point_id='+item.point_id:'building_id='+item.building_id}}" data-val="{{item.name}}" url="../list/list?{{item.point_id?'point_id='+item.point_id:'building_id='+item.building_id}}" wx:for="{{seachList}}" wx:key="id">
+        <text class="resultList_title">{{comm.before(item.name,keyword)}}<text class="yellow">{{comm.content(item.name,keyword)}}</text>{{comm.after(item.name,keyword)}}</text>
+        <text>（{{item.district_name}}-{{item.street_name}}）</text>
+    </navigator>
+</view>
+<view class="dataBox" wx:if="{{seachFlag&&showSorry}}">
+    <view class="dataBox_img">
+        <image src="../../images/no_data.png" type=""></image>
+    </view>
+    <text class="dataBox_text">Sorry,暂无满足您筛选条件的房源～</text>
+    <button catchtap="callPhone" class="dataBox_btn" openType="contact">进入客服会话</button>
+</view>
+<wxs module="comm" src="../../utils/common.wxs" />

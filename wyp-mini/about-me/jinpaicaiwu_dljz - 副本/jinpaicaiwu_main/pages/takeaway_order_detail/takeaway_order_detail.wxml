@@ -1,0 +1,213 @@
+<view class="top">
+    <view class="bg cart_bg_color"></view>
+    <view class="tan">
+        <view class="style">
+            <view class="bgg cart_bg_color" wx:if="{{order.status_no==1}}">
+                <text class="iconfont icon-fukuan st1 "></text>
+            </view>
+            <text class="st2" wx:if="{{order.status_no==1}}">订单待付款</text>
+            <view class="bgg cart_bg_color" wx:if="{{order.status_no==2}}">
+                <text class="iconfont icon-dengdaiwenjian st1 "></text>
+            </view>
+            <text class="st2" wx:if="{{order.status_no==2}}">订单待接单</text>
+            <view class="bgg cart_bg_color" wx:if="{{order.status_no==9}}">
+                <text class="iconfont icon-yijiedan st1 "></text>
+            </view>
+            <text class="st2" wx:if="{{order.status_no==9}}">订单已接单</text>
+            <view class="bgg cart_bg_color" wx:if="{{order.status_no==7}}">
+                <text class="iconfont icon-tuikuanguanhuai st1 "></text>
+            </view>
+            <text class="st2" wx:if="{{order.status_no==7}}">订单退款中</text>
+            <view class="bgg cart_bg_color" wx:if="{{order.status_no==8}}">
+                <text class="iconfont icon-tuikuan st1 "></text>
+            </view>
+            <text class="st2" wx:if="{{order.status_no==8}}">已退款</text>
+            <view class="bgg cart_bg_color" wx:if="{{order.status_no==5}}">
+                <text class="iconfont icon-refuse st1 "></text>
+            </view>
+            <text class="st2" wx:if="{{order.status_no==5}}">订单已拒绝</text>
+            <view class="bgg cart_bg_color" wx:if="{{order.status_no==4}}">
+                <text class="iconfont icon-jiaoyiguanbi st1 "></text>
+            </view>
+            <text class="st2" wx:if="{{order.status_no==4}}">订单已取消</text>
+            <view class="bgg cart_bg_color" wx:if="{{order.status_no==3}}">
+                <text class="iconfont icon-yijiedan st1 "></text>
+            </view>
+            <text class="st2" wx:if="{{order.status_no==3}}">订单已完成</text>
+        </view>
+        <view class="progress">
+            <view class="txt_list" style="" wx:if="{{order.status_no==1}}">
+                <text class="radio_c cart_color">待付款</text>
+                <text>待接单</text>
+                <text>已接单</text>
+            </view>
+            <view class="text_list" style="" wx:if="{{order.status_no==1}}">
+                <text class="radio_b cart_bg_color"></text>
+                <text class="line_liner cart_bg_gradient"></text>
+                <text class="radio"></text>
+                <text class="line"></text>
+                <text class="radio"></text>
+            </view>
+            <view class="txt_list" style="" wx:if="{{order.status_no==7}}">
+                <text class="radio_c cart_color">退款中</text>
+                <text>已退款</text>
+            </view>
+            <view class="text_list" wx:if="{{order.status_no==7}}">
+                <text class="radio_b cart_bg_color"></text>
+                <text class="line_linered cart_bg_color"></text>
+                <text class="line_liner cart_bg_gradient"></text>
+                <text class="radio"></text>
+            </view>
+            <view class="txt_list" style="" wx:if="{{order.status_no==8}}">
+                <text>退款中</text>
+                <text class="radio_c cart_color">已退款</text>
+            </view>
+            <view class="text_list" wx:if="{{order.status_no==8}}">
+                <text class="radio_b cart_bg_color"></text>
+                <text class="line_linered cart_bg_color"></text>
+                <text class="line_linered cart_bg_color"></text>
+                <text class="radio_b cart_bg_color"></text>
+            </view>
+            <view class="txt_list" style="" wx:if="{{order.status_no==2}}">
+                <text>待付款</text>
+                <text class="radio_c cart_color">待接单</text>
+                <text>已接单</text>
+            </view>
+            <view class="text_list" wx:if="{{order.status_no==2}}">
+                <text class="radio_b cart_bg_color"></text>
+                <text class="line_linered cart_bg_color"></text>
+                <text class="radio_b cart_bg_color"></text>
+                <text class="line_liner cart_bg_gradient"></text>
+                <text class="radio "></text>
+            </view>
+            <view class="txt_list" style="" wx:if="{{order.status_no==9}}">
+                <text>待付款</text>
+                <text>待接单</text>
+                <text class="radio_c cart_color">已接单</text>
+            </view>
+            <view class="text_list" wx:if="{{order.status_no==9}}">
+                <text class="radio_b cart_bg_color"></text>
+                <text class="line_linered cart_bg_color"></text>
+                <text class="radio_b cart_bg_color"></text>
+                <text class="line_linered cart_bg_color"></text>
+                <text class="radio_b cart_bg_color"></text>
+            </view>
+            <view class="jj" wx:if="{{order.status_no==3}}">
+                <text>订单已完成，感谢您的信任</text>
+            </view>
+            <view class="jj" wx:if="{{order.status_no==4}}">
+                <text>订单已取消，期待为您下一次服务</text>
+            </view>
+            <view class="jj" wx:if="{{order.status_no==5}}">
+                <text>订单已被拒绝，期待为您下一次服务</text>
+            </view>
+        </view>
+    </view>
+</view>
+<view class="title">
+    <view class="title_t">
+        <view>
+            <image src="{{order.shimg}}"></image>
+        </view>
+        <view>
+            <text>{{order.shop_name?order.shop_name:''}}</text>
+        </view>
+    </view>
+</view>
+<view class="eatch_list">
+    <view class="eatch_item" wx:for="{{products}}" wx:key="index">
+        <view class="eatch_item_l">
+            <image mode="aspectFit" src="{{item.feature_img}}"></image>
+        </view>
+        <view class="eatch_item_r">
+            <view class="eatch_item_r2">
+                <text>{{item.product_name}}</text>
+                <text>￥{{item.dprice}}X{{item.amount}}</text>
+            </view>
+            <block wx:if="{{item.attr_data.length>0}}">
+                <view class="eatch_item_r1" wx:for="{{item.attr_data}}" wx:for-item="attr_items">
+                    <text wx:for="{{attr_items}}" wx:for-item="attr_txt">{{attr_txt}}</text>
+                </view>
+            </block>
+        </view>
+    </view>
+    <view class="hj">
+        <view class="flex">
+            <text>包装费</text>
+            <text>￥{{order.packing_fee}}</text>
+        </view>
+        <view class="flex" wx:if="{{order.isdd==1}}">
+            <view>配送费</view>
+            <view>￥{{order.delivery_fee}}</view>
+        </view>
+        <view class="flex">
+            <text>合计</text>
+            <text class="red cart_color">￥{{order.total_price}}</text>
+        </view>
+    </view>
+</view>
+<view class="list">
+    <view class="input_list">
+        <view class="input_item">
+            <text class="f1">配送服务</text>
+            <text class="f2" wx:if="{{order.isdd==0}}">商家配送</text>
+            <text class="f2" wx:if="{{order.isdd==1}}">达达配送</text>
+        </view>
+    </view>
+    <view class="input_list" wx:if="{{order.psrs.psr==1}}">
+        <view class="input_item">
+            <text class="f1">配送骑手：</text>
+            <text class="f2">{{order.psrs.iName}}</text>
+        </view>
+    </view>
+    <view class="input_list">
+        <view class="input_item">
+            <text class="f1">期望时间：</text>
+            <text class="f2">{{order.meal_getime}}</text>
+        </view>
+    </view>
+    <view class="input_list">
+        <view class="input_item">
+            <text class="f1">配送地址：</text>
+            <text class="f2">{{order.details_addr}}</text>
+        </view>
+    </view>
+</view>
+<view class="list">
+    <view class="input_list">
+        <view class="input_item">
+            <text class="f1">订单号：</text>
+            <text class="f2">{{order.out_trade_no}}</text>
+        </view>
+    </view>
+    <view class="input_list">
+        <view class="input_item">
+            <text class="f1">下单时间：</text>
+            <text class="f2">{{order.order_time}}</text>
+        </view>
+    </view>
+    <view class="input_list">
+        <view class="input_item">
+            <text class="f1">支付方式：</text>
+            <text class="f2">{{order.payment_type}}</text>
+        </view>
+    </view>
+    <view class="input_list">
+        <view class="input_item">
+            <text class="f1">联系电话：</text>
+            <text class="f2">{{order.phone?order.phone:''}}</text>
+        </view>
+    </view>
+    <view class="input_list">
+        <view class="input_item">
+            <text class="f1">联系人：</text>
+            <text class="f2">{{order.receiver_name}}</text>
+        </view>
+    </view>
+    <view class="input_list">
+        <view class="input_item">
+            <text class="f1">备注：</text>
+            <text class="f2">{{order.message}}</text>
+        </view>
+    </view>
+</view>

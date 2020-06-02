@@ -1,0 +1,26 @@
+<template name="bbc30e04">
+    <view class="_view bbc30e04">
+        <view class="_view bbc30e04 login-wrap">
+            <view class="_view bbc30e04 logo">
+                <view class="_view bbc30e04">
+                    <view class="_view bbc30e04 mg-logo"></view>
+                    <text class="_text bbc30e04">蘑菇租房</text>
+                </view>
+            </view>
+            <view class="_view bbc30e04 input-wrap">
+                <form bindsubmit="handleProxy" class="_form bbc30e04" data-comkey="{{$k}}" data-eventid="{{'bbc30e04-3'}}">
+                    <view class="_view bbc30e04 tip-wrap">
+                        <input bindinput="handleProxy" class="_input bbc30e04 input-tel" data-comkey="{{$k}}" data-eventid="{{'bbc30e04-0'}}" data-name="mobile" maxlength="11" placeholder="请输入手机号" type="tel"></input>
+                    </view>
+                    <view class="_view bbc30e04 tip-wrap">
+                        <text bindtap="handleProxy" class="_text bbc30e04 send-message" data-comkey="{{$k}}" data-eventid="{{'bbc30e04-1'}}">{{messTxt}}</text>
+                        <input bindinput="handleProxy" class="_input bbc30e04 input-tel" data-comkey="{{$k}}" data-eventid="{{'bbc30e04-2'}}" data-name="code" maxlength="6" placeholder="请输入验证码"></input>
+                    </view>
+                    <view class="_view bbc30e04 btn-area">
+                        <button class="_button bbc30e04 {{[true?'submit-btn':'',isDisableSend?'submit-disabled':'']}}" disabled="{{isDisableSend}}" formType="submit">登录</button>
+                    </view>
+                </form>
+            </view>
+        </view>
+    </view>
+</template>

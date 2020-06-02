@@ -1,0 +1,11 @@
+<view class="map-tap">
+    <view bindtap="nearbySearch" class="search-item" data-name="{{item.name}}" data-tabindex="{{index}}" data-tag="{{item.tag}}" enableZoom="true" wx:for="{{tabArr}}">
+        <view class="{{tabindex===index?'nearby-search':''}}">
+            <image src="{{item.imgurl}}" wx:if="{{tabindex===index}}"></image>
+            <text>{{item.name}}</text>
+        </view>
+    </view>
+    <view class="map-ctn">
+        <map id="myMap" latitude="{{lat}}" longitude="{{lon}}" markers="{{markers}}" scale="14"></map>
+    </view>
+</view>

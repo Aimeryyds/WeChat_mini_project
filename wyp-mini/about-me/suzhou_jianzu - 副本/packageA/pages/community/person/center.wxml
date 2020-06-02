@@ -1,0 +1,36 @@
+<image class="bg" src="https://tws.cnweisou.com/images/userbg.png"></image>
+<image class="avatar" src="{{data.member.avatar}}"></image>
+<view class="Introduction">
+    <view class="nickname" style="">{{data.member.nickname}}
+			<view class="icon">{{data.level.levelname}}</view>
+    </view>
+    <view style="margin-top:10rpx;">话题数：{{data.postcount}}  关注数：{{data.followcount}}</view>
+    <view style="margin-top:10rpx;">社区积分：0</view>
+    <view style="margin-top:20rpx;" wx:if="{{data.member.sns_sign==''}}">这家伙什么也没有留下~~~</view>
+</view>
+<block wx:if="{{data.boards}}">
+    <view style="height: 2rpx;background-color: #ccc;margin: 60rpx 0 30rpx;position: relative;text-align: center;">
+        <text style="position: absolute;top:-16rpx;left: 45%;font-size: 28rpx;background-color: #fff;z-index: 3">TA的板块</text>
+    </view>
+    <view class="plate">
+        <view bindtap="tolist" class="menu_view" data-bid="{{item.id}}" wx:for="{{data.boards}}">
+            <image class="orange" mode="aspectFill" src="{{item.logo}}"></image>
+            <text>{{item.title}}</text>
+        </view>
+    </view>
+</block>
+<view style="height: 2rpx;background-color: #ccc;margin: 60rpx 0 30rpx;position: relative;text-align: center;">
+    <text style="position: absolute;top:-16rpx;left: 45%;font-size: 28rpx;background-color: #fff;z-index: 3">TA的话题</text>
+</view>
+<view class="Section">
+    <view bindtap="toTopic" class="item" data-pid="{{item.id}}" wx:for="{{data.posts}}">
+        <view class="left">
+            <image class="img" src="{{item.boardlogo}}"></image>
+            <view style="margin-left: 20rpx;">
+                <view class="line" style="margin-bottom: 20rpx;">{{item.title}}</view>
+                <view class="line">{{item.boardtitle}} | 阅读：{{item.views}}</view>
+            </view>
+        </view>
+        <view class="right">></view>
+    </view>
+</view>

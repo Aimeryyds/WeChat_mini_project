@@ -1,0 +1,14 @@
+<block wx:if="{{data}}">
+    <view bindtap="jump" class="tableviewcell" data-id="{{item.id}}" wx:for="{{data}}">
+        <image src="{{item.thumb}}" style="width: 92rpx;height: 92rpx;border-radius: 50%;margin: 24rpx 36rpx;line-height: 143rpx;flex-shrink:0;"></image>
+        <view class="pair">{{item.name}}</view>
+    </view>
+</block>
+<view class="wrap" style="height:{{height*2}}rpx;line-height: {{height*2}}rpx;" wx:else>
+    <view style="overflow: hidden;line-height: 0;margin-top: {{height-200}}rpx;">
+        <image src="../../../images/jump.png" style="width: 160rpx;height: 160rpx;"></image>
+        <view style="line-height: 50rpx;">
+	  目前还没有关联小程序哟
+</view>
+    </view>
+</view>

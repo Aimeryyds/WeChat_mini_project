@@ -1,0 +1,4 @@
+<cover-view catchtouchmove="handleTouchMove" class="gio-message-inner" wx:if="{{visible}}">
+    <cover-image binderror="onImageError" bindload="onImageLoad" bindtap="onClickTarget" class="gio-message-image" mode="widthFix" src="{{message.contentMetadata.components[0].config.src}}"></cover-image>
+    <cover-view bindtap="handleClose" class="gio-message-close">╳</cover-view>
+</cover-view>

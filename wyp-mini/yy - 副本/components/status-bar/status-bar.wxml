@@ -1,0 +1,24 @@
+<cover-view class="header-main isRoom" hidden="{{hidePannel}}" style="padding-top:{{statusBarHeight}}px" wx:if="{{statusBar.isRoom&&hasReady}}">
+    <cover-view class="title">
+        {{statusBar.title||'YY直播'}}
+    </cover-view>
+    <cover-view class="status-bar-left" style="top:{{statusBarHeight}}px">
+        <cover-view class="status-bar-left__main">
+            <cover-view bindtap="goToBack" class="back-img-wrap">
+                <cover-image class="back-img" src="./images/back-icon2.png"></cover-image>
+            </cover-view>
+            <cover-view class="gap-line"></cover-view>
+            <cover-view bindtap="goToIndex" class="index-img-wrap">
+                <cover-image class="icon-index__img" src="./images/icon-index.png"></cover-image>
+            </cover-view>
+        </cover-view>
+    </cover-view>
+</cover-view>
+<view class="header-main isCommon" hidden="{{hidePannel}}" style="top:{{statusBar.height+'px'}}" wx:if="{{!statusBar.isRoom}}">
+    <view class="title">
+        {{statusBar.title||'YY直播'}}
+    </view>
+    <view bindtap="goToBack" class="back" wx:if="{{notTabPage}}">
+        <image class="img" src="./images/back-icon.png"></image>
+    </view>
+</view>

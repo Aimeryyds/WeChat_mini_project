@@ -1,0 +1,250 @@
+@import "../../wuBaseWxss/1.wxss";
+
+@import "../../wuBaseWxss/2.wxss";
+
+#j_page {
+    display: block;
+}
+
+.index-container {
+    padding-top: 240rpx;
+    overflow: hidden;
+}
+
+.index-container .index-head {
+    position: fixed;
+    top: 0;
+    background: #fff;
+    z-index: 9;
+    margin-top: 80rpx;
+    z-index: 99;
+}
+
+.index-loading {
+    position: fixed;
+    top: 0;
+    bottom: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 99;
+}
+
+.index-loading image {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 60rpx;
+    height: 60rpx;
+    transform: translate(-50%,-50%);
+}
+
+.index-head {
+    width: 100%;
+}
+
+.index-nav {
+    width: 100%;
+    width: 100%;
+    height: 66rpx;
+    z-index: 9;
+    background-color: #fff;
+}
+
+.index-nav .navs-scroll {
+    width: 100%;
+    height: 66rpx;
+    white-space: nowrap;
+}
+
+.index-nav .navs-name {
+    position: relative;
+    display: inline-block;
+    padding: 10rpx 30rpx 0;
+    font-size: 28rpx;
+    color: #999;
+}
+
+.index-nav .current {
+    font-size: 30rpx;
+    color: #3a3a3a;
+}
+
+.index-nav .current:after {
+    position: absolute;
+    left: 50%;
+    content: '';
+    display: block;
+    width: 50rpx;
+    height: 6rpx;
+    border-radius: 6rpx 6rpx;
+    background: #fd0;
+    transform: translateX(-50%);
+}
+
+::-webkit-scrollbar {
+    width: 0;
+    height: 0;
+    color: transparent;
+}
+
+.index-main {
+    height: calc(100vh - 240rpx);
+}
+
+.index-swiper-main {
+    width: 100%;
+    margin-bottom: 20rpx;
+}
+
+.index-swiper-main .index-swiper {
+    width: 100%;
+    height: 250rpx;
+}
+
+.index-swiper .swiper-link,.index-swiper_bg {
+    width: 100%;
+    height: 100%;
+    background-size: cover;
+    border: none;
+    padding: 0;
+    margin: 0;
+    border-radius: 0;
+}
+
+.index-swiper .index-swiper_bg:after {
+    border: none;
+    border-radius: 0;
+    background-color: transparent;
+}
+
+.index-module {
+}
+
+.modules-head {
+    color: #3a3a3a;
+    font-size: 30rpx;
+    height: 80rpx;
+    line-height: 80rpx;
+}
+
+.modules-head image {
+    width: 14rpx;
+    height: 38rpx;
+}
+
+.index-push {
+    position: fixed;
+    display: flex;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    background-color: rgba(0,0,0,0.8);
+    align-items: center;
+    z-index: 99;
+}
+
+.index-push .push-main {
+    display: -webkit-flex;
+    align-items: center;
+    position: relative;
+    margin: 0 auto;
+}
+
+.index-push .push-main .ad-wrapper {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: absolute;
+    width: 100%;
+    bottom: 48rpx;
+}
+
+.index-push .push-main .text {
+    font-family: PingFangSC-Regular;
+    font-size: 14px;
+    color: #9C45E9;
+    letter-spacing: 0;
+    text-align: center;
+    position: absolute;
+    bottom: 112rpx;
+}
+
+.index-push .push-main .ad-button {
+    width: 360rpx;
+    height: 80rpx;
+    border-radius: 25rpx;
+}
+
+.index-push .push-main .ad-button+text {
+    font-family: PingFangSC-Medium;
+    font-size: 16px;
+    color: #FFFFFF;
+    position: absolute;
+}
+
+.index-push .push-link,.index-push .push-img {
+    position: relative;
+    max-width: 584rpx;
+    max-height: 814rpx;
+    margin: 0;
+    padding: 0;
+    border-radius: 25rpx;
+    line-height: 0;
+}
+
+.index-push .close-main {
+    position: absolute;
+    right: 0;
+    top: 0;
+    padding: 20rpx;
+    width: 60rpx;
+    height: 60rpx;
+}
+
+.index-push .push-close {
+    position: absolute;
+    right: 0;
+    top: 0;
+    padding: 20rpx 20rpx 40rpx 40rpx;
+    width: 24rpx;
+    height: 24rpx;
+}
+
+.init-loading {
+    position: fixed;
+    top: 260rpx;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.init-loading__img {
+    width: 114rpx;
+    height: 114rpx;
+}
+
+.index-baseLine {
+    font-size: 24rpx;
+    padding-top: 20rpx;
+    padding-bottom: 4rpx;
+    color: #999;
+}
+
+.adunit-main {
+    position: relative;
+    margin-bottom: 30rpx;
+    transition: all 0.3s ease;
+}
+
+.adunit-placeholder {
+    position: absolute;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    color: #fff;
+    text-align: center;
+}

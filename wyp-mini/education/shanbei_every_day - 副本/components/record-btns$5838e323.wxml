@@ -1,0 +1,36 @@
+<template name="record-btns$5838e323">
+    <view class="_div data-v-b98615da record-btns">
+        <view bindtap="handleProxy" class="_div data-v-b98615da re-record" data-comkey="{{$k}}" data-eventid="{{'0'}}" style=" {{'display:'+(recordComplete?'flex':'none')+';'}}">
+            <view class="_div data-v-b98615da btn-s">
+                <image class="_img data-v-b98615da" src="/static/img/record-restart.png"></image>
+            </view>
+            <view class="_div data-v-b98615da hint">重录</view>
+        </view>
+        <view bindtap="handleProxy" class="_div data-v-b98615da pre-listen" data-comkey="{{$k}}" data-eventid="{{'1'}}" style=" {{'display:'+(recordComplete?'flex':'none')+';'}}">
+            <view class="_div data-v-b98615da btn-m">
+                <image class="_img data-v-b98615da" src="{{isRecordPlaying?'/static/img/record-stop.png':'/static/img/record-play.png'}}"></image>
+            </view>
+            <view class="_div data-v-b98615da hint">试听</view>
+        </view>
+        <view bindtap="handleProxy" class="_div data-v-b98615da publish" data-comkey="{{$k}}" data-eventid="{{'2'}}" style=" {{'display:'+(recordComplete?'flex':'none')+';'}}">
+            <view class="_div data-v-b98615da btn-s">
+                <image class="_img data-v-b98615da" src="/static/img/record-publish.png"></image>
+            </view>
+            <view class="_div data-v-b98615da hint">发布</view>
+        </view>
+        <view class="_div data-v-b98615da record" style=" {{'display:'+(!recordComplete?'flex':'none')+';'}}">
+            <view bindtouchend="handleProxy" bindtouchstart="handleProxy" class="_div data-v-b98615da record-wrapper" data-comkey="{{$k}}" data-eventid="{{'3'}}">
+                <view class="_div data-v-b98615da shadow-m  {{[isRecordActive?'active':'']}}"></view>
+                <view class="_div data-v-b98615da shadow-s  {{[isRecordActive?'active':'']}}"></view>
+                <view class="_div data-v-b98615da btn-m">
+                    <image class="_img data-v-b98615da" src="/static/img/mic.png"></image>
+                </view>
+            </view>
+            <view class="_div data-v-b98615da hint" style=" {{'color:'+(isRecordActive?'#fff':'#999999')+';'}}">长按录音</view>
+        </view>
+        <view class="_div data-v-b98615da record-toast" wx:if="{{isRecordActive}}">
+            <image class="_img data-v-b98615da" src="/static/img/recording.gif"></image>
+            <label class="_span data-v-b98615da">正在录音，松开结束</label>
+        </view>
+    </view>
+</template>

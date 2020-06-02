@@ -1,0 +1,16 @@
+<template name="form_submit">
+    <view class="wp_content form_submit_content {{layerid}}">
+        <button class="wxbtn" data-tips="{{param.submit_tips}}" formType="submit" hoverClass="btnhover" plain="true" style="{{inner_style}}">{{param.btnval}}</button>
+    </view>
+</template>
+<form bindsubmit="formSubmit" data-id="{{param.tbl}}" reportSubmit="true" style="display:block;padding-bottom:10rpx;overflow:hidden;">
+    <view class="mod_wrapper" id="{{item.id}}" style="{{item.globalstylestr}}" wx:for="{{children}}" wx:key="{{item.id}}">
+        <wpform_input id="comp_{{item.id}}" layerid="{{item.id}}" name="{{item.id}}" param="{{item.childprop}}" value="" wx:if="{{item.type=='form_input'}}"></wpform_input>
+        <wpform_textarea id="comp_{{item.id}}" layerid="{{item.id}}" name="{{item.id}}" param="{{item.childprop}}" value="" wx:elif="{{item.type=='form_textarea'}}"></wpform_textarea>
+        <wpform_datepicker id="comp_{{item.id}}" layerid="{{item.id}}" name="{{item.id}}" param="{{item.childprop}}" value="" wx:elif="{{item.type=='form_datepicker'}}"></wpform_datepicker>
+        <wpform_options id="comp_{{item.id}}" layerid="{{item.id}}" name="{{item.id}}" param="{{item.childprop}}" value="" wx:elif="{{item.type=='form_options'}}"></wpform_options>
+        <wpform_uploadimage id="comp_{{item.id}}" layerid="{{item.id}}" name="{{item.id}}" param="{{item.childprop}}" value="" wx:elif="{{item.type=='form_uploadimage'}}"></wpform_uploadimage>
+        <wpform_selector id="comp_{{item.id}}" layerid="{{item.id}}" name="{{item.id}}" param="{{item.childprop}}" value="" wx:elif="{{item.type=='form_selector'}}"></wpform_selector>
+        <template is="form_submit" data="{{...item.data}}" wx:elif="{{item.type=='form_submit'}}"></template>
+    </view>
+</form>

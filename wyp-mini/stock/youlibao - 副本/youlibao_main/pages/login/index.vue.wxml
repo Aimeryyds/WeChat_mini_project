@@ -1,0 +1,21 @@
+<template name="77648d00">
+    <view class="_div data-v-23181412 container">
+        <view class="_div data-v-23181412 logo">
+            <image alt class="_img data-v-23181412" src="https://static.xyzq.cn/activity/mp-images/mp-home/login_logo_small.png"></image>
+        </view>
+        <view class="_h3 data-v-23181412">兴业证券优理宝</view>
+        <view class="_div data-v-23181412 phone">
+            <image alt class="_img data-v-23181412" src="https://static.xyzq.cn/activity/mp-images/mp-home/icon_phone.svg"></image>
+            <input disabled bindinput="handleProxy" class="_input data-v-23181412" data-comkey="{{$k}}" data-eventid="{{'2_0'}}" placeholder="手机号" type="tel" value="{{phone}}"></input>
+        </view>
+        <view class="_div data-v-23181412 code">
+            <view class="_div data-v-23181412">
+                <image alt class="_img data-v-23181412" src="https://static.xyzq.cn/activity/mp-images/mp-home/icon_code.svg"></image>
+                <input bindinput="handleProxy" class="_input data-v-23181412" data-comkey="{{$k}}" data-eventid="{{'3_1'}}" placeholder="验证码" ref="code" type="tel" value="{{code}}"></input>
+            </view>
+            <button bindtap="handleProxy" class="_button data-v-23181412 sendcode {{[codeDisabled?'disabled':'']}}" data-comkey="{{$k}}" data-eventid="{{'2_2'}}" disabled="{{codeDisabled}}">{{codeStr}}</button>
+        </view>
+        <button bindtap="handleProxy" class="_button data-v-23181412 wx-login" data-comkey="{{$k}}" data-eventid="{{'1_3'}}">登录</button>
+        <view class="_section data-v-23181412"> 注册即表示您已同意<label bindtap="handleProxy" class="_span data-v-23181412" data-comkey="{{$k}}" data-eventid="{{'2_4'}}">《兴业证券互联网平台服务协议及隐私条款》</label>，未注册手机号码将自动注册登录。 </view>
+    </view>
+</template>

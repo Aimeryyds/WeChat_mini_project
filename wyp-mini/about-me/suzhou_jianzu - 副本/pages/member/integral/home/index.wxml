@@ -1,0 +1,117 @@
+<template name="recommands">
+    <view class="integral">
+        <view class="i_tp">
+            <image src="http://tws.cnweisou.com/images/gift.png" style="width: 40rpx;height: 40rpx;display: block;margin-right: 20rpx;"></image>
+            <text>推荐积分兑换</text>
+        </view>
+        <view class="i_list">
+            <view bindtap="todetail" class="item" data-id="{{item.id}}" wx:for="{{recommands}}">
+                <image class="img" src="{{item.thumb}}"></image>
+                <view class="title">{{item.title}}</view>
+                <view class="bottom">
+                    <view class="left">
+                        <view style="font-size: 34rpx;">{{item.credit}}<text style="font-size: 26rpx;margin-left:8rpx;color:rgb(153, 153, 153);font-weight: normal;">积分</text>
+                        </view>
+                        <view style="margin-left:6rpx;">+￥{{item.money}}</view>
+                    </view>
+                    <view class="right">兑换</view>
+                </view>
+            </view>
+        </view>
+    </view>
+</template>
+<template name="times">
+    <view class="integral">
+        <view class="i_tp">
+            <image src="http://tws.cnweisou.com/images/gift.png" style="width: 40rpx;height: 40rpx;display: block;margin-right: 20rpx;"></image>
+            <text>限时积分兑换</text>
+        </view>
+        <view class="i_list">
+            <view bindtap="todetail" class="item_exchange" data-id="{{item.id}}" wx:for="{{times}}">
+                <image class="img_exchange" src="{{item.thumb}}"></image>
+                <view class="wrap">
+                    <view class="title_exchange">{{item.title}}</view>
+                    <view class="bottom_exchange">
+                        <view class="left">
+                            <view style="font-size: 34rpx;">{{item.credit}}<text style="font-size: 26rpx;margin-left:8rpx;color:rgb(153, 153, 153);font-weight: normal;">积分</text>
+                            </view>
+                            <view style="margin-left:6rpx;">+￥{{item.money}}</view>
+                        </view>
+                        <view class="right">兑换</view>
+                    </view>
+                </view>
+            </view>
+        </view>
+    </view>
+</template>
+<template name="tops">
+    <view class="integral">
+        <view class="i_tp">
+            <image src="http://tws.cnweisou.com/images/gift.png" style="width: 40rpx;height: 40rpx;display: block;margin-right: 20rpx;"></image>
+            <text>热销积分兑换</text>
+        </view>
+        <view class="i_list">
+            <view bindtap="todetail" class="item" data-id="{{item.id}}" wx:for="{{tops}}">
+                <image class="img" src="{{item.thumb}}"></image>
+                <view class="title">{{item.title}}</view>
+                <view class="bottom">
+                    <view class="left">
+                        <view style="font-size: 34rpx;">{{item.credit}}<text style="font-size: 26rpx;margin-left:8rpx;color:rgb(153, 153, 153);font-weight: normal;">积分</text>
+                        </view>
+                        <view style="margin-left:6rpx;">+￥{{item.money}}</view>
+                    </view>
+                    <view class="right">兑换</view>
+                </view>
+            </view>
+        </view>
+    </view>
+</template>
+<template name="vips">
+    <view class="integral">
+        <view class="i_tp">
+            <image src="http://tws.cnweisou.com/images/gift.png" style="width: 40rpx;height: 40rpx;display: block;margin-right: 20rpx;"></image>
+            <text>VIP积分兑换</text>
+        </view>
+        <view class="i_list">
+            <view bindtap="todetail" class="item" data-id="{{item.id}}" wx:for="{{vips}}">
+                <image class="img" src="{{item.thumb}}"></image>
+                <view class="title">{{item.title}}</view>
+                <view class="bottom">
+                    <view class="left">
+                        <view style="font-size: 34rpx;">{{item.credit}}<text style="font-size: 26rpx;margin-left:8rpx;color:rgb(153, 153, 153);font-weight: normal;">积分</text>
+                        </view>
+                        <view style="margin-left:6rpx;">+￥{{item.money}}</view>
+                    </view>
+                    <view class="right">兑换</view>
+                </view>
+            </view>
+        </view>
+    </view>
+</template>
+<template name="swiper">
+    <swiper indicatorDots="true" interval="true" style="height: 500rpx;">
+        <swiper-item wx:for="{{advs}}">
+            <image class="slide-image" src="{{item.thumb}}" style="width:100%;height:100%;"></image>
+        </swiper-item>
+    </swiper>
+    <view class="section_tp">
+        <view style="display: flex;flex-direction: row;justify-content: center;align-items: center;">
+            <image src="http://tws.cnweisou.com/images/integral.png" style="width: 40rpx;height: 40rpx;display: block;margin-right: 20rpx;"></image>
+            <text>积分：{{credit}}</text>
+        </view>
+        <view bindtap="tointegral" data-credit="{{credit}}" style="display: flex;flex-direction: row;justify-content: center;align-items: center;">
+            <image src="http://tws.cnweisou.com/images/recording.png" style="width: 40rpx;height: 40rpx;display: block;margin-right: 20rpx;"></image>
+            <text>参与记录</text>
+        </view>
+    </view>
+</template>
+<view class="page">
+    <block wx:for="{{data}}">
+        <template is="swiper" data="{{advs:item,credit:data.credit}}" wx:if="{{index=='advs'}}"></template>
+        <template is="vips" data="{{vips:item}}" wx:if="{{index=='vips'}}"></template>
+        <template is="tops" data="{{tops:item}}" wx:if="{{index=='tops'}}"></template>
+        <template is="times" data="{{times:item}}" wx:if="{{index=='times'}}"></template>
+        <template is="recommands" data="{{recommands:item}}" wx:if="{{index=='recommands'}}"></template>
+    </block>
+</view>
+<loading wx:if="{{loading}}"></loading>

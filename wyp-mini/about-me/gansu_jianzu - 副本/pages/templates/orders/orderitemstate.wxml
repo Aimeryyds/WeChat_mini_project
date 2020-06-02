@@ -1,0 +1,9 @@
+<template name="order-item-state">
+    <view bindtap="gotoshop" class="order-state-row-box" data-id="{{item.storeId}}">
+        <view class="order-state-direction-row">
+            <view class="order-state_text">{{item.brandName}}-{{item.storeName}}</view>
+            <image src="http://imgcdnali.wfenxiao.com.cn/xcx/c/order/arrow-right.png" style="width:16rpx; height:24rpx; margin-left:20rpx;margin-top:5rpx;"></image>
+        </view>
+        <view class="order-state_text {{item.orderStatus==10?'state-will-pay':item.orderStatus==20?'state-cancel':item.orderStatus==50?'state-paid':item.orderStatus==60?'state-paid':'state-done'}}">{{item.orderStatusName}}</view>
+    </view>
+</template>

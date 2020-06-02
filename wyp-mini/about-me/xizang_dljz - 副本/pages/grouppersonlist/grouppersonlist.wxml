@@ -1,0 +1,12 @@
+<view class="container">
+    <view class="list-wrap">
+        <view class="item" wx:for="{{group_info.list}}">
+            <image src="{{item.photo}}"></image>
+            <view class="info">
+                <view>{{item.nickName}}</view>
+                <text>还差{{item.attendNum-item.nowNum}}人, {{item.coundown_str}}</text>
+            </view>
+            <navigator class="btn" url="/pages/groupdetail/groupdetail?groupOrderId={{item.groupOrderId}}&goodsSn={{goodsSn}}">去参团</navigator>
+        </view>
+    </view>
+</view>

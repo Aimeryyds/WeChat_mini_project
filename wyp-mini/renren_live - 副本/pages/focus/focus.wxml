@@ -1,0 +1,30 @@
+<navigationBar navigationTitleText="{{navigationTitleText}}" navigationType="1"></navigationBar>
+<view class="line-row" style="margin-top:{{navStatusbarHeight+46}}px;"></view>
+<view class="hint-border" wx:if="{{hintInfo.hintIsShow}}">
+    <image class="hint-image" hidden="{{hintInfo.hintImage==null}}" src="{{hintInfo.hintImage}}"></image>
+    <text class="hint-text1" hidden="{{hintInfo.hintMessage1==null}}">{{hintInfo.hintMessage1}}</text>
+    <text class="hint-text2" hidden="{{hintInfo.hintMessage2==null}}">{{hintInfo.hintMessage2}}</text>
+    <button bindtap="onRest" class="hint-button" hidden="{{hintInfo.hintButton==null}}">{{hintInfo.hintButton}}</button>
+</view>
+<block wx:else>
+    <view class="focus-list-border">
+        <view class="focus-item-border" data-item="{{item}}" wx:for="{{focusListInfo}}" wx:key="asa">
+            <image bindtap="onJumpView" class="focus-item-avatar" data-item="{{item}}" mode="aspectFill" src="{{item.headUrl}}"></image>
+            <view bindtap="onJumpView" class="focus-item-message-border" data-item="{{item}}">
+                <text class="focus-item-name">{{item.name}}</text>
+                <text class="focus-item-message">{{item.authDescription}}</text>
+            </view>
+            <text bindtap="tochatDetail" class="chat_btn" data-item="{{item}}" style="{{isChat==0?'opacity:0.3':'opacity: 1'}}">撩TA</text>
+            <view bindtap="onJumpView" class="focus-img" data-item="{{item}}">
+                <image class="focus-next-image" src="/images/mine_next.png"></image>
+            </view>
+        </view>
+    </view>
+    <view class="loadMore-block" hidden="{{!hasMore}}">
+        <view class="loadMore-block" hidden="{{!hasMoreLoading}}">
+            <image class="loadMore-roate" src="../../images/icon_loading.png"></image>
+            <text class="loadMore-text">加载更多...</text>
+        </view>
+    </view>
+</block>
+<component-tag-name class="mydialog"></component-tag-name>

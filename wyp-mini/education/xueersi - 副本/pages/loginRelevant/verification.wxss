@@ -1,0 +1,131 @@
+@import "../../wuBaseWxss/16.wxss";
+
+page {
+    background-color: #ADB0C1;
+}
+
+.container-input {
+    margin: 104rpx 92rpx 0 92rpx;
+}
+
+.container-input .input-vercode {
+    width: 552rpx;
+    height: 108rpx;
+    display: -webkit-box;
+    display: -webkit-flex;
+    display: flex;
+    -webkit-box-orient: horizontal;
+    -webkit-box-direction: normal;
+    flex-direction: row;
+    -webkit-box-pack: justify;
+    justify-content: space-between;
+    z-index: 999;
+}
+
+.container-input .input-vercode .input-item {
+    width: 72rpx;
+    height: 108rpx;
+    border-bottom: 0.5rpx solid #ADB0C1;
+    text-align: center;
+    padding-bottom: 20rpx;
+}
+
+.container-input .input-vercode .input-item .vercode {
+    font-size: 72rpx;
+    position: relative;
+}
+
+.container-input .input-content {
+    position: absolute;
+    opacity: 0;
+    text-align: center;
+    top: 0;
+    left: -100%;
+}
+
+.animation::after {
+    content: '';
+    margin-top: 28rpx;
+    margin-left: 28rpx;
+    display: block;
+    width: 6rpx;
+    height: 56rpx;
+    border-radius: 5rpx;
+    animation: blink 1s infinite steps(1,start);
+}
+
+@-webkit-keyframes blink {
+    0%,100% {
+        background-color: #6CC9DF;
+    }
+
+    50% {
+        opacity: 0;
+    }
+}
+
+@keyframes blink {
+    0%,100% {
+        background-color: #6CC9DF;
+    }
+
+    50% {
+        opacity: 0;
+    }
+}
+
+.animation-none {
+    display: none;
+}
+
+page {
+    background-color: #3F4460;
+    color: #FFF;
+}
+
+.container {
+    height: 1206rpx;
+}
+
+.verification-code {
+    padding: 148rpx 92rpx 0 92rpx;
+    font-size: 48rpx;
+    line-height: 48rpx;
+}
+
+.verCodeSendTo {
+    font-size: 30rpx;
+    margin: 32rpx 92rpx 0 92rpx;
+}
+
+.showMes {
+    font-size: 24rpx;
+    color: #ADB0C1;
+    margin: 30rpx 92rpx 0 92rpx;
+}
+
+.send-time {
+    margin-left: 92rpx;
+    margin-top: 60rpx;
+    width: 174rpx;
+    height: 56rpx;
+    line-height: 56rpx;
+    border: 0.5rpx solid #ADB0C1;
+    border-radius: 4rpx;
+    text-align: center;
+    font-size: 24rpx;
+    color: #ADB0C1;
+}
+
+.send-time-again {
+    margin-left: 92rpx;
+    margin-top: 60rpx;
+    width: 174rpx;
+    height: 56rpx;
+    line-height: 56rpx;
+    background-color: #646981;
+    border-radius: 4rpx;
+    text-align: center;
+    font-size: 24rpx;
+    color: #FFF;
+}

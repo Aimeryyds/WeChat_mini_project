@@ -1,0 +1,66 @@
+<view class="pay warp">
+    <view class="realcheck" wx:if="{{isRealCheck}}">
+        <button bindtap="click" type="primary">保险缴费实名认证</button>
+    </view>
+    <view class="loading" wx:if="{{loading}}">
+        <view class="result">
+            <view>申请支付...</view>
+        </view>
+    </view>
+    <view class="success" wx:if="{{isSuccess}}">
+        <view class="result">
+            <image mode="aspectFit" src="../../assets/images/success.png" style="width: 50px; height: 50px;"></image>
+            <view>支付成功</view>
+        </view>
+        <view class="content">
+            <view class="line">
+                <view class="line-title">产品名称</view>
+                <view class="line-desc">{{product.name}}</view>
+            </view>
+            <view class="line">
+                <view class="line-title">订单号</view>
+                <view class="line-desc">{{product.orderId}}</view>
+            </view>
+            <view class="line">
+                <view class="line-title">金额</view>
+                <view class="line-desc">{{product.price}}元</view>
+            </view>
+            <view class="line">
+                <view class="line-title">日期</view>
+                <view class="line-desc">{{product.date}}</view>
+            </view>
+        </view>
+        <view style="padding-top:20rpx;">
+            <button bindtap="backHome" class="btns backhome">返回首页</button>
+            <button bindtap="ckdd" class="btns">查看订单</button>
+        </view>
+    </view>
+    <view class="fail" wx:if="{{isFail}}">
+        <view class="result">
+            <image mode="aspectFit" src="../../assets/images/error.png" style="width: 50px; height: 50px;"></image>
+            <view>支付失败</view>
+        </view>
+        <view class="content">
+            <view class="line">
+                <view class="line-title">产品名称</view>
+                <view class="line-desc">{{product.name}}</view>
+            </view>
+            <view class="line">
+                <view class="line-title">订单号</view>
+                <view class="line-desc">{{product.orderId}}</view>
+            </view>
+            <view class="line">
+                <view class="line-title">金额</view>
+                <view class="line-desc">{{product.price}}元</view>
+            </view>
+            <view class="line">
+                <view class="line-title">日期</view>
+                <view class="line-desc">{{product.date}}</view>
+            </view>
+        </view>
+        <view style="padding-top:20rpx;">
+            <button bindtap="backHome" class="btns backhome">返回首页</button>
+            <button bindtap="ckdd" class="btns">查看订单</button>
+        </view>
+    </view>
+</view>

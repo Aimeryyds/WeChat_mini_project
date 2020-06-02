@@ -1,0 +1,58 @@
+<import src="../../components/guidance/template.wxml"></import>
+<view hidden="{{!firstLoading.loadhidden||guidance.hidden}}">
+    <template is="guidance" data="{{data:guidance.data}}"></template>
+</view>
+<view class="refresh-tips" hidden="{{tipspush}}">
+    <view animation="{{animationData}}" class="detail">
+        <view class="info-text">
+            <text>已为您推荐{{tipsnum}}条资讯</text>
+        </view>
+        <view class="info-img">
+            <image src="../../images/loadicon.png"></image>
+        </view>
+    </view>
+</view>
+<view class="diss-tips" hidden="{{disstips}}">减少推荐类似内容</view>
+<block wx:if="{{topAppletAdArticles.length}}">
+    <import src="../../template/news-model/top-ad-model.wxml"></import>
+    <view>
+        <template is="top-ad-model" data="{{topAppletAdArticles:topAppletAdArticles}}"></template>
+    </view>
+</block>
+<block wx:if="{{topNewsList.length}}">
+    <import src="../../template/news-model/top-model.wxml"></import>
+    <view>
+        <template is="top-model" data="{{topNewsList:topNewsList,clickedList:clickedList}}"></template>
+    </view>
+</block>
+<view class="hot-topic-entry" wx:if="{{hotNewsList.length}}">
+    <view class="hot-news">
+        <form bindsubmit="onSubmit" bindtap="gotoHotArticle" class="hot-item{{item.isRead?' read':''}}" data-index="{{index}}" reportSubmit="true" wx:for="{{hotNewsList}}" wx:key="newsId">
+            <button formType="submit">
+                <image lazyLoad="false" mode="aspectFill" src="{{item.smallPic}}"></image>
+                <text class="title">{{item.title}}</text>
+            </button>
+        </form>
+    </view>
+    <view bindtap="gotoHotTopic" class="to-more">
+        <text>查看今日热榜</text>
+        <image class="icon" mode="widthFix" src="../../images/icon-arrow-rr.png"></image>
+    </view>
+</view>
+<import src="../../template/news-model/news-model.wxml"></import>
+<view bindtouchend="touchEnd" bindtouchstart="touchStart" class="container" hidden="{{!firstLoading.loadhidden}}" style="padding-bottom: 125rpx;">
+    <view class="container-info">
+        <template is="news-model" data="{{newsList:newsList,dissList:dissList,clickedList:clickedList,lastIndex:lastIndex}}"></template>
+    </view>
+</view>
+<import src="../../components/tab/template.wxml"></import>
+<view hidden="{{!firstLoading.loadhidden}}">
+    <template is="tab" data="{{tabData:tabData}}"></template>
+</view>
+<view class="loading-begin" hidden="{{firstLoading.loadhidden}}">
+    <image src="../../images/loading-home-new.jpg"></image>
+</view>
+<view bindtap="onGotoActivity" class="activity-entry" hidden="{{!activity.isShow}}">
+    <view capture-catch:tap="onActivityClose" class="close"></view>
+    <image src="{{activity.icon}}"></image>
+</view>

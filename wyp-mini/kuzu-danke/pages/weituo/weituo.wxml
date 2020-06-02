@@ -1,0 +1,42 @@
+<view class="page">
+    <view class="wt-list">
+        <view class="wt-model">
+            <text class="wt-text">姓名</text>
+            <input bindinput="__e" data-event-opts="{{[ [ 'input',[ [ 'userNameInput',['$event'] ] ] ] ]}}" maxlength="20" placeholder="请输入您的姓名" type="text"></input>
+        </view>
+        <view class="wt-model">
+            <text class="wt-text">手机号</text>
+            <input bindinput="__e" data-event-opts="{{[ [ 'input',[ [ 'phoneNumInput',['$event'] ] ] ] ]}}" maxlength="11" placeholder="请输入您的手机号" type="number"></input>
+        </view>
+        <view class="wt-model">
+            <text class="wt-text">验证码</text>
+            <input bindinput="__e" data-event-opts="{{[ [ 'input',[ [ 'verification',['$event'] ] ] ] ]}}" maxlength="4" placeholder="请输入短信验证码" type="number"></input>
+            <button bindtap="__e" class="yzm" data-event-opts="{{[ [ 'tap',[ [ 'getVerificationCode',['$event'] ] ] ] ]}}" data-id="2" disabled="{{disabled}}">{{''+time+''}}</button>
+        </view>
+        <view class="wt-model">
+            <text class="wt-text">城市</text>
+            <picker bindchange="__e" class="picker_class" data-event-opts="{{[ [ 'change',[ [ 'bindPickerChange',['$event'] ] ] ] ]}}" range="{{areaList}}" value="{{areaIndex}}">
+                <view class="pickerClass">{{''+areaList[areaIndex]+''}}</view>
+            </picker>
+            <image class="arr-img" src="https://public.wutongwan.org/public-20180519-FkPRUs3Rkoy3Tug34VMRo66gd9o2"></image>
+        </view>
+        <view class="wt-model">
+            <text class="wt-text">小区名称</text>
+            <input bindinput="__e" data-event-opts="{{[ [ 'input',[ [ 'community',['$event'] ] ] ] ]}}" maxlength="20" placeholder="请输入小区名称" type="text"></input>
+        </view>
+        <view class="err-info">
+            <text>{{errInfo}}</text>
+        </view>
+        <view bindtap="__e" class="confirm" data-event-opts="{{[ [ 'tap',[ [ 'confirm',['$event'] ] ] ] ]}}">
+            <text>提交</text>
+        </view>
+        <view class="hidden" wx:if="{{flag}}">
+            <view class="yzm-img">
+                <view class="yzm-title">{{errImg}}</view>
+                <image bindtap="__e" data-event-opts="{{[ [ 'tap',[ [ 'changeImg',['$event'] ] ] ] ]}}" src="{{yzmPhone}}"></image>
+                <input bindinput="__e" class="inp_img" data-event-opts="{{[ [ 'input',[ [ 'imgYzmInput',['$event'] ] ] ] ]}}" maxlength="5" placeholder="不区分大小写" placeholderClass="inpYzm" value="{{yzmimgValue}}"></input>
+                <view bindtap="__e" class="yzm-qd" data-event-opts="{{[ [ 'tap',[ [ 'yzmqd',['$event'] ] ] ] ]}}" style="{{'background:'+confirm_bg+';'}}">提交</view>
+            </view>
+        </view>
+    </view>
+</view>

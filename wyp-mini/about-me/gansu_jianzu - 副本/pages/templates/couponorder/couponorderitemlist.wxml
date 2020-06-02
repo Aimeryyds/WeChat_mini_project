@@ -1,0 +1,18 @@
+<template name="coupon_order-goods">
+    <view class="coupon_order_goods-detail-box">
+        <view class="new_order_hor" wx:if="{{item.type==0}}">
+            <image src="{{item.imgUrl}}" style="width:90rpx;height:90rpx; margin-left:10rpx;border-radius: 5px"></image>
+            <view style="margin-left:20rpx;margin-right:100rpx">{{item.goodsname}}</view>
+        </view>
+        <view class="new_order_coupon" wx:if="{{item.type==1}}">
+            <image src="{{item.imgUrl}}"></image>
+        </view>
+        <view class="new_order_giftcard" wx:if="{{item.type==2}}">
+            <image src="{{item.imgUrl}}"></image>
+        </view>
+        <view>
+            <view class="new_order_coupon-price">{{item.price}}积分</view>
+            <view class="new_order_coupon-num">X{{item.num?item.num:num}}</view>
+        </view>
+    </view>
+</template>

@@ -1,0 +1,39 @@
+<view class="content">
+    <view class="collect-nav medium_font" wx:if="{{showtab}}">
+        <view bindtap="changActive" class="{{activeIndex=='product'?'active':''}}" data-id="product">产品({{pro_total}})</view>
+        <view bindtap="changActive" class="{{activeIndex=='article'?'active':''}}" data-id="article">文章({{art_total}})</view>
+    </view>
+    <view class="list">
+        <view bindtap="turnToPage" class="list_item" data-index="{{index}}" wx:if="{{items&&items.length>0}}" wx:for="{{items}}" wx:key="index">
+            <view class="list_item_L">
+                <image src="{{item.product.doc_image}}" wx:if="{{activeIndex=='product'}}"></image>
+                <image src="{{item.article.doc_image}}" wx:else></image>
+            </view>
+            <view class="list_item_R">
+                <view>
+                    <text class="txt" wx:if="{{activeIndex=='product'}}">{{item.product.title}}</text>
+                    <text class="txt" wx:else>{{item.article.title}}</text>
+                </view>
+                <view class="newflx" wx:if="{{activeIndex=='product'}}">
+                    <text class="txt1">￥{{item.product.discount_price}}</text>
+                    <text catchtap="del_collection" class="txt2" data-id="{{item.id}}">取消收藏</text>
+                </view>
+                <view style="display:flex;flex-direction:column;" wx:else>
+                    <view>
+                        <text class="txt1">{{item.article.publish_time}}</text>
+                    </view>
+                    <view class="newflx">
+                        <text class="txt1">{{item.article.author}}</text>
+                        <text catchtap="del_collection" class="txt2" data-id="{{item.id}}">取消收藏</text>
+                    </view>
+                </view>
+            </view>
+        </view>
+        <view wx:if="{{!items||items.length==0}}">
+            <view class="no_collection">
+                <image src="http://static.websiteonline.cn/website/template/default/images/no_collection.png"></image>
+                <text>亲，你还没有收藏哦～</text>
+            </view>
+        </view>
+    </view>
+</view>

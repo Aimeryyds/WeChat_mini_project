@@ -1,0 +1,46 @@
+<template name="multiPhotoModule">
+    <view class="multiPhotoModule">
+        <view class="moduleTitle" wx:if="{{moduleInfo.pattern.e}}">
+            <text class="lines left-lines"></text>
+            <text>{{moduleInfo.content.title}}</text>
+            <text class="lines right-lines"></text>
+        </view>
+        <swiper autoplay="true" class="mutil-graph-swiperA {{moduleInfo.content.imgList.length==1?'noDot':''}}" duration="500" indicatorDots="true" interval="3000" style="background-color:{{moduleInfo.pattern.bg.t==0?'#fff':moduleInfo.pattern.bg.c}}; {{moduleInfo.pattern.imgh.t==0?'':'height: '+moduleInfo.pattern.imgh.n*2+'rpx'}} " wx:if="{{moduleInfo.content.style==0}}">
+            <swiper-item wx:for="{{moduleInfo.content.imgList}}" wx:for-item="imgInfo">
+                <button bindtap="{{imgInfo.jInfo?'jumpCtrl':'previewModuleMultiImage'}}" class="moduleButton" data-img="{{imgInfo.imgPath}}" data-imgList="{{moduleInfo.content.imgList}}" data-jinfo="{{imgInfo.jInfo}}" openType="{{imgInfo.jInfo&&imgInfo.jInfo.t==5?'share':imgInfo.jInfo.t==7?'contact':''}}" style="height:100%;">
+                    <image class="slide-image" mode="{{moduleInfo.pattern.is==2?'aspectFit':moduleInfo.pattern.is==1?'aspectFill':''}}" src="{{imgInfo.imgPath}}"></image>
+                    <view class="imgDes" style="color:{{moduleInfo.pattern.de.t==2?moduleInfo.pattern.de.c:''}}" wx:if="{{moduleInfo.pattern.de.t!=1}}">
+                        <template is="wxParse" data="{{wxParseData:imgInfo.des.nodes}}"></template>
+                    </view>
+                </button>
+            </swiper-item>
+        </swiper>
+        <scroll-view scrollX class="mutil-graph-swiperB" style="background-color:{{moduleInfo.pattern.bg.t==0?'#fff':moduleInfo.pattern.bg.c}};" wx:elif="{{moduleInfo.content.style==1}}">
+            <view class="multiPhotoContainer" style="width:{{moduleInfo.content.imgList.length*296}}rpx;">
+                <view class="multiPhotoItem {{moduleInfo.pattern.sd==1?'sd-show':''}} {{moduleInfo.pattern.bd==2?'bd-hidden':''}}" wx:for="{{moduleInfo.content.imgList}}" wx:for-item="imgInfo">
+                    <button bindtap="{{imgInfo.jInfo?'jumpCtrl':'previewModuleMultiImage'}}" class="moduleButton" data-img="{{imgInfo.imgPath}}" data-imgList="{{moduleInfo.content.imgList}}" data-jinfo="{{imgInfo.jInfo}}" openType="{{imgInfo.jInfo&&imgInfo.jInfo.t==5?'share':imgInfo.jInfo.t==7?'contact':''}}" style="height:100%;">
+                        <image class="slide-image" mode="{{moduleInfo.pattern.is==2?'aspectFit':moduleInfo.pattern.is==1?'aspectFill':''}}" src="{{imgInfo.imgPath}}" style="height: {{moduleInfo.pattern.imgh.t==1?moduleInfo.pattern.imgh.n*2+'rpx':'194rpx'}}; {{moduleInfo.pattern.de.t==1?'border-bottom: none;':''}}"></image>
+                        <view class="imgDesWrap" wx:if="{{moduleInfo.pattern.de.t!=1&&imgInfo.des}}">
+                            <view class="imgDes" style="color:{{moduleInfo.pattern.de.t==2?moduleInfo.pattern.de.c:''}}">
+                                <template is="wxParse" data="{{wxParseData:imgInfo.des.nodes}}"></template>
+                            </view>
+                        </view>
+                    </button>
+                </view>
+            </view>
+        </scroll-view>
+        <view class="mutil-graph-swiperC" style="background-color:{{moduleInfo.pattern.bg.t==0?'#fff':moduleInfo.pattern.bg.c}};" wx:elif="{{moduleInfo.content.style==2}}">
+            <view class="swiperSlide" wx:for="{{moduleInfo.content.imgList}}" wx:for-item="imgInfo">
+                <button bindtap="{{imgInfo.jInfo?'jumpCtrl':'previewModuleMultiImage'}}" class="moduleButton" data-img="{{imgInfo.imgPath}}" data-imgList="{{moduleInfo.content.imgList}}" data-jinfo="{{imgInfo.jInfo}}" openType="{{imgInfo.jInfo&&imgInfo.jInfo.t==5?'share':imgInfo.jInfo.t==7?'contact':''}}" style="height:100%; {{moduleInfo.pattern.sd==1?'box-shadow: 0 0px 12px 2px rgba(0,0,0,0.07);':''}}">
+                    <image class="slide-image {{moduleInfo.pattern.bd==2?'bd-hidden':''}}" mode="{{moduleInfo.pattern.is==2?'aspectFit':moduleInfo.pattern.is==1?'aspectFill':''}}" src="{{imgInfo.imgPath}}" style="width: 332rpx; height: {{moduleInfo.pattern.imgh.t==1?moduleInfo.pattern.imgh.n*2+'rpx':'216rpx'}};"></image>
+                    <view class="photo-desc-wrap" wx:if="{{moduleInfo.pattern.de.t!=1}}">
+                        <view class="photoDesc" style="color:{{moduleInfo.pattern.de.t==2?moduleInfo.pattern.de.c:''}}">
+                            <template is="wxParse" data="{{wxParseData:imgInfo.des.nodes}}"></template>
+                        </view>
+                    </view>
+                </button>
+            </view>
+        </view>
+    </view>
+</template>
+<import src="/libs/wxParse/wxParse.wxml"></import>

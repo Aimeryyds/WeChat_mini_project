@@ -1,0 +1,77 @@
+<template name="daily-quote$3bd66b87">
+    <view bindtap="handleProxy" class="_div data-v-51549797 daily-quote" data-comkey="{{$k}}" data-eventid="{{'14'}}">
+        <view class="_div data-v-51549797 top-scroll">{{noneTip}}</view>
+        <swiper bindchange="handleProxy" class="_swiper data-v-51549797 swiper" currentItemId="{{itemDate}}" data-comkey="{{$k}}" data-eventid="{{'1'}}" indicatorDots="{{false}}" vertical="{{true}}">
+            <swiper-item class="_swiper-item data-v-51549797" itemId="{{item.assign_date}}" key="{{item.id}}" wx:for="{{dailyQuoteList}}" wx:key="item.id">
+                <template is="card$68f19830" data="{{...$root[$kk+'0-'+index],$root:$root}}"></template>
+            </swiper-item>
+        </swiper>
+        <view class="_div data-v-51549797 records-modal {{[isShowRecordModal?'show':'',!isShowRecordModal?'hide':'']}}">
+            <image bindtouchstart="handleProxy" class="_img data-v-51549797 close" data-comkey="{{$k}}" data-eventid="{{'2'}}" src="/static/img/close-modal.png"></image>
+            <view class="_div data-v-51549797 title">录音作品({{total}})</view>
+            <view class="_div data-v-51549797 sentence">
+                <view class="_div data-v-51549797">{{dailyQuoteList[currentIndex]&&dailyQuoteList[currentIndex].content}}</view>
+            </view>
+            <scroll-view scrollY bindscrolltolower="handleProxy" class="_scroll-view data-v-51549797 scroll-view" data-comkey="{{$k}}" data-eventid="{{'4'}}" style=" {{'padding-bottom:'+(showRecordBtns?paddingBottom+80+'px':'0')+';'}}">
+                <template is="records$abddff5c" data="{{...$root[$kk+'2'],$root:$root}}" wx:if="{{mine.id||dailyRecordList.length>0}}"></template>
+                <image class="_img data-v-51549797 empty" src="/static/img/empty-translation.png" wx:if="{{showSofa}}"></image>
+            </scroll-view>
+            <view class="_div data-v-51549797 bottom" style=" {{'height:'+paddingBottom+86+'px'+';'+'padding-bottom:'+paddingBottom+'px'+';'+'display:'+(showRecordBtns?'flex':'none')+';'}}">
+                <template is="record-btns$5838e323" data="{{...$root[$kk+'3'],$root:$root}}"></template>
+            </view>
+        </view>
+        <view catchtouchmove="handleProxy" class="_div data-v-51549797 love-modal" data-comkey="{{$k}}" data-eventid="{{'9'}}" wx:if="{{showLoveModal}}">
+            <view class="_div data-v-51549797 inner">
+                <view class="_div data-v-51549797 content">
+                    <view class="_div data-v-51549797 author">
+                        <image class="_img data-v-51549797" src="{{record.userinfo&&record.userinfo.avatar}}"></image>
+                        <view class="_div data-v-51549797">{{record.userinfo&&record.userinfo.nickname}}</view>
+                        <label class="_span data-v-51549797">的语音作品</label>
+                    </view>
+                    <view bindtap="handleProxy" class="_div data-v-51549797 record" data-comkey="{{$k}}" data-eventid="{{'6'}}">
+                    {{record.audio_length}}
+                </view>
+                    <view class="_div data-v-51549797 origin-sentence">
+                    {{dailyQuote.content}}
+                </view>
+                    <view class="_div data-v-51549797 translation">{{dailyQuote.translation}}</view>
+                    <view class="_div data-v-51549797 from">—— {{dailyQuote.author}}</view>
+                    <view class="_div data-v-51549797 line"></view>
+                    <view bindtap="handleProxy" class="_div data-v-51549797 love-btn" data-comkey="{{$k}}" data-eventid="{{'7'}}" style=" {{'background-color:'+(record.is_liked?'#fe6135':'#f5f5f5')+';'+'color:'+(record.is_liked?'#ffffff':'#fe6135')+';'}}">
+                        <label class="_span data-v-51549797" style=" {{'color:'+(record.is_liked?'#fff':'#999999')+';'}}">{{record.like}}</label>
+                        <image class="_img data-v-51549797" src="{{record.is_liked?'/static/img/love-inactive-m.png':'/static/img/love-active-m.png'}}"></image>
+                    </view>
+                    <view class="_div data-v-51549797 tip">{{record.is_liked?'谢谢你的鼓励':'给我点个赞吧'}}</view>
+                </view>
+                <view bindtap="handleProxy" class="_div data-v-51549797 login-btn" data-comkey="{{$k}}" data-eventid="{{'8'}}">随便逛逛</view>
+            </view>
+        </view>
+        <view catchtap="handleProxy" catchtouchmove="handleProxy" class="_div data-v-51549797 new-dailyquote-tip" data-comkey="{{$k}}" data-eventid="{{'10'}}" wx:if="{{showTips}}">
+            <view class="_div data-v-51549797 tip1" hidden="{{!(tipCount===1)}}">
+                <image class="_img data-v-51549797 tip1-1" src="https://media-image1.baydn.com/storage_media_image/vryjyo/d81b186796df840b12baca08333260aa.f6ba03b22abfdebc87f8f70a219ff3fa.png"></image>
+                <image class="_img data-v-51549797 tip1-2" src="https://media-image1.baydn.com/storage_media_image/vryjyo/b666154bf69d65f98d07b47628b239a9.df6a5b78c20df41ec288b052e9eebb06.png"></image>
+                <view class="_div data-v-51549797 description">
+                    <label class="_span data-v-51549797" style="color:#e5b557">上下滑动</label>，查看更多精选美句</view>
+            </view>
+            <view class="_div data-v-51549797 next-step" hidden="{{!(tipCount===1)}}"></view>
+            <image class="_img data-v-51549797 tip2" hidden="{{!(tipCount===2)}}" src="https://media-image1.baydn.com/storage_media_image/ccdbwr/024f6b002efa0f4cd34128c9f19df13e.b43edf10d26a9885e745f4c074012133.png"></image>
+        </view>
+        <image catchtap="handleProxy" class="_img data-v-51549797 ad" data-comkey="{{$k}}" data-eventid="{{'11'}}" hidden="{{!isShowAdImg}}" src="https://media-image1.baydn.com/storage_media_image/vryjyo/fb52ab68b01e3ad8f8c5f79a251fadf7.41f9dd3b1d84f5ee47b36dac5bf55c96.gif"></image>
+        <view catchtap="handleProxy" catchtouchmove="handleProxy" class="_div data-v-51549797 ad-modal" data-comkey="{{$k}}" data-eventid="{{'13'}}" style=" {{'display:'+(isShowAdModal?'flex':'none')+';'}}">
+            <view class="_div data-v-51549797 modal-inner {{[isShowAdModal?'show':'']}}">
+                <image class="_img data-v-51549797 header" src="https://media-image1.baydn.com/storage_media_image/ccdbwr/2e5c168e73fa40928587968b66c54fdd.a3dfb506ee7f5e3cd71dc49c39748bf8.png"></image>
+                <view class="_div data-v-51549797 body">
+                    <view class="_div data-v-51549797 title">加入跟读小计划，免费领取视频课</view>
+                    <view class="_div data-v-51549797 content">点击【确认】-回复【1】领取</view>
+                </view>
+                <view class="_div data-v-51549797 footer">
+                    <view bindtap="handleProxy" class="_div data-v-51549797 cancel" data-comkey="{{$k}}" data-eventid="{{'12'}}">取消</view>
+                    <button class="_button data-v-51549797 sure" openType="contact">确定</button>
+                </view>
+            </view>
+        </view>
+    </view>
+</template>
+<import src="card$68f19830"></import>
+<import src="records$abddff5c"></import>
+<import src="record-btns$5838e323"></import>

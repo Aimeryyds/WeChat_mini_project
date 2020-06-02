@@ -1,0 +1,24 @@
+<form bindsubmit="formBook">
+    <view style="background:{{item.bg_color}};padding:0.8rem;display:flex;flex-direction: column;align-items: center;width:100%;box-sizing: border-box">
+        <view class="formBook_li02">
+            <textarea name="content" placeholder="感谢提出建议" value="{{bookData.content}}"></textarea>
+        </view>
+        <view class="formBook_li">
+            <view class="li_tit">
+                <text>姓名</text>
+            </view>
+            <input name="name" placeholder="请输入姓名" type="text" value="{{bookData.name}}"></input>
+            <view class="clear"></view>
+        </view>
+        <view class="formBook_li">
+            <view class="li_tit">
+                <text>手机</text>
+            </view>
+            <input name="phone" placeholder="请输入手机号" type="number" value="{{bookData.phone}}"></input>
+            <view class="clear"></view>
+        </view>
+        <view class="formBook_btn_index" style="width:100%;">
+            <button formType="submit" style="background:{{page_config.nv_color}};color:{{page_config.text_color}};width:100%;margin-top:1rem;padding:0;">提交</button>
+        </view>
+    </view>
+</form>

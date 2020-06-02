@@ -1,0 +1,34 @@
+<my-component bind:myevent="myEventListener" innerText="押金"></my-component>
+<view class="main" style=" margin-top: {{myHight}}px"></view>
+<view class="box" wx:if="{{ishow}}">
+    <view bindtap="change" class="itme-box" data-index="{{index}}" wx:for="{{cardList}}" wx:key="index">
+        <view class="item">
+            <image src="{{cur===index?'../../../Content/Img/qxc2on.png':'../../../Content/Img/qxc2.png'}}"></image>
+            <view class="info">
+                <view class="title">
+                    <view class="l">{{item.name}}</view>
+                    <view class="r">{{item.price}}元</view>
+                </view>
+                <view class="text">
+                    <view class="l">
+            仅免押金不免车费（不可退）
+          </view>
+                    <view class="r">
+            {{item.feeprice}}
+          </view>
+                </view>
+            </view>
+        </view>
+    </view>
+    <view class="shuoming">
+    免押金骑行卡说明
+  </view>
+    <view class="shouminginfo">
+        <view wx:for="{{shoumingList}}" wx:key="index">{{item}}</view>
+    </view>
+    <view class="pay">
+        <view class="text">充值即表示阅读并同意<text bindtap="userProtocol" style="color:#333333">《小呗支付协议》</text>
+        </view>
+        <view bindtap="pay" class="pay-btn">立即购买</view>
+    </view>
+</view>

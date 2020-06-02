@@ -1,0 +1,16 @@
+<image src="{{data.img}}" style="width: 100%;height: 450rpx;"></image>
+<view class="mt20">公司名称：{{data.title}}</view>
+<view class="mt20">简介：
+    <view class="jianjie" wx:for="{{data.con}}">{{item}}</view>
+</view>
+<view class="mt20" wx:if="{{data.tel.length==1}}">电话：{{data.tel[0]}}</view>
+<block wx:else>
+    <view class="mt20">电话：</view>
+    <view class="mt20" style="margin-left: 80rpx;" wx:for="{{data.tel}}">{{item}}</view>
+</block>
+<view class="mt20">地址：{{data.address}}</view>
+<text class="desc" style="text-align:center;font-size:28rpx;">
+	{{data.wxapp_sign}}
+</text>
+<map showLocation bindcontroltap="controltap" bindmarkertap="markertap" bindregionchange="regionchange" controls="{{controls}}" id="map" latitude="{{data.map1}}" longitude="{{data.map2}}" markers="{{markers}}" polyline="{{polyline}}" scale="12" style="width: 100%; height: 450rpx;" title="{{markers.title}}"></map>
+<loading wx:if="{{loading}}"></loading>

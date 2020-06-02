@@ -1,0 +1,251 @@
+<navigation-bar title="{{cpDetail.title}}" wx:if="{{showTopbar}}"></navigation-bar>
+<cover-view bindtap="tapBackbtn" class="backbtn" style="top:{{backbtnPos}}px" wx:if="{{!showTopbar}}">
+    <cover-image class="backbtnicon" src="{{backiconUrl}}"></cover-image>
+</cover-view>
+<view bindtap="pageReload" class="cplist_nodata" wx:if="{{requeseFail}}">{{requeseFailTips}}</view>
+<view wx:else>
+    <block wx:if="{{isVideocp}}">
+        <view class="headervideo">
+            <view class="vw" style="background:#000;width:750rpx;height:{{cpDetail.video.height/cpDetail.video.width*750}}rpx">
+                <video controls showFullscreenBtn autoplay="{{vAutoplay}}" bindended="videoEnd" bindplay="videoPlay" customCache="{{false}}" hidden="{{vEnd}}" id="myVideo0" objectFit="cover" src="{{cpDetail.video.vendor_video}}" style="width:750rpx;height:{{cpDetail.video.height/cpDetail.video.width*750}}rpx"></video>
+                <view class="vadw" wx:if="{{vEnd}}">
+                    <ad adTheme="white" adType="video" unitId="adunit-0170568483be5a80"></ad>
+                    <view bindtap="replayVideo" class="replaybtn">
+                        <view class="i"></view>重播菜谱视频</view>
+                </view>
+            </view>
+        </view>
+        <view class="c_c2" id="toptitle0" wx:if="{{cpDetail.title}}">
+            <text class="title">{{cpDetail.title}}</text>
+            <text class="info">by {{cpDetail.author.nickname}}　{{cpDetail.favor_amount_new||cpDetail.favor_amount}}收藏　{{cpDetail.viewed_amount}}浏览</text>
+        </view>
+    </block>
+    <block wx:elif="{{about_recipe_list.length==1}}">
+        <view class="headerimg" id="topimg0" style="background:url('{{about_recipe_list[0].img}}') center no-repeat;background-size:cover;" wx:if="{{about_recipe_list[0].img}}"></view>
+        <view class="headerimg" id="topimg0" style="background:url('{{about_recipe_list[0].cover_img.big}}') center no-repeat;background-size:cover;" wx:else></view>
+        <view class="c_c2" id="toptitle0" wx:if="{{about_recipe_list[0].title}}">
+            <text class="title">{{about_recipe_list[0].title}}</text>
+            <text class="info">by {{about_recipe_list[0].author.nickname}}　{{about_recipe_list[0].favor_amount_new||about_recipe_list[0].favor_amount}}收藏　{{about_recipe_list[0].viewed_amount}}浏览</text>
+        </view>
+    </block>
+    <block wx:else>
+        <block wx:if="{{showpage}}">
+            <swiper autoplay="{{false}}" bindanimationfinish="goNext_about_recipe" class="c_head_swiper" indicatorDots="{{false}}" skipHiddenItemLayout="{{true}}" style="height:{{swiperheight*rpxR||1208}}rpx">
+                <swiper-item wx:for="{{about_recipe_list}}" wx:key="key">
+                    <view class="headerimg" id="topimg{{index}}" style="background:url('{{index-2<arrivedSwiper?item.img:defaultimg}}') center no-repeat;background-size:cover;" wx:if="{{item.img}}"></view>
+                    <view class="headerimg" id="topimg{{index}}" style="background:url('{{index-2<arrivedSwiper?item.cover_img.big:defaultimg}}') center no-repeat;background-size:cover;" wx:else></view>
+                    <view class="c_c2" id="toptitle{{index}}" wx:if="{{item.title}}">
+                        <text class="title">{{item.title}}</text>
+                        <text class="info">by {{item.author.nickname}}　{{item.favor_amount_new||item.favor_amount}}收藏　{{item.viewed_amount}}浏览</text>
+                    </view>
+                </swiper-item>
+            </swiper>
+            <view class="swipertip" wx:if="{{!swipertip&&about_recipe_list.length>1}}">
+                <view class="arroww">
+                    <view class="arrow arrow3">
+                        <image class="arrowimage" src="{{arrowicon}}"></image>
+                    </view>
+                    <view class="arrow arrow2">
+                        <image class="arrowimage" src="{{arrowicon}}"></image>
+                    </view>
+                    <view class="arrow arrow1">
+                        <image class="arrowimage" src="{{arrowicon}}"></image>
+                    </view>
+                </view>
+			左滑查看{{about_recipe_list.length-1}}篇相关菜谱</view>
+            <view class="swipertip" wx:elif="{{about_recipe_list.length>1}}">{{swipertip}}</view>
+        </block>
+    </block>
+    <view class="c_c3" wx:if="{{cpDetail.rate||cpDetail.technology||cpDetail.taste||cpDetail.cooking_time||cpDetail.caloric}}">
+        <view class="heatsw">
+            <view class="heat" wx:if="{{cpDetail.caloric!=''}}">{{cpDetail.caloric}}</view>
+            <view class="heat" wx:if="{{yydata.label.length>0}}" wx:for="{{yydata.label}}" wx:key="key">{{item}}</view>
+        </view>
+        <view class="yyview" wx:if="{{yydata.fits}}">
+            <view class="t">{{yydata.fits}}</view>
+            <view class="yyitem" wx:for="{{yydata.chart}}" wx:key="key">
+                <view class="c1">{{item.desc}}</view>
+                <view class="c2">
+                    <view class="jd" style="width:{{item.value100NRV}}%;opacity:{{item.value100NRV/100<0.3?0.3:item.value100NRV/100}};"></view>
+                </view>
+            </view>
+        </view>
+        <view class="cpargsw">
+            <view class="cpargs cpargs1" wx:if="{{cpDetail.rate!=''}}">
+                <view class="i"></view>{{cpDetail.rate}}星</view>
+            <view class="cpargs cpargs2" wx:if="{{cpDetail.technology!=''}}">
+                <view class="i"></view>{{cpDetail.technology}}</view>
+            <view class="cpargs cpargs3" wx:if="{{cpDetail.taste!=''}}">
+                <view class="i"></view>{{cpDetail.taste}}</view>
+            <view class="cpargs cpargs4" wx:if="{{cpDetail.cooking_time!=''}}">
+                <view class="i"></view>{{cpDetail.cooking_time}}</view>
+        </view>
+        <view class="cpdesw {{cpdeswShowBtn}}" wx:if="{{cpDetail.story_content!=''}}">
+            <view class="cpdes" id="cpdes">{{cpDetail.story_content}}</view>
+            <view bindtap="tapOpenCpdesBtn" class="open_cpdes">展开<image src="{{moreArrowBlue}}"></image>
+            </view>
+        </view>
+    </view>
+    <view class="c_c6">
+        <view class="c_mtr_t" wx:if="{{cpDetail.main_ingredient.length>0}}">主料<text>{{cpDetail.amount}}</text>
+        </view>
+        <view class="c_mtr_ul">
+            <view class="c_mtr_li" wx:for="{{cpDetail.main_ingredient}}" wx:key="key">
+                <navigator hoverClass="navigator-hover" url="/pages/searchRecipe/searchRecipe?keyword={{item.title}}">
+                    <text class="t">{{item.title}}</text>
+                    <text class="a">{{item.amount}}</text>
+                </navigator>
+            </view>
+        </view>
+        <navigator appId="wx93d17942795dec0e" hoverClass="none" style="width:100vw;height:30vw;background:url(https://st-cn.meishij.net/p2/20191220/20191220173003_498.jpg) center no-repeat;background-size:cover;margin-top:-60rpx;margin-bottom:-30rpx;" target="miniProgram" wx:if="{{cpDetail.main_ingredient.length>0}}"></navigator>
+        <view class="c_mtr_t" wx:if="{{cpDetail.secondary_ingredient.length>0}}">辅料</view>
+        <view class="c_mtr_ul {{flShowBtn}}">
+            <view class="c_mtr_liw">
+                <view class="c_mtr_li" wx:for="{{cpDetail.secondary_ingredient}}" wx:key="key">
+                    <text class="t">{{item.title}}</text>
+                    <text class="a">{{item.amount}}</text>
+                </view>
+            </view>
+            <view bindtap="tapOpenFlBtn" class="fl_more_btn">展开全部辅料<image src="{{moreArrowBlue}}"></image>
+            </view>
+        </view>
+    </view>
+    <view class="c_c7">
+        <view class="stepitem1" wx:for="{{cpDetail.cook_steps}}" wx:for-item="i" wx:key="key">
+            <view class="step_title" wx:if="{{i.title!='成品图'}}">{{i.title}}</view>
+            <swiper autoplay="{{autoplay}}" circular="{{circular}}" class="stepimageset" duration="{{duration}}" indicatorActiveColor="{{indicatorActiveColor}}" indicatorColor="{{indicatorColor}}" indicatorDots="{{indicatorDots}}" interval="{{interval}}" style="height:{{i.pic_urls[0].height/i.pic_urls[0].width*750}}rpx;width:750rpx;" wx:if="{{i.pic_urls.length>1}}">
+                <swiper-item wx:for="{{i.pic_urls}}" wx:key="key">
+                    <image class="slide-image stepimg_ab" src="{{item.big}}" style="height:{{item.height/item.width<i.pic_urls[0].height/i.pic_urls[0].width?i.pic_urls[0].height/i.pic_urls[0].width*750:item.height/item.width*750}}rpx;width:{{item.height/item.width<i.pic_urls[0].height/i.pic_urls[0].width?item.width/item.height*i.pic_urls[0].height/i.pic_urls[0].width*750:750}}rpx;"></image>
+                </swiper-item>
+            </swiper>
+            <image class="stepimg" src="{{i.pic_urls[0].big}}" style="height:{{i.pic_urls[0].height/i.pic_urls[0].width*750}}rpx" wx:elif="{{i.pic_urls.length>0}}"></image>
+            <view class="stepc" wx:if="{{!(i.content==''||i.content==undefined)}}">
+                <text class="stepdes">{{i.content}}</text>
+            </view>
+        </view>
+        <view class="stepitem1" wx:for="{{cpDetail.advanced_skills}}" wx:key="key">
+            <view class="step_title1">{{item.title}}</view>
+            <text class="stepdes1">{{item.content}}</text>
+        </view>
+    </view>
+    <view bindtap="addXcc" class="addXccBtn" wx:if="{{cpDetail.title||cpDetail.favor_amount||cpDetail.viewed_amount}}">收藏到我的小程序</view>
+    <cover-view class="addXccbox" wx:if="{{showAddXcc}}">
+        <cover-image src="{{addXccimg}}" style="width:100%;height:auto;position:absolute;left:0px;top:{{barHeight}}px"></cover-image>
+        <button bindtap="hideAddXcc" class="hideXccboxbtn">我知道了</button>
+    </cover-view>
+    <view class="c_ad1" wx:if="{{requeseDone}}">
+        <ad adTheme="white" adType="video" unitId="adunit-2551a6c0095e454c"></ad>
+    </view>
+    <view class="tj_w">
+        <view class="tj_titlew" wx:if="{{tjInfo}}">
+            <view class="tj_title">为你推荐</view>
+        </view>
+        <view wx:for="{{tjInfo}}" wx:for-index="fi_i" wx:key="key">
+            <view wx:if="{{fi_i==6}}">
+                <view class="feed_ad">
+                    <ad unitId="adunit-4af4f70c66c67424"></ad>
+                </view>
+            </view>
+            <view wx:if="{{fi_i==23}}">
+                <view class="feed_ad">
+                    <ad unitId="adunit-afa66724a0a19947"></ad>
+                </view>
+            </view>
+            <view wx:if="{{fi_i==43}}">
+                <view class="feed_ad">
+                    <ad unitId="adunit-43e3228a3dfc4bac"></ad>
+                </view>
+            </view>
+            <view wx:if="{{fi_i==63}}">
+                <view class="feed_ad">
+                    <ad unitId="adunit-c943def20849d578"></ad>
+                </view>
+            </view>
+            <view wx:if="{{fi_i==83}}">
+                <view class="feed_ad">
+                    <ad unitId="adunit-5a32ee28f667016b"></ad>
+                </view>
+            </view>
+            <view wx:if="{{fi_i==103}}">
+                <view class="feed_ad">
+                    <ad unitId="adunit-2991c1e626740292"></ad>
+                </view>
+            </view>
+            <view wx:if="{{item.img_show_type==1}}">
+                <navigator class="recipeitem" hoverClass="navigator-hover" url="/pages/wenzhang/wenzhang?id={{item.id}}" wx:if="{{item.images.length==1}}">
+                    <view class="recipeitemw">
+                        <view class="cpimgw" style="background:#f8f8f8 url({{item.images[0]}}) center no-repeat;background-size:cover;"></view>
+                        <view class="cpinfow">
+                            <view class="cpnamew">
+                                <view class="cpname">{{item.title}}</view>
+                            </view>
+                            <view class="viewdata">
+                                <image src="{{iconUrl2}}"></image>
+                                <text>{{item.click_num}}</text>
+                                <text>{{item.create_time}}</text>
+                            </view>
+                        </view>
+                    </view>
+                </navigator>
+                <navigator class="recipeitem_3pic" hoverClass="navigator-hover" url="/pages/wenzhang/wenzhang?id={{item.id}}" wx:else>
+                    <view class="cpinfoww_3pic">
+                        <view class="cpnamew">
+                            <view class="cpname">{{item.title}}</view>
+                        </view>
+                        <view class="recipeitemw_3pic">
+                            <view class="cpimgw_3pic">
+                                <view class="cpimgww_3pic" style="background:#f8f8f8 url({{item.images[0]}}) center no-repeat;background-size:cover;"></view>
+                                <view class="cpimgww_3pic center" style="background:#f8f8f8 url({{item.images[1]}}) center no-repeat;background-size:cover;"></view>
+                                <view class="cpimgww_3pic" style="background:#f8f8f8 url({{item.images[2]}}) center no-repeat;background-size:cover;"></view>
+                            </view>
+                        </view>
+                        <view class="cpinfow_3pic">
+                            <view class="viewdata_3pic">
+                                <image src="{{iconUrl2}}"></image>
+                                <text>{{item.click_num}}</text>
+                                <text>{{item.create_time}}</text>
+                            </view>
+                        </view>
+                    </view>
+                </navigator>
+            </view>
+            <view wx:elif="{{item.img_show_type==2}}">
+                <navigator class="recipeitem_big" hoverClass="navigator-hover" url="/pages/wenzhang/wenzhang?id={{item.id}}">
+                    <view class="recipeitemw_big">
+                        <view class="cpname">{{item.title}}</view>
+                        <view class="cpimgw_big" style="background:#f8f8f8 url({{item.images[0]}}) center no-repeat;background-size:cover;"></view>
+                        <view class="cpinfow_big">
+                            <view class="viewdata_big">
+                                <image src="{{iconUrl2}}"></image>
+                                <text>{{item.click_num}}</text>
+                                <text>{{item.create_time}}</text>
+                            </view>
+                        </view>
+                    </view>
+                </navigator>
+            </view>
+        </view>
+    </view>
+    <view class="favbtn_bottom_w" wx:if="{{cpDetail}}">
+        <button bindgetuserinfo="tapFavBtn" class="favbtn_bottom" openType="getUserInfo" wx:if="{{faved=='1'}}">
+            <image src="{{addfavedicon}}"></image>
+            <text>已收藏({{favorAmount}})</text>
+        </button>
+        <button bindgetuserinfo="tapFavBtn" class="favbtn_bottom" openType="getUserInfo" wx:else>
+            <image src="{{addfavicon}}"></image>
+            <text>收藏({{favorAmount}})</text>
+        </button>
+        <button bindtap="tapShareBtn" class="share_bottom" openType="share">
+            <image src="{{shareicon}}"></image>
+            <text>分享给朋友</text>
+        </button>
+    </view>
+    <view class="toastw" wx:if="{{showToast}}">
+        <view class="toast">
+            <rich-text nodes="{{toastTitle}}"></rich-text>
+        </view>
+    </view>
+</view>
+<loading hidden="{{requeseDone}}">
+ 加载中...
+</loading>

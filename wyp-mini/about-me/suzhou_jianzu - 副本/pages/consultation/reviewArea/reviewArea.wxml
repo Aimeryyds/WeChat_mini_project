@@ -1,0 +1,70 @@
+<form bindreset="formResetReview" bindsubmit="submitReview" class="reviewForm" wx:if="{{submitShow}}">
+    <textarea bindblur="bindTextAreaBlur" class="reviewText" name="talkContent" placeholder="说说你的看法" value="{{content}}"></textarea>
+    <view class="showRegion">
+        <image class="reviewImage" src="http://tws.cnweisou.com/images/position2Z.png"></image>
+        <text bindtap="getMap" class="getPsition" wx:if="{{isNull}}">点击获取位置</text>
+        <text bindtap="getMap" class="getPsition" wx:else>{{getMap}}</text>
+        <template is="WxEmojiChooseChooseViewRevi" data="{{WxEmojiObjs:WxEmojiObjs}}" wx:if="{{showExpression}}"></template>
+        <button formType="submit"> 发表 </button>
+    </view>
+</form>
+<view class="everybodyTalk">
+    <view class="talkTitle" wx:if="{{news}}">
+		最新评论
+	</view>
+    <view class="talkCont" data-index="{{index}}" wx:for="{{talkList}}">
+        <view class="talcImg">
+            <image src="{{item.avatar}}"></image>
+        </view>
+        <view class="rightCont rightContBottom">
+            <view class="rightContTop">{{item.nickname}}</view>
+            <text class="special">{{item.time}}</text>
+            <image class="reviewImage" src="http://tws.cnweisou.com/images/position2Z.png" wx:if="{{item.address}}"></image>
+            <text class="reviewPsition" wx:if="{{item.address}}">{{item.address}}</text>
+            <view class="talkDetial talkDetialCont">
+				{{item.cons}}
+				</view>
+            <view class="talkReply">
+                <view class="talkReplyCont">
+                    <image bindtap="giveGood" class="talkReplyImage" data-index="{{index}}" src="http://tws.cnweisou.com/images/good1Z.png" wx:if="{{isgoods}}"></image>
+                    <image bindtap="giveGood" class="talkReplyImage" data-index="{{index}}" src="http://tws.cnweisou.com/images/good1Z.png" wx:else></image>
+                    <text class="reviewPsition marginRight30"> {{item.like}}</text>
+                    <image class="reviewImage" src="http://tws.cnweisou.com/images/talk2Z.png"></image>
+                    <text class="reviewPsition marginRight30"> {{item.count_report}}</text>
+                    <image class="reviewImage" src="http://tws.cnweisou.com/images/talk1Z.png"></image>
+                    <text bindtap="talkArea1" class="reviewPsition" data-index="{{index}}">回复</text>
+                    <view class="replyCont" wx:if="{{currArea1==index}}">
+                        <form bindreset="formResetReview" bindsubmit="submitTalk" data-index="{{index}}">
+                            <textarea bindblur="everyReply" placeholder="回复Ta:" value="{{contentReply}}"></textarea>
+                            <image class="reviewImage" src="http://tws.cnweisou.com/images/position2Z.png"></image>
+                            <text bindtap="getMapSecond" class="reviewPsition" wx:if="{{isNullS}}">点击获取位置</text>
+                            <text bindtap="getMapSecond" class="reviewPsition" wx:else>{{getMapS}}</text>
+                            <button formType="submit"> 发表 </button>
+                        </form>
+                    </view>
+                </view>
+            </view>
+            <view class="clear"></view>
+        </view>
+        <view class="talkTitle2"></view>
+        <view class="talkCont marginSecond" data-index="{{index}}" wx:for="{{item.child_report}}">
+            <view class="rightCont rightCont2">
+                <text class="special2">{{item.nickname}}</text>
+                <image class="reviewImage" src="http://tws.cnweisou.com/images/position2Z.png" wx:if="{{item.address}}"></image>
+                <text class="reviewPsition" wx:if="{{item.address}}">{{item.address}}</text>
+                <view class="talkDetial">
+					{{item.cons}}
+				</view>
+                <view class="talkReply talkSecond"></view>
+            </view>
+        </view>
+    </view>
+</view>
+<view class="bgtypeListTalk" wx:if="{{talkAlert}}">
+    <view class="cardAgainType">
+		{{msgTalk}}
+		<view bindtap="returnIndex" class="determineAgin">
+			确定
+		</view>
+    </view>
+</view>

@@ -1,0 +1,19 @@
+<view class="page_loginPhone">
+    <web-view src="{{privacy_url}}" wx:if="{{userPrivacy}}"></web-view>
+    <view class="title_style">登录蛋壳公寓</view>
+    <view class="input-p">
+        <input bindinput="__e" class="inputstyle1" data-event-opts="{{[ [ 'input',[ [ 'phoneNumInput',['$event'] ] ] ] ]}}" disabled="{{inputDisabled}}" id="phoneNum" maxlength="11" placeholder="请输入手机号" placeholderClass="inpClass" type="number"></input>
+    </view>
+    <view class="input-p">
+        <input bindinput="__e" class="inputstyle2" data-event-opts="{{[ [ 'input',[ [ 'yzmInput_new',['$event'] ] ] ] ]}}" disabled="{{inputDisabled}}" id="yzm" maxlength="4" placeholder="请输入验证码" placeholderClass="inpClass" type="number"></input>
+        <button bindtap="__e" class="yzm" data-event-opts="{{[ [ 'tap',[ [ 'getVerificationCode',['$event'] ] ] ] ]}}" data-id="2" disabled="{{disabled}}" style="background:#fff;">{{time}}</button>
+    </view>
+    <view class="err-info">
+        <text>{{errInfo}}</text>
+    </view>
+    <view bindtap="__e" class="login" data-event-opts="{{[ [ 'tap',[ [ 'confirm',['$event'] ] ] ] ]}}" style="{{'background:'+bg_con+';'}}">登录</view>
+    <view class="clause">登录即代表你同意<text bindtap="__e" data-event-opts="{{[ [ 'tap',[ [ 'toSecrecy',['$event'] ] ] ] ]}}">《用户使用条款》</text>和<text bindtap="__e" data-event-opts="{{[ [ 'tap',[ [ 'toProtect',['$event'] ] ] ] ]}}">《隐私保护政策》</text>
+    </view>
+    <imgverificate bind:__l="__l" bind:bindImgVerificaValue="__e" bind:confirmVeri="__e" bind:getImgVerCode="__e" bind:hideimgVerifi="__e" data-event-opts="{{[ [ '^hideimgVerifi',[ ['hideimgVerifi'] ] ],[ '^bindImgVerificaValue',[ ['bindImgVerificaValue'] ] ],[ '^confirmVeri',[ ['confirmVeri'] ] ],[ '^getImgVerCode',[ ['getImgVerCode'] ] ] ]}}" imgTitle="{{imgTitle}}" imgVerificaUrl="{{imgVerificaUrl}}" phoneNum="{{phoneNum}}" showimgVerifi="{{showimgVerifi}}" vueId="444646e2-1"></imgverificate>
+    <image bindtap="__e" class="close" data-event-opts="{{[ [ 'tap',[ [ 'closeEvent',['$event'] ] ] ] ]}}" src="https://public.wutongwan.org/public-20180822-FkcpajzSjGVkOZ4o_MSfENHygn2e"></image>
+</view>

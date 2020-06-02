@@ -1,0 +1,9 @@
+<view class="footer">
+    <view class="top-tag" wx:if="{{isTop}}">置顶</view>
+    <view class="author" wx:if="{{hasAuthor}}">{{config.authorName}}</view>
+    <view class="time">{{dateFormat}}</view>
+    <view class="article-pv" wx:if="{{!noPv}}">
+        <image class="icon-eye" src="/images/ic_eye.png"></image>
+        <text>{{pvFormat}}</text>
+    </view>
+</view>

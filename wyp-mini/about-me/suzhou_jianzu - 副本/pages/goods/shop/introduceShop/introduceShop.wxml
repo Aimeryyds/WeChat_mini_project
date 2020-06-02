@@ -1,0 +1,58 @@
+<loading wx:if="{{loading}}"></loading>
+<swiper autoplay="{{autoplay}}" class="swiper" duration="{{duration}}" indicatorDots="{{indicatorDots}}" interval="{{interval}}">
+    <swiper-item class="swiperitem" wx:if="{{isAdvs}}" wx:for="{{advs}}">
+        <image src="{{item.thumb}}"></image>
+    </swiper-item>
+    <swiper-item class="swiperitem" wx:if="{{isAdvs==false}}" wx:for="{{imgUrls}}">
+        <image src="{{item}}"></image>
+    </swiper-item>
+    <view class="cover"></view>
+</swiper>
+<view class="logoImg">
+    <image src="{{shopinfo.logo}}"></image>
+</view>
+<view class="logo">
+    <view class="logoTitle">{{shopinfo.merchname}}</view>
+    <view class="logoMap">
+        <view bindtap="map" class="map">
+            <image src="http://tws.cnweisou.com/images/shopPosition.png"></image>
+            <text>查看位置</text>
+        </view>
+    </view>
+</view>
+<view class="list" wx:if="{{shopinfo.desc}}">
+    <view class="introduce">
+        <text class="title">商家简介：</text>
+        <text class="cont">{{shopinfo.desc}}</text>
+    </view>
+</view>
+<view class="list">
+    <view class="introduce">
+        <text class="title phoneTitle">联系电话：</text>
+        <text class="contphone">{{shopinfo.mobile}}</text>
+        <image bindtap="dialPhone" src="http://tws.cnweisou.com/images/shopPhone.png"></image>
+    </view>
+</view>
+<view class="list listBottom" wx:if="{{shopinfo.address}}">
+    <view class="introduce">
+        <text class="title">联系地址：</text>
+        <text class="cont">{{shopinfo.address}}</text>
+    </view>
+</view>
+<view class="shopphoto" wx:if="{{isPhoto}}">
+    <view class="title">
+        <image src="http://tws.cnweisou.com/images/shopPhoto.png"></image>
+        <text>企业相册</text>
+    </view>
+    <view class="photo">
+        <view bindtap="joinImage" class="photoDetial" data-index="{{index}}" wx:for="{{banners}}">
+            <image mode="widthFix" src="{{item.thumb}}"></image>
+        </view>
+    </view>
+</view>
+<view class="interval"></view>
+<view bindtap="showImages" class="bgtypeList" wx:if="{{showImage}}">
+    <view class="slideImgs">
+        <image class="slide-image" mode="widthFix" src="{{nowImg}}"></image>
+    </view>
+</view>

@@ -1,0 +1,21 @@
+<view class="header" id="header">
+    <view bindtap="jumpstoredetail" data-id="{{shopId}}" data-openevaluate="{{storeDetail.openEvaluate}}">
+        <image class="logo" src="{{storeDetail.logo?storeDetail.logo:'http://imgcdnali.wfenxiao.com.cn/xcx/c/icons/brand.png'}}"></image>
+        <view class="freight">
+            <view class="shop-header-name zan-ellipsis" style="max-width:{{storeDetail.hasCoupons==0?'500rpx':'460rpx'}}">{{storeDetail.brandName}} 【{{storeDetail.storeName}}】</view>
+        </view>
+        <view style="display:flex;">
+            <view class="freight" style="flex: 1;">
+                <text class="type">已售{{storeDetail.orderNum}}单 | 距离{{storeDetail.distance>1000?storeDetail.distance/1000+'km':storeDetail.distance+'m'}}</text>
+                <view class="item_intro" style="font-size:22rpx; margin-left:10rpx;" wx:if="{{storeDetail.openEvaluate==1}}">{{storeDetail.reviewsNum}}条评价   {{storeDetail.goodReviewsRate}}%好评</view>
+            </view>
+            <view class="desc-Collection" style="margin-right:70rpx;margin-top:22rpx">
+                <view catchtap="collectionOn" class="desc-Collection__cont  {{storeDetail.hasCollection?'desc-Collection__coll':'desc-Collection__no-coll'}}" data-hascollection="{{storeDetail.hasCollection}}">
+                    <image src="{{storeDetail.hasCollection?'http://imgcdnali.wfenxiao.com.cn/xcx/c/1120/collection2.png':'http://imgcdnali.wfenxiao.com.cn/xcx/c/1120/collection.png'}}"></image>
+                    <text>{{storeDetail.hasCollection?'已收藏':'收藏'}}</text>
+                </view>
+            </view>
+        </view>
+        <image class="arrow" src="http://imgcdnali.wfenxiao.com.cn/xcx/c/icons/arrow_right.png"></image>
+    </view>
+</view>

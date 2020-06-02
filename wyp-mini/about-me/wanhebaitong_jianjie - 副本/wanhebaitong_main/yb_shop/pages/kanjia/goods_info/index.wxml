@@ -1,0 +1,111 @@
+<import src="/yb_shop/utils/wxParse/wxParse.wxml"></import>
+<block wx:if="{{show}}">
+    <view class="index_swiper">
+        <swiper autoplay="{{autoplay}}" circular="true" duration="{{duration}}" indicatorDots="{{indicatorDots}}" interval="{{interval}}" style="height:11.5rem;">
+            <swiper-item wx:for="{{bargain_info.pic_arr}}">
+                <image class="slide-image" mode="aspectFill" src="{{item}}"></image>
+            </swiper-item>
+        </swiper>
+    </view>
+    <view class="page_info">
+        <view class="index_info_tit">{{bargain_info.bargain_name}}</view>
+        <view class="index_price clear">
+            <view class="price_left">
+                <view class="price01">原价：￥{{bargain_info.original_price}}</view>
+                <view class="price02">最低￥
+          <text>{{bargain_info.lowest_price}}</text>
+                </view>
+            </view>
+            <view class="price_right">
+                <view class="sur_no">剩余{{bargain_info.bargain_inventory}}件</view>
+            </view>
+        </view>
+    </view>
+    <view class="count_info_box">
+        <view class="count_info_li">
+            <text class="red_font" style="font-size:1rem;">{{bargain_info.check_number}}</text>
+            <text>查看数</text>
+        </view>
+        <view class="count_info_li">
+            <text class="red_font" style="font-size:1rem;">{{bargain_info.participants_number}}</text>
+            <text>人参与</text>
+        </view>
+        <view class="count_info_li">
+            <text class="red_font" style="font-size:1rem;">{{bargain_info.help_number}}</text>
+            <text>人帮砍</text>
+        </view>
+        <view class="clear"></view>
+    </view>
+    <view class="shop_info">
+        <view class="shop_info_li">
+            <view class="info_icon">
+                <image src="../static/kanjia/shop_icon.jpg"></image>
+            </view>
+            <view bindtap="navigate" class="shop_name">
+                <text class="name">{{about_info.name}}</text>
+                <text class="address">{{about_info.address}}</text>
+            </view>
+            <view class="arrow_icon">
+                <image src="../static/kanjia/arrow_icon.jpg"></image>
+            </view>
+            <view class="clear"></view>
+        </view>
+        <view class="shop_info_li02">
+            <view class="info_icon">
+                <image src="../static/kanjia/time_icon.jpg"></image>
+            </view>
+            <view class="shop_time">{{about_info.job_time}}</view>
+            <view class="clear"></view>
+        </view>
+        <view class="shop_info_li02">
+            <view class="info_icon">
+                <image src="../static/kanjia/phone_icon.jpg"></image>
+            </view>
+            <view bindtap="phone" class="shop_time" data-phone="{{about_info.phone}}" style="width:100%;">{{about_info.phone}}</view>
+            <view class="clear"></view>
+        </view>
+    </view>
+    <view class="info_content_box" style="padding-bottom:1rem;">
+        <view class="info_con_tit">活动详情</view>
+        <view class="info_con_info">
+            <view class="wxParse">
+                <template is="wxParse" data="{{wxParseData:wxParseData.nodes}}"></template>
+            </view>
+        </view>
+    </view>
+    <view class="other_info_box" wx:if="{{list.length!=0}}">
+        <view class="other_tit">推荐活动</view>
+        <view bindtap="url" class="other_info_li" data-id="{{item.id}}" wx:for="{{list}}">
+            <view class="other_count">
+                <text>剩余{{item.bargain_inventory}}份</text>
+            </view>
+            <image mode="scaleToFill" src="{{item.pic.img_cover}}"></image>
+            <view class="info_box">
+                <text class="title">{{item.bargain_name}}</text>
+                <view class="other_price">
+                    <view class="price01 red_font">最低
+              <text class="price_no">￥{{item.lowest_price}}</text>
+                    </view>
+                    <view class="price02">￥{{item.original_price}}</view>
+                    <view class="clear"></view>
+                </view>
+                <view class="other_info_btn">
+                    <text>去砍价</text>
+                </view>
+            </view>
+        </view>
+    </view>
+    <view class="bottom_info_box">
+        <view class="bottom_info_text" wx:if="{{show_time}}">活动结束倒计时
+      <text style="color:#ed4f4e;">{{countDownDay}}天{{countDownHour}}小时{{countDownMinute}}分{{countDownSecond}}秒</text>
+        </view>
+        <view class="bottom_info_text" wx:if="{{!show_time}}">活动已结束
+    </view>
+        <view bindtap="shoping" class="bottom_info_btn btn01" data-goods_id="{{bargain_info.goods_id}}" data-id="{{bargain_info.id}}" data-type="1">直接购</view>
+        <form bindsubmit="formSubmit" reportSubmit="true">
+            <input name="id" style="display:none" value="{{bargain_info.id}}"></input>
+            <button class="bottom_info_btn btn02" formType="submit" style="border-radius:0;">发起砍</button>
+        </form>
+    </view>
+    <view class="bottom_space"></view>
+</block>

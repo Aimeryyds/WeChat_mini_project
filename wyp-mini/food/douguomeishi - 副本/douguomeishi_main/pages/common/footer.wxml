@@ -1,0 +1,40 @@
+<template name="note-footer">
+    <view class="footer" wx:if="{{footerState!=0}}">
+        <button class="loading" loading="true" wx:if="{{footerState==1}}">加载中...</button>
+        <image class="end" mode="aspectFill" src="/images/footer.png" wx:if="{{footerState==2}}"></image>
+        <view class="no-data" wx:if="{{footerState==3}}">抱歉，没有相关笔记</view>
+        <view class="error" wx:if="{{footerState==4}}">别着急，网有点慢，再试试</view>
+    </view>
+</template>
+<template name="reply-footer">
+    <view class="footer" wx:if="{{footerState!=0}}">
+        <button class="loading" loading="true" wx:if="{{footerState==1}}">加载中...</button>
+        <image class="end" mode="aspectFill" src="/images/footer.png" wx:if="{{footerState==2}}"></image>
+        <view class="no-data" wx:if="{{footerState==3}}"></view>
+        <view class="error" wx:if="{{footerState==4}}">别着急，网有点慢，再试试</view>
+    </view>
+</template>
+<template name="comment-footer">
+    <view class="footer" wx:if="{{footerState!=0}}">
+        <button class="loading" loading="true" wx:if="{{footerState==1}}">加载中...</button>
+        <image class="end" mode="aspectFill" src="/images/footer.png" wx:if="{{footerState==2}}"></image>
+        <view class="no-data" wx:if="{{footerState==3}}">暂无评论</view>
+        <view class="error" wx:if="{{footerState==4}}">别着急，网有点慢，再试试</view>
+    </view>
+</template>
+<template name="menu-footer">
+    <view class="footer" wx:if="{{footerState!=0}}">
+        <button class="loading" loading="true" wx:if="{{footerState==1}}">加载中...</button>
+        <image class="end" mode="aspectFill" src="/images/footer.png" wx:if="{{footerState==2}}"></image>
+        <view class="no-data" wx:if="{{footerState==3}}">抱歉，没有相关菜谱</view>
+        <view class="error" wx:if="{{footerState==4}}">别着急，网有点慢，再试试</view>
+    </view>
+</template>
+<template name="footer">
+    <view class="footer" wx:if="{{footerState!=0}}">
+        <button class="loading" loading="true" wx:if="{{footerState==1}}">加载中...</button>
+        <image class="end" mode="aspectFill" src="/images/footer.png" wx:if="{{footerState==2}}"></image>
+        <view class="no-data" wx:if="{{footerState==3}}">抱歉，还没有你要找的菜谱</view>
+        <view class="error" wx:if="{{footerState==4}}">别着急，网有点慢，再试试</view>
+    </view>
+</template>

@@ -1,0 +1,27 @@
+<scroll-view scrollY bindscroll="scrollIndex" bindscrolltolower="scrollBottom" class="scroll-wrapper" lowerThreshold="120" wx:if="{{type==2}}">
+    <feed-list bind:adError="handleErrorAd" class="feed-list" index="{{index}}" list="{{feedData}}" page="{{page}}" pvId="{{pvId}}" spmB="{{spmB}}" spmC="{{spmC}}" wx:if="{{feedData.length&&!showFlowList}}"></feed-list>
+    <feed-flow-list pv class="feed-list" index="{{index}}" list="{{feedData}}" page="{{page}}" pvId="{{pvId}}" spmB="{{spmB}}" spmC="{{spmC}}" wx:if="{{feedData.length&&showFlowList}}"></feed-flow-list>
+    <view class="first-loading" wx:if="{{!feedData.length}}">
+        <image class="loading-image" src="../../images/feedLoading.gif"></image>
+    </view>
+    <view wx:else>
+        <view class="loading" wx:if="{{!isFinished}}">加载中</view>
+        <view class="loading" wx:if="{{isFinished}}">已经到底了</view>
+        <view class="loading" wx:if="{{isError}}">网络异常</view>
+    </view>
+</scroll-view>
+<view wx:if="{{type==1}}">
+    <feed-list bind:adError="handleErrorAd" bind:adLoad="handleLoadAd" index="{{index}}" list="{{feedData}}" page="{{page}}" pvId="{{pvId}}" spmB="{{spmB}}" spmC="{{spmC}}" wx:if="{{feedData.length}}"></feed-list>
+</view>
+<view class="click-list-wrapper" wx:if="{{type==3}}">
+    <feed-list bind:adError="handleErrorAd" class="feed-list" index="{{index}}" list="{{feedData}}" page="{{page}}" pvId="{{pvId}}" spmB="{{spmB}}" spmC="{{spmC}}" wx:if="{{feedData.length&&!showFlowList}}"></feed-list>
+    <feed-flow-list pv class="feed-list" index="{{index}}" list="{{feedData}}" page="{{page}}" pvId="{{pvId}}" spmB="{{spmB}}" spmC="{{spmC}}" wx:if="{{feedData.length&&showFlowList}}"></feed-flow-list>
+    <view class="first-loading" wx:if="{{!feedData.length}}">
+        <image class="loading-image" src="../../images/feedLoading.gif"></image>
+    </view>
+    <view wx:else>
+        <view class="loading" wx:if="{{!isFinished}}">加载中</view>
+        <view class="loading" wx:if="{{isFinished}}">已经到底了</view>
+        <view class="loading" wx:if="{{isError}}">网络异常</view>
+    </view>
+</view>

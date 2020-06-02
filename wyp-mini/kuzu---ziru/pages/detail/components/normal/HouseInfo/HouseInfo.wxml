@@ -1,0 +1,161 @@
+<view class="data-v-5feaaf42">
+    <view class="{{['house-info house-detail data-v-5feaaf42',skeletonFlag?'active':'']}}" wx:if="{{roomData}}">
+        <view bindtap="__e" class="top-banner data-v-5feaaf42" data-event-opts="{{[ [ 'tap',[ [ 'handleJumpH5',[roomData.zz_youxuan_banner.top.parameter&&roomData.zz_youxuan_banner.top.parameter.url] ] ] ] ]}}" wx:if="{{roomData.zz_youxuan_banner&&roomData.zz_youxuan_banner.top}}">
+            <image alt class="image data-v-5feaaf42" mode="widthFix" src="{{roomData.zz_youxuan_banner.top.img}}"></image>
+        </view>
+        <view class="house-title data-v-5feaaf42">
+            <view class="name _h1 data-v-5feaaf42">{{roomData.name}}</view>
+        </view>
+        <view class="price-wrap data-v-5feaaf42" wx:if="{{priceObj&&!isSnapshot}}">
+            <view class="price-row data-v-5feaaf42">
+                <label class="price _span data-v-5feaaf42">
+                    <label class="symbol _span data-v-5feaaf42">￥</label>
+                    <price bind:__l="__l" class="data-v-5feaaf42" fontSize="20px" offset="{{21}}" priceObj="{{priceObj.price}}" vueId="1" width="14px"></price>
+                    <label class="unit _span data-v-5feaaf42">{{price||''}}</label>
+                </label>
+            </view>
+            <view class="price-desc data-v-5feaaf42">
+                <label class="desc _span data-v-5feaaf42">{{payment.text}}</label>
+                <label bindtap="__e" class="payment-way _span data-v-5feaaf42" data-event-opts="{{[ [ 'tap',[ [ 'handleOpenModal',['$event'] ] ] ] ]}}">{{''+payment.entre_text+''}}<view class="iconfont icon-zrk_ic_arrowright _i data-v-5feaaf42"></view>
+                </label>
+            </view>
+        </view>
+        <view class="activity-highlight-list data-v-5feaaf42" wx:if="{{activity_highlight_list&&activity_highlight_list.length}}">
+            <view bindtap="__e" class="activity-highlight-item data-v-5feaaf42" data-event-opts="{{[ [ 'tap',[ [ 'handleJumpH5',['$0'],[ [ ['activity_highlight_list','name',item.name,'link'] ] ] ] ] ] ]}}" wx:for="{{activity_highlight_list}}" wx:for-index="__i0__" wx:key="name">
+                <image class="tag-img data-v-5feaaf42" mode="aspectFit" src="{{item.icon}}" wx:if="{{item.icon}}"></image>
+                <view class="tag data-v-5feaaf42" style="{{'background:'+(item.style&&item.style.background||'rgba(0, 0, 0, .03)')+';'+'color:'+(item.style&&item.style.color||'rgba(0, 0, 0, .6)')+';'}}" wx:else>{{item.name}}</view>
+                <view class="name data-v-5feaaf42" style="{{'color:'+(item.style&&item.style.color||'')+';'}}">{{item.title}}</view>
+                <view class="iconfont icon-zrk_ic_arrowright _i data-v-5feaaf42" wx:if="{{item.link}}"></view>
+            </view>
+        </view>
+        <view class="activity-list data-v-5feaaf42" wx:if="{{activity_list&&activity_list.length}}">
+            <view class="activity-title data-v-5feaaf42">{{activity_title}}</view>
+            <view class="list-wrap data-v-5feaaf42">
+                <view class="activity-item data-v-5feaaf42" wx:for="{{activity_list}}" wx:for-index="__i1__" wx:key="name">
+                    <image class="tag-img data-v-5feaaf42" mode="aspectFit" src="{{item.icon}}" wx:if="{{item.icon}}"></image>
+                    <view bindtap="__e" class="tag data-v-5feaaf42" data-event-opts="{{[ [ 'tap',[ [ 'handleJumpH5',['$0'],[ [ ['activity_list','name',item.name,'link'] ] ] ] ] ] ]}}" style="{{'background:'+(item.style&&item.style.background||'rgba(0, 0, 0, .03)')+';'+'color:'+(item.style&&item.style.color||'rgba(0, 0, 0, .6)')+';'}}" wx:else>{{item.name}}</view>
+                </view>
+            </view>
+        </view>
+        <view bindtap="__e" class="promotion-banner data-v-5feaaf42" data-event-opts="{{[ [ 'tap',[ [ 'handleJumpH5',[hz_6_feature_top.head&&hz_6_feature_top.head.parameter&&hz_6_feature_top.head.parameter.url] ] ] ] ]}}" wx:if="{{hz_6_feature_top}}">
+            <image alt class="banner-title data-v-5feaaf42" mode="widthFix" src="{{hz_6_feature_top.head&&hz_6_feature_top.head.img}}"></image>
+            <view class="banner-item-wrap data-v-5feaaf42" wx:if="{{hz_6_feature_top.data}}">
+                <view catchtap="__e" class="banner-item data-v-5feaaf42" data-event-opts="{{[ [ 'tap',[ [ 'handleJumpH5',[item.parameter&&item.parameter.url] ] ] ] ]}}" wx:for="{{hz_6_feature_top.data}}" wx:for-index="__i2__" wx:key="title">
+                    <view class="top data-v-5feaaf42">
+                        <view class="item-title data-v-5feaaf42">{{item.title}}</view>
+                        <image alt class="item-pic _img data-v-5feaaf42" src="{{item.img}}"></image>
+                    </view>
+                    <view class="bottom data-v-5feaaf42">{{item.sub_title}}</view>
+                </view>
+            </view>
+            <view class="iconfont icon-zrk_ic_arrowright _i data-v-5feaaf42"></view>
+        </view>
+        <view class="detail-info data-v-5feaaf42" wx:if="{{focus_base.length}}">
+            <block wx:for="{{focus_base}}" wx:key="index">
+                <view class="item data-v-5feaaf42">
+                    <view class="name _h4 data-v-5feaaf42">{{item.name}}</view>
+                    <view class="value _h3 data-v-5feaaf42">{{item.value}}</view>
+                </view>
+                <view class="split-line data-v-5feaaf42" wx:if="{{index!==focus_base.length-1}}"></view>
+            </block>
+        </view>
+        <view class="house-tags data-v-5feaaf42" wx:if="{{tags&&tags.length}}">
+            <view class="house-tag data-v-5feaaf42" wx:for="{{tags}}" wx:for-index="__i3__" wx:key="title">{{item.title}}</view>
+        </view>
+        <view class="air-test _div data-v-5feaaf42" wx:if="{{air_test_config}}">
+            <view class="tag _div data-v-5feaaf42" style="{{tagStyle}}" wx:if="{{air_test_config.title_text}}">
+                <view class="png-icon icon-airquality _i data-v-5feaaf42" wx:if="{{!air_test_config.style}}"></view>{{''+air_test_config.title_text+''}}</view>
+            <view class="{{['desc _p data-v-5feaaf42',descClass]}}">{{air_test_config.desc}}</view>
+            <label bindtap="__e" class="link _span data-v-5feaaf42" data-event-opts="{{[ [ 'tap',[ [ 'handleJumpH5',['$0'],['air_test_config.link'] ] ] ] ]}}" wx:if="{{air_test_config.link}}">
+                <label class="{{['status _span data-v-5feaaf42',statusClass]}}">{{air_test_config.status_text}}</label>
+                <view class="iconfont icon-arrowforward _i data-v-5feaaf42"></view>
+            </label>
+        </view>
+        <view class="detail _div data-v-5feaaf42">
+            <label class="detail-50 _span data-v-5feaaf42" wx:for="{{base}}" wx:for-index="__i4__" wx:key="name">
+                <label class="tag-name _span data-v-5feaaf42">{{item.name}}</label>{{item.value+''}}</label>
+            <label class="detail-100 _span data-v-5feaaf42" wx:if="{{lease&&lease.sign_and_checkin_date}}">
+                <label class="tag-name _span data-v-5feaaf42">入住</label>{{lease.sign_and_checkin_date+''}}</label>
+            <label class="detail-100 _span data-v-5feaaf42" wx:if="{{lease&&lease.sign_duration}}">
+                <label class="tag-name _span data-v-5feaaf42">租期</label>{{lease.sign_duration+''}}</label>
+            <label class="detail-100 _span data-v-5feaaf42" wx:if="{{resblock&&resblock.name}}">
+                <label class="tag-name _span data-v-5feaaf42">小区</label>
+                <label bindtap="__e" class="value _span data-v-5feaaf42" data-event-opts="{{[ [ 'tap',[ [ 'handleJumpResblock',['$0'],['resblock.id'] ] ] ] ]}}">
+                    <label class="_span data-v-5feaaf42">{{resblock.name}}</label>
+                    <view class="iconfont icon-arrowforward _i data-v-5feaaf42"></view>
+                </label>
+            </label>
+        </view>
+        <view class="tips _p data-v-5feaaf42" wx:if="{{bottom_notice_desc}}">{{bottom_notice_desc}}</view>
+        <view bindtap="__e" class="house-location data-v-5feaaf42" data-event-opts="{{[ [ 'tap',[ [ 'handleOpenLocation',['$event'] ] ] ] ]}}">
+            <view class="png-icon icon-map _i data-v-5feaaf42"></view>
+            <label class="location _span data-v-5feaaf42">{{location}}</label>
+            <view class="iconfont icon-zrk_ic_arrowright _i data-v-5feaaf42"></view>
+        </view>
+        <view class="tips flex-line _p data-v-5feaaf42" wx:if="{{subway_info}}">{{''+subway_info.desc+''}}<view bindtap="__e" class="png-icon icon-question _i data-v-5feaaf42" data-event-opts="{{[ [ 'tap',[ [ 'handleOpenAlert',[ [ 'o',['title',subway_info.notice_title],['content',subway_info.notice_content] ] ] ] ] ] ]}}" wx:if="{{subway_info.notice_content}}"></view>
+        </view>
+        <popup-wrapper backgroundColor="#fff" bind:__l="__l" class="data-v-5feaaf42 vue-ref" data-ref="pricePopup" height="75%" maskClick="{{true}}" maskShow="{{true}}" transition="slider" type="bottom" vueId="2" vueSlots="{{['default']}}">
+            <view class="_div data-v-5feaaf42" wx:if="{{!modalData}}">
+                <view class="skeleton s h _div data-v-5feaaf42"></view>
+                <view class="skeleton l _div data-v-5feaaf42"></view>
+                <view class="skeleton s _div data-v-5feaaf42"></view>
+                <view class="skeleton l _div data-v-5feaaf42"></view>
+                <view class="skeleton l _div data-v-5feaaf42"></view>
+                <view class="skeleton s _div data-v-5feaaf42"></view>
+                <view class="skeleton l _div data-v-5feaaf42"></view>
+                <view class="skeleton l _div data-v-5feaaf42"></view>
+                <view class="skeleton _div data-v-5feaaf42"></view>
+            </view>
+            <view class="_div data-v-5feaaf42" wx:else>
+                <view class="modal-block pay-modal _div data-v-5feaaf42">
+                    <view class="modal-title _h3 data-v-5feaaf42">付款方式</view>
+                    <view class="modal-content _div data-v-5feaaf42" wx:if="{{modalData}}">
+                        <view bindtap="__e" class="modal-line bb1 _div data-v-5feaaf42" data-event-opts="{{[ [ 'tap',[ [ 'handleJumpH5',['$0'],[ [ ['modalData.details','',i,'more_link'] ] ] ] ] ] ]}}" wx:for="{{modalData.details}}" wx:for-index="i" wx:key="i">
+                            <view class="top _div data-v-5feaaf42">
+                                <label class="way _span data-v-5feaaf42">{{''+item.title+''}}<view class="iconfont icon-aui-icon-question mcolor _i data-v-5feaaf42" wx:if="{{item.more_link}}"></view>
+                                </label>
+                                <label class="price-d _span data-v-5feaaf42">￥<price bind:__l="__l" class="data-v-5feaaf42" offset="{{17}}" priceObj="{{item.rent_fee}}" vueId="{{'3-'+i+','+'2'}}" width="12px"></price>{{''+item.rent_fee_unit+''}}</label>
+                            </view>
+                            <view class="bottom _div data-v-5feaaf42">押金： ￥<price bind:__l="__l" class="data-v-5feaaf42" fontSize="14px" offset="{{14.8333}}" priceObj="{{item.deposit}}" vueId="{{'4-'+i+','+'2'}}"></price>{{''+item.deposit_unit+'， 服务费： ￥'}}<price bind:__l="__l" class="data-v-5feaaf42" fontSize="14px" offset="{{14.8333}}" priceObj="{{item.service_fee}}" vueId="{{'5-'+i+','+'2'}}"></price>{{''+item.service_fee_unit+''}}</view>
+                        </view>
+                    </view>
+                </view>
+                <view class="modal-block pay-modal _div data-v-5feaaf42">
+                    <view class="modal-title _h3 data-v-5feaaf42">说明</view>
+                    <view class="modal-content _div data-v-5feaaf42" wx:if="{{modalData}}">
+                        <view class="desc _p data-v-5feaaf42" wx:for="{{modalData.reminder}}" wx:for-index="i" wx:key="i">{{''+item+''}}</view>
+                    </view>
+                </view>
+            </view>
+        </popup-wrapper>
+    </view>
+    <block wx:else>
+        <view class="house-skeleton-wrapper data-v-5feaaf42" wx:if="{{!isOffline}}">
+            <view class="name data-v-5feaaf42"></view>
+            <view class="price-row data-v-5feaaf42">
+                <label class="price _span data-v-5feaaf42"></label>
+                <label class="payment-way _span data-v-5feaaf42"></label>
+            </view>
+            <view class="banner data-v-5feaaf42"></view>
+            <view class="tags data-v-5feaaf42">
+                <label class="zr-tag _span data-v-5feaaf42"></label>
+                <label class="zr-tag _span data-v-5feaaf42"></label>
+                <label class="zr-tag _span data-v-5feaaf42"></label>
+                <label class="zr-tag _span data-v-5feaaf42"></label>
+                <label class="zr-tag _span data-v-5feaaf42"></label>
+            </view>
+            <view class="info l bt1 mt10 data-v-5feaaf42"></view>
+            <view class="info s bt1 mt10 data-v-5feaaf42"></view>
+            <view class="info bt1 mt10 data-v-5feaaf42"></view>
+            <view class="info s bt1 mt10 data-v-5feaaf42"></view>
+            <view class="info l bt1 mt10 data-v-5feaaf42"></view>
+            <view class="info l bt1 mt10 data-v-5feaaf42"></view>
+            <view class="info s bt1 mt10 data-v-5feaaf42"></view>
+            <view class="info l bt1 mt10 data-v-5feaaf42"></view>
+            <view class="info l bt1 mt10 data-v-5feaaf42"></view>
+            <view class="info s bt1 mt10 data-v-5feaaf42"></view>
+            <view class="info l bt1 mt10 data-v-5feaaf42"></view>
+            <view class="info l bt1 mt10 data-v-5feaaf42"></view>
+        </view>
+    </block>
+</view>

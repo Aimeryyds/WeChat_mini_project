@@ -1,0 +1,26 @@
+<view>
+    <swiper autoplay="{{autoplay||true}}" circular="{{true}}" duration="{{duration||1000}}" indicatorDots="{{false}}" interval="{{module.options.interval*1000||2000}}" style="height:420rpx">
+        <swiper-item wx:for="{{module.options.imgUrl}}" wx:key="{{index}}">
+            <image class="carousel-slideImage" data-link="{{item}}" ontap="onTapCarousel" src="{{item}}" style="width: 750rpx; height:420rpx"></image>
+        </swiper-item>
+    </swiper>
+</view>
+<view class="hotelIndex">
+    <view class="hotelIndex-mod">
+        <navigator hoverClass="none" style="display:flex;width:100%;align-items:center;" url="{{'/pages/citys/citys?isLocation='+location.isLocation+'&from=hotel&city='+location.cityName||''}}">
+            <view class="hotelIndex-mod__address">
+                <view class="hotelIndex-mod__address-title">当前位置</view>
+                <view class="zan-ellipsis">{{location.location||'北京市'}}</view>
+            </view>
+            <image class="hotelIndex-mod__linkimg" src="http://imgcdnali.wfenxiao.com.cn/xcx/c/icons/arrow-right.png"></image>
+        </navigator>
+    </view>
+    <view class="hotelIndex-inTime" style="padding:28rpx 0">
+        <hotel_intime id="hoteltime"></hotel_intime>
+    </view>
+    <view bindtap="handlesearch" class="hotelIndex-search">
+        <view class="hotelIndex-search__text">{{keyword||'搜索酒店名称'}}</view>
+        <image class="hotelIndex-mod__linkimg" src="http://imgcdnali.wfenxiao.com.cn/xcx/c/icons/arrow-right.png"></image>
+    </view>
+    <view bindtap="handleSearchHotelList" class="hotelIndex-search__btn" hoverClass="none">查询酒店</view>
+</view>

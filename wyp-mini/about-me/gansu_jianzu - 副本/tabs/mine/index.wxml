@@ -1,0 +1,11 @@
+<import src="/dist/toast/index.wxml"></import>
+<import src="./_mine-user.wxml"></import>
+<import src="./_mine-orders.wxml"></import>
+<import src="./_mine-address.wxml"></import>
+<view class="container" wx:if="{{userInfo}}">
+    <template is="mineUser" data="{{...userInfo,color:color}}"></template>
+    <template is="mineOrders" data="{{myOrderIsShow:mine.myOrderIsShow,order:order}}"></template>
+    <template is="mineAddress" data="{{menus:menus}}"></template>
+    <template is="zan-toast" data="{{zanToast:zanToast}}"></template>
+    <phonemodal bind:changeuser="changeuser" showModal="{{showModal}}" url="{{url}}"></phonemodal>
+</view>

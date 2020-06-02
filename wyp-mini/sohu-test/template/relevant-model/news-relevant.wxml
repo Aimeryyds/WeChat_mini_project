@@ -1,0 +1,15 @@
+<template name="news-relevant">
+    <view catchtap="gotoArticle" class="recommend-news-item {{clickedList[item.newsId]==item.newsId?'clicked':''}}" data-index="{{index}}" data-newsid="{{item.newsId}}" data-newstype="{{item.newsType}}" data-recominfo="{{item.recominfo}}" data-templatetype="{{item.templateType}}" wx:if="{{item.pics&&item.pics.length}}" wx:for="{{newsList}}" wx:key="index">
+        <view class="pic">
+            <image src="{{item.pics[0]}}"></image>
+        </view>
+        <view class="detail">
+            <view class="title">{{item.title}}</view>
+            <view class="source">
+                <text class="comment-count" hidden="{{!item.commentCount}}">{{item.commentCount}}评</text>
+                <text class="pic-num" hidden="{{!item.picNum}}">{{item.picNum}}图</text>
+                <text class="media">{{item.media}}</text>
+            </view>
+        </view>
+    </view>
+</template>

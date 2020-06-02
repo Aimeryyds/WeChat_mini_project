@@ -1,0 +1,54 @@
+<view class="pai_add">
+    <input bindinput="pai_title" class="pai_add_input" placeholder="有标题，更好看" placeholderStyle="color:#999"></input>
+    <textarea autoHeight bindinput="pai_message" class="pai_add_textarea" placeholder="写内容（必填）" placeholderStyle="color:#999" value="{{tag}}"></textarea>
+    <view class="weui-uploader__bd">
+        <view class="weui-uploader__files">
+            <view class="weui-uploader__file" wx:for="{{imageList}}" wx:for-index="num" wx:for-item="image" wx:key="imageList">
+                <image bindtap="previewImage" class="weui-uploader__img" data-src="{{image}}" src="{{image}}?x-oss-process=style/c180"></image>
+                <view bindtap="del_img" class="del_img" data-num="{{num}}">
+                    <view></view>
+                </view>
+            </view>
+        </view>
+        <view class="weui-uploader__input-box" wx:if="{{img_count>0}}">
+            <view bindtap="chooseImage" class="weui-uploader__input">
+                <image src="../../image/xiangji.png"></image>
+                <view>传图片</view>
+            </view>
+        </view>
+    </view>
+    <view class="pai_add_city">
+        <image src="../../image/local.png"></image>
+        <view bindtap="pai_city" wx:if="{{city==''}}">显示城市</view>
+        <view wx:elif="{{city==1}}">定位中...</view>
+        <view wx:else>
+            <text>{{city}}</text>
+            <view bindtap="close_city" class="close_city_image">×</view>
+        </view>
+    </view>
+    <navigator class="pai_addevent" url="/pages/pai_addevent/pai_addevent" wx:if="{{events.length>0}}">
+        <block wx:if="{{activityid>0}}">
+            <view class="pai_addevent11">
+                <text>{{event_subject}}</text>
+            </view>
+            <view class="pai_addevent2">
+                <text class="pai_addevent4"></text>
+            </view>
+        </block>
+        <block wx:else>
+            <view class="pai_addevent1">
+                <text style="color:#777">参与活动</text>
+            </view>
+            <view class="pai_addevent2">
+                <text class="pai_addevent3">{{events.length}}</text>
+                <text class="pai_addevent4"></text>
+            </view>
+        </block>
+    </navigator>
+</view>
+<button bindtap="pai_add_do" class="pai_add_btn" wx:if="{{allowadd}}">发布</button>
+<button class="pai_add_btn graybg" wx:else>发布</button>
+<view>　</view>
+<button bindtap="pai_add_drop" class="">取消</button>
+<view>　</view>
+<view>　</view>

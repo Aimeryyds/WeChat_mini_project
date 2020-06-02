@@ -1,0 +1,76 @@
+<view class="container" hidden="{{!firstLoading.loadhidden}}" id="container">
+    <view class="art-detail">
+        <view bindtap="onTitleTap" class="article-title" wx:if="{{newsdata.wechatNewsType!=1&&newsdata.title}}">
+      {{newsdata.title}}
+    </view>
+        <view class="article-info">
+            <view class="time">{{newsdata.time}}</view>
+            <view class="media">{{newsdata.media.mediaName}}</view>
+        </view>
+        <view class="article-content">
+            <view class="article-item" wx:for="{{newsdata.content}}" wx:key="*this">
+                <view hidden="{{!item.tvInfo.tvUrl||!imageGallery.isHidden||!circleShareHidden}}" wx:if="{{newsdata.newsType!=64&&item.type=='tv'&&item.tvInfo}}">
+                    <video controls autoplay="{{item.tvInfo.tvUrl&&imageGallery.isHidden&&circleShareHidden&&index==0?true:false}}" class="art_video" hidden="{{vhidden}}" id="myVideo" objectFit="contain" src="{{item.tvInfo.tvUrl}}"></video>
+                </view>
+                <view wx:if="{{item.type=='text'&&item.info&&item.info.length>0}}">
+          {{item.info}}
+        </view>
+                <view wx:if="{{item.type=='image'&&item.imageInfo}}">
+                    <image mode="widthFix" src="{{item.imageInfo.pic}}" style="width: 100%; height: {{item.imageInfo.height>0?690/item.imageInfo.width*item.imageInfo.height+'rpx':'0'}}; background-color:#f1f1f1;"></image>
+                </view>
+            </view>
+        </view>
+    </view>
+    <view class="event-progress" hidden="{{corhidden}}" wx:if="{{eventProgressList.length>0}}">
+        <view class="tit">
+            <text>事件进展</text>
+        </view>
+        <view class="events">
+            <view catchtap="onEventItemClick" class="event-item" data-newsid="{{item.news_id}}" data-newstype="{{item.news_type}}" hidden="{{isEventFold&&index>2}}" wx:for="{{eventProgressList}}" wx:key="index">
+                <view class="time">
+                    <text>{{item.timeFormat}}</text>
+                </view>
+                <view class="title">
+                    <text>{{item.title}}</text>
+                </view>
+            </view>
+        </view>
+        <view class="btns" hidden="{{eventProgressList.length<=3}}">
+            <viev bindtap="onEventsUnfold" class="btn-unfold" wx:if="{{isEventFold}}">
+                <text>更多事件进展({{eventProgressList.length-3}})</text>
+            </viev>
+            <view bindtap="onEventsFold" class="btn-fold" wx:else>
+                <text>折叠事件进展</text>
+            </view>
+        </view>
+    </view>
+    <view class="hot-points" hidden="{{hotPointsList.length<=0}}">
+        <view class="tit">
+            <text>最热观点</text>
+        </view>
+        <view class="list">
+            <view class="point" wx:for="{{hotPointsList}}" wx:key="index">
+                <view class="user-info">
+                    <image class="avatar" src="{{item.userInfo.icon}}"></image>
+                    <text class="name">{{item.userInfo.nickName}}</text>
+                    <text class="time">{{item.createTimeFormat}}</text>
+                </view>
+                <view class="content">
+                    <text>{{item.content}}</text>
+                </view>
+            </view>
+        </view>
+    </view>
+</view>
+<import src="./template/loading.wxml"></import>
+<view class="bg_cont" hidden="{{firstLoading.loadhidden}}">
+    <template is="loading-coverage" data="{{items:firstLoading.items}}"></template>
+</view>
+<import src="../../components/share-bar/template.wxml"></import>
+<view hidden="{{!firstLoading.loadhidden||!sharePoster.hidden}}">
+    <template is="share-bar" data="{{newsdata:newsdata,shareBarHidden:shareBarHidden}}"></template>
+</view>
+<import src="../../components/share-poster/template.wxml"></import>
+<view hidden="{{sharePoster.hidden}}">
+    <template is="share-poster" data="{{sharePoster:sharePoster}}"></template>
+</view>

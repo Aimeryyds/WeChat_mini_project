@@ -1,0 +1,80 @@
+<template name="products">
+    <view class="products-wrap">
+        <navigator class="products" hoverClass="none" url="{{item.type==0?'/pages/services/service_detail/index?shopId='+item.storeId+'&serviceId='+item.id:'/pages/products/show/show?id='+item.id}}" wx:for="{{products}}">
+            <image mode="scaleToFill" src="{{item.imgUrl}}" style="width:308rpx;height:308rpx;align-self:center;"></image>
+            <view class="product-name zan-ellipsis--l2">{{item.name}}</view>
+            <view class="product-storename zan-ellipsis" wx:if="{{isShowStoreName}}">{{item.storeName}}</view>
+            <view class="products-cont">
+                <view class="products-price">
+                    <text style="font-size:24rpx">￥</text>{{item.price}}
+          </view>
+                <view class="products-stock">已售{{item.saleNum}}件</view>
+            </view>
+            <view style="font-size:24rpx;color:rgba(0,0,0,0.43);">{{item.reviewsNum}}条评价  {{item.goodReviewsRate}}%好评</view>
+        </navigator>
+    </view>
+</template>
+<view style="background-color:#fff;display:{{products.data&&products.data.length>0?'':'none'}}">
+    <view style="border-bottom: 1rpx solid #e5e5e5">
+        <segements bind:switch="handleTabSwitch" class="Segements" filter="{{filter}}" filterActive="{{filterActive}}" id="segements" segements="{{segements}}" style="height:64rpx;display:flex;justify-content:center;align-items:center;width:100%">
+            <view catchtap="preventPop" class="filter" id="filter" style="height:600rpx;overflow:hidden;position:relative">
+                <scroll-view scrollY="{{true}}" style="height: 500rpx;">
+                    <view class="filter-row" wx:if="{{filters.brandList.childrenList&&filters.brandList.childrenList.length>0}}">
+                        <view class="filter-row--title">
+              品牌
+            </view>
+                        <wxc-flex cross="top" main="left" style="display:block;padding:0 24rpx;" wrap="wrap">
+                            <view catchtap="handleCheckBrand" class="filter-row--contents-item {{brand.checked?'checked':''}}" data-index="{{idx}}" style="margin-left:{{idx%3==0?'0':'22'}}rpx" wx:for="{{filters.brandList.childrenList}}" wx:for-index="idx" wx:for-item="brand" wx:key="index">
+                                <text style="margin-left:12rpx">{{brand.propertyName}}</text>
+                            </view>
+                        </wxc-flex>
+                    </view>
+                    <view class="filter-row">
+                        <view class="filter-row--title">
+              价格区间
+            </view>
+                        <view style="display:flex;align-items:center;justify-content:space-between;padding:0 24rpx 0 24rpx;">
+                            <view class="filter-row--contents-item" style="margin-right:24rpx;flex:45%">
+                                <input bindinput="handleSetPrice" data-type="minPrice" placeholder="最低价" type="digit" value="{{filters.minPrice}}"></input>
+                            </view>
+                            <text style="margin-bottom:24rpx;flex:10%;text-align:center">-</text>
+                            <view class="filter-row--contents-item" style="margin-left:24rpx;flex:45%">
+                                <input bindinput="handleSetPrice" data-type="maxPrice" placeholder="最高价" type="digit" value="{{filters.maxPrice}}"></input>
+                            </view>
+                        </view>
+                    </view>
+                    <view class="filter-row" wx:for="{{filters.propertyList}}" wx:key="index">
+                        <view class="filter-row--title">
+                {{item.propertyName}}
+              </view>
+                        <wxc-flex cross="top" main="left" style="display:block;padding:0 24rpx;" wrap="wrap">
+                            <view catchtap="handleCheckProperty" class="filter-row--contents-item" data-idx="{{idx}}" data-index="{{index}}" style="margin-left:{{idx%3==0?'0':'23'}}rpx;background-color:{{option.checked?'#fff':'#eee'}};color: {{option.checked?'red':'#000'}};border-color:{{option.checked?'red':''}} " wx:for="{{item.childrenList}}" wx:for-index="idx" wx:for-item="option" wx:key="index">
+                                <text style="margin-left:12rpx">{{option.propertyName}}</text>
+                            </view>
+                        </wxc-flex>
+                    </view>
+                    <view wx:if="{{filters.categoryList&&filters.categoryList.length>0}}">
+                        <view class="filter-row">
+                            <view class="filter-row--title">
+                全部类目
+              </view>
+                            <wxc-flex cross="top" main="left" style="display:block;padding:0 24rpx;" wrap="wrap">
+                                <view catchtap="handleCheckCategory" class="filter-row--contents-item" data-index="{{index}}" style="margin-left:{{idx%3==0?'0':'23'}}rpx;background-color:{{item.checked?'#fff':'#eee'}};color: {{item.checked?'red':'#000'}};border-color:{{item.checked?'red':''}} " wx:for="{{filters.categoryList}}">
+                                    <text style="margin-left:12rpx">{{item.catName}}</text>
+                                </view>
+                            </wxc-flex>
+                        </view>
+                    </view>
+                </scroll-view>
+                <view class="buttons" style="position:absolute;bottom:0;width:100%">
+                    <view catchtap="handleResetFilter" class="button-reset">重置</view>
+                    <view catchtap="handleSubmitFilter" class="button-submit">确定</view>
+                </view>
+            </view>
+        </segements>
+    </view>
+    <scroll-view bindscrolltolower="handleScrollBottom" scrollY="{{true}}" style="height:{{scrollHeight}}px">
+        <template is="products" data="{{products:products.data,isShowStoreName:isShowStoreName}}"></template>
+    </scroll-view>
+</view>
+<wxc-abnor type="DATA" wx:if="{{products.data&&products.data.length==0}}"></wxc-abnor>

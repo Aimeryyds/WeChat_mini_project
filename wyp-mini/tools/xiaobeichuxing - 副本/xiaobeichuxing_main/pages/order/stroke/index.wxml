@@ -1,0 +1,81 @@
+<view class="page">
+    <nav bindmyevent="myEventListener">
+        <view bindtap="goBack" slot="left">
+            <image class="backimg" role="img" src="/Content/images/top_back.png"></image>
+        </view>
+        <view slot="center">行程详情</view>
+    </nav>
+    <view class="main" style=" margin-top: {{myHight}}px"></view>
+    <view style="position:fixed; top:0; left: 0; right: 0; bottom: 350px;">
+        <map id="myMap" includePoints="{{polyline[0].points}}" markers="{{markers}}" polyline="{{polyline}}" showLocation="true" style="width: 100%; height: 100%;"></map>
+    </view>
+    <cover-view class="conts">
+        <cover-view class="title">
+            <cover-view class="box">
+                <cover-view class="tit-t">车辆编号</cover-view>
+                <cover-view class="car-no">{{vid}}</cover-view>
+            </cover-view>
+            <cover-view class="box">
+                <cover-view class="tit-t">订单编号</cover-view>
+                <cover-view class="car-no">{{obj.orderno}}</cover-view>
+            </cover-view>
+        </cover-view>
+        <cover-view class="rot-list">
+            <cover-view class="list-l ad-o29">
+                <cover-view class="tit-top09">
+                    <cover-image class="icon-img09" src="../../../Content/images/jl.png"></cover-image>
+                    <cover-view class="ad-linH15">骑行距离{{obj.mile}}公里</cover-view>
+                </cover-view>
+                <cover-view class="wz-sty">
+                    <cover-view>起点:{{obj.slatlng}}</cover-view>
+                </cover-view>
+                <cover-view class="wz-sty">
+                    <cover-view>终点:{{obj.elatlng}}</cover-view>
+                </cover-view>
+            </cover-view>
+        </cover-view>
+        <cover-view class="rot-list">
+            <cover-view class="list-l ad-o29">
+                <cover-view class="tit-top09">
+                    <cover-image class="icon-img09" src="../../../Content/images/time.png"></cover-image>
+                    <cover-view class="ad-linH15">骑行时长{{obj.ridingtime}}分钟</cover-view>
+                </cover-view>
+                <cover-view class="wz-sty">
+                    <cover-view>开始:{{obj.stime}}</cover-view>
+                </cover-view>
+                <cover-view class="wz-sty">
+                    <cover-view>结束:{{obj.etime}}</cover-view>
+                </cover-view>
+            </cover-view>
+        </cover-view>
+        <cover-view class="rot-list  rot-list-3">
+            <cover-view class="list-l ad-o29">
+                <cover-view class="tit-top09">
+                    <cover-image class="icon-img09" src="../../../Content/images/fy.png"></cover-image>
+                    <cover-view class="ad-linH15">骑行费用{{obj.amount}}元</cover-view>
+                </cover-view>
+                <cover-view class="wz-sty">
+                    <cover-view>基础费用:{{obj.costprice}}元</cover-view>
+                </cover-view>
+                <cover-view class="wz-sty">
+                    <cover-view>调度费:{{obj.dispatchamount}}元</cover-view>
+                </cover-view>
+                <cover-view class="wz-sty">
+                    <cover-view>优惠券:{{obj.couponamount}}元</cover-view>
+                </cover-view>
+            </cover-view>
+            <cover-view class="list-r ad-t29">
+                <cover-view class="tit-top09"></cover-view>
+                <cover-view class="wz-sty">
+                    <cover-view>时长费用:{{timeOut}}元</cover-view>
+                </cover-view>
+                <cover-view class="wz-sty">
+                    <cover-view>里程费用:{{miOut}}元</cover-view>
+                </cover-view>
+            </cover-view>
+        </cover-view>
+        <cover-view class="btn" wx:if="{{paystatus==0}}">
+            <button bindtap="showModelkf" class="button" data-orderno="{{obj.orderno}}" type="default">去支付</button>
+        </cover-view>
+    </cover-view>
+</view>

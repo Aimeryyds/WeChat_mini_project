@@ -1,0 +1,15 @@
+<view class="flex container">
+    <text class="title-name">{{Title}}</text>
+    <view class="title-line" wx:if="{{Title}}"></view>
+    <view class="develop-cell" wx:for="{{articles}}" wx:for-index="developIndex" wx:for-item="developItem">
+        <view class="develop-catalogue" style="background-color:{{developIndex==articles.length-1?'white':'rgb(168, 169, 170)'}}">
+            <view class="develop-point">●</view>
+        </view>
+        <view class="develop-content">
+            <text class="content">{{developItem.Content}}</text>
+            <text class="time">{{developItem.Year}}.{{developItem.Month}}</text>
+        </view>
+    </view>
+</view>
+<import src="../../common/template.wxml"></import>
+<template is="bottomlogo" data="{{AgentConfig:AgentConfig}}"></template>

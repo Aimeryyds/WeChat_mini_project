@@ -1,0 +1,14 @@
+<wux-animation-group classNames="{{classNames}}" in="{{in}}" wuxClass="{{prefixCls}}">
+    <swiper autoplay="{{autoplay}}" bindchange="onChange" circular="{{circular}}" class="{{classes.swiper}}" current="{{current}}" duration="{{duration}}" indicatorActiveColor="{{indicatorActiveColor}}" indicatorColor="{{indicatorColor}}" indicatorDots="{{indicatorDots}}" interval="{{interval}}" vertical="{{vertical}}" wx:if="{{in&&images.length}}">
+        <swiper-item class="{{classes.item}}" wx:for="{{images}}" wx:key="index">
+            <image bindtap="onTap" bindtouchend="onTouchEnd" bindtouchmove="onTouchMove" bindtouchstart="onTouchStart" class="{{classes.img}}" data-index="{{index}}" data-touch="{{item.touch}}" mode="aspectFit" src="{{item.image}}" style="transform: scale({{item.touch.scale}}); transition: {{transition||'none'}}"></image>
+            <view class="{{classes.remark}} {{current===index?prefixCls+'__remark--active':''}}" wx:if="{{item.remark}}">{{item.remark}}</view>
+        </swiper-item>
+    </swiper>
+    <view bindtap="onDelete" class="{{classes.opr}}" wx:if="{{showDelete||icon}}">
+        <view class="{{classes.del}}">
+            <view class="{{classes.icon}}" wx:if="{{!icon}}"></view>
+            <image src="{{icon}}" wx:if="{{icon}}"></image>
+        </view>
+    </view>
+</wux-animation-group>

@@ -1,0 +1,53 @@
+<template name="order-item-list-detail">
+    <view class="order-item-detail-box">
+        <view class="left-box">
+            <view class="line1"></view>
+            <view class="icon"></view>
+            <view class="line2"></view>
+        </view>
+        <view class="right-box">
+            <view class="order_goods-detail-box">
+                <view style="max-width: {{goods.length+giveawayList.length>5?'750rpx':'612rpx'}}">
+                    <scroll-view scrollX style="white-space:nowrap;">
+                        <view style="display:inline-block;" wx:for="{{goods}}" wx:key="{{index}}">
+                            <view class="item-pro">
+                                <view style="position:relative;">
+                                    <image src="{{item.imgUrl}}" style="width:120rpx;height:120rpx; margin-left:10rpx; margin-top:10rpx; padding-bottom:0;padding-right:10rpx;border:1px solid #F4F4F4;"></image>
+                                    <view class="zan-badge__count" style="top:0rpx;right:9px;" wx:if="{{item.num&&item.num>1}}">{{item.num}}</view>
+                                    <view style="position:absolute;left:20rpx;top:20rpx;" wx:if="{{item.activityType==1}}">
+                                        <view class="order-tag order-seckill-tag">
+                        秒杀
+                      </view>
+                                    </view>
+                                </view>
+                                <view class="orders-pro-item-num">{{item.price}}*{{item.num}}</view>
+                            </view>
+                        </view>
+                        <view style="display:inline-block;" wx:for="{{giveawayList}}" wx:key="{{index}}">
+                            <view class="item-pro">
+                                <view style="position:relative;">
+                                    <image src="{{item.imgUrl}}" style="width:120rpx;height:120rpx; margin-left:10rpx;  padding-top:10rpx; padding-bottom:0;padding-right:10rpx;border:1px solid #F4F4F4;"></image>
+                                    <view class="zan-badge__count" style="top:0rpx;right:9px;" wx:if="{{item.num&&item.num>1}}">{{item.num}}</view>
+                                    <view style="position:absolute;left:20rpx;top:20rpx;">
+                                        <view class="order-tag order-seckill-tag">
+                        赠品
+                      </view>
+                                    </view>
+                                </view>
+                                <view class="orders-pro-item-num"></view>
+                            </view>
+                        </view>
+                        <view style="display: inline-block; margin-bottom:44rpx;" wx:if="{{goods.length+giveawayList.length>5}}">
+                            <view class="price" wx:if="{{totalPrice}}">￥{{totalPrice}}</view>
+                            <view class="num">共{{goodsTotal}}件</view>
+                        </view>
+                    </scroll-view>
+                </view>
+                <view wx:if="{{goods.length+giveawayList.length<=5}}">
+                    <view class="price" wx:if="{{totalPrice}}">￥{{totalPrice}}</view>
+                    <view class="num">共{{goodsTotal}}件</view>
+                </view>
+            </view>
+        </view>
+    </view>
+</template>

@@ -1,0 +1,128 @@
+<block wx:if="{{show}}">
+    <import src="../../template/toast.wxml"></import>
+    <import src="/yb_shop/utils/wxParse/wxParse.wxml"></import>
+    <view class="goodsInfo">
+        <swiper autoplay="true" circular="true" style="height:175px">
+            <swiper-item wx:for="{{goodsDetail.album}}">
+                <image mode="aspectFill" src="{{item}}" style="height:175px"></image>
+            </swiper-item>
+        </swiper>
+        <view class="goods-item bg-fff" style="position:relative;">
+            <view class="g-left">
+                <text class="goods-price01"> 拼团价 ￥</text>
+                <text class="goods-price" style="float:left;height:110rpx; line-height:110rpx;">{{goodsDetail.gprice}}</text>
+                <view class="goods-price02">
+                    <text class="origin-price">¥{{goodsDetail.price}}</text>
+                    <text class="goods-sale">
+		{{goodsDetail.groupNum}}人团
+		</text>
+                </view>
+                <view class="clearfix"></view>
+                <view class="goods-sale02">
+			已团{{goodsDetail.saleNum}}{{goodsDetail.unit}}
+		</view>
+            </view>
+            <view class="icon-share2 text-center">
+                <button class="share-btn" openType="share"></button>
+                <image src="../../resource/share.png"></image>
+            </view>
+            <view class="clearfix"></view>
+            <view class="goods-title bg-fff">{{goodsDetail.name}}</view>
+            <view class="goods-brief bg-fff">{{goodsDetail.brief}}</view>
+        </view>
+        <view bindtap="showServer" class="server" data-statu="open">
+            <image src="../../resource/yes.png"></image>
+            <text>全场包邮</text>
+            <image src="../../resource/yes.png"></image>
+            <text>7天退换</text>
+            <image src="../../resource/yes.png"></image>
+            <text>全场48小时发货</text>
+            <image src="../../resource/yes.png"></image>
+            <text>假一赔十</text>
+        </view>
+        <view wx:if="{{groupList.length>0}}">
+            <view class="bg-fff mt-20 p-20">小伙伴正在开团</view>
+            <block wx:for="{{groupList}}" wx:key="unique">
+                <view bindtap="joinGroup" class="pull-left group-item bg-fff" data-id="{{item.oid}}">
+                    <view class="pull-left user-img">
+                        <image mode="aspectFill" src="{{item.user_headimg}}"></image>
+                    </view>
+                    <view class="group-user pull-left">
+                        <view class="user-name">{{item.nickName}}</view>
+                        <view class="left-time">还差{{goodsDetail.groupNum-1-item.leftNum}}人，剩余{{item.leftTimeStr}}</view>
+                    </view>
+                    <view class="pull-right btn">去参团</view>
+                </view>
+                <view class="clearfix"></view>
+            </block>
+        </view>
+        <view class="goods-desc bg-fff">
+            <view>商品详情</view>
+        </view>
+        <view class="wxParse case_content">
+            <template is="wxParse" data="{{wxParseData:wxParseData.nodes}}"></template>
+        </view>
+    </view>
+    <view style="width:100%;height:3rem;"></view>
+    <view class="footer">
+        <view bindtap="goHome" class="index">
+            <image mode="aspectFill" src="../../resource/icon-store.png"></image>
+            <view class="mt-10">首页</view>
+        </view>
+        <view bindtap="goHome" class="index">
+            <view class="service_box">
+                <contact-button class="user_service" sessionFrom="weapp" size="20" type="default-light"></contact-button>
+                <contact-button class="user_service" sessionFrom="weapp" size="20" type="default-light"></contact-button>
+                <contact-button class="user_service" sessionFrom="weapp" size="20" type="default-light"></contact-button>
+                <contact-button class="user_service" sessionFrom="weapp" size="20" type="default-light"></contact-button>
+            </view>
+            <image mode="aspectFill" src="../../resource/service_icon.png"></image>
+            <view class="mt-10">客服</view>
+        </view>
+        <view bindtap="showModal" class="buy-group pull-right" data-statu="open" data-type="group">
+            <view>¥{{goodsDetail.gprice}}</view>
+            <view class="mt-10">一键开团</view>
+        </view>
+        <view bindtap="showModal" class="buy-only pull-right" data-statu="open" data-type="only">
+            <view>¥{{goodsDetail.price}}</view>
+            <view class="mt-10">单独购买</view>
+        </view>
+    </view>
+    <view bindtap="showModal" class="drawer_screen" data-statu="close" wx:if="{{showModalStatus}}"></view>
+    <view animation="{{animationData}}" class="modal" wx:if="{{showModalStatus}}">
+        <view bindtap="showModal" class="modal-close pull-right" data-statu="close">
+            <image src="../../resource/off.png" style="width: 30rpx;height: 30rpx;"></image>
+        </view>
+        <view class="clearfix"></view>
+        <view class="modal-title">
+            <view class="goods-img">
+                <image mode="aspectFit" src="{{goodsDetail.img}}"></image>
+            </view>
+            <view class="goods_price_box">
+                <view class="goods-price">¥{{goodsPrice}}</view>
+                <view class="goods-stock">库存{{goodsDetail.stock}}件</view>
+            </view>
+        </view>
+        <view class="number pull-left02">
+            <text class="pull-left02" style="padding-left: 24rpx;">数量</text>
+            <text bindtap="plus" class="plus pull-right">十</text>
+            <text class="buy-value pull-right">{{num}}</text>
+            <text bindtap="minus" class="minus pull-right">一</text>
+        </view>
+        <view class="modal-footer">
+            <view bindtap="goToBuy" class="btn_pt" style="font-size: 14pt">确定</view>
+        </view>
+    </view>
+    <view bindtap="showServer" class="drawer_screen" data-statu="close" wx:if="{{showServer}}"></view>
+    <view animation="{{animationData}}" class="modal" wx:if="{{showServer}}">
+        <text bindtap="showModal" class="modal-close pull-right" data-statu="close">x</text>
+        <view class="clearfix"></view>
+        <view class="modal-title">
+            <view class="text-center">
+                <text class="">服务说明</text>
+            </view>
+        </view>
+        <view class="modal-body"></view>
+    </view>
+    <template is="toast" data="{{toast:toast}}"></template>
+</block>

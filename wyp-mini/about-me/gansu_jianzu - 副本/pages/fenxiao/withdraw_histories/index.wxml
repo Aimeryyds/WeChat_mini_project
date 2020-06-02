@@ -1,0 +1,24 @@
+<scroll-view enableBackToTop scrollY bindscrolltolower="lower" scrollTop="{{scrollTop}}" style="width:100%;height: 100vh;">
+    <view class="container">
+        <navigator class="withdraw-history" hoverClass="none" openType="navigate" url="/pages/fenxiao/withdraw_detail/index?id={{item.id}}" wx:for="{{wdRecordData}}" wx:key="index">
+            <view class="withdraw-history__info">
+                <view class="withdraw-history__bank">
+                    <view>{{item.bankName}}（尾号{{minCard[index]}}）</view>
+                    <view class="withdraw-history__date">{{item.modifiedTime}}</view>
+                    <view class="withdraw-history__item" wx:if="{{item.status==1}}">
+                        <text style="width:750rpx">佣金到账需人工处理，大约需1~3个工作日，请耐心等待</text>
+                    </view>
+                </view>
+                <view bindtap="showOn" class="withdraw-history--state" data-index="{{index}}">
+                    <view class="withdraw-history__msg">
+                        <view class="withdraw-history__money">
+                            <text wx:if="{{item.status==1||item.status==2||item.status==4}}"></text>{{item.amount}}</view>
+                        <view>{{item.status==1?'审核中':item.status==2?'未打款':item.status==4?'已打款':'提现失败'}}</view>
+                    </view>
+                    <image class="withdraw-history__linkImg" src="http://imgcdnali.wfenxiao.com.cn/xcx/c/icons/item-link.png"></image>
+                </view>
+            </view>
+        </navigator>
+        <view class="noData" wx:if="{{wdRecordData.length==0}}">暂无数据</view>
+    </view>
+</scroll-view>

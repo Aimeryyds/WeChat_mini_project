@@ -1,0 +1,110 @@
+<view class="wraper">
+    <view class="haibao">
+        <swiper autoplay="{{autoplay}}" duration="{{duration}}" indicatorDots="{{indicatorDots}}" interval="{{interval}}" style="height:80px;">
+            <swiper-item wx:for="{{imgUrls}}">
+                <image class="slide-image" data-index="{{index}}" src="{{item}}" style="width:100%;height:100%;"></image>
+            </swiper-item>
+        </swiper>
+    </view>
+    <form bindsubmit="formSubmit">
+        <view class="Search-section">
+            <view class="Search-pancel">
+                <input class="Search-input" maxlength="6" name="id" placeholder="请输入易方达旗下基金代码" type="digit"></input>
+                <button class="Search-button" formType="submit" plain="true" size="mini">
+                    <view class="find">搜索</view>
+                </button>
+            </view>
+        </view>
+    </form>
+    <view class="table">
+        <view class="t">
+            <view class="t6_1">基金名称</view>
+            <view class="t6_2">
+                <text>基金
+代码</text>
+            </view>
+            <view class="t6_3">
+                <text>净值
+日期</text>
+            </view>
+            <view class="t6_4">
+                <text>单位
+净值</text>
+            </view>
+            <view class="t6_5">
+                <text>日涨跌↓</text>
+            </view>
+            <view class="t6_6">
+                <text>最近
+一年</text>
+            </view>
+        </view>
+    </view>
+    <view class="main">
+        <scroll-view class="content" scrollIntoView="{{tofund}}" scrollWithAnimation="true" scrollY="true">
+            <view wx:for="{{jsondata888}}">
+                <view wx:if="{{!item.qrnh}}">
+                    <view class="bottom" id="Y{{item.code}}">
+                        <view class="table">
+                            <view class="t2">
+                                <view class="t6_1">{{item.name}}</view>
+                                <view class="t6_2">{{item.code}}</view>
+                                <view class="t6_3">{{item.date}}</view>
+                                <view class="t6_4">{{item.value}}</view>
+                                <view class="t6_5">{{item.updown}}</view>
+                                <view class="t6_6">{{item.oneyear}}</view>
+                            </view>
+                        </view>
+                    </view>
+                </view>
+            </view>
+            <view class="table">
+                <view class="t">
+                    <view class="t6_1">基金名称</view>
+                    <view class="t6_2">
+                        <text>基金
+代码</text>
+                    </view>
+                    <view class="t6_3">
+                        <text>净值
+日期</text>
+                    </view>
+                    <view class="t6_4">
+                        <text>万份
+收益</text>
+                    </view>
+                    <view class="t6_5">
+                        <text>七日↓
+年化↓</text>
+                    </view>
+                    <view class="t6_6">
+                        <text>最近
+一年</text>
+                    </view>
+                </view>
+            </view>
+            <view wx:for="{{jsondata888}}">
+                <view wx:if="{{item.qrnh}}">
+                    <view class="bottom" id="Y{{item.code}}">
+                        <view class="table">
+                            <view class="t2">
+                                <view class="t6_1">{{item.name}}</view>
+                                <view class="t6_2">{{item.code}}</view>
+                                <view class="t6_3">{{item.date}}</view>
+                                <view class="t6_4">{{item.wfsy}}</view>
+                                <view class="t6_5">{{item.qrnh}}</view>
+                                <view class="t6_6">{{item.oneyear}}</view>
+                            </view>
+                        </view>
+                    </view>
+                </view>
+            </view>
+        </scroll-view>
+    </view>
+    <view class="shuoming">
+        <view>说明:</view>
+        <view>1、请在输入框输入易方达旗下基金的6位基金代码查询，例如：“110011”。</view>
+        <view>2、基金按照非货币基金和货币基金展示，展示字段有差异。</view>
+        <view>3、非货币基金排序以日涨跌为第一关键字，货币基金排序以七日年化收益率为第一关键字。</view>
+    </view>
+</view>

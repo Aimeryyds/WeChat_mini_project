@@ -1,0 +1,16 @@
+<template name="22d66e1b">
+    <view class="_view 22d66e1b apartment-banner">
+        <view class="_view 22d66e1b mg-full">
+            <swiper bindchange="handleProxy" circular="{{true}}" class="_swiper 22d66e1b mg-swiper apartment-swiper" current="{{bannerChangeIndex}}" data-comkey="{{$k}}" data-eventid="{{'22d66e1b-1'}}">
+                <swiper-item bindtap="handleProxy" class="_swiper-item 22d66e1b swiperItem" data-comkey="{{$k}}" data-eventid="{{'22d66e1b-0-'+k}}" data-item="{{item}}" key="{{k}}" style=" {{initStyle}}" wx:for="{{bannerImages}}" wx:for-index="k" wx:key="k">
+                    <template is="0e24a461" data="{{...$root['0'],...$root[$kk+'22d66e1b-0-'+k],$root:$root}}"></template>
+                </swiper-item>
+            </swiper>
+        </view>
+        <view class="_view 22d66e1b mg-flex banner-tab" wx:if="{{!hideBannerDots}}">
+            <view catchtap="handleProxy" class="_view 22d66e1b {{'banner-item '+(tabIndex==k?'tab-active':'')}}" data-comkey="{{$k}}" data-eventid="{{'22d66e1b-2-'+k}}" key="{{k}}" wx:if="{{item.groupName}}" wx:for="{{banners}}" wx:for-index="k" wx:key="k">{{item.groupName}}</view>
+        </view>
+        <view class="_view 22d66e1b room-detail-banner-indicator-dots" wx:if="{{hideBannerDots}}">{{bannerCurrent+1}}/{{bannerImages.length}}</view>
+    </view>
+</template>
+<import src="/components/mgImage.vue.wxml"></import>

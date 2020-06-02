@@ -1,0 +1,398 @@
+@import "../../libs/wxParse/wxParse.wxss";
+
+page {
+    background-color: #f4f4f4;
+}
+
+.bg {
+    height: 500rpx;
+    position: fixed;
+    top: -100rpx;
+    width: 100%;
+}
+
+.card-container {
+    margin-bottom: 100rpx;
+    padding-top: 30rpx;
+    position: relative;
+    background-color: #fff;
+}
+
+.header-bg {
+    width: 100%;
+    height: 220rpx;
+    background-color: #D8443A;
+    clip-path: ellipse(82% 100% at 50% 0%);
+    position: absolute;
+    top: 0;
+}
+
+.card {
+    width: 690rpx;
+    height: 350rpx;
+    margin: 0rpx auto 40rpx;
+    background-color: #fff;
+    position: relative;
+    border-radius: 10rpx;
+    color: #999;
+    box-shadow: 0 4rpx 40rpx 4rpx rgba(150,150,150,0.2);
+}
+
+.intro {
+    height: 260rpx;
+    padding: 40rpx 30rpx 0;
+    border-bottom: 1px dashed #eee;
+    box-sizing: border-box;
+    position: relative;
+}
+
+.firm-name {
+    max-width: 500rpx;
+    font-size: 32rpx;
+    margin-bottom: 32rpx;
+}
+
+.name {
+    max-width: 500rpx;
+    font-size: 44rpx;
+    margin-bottom: 10rpx;
+    color: #333;
+}
+
+.job {
+    font-size: 24rpx;
+    overflow: hidden;
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+    word-break: break-all;
+}
+
+.head-icon {
+    width: 92rpx;
+    height: 92rpx;
+    position: absolute;
+    right: 30rpx;
+    top: 40rpx;
+    border-radius: 12rpx;
+    background: #ccc;
+}
+
+.intro-bottom {
+    height: 90rpx;
+    line-height: 90rpx;
+    padding: 0 30rpx;
+    position: relative;
+}
+
+.card-text {
+    font-size: 26rpx;
+}
+
+.qr-code {
+    position: absolute;
+    right: 30rpx;
+    top: 0;
+}
+
+.qr-code::after {
+    content: "\e91d";
+    font-size: 40rpx;
+}
+
+.content {
+    width: 630rpx;
+    min-height: 400rpx;
+    margin: 0 auto 40rpx;
+    background-color: #fff;
+}
+
+.nav {
+    height: 60rpx;
+    line-height: 60rpx;
+    position: relative;
+}
+
+.nav-item {
+    height: 60rpx;
+    line-height: 60rpx;
+    margin-right: 50rpx;
+    font-size: 26rpx;
+    color: #666;
+    display: inline-block;
+    cursor: pointer;
+}
+
+.active {
+    font-size: 30rpx;
+    color: #333;
+}
+
+.connect {
+    margin-top: 20rpx;
+}
+
+.about .wxParse-img {
+    max-width: 100%;
+}
+
+.item {
+    height: 98rpx;
+    line-height: 98rpx;
+    border-bottom: 1rpx solid #f0f0f0;
+}
+
+.item-text {
+    max-width: 560rpx;
+    font-size: 28rpx;
+    display: inline-block;
+    color: #333;
+}
+
+.item::after {
+    font-size: 34rpx;
+    float: right;
+    color: #666;
+}
+
+.phone::after {
+    content: "\e91c";
+}
+
+.email::after {
+    content: "\e91b";
+}
+
+.address::after {
+    content: "\e91a";
+}
+
+.wechatId::after {
+    content: "\e919";
+}
+
+.card-footer {
+    width: 100%;
+    height: 100rpx;
+    box-shadow: 0 -14rpx 20rpx -14rpx rgba(150,150,150,0.1);
+    position: fixed;
+    bottom: 0;
+    display: flex;
+    align-items: center;
+    background-color: #fff;
+}
+
+.footer-item {
+    padding: 0 44rpx;
+    text-align: center;
+    overflow: hidden;
+}
+
+.footer-item::before {
+    display: block;
+    font-size: 32rpx;
+    color: #989898;
+}
+
+.footer-text {
+    font-size: 24rpx;
+    color: #C9C9C9;
+}
+
+.share {
+    padding-top: 8rpx;
+    position: relative;
+}
+
+.shareBtn {
+    position: absolute;
+    background-color: transparent;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+}
+
+.share::before {
+    content: "\e901";
+}
+
+.firm::before {
+    content: "\e918";
+    font-size: 40rpx;
+}
+
+.footer-btn {
+    height: 100rpx;
+    line-height: 100rpx;
+    flex-grow: 1;
+    text-align: center;
+    color: #fff;
+    font-size: 30rpx;
+    background-color: #D8443A;
+}
+
+.mySharePanel {
+    position: absolute;
+    top: 0;
+    width: 100%;
+    z-index: 101;
+    text-align: center;
+}
+
+.commodity_screen {
+    width: 100%;
+    height: 100%;
+    position: fixed;
+    top: 0;
+    left: 0;
+    background: #000;
+    opacity: 0.5;
+    overflow: hidden;
+    z-index: 100;
+    color: #fff;
+}
+
+.commodity_attr_box {
+    width: 100%;
+    height: 304rpx;
+    overflow: hidden;
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    z-index: 2000;
+    background: #fff;
+}
+
+.commodity_attr_box .shareChoose {
+    height: 204rpx;
+    font-size: 24rpx;
+    color: #353535;
+}
+
+.commodity_attr_box .shareBtn {
+    position: absolute;
+    left: 70px;
+    top: 30rpx;
+    opacity: 0;
+    width: 100rpx;
+    height: 100rpx;
+    z-index: 100;
+}
+
+.commodity_attr_box .iconBg {
+    width: 80rpx;
+    height: 80rpx;
+    margin: 0 auto;
+    border-radius: 40rpx;
+    background-color: #72b44d;
+    margin-top: 40rpx;
+}
+
+.commodity_attr_box .iconfont {
+    position: absolute;
+    left: 163rpx;
+    top: 56rpx;
+    font-size: 50rpx;
+}
+
+.commodity_attr_box .des {
+    font-size: 24rpx;
+    color: #353535;
+    margin-top: 22rpx;
+}
+
+.commodity_attr_box .shareChoose .shareFriend {
+    height: 204rpx;
+    float: left;
+    width: 50%;
+    text-align: center;
+    position: relative;
+}
+
+.commodity_attr_box .shareChoose .shareFriendWord {
+    height: 204rpx;
+    float: left;
+    width: 50%;
+    text-align: center;
+    position: relative;
+}
+
+.commodity_attr_box .cancelBtn {
+    height: 100rpx;
+    text-align: center;
+    font-size: 30rpx;
+    color: #353535;
+    background-color: #f9f9f9;
+    line-height: 100rpx;
+}
+
+.share-btn {
+    display: inline-block;
+    background-color: #fff;
+    font-size: 28rpx;
+    color: #353535;
+    height: 90rpx;
+    width: 320rpx;
+    margin: 30rpx auto;
+    text-align: center;
+    line-height: 90rpx;
+    border-radius: 45rpx;
+    border: 1px solid #fff;
+}
+
+.saveSharePic {
+    margin-right: 20rpx;
+}
+
+.hideSharePic {
+    background-color: transparent;
+    color: #fff;
+}
+
+.visitor-list {
+    width: 77rpx;
+    position: fixed;
+    right: 15rpx;
+    bottom: 125rpx;
+}
+
+.visitor-list.single-icon {
+    bottom: 210rpx;
+}
+
+.visitor-list image {
+    width: 77rpx;
+    height: 77rpx;
+    margin-bottom: 10rpx;
+    border-radius: 50%;
+    border: 1px solid #f0f0f0;
+    box-shadow: 0 0 20rpx 5rpx #eee;
+}
+
+.visitor-tip {
+    position: absolute;
+    left: -400rpx;
+    top: 0;
+    font-size: 26rpx;
+    background-color: #fff;
+    padding: 25rpx;
+    color: #333;
+    border-radius: 8rpx;
+    box-shadow: 0 0 20rpx 5rpx #eee;
+    opacity: 0;
+    transition: opacity 1s ease;
+}
+
+.tip-show {
+    opacity: 1;
+}
+
+.visitor-tip::after {
+    content: '';
+    border: 10rpx solid transparent;
+    border-left-color: #fff;
+    position: absolute;
+    right: -17rpx;
+    top: calc(50% - 10rpx);
+}

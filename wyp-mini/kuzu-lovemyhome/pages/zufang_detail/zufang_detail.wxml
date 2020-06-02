@@ -1,0 +1,577 @@
+<view class="load_style" hidden="{{!loading}}">
+    <view class="loading">
+        <image class="loading-img" src="/img/resources/load.png"></image>
+    </view>
+</view>
+<cover-view class="shouquan" hidden="{{!shouq}}">
+    <cover-view class="sq_con">
+        <cover-view bindtap="guanbi" class="close">
+            <cover-image src="/img/resources/close_h.png"></cover-image>
+        </cover-view>
+        <cover-image class="wxicon" src="https://res.5i5j.com/cache/weixin/common/wxicon.png"></cover-image>
+        <cover-view class="wx_tit">初次使用请先允许微信授权</cover-view>
+        <button bindgetuserinfo="bindGetUserInfo" bindtap="guanbi" class="wxloginbtn" openType="getUserInfo">
+            <cover-image src="https://res.5i5j.com/cache/weixin/common/btn.png"></cover-image>
+        </button>
+    </cover-view>
+</cover-view>
+<view class="page-section page-section-spacing swiper">
+    <swiper autoplay="{{autoplay}}" bindchange="getCurrent" circular="{{circular}}" class="detail_swiper" duration="{{duration}}" indicatorDots="{{indicatorDots}}" interval="{{interval}}" nextMargin="{{nextMargin}}px" previousMargin="{{previousMargin}}px" vertical="{{vertical}}">
+        <swiper-item class="swiper_img" id="{{index}}" wx:if="{{detail_data.houseinfo.imgs.length>=1&&detail_data.houseinfo.updown==1}}" wx:for="{{detail_data.houseinfo.imgs}}" wx:for-item="cell" wx:key="index">
+            <image bindtap="imgYu" data-list="{{detail_data.houseinfo.imgs}}" data-src="{{cell}}" src="{{cell}}"></image>
+        </swiper-item>
+        <swiper-item class="swiper_img" wx:if="{{detail_data.houseinfo.imgs.length>=1&&detail_data.houseinfo.updown==2}}">
+            <image bindtap="imgYu" src="{{detail_data.houseinfo.imgs[0]}}"></image>
+        </swiper-item>
+        <swiper-item class="swiper_img" wx:if="{{!detail_data.houseinfo.imgs}}">
+            <image src="https://res.5i5j.com/cache/weixin/common/default_house_detail_404.png"></image>
+        </swiper-item>
+    </swiper>
+    <view class="updowns" wx:if="{{detail_data.houseinfo.updown==2}}">此房源已下线</view>
+    <view wx:if="{{swiperCurrent+1==1&&detail_data.houseinfo.updown==1}}">
+        <view bindtap="icon_3d" class="icon_3d" wx:if="{{detail_data.houseinfo.flag3d==1}}">
+            <image src="/img/resources/icon3d.png"></image>
+        </view>
+    </view>
+    <view wx:if="{{swiperCurrent+1==1&&detail_data.houseinfo.updown==1}}">
+        <view bindtap="icon_3d" class="icon_3d" wx:if="{{detail_data.houseinfo.flag3d==2}}">
+            <image src="/img/resources/iconhz.png"></image>
+        </view>
+    </view>
+    <view class="swiper_tit" wx:if="{{detail_data.houseinfo.imgs.length>1&&detail_data.houseinfo.updown==1}}">
+        <text>{{swiperCurrent+1}}</text> / {{detail_data.houseinfo.imgs.length}}
+    </view>
+    <view class="house_Id">ID {{detailId}}</view>
+    <button bindtap="focusFn" class="focus_box" wx:if="{{focussTate==0&&detail_data.houseinfo.updown==1}}">
+        <image src="https://res.5i5j.com/cache/weixin/common/focus.png"></image>
+    </button>
+    <button bindtap="unfocusFn" class="focus_box" wx:if="{{focussTate==1&&detail_data.houseinfo.updown==1}}">
+        <image src="https://res.5i5j.com/cache/weixin/common/focus-cur.png"></image>
+    </button>
+    <button bindgetuserinfo="bindGetUserInfo" class="share_box" data-city="{{cityId}}" openType="share" wx:if="{{detail_data.houseinfo.updown==1}}">
+        <image src="https://res.5i5j.com/cache/weixin/common/share.png"></image>
+    </button>
+</view>
+<view class="sale_detail">
+    <view class="pdrf">
+        <view class="sale_tags">
+            <text class="tag_{{index}}" wx:for="{{detail_data.houseinfo.tagwall}}" wx:for-item="cell" wx:key="index">{{cell}}</text>
+        </view>
+        <view class="detail_title">
+            <view class="xystyle" wx:if="{{detail_data.houseinfo.othertypeid==3}}">
+                <image src="https://res.5i5j.com/cache/weixin/common/tags.png"></image>
+                {{detail_data.houseinfo.rentmodename+'/'}}
+            </view>        
+            {{detail_data.houseinfo.housetitle}}
+        </view>
+        <view class="detail_top_info mflex">
+            <view class="detail_price ">
+                <text>{{detail_data.houseinfo.price+'元/月'}}</text>
+                <text>租金</text>
+            </view>
+            <view class="detail_price ">
+                <text>{{detail_data.houseinfo.bedroom==null?0:detail_data.houseinfo.bedroom==99?'多':detail_data.houseinfo.bedroom}}室{{detail_data.houseinfo.livingroom==null?0:detail_data.houseinfo.livingroom==99?'多':detail_data.houseinfo.livingroom}}厅{{detail_data.houseinfo.toilet==null?0:detail_data.houseinfo.toilet==99?'多':detail_data.houseinfo.toilet}}卫</text>
+                <text>户型</text>
+            </view>
+            <view class="detail_price ">
+                <text class="danwei">{{detail_data.houseinfo.area}}</text>
+                <text>面积</text>
+            </view>
+        </view>
+        <view class="r_house_info">
+            <view class="lf w50" wx:if="{{detail_data.houseinfo.contacttime}}">
+                <text>看房时间</text>
+                <text>{{detail_data.houseinfo.contacttime}} </text>
+            </view>
+            <view class="lf w50" wx:if="{{detail_data.houseinfo.pay||detail_data.houseinfo.paydes}}">
+                <text>支付</text>
+                <text wx:if="{{detail_data.houseinfo.paydes==''}}">{{'押'+word_result}}</text>
+                <text wx:if="{{detail_data.houseinfo.pay==''}}">{{detail_data.houseinfo.paydes}}</text>
+            </view>
+            <view class="lf w50" wx:if="{{detail_data.houseinfo.othertypeid!=3&&detail_data.houseinfo.rentmodename}}">
+                <text>出租方式</text>
+                <text>{{detail_data.houseinfo.rentmodename}}</text>
+            </view>
+            <view class="lf w50" wx:if="{{detail_data.houseinfo.heading}}">
+                <text>朝向</text>
+                <text>{{detail_data.houseinfo.heading}}</text>
+            </view>
+            <view class="lf w50" wx:if="{{detail_data.houseinfo.othertypeid==3&&detail_data.extinfo.hasLift=='有'}}">
+                <text>电梯</text>
+                <text>{{detail_data.extinfo.hasLift+'电梯'}}</text>
+            </view>
+            <view class="lf w50" wx:if="{{detail_data.houseinfo.floorStr}}">
+                <text>楼层</text>
+                <text>{{detail_data.houseinfo.floorStr}}</text>
+            </view>
+            <view class="lf w50" wx:if="{{detail_data.houseinfo.decoratelevel}}">
+                <text>装修</text>
+                <text>{{detail_data.houseinfo.decoratelevel}}</text>
+            </view>
+            <view class="lf w50" wx:if="{{detail_data.houseinfo.floorType}}">
+                <text>楼型</text>
+                <text>{{detail_data.houseinfo.floorType}}</text>
+            </view>
+            <view class="lf w50" wx:if="{{detail_data.houseinfo.sqname}}">
+                <text>商圈</text>
+                <text>{{detail_data.houseinfo.sqname}}</text>
+            </view>
+            <view class="lf w50" wx:if="{{detail_data.houseinfo.heattype}}">
+                <text>供暖</text>
+                <text>{{detail_data.houseinfo.heattype}}</text>
+            </view>
+        </view>
+        <view class="nato_info_box2" wx:if="{{detail_data.houseinfo.othertypeid==3&&detail_data.extinfo.startTime}}">
+            <text>起租日期</text>
+            <text>{{detail_data.extinfo.startTime}}</text>
+        </view>
+        <view class="nato_info_box2" wx:if="{{detail_data.houseinfo.othertypeid==3&&detail_data.extinfo.vacantEndDate}}">
+            <text>可签约至</text>
+            <text>{{detail_data.extinfo.vacantEndDate}}</text>
+        </view>
+        <view bindtap="toCommunity" class="nato_info_box" data-communityid="{{detail_data.houseinfo.communityid}}" wx:if="{{detail_data.houseinfo.communityname}}">
+            <text>小区</text>
+            <text wx:if="{{detail_data.houseinfo.othertypeid!=3}}">{{detail_data.houseinfo.communityname}}</text>
+            <text style="color:#8D6FC9" wx:if="{{detail_data.houseinfo.othertypeid==3}}">{{detail_data.houseinfo.communityname}}</text>
+            <image class="rightjiantou" src="/img/resources/right.png"></image>
+        </view>
+        <view class="adr_href mflex" wx:if="{{detail_data.houseinfo.subway}}">
+            <view class="mfauto">
+                <text>位置</text>
+                <text>{{detail_data.houseinfo.subway}}</text>
+            </view>
+        </view>
+    </view>
+    <view wx:if="{{brokerId=='undefined'||brokerId==''}}">
+        <view class="bor_top" wx:if="{{detail_data.brokerlist}}"></view>
+        <view class="pdrf" wx:if="{{detail_data.brokerlist}}">
+            <view class="t_broker_title">推荐经纪人</view>
+            <view bindtap="brokerDeatil" class="t_broker_box mflex" data-brokerid="{{item.brokerid}}" data-citycode="{{item.citycode}}" wx:for="{{detail_data.brokerlist}}" wx:key="index">
+                <view class="t_broker_info mflex mfauto">
+                    <view class="t_broker_head">
+                        <image binderror="avatarError" data-imgindex="{{index}}" mode="widthFix" src="{{item.brokerurl==null||item.brokerurl==''?'/img/resources/default_broker_404.png':item.brokerurl}}"></image>
+                    </view>
+                    <view class="t_broker_text_">
+                        <view class="t_broker_name">
+                            <view class="bit_text">{{item.name}}</view>
+                            <image catchtap="tagIndex" class="kapian" data-index="{{index}}" data-src="{{item.jobimg}}" src="/img/resources/kapian.png" wx:if="{{item.jobimg}}"></image>
+                            <text wx:if="{{bro_fenshu[index]>0}}">{{bro_fenshu[index]}}</text>
+                            <text class="color_text mar_r5" wx:if="{{bro_fenshu[index]>0}}">分</text>
+                            <text wx:if="{{item.pjcnt>0}}">{{item.pjcnt}}</text>
+                            <text class="color_text" wx:if="{{item.pjcnt>0}}">人评价</text>
+                        </view>
+                        <view>
+                            <text wx:if="{{item.sqname}}">{{item.sqname+' · '}}</text>
+                            <text wx:if="{{item.shopname}}">{{item.shopname}}</text>
+                        </view>
+                        <view wx:if="{{item.scope}}">{{item.scope}}</view>
+                    </view>
+                </view>
+                <view class="t_broker_ mflex">
+                    <view catchtap="tel" class="bro_tel" data-bid="{{item.brokerid}}" data-index="{{index}}" data-teltype="推荐经纪人" id="{{item.mobile}}">
+                        <image src="/img/resources/tel_icon.png"></image>
+                    </view>
+                    <view catchtap="toIm" class="bro_mes" data-ailiaotype="推荐经纪人" data-bid="{{item.brokerid}}" data-index="{{index}}" data-leave="{{item.job_leave}}">
+                        <image src="/img/resources/mes_icon.png"></image>
+                    </view>
+                </view>
+            </view>
+        </view>
+    </view>
+    <view class="bor_top" wx:if="{{detail_data.houseinfo.othertypeid==3&&detail_data.extinfo.roomShip}}"></view>
+    <view class="pdrf" wx:if="{{detail_data.houseinfo.othertypeid==3&&detail_data.extinfo.roomShip}}">
+        <view class="t_broker_title">房间信息</view>
+        <view class="h_info_box" wx:for="{{detail_data.extinfo.roomShip}}" wx:key="index">
+            <view wx:if="{{item.alreadyStay=='房源维护中'}}">
+                <view class="houseimg">
+                    <image binderror="imageError" data-imgindex="{{index}}" src="{{item.picUrl==null||item.picUrl==''?'https://res.5i5j.com/cache/weixin/common/xybg.png':item.picUrl}}"></image>
+                </view>
+                <view class="houseifons">
+                    <view class="huxing">{{item.roomName}}</view>
+                    <view class="area">
+                    {{item.roomArea+'㎡'}}<text wx:if="{{item.roomArea&&item.roomOrientation}}">/</text>{{item.roomOrientation}}
+                </view>
+                </view>
+                <view class="status">
+                    <text>{{item.alreadyStay}}</text>
+                </view>
+            </view>
+            <view class="cur" wx:if="{{item.alreadyStay=='当前房源'}}">
+                <view class="houseimg">
+                    <image binderror="imageError" data-imgindex="{{index}}" src="{{item.picUrl==null||item.picUrl==''?'https://res.5i5j.com/cache/weixin/common/xybg.png':item.picUrl}}"></image>
+                </view>
+                <view class="houseifons">
+                    <view class="huxing">{{item.roomName}}</view>
+                    <view class="area">
+                    {{item.roomArea+'㎡'}}<text wx:if="{{item.roomArea&&item.roomOrientation}}">/</text>{{item.roomOrientation}}
+                </view>
+                </view>
+                <view class="status">
+                    <text>{{item.alreadyStay}}</text>
+                </view>
+            </view>
+            <view wx:if="{{item.alreadyStay=='已出租'}}">
+                <view class="houseimg">
+                    <image binderror="imageError" data-imgindex="{{index}}" src="{{item.picUrl==null||item.picUrl==''?'https://res.5i5j.com/cache/weixin/common/xybg.png':item.picUrl}}"></image>
+                    <image src="{{item.picUrl==null||item.picUrl==''?'https://res.5i5j.com/cache/weixin/common/xybg.png':item.picUrl}}"></image>
+                </view>
+                <view class="houseifons">
+                    <view class="huxing">{{item.roomName}}</view>
+                    <view class="area">
+                    {{item.sex}}<text wx:if="item.sex && item.constellation">/</text>{{item.constellation}}
+                </view>
+                </view>
+                <view class="status">
+                    <text>{{item.checkinTime}}</text>
+                </view>
+            </view>
+            <view bindtap="tuijian" class="cur" data-id="{{item.houseId}}" wx:if="{{item.alreadyStay[0]>0}}">
+                <view class="houseimg">
+                    <image src="{{item.picUrl==null||item.picUrl==''?'https://res.5i5j.com/cache/weixin/common/xybg.png':item.picUrl}}"></image>
+                </view>
+                <view class="houseifons">
+                    <view class="huxing">{{item.roomName}}</view>
+                    <view class="area">
+                    {{item.roomArea+'㎡'}}<text wx:if="{{item.roomArea&&item.roomOrientation}}">/</text>{{item.roomOrientation}}
+                </view>
+                </view>
+                <view class="status">
+                    <text>{{item.alreadyStay}}</text>
+                    <image src="/img/resources/right.png"></image>
+                </view>
+            </view>
+        </view>
+    </view>
+    <view class="bor_top" wx:if="{{detail_data.houseinfo.othertypeid==3}}"></view>
+    <view class="pdrf " wx:if="{{detail_data.houseinfo.othertypeid==3}}">
+        <view class="t_broker_title">服务介绍</view>
+        <view class="xyBox">
+            <view class="xy_kuai">
+                <image src="https://res.5i5j.com/cache/weixin/common/xy_2.png"></image>
+                <view class="xy_name">品质</view>
+                <view class="xy_tit">相寓房源品质保证</view>
+            </view>
+            <view class="xy_kuai">
+                <image src="https://res.5i5j.com/cache/weixin/common/xy_1.png"></image>
+                <view class="xy_name">承诺</view>
+                <view class="xy_tit">专心贴心的服务</view>
+            </view>
+            <view class="xy_kuai">
+                <image src="https://res.5i5j.com/cache/weixin/common/xy_3.png"></image>
+                <view class="xy_name">支付</view>
+                <view class="xy_tit">在线支付轻松省心</view>
+            </view>
+        </view>
+        <view bindtap="xymore" class="xy_more" wx:if="{{detail_data.houseinfo.serverurl}}">查看服务详情介绍</view>
+    </view>
+    <view class="bor_top"></view>
+    <view class="equipments_box">
+        <view class="eqlist">
+            <view class="eq_icon">
+                <image src="https://res.5i5j.com/cache/weixin/common/xyj.png" wx:if="{{allPosition[0]==1}}"></image>
+                <image src="https://res.5i5j.com/cache/weixin/common/xyj_h.png" wx:if="{{allPosition[0]==0||allPosition==undefined}}"></image>
+            </view>
+            <view class="text">洗衣机</view>
+        </view>
+        <view class="eqlist">
+            <view class="eq_icon">
+                <image src="https://res.5i5j.com/cache/weixin/common/bx.png" wx:if="{{allPosition[1]==2}}"></image>
+                <image src="https://res.5i5j.com/cache/weixin/common/bx_h.png" wx:if="{{allPosition[1]==0||allPosition==undefined}}"></image>
+            </view>
+            <view class="text">冰箱</view>
+        </view>
+        <view class="eqlist">
+            <view class="eq_icon">
+                <image src="https://res.5i5j.com/cache/weixin/common/ds.png" wx:if="{{allPosition[2]==3}}"></image>
+                <image src="https://res.5i5j.com/cache/weixin/common/ds_h.png" wx:if="{{allPosition[2]==0||allPosition==undefined}}"></image>
+            </view>
+            <view class="text">电视</view>
+        </view>
+        <view class="eqlist">
+            <view class="eq_icon">
+                <image src="https://res.5i5j.com/cache/weixin/common/kt.png" wx:if="{{allPosition[3]==4}}"></image>
+                <image src="https://res.5i5j.com/cache/weixin/common/kt_h.png" wx:if="{{allPosition[3]==0||allPosition==undefined}}"></image>
+            </view>
+            <view class="text">空调</view>
+        </view>
+        <view class="eqlist">
+            <view class="eq_icon">
+                <image src="https://res.5i5j.com/cache/weixin/common/rsq.png" wx:if="{{allPosition[4]==5}}"></image>
+                <image src="https://res.5i5j.com/cache/weixin/common/rsq_h.png" wx:if="{{allPosition[4]==0||allPosition==undefined}}"></image>
+            </view>
+            <view class="text">热水器</view>
+        </view>
+        <view class="eqlist">
+            <view class="eq_icon">
+                <image src="https://res.5i5j.com/cache/weixin/common/rq.png" wx:if="{{allPosition[5]==6}}"></image>
+                <image src="https://res.5i5j.com/cache/weixin/common/rq_h.png" wx:if="{{allPosition[5]==0||allPosition==undefined}}"></image>
+            </view>
+            <view class="text">天燃气</view>
+        </view>
+        <view class="eqlist">
+            <view class="eq_icon">
+                <image src="https://res.5i5j.com/cache/weixin/common/nq.png" wx:if="{{allPosition[6]==7}}"></image>
+                <image src="https://res.5i5j.com/cache/weixin/common/nq_h.png" wx:if="{{allPosition[6]==0||allPosition==undefined}}"></image>
+            </view>
+            <view class="text">暖气</view>
+        </view>
+        <view class="eqlist">
+            <view class="eq_icon">
+                <image src="https://res.5i5j.com/cache/weixin/common/chuang.png" wx:if="{{allPosition[7]==8}}"></image>
+                <image src="https://res.5i5j.com/cache/weixin/common/chuang_h.png" wx:if="{{allPosition[7]==0||allPosition==undefined}}"></image>
+            </view>
+            <view class="text">床</view>
+        </view>
+        <view class="eqlist">
+            <view class="eq_icon">
+                <image src="https://res.5i5j.com/cache/weixin/common/wl.png" wx:if="{{allPosition[8]==9}}"></image>
+                <image src="https://res.5i5j.com/cache/weixin/common/wl_h.png" wx:if="{{allPosition[8]==0||allPosition==undefined}}"></image>
+            </view>
+            <view class="text">网络</view>
+        </view>
+        <view class="eqlist">
+            <view class="eq_icon">
+                <image src="https://res.5i5j.com/cache/weixin/common/dt.png" wx:if="{{allPosition[9]==10}}"></image>
+                <image src="https://res.5i5j.com/cache/weixin/common/dt_h.png" wx:if="{{allPosition[9]==0||allPosition==undefined}}"></image>
+            </view>
+            <view class="text">电梯</view>
+        </view>
+    </view>
+    <view class="bor_top"></view>
+    <view class="pdrf padb60" wx:if="{{detail_data.houseinfo.memo1||detail_data.houseinfo.memo2||detail_data.houseinfo.memo3||detail_data.houseinfo.memo4||detail_data.houseinfo.memo5}}">
+        <view class="t_broker_title">房源特色</view>
+        <view class="tese" wx:if="{{detail_data.houseinfo.memo1}}">
+            <text>房源亮点</text>
+            <text>{{detail_data.houseinfo.memo1}}</text>
+        </view>
+        <view class="tese" wx:if="{{detail_data.houseinfo.memo2}}">
+            <text>交通出行</text>
+            <text>{{detail_data.houseinfo.memo2}}</text>
+        </view>
+        <view class="tese" wx:if="{{detail_data.houseinfo.memo3}}">
+            <text>周边配套</text>
+            <text>{{detail_data.houseinfo.memo3}}</text>
+        </view>
+        <view class="tese" wx:if="{{detail_data.houseinfo.memo4}}">
+            <text>户型介绍</text>
+            <text>{{detail_data.houseinfo.memo4}}</text>
+        </view>
+        <view class="tese" wx:if="{{detail_data.houseinfo.memo5}}">
+            <text>小区信息</text>
+            <text>{{detail_data.houseinfo.memo5}}</text>
+        </view>
+        <view bindtap="tese" class="more_btn" wx:if="{{detail_data.houseinfo.othertypeid!=3}}">查看更多</view>
+        <view wx:if="{{detail_data.houseinfo.house_evaluate}}">
+            <view bindtap="ziping" class="href_title mflex">
+                <text class="mfauto">业主自评</text>
+                <view class="textmore" wx:if="{{detail_data.houseinfo.othertypeid!=3}}">更多<image src="/img/resources/right_2.png"></image>
+                </view>
+                <view class="textmore" wx:if="{{detail_data.houseinfo.othertypeid==3}}">更多<image src="https://res.5i5j.com/cache/weixin/common/x_right_2.png"></image>
+                </view>
+            </view>
+            <view class="ziping_box mflex">
+                <view class="y_head ">
+                    <image mode="widthFix" src="/img/resources/default_broker_404.png"></image>
+                </view>
+                <view class="y_cont mfauto">
+                    <view class="y_bg mflex">
+                        <view class="triangle_border_left"></view>
+                        <view class="arrow_con mfauto">
+                            <text>{{detail_data.houseinfo.house_evaluate}}</text>
+                            <text>{{detail_data.houseinfo.community_evaluate}}</text>
+                        </view>
+                    </view>
+                </view>
+            </view>
+        </view>
+    </view>
+    <view class="bor_top"></view>
+</view>
+<view class="pdrf">
+    <view class="look_box mflex">
+        <view class="mfauto">带看记录</view>
+        <view bindtap="dklist" wx:if="{{dktimes}}">最新带看{{dktimes}}<image class="right" src="/img/resources/right.png"></image>
+        </view>
+    </view>
+    <view class="look_datas mflex">
+        <view class="mfauto">
+            <text>近7天带看</text>
+            <text>{{detail_data.takelookweekcount}}</text>
+        </view>
+        <view class="mfauto">
+            <text>近30天带看</text>
+            <text>{{detail_data.takelooksumcount}}</text>
+        </view>
+    </view>
+</view>
+<view class="bor_top"></view>
+<view class="zhoubian padt30">周边信息</view>
+<view class="zhoubian_adr" wx:if="{{detail_data.communityaround.selladd}}">
+    <image src="/img/resources/adr_icon.png" wx:if="{{detail_data.houseinfo.othertypeid!=3}}"></image>
+    <image src="https://res.5i5j.com/cache/weixin/common/x_adr_icon.png" wx:if="{{detail_data.houseinfo.othertypeid==3}}"></image>
+    <text>位置 </text>
+    <text>{{detail_data.communityaround.selladd}}</text>
+</view>
+<map covers="{{covers}}" id="myMap" latitude="{{latitude}}" longitude="{{longitude}}" markers="{{markers}}" scale="15">
+    <cover-view class="img_box_title mflex">
+        <cover-view class="mfauto">
+            <cover-view>商圈房源数</cover-view>
+            <cover-view class="gs">{{detail_data.communityaround.count}}</cover-view>
+            <cover-view>套</cover-view>
+        </cover-view>
+    </cover-view>
+</map>
+<view class="pdrf">
+    <view class="href_tongxq x_bor_top mflex">
+        <text class="mfauto" wx:if="{{detail_data.community.address}}">{{detail_data.community.address}}</text>
+        <text class="mfauto" wx:else>小区信息</text>
+        <view bindtap="toCommunity" class="textmore" data-communityid="{{detail_data.houseinfo.communityid}}">更多<image src="/img/resources/right_2.png" wx:if="{{detail_data.houseinfo.othertypeid!=3}}"></image>
+            <image src="https://res.5i5j.com/cache/weixin/common/x_right_2.png" wx:if="{{detail_data.houseinfo.othertypeid==3}}"></image>
+        </view>
+    </view>
+    <view class="xiaoqu_boxs">
+        <view class="xiaoqu_info mflex">
+            <view class="xiaoqu_info_list mfauto">
+                <text>年代</text>
+                <text>{{detail_data.community.startData+'年'}}</text>
+            </view>
+            <view class="xiaoqu_info_list mfauto">
+                <text>位置</text>
+                <text>{{detail_data.community.sqname}}</text>
+            </view>
+        </view>
+        <view class="xiaoqu_info mflex">
+            <view class="xiaoqu_info_list mfauto">
+                <text>类型</text>
+                <text>{{detail_data.community.communitytype}}</text>
+            </view>
+            <view class="xiaoqu_info_list mfauto">
+                <text>供暖</text>
+                <text>{{detail_data.community.heattype}}</text>
+            </view>
+        </view>
+    </view>
+</view>
+<view wx:if="{{detail_data.community.rentList}}">
+    <view class="href_tongxq pdrf mflex">
+        <text class="mfauto">同小区在租房源（{{detail_data.community.rentcount}}）</text>
+        <view bindtap="txq_zaishou" class="textmore" wx:if="{{detail_data.houseinfo.othertypeid!=3&&detail_data.community.rentcount>4}}">更多<image src="/img/resources/right_2.png"></image>
+        </view>
+        <view bindtap="txq_zaishou" class="textmore" wx:if="{{detail_data.houseinfo.othertypeid==3}}">更多 <image src="https://res.5i5j.com/cache/weixin/common/x_right_2.png"></image>
+        </view>
+    </view>
+    <view class="house_detail_box">
+        <scroll-view scrollX class="house_tag_box">
+            <view bindtap="tuijian" class=" house_tag_sty" data-id="{{item.housesid}}" wx:if="{{index<4}}" wx:for="{{detail_data.community.rentList}}" wx:key="index">
+                <image src="{{item.imgurl==null||item.imgurl==''?'https://res.5i5j.com/cache/weixin/common/default_house_detail_404.png':item.imgurl}}"></image>
+                <view class="house_tag_title">{{item.housetitle}}</view>
+                <view class="house_tag_ting">{{item.bedroom+'室'+item.livingroom+'厅'+item.toilet+'卫 · '+item.area+'㎡'}}</view>
+                <view class="house_tag_price">
+                    <text>{{item.price+'元/月'}}</text>
+                </view>
+            </view>
+        </scroll-view>
+    </view>
+</view>
+<view wx:if="{{detail_data.communityaround.rentHouse4List}}">
+    <view class="pdrf">
+        <view bindtap="tsq_zaishou" class="href_tongxq border_top  mflex">
+            <text class="mfauto">同商圈在租房源（{{detail_data.communityaround.count-1}}）</text>
+            <view class="textmore" wx:if="{{detail_data.houseinfo.othertypeid!=3}}">更多 <image src="/img/resources/right_2.png"></image>
+            </view>
+            <view class="textmore" wx:if="{{detail_data.houseinfo.othertypeid==3}}">更多 <image src="https://res.5i5j.com/cache/weixin/common/x_right_2.png"></image>
+            </view>
+        </view>
+    </view>
+    <view class="house_detail_box">
+        <scroll-view scrollX class="house_tag_box">
+            <view bindtap="tuijian" class=" house_tag_sty" data-id="{{item.housesid}}" wx:if="{{index<4}}" wx:for="{{detail_data.communityaround.sqrentlist}}" wx:key="index">
+                <image src="{{item.imgurl==null||item.imgurl==''?'https://res.5i5j.com/cache/weixin/common/default_house_detail_404.png':item.imgurl}}"></image>
+                <view class="house_tag_title">{{item.housetitle}}</view>
+                <view class="house_tag_ting">{{item.bedroom+'室'+item.livingroom+'厅'+item.toilet+'卫 · '+item.area+'㎡'}}</view>
+                <view class="house_tag_price">
+                    <text>{{item.price+'元/月'}}</text>
+                </view>
+            </view>
+        </scroll-view>
+    </view>
+</view>
+<view class="bor_top"></view>
+<view class="pdrf" wx:if="{{detail_data.community.tjList}}">
+    <view class="tj_house">推荐房源（{{detail_data.community.tjList.length}}）</view>
+</view>
+<view class="house_detail_box_2" wx:if="{{detail_data.community.tjList}}">
+    <scroll-view scrollX class="house_tag_box">
+        <view class=" house_tag_sty" wx:if="{{index<4}}" wx:for="{{detail_data.community.tjList}}" wx:key="index">
+            <view bindtap="tuijian" data-id="{{item.housesid}}">
+                <image src="{{item.imgurl==null||item.imgurl==''?'https://res.5i5j.com/cache/weixin/common/default_house_detail_404.png':item.imgurl}}"></image>
+                <view class="house_tag_title">{{item.housetitle}}</view>
+                <view class="house_tag_ting">{{item.bedroom+'室'+item.livingroom+'厅'+item.toilet+'卫 · '+item.area+'㎡'}}</view>
+                <view class="house_tag_price">
+                    <text>{{item.price+'元/月'}}</text>
+                </view>
+            </view>
+        </view>
+    </scroll-view>
+</view>
+<view style="height:115rpx;"></view>
+<cover-view class="fixed_foot" hidden="{{!foot}}" wx:if="{{detail_data.brokerlist&&tBrokerid==undefined}}">
+    <cover-view class="foot_con foot_left">
+        <cover-view bindtap="brokerDeatil" class="foot_bro" data-brokerid="{{detail_data.brokerlist[0].brokerid}}" data-citycode="{{detail_data.brokerlist[0].citycode}}">
+            <cover-view class=" foot_head">
+                <cover-image binderror="avatarError" data-imgindex="0" mode="widthFix" src="{{detail_data.brokerlist[0].brokerurl}}"></cover-image>
+            </cover-view>
+            <cover-view class="foot_bro_text">
+                <cover-view class="back_color">
+                    <cover-view class="bit_text world">{{detail_data.brokerlist[0].name}}</cover-view>
+                    <cover-image catchtap="tagIndex" class="kapian" data-index="0" data-src="{{detail_data.brokerlist[0].jobimg}}" src="/img/resources/kapian.png" wx:if="{{detail_data.brokerlist[0].jobimg}}"></cover-image>
+                </cover-view>
+                <cover-view wx:if="{{bro_score>0}}">
+                    <cover-view class="world pingfen">{{bro_score}}</cover-view>
+                    <cover-image class="satr" src="/img/resources/satr.png"></cover-image>
+                </cover-view>
+            </cover-view>
+        </cover-view>
+    </cover-view>
+    <cover-view class="foot_con foot_main">
+        <cover-view bindtap="tel" class="dh anniu" data-bid="{{detail_data.brokerlist[0].brokerid}}" data-index="{{0}}" data-teltype="底部" id="{{detail_data.brokerlist[0].mobile}}">
+            <cover-image src="/img/resources/tel.png" wx:if="{{detail_data.houseinfo.othertypeid!=3}}"></cover-image>
+            <cover-image src="https://res.5i5j.com/cache/weixin/common/x_tel.png" wx:if="{{detail_data.houseinfo.othertypeid==3}}"></cover-image>
+        </cover-view>
+    </cover-view>
+    <cover-view class="foot_con foot_main">
+        <cover-view bindtap="toIm" class="dh anniu" data-ailiaotype="底部" data-bid="{{detail_data.brokerlist[0].brokerid}}" data-index="{{0}}" data-leave="{{detail_data.brokerlist[0].job_leave}}">
+            <cover-image src="https://res.5i5j.com/cache/weixin/common/zx.png" wx:if="{{detail_data.houseinfo.othertypeid!=3}}"></cover-image>
+            <cover-image src="https://res.5i5j.com/cache/weixin/common/x_im.png" wx:if="{{detail_data.houseinfo.othertypeid==3}}"></cover-image>
+        </cover-view>
+    </cover-view>
+</cover-view>
+<cover-view class="fixed_foot" hidden="{{!foot}}" wx:if="{{brokerId>0&&tBrokerid!=undefined}}">
+    <cover-view class="foot_con foot_left">
+        <cover-view bindtap="brokerDeatil" class="foot_bro" data-brokerid="{{detail_broker_data.brokerid}}" data-citycode="{{detail_broker_data.citycode}}">
+            <cover-view class=" foot_head">
+                <cover-image binderror="shareError" mode="widthFix" src="{{detail_broker_data.brokerimg}}"></cover-image>
+            </cover-view>
+            <cover-view class="foot_bro_text">
+                <cover-view class="back_color">
+                    <cover-view class="bit_text world">{{tBrokerid.bname}}</cover-view>
+                    <cover-image catchtap="tagIndex" class="kapian" data-index="0" data-src="{{detail_broker_data.jobimg}}" src="/img/resources/kapian.png" wx:if="{{detail_broker_data.jobimg}}"></cover-image>
+                </cover-view>
+                <cover-view wx:if="{{sharebroker_score>0}}">
+                    <cover-view class="world pingfen">{{sharebroker_score}}</cover-view>
+                    <cover-image class="satr" src="/img/resources/satr.png"></cover-image>
+                </cover-view>
+            </cover-view>
+        </cover-view>
+    </cover-view>
+    <cover-view class="foot_con foot_main">
+        <cover-view bindtap="tel" class="dh anniu" data-bid="{{detail_broker_data.brokerid}}" data-index="{{0}}" data-jobleave="{{detail_broker_data.job_leave}}" data-teltype="底部" id="{{detail_broker_data.mobile}}">
+            <cover-image src="/img/resources/tel.png"></cover-image>
+        </cover-view>
+    </cover-view>
+    <cover-view class="foot_con foot_main">
+        <cover-view bindtap="toIm" class="dh anniu" data-ailiaotype="底部" data-bid="{{detail_broker_data.brokerid}}" data-index="{{0}}" data-leave="{{detail_broker_data.job_leave}}">
+            <cover-image src="https://res.5i5j.com/cache/weixin/common/zx.png"></cover-image>
+        </cover-view>
+    </cover-view>
+</cover-view>

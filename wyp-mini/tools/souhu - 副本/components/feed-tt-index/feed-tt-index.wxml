@@ -1,0 +1,6 @@
+<view class="menu-container">
+    <menu bind:handleClick="handleIndexChange" class="tt-menu" currentIndex="{{currentIndex}}" list="{{list}}"></menu>
+</view>
+<view class="feed-list-container">
+    <feed-list-pack bind:feedExposure="feedExposure" options="{{list[currentIndex].options}}" pvId="{{pvId}}" regionId="{{list[currentIndex].id}}" spmB="{{spmB}}" spmC="{{list[currentIndex].spmCCode}}" type="{{3}}"></feed-list-pack>
+</view>

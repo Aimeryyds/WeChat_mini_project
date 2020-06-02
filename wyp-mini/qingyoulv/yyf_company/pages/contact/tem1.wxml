@@ -1,0 +1,83 @@
+<template name="info">
+    <view class="c1_div">
+        <view class="c1_first_line">
+            <view bindtap="gomap" class="fline fline_left" style="background:{{info.tcolor}}">
+                <view class="fline_img">
+                    <image src="../../resource/images/daohang1.png"></image>
+                </view>
+                <view class="fline_text" style="color:white">
+        地图导航
+      </view>
+            </view>
+            <view class="fline fline_right {{info.custom_close=='1'?'hide':''}}" style="background:{{info.tcolor}} ">
+                <view class="fline_img">
+                    <image src="../../resource/images/webchat.png"></image>
+                </view>
+                <view class="fline_text" style="color:white">
+        在线咨询
+      </view>
+            </view>
+            <view class="fline_contact">
+                <button class="contact_button1" openType="contact"></button>
+            </view>
+        </view>
+        <view class="c1_other_line" style="border:1px solid {{info.tcolor}}" wx:if="{{info.phone}}">
+            <view class="oline_img">
+                <image src="../../resource/images/phone.png"></image>
+            </view>
+            <view class="oline_text oline_text_div">
+                <view>{{info.phone}} </view>
+                <view bindtap="calling" class="oline_text_right" style="color:{{info.tcolor}}">点击拨打</view>
+            </view>
+        </view>
+        <view class="c1_other_line" style="border:1px solid {{info.tcolor}}" wx:if="{{info.phone2}}">
+            <view class="oline_img">
+                <image src="../../resource/images/phone.png"></image>
+            </view>
+            <view class="oline_text oline_text_div">
+                <view>{{info.phone2}} </view>
+                <view bindtap="calling2" class="oline_text_right" style="color:{{info.tcolor}}">点击拨打</view>
+            </view>
+        </view>
+        <view class="c1_other_line" style="border:1px solid {{info.tcolor}}" wx:if="{{info.qq}}">
+            <view class="oline_img">
+                <image src="../../resource/images/qq.png"></image>
+            </view>
+            <view class="oline_text">
+      {{info.qq}}
+    </view>
+        </view>
+        <view class="c1_other_line" style="border:1px solid {{info.tcolor}}" wx:if="{{info.email}}">
+            <view class="oline_img">
+                <image src="../../resource/images/email.png"></image>
+            </view>
+            <view class="oline_text">
+      {{info.email}}
+    </view>
+        </view>
+        <view class="c1_other_line" style="border:1px solid {{info.tcolor}}" wx:if="{{info.wechat}}">
+            <view class="oline_img">
+                <image src="../../resource/images/wechat.png"></image>
+            </view>
+            <view class="oline_text">
+      {{info.wechat}}
+    </view>
+        </view>
+        <view class="c1_other_line" style="border:1px solid {{info.tcolor}}" wx:if="{{info.website}}">
+            <view class="oline_img">
+                <image src="../../resource/images/website.png"></image>
+            </view>
+            <view class="oline_text">
+      {{info.website}}
+    </view>
+        </view>
+        <view class="c1_other_line_address" style="border:1px solid {{info.tcolor}}">
+            <view class="oline_img">
+                <image src="../../resource/images/address.png"></image>
+            </view>
+            <view class="oline_text oline_text_div">
+                <view class="oline_text_left">{{info.address}} </view>
+            </view>
+        </view>
+    </view>
+</template>

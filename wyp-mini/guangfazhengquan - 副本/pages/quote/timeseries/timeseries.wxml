@@ -1,0 +1,587 @@
+<include src="../../../components/circus/network/network.wxml"></include>
+<include src="../../../components/circus/toast/toast.wxml"></include>
+<view class="v v-quote-timeseries">
+    <view bindtap="togglePlate" class="plate">
+        <include src="../components/plate/plate.wxml"></include>
+    </view>
+    <view class="empty-block"></view>
+    <view bindtap="changeTimeTab" class="tabs c-line-bottom">
+        <view class="tab-item {{timeTabs.curTimeTabId==0?'active':''}}" data-id="0">分时</view>
+        <view class="tab-item {{timeTabs.curTimeTabId==1?'active':''}}" data-id="1">五日</view>
+        <view class="tab-item {{timeTabs.curTimeTabId==2?'active':''}}" data-id="2">日K</view>
+        <view class="tab-item {{timeTabs.curTimeTabId==3?'active':''}}" data-id="3">周K</view>
+        <view class="tab-item {{timeTabs.curTimeTabId==4?'active':''}}" data-id="4">月K</view>
+        <view class="tab-item {{timeTabs.curTimeTabId==5?'active':''}}">
+            <picker bindchange="changeMinutes" class="picker" mode="selector" range="{{timeTabs.minutes}}" value="{{timeTabs.minuteIdx}}">
+                <view class="minute-label">{{timeTabs.minutes[timeTabs.minuteIdx]||'分钟'}}</view>
+            </picker>
+        </view>
+    </view>
+    <view class="content">
+        <view style="display:{{timeTabs.curTimeTabId==0?'block':'none'}};">
+            <view class="content-t">
+                <view>均价:{{hint.avg_d}}</view>
+                <view class="ml10" style="color:{{hint.color}}">
+          最新:{{hint.now_d}}  {{hint.change_d}}  {{hint.rise_d}}
+        </view>
+            </view>
+            <view class="content-b" style="height: {{chart.style.height}}px;">
+                <view capture-bind:touchend="ontouchend" capture-bind:touchmove="ontouchmove" capture-bind:touchstart="ontouchstart" class="chart">
+                    <canvas canvasId="dataCvs" class="data-cvs {{isHiddenCanvas?'hidden':''}}"></canvas>
+                    <canvas canvasId="hintCvs" class="hint-cvs {{isHiddenCanvas||!chart.lining?'hidden':''}}"></canvas>
+                    <canvas canvasId="touchCvs" class="touch-cvs {{isHiddenCanvas||!chart.lining?'hidden':''}}"></canvas>
+                    <view style="{{item.style}}" wx:for="{{labels.statics}}" wx:key="id">{{item.text}}</view>
+                    <view style="{{item.style}}" wx:for="{{labels.dynamics}}" wx:key="id">{{item.text}}</view>
+                    <view class="loading c-fs-10 c-fc-gray c-right-angle-rect" wx:if="{{chart.loading}}">
+                        <view class="hint">加载中</view>
+                    </view>
+                </view>
+                <view bindtap="toggleFiveTick" class="five-tick c-line-top c-line-bottom" wx:if="{{type!='1'}}">
+                    <view class="five" style="height:{{fiveTick.five.height}}">
+                        <view class="sells c-line-right" style="margin-top:{{fiveTick.five.marginTop}}">
+                            <view class="row" wx:for="{{fiveTick.five.data.sell}}" wx:key="id">
+                                <view class="name">卖{{5-index}}</view>
+                                <view class="price" style="color: {{item.color}};font-size:{{item.price_size}}">
+                  {{item.price}}
+                </view>
+                                <view class="volume" style="font-size:{{item.volume_size}};color: {{item.volume_color}};">
+                  {{item.volume}}
+                </view>
+                            </view>
+                        </view>
+                        <view class="buys c-line-right c-line-top">
+                            <view class="row" wx:for="{{fiveTick.five.data.buy}}" wx:key="id">
+                                <view class="name">买{{index+1}}</view>
+                                <view class="price" style="color: {{item.color}};font-size:{{item.price_size}}">
+                  {{item.price}}
+                </view>
+                                <view class="volume" style="font-size:{{item.volume_size}};color: {{item.volume_color}};">
+                  {{item.volume}}
+                </view>
+                            </view>
+                        </view>
+                    </view>
+                    <view class="tick c-line-top">
+                        <view class="tick-controls c-line-right {{fiveTick.tick.packup?'open':''}}">
+                            <text class="title">明细</text>
+                        </view>
+                        <scroll-view scrollY class="tick-content c-line-top c-line-right" style="height:{{fiveTick.tick.height}};">
+                            <view class="row" wx:for="{{fiveTick.tick.data}}" wx:key="id">
+                                <view class="time">{{item.time}}</view>
+                                <view class="price" style="color: {{item.price_color}};font-size: {{item.price_size}}">
+                  {{item.price}}
+                </view>
+                                <view class="volume" style="color: {{item.volume_color}};font-size: {{item.volume_size}}">
+                  {{item.volume}}
+                </view>
+                            </view>
+                        </scroll-view>
+                    </view>
+                </view>
+            </view>
+        </view>
+        <view style="display:{{timeTabs.curTimeTabId==1?'block':'none'}};">
+            <include src="../components/fiveday/fiveday.wxml"></include>
+        </view>
+        <view style="display:{{timeTabs.curTimeTabId>=2?'block':'none'}};">
+            <include src="../components/kline/kline.wxml"></include>
+        </view>
+    </view>
+    <view class="empty-block" wx:if="{{type-0==2||type-0==4}}"></view>
+    <view class="quote-tabs" wx:if="{{type-0==2||type-0==4}}">
+        <view class="heads c-line-bottom {{exchange==111?'heads-one':''}}">
+            <view bindtap="tapLatest" class="head latest">最新</view>
+            <view bindtap="tapSummary" class="head summary" wx:if="{{exchange!=111}}">概况</view>
+            <view animation="{{tabs.bar.animation}}" class="bar"></view>
+        </view>
+        <view class="infos" style="color: {{tabs.latest.color}}" wx:if="{{tabs.latest.select}}">
+            <view class="latest">
+                <view bindtap="goMessage" class="record c-line-bottom" data-id="{{item.id}}" wx:for="{{tabs.latest.data}}" wx:key="id">
+                    <view class="content">
+                        <view class="logo" style="background-color: {{item.logo.color}}">
+              {{item.logo.text}}
+            </view>
+                        <view class="row">
+                            <view class="title">{{item.title}}</view>
+                        </view>
+                        <view class="row c-mgt-2">
+                            <view class="media">{{item.media}}</view>
+                            <view class="datetime">{{item.datetime}}</view>
+                        </view>
+                    </view>
+                </view>
+                <view class="v-paging">
+                    <view class="loading" wx:if="{{tabs.latest.status=='loading'}}">
+                        <view class="icon-loading"></view>
+                        <view class="text">加载中</view>
+                    </view>
+                    <view bindtap="loadLatest" class="more" wx:if="{{tabs.latest.status=='more'}}">
+            点击加载更多
+          </view>
+                    <view class="done" wx:if="{{tabs.latest.status=='done'}}">没有更多了</view>
+                    <view bindtap="loadLatest" class="fail" wx:if="{{tabs.latest.status=='fail'}}">
+            出错啦,点击重新加载
+          </view>
+                </view>
+            </view>
+        </view>
+        <view class="summary" wx:if="{{tabs.summary.select}}">
+            <view class="today-money">
+                <view class="s-header c-line-bottom">
+                    <view class="title">今日资金流向</view>
+                    <view class="sub-title capflow-type">
+                        <view class="flow-in">资金流入</view>
+                        <view class="flow-out">资金流出</view>
+                    </view>
+                </view>
+                <view class="s-content today-wrapper">
+                    <view class="today-chart">
+                        <view class="v-paging" wx:if="{{tabs.summary.todayMoney.status!='done'}}">
+                            <view class="loading" wx:if="{{tabs.summary.todayMoney.status=='loading'}}">
+                                <view class="icon-loading"></view>
+                                <view class="text">加载中</view>
+                            </view>
+                            <view bindtap="refreshTodayMoney" class="fail" wx:if="{{tabs.summary.todayMoney.status=='fail'}}">
+                出错啦,点击重新加载
+              </view>
+                        </view>
+                        <view wx:if="{{tabs.summary.todayMoney.status=='done'}}">
+                            <canvas canvasId="todayCvs" class="today-cvs"></canvas>
+                            <view style="{{item.hold}}" wx:for="{{tabs.summary.todayMoney.shapes}}" wx:key="id">
+                                <view style="{{item.pie0}}"></view>
+                                <view style="{{item.pie1}}"></view>
+                            </view>
+                            <view style="{{item.style}}" wx:for="{{tabs.summary.todayMoney.labels.statics}}" wx:key="id">
+                {{item.text}}
+              </view>
+                            <view style="{{item.style}}" wx:for="{{tabs.summary.todayMoney.labels.dynamics}}" wx:key="id">
+                {{item.text}}
+              </view>
+                        </view>
+                    </view>
+                </view>
+                <view class="s-table" wx:if="{{capflow.total}}">
+                    <view class="tr">
+                        <view class="td"></view>
+                        <view class="td">流入</view>
+                        <view class="td">流出</view>
+                        <view class="td">净流入</view>
+                    </view>
+                    <view class="tr " wx:for="{{capflow.data}}" wx:key="index">
+                        <view class="td">{{item.name}}</view>
+                        <view class="td" style="color:{{item.in.color}}">{{item.in.text}}</view>
+                        <view class="td" style="color:{{item.out.color}}">{{item.out.text}}</view>
+                        <view class="td" style="color:{{item.netin.color}}">{{item.netin.text}}</view>
+                    </view>
+                </view>
+            </view>
+            <view>
+                <view class="fund-profile" wx:if="{{type-0==4}}">
+                    <view class="s-header c-line-bottom">
+                        <view class="title">基本信息</view>
+                    </view>
+                    <view class="s-content">
+                        <view class="v-paging" wx:if="{{tabs.summary.fundProfile.status!='done'}}">
+                            <view class="loading" wx:if="{{tabs.summary.fundProfile.status=='loading'}}">
+                                <view class="icon-loading"></view>
+                                <view class="text">加载中</view>
+                            </view>
+                            <view bindtap="refreshComProfile" class="fail" wx:if="{{tabs.summary.fundProfile.status=='fail'}}">
+                出错啦,点击重新加载
+              </view>
+                        </view>
+                        <view wx:if="{{tabs.summary.fundProfile.status=='done'}}">
+                            <view class="f-row">
+                                <view class="f-cell-0">基金管理公司</view>
+                                <view class="f-cell-1">{{tabs.summary.fundProfile.fmc_com_name}}</view>
+                            </view>
+                            <view class="f-row">
+                                <view class="f-cell-0">基金托管人</view>
+                                <view class="f-cell-1">{{tabs.summary.fundProfile.cust_com_name}}</view>
+                            </view>
+                            <view class="f-row">
+                                <view class="f-cell-0">基金简称</view>
+                                <view class="f-cell-1">{{tabs.summary.fundProfile.secu_sht}}</view>
+                            </view>
+                            <view class="f-row">
+                                <view class="f-cell-0">基金介绍</view>
+                                <view class="f-cell-1">{{tabs.summary.fundProfile.intro}}</view>
+                            </view>
+                            <view class="f-row">
+                                <view class="f-cell-0">基金中文名称</view>
+                                <view class="f-cell-1">{{tabs.summary.fundProfile.chi_name}}</view>
+                            </view>
+                            <view class="f-row">
+                                <view class="f-cell-0">中文名称缩写</view>
+                                <view class="f-cell-1">{{tabs.summary.fundProfile.chi_sht}}</view>
+                            </view>
+                            <view class="f-row">
+                                <view class="f-cell-0">上市日期</view>
+                                <view class="f-cell-1">{{tabs.summary.fundProfile.lst_dt}}</view>
+                            </view>
+                            <view class="f-row">
+                                <view class="f-cell-0">现任基金经理</view>
+                                <view class="f-cell-1">{{tabs.summary.fundProfile.mng_psn_name}}</view>
+                            </view>
+                            <view class="f-row">
+                                <view class="f-cell-0">管理费用</view>
+                                <view class="f-cell-1">{{tabs.summary.fundProfile.mgt_fee}}</view>
+                            </view>
+                            <view class="f-row">
+                                <view class="f-cell-0">托管费用</view>
+                                <view class="f-cell-1">{{tabs.summary.fundProfile.trst_fee}}</view>
+                            </view>
+                            <view bindtap="goFieldDetail" class="f-row" data-field="inv_obj" data-title="投资目标">
+                                <view class="f-cell-0">投资目标</view>
+                                <view class="f-cell-1">
+                                    <view class="f-shrink">{{tabs.summary.fundProfile.inv_obj}}</view>
+                                    <view class="f-more"></view>
+                                </view>
+                            </view>
+                            <view bindtap="goFieldDetail" class="f-row" data-field="inv_scope" data-title="投资范围">
+                                <view class="f-cell-0">投资范围</view>
+                                <view class="f-cell-1">
+                                    <view class="f-shrink">{{tabs.summary.fundProfile.inv_scope}}</view>
+                                    <view class="f-more"></view>
+                                </view>
+                            </view>
+                            <view bindtap="goFieldDetail" class="f-row" data-field="inv_st" data-title="投资策略">
+                                <view class="f-cell-0">投资策略</view>
+                                <view class="f-cell-1">
+                                    <view class="f-shrink">{{tabs.summary.fundProfile.inv_st}}</view>
+                                    <view class="f-more"></view>
+                                </view>
+                            </view>
+                            <view bindtap="goFieldDetail" class="f-row" data-field="inv_rstr" data-title="投资限制">
+                                <view class="f-cell-0">投资限制</view>
+                                <view class="f-cell-1">
+                                    <view class="f-shrink">{{tabs.summary.fundProfile.inv_rstr}}</view>
+                                    <view class="f-more"></view>
+                                </view>
+                            </view>
+                            <view bindtap="goFieldDetail" class="f-row" data-field="rish_rtn_char" data-title="风险收益特征">
+                                <view class="f-cell-0">风险收益特征</view>
+                                <view class="f-cell-1">
+                                    <view class="f-shrink">{{tabs.summary.fundProfile.rish_rtn_char}}</view>
+                                    <view class="f-more"></view>
+                                </view>
+                            </view>
+                        </view>
+                    </view>
+                </view>
+                <view class="fund-asset" wx:if="{{type-0==4}}">
+                    <view class="s-header c-line-bottom">
+                        <view class="title">资产配置</view>
+                        <view class="sub-title">{{tabs.summary.fundAsset.public_at}}</view>
+                    </view>
+                    <view class="s-content">
+                        <view class="v-paging" wx:if="{{tabs.summary.fundAsset.status!='done'}}">
+                            <view class="loading" wx:if="{{tabs.summary.fundAsset.status=='loading'}}">
+                                <view class="icon-loading"></view>
+                                <view class="text">加载中</view>
+                            </view>
+                            <view bindtap="refreshFundAsset" class="fail" wx:if="{{tabs.summary.fundAsset.status=='fail'}}">
+                出错啦,点击重新加载
+              </view>
+                            <view bindtap="refreshFundAsset" class="fail" wx:if="{{tabs.summary.fundAsset.status=='noRecord'}}">
+                暂无数据
+              </view>
+                        </view>
+                        <view wx:if="{{tabs.summary.fundAsset.status=='done'}}">
+                            <view class="f-row" wx:for="{{tabs.summary.fundAsset.portfolio}}" wx:key="id">
+                                <view class="f-cell-0 per-75">{{item.ast_typ_name}}</view>
+                                <view class="f-cell-1 per-25">{{item.hld_ttl_ast_rat}}</view>
+                            </view>
+                        </view>
+                    </view>
+                </view>
+            </view>
+            <view wx:if="{{type!='5'&&type!='4'}}">
+                <view class="five-brunt">
+                    <view class="s-header c-line-bottom">
+                        <view class="title">近5日主力资金流向</view>
+                    </view>
+                    <view class="s-content five-wrapper">
+                        <view class="v-paging" wx:if="{{tabs.summary.todayMoney.status!='done'}}">
+                            <view class="loading" wx:if="{{tabs.summary.todayMoney.status=='loading'}}">
+                                <view class="icon-loading"></view>
+                                <view class="text">加载中</view>
+                            </view>
+                            <view bindtap="refreshTodayMoney" class="fail" wx:if="{{tabs.summary.todayMoney.status=='fail'}}">
+                出错啦,点击重新加载
+              </view>
+                        </view>
+                        <view wx:if="{{tabs.summary.todayMoney.status=='done'}}">
+                            <view class="five-chart">
+                                <view style="{{item.hold}}" wx:for="{{tabs.summary.fiveBrunt.shapes}}" wx:key="id"></view>
+                                <view style="{{item.style}}" wx:for="{{tabs.summary.fiveBrunt.labels.statics}}" wx:key="id">
+                  {{item.text}}
+                </view>
+                                <view style="{{item.style}}" wx:for="{{tabs.summary.fiveBrunt.labels.dynamics}}" wx:key="id">
+                  {{item.text}}
+                </view>
+                            </view>
+                        </view>
+                    </view>
+                </view>
+                <view class="five-brunt">
+                    <view class="s-header c-line-bottom">
+                        <view class="title">多日累计主力资金流向(含今日)</view>
+                    </view>
+                    <view class="s-content five-wrapper">
+                        <view class="v-paging" wx:if="{{tabs.summary.todayMoney.status!='done'}}">
+                            <view class="loading" wx:if="{{tabs.summary.todayMoney.status=='loading'}}">
+                                <view class="icon-loading"></view>
+                                <view class="text">加载中</view>
+                            </view>
+                            <view bindtap="refreshTodayMoney" class="fail" wx:if="{{tabs.summary.todayMoney.status=='fail'}}">
+                出错啦,点击重新加载
+              </view>
+                        </view>
+                        <view wx:if="{{tabs.summary.todayMoney.status=='done'}}">
+                            <view class="five-chart">
+                                <view style="{{item.hold}}" wx:for="{{tabs.summary.recentBrunt.shapes}}" wx:key="id"></view>
+                                <view style="{{item.style}}" wx:for="{{tabs.summary.recentBrunt.labels.statics}}" wx:key="id">
+                  {{item.text}}
+                </view>
+                                <view style="{{item.style}}" wx:for="{{tabs.summary.recentBrunt.labels.dynamics}}" wx:key="id">
+                  {{item.text}}
+                </view>
+                            </view>
+                        </view>
+                    </view>
+                </view>
+                <view class="com-profile">
+                    <view class="s-header c-line-bottom">
+                        <view class="title">公司简介</view>
+                    </view>
+                    <view class="s-content">
+                        <view class="v-paging" wx:if="{{tabs.summary.comProfile.status!='done'}}">
+                            <view class="loading" wx:if="{{tabs.summary.comProfile.status=='loading'}}">
+                                <view class="icon-loading"></view>
+                                <view class="text">加载中</view>
+                            </view>
+                            <view bindtap="refreshComProfile" class="fail" wx:if="{{tabs.summary.comProfile.status=='fail'}}">
+                出错啦,点击重新加载
+              </view>
+                        </view>
+                        <view wx:if="{{tabs.summary.comProfile.status=='done'}}">
+                            <view class="f-row">
+                                <view class="f-cell-0">公司名称</view>
+                                <view class="f-cell-1">{{tabs.summary.comProfile.chi_name}}</view>
+                            </view>
+                            <view class="f-row">
+                                <view class="f-cell-0">证券类别</view>
+                                <view class="f-cell-1">{{tabs.summary.comProfile.stock_type}}</view>
+                            </view>
+                            <view class="f-row">
+                                <view class="f-cell-0">所属行业</view>
+                                <view class="f-cell-1">{{tabs.summary.comProfile.indu_name_csrc}}</view>
+                            </view>
+                            <view class="f-row">
+                                <view class="f-cell-0">概念板块</view>
+                                <view class="f-cell-1">{{tabs.summary.comProfile.sect_names}}</view>
+                            </view>
+                            <view class="f-row">
+                                <view class="f-cell-0">上市日期</view>
+                                <view class="f-cell-1">{{tabs.summary.comProfile.lst_dt}}</view>
+                            </view>
+                            <view class="f-row">
+                                <view class="f-cell-0">主营业务</view>
+                                <view class="f-cell-1">{{tabs.summary.comProfile.pri_biz}}</view>
+                            </view>
+                        </view>
+                    </view>
+                </view>
+                <view class="share-capital">
+                    <view class="s-header c-line-bottom">
+                        <view class="title">股东股本</view>
+                        <view class="sub-title">{{tabs.summary.shareCapital.public_at}}</view>
+                    </view>
+                    <view class="s-content">
+                        <view class="v-paging" wx:if="{{tabs.summary.shareCapital.status!='done'}}">
+                            <view class="loading" wx:if="{{tabs.summary.shareCapital.status=='loading'}}">
+                                <view class="icon-loading"></view>
+                                <view class="text">加载中</view>
+                            </view>
+                            <view bindtap="refreshShareCapital" class="fail" wx:if="{{tabs.summary.shareCapital.status=='fail'}}">
+                出错啦,点击重新加载
+              </view>
+                        </view>
+                        <view wx:if="{{tabs.summary.shareCapital.status=='done'}}">
+                            <view class="f-row">
+                                <view class="f-cell-0">控股股东</view>
+                                <view class="f-cell-1">{{tabs.summary.shareCapital.ctrl}}</view>
+                            </view>
+                            <view class="f-row">
+                                <view class="f-cell-0">实际控制人</view>
+                                <view class="f-cell-1">{{tabs.summary.shareCapital.fact}}</view>
+                            </view>
+                            <view class="f-sub-header c-line-bottom">
+                                <view class="title">十大流通股东</view>
+                            </view>
+                            <view class="s-content">
+                                <view class="f-row" wx:for="{{tabs.summary.shareCapital.tops}}" wx:key="id">
+                                    <view class="f-cell-0 sub per-75">{{item.company}}</view>
+                                    <view class="f-cell-1 per-25">{{item.ratio}}</view>
+                                </view>
+                            </view>
+                        </view>
+                    </view>
+                </view>
+                <view class="share-finance">
+                    <view class="s-header c-line-bottom">
+                        <view class="title">公司财务</view>
+                        <view class="sub-title">{{tabs.summary.shareFinance.public_at}}</view>
+                    </view>
+                    <view class="s-sub-content">
+                        <view class="v-paging" wx:if="{{tabs.summary.shareFinance.status!='done'}}">
+                            <view class="loading" wx:if="{{tabs.summary.shareFinance.status=='loading'}}">
+                                <view class="icon-loading"></view>
+                                <view class="text">加载中</view>
+                            </view>
+                            <view bindtap="refreshShareFinance" class="fail" wx:if="{{tabs.summary.shareFinance.status=='fail'}}">
+                出错啦,点击重新加载
+              </view>
+                        </view>
+                        <view wx:if="{{tabs.summary.shareFinance.status=='done'}}">
+                            <view class="f-sub-header c-line-bottom">
+                                <view class="title">利润表</view>
+                                <view class="sub-title">{{tabs.summary.shareFinance.income.public_at}}</view>
+                            </view>
+                            <view class="s-content">
+                                <view class="f-row">
+                                    <view class="f-cell-0 sub per-50">每股收益</view>
+                                    <view class="f-cell-1 per-50">{{tabs.summary.shareFinance.income.eps_bas}}</view>
+                                </view>
+                                <view class="f-row">
+                                    <view class="f-cell-0 sub per-50">营业收入</view>
+                                    <view class="f-cell-1 per-50">{{tabs.summary.shareFinance.income.oper_inc}}</view>
+                                </view>
+                                <view class="f-row">
+                                    <view class="f-cell-0 sub per-50">营收同比增长</view>
+                                    <view class="f-cell-1 per-50">
+                    {{tabs.summary.shareFinance.income.oper_inc_yoy}}
+                  </view>
+                                </view>
+                                <view class="f-row">
+                                    <view class="f-cell-0 sub per-50">营业利润</view>
+                                    <view class="f-cell-1 per-50">
+                    {{tabs.summary.shareFinance.income.oper_prof}}
+                  </view>
+                                </view>
+                                <view class="f-row">
+                                    <view class="f-cell-0 sub per-50">其他利润</view>
+                                    <view class="f-cell-1 per-50">
+                    {{tabs.summary.shareFinance.income.oth_comp_inc}}
+                  </view>
+                                </view>
+                                <view class="f-row">
+                                    <view class="f-cell-0 sub per-50">投资净利润</view>
+                                    <view class="f-cell-1 per-50">{{tabs.summary.shareFinance.income.inv_inc}}</view>
+                                </view>
+                                <view class="f-row">
+                                    <view class="f-cell-0 sub per-50">净利润</view>
+                                    <view class="f-cell-1 per-50">
+                    {{tabs.summary.shareFinance.income.net_prof_pco}}
+                  </view>
+                                </view>
+                            </view>
+                            <view class="f-sub-header c-line-bottom">
+                                <view class="title">资产负债表</view>
+                                <view class="sub-title">{{tabs.summary.shareFinance.balance.public_at}}</view>
+                            </view>
+                            <view class="s-content">
+                                <view class="f-row">
+                                    <view class="f-cell-0 sub per-50">每股净资产</view>
+                                    <view class="f-cell-1 per-50">{{tabs.summary.shareFinance.balance.bvps}}</view>
+                                </view>
+                                <view class="f-row">
+                                    <view class="f-cell-0 sub per-50">净资产收益率</view>
+                                    <view class="f-cell-1 per-50">{{tabs.summary.shareFinance.balance.roe_wt}}</view>
+                                </view>
+                                <view class="f-row">
+                                    <view class="f-cell-0 sub per-50">非流动资产</view>
+                                    <view class="f-cell-1 per-50">
+                    {{tabs.summary.shareFinance.balance.ttl_ncur_ast}}
+                  </view>
+                                </view>
+                                <view class="f-row">
+                                    <view class="f-cell-0 sub per-50">资产总额</view>
+                                    <view class="f-cell-1 per-50">{{tabs.summary.shareFinance.balance.ttl_ast}}</view>
+                                </view>
+                                <view class="f-row">
+                                    <view class="f-cell-0 sub per-50">流动负债</view>
+                                    <view class="f-cell-1 per-50">
+                    {{tabs.summary.shareFinance.balance.ttl_cur_liab}}
+                  </view>
+                                </view>
+                                <view class="f-row">
+                                    <view class="f-cell-0 sub per-50">长期负债</view>
+                                    <view class="f-cell-1 per-50">
+                    {{tabs.summary.shareFinance.balance.ttl_ncur_liab}}
+                  </view>
+                                </view>
+                                <view class="f-row">
+                                    <view class="f-cell-0 sub per-50">负债总额</view>
+                                    <view class="f-cell-1 per-50">
+                    {{tabs.summary.shareFinance.balance.ttl_liab}}
+                  </view>
+                                </view>
+                                <view class="f-row">
+                                    <view class="f-cell-0 sub per-50">股东权益</view>
+                                    <view class="f-cell-1 per-50">{{tabs.summary.shareFinance.balance.sheqy}}</view>
+                                </view>
+                            </view>
+                            <view class="f-sub-header c-line-bottom">
+                                <view class="title">现金流量表</view>
+                                <view class="sub-title">{{tabs.summary.shareFinance.flow.public_at}}</view>
+                            </view>
+                            <view class="s-content">
+                                <view class="f-row">
+                                    <view class="f-cell-0 sub per-50">每股现金流</view>
+                                    <view class="f-cell-1 per-50">
+                    {{tabs.summary.shareFinance.flow.net_cf_oper_ps}}
+                  </view>
+                                </view>
+                                <view class="f-row">
+                                    <view class="f-cell-0 sub per-50">投资现金流净额</view>
+                                    <view class="f-cell-1 per-50">{{tabs.summary.shareFinance.flow.net_cf_inv}}</view>
+                                </view>
+                                <view class="f-row">
+                                    <view class="f-cell-0 sub per-50">经营现金流净额</view>
+                                    <view class="f-cell-1 per-50">
+                    {{tabs.summary.shareFinance.flow.net_cf_oper}}
+                  </view>
+                                </view>
+                                <view class="f-row">
+                                    <view class="f-cell-0 sub per-50">筹资现金流净额</view>
+                                    <view class="f-cell-1 per-50">{{tabs.summary.shareFinance.flow.net_cf_fin}}</view>
+                                </view>
+                            </view>
+                        </view>
+                    </view>
+                </view>
+            </view>
+        </view>
+    </view>
+    <view class="operation">
+        <view class="menu-bar c-line-top" style="height:{{menus.height}}rpx;">
+            <view bindtap="goOpenAccount" class="cell open-account">开户</view>
+            <view bindtap="goTransaction" class="cell transaction">交易</view>
+            <view bindtap="authorized" class="cell help">
+                <view class="icon icon-warning"></view>
+                <view>提醒</view>
+            </view>
+            <view bindtap="toggleFav" class="cell favourite">
+                <view class="icon icon-on" wx:if="{{favourite.on}}"></view>
+                <view class="icon icon-setting" wx:if="{{!favourite.on}}"></view>
+                <view>{{favourite.text}}</view>
+            </view>
+        </view>
+    </view>
+</view>
+<zxgroup-selector id="selector"></zxgroup-selector>
+<modal contentPadding="0" id="modal_cancel_fav"></modal>
+<include src="../../../components/circus/loading/loading.wxml"></include>
+<include src="../../../components/disclaimer/disclaimer.wxml"></include>

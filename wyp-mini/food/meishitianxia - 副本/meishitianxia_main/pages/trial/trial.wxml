@@ -1,0 +1,29 @@
+<view class="glist">
+    <navigator class="glist_item" url="../trial_info/trial_info?id={{item.ctid}}" wx:for="{{list}}" wx:key="list">
+        <image class="glist_img" src="{{item.pic180}}"></image>
+        <view class="glist_detail">
+            <text class="glist_t">{{item.ctsubject}}</text>
+            <text class="glist_c">原价：￥{{item.cprice}}</text>
+            <text class="glist_n">等级：{{item.rank>0?'Lv.'+item.rank:'不限'}}</text>
+            <text class="glist_n2" wx:if="{{item.kaijiang==1}}">今日开奖</text>
+            <text class="glist_n2" wx:if="{{item.kaijiang==2}}">明日开奖</text>
+            <text class="glist_b" wx:if="{{item.timestate==3}}">查看</text>
+            <text class="glist_b red" wx:if="{{item.timestate==2}}">免费试用</text>
+            <text class="glist_b" wx:if="{{item.timestate==1}}">未开始</text>
+        </view>
+    </navigator>
+</view>
+<view class="btn_do">
+    <form catchsubmit="shareSubmit" reportSubmit="true">
+        <button class="share" formType="submit" openType="share">
+            <image class="icon_fav" src="../../image/share.png"></image>
+            <text>分享给朋友</text>
+        </button>
+    </form>
+</view>
+<view class="loading" wx:if="{{loading}}">
+    <image class="loading_img" src="../../image/loading-32-32.gif"></image>
+</view>
+<view class="loading_end" wx:if="{{loading_end}}"></view>
+<view class="loading_fail" wx:if="{{loading_fail}}"></view>
+<view>　</view>

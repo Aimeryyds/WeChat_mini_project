@@ -1,0 +1,38 @@
+<view class="searchBox">
+    <view class="inputBackground">
+        <image class="search-icon" src="/img/resources/search-icon.png"></image>
+        <input bindconfirm="bindconfirm" bindinput="searchInpFn" class="searchInput" confirmType="search" placeholder="请输入小区名称" type="text" value="{{inputValue}}"></input>
+        <image bindtap="delInp" class="search-del" hidden="{{inputCha}}" src="/img/resources/del-search.png"></image>
+    </view>
+</view>
+<view class="searchListBox">
+    <view class="lenovoBox">
+        <view class="history-box">
+            <view bindtap="toListLink" class="historySty" data-adrs="{{item.alias}}" data-alias="{{item.address}}" data-communityid="{{item.communityid}}" wx:for="{{lianxiangList}}" wx:key="index">
+                <text>{{item.alias}}</text>
+            </view>
+        </view>
+    </view>
+    <view class="seaHistoryBox" hidden="{{lishi}}">
+        <view class="historyTit" wx:if="{{historyRecord.length!=0}}">历史搜索</view>
+        <view class="history-box">
+            <view bindtap="historyLinkFn" class="historySty" data-adrs="{{item.value[1]}}" data-communityid="{{item.value[2]}}" data-name="{{item.value[0]}}" wx:for="{{historyRecord}}" wx:key="index">
+                <image src="https://res.5i5j.com/cache/weixin/common/timeIcon.png"></image>
+                <text wx:if="{{item.value[2]==undefined}}">{{item.value[0]}}</text>
+                <text wx:if="{{item.value[2]}}">{{item.value[1]}}</text>
+            </view>
+        </view>
+    </view>
+    <view bindtap="historyDelFn" class="emptyBtn" hidden="{{lishi}}" wx:if="{{historyRecord.length!=0}}">清空历史记录</view>
+    <view class="noData" hidden="{{nodata}}">
+        <image src="https://res.5i5j.com/cache/weixin/common/no-house.png"></image>
+        <view>还没有搜索历史</view>
+        <view>赶快搜搜看吧</view>
+    </view>
+    <view class="no-data" hidden="{{lxHidden}}">
+        <image src="https://res.5i5j.com/cache/weixin/common/no-house.png"></image>
+        <view class="no-text">
+            <text>没有找到房源，换个条件实施</text>
+        </view>
+    </view>
+</view>

@@ -1,0 +1,55 @@
+<import src="../../commons/tpl/templateLive.wxml"></import>
+<import src="../../commons/tpl/templateNoData.wxml"></import>
+<form bindsubmit="submitForm" id="j_page" reportSubmit="true">
+    <allPage-toast hideMiniAppToast="{{hideMiniAppToast}}" statusBar="{{statusBar}}"></allPage-toast>
+    <view style="position:fixed;background:#fff;z-index:4;width:100%;top:0;height:{{statusBar.height+'px'}}"></view>
+    <view class="container index-container" style="margin-top:{{statusBar.height+'px'}}">
+        <status-bar gotoUrl="{{gotoUrl}}" statusBar="{{statusBar}}"></status-bar>
+        <view class="index-head" style="top:{{statusBar.height+'px'}}">
+            <search-bar bindhiidoEvent="onHiidoEvent" gotoUrl="{{gotoUrl}}" roomList="{{recommendList}}" statusBar="{{statusBar}}"></search-bar>
+            <view class="index-nav">
+                <scroll-view scrollX class="navs-scroll" scrollLeft="{{scrollLeft}}">
+                    <view bindtap="selectNavs" class="navs-name {{currentIdx==index?'current':''}}" data-biz="{{item.biz}}" data-index="{{index}}" wx:for="{{navsData}}" wx:key="index">{{item.name}}</view>
+                </scroll-view>
+            </view>
+        </view>
+        <pull-refresh bind:refreshData="onRefreshData" hasPullReq="{{hasPullReq}}">
+            <view class="index-swiper-main" slot="slot1" wx:if="{{item.type==1006&&item.data.length}}" wx:for="{{liveData}}" wx:key="index">
+                <swiper autoplay="true" circular="true" class="index-swiper" current="0" indicatorActiveColor="#ffdd00" indicatorColor="#fff" indicatorDots="{{item.data.length>1?true:false}}" interval="8000">
+                    <swiper-item class="index-swiper_item" wx:if="{{item.pic}}" wx:for="{{item.data}}" wx:key="index">
+                        <button bindgetuserinfo="getuserinfo" class="index-swiper_bg" data-type="banner" data-url="/pages/room/room?{{item.url}}" formType="submit" openType="getUserInfo" style="background-image: url({{item.pic}})" wx:if="{{item.urlType==100}}"></button>
+                        <button bindgetuserinfo="getuserinfo" class="swiper-link" data-type="banner" data-url="/pages/webView/webView?{{item.url}}" formType="submit" openType="getUserInfo" style="background-image: url({{item.pic}})" wx:else></button>
+                    </swiper-item>
+                </swiper>
+            </view>
+            <view bind:touchmove="hideMiniAppToast" bindtap="hideMiniAppToast" class="index-module" slot="slot2" wx:if="{{roomList.list.length}}">
+                <view class="modules-head" wx:if="{{modulesName}}">
+                    <image src="./images/icon_decorate.png"></image>
+                    {{modulesName}}
+                </view>
+                <template is="liveList-tpl" data="{{...roomList,module:currentIdx,isIndexPage:isIndexPage,showAdDefault:showAdDefault,isAdError1:isAdError1,isAdError2:isAdError2}}"></template>
+            </view>
+        </pull-refresh>
+        <view class="index-baseLine" wx:if="{{showBaseLine}}">我是有底线的~</view>
+        <view class="init-loading" wx:if="{{isShowInitLoading}}">
+            <image class="init-loading__img" src="../../images/yybear_loading.gif"></image>
+        </view>
+        <view wx:if="{{networkTips&&!roomList.list.length}}">
+            <template is="noData-tpl" data="{{tips:'暂无列表~'}}"></template>
+        </view>
+        <view class="index-push" wx:if="{{showPush}}">
+            <view class="push-main">
+                <button class="push-link" data-type="push" data-url="{{pushData.url}}" formType="submit" openType="getUserInfo">
+                    <image class="push-img" mode="widthFix" src="{{pushData.image}}"></image>
+                </button>
+                <image catchtap="closePush" class="push-close" src="./images/push_close.png"></image>
+                <view catchtap="gotoOtherPrograme" class="ad-wrapper">
+                    <text class="text">请求与你连线...</text>
+                    <image class="ad-button" src="./images/btnbg.png"></image>
+                    <text>接受聊天</text>
+                </view>
+            </view>
+        </view>
+        <cover-view class="index-loading" wx:if="{{isLoading}}"></cover-view>
+    </view>
+</form>

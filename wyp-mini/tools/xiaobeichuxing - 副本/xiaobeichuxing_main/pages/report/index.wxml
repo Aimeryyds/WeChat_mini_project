@@ -1,0 +1,46 @@
+<view class="page">
+    <my-component bind:myevent="myEventListener" innerText="举报中心"></my-component>
+    <view class="main" style=" margin-top: {{myHight}}px"></view>
+    <form bindsubmit="formSubmit" reportSubmit="true">
+        <text class="title ad-t09 adweihg">{{smtitle}}</text>
+        <view class="weui-cell weui-cell_vcode">
+            <view class="weui-cell__bd">
+                <input class="sm-inp" name="input" placeholder="扫描二维码或输入车辆编码" value="{{scanval}}"></input>
+            </view>
+            <view class="weui-cell__ft">
+                <image bindtap="scan" class="sm-icon" src="{{imgsm}}"></image>
+            </view>
+        </view>
+        <view class="wrap">
+            <view class="checkbox-con">
+                <checkbox-group bindchange="checkboxChange" class="check-all09" name="seletList">
+                    <label bindtap="checkbox" class="chek-list10" data-index="{{index}}" wx:for="{{checkboxArr}}" wx:key="item.name">
+                        <checkbox checked="{{item.checked}}" value="{{item.name}}"></checkbox>{{item.name}}
+          </label>
+                </checkbox-group>
+            </view>
+        </view>
+        <view class="wxtextarea">
+            <textarea class="weui-textarea" name="textareaCont" placeholder="问题描述补充(最多输入500字)" rows="3"></textarea>
+        </view>
+        <view class="updata-img">
+            <view class="weui-uploader">
+                <view class="weui-uploader__bd admar">
+                    <view>
+                        <image bindtap="updataImg" class="up-img" src="{{imgjbp}}"></image>
+                        <text class="ts10">请拍照并上传</text>
+                    </view>
+                    <view class="weui-uploader__file up-img-con" wx:for="{{upImgList}}" wx:for-item="image" wx:key="index">
+                        <image bindtap="previewImage" class="weui-uploader__img upimg-list" data-src="{{image}}" src="{{image}}" style="width:90px;"></image>
+                        <view catchtap="deleteImg" class="delete-btn" data-index="{{index}}">
+                            <image class="del-img29" src="{{delImg}}"></image>
+                        </view>
+                    </view>
+                </view>
+            </view>
+        </view>
+        <view class="btn-area">
+            <button class="sub" formType="submit">立即提交</button>
+        </view>
+    </form>
+</view>

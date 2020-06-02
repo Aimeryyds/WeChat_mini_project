@@ -1,0 +1,12 @@
+<view>
+    <view class="step" wx:for="{{steps}}" wx:key="index">
+        <view class="step__icon">
+            <view class="step__dot {{index>current?'step__dot--todo':''}}"></view>
+            <view class="step__line {{index<current?'step__line--finish':''}} " wx:if="{{index!==steps.length-1}}"></view>
+        </view>
+        <view class="step__content">
+            <view class="step__desc {{index>current?'step__desc--todo':''}}" wx:if="{{item.desc}}">{{item.desc}}</view>
+            <view class="step-title" wx:if="{{item.title}}">{{item.title}}</view>
+        </view>
+    </view>
+</view>

@@ -1,0 +1,30 @@
+<view class="address box">
+    <view class="title">
+        <text>新增收货地址</text>
+        <text bindtap="add" class="add">+</text>
+    </view>
+    <view class="noAddress" wx:if="{{addressList.length==0}}">你还没有收货地址,快添加吧。</view>
+    <view class="list" wx:for="{{addressList}}">
+        <view class="title">
+            我的收货地址
+        </view>
+        <view class="addressText">
+            {{(item.province||'')+(item.city||'')+(item.area||'')+(item.address||'')}}
+        </view>
+        <view class="phone">
+            <text>{{item.realname}}</text>
+            <text>{{item.sex==1?'先生':'女士'}}</text>
+            <text>{{item.mobile}}</text>
+        </view>
+        <view bindtap="setdefault" class="default" data-id="{{item.id}}" data-isdefault="{{item.isdefault}}">
+            <image src="{{item.isdefault==1?'https://tws.cnweisou.com/images/icon_default.png':'https://tws.cnweisou.com/images/icon_default_jc.png'}}"></image>
+            <text>{{item.isdefault==1?'默认地址':'设为默认'}}</text>
+        </view>
+        <view bindtap="editAddress" class="edit" data-id="{{item.id}}">
+            <image src="https://tws.cnweisou.com/images/icon_edit_jc.png"></image>
+        </view>
+        <view bindtap="deleteAddress" class="delete" data-id="{{item.id}}">
+            <image src="https://tws.cnweisou.com/images/icon_delete_jc.png"></image>
+        </view>
+    </view>
+</view>

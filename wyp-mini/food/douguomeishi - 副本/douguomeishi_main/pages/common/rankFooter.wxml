@@ -1,0 +1,8 @@
+<template name="rankFooter">
+    <view class="footer" wx:if="{{footerState!=0}}">
+        <button class="loading" loading="true" wx:if="{{footerState==1}}">加载中...</button>
+        <image class="end" mode="aspectFill" src="/images/footer.png" wx:if="{{footerState==2}}"></image>
+        <view class="no-data" wx:if="{{footerState==3}}">本群暂无参与测试的人</view>
+        <view class="error" wx:if="{{footerState==4}}">别着急，网有点慢，再试试</view>
+    </view>
+</template>

@@ -1,0 +1,22 @@
+<view class="page">
+    <view class="orderDetail-page" wx:if="{{loadSuccessFlag}}">
+        <view class="orderDetail-top">
+            <view class="orderDetail-top-title">{{orderData.title}}</view>
+            <view class="orderDetail-top-money">{{'￥'+orderData.should_money}}</view>
+            <view class="orderDetail-top-status" wx:if="{{orderData.is_pay}}">未支付</view>
+            <view class="orderDetail-top-statuspay" wx:if="{{!orderData.is_pay}}">
+                <image src="https://public.danke.com.cn/public-20190820-FskE6_sTXUVh6NwVInYaPIj4sNNi"></image>已支付</view>
+        </view>
+        <view class="cut-off-rule">
+            <view class="roundness-left"></view>
+            <view class="line-middle"></view>
+            <view class="roundness-right"></view>
+        </view>
+        <view class="orderDetail-content">
+            <view class="orderDetail-content-item" wx:for="{{orderData.list}}" wx:key="index">
+                <view class="content-item-title">{{item.name}}</view>
+                <view class="content-item-detail">{{item.value}}</view>
+            </view>
+        </view>
+    </view>
+</view>

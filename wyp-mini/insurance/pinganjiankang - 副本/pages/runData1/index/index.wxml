@@ -1,0 +1,17 @@
+<view class="container">
+    <image src="{{hrImg}}"></image>
+    <view>温馨提示：每天首次同步时会将您使用的平安健康APP账号与微信账号进行绑定，当天若再次同步，需要使用同一个微信号，否则会导致步数同步失败。</view>
+    <button bind:tap="getRundata" class="btn">立即同步</button>
+</view>
+<van-dialog showCancelButton useSlot appParameter="{{appParameterString}}" bind:cancel="onCancel" bind:error="launchAppError" bind:launchapp="launchApp" confirmButtonColor="#ff6600" confirmButtonOpenType="launchApp" confirmButtonText="立即同步" id="show" messageAlign="center" show="{{show}}" title="您当前的微信运动步数为" transition="none">
+    <view class="dialog-wrap">
+        <view class="center">
+            <view class="step">{{step}}</view>
+            <view class="tips">注：若步数为0，请尝试打开微信运动</view>
+        </view>
+    </view>
+</van-dialog>
+<van-dialog showCancelButton bind:cancel="onCancel" bind:getuserinfo="getUserInfo" confirmButtonColor="#ff6600" confirmButtonOpenType="getUserInfo" confirmButtonText="立即授权" id="showUserInfo" message="温馨提示：需要您授权头像，才可以进行步数同步" messageAlign="center" show="{{showUserInfo}}" title="完成授权才可以哦~" transition="none"></van-dialog>
+<van-dialog showCancelButton bind:getuserinfo="getUserInfo" confirmButtonColor="#ff6600" confirmButtonOpenType="getUserInfo" confirmButtonText="立即授权" message="授权未完成" messageAlign="center" show="{{showUnfinishUserInfo}}" title="提示信息" transition="none"></van-dialog>
+<van-dialog id="van-dialog"></van-dialog>
+<van-toast id="van-toast"></van-toast>

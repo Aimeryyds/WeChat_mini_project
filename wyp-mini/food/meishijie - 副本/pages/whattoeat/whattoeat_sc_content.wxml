@@ -1,0 +1,73 @@
+<navigation-bar enable="{{enable}}" title="苹果" wx:if="{{showtopbar}}"></navigation-bar>
+<cover-view bindtap="tapBackbtn" class="backbtn" style="top:{{backbtnPos}}px" wx:if="{{!showTopbar}}">
+    <cover-image class="backbtnicon" src="{{backiconUrl}}"></cover-image>
+</cover-view>
+<view class="container">
+    <view class="sc_top" style="background:url({{scDetail.data.img}}) center no-repeat;background-size:cover;"></view>
+    <view class="sc_titlew">
+        <view class="sc_titlec">
+            <view class="line"></view>
+            <view class="title">{{scDetail.data.title}}</view>
+            <view class="othernamesw">
+                <view class="othername" wx:if="{{item}}" wx:for="{{tools.getarr(scDetail.data.a_name)}}" wx:for-index="i" wx:key="key">{{item}}</view>
+            </view>
+        </view>
+    </view>
+    <view class="csmi_line"></view>
+    <view class="sc_content">
+        <view class="sc_content_con1" wx:for="{{scDetail.data.content}}">
+            <view class="tw" wx:if="{{item.desc}}">
+                <image class="i" src="{{item.icon}}"></image>{{item.title}}</view>
+            <view class="c">{{item.desc}}</view>
+        </view>
+    </view>
+    <view class="csmi_line" wx:if="{{scDetail_recommend.data.tj_title}}"></view>
+    <view class="sc_cpw" wx:if="{{scDetail_recommend.data.tj_title}}">
+        <view class="tip">{{scDetail_recommend.data.tj_title}}</view>
+        <block wx:for="{{scDetail_recommend.data.items}}" wx:for-index="i" wx:key="key">
+            <view class="title">{{item.title}}</view>
+            <navigator class="recipeitem" hoverClass="navigator-hover" url="/pages/content/content?id={{item.id}}" wx:for="{{item.items}}" wx:for-index="j" wx:key="key">
+                <view class="cpimgw" style="background:#f5f5f5 url({{item.img}}) center no-repeat;background-size:cover;">
+                    <view class="vicon" wx:if="{{item.item_type==3}}"></view>
+                </view>
+                <view class="cpinfow">
+                    <view class="cpnamew">
+                        <text class="cpname">{{item.title}}</text>
+                    </view>
+                    <view class="starw">
+                        <block wx:for="{{[1,2,3,4,5]}}" wx:for-item="i" wx:key="key">
+                            <image class="img" src="../../images/star1.png" wx:if="{{item.rate-i>=0}}"></image>
+                            <image class="img" src="../../images/star2.png" wx:elif="{{item.rate-i+1>0}}"></image>
+                            <image class="img" src="../../images/star3.png" wx:else></image>
+                        </block>
+                    </view>
+                    <view class="viewdata">
+                        <image class="i" src="../../images/cplisticon1.png"></image>
+                        <text class="p">{{item.favor_amount}}</text>
+                        <image class="i" src="../../images/cplisticon2.png"></image>
+                        <text class="p">{{item.viewed_amount}}</text>
+                        <view class="avatarw">
+                            <image class="ava" src="{{item.author.avatar_url}}"></image>
+                            <view class="name">{{item.author.nickname}}</view>
+                        </view>
+                    </view>
+                </view>
+            </navigator>
+        </block>
+        <navigator class="allbtn" url="/pages/whattoeat/whattoeat_sc_cplist?scene_id={{option.scene_id}}&sc_id={{option.sc_id}}" wx:if="{{scDetail_recommend.data.tj_click_title}}">{{scDetail_recommend.data.tj_click_title}}<image class="i" src="../../images/arrow2.png"></image>
+        </navigator>
+        <view class="sc_cpw_tip">— 此数据由美食杰大数据中心提供 —</view>
+    </view>
+</view>
+<loading hidden="{{requeseDone}}">
+ 加载中...
+</loading>
+<wxs module="tools">
+function getarr(str) {
+    var arr = str.split(',');
+    return (arr)
+};
+module.exports = ({
+    getarr: getarr,
+});
+</wxs>

@@ -1,0 +1,68 @@
+<template name="54590120">
+    <view class="_div data-v-a253fd0a wrapper" wx:if="{{bookInfo}}">
+        <view class="_div data-v-a253fd0a basic">
+            <image class="_img data-v-a253fd0a basic-bgimg" src="{{bookInfo.cover_urls[0]}}"></image>
+            <view class="_div data-v-a253fd0a basic-info" style=" {{'height:'+height+';'+'padding-top:'+paddingTop+';'}}">
+                <template is="694882de" data="{{...$root[$kk+'0'],$root:$root}}"></template>
+            </view>
+        </view>
+        <view class="_div data-v-a253fd0a publisher">
+            <label class="_span data-v-a253fd0a">出版商</label>
+            <label class="_span data-v-a253fd0a">{{bookInfo.publisher.name_cn}}</label>
+        </view>
+        <view class="_div data-v-a253fd0a horizontal-line"></view>
+        <view class="_div data-v-a253fd0a description {{[isEllipsis?'ellipsis':'']}}">{{bookInfo.description_cn}}</view>
+        <view bindtap="handleProxy" class="_div data-v-a253fd0a view-description" data-comkey="{{$k}}" data-eventid="{{'0'}}">{{isEllipsis?'展开':'收起'}}</view>
+        <view class="_div data-v-a253fd0a tags-and-share">
+            <view class="_div data-v-a253fd0a tags">
+                <view class="_div data-v-a253fd0a tags-item">
+                    <view class="_div data-v-a253fd0a level-icon"></view>
+                    <view class="_div data-v-a253fd0a tags-name">{{bookInfo.level.name}}</view>
+                </view>
+                <view class="_div data-v-a253fd0a tags-item" key="{{tag.id}}" wx:for="{{bookInfo.tags}}" wx:for-item="tag" wx:key="tag.id">
+                    <view class="_div data-v-a253fd0a tag-icon"></view>
+                    <view class="_div data-v-a253fd0a tags-name">{{tag.name}}</view>
+                </view>
+            </view>
+            <button bindtap="handleProxy" class="_button data-v-a253fd0a share" data-comkey="{{$k}}" data-eventid="{{'1'}}" openType="share">分享给好友</button>
+        </view>
+        <view class="_div data-v-a253fd0a divider"></view>
+        <view class="_div data-v-a253fd0a adv-tab">
+            <view bindtap="handleProxy" class="_div data-v-a253fd0a {{[!showCatalogs?'active':'']}}" data-comkey="{{$k}}" data-eventid="{{'2'}}">详情</view>
+            <view bindtap="handleProxy" class="_div data-v-a253fd0a {{[showCatalogs?'active':'']}}" data-comkey="{{$k}}" data-eventid="{{'3'}}">目录</view>
+        </view>
+        <view class="_div data-v-a253fd0a adv-detail" wx:if="{{!showCatalogs}}">
+            <view class="_div data-v-a253fd0a adv-discount" wx:if="{{bookInfo.product_info&&bookInfo.product_info.promotions.length&&isAndroid}}">
+                <view class="_div data-v-a253fd0a adv-discount-title">{{bookInfo.product_info.promotions[0].title}}</view>
+                <view class="_div data-v-a253fd0a adv-discount-desc">{{bookInfo.product_info.promotions[0].description}}</view>
+            </view>
+            <view class="_div data-v-a253fd0a adv-feature" wx:if="{{bookInfo.product_info&&bookInfo.product_info.media_urls.length}}">
+                <view class="_div data-v-a253fd0a adv-feature-title">特色介绍</view>
+                <view class="_div data-v-a253fd0a feature-img" style=" {{'background-image:'+featureImg+';'}}"></view>
+            </view>
+            <view class="_div data-v-a253fd0a divider" wx:if="{{bookInfo.product_info&&bookInfo.product_info.services.length}}"></view>
+            <view class="_div data-v-a253fd0a comments" wx:if="{{comments}}">
+                <view class="_div data-v-a253fd0a comments-header">书评({{comments.total}})</view>
+                <template is="7e9d34dd" data="{{...$root[$kk+'1-'+index],$root:$root}}" wx:for="{{comments.objects}}" wx:for-item="comment" wx:key="comment.id"></template>
+                <view class="_div data-v-a253fd0a empty-comment" wx:if="{{comments.total===0}}">
+                    <view class="_div data-v-a253fd0a empty-comment-img"></view>
+                    <view class="_div data-v-a253fd0a empty-comment-text">暂时还没有书评哦~</view>
+                </view>
+                <template is="67b5afcd" data="{{...$root[$kk+'2'],$root:$root}}" wx:if="{{comments.total}}"></template>
+            </view>
+        </view>
+        <view class="_div data-v-a253fd0a adv-catalogs" wx:else>
+            <template is="75998cd2" data="{{...$root[$kk+'3-'+index],$root:$root}}" wx:for="{{catalogs.catalogs}}" wx:for-item="catalog" wx:key="catalog.id"></template>
+            <template is="67b5afcd" data="{{...$root[$kk+'4'],$root:$root}}"></template>
+        </view>
+        <template is="64f2faeb" data="{{...$root[$kk+'5'],$root:$root}}" wx:if="{{isLogin}}"></template>
+        <view class="_div data-v-a253fd0a login-btn-container" wx:else>
+            <button bindgetuserinfo="handleProxy" class="_button data-v-a253fd0a login-btn" data-comkey="{{$k}}" data-eventid="{{'6'}}" disabled="{{loginLoading}}" loading="{{loginLoading}}" openType="getUserInfo">点击登录后，试读本书</button>
+        </view>
+    </view>
+</template>
+<import src="/components/ComplexBook.vue.wxml"></import>
+<import src="/pages/detail/Comment.vue.wxml"></import>
+<import src="/pages/detail/LoadMore.vue.wxml"></import>
+<import src="/pages/detail/Catalog.vue.wxml"></import>
+<import src="/pages/detail/ButtonGroup.vue.wxml"></import>

@@ -1,0 +1,11 @@
+<view class="wp_content form_uploadimage_content">
+    <view class="upload-img" style="{{inner_style}}">
+        <view class="upload-img-info" style="{{inptext_style}}">
+            <text class="upload-img-info-detail">{{inptext}}</text>
+            <text bindtap="clearImage" class="upload-img-info-ope iconfont icon-cuohao1" wx:if="{{showClear}}"></text>
+        </view>
+        <view bindtap="chooseImage" class="upload-img-btn" style="{{btnwrapper_style+btntext_style}}">{{param.btntext}}</view>
+    </view>
+    <text class="required" wx:if="{{param.required}}">*</text>
+    <icon class="warn" size="20" style="top:calc(50% - 26rpx);right:4rpx;" type="warn" wx:if="{{haswarn}}"></icon>
+</view>

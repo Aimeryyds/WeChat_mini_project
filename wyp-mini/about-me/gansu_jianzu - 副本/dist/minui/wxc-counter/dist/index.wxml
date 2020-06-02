@@ -1,0 +1,11 @@
+<view class="counter">
+    <view class="counter__number">
+        <view bindtap="minusHandler" class="counter__modify counter__opt {{number<=min||disabled?' counter__no':''}}">
+            <wxc-icon _pid="{{_pid}}" color="{{number<=min||disabled?'#d2d2d2':color}}" type="minus"></wxc-icon>
+        </view>
+        <text class="counter__modify counter__text{{disabled?' counter__no':''}}">{{number}}</text>
+        <view bindtap="addHandler" class="counter__modify counter__opt {{number>=max||disabled?' counter__no':''}}">
+            <wxc-icon _pid="{{_pid}}" color="{{number>=max||disabled?'#d2d2d2':color}}" type="add"></wxc-icon>
+        </view>
+    </view>
+</view>

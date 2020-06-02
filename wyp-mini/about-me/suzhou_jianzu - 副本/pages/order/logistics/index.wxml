@@ -1,0 +1,42 @@
+<view class="top" style="margin:30rpx 0;border-top:1rpx solid #ccc;border-bottom: 1rpx solid #ccc;display: flex;flex-direction:row;justify-content: space-between;align-items: center;;padding: 16rpx 0;">
+    <view style="display: flex;flex-direction: row;">
+        <image class="img" src="{{data[0][0].thumb}}" style="	width: 120rpx;height: 120rpx;margin:0 20rpx;"></image>
+        <view class="wliu" style="	display: flex;flex-direction: column;font-size: 27rpx;">
+            <text>物流信息：{{str}}</text>
+            <text style="margin-top: 14rpx;">快递公司：{{data[2].expresscom}}</text>
+            <text selectable="true" style="margin-top: 14rpx;">快递单号：{{data[2].expresssn}}</text>
+        </view>
+    </view>
+    <image bindtap="toStart" src="/images/icon_home_selected.png" style="margin-right: 30rpx;  width: 56rpx;height: 56rpx;"></image>
+</view>
+<view class="list" wx:if="{{data[1]!=''}}">
+    <block wx:for="{{data[1]}}">
+        <view class="item" wx:if="{{index=='0'}}">
+            <view class="first"></view>
+            <view class="item_wrap">
+                <text style="margin-bottom:16rpx;">{{item.step}}</text>
+                <text>{{item.time}}</text>
+            </view>
+        </view>
+        <block wx:else>
+            <view class="item" wx:if="{{length==index+1}}">
+                <view class="icon"></view>
+                <view class="item_wrap" style="border-bottom: none;">
+                    <text style="margin-bottom:16rpx;">{{item.step}}</text>
+                    <text>{{item.time}}</text>
+                </view>
+            </view>
+            <view class="item" wx:else>
+                <view class="icon"></view>
+                <view class="item_wrap">
+                    <text style="margin-bottom:16rpx;">{{item.step}}</text>
+                    <text>{{item.time}}</text>
+                </view>
+            </view>
+        </block>
+    </block>
+</view>
+<view style="display:flex;flex-direction:column;justify-content:center;align-items: center;width:100%;margin-top: 200rpx;text-align: center;" wx:else>
+    <image src="https://tws.cnweisou.com/images/car.png" style="width: 180rpx;height: 180rpx;background-color:#FFF;"></image>
+    <view style="margin-top:80rpx;">暂时还没有物流信息哟！</view>
+</view>

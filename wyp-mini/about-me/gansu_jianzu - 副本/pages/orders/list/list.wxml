@@ -1,0 +1,44 @@
+<import src="../../templates/orders/tabbar.wxml"></import>
+<import src="../../templates/orders/orderitemlistmoreproducts.wxml"></import>
+<import src="../../templates/orders/orderitemstate.wxml"></import>
+<import src="../../templates/orders/orderbtns.wxml"></import>
+<import src="/dist/loadmore/index.wxml"></import>
+<import src="/dist/toptips/index.wxml"></import>
+<import src="/dist/toast/index.wxml"></import>
+<template is="zan-toast" data="{{zanToast:zanToast}}"></template>
+<template is="zan-toptips" data="{{zanTopTips:zanTopTips}}"></template>
+<view class="container orders-container">
+    <template is="orders-tabbar" data="{{statusType:statusType,currentType:currentType}}"></template>
+    <view class="no-order" hidden="{{orderList&&orderList.length>0||loading?true:false}}">
+        <image class="no-order-img" src="http://imgcdnali.wfenxiao.com.cn/xcx/c/icons/no_order.png"></image>
+        <view class="text">暂无订单</view>
+    </view>
+    <scroll-view enableBackToTop bindscrolltolower="lower" class="order-list" hidden="{{!orderList||loading?true:false}}" scrollY="true" style="margin-top:90rpx; height:calc(100vh - 90rpx)">
+        <view class="a-order" wx:for="{{orderList}}" wx:key="{{index}}">
+            <template is="order-item-state" data="{{item:item}}"></template>
+            <view bindtap="orderDetail" class="orders-goods" data-id="{{item.id}}">
+                <template is="order-more-goods" data="{{ goods:item.goodsList,goodsTotal:item.goodsTotal,totalPrice:item.total,giveawayList:item.giveawayList||[] }}"></template>
+            </view>
+            <template is="orders-btns" data="{{order:item}}"></template>
+        </view>
+        <view id="loadmore">
+            <template is="zan-loadmore" data="{{loading:loadmore}}"></template>
+        </view>
+    </scroll-view>
+    <wxc-dialog _pid="{{_pid}}" bindcancel="onCancel" bindconfirm="onConfirm" class="wxc-dialog" confirmText="我知道了" title="以下商品购买数量超过限制">
+        <view wx:for="{{errGoodList}}" wx:key="{{index}}">
+            <view class="reject-reason">
+                <image src="{{item.img}}"></image>
+                <view class="reject-reason-content">
+                    <wxc-elip line="2">
+                        <text style="font-size:24rpx">{{item.goodsName}}</text>
+                    </wxc-elip>
+                    <view class="reject-reason-price">
+                        <text style="color:#ff2222; font-size:24rpx">￥{{item.price}}</text>
+                        <text style="color:#cccccc; font-size:24rpx">X{{item.quantity}}</text>
+                    </view>
+                </view>
+            </view>
+        </view>
+    </wxc-dialog>
+</view>

@@ -1,0 +1,8 @@
+<template name="textModule">
+    <button bindtap="jumpCtrl" class="moduleButton" data-jinfo="{{item.subModuleInfo.content.jInfo}}" openType="{{item.subModuleInfo.content.jInfo&&item.subModuleInfo.content.jInfo.t==5?'share':item.subModuleInfo.content.jInfo.t==7?'contact':''}}">
+        <view class="textContainer" style="width:{{item.subModuleInfo.pattern.w}}rpx;font-size:{{item.subModuleInfo.pattern.fs}}rpx;color:{{item.subModuleInfo.pattern.fc}};line-height:{{item.subModuleInfo.pattern.lh}}rpx;{{item.subModuleInfo.pattern.fp==1?'text-align:center;':''}}{{item.subModuleInfo.pattern.fp==2?'text-align:right;':''}}{{item.subModuleInfo.pattern.fb?'font-weight: bold;':''}}{{item.subModuleInfo.pattern.fi?'font-style: italic;':''}}{{item.subModuleInfo.pattern.fd?'text-decoration: underline;':''}}">
+            <template is="wxParse" data="{{wxParseData:item.subModuleInfo.content.text.nodes}}"></template>
+        </view>
+    </button>
+</template>
+<import src="/libs/wxParse/wxParse.wxml"></import>

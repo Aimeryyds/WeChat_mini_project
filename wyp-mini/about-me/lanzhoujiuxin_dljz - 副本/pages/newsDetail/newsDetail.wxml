@@ -1,0 +1,15 @@
+<import src="../../libs/templates/cusService.wxml"></import>
+<import src="../../libs/wxParse/wxParse.wxml"></import>
+<view class="news-detail">
+    <view class="news-detail-title">{{newsInfo.title}}</view>
+    <view class="iconfont icon-share"></view>
+    <button class="shareBtn" openType="share"></button>
+    <view class="news-detail-tool">
+        <text class="news-detail-time">{{newsInfo.publicTime}}</text>
+        <text class="news-detail-read">阅读 {{newsInfo.views}}</text>
+    </view>
+    <view class="news-detail-content" wx:if="{{newsInfoContent}}">
+        <template is="wxParse" data="{{wxParseData:newsInfoContent.nodes}}"></template>
+    </view>
+</view>
+<template is="cusservice" data="{{cusService:cusService,flag:flag}}" wx:if="{{flag.cusServiceOpen||cusService.supportOpen}}"></template>

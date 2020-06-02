@@ -1,0 +1,28 @@
+<view class="blockdetail data-v-65acf87a">
+    <view class="topInfo data-v-65acf87a">
+        <view class="blockName data-v-65acf87a">{{name+'('}}<text class="blockCode data-v-65acf87a">{{code}}</text>)</view>
+        <view class="{{['dataInfo data-v-65acf87a',gain<0?'down':'up']}}">
+            <view class="num data-v-65acf87a">{{$root.f0}}</view>
+            <view class="precent data-v-65acf87a">{{$root.f1}}</view>
+        </view>
+    </view>
+    <view bindtap="__e" class="contentInfo data-v-65acf87a" data-event-opts="{{[ [ 'tap',[ [ 'changeTextState',['$event'] ] ] ] ]}}" wx:if="{{intro}}">
+        <view class="{{['textContent data-v-65acf87a',showText?'showText':'hideText']}}">{{intro}}</view>
+        <view class="icon data-v-65acf87a">
+            <image class="{{['arrow data-v-65acf87a',showText?'down':'up']}}" src="../../static/arrows_hz.png"></image>
+        </view>
+    </view>
+    <view class="long data-v-65acf87a" wx:if="{{longArr.length>0}}">
+        <view class="tit data-v-65acf87a">龙头股</view>
+        <view class="{{['longWrap data-v-65acf87a',longArr.length==3?'three':'']}}">
+            <view bindtap="__e" class="longItem data-v-65acf87a" data-event-opts="{{[ [ 'tap',[ [ 'jump',['$0'],[ [ ['longArr','code',item[$orig].code] ] ] ] ] ] ]}}" wx:for="{{$root.l0}}" wx:for-index="__i0__" wx:key="code">
+                <view class="stockName data-v-65acf87a">{{item.f2}}</view>
+                <view class="{{['dataInfo data-v-65acf87a',item[$orig].gain<0?'down':'up']}}">
+                    <view class="price data-v-65acf87a">{{item.f3}}</view>
+                    <view class="precent data-v-65acf87a">{{item.f4}}</view>
+                </view>
+            </view>
+        </view>
+    </view>
+    <ths-unify-list bind:__l="__l" bind:changeList="__e" bind:jump="__e" bind:sortData="__e" class="ths-list data-v-65acf87a" colorKey="{{colorKey}}" data-event-opts="{{[ [ '^changeList',[ ['changeList'] ] ],[ '^sortData',[ ['sortData'] ] ],[ '^jump',[ ['jump'] ] ] ]}}" fixedTop="{{fixedTop}}" fixedType="{{1}}" infoTit="{{infoTit}}" inverted="{{inverted}}" isFixed="{{isTop}}" listActive="{{listActive}}" listData="{{listData}}" load="{{load}}" optionText="{{optionText}}" sortTypeStatus="{{sortTypeStatus}}" titArr="{{titArr}}" titDataType="{{titDataType}}" titShow="{{true}}" titText="{{titText}}" vueId="cf1e3e7c-1"></ths-unify-list>
+</view>

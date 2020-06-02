@@ -1,0 +1,31 @@
+<template name="3ccdd970">
+    <view class="_view 3ccdd970 evaluation-container">
+        <view bindtap="handleProxy" catchtouchmove="handleProxy" class="_view 3ccdd970 full-mask" data-comkey="{{$k}}" data-eventid="{{'3ccdd970-1'}}">
+            <image bindtap="handleProxy" class="_image 3ccdd970" data-comkey="{{$k}}" data-eventid="{{'3ccdd970-0'}}" src="https://assets.mgzf.com/appimg/b8182faa9768b9c2f4de3531b21bee68.png"></image>
+        </view>
+        <view catchtouchmove="handleProxy" class="_view 3ccdd970 evaluation-box" data-comkey="{{$k}}" data-eventid="{{'3ccdd970-6'}}">
+            <view class="_view 3ccdd970 title">电话服务评价</view>
+            <view class="_view 3ccdd970" wx:if="{{isAgent}}">
+                <image class="_image 3ccdd970 contact-logo" src="{{agent.photoUrl||''}}"></image>
+                <view class="_view 3ccdd970 contact-info">
+                    <text class="_text 3ccdd970 contact-name">{{agent.name}}</text>
+                    <text class="_text 3ccdd970 contact-type">经纪人</text>
+                </view>
+            </view>
+            <view class="_view 3ccdd970" wx:else>
+                <image class="_image 3ccdd970 contact-logo" src="{{brand.img||''}}"></image>
+                <view class="_view 3ccdd970 contact-info">
+                    <text class="_text 3ccdd970 contact-name">{{brand.title}}</text>
+                </view>
+            </view>
+            <view class="_view 3ccdd970 evaluateScore-box">
+                <view class="_view 3ccdd970 evaluateScore-content" key="{{item}}" wx:for="{{[1,2,3,4,5]}}" wx:key="item">
+                    <image bindtap="handleProxy" class="_image 3ccdd970 evaluation-icon" data-comkey="{{$k}}" data-eventid="{{'3ccdd970-3-'+index}}" src="https://assets.mgzf.com/appimg/5607d99713259263e8e9b476d5ad6d03.png" wx:if="{{item<evaluateScore}}"></image>
+                    <image bindtap="handleProxy" class="_image 3ccdd970 evaluation-icon" data-comkey="{{$k}}" data-eventid="{{'3ccdd970-2-'+index}}" src="https://assets.mgzf.com/appimg/7b17511f9255a331db7b52e649f7453c.png" wx:else></image>
+                </view>
+            </view>
+            <input bindinput="handleProxy" catchtouchmove="handleProxy" class="_input 3ccdd970 textArea" data-comkey="{{$k}}" data-eventid="{{'3ccdd970-4'}}" maxlength="50" placeholder="添加留言" value="{{evaluateMessage}}"></input>
+            <view bindtap="handleProxy" class="_view 3ccdd970 {{evaluateScore>0?'btn submit-btn':'btn submit-btn-disable'}}" data-comkey="{{$k}}" data-eventid="{{'3ccdd970-5'}}">提交</view>
+        </view>
+    </view>
+</template>

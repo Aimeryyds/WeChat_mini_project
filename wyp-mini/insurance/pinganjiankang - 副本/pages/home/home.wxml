@@ -1,0 +1,19 @@
+<view class="container">
+    <View class="box-hide">
+        <View class="arrow"></View>
+        <View class="tooltip">
+            <Text>点击「添加小程序」，下次访问更便捷 </Text>
+        </View>
+    </View>
+    <view bindtap="bindViewTap" class="userinfo">
+        <image backgroundSize="cover" class="userinfo-avatar" src="{{userInfo.avatarUrl}}"></image>
+        <text wx:if="{{userInfo.nickName==''||userInfo.nickName==undefined}}">未登录</text>
+        <text class="userinfo_nickname" wx:else>尊敬的{{userInfo.nickName}}</text>
+    </view>
+    <view bindtap="tiaozhuan" class="home_list" data-index="{{item.index}}" wx:for="{{userListInfo}}" wx:key="{{key}}">
+        <van-icon customStyle="color:#bbb;margin:0 8px;vertical-align:middle" name="{{item.icon}}" size="24px"></van-icon>
+        <text>{{item.text}}</text>
+        <image class="arrow_right" src="../../resource/images/icon-arrowdown.png"></image>
+    </view>
+</view>
+<van-toast id="van-toast"></van-toast>

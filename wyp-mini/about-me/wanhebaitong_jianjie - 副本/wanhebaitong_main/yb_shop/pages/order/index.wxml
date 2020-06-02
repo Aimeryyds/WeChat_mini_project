@@ -1,0 +1,103 @@
+<loading hidden="{{show}}">正在加载</loading>
+<view class="page navbar order" wx:if="{{show}}">
+    <view class="fui-tab-scroll" scrollX="true">
+        <view bindtap="selected" class="item {{status==''?'active':''}}" data-type="">全部</view>
+        <view bindtap="selected" class="item {{status=='0'?'active':''}}" data-type="0">待付款</view>
+        <view bindtap="selected" class="item {{status=='1'?'active':''}}" data-type="1">待发货</view>
+        <view bindtap="selected" class="item {{status=='2'?'active':''}}" data-type="2">待收货</view>
+        <view bindtap="selected" class="item {{status=='3'?'active':''}}" data-type="3">已完成</view>
+        <view bindtap="selected" class="item {{status=='4'?'active':''}}" data-type="4">退换货</view>
+    </view>
+    <view class="contain" wx:if="{{list.length!=0}}">
+        <view class="fui-list-group noclick" wx:for="{{list}}">
+            <navigator hoverClass="none" url="/yb_shop/pages/order/detail/index?order_id={{item.order_id}}">
+                <view class="fui-list-group-title">
+                    <view class="order-num">订单号：
+              <text>{{item.order_no}}</text>
+                    </view>
+                    <view class="statuscss">
+                        <view wx:if="{{item.order_status==0}}">待付款 </view>
+                        <view wx:elif="{{item.order_status==1}}"> 待发货 </view>
+                        <view wx:elif="{{item.order_status==2}}"> 待收货 </view>
+                        <view wx:elif="{{item.order_status==3}}"> 已完成 </view>
+                        <view wx:elif="{{item.order_status==4}}"> 退款中 </view>
+                        <view wx:elif="{{item.order_status==5}}"> 已退款 </view>
+                        <view wx:elif="{{item.order_status==-1}}"> 已取消 </view>
+                        <view wx:else> 未知状态 </view>
+                    </view>
+                </view>
+                <view class="fui-list goods-info" wx:for="{{item.goods}}" wx:for-index="key" wx:for-item="val">
+                    <view class="fui-list-media">
+                        <image class="round goods_img" src="{{val.pic.img_cover}}"></image>
+                    </view>
+                    <view class="fui-list-inner">
+                        <view class="text text-left shop_name">{{val.goods_name}}</view>
+                        <view class="subtitle text-left">{{val.sku_name}}</view>
+                    </view>
+                    <view class="num">
+                        <view class="text-right" style="color: #181a19;">￥
+                  <text>{{val.goods_money}}</text>
+                        </view>
+                        <view class="text-right">x
+                  <text>{{val.num}}</text>
+                        </view>
+                    </view>
+                </view>
+                <view class="fui-list list-padding">
+                    <text class="fui-list-inner text-right totle" style="height:46rpx;line-height:46rpx;">
+                        <text>共</text>
+                        <text class="text-danger">{{item.goods.length}}</text>
+                        <text>件商品 实付</text>
+                        <text class="text-danger">
+                            <text>￥</text>
+                            <text>{{item.pay_money}}</text>
+                        </text>
+                    </text>
+                </view>
+            </navigator>
+            <view class="fui-list list-padding" wx:if="{{status!=4}}">
+                <view class="fui-list-inner text-right">
+                    <view class="btn btn-default btn-default-o" wx:if="{{item.order_status==0}}">
+                        <picker bindchange="cancel" data-orderid="{{item.order_id}}" range="{{cancel}}" value="{{cancelindex}}">
+                  取消订单
+                </picker>
+                    </view>
+                    <navigator class="btn btn-danger" style="background:{{config.selectedColor!='#000000'?config.selectedColor:config.background}};color:{{config.selectedColor=='#000000'&&config.font_color=='black'?'#000000':'#ffffff'}};border:1px solid {{config.selectedColor!='#000000'?config.selectedColor:config.background}};" url="/yb_shop/pages/order/pay/index?id={{item.order_id}}" wx:if="{{item.order_status==0}}">
+                支付订单
+              </navigator>
+                    <view bindtap="delete" class="btn btn-default btn-default-o" data-orderid="{{item.order_id}}" data-type="1" wx:if="{{item.order_status==3}}">
+                删除订单
+              </view>
+                    <navigator class="btn btn-default btn-default-o" url="" wx:if="{{item.order_status==3}}">
+                评价
+              </navigator>
+                    <view bindtap="finish" class="btn btn-default btn-default-o" data-orderid="{{item.order_id}}" style="background:{{config.selectedColor!='#000000'?config.selectedColor:config.background}};color:{{config.selectedColor=='#000000'&&config.font_color=='black'?'#000000':'#ffffff'}};border:1px solid {{config.selectedColor!='#000000'?config.selectedColor:config.background}};" wx:if="{{item.order_status==2}}">
+                确认收货
+              </view>
+                    <view bindtap="to_barcode" class="btn btn-default btn-default-o" data-code="{{item.order_no}}" style="background:{{config.selectedColor!='#000000'?config.selectedColor:config.background}};color:{{config.selectedColor=='#000000'&&config.font_color=='black'?'#000000':'#ffffff'}};border:1px solid {{config.selectedColor!='#000000'?config.selectedColor:config.background}};" wx:if="{{item.mailing_type==2&&item.order_status==1}}">
+                核销码
+              </view>
+                    <navigator bindtap="refund" class="btn btn-default btn-default-o" data-orderid="{{item.order_id}}" wx:if="{{item.order_status==1||item.order_status==2||item.order_status==3}}">
+                退款
+              </navigator>
+                </view>
+            </view>
+        </view>
+    </view>
+    <view class="center" wx:if="{{total==0}}">
+        <view class="empty">
+            <image class="cart_empty" src="/yb_shop/static/images/cart_big.png" style="margin-top:38rpx;"></image>
+            <view class="text-cancel">暂时没有任何订单</view>
+            <navigator class="btn btn-danger" openType="redirect" style="width:80%;margin:0.5rem auto;height:90rpx;line-height:90rpx;padding:0;background:{{config.selectedColor!='#000000'?config.selectedColor:config.background}};color:{{config.selectedColor=='#000000'&&config.font_color=='black'?'#000000':'#ffffff'}};border:1px solid {{config.selectedColor!='#000000'?config.selectedColor:config.background}};" url="/yb_shop/pages/index/index">
+        到处逛逛吧
+      </navigator>
+        </view>
+    </view>
+    <navigator bindtap="url_member" class="fui-dot" hoverClass="none">
+        <image src="/yb_shop/static/images/icon-white/people.png"></image>
+    </navigator>
+    <block wx:if="{{showtabbar}}">
+        <view style="height:100rpx"></view>
+        <include src="/yb_shop/pages/common/menu.wxml"></include>
+    </block>
+</view>

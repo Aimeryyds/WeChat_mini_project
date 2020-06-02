@@ -1,0 +1,203 @@
+.list view {
+    box-sizing: border-box;
+}
+
+.tab {
+    display: flex;
+    position: fixed;
+    width: 100%;
+    height: 70rpx;
+    justify-content: space-around;
+    font-size: 32rpx;
+    line-height: 70rpx;
+    text-align: center;
+    background-color: #fff;
+    z-index: 99;
+}
+
+.tab view {
+    width: 50%;
+}
+
+.building_class {
+    border-bottom: 3rpx solid #fd9704;
+    color: #fd9704;
+}
+
+.space_class {
+    border-bottom: 3rpx solid #fd9704;
+    color: #fd9704;
+}
+
+.list {
+    background-color: #fff;
+    padding-top: 70rpx;
+}
+
+.list_li {
+    border-top: 1rpx solid #f1f1f1;
+    padding: 40rpx 30rpx;
+    position: relative;
+    overflow: hidden;
+}
+
+.list_li:after {
+    content: "\0020";
+    display: block;
+    clear: both;
+    height: 0;
+    visibility: hidden;
+}
+
+.list_li view {
+    float: left;
+}
+
+.list_li .pht {
+    width: 216rpx;
+    height: 162rpx;
+    display: block;
+}
+
+.text {
+    margin-left: 20rpx;
+    color: #a5a5a5;
+    width: 454rpx;
+}
+
+.sm_msg {
+    font-size: 24rpx;
+    height: 42rpx;
+    line-height: 42rpx;
+    width: 454rpx;
+    display: block;
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+}
+
+.title {
+    font-size: 28rpx;
+    color: #333;
+    height: 42rpx;
+    line-height: 42rpx;
+    width: 454rpx;
+    display: block;
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+    padding-bottom: 5rpx;
+    font-weight: bold;
+}
+
+.price {
+    position: absolute;
+    right: 20rpx;
+    top: 37%;
+    font-size: 24rpx;
+}
+
+.img_tag {
+    width: 92rpx;
+    height: 92rpx;
+    position: absolute;
+    left: 30rpx;
+    top: 40rpx;
+}
+
+.icon {
+    font-size: 0;
+    width: 100%;
+}
+
+.icon view {
+    padding: 0 10rpx;
+    border-radius: 5rpx;
+    margin-right: 15rpx;
+    height: 36rpx;
+    line-height: 36rpx;
+    font-size: 24rpx;
+    margin-top: 5rpx;
+}
+
+.a_color {
+    background-color: #f8f0ee;
+    color: #d2a5a0;
+}
+
+.b_color {
+    background-color: #f0f0f0;
+    color: #b7b7b9;
+}
+
+.c_color {
+    background-color: #eef3f9;
+    color: #eed9ac;
+}
+
+.d_color {
+    background-color: #f5f2e9;
+    color: #a7c0bc;
+}
+
+.r_btn {
+    position: absolute;
+    left: 750rpx;
+    top: 0;
+    bottom: 0;
+    font-size: 0;
+}
+
+.r_btn .r_collection,.r_btn .r_advisory,.r_btn .r_delete {
+    display: inline-block;
+    width: 128rpx;
+    height: 100%;
+    text-align: center;
+    font-size: 24rpx;
+    color: #fff;
+    line-height: 100%;
+    vertical-align: top;
+    position: relative;
+}
+
+.r_btn .r_collection view,.r_btn .r_advisory view,.r_btn .r_delete view {
+    display: inline-block;
+    height: 32rpx;
+    line-height: 32rpx;
+    position: absolute;
+    top: 50%;
+    margin-top: -16rpx;
+    left: 0;
+    width: 100%;
+}
+
+.r_btn .r_collection {
+    background: #ffbc2b;
+}
+
+.r_btn .r_advisory {
+    background: #f90;
+}
+
+.r_btn .r_delete {
+    background: #f76924;
+}
+
+.sell-content {
+    width: 100%;
+    overflow: hidden;
+    white-space: nowrap;
+    height: auto;
+    position: relative;
+    min-height: 246rpx;
+}
+
+.hide {
+    display: none;
+}
+
+.active-tag {
+    transition-duration: .2s;
+}
+
+@import "../../tpls/edm.wxss";

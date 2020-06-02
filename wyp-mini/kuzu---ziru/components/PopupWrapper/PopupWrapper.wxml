@@ -1,0 +1,11 @@
+<view class="{{['lu-popup-wrapper',popupClass]}}" id="{{[popupId?'lupopupWrapper'+popupId:'']}}" style="{{$root.s0}}">
+    <view class="{{['lu-popup-content',popupContentClass]}}" style="{{'height:'+height+';'+'width:'+width+';'+'background-color:'+backgroundColor+';'}}">
+        <view class="header _div">
+            <view bindtap="__e" class="iconfont icon-close _i" data-event-opts="{{[ [ 'tap',[ [ 'close',['$0'],['maskClick'] ] ] ] ]}}"></view>
+        </view>
+        <scroll-view class="{{['content',contentClass]}}" scrollY="{{true}}">
+            <slot></slot>
+        </scroll-view>
+    </view>
+    <view bindtap="__e" class="{{['lu-popup-mask',popupMaskClass]}}" data-event-opts="{{[ [ 'tap',[ [ 'close',['$0'],['maskClick'] ] ] ] ]}}" wx:if="{{maskShow}}"></view>
+</view>

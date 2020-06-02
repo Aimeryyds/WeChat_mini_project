@@ -1,0 +1,63 @@
+<view style="width:100%;height: 100%;overflow:hidden;">
+    <view class="parent">
+        <view class="view-order" wx:if="{{result.store}}">
+            <text class="text-address" wx:if="{{result.log.status=='0'}}">支付状态: 待付款</text>
+            <text class="text-address" wx:elif="{{result.log.status=='1'}}">支付状态: 待发货</text>
+            <text class="text-address" wx:elif="{{result.log.status=='2'}}">支付状态: 待收货</text>
+            <text class="text-address" wx:elif="{{result.log.status=='3'}}">支付状态: 已完成</text>
+            <text class="text-name">门店名称: {{result.store.storename}}</text>
+            <text class="text-address">门店地址: {{result.store.address}}</text>
+            <text class="text-address">预约开始时间: {{start}}</text>
+            <text class="text-address" wx:if="{{end}}">预约结束时间: {{end}}</text>
+        </view>
+        <view class="view-title">
+            <image src="http://tws.cnweisou.com/images/payicon.png"></image>
+            <text style="margin-left:10rpx;">网站自营</text>
+        </view>
+        <view class="container carts-list">
+            <view class="carts-item">
+                <view>
+                    <image class="carts-image" mode="aspectFill" src="{{result.goods.thumb}}"></image>
+                </view>
+                <view class="carts-text">
+                    <text class="carts-title">{{result.goods.title}}</text>
+                    <text class="carts-key-name">{{result.goods.optiontitle}}</text>
+                    <view class="carts-subtitle"></view>
+                </view>
+                <view class="carts-right" style="width: 200rpx;align-items:flex-end;font-size: 24rpx;">
+                    <text class="text-red">￥{{result.goods.price}}</text>
+                    <text class="text-price"> x{{result.log.number}}</text>
+                </view>
+            </view>
+        </view>
+        <view style="background:#ffffff;border-bottom:1px solid #eee;">
+            <view>
+                <view class=" text_between">
+                    <text>商品小计</text>
+                    <text class="text_price">￥{{result.goods.price}}</text>
+                </view>
+                <view class=" text_between">
+                    <text>运费</text>
+                    <text class="text_price">￥0.00</text>
+                </view>
+                <view class=" text_between">
+                    <text>实付费(不含运费)</text>
+                    <text class="text_price">￥{{result.goods.price}}</text>
+                </view>
+            </view>
+        </view>
+        <view style="background:#ffffff;border-bottom:1px solid #eee;">
+            <view class="text_order">
+                <text>订单编号：{{result.log.logno}}</text>
+            </view>
+            <view class="text_order">
+                <text>创建时间：{{times}}</text>
+            </view>
+        </view>
+    </view>
+    <view bindtap="to_use" class="btn" wx:if="{{hexiao}}">确定核销</view>
+    <view bindtap="show" class="btn" wx:if="{{result.log.status=='2'||result.log.status=='1'}}">消费码</view>
+    <view bindtap="show" class="{{show==1?'dn':''}}" style="width: 100%;height: 100%;position: fixed;top: 0;background-color: rgba(0,0,0,.2);">
+        <image mode="widthFix" src="{{url}}" style="width: 80%;margin:10% 10%;"></image>
+    </view>
+</view>

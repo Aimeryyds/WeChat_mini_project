@@ -1,0 +1,99 @@
+<include src="../../../components/circus/toast/toast.wxml"></include>
+<include src="../../../components/circus/network/network.wxml"></include>
+<view class="v v-quote-search">
+    <view class="search-wrapper">
+        <input focus bindinput="inputFuzzy" class="search-input" placeholder="点击搜索股票/板块" value="{{keyword}}"></input>
+        <view class="search-icon"></view>
+        <view bindtap="goToProgram" class="icon-import">
+            <image src="./icon-import.png"></image>
+        </view>
+        <view bindtap="clearSearch" class="cancel-icon" wx:if="{{clearSeach}}"></view>
+        <view bindtap="seachCancel" class="seach-cancel">取消</view>
+    </view>
+    <view class="history-wrapper" wx:if="{{history.show}}">
+        <view class="histories c-line-top">
+            <view bindtap="goStock" class="stock c-line-bottom" data-code="{{item.code}}" data-exchange="{{item.exchange}}" data-name="{{item.name}}" data-sector="{{item.sector}}" wx:for="{{history.data}}" wx:key="id">
+                <view class="stock-name fs-dark">{{item.name}}</view>
+                <view class="stock-groups" wx:if="{{item.groupname.length}}">
+          已在
+          <view class="stock-code stock-group" wx:for="{{item.groupname}}" wx:key="{{item.gid}}">
+            ‘{{item.cname}}’
+          </view>
+          中
+        </view>
+                <view class="search-results" wx:else>
+                    <view class="stock-code">
+                        <view class="{{tag.className}} icon" wx:for="{{item.tagList}}" wx:for-item="tag" wx:key="index">
+              {{tag.text}}
+            </view>
+            {{item.code}}
+          </view>
+                </view>
+                <view class="stock-operation">
+                    <view catchtap="stopPropagation">
+                        <view bindtap="addFav" class="stock-operation-rect" data-code="{{item.code}}" data-exchange="{{item.exchange}}" data-market="{{item.market}}" data-name="{{item.name}}" data-source="fuzzy">
+                            <view class="icon1 icon-add"></view>
+                        </view>
+                    </view>
+                </view>
+            </view>
+            <zxgroup-selector id="selector"></zxgroup-selector>
+            <view class="clear-wrapper">
+                <view bindtap="clearHistory" class="clear" wx:if="{{history.data.length}}">清除搜索历史</view>
+                <view class="no-record" wx:if="{{!history.data.length}}">无搜索历史数据</view>
+            </view>
+        </view>
+    </view>
+    <view class="fuzzy-wrapper" wx:if="{{fuzzy.show}}">
+        <view class="fuzzies c-line-top">
+            <view bindtap="goStock" class="stock c-line-bottom" data-code="{{item.code}}" data-exchange="{{item.exchange}}" data-market="{{item.market}}" data-name="{{item.name}}" data-sector="{{item.sector}}" wx:for="{{fuzzy.data}}" wx:key="id">
+                <view class="search-results" wx:if="{{fuzzy.keyinfo=='num'}}">
+                    <view class="stock-name fs-dark">{{item.name}}</view>
+                    <view class="stock-code">
+                        <view class="{{tag.className}} icon" wx:for="{{item.tagList}}" wx:for-item="tag" wx:key="index">
+              {{tag.text}}
+            </view>
+            {{item.code1}}
+            <view class="key">{{item.code2}}</view>
+            {{item.code3}}
+          </view>
+                </view>
+                <view class="search-results" wx:if="{{fuzzy.keyinfo=='hz'}}">
+                    <view class="stock-name stock-name-hz fs-dark">
+            {{item.name1}}
+            <view class="key">{{item.name2}}</view>
+            {{item.name3}}
+          </view>
+                    <view class="stock-code">
+                        <view class="{{tag.className}} icon" wx:for="{{item.tagList}}" wx:for-item="tag" wx:key="index">
+              {{tag.text}}
+            </view>
+            {{item.code}}
+          </view>
+                </view>
+                <view class="search-results" wx:if="{{fuzzy.keyinfo=='py'}}">
+                    <view class="stock-name fs-dark">{{item.name}}</view>
+                    <view class="stock-code">
+                        <view class="{{tag.className}} icon" wx:for="{{item.tagList}}" wx:for-item="tag" wx:key="index">
+              {{tag.text}}
+            </view>
+            {{item.code}}
+          </view>
+                </view>
+                <view class="stock-operation">
+                    <view catchtap="stopPropagation">
+                        <view bindtap="addFav" class="stock-operation-rect" data-code="{{item.code}}" data-exchange="{{item.exchange}}" data-market="{{item.market}}" data-name="{{item.name}}" data-source="fuzzy">
+                            <view class="icon1 icon-add"></view>
+                        </view>
+                    </view>
+                </view>
+            </view>
+            <zxgroup-selector id="selector"></zxgroup-selector>
+            <view bindtap="showMore" class="show-more" wx:if="{{moreFuzzy.length>=5&&moreFuzzy.noMore}}">
+        展开更多股票
+        <view class="more-icon"></view>
+            </view>
+        </view>
+    </view>
+</view>
+<include src="../../../components/circus/loading/loading.wxml"></include>

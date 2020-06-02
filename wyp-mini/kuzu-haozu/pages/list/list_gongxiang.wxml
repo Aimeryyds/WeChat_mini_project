@@ -1,0 +1,70 @@
+<view class="filterWrap">
+    <view bindtap="selectedFun" class="{{params.show_type?'':'default'}} tab-item" data-val="0">{{params.show_type?params.show_type:'类型'}}</view>
+    <view bindtap="selectedFun" class="{{params.price_show?'':'default'}} tab-item" data-val="1">{{params.price_show?params.price_show:'价格'}}</view>
+</view>
+<view bindtap="closeFun" class="ul01 filterMask {{selected==0?'show':'hidden'}}">
+    <view catchtap="emptyFun" class="filterCon">
+        <view bindtap="tabFun" class=" listMeasure" data-key="curSdIndexR">
+            <view bindtap="goTap" class=" {{tabArr.curSdIndexR===item.val?'cur':''}}" data-cowork_type="{{item.val}}" data-id="{{item.val}}" wx:for="{{cowork_type}}" wx:key="val">{{item.show}}</view>
+        </view>
+    </view>
+</view>
+<view bindtap="closeFun" class="ul02 filterMask {{selected==1?'show':'hidden'}}">
+    <view catchtap="emptyFun" class="filterCon">
+        <view bindtap="tabFun" class="listMeasure" data-key="curSdIndex">
+            <view bindtap="goTap" class=" {{tabArr.curSdIndex===item.val?'cur':''}}" data-id="{{item.val}}" data-price="{{item.val}}" wx:for="{{price_cowork}}" wx:key="val">{{item.show}} </view>
+        </view>
+    </view>
+</view>
+<scroll-view bindscroll="scrollTopFun" bindscrolltolower="upper" class="scroll_container" id="cont_scroll" scrollTop="{{scrollTop.scroll_top}}" scrollY="true" style="height:{{windowHeight}}px;">
+    <view class="leaseListWrap">
+        <text class="topCore">{{building.name}}所有共享办公出租房源</text>
+    </view>
+    <view class="nohouse" wx:if="{{nohouse}}">
+        <image src="../../images/no_data.png"></image>
+        <view class="v1">Sorry，暂无满足您筛选条件的房源</view>
+        <view class="v2">联系顾问：<text>{{msg_template}}</text>
+        </view>
+    </view>
+    <view bindtouchmove="move" class="listBuildingShow" wx:if="{{!nohouse}}">
+        <navigator class="listbox" data-id="{{item.id}}" url="../shareoffice/shareoffice?house_id={{item.id}}" wx:for="{{building_items}}" wx:key="id">
+            <view class="listProLeft">
+                <image src="{{item.thumb_image}}"></image>
+            </view>
+            <view class="listProRight">
+                <view class="listProRight_top">
+                    <label>
+                        <text>{{item.show_type}}</text>
+                    </label>
+                    <label>
+                        <text>{{item.price}}</text>{{comm.html_decode(item.price_unit)}}</label>
+                    <label>
+                        <text>{{item.house_num}}</text>个</label>
+                </view>
+                <view class="listProRight_about">
+                    <text>{{item.point_name}}</text>
+                </view>
+            </view>
+        </navigator>
+    </view>
+</scroll-view>
+<view class="botFixed">
+    <view catchtap="showFn" class="botTel">
+        <text>免费咨询</text>
+        <icon class="iconTelphone">
+            <image backgroundSize="cover" src="../../images/Telphone_icon.png"></image>
+        </icon>
+    </view>
+    <view bindtap="onClickButton" class="btSort" data-index="0">
+        <image backgroundSize="cover" src="../../images/btSort_icon.png"></image>
+    </view>
+    <view catchtap="goTopFun" class="btToTop">
+        <image backgroundSize="cover" src="../../images/backtop_icon.png"></image>
+    </view>
+</view>
+<view bindtap="closeFun" class="orderWrap {{showDialog?'dialog_show':''}}">
+    <view catchtap="emptyFun" class="orderList">
+        <view bindtap="goTap" class=" {{ordertype===item.val?'cur':''}}" data-listorder="{{item.val}}" hoverClass="none" wx:for="{{listorder}}" wx:key="val">{{item.show}}</view>
+    </view>
+</view>
+<wxs module="comm" src="../../utils/common.wxs" />

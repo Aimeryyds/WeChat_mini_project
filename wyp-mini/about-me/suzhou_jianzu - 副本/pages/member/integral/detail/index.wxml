@@ -1,0 +1,58 @@
+<import src="../../../../wxParse/wxParse.wxml"></import>
+<scroll-view bindscroll="scrollTopFun" scrollTop="{{scrollTop.scroll_top}}" scrollWithAnimation="true" scrollY="true" style="height: 1200rpx;">
+    <image class="image" src="{{goods.thumb}}"></image>
+    <view class="wrap">
+        <view class="title">
+            <view class="tip">商品</view>
+            <view class="store">{{goods.title}}</view>
+        </view>
+        <view class="num">
+            <text>
+                <block wx:if="{{goods.total!='0'}}">仅限：{{goods.total}}份</block>   已参与：{{goods.joins}}次</text>
+        </view>
+        <view class="postage">
+            <text wx:if="{{goods.dispatch>0}}">邮费：{{goods.dispatch}}</text>
+            <text wx:else>邮费：包邮</text>
+        </view>
+        <view class="price">
+            <view style="font-size: 40rpx;">{{goods.credit}}<text style="font-size: 28rpx;margin-left: 10rpx;">积分</text>
+            </view>
+            <view class="old_rpice" style="" wx:if="{{goods.price}}">原价：{{goods.price}}元</view>
+        </view>
+    </view>
+    <view class="rec">
+        <view class="section_tp">
+            <view class="border  " style="width: 100%;border-bottom: none;">商品详情</view>
+        </view>
+        <view class="section_bd" style="padding-left: 20rpx;padding-bottom: 62rpx;">
+            <template is="wxParse" data="{{wxParseData:article.nodes}}" wx:if="{{index=='detail'}}" wx:for="{{data.goods}}"></template>
+            <view style="margin-top: 54rpx;">本商品为演示兑换商品，使用足够的积分可兑换商品</view>
+        </view>
+    </view>
+    <view class="banner">
+        <view class="T_title">为您推荐</view>
+        <scroll-view class="banner_wrap" scrollX="true" style=" white-space: nowrap; display: flex">
+            <block wx:for="{{recommands}}">
+                <view bindtap="todetail" class="banner_one" data-id="{{item.id}}" style="display:inline-block;" wx:if="{{rec_num==index}}">
+                    <image class="banner_img" src="{{item.thumb}}"></image>
+                    <view class="banner_title">{{item.title}}</view>
+                    <view class="banner_detail">{{item.price}}元</view>
+                </view>
+                <view bindtap="todetail" class="banner_one" data-id="{{item.id}}" style="display:inline-block;margin-right: 0;" wx:if="{{rec_num!=index}}">
+                    <image class="banner_img" src="{{item.thumb}}"></image>
+                    <view class="banner_title">{{item.title}}</view>
+                    <view class="banner_detail">
+                        <view style="font-size: 34rpx;">{{item.credit}}<text style="font-size: 26rpx;margin-left:8rpx;color:rgb(153, 153, 153);font-weight: normal;">积分</text>
+                        </view>
+                        <view style="margin-left:6rpx;line-height: 40rpx;">+￥{{item.money}}</view>
+                    </view>
+                </view>
+            </block>
+        </scroll-view>
+    </view>
+</scroll-view>
+<view catchtap="goTopFun" class="com-widget-goTop" style="" wx:if="{{scrollTop.goTop_show}}">
+    <text class="icon-gotop"> 顶部</text>
+</view>
+<view bindtap="toexchange" class="exchange">立即兑换</view>
+<loading wx:if="{{loading}}"></loading>

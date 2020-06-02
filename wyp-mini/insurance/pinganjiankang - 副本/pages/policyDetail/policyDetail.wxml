@@ -1,0 +1,31 @@
+<view class="tab-list">
+    <view class="tab-list-product">
+        <view class="t-list-text">
+            <text class="t-product-text">{{policyDetail.productName}}</text>
+            <text class="p-product-state">{{state}}</text>
+            <view class="t-product-state">
+                <view class="">保单号：{{policyDetail.polno}}</view>
+            </view>
+        </view>
+    </view>
+</view>
+<view class="order-detail">
+    <text class="order-detail-title">保障内容</text>
+    <text class="order-number">生效日期:<text class="right">{{policyDetail.effDate}}</text>
+    </text>
+    <text class="order-number">满期日期:<text class="right">{{policyDetail.matuDate}}</text>
+    </text>
+    <text class="order-number">投保人:<text class="right">{{policyDetail.applicant.customerName}}</text>
+    </text>
+    <text class="order-number">被保人:<text class="right">{{polInsuredListNames}}</text>
+    </text>
+    <text class="order-number">保费金额:<text class="right price">￥:{{policyDetail.totalPrem}}</text>
+    </text>
+    <text bindtap="electronicPolicy" class="order-number">查看<text class="jiankang-url">《电子保单》</text>
+    </text>
+</view>
+<van-dialog useSlot show="{{showVanDialog}}" title="下载平安健康app查看电子保单及详情">
+    <view style="text-align:center;padding:20px 0;">
+        <image src="../../images/webwxgetmsgimg.jpg" style="width:100px;height:100px"></image>
+    </view>
+</van-dialog>

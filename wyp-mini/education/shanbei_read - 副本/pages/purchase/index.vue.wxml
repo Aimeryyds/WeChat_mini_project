@@ -1,0 +1,47 @@
+<template name="211f0f20">
+    <view class="_div data-v-78ed8b2a purchase">
+        <view class="_div data-v-78ed8b2a order-book book-detail">
+            <image alt="{{book.titleEn}}" class="_img data-v-78ed8b2a book-cover" src="{{book.cover}}"></image>
+            <view class="_div data-v-78ed8b2a book-meta">
+                <view class="_div data-v-78ed8b2a title-en two-line-ellipsis">{{book.titleEn}}</view>
+                <view class="_div data-v-78ed8b2a title-cn one-line-ellipsis">{{book.titleCn}}</view>
+                <view class="_div data-v-78ed8b2a price" wx:if="{{isPurchase}}">
+                    <label class="_span data-v-78ed8b2a price-discount">¥{{promoPrice}}</label>
+                    <label class="_span data-v-78ed8b2a price-original" wx:if="{{promoPrice!==price}}">¥{{price}}</label>
+                </view>
+                <view class="_div data-v-78ed8b2a price" wx:else>
+                    <label class="_span data-v-78ed8b2a price-done">已购买</label>
+                </view>
+            </view>
+        </view>
+        <view class="_div data-v-78ed8b2a book-service" wx:if="{{showService}}">
+            <view class="_div data-v-78ed8b2a" wx:if="{{notAvaiableServices.length}}">
+                <view class="_div data-v-78ed8b2a service-title">选择增值服务</view>
+                <view class="_ul data-v-78ed8b2a">
+                    <view class="_li data-v-78ed8b2a flex service-item" key="{{service.id}}" wx:for="{{notAvaiableServices}}" wx:for-item="service" wx:key="service.id">
+                        <image alt class="_img data-v-78ed8b2a item-image" src="{{service.iconUrl}}"></image>
+                        <view class="_div data-v-78ed8b2a item-name">{{service.name}}</view>
+                        <view class="_div data-v-78ed8b2a">{{service.promo_price?service.promo_price:'免费'}}</view>
+                        <view bindtap="handleProxy" class="_div data-v-78ed8b2a checkbox" data-comkey="{{$k}}" data-eventid="{{'0-'+index}}">
+                            <image alt class="_img data-v-78ed8b2a" src="https://media-image1.baydn.com/storage_media_image/kvhfgj/fd7e03be4f498f28fdc48ccf47e8dcee.4e1b498eefeb80a76704d0a24cee2bcf.png" wx:if="{{service.checked}}"></image>
+                        </view>
+                    </view>
+                </view>
+            </view>
+            <view class="_div data-v-78ed8b2a" wx:if="{{isPurchase&&freeServices.length}}">
+                <view class="_div data-v-78ed8b2a line"></view>
+                <view class="_div data-v-78ed8b2a service-title">免费赠送服务</view>
+                <template is="c4f6426a" data="{{...$root[$kk+'0'],$root:$root}}"></template>
+            </view>
+            <view class="_div data-v-78ed8b2a" wx:if="{{!isPurchase&&avaiableServices.length}}">
+                <view class="_div data-v-78ed8b2a line"></view>
+                <view class="_div data-v-78ed8b2a service-title">已拥有服务</view>
+                <template is="c4f6426a" data="{{...$root[$kk+'1'],$root:$root}}"></template>
+            </view>
+        </view>
+        <view class="_div data-v-78ed8b2a tip">完成购买，即可解锁全书，小程序中购买的书籍，在扇贝阅读app中也可以使用哦～</view>
+        <button bindtap="handleProxy" class="_button data-v-78ed8b2a confirm-pay {{[!totalPrice?'disabled':'']}}" data-comkey="{{$k}}" data-eventid="{{'2'}}" wx:if="{{isPurchase}}">¥{{totalPrice}} 确认支付</button>
+        <button bindtap="handleProxy" class="_button data-v-78ed8b2a confirm-pay {{[isDisabled?'disabled':'']}}" data-comkey="{{$k}}" data-eventid="{{'1'}}" wx:else>{{buttonStr}}</button>
+    </view>
+</template>
+<import src="/components/ServiceList.vue.wxml"></import>

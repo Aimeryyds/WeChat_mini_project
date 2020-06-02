@@ -1,0 +1,92 @@
+<block wx:if="{{show}}">
+    <import src="/yb_shop/utils/wxParse/wxParse.wxml"></import>
+    <view class="wx_user_login_box" wx:if="{{display}}">
+        <view class="wx_user_face" style="background:#06cf5b;">
+            <image src="/yb_shop/static/images/wx_user_login.png"></image>
+        </view>
+        <view class="wx_login_info">
+            <text>请您授权微信登录</text>
+            <text>否则部分功能无法正常使用</text>
+        </view>
+        <button bindgetuserinfo="onGotUserInfo" class="wx_user_login" lang="zh_CN" openType="getUserInfo" style="background:#06cf5b;">授权登录</button>
+    </view>
+    <view class="index_swiper">
+        <swiper autoplay="{{autoplay}}" circular="true" duration="{{duration}}" indicatorDots="{{indicatorDots}}" interval="{{interval}}" style="height:11.5rem;">
+            <swiper-item wx:for="{{bargain_info.pic_arr}}">
+                <image class="slide-image" mode="aspectFill" src="{{item}}"></image>
+            </swiper-item>
+        </swiper>
+    </view>
+    <view class="page_info02">
+        <view class="index_info_tit">{{bargain_info.bargain_name}}</view>
+        <view class="goods_stock">当前库存：{{bargain_info.bargain_inventory}}
+      <text class="o_color">【库存为0时，所有砍价将停止】</text>
+        </view>
+    </view>
+    <view class="share_reb_bg">
+        <text>{{user_info.nick_name}} 正在参与{{bargain_info.bargain_name}}砍价活动，把价格砍到底价，TA就可以特惠抢购此商品啦！</text>
+    </view>
+    <view class="count_info_box">
+        <view class="count_info_li">
+            <text class="red_font">{{user_info.original_price}}</text>
+            <text>原价</text>
+        </view>
+        <view class="count_info_li">
+            <text class="red_font">{{user_info.lowest_price}}</text>
+            <text>最低价</text>
+        </view>
+        <view class="count_info_li">
+            <text class="red_font">{{user_info.current_price}}</text>
+            <text>当前价</text>
+        </view>
+        <view class="clear"></view>
+    </view>
+    <view class="countdown" wx:if="{{show_time}}">活动结束倒计时：
+    <text class="y_color">{{countDownDay}}天{{countDownHour}}小时{{countDownMinute}}分{{countDownSecond}}秒</text>
+    </view>
+    <view class="countdown" wx:if="{{!show_time}}">活动已结束
+  </view>
+    <view class="share_btn_box">
+        <view class="share_btn_b">
+            <view bindtap="shoping" class="share_btn_s" data-id="{{bargain_id}}">
+                <text>我要参加</text>
+            </view>
+        </view>
+        <view class="share_btn_b">
+            <form bindsubmit="bargain_help">
+                <input name="id" style="display:none" value="{{id}}"></input>
+                <button class="share_btn_s" formType="submit" style="">帮TA砍价</button>
+            </form>
+        </view>
+        <view class="clear"></view>
+    </view>
+    <view class="info_content_box">
+        <view class="info_con_tit">商品详情</view>
+        <view class="info_con_info">
+            <view class="wxParse">
+                <template is="wxParse" data="{{wxParseData:wxParseData.nodes}}"></template>
+            </view>
+        </view>
+    </view>
+    <view class="pop_bg" wx:if="{{popup}}">
+        <view class="pop_box">
+            <view class="pop_price_bg">
+                <view class="pop_price_no">
+                    <text>{{info}}元</text>
+                </view>
+            </view>
+            <view class="pop_price">
+                <text>砍掉{{info}}元</text>
+            </view>
+            <view class="pop_user_name">
+                <text>小手一甩，帮TA砍下一刀</text>
+            </view>
+            <view class="pop_btn">
+                <view bindtap="tankuang" class="close_btn">
+                    <text>确定</text>
+                </view>
+            </view>
+        </view>
+    </view>
+</block>
+<view class="bottom_space"></view>

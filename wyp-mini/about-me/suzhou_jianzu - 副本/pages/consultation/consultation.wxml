@@ -1,0 +1,16 @@
+<scroll-view class="couponNum" scrollX="true">
+    <view bindtap="clickTitle" class="newTitle {{sub==item.numid?'active':''}}" data-id="{{item.id}}" data-index="{{index}}" wx:for="{{list}}">{{item.category_name}}</view>
+</scroll-view>
+<view bindtap="joinDetail" class="newCont" data-index="{{index}}" wx:if="{{sub==numid}}" wx:for="{{allNews}}">
+    <view class="contLeft">
+        <view class="contLeftTitle">{{item.article_title}}
+      </view>
+        <text class="special">{{item.article_author}}</text>
+        <text class="specialTitle">{{item.article_date_v}}</text>
+        <text class="thumbs-up">{{item.article_report}}</text>
+        <image src="http://tws.cnweisou.com/images/talk2Z.png"></image>
+    </view>
+    <view class="contRight">
+        <image src="{{item.resp_img}}"></image>
+    </view>
+</view>

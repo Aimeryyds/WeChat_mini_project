@@ -1,0 +1,79 @@
+<view class="fixed" hidden="{{selectPerson}}">
+    <text bindtap="menu_redir" data-iddd="{{item.id}}" data-index="{{index}}" wx:for="{{nav_menu}}" wx:key="{{index}}">{{item.name}}</text>
+</view>
+<view bindtap="mySelect" class="bg" wx:if="{{showModalStatus}}"></view>
+<view class="header">
+    <image src="../../common/top.jpg"></image>
+    <view class="head_img">
+        <view class="header_top_L" wx:if="{{canIUseAvatarUrl}}">
+            <open-data class="thumb" type="userAvatarUrl" wx:if="{{canIUseAvatarUrl}}"></open-data>
+        </view>
+        <image src="{{show_user.headphoto}}" wx:else></image>
+    </view>
+    <view class="head_txt">
+        <text class="dx">{{show_user.fxdp_name}}</text>
+        <text class="orver">{{show_user.fxdp_miaoshu}}</text>
+    </view>
+    <view bindtap="rotateClick" class="cd_img">
+        <image src="../../common/select.png"></image>
+    </view>
+</view>
+<view class="flex">
+    <scroll-view class="scroll-view1" scrollY="true" style="height:{{second_height-150}}px">
+        <text bindtap="selectNav" class="type-nav {{curNav==item.id?'selected':''}}" data-iddd="{{item.id}}" data-indexxx="{{index}}" wx:for="{{first_categories}}">{{item.name}}</text>
+    </scroll-view>
+    <scroll-view class="scroll-view2" scrollY="true" style="height:{{second_height-150}}px">
+        <view class="fxcontainer" wx:if="{{products.length}}">
+            <view class="view-list" wx:for="{{products}}" wx:key="this">
+                <view bindtap="toDetail" class="product-item" data-productid="{{item.id}}">
+                    <view class="img_padd">
+                        <image mode="aspectFit" src="{{item.feature_img}}"></image>
+                    </view>
+                    <view class="flex_r">
+                        <view class="view-list-name">
+                            <text class="name_txt">{{item.name}}</text>
+                        </view>
+                        <view class="b-flex">
+                            <text class="m1">售价:￥{{item.price}}</text>
+                            <text class="m2">原价:￥{{item.mark_price}}</text>
+                        </view>
+                    </view>
+                </view>
+            </view>
+            <view bindtap="loadMore" class="more_btn" wx:if="{{pagerShow}}">点击加载更多</view>
+        </view>
+        <view class="product-list err_msg" wx:else>{{errmsg}}</view>
+    </scroll-view>
+</view>
+<view class="fx_footer">
+    <view class="tab1 active">
+        <view class="tab1" hoverClass="navigator-hover" url="/pages/fxdp_sy/fxdp_sy">
+            <view class="tab-img">
+                <text class="iconfont icon-dianpu"></text>
+            </view>
+            <view class="tab-title">
+                <text>店铺首页</text>
+            </view>
+        </view>
+    </view>
+    <view class="tab1 default">
+        <view bindtap="toqrc" class="tab1">
+            <view class="tab-img">
+                <text class="iconfont icon-erweima"></text>
+            </view>
+            <view class="tab-title">
+                <text>二维码</text>
+            </view>
+        </view>
+    </view>
+    <view class="tab1 default">
+        <view bindtap="tohome" class="tab1">
+            <view class="tab-img">
+                <text class="iconfont icon-fenxiao"></text>
+            </view>
+            <view class="tab-title">
+                <text>我的分销</text>
+            </view>
+        </view>
+    </view>
+</view>

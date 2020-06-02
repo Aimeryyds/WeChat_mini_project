@@ -1,0 +1,13 @@
+<import src="../common/footer.wxml"></import>
+<import src="../common/searchBar.wxml"></import>
+<import src="../common/simpleRecipe.wxml"></import>
+<view class="page">
+    <taskbarGuide></taskbarGuide>
+    <view class="header">
+        <view class="menu-title">{{menu.title}}</view>
+        <view class="menu-description">{{menu.description}}</view>
+        <view class="recipes-count" wx:if="{{menu.c}}">- {{menu.c}}道菜谱 -</view>
+    </view>
+    <template is="menu-simple-recipe" data="{{item:item}}" wx:for="{{recipes}}" wx:key="key"></template>
+    <template is="menu-footer" data="{{footerState:footerState}}"></template>
+</view>

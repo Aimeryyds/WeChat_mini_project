@@ -1,0 +1,24 @@
+<view class="chatMain">
+    <scroll-view class="nochat" id="chatScroll" scrollTop="{{scrollTop}}" scrollWithAnimation="true" scrollY="true" style="height: {{lheight}}px" wx:if="{{condition}}">
+        <view class="chat-info" id="chat-page">
+            <view bindtap="toUpper" class="moreMess point" hidden="{{!showR1}}">{{showR1Text}}</view>
+            <view class="moreMess" hidden="{{!showR2}}">消息已全部显示</view>
+            <view class="chat-item" data-talkid="{{item.talkerId}}" data-talkname="{{item.talkerName}}" wx:for="{{allMessage}}" wx:key="*this">
+                <view class="topBorder"></view>
+                <view class="midBorder">
+                    <image class="item-icon" src="../../assets/icons/organizer.png" wx:if="{{item.senderRole%2==1}}"></image>
+                    <image class="item-icon" src="../../assets/icons/chat.png" wx:else></image>
+                    <view class="item-user others">{{item.talkerName}}</view>
+                    <view class="item-time">{{item.time}}</view>
+                </view>
+                <text class="botBorder" decode="{{decode}}" style="{{item.style}}">{{item.msg}}</text>
+            </view>
+        </view>
+    </scroll-view>
+    <view class="nochat" wx:else>
+        <view class="noChat-img">
+            <image class="noChat-img2" src="../../assets/images/noChat.png"></image>
+        </view>
+        <text class="noChat-text">无聊天记录</text>
+    </view>
+</view>

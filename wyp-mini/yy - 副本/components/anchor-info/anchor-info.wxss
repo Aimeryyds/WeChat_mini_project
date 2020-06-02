@@ -1,0 +1,437 @@
+.anchor-info-container {
+    position: relative;
+    width: 100%;
+    background-color: transparent;
+    z-index: 99;
+    height: 160rpx;
+}
+
+.anchor-info-container .anchor-info-content {
+    display: -webkit-flex;
+    height: 100%;
+    padding: 0rpx 16rpx 0;
+}
+
+.anchor-info-content .user-info {
+    display: flex;
+    float: left;
+    height: 70rpx;
+    overflow: hidden;
+    align-items: center;
+    padding: 0 12rpx;
+    margin-top: 10rpx;
+    border-radius: 35rpx;
+    background-color: rgba(0,0,0,0.5);
+}
+
+.anchor-info-content .link-anchorInfo {
+    position: absolute;
+    bottom: 0;
+    left: 50%;
+    font-size: 24rpx;
+}
+
+.anchor-info-content .avatar {
+    width: 58rpx;
+    height: 58rpx;
+    border-radius: 30rpx;
+    border: 1rpx solid rgba(255,255,255,0.5);
+}
+
+.anchor-info-content .user-info-icon {
+    flex: 1;
+    box-sizing: border-box;
+    padding-right: 10rpx;
+    margin-left: 12rpx;
+}
+
+.anchor-info-content .user-attention {
+    width: 80rpx;
+    height: 48rpx;
+    line-height: 48rpx;
+    border-radius: 24rpx;
+    color: #1d1d1d;
+    font-size: 22rpx;
+    background: linear-gradient(to right,#fffa1d 60%,#ffda06);
+    background-color: #ffda06;
+    font-weight: bold;
+    text-align: center;
+    padding: 0;
+}
+
+.anchor-info-content .user-attentioned {
+    background: #e6e6e6;
+    color: #999;
+}
+
+.user-info-icon .username {
+    line-height: 26rpx;
+    font-size: 22rpx;
+    color: rgba(255,255,255,0.8);
+    white-space: nowrap;
+    max-width: 120rpx;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    margin-left: 6rpx;
+}
+
+.anchor-info-content .user-info-icon .num {
+    display: flex;
+    align-items: center;
+    margin-top: 8rpx;
+}
+
+.viewer_icon {
+    display: inline-block;
+    margin-right: 2rpx;
+    width: 30rpx;
+    height: 30rpx;
+}
+
+.viewer-num {
+    flex: 1;
+    font-size: 24rpx;
+    color: rgba(255,255,255,0.6);
+}
+
+.official-info {
+    position: relative;
+    display: flex;
+    align-items: center;
+    width: 280rpx;
+    height: 90rpx;
+}
+
+.official-logo {
+    position: absolute;
+    width: 280rpx;
+    height: 90rpx;
+}
+
+.official-info .official-img {
+    position: relative;
+    top: 3rpx;
+    width: 96rpx;
+    height: 72rpx;
+    z-index: 9;
+    margin-left: 6rpx;
+}
+
+.official-user-num {
+    position: relative;
+    top: 18rpx;
+    flex: 1;
+    font-size: 24rpx;
+    color: #fff;
+    z-index: 9;
+    text-align: right;
+    padding-right: 10rpx;
+}
+
+.official-main {
+    position: relative;
+}
+
+.anchor-info {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    background: rgba(0,0,0,0.5);
+    display: flex;
+    color: #fff;
+    font-size: 22rpx;
+    padding-left: 10rpx;
+    border-radius: 24rpx;
+    z-index: 99;
+}
+
+.anchor-info .anchor-nick {
+    flex: 1;
+    height: 48rpx;
+    line-height: 48rpx;
+    max-width: 110rpx;
+    padding-right: 6rpx;
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+}
+
+.anchor-info .anchor-attention {
+    width: 48rpx;
+    height: 48rpx;
+    padding: 0;
+    margin: 0;
+    background: transparent;
+    border-radius: 24rpx;
+}
+
+.anchor-info .anchor-attention:after {
+    outline: none;
+}
+
+.anchor-info .follow-icon {
+    display: -webkit-flex;
+    align-items: center;
+    width: 48rpx;
+    height: 48rpx;
+    background: #fff;
+    padding: 0;
+    margin: 0;
+    border-radius: 24rpx;
+}
+
+.hasFollow .follow-icon {
+    background-color: #ffdd00;
+}
+
+.official-main .follow-icon cover-image,.link-anchorInfo .follow-icon cover-image {
+    width: 36rpx;
+    height: 36rpx;
+    margin: 0 auto;
+}
+
+.anchor-info-content .room-id .id-num {
+    font-weight: 700;
+    margin-top: 10rpx;
+}
+
+.anchor-info-content .room-id {
+    position: absolute;
+    right: 20rpx;
+    background: rgba(0,0,0,0.3);
+    top: 10rpx;
+    text-align: right;
+    padding: 8rpx 10rpx 5rpx 8rpx;
+    border-radius: 16rpx;
+    margin-top: 4rpx;
+}
+
+.anchor-info-content .room-id cover-view {
+    display: block;
+    font-size: 16rpx;
+    color: rgba(255,255,255,0.8);
+}
+
+.anchor-info-content .room-id .noble-value {
+    padding-top: 10rpx;
+}
+
+.anchor-info-content .room-id .noble-value cover-view {
+    display: inline;
+    color: #FFDD00;
+    font-size: 20rpx;
+}
+
+.anchor-info-content .room-id .noble-value .noble-num {
+    padding-left: 8rpx;
+    color: #FFDD00;
+}
+
+.notice-info {
+    position: fixed;
+    top: 0;
+    bottom: 0;
+    box-sizing: border-box;
+    width: 100%;
+    z-index: 9999;
+}
+
+.notic-wrapper {
+    position: absolute;
+    bottom: 0;
+    width: 100%;
+    padding-top: 80rpx;
+}
+
+.notice-info .notice-main {
+    padding: 60rpx 80rpx;
+    background-color: #fff;
+    border-radius: 20rpx 20rpx 0 0;
+}
+
+.notice-info .notice-img {
+    position: absolute;
+    top: 0;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 154rpx;
+    height: 154rpx;
+    border-radius: 78rpx;
+    margin: 0 auto;
+    z-index: 99;
+}
+
+.notice-img cover-image {
+    width: 150rpx;
+    height: 150rpx;
+    border-radius: 75rpx;
+    margin-top: 2rpx;
+    margin-left: 2rpx;
+}
+
+.notice-img .notice-office-bg cover-image {
+    position: relative;
+    width: 120rpx;
+    height: 86rpx;
+    margin: 0 auto;
+    border-radius: 50%;
+}
+
+.notice-img .notice-line,.notice-img .notice-office-bg {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: #fff;
+    z-index: -1;
+}
+
+.notice-img .notice-office-bg {
+    display: -webkit-flex;
+    align-items: center;
+    background-color: #000;
+}
+
+.notice-img .default-office-bg {
+    background: #ffdd00;
+}
+
+.notice-info .notice-nick {
+    font-size: 32rpx;
+    color: #1d1d1d;
+    padding-top: 30rpx;
+    padding-bottom: 10rpx;
+    text-align: center;
+}
+
+.notice-info .id-fans {
+    display: flex;
+    text-align: center;
+    padding-bottom: 30rpx;
+    line-height: 1;
+}
+
+.notice-id,.notice-fans {
+    width: 100%;
+    text-align: center;
+    font-size: 24rpx;
+    color: #999;
+    padding: 0 10rpx;
+    white-space: normal;
+}
+
+.notice-info .notice-detail {
+    font-size: 28rpx;
+    color: #333;
+    height: 80rpx;
+    line-height: 1.4;
+    white-space: normal;
+    text-align: center;
+}
+
+.notice-info .notice-focus {
+    width: 100%;
+    height: 90rpx;
+    line-height: 90rpx;
+    color: #1b1b1b;
+    font-size: 30rpx;
+    font-weight: bold;
+    text-align: center;
+    border-radius: 45rpx;
+    background-color: #ffdd00;
+    margin-top: 40rpx;
+}
+
+.notice-info .notice-focused {
+    background: #e6e6e6;
+    color: #999;
+}
+
+.fix-img {
+    display: inline-block;
+    width: 1rpx;
+    height: 1rpx;
+    margin-left: 12rpx;
+    vertical-align: top;
+}
+
+.inform-wrapper {
+    position: fixed;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    color: #1D1D1D;
+    font-size: 26rpx;
+    background: rgba(0,0,0,0.6);
+    z-index: 9999;
+    font-family: PingFangSC-Medium;
+}
+
+.inform-toast {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 560rpx;
+    color: #1D1D1D;
+    font-size: 30rpx;
+    border-radius: 16rpx;
+    transform: translate(-50%,-50%);
+}
+
+.inform-toast .inform-bg {
+    position: relative;
+    top: 6rpx;
+    width: 100%;
+    height: 230rpx;
+}
+
+.inform-toast .inform-main {
+    background-color: #fff;
+    padding-top: 20rpx;
+}
+
+.inform-toast .inform-tips {
+    padding: 0 60rpx;
+    text-align: center;
+}
+
+.inform-toast .inform-bth {
+    display: flex;
+    align-items: center;
+    padding: 60rpx 40rpx;
+}
+
+.inform-bth button {
+    box-sizing: border-box;
+    width: 184rpx;
+    height: 72rpx;
+    line-height: 72rpx;
+    border-radius: 36rpx;
+    display: inline-block;
+    background-color: #FFDD00;
+}
+
+.inform-bth .btn-off {
+    background: #e6e6e6;
+    color: #999;
+}
+
+.inform-toast button:after,.unLive-attention button:after {
+    outline: none;
+    border: none;
+}
+
+.unLive-attention {
+    position: absolute;
+    bottom: 114rpx;
+    left: 20rpx;
+    width: 272rpx;
+    height: 75rpx;
+    z-index: 99;
+}
+
+.unLive-attention button {
+    background: transparent;
+}

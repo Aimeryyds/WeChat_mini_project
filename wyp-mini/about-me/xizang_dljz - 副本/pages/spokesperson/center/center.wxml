@@ -1,0 +1,57 @@
+<import src="../../../component/s-share-wrap/s-share-wrap.wxml"></import>
+<view class="container">
+    <navigator class="header" hoverClass="hover" url="/pages/spokesperson/personinfo/personinfo">
+        <image class="avatar" src="{{userInfo.photo}}" wx:if="{{userInfo.photo}}"></image>
+        <view class="header__info">
+            <view>{{userInfo.nickName}}</view>
+            <text>{{userInfo.spokesman.phone}}</text>
+        </view>
+        <image class="arrow" src="/images/pcenter/icon_next_dark.png"></image>
+    </navigator>
+    <view class="balance-wrap">
+        <view class="wrap__top">
+            <text>累计收益/元</text>
+            <view>¥{{userInfo.spokesman.amount}}</view>
+            <text>含待结算金额: {{userInfo.spokesman.settleAmount}}</text>
+        </view>
+        <navigator class="wrap__bottom" hoverClass="hover" url="/pages/spokesperson/balance/balance">
+            <text>账户余额: ¥{{userInfo.spokesman.balance}}</text>
+            <view>
+                <text>立即查看</text>
+                <image class="arrow" src="/images/pcenter/icon_next_dark.png"></image>
+            </view>
+        </navigator>
+    </view>
+    <view class="cate-list">
+        <view bindtap="openSSWrap" class="cate-item">
+            <image src="/images/icon_store.png"></image>
+            <text>推广店铺</text>
+        </view>
+        <navigator class="cate-item" hoverClass="hover" url="/pages/spokesperson/generalize/generalize">
+            <image src="/images/spokesperson/message/icon_commodity.png"></image>
+            <text>推广商品</text>
+        </navigator>
+        <navigator class="cate-item" hoverClass="hover" url="/pages/spokesperson/clientmangr/clientmangr">
+            <image src="/images/spokesperson/message/icon_manager.png"></image>
+            <text>客户管理</text>
+        </navigator>
+        <navigator class="cate-item" hoverClass="hover" url="/pages/spokesperson/question/question">
+            <image src="/images/spokesperson/message/icon_question.png"></image>
+            <text>常见问题</text>
+        </navigator>
+        <view class="cate-item"></view>
+        <view class="cate-item"></view>
+    </view>
+</view>
+<view class="generate-wrap">
+    <view bindtap="closeGenWrap" class="bg" style="display: {{show_generate?'fixed':'none'}}"></view>
+    <view class="generate-box" style="display: {{show_generate?'block':'none'}}">
+        <view class="generating" style="width: {{box_w}}rpx; height: {{box_h}}rpx">
+            <image src="/images/wait.png"></image>
+            <text>图片生成中...</text>
+        </view>
+        <image bindtap="previewPhoto" class="pre-img" src="{{photo}}" style="width: {{generate_w}}rpx; height: {{generate_h}}rpx; left: {{generate_l}}; top: {{generate_t}}" wx:if="{{photo}}"></image>
+        <view bindtap="savePhoto" class="generate-btn" style="background: {{photo?'#b90404':'#707070'}}">保存图片到相册</view>
+    </view>
+</view>
+<template is="s-share-wrap" data="{{alias:spokesmanAlias,show_s_wrap:show_s_wrap,hideCenter:true}}"></template>

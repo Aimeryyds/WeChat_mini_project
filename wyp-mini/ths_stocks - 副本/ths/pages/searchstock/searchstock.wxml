@@ -1,0 +1,57 @@
+<view class="searchstock">
+    <view class="searchBox">
+        <view class="searchWrap btn">
+            <view class="iconWrap" wx:if="{{showState}}">
+                <image class="searchIcon" src="../../static/search.png"></image>
+                <text>搜股票名称/股票代码</text>
+            </view>
+            <view class="inputSearch">
+                <input bindblur="__e" bindfocus="__e" bindinput="__e" data-event-opts="{{[ [ 'focus',[ [ 'hidIcon',['$event'] ] ] ],[ 'blur',[ [ 'showIcon',['$event'] ] ] ],[ 'input',[ [ '__set_model',[ '','searchContent','$event',[] ] ],[ 'inputHandle',['$event'] ] ] ] ]}}" focus="{{true}}" placeholder="{{searchText}}" type="text" value="{{searchContent}}"></input>
+            </view>
+        </view>
+    </view>
+    <view class="paddingBox"></view>
+    <view class="hotSrarch" wx:if="{{!searchContent}}">
+        <view class="hotSearchWrap" wx:if="{{hotData.length>0}}">
+            <view class="tit">大家都在搜</view>
+            <view class="hotItem" wx:for="{{$root.l0}}" wx:key="name">
+                <view bindtap="__e" class="info" data-event-opts="{{[ [ 'tap',[ [ 'jump',['$0'],[ [ ['hotData','name',item[$orig].name] ] ] ] ] ] ]}}">
+                    <view class="rank">{{index+1}}</view>
+                    <view class="stockName">{{item[$orig].name}}</view>
+                    <view class="{{['precent',item[$orig]&&item[$orig].gain<0?'down':'up']}}">{{item.f0}}</view>
+                </view>
+                <view bindtap="__e" class="btn" data-event-opts="{{[ [ 'tap',[ [ 'optionChange',['$0'],[ [ ['hotData','name',item[$orig].name] ] ] ] ] ] ]}}" wx:if="{{loginInfo.account}}">{{item[$orig].optional?'删自选':'加自选'}}</view>
+                <view class="btn" wx:else>
+                    <button bindgetphonenumber="__e" data-event-opts="{{[ [ 'getphonenumber',[ [ 'getPhoneNumber',['$event'] ] ] ] ]}}" id="btnLogin" openType="getPhoneNumber" style="{{'background-color:'+'transparent'+';'}}" type="primary">加自选</button>
+                </view>
+            </view>
+        </view>
+    </view>
+    <block wx:else>
+        <view class="searchContent" wx:if="{{searchData.length>0}}">
+            <view class="searchItem" wx:for="{{$root.l1}}" wx:for-index="__i0__" wx:key="name">
+                <view bindtap="__e" class="leftWrap" data-event-opts="{{[ [ 'tap',[ [ 'jump',['$0'],[ [ ['searchData','name',item[$orig].name] ] ] ] ] ] ]}}">
+                    <view class="stockName">
+                        <view class="name">
+                            <rich-text nodes="{{item[$orig].name_new}}"></rich-text>
+                        </view>
+                        <view class="code">
+                            <rich-text nodes="{{item[$orig].code_new}}"></rich-text>
+                        </view>
+                    </view>
+                    <view class="{{['price',item[$orig].newPrice<0?'down':'up']}}">{{item.f1}}</view>
+                    <view class="{{['precent',item[$orig].gain<0?'down':'',item[$orig].gain>0?'up':'']}}">{{item.f2}}</view>
+                </view>
+                <view bindtap="__e" class="{{['option',item[$orig].optional?'del':'']}}" data-event-opts="{{[ [ 'tap',[ [ 'optionChange',['$0'],[ [ ['searchData','name',item[$orig].name] ] ] ] ] ] ]}}" wx:if="{{loginInfo.account}}">{{item[$orig].optional?'删自选':'加自选'}}</view>
+                <view class="option" wx:else>
+                    <button bindgetphonenumber="__e" data-event-opts="{{[ [ 'getphonenumber',[ [ 'getPhoneNumber',['$event'] ] ] ] ]}}" id="btnLogin" openType="getPhoneNumber" style="{{'background-color:'+'transparent'+';'}}" type="primary">加自选</button>
+                </view>
+            </view>
+        </view>
+        <block wx:else>
+            <view class="searchContent" wx:if="{{searchData.length==0&&!searching&&searchContent}}">
+                <view class="noContent">找不到任何匹配内容</view>
+            </view>
+        </block>
+    </block>
+</view>

@@ -1,0 +1,45 @@
+<view class="container" wx:if="{{isShow}}">
+    <view class="searchLetter touchClass">
+        <view bindtap="hotCity" class="thishotText">
+            <view style="margin-top:0;">热门</view>
+        </view>
+        <view catchtouchend="clickLetter" data-letter="{{item}}" style="color:#999;font-size:20rpx;" wx:for="{{shortNames}}" wx:key="index">{{item}}</view>
+    </view>
+    <view class="showSlectedLetter" wx:if="{{isShowLetter}}">
+      {{showLetter}}
+    </view>
+    <scroll-view scrollIntoView="{{scrollTopId}}" scrollTop="{{scrollTop}}" scrollY="true" style=" height: 100vh; background-color: #fff; ">
+        <view class="search-wrap">
+            <view class="search">
+                <input bindconfirm="searchCtiy" bindinput="removesearch" confirmType="搜索" placeholder="输入城市或拼音" style="width: 100%;text-align:center;font-size: 24rpx;"></input>
+            </view>
+            <view style="position: fixed; top: 75rpx;left:0; height: 100vh;width: 100%; z-index:10;background-color: #eee" wx:if="{{searchShow}}">
+                <scroll-view scrollY="true" style="width:100%;position:absolute;top: 0rpx;left:0;z-index:100;background-color: #fff;max-height: 100vh;" wx:if="{{searchShow}}">
+                    <view bindtap="bindCity" class="cityitem-content" data-city="{{city}}" wx:for="{{searchlist}}" wx:for-item="city">
+              {{city.cityName}}
+            </view>
+                    <view class="search-error" wx:if="{{searchlist.length==0}}">
+            抱歉，未找到相关位置，可尝试修改后重试
+          </view>
+                </scroll-view>
+            </view>
+        </view>
+        <view class="hotcity-common thisCity">当前选择城市</view>
+        <view class="thisCityName" style="margin-right: 20rpx; color: {{isLocation!=1?'#D61A31':'#000'}};border-color:{{isLocation!=1?'#D61A31':'#ececec'}} ">{{city}}</view>
+        <view bindtap="makesetting" class="thisCityName" style="color: {{isLocation==1?'#D61A31':'#000'}};border-color:{{isLocation==1?'#D61A31':'#ececec'}}" wx:if="{{config.locationType==1&&type=='hotel'}}">我的位置</view>
+        <view>
+            <text class="hotcity hotcity-common">热门城市</text>
+            <view class="weui-grids">
+                <view bindtap="bindCity" class="weui-grid" data-city="{{item}}" data-cityCode="{{item.cityCode}}" wx:for="{{hots}}" wx:key="{{index}}">
+                    <view class="weui-grid__label">{{item.cityName}}</view>
+                </view>
+            </view>
+        </view>
+        <view class="selection" wx:for="{{cityList}}" wx:key="{{item.shortName}}">
+            <view class="item_letter" id="{{item.shortName}}">{{item.shortName}}</view>
+            <view bindtap="bindCity" class="item_city" data-city="{{ct}}" data-cityCode="{{ct.cityCode}}" wx:for="{{item.cities}}" wx:for-item="ct" wx:key="{{ct.id}}">
+      {{ct.cityName}}
+    </view>
+        </view>
+    </scroll-view>
+</view>

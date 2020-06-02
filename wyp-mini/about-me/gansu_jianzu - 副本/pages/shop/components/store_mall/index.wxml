@@ -1,0 +1,100 @@
+<toast show="{{toast.show}}" title="{{toast.title}}"></toast>
+<view class="container">
+    <scroll-view scrollY bindscroll="onMallScroll" bindscrolltolower="onReachMallBottom" id="sId" style="height:calc(100vh - 112rpx)">
+        <store-header bindsetStoreDetail="setStoreDetail" shopId="{{shopId}}"></store-header>
+        <view class="products-fixedbar" style="position:relative">
+            <view class="search-wrap">
+                <view bindtap="bindmallsearch" class="products-search">
+                    <image class="products-search__img" src="http://imgcdnali.wfenxiao.com.cn/xcx/c/icons/ic_search.png"></image>
+                    <view class="products-search__input">搜索店内的商品</view>
+                </view>
+                <image bindtap="handleClassify" class="products-searc__feilei-image" src="http://imgcdnali.wfenxiao.com.cn/xcx/c/1120/fenlei.png"></image>
+            </view>
+            <view class="products-tab" style="position:{{shopMall.fixHeader?'fixed;top:0;left:0;right:0;border-bottom:1px solid #e5e5e5;':'relative'}}">
+                <view bindtap="handleSwitchSort" data-sort="saleNum" style="color:{{shopMall.sort=='saleNum'?'red':''}}">销量</view>
+                <view bindtap="handleSwitchSort" data-sort="createTime" style="color:{{shopMall.sort=='createTime'?'red':''}}">新品</view>
+                <view bindtap="handleSwitchSort" data-sort="evaluateCount" style="color:{{shopMall.sort=='evaluateCount'?'red':''}}">好评</view>
+                <view class="">
+                    <text bindtap="handleSwitchSort" data-sort="price" style="color:{{shopMall.sort=='price'?'red':''}}">价格</text>
+                    <image class="products-sort-img" src="http://imgcdnali.wfenxiao.com.cn/xcx/c/icons/ic_price_sort_default.png" wx:if="{{shopMall.sort!='price'}}"></image>
+                    <image class="products-sort-img" src="http://imgcdnali.wfenxiao.com.cn/xcx/c/icons/ic_price_sort_up.png" wx:elif="{{shopMall.order=='asc'}}"></image>
+                    <image class="products-sort-img" src="http://imgcdnali.wfenxiao.com.cn/xcx/c/icons/ic_price_sort_down.png" wx:else></image>
+                </view>
+                <view>
+                    <image bindtap="handleToggleMode" class="products-type-img" data-mode="grid" src="http://imgcdnali.wfenxiao.com.cn/xcx/c/icons/pro-type1.png" wx:if="{{shopMall.mode=='list'}}"></image>
+                    <image bindtap="handleToggleMode" class="products-type-img" data-mode="list" src="http://imgcdnali.wfenxiao.com.cn/xcx/c/icons/pro-type2.png" wx:else></image>
+                </view>
+            </view>
+        </view>
+        <view class="products-wrap" style="margin-top:{{shopMall.fixHeader?76:0}}rpx" wx:if="{{shopMall.mode=='list'}}">
+            <view bindtap="goodDetail" class="products-list" data-id="{{product.id}}" wx:for="{{shopMall.products.data}}" wx:for-item="product">
+                <image class="products-list__img" src="{{product.imgUrl}}"></image>
+                <view class="products-list__info">
+                    <view class="products-list__name">
+                        <view class="tuan__tag1" wx:if="{{product.activityType==1}}">
+                            <view class="seckill-tag">
+                                <image src="http://imgcdnali.wfenxiao.com.cn/xcx/c/tuan/seckill.png"></image>
+                                <view>秒杀</view>
+                            </view>
+                        </view>
+                        <view class="tuan__tag1" wx:elif="{{product.activityType==2}}">
+                            <view class="tuan-tag">{{product.limitPeople||0}}人团</view>
+                        </view>
+                        <view class="tuan__tag1" wx:elif="{{product.activityType==3}}">
+                            <view class="manjian-tag">满减</view>
+                        </view>
+                        <view class="products-list__nameInfo zan-ellipsis--l2" style="text-indent:{{product.activityType==0?'0rpx':'80rpx'}}">{{product.name}}</view>
+                    </view>
+                    <view class="products-list__cont">
+                        <view class="products-list__price">
+                            <text>¥</text>{{product.price}}</view>
+                        <view class="products-list__stock" style="flex:2">{{product.activityType==2?'已团':'已售'}}{{product.saleNum}}件</view>
+                        <view class="goods-list__btn" wx:if="{{product.activityType==1}}">马上抢</view>
+                        <view class="goods-list__btn" wx:elif="{{product.activityType==2}}">去开团</view>
+                        <image catchtap="addToCart" data-good="{{product}}" data-index="{{index}}" src="http://imgcdnali.wfenxiao.com.cn/xcx/c/plus1.png" style="align-self:flex-end;width:48rpx;height:48rpx" wx:elif="{{product.activityType==0}}"></image>
+                    </view>
+                    <view style="font-size:24rpx;color:rgba(0,0,0,0.43);margin-top:8rpx;">{{product.reviewsNum}}条评价  {{product.goodReviewsRate}}%好评</view>
+                </view>
+            </view>
+        </view>
+        <view class="products-wrap products-wrap--type2" style="margin-top:{{shopMall.fixHeader?76:0}}rpx" wx:else>
+            <view bindtap="goodDetail" class="products-list2" data-id="{{product.id}}" style="padding:24rpx;height:auto" wx:for="{{shopMall.products.data}}" wx:for-item="product" wx:key="id">
+                <view class="tuan__tag2" wx:if="{{product.activityType==1}}">
+                    <view class="seckill-tag">
+                        <image src="http://imgcdnali.wfenxiao.com.cn/xcx/c/tuan/seckill.png"></image>
+                        <view>秒杀</view>
+                    </view>
+                </view>
+                <view class="tuan__tag2" wx:if="{{product.activityType==2}}">
+                    <view class="tuan-tag">{{product.limitPeople||0}}人团</view>
+                </view>
+                <view class="tuan__tag2" wx:if="{{product.activityType==3}}">
+                    <view class="manjian-tag">满减</view>
+                </view>
+                <image src="{{product.imgUrl}}" style="width:308rpx;height:308rpx;;align-self:center"></image>
+                <view class="products-list2__name" style="margin-top:4rpx;">{{product.name}}</view>
+                <view class="products-list__cont" style="margin-top:4rpx;">
+                    <view style="flex:1;">
+                        <view style="display:flex;">
+                            <view class="products-list__price">
+                                <text>¥</text>{{product.price}}</view>
+                            <view class="products-list__stock">{{product.activityType==2?'已团':'已售'}}{{product.saleNum}}件</view>
+                        </view>
+                        <view style="font-size:24rpx;color:rgba(0,0,0,0.43);margin-top:8rpx;">{{product.reviewsNum}}条评价  {{product.goodReviewsRate}}%好评</view>
+                    </view>
+                    <view class="goods-list__btn" wx:if="{{product.activityType==1}}">马上抢</view>
+                    <view class="goods-list__btn" wx:elif="{{product.activityType==2}}">去开团</view>
+                    <image catchtap="addToCart" data-good="{{product}}" data-index="{{index}}" src="http://imgcdnali.wfenxiao.com.cn/xcx/c/plus1.png" style="align-self:flex-end;width:48rpx;height:48rpx" wx:else></image>
+                </view>
+            </view>
+        </view>
+        <view class="goods-end" style="margin-top:100rpx" wx:if="{{shopMall.products.data.length==0&&loading}}">
+            <text>暂无商品</text>
+        </view>
+        <view id="loadmore" wx:if="{{shopMall.loadmore}}">
+            <wxc-loadmore icon="{{true}}" text="努力加载中..."></wxc-loadmore>
+        </view>
+    </scroll-view>
+    <cart id="cart" shopId="{{shopId}}"></cart>
+    <cart-popup bindaddToCartSuccess="handleAddToCartSuccess" currentGood="{{currentGood}}" id="cartpop" showDialog="{{showDialog}}"></cart-popup>
+</view>

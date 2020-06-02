@@ -1,0 +1,35 @@
+<view class="recordList _62408f2">
+    <view class="network _32f532b _62408f2" wx:if="{{$net$hasNet}}">
+        <image class="_32f532b" src="../../images/network.png"></image>
+        <text class="_32f532b">网络不可用，请检查网络设置</text>
+        <view class="net-text font28 animated flash infinite _32f532b">正在尝试重新连接...</view>
+    </view>
+    <view class="option_save _62408f2">
+        <image class="option_save_bg fade_in _62408f2" src="https://jfinfo.oss-cn-beijing.aliyuncs.com/jugupiao/images/record/record.png"></image>
+        <view class="option_save_follow _62408f2" wx:if="{{clickNum}}">
+              {{clickNum}}人关注
+            </view>
+    </view>
+    <view class="list-container _62408f2">
+        <navigator class="_62408f2" hoverClass="none" openType="navigate" url="/pages/record/recordDetails?id={{item.id}}&isListEnter=0" wx:for="{{list}}">
+            <view class="list-container-box _62408f2">
+                <view class="list-box-c _62408f2">
+                    <image class="list-box-i fade_in _62408f2" src="{{item.thumb||'https://jfinfo.oss-cn-beijing.aliyuncs.com/jugupiao/images/service/img_zw.png'}}"></image>
+                    <view class="acrt-right _62408f2">
+                        <view class="acrt-right-tle _62408f2">{{item.title}}</view>
+                        <view class="acrt-right-date _62408f2">{{item.created_at}}</view>
+                    </view>
+                </view>
+            </view>
+        </navigator>
+    </view>
+    <view class="foot-load _0a8cc92 _62408f2" wx:if="{{$loadFooter$loadComplete}}">
+        <view class="_0a8cc92" wx:if="{{$loadFooter$curStatus==1}}">
+            <i-icon class="_0a8cc92" color="#999" size="20" type="enterinto"></i-icon>上拉加载更多</view>
+        <view class="_0a8cc92" wx:if="{{$loadFooter$curStatus==2}}">正在加载...</view>
+        <view class="_0a8cc92" wx:if="{{$loadFooter$curStatus==3}}">没有更多数据</view>
+    </view>
+    <view catchtap="$backHome$goHome" class="box animated bounceIn _97a9f08 _62408f2" wx:if="{{$backHome$isShow}}">
+        <image class="_97a9f08" lazyLoad="false" mode="scaleToFill" src="https://jfinfo.oss-cn-beijing.aliyuncs.com/jugupiao/images/share/home.png"></image>
+    </view>
+</view>

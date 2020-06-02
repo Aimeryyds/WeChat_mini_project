@@ -1,0 +1,247 @@
+@import "../../../../wxParse/wxParse.wxss";
+
+.container {
+    width: 100%;
+    height: 100%;
+}
+
+.Img {
+    background: -webkit-linear-gradient(left top,#5f90cf,#627cd3);
+    width: 94%;
+    margin-left: 3%;
+    height: 270rpx;
+    margin-top: 30rpx;
+    display: flex;
+    align-items: flex-start;
+    position: relative;
+}
+
+.wayTop {
+    position: absolute;
+    z-index: 5;
+    top: -3rpx;
+    left: 0;
+    transform-origin: center left;
+    transform: rotate(90deg);
+    width: 268rpx;
+    height: 8rpx;
+    background-image: radial-gradient(circle,#fff,#fff 5rpx,#5f90cf 6rpx,#5f90cf 8rpx,#5f90cf 8rpx,#5f90cf);
+    background-size: 16rpx 16rpx;
+    background-repeat: repeat-x;
+}
+
+.wayBottom {
+    position: absolute;
+    z-index: 5;
+    top: -3rpx;
+    right: 0;
+    transform-origin: center right;
+    transform: rotate(-90deg);
+    width: 268rpx;
+    height: 8rpx;
+    background: radial-gradient(circle,#fff,#fff 5rpx,#5f90cf 6rpx,#5f90cf 8rpx,#5f90cf 8rpx,#5f90cf);
+    background-size: 16rpx 16rpx;
+    background-repeat: repeat-x;
+}
+
+.Img image {
+    width: 140rpx;
+    height: 140rpx;
+    margin: 20rpx;
+}
+
+.center {
+    display: flex;
+    flex-direction: column;
+    color: #fff;
+    width: 43%;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    margin-top: 20rpx;
+}
+
+.name {
+    font-size: 29rpx;
+    margin-bottom: 10rpx;
+    font-weight: 700;
+}
+
+.time {
+    font-size: 30rpx;
+}
+
+.bottom {
+    display: flex;
+    flex-direction: column;
+    margin-top: 180rpx;
+    color: #fff;
+    align-items: flex-end;
+    height: 48rpx;
+}
+
+.bottom text {
+    display: block;
+    line-height: 20rpx;
+}
+
+.consume {
+    font-size: 28rpx;
+    word-spacing: 4rpx;
+}
+
+.reduce {
+    font-size: 28rpx;
+    font-weight: 700;
+}
+
+.order {
+    width: 94%;
+    margin-left: 3%;
+    margin-top: 20rpx;
+    z-index: 999;
+    font-size: 30rpx;
+}
+
+.way {
+    width: 94%;
+    height: 80rpx;
+    margin-left: 3%;
+    border-bottom: 1px solid #ccc;
+    line-height: 80rpx;
+}
+
+.way .orderRight {
+    float: right;
+}
+
+.use {
+    text-align: center;
+    border: none;
+}
+
+.bold {
+    font-weight: 700;
+}
+
+.red {
+    color: red;
+}
+
+.foot {
+    position: fixed;
+    bottom: 0;
+    width: 100%;
+    height: 100rpx;
+    color: snow;
+    display: flex;
+    font-size: 36rpx;
+    box-shadow: 5rpx 0rpx 15rpx #ccc;
+}
+
+.footLeft {
+    width: 70%;
+    background-color: #fff;
+    line-height: 100rpx;
+    text-align: center;
+    color: #333;
+}
+
+.footRight {
+    width: 30%;
+    background-color: red;
+    line-height: 100rpx;
+    text-align: center;
+}
+
+.check {
+    text-align: center;
+    line-height: 100rpx;
+    height: 100rpx;
+    color: #333;
+    width: 100%;
+    background: #fff;
+}
+
+.active {
+    background-color: #ccc;
+}
+
+.banner {
+    padding: 20rpx 0 20rpx 0;
+    border-bottom: 2rpx solid #e9e9e9;
+    margin-bottom: 20rpx;
+    margin-left: 3%;
+    margin-right: 3%;
+    overflow: hidden;
+    width: 660rpx;
+}
+
+.banner_wrap {
+    flex-direction: row;
+    margin-top: 20rpx;
+    white-space: nowrap;
+}
+
+.banner_one {
+    margin-right: 20rpx;
+    display: inline-block;
+}
+
+.banner_img {
+    width: 200rpx;
+    height: 200rpx;
+    background-color: #fff;
+}
+
+.banner_title {
+    font-size: 28rpx;
+    letter-spacing: 2rpx;
+    margin: 10rpx 0 10rpx 0;
+    width: 200rpx;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+
+.banner_detail {
+    font-size: 26rpx;
+    color: #d5d5d5;
+    letter-spacing: 2rpx;
+    overflow: hidden;
+}
+
+::-webkit-scrollbar {
+    width: 0;
+    height: 0;
+    color: transparent;
+}
+
+.modal {
+    width: 100%;
+    height: 100%;
+    position: fixed;
+    top: 0;
+    left: 0;
+    background-color: rgba(0,0,0,.5);
+    z-index: 999;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.modal .info {
+    width: 600rpx;
+    height: 700rpx;
+    background-color: #fff;
+    border-radius: 10rpx;
+    box-sizing: border-box;
+    overflow: hidden;
+    padding: 20rpx;
+    font-size: 30rpx;
+}
+
+.modal .info scroll-view {
+    width: 100%;
+    height: 100%;
+}

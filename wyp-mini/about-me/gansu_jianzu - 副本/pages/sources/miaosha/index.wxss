@@ -1,0 +1,81 @@
+.miao-item {
+    padding-left: 24rpx;
+    display: flex;
+    align-items: center;
+    position: relative;
+}
+
+.miao-item::after {
+    position: absolute;
+    left: 184rpx;
+    right: 0;
+    bottom: 0;
+    border-top: 1rpx solid #e5e5e5;
+    background: #e5e5e5;
+    content: '';
+}
+
+.miao-item:last-child::after {
+    border-top: 0px;
+}
+
+.miao-item--thumb {
+    width: 160rpx;
+    height: 160rpx;
+}
+
+.miao-item--content {
+    flex: 1;
+    font-size: 28rpx;
+    margin-left: 24rpx;
+    position: relative;
+    padding: 24rpx 0;
+    border-bottom: 1px solid #f4f4f4;
+}
+
+.miao-item--title {
+    font-size: 30rpx;
+}
+
+.miao-item--price-now {
+    font-size: 34rpx;
+    color: red;
+}
+
+.miao-item--price-mark {
+    font-size: 24rpx;
+}
+
+.miao-item--price-old {
+    font-size: 28rpx;
+    margin-left: 24rpx;
+    text-decoration: line-through;
+    color: #ccc;
+}
+
+.miao-item--btn,.miao-item--btn-invalid {
+    color: #fff;
+    position: absolute;
+    bottom: 24rpx;
+    right: 24rpx;
+    font-size: 28rpx;
+}
+
+.miao-item--btn-invalid {
+    background-color: #f4f4f4;
+    color: #bababa;
+    border: 1px solid #f4f4f4;
+}
+
+.miao-item--progress {
+    display: flex;
+    align-items: center;
+}
+
+.miao-item--store {
+    color: #999;
+}
+
+.miao-item--store,.miao-item--price,.miao-item--time,.miao-item--progress {
+    margin-top: 8rpx;
+}

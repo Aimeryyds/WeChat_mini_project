@@ -1,0 +1,9 @@
+<import src="/pages/giftcard/templates/card/index.wxml"></import>
+<view class="container">
+    <view class="giftcard-list">
+        <navigator hoverClass="none" url="/pages/giftcard/buy/index?urlType=tabGigtCard&id={{item.id}}" wx:for="{{giftcardlistData}}">
+            <template is="giftcard" data="{{text:item.name,imgUrl:item.imgUrl[0],id:item.id}}"></template>
+        </navigator>
+    </view>
+    <view class="giftcard-nodata" wx:if="{{giftcardlistData.length==0}}">暂时无数据</view>
+</view>

@@ -1,0 +1,8 @@
+<template name="footerView">
+    <view bindtap="retryLoading" class="flex footer-view" wx:if="{{errorMsg}}">
+        <view class="loading-clip-rotate flex" style="align-items: center;" wx:if="{{netStateBean.loading}}">
+            <view></view>
+        </view>
+        <text class="f-14rem marginLeft10 infoTextColor">{{errorMsg}}</text>
+    </view>
+</template>

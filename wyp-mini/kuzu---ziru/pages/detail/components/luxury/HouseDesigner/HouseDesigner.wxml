@@ -1,0 +1,15 @@
+<view class="house-designer house-detail _div data-v-eb2fe000" wx:if="{{houseDesigner&&houseDesigner.name}}">
+    <view class="title hz-style _h3 data-v-eb2fe000">专属设计师</view>
+    <view class="designer-wrapper _div data-v-eb2fe000">
+        <view bindtap="__e" class="designer-info _div data-v-eb2fe000" data-event-opts="{{[ [ 'tap',[ [ 'handleJumpH5',['$0'],['houseDesigner.home_page'] ] ] ] ]}}">
+            <image binderror="__e" class="img _img data-v-eb2fe000" data-event-opts="{{[ [ 'error',[ [ 'imgFallback',['$event'] ] ] ] ]}}" src="{{houseDesigner.avatar}}" wx:if="{{!errorFlag&&houseDesigner.avatar}}"></image>
+            <image class="img _img data-v-eb2fe000" src="https://image.ziroom.com/g2m1/M00/4B/DA/ChAFBlt8K6yAWmixAAAPhvrM8Tg062.png" wx:else></image>
+            <view class="info _div data-v-eb2fe000">
+                <view class="name _h4 data-v-eb2fe000" wx:if="{{houseDesigner.name}}">{{houseDesigner.name}}</view>
+                <view class="tag _p data-v-eb2fe000" wx:if="{{tags}}">{{tags}}</view>
+            </view>
+            <view class="iconfont icon-zrk_ic_arrowright _i data-v-eb2fe000" wx:if="{{houseDesigner.home_page}}"></view>
+        </view>
+        <view class="desc _div data-v-eb2fe000" wx:if="{{houseDesigner.estimate}}">{{houseDesigner.estimate}}</view>
+    </view>
+</view>

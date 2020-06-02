@@ -1,0 +1,22 @@
+<import src="../../wxParse/wxParse.wxml"></import>
+<view class="container">
+    <view class="header">
+        <swiper circular="true" indicatorDots="{{imgUrls.length<=1?false:true}}" style="width:100%;height:100%;">
+            <image src="../../images/ic_error_state.png" style="width:100%;height:100%;" wx:if="{{imgUrls.length==0}}"></image>
+            <swiper-item wx:for="{{imgUrls}}">
+                <image class="slide-image" src="{{item==''?'../../images/ic_error_state.png':item}}" style="width:100%;height:100%;"></image>
+            </swiper-item>
+        </swiper>
+    </view>
+    <view class="body">
+        <view class="title">
+            <text class="name">{{title}}</text>
+            <view class="line" wx:if="{{title.length!=0}}"></view>
+        </view>
+        <view class="basis-rich">
+            <template is="wxParse" data="{{wxParseData:introductInfo.dataNode.nodes}}"></template>
+        </view>
+    </view>
+</view>
+<import src="../../common/template.wxml"></import>
+<template is="bottomlogo" data="{{AgentConfig:AgentConfig}}"></template>

@@ -1,0 +1,11 @@
+<view class="container log-list " style="padding-top:70px;">
+    <my-component bind:myevent="myEventListener" innerText="个人信息"></my-component>
+    <view class="main" style=" margin-top: {{myHight}}px"></view>
+    <view bindtap="navTonew" class="user-list" data-url="{{item.url}}" wx:for="{{userList}}" wx:key="index">
+        <view class="list-l">{{item.name}}</view>
+        <view class="list-r" wx:if="{{index==0}}">
+            <image class="icon-img08" src="{{item.Rcont}}"></image>
+        </view>
+        <view class="list-r" wx:else>{{item.Rcont}}</view>
+    </view>
+</view>

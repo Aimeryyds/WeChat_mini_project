@@ -1,0 +1,59 @@
+<view class="load_style" hidden="{{loading}}">
+    <view class="loading">
+        <image class="loading-img" src="/img/resources/load.png"></image>
+    </view>
+</view>
+<view class="bottom-bg" style="min-height:{{gaodu2}}rpx">
+    <view class="sqPage-con">
+        <view class="sqList-box">
+            <view class="sqList" wx:for="{{kjList.activities}}" wx:key="index">
+                <view class="kj-left">
+                    <image mode="widthFix" src="{{item.img_left_full}}"></image>
+                </view>
+                <view class="kj-right ylqSty">
+                    <image mode="widthFix" src="{{item.img_right_full}}"></image>
+                    <image class="ylq-tag" src="https://res.5i5j.com/wap/event/year/images/icon-yiling.png"></image>
+                </view>
+            </view>
+        </view>
+        <view bindtap="saleList" class="anniu2">
+            <image src="https://res.5i5j.com/wap/event/year/images/btn-kan.png"></image>
+        </view>
+    </view>
+    <view class="pdbottom" wx:if="{{kjList.activities.length>0}}"></view>
+    <view class="popupBox">
+        <view bindtap="mztkBtn" class="mztk">
+            <image src="https://res.5i5j.com/wap/event/year/images/icon-sm.png"></image>免责条款
+        </view>
+        <view bindtap="hdsmBtn" class="hdsm">
+            <image src="https://res.5i5j.com/wap/event/year/images/icon-sm.png"></image>活动说明
+        </view>
+    </view>
+</view>
+<view class="mzTan" hidden="{{mzsmMask}}">
+    <view class="mianzetiaokuan" hidden="{{mianzetk}}">
+        <view class="mzTit">免责条款</view>
+        <view class="mzCon">
+            <rich-text nodes="{{myrich}}" type="text"></rich-text>
+        </view>
+    </view>
+    <view class="huodongshuoming" hidden="{{huodongsm}}">
+        <view class="mzTit">活动说明</view>
+        <view class="mzCon">
+            <rich-text nodes="{{myrich2}}" type="text"></rich-text>
+        </view>
+    </view>
+</view>
+<view bindtap="colseMask" class="maskSty-close" hidden="{{mzsmMask}}">
+    <image src="https://res.5i5j.com/wap/event/year/images/icon-close.png"></image>
+</view>
+<view class="tanMask" hidden="{{maskSty}}"></view>
+<view class="receive" hidden="{{remaskSty}}" wx:if="{{lingquguo!=1}}">
+    <view class="receivetit">领取成功</view>
+    <view class="receivecon">券码以短信的形式发放到您的手机上，请注意查收！（如未找到该短信，请在已拦截短信中查看）</view>
+    <view class="receivecon">也可用当前账号登录<text>最新版本</text>我爱我家APP，在“我的-卡券”中查看。</view>
+    <view bindtap="knowBtn" class="knowBtn">
+        <image src="https://res.5i5j.com/wap/event/year/images/btn-zhidao.png"></image>
+    </view>
+</view>
+<view class="receiveMask" hidden="{{remaskSty}}" wx:if="{{lingquguo!=1}}"></view>

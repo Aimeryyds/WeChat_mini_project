@@ -1,0 +1,22 @@
+<view class="map-tab" style="{{'height:'+mapHeight+'px'}}">
+    <view class="map-tab-bar">
+        <view class="map-tab-box">
+            <view bindtap="__e" class="{{['map-tab-list vertical-align',item.selected?'actives':'']}}" data-event-opts="{{[ [ 'tap',[ [ 'getAround',['$event'] ] ] ] ]}}" data-index="{{index}}" data-type="{{item.id}}" wx:for="{{aroundList}}" wx:key="index">{{''+item.name+''}}</view>
+        </view>
+    </view>
+    <map bindcallouttap="__e" bindmarkertap="__e" class="map" data-event-opts="{{[ [ 'callouttap',[ [ 'markertap',['$event'] ] ] ],[ 'markertap',[ [ 'markertap',['$event'] ] ] ] ]}}" id="map" includePoints="{{includePoints}}" latitude="{{mapData.latitude}}" longitude="{{mapData.longitude}}" markers="{{mapData.markers}}" polyline="{{polyline}}" scale="14" style="{{'width: 100%;height: '+mapHeight-44+'px'}}"></map>
+    <cover-view bindtap="__e" class="map-button" data-event-opts="{{[ [ 'tap',[ [ 'findWayRoute',['$event'] ] ] ] ]}}" wx:if="{{!typeStatus}}">
+        <cover-image class="way-img" src="https://zhuanti.danke.com.cn/way_icon.png"></cover-image>
+        <cover-view>路线</cover-view>
+    </cover-view>
+    <cover-view bindtap="__e" class="maker-click" data-event-opts="{{[ [ 'tap',[ [ 'findWayRoute',['$event'] ] ] ] ]}}" data-name="{{mapData.markers[markerId].callout.content}}" wx:if="{{typeStatus&&mapData.markers[markerId].callout.content}}">
+        <cover-view class="address-name">{{''+mapData.markers[markerId].callout.content+''}}</cover-view>
+        <cover-view class="addressInfo">
+            <cover-view class="address">{{''+mapData.markers[markerId].callout.address+''}}</cover-view>
+            <cover-view class="distance">
+                <cover-image class="d-arrow" src="https://zhuanti.danke.com.cn/position.png"></cover-image>
+                <cover-view>{{'步行距离为'+distanceText[markerId]}}</cover-view>
+            </cover-view>
+        </cover-view>
+    </cover-view>
+</view>

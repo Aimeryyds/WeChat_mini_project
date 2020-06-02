@@ -1,0 +1,60 @@
+<import src="../common/footer.swan"></import>
+<import src="../common/searchBar.swan"></import>
+<import src="../common/simpleRecipe.swan"></import>
+<view class="page">
+    <taskbarGuide></taskbarGuide>
+    <view class="header">
+        <view class="search_view" style="background-color:white">
+            <view class="search-bar-container">
+                <view bindtap="clickFocused" class="search-container" wx:if="{{!focused}}">
+                    <view class="search-icon-contaienr">
+                        <image class="search-icon" mode="aspectFit" src="/images/home_search_icon.png"></image>
+                    </view>
+                    <view class="search-unfocused-text">{{keyword}}</view>
+                </view>
+                <view class="search-container" wx:else>
+                    <input bindblur="onSearchBlur" bindconfirm="searchConfirm" bindinput="searchInput" class="search-input-view" focus="{{focused}}" name="searchinput" placeholder="搜你想吃的" value="{{keyword}}"></input>
+                </view>
+                <view bindtap="searchButtonPressed" class="search-button">搜索</view>
+            </view>
+        </view>
+        <view class="order_view">
+            <view bindtap="firstOrderPressed" class="order_view_first">
+                <view class="order_view_first_text" style="color:{{orderID==0?'#FF7029':'#333'}};font-weight:{{orderID==0?'bold':'normal'}}">综合最佳</view>
+                <view class="order_view_first_separator" style="background-color:{{orderID==0?'#FF7029':'white'}}"></view>
+            </view>
+            <view bindtap="secondOrderPressed" class="order_view_second">
+                <view class="order_view_second_text" style="color:{{orderID==2?'#FF7029':'#333'}};font-weight:{{orderID==2?'bold':'normal'}}">收藏最多</view>
+                <view class="order_view_second_separator" style="background-color:{{orderID==2?'#FF7029':'white'}}"></view>
+            </view>
+            <view bindtap="thirdOrderPressed" class="order_view_third">
+                <view class="order_view_third_text" style="color:{{orderID==3?'#FF7029':'#333'}};font-weight:{{orderID==3?'bold':'normal'}}">做过最多</view>
+                <view class="order_view_third_separator" style="background-color:{{orderID==3?'#FF7029':'white'}}"></view>
+            </view>
+        </view>
+    </view>
+    <view class="recipe_list">
+        <view class="recipe-simple-item" wx:if="{{item.type==1}}" wx:for="{{array}}" wx:key="key">
+            <view bindtap="recipeItemPressed" class="recipe-simple-content" data-recipe-id="{{item.recipe.id}}">
+                <view class="recipe-simple-image-view" style="background-image:url({{item.recipe.p}})">
+                    <image class="recipe-simple-image" src="/images/recipe_button_play.png" wx:if="{{item.recipe.vu.length>0||item.recipe.vfurl.length>0}}"></image>
+                </view>
+                <view class="recipe-simple-detail">
+                    <view class="recipe-simple-title" style="-webkit-line-clamp:{{item.recipe.major?'1':'2'}}">
+							{{item.recipe.n}}</view>
+                    <view class="recipe-simple-ingredients">
+                        <text wx:for="{{item.recipe.major}}" wx:key="key">{{item.title}} </text>
+                    </view>
+                    <view class="recipe-simple-nickname">{{item.recipe.a.n}}</view>
+                    <view class="recipe-simple-favo-container">
+                        <view class="recipe-simple-favo">
+                            <a wx:if="{{item.recipe.fc}}">{{item.recipe.fc}}收藏 </a>
+                            <a wx:if="{{item.recipe.dc}}">{{item.recipe.dc}}作品</a>
+                        </view>
+                    </view>
+                </view>
+            </view>
+        </view>
+        <template is="footer" data="{{footerState:footerState}}"></template>
+    </view>
+</view>

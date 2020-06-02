@@ -1,0 +1,111 @@
+<view class="main">
+    <view class="search_box">
+        <view class="search_box_content" style="{{styles}}">
+            <image bindtap="subSearch" src="{{config.src}}" style="{{imgstyle}}"></image>
+            <input bindblur="blur" bindconfirm="subSearch" bindinput="inputSearch" focus="ture" placeholder="{{config.defaultText}}" style="{{inputstyle}}" type="search" value="{{keywords}}"></input>
+            <view class="search_history_lists" style="top:{{config.style.height*2}}rpx;" wx:if="{{isWritting}}">
+                <view bindtap="keyDownSearch" data-index="{{index}}" wx:for="{{searchTitle}}">{{item.title}}</view>
+            </view>
+        </view>
+        <view class="directBtns" wx:if="{{articles.length==0&&products.length==0}}">
+            <view class="directBtnsBox">
+                <view class="search-h1">热门搜索</view>
+                <view class="search-ul">
+                    <text bindtap="subHotSearch" class="search-li" data-index="{{index}}" wx:for="{{hotSearchArr}}">{{item}}</text>
+                </view>
+            </view>
+        </view>
+    </view>
+    <view class="article-list" wx:if="{{type=='article'}}">
+        <view class="article-list-container">
+            <view class="article-list-ul">
+                <view bindtap="navigateToDetail" class="article-list-li clearFix" data-aid="{{item.id}}" wx:for="{{articles}}" wx:key="{{item.id}}">
+                    <view class="article-list-li-img">
+                        <image src="{{item.doc_image}}" style="width: 100%;height: 100%;"></image>
+                    </view>
+                    <view class="list-li-content">
+                        <view class="list-li-title">
+                            <text class="cate_title color">[{{item.category_name}}]</text>
+                            <text>{{item.title}}</text>
+                        </view>
+                        <view class="list-li-detail">{{item.intro}}</view>
+                        <view class="list-li-info clearFix">
+                            <text class="fl">
+                                <text class="iconfont icon-weibiaoti-ss"></text>{{item.v_num}}</text>
+                            <text class="fr">
+                                <text class="iconfont icon-cloud-time"></text>{{item.publish_time}}</text>
+                        </view>
+                    </view>
+                </view>
+                <view bindtap="{{loadMore}}" class="list-btn" wx:if="{{articles.length&&pagerShow}}">加载更多</view>
+            </view>
+        </view>
+    </view>
+    <block wx:if="{{type=='product'}}">
+        <view class="product-list" wx:if="{{products.length}}">
+            <view class="product-list-nav">
+                <view class="{{barIdx==item.type?'active':''}} nav-item" wx:for="{{searchBar}}" wx:key="{{index}}">
+                    <view bindtap="resortBy" class="product_list_title" data-sortidx="{{index}}">{{item.alias}}</view>
+                    <view class="operate" wx:if="{{item.type!='default'}}">
+                        <text class="{{item.value=='desc'?'on':''}} iconfont icon-shangxiajiantou1"></text>
+                        <text class="{{item.value=='asc'?'on':''}} iconfont icon-shangxiajiantou"></text>
+                    </view>
+                </view>
+            </view>
+            <view class="product-list-content">
+                <view bindtap="navigateToDetail" class="product-list-item" data-aid="{{item.id}}" style="{{styles.li_box}}" wx:for="{{products}}" wx:key="{{item.id}}">
+                    <image mode="aspectFit" src="{{item.doc_image}}" style="{{styles.thumb}}"></image>
+                    <view class="product-list-item-detail">
+                        <view class="product-name">{{item.title}}</view>
+                        <view class="last_price">￥{{item.discount_price}}</view>
+                        <view>市场价：￥{{item.price}}</view>
+                        <view class="desc tooLong">
+                            <view wx:if="{{item.intro.length&&item.intro!='WxParsePlaceHolder'}}">
+                                <template is="wxParse" data="{{wxParseData:intro}}" wx:if="{{index==idx}}" wx:for="{{prdintroArr}}" wx:for-index="idx" wx:for-item="intro" wx:key="{{idx}}"></template>
+                            </view>
+                        </view>
+                        <text catchtap="{{directAddCart}}" class="iconfont icon-jiarugouwuche" data-id="{{item.id}}" wx:if="{{param.display.shopping_cart}}"></text>
+                    </view>
+                </view>
+            </view>
+            <view bindtap="loadMore" class="list-btn" wx:if="{{pagerShow}}">加载更多</view>
+            <view>
+                <view class="mask" wx:if="{{currentState}}"></view>
+                <view class="dig {{showBar?'dig_special':''}}" wx:if="{{currentState}}">
+                    <view class="detail-cart-box" style="padding-bottom:20rpx;">
+                        <view class="detail-cart-list">
+                            <view class="detail-cart-list-top">
+                                <image class="detail-cart-thumb" mode="aspectFit" src="{{detail_data.feature_img}}"></image>
+                                <view>
+                                    <text class="detail-cart-pro-name tooLong">{{detail_data.name}}</text>
+                                    <text class="detail-cart-pro-price cart_color small_font">价格：<text>{{detail_data.price}}</text>
+                                    </text>
+                                </view>
+                                <icon bindtap="{{changState}}" class="digClose" color="#aaa" size="23" type="cancel"></icon>
+                            </view>
+                            <scroll-view scrollY style="max-height: 200px;">
+                                <view class="detail-cart-property" style="text-align: left;">
+                                    <view class="property-list border_bottom" wx:for="{{propertys}}" wx:for-index="id" wx:key="{{item}}">
+                                        <view class="property-list-name">{{item.name}}</view>
+                                        <view class="property-list-li">
+                                            <text bindtap="{{switchDetState}}" class="{{detail.detail_state}}" data-did="{{detail.id}}" data-id="{{id}}" data-index="{{index}}" data-pid="{{item.id}}" wx:for="{{item.details}}" wx:for-item="detail" wx:key="{{item}}">{{detail.detail_name}}</text>
+                                        </view>
+                                    </view>
+                                </view>
+                                <view class="detail-cart-count-box" style="text-align: left;">
+                                    <text class="detail-cart-count-tex">数量:</text>
+                                    <text bindtap="{{minusCount}}" class="detail-cart-count-down">-</text>
+                                    <text class="detail-cart-count-num">{{food.num}}</text>
+                                    <text bindtap="{{addCount}}" class="detail-cart-count-add">+</text>
+                                    <text class="detail-cart-count-surplus">库存:<text>{{detail_data.num}}</text>
+                                    </text>
+                                </view>
+                            </scroll-view>
+                            <view bindtap="{{directAddCartOK}}" class="directTocart_Btn cart_bg_color2">确定</view>
+                        </view>
+                    </view>
+                </view>
+            </view>
+        </view>
+    </block>
+</view>

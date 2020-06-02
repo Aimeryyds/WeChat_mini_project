@@ -1,0 +1,31 @@
+<import src="/dist/steps/index.wxml"></import>
+<import src="/dist/toptips/index.wxml"></import>
+<view class="container">
+    <view class="zan-panel zan-panel__no-margin-top" style="padding:20px;background-color:#fff;display:flex;flex-direction:column">
+        <view style="display:flex;flex-direction:row;justify-content:center;align-items:center;padding:10px">
+            <image src="https://b.yzcdn.cn/v2/image/wap/success_small@2x.png" style="width:20px;height:20px"></image>
+            <view style=" background-color:#e5e5e5;height:1px;width:375rpx"></view>
+            <view style="background-color:#e5e5e5;border-radius:50%;width:10px;height:10px"></view>
+        </view>
+        <view style="display:flex;flex-direction:row;justify-content:space-around;align-items:center">
+            <text>验证旧手机</text>
+            <text style="color:#ddd">绑定新手机</text>
+        </view>
+    </view>
+    <form bindsubmit="formSubmit">
+        <view class="zan-panel" style="background-color:#fff;margin:12rpx 0;font-size:28rpx;">
+            <view class="zan-cell zan-form__item ">
+                <input disabled bindinput="verifyPhone" class="zan-form__input zan-cell__bd" maxlength="11" name="mobile" placeholder="请输入手机号码" type="number" value="{{fomatMobile}}"></input>
+                <view class="verifyCode" wx:if="{{countDown}}">重新发送({{count}})</view>
+                <view bindtap="getCode" class="red-verifyCode" wx:else>获取验证码</view>
+            </view>
+            <view class="zan-cell zan-form__item">
+                <input class="zan-form__input zan-cell__bd" maxlength="20" name="verifyCode" placeholder="请输入验证码" type="number"></input>
+            </view>
+        </view>
+        <view style="margin-top:40rpx;">
+            <button class="red-new-btn" formType="submit">下一步</button>
+        </view>
+    </form>
+</view>
+<template is="zan-toptips" data="{{zanTopTips:zanTopTips}}"></template>

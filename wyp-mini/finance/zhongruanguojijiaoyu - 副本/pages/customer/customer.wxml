@@ -1,0 +1,14 @@
+<view class="btn-container">
+    <view bindtap="makePhoneCall" class="btn">
+    客服热线
+  </view>
+    <button class="btn" openType="contact">在线客服</button>
+</view>
+<view class="list-container" wx:for="{{customer}}" wx:key="{{item.id}}">
+    <view bindtap="questionClick" class="question" id="{{item.id}}">
+      {{item.q}}
+  </view>
+    <view class="answer" wx:if="{{item.isShow}}">
+      {{item.a}}
+  </view>
+</view>

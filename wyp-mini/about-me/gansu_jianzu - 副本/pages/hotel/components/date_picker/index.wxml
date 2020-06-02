@@ -1,0 +1,29 @@
+<view class="main">
+    <view class="header">
+        <view class="header-day weekend">日</view>
+        <view class="header-day">一</view>
+        <view class="header-day">二</view>
+        <view class="header-day">三</view>
+        <view class="header-day">四</view>
+        <view class="header-day">五</view>
+        <view class="header-day weekend">六</view>
+    </view>
+    <view bind:clickday="handleSelectDay" style="margin-top: 64rpx;">
+        <slot></slot>
+    </view>
+</view>
+<wxs module="date">
+function parseYear(currYear, monthIndex) {
+    var date = getDate(currYear, monthIndex);
+    return (date.getFullYear(date))
+};
+
+function parseMonth(currYear, monthIndex) {
+    var date = getDate(currYear, monthIndex);
+    return (date.getMonth(date))
+};
+module.exports = ({
+    getYear: parseYear,
+    getMonth: parseMonth,
+});
+</wxs>

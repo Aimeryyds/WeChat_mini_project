@@ -1,0 +1,14 @@
+<cover-view class="swiper">
+    <cover-view class="container">
+        <cover-view class="flex-wrp">
+            <cover-view bindtap="tourl" bindtouchend="endmove" bindtouchmove="movetap" bindtouchstart="startmove" class="{{curidx==index?'on flex-item':'flex-item'}}" data-type="{{item.activitytype}}" wx:for="{{list}}" wx:key="index">
+                <cover-image class="img" src="{{item.picturepath}}"></cover-image>
+            </cover-view>
+            <cover-view class="btns">
+                <cover-view class="ib">
+                    <cover-view class="btn-item {{curidx==index?'on':''}}" wx:for="{{list}}" wx:key="index"></cover-view>
+                </cover-view>
+            </cover-view>
+        </cover-view>
+    </cover-view>
+</cover-view>

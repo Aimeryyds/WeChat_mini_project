@@ -1,0 +1,13 @@
+<template name="top-model">
+    <form bindsubmit="onSubmit" catchtap="gotoArticle" class="top-item {{clickedList[item.newsId]==item.newsId?'clicked':''}}" data-index="{{index}}" data-link="{{item.link}}" data-newsid="{{item.newsId}}" data-newstype="{{item.newsType}}" data-pics="{{item.pics}}" data-recominfo="{{item.recominfo}}" data-templatetype="{{item.templateType}}" reportSubmit="true" wx:if="{{item.newsType!==8}}" wx:for="{{topNewsList}}" wx:key="newsId">
+        <button formType="submit">
+            <view class="news-text">
+                <view class="title">{{item.title}}</view>
+                <view class="source">
+                    <view class="media">{{item.media}}</view>
+                    <view class="set-top">置顶</view>
+                </view>
+            </view>
+        </button>
+    </form>
+</template>

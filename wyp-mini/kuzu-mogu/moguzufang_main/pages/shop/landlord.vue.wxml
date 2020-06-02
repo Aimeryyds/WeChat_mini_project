@@ -1,0 +1,56 @@
+<template name="55c583f5">
+    <view class="_view 55c583f5">
+        <image class="_image 55c583f5 banner" src="{{info.banner}}"></image>
+        <view class="_view 55c583f5 content-brand">
+            <image class="_image 55c583f5 brand-page-img" src="{{info.img}}" wx:if="{{info.img}}"></image>
+            <view class="_view 55c583f5 title" wx:if="{{info.title}}">
+                <view class="_view 55c583f5 h1">{{info.title}}<image bindtap="handleProxy" class="_image 55c583f5" data-comkey="{{$k}}" data-eventid="{{'55c583f5-0'}}" src="https://assets.mgzf.com/appimg/2da049077ddd7c6bef39de5360e60ad6.png" style="width: 44rpx;height: 30rpx;margin-left: 20rpx;vertical-align: middle" wx:if="{{info.businessLicenseUrl}}"></image>
+                </view>
+                <view class="_view 55c583f5 iconfont stars">
+                    <text class="_text 55c583f5 i mgic-shiwujiao" key="{{i}}" wx:for="{{5}}" wx:for-item="i" wx:key="i"></text>
+                </view>
+                <text bindtap="handleProxy" class="_text 55c583f5 brand-intro" data-comkey="{{$k}}" data-eventid="{{'55c583f5-1'}}" wx:if="{{info.description}}">品牌介绍</text>
+            </view>
+            <view class="_view 55c583f5 agent-city" wx:if="{{isPrivateShops&&cities.length>1}}">
+                <picker bindchange="handleProxy" class="_picker 55c583f5" data-comkey="{{$k}}" data-eventid="{{'55c583f5-2'}}" range="{{cities}}" rangeKey="cityName" value="{{cityIndex}}">
+                    <view class="_view 55c583f5 city-area">{{city.cityName}}<view class="_i 55c583f5 arrow-down"></view>
+                    </view>
+                </picker>
+            </view>
+        </view>
+        <view class="_view 55c583f5 description-expand" wx:if="{{descriptionExpand}}">
+            <view class="_view 55c583f5 brand-page-title1">{{info.title}}</view>
+            <view class="_view 55c583f5 brand-page-desc">{{info.description}}</view>
+            <view bindtap="handleProxy" class="_view 55c583f5 iconfont mgic-chahao" data-comkey="{{$k}}" data-eventid="{{'55c583f5-3'}}"></view>
+        </view>
+        <view class="_view 55c583f5 landlord-renter" wx:if="{{isPrivateShops}}">
+            <view bindtap="handleProxy" class="_view 55c583f5 landlord-renter-item" data-comkey="{{$k}}" data-eventid="{{'55c583f5-4'}}">
+                <view class="_view 55c583f5 option-icon mgic-pay"></view>
+                <view class="_view 55c583f5 option-title">支付房租</view>
+                <text class="_text 55c583f5 option-tips" wx:if="{{renterInfo.unpaidOrderCount>0}}">{{renterInfo.unpaidOrderCount}}</text>
+            </view>
+            <view bindtap="handleProxy" class="_view 55c583f5 landlord-renter-item" data-comkey="{{$k}}" data-eventid="{{'55c583f5-5'}}">
+                <view class="_view 55c583f5 option-icon mgic-zuyue"></view>
+                <view class="_view 55c583f5 option-title">租约管理</view>
+                <text class="_text 55c583f5 option-tips" wx:if="{{renterInfo.unconfirmedLeaseCount>0}}">{{renterInfo.unconfirmedLeaseCount}}</text>
+            </view>
+            <view bindtap="handleProxy" class="_view 55c583f5 landlord-renter-item" data-comkey="{{$k}}" data-eventid="{{'55c583f5-6'}}">
+                <view class="_view 55c583f5 option-icon mgic-maintain"></view>
+                <view class="_view 55c583f5 option-title">报修服务</view>
+            </view>
+        </view>
+        <view bindtap="handleProxy" class="_view 55c583f5 coupon-tips" data-comkey="{{$k}}" data-eventid="{{'55c583f5-7'}}" onTap="toggleCouponsDialog" wx:if="{{isPrivateShops&&activity.landlordCoupons.length>0}}">
+            <image alt class="_image 55c583f5 tips-icon" src="https://assets.mgzf.com/appimg/0625e33d8e2eee9ed05f17a260a60127.png"></image>
+            <view class="_view 55c583f5 tips-text">限量领取<view class="_view 55c583f5 tips-i"></view>
+            </view>
+        </view>
+        <template is="e0bfbfde" data="{{...$root['0'],...$root[$kk+'55c583f5-0'],$root:$root}}" wx:if="{{activity}}"></template>
+        <template is="4acf755c" data="{{...$root['0'],...$root[$kk+'55c583f5-1'],$root:$root}}" wx:if="{{refresh}}"></template>
+        <template is="aa63a2de" data="{{...$root['0'],...$root[$kk+'55c583f5-2'],$root:$root}}" wx:if="{{showLoginDialog}}"></template>
+        <template is="31e93c2c" data="{{...$root['0'],...$root[$kk+'55c583f5-3'],$root:$root}}"></template>
+    </view>
+</template>
+<import src="/components/couponDialog/index.vue.wxml"></import>
+<import src="/components/listCollection.vue.wxml"></import>
+<import src="/components/loginDialog.vue.wxml"></import>
+<import src="/components/bottomTab.vue.wxml"></import>

@@ -1,0 +1,25 @@
+<view class="form_tit" wx:if="{{f_item.title}}">{{f_item.title}}<text class="ture_color" wx:if="{{f_item.empty}}">*</text>
+</view>
+<view class="form_li time_box right_arrow">
+    <view class="star_time">
+        <view class="time_input">
+            <picker bindchange="listen_time_two" data-key="1" end="{{f_item.end}}" id="{{f_item.name}}" mode="date" start="{{f_item.star}}" value="{{f_item.default1}}">
+
+        {{form_data[f_item.name+'_1']?form_data[f_item.name+'_1']:f_item.default1?f_item.default1:'开始时间'}}  
+
+        </picker>
+        </view>
+    </view>
+    <view class="time_link">至</view>
+    <view class="end_time">
+        <view class="time_input">
+            <picker bindchange="listen_time_two" data-key="2" end="{{f_item.end}}" id="{{f_item.name}}" mode="date" start="{{data[f_item.name+'_1']}}" value="{{f_item.default2}}">
+
+        {{form_data[f_item.name+'_2']?form_data[f_item.name+'_2']:f_item.default2?f_item.default2:'结束时间'}}  
+        
+        </picker>
+        </view>
+    </view>
+    <view class="clear"></view>
+</view>
+<input name="{{f_item.name}}" style="display:none" value="{{form_data[f_item.name+'_1']}}至{{form_data[f_item.name+'_2']}}"></input>

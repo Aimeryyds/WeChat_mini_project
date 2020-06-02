@@ -1,0 +1,33 @@
+var filter = ({
+    replaceTo: (function(value) {
+        if (value != null && value.indexOf(',') != -1) {
+            var rep = getRegExp(',', 'g');
+            return (value.replace(rep, '/'))
+        } else {
+            return (value)
+        }
+    }),
+    shopRep: (function(value) {
+        if (value != null && value.indexOf(',') != -1) {
+            return (value.split('/'))
+        } else {
+            return (value)
+        }
+    }),
+    dataSub: (function(value) {
+        if (value != null && value.length > 4) {
+            return (value.slice(0, 4))
+        } else {
+            return (value)
+        }
+    }),
+    scoreOne: (function(value) {
+        return (value.toFixed(1))
+    }),
+});
+module.exports = ({
+    replaceTo: filter.replaceTo,
+    shopRep: filter.shopRep,
+    dataSub: filter.dataSub,
+    scoreOne: filter.scoreOne,
+});

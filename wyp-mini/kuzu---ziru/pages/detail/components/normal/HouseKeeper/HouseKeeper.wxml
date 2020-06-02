@@ -1,0 +1,75 @@
+<view class="house-keeper house-detail _div data-v-3bed0d64" wx:if="{{keeper&&keeper.length}}">
+    <view class="block-title _h2 data-v-3bed0d64">{{title}}</view>
+    <view class="keeper-card _div data-v-3bed0d64" wx:if="{{keeper.length===1}}">
+        <view class="{{['corn-wrap _div data-v-3bed0d64',isImageError[0]||!keeper[0].headCorn?'error':'']}}">
+            <image alt="headCorn" binderror="__e" class="corn _img data-v-3bed0d64" data-event-opts="{{[ [ 'error',[ [ 'handleImageError',[0] ] ] ] ]}}" src="{{keeper[0].headCorn}}" wx:if="{{!isImageError[0]&&keeper[0].headCorn}}"></image>
+            <image alt="headCorn" class="corn _img data-v-3bed0d64" src="{{defaultKeeper}}" wx:else></image>
+        </view>
+        <view class="info _div data-v-3bed0d64">
+            <view class="top _div data-v-3bed0d64">
+                <view class="name _h4 data-v-3bed0d64">{{keeper[0].keeperName}}</view>
+                <view class="detail _p data-v-3bed0d64">
+                    <label class="_span data-v-3bed0d64" style="margin-right:10rpx;" wx:if="{{keeper[0].lookCount}}">带看<view class="_b data-v-3bed0d64">{{keeper[0].lookCount}}</view>次</label>
+                    <label class="_span data-v-3bed0d64" wx:if="{{keeper[0].commentRate}}">好评率<view class="_b data-v-3bed0d64">{{keeper[0].commentRate}}</view>
+                    </label>
+                </view>
+                <view class="desc _p data-v-3bed0d64" wx:if="{{keeper[0].keeperTag||keeper[0].keeperPresent}}">{{keeper[0].keeperTag||keeper[0].keeperPresent}}</view>
+            </view>
+            <view class="btn-group _div data-v-3bed0d64">
+                <view bindtap="__e" class="im-btn _div data-v-3bed0d64" data-event-opts="{{[ [ 'tap',[ [ 'handleAlertApp',['$event'] ] ] ] ]}}" wx:if="{{keeper[0].has_IM!==0}}">在线联系</view>
+                <view bindtap="__e" class="contact-btn _div data-v-3bed0d64" data-event-opts="{{[ [ 'tap',[ [ 'handleCallKeeper',['$0'],['keeper.__$n0'] ] ] ] ]}}" wx:if="{{keeper[0].keeperPhone}}">
+                    <view class="png-icon icon-telephone _i data-v-3bed0d64"></view>联系Ta</view>
+            </view>
+        </view>
+    </view>
+    <block wx:else>
+        <view class="keeper-list _div data-v-3bed0d64" wx:if="{{keeper.length>1}}">
+            <view class="keeper-item _div data-v-3bed0d64" wx:for="{{keeper}}" wx:for-index="i" wx:key="keeperId">
+                <view class="{{['corn-wrap _div data-v-3bed0d64',isImageError[i+1]?'error':'']}}">
+                    <image alt="corn" binderror="__e" class="corn data-v-3bed0d64" data-event-opts="{{[ [ 'error',[ [ 'handleImageError',[i+1] ] ] ] ]}}" mode="widthFix" src="{{item.headCorn}}" wx:if="{{!isImageError[i+1]&&item.headCorn}}"></image>
+                    <image alt="corn" class="corn data-v-3bed0d64" mode="widthFix" src="{{defaultKeeper}}" wx:else></image>
+                </view>
+                <view class="info _div data-v-3bed0d64">
+                    <view class="top _div data-v-3bed0d64">
+                        <view class="left _div data-v-3bed0d64">
+                            <view class="name _h4 data-v-3bed0d64">{{item.keeperName}}</view>
+                            <view class="detail _p data-v-3bed0d64">
+                                <label class="_span data-v-3bed0d64" wx:if="{{item.lookCount}}">带看<view class="_b data-v-3bed0d64">{{item.lookCount}}</view>次</label>
+                                <label class="_span data-v-3bed0d64" wx:if="{{item.commentRate}}">好评率<view class="_b data-v-3bed0d64">{{item.commentRate}}</view>
+                                </label>
+                            </view>
+                        </view>
+                        <view class="right _div data-v-3bed0d64">
+                            <view bindtap="__e" class="im-btn _div data-v-3bed0d64" data-event-opts="{{[ [ 'tap',[ [ 'handleAlertApp',['$event'] ] ] ] ]}}" wx:if="{{item.has_IM!==0}}"></view>
+                            <view bindtap="__e" class="contact-btn _div data-v-3bed0d64" data-event-opts="{{[ [ 'tap',[ [ 'handleCallKeeper',['$0'],[ [ ['keeper','keeperId',item.keeperId] ] ] ] ] ] ]}}" wx:if="{{item.has_phone!==0&&item.keeperPhone}}"></view>
+                        </view>
+                    </view>
+                    <view class="desc _div data-v-3bed0d64" wx:if="{{item.keeperTag}}">{{''+item.keeperTag+''}}</view>
+                </view>
+            </view>
+        </view>
+    </block>
+    <popup-wrapper backgroundColor="#fff" bind:__l="__l" class="data-v-3bed0d64 vue-ref" data-ref="servicesPopup" height="75%" maskClick="{{true}}" maskShow="{{true}}" popupId="{{1}}" transition="slider" type="bottom" vueId="1" vueSlots="{{['default']}}">
+        <view class="_div data-v-3bed0d64" wx:if="{{services}}">
+            <view class="modal-block _div data-v-3bed0d64" wx:for="{{services}}" wx:for-index="i" wx:key="i">
+                <view class="modal-title _h3 data-v-3bed0d64">{{item.title+''}}<view bindtap="__e" class="more _p data-v-3bed0d64" data-event-opts="{{[ [ 'tap',[ [ 'handleJumpH5',['$0'],[ [ ['services','',i,'url'] ] ] ] ] ] ]}}" wx:if="{{item.url}}">查看更多 ></view>
+                </view>
+                <view class="modal-content _div data-v-3bed0d64">
+                    <view class="modal-line bb1 _div data-v-3bed0d64" wx:for="{{item.item}}" wx:for-index="j" wx:for-item="l" wx:key="j">{{''+l.desc+''}}<view bindtap="__e" class="link mcolor _p data-v-3bed0d64" data-event-opts="{{[ [ 'tap',[ [ 'handleJumpH5',['$0'],[ [ ['services','',i],['item','',j,'url'] ] ] ] ] ] ]}}" wx:if="{{l.url}}">了解更多 ></view>
+                    </view>
+                </view>
+            </view>
+        </view>
+        <view class="_div data-v-3bed0d64" wx:else>
+            <view class="skeleton s h _div data-v-3bed0d64"></view>
+            <view class="skeleton l _div data-v-3bed0d64"></view>
+            <view class="skeleton s _div data-v-3bed0d64"></view>
+            <view class="skeleton l _div data-v-3bed0d64"></view>
+            <view class="skeleton l _div data-v-3bed0d64"></view>
+            <view class="skeleton s _div data-v-3bed0d64"></view>
+            <view class="skeleton l _div data-v-3bed0d64"></view>
+            <view class="skeleton l _div data-v-3bed0d64"></view>
+            <view class="skeleton _div data-v-3bed0d64"></view>
+        </view>
+    </popup-wrapper>
+</view>

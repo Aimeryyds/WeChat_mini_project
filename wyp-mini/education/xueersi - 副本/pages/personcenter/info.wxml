@@ -1,0 +1,46 @@
+<view class="box">
+    <view bindtap="chooseImg" class="change-headimg">
+        <image binderror="errorImg" class="imgsrc" mode="aspectFill" src="{{studentInfo.pic}}" wx:if="{{studentInfo.pic}}"></image>
+        <image class="imgsrc" src="{{defaultImg}}" wx:else></image>
+        <view class="changeImg">
+            <text class="font-small-style changetxt">修改头像</text>
+            <image class="next nextr" src="https://cdninsight.speiyou.com/Rectangle%2520Copy%25402x.png"></image>
+        </view>
+    </view>
+    <view class="line"></view>
+    <view class="section">
+        <text class="fl stylec">姓名</text>
+        <view class="fr">
+            <text class="font-small-style">{{studentInfo.realName}}</text>
+        </view>
+    </view>
+    <view class="section">
+        <text class="fl stylec">学员编号</text>
+        <view class="fr">
+            <text class="font-small-style">{{studentInfo.studentNum}}</text>
+        </view>
+    </view>
+    <view class="section">
+        <text class="fl stylec">城市</text>
+        <view class="fr">
+            <text class="font-small-style">{{studentInfo.cityName}}</text>
+        </view>
+    </view>
+    <view class="section">
+        <text class="fl stylec">在读年级</text>
+        <view bindtap="changeGrade" class="fr">
+            <text class="font-small-style">{{studentInfo.gradeName}}</text>
+            <image class="next nextr" src="https://cdninsight.speiyou.com/Rectangle%2520Copy%25402x.png"></image>
+        </view>
+    </view>
+    <navigator class="section" url="addressmanage">
+        <text class="fl stylec">收货地址</text>
+        <view class="fr">
+            <image class="next nextr" src="https://cdninsight.speiyou.com/Rectangle%2520Copy%25402x.png"></image>
+        </view>
+    </navigator>
+</view>
+<view bindtap="$GoHomeView$backfunc" class="goHome" wx:if="{{isShare}}">
+    <text class="iconfont icon-home"></text>
+</view>
+<tal-toast></tal-toast>

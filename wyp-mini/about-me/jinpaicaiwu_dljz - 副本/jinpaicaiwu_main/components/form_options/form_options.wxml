@@ -1,0 +1,34 @@
+<view class="wp_content form_options_content" wx:if="{{param.skin=='default'}}">
+    <view class="clearFix" style="display:inline-block;{{inner_stylestr}}">
+        <view class="title fl" style="{{title_stylestr}};margin-bottom:6rpx;">{{param.title}}<text class="required sup" style="margin-left:3rpx;position:static;" wx:if="{{param.required}}">*</text>
+        </view>
+        <icon class="warn" size="20" style="right:4rpx;" type="warn" wx:if="{{haswarn}}"></icon>
+        <radio-group bindchange="onChange" class="fr" name="{{layerid}}" style="clear:both;float:left;text-align:{{param.option_style['text-align']}};" wx:if="{{param.type=='radio'}}">
+            <label class="{{layerid}}-label option-label" style="{{option_stylestr}}" wx:for="{{param.options}}" wx:key="{{index}}">
+                <radio checked="{{value[0]==index?true:false}}" value="{{index}}"></radio>{{item.value}}
+		</label>
+        </radio-group>
+        <checkbox-group bindchange="onChange" class="fr" name="{{layerid}}" style="clear:both;float:left;text-align:{{param.option_style['text-align']}};" wx:else>
+            <label class="{{layerid}}-label option-label" style="{{option_stylestr}}" wx:for="{{param.options}}" wx:key="{{index}}">
+                <checkbox checked="{{value[index]?true:false}}" value="{{index}}"></checkbox>{{item.value}}
+		</label>
+        </checkbox-group>
+    </view>
+</view>
+<view class="wp_content form_options_content" wx:else>
+    <view class="clearFix" style="display:flex;align-items:center;{{inner_stylestr}};margin-left:0px;">
+        <view class="title fl" style="{{title_stylestr}};margin-bottom:6rpx;margin-left:10px;margin-right:0px;">{{param.title}}<text class="required sup" style="margin-left:3rpx;position:static;" wx:if="{{param.required}}">*</text>
+        </view>
+        <icon class="warn" size="20" style="right:4rpx;" type="warn" wx:if="{{haswarn}}"></icon>
+        <radio-group bindchange="onChange" class="fr" name="{{layerid}}" style="clear:both;float:left;text-align:{{param.option_style['text-align']}};{{inner_stylestr}};width:auto;border:1px solid #cec9c3;padding:5px;" wx:if="{{param.type=='radio'}}">
+            <label class="{{layerid}}-label option-label" style="{{option_stylestr}}" wx:for="{{param.options}}" wx:key="{{index}}">
+                <radio checked="{{value[0]==index?true:false}}" value="{{index}}"></radio>{{item.value}}
+		</label>
+        </radio-group>
+        <checkbox-group bindchange="onChange" class="fr" name="{{layerid}}" style="clear:both;float:left;text-align:{{param.option_style['text-align']}};" wx:else>
+            <label class="{{layerid}}-label option-label" style="{{option_stylestr}}" wx:for="{{param.options}}" wx:key="{{index}}">
+                <checkbox checked="{{value[index]?true:false}}" value="{{index}}"></checkbox>{{item.value}}
+		</label>
+        </checkbox-group>
+    </view>
+</view>

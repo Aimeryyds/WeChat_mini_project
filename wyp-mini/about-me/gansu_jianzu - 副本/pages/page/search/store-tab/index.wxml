@@ -1,0 +1,35 @@
+<template name="stores">
+    <view>
+        <view class="store-item" wx:for="{{stores}}">
+            <navigator class="store-info" hoverClass="none" url="{{'/pages/shop/products/products?storeid='+item.id}}">
+                <image class="store-info-img" src="{{item.logo||'http://imgcdnali.wfenxiao.com.cn/xcx/c/icons/brand.png'}}"></image>
+                <view class="store-info__detail">
+                    <view class="store-info__detail-name zan-ellipsis">{{item.brandName}}-{{item.storeName}}</view>
+                    <view class="store-info__detail-desc">
+                        <text style="margin-right: 16rpx;">已售{{item.orderNum||0}}单</text>
+                        <text>距离:{{item.distance>1000?item.distance/1000+'km':item.distance+'m'}}</text>
+                    </view>
+                    <view style="font-size:24rpx;color:rgba(0,0,0,0.43);margin-bottom: 4rpx;">{{item.reviewsNum}}条评价  {{item.goodReviewsRate}}%好评</view>
+                </view>
+            </navigator>
+            <view class="store-goodsList">
+                <navigator hoverClass="none" url="{{'/pages/services/service_detail/index?shopId='+item.id+'&serviceId='+projectitem.id}}" wx:if="{{item.projectList.length>0}}" wx:for="{{item.projectList}}" wx:for-index="projectindex" wx:for-item="projectitem">
+                    <image class="store-goodsList__item" src="{{projectitem.imgUrl}}" style="margin-right:{{projectindex==2?'0':'14rpx;'}}" wx:if="{{projectindex<3}}"></image>
+                </navigator>
+                <navigator hoverClass="none" url="{{'/pages/products/show/show?id='+goodsitem.id}}" wx:if="{{item.projectList.length==0&&item.goodsList.length>0}}" wx:for="{{item.goodsList}}" wx:for-index="goodsindex" wx:for-item="goodsitem">
+                    <image class="store-goodsList__item" src="{{goodsitem.imgUrl}}" style="margin-right:{{goodsindex==2?'0':'14rpx;'}}" wx:if="{{goodsindex<3}}"></image>
+                </navigator>
+            </view>
+            <navigator class="store-more" hoverClass="none" url="{{'/pages/shop/products/products?storeid='+item.id}}" wx:if="{{item.projectNum>3||item.projectList.length==0&&item.goodsNum>3}}">查看更多</navigator>
+        </view>
+    </view>
+</template>
+<view style="background-color:#fff;display:{{stores.data&&stores.data.length>0?'':'none'}}">
+    <view style="border-bottom: 1rpx solid #e5e5e5">
+        <segements bind:switch="handleTabSwitch" class="Segements" filter="{{filter}}" filterActive="{{filterActive}}" id="segements" segements="{{segements}}" style="height:64rpx;display:flex;justify-content:center;align-items:center;width:100%"></segements>
+    </view>
+    <scroll-view bindscrolltolower="handleScrollBottom" scrollY="{{true}}" style="height:{{scrollHeight}}px">
+        <template is="stores" data="{{stores:stores.data}}"></template>
+    </scroll-view>
+</view>
+<wxc-abnor type="DATA" wx:if="{{stores.data&&stores.data.length==0}}"></wxc-abnor>

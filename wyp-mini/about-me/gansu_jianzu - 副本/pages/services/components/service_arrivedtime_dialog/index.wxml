@@ -1,0 +1,21 @@
+<import src="/dist/toptips/index.wxml"></import>
+<view class="zan-dialog {{show?'zan-dialog--show':''}}">
+    <view bindtap="hideDialog" class="zan-dialog__mask"></view>
+    <view class="zan-dialog__container" style="z-index:100">
+        <scroll-view scrollX class="sd-date-list1">
+            <view bindtap="handleClickDay" class="sd-date__item {{index==tempCurrentIndex?'sa-date__item--active':'sa-date__item'}}" data-index="{{index}}" wx:for="{{days}}">
+                <view class="sd-date__week">{{item.text}}</view>
+                <view class="sd-date__time">{{item.day}}</view>
+            </view>
+        </scroll-view>
+        <view class="sd-time-list-full" wx:if="{{days[tempCurrentIndex].available==0}}">
+      全天已约满
+    </view>
+        <view class="sd-time-list sd-time-list" wx:if="{{days[tempCurrentIndex].available==1}}">
+            <view bindtap="handleClickTime" class="{{tempTimeIndex==index?'sd-time__item--active':'sd-time__item'}}" data-disabled="{{item.available==0}}" data-index="{{index}}" style="opacity:{{item.available==0?0.43:1}}" wx:for="{{times[tempCurrentIndex]}}">{{item.time}}</view>
+        </view>
+        <view bindtap="handleUpdateDateTime" class="order_create_action">
+      确定
+    </view>
+    </view>
+</view>

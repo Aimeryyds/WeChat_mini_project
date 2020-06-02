@@ -1,0 +1,57 @@
+<view class="class-tab">
+    <text bindtap="tabClick" class="{{tabClasss[0]}}" data-index="0">全部</text>
+    <text bindtap="tabClick" class="{{tabClasss[1]}}" data-index="1">待付款</text>
+    <text bindtap="tabClick" class="{{tabClasss[2]}}" data-index="2">待发货</text>
+    <text bindtap="tabClick" class="{{tabClasss[3]}}" data-index="3">待收货</text>
+    <text bindtap="tabClick" class="{{tabClasss[4]}}" data-index="4">已完成</text>
+</view>
+<view class="order-item" wx:for="{{orders}}">
+    <view class="view-title">
+        <image src="http://tws.cnweisou.com/images/order_icon.png"></image>
+        <text>订单号:{{item.orderno}} </text>
+        <text class="refund" wx:if="{{item.refund}}">{{item.refund}}</text>
+    </view>
+    <view bindtap="details" class="order-body" data-index="{{index}}">
+        <view class="carts-item" data-index="{{index}}">
+            <view>
+                <image class="carts-image" mode="aspectFill" src="{{item.thumb}}"></image>
+            </view>
+            <view class="carts-text">
+                <text class="carts-title">{{item.title}}</text>
+                <view class="carts-subtitle">
+                    <text>{{item.optiontitle}}</text>
+                </view>
+            </view>
+            <view class="carts-right">
+                <text class="carts-price">￥{{item.price}}</text>
+                <text class="carts-num">x{{item.goodsnum}}</text>
+            </view>
+        </view>
+    </view>
+    <view class="order-footer">
+        <text>{{item.statusstr}}  实付款：</text>
+        <text style="color:red">￥{{item.amount}}元</text>
+    </view>
+    <view class="order-footer" wx:if="{{item.status==0}}">
+        <text bindtap="cancel" class="btn-cancel" data-index="{{index}}">取消订单</text>
+        <text bindtap="pay" class="btn-pay" data-index="{{index}}" wx:if="{{item.pay_code!='cod'}}">立即付款</text>
+    </view>
+    <view class="order-footer" wx:elif="{{item.status==1}}">
+        <text bindtap="details" class="btn-pay" data-index="{{index}}">查看订单</text>
+    </view>
+    <view class="order-footer" wx:elif="{{item.status==2}}">
+        <text bindtap="confirm" class="btn-pay" data-index="{{index}}">收货确认</text>
+        <text bindtap="details" class="btn-pay" data-index="{{index}}">查看订单</text>
+    </view>
+    <view class="order-footer" wx:elif="{{item.status==3}}">
+        <text bindtap="evaluation" class="btn-cancel" data-index="{{index}}" wx:if="{{item.iscomment=='0'}}">评价</text>
+        <block wx:else></block>
+        <text bindtap="details" class="btn-pay" data-index="{{index}}">查看订单</text>
+    </view>
+    <view class="order-footer" wx:else></view>
+</view>
+<view class="nodata" wx:if="{{orders==''}}">
+    <image src="https://tws.cnweisou.com/images/becomeRegister.png"></image>
+    <text>暂时没有相关订单</text>
+</view>
+<loading wx:if="{{loading}}"></loading>

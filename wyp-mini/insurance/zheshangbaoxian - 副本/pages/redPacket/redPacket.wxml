@@ -1,0 +1,29 @@
+<view class="container">
+    <view class="userinfo">
+        <button bindgetuserinfo="getUserInfo" openType="getUserInfo" wx:if="{{!hasUserInfo&&canIUse}}"> 获取头像昵称 </button>
+        <block wx:else>
+            <image bindtap="bindViewTap" class="userinfo-avatar" mode="cover" src="{{userInfo.avatarUrl}}"></image>
+            <text class="userinfo-nickname">{{userInfo.nickName}}</text>
+        </block>
+    </view>
+    <view class="usermotto">
+        <text class="user-motto">{{motto}}</text>
+    </view>
+    <view>
+        <button bindtap="jumpPage1"> 跳转到entrance页面 </button>
+    </view>
+    <view>**1011  扫二维码** </view>
+    <view>**1025  扫一维码** </view>
+    <view>**1047  扫小程序码** </view>
+    <view>**1124  扫一物一码**</view>
+    <view>
+        <button bindtap="getScene"> 获取场景↓ </button>
+        <textarea bindinput="textareaInput" maxlength="-1" value="{{scene}}"></textarea>
+    </view>
+    <view>
+        <button bindtap="getRedPacket"> 获取红包1 </button>
+    </view>
+    <view>
+        <button bindtap="getRedPacketText"> 获取红包2 </button>
+    </view>
+</view>

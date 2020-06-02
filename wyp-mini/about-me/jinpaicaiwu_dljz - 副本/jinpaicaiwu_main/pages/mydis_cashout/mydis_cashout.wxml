@@ -1,0 +1,65 @@
+<view class="bg_color">
+    <form bindsubmit="submitApply" reportSubmit="true">
+        <navigator class="dis_accounts" url="../mydis_add_account/mydis_add_account" wx:if="{{accounts.length==0}}">
+            <view class="card">
+                <view class="card1">
+                    <text class="iconfont icon-zhanghuxinxi"></text>
+                </view>
+                <view class="flex_row">
+                    <text>点击添加提现账户</text>
+                    <text class="iconfont icon-jiantou"></text>
+                </view>
+            </view>
+        </navigator>
+        <view class="card" wx:if="{{accounts.length>0}}">
+            <view class="card1">
+                <text class="iconfont icon-zhanghuxinxi"></text>
+            </view>
+            <view bindtap="selectaccount" class="flex_row">
+                <view class="select">
+                    <view class="picker">
+            当前选择：{{accounts[aindex]}}
+          </view>
+                </view>
+            </view>
+            <text class="iconfont icon-jiantou selheight"></text>
+        </view>
+        <navigator class="dis_accounts" url="../mydis_add_account/mydis_add_account" wx:if="{{accounts.length>0}}">
+            <view class="add">
+                <text class="iconfont icon-tianjia"></text>
+                <text>添加账户</text>
+            </view>
+        </navigator>
+        <view class="list">
+            <view class="list_item">
+                <view class="t">
+                    <text>可提现金额</text>
+                </view>
+                <view class="b">
+                    <input disabled="true" type="text" value="{{datas.remaining}}"></input>
+                    <text>元</text>
+                </view>
+            </view>
+            <view class="list_item">
+                <view class="t">
+                    <text>提现金额</text>
+                </view>
+                <view class="b">
+                    <input bindblur="changeValue" bindconfirm="changeValue" confirmType="done" maxlength="7" name="input-value" placeholder="请输入提现金额" placeholderClass="place" type="number" value="{{datas.minval}}"></input>
+                    <text>元</text>
+                </view>
+            </view>
+        </view>
+        <view class="list">
+            <view class="list_item">
+                <view class="t">
+                    <text>备注信息</text>
+                </view>
+                <view class="b">
+                    <input name="note-value" placeholder="请输入备注信息" placeholderClass="place" type="text" value="{{apply.note}}"></input>
+                </view>
+            </view>
+        </view>
+        <button class="bu {{accounts.length?'active':''}}" formType="submit">提交</button>
+    </form>
+</view>

@@ -1,0 +1,9 @@
+<view class="form_tit" wx:if="{{f_item.title}}">{{f_item.title}}<text class="ture_color" wx:if="{{f_item.empty}}">*</text>
+</view>
+<view class="form_li">
+    <checkbox-group name="{{f_item.name}}">
+        <label class="checkbox" wx:for="{{f_item.list}}" wx:for-item="val">
+            <checkbox checked="{{val.checked}}" class="zoom_80" color="{{config.font_color=='#ffffff'?config.background:'green'}}" disabled="{{val.disabled}}" value="{{val.value}}"></checkbox>{{val.value}}
+    </label>
+    </checkbox-group>
+</view>

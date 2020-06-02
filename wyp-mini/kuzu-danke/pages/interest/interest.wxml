@@ -1,0 +1,118 @@
+<view>
+    <view class="menu_box">
+        <text catchtap="__e" class="{{['menu1',menuTapCurrent==0?'borders':'']}}" data-current="0" data-event-opts="{{[ [ 'tap',[ [ 'menuTap',['$event'] ] ] ] ]}}">
+            <text></text>我的关注</text>
+        <text catchtap="__e" class="{{['menu2',menuTapCurrent==1?'borders':'']}}" data-current="1" data-event-opts="{{[ [ 'tap',[ [ 'menuTap',['$event'] ] ] ] ]}}">
+            <text></text>浏览足迹</text>
+    </view>
+    <view class="tab1" wx:if="{{menuTapCurrent=='0'}}">
+        <view class="{{['page',edit_status?'editing':'']}}">
+            <view class="header" wx:if="{{onoff_show&&user_id}}">
+                <view class="info" wx:if="{{!edit_status}}">{{'共关注了'+total+'套房源'}}</view>
+                <view class="info" wx:if="{{edit_status}}">
+                    <text bindtap="__e" data-event-opts="{{[ [ 'tap',[ [ 'cancelEdit',['$event'] ] ] ] ]}}">取消</text>
+                </view>
+                <view bindtap="__e" class="check-all" data-event-opts="{{[ [ 'tap',[ [ 'checkAllEvt',['$event'] ] ] ] ]}}" wx:if="{{edit_status}}">全选</view>
+                <view class="edit-btn" wx:if="{{!edit_status}}">
+                    <image bindtap="__e" data-event-opts="{{[ [ 'tap',[ [ 'editEvt',['$event'] ] ] ] ]}}" src="https://public.danke.com.cn/public-20190712-Fkd-1YLElrn5Vbrq9I8yc9mD8jCt"></image>
+                    <text bindtap="__e" data-event-opts="{{[ [ 'tap',[ [ 'editEvt',['$event'] ] ] ] ]}}">编辑</text>
+                </view>
+                <view bindtap="__e" class="del-btn" data-event-opts="{{[ [ 'tap',[ [ 'deleteEvt',['$event'] ] ] ] ]}}" wx:if="{{edit_status}}">{{'删除('+selectNum+')'}}</view>
+            </view>
+            <view bindscrolltolower="__e" class="container-body" data-event-opts="{{[ [ 'scrolltolower',[ [ 'scrollLoading',['$event'] ] ] ] ]}}" style="padding-bottom:160rpx;">
+                <navigator bindtap="__e" class="{{['conference-item',item.status=='可出租'?'':'gray']}}" data-event-opts="{{[ [ 'tap',[ [ 'interest_room',['$event'] ] ] ] ]}}" data-index="{{index}}" url="{{edit_status?'':navigateUrl[index]}}" wx:if="{{onoff_show&&user_id}}" wx:for="{{roomList}}" wx:key="index">
+                    <view bindtap="__e" class="check-icon" data-event-opts="{{[ [ 'tap',[ [ 'checkEvt',['$event'] ] ] ] ]}}" data-index="{{index}}" wx:if="{{edit_status}}">
+                        <image src="{{selectIndex[index].sureid?'../../static/check_act.png':'../../static/check_nev.png'}}"></image>
+                    </view>
+                    <view class="room-detail">
+                        <view class="room-img">
+                            <image lazyLoad="true" src="{{item.list_pic}}"></image>
+                            <view style="{{'background: #'+item.promotion_info.bg_color}}" wx:if="{{item.promotion_info.type}}">{{item.promotion_info.promotion_label}}<text class="triangle" style="{{'border-color: #'+item.promotion_info.bg_color+';border-right: 7rpx dashed transparent;'}}"></text>
+                            </view>
+                            <view class="mask_footlist" style="width:260rpx;height:180rpx;background:#D8D8D8;opacity:0.5;" wx:if="{{item.status=='已出租'}}"></view>
+                        </view>
+                        <view class="roomOther-info">
+                            <view class="other-title" style="{{item.status=='已出租'?'color:#CECECE':''}}">{{item.name}}</view>
+                            <view class="distence-info" style="{{item.status=='已出租'?'color:#CECECE':''}}" wx:if="{{item.nearest_subway_title!=''}}">
+                                <text>{{item.nearest_subway_title}}</text>
+                            </view>
+                            <view class="rentType_part" style="{{item.status=='已出租'?'color:#CECECE':''}}">
+                                <text class="rent-type" style="{{item.status=='已出租'?'color:#CECECE':''}}" wx:if="{{item.rent_type==1}}">整租</text>
+                                <text class="rent-type" style="{{item.status=='已出租'?'color:#CECECE':''}}" wx:if="{{item.rent_type==2}}">合租</text>
+                                <text class="rent-type" style="{{item.status=='已出租'?'color:#CECECE':''}}" wx:if="{{item.rent_type==3}}">月租</text>
+                                <text class="new-mianji-box">{{'· '+item.direction+' | '+item.area+' | '+item.floor_num+'/'+item.floor_total_num+'层'}}</text>
+                            </view>
+                            <view class="room-price" wx:if="{{item.promotion_info.type}}">
+                                <text class="first-month" style="margin:0 15rpx 0 0;" wx:if="{{item.promotion_info.promotion_price_title==='首月租金'}}">首月</text>
+                                <text class="sale" style="{{item.status=='已出租'?'color:#CECECE':''}}">{{item.promotion_info.promotion_price}}</text>
+                                <text style="margin:0 10rpx;line-height:24rpx;">{{''+item.price_unit+''}}</text>
+                                <text class="normal" style="{{item.status=='已出租'?'color:#CECECE':''}}">{{item.price}}</text>
+                            </view>
+                            <view class="room-price" wx:if="{{!item.promotion_info.type}}">
+                                <text class="sale" style="{{item.status=='已出租'?'color:#CECECE':''}}">{{item.price}}</text>
+                                <text style="margin-right:10rpx;line-height:24rpx;margin-left:10rpx;">{{item.price_unit}}</text>
+                            </view>
+                            <view class="type-tag" wx:if="{{!edit_status}}">{{item.status}}</view>
+                        </view>
+                    </view>
+                </navigator>
+                <view class="no_room" wx:if="{{!onoff_show||!user_id}}">
+                    <image src="https://public.danke.com.cn/public-20190715-FqbPFZ11_l4xqqbx_u_OZpLu1KUf"></image>
+                    <text wx:if="{{!user_id}}">您还没有任何关注房源记录</text>
+                    <text wx:if="{{no_room&&user_id}}">您还没有任何找房记录</text>
+                    <view bindtap="__e" class="jump-btn" data-event-opts="{{[ [ 'tap',[ [ 'toLogin',['$event'] ] ] ] ]}}" wx:if="{{!user_id}}">登录/注册</view>
+                    <view bindtap="__e" class="jump-btn" data-event-opts="{{[ [ 'tap',[ [ 'toIndex',['$event'] ] ] ] ]}}" wx:if="{{no_room&&user_id}}">去找房</view>
+                </view>
+            </view>
+        </view>
+    </view>
+    <view class="tab2" wx:if="{{menuTapCurrent=='1'}}">
+        <view class="page">
+            <view class="header" wx:if="{{!footlist_onoff}}">
+                <view class="info">{{'共浏览'+footlist_total+'套房源'}}</view>
+            </view>
+            <view bindscrolltolower="__e" class="container-body" data-event-opts="{{[ [ 'scrolltolower',[ [ 'scrollLoadingTab2',['$event'] ] ] ] ]}}" style="padding-bottom:160rpx;" wx:if="{{!footlist_onoff}}">
+                <navigator bindtap="__e" class="{{['conference-item',item.status=='可出租'?'':'gray']}}" data-event-opts="{{[ [ 'tap',[ [ 'interest_room',['$event'] ] ] ] ]}}" data-index="{{index}}" url="{{'../detail/detail?id='+item.id+'&rent_type='+item.rent_type+'&from_app='}}" wx:for="{{footList_list}}" wx:key="index">
+                    <view class="room-detail">
+                        <view class="room-img">
+                            <image lazyLoad="true" src="{{item.list_pic}}"></image>
+                            <view style="{{'background: #'+item.promotion_info.bg_color}}" wx:if="{{item.promotion_info.type}}">{{item.promotion_info.promotion_label}}<text class="triangle" style="{{'border-color: #'+item.promotion_info.bg_color+';border-right: 7rpx dashed transparent;'}}"></text>
+                            </view>
+                            <image class="has_rent" src="https://public.danke.com.cn/public-20190315-FhTiU09GK72Hm4JbSyJvcSCloh4s" style="width:116rpx;height:94rpx;position:absolute;top:87rpx;left:0rpx;" wx:if="{{item.status=='已出租'}}"></image>
+                            <view class="mask_footlist" style="width:260rpx;height:180rpx;background:#D8D8D8;opacity:0.5;" wx:if="{{item.status=='已出租'}}"></view>
+                        </view>
+                        <view class="roomOther-info">
+                            <view class="other-title" style="{{item.status=='已出租'?'color:#CECECE':''}}">{{item.name}}</view>
+                            <view class="distence-info" style="{{item.status=='已出租'?'color:#CECECE':''}}" wx:if="{{item.nearest_subway_title!=''}}">
+                                <text>{{item.nearest_subway_title}}</text>
+                            </view>
+                            <view class="rentType_part" style="{{item.status=='已出租'?'color:#CECECE':''}}">
+                                <text class="rent-type" style="{{item.status=='已出租'?'color:#CECECE':''}}" wx:if="{{item.rent_type==1}}">整租</text>
+                                <text class="rent-type" style="{{item.status=='已出租'?'color:#CECECE':''}}" wx:if="{{item.rent_type==2}}">合租</text>
+                                <text class="rent-type" style="{{item.status=='已出租'?'color:#CECECE':''}}" wx:if="{{item.rent_type==3}}">月租</text>
+                                <text class="new-mianji-box">{{'· '+item.direction+' | '+item.area+' | '+item.floor_num+'/'+item.floor_total_num+'层'}}</text>
+                            </view>
+                            <view class="room-price" wx:if="{{item.promotion_info.type}}">
+                                <text class="first-month" style="margin:0 15rpx 0 0;" wx:if="{{item.promotion_info.promotion_price_title==='首月租金'}}">首月</text>
+                                <text class="sale" style="{{item.status=='已出租'?'color:#CECECE':''}}">{{item.promotion_info.promotion_price}}</text>
+                                <text style="margin:0 10rpx;line-height:24rpx;">{{''+item.price_unit+''}}</text>
+                                <text class="normal" style="{{item.status=='已出租'?'color:#CECECE':''}}">{{item.price}}</text>
+                            </view>
+                            <view class="room-price" wx:if="{{!item.promotion_info.type}}">
+                                <text class="sale" style="{{item.status=='已出租'?'color:#CECECE':''}}">{{item.price}}</text>
+                                <text style="margin-right:10rpx;line-height:24rpx;margin-left:10rpx;">{{item.price_unit}}</text>
+                            </view>
+                            <view class="type-tag" data-roomid="{{item.room_id}}">{{item.status}}</view>
+                        </view>
+                    </view>
+                </navigator>
+            </view>
+            <view class="no_footlist" wx:if="{{footlist_onoff}}">
+                <image class="footlist_img" src="https://public.danke.com.cn/public-20190315-FvLJDDhjYwAMYb6mOI4e8XKQ0d3C"></image>
+                <view class="footlist_word">您还没有任何找房记录</view>
+                <view bindtap="__e" class="jump-btn" data-event-opts="{{[ [ 'tap',[ [ 'toLogin',['$event'] ] ] ] ]}}" style="margin:0 auto;" wx:if="{{!user_id}}">登录/注册</view>
+                <view bindtap="__e" class="footlist_btn" data-event-opts="{{[ [ 'tap',[ [ 'toIndex',['$event'] ] ] ] ]}}" wx:if="{{!toIndex_once&&user_id}}">去找房</view>
+            </view>
+        </view>
+    </view>
+</view>

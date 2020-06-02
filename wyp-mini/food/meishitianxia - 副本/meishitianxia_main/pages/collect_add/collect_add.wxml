@@ -1,0 +1,17 @@
+<view class="collect_add">
+    <input bindinput="collect_subject" class="collect_add_input" focus="true" placeholder="标题，如“花式饮品全攻略”..." placeholderStyle="color:#999" value="{{subject}}"></input>
+    <textarea autoHeight bindinput="collect_message" class="collect_add_textarea" placeholder="写描述..." placeholderStyle="color:#999" value="{{message}}"></textarea>
+</view>
+<block wx:if="{{id==0}}">
+    <button bindtap="collect_add_do" class="collect_add_btn" wx:if="{{allowadd}}">创建</button>
+    <button class="collect_add_btn graybg" wx:else>创建</button>
+</block>
+<block wx:if="{{id>0}}">
+    <button bindtap="collect_edit_do" class="collect_add_btn" wx:if="{{allowadd}}">编辑</button>
+    <button class="collect_add_btn graybg" wx:else>编辑</button>
+</block>
+<view>　</view>
+<button bindtap="collect_add_drop" class="">取消</button>
+<view>　</view>
+<view>　</view>
+<view bindtap="collect_del" class="collect_del" wx:if="{{id>0}}">删除本菜单</view>

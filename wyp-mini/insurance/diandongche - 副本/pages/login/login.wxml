@@ -1,0 +1,23 @@
+<view class="login-container">
+    <view class="login">
+        <view class="login-banner">
+            <image class="banner-image" src="{{logo}}"></image>
+        </view>
+        <view class="login-title">电动车保险</view>
+        <view class="cu-form-group phoneGroup">
+            <view class="title">手机号</view>
+            <input bindinput="getInputValue" class="title" id="phoneNumber" placeholder="请输入手机号"></input>
+        </view>
+        <view class="cu-form-group" style="border: 0px;border-bottom:1px solid #cecece;margin-top: 40rpx;">
+            <view class="title text-right margin-left">密码</view>
+            <input bindinput="getInputValue" class="title" id="password" placeholder="请输入密码" type="password"></input>
+        </view>
+        <view bindtap="goRegister" class="text-sm text-blue text-right margin-top" data-registerType="back">忘记密码？</view>
+        <button catchtap="insuranceLogin" class="cu-btn block bg-blue margin-tb-sm lg btn">登录</button>
+        <button catchtap="goRegister" class="cu-btn block bg-gradual-blue margin-tb-sm lg btn" data-registerType="new">注册</button>
+        <button catchtap="goHome" class="cu-btn block line-blue margin-tb-sm lg btn" data-registerType="new">取消</button>
+    </view>
+    <view class="cu-load load-modal" wx:if="{{loadModal}}">
+        <view class="gray-text">登录中...</view>
+    </view>
+</view>

@@ -1,0 +1,35 @@
+<include src="../../../../components/circus/network/network.wxml"></include>
+<view class="v v-quote-explore-board">
+    <view class="v v-quote-stocks">
+        <view class="head">
+            <view class="cell board-name">板块</view>
+            <view class="cell board-rise">涨跌幅</view>
+            <view class="cell stock-name-code">领涨股</view>
+        </view>
+        <view class="body c-line-top">
+            <view bindtap="goRanks" class="row c-line-bottom" data-code="{{item.board.code}}" data-name="{{item.board.name}}" wx:for="{{boards}}" wx:key="id">
+                <view class="cell board-name">{{item.board.name}}</view>
+                <view class="cell board-rise" style="color: {{item.board.rise.color}}">{{item.board.rise.text}}</view>
+                <view class="cell stock-name-code">
+                    <view class="stock-name">{{item.stock.name}}</view>
+                    <view class="stock-code">{{item.stock.code}}</view>
+                </view>
+            </view>
+            <view class="v-paging">
+                <view class="loading" wx:if="{{loadings.boards.status=='loading'}}">
+                    <view class="icon-loading"></view>
+                    <view class="text">加载中</view>
+                </view>
+                <view bindtap="moreBoards" class="more" wx:if="{{loadings.boards.status=='more'}}">
+          点击加载更多
+        </view>
+                <view class="done" wx:if="{{loadings.boards.status=='done'}}">
+          没有更多了
+        </view>
+                <view class="fail" wx:if="{{loadings.boards.status=='fail'}}">
+          出错啦，点击重试
+        </view>
+            </view>
+        </view>
+    </view>
+</view>

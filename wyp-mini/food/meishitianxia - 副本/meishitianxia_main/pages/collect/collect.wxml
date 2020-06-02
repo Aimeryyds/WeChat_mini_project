@@ -1,0 +1,46 @@
+<view class="nav">
+    <view bindtap="tagtag_info" class="nav_item" data-n="0">
+        <view class="nav_default {{tag==0?'nav_red':''}}">推荐</view>
+    </view>
+    <view bindtap="tagtag_info" class="nav_item" data-n="1">
+        <view class="nav_default {{tag==1?'nav_red':''}}">最新</view>
+    </view>
+</view>
+<swiper bindchange="swiper_list_change" class="swiper_list" current="{{tag}}" duration="300" skipHiddenItemLayout="true" style="height:{{height}}px;">
+    <swiper-item>
+        <scroll-view bindscrolltolower="list_onReachBottom" enableBackToTop="true" scrollY="true">
+            <view class="rlist">
+                <navigator class="rlist_item" url="../collect_info/collect_info?id={{item.id}}" wx:for="{{list[0]}}" wx:key="list0">
+                    <image class="rlist_img" src="{{item.pic}}"></image>
+                    <view class="rlist_detail">
+                        <text class="rlist_t2">{{item.subject}}</text>
+                        <text class="rlist_n" wx:if="{{item.collnum>0}}">{{item.collnum}}人收藏</text>
+                    </view>
+                </navigator>
+            </view>
+            <view class="loading_end" wx:if="{{loading_end[0]}}"></view>
+            <view class="loading" wx:if="{{tag==0&&loading}}">
+                <image class="loading_img" src="../../image/loading-32-32.gif"></image>
+            </view>
+            <view class="loading_fail" wx:if="{{tag==0&&loading_fail}}"></view>
+        </scroll-view>
+    </swiper-item>
+    <swiper-item>
+        <scroll-view bindscrolltolower="list_onReachBottom" enableBackToTop="true" scrollY="true">
+            <view class="rlist">
+                <navigator class="rlist_item" url="../collect_info/collect_info?id={{item.id}}" wx:for="{{list[1]}}" wx:key="list1">
+                    <image class="rlist_img" src="{{item.pic}}"></image>
+                    <view class="rlist_detail">
+                        <text class="rlist_t2">{{item.subject}}</text>
+                        <text class="rlist_n" wx:if="{{item.collnum>0}}">{{item.collnum}}人收藏</text>
+                    </view>
+                </navigator>
+            </view>
+            <view class="loading_end" wx:if="{{loading_end[1]}}"></view>
+            <view class="loading" wx:if="{{tag==1&&loading}}">
+                <image class="loading_img" src="../../image/loading-32-32.gif"></image>
+            </view>
+            <view class="loading_fail" wx:if="{{tag==1&&loading_fail}}"></view>
+        </scroll-view>
+    </swiper-item>
+</swiper>

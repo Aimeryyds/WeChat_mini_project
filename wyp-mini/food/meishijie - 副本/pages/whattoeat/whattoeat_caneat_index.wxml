@@ -1,0 +1,19 @@
+<view class="container">
+    <view class="caneat_top" style="padding-top:{{barHeight_nobar}}px">
+        <view bindtap="tapBackbtn" class="topbar_backicon">
+            <image class="nav-icon" src="../../images/nav_icon_black.png"></image>
+        </view>
+        <navigator class="searchw" hoverClass="navigator-hover" url="/pages/whattoeat/search_sc?scene_id={{option.scene_id}}">
+            <image class="img" src="../../images/searchicon_black.png"></image>输入食物名,看能不能吃
+		</navigator>
+    </view>
+    <view class="caneat_index_list" style="padding-top:{{barHeight}}px">
+        <navigator class="caneat_index_item" hoverClass="navigator-hover" url="/pages/whattoeat/whattoeat_caneat_list?scene_id={{option.scene_id}}&c_id={{item.id}}&title={{item.title}}" wx:for="{{sortlist.data}}" wx:for-index="i" wx:key="key">
+            <image class="img" src="{{item.img}}"></image>
+            <view class="t">{{item.title}}</view>
+        </navigator>
+    </view>
+</view>
+<loading hidden="{{requeseDone||requeseFail||noData}}">
+ 加载中...
+</loading>

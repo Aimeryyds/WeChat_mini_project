@@ -1,0 +1,32 @@
+<template name="supply-tab-list">
+    <view bindtap="_handlesupplyTabChange" class="supply-tab__item" data-component-id="{{componentId}}" data-item-id="{{item.id}}" wx:for="{{tab.list}}" wx:key="id">
+        <picker bindchange="bindAddressPickerChange" bindcolumnchange="bindAddressPickerColumnChange" mode="multiSelector" range="{{addresses}}" rangeKey="{{'fullName'}}" value="{{addressIndex}}" wx:if="{{item.id=='address'}}">
+            <view style="display: flex;flex-direction: row; align-items: center;">
+                <view class="supply-tab__title {{addressIndex[0]!=0?'supply-tab__item--selected':''}}">{{selectAddress}}</view>
+                <image class="supply-tab__icon" src="{{addressIndex[0]!=0?'http://imgcdnali.wfenxiao.com.cn/xcx/c/gongqiu/triangle_select.png':'http://imgcdnali.wfenxiao.com.cn/xcx/c/gongqiu/triangle_default.png'}}"></image>
+            </view>
+        </picker>
+        <picker bindchange="bindTypePickerChange" range="{{types}}" rangeKey="{{'name'}}" value="{{typeIndex!=-1?typeIndex:0}}" wx:elif="{{item.id=='type'}}">
+            <view style="display: flex;flex-direction: row; align-items: center;">
+                <view class="supply-tab__title {{typeIndex!=-1?'supply-tab__item--selected':''}} ">{{typeIndex!=-1?types[typeIndex].name:'类型'}}</view>
+                <image class="supply-tab__icon" src="{{typeIndex!=-1?'http://imgcdnali.wfenxiao.com.cn/xcx/c/gongqiu/triangle_select.png':'http://imgcdnali.wfenxiao.com.cn/xcx/c/gongqiu/triangle_default.png'}}"></image>
+            </view>
+        </picker>
+        <picker bindchange="bindClassifyMultiPickerChange" bindcolumnchange="bindClassifyMultiPickerColumnChange" mode="multiSelector" range="{{classifies}}" rangeKey="{{'name'}}" value="{{classifyIndex}}" wx:else>
+            <view style="display: flex;flex-direction: row; align-items: center;">
+                <view class="supply-tab__title {{classifyIndex[0]!=0?'supply-tab__item--selected':''}}">{{selectClassify}}</view>
+                <image class="supply-tab__icon" src="{{classifyIndex[0]!=0?'http://imgcdnali.wfenxiao.com.cn/xcx/c/gongqiu/triangle_select.png':'http://imgcdnali.wfenxiao.com.cn/xcx/c/gongqiu/triangle_default.png'}}"></image>
+            </view>
+        </picker>
+    </view>
+</template>
+<template name="supply-tab">
+    <view class="supply-tab">
+        <scroll-view class="supply-tab__bd supply-tab__bd--scroll {{fixed?'supply-tab__bd--fixed':''}}" scrollX="true" style="height: {{tab.height?tab.height+'px':'auto'}}" wx:if="{{tab.scroll}}">
+            <template is="supply-tab-list" data="{{tab:tab,componentId:componentId,addresses:addresses,addressIndex:addressIndex,types:types,typeIndex:typeIndex,classifies:classifies,classifyIndex:classifyIndex,selectAddress:selectAddress,selectClassify:selectClassify}}"></template>
+        </scroll-view>
+        <view class="supply-tab__bd {{fixed?'supply-tab__bd--fixed':''}}" wx:else>
+            <template is="supply-tab-list" data="{{tab:tab,componentId:componentId,addresses:addresses,addressIndex:addressIndex,types:types,typeIndex:typeIndex,classifies:classifies,classifyIndex:classifyIndex,selectAddress:selectAddress,selectClassify:selectClassify}}"></template>
+        </view>
+    </view>
+</template>

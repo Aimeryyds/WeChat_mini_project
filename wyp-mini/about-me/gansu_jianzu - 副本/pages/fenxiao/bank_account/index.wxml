@@ -1,0 +1,24 @@
+<import src="/dist/toast/index.wxml"></import>
+<template is="zan-toast" data="{{zanToast:zanToast}}"></template>
+<form bindsubmit="formSubmit">
+    <view class="container">
+        <view class="bank-account-form">
+            <view class="ba-form__item">
+                <text class="ba-form__label">户名</text>
+                <input class="ba-form__input" name="accountName" placeholder="请输入用户名" value="{{data.accountName?data.accountName:''}}"></input>
+            </view>
+            <view class="ba-form__item">
+                <text class="ba-form__label">卡号</text>
+                <input class="ba-form__input" name="cardNo" placeholder="请输入卡号" type="number" value="{{data.cardNo?data.cardNo:''}}"></input>
+            </view>
+            <view class="ba-form__item">
+                <text class="ba-form__label">银行</text>
+                <picker bindchange="bindPickerChange" range="{{bankData}}" rangeKey="bankName" style="width:85%;height:90rpx;line-height:90rpx;" value="{{index}}">
+                    <view style="color:#919191;" wx:if="{{bankName}}">{{bankData[index].bankName}}</view>
+                    <view style="color:#919191;" wx:else>请选择银行</view>
+                </picker>
+            </view>
+        </view>
+        <button class="btn btn-default bank-account__btn" formType="submit" type="button">保存</button>
+    </view>
+</form>

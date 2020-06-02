@@ -1,0 +1,152 @@
+<view class="container">
+    <view class="userinfo">
+        <view class="index-main">
+            <map showLocation bindcallouttap="binPaek" bindmarkertap="bindMak" bindregionchange="regionchange" circles="{{circles}}" id="myMap" latitude="{{latitude}}" longitude="{{longitude}}" markers="{{markers}}" polygons="{{polygons}}" polyline="{{polyline}}" scale="{{scale}}" style="width: 100%; height:100%;z-index:1000;position:fixed;top:0">
+                <cover-view class="mayvid09">
+                    <cover-image src="{{myvid}}" wx:if="{{myvidIcon}}"></cover-image>
+                </cover-view>
+                <cover-view class="index-top" style="padding-top:{{phonex}}">
+                    <cover-view bindtap="ShowViewLeft" class="top-flex">
+                        <cover-image class="user-icon" src="{{user}}"></cover-image>
+                    </cover-view>
+                    <cover-view class="top-flex cent">
+                        <cover-image class="con-img09" src="{{logo}}" style=""></cover-image>
+                        <cover-view class="ad-css26">小呗出行</cover-view>
+                    </cover-view>
+                    <cover-view class="top-flex msg-align"></cover-view>
+                </cover-view>
+                <cover-view class="ts-new10 {{phonex=='44px'?'on':''}}" wx:if="{{pushnew}}">
+                    <cover-view class="new-cont10">{{PushContent}}</cover-view>
+                </cover-view>
+                <cover-view bindtap="remind" class="ts-new10 ad-pos21 {{phonex=='44px'?'on':''}}" wx:if="{{!(NoLogin||depositstateType||certifyType)}}">
+                    <cover-view class="new-cont10 al-cont21">小呗出行定点还车宣导，点击查看更多</cover-view>
+                </cover-view>
+                <cover-view bindtap="NoLogin" class="ts-new10 ad-pos21 {{phonex=='44px'?'on':''}}" wx:if="{{NoLogin}}">
+                    <cover-view class="new-cont10 al-cont21">还没有登录，点击登录!</cover-view>
+                </cover-view>
+                <cover-view bindtap="depositstate" class="ts-new10 ad-pos21 {{phonex=='44px'?'on':''}}" wx:if="{{depositstateType}}">
+                    <cover-view class="new-cont10 al-cont21">还没有缴纳押金，点击缴纳押金!</cover-view>
+                </cover-view>
+                <cover-view bindtap="certify" class="ts-new10 ad-pos21 {{phonex=='44px'?'on':''}}" wx:if="{{certifyType}}">
+                    <cover-view class="new-cont10 al-cont21">还没有实名认证，点击去实名认证!</cover-view>
+                </cover-view>
+                <cover-view class="active {{phonex=='44px'?'on':''}}" wx:if="{{activeUrl}}">
+                    <cover-image bindtap="closeActive" class="icon" src="{{closeActiveUrl}}"></cover-image>
+                    <cover-image bindtap="gorecharge" class="img" src="{{activeUrl}}"></cover-image>
+                </cover-view>
+                <cover-view class="activity2 {{activity2on}}" wx:if="{{huodongList.length}}">
+                    <cover-view class="wrap">
+                        <huodong-component bindmyevent="myEventListener" curidx="{{curidx}}" huodongList="{{huodongList}}"></huodong-component>
+                        <cover-view class="check">
+                            <cover-view bindtap="switch2Change" class="gou-box">
+                                <cover-image class="gou" src="../../Content/Img/gouon.png" wx:if="{{switch2Checked}}"></cover-image>
+                                <cover-image class="gou" src="../../Content/Img/gou.png" wx:if="{{!switch2Checked}}"></cover-image>
+                            </cover-view>
+                            <cover-view class="text">今天不再提示</cover-view>
+                        </cover-view>
+                        <cover-view class="c">
+                            <cover-image bindtap="closehuodong" class="icon" src="../../Content/Img/huodongx.png"></cover-image>
+                        </cover-view>
+                    </cover-view>
+                </cover-view>
+                <cover-view style="margin-top:65px;display:none">
+                    <cover-view class="Tips add-css1204">
+                        <cover-view class="f-1204">
+                            <cover-view class="f-l1204">站点名 :{{packname}} </cover-view>
+                            <cover-view class="f-l1204">数量 :{{packcarnun}} </cover-view>
+                            <cover-view class="f-l1204">距离 :{{distance}} 米 </cover-view>
+                        </cover-view>
+                    </cover-view>
+                </cover-view>
+                <cover-view class="{{ingBottom=='32%'?'left-list on':'left-list'}}">
+                    <cover-view class="list-icon" wx:if="{{scaveSeccess}}">
+                        <cover-view bindtap="showALLVeh" class="ad19" style="background:{{activeBG}}">
+                            <cover-image class="l-icon" src="{{wcIcon}}"></cover-image>
+                        </cover-view>
+                        <cover-view bindtap="showParkingArea" class="ad19 ad-l19" style="background:{{defaultBG}}">
+                            <cover-image class="l-icon" src="{{wcIcon2}}"></cover-image>
+                        </cover-view>
+                    </cover-view>
+                </cover-view>
+                <cover-view bindtap="showlocation" class="adkf09 adloc20 " style="bottom:{{ingBottom}}">
+                    <cover-image class="smimg09 kfimgad09" src="{{locImgs}}"></cover-image>
+                </cover-view>
+                <cover-view bindtap="showModelkf" class="adkf09" style="bottom:{{ingBottom}}">
+                    <cover-image class="smimg09 kfimgad09" src="{{kfImgs}}"></cover-image>
+                </cover-view>
+                <cover-view bindtap="Scavenging" class="Scavenging" wx:if="{{scaveSeccess}}">
+                    <cover-image class="smimg09" src="{{smImgs}}"></cover-image>
+                    <cover-view> 扫码开锁 </cover-view>
+                </cover-view>
+                <cover-view class="suc-car-cont" wx:else>
+                    <cover-image bindtap="security" class="deng10" src="{{dg}}"></cover-image>
+                    <cover-view class="suc-top10">
+                        <cover-view class="carTypeAndMain">
+                            <cover-view class="carType">{{carTypeing}}</cover-view>
+                            <cover-view class="carMain">
+                                <cover-view class="carImge">
+                                    <cover-image class="top10-img" src="{{img11}}" wx:if="{{temporaryClock}}"></cover-image>
+                                    <cover-image bindtap="findCard" class="findCard" src="{{xuncheBack}}" wx:else></cover-image>
+                                    <cover-view style="font-size:12px">{{vid}}</cover-view>
+                                </cover-view>
+                                <cover-view class="carImge">
+                                    <cover-image class="top10-img img102" src="{{imgdc}}"></cover-image>
+                                    <cover-view style="font-size:12px">约可行驶{{mile}}公里</cover-view>
+                                </cover-view>
+                            </cover-view>
+                        </cover-view>
+                    </cover-view>
+                    <cover-view class="suc-top10 btn-l">
+                        <cover-view class="top10-l">
+                            <cover-view bindtap="lsUnclockBtnFirstFn2" class="ad-btn-l over-btn" wx:if="{{temporaryClock}}">临时锁车</cover-view>
+                            <cover-view bindtap="temporaryClockFirstFn2" class="ad-btn-l over-btn" wx:else>临时开锁</cover-view>
+                        </cover-view>
+                        <cover-view class="top10-l">
+                            <cover-view bindtap="overUnclockBtnFirstFn2" class="ad-btn-l over-btn">结束行程</cover-view>
+                        </cover-view>
+                    </cover-view>
+                </cover-view>
+                <cover-view bindtap="hideModalkf" catchtouchmove="preventTouchMove" class="modal-mask" wx:if="{{showModalkf}}"></cover-view>
+                <cover-view class="kf-cont09" wx:if="{{showModalkf}}">
+                    <cover-view class="kf-top">客户服务</cover-view>
+                    <cover-view class="kf-list">
+                        <cover-view bindtap="CatRepair" class="list09 kf-bs">
+                            <cover-image class="kf-icon09" src="{{imgbs}}"></cover-image>
+                            <cover-view>车辆损坏</cover-view>
+                        </cover-view>
+                        <cover-view bindtap="CatReport" class="list09 kf-jb">
+                            <cover-image class="kf-icon09" src="{{imgjb}}"></cover-image>
+                            <cover-view>举报不文明行为</cover-view>
+                        </cover-view>
+                    </cover-view>
+                    <cover-view class="kf-list ad-magtop">
+                        <cover-view bindtap="makePhoneCall" class="list09 kf-bs">
+                            <cover-image class="kf-icon09" src="{{imgph}}"></cover-image>
+                            <cover-view>客服中心</cover-view>
+                        </cover-view>
+                    </cover-view>
+                </cover-view>
+                <cover-view bindtap="hideModal" catchtouchmove="preventTouchMove" class="modal-mask" wx:if="{{showModal}}"></cover-view>
+                <cover-view class="left-view" hidden="{{!showModal}}">
+                    <cover-view class="left-user">
+                        <cover-image bindtap="bindViewTap" class="userinfo-avatar" data-userName="{{userName}}" mode="cover" src="{{userImg}}"></cover-image>
+                        <cover-view class="userinfo-nickname adheig08">{{userName}}</cover-view>
+                    </cover-view>
+                    <cover-view class="left-nav page-main-list">
+                        <cover-view bindtap="navTonew" class="nav-list page-list" data-url="{{item.url}}" wx:for="{{navLeft}}" wx:key="index">
+                            <cover-view class="list-img">
+                                <cover-image class="icon-img08" src="{{item.icon}}"></cover-image>
+                            </cover-view>
+                            <cover-view class="list-con">
+                                <cover-view class="adflex08">
+                                    <cover-view class="adlist-t t08">{{item.listname}}</cover-view>
+                                </cover-view>
+                            </cover-view>
+                        </cover-view>
+                    </cover-view>
+                </cover-view>
+            </map>
+        </view>
+        <loading hidden="{{secCatLoading}}">正在扫车...</loading>
+    </view>
+</view>

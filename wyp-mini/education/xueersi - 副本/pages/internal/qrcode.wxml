@@ -1,0 +1,27 @@
+<view class="note">
+    <icon class="note-icon" color="#bbb" size="15" type="warn"></icon>以下展示的是您当前{{setMasge}}的小程序路径和二维码：</view>
+<view class="qrcode-qrid" wx:if="{{isDetails}}">
+    <view class="qrid-tips">
+        <text>该路径的序列号为：</text>
+        <text class="code">{{QR_id}}</text>
+    </view>
+    <view class="explain">仅用于在数据传送带中查看数据</view>
+</view>
+<view class="title">小程序路径</view>
+<view class="path-wrap">
+    <text class="path-text" selectable="true">{{shortUrl}}</text>
+    <button bindtap="copy" class="path-btn">复制路径</button>
+</view>
+<view class="title">小程序二维码</view>
+<view class="select-size-title">选择二维码边长</view>
+<view class="size-btn-wrap">
+    <button bindtap="getQrcode" class="size-btn" data-wpygetqrcode-a="8" type="{{activeBtn===8?'':'default'}}">8cm</button>
+    <button bindtap="getQrcode" class="size-btn" data-wpygetqrcode-a="12" type="{{activeBtn===12?'':'default'}}">12cm</button>
+    <button bindtap="getQrcode" class="size-btn" data-wpygetqrcode-a="15" type="{{activeBtn===15?'':'default'}}">15cm</button>
+    <button bindtap="getQrcode" class="size-btn" data-wpygetqrcode-a="20" type="{{activeBtn===20?'':'default'}}">20cm</button>
+    <button bindtap="getQrcode" class="size-btn" data-wpygetqrcode-a="30" type="{{activeBtn===30?'':'default'}}">30cm</button>
+</view>
+<view class="qrcode-wrap">
+    <image bindtap="preview" class="qrcode-img" data-wpypreview-a="{{qrcodeUrl}}" src="{{qrcodeUrl}}"></image>
+    <view class="qrcode-tips">点击二维码缩略图查看大图</view>
+</view>

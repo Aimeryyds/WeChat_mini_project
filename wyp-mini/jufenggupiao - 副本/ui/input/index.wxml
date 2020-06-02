@@ -1,0 +1,5 @@
+<view class="i-class i-cell i-input {{error?'i-input-error':''}} {{mode==='wrapped'?'i-input-wrapped':''}}">
+    <view class="i-cell-hd i-input-title" wx:if="{{title}}">{{title}}</view>
+    <textarea autoHeight bindblur="handleInputBlur" bindfocus="handleInputFocus" bindinput="handleInputChange" class="i-input-input i-cell-bd {{right?'i-input-input-right':''}}" disabled="{{disabled}}" focus="{{autofocus}}" maxlength="{{maxlength}}" placeholder="{{placeholder}}" placeholderClass="i-input-placeholder" value="{{value}}" wx:if="{{type==='textarea'}}"></textarea>
+    <input bindblur="handleInputBlur" bindfocus="handleInputFocus" bindinput="handleInputChange" class="i-input-input i-cell-bd {{right?'i-input-input-right':''}}" disabled="{{disabled}}" focus="{{autofocus}}" maxlength="{{maxlength}}" placeholder="{{placeholder}}" placeholderClass="i-input-placeholder" type="{{type}}" value="{{value}}" wx:else></input>
+</view>

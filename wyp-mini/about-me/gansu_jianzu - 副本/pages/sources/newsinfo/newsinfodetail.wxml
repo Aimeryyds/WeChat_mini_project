@@ -1,0 +1,36 @@
+<import src="/utils/wxParse/wxParse.wxml"></import>
+<view class="container" wx:if="{{isShow}}">
+    <view class="" style="display:flex;align-items:center; padding: 26rpx 0rpx 26rpx 25rpx;background-color:#fff;border-bottom:1rpx solid #d9d9d9">
+        <view style="flex:1;">
+            <view class="news-detail-title">{{detail.title}}</view>
+            <view class="news-detail-time">
+                <text style="margin-right: 30rpx;" wx:if="{{detail.publishTime}}">{{detail.publishTime}}</text>
+                <text>{{detail.author}}</text>
+            </view>
+        </view>
+        <button class="newsDetail__item-imgWrap" openType="share">
+            <image src="http://imgcdnali.wfenxiao.com.cn/xcx/c/gongqiu/share-icon.png" style="width:30rpx; height: 30rpx"></image>
+        </button>
+    </view>
+    <view class="news-detail">
+        <view class="rich-text-wrap">
+            <template is="wxParse" data="{{wxParseData:article.nodes,wxParseTagATap:wxParseTagATap}}" wx:if="{{detail.content}}"></template>
+        </view>
+        <view class="news-detail-end">
+            <view class="news-detail-end-border"></view>
+            <text style="font-size:28rpx;">（完）</text>
+            <view class="news-detail-end-border"></view>
+        </view>
+        <comment wx:if="{{detail.isMessage==1}}"></comment>
+    </view>
+    <view class="news-more-module">
+        <block wx:for="{{modules}}">
+            <newsinfo module="{{...item}}" style="display:block;margin-top:24rpx" wx:if="{{item.moduleName=='infoList'&&item.data.length>0}}"></newsinfo>
+            <supplyinfo module="{{...item}}" style="display:block;margin-top:24rpx" wx:if="{{item.moduleName=='supplyBuyList'&&item.data.length>0}}"></supplyinfo>
+            <brands module="{{...item}}" style="display:block;margin-top:24rpx" wx:if="{{item.moduleName=='brand'&&item.data.length>0}}"></brands>
+            <nearstore module="{{...item}}" style="display:block;margin-top:24rpx" wx:if="{{item.moduleName=='storeList'&&item.data.length>0}}"></nearstore>
+            <products module="{{...item}}" style="display:block;margin-top:24rpx" wx:if="{{(item.moduleName=='goods'||item.moduleName=='goodsList')&&item.data.length>0}}"></products>
+            <services module="{{...item}}" style="display:block;margin-top:24rpx" wx:if="{{item.moduleName=='projectList'&&item.data.length>0}}"></services>
+        </block>
+    </view>
+</view>

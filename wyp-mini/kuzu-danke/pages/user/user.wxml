@@ -1,0 +1,26 @@
+<view class="page">
+    <view bindtap="__e" class="login_part" data-event-opts="{{[ [ 'tap',[ [ 'toLogin',['$event'] ] ] ] ]}}">
+        <image src="{{avatar}}"></image>
+        <view class="login_title">
+            <view class="title_part">{{nickname}}</view>
+            <view class="sub_title">{{mobile}}</view>
+        </view>
+    </view>
+    <view class="function_part">
+        <view bindtap="__e" class="my-list" data-event-opts="{{[ [ 'tap',[ [ 'changeList',['$0'],[ [ ['lists','',index,'type'] ] ] ] ] ] ]}}" wx:if="{{list.show}}" wx:for="{{lists}}" wx:for-item="list" wx:key="index">
+            <view class="list-left">
+                <image class="list-icon" src="{{list.icon}}"></image>
+                <view class="list-title">{{list.title}}</view>
+            </view>
+            <image class="right_arrow" src="https://public.danke.com.cn/public-20190716-FhzQf6_v49Rft4_cqMoBxRuYXGNt"></image>
+        </view>
+    </view>
+    <view class="swiper" wx:if="{{user_banner}}">
+        <swiper autoplay="{{true}}" bindchange="__e" circular="{{true}}" current="{{indexFal}}" data-event-opts="{{[ [ 'change',[ [ 'onSlideChangeEnd',['$event'] ] ] ] ]}}" duration="{{500}}" indicatorDots="{{true}}" interval="{{3000}}">
+            <swiper-item wx:for="{{banner_list}}" wx:key="index">
+                <image bindtap="__e" class="slide-image" data-address="{{item.resource_data}}" data-bannerType="{{item.resource_type}}" data-event-opts="{{[ [ 'tap',[ [ 'to_banner',['$event'] ] ] ] ]}}" data-isLogin="{{item.is_need_login}}" src="{{item.images}}"></image>
+            </swiper-item>
+        </swiper>
+    </view>
+    <view bindtap="__e" class="logout" data-event-opts="{{[ [ 'tap',[ [ 'logout',['$event'] ] ] ] ]}}" wx:if="{{logout_onoff}}">退出登录</view>
+</view>

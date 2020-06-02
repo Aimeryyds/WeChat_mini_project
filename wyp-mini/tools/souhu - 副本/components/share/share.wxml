@@ -1,0 +1,20 @@
+<view>
+    <view wx:if="{{type==1}}">
+        <button bind:tap="handleClick" class="share-btn share-btn1" openType="share">分享</button>
+    </view>
+    <view wx:if="{{type==2}}">
+        <view bind:tap="handleClick" class="share-btn share-btn2">分享</view>
+        <view class="mask" wx:if="{{showSharePanel}}">
+            <view class="container">
+                <view class="title">
+                    <image src="../../images/ic_succ.png"></image>
+                    <text>链接已复制</text>
+                </view>
+                <view class="content">
+                    {{shareText.leading}}<text class="content-title">{{shareText.title}}</text>{{shareText.trailing}}
+                </view>
+                <view bind:tap="closePanel" class="confirm-button">我知道了</view>
+            </view>
+        </view>
+    </view>
+</view>

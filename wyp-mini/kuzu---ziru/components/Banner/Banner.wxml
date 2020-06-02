@@ -1,0 +1,12 @@
+<view class="banner-swiper-wrapper _div data-v-69d81359" id="banner" wx:if="{{imgUrls.length}}">
+    <swiper autoplay="{{autoplay}}" bindchange="__e" circular="{{circular}}" class="banner-swiper data-v-69d81359" data-event-opts="{{[ [ 'change',[ [ 'swiperChange',['$event'] ] ] ] ]}}" duration="{{duration}}" indicatorDots="{{indicatorDots}}" interval="{{interval}}">
+        <view class="_div data-v-69d81359" wx:for="{{imgUrls}}" wx:for-index="i" wx:key="i">
+            <swiper-item bindtap="__e" class="data-v-69d81359" data-event-opts="{{[ [ 'tap',[ [ 'handleJumpH5',[item.parameter?item.parameter.url:''] ] ] ] ]}}">
+                <image class="slide-image data-v-69d81359" mode="scaleToFill" src="{{item.img}}"></image>
+            </swiper-item>
+        </view>
+    </swiper>
+    <view class="indicator-dots-wrapper _div data-v-69d81359" wx:if="{{swiperIndicatorStatus.length>1}}">
+        <label class="{{['dot _span data-v-69d81359',swiperIndicatorStatus[i]===2?'s0':'',swiperIndicatorStatus[i]===1?'s1':'']}}" wx:for="{{imgUrls}}" wx:for-index="i" wx:for-item="url" wx:key="i"></label>
+    </view>
+</view>

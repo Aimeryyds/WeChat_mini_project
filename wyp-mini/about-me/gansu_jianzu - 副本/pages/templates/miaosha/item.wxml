@@ -1,0 +1,27 @@
+<template name="miaoItem">
+    <view bindtap="makeMiaoItem" class="miao-item" data-miao="{{miaoItem}}">
+        <image class="miao-item--thumb" src="{{miaoItem.imgUrl}}" style=""></image>
+        <view class="miao-item--content">
+            <view class="zan-ellipsis miao-item--title">{{miaoItem.goodsName}}</view>
+            <view class="miao-item--store" style="font-size:24rpx">{{miaoItem.brandName}} - {{miaoItem.storeName}}</view>
+            <view class="miao-item--price">
+                <text class="miao-item--price-now">
+                    <text class="miao-item--price-mark">￥</text>{{miaoItem.price}}</text>
+                <text class="miao-item--price-old">￥{{miaoItem.originalPrice}}</text>
+            </view>
+            <view style="font-size:24rpx;color:rgba(0,0,0,0.43);margin-top:8rpx;">{{miaoItem.reviewsNum}}条评价  {{miaoItem.goodReviewsRate}}%好评</view>
+            <view class="miao-item--time" style="display:flex">
+        距{{miaoItem.seckillStatus==2?'结束':'开始'}}
+        <wxc-countdown countdown="{{miaoItem.overTime}}" format="dd天hh：mm：ss" numStyle="{{'text-align:center;color:red'}}" style="margin-left:8rpx;"></wxc-countdown>
+            </view>
+            <view class="miao-item--progress">
+                <progress activeColor="#FF8E8E" backgroundColor="#e3e3e3" percent="{{miaoItem.ratio}}" strokeWidth="10" style="width:200rpx;border-radius:12rpx"></progress>
+                <text style="font-size: 24rpx;color:#999;margin-left:12rpx;">已抢{{miaoItem.ratio}}%</text>
+            </view>
+            <view class="zan-btn zan-btn--small zan-btn--danger miao-item--btn{{miaoItem.ratio==100||miaoItem.overTime<=0?'-invalid':''}}" wx:if="{{miaoItem.seckillStatus==2}}">
+        {{miaoItem.overTime>0?miaoItem.ratio==100?'已抢光':'马上抢':'已结束'}}
+      </view>
+            <view bindtap="makeMiaoItem" class="zan-btn zan-btn--small zan-btn--danger miao-item--btn-invalid" data-miao="{{miaoItem}}" wx:else>请等待</view>
+        </view>
+    </view>
+</template>

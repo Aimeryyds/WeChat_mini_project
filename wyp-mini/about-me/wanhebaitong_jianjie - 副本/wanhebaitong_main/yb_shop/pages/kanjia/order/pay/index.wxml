@@ -1,0 +1,119 @@
+<loading hidden="{{show}}">正在加载</loading>
+<view class="page" wx:if="{{!success&&show}}">
+    <view class="fui-cell-group">
+        <view class="fui-cell">
+            <view class="fui-cell-text textl">订单编号</view>
+            <view class="fui-cell-remark noremark">{{list.order_no}}</view>
+        </view>
+        <view class="fui-cell">
+            <view class="fui-cell-text textl">订单金额</view>
+            <view class="text-danger">￥
+        <text>{{list.pay_money}}</text>
+            </view>
+        </view>
+    </view>
+    <view class="fui-list-group" style="margin-top:0;">
+        <view bindtap="pay" class="fui-list" data-type="credit" wx:if="{{list.pay_money==0}}">
+            <view class="fui-list-media credit radius">
+                <image class="round" src="/yb_shop/static/images/icon-white/money.png"></image>
+            </view>
+            <view class="fui-list-inner">
+                <view class="row">
+                    <view class="row-text">确认支付</view>
+                </view>
+            </view>
+            <view class="angle"></view>
+        </view>
+        <view bindtap="pay" class="fui-list" data-type="wechat" wx:if="{{list.pay_money!=0}}">
+            <view class="fui-list-media wechat">
+                <image class="round" src="/yb_shop/static/images/icon-white/wechat.png"></image>
+            </view>
+            <view class="fui-list-inner">
+                <view class="row">
+                    <view class="row-text">微信支付</view>
+                </view>
+                <view class="subtitle">微信安全支付</view>
+            </view>
+            <view class="angle"></view>
+        </view>
+    </view>
+    <view bindtap="pay" class="btn btn-danger block" data-type="wechat" style="font-size:30rpx;background:#ed4f4e;">确认支付</view>
+</view>
+<view class="page" wx:if="{{success}}">
+    <view class="fui-list success">
+        <view class="fui-list-media">
+            <image class="round" src="/yb_shop/static/images/icon-white/deliver-48.png"></image>
+        </view>
+        <view class="fui-list-inner">
+            <view class="row">
+                <view class="">
+                    <view wx:if="{{list.order_status==0}}">待付款 </view>
+                    <view wx:elif="{{list.order_status==1}}"> 待发货 </view>
+                    <view wx:elif="{{list.order_status==2}}"> 待收货 </view>
+                    <view wx:elif="{{list.order_status==3}}"> 已完成 </view>
+                    <view wx:elif="{{list.order_status==4}}"> 退换货 </view>
+                    <view wx:else> 未知状态 </view>
+                </view>
+            </view>
+            <view class="">{{list.buyer_message}}</view>
+        </view>
+    </view>
+    <view class="fui-cell-group">
+        <navigator class="fui-cell" hoverClass="none">
+            <image class="fui-cell-icon" src="/yb_shop/static/images/icon/location01.png" url=""></image>
+            <view class="fui-cell-text textl info">
+                <view>
+                    <text class="name">{{list.receiver_name}}</text>
+                    <text>{{list.receiver_mobile}}</text>
+                </view>
+                <view class="adress">{{list.address.province+list.address.city+list.address.district+' '+list.receiver_address}}</view>
+            </view>
+        </navigator>
+    </view>
+    <view class="fui-cell-group {{shop?'toggleSend-group':''}}" wx:if="{{list.stores}}">
+        <view class="send-code fui-list">
+            <view class="fui-list" wx:for="{{list.stores}}">
+                <view class="fui-list-media">
+                    <image class="fui-list-icon" src="/yb_shop/static/images/icon/shop.png"></image>
+                </view>
+                <view class="fui-list-inner store-inner">
+                    <view class="title">
+                        <span class="storename">{{item.storename}}</span>
+                    </view>
+                    <view class="text">
+                        <text class="realname">{{item.realname}}</text>
+                        <text class="mobile">{{item.mobile}}</text>
+                    </view>
+                    <view class="text">
+                        <text class="address">{{item.address}}</text>
+                    </view>
+                </view>
+                <view class="fui-list-angle ">
+                    <image bindtap="phone" class="image-48" data-phone="{{item.mobile}}" src="/yb_shop/static/images/icon/tel.png"></image>
+                    <navigator hoverClass="none" url="/pages/order/store/map?id={{item.id}}">
+                        <image class="image-48" src="/yb_shop/static/images/icon/location01.png"></image>
+                    </navigator>
+                </view>
+            </view>
+        </view>
+    </view>
+    <view class="fui-cell-group">
+        <view class="fui-cell">
+            <view class="fui-cell-text ">微信支付</view>
+            <view class="text-danger">￥
+        <text>{{list.order_money}}</text>
+            </view>
+        </view>
+        <view class="fui-cell">
+            <view class="fui-cell-remark noremark">请到订单详情中查看详细信息</view>
+        </view>
+    </view>
+    <view class="operate">
+        <navigator class="btn btn-default" url="/yb_shop/pages/kanjia/order/detail/index?order_id={{list.order_id}}">
+      订单详情
+    </navigator>
+        <navigator class="btn btn-default" openType="redirect" url="/yb_shop/pages/kanjia/index/index">
+      返回首页
+    </navigator>
+    </view>
+</view>

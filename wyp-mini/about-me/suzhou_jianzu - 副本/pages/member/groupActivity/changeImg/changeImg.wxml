@@ -1,0 +1,33 @@
+<view class="gallery">
+    <view class="formTitle">最多上传5张<text></text>
+    </view>
+    <view class="item" wx:for="{{images}}">
+        <image bindtap="previewImage" mode="aspectFill" src=" {{item}}" style="width: {{imageWidth}}px; height: {{imageWidth}}px"></image>
+        <view bindtap="delete" class="delete" data-index="{{index}}">
+            <image src="http://tws.cnweisou.com/images/icon_delete.png" style="left: {{imageWidth/2-10}}px;"></image>
+        </view>
+    </view>
+    <view class="item">
+        <image bindtap="chooseImage" class="button-upload" src="http://tws.cnweisou.com/images/icon_add.png" style="width: {{imageWidth}}px; height: {{imageWidth}}px"></image>
+    </view>
+</view>
+<view class="recommend">精品推荐（可多选）</view>
+<view class="gallery">
+    <scroll-view bindscroll="scroll" bindscrolltolower="bindDownLoad" bindscrolltoupper="topLoad" scrollTop="{{scrollTop}}" scrollY="true" style="height:900rpx;">
+        <view class="item recommendImage" wx:for="{{imgList}}">
+            <image bindtap="recommendImage" data-index="{{index}}" data-name="{{isSelectList[index]}}" mode="aspectFill" src=" {{item.url}}" style="width: {{imageWidth2}}px; height: {{imageWidth2}}px;"></image>
+            <view class="cancelImage" data-index="{{index}}" wx:if="{{isSelectList[index]}}">
+                <text>已选</text>
+            </view>
+        </view>
+    </scroll-view>
+</view>
+<button bindtap="submit" style="background:#D95940;" type="primary">确定</button>
+<view class="bgtypeList" wx:if="{{cardAgain}}">
+    <view class="cardAgainType">
+            您还没选择任何图片喔
+    <view bindtap="returnIndex" class="determineAgin">
+    确定
+    </view>
+    </view>
+</view>

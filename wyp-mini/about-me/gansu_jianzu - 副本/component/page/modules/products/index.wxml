@@ -1,0 +1,98 @@
+<import src="/pages/templates/tag/tuan.wxml"></import>
+<import src="/pages/templates/tag/seckill.wxml"></import>
+<view class="zan-panel zan-panel__no-margin-top zan-panel__no-border" wx:if="{{module.data.length>0}}">
+    <view class="products-panel__type2" style="margin-bottom: 0;padding-bottom:2rpx;" wx:if="{{module.options.listStyle=='type1'}}">
+        <view bindtap="makegoods" class="products__type2" data-id="{{product.id}}" data-storedetail="{{product}}" style="width: {{(750-12)/2}}rpx; margin-bottom: {{index>17?'0':'8rpx'}};" wx:for="{{module.data}}" wx:for-item="product" wx:key="{{index}}">
+            <view class="product__type2-thumb" style="width: {{(750-12)/2}}rpx; position:relative">
+                <image src="{{product.imgUrl}}" style="width:{{(750-12)/2}}rpx;height:{{(750-12)/2}}rpx"></image>
+            </view>
+            <view class="tuan__tag2" wx:if="{{product.activityType==2}}">
+                <template is="tuan-tag" data="{{num:product.limitPeople}}"></template>
+            </view>
+            <view class="tuan__tag2" wx:if="{{product.activityType==1&&product.seckillStatus==2}}">
+                <template is="seckill-tag" data></template>
+            </view>
+            <view style=" padding: 0 16rpx; ">
+                <view class="product-name zan-ellipsis--l2" style="text-indent:0rpx;height: 80rpx;">{{product.name}}</view>
+                <view class="product-storename-1" wx:if="{{isShowStoreName}}">
+                    <image src="http://imgcdnali.wfenxiao.com.cn/xcx/c/store.png" style="width:34rpx;height:34rpx;margin-right:8rpx;"></image>
+                    <view class="zan-ellipsis" style="flex: 1;">{{product.brandName}}-{{product.storeName}}</view>
+                </view>
+                <view class="product-footer">
+                    <view class="product-price-container" style="display:flex;flex-direction:row;align-items:flex-end; ">
+                        <view class="product-price">￥
+                <text class="product-price_num">{{product.price||'0.00'}}</text>
+                        </view>
+                        <view style="font-size: 24rpx;color: rgba(0,0,0,0.43);margin-left:28rpx;">已售{{product.saleNum||0}}件</view>
+                    </view>
+                </view>
+                <view style="font-size:24rpx;color:rgba(0,0,0,0.43);margin-top:8rpx;">{{product.reviewsNum}}条评价  {{product.goodReviewsRate}}%好评</view>
+            </view>
+        </view>
+    </view>
+    <block wx:if="{{module.options.listStyle=='type2'}}">
+        <view bindtap="makegoods" class="zan-card products__type4" data-storedetail="{{product}}" style="margin-bottom: 20rpx;" wx:for="{{module.data}}" wx:for-item="product" wx:key="{{index}}">
+            <view class="zan-card__thumb">
+                <image class="zan-card__img" src="{{product.imgUrl}}" style="width:90px;height:90px;"></image>
+            </view>
+            <view class="zan-card__detail">
+                <view class="zan-card__detail-row product-name-wrap">
+                    <view class="tuan__tag1">
+                        <template is="tuan-tag" data="{{num:product.limitPeople}}" wx:if="{{product.activityType==2}}"></template>
+                    </view>
+                    <view class="tuan__tag1" wx:if="{{product.activityType==1&&product.seckillStatus==2}}">
+                        <template is="seckill-tag" data></template>
+                    </view>
+                    <view class="product-name zan-ellipsis--l2" style=" text-indent:{{product.activityType==1&&product.seckillStatus==2||product.activityType==2?'70rpx':'0rpx'}}">{{product.name}}</view>
+                </view>
+                <view class="product-footer">
+                    <view class="product-price-container">
+                        <view class="zan-card__detail-row zan-c-gray-darker" style="display:flex;flex-direction:row;align-items:center;">
+                            <view class="zan-card__left-col zan-c-red product-price" style="flex-shrink:0;margin-right:20px;">￥
+                <text class="product-price_num">{{product.price||'0.00'}}</text>
+                            </view>
+                            <view style="font-size: 24rpx;flex-shrink:0;color: rgba(0,0,0,0.43);">已售{{product.saleNum||0}}件</view>
+                            <view class="product-storename-2" wx:if="{{isShowStoreName}}">【{{product.brandName}}-{{product.storeName}}】</view>
+                        </view>
+                    </view>
+                </view>
+                <view style="font-size:24rpx;color:rgba(0,0,0,0.43);margin-top:8rpx;">{{product.reviewsNum}}条评价  {{product.goodReviewsRate}}%好评</view>
+            </view>
+        </view>
+    </block>
+    <block wx:if="{{module.options.listStyle=='type3'}}">
+        <view bindtap="makegoods" class="products__type1" data-storedetail="{{product}}" wx:for="{{module.data}}" wx:for-item="product" wx:key="{{index}}">
+            <view class="product__type1-thumb">
+                <image src="{{product.imgUrl}}" style="width:{{750-8}}rpx;height:{{750-8}}rpx"></image>
+            </view>
+            <view class="product-name zan-ellipsis--l2">{{product.name}}</view>
+            <view class="product-footer">
+                <view class="product-price-container">
+                    <view class="product-price">￥
+            <text class="product-price_num">{{product.price||'0.00'}}</text>
+                    </view>
+                </view>
+            </view>
+        </view>
+    </block>
+    <view class="products-panel__type3" wx:if="{{module.options.listStyle=='type4'}}">
+        <view bindtap="makegoods" class="products__type3" data-id="{{product.gid}}" data-storedetail="{{product}}" style="width: {{index%3==0?750-8:(750-12)/2}}rpx" wx:for="{{module.data}}" wx:for-item="product" wx:key="{{index}}">
+            <view class="product__type3-thumb" style="width: {{index%3==0?750-8:(750-12)/2}}rpx">
+                <image mode="{{index%3==0?'aspectFill':'center'}}" src="{{product.imgUrl}}" style="width: {{index%3==0?'100%':(750-12)/2+'rpx'}};height: {{index%3==0?(750-8)/2.3:(750-12)/2}}rpx"></image>
+            </view>
+            <view class="product-name zan-ellipsis--l2">{{product.name}}</view>
+            <view class="product-footer">
+                <view class="product-price-container">
+                    <view class="product-price">￥
+              <text class="product-price_num">{{product.price||'0.00'}}</text>
+                    </view>
+                </view>
+            </view>
+        </view>
+    </view>
+    <view bindtap="makedataSource" class="view-more" data-options="{{module.options}}" data-type="products" wx:if="{{module.moduleName=='goodsList'&&module.total>20}}">
+        <text class="aa">查看更多</text>
+        <image class="view-more--img" src="http://imgcdnali.wfenxiao.com.cn/xcx/c/icons/arrow-bottom-red.png"></image>
+    </view>
+</view>
+<view class="services-error" wx:if="{{module.data.length==0}}">{{locationType==0?'该城市暂无商品':'当前位置暂无商品'}}</view>

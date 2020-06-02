@@ -1,0 +1,72 @@
+<view class="index_tip" wx:if="{{index_tip}}">添加到我的小程序，菜谱随手查</view>
+<view class="search mt20">
+    <view bindtap="do_search" class="search_item search_mask">
+        <input name="q" placeholder="搜索菜谱、食材或专题..." placeholderStyle="color:#666;" value="{{search_q}}"></input>
+        <form>
+            <button class="search_b" plain="true">
+                <icon size="14" type="search"></icon>
+                <text>搜索</text>
+            </button>
+        </form>
+    </view>
+</view>
+<view class="hotkey">
+    <navigator class="hotkey_item" url="../search/search?q={{item.key}}" wx:if="{{index<10}}" wx:for="{{hotkey}}" wx:key="hotkey">{{item.key}}</navigator>
+</view>
+<view class="tplist2">
+    <view class="tplist2_item" wx:if="{{index<8}}" wx:for="{{bestIndexElite}}" wx:key="bestIndexElite">
+        <navigator url="/{{item.url}}">
+            <image src="{{item.pic}}"></image>
+            <text>{{item.title?item.title:'　'}}</text>
+        </navigator>
+    </view>
+</view>
+<view class="timeline">
+    <form catchsubmit="timelineSubmit" reportSubmit="true">
+        <block wx:for="{{timelist}}" wx:key="timelist">
+            <view class="timeline_item" wx:if="{{index==2}}">
+                <view class="tm3">
+                    <ad unitId="adunit-6e47f5075a513c46"></ad>
+                </view>
+            </view>
+            <view class="timeline_item" wx:if="{{index==7}}">
+                <view class="tm3">
+                    <ad adTheme="white" adType="video" unitId="adunit-7d72ae3990914f56"></ad>
+                </view>
+            </view>
+            <view class="timeline_item" wx:if="{{item.type=='collect'||item.type=='recipe'||item.type=='pai'||item.type=='mofang'||item.type=='article'||item.type=='event'||item.type=='miniprogram'}}">
+                <button bindtap="open_timeline" data-adid="{{item.adid}}" data-app="0" data-id="{{item.subid}}" data-index="{{index+1}}" data-type="{{item.type}}" data-url="{{item.url}}" formType="submit" plain="true"></button>
+                <view class="tm1" wx:if="{{item.templetid==1}}">
+                    <image class="tm1_img r4{{open_v==1?item.r4:''}}" src="{{item.pic640}}"></image>
+                    <view class="tm1_11" wx:if="{{item.desc==''}}">{{item.subject}}</view>
+                    <view class="tm1_1" wx:else>{{item.subject}}</view>
+                    <view class="tm1_2" wx:if="{{item.desc!=''}}">{{item.desc}}</view>
+                    <view class="tm1_3">{{item.remark}}</view>
+                </view>
+                <view class="tm2" wx:elif="{{item.templetid==2}}">
+                    <view class="tm2_1" wx:if="{{item.subject}}">{{item.subject}}</view>
+                    <view class="tm2_2" wx:if="{{item.desc}}">{{item.desc}}</view>
+                    <image class="tm2_img" src="{{item.picset[0]}}"></image>
+                    <image class="tm2_img" src="{{item.picset[1]}}"></image>
+                    <image class="tm2_img" src="{{item.picset[2]}}"></image>
+                    <view class="tm2_3" wx:if="{{item.remark}}">{{item.remark}}</view>
+                </view>
+                <view class="tm3" wx:elif="{{item.templetid==3}}">
+                    <view class="tm3_1" wx:if="{{item.subject}}">{{item.subject}}</view>
+                    <view class="tm3_2" wx:if="{{item.desc}}">{{item.desc}}</view>
+                    <image class="tm3_img r42{{open_v==1?item.r4:''}}" src="{{item.picset.length>0?item.picset[0]:item.pic}}" style="height:{{670*item.shownum}}rpx"></image>
+                    <view class="tm3_3" wx:if="{{item.remark}}">{{item.remark}}</view>
+                </view>
+            </view>
+        </block>
+    </form>
+</view>
+<view class="loading_end" wx:if="{{loading_end}}"></view>
+<view class="loading" wx:if="{{loading}}">
+    <image class="loading_img" src="../../image/loading-32-32.gif"></image>
+</view>
+<view class="loading_fail" wx:if="{{loading_fail}}"></view>
+<navigator class="icon_goods" url="/pages/goods/goods">
+    <image src="/image/icon_goods.png"></image>
+    <text>福利</text>
+</navigator>

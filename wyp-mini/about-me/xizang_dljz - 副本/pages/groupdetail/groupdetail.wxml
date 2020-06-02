@@ -1,0 +1,129 @@
+<view class="container">
+    <view class="groupon-info" wx:if="{{groupOrderInfo}}">
+        <navigator class="shop-item" hoverClass="hover" openType="redirect" url="/pages/shopdetail/shopdetail?goodsSn={{goods.goodsSn}}">
+            <image mode="widthFix" src="{{groupOrderInfo.thumb}}" style="background: lightgray"></image>
+            <view>
+                <text class="two-line">{{goods.name}}</text>
+                <view class="price-wrap">
+                    <text class="new-price">
+                        <text class="small-price">¥</text> {{groupOrderInfo.groupMarketPrice}}</text>
+                    <text class="old-price">
+                        <text class="small-price">¥</text> {{groupOrderInfo.price}}</text>
+                </view>
+            </view>
+        </navigator>
+        <view class="join-list">
+            <view class="list">
+                <view class="{{item.isMaster==1?'leader':''}} item" wx:for="{{memberList}}">
+                    <image mode="aspectFit" src="{{item.photo}}"></image>
+                </view>
+                <view class="empty-item" wx:for="{{empty_list}}"></view>
+                <block wx:if="{{groupOrderInfo.groupStatus==30}}">
+                    <view class="item" wx:for="{{autoBuidNumList}}">
+                        <image mode="aspectFit" src="/images/default_p.png"></image>
+                    </view>
+                </block>
+            </view>
+            <view class="time-wrap" wx:if="{{groupOrderInfo.groupStatus==20}}">仅剩<text style="color: #ff5777; font-size: 40rpx">{{groupOrderInfo.attendNum-groupOrderInfo.nowNum}}</text>人, 
+          <view class="l-time">
+                    <block wx:if="{{clock.day>0}}">
+                        <text class="l-cell">{{clock.day}}</text> 天
+            </block>
+                    <text class="l-cell">{{clock.hr}}</text>:<text class="l-cell">{{clock.min}}</text>:<text class="l-cell">{{clock.sec}}</text>
+                </view>后结束</view>
+            <view class="success-wrap" wx:if="{{groupOrderInfo.groupStatus==30}}">已有{{groupOrderInfo.nowNum}}人参加, <text>拼团成功</text>
+            </view>
+            <view class="fail-wrap" wx:if="{{4==groupOrderInfo.status&&groupOrderInfo.groupStatus!=30&&groupOrderInfo.groupStatus!=80}}">
+                <text style="color: #bb3333;">活动已失效</text>
+            </view>
+            <view class="fail-wrap" wx:if="{{groupOrderInfo.groupStatus==80}}">还差<text style="color: #bb3333; font-size: 40rpx">{{groupOrderInfo.attendNum-groupOrderInfo.nowNum}}</text> 人，<text style="color: #bb3333;">拼团失败</text>
+            </view>
+        </view>
+        <button class="btn share-btn" openType="share" wx:if="{{groupOrderInfo.groupStatus==20}}">分享给微信好友</button>
+        <navigator class="btn" openType="redirect" url="/pages/orderdetail/orderdetail?orderNo={{orderNo}}" wx:if="{{userHasBuy==1&&orderNo!=null}}">查看订单详情</navigator>
+        <view bindtap="showChoose" class="btn" wx:elif="{{4!=groupOrderInfo.status&&groupOrderInfo.groupStatus==20}}">一键参团</view>
+        <navigator bindtap="showChoose" class="btn" hoverClass="hover" openType="redirect" url="/pages/shopdetail/shopdetail?goodsSn={{goods.goodsSn}}" wx:if="{{userHasBuy!=1&&orderNo==null&&groupOrderInfo.groupStatus==30}}">拼团成功, 重新发起拼团</navigator>
+        <navigator class="btn" hoverClass="hover" openType="redirect" url="/pages/shopdetail/shopdetail?goodsSn={{goods.goodsSn}}" wx:if="{{groupOrderInfo.groupStatus==80}}">拼团失败, 重新发起拼团</navigator>
+    </view>
+    <navigator class="common-row" url="/pages/groupexplain/groupexplain">
+        <text>拼团须知</text>
+        <view>
+            <text>·好友参团 ·人满发货 ·人不满退款</text>
+            <image src="/images/arrow.png"></image>
+        </view>
+    </navigator>
+    <view class="more-list">
+        <navigator class="header" hoverClass="hover" openType="redirect" url="/pages/grouplist/grouplist">
+            <text>更多拼团</text>
+            <view>
+                <text>更多</text>
+                <image src="/images/arrow.png"></image>
+            </view>
+        </navigator>
+        <view class="list">
+            <navigator class="item" hoverClass="hover" openType="redirect" url="../shopdetail/shopdetail?goodsSn={{item.goodsSn}}" wx:for="{{module_list}}">
+                <image src="{{item.thumb}}"></image>
+                <view>
+                    <view class="top">
+                        <text class="name">{{item.name}}</text>
+                        <text class="desc">{{item.brief?item.brief:''}}</text>
+                        <text class="count">已购{{item.salesNum}}件</text>
+                    </view>
+                    <view class="bottom">
+                        <view class="price-wrap">
+                            <text class="new-price">
+                                <text class="small-price">¥</text> {{item.groupMarket.groupMarketPrice}}</text>
+                            <text class="old-price">
+                                <text class="small-price">¥</text>{{item.price}}</text>
+                        </view>
+                        <view class="btn">去开团</view>
+                    </view>
+                </view>
+            </navigator>
+        </view>
+    </view>
+</view>
+<form bindsubmit="confirm" class="purchase-window" reportSubmit="true" wx:if="{{show_choose}}">
+    <view catchtap="closeChoose" class="bg" disableScroll="true"></view>
+    <view class="purchase-form">
+        <view class="info">
+            <image class="image" mode="aspectFill" src="{{attrPic}}"></image>
+            <view class="content">
+                <text class="title">{{goods.name}}</text>
+                <view class="content_bottom">
+                    <text class="price-wrap">¥<text class="price">{{attrGroupPrice}}</text>
+                    </text>
+                    <text class="desc">库存：{{attrStock}}</text>
+                    <text class="desc" wx:if="{{purchaseLimit==1}}">拼团限购: {{goods.groupMarket.purchaseMax}}</text>
+                </view>
+            </view>
+        </view>
+        <view class="standard">
+            <block wx:for="{{attr_group}}" wx:for-index="idx">
+                <text>{{item.name}}</text>
+                <view>
+                    <text bindtap="bindAttrChange" class="{{select_attr_arr[idx]==index?'selected':''}}" id="{{idx}},{{index}}" wx:for="{{item.attrs}}" wx:for-item="attrItem">{{attrItem.value}}</text>
+                </view>
+            </block>
+        </view>
+        <template is="line" data></template>
+        <view class="counter">
+            <text class="label">购买数量</text>
+            <view class="stepper">
+                <view catchtap="bindMinus" class="icon-wrap left">
+                    <image src="/images/icon_del.png" style="width: 16px; height: 16px;"></image>
+                </view>
+                <input bindchange="bindKeyInput" type="number" value="{{input_number}}"></input>
+                <view catchtap="bindPlus" class="icon-wrap right">
+                    <image src="/images/icon_add.png" style="width: 16px; height: 16px;"></image>
+                </view>
+            </view>
+        </view>
+        <view catchtap="closeChoose" class="close-view">
+            <image class="image" src="../../images/goods/close.png"></image>
+        </view>
+    </view>
+    <view class="button-wrap">
+        <button class="purchase-button z-index-top" formType="submit">确定</button>
+    </view>
+</form>

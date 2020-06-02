@@ -1,0 +1,58 @@
+<navigation-bar enable="{{enable}}" title="本周流行" wx:if="{{showtopbar}}"></navigation-bar>
+<view class="container" style="padding-top:{{barHeight}}px">
+    <view bindtap="pageReload" class="cplist_nodata" wx:if="{{requeseFail}}">{{requeseFailTips}}</view>
+    <view class="top">
+        <view class="topbar">
+            <view class="h2">本周流行菜谱</view>
+        </view>
+        <view class="h1">
+            <view class="em">本</view>
+            <view class="em">周</view>
+            <view class="em">流</view>
+            <view class="em">行</view>
+            <view class="em">菜</view>
+            <view class="em">谱</view>
+        </view>
+        <view class="des">不知道吃什么？这里有你想要的答案！</view>
+        <image class="topimg" src="https://s1.st.meishij.net/p2/20180912/20180912174143_798.jpg"></image>
+        <view class="topimg_cover"></view>
+    </view>
+    <view class="cpitemlist">
+        <navigator class="recipeitem" hoverClass="navigator-hover" url="/pages/content/content?id={{item.id}}" wx:for="{{weekData}}" wx:for-index="i" wx:key="key">
+            <view class="recipeitemw">
+                <view class="cpimgw" style="background:#f5f5f5 url({{item.img}}) center no-repeat;background-size:cover;">
+                    <view class="rank rank{{i}}">
+                        <view class="em">{{item.week_onclick}}人在看</view>
+                    </view>
+                </view>
+                <view class="cpinfow">
+                    <view class="cpnamew">
+                        <text class="cpname">{{item.title}}</text>
+                    </view>
+                    <view class="tagw">
+                        <view class="tag" wx:if="{{item.tags[0]}}">
+                            <view class="t" wx:if="{{item.tags[0].name}}">{{item.tags[0].name}}</view>
+                            <view class="c" wx:if="{{item.tags[0].desc}}">{{item.tags[0].desc}}</view>
+                        </view>
+                    </view>
+                    <view class="starw">
+                        <view wx:for="{{[1,2,3,4,5]}}" wx:for-item="i" wx:key="key">
+                            <image src="{{starUrl1}}" wx:if="{{item.rate-i>=0}}"></image>
+                            <image src="{{starUrl2}}" wx:elif="{{item.rate-i+1>0}}"></image>
+                            <image src="{{starUrl3}}" wx:else></image>
+                        </view>
+                    </view>
+                    <view class="viewdata">
+                        <image src="{{iconUrl1}}"></image>
+                        <text>{{item.fav}}</text>
+                        <image src="{{iconUrl2}}"></image>
+                        <text>{{item.onclick}}</text>
+                    </view>
+                </view>
+            </view>
+        </navigator>
+    </view>
+</view>
+<loading hidden="{{requeseDone||requeseFail||noData}}">
+ 加载中...
+</loading>

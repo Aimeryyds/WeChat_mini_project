@@ -1,0 +1,25 @@
+<view class="reply">
+    <view class="talkCont">
+        <view class="rightCont rightContBottom">
+            <view class="rightContTop">{{nickname}}</view>
+            <text class="special">{{create_time}}</text>
+            <view class="talkDetial talkDetialCont">
+			{{question}}
+			</view>
+        </view>
+        <view class="talcImg">
+            <image src="{{avatar}}"></image>
+        </view>
+        <view class="clear"></view>
+    </view>
+</view>
+<view class="answer" wx:if="{{answer}}">
+    <view class="answertitle">问题解答：</view>
+    <view class="answerCont">
+{{answer}}
+
+</view>
+</view>
+<view bindtap="joinComplaint" class="bottomMyQues">
+继续提问
+</view>

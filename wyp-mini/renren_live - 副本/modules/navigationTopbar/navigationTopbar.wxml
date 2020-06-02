@@ -1,0 +1,16 @@
+<view class="navTop_con" style="height:{{46+navigationBarHeight}}px;background: {{backgroundColor}};border-bottom: {{borderBottom}};" wx:if="{{showWhiteBackground}}">
+    <view class="nav_box" style="top:{{navigationBarHeight}}px">
+        <view bindtap="ClickBack" class="nav_back">
+            <image class="back_img" src="{{navBackUrl}}"></image>
+        </view>
+        <view class="nav_text">{{navTxt}}</view>
+    </view>
+</view>
+<view class="navTop_con" style="height:{{46+navigationBarHeight}}px;background: {{backgroundColor}}; border-bottom: {{borderBottom}};" wx:else>
+    <view class="nav_box" style="top:{{navigationBarHeight}}px">
+        <view class="nav_text" wx:if="{{navtype==1}}">
+            <image class="txt_img" src="{{navImage}}"></image>
+        </view>
+        <view class="nav_text" wx:if="{{navtype==2}}">{{navTxt}}</view>
+    </view>
+</view>

@@ -1,0 +1,38 @@
+.menu-list {
+    padding: 20rpx 0 4rpx;
+    white-space: nowrap;
+}
+
+.menu-item {
+    position: relative;
+    display: inline-block;
+    height: 58rpx;
+    margin-left: 44rpx;
+    font-size: 32rpx;
+    color: #777777;
+}
+
+.menu-item:first-child {
+    margin-left: 36rpx;
+}
+
+.menu-item:last-child {
+    margin-right: 36rpx;
+}
+
+.menu-item.active {
+    color: #333333;
+    font-weight: bold;
+}
+
+.active::after {
+    position: absolute;
+    content: '';
+    left: 50%;
+    bottom: 0rpx;
+    width: 34rpx;
+    height: 6rpx;
+    margin-left: -17rpx;
+    border-radius: 3rpx;
+    background-color: #fdc300;
+}

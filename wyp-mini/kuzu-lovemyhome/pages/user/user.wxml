@@ -1,0 +1,51 @@
+<view class="user-box">
+    <view class="logintop">
+        <view class="userbg">
+            <image src="https://res.5i5j.com/cache/weixin/common/userbg.png"></image>
+        </view>
+        <view class="login" wx:if="{{loginStatus==1}}">
+            <view class="userimg">
+                <image src="{{userInfo.headimg}}" wx:if="{{userInfo.headimg}}"></image>
+                <image src="https://res.5i5j.com/cache/weixin/common/loginimg.png" wx:if="{{!userInfo.headimg}}"></image>
+            </view>
+            <text>{{phonenumber}}</text>
+        </view>
+        <view bindtap="btnclick" class="login" wx:else>
+            <view class="userimg">
+                <image src="https://res.5i5j.com/cache/weixin/common/loginimg.png"></image>
+            </view>
+            <text>点击登录/注册</text>
+        </view>
+    </view>
+    <view class="user-item-box">
+        <view bindtap="toFocus" class="user-item">
+            <image class="icon" src="https://res.5i5j.com/cache/weixin/common/user-icon1.png"></image>
+            <view class="info">
+                <text>我的关注</text>
+                <image class="arrow" src="/img/resources/right.png"></image>
+            </view>
+        </view>
+        <view bindtap="logout" class="user-item" wx:if="{{loginStatus==1}}">
+            <image class="icon" src="https://res.5i5j.com/cache/weixin/common/user-icon3.png"></image>
+            <view class="info">
+                <text>退出登录</text>
+                <image class="arrow" src="/img/resources/right.png"></image>
+            </view>
+        </view>
+    </view>
+</view>
+<view class="bottom-nav _flex _row _icenter _around">
+    <view bindtap="toHome" class="b-navitem">
+        <image src="/img/resources/bar-home.png"></image>
+        <text>首页</text>
+    </view>
+    <view bindtap="toMessage" class="b-navitem">
+        <image src="/img/resources/bar-message.png"></image>
+        <text>消息</text>
+        <text class="messageNumber" wx:if="{{unReadNum>0}}">{{unReadNum}}</text>
+    </view>
+    <view class="b-navitem b-nav-cur">
+        <image src="/img/resources/bar-my-cur.png"></image>
+        <text>我的</text>
+    </view>
+</view>

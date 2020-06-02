@@ -1,0 +1,17 @@
+<view class="index-advs" style="position:relative;background:{{item.bg_color?item.bg_color:'#ffffff'}}" wx:if="{{item.list.length>0}}">
+    <swiper autoplay="{{autoplay}}" circular="{{circular}}" duration="{{duration}}" indicatorActiveColor="{{item.jiaodian_color}}" indicatorDots="{{item.jiaodian_dots!='block'?false:true}}" interval="{{interval}}" style="height:{{item.high!='undefined'?item.high:'180'}}px;">
+        <swiper-item wx:for="{{item.list}}" wx:for-index="idx" wx:for-item="val">
+            <form reportSubmit bindsubmit="formSubmit" class="index-advs-navigator">
+                <image class="advimg" mode="widthFix" src="{{val.imgurl}}"></image>
+                <input name="key" style="display:none" value="{{val.key?val.key:1}}"></input>
+                <input name="appid" style="display:none" value="{{val.appid}}"></input>
+                <input name="title" style="display:none" value="{{val.name}}"></input>
+                <input name="url" style="display:none" value="{{val.url}}"></input>
+                <input name="phone" style="display:none" value="{{val.phone}}"></input>
+                <input name="lat" style="display:none" value="{{val.lat}}"></input>
+                <input name="lng" style="display:none" value="{{val.lng}}"></input>
+                <button class="test_button" formType="submit" style="height:{{item.high!='undefined'?item.high:'180'}}px;"></button>
+            </form>
+        </swiper-item>
+    </swiper>
+</view>

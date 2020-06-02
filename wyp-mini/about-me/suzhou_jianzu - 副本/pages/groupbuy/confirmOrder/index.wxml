@@ -1,0 +1,73 @@
+<view class="page" style="height:{{height*2-144}}rpx;position: fixed;top: 0;width: 100%;z-index: 9" wx:if="{{status=='1'}}">
+    <view style="display: flex;flex-direction: column;margin-top: 40%;justify-content: center;align-items: center;">
+        <image src="https://tws.cnweisou.com/images/jingao.png" style="width: 160rpx;height: 160rpx;background-color: #fff;margin-bottom: 72rpx;"></image>
+        <view style="margin-bottom: 72rpx;">{{msg}}</view>
+        <button bindtap="todetail" style="width: 80%;">确认</button>
+    </view>
+</view>
+<form bindsubmit="bindFormSubmit" wx:else>
+    <view class="page" style="height:{{height*2-174}}rpx;">
+        <view bindtap="addressSelect" class="addr" id="{{address.id}}" wx:if="{{address}}">
+            <view style="display: flex;flex-direction: column;width: 450rpx;">
+                <view>收货人：{{address.realname}}</view>
+                <view style="overflow: hidden;text-overflow:ellipsis;white-space: nowrap;">收货地址：{{address.province}} {{address.city}} {{address.area}}</view>
+            </view>
+            <view class="view-addressright">
+                <text class="text-mobile" style="overflow: hidden;text-overflow:ellipsis;white-space: nowrap;">{{address.mobile}}</text>
+                <image src="https://tws.cnweisou.com/images/right.png"></image>
+            </view>
+        </view>
+        <view bindtap="addressSelect" class="addr" style="line-height: 80rpx;background-color: #fff" wx:else>
+            <view style="display: flex;flex-direction: column;">
+                <view>收货地址</view>
+            </view>
+            <view class="view-addressright">
+                <text class="text-mobile" style="color:#ccc;">请选择收货地址</text>
+                <image src="https://tws.cnweisou.com/images/right.png"></image>
+            </view>
+        </view>
+        <view class="goods">
+            <image class="img" src="{{data.goods.thumb}}"></image>
+            <view class="g_wrap">
+                <text style="overflow: hidden;text-overflow:ellipsis;white-space: nowrap;">{{data.goods.title}}</text>
+                <text>数量：1 (<text style="color:#F27C79;">
+                        <text wx:if="{{type=='groups'}}">¥ {{data.goods.groupsprice}}</text>
+                        <text wx:else>¥ {{data.goods.singleprice}}</text>
+                    </text>/1件)</text>
+                <text>库存：{{data.goods.stock}}</text>
+            </view>
+        </view>
+        <view class="store" style="padding: 10rpx 20rpx;">
+            <input class="title" maxlength="50" name="prompt" placeholder="选填：买家留言(50字以内)" style="width: 100%;font-size: 28rpx;" type="text"></input>
+        </view>
+        <view class="subtotal">
+            <view class="fsp bb">
+                <view>商品小计</view>
+                <view wx:if="{{type=='groups'}}">¥ {{data.goods.groupsprice}}</view>
+                <view wx:else>¥ {{data.goods.singleprice}}</view>
+            </view>
+            <view class="fsp">
+                <view>运费</view>
+                <view>¥ {{data.goods.freight}}</view>
+            </view>
+            <view class="fsp" wx:if="{{heads}}">
+                <view>团长优惠</view>
+                <view>-¥ {{data.goods.headsmoney}}</view>
+            </view>
+        </view>
+        <view class="footer">
+            <view class="item" style="align-items: flex-end;padding-right: 30rpx;color:#B4B4B4;">
+                <text>需付：¥ <text style="color:#F06A75;">{{total}}</text>
+                </text>
+            </view>
+            <image bindtap="toStart" src="../../../images/icon_home_selected.png" style="margin-right: 30rpx;"></image>
+            <view class="item" style="background-color: #FD5454;">
+                <label>
+                    <text style="display: block;height: 100rpx;line-height: 100rpx;font-size: 26rpx;">提交订单</text>
+                    <button hidden class="upload" formType="submit" type="primary"> 提交 </button>
+                </label>
+            </view>
+        </view>
+    </view>
+</form>
+<loading wx:if="{{loading}}"></loading>

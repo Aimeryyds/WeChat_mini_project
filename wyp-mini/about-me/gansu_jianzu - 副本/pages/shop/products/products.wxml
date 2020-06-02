@@ -1,0 +1,27 @@
+<block wx:if="{{shop.status==1}}">
+    <view wx:if="{{shop.storeType==2||shop.storeType==4&&shop.goodsPattern==1||!shop.storeType&&shop.goodsPattern==1}}">
+        <store-otwoo id="storeo2o" shopId="{{shopId}}"></store-otwoo>
+    </view>
+    <view wx:elif="{{shop.storeType==3||shop.storeType==4&&shop.servicePattern==1||!shop.storeType&&shop.servicePattern==1}}">
+        <store-service id="storeservice" shopId="{{shopId}}"></store-service>
+    </view>
+    <view wx:elif="{{shop.storeType==1||shop.storeType==4&&shop.mallPattern==1||!shop.storeType&&shop.mallPattern==1}}">
+        <store-mall category="{{category}}" id="storemall" shopId="{{shopId}}"></store-mall>
+    </view>
+    <view wx:elif="{{shop.storeType==6}}">
+        <store-food diningTableNo="{{diningTableNo}}" id="storefood" shopId="{{shopId}}"></store-food>
+    </view>
+    <view wx:elif="{{shop.storeType==5}}">
+        <store-hotel id="storehotel" shopId="{{shopId}}"></store-hotel>
+    </view>
+</block>
+<view style="display:flex;flex-direction:column;align-items:center" wx:if="{{shop.status==2}}">
+    <image src="http://imgcdnali.wfenxiao.com.cn/xcx/c/icons/no_order.png" style="margin-top:100px;width:150rpx;height:150rpx"></image>
+    <navigator hoverClass="none" openType="switchTab" url="/tabs/home/index">
+        <view style="margin-top:20px;font-size:28rpx;color:#bbb;">
+        此门店已下线，去
+        <text style="color:blue;text-decoration:under-line">首页</text>逛逛吧
+      </view>
+    </navigator>
+</view>
+<phonemodal showModal="{{showModal}}" url="{{url}}"></phonemodal>

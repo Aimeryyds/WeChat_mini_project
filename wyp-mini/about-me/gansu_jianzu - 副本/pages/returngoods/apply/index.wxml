@@ -1,0 +1,36 @@
+<import src="/pages/templates/orders/orderitemlistmoreproducts.wxml"></import>
+<view class="container">
+    <view class="apply__goodsList">
+        <template is="order-more-goods" data="{{ goods:applyformData.goodsList,goodsTotal:applyformData.goodsTotal,giveawayList:order.giveawayList||[] }}"></template>
+    </view>
+    <view class="returnMoney-apply" wx:if="{{applyformData.refundType==1}}">
+        <view class="zan-panel">
+            <view bindtap="applyformUrl" class="zan-cell zan-cell--access" data-name="未发货下的仅退款">
+                <view class="zan-cell__bd">
+          退款<text class="zan-cell__text">（仅退款，不退货）</text>
+                </view>
+                <view class="zan-cell__ft"></view>
+            </view>
+        </view>
+    </view>
+    <view class="returnMoney-apply" wx:else>
+        <view class="zan-panel">
+            <view bindtap="applyformUrl" class="zan-cell zan-cell--access" data-name="仅退款">
+                <view class="zan-cell__bd">
+                    <view class="zan-cell__title">仅退款</view>
+                    <view class="zan-cell__text">未收到货（包括未签收），或卖家协商同意前提下</view>
+                </view>
+                <view class="zan-cell__ft"></view>
+            </view>
+        </view>
+        <view class="zan-panel">
+            <view bindtap="applyformUrl" class="zan-cell zan-cell--access" data-name="退货退款">
+                <view class="zan-cell__bd">
+                    <view class="zan-cell__title">退货退款</view>
+                    <view class="zan-cell__text">已收到货，需要退已收到的货物</view>
+                </view>
+                <view class="zan-cell__ft"></view>
+            </view>
+        </view>
+    </view>
+</view>

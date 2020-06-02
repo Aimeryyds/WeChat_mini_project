@@ -1,0 +1,13 @@
+<template name="danmu-landscape">
+    <view bindtap="hideChatInput" class="gongping {{ishappyFight?'ishappyFight':''}}" style="height:{{gongpingHeight}}px;padding-bottom:{{xModel?134:90}}rpx;">
+        <view class="gongping-mask"></view>
+        <scroll-view bindscroll="{{gongpingUI.scrollEvent}}" class="scroll-view" hidden="{{!submodules.danmu}}" scrollIntoView="BottomSign" scrollTop="{{gongpingUI.scrollTop}}" scrollY="true">
+            <template is="gongping-danmu" data="{{gongpingInfo:gongpingInfo,bottomPosition:bottomPosition}}"></template>
+        </scroll-view>
+        <view class="combo-wrapper combo-content" hidden="{{!submodules.combo}}">
+            <template is="gongping-combo" data="{{sourceA:sourceA,sourceB:sourceB}}"></template>
+        </view>
+    </view>
+</template>
+<import src="../../template/gongping-danmu/gongping-danmu.wxml"></import>
+<import src="../../template/gongping-combo/gongping-combo.wxml"></import>

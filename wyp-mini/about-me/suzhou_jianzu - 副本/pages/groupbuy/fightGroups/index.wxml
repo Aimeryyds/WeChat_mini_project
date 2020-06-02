@@ -1,0 +1,34 @@
+<scroll-view bindscrolltolower="bottom" scrollY="true" style="height: 100%;width:100%;overflow:hidden;">
+    <view class="goods">
+        <image class="img" src="{{data.goods.thumb}}"></image>
+        <view class="g_wrap">
+            <text style="font-size: 34rpx;line-height: 60rpx;height: 112rpx;font-weight: bolder;overflow: hidden;text-overflow:ellipsis;white-space: nowrap;">{{data.goods.title}}</text>
+            <view style="display: flex;flex-direction: row;justify-content: space-between;">
+                <view>{{data.goods.groupnum}}人团：<text style="color:#F27C79;">¥ {{data.goods.groupsprice}}/</text>1件</view>
+                <view>已有<text>{{data.goods.fightnum}}</text>人参团</view>
+            </view>
+        </view>
+    </view>
+    <view>
+        <view style="padding:24rpx;font-size: 28rpx;">以下小伙伴正在发起拼团，您可以直接参加</view>
+        <block wx:if="{{data.teams!=''}}">
+            <view style="background-color:#fff;padding:20rpx;" wx:if="{{arr[index]!=''}}" wx:for="{{data.teams}}">
+                <view bindtap="tocorder" data-id="{{item.id}}" style="display:flex;flex-direction:row;justify-content:space-between;border-radius:30rpx;height:60rpx;background-color:#fff;border-top:1rpx solid #f3f3f3;border-bottom:1rpx solid #f3f3f3;width:710rpx;">
+                    <view style="display:flex;flex-direction:row;">
+                        <image src="{{item.avatar?item.avatar:'https://tws.cnweisou.com/images/person.jpg'}}" style="width:60rpx;height:60rpx;border-radius:50%;margin-right:20rpx;"></image>
+                        <view style="display:flex;flex-direction:column;font-size:26rpx;line-height:30rpx;">
+                            <view>{{item.nickname}}</view>
+                            <view>剩余时间：{{arr[index]}}</view>
+                        </view>
+                    </view>
+                    <view style="display:flex;flex-direction:row;line-height:60rpx;font-size:26rpx;">
+                        <view>还差{{item.num}}人成团</view>
+                        <view style="background-color:red;color:#fff;border-radius:0 30rpx 30rpx 0 ;padding:0 20rpx;margin-left:20rpx;">去参团</view>
+                    </view>
+                </view>
+            </view>
+        </block>
+        <view style="padding:  24rpx;font-size: 29rpx;text-align: center;" wx:else>暂无相关团购</view>
+    </view>
+</scroll-view>
+<loading wx:if="{{loading}}"></loading>

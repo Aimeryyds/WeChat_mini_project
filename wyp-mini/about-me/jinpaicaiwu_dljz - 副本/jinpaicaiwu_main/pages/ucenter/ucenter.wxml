@@ -1,0 +1,182 @@
+<view class="main">
+    <view class="header{{blockshow.orders_display!='0'?'':'s'}}">
+        <view class="header_top{{blockshow.orders_display!='0'?'':'s'}} cart_bg_color">
+            <view class="header_top_L" wx:if="{{canIUseAvatarUrl}}">
+                <open-data class="thumb" type="userAvatarUrl"></open-data>
+            </view>
+            <view class="header_top_L" wx:else>
+                <image class="thumb" mode="aspectFit" src="{{userInfo.avatarUrl}}" style="height:100%;width:100%"></image>
+            </view>
+            <view class="header_top_R">
+                <view class="fx">
+                    <view class="lin_heigt_t">
+                        <view class="niccss">
+                            <open-data class="t1" type="userNickName" wx:if="{{canIUseNickName}}"></open-data>
+                            <text class="t1" wx:else>{{userInfo.nickName}}</text>
+                        </view>
+                        <view class="niccss">
+                            <text class="t2" wx:if="{{userInfo.user_lever_name}}">{{userInfo.user_lever_name}}</text>
+                        </view>
+                    </view>
+                    <view bindtap="goPage" class="lin_heigt_t radio cart_color" data-page="recharge" wx:if="{{blockshow.recharge_display!='0'}}">
+                        <text class="iconfont icon-3 cart_color"></text>
+                        <text class="cart_color">立即充值</text>
+                    </view>
+                </view>
+                <view class="flex">
+                    <view class="j_l" wx:if="{{blockshow.points_display!='0'}}">
+                        <text class="iconfont icon-jifen"></text>
+                        <text>积分：{{userInfo.account_points||0}}</text>
+                    </view>
+                    <view class="j_c" wx:if="{{blockshow.money_display!='0'}}">
+                        <text>|</text>
+                    </view>
+                    <view class="j_r" wx:if="{{blockshow.money_display!='0'}}">
+                        <text class="iconfont icon-yue"></text>
+                        <text>余额：{{userInfo.account_money||'0.00'}}</text>
+                    </view>
+                </view>
+            </view>
+        </view>
+        <view class="header_pos" wx:if="{{blockshow.orders_display!='0'}}">
+            <view bindtap="goPage" class="header_pos_T" data-page="orders">
+                <view class="flx1">
+                    <text>我的订单</text>
+                    <text class="all">查看全部订单</text>
+                </view>
+                <view class="flx2">
+                    <text class="iconfont icon-jiantou"></text>
+                </view>
+            </view>
+            <view class="header_pos_B">
+                <view bindtap="goPage" data-active="nopay" data-page="orders">
+                    <text class="iconfont icon-icon bg"></text>
+                    <text>待付款</text>
+                    <text class="q cart_color car_border" wx:if="{{order_num_state.nopay_num}}">{{order_num_state.nopay_num}}</text>
+                </view>
+                <view bindtap="goPage" data-active="delivery" data-page="orders">
+                    <text class="iconfont icon-xianxing_huoche bg"></text>
+                    <text>待发货</text>
+                    <text class="q cart_color car_border" wx:if="{{order_num_state.hadpay_num}}">{{order_num_state.hadpay_num}}</text>
+                </view>
+                <view bindtap="goPage" data-active="getit" data-page="orders">
+                    <text class="iconfont icon-qianbao bg"></text>
+                    <text>待收货</text>
+                    <text class="q cart_color car_border" wx:if="{{order_num_state.delivery_num}}">{{order_num_state.delivery_num}}</text>
+                </view>
+                <view bindtap="goPage" data-active="rating" data-page="orders">
+                    <text class="iconfont icon-daipingjia bg"></text>
+                    <text>待评价</text>
+                    <text class="q cart_color car_border" wx:if="{{order_num_state.getit_num}}">{{order_num_state.getit_num}}</text>
+                </view>
+            </view>
+        </view>
+    </view>
+    <view class="item_list">
+        <view bindtap="goPage" class="item" data-page="takeaway_order_list" wx:if="{{blockshow.takeaway_display!='0'}}">
+            <view class="item_l">
+                <text class="iconfont icon-waimai bg1"></text>
+            </view>
+            <view class="item_r">
+                <text>外卖订单</text>
+                <text class="iconfont icon-jiantou"></text>
+            </view>
+        </view>
+        <view bindtap="goPage" class="item" data-page="appiont_order_list" wx:if="{{blockshow.appoints_display!='0'}}">
+            <view class="item_l">
+                <text class="iconfont icon-yuyueguahao bg1"></text>
+            </view>
+            <view class="item_r">
+                <text>我的预约</text>
+                <text class="iconfont icon-jiantou"></text>
+            </view>
+        </view>
+        <view bindtap="goPage" class="item" data-page="meal_order_list" wx:if="{{blockshow.mealorder_display!='0'}}">
+            <view class="item_l">
+                <text class="iconfont icon-icon-- bg1"></text>
+            </view>
+            <view class="item_r">
+                <text>手机点单</text>
+                <text class="iconfont icon-jiantou"></text>
+            </view>
+        </view>
+        <view bindtap="goPage" class="item" data-page="collage_order_list" wx:if="{{blockshow.collage_display!='0'}}">
+            <view class="item_l">
+                <text class="iconfont icon-pintuan bg1"></text>
+            </view>
+            <view class="item_r">
+                <text>拼团</text>
+                <text class="iconfont icon-jiantou"></text>
+            </view>
+        </view>
+        <view bindtap="goPage" class="item" data-page="mydistribution" wx:if="{{blockshow.mydis_display!='0'&&isdistrib=='1'}}">
+            <view class="item_l">
+                <text class="iconfont icon-wodefenxiaoshang bg1"></text>
+            </view>
+            <view class="item_r">
+                <text>我的分销</text>
+                <text class="iconfont icon-jiantou"></text>
+            </view>
+        </view>
+        <view bindtap="goPage" class="item" data-page="coupon" wx:if="{{blockshow.coupon_display!='0'}}">
+            <view class="item_l">
+                <text class="iconfont icon-youhuiquan bg1"></text>
+            </view>
+            <view class="item_r">
+                <text>优惠劵</text>
+                <text class="iconfont icon-jiantou"></text>
+            </view>
+        </view>
+        <view bindtap="goPage" class="item" data-page="promo_code" wx:if="{{blockshow.promo_display!='0'}}">
+            <view class="item_l">
+                <text class="iconfont icon-youhuijuan bg1"></text>
+            </view>
+            <view class="item_r">
+                <text>优惠码</text>
+                <text class="iconfont icon-jiantou"></text>
+            </view>
+        </view>
+        <view bindtap="goPage" class="item" data-page="recharge" wx:if="{{blockshow.recharge_display!='0'}}">
+            <view class="item_l">
+                <text class="iconfont icon-yue1 bg1"></text>
+            </view>
+            <view class="item_r">
+                <text>账户充值</text>
+                <text class="iconfont icon-jiantou"></text>
+            </view>
+        </view>
+        <view bindtap="goPage" class="item" data-page="address-list" wx:if="{{blockshow.address_display!='0'}}">
+            <view class="item_l">
+                <text class="iconfont icon-guanlidizhi bg1"></text>
+            </view>
+            <view class="item_r">
+                <text>地址管理</text>
+                <text class="iconfont icon-jiantou"></text>
+            </view>
+        </view>
+        <view bindtap="goPage" class="item" data-page="my_collection" wx:if="{{blockshow.collect_display!='0'}}">
+            <view class="item_l">
+                <text class="iconfont icon-shoucangjia bg11"></text>
+            </view>
+            <view class="item_r">
+                <text>收藏夹</text>
+                <text class="iconfont icon-jiantou"></text>
+            </view>
+        </view>
+    </view>
+    <block wx:if="{{showBar}}">
+        <view style="height:110rpx;"></view>
+        <view class="tabBar" style="color:{{tabs.color}};border-color:{{tabs.borderStyle}};background-color:{{tabs.backgroundColor}};border-top-color:{{tabs.borderTopColor}};">
+            <view class="barList" style="color:{{pageid==item.pagePath?tabs.selectedColor:tabs.color}}" wx:for="{{tabs.list}}" wx:key="{{index}}">
+                <view bindtap="switchTab" class="barList-content" data-tab="{{item}}" data-url="{{item.pagePath}}">
+                    <image class="icon" src="{{pageid==item.pagePath?item.selectedIconPath:item.iconPath}}"></image>
+                    <view>{{item.text}}</view>
+                </view>
+            </view>
+        </view>
+    </block>
+    <view class="back" wx:if="{{show_homeBar&&!showBar}}">
+        <text bindtap="backHome" class="backHome">首页</text>|
+      <text bindtap="backTop" class="backTop">顶部</text>
+    </view>
+</view>

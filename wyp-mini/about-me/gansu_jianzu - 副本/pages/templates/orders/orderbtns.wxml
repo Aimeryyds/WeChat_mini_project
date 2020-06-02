@@ -1,0 +1,24 @@
+<template name="orders-btns">
+    <view class="orders-btns">
+        <view class="orders-btns-time">{{order.timeShow}}</view>
+        <view class="action-box" wx:if="{{order.actionList&&order.actionList.length>0}}">
+            <block wx:for="{{order.actionList}}" wx:key="{{index}}">
+                <button catchtap="cancelOrder" class="zan-btn zan-btn--small order-actions-btn" data-id="{{order.id}}" wx:if="{{item=='cancel'}}">取消订单</button>
+                <button catchtap="payOrder" class="zan-btn zan-btn--small zan-btn--primary order-actions-btn order-btn--primary" data-id="{{order.id}}" data-no="{{order.orderNo}}" data-oto="0" wx:if="{{item=='pay'}}">去支付</button>
+                <navigator url="/pages/orders/showlogistics/showlogistics?id={{order.id}}">
+                    <button class="zan-btn zan-btn--small order-actions-btn" data-id="{{order.id}}" wx:if="{{item=='logistics'}}">查看物流</button>
+                </navigator>
+                <button catchtap="confirmOrder" class="zan-btn zan-btn--small zan-btn--primary order-actions-btn order-btn--primary" data-id="{{order.id}}" wx:if="{{item=='receive'}}">确认收货</button>
+                <navigator url="/pages/tuan/detail/index?id={{order.id}}">
+                    <button class="zan-btn zan-btn--small order-actions-btn" wx:if="{{item=='viewGroup'}}">查看团详情</button>
+                </navigator>
+                <navigator hoverClass="none" url="/pages/pingjia/evaluateform/index?orderNo={{order.orderNo}}&type=1">
+                    <button class="zan-btn zan-btn--small order-actions-btn" hoverClass="none" wx:if="{{item=='firstEvaluate'}}">去评价</button>
+                </navigator>
+                <navigator hoverClass="none" url="/pages/pingjia/evaluateform/index?orderNo={{order.orderNo}}&type=1">
+                    <button class="zan-btn zan-btn--small order-actions-btn" hoverClass="none" wx:if="{{item=='secondEvaluate'}}">写追评</button>
+                </navigator>
+            </block>
+        </view>
+    </view>
+</template>

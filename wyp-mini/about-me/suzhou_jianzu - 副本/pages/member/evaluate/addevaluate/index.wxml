@@ -1,0 +1,30 @@
+<view class="parent">
+    <view bindtap="tapGoods" class="carts-item">
+        <view>
+            <image class="carts-image" mode="aspectFill" src="{{image}}"></image>
+        </view>
+        <view class="carts-text">
+            <text class="carts-title">{{goods_name}}</text>
+            <text class="carts-price">{{spec}}</text>
+        </view>
+    </view>
+    <view class="section">
+        <textarea bindblur="blur" class="tt-evaluate" placeholder="对您的商品评价" placeholderClass="tt-place-evaluate"></textarea>
+    </view>
+    <view class="content">
+        <text class="text-pf">评分</text>
+        <view class="v-xx">
+            <text class="text-pf">与描述相符：</text>
+            <image bindtap="starsDesc" src="{{starsDescIMG}}"></image>
+        </view>
+        <view class="v-xx">
+            <text class="text-pf">客服服务质量：</text>
+            <image bindtap="starsKF" src="{{starsKFIMG}}"></image>
+        </view>
+        <view class="v-xx">
+            <text class="text-pf">物流发货速度：</text>
+            <image bindtap="starsShipper" src="{{starsShipperIMG}}"></image>
+        </view>
+    </view>
+    <text bindtap="formSubmit" class="text-save">提交</text>
+</view>

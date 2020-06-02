@@ -1,0 +1,29 @@
+<import src="/dist/loadmore/index.wxml"></import>
+<view class="container">
+    <view class="page_location_container" wx:if="{{globalConfig.isEnableLocation&&!locationSuccess}}">
+        <image class="page_location_icon" src="http://imgcdnali.wfenxiao.com.cn/xcx/c/icons/location_fail.png"></image>
+        <view class="page_location_text">无法获取您的位置信息</view>
+        <navigator class="page_location_btn" hoverClass="none" url="/pages/citys/citys" wx:if="{{globalConfig.locationType==0}}">手动选择地址</navigator>
+        <navigator class="page_location_btn" hoverClass="none" url="/pages/addressdetail/addressdetail?addressid={{location.addressId}}" wx:else>手动选择地址</navigator>
+    </view>
+    <block wx:else>
+        <view class="brand-location" wx:if="{{globalConfig.isEnableLocation}}">
+            <navigator bindtap="handleaddress" class="location-btn" hoverClass="none" url="{{globalConfig.locationType==0?'/pages/citys/citys':'/pages/addressdetail/addressdetail?addressid='+location.addressId}}">
+                <text>{{location.location?'当前位置：'+location.location:'定位中...'}}</text>
+                <image src="http://imgcdnali.wfenxiao.com.cn/xcx/c/icons/arrow-button.png" style="margin-left: 24rpx;width: 8px;height: 4px;" wx:if="{{location.location}}"></image>
+            </navigator>
+        </view>
+        <scroll-view enableBackToTop scrollY bindscrolltolower="lower" scrollTop="{{scrollTop}}" style="width:100%;height: 100vh;padding-top:{{globalConfig.isEnableLocation?84:0}}rpx">
+            <view bindtap="handlestorelist" class="brand-list" data-brand="{{item}}" wx:for="{{list}}">
+                <image class="brand-list__img" src="{{item.logo||'http://imgcdnali.wfenxiao.com.cn/xcx/c/icons/brand.png'}}"></image>
+                <view class="brand-list__cont">
+                    <view class="brand-list__title">{{item.brandName}}</view>
+                    <view class="brans-list__desc zan-ellipsis--l2">{{item.description}}</view>
+                </view>
+            </view>
+            <view id="loadmore">
+                <template is="zan-loadmore" data="{{loading:loadingmore}}"></template>
+            </view>
+        </scroll-view>
+    </block>
+</view>

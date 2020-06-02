@@ -1,0 +1,58 @@
+<template name="records$abddff5c">
+    <view class="_div data-v-0a4b8a42 records">
+        <view class="_div data-v-0a4b8a42 record" wx:if="{{mine.id}}">
+            <view class="_div data-v-0a4b8a42 content">
+                <image class="_img data-v-0a4b8a42 avatar" src="{{mine.userinfo&&mine.userinfo.avatar}}"></image>
+                <view class="_div data-v-0a4b8a42 right">
+                    <view class="_div data-v-0a4b8a42 top">
+                        <view class="_div data-v-0a4b8a42 nickname">{{mine.userinfo&&mine.userinfo.nickname}}</view>
+                        <view class="_div data-v-0a4b8a42 tool">
+                            <view bindtap="handleProxy" class="_div data-v-0a4b8a42 love" data-comkey="{{$k}}" data-eventid="{{'0'}}">
+                                <label class="_span data-v-0a4b8a42" style=" {{'color:'+(mine.is_liked?'#fe6135':'#999999')+';'}}">{{mine.like}}</label>
+                                <image class="_img data-v-0a4b8a42 icon" src="{{mine.is_liked?'/static/img/love-active.png':'/static/img/love-inactive.png'}}"></image>
+                            </view>
+                        </view>
+                    </view>
+                    <view class="_div data-v-0a4b8a42 content">
+                        <view bindtap="handleProxy" class="_div data-v-0a4b8a42 sound {{[mine.isPlaying?'playing':'']}}" data-comkey="{{$k}}" data-eventid="{{'1'}}">
+                            <image class="_img data-v-0a4b8a42" src="{{mine.isPlaying?'/static/img/sound-playing.gif':'/static/img/sound-line.png'}}"></image>
+                        </view>
+                        <view class="_div data-v-0a4b8a42 duration">{{mine.audio_length}}</view>
+                    </view>
+                    <view class="_div data-v-0a4b8a42 bottom">
+                        <label class="_span data-v-0a4b8a42 date">{{mine.showDate}}</label>
+                        <label bindtap="handleProxy" class="_span data-v-0a4b8a42 del" data-comkey="{{$k}}" data-eventid="{{'2'}}">删除</label>
+                    </view>
+                </view>
+            </view>
+            <view bindtap="handleProxy" class="_div data-v-0a4b8a42 share-btn" data-comkey="{{$k}}" data-eventid="{{'3'}}" id="share-my-record">{{!showCheckin?'分享集赞':'签到'}}</view>
+            <view class="_div data-v-0a4b8a42 line"></view>
+        </view>
+        <view class="_div data-v-0a4b8a42 record" key="{{record.id}}" wx:for="{{recordList}}" wx:for-item="record" wx:key="record.id">
+            <view class="_div data-v-0a4b8a42 content">
+                <image class="_img data-v-0a4b8a42 avatar" src="{{record.userinfo&&record.userinfo.avatar}}"></image>
+                <view class="_div data-v-0a4b8a42 right">
+                    <view class="_div data-v-0a4b8a42 top">
+                        <view class="_div data-v-0a4b8a42 nickname">{{record.userinfo&&record.userinfo.nickname}}</view>
+                        <view class="_div data-v-0a4b8a42 tool">
+                            <view bindtap="handleProxy" class="_div data-v-0a4b8a42 love" data-comkey="{{$k}}" data-eventid="{{'4-'+index}}">
+                                <label class="_span data-v-0a4b8a42" style=" {{'color:'+(record.is_liked?'#fe6135':'#999999')+';'}}">{{record.like}}</label>
+                                <image class="_img data-v-0a4b8a42 icon" src="{{record.is_liked?'/static/img/love-active.png':'/static/img/love-inactive.png'}}"></image>
+                            </view>
+                        </view>
+                    </view>
+                    <view class="_div data-v-0a4b8a42 content">
+                        <view bindtap="handleProxy" class="_div data-v-0a4b8a42 sound {{[record.isPlaying?'playing':'']}}" data-comkey="{{$k}}" data-eventid="{{'5-'+index}}">
+                            <image class="_img data-v-0a4b8a42" src="{{record.isPlaying?'/static/img/sound-playing.gif':'/static/img/sound-line.png'}}"></image>
+                        </view>
+                        <view class="_div data-v-0a4b8a42 duration">{{record.audio_length}}</view>
+                    </view>
+                    <view class="_div data-v-0a4b8a42 bottom">
+                        <label class="_span data-v-0a4b8a42 date">{{record.showDate}}</label>
+                    </view>
+                </view>
+            </view>
+            <view class="_div data-v-0a4b8a42 line"></view>
+        </view>
+    </view>
+</template>

@@ -1,0 +1,22 @@
+<view class="crmact_header">
+    <image src="https://fang-oss.haozu.com/cms/index/2018/04/26/xHMKhs8JxA.jpg@750w_348h_1e_1c"></image>
+</view>
+<view class="crmact_prompt">请登录后对我们的服务进行评价!<text>-</text>
+    <text>-</text>
+</view>
+<view class="blank_one"></view>
+<view class="phone">
+    <view style="width:380rpx;">
+        <input bindinput="phone_input_fn" class="first_input" maxlength="11" placeholder="输入您的手机号" type="number"></input>
+    </view>
+    <view catchtap="setTimeFn" class="{{class_text}}">
+        <text>{{msg}}</text>
+    </view>
+</view>
+<view class="phone">
+    <view style="width:700rpx;">
+        <input bindinput="pass_input_fn" maxlength="6" placeholder="请输入验证码" type="number"></input>
+    </view>
+</view>
+<view catchtap="login_btn" class="login">登录</view>
+<image class="login_err" hidden="{{phone_err_show}}" src="../../images/login_err.png"></image>

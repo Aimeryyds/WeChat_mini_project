@@ -1,0 +1,165 @@
+<scroll-view bindscrolltolower="scrolltolower" bindtouchend="handletouchend" bindtouchmove="handletouchmove" bindtouchstart="handletouchtart" enableBackToTop="true" scrollY="true" style="height: {{height}}px;">
+    <view class="main {{refresh>0?'refresh_show_padding':''}}" style="min-height: {{height-70}}px;">
+        <view class="infos" style="height:2rpx;"></view>
+        <view class="refresh {{refresh>0?'refresh_show':''}}" style="top:0">
+            <view wx:if="{{refresh_end}}">没有更多了</view>
+            <block wx:else>
+😲<view>{{refresh==2?'松开':'下拉'}}阅读上一篇</view>
+            </block>
+        </view>
+        <view class="title_h1 mt20" wx:if="{{p.title}}">
+            <text class="pai_info_tip" wx:if="{{p.type==2}}">问答</text>
+            <text class="pai_info_tip" wx:if="{{p.type==3}}">投票</text>
+            <text>{{p.title}}</text>
+        </view>
+        <view class="pai_info {{p.digest==2?'digest':''}}" wx:if="{{p!=''}}">
+            <view class="pai_info_u">
+                <navigator class="pai_info_nu" url="/pages/space/space?uid={{p.uid}}">
+                    <image class="pai_info_img_u" src="{{p.avatar}}"></image>
+                    <image class="vip_icon" src="/image/vip_icon.png" wx:if="{{vip}}"></image>
+                </navigator>
+                <navigator class="pai_info_nu2" url="/pages/space/space?uid={{p.uid}}">{{p.username}}</navigator>
+                <view class="pai_info_time">{{p.dateline}}<text wx:if="{{p.city}}">，{{p.city}}</text>
+                </view>
+            </view>
+            <view class="pai_info_t">
+                <text>{{p.subject}}</text>
+            </view>
+        </view>
+        <view class="pia_info_pic">
+            <image class="load" mode="widthFix" src="{{photo.pic}}" wx:for="{{p.p800}}" wx:for-item="photo" wx:key="photo"></image>
+        </view>
+        <view class="vote" wx:if="{{vote}}">
+            <form catchsubmit="voteSubmit" reportSubmit="true">
+                <view class="vote_title" wx:if="{{vote.isdeadtime==1||vote.useroption!=null}}">大家的态度 <text class="tip" wx:if="{{show_tip}}">(标红为正确答案)</text>
+                </view>
+                <view class="vote_title" wx:else>{{vote.title==''?'投票':vote.title}}
+<text wx:if="{{vote.choosenum==1}}"> (单选)</text>
+                    <text wx:elif="{{vote.choosenum==vote.optionlist.length}}"> (多选)</text>
+                    <text wx:else> (最多{{vote.choosenum}}项)</text>
+                </view>
+                <radio-group bindchange="radioChange" class="optionlist" name="radio" wx:if="{{vote.choosenum==1}}">
+                    <label class="radio" wx:for="{{vote.optionlist}}" wx:key="optionlist">
+                        <view class="option_item">
+                            <view>
+                                <radio checked="{{item.checked}}" color="#ff6767" disabled="{{vote.isdeadtime==1||vote.useroption!=null}}" value="{{item.id}}"></radio>
+                            </view>
+                            <view>
+                                <text class="{{vote.useroption!=null&&item.istrue==1?'red':''}}">{{item.title}}</text>
+                            </view>
+                        </view>
+                        <view class="prog" wx:if="{{vote.isdeadtime==1||vote.useroption!=null}}">
+                            <view>
+                                <progress active activeColor="#ff6767" backgroundColor="#ccc" percent="{{item.percent}}" strokeWidth="6"></progress>
+                            </view>
+                            <text>{{item.num}}票</text>
+                            <text class="percent">{{item.percent}}%</text>
+                        </view>
+                    </label>
+                </radio-group>
+                <checkbox-group bindchange="checkboxChange" class="optionlist" name="checkbox" wx:if="{{vote.choosenum>1}}">
+                    <label class="checkbox" wx:for="{{vote.optionlist}}" wx:key="{{optionlist}}">
+                        <view class="option_item">
+                            <view>
+                                <checkbox checked="{{item.checked}}" color="#ff6767" disabled="{{vote.isdeadtime==1||vote.useroption!=null}}" value="{{item.id}}"></checkbox>
+                            </view>
+                            <view>
+                                <text class="{{vote.useroption!=null&&item.istrue==1?'red':''}}">{{item.title}}</text>
+                            </view>
+                        </view>
+                        <view class="prog" wx:if="{{vote.isdeadtime==1||vote.useroption!=null}}">
+                            <view>
+                                <progress active activeColor="#ff6767" backgroundColor="#ccc" percent="{{item.percent}}" strokeWidth="6"></progress>
+                            </view>
+                            <text>{{item.num}}票</text>
+                            <text class="percent">{{item.percent}}%</text>
+                        </view>
+                    </label>
+                </checkbox-group>
+                <block wx:if="{{haveuid}}">
+                    <button plain="true" wx:if="{{vote.useroption!=null}}">你已投票</button>
+                    <button plain="true" wx:elif="{{vote.isdeadtime==1}}">投票已截止</button>
+                    <button class="{{vote_allow?'red':''}}" formType="submit" plain="true" wx:else>投票</button>
+                </block>
+                <block wx:else>
+                    <button plain="true" wx:if="{{vote.isdeadtime==1}}">投票已截止</button>
+                    <button bindgetuserinfo="clickinfo" data-type="vote" openType="getUserInfo" plain="true" wx:else>投票</button>
+                </block>
+            </form>
+        </view>
+        <view class="s2_1" wx:if="{{commentlist.length>0}}">评论</view>
+        <view class="comment_list" wx:if="{{commentlist.length>0}}">
+            <view class="comment_list_item" wx:for="{{commentlist}}" wx:key="commentlist">
+                <view class="comment_list_u">
+                    <navigator class="comment_list_nu" url="/pages/space/space?uid={{item.authorid}}">
+                        <image class="comment_list_img_u" src="{{item.avatar}}"></image>
+                        <image class="vip_icon" src="/image/vip_icon.png" wx:if="{{item.vip}}"></image>
+                    </navigator>
+                    <navigator class="comment_list_nu2" url="/pages/space/space?uid={{item.authorid}}">{{item.author}}</navigator>
+                    <view class="comment_list_time">{{item.floors}}#　{{item.dateline}}</view>
+                </view>
+                <view class="comment_list_q" wx:if="{{item.cmessage!=''}}">
+                    <view>
+{{item.cmessage}}
+</view>
+                </view>
+                <view class="comment_list_t">
+                    <block wx:for="{{item.message}}" wx:key="message">
+                        <text wx:if="{{item.type=='txt'}}">{{item.value}}</text>
+                        <image class="face" mode="widthFix" src="{{item.value}}" wx:if="{{item.type=='img'}}"></image>
+                    </block>
+                </view>
+                <image class="load" mode="widthFix" src="{{item.pic}}" wx:if="{{item.pic!=''}}"></image>
+            </view>
+        </view>
+        <view class="loading" wx:if="{{loading_c}}">
+            <image class="loading_img" src="../../image/loading-32-32.gif"></image>
+        </view>
+        <view class="loading_end" wx:if="{{loading_c_end}}"></view>
+        <view class="loading_fail" wx:if="{{loading_c_fail}}"></view>
+        <view class="refresh {{refresh_b>0?'refresh_show':''}}" style="bottom:-80rpx">
+            <view wx:if="{{refresh_b_end}}">没有更多了</view>
+            <block wx:else>
+                <view>{{refresh_b==2?'松开':'上拉'}}阅读下一篇</view>😲
+</block>
+        </view>
+    </view>
+    <view>　</view>
+    <view>　</view>
+    <view>　</view>
+    <view class="infos" style="height:2rpx;"></view>
+</scroll-view>
+<view class="btn_do2" style="padding-bottom:{{statusBarHeight>30?'40':'0'}}rpx">
+    <form catchsubmit="formSubmit" reportSubmit="true">
+        <button bindtap="comment_do" formType="submit" plain="true" wx:if="{{haveuid}}">
+            <image class="icon_fav" src="../../image/comment2.png"></image>
+            <text>评论</text>
+        </button>
+        <button bindgetuserinfo="clickinfo" data-type="comment" openType="getUserInfo" plain="true" wx:else>
+            <image class="icon_fav" src="../../image/comment2.png"></image>
+            <text>评论</text>
+        </button>
+        <block wx:if="{{haveuid}}">
+            <button bindtap="do_fav" data-type="fav_done" formType="submit" plain="true" wx:if="{{isfav==1}}">
+                <image class="icon_fav" src="../../image/fav2_on.png"></image>
+                <text style="color:#ff6767">收藏</text>
+            </button>
+            <button bindtap="do_fav" data-type="fav_do" formType="submit" plain="true" wx:else>
+                <image class="icon_fav" src="../../image/fav2.png"></image>
+                <text>收藏</text>
+            </button>
+        </block>
+        <button bindgetuserinfo="clickinfo" data-type="fav" openType="getUserInfo" plain="true" wx:else>
+            <image class="icon_fav" src="../../image/fav2.png"></image>
+            <text>收藏</text>
+        </button>
+        <button formType="submit" openType="share" plain="true">
+            <image class="icon_fav" src="../../image/share2.png"></image>
+            <text>分享</text>
+        </button>
+        <button bindtap="fulishe" formType="submit" plain="true">
+            <image class="icon_fav" src="../../image/fulishe2_on.png"></image>
+            <text style="color:#ff6767">福利社</text>
+        </button>
+    </form>
+</view>

@@ -1,0 +1,9 @@
+<view class="feed-list-wrapper">
+    <view class="feed-list">
+        <view class="feed-item{{page}} feed-item" data-id="{{news.id}}" data-scm="{{news.scm}}" data-spm="{{spmA}}.{{spmB}}.{{spmC}}.{{index+1}}.{{pvId}}" data-target="{{spmB}}|{{news.id}}|{{news.authorId}}" wx:for="{{list}}" wx:for-item="news" wx:key="index">
+            <navigator url="{{news.path}}&spm={{spmA}}.{{spmB}}.{{spmC}}.{{index+1}}.{{pvId}}">
+                <image-flow config="{{news}}"></image-flow>
+            </navigator>
+        </view>
+    </view>
+</view>

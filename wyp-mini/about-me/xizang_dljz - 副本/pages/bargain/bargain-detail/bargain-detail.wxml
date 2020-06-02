@@ -1,0 +1,246 @@
+<view class="container">
+    <view class="header">
+        <image class="title" src="/images/bargain/png/img_title.png"></image>
+        <view class="header__info" wx:if="{{storeBargainOrder&&(order_status==2||order_status==3)}}">
+            <text>“{{storeBargainOrder.nickName}}”</text>邀请您帮忙砍价
+    
+    </view>
+        <view class="header__shop">
+            <image class="shop__thumb" src="{{storeBargainOrder.pic?storeBargainOrder.pic:storeBargain.thumb}}"></image>
+            <view class="shop__info">
+                <text class="info__title">{{storeBargain.name}}</text>
+                <view class="info__desc">
+                    <text wx:if="{{storeBargainOrder}}">{{storeBargainOrder.attrList}}</text>
+          （剩 <text>{{show_stock}}</text> 件）
+        </view>
+                <view class="info__price-wrap">
+                    <view class="info__price">
+            ¥ <text>{{cur_price_main}}</text>.{{cur_price_dot}}
+          </view>
+                    <view class="price-tag">当前价</view>
+                </view>
+            </view>
+        </view>
+        <view class="header__bargain">
+            <view class="bargain__title" wx:if="{{order_status!=4&&order_status!=5}}"> 
+        已砍{{alreadyCut}}元, 还能再砍 <text>{{surplus}}</text> 元
+      </view>
+            <view class="bargain__title" wx:elif="{{order_status==4}}">
+                <image src="/images/bargain/png/icon_complete.png"></image>
+        已经砍至最低价了奥~
+      </view>
+            <view class="bargain__title" wx:else>
+                <image src="/images/bargain/png/icon_complete.png"></image>
+        该商品已经被好友们砍至最低价啦～
+      </view>
+            <view class="bargain__progress">
+                <view class="sub_progress" style="width: {{progress}}"></view>
+            </view>
+            <view class="bargain__price">
+                <text>原价: {{storeBargain.purchasePrice}}元</text>
+                <view>底价: {{storeBargain.marketPriceMin}}元</view>
+            </view>
+        </view>
+        <button catchtap="showChoose" class="header__btn" data-type="1" wx:if="{{order_status==0}}">我要砍价</button>
+        <button class="header__btn" openType="share" wx:if="{{order_status==1}}">喊人砍一刀</button>
+        <button catchtap="helpBargain" class="header__btn" wx:if="{{order_status==2}}">帮他砍价</button>
+        <button catchtap="redirctToList" class="header__btn" wx:if="{{order_status==3||order_status==5}}">我也要砍价</button>
+        <button catchtap="buy" class="header__btn" wx:if="{{order_status==4}}">立即购买</button>
+        <view class="header__time" wx:if="{{clock}}">
+      距离活动结束还剩 
+      <text>
+                <block wx:if="{{clock.day>0}}">{{clock.day}}天 </block>{{clock.hr}}:{{clock.min}}:{{clock.sec}}.{{clock.msec}}</text>
+        </view>
+    </view>
+    <view class="common">
+        <view class="ctit">
+      我的砍价帮
+    </view>
+        <view class="empty-wrap" wx:if="{{cutslist.length==0}}">
+            <image src="/images/bargain/png/icon_planet.png"></image>
+            <view class="text">
+                <text>暂无好友帮忙</text>
+            </view>
+        </view>
+        <view class="help-wrap">
+            <view class="help-item" wx:for="{{cutslist}}">
+                <image src="{{item.photo}}" style="background: lightgray"></image>
+                <view class="h_info">
+                    <view>{{item.nickName}}</view>
+                    <text>{{item.remark}}</text>
+                </view>
+                <view class="h_pri">
+                    <image src="/images/bargain/png/icon_shin.png"></image>
+                    <text>砍掉{{item.cutPrice}}元</text>
+                </view>
+            </view>
+        </view>
+    </view>
+    <view class="common">
+        <view class="ctit">
+      看看其他商品
+    </view>
+        <view class="recommon-grid">
+            <navigator class="recommon-item" hoverClass="hover" url="../../shopdetail/shopdetail?goodsSn={{item.goodsSn}}" wx:for="{{shopList}}" wx:key="key">
+                <image class="tag-label" src="/images/bargain/svg/mark_tuan.svg" wx:if="{{item.groupMarket}}"></image>
+                <image class="{{item.groupMarket?'is_group':''}}" src="{{item.thumb}}"></image>
+                <view class="item-footer">
+                    <view class="item-left">
+                        <text class="item-title">{{item.name}}</text>
+                        <view class="item-price">
+                            <text class="price">
+                                <text style="font-size: 24rpx">¥</text> {{item.price}}</text>
+                            <text class="group-tag" wx:if="{{item.groupMarket}}">{{item.groupMarket.attendNum}}人团</text>
+                        </view>
+                    </view>
+                </view>
+            </navigator>
+        </view>
+        <navigator class="copyright" style="line-height:14px;text-align:center;margin-top:30rpx;padding-bottom:130rpx;" url="../../support/support" wx:if="{{shop.copyType==1}}">
+            <text style="color:#fff;opacity:0.4;font-size:24rpx;letter-spacing: 2rpx; ">晓商+提供技术支持</text>
+        </navigator>
+        <view bindtap="call" class="copyright" style="line-height:14px;text-align:center;margin-top:30rpx;padding-bottom:130rpx;" wx:if="{{shop.copyType==2}}">
+            <text style="color:#fff;opacity:0.4;font-size:24rpx; letter-spacing: 2rpx;">{{shop.copyright}}</text>
+        </view>
+    </view>
+    <view class="footer">
+        <view catchtap="redirctToList" class="btn">
+    更多好货
+    </view>
+        <view catchtap="redirctToList" class="p-btn" wx:if="{{!is_show_purchase}}">
+    我也要砍价
+    </view>
+        <view catchtap="buy" class="p-btn" wx:else>
+    立即购买
+    </view>
+    </view>
+</view>
+<view class="box-wrap" wx:if="{{self_bargain_show}}">
+    <view bindtap="closeBox" class="bg"></view>
+    <view class="tbox">
+        <view class="t">
+            <image src="/images/bargain/svg/img_shin.svg"></image>
+        </view>
+        <view class="c">
+            <view>太棒了</view>
+            <text>你一出手就帮自己砍掉了 <text>{{cutPrice}}</text> 元 
+快叫上好友帮忙吧</text>
+        </view>
+        <button class="f" openType="share">
+      邀请好友
+    </button>
+        <image bindtap="closeBox" class="close-btn" src="/images/bargain/png/btn_close.png"></image>
+    </view>
+</view>
+<view class="box-wrap" wx:if="{{help_bargain_show}}">
+    <view bindtap="closeBox" class="bg"></view>
+    <view class="tbox">
+        <view class="t">
+            <image src="/images/bargain/svg/img_shin.svg"></image>
+        </view>
+        <view class="c">
+            <view>太棒了</view>
+            <text>一出手就帮好友砍掉了 <text>{{cutPrice}}</text> 元 
+功力了得啊</text>
+        </view>
+        <button catchtap="redirctToList" class="f">
+      我也要砍价
+    </button>
+        <image bindtap="closeBox" class="close-btn" src="/images/bargain/png/btn_close.png"></image>
+    </view>
+</view>
+<view class="box-wrap" wx:if="{{end_bargain_show}}">
+    <view class="bg"></view>
+    <view class="tbox">
+        <view class="t">
+            <image src="/images/bargain/svg/img_sad.svg"></image>
+        </view>
+        <view class="c">
+            <view>真遗憾</view>
+            <text>砍价活动已经过期了哦 
+去看看别的好货吧~</text>
+        </view>
+        <button bindtap="redirctToList" class="f">
+      去逛逛
+    </button>
+    </view>
+</view>
+<view class="box-wrap" wx:if="{{over_bargain_show}}">
+    <view class="bg"></view>
+    <view class="tbox">
+        <view class="t">
+            <image src="/images/bargain/svg/img_sad.svg"></image>
+        </view>
+        <view class="c">
+            <view>真遗憾</view>
+            <text>砍价结束啦  
+去看看别的好货吧~</text>
+        </view>
+        <button bindtap="redirctToList" class="f">
+      去逛逛
+    </button>
+    </view>
+</view>
+<view class="box-wrap" wx:if="{{down_bargain_show}}">
+    <view class="bg"></view>
+    <view class="tbox">
+        <view class="t">
+            <image src="/images/bargain/svg/img_sad.svg"></image>
+        </view>
+        <view class="c">
+            <view>真遗憾</view>
+            <text>你来晚啦，该商品已经下架  
+去看看别的好货吧~</text>
+        </view>
+        <button bindtap="redirctToList" class="f">
+      去逛逛
+    </button>
+    </view>
+</view>
+<view class="box-wrap" wx:if="{{empty_bargain_show}}">
+    <view class="bg"></view>
+    <view class="tbox">
+        <view class="t">
+            <image src="/images/bargain/svg/img_sad.svg"></image>
+        </view>
+        <view class="c">
+            <view>真遗憾</view>
+            <text>你来晚啦，该商品已经售空 
+去看看别的好货吧~</text>
+        </view>
+        <button bindtap="redirctToList" class="f">
+      去逛逛
+    </button>
+    </view>
+</view>
+<form bindsubmit="confirm" class="purchase-window" reportSubmit="true" wx:if="{{show_choose}}">
+    <view catchtap="closeChoose" class="bg" disableScroll="true"></view>
+    <view class="purchase-form">
+        <view class="info">
+            <image class="image" mode="aspectFill" src="{{attrPic}}"></image>
+            <view class="content">
+                <text class="title">{{goods.name}}</text>
+                <view class="content_bottom">
+                    <text class="price-wrap">¥ <text class="price">{{storeBargain.purchasePrice}}</text>
+                    </text>
+                    <text class="desc">库存：{{attrStock}}</text>
+                </view>
+            </view>
+        </view>
+        <view class="standard">
+            <block wx:for="{{attr_group}}" wx:for-index="idx">
+                <text>{{item.name}}</text>
+                <view>
+                    <text bindtap="bindAttrChange" class="{{select_attr_arr[idx]==index?'selected':''}}" id="{{idx}},{{index}}" wx:for="{{item.attr_objs}}" wx:for-item="attrItem">{{attrItem.name}}</text>
+                </view>
+            </block>
+        </view>
+        <template is="line" data></template>
+        <view catchtap="closeChoose" class="close-view">
+            <image class="image" src="/images/goods/close.png"></image>
+        </view>
+    </view>
+    <view class="button-wrap">
+        <button class="purchase-button z-index-top" formType="submit">确定</button>
+    </view>
+</form>

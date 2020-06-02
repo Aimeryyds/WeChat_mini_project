@@ -1,0 +1,93 @@
+<view class="interval money">
+    <view class="imageD">
+        <image src="https://tws.cnweisou.com/images/sdDtail.png"></image>
+    </view>
+    <text wx:if="{{detialList.type==0}}">供应详情</text>
+    <text wx:if="{{detialList.type==1}}">需求详情</text>
+    <text class="read"></text>
+    <view class="readNum">
+阅读量:{{detialList.views}}
+	</view>
+</view>
+<view class="listMode">
+    <view class="title">
+        <view class="imageD">
+            <image class="name" src="https://tws.cnweisou.com/images/sdName.png"></image>
+        </view>
+      姓名</view>
+    <view class="formValue">
+     {{detialList.name}}
+			</view>
+    <image bindtap="modifyName" src="https://tws.cnweisou.com/images/sdEidt.png" wx:if="{{detialList.status==1}}"></image>
+</view>
+<view class="inputD {{fname?'fname':''}}">
+    <input bindblur="pname" maxlength="20" placeholder="请填写要修改的姓名" placeholderStyle="font-size:28rpx;color:#ccc;" value="{{pname}}"></input>
+</view>
+<view class="listMode">
+    <view class="title">
+        <view class="imageD">
+            <image class="info" src="https://tws.cnweisou.com/images/sdPhone.png"></image>
+        </view>
+      手机号</view>
+    <view class="formValue">{{detialList.mobile}}
+  
+			</view>
+    <image bindtap="modifyPhone" src="https://tws.cnweisou.com/images/sdEidt.png" wx:if="{{detialList.status==1}}"></image>
+</view>
+<view class="inputD {{fphone?'fname':''}}">
+    <input bindblur="phone" maxlength="11" placeholder="请填写要修改的手机号" placeholderStyle="font-size:28rpx;color:#ccc;" type="number" value="{{myphone}}"></input>
+</view>
+<view class="listMode">
+    <view class="title">
+        <view class="imageD">
+            <image class="type" src="https://tws.cnweisou.com/images/sdType.png"></image>
+        </view>
+      类型</view>
+    <view class="formValue">
+{{detialList.desc}}
+			</view>
+    <image bindtap="modifyType" src="https://tws.cnweisou.com/images/sdEidt.png" wx:if="{{detialList.status==1}}"></image>
+</view>
+<view class="inputD {{ftype?'fname':''}}">
+    <input bindfocus="type" placeholder="请选择要修改的类型" placeholderStyle="font-size:28rpx;color:#ccc;" value="{{currtype}}"></input>
+</view>
+<view class="listMode contDetail">
+    <view class="title">
+        <view class="imageD">
+            <image class="info" src="https://tws.cnweisou.com/images/sdInfo.png"></image>
+        </view>
+      内容</view>
+    <view class="formValue"></view>
+    <image bindtap="modifyCont" src="https://tws.cnweisou.com/images/sdEidt.png" wx:if="{{detialList.status==1}}"></image>
+</view>
+<view class="areaD {{fcont?'fname':''}}">
+    <textarea bindblur="cont" maxlength="300" placeholderStyle="text-indent:30rpx;font-size:28rpx;color:#ccc;" value="{{cont}}"></textarea>
+</view>
+<view class="cont">{{detialList.content}}</view>
+<view class="bottom">
+    <view bindtap="clickEnd" class="clickEnd">{{isFinish}}</view>
+    <view bindtap="clickmodify" class="clickmodify" wx:if="{{detialList.status==1}}">提交修改</view>
+</view>
+<view class="bgtypeList" wx:if="{{cardAgain}}">
+    <view class="cardAgainType">
+            您输入有误，请重新输入
+    <view bindtap="returnIndex" class="determineAgin">
+    确定
+    </view>
+    </view>
+</view>
+<view class="bgtypeList" wx:if="{{cardf}}">
+    <view class="cardAgainType">
+            您没有修改任何数据
+    <view bindtap="returnIndexf" class="determineAgin">
+    确定
+    </view>
+    </view>
+</view>
+<view class="bgtypeList1" wx:if="{{showType}}">
+    <scroll-view scrollY class="typebg">
+        <view class="typeList" wx:for="{{listType}}">
+            <view bindtap="chooseType" class="yearAndMonth" data-index="{{index}}">{{item}}</view>
+        </view>
+    </scroll-view>
+</view>

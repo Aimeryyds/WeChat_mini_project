@@ -1,0 +1,42 @@
+<view class="index_advan_list">
+    <view bindtap="is_show" class="advan_li" data-index="{{index}}" wx:for="{{list}}">
+        <image src="{{item.img}}"></image>
+        <view class="advan_info">
+            <view class="advan_tit">{{item.name}}</view>
+            <view class="advan_memo">添加时间：{{item.create_time}}</view>
+        </view>
+        <view class="clear"></view>
+    </view>
+    <view class="fui-loading empty" wx:if="{{loaded&&list.length==0}}">
+        <view class="text">暂无预约记录</view>
+    </view>
+</view>
+<view class="page_pop_box" wx:if="{{info_show}}">
+    <view bindtap="is_show" class="pop_close" data-index="-1">
+        <image mode="aspectFill" src="/yb_shop/static/images/icon/close.png"></image>
+    </view>
+    <view class="page_pop">
+        <block wx:for="{{info_list}}">
+            <view class="pop_li" wx:if="{{item.key!='pic_arr'&&item.key!='pic'}}">
+                <view class="pop_li_left">{{item.title}}：</view>
+                <view class="pop_li_right">{{item.value}}</view>
+                <view class="clear"></view>
+            </view>
+            <view class="pop_li" wx:if="{{item.key=='pic_arr'}}">
+                <view class="pop_li_left02">{{item.title}}：</view>
+                <view class="pop_li_right02">
+                    <image mode="aspectFill" src="{{val}}" wx:for="{{item.value}}" wx:for-item="val"></image>
+                    <view class="clear"></view>
+                </view>
+                <view class="clear"></view>
+            </view>
+            <view class="pop_li" wx:if="{{item.key=='pic'}}">
+                <view class="pop_li_left02">{{item.title}}：</view>
+                <view class="pop_li_right02">
+                    <image mode="aspectFill" src="{{item.value}}"></image>
+                </view>
+                <view class="clear"></view>
+            </view>
+        </block>
+    </view>
+</view>

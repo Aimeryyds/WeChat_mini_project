@@ -1,0 +1,7 @@
+<template name="imgModule">
+    <view bindtap="{{item.subModuleInfo.content.jInfo?'jumpCtrl':'previewModuleImage'}}" class="imgModule" data-img="{{item.subModuleInfo.content.pp}}" data-jinfo="{{item.subModuleInfo.content.jInfo}}" data-sbp="{{item.subModuleInfo.content.sbp}}">
+        <button class="imgContainer moduleButton" openType="{{item.subModuleInfo.content.jInfo&&item.subModuleInfo.content.jInfo.t==5?'share':item.subModuleInfo.content.jInfo.t==7?'contact':''}}" sessionFrom="weapp" style="width:{{item.subModuleInfo.pattern.w}}rpx;height:{{item.subModuleInfo.pattern.h}}rpx;">
+            <image src="{{item.subModuleInfo.content.pp}}" style="width:{{item.subModuleInfo.pattern.w-1}}rpx;height:{{item.subModuleInfo.pattern.h}}rpx;position:absolute;"></image>
+        </button>
+    </view>
+</template>

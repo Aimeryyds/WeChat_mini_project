@@ -1,0 +1,95 @@
+<import src="../../../../wxParse/wxParse.wxml"></import>
+<view class="i_store">
+    <view class="is_left">
+        <image class="i_img" src="{{data.goods.thumb}}"></image>
+        <view class="mt20">
+            <view>{{data.goods.title}}</view>
+            <view class="i_price">
+                <view>
+                    <text class="red">￥{{data.goods.groupsprice}}</text>/{{data.goods.units}}</view>
+                <view style="margin-top: 6rpx;">*{{data.goods.goodsnum}}</view>
+            </view>
+        </view>
+    </view>
+</view>
+<view class="wrap">
+    <view class="w_time">
+        <text wx:if="{{key==0}}">拼团时间    {{time}} ， <block wx:if="{{data.n}}">还差{{data.n}}人</block>
+            <block wx:else>开团成功</block>
+        </text>
+        <block wx:elif="{{key==2}}"></block>
+    </view>
+    <view class="w_touxiang">
+        <image src="{{item.avatar}}" wx:for="{{data.orders}}"></image>
+    </view>
+    <view class="w_tip" wx:if="{{key==0||key==1}}">快邀请好友一起来拼团吧！</view>
+    <view class="w_tip" wx:elif="{{key==2}}">参团失败！</view>
+    <view class="cantuan" wx:if="{{data.n=='0'}}">开团成功</view>
+    <view bindtap="toopen" class="cantuan" wx:else>立即参团</view>
+</view>
+<view class="line"></view>
+<view class="top">
+    <view bindtap="select" class="t_item {{select==index?'b_bottom':''}}" data-index="{{index}}" wx:for="{{arr}}">{{item}}</view>
+</view>
+<block wx:if="{{select=='0'}}">
+    <view class="s_item" wx:for="{{data.orders}}">
+        <view class="si_top">
+            <image class="si_img" src="{{item.avatar}}"></image>
+            <view>{{item.nickname}}</view>
+        </view>
+        <view>
+            <text>{{time_arr[index]}} 开团</text>
+        </view>
+    </view>
+    <view class="pintuan">
+        <view class="store">
+            <view class="row1">
+                <view class="fangzi"></view>
+                <view>拼团玩法</view>
+            </view>
+        </view>
+        <view class="foot">
+            <view class="p_item">
+                <view class="num"> 1 </view>
+                <text>选择
+            心仪商品</text>
+            </view>
+            <view class="p_item">
+                <view class="num"> 2 </view>
+                <text>支付开团
+            或参团</text>
+            </view>
+            <view class="p_item p_select">
+                <view class="num"> 3 </view>
+                <text>邀请好友
+            参团支付</text>
+            </view>
+            <view class="p_item">
+                <view class="num"> 4 </view>
+                <text>达到人数
+            团购成功</text>
+            </view>
+        </view>
+    </view>
+</block>
+<view class="richtext" wx:if="{{select=='1'}}">
+    <template is="wxParse" data="{{wxParseData:contain.nodes}}"></template>
+</view>
+<view class="f_bottom">
+    <block wx:if="{{key==0||key==1}}">
+        <button class="f_left" openType="share">快邀请好友参团吧</button>
+        <view bindtap="toIndex" class="f_right">
+            <image src="https://tws.cnweisou.com/images/icon_home.png" style="width: 60rpx;height: 60rpx;margin-bottom: 5rpx;"></image>
+            <text>首页</text>
+        </view>
+    </block>
+    <block wx:elif="{{key==2}}">
+        <view class="f_left">本次团已过期</view>
+        <view class="f_right">
+            <image src="https://tws.cnweisou.com/images/icon_home.png" style="width: 60rpx;height: 60rpx;margin-bottom: 5rpx;"></image>
+            <text>首页</text>
+        </view>
+    </block>
+</view>
+<image bindtap="kanjias" class="{{bargains=='1'?'actives':'uactives'}}" src="https://tws.cnweisou.com/images/share.jpg" style="width:100%;height:{{height}}rpx;position:fixed;top:0;left:0;z-index:3;"></image>
+<loading wx:if="{{loading}}"></loading>

@@ -1,0 +1,39 @@
+<view catchtap="set_focus" catchtouchmove="false" class="container">
+    <view class="verification-code">
+        <text>输入验证码</text>
+    </view>
+    <view class="verCodeSendTo">
+        <text>短信验证码已发送至 {{phonenumber}} </text>
+    </view>
+    <view class="attention" hidden="{{!$vercode$tips$isWrong}}">{{$vercode$tips$masg}}</view>
+    <view class="container-input">
+        <view catchtap="$vercode$setFocus" class="input-vercode">
+            <view class="input-item">
+                <view class="{{$vercode$code.length===0?'animation':'animation-none'}}"></view>
+                <text class="vercode">{{$vercode$code[0]}}</text>
+            </view>
+            <view class="input-item">
+                <view class="{{$vercode$code.length===1?'animation':'animation-none'}}"></view>
+                <text class="vercode">{{$vercode$code[1]}}</text>
+            </view>
+            <view class="input-item">
+                <view class="{{$vercode$code.length===2?'animation':'animation-none'}}"></view>
+                <text class="vercode">{{$vercode$code[2]}}</text>
+            </view>
+            <view class="input-item">
+                <view class="{{$vercode$code.length===3?'animation':'animation-none'}}"></view>
+                <text class="vercode">{{$vercode$code[3]}}</text>
+            </view>
+            <view class="input-item">
+                <view class="{{$vercode$code.length===4?'animation':'animation-none'}}"></view>
+                <text class="vercode">{{$vercode$code[4]}}</text>
+            </view>
+            <view class="input-item">
+                <view class="{{$vercode$code.length===5?'animation':'animation-none'}}"></view>
+                <text class="vercode">{{$vercode$code[5]}}</text>
+            </view>
+        </view>
+        <input bindinput="$vercode$passwordValue" class="input-content" cursorSpacing="{{$vercode$topSpacing}}" focus="{{$vercode$catchfocus}}" maxlength="6" type="number" value="{{$vercode$code}}"></input>
+    </view>
+    <view bindtap="sendagain" class="{{timeStatus?'send-time-again':'send-time'}}">{{messageShow}}</view>
+</view>

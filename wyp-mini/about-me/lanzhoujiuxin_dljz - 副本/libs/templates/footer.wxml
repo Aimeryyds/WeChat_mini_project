@@ -1,0 +1,11 @@
+<template name="footer">
+    <view class="footer" wx:if="{{flag.footerOpen}}">
+        <view wx:if="{{isOem}}">
+            <view class="des">{{agentAcct}}</view>
+        </view>
+        <view wx:elif="{{!isOem}}">
+            <view class="iconfont icon-footer"></view>
+            <view bindtap="showAdvertising" class="des">由凡科轻站提供技术支持</view>
+        </view>
+    </view>
+</template>

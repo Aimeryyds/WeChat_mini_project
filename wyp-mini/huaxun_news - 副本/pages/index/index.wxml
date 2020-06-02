@@ -1,0 +1,162 @@
+<view class="conBox">
+    <view class="swiper-tab">
+        <view bindtap="swichNav" class="swiper-tab-list {{currentTab==0?'on':''}}" data-current="0">推荐</view>
+        <view bindtap="swichNav" class="swiper-tab-list {{currentTab==1?'on':''}}" data-current="1">要闻</view>
+        <view bindtap="swichNav" class="swiper-tab-list {{currentTab==2?'on':''}}" data-current="2">快讯</view>
+        <view bindtap="swichNav" class="swiper-tab-list {{currentTab==3?'on':''}}" data-current="3">机会</view>
+        <view bindtap="swichNav" class="swiper-tab-list {{currentTab==4?'on':''}}" data-current="4">公司</view>
+        <view bindtap="swichNav" class="swiper-tab-list {{currentTab==5?'on':''}}" data-current="5">大盘</view>
+        <view bindtap="swichNav" class="swiper-tab-list {{currentTab==6?'on':''}}" data-current="6">其他</view>
+    </view>
+</view>
+<view class="tuiBg {{ten?'moves':''}}">为您推荐10条新内容</view>
+<view class="swipers">
+    <swiper bindchange="bindChange" class="swiper-box" current="{{currentTab}}" duration="300" style="height:{{winHeight}}px;">
+        <swiper-item>
+            <scroll-view bindscrolltolower="onReachBottom" scrollTop="{{scrollTop}}" scrollY="false" style="height: 100%;">
+                <view>
+                    <view class="newsTop">
+                        <view bindtap="jump2" class="main" data-cur="0" data-newsid="{{item.newsId}}" wx:for="{{top}}" wx:key="key">
+                            <view class="leftBox">
+                                <text class="title" id="yaowen_title">{{item.newsTitle}}</text>
+                                <text class="zhi-ding">置顶</text>
+                                <text class="times">{{filter.dateFn(item.publishTime)}}</text>
+                                <text class="from">来源：{{item.source}}</text>
+                            </view>
+                            <view class="rigBox">
+                                <image mode="aspectFill" src="{{item.newsImage[0].imageUrl}}"></image>
+                            </view>
+                        </view>
+                        <view bindtap="jump2" class="main" data-cur="0" data-newsid="{{item.newsId}}" wx:for="{{hot}}" wx:key="key">
+                            <view class="leftBox">
+                                <text class="title" id="yaowen_title">{{item.newsTitle}}</text>
+                                <text class="re-ding">热</text>
+                                <text class="times">{{filter.dateFn(item.publishTime)}}</text>
+                                <text class="from">来源：{{item.source}}</text>
+                            </view>
+                            <view class="rigBox">
+                                <image mode="aspectFill" src="{{item.newsImage[0].imageUrl}}"></image>
+                            </view>
+                        </view>
+                        <view bindtap="jump2" class="main" data-cur="0" data-newsid="{{item.newsId}}" id="yaowen" wx:for="{{recommend}}" wx:key="key">
+                            <view class="leftBox">
+                                <text class="title" id="yaowen_title">{{item.newsTitle}}</text>
+                                <text class="times">{{filter.dateFn(item.publishTime)}}</text>
+                                <text class="from">来源：{{item.source}}</text>
+                            </view>
+                            <view class="rigBox">
+                                <image mode="aspectFill" src="{{item.newsImage[0].imageUrl}}"></image>
+                            </view>
+                        </view>
+                    </view>
+                    <view class="again-box">
+                        <view bindtap="onPullDownRefresh" class="again-click">您上次看到这里 点击刷新 <image class="load-pic" src="../../images/loading.png"></image>
+                        </view>
+                    </view>
+                    <view class="newsBot">
+                        <view bindtap="jump2" class="main" data-cur="0" data-newsid="{{item.newsId}}" id="yaowen" wx:for="{{Blist}}" wx:key="key">
+                            <view class="leftBox">
+                                <text class="title" id="yaowen_title">{{item.newsTitle}}</text>
+                                <text class="times">{{filter.dateFn(item.publishTime)}}</text>
+                                <text class="from">来源：{{item.source}}</text>
+                            </view>
+                            <view class="rigBox">
+                                <image mode="aspectFill" src="{{item.newsImage[0].imageUrl}}"></image>
+                            </view>
+                        </view>
+                    </view>
+                </view>
+            </scroll-view>
+        </swiper-item>
+        <swiper-item>
+            <scroll-view bindscrolltolower="onReachBottom" scrollY="false" style="height: 100%;">
+                <image bindtap="images" class="navImg" data-url="{{ban.data.ad[1004][0].url}}" src="{{ban.data.ad[1004][0].pic}}" wx:if="{{ban.data.ad}}"></image>
+                <view bindtap="jump" class="main" data-cur="1" data-txt="{{item.column}}" data-url="{{item.url}}" id="{{item.articleid}}" wx:for="{{lists[1]}}" wx:key="key">
+                    <text class="title" id="yaowen_title">{{item.title}}</text>
+                    <text class="times">{{item.ym}} {{item.hs}}</text>
+                    <text class="from">来源：{{item.frommedia}}</text>
+                </view>
+            </scroll-view>
+        </swiper-item>
+        <swiper-item>
+            <scroll-view bindscrolltolower="onReachBottom" class="scroll_roll" scrollY="false" style="height: 100%;">
+                <view class="solid"></view>
+                <view bindtap="jump" class="main main_scroll" data-cur="2" data-txt="{{item.column}}" data-url="{{item.url}}" id="{{item.articleid}}" wx:for="{{lists[2]}}" wx:key="key">
+                    <view class="timeBox">
+                        <text class="times circle">{{item.hs}}</text>
+                        <text class="times2">{{item.ym}}</text>
+                    </view>
+                    <text class="content">【{{item.title}}】{{item.titlesub}}</text>
+                    <view class="borders"></view>
+                </view>
+            </scroll-view>
+        </swiper-item>
+        <swiper-item>
+            <scroll-view bindscrolltolower="onReachBottom" scrollY="false" style="height: 100%;">
+                <view bindtap="jump" class="main" data-cur="3" data-txt="{{item.column}}" data-url="{{item.url}}" id="{{item.articleid}}" wx:for="{{lists[3]}}" wx:key="key">
+                    <text class="title">{{item.title}}</text>
+                    <text class="times">{{item.ym}} {{item.hs}}</text>
+                    <text class="from">来源：{{item.frommedia}}</text>
+                </view>
+            </scroll-view>
+        </swiper-item>
+        <swiper-item>
+            <scroll-view bindscrolltolower="onReachBottom" scrollY="false" style="height: 100%;">
+                <view bindtap="jump" class="main" data-cur="4" data-txt="{{item.column}}" data-url="{{item.url}}" id="{{item.articleid}}" wx:for="{{lists[4]}}" wx:key="key">
+                    <text class="title">{{item.title}}</text>
+                    <text class="times">{{item.ym}} {{item.hs}}</text>
+                    <text class="from">来源：{{item.frommedia}}</text>
+                </view>
+            </scroll-view>
+        </swiper-item>
+        <swiper-item>
+            <scroll-view bindscrolltolower="onReachBottom" scrollY="false" style="height: 100%;">
+                <view bindtap="jump" class="main" data-cur="5" data-txt="{{item.column}}" data-url="{{item.url}}" id="{{item.articleid}}" wx:for="{{lists[5]}}" wx:key="key">
+                    <text class="title">{{item.title}}</text>
+                    <text class="times">{{item.ym}} {{item.hs}}</text>
+                    <text class="from">来源：{{item.frommedia}}</text>
+                </view>
+            </scroll-view>
+        </swiper-item>
+        <swiper-item>
+            <scroll-view bindscrolltolower="onReachBottom" scrollY="false" style="height: 100%;">
+                <view bindtap="jump" class="main" data-cur="6" data-txt="{{item.column}}" data-url="{{item.url}}" id="{{item.articleid}}" wx:for="{{lists[6]}}" wx:key="key">
+                    <text class="title">{{item.title}}</text>
+                    <text class="times">{{item.ym}} {{item.hs}}</text>
+                    <text class="from">来源：{{item.frommedia}}</text>
+                </view>
+            </scroll-view>
+        </swiper-item>
+    </swiper>
+</view>
+<view bindtap="moreBtn" class="layerBoxs" wx:if="{{ban.data.more}}">
+    <view>{{ban.data.more.title}}</view>
+</view>
+<view bindtap="closeSupplyModalClick" class="modal-mask" wx:if="{{showSupplyModal}}"></view>
+<view class="supply-modal" wx:if="{{showSupplyModal}}">
+    <view style="width: 100%">
+        <view class="supply-modal-body">
+            <view class="supply-title">免费领牛股</view>
+            <view class="supply-content">
+                <view class="supply-step">1.点击下面“领取”按钮</view>
+                <view class="supply-step">2.回复数字“88”</view>
+                <view class="supply-step">3.长按识别二维码即可领取</view>
+            </view>
+            <button class="btn-supply-contact" openType="contact">
+                <view class="btn-save-supply-image">领取</view>
+            </button>
+        </view>
+    </view>
+</view>
+<view class="ads-box" style="{{adsInfo.adsBoxStyle}}" wx:if="{{adsInfo.show}}">
+    <view class="ads-inner" style="{{adsInfo.adsInnerStyle}}">
+        <button class="ads-contact-btn" lang="zh_CN" openType="contact" wx:if="{{adsInfo.type=='contact'}}"></button>
+        <button bindgetphonenumber="getPhoneNumber" class="ads-contact-btn" lang="zh_CN" openType="getPhoneNumber" wx:if="{{adsInfo.type=='auth-phone'}}"></button>
+        <button bindgetuserinfo="getUserInfo" class="ads-contact-btn" lang="zh_CN" openType="getUserInfo" wx:if="{{adsInfo.type=='auth-userinfo'}}"></button>
+        <view bindtap="closeAdsClick" class="ads-close" data-ads="{{adsInfo}}" wx:if="{{adsInfo.showClose}}">
+            <view class="ads-close-icon"></view>
+        </view>
+        <image bindtap="openAds" data-ads="{{adsInfo}}" mode="{{adsInfo.imageMode}}" src="{{adsInfo.imageUrl}}" style="{{adsInfo.adsImageStyle}}"></image>
+    </view>
+</view>
+<wxs module="filter" src="../../utils/date.wxs" />

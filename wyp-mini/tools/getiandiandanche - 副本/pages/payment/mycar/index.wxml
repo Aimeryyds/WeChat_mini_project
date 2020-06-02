@@ -1,0 +1,18 @@
+<view class="page">
+    <view class="carList" wx:for="{{carList}}" wx:key="index">
+        <view class="l-cont" wx:if="{{item.state==0}}">
+            <view class="card" style="">
+                <view class="type intime"> 葛天出行·{{item.oncecard==0?'次':'月'}}卡</view>
+                <view class="time"> 有效期{{item.expireday}}天 </view>
+                <view class="num"> {{item.amount}} 元 </view>
+            </view>
+        </view>
+        <view class="l-cont" wx:else>
+            <view class="card outtime">
+                <view class="type"> 葛天出行·{{item.oncecard==0?'次':'月'}}卡</view>
+                <div class="statu">{{item.state==0?'使用中 ':'已过期'}}</div>
+                <div class="timer num">过期日:{{item.invaliddate}} </div>
+            </view>
+        </view>
+    </view>
+</view>

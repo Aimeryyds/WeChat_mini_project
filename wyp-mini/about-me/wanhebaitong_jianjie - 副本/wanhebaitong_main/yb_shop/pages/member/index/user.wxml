@@ -1,0 +1,12 @@
+<view class="member-head" style="background-image: url({{item.bg_img}});background-color:{{item.bg_color}}">
+    <view class="child"></view>
+    <view class="child userinfo">
+        <view class="avatar">
+            <image class="icon" src="{{member.avatarUrl||'/yb_shop/static/images/noface.png'}}"></image>
+        </view>
+        <view class="nickname" style="color:{{item.text_color?item.text_color:'#212121'}};" wx:if="{{member.nickName!=null}}">{{member.nickName}}</view>
+        <view bindtap="relogin" class="level" wx:if="{{member.nickName==null}}">点击登录</view>
+        <view class="member_level" wx:if="{{member.level_name}}">{{member.level_name}}</view>
+    </view>
+    <view class="child"></view>
+</view>

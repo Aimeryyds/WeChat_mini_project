@@ -1,0 +1,211 @@
+<swiper autoplay="0" bindchange="changeCur" circular="true" class="head_swiper" duration="1000" interval="5000">
+    <swiper-item wx:for="{{imgUrls}}" wx:key="item">
+        <image class="slide-image" src="{{item}}"></image>
+    </swiper-item>
+    <swiper-item wx:if="{{imgUrls.length===0}}">
+        <image class="slide-image" src="https://fang-oss.haozu.com/cms/index/2018/04/17/JkhhPDfpJA.jpg@750w_490h_1c_1e_1"></image>
+    </swiper-item>
+</swiper>
+<view class="swiper_tips" wx:if="{{imgUrls.length>0}}">
+    <text>{{currIndex}}/{{total}}</text>
+</view>
+<view class="title_con">
+    <view class="left_con">
+        <view class="con_h1">{{pointInfo.name}}</view>
+    </view>
+    <button class="right-con" openType="share">
+        <image class="share_img" src="{{shareimg}}"></image>
+    </button>
+</view>
+<view class="data-bar">
+    <view class="bar bar-begin">
+        <text class="bar-title">单价</text>
+        <text class="text_number">{{simpleInfo.minPrice.showPrice}}</text>
+        <text class="line_unit">{{comm.html_decode(simpleInfo.minPrice.priceUnit)}}</text>
+    </view>
+    <view class="bar bar-second">
+        <text class="bar-title">工位数</text>
+        <text class="text_number">{{comm.emptyCheck(simpleInfo.stationSection.min,simpleInfo.stationSection.max,'暂无工位')}}</text>
+        <text class="line_unit">{{comm.emptyCheck(simpleInfo.stationSection.min,simpleInfo.stationSection.max,'暂无')==='暂无'?'':'工位'}}</text>
+    </view>
+    <view class="bar bar-third">
+        <text class="bar-title">在租</text>
+        <text class="text_number">{{simpleInfo.houseTotal}}</text>
+        <text class="line_unit">套</text>
+    </view>
+</view>
+<view class="data-pos">
+    <view bindtap="toMapInfo" class="pos-ditu">
+        <view>
+            <image class="map_icon" src="{{mapimg}}"></image>
+        </view>
+        <text>查看地图</text>
+    </view>
+    <view class="pos-dizhi">
+        <image class="point_icon" src="../../images/dizhi.png"></image>
+        <text>[<text class="area">{{building.district_name}}-{{building.street_name}}</text>]{{building.address}}</text>
+    </view>
+    <view class="pos-ditie" wx:if="{{building.subway.length>0}}">
+        <image class="point_icon" src="../../images/ditie.png"></image>
+        <text>{{building.subway[0]}}</text>
+    </view>
+</view>
+<view class="empty-line"></view>
+<view class="section data-sell" wx:if="{{gxlist.length>0}}">
+    <view class="sell-title">{{pointInfo.name}}出租</view>
+    <scroll-view scrollX bindscroll="turnScroll" bindscrolltolower="turnEnd" bindtouchcancel="touchEnd" bindtouchend="touchEnd" bindtouchstart="touchStart" class="scroll-view_H sell-content" data-len="{{gxlist.length}}" data-tid="{{building.id}}" data-url="/pages/list/list_gongxiang" lowerThreshold="10">
+        <navigator class="sell-item" url="/pages/shareoffice/shareoffice?house_id={{item.id}}" wx:for="{{gxlist}}" wx:key="id">
+            <image class="sell-img" src="{{item.thumb_image}}"></image>
+            <view class="sell-area">
+                <text class="sell-number r-line">{{item.show_name}}</text>
+                <text class="sell-num pirce">{{item.price}}</text>
+                <text class="r-line">{{comm.html_decode(item.price_unit)}}</text>
+            </view>
+            <view>
+                <text class="sell-number">{{item.show_type}}</text>
+            </view>
+            <view class="sell-pirce" wx:if="{{item.point_name}}">
+                <text>{{item.point_name}}</text>
+            </view>
+        </navigator>
+        <view class="item-last" style="opacity:1" wx:if="{{gxlist.length>1}}">
+            <text>查</text>
+            <text>看</text>
+            <text>更</text>
+            <text>多</text>
+            <image src="{{rightmore}}"></image>
+        </view>
+    </scroll-view>
+</view>
+<view class="empty-line"></view>
+<view class="data-service">
+    <view class="service-title">基础服务</view>
+    <view class="service-content">
+        <view class="service-item {{index%5===4?'':'mar'}}" wx:for="{{baseList}}" wx:key="item">
+            <image src="../../images/fw_icon/{{comm.getIcon(item.key)}}.png"></image>
+            <text>{{item.name}}</text>
+        </view>
+    </view>
+    <view class="service-title">企业服务</view>
+    <view class="service-content">
+        <view class="service-item {{index%5===4?'':'mar'}}" wx:for="{{companyList}}" wx:key="item">
+            <image src="../../images/fw_icon/{{comm.getIcon(item.key)}}.png"></image>
+            <text>{{item.name}}</text>
+        </view>
+    </view>
+</view>
+<view class="empty-line"></view>
+<view class="data-build">
+    <view class="build-title">{{building.name}}写字楼简介</view>
+    <view class="build-detail">
+        <view wx:if="{{building.briefIntroduction.total_ceng}}">
+            <text class="tag-name">总楼层：</text>
+            <text>{{building.briefIntroduction.total_ceng.val}}</text>
+        </view>
+        <view wx:if="{{building.briefIntroduction.jianzu_area}}">
+            <text class="tag-name">建筑面积：</text>
+            <text>{{building.briefIntroduction.jianzu_area.val}}</text>
+        </view>
+        <view wx:if="{{building.briefIntroduction.room_rate}}">
+            <text class="tag-name">得房率：</text>
+            <text>{{building.briefIntroduction.room_rate.val}}</text>
+        </view>
+        <view wx:if="{{building.briefIntroduction.green_rate}}">
+            <text class="tag-name">绿化率：</text>
+            <text>{{building.briefIntroduction.green_rate.val}}</text>
+        </view>
+        <view wx:if="{{building.briefIntroduction.cenggao}}">
+            <text class="tag-name">标准层高：</text>
+            <text>{{building.briefIntroduction.cenggao.val}}</text>
+        </view>
+        <view wx:if="{{building.briefIntroduction.keti_num}}">
+            <text class="tag-name">客梯数：</text>
+            <text>{{building.briefIntroduction.keti_num.val}}</text>
+        </view>
+        <view class="v-last" wx:if="{{building.briefIntroduction.wuye_company}}">
+            <text class="tag-name">物业公司：</text>
+            <text class="last-text">{{building.briefIntroduction.wuye_company.val}}</text>
+        </view>
+    </view>
+    <view class="build-content {{isUp&&building.description&&building.description.length>100?'single':''}}">
+    {{building.description}}
+  </view>
+    <view bindtap="showAll" class="read-down" wx:if="{{isUp&&building.description&&building.description.length>100}}">
+        <view>
+            <image src="{{zhankai}}"></image>
+        </view>
+        <view class="read-text">查看全部简介</view>
+    </view>
+</view>
+<view class="bee-line"></view>
+<view class="data-tage">
+    <view class="tage-title">{{pointInfo.name}}</view>
+    <view class="tage-content">
+    {{pointInfo.description}}
+  </view>
+</view>
+<view class="bee-line"></view>
+<view bindtap="toMapInfo" class="data-map">
+    <image class="map-area" id="map-content" src="{{mapUrl}}"></image>
+</view>
+<view class="empty-line"></view>
+<view class="section data-sell data-suggest">
+    <view class="sell-title" wx:if="{{zblist.length>0}}">{{pointInfo.name}}周边共享办公推荐</view>
+    <scroll-view scrollX bindscroll="turnScroll" bindscrolltolower="turnEnd" bindtouchcancel="touchEnd" bindtouchend="touchEnd" bindtouchstart="touchStart" class="scroll-view_H sell-content" data-len="{{zblist.length}}" data-tid="{{building.id}}" data-url="" lowerThreshold="10" wx:if="{{zblist.length>0}}">
+        <navigator class="sell-item" url="/pages/netpoint/netpoint?point_id={{item.point_id}}" wx:for="{{zblist}}" wx:key="point_id">
+            <image class="sell-img" src="{{item.thumb_image}}"></image>
+            <view class="sell-area suggest-area">
+                <text class="sell-number">{{item.name}}</text>
+            </view>
+            <view class="sell-pirce">
+                <text class="sell-num pirce">{{item.price}}</text>
+                <text class="r-line">{{comm.html_decode(item.price_unit)}}</text>
+                <text class="">{{item.min_station_number}}-{{item.max_station_number}}个工位</text>
+            </view>
+            <view class="sell-pirce">
+                <text>{{item.location}}</text>
+            </view>
+        </navigator>
+    </scroll-view>
+</view>
+<view class="data-admin">
+    <view bindtap="showyekan" class="admin-order">
+        <image src="../../images/task.png"></image>
+        <text>预约看房</text>
+    </view>
+    <view bindtap="zixun" class="admin-call">
+        <text>免费咨询</text>
+    </view>
+</view>
+<view class="data-shade {{shade?'':'hide'}}"></view>
+<view class="data-yuekan {{showYK?'':'hide'}}">
+    <view class="yuekan-title">
+        <text>预约看房</text>
+        <image bindtap="closeyuekan" class="closebtn" src="{{close}}"></image>
+    </view>
+    <view class="yuekan-content" wx:if="{{house.renqi&&house.renqi.yuyue}}">
+    已有<text>{{house.renqi&&house.renqi.yuyue?house.renqi.yuyue:10}}</text>人预约看过此房源，预计很快会成交，留下联系方式，顾问带您实地看房。
+  </view>
+    <view class="yuekan-input error">
+        <image src="{{error_icon}}" wx:if="{{hasError}}"></image>
+        <input bindinput="inputChange" disabled="{{isYK||isDis}}" focus="{{showYK}}" maxlength="11" placeholder="请输入手机号" placeholderClass="phone_holder" type="number" value="{{resPhone}}"></input>
+        <text wx:if="{{hasError}}">请输入正确的手机号！</text>
+    </view>
+    <view bindtap="submitYK" class="yuekan-btn {{isYK?'hui':''}}">{{isYK?'已':'立即'}}预约</view>
+</view>
+<view class="data-result {{subsucc?'':'hide'}}">
+    <image src="../../images/success.png"></image>
+    <text class="result-title">提交成功</text>
+    <text>客服很快会与您联系！</text>
+    <view class="login-box {{loginYK?'h270':'hide'}}">
+        <text class="login-prompt">是否用当前手机号登录会员？</text>
+        <view bindtap="Ylogin" class="login-btn">确认登录</view>
+        <view bindtap="closePop" class="login-cancel">暂时不用</view>
+    </view>
+    <image bindtap="closePop" class="closebtn" src="{{close}}"></image>
+</view>
+<navigator class="goTag_home" openType="reLaunch" url="/pages/index/index" wx:if="{{!!share}}">
+    <image class="icon_home" src="/images/home.png"></image>
+    <text>首页</text>
+</navigator>
+<wxs module="comm" src="../../utils/common.wxs" />

@@ -1,0 +1,21 @@
+<view class="zhezao" style="background:none;" wx:if="{{visible}}">
+    <view class="t_w" style="width: 75%">
+        <view class="tip-content">
+            <view>
+                <view class="pay-tip-header" style="background-color: {{mainColor}}">
+          温馨提示
+        </view>
+                <view class="pay-content">
+          {{dialogTip}}
+        </view>
+                <view class="content-tip">
+                    <view>特别注意：充值并不会结束订单，必须要充值完成再返回点还车！</view>
+                </view>
+                <view class="dialog-btn">
+                    <button bindtap="tipCancel" size="mini">取消</button>
+                    <button bindtap="tipConfirm" size="mini" style="background-color: {{mainColor}};color:{{textColor}}">确定</button>
+                </view>
+            </view>
+        </view>
+    </view>
+</view>

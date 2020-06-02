@@ -1,0 +1,23 @@
+<template name="gongping-tool">
+    <cover-view class="gongping-tool">
+        <button bindgetuserinfo="getuserinfo" class="icon-chat" openType="getUserInfo">
+            <cover-image src="./template/gongping-tool/images/icon-chat.png"></cover-image>
+        </button>
+        <button bindtap="gotoShare" class="icon-share" openType="share">
+            <cover-image src="./template/gongping-tool/images/icon-share.png"></cover-image>
+        </button>
+        <button bindgetuserinfo="getuserinfoOnRecommend" class="icon-recommend" openType="getUserInfo">
+            <cover-image src="./template/gongping-tool/images/icon-recommend.png"></cover-image>
+        </button>
+        <button bindgetuserinfo="getuserinfoOnGiftIos" class="icon-send-gift ios-gift-btn" openType="getUserInfo" wx:if="{{isGiftReady&&!hasAccredit&&!showGiftTimer&&flowerGiftNum}}">
+            <cover-image class="ios-gift-btn__img" src="./template/gongping-tool/images/gift_btn_ios.png"></cover-image>
+            <cover-image class="ios-gift-btn__num__bg" src="./template/gongping-tool/images/gift_num_ios.png" wx:if="{{flowerGiftNum}}"></cover-image>
+            <cover-view class="ios-gift-btn__num" wx:if="{{flowerGiftNum}}">{{flowerGiftNum}}</cover-view>
+        </button>
+        <cover-view bindtap="sendGiftIosBtnClick" class="icon-send-gift ios-gift-btn" wx:if="{{isGiftReady&&hasAccredit&&!showGiftTimer&&flowerGiftNum}}">
+            <cover-image class="ios-gift-btn__img" src="./template/gongping-tool/images/gift_btn_ios.png"></cover-image>
+            <cover-image class="ios-gift-btn__num__bg" src="./template/gongping-tool/images/gift_num_ios.png" wx:if="{{flowerGiftNum}}"></cover-image>
+            <cover-view class="ios-gift-btn__num" wx:if="{{flowerGiftNum}}">{{flowerGiftNum}}</cover-view>
+        </cover-view>
+    </cover-view>
+</template>

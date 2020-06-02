@@ -1,0 +1,13 @@
+<view class="container msg-container">
+    <view class="msg-text-wrap">
+        <textarea bindinput="onchagevalue" class="msg-text" placeholder="{{item.fieldcontent||'请输入字符'}}" placeholderStyle="font-size: 24rpx;" value="{{item.value||''}}"></textarea>
+        <view class="clear-btn">
+            <view bindtap="clearvalue" style="display: flex;align-items:center;">
+                <image class="clear-img" src="http://imgcdnali.wfenxiao.com.cn/xcx/c/icons/close_coupon.png"></image>
+                <view class="">清空所有</view>
+            </view>
+        </view>
+    </view>
+    <button bindtap="jumporder" class="msg-btn">完成</button>
+    <toast show="{{toast.show}}" title="{{toast.title}}"></toast>
+</view>

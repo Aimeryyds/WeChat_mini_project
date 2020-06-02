@@ -1,0 +1,103 @@
+.order-state-detail-box {
+    width: 100%;
+    backgroud: #ffffff;
+    display: flex;
+    flex-direction: row;
+}
+
+.order-state-detail-box .left-box {
+    width: 110rpx;
+    height: 190rpx;
+    display: flex;
+    flex-direction: column;
+    overflow: hidden;
+}
+
+.order-state-detail-box .left-box .list_icon {
+    width: 60rpx;
+    height: 60rpx;
+    position: relative;
+    left: 25rpx;
+    top: 55rpx;
+}
+
+.order-state-detail-box .left-box .line {
+    flex-grow: 1;
+    position: relative;
+    left: 55rpx;
+    top: 55rpx;
+    width: 2rpx;
+    border-left: 1rpx solid #eeeeee;
+}
+
+.order-state-detail-box .right-box {
+    flex-grow: 1;
+    padding: 20rpx;
+    border-bottom: 1px solid #f1f1f1;
+    position: relative;
+}
+
+.order-state-detail-box .right-box .content {
+    box-sizing: border-box;
+    background: #f1f1f1;
+    border-radius: 5rpx;
+    border: 1px solid #f1f1f1;
+}
+
+.order-state-detail-box .right-box:before {
+    position: absolute;
+    display: block;
+    width: 0;
+    height: 0;
+    border: solid transparent;
+    pointer-events: none;
+    content: "";
+    border-color: rgba(136,183,213,0);
+}
+
+.order-state-detail-box .right-box .content .head {
+    display: flex;
+    flex-grow: 1;
+    justify-content: space-between;
+    box-sizing: border-box;
+    padding: 20rpx 30rpx 20rpx 30rpx;
+    font-size: 28rpx;
+    color: #000;
+    position: relative;
+}
+
+.order-state-detail-box .right-box .content .head .order-no_text {
+    font-size: 28rpx;
+    color: #333333;
+}
+
+.order-state-detail-box .right-box .content .head .time {
+    font-size: 20rpx;
+    color: #b2b2b2;
+}
+
+.order-state-detail-box .right-box .content .state-desc {
+    font-size: 20rpx;
+    margin-top: 20rpx;
+    padding: 0 30rpx 20rpx 30rpx;
+    color: #b2b2b2;
+}
+
+.order-state-detail-box .right-box .content .state-wuliu {
+    font-size: 20rpx;
+    margin-top: 20rpx;
+    padding: 0 30rpx 20rpx 30rpx;
+    color: #108ee9;
+}
+
+.order_arrow-left {
+    width: 0;
+    height: 0;
+    border-width: 18px;
+    border-style: solid;
+    border-color: transparent #f1f1f1 transparent transparent;
+    position: absolute;
+    left: -18px;
+    top: 28px;
+    z-index: 999;
+}

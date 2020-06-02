@@ -1,0 +1,24 @@
+<template name="WxEmojiChooseChooseView">
+    <view class="WxEmojiChooseChooseView" style="display:block;">
+        <image bindtap="wxPreEmojiTap" class="wxPreEmoji" data-text="[{{item}}]" src="/WxEmojiView/emojis/{{item}}.gif" wx:for="{{WxEmojiObjs.emojiArray}}"></image>
+    </view>
+</template>
+<template name="WxEmojiTextarea">
+    <textarea bindblur="WxEmojiTextareaBlur" bindfocus="WxEmojiTextareaFocus" class="WxEmojiTextarea" maxlength="-1" name="textArea" placeholder="请输入你要填写的内容" value="{{WxEmojiObjs.textAreaText}}"></textarea>
+</template>
+<template name="WxEmojiViewContainer">
+    <view class="WxEmojiPreView">
+        <block wx:for="{{WxEmojiObjs.WxEmojiTextArray}}">
+            <block wx:if="{{item.node=='text'}}">{{item.text}}</block>
+            <image class="wxEmoji" src="/WxEmojiView/emojis/{{item.text}}" wx:elif="{{item.node=='element'}}"></image>
+        </block>
+    </view>
+</template>
+<template name="WxEmojiView">
+    <view class="WxEmojiView">
+        <block wx:for="{{WxEmojiObjs.WxEmojiTextArray}}">
+            <block wx:if="{{item.node=='text'}}">{{item.text}}</block>
+            <image class="wxEmoji" src="/WxEmojiView/emojis/{{item.text}}" wx:elif="{{item.node=='element'}}"></image>
+        </block>
+    </view>
+</template>

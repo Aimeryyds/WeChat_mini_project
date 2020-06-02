@@ -1,0 +1,26 @@
+<view class="view_search" style="padding: {{data.style.paddingtop}}px ,{{data.style.paddingleft}}px;">
+    <form bindsubmit="formSubmit" class="view_searchbg">
+        <label>
+            <view class="img_wrap"></view>
+            <button hidden class="img_btn" formType="submit" name="Search"></button>
+        </label>
+        <input bindconfirm="formSubmit" class="input" name="keyword" placeholder="请输入关键字..." type="text"></input>
+    </form>
+</view>
+<view class="slide">
+    <test bindtap="slide" class="temABC" data-index="{{item}}" wx:for="{{temABC}}">{{item}}</test>
+</view>
+<view class="yin" wx:if="{{show==1}}">{{strA}}</view>
+<scroll-view class="top" scrollIntoView="{{toView}}" scrollY="true">
+    <view class="common">当前城市</view>
+    <view bindtap="add" class="city" data-index="{{local.addr}}" data-lat="{{local.lat}}" data-lng="{{local.lng}}">{{local.addr}}</view>
+    <view class="common">热门城市</view>
+    <view class="hotaddr">
+        <view bindtap="add" class="cityx" data-index="{{item.city}}" data-lat="{{item.N}}" data-lng="{{item.E}}" wx:for="{{hotaddr}}"> {{item.city}}</view>
+    </view>
+    <view class="common sort">排序城市</view>
+    <block wx:for="{{add}}">
+        <view class="sort" id="{{item.key}}">{{item.key}}</view>
+        <view bindtap="add" class="add" data-index="{{item.city}}" data-lat="{{item.N}}" data-lng="{{item.E}}" wx:for="{{item.item}}"> {{item.city}}</view>
+    </block>
+</scroll-view>

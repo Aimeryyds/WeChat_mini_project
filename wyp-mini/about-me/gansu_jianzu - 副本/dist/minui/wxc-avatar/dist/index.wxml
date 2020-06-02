@@ -1,0 +1,7 @@
+<view class="avatar">
+    <view class="avatar__pic avatar__mold--{{mold}}" style="background-image: url({{src}}); background-repeat: no-repeat; background-position: center center; background-size: cover" wx:if="{{src}}"></view>
+    <wxc-cc _pid="{{_pid}}">
+        <slot></slot>
+    </wxc-cc>
+    <wxc-badge _pid="{{_pid}}" class="avatar__badge" wx:if="{{count}}">{{count}}</wxc-badge>
+</view>

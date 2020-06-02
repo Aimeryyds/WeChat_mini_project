@@ -1,0 +1,14 @@
+<view class="container" style="background-color:#fff">
+    <wxc-search bind:search="onSearch" focus="{{true}}" id="search" name="indexAll"></wxc-search>
+    <view class="tab" id="tab">
+        <view bindtap="onTabSwitch" class="tab-label {{tab.current?'tab-label--active':''}}" data-index="{{index}}" wx:for="{{tabs}}" wx:for-item="tab" wx:key="index">
+        {{tab.title}}
+      </view>
+    </view>
+    <view class="tab-panel" style="display:{{currentTab=='0'?'':'none'}}">
+        <product-tab bindonquery="handleQueryProducts" filters="{{filters}}" keyword="{{keyword}}" products="{{products}}" serverTime="{{serverTime}}"></product-tab>
+    </view>
+    <view class="tab-panel" style="height:100%;display:{{currentTab=='1'?'':'none'}}">
+        <store-tab bindonquery="handleQueryStores" keyword="{{keyword}}" serverTime="{{serverTime}}" stores="{{stores}}"></store-tab>
+    </view>
+</view>

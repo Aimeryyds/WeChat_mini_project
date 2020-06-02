@@ -1,0 +1,35 @@
+<view class="container data-v-5abc7f2c">
+    <ths-nav bind:__l="__l" bind:itemClick="__e" bind:loginComplete="__e" bind:showMenu="__e" class="data-v-5abc7f2c" data-event-opts="{{[ [ '^loginComplete',[ ['loginComplete'] ] ],[ '^showMenu',[ ['showMenu'] ] ],[ '^itemClick',[ ['itemClick'] ] ] ]}}" navInfo="{{getNavInfo}}" showAccount="{{showAccount}}" vueId="8dd740cc-1"></ths-nav>
+    <view class="topWrap data-v-5abc7f2c">
+        <view class="openInfoWrap data-v-5abc7f2c">
+            <view class="openStat data-v-5abc7f2c" wx:if="{{jyrType>=0}}">
+                <image class="icon data-v-5abc7f2c" src="{{jyrInfo.iconSrc}}"></image>
+                <text class="data-v-5abc7f2c">{{$root.f0}}</text>
+            </view>
+            <view class="date data-v-5abc7f2c">{{nowDate}}</view>
+        </view>
+        <view bindtap="__e" class="searchWrap data-v-5abc7f2c" data-event-opts="{{[ [ 'tap',[ [ 'jumpSearch',['$event'] ] ] ] ]}}">
+            <image class="icon data-v-5abc7f2c" src="../../static/search.png"></image>
+            <text class="data-v-5abc7f2c">搜股票名称/股票代码</text>
+        </view>
+    </view>
+    <view class="exponentWrap data-v-5abc7f2c">
+        <view bindtap="__e" class="{{['exponentItem data-v-5abc7f2c',item[$orig].gainPoint<0?'fall':'rise']}}" data-event-opts="{{[ [ 'tap',[ [ 'jumpExponent',['$0',true],[ [ ['exponentData','name',item[$orig].name] ] ] ] ] ] ]}}" wx:for="{{$root.l0}}" wx:for-index="__i0__" wx:key="name">
+            <view class="exponentName data-v-5abc7f2c">{{item.f1}}</view>
+            <view class="exponentNum data-v-5abc7f2c">{{item.f2}}</view>
+            <view class="exponentInfo data-v-5abc7f2c">
+                <view class="num data-v-5abc7f2c">{{item.f3}}</view>
+                <view class="precent data-v-5abc7f2c">{{item.f4}}</view>
+            </view>
+        </view>
+    </view>
+    <view class="contrast data-v-5abc7f2c">
+        <ths-contrast bind:__l="__l" class="data-v-5abc7f2c" fall="{{fall}}" rise="{{rise}}" vueId="8dd740cc-2"></ths-contrast>
+    </view>
+    <ths-headline bind:__l="__l" class="data-v-5abc7f2c" newsList="{{newsList}}" upDate="{{newsUpdate}}" vueId="8dd740cc-3" wx:if="{{newsList.length>0}}"></ths-headline>
+    <view class="todayPlate data-v-5abc7f2c">
+        <ths-todayplate bind:__l="__l" class="data-v-5abc7f2c" hotConcept="{{hotConcept}}" hotIndustry="{{hotIndustry}}" maximumHeatInFiveDays="{{maximumHeatInFiveDays}}" vueId="8dd740cc-4"></ths-todayplate>
+    </view>
+    <ths-unify-list bind:__l="__l" bind:changeList="__e" bind:jump="__e" bind:sortData="__e" class="ths-list data-v-5abc7f2c" colorKey="{{colorKey}}" data-event-opts="{{[ [ '^changeList',[ ['changeList'] ] ],[ '^sortData',[ ['sortData'] ] ],[ '^jump',[ ['jump'] ] ] ]}}" fixedTop="{{fixedTop}}" fixedType="{{1}}" infoTit="{{infoTit}}" inverted="{{inverted}}" isFixed="{{isTop}}" listActive="{{listActive}}" listData="{{listData}}" optionText="{{optionText}}" showSpecialText="{{noShowRank}}" sortTypeStatus="{{sortTypeStatus}}" specialText="{{specialText}}" titArr="{{titArr}}" titDataType="{{titDataType}}" titShow="{{true}}" titText="{{titText}}" vueId="8dd740cc-5"></ths-unify-list>
+    <ths-pop-up bind:__l="__l" bind:changePopUpState="__e" bind:exitLogin="__e" class="data-v-5abc7f2c" data-event-opts="{{[ [ '^changePopUpState',[ ['changePopUpState'] ] ],[ '^exitLogin',[ ['exitLogin'] ] ] ]}}" popUpType="{{popUpType}}" showPop="{{showPop}}" vueId="8dd740cc-6"></ths-pop-up>
+</view>

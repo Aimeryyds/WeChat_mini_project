@@ -1,0 +1,23 @@
+<view style="overflow: hidden">
+    <view class="historyRecordWrap">
+        <view wx:if="{{historyRecords.length>0}}">
+            <view class="historyRecord" wx:for="{{historyRecords}}" wx:key="accountId">
+                <label class="label">
+                    <text class="iconfont icon-record " style="color:{{mainColor}};font-size: 60rpx;"></text>
+                    <label class="label1">
+                        <text class="text1" style="color:{{mainColor}}">{{item.remark}}</text>
+                        <text class="text2">{{item.operaTime}}</text>
+                    </label>
+                </label>
+                <label class="label2">
+                    <view style="color: {{item.type?'#81be48':'#f88'}}">
+            {{item.type?'+':'-'}}{{item.money/100}}元
+          </view>
+                </label>
+            </view>
+        </view>
+        <view class="noRecord" wx:else>
+            <text>{{tip}}</text>
+        </view>
+    </view>
+</view>

@@ -1,0 +1,57 @@
+<view catchtap="itemTap" class="card-class gf-card {{isLastItem?'last-card':''}} {{isLink?'gf-card--access':''}}" style="{{customStyle}}">
+    <view class="gf-card__image" wx:if="{{image}}">
+        <image src="{{image}}"></image>
+    </view>
+    <slot name="title"></slot>
+    <view class="gf-card__bd">
+        <view class="gf-card_type">
+            <view class="gf-card_audiotext" wx:if="{{messageType==='audio'}}">音频</view>
+            <view wx:elif="{{messageType==='vedio'}}">视频</view>
+            <view class="{{messageType==='audio'?'gf-card__audiotitle':'gf-card__title'}}" wx:if="{{title}}">
+        {{title}}
+      </view>
+        </view>
+        <view class="gf-card_title" wx:if="{{messageType==='audio'}}">
+            <view class="gf-card_audioDes">
+                <view class="gf-card_left">
+                    <view wx:if="{{author.length>0}}">
+                        <image src="{{item.thumbUrl?item.thumbUrl:'./icon-default.png'}}" wx:for="{{author}}" wx:key="{{item}}"></image>
+                    </view>
+                    <view wx:else>
+                        <image src="./icon-default.png"></image>
+                    </view>
+                </view>
+                <view class="gf-card_middle">
+                    <view class="gf-card_middle_audiodes">
+                        <view wx:for="{{author}}" wx:key="{{item}}">
+                            <text class="gf-card_middle_name">{{item.name}}</text>
+                            <text>{{item.title}}</text>
+                        </view>
+                    </view>
+                    <view class="gf-card_middle_time">
+                        <image src="./icon-time.png"></image>
+                        <text>{{timeLength}}</text>
+                    </view>
+                </view>
+                <view class="gf-card_right">
+                    <image src="./icon-play.png"></image>
+                </view>
+            </view>
+        </view>
+        <view class="gf-card__abstract" wx:if="{{abstract&&messageType==='message'}}">
+      {{abstract}}
+    </view>
+        <view class="gf-card__info">
+            <view>
+                <text class="gf-card__tag" wx:if="{{tag}}">{{tag}}</text>
+                <image class="gf-card_ear" src="./icon-ear.png" wx:if="{{messageType==='audio'}}"></image>
+                <image class="gf-card_eyes" src="./icon-eyes.png" wx:else></image>
+                <text class="gf-card__label" wx:if="{{label}}">{{label}}</text>
+            </view>
+            <view>
+                <text class="gf-card__extra" wx:if="{{extra}}">{{extra}}</text>
+            </view>
+        </view>
+        <slot></slot>
+    </view>
+</view>

@@ -1,0 +1,49 @@
+<view class="house-type-wrapper house-detail _div data-v-43cccc92" wx:if="{{!!houseType}}">
+    <view class="title hz-style _h3 data-v-43cccc92">户型&配套</view>
+    <view class="content _div data-v-43cccc92">
+        <view class="hz-info _div data-v-43cccc92">
+            <view class="info-block _div data-v-43cccc92">
+                <view class="info-title _h5 data-v-43cccc92">面积</view>
+                <view class="value _p data-v-43cccc92">{{houseType.houseInfo.area}}</view>
+            </view>
+            <view class="info-block _div data-v-43cccc92">
+                <view class="info-title _h5 data-v-43cccc92">户型</view>
+                <view class="value _p data-v-43cccc92">{{houseType.houseInfo.type}}</view>
+            </view>
+            <view class="info-block _div data-v-43cccc92">
+                <view class="info-title _h5 data-v-43cccc92">楼层</view>
+                <view class="value _p data-v-43cccc92">{{houseType.houseInfo.floor}}</view>
+            </view>
+            <view class="info-block _div data-v-43cccc92">
+                <view class="info-title _h5 data-v-43cccc92">朝向</view>
+                <view class="value _p data-v-43cccc92">{{houseType.houseInfo.face}}</view>
+            </view>
+        </view>
+        <view bindtap="__e" class="type-image _div data-v-43cccc92" data-event-opts="{{[ [ 'tap',[ [ 'handleTypeImageClick',['$0'],['houseType.hx_photos_big.__$n0'] ] ] ] ]}}">
+            <image alt="hx_photo" binderror="__e" class="_img data-v-43cccc92" data-event-opts="{{[ [ 'error',[ [ 'handleError',['$event'] ] ] ] ]}}" mode="widthFix" src="{{houseType.hx_photos_big[0]}}"></image>
+        </view>
+        <view class="weui-tab type-tab hz-style _div data-v-43cccc92">
+            <scroll-view class="weui-navbar data-v-43cccc92" scrollX="{{true}}">
+                <view class="type-navbar _div data-v-43cccc92">
+                    <view bindtap="__e" class="{{['nav-item _div data-v-43cccc92',activeIndex==index?'weui-bar__item_on':'']}}" data-event-opts="{{[ [ 'tap',[ [ 'tabClick',['$event'] ] ] ] ]}}" id="{{index}}" wx:for="{{houseType.space}}" wx:key="index">
+                        <view class="weui-navbar__title _div data-v-43cccc92">{{item.name}}</view>
+                    </view>
+                </view>
+            </scroll-view>
+            <view class="weui-tab__panel type-panel _div data-v-43cccc92">
+                <view class="weui-tab__content _div data-v-43cccc92" hidden="{{activeIndex!=i}}" wx:for="{{houseType.space}}" wx:for-index="i" wx:key="i">
+                    <view class="info hz-style-color _div data-v-43cccc92">
+                        <label class="area _span data-v-43cccc92">{{'面积 · '+item.area+'㎡'}}</label>
+                        <label class="face _span data-v-43cccc92">{{'朝向 · '+item.face}}</label>
+                    </view>
+                    <view class="config-icons _div data-v-43cccc92">
+                        <view class="config-icon _div data-v-43cccc92" wx:for="{{item.config}}" wx:for-index="j" wx:for-item="icon" wx:key="j">
+                            <image alt="{{icon.name}}" class="icon _img data-v-43cccc92" src="{{icon.icon}}"></image>
+                            <label class="name _span data-v-43cccc92">{{icon.name}}</label>
+                        </view>
+                    </view>
+                </view>
+            </view>
+        </view>
+    </view>
+</view>

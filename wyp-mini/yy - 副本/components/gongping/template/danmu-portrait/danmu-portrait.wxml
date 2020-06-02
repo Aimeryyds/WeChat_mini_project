@@ -1,0 +1,10 @@
+<template name="danmu-portrait">
+    <cover-view class="scroll-view" hidden="{{!submodules.danmu}}">
+        <template is="gongping-danmu-cover" data="{{gongpingInfo:gongpingInfo,bottomPosition:bottomPosition}}"></template>
+    </cover-view>
+    <cover-view class="combo-wrapper combo-content" hidden="{{!submodules.combo}}">
+        <template is="gongping-combo-cover" data="{{sourceA:sourceA,sourceB:sourceB}}"></template>
+    </cover-view>
+</template>
+<import src="../../template/gongping-danmu/gongping-danmu-cover.wxml"></import>
+<import src="../../template/gongping-combo/gongping-combo-cover.wxml"></import>

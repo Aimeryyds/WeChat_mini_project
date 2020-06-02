@@ -1,0 +1,75 @@
+<template name="677cf3bb">
+    <view class="_div data-v-6efdfee0 course-share">
+        <view class="_div data-v-6efdfee0 poster">
+            <view class="_div data-v-6efdfee0 banner-container">
+                <image class="_img data-v-6efdfee0 banner" src="{{backgroundUrl}}"></image>
+                <view class="_div data-v-6efdfee0 mask"></view>
+            </view>
+            <view class="_div data-v-6efdfee0 placeholder"></view>
+            <view class="_div data-v-6efdfee0 content-bg">
+                <view class="_div data-v-6efdfee0 header">
+                    <view class="_div data-v-6efdfee0 check-in">
+                        <view class="_div data-v-6efdfee0 date">{{date}}</view>
+                        <view class="_div data-v-6efdfee0 days">
+                            <view class="_div data-v-6efdfee0">{{checkinDaysNum}}</view>
+                            <view class="_div data-v-6efdfee0 decoration"></view>
+                        </view>
+                        <view class="_div data-v-6efdfee0 description">扇贝打卡天数</view>
+                    </view>
+                    <view class="_div data-v-6efdfee0 user">
+                        <view class="_div data-v-6efdfee0">正在「扇贝阅读」精读原版书</view>
+                        <image class="_img data-v-6efdfee0 avatar" src="{{avatar}}"></image>
+                        <view class="_div data-v-6efdfee0 nickname">{{nickname}}</view>
+                    </view>
+                </view>
+                <view class="_div data-v-6efdfee0 book">
+                    <image class="_img data-v-6efdfee0 cover" src="{{bookCover}}"></image>
+                    <view class="_div data-v-6efdfee0 meta">
+                        <view class="_div data-v-6efdfee0 book-name">{{bookNameEn}}</view>
+                        <view class="_div data-v-6efdfee0 book-title">{{bookNameCn}}</view>
+                        <view class="_div data-v-6efdfee0 article-title">{{articleTitle}}</view>
+                    </view>
+                    <image class="_img data-v-6efdfee0 decoration" src="https://media-image1.baydn.com/storage_media_image/kvhfgj/89934a8fbd3c3208eb82454f5c21ffe1.d268eae5502bf1c82a3e2701cb95dece.png"></image>
+                </view>
+                <view class="_div data-v-6efdfee0 stats">
+                    <view class="_div data-v-6efdfee0">
+                        <view class="_div data-v-6efdfee0 number">{{wordCount}}</view>
+                        <view class="_div data-v-6efdfee0 text">阅读字数</view>
+                    </view>
+                    <view class="_div data-v-6efdfee0">
+                        <view class="_div data-v-6efdfee0 number">{{time}}</view>
+                        <view class="_div data-v-6efdfee0 text">学习时长</view>
+                    </view>
+                    <view class="_div data-v-6efdfee0">
+                        <view class="_div data-v-6efdfee0 number">{{studyDays}}</view>
+                        <view class="_div data-v-6efdfee0 text">学习天数</view>
+                    </view>
+                </view>
+                <view class="_div data-v-6efdfee0 article">
+                    <view class="_div data-v-6efdfee0 title">本章回顾</view>
+                    <view class="_div data-v-6efdfee0 item-list">
+                        <view class="_div data-v-6efdfee0 item" key="{{point}}" wx:for="{{keyPoints}}" wx:for-item="point" wx:key="point">{{point}}</view>
+                    </view>
+                </view>
+            </view>
+        </view>
+        <view class="_div data-v-6efdfee0 btn-container" wx:if="{{!isShared}}">
+            <button bindtap="handleProxy" class="_button data-v-6efdfee0 btn flex-vhc left" data-comkey="{{$k}}" data-eventid="{{'0'}}">返回目录</button>
+            <button bindtap="handleProxy" class="_button data-v-6efdfee0 btn flex-vhc right" data-comkey="{{$k}}" data-eventid="{{'1'}}">分享</button>
+        </view>
+        <view class="_div data-v-6efdfee0 modal" wx:if="{{isModalShow}}">
+            <view bindtap="handleProxy" class="_div data-v-6efdfee0 modal-mask" data-comkey="{{$k}}" data-eventid="{{'4'}}">
+                <view catchtap="handleProxy" class="_div data-v-6efdfee0 modal-container" data-comkey="{{$k}}" data-eventid="{{'3'}}">
+                    <button class="_button data-v-6efdfee0 option" openType="share">
+                        <image class="_img data-v-6efdfee0 icon" src="https://media-image1.baydn.com/storage_media_image/kvhfgj/ef772ecc617dfec37a24f531303aa5ec.b8024cb02ecebd42e91cb964e217b697.png"></image>
+                        <view class="_div data-v-6efdfee0 text">微信好友</view>
+                    </button>
+                    <button bindtap="handleProxy" class="_button data-v-6efdfee0 option" data-comkey="{{$k}}" data-eventid="{{'2'}}">
+                        <image class="_img data-v-6efdfee0 icon" src="https://media-image1.baydn.com/storage_media_image/kvhfgj/e222186d29d432c73f69b88bef302ad8.4e77a6cb375d46e5a080f7d3961cad8e.png"></image>
+                        <view class="_div data-v-6efdfee0 text">生成海报</view>
+                    </button>
+                </view>
+            </view>
+        </view>
+    </view>
+</template>

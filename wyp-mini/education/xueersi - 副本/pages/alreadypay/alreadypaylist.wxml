@@ -1,0 +1,76 @@
+<view class="already-pay-list" wx:if="{{paidList.length}}">
+    <view class="list-wrap">
+        <view class="list-item" wx:for="{{paidList}}" wx:key="item">
+            <view bindtap="moreDetail" class="already-deatail" data-wpymoredetail-a="{{index}}">
+                <view class="data-box" wx:if="{{item.lastPayTime}}">
+                    付款时间：{{item.lastPayTime}}
+                </view>
+                <view class="course-box">
+                    <view class="course-info-wrap">
+                        <view class="title">
+                            <text class="'course-type-icon' {{$courseInfo$classType[item.courseType].icon}}" hidden="{{!item.courseType}}">{{$courseInfo$classType[item.courseType].text}}</text>
+                            <text class="class-name">{{item.className}}</text>
+                        </view>
+                        <view class="info-list">
+                            <view class="item" hidden="{{item.courseType===1||!item.address}}">
+                                <image class="icon" mode="widthFix" src="../../common/img/address.png"></image>
+                                <view class="text-right">{{item.address}}</view>
+                            </view>
+                            <view class="item" hidden="{{!item.classTime}}">
+                                <image class="icon" mode="widthFix" src="../../common/img/time.png"></image>
+                                <view class="text-right">{{item.classTime}}</view>
+                            </view>
+                            <view class="item" hidden="{{!item.timeArea}}">
+                                <image class="icon" mode="widthFix" src="../../common/img/date.png"></image>
+                                <view class="text-right">{{item.timeArea}}</view>
+                            </view>
+                            <view class="item" wx:if="{{item.teacherList||item.tutorList}}">
+                                <image class="icon" mode="widthFix" src="../../common/img/person.png"></image>
+                                <view class="text-right">
+                                    <view class="text-right-block" wx:if="{{item.teacherList.length&&!item.strengTutor}}">
+                                        <text class="teacher-title">授课:</text>
+                                        <text class="teacher-item" wx:for="{{item.teacherList}}" wx:for-index="_mun1" wx:for-item="_tea1" wx:key="_mun1">{{_tea1.name}}</text>
+                                    </view>
+                                    <view class="text-right-block" wx:if="{{item.tutorList.length&&item.classType!==4}}">
+                                        <text class="teacher-title">{{item.strengTutor?'老师':'辅导'}}:</text>
+                                        <text class="teacher-item" wx:for="{{item.tutorList}}" wx:for-index="_mun2" wx:for-item="_tea2" wx:key="_tea2">{{_tea2.name}}</text>
+                                    </view>
+                                </view>
+                            </view>
+                        </view>
+                        <view class="price-wrap">
+                            <text class="info-price" wx:if="{{item.coursePrice}}">{{item.coursePrice}}</text>
+                            <text class="surplus-class" wx:if="{{item.surplusClassNum}}">剩余{{item.surplusClassNum}}节课</text>
+                        </view>
+                    </view>
+                    <view class="price fr" wx:if="{{!item.registStagesList}}">¥<span class="price-number">{{item.claPrice}}</span>
+                    </view>
+                    <view class="course-period-item" wx:for="{{item.registStagesList}}" wx:for-index="i" wx:for-item="_item" wx:key="i">
+                        <view class="info-left">
+                            <view class="period-name">
+                                <text>{{_item.stagesName}}</text>
+                            </view>
+                            <view class="date-bottom">
+                                <image class="icon" src="../../common/img/date.png"></image>
+                                <text class="text">{{_item.endCurriculumTime}}-{{_item.startCurriculumTime}}</text>
+                            </view>
+                        </view>
+                        <view class="price-right">{{_item.price}}</view>
+                    </view>
+                </view>
+            </view>
+            <view class="check-class-box" wx:if="{{item.courseType===1}}">
+                <view bindtap="hoveToClass" class="btn">如何上课</view>
+            </view>
+        </view>
+    </view>
+</view>
+<view class="no-list-tip" wx:else>您还没有已缴费班级，缴费成功后显示在这里哦～</view>
+<view bindtap="$gohomeview$backfunc" class="goHome" wx:if="{{isShare}}">
+    <text class="iconfont icon-home"></text>
+</view>
+<view animation="{{$talToast$animationData}}" class="tal-toast-container" style="top:{{$talToast$vertical}}%;" wx:if="{{$talToast$toastVisible}}">
+    <view class="tal-toast">
+        <text>{{$talToast$toastMessage}}</text>
+    </view>
+</view>

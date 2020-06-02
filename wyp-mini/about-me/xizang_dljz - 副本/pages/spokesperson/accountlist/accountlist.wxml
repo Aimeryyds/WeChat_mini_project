@@ -1,0 +1,37 @@
+<view class="container">
+    <view class="account-list">
+        <view bindtap="choose" class="account-item" id="1" wx:if="{{account.openWechat==1}}">
+            <image class="bg" src="/images/spokesperson/withdraw/bg_wechat.png"></image>
+            <view class="item-content">
+                <image src="/images/spokesperson/withdraw/icon_{{payway==1?'sel':'nor'}}_light.png"></image>
+                <view class="info">
+                    <text>微信零钱账号</text>
+                    <view>{{userInfo.wxAuthname?userInfo.wxAuthname:'暂未添加'}}</view>
+                </view>
+                <view catchtap="modify" class="btn" id="1">{{userInfo.wxAuthname?'修改':'添加'}}</view>
+            </view>
+        </view>
+        <view bindtap="choose" class="account-item" id="2" wx:if="{{account.openAlipay==1}}">
+            <image class="bg" src="/images/spokesperson/withdraw/bg_alipay.png"></image>
+            <view class="item-content">
+                <image src="/images/spokesperson/withdraw/icon_{{payway==2?'sel':'nor'}}_light.png"></image>
+                <view class="info">
+                    <text>支付宝账号</text>
+                    <view>{{userInfo.alipayAccount?userInfo.alipayAccount:'暂未添加'}}</view>
+                </view>
+                <view catchtap="modify" class="btn" id="2">{{userInfo.alipayAccount?'修改':'添加'}}</view>
+            </view>
+        </view>
+        <view bindtap="choose" class="account-item" id="3" wx:if="{{account.openBank==1}}">
+            <image class="bg" src="/images/spokesperson/withdraw/bg_card.png"></image>
+            <view class="item-content">
+                <image src="/images/spokesperson/withdraw/icon_{{payway==3?'sel':'nor'}}_light.png"></image>
+                <view class="info">
+                    <text>银行卡账号</text>
+                    <view>{{userInfo.bankAccount?userInfo.bankAccount:'暂未添加'}}</view>
+                </view>
+                <view catchtap="modify" class="btn" id="3">{{userInfo.bankAccount?'修改':'添加'}}</view>
+            </view>
+        </view>
+    </view>
+</view>

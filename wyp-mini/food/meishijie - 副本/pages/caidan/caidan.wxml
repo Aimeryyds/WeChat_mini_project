@@ -1,0 +1,28 @@
+<navigation-bar enable="{{enable}}" title="菜单"></navigation-bar>
+<view class="sancanlistw" style="padding-top:{{barHeight}}px">
+    <view>
+        <view bindtap="pageReload" class="cplist_nodata" wx:if="{{requeseFail}}">{{requeseFailTips}}</view>
+        <view class="caidanitem" wx:for="{{caidanResult}}" wx:for-index="fi_i" wx:key="key">
+            <view wx:if="{{fi_i==3}}">
+                <view class="caidan_ad">
+                    <ad adTheme="white" adType="video" unitId="adunit-00659ddfeaa56e5e"></ad>
+                </view>
+            </view>
+            <navigator hoverClass="navigator-hover" url="/pages/cd_content/cd_content?cid={{item.id}}&&title={{item.title}}">
+                <view class="title">{{item.title}}<view class="am">{{item.amount}}篇菜谱</view>
+                </view>
+                <view class="cpw">
+                    <view class="recipeitem">
+                        <view class="cpitemw" wx:if="{{i<3}}" wx:for="{{item.last_items_img}}" wx:for-index="i" wx:key="key">
+                            <image src="{{item}}"></image>
+                        </view>
+                    </view>
+                </view>
+            </navigator>
+        </view>
+        <view class="bottomline" wx:if="{{!hasNextPage}}">- 这就是我的底线了 -</view>
+    </view>
+</view>
+<loading hidden="{{requeseDone||requeseFail||noData}}">
+ 加载中...
+</loading>

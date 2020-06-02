@@ -1,0 +1,126 @@
+.cart-dialog__mask {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    z-index: 10;
+    background: rgba(0,0,0,0.7);
+    display: none;
+}
+
+.cart-dialog__container {
+    position: fixed;
+    bottom: 0;
+    width: 750rpx;
+    background: white;
+    transform: translateY(150%);
+    transition: all 0.4s ease;
+    z-index: 11;
+}
+
+.cart-dialog--show .cart-dialog__container {
+    transform: translateY(0);
+}
+
+.cart-dialog--show .cart-dialog__mask {
+    display: block;
+}
+
+.cart_popup--header {
+    border-bottom: 1px solid #e5e5e5;
+    display: flex;
+    justify-content: flex-start;
+    padding: 24rpx;
+    align-items: center;
+}
+
+.cart_popup--header-content {
+    height: 120rpx;
+    margin-left: 24rpx;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: flex-start;
+}
+
+.cart_popup--spec {
+    margin-top: 24rpx;
+    padding: 0 24rpx;
+    display: flex;
+    align-items: flex-start;
+    justify-content: flex-start;
+}
+
+.cart_popup--spec-values {
+    flex: 1;
+    display: flex;
+    margin-left: 24rpx;
+    flex-wrap: wrap;
+}
+
+.cart_popup--spec-value {
+    margin: 0 24rpx 24rpx 0;
+    border-radius: 4rpx;
+    background-color: #e5e5e5;
+    border: 1px solid #e5e5e5;
+    padding: 6rpx 24rpx;
+}
+
+.spec-value--disabled {
+    border: 1px dashed #ccc;
+    background-color: #fff;
+    color: #ccc;
+}
+
+.spec-value--selected {
+    border: 1px solid #f22;
+    background-color: #f22;
+    color: #fff;
+}
+
+.cart_popup--num {
+    margin-top: 24rpx;
+    padding: 0 24rpx;
+    display: flex;
+    align-items: flex-start;
+    justify-content: flex-start;
+}
+
+.cart_popup--num-content {
+    margin-left: 24rpx;
+    display: flex;
+    align-items: center;
+}
+
+.cart_popup--num-quantity {
+    font-size: 24rpx;
+    text-align: center;
+    width: 48rpx;
+}
+
+.cart_popup--footer {
+    font-size: 32rpx;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background-color: #fff;
+    border-top: 1px solid #e5e5e5;
+    bottom: 0;
+    height: 112rpx;
+    padding: 0 40rpx;
+}
+
+.cart_popup--footer-btn {
+    width: 240rpx;
+    height: 80rpx;
+    line-height: 2.5;
+    margin-right: 24rpx;
+    font-size: 32rpx;
+}
+
+.zan-btn--danger {
+    background-color: #f22;
+    border-color: #e33;
+    color: #fff;
+}

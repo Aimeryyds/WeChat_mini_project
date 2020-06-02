@@ -1,0 +1,17 @@
+<view class="container">
+    <scroll-view enableBackToTop scrollY bindscroll="handlescroll" bindscrolltolower="lower" scrollTop="{{scrollTop}}" style="width:100%;height: 100vh;">
+        <view class="order-list" wx:for="{{orderList}}">
+            <view class="order-list__info">
+                <view>{{item.nickName}}</view>
+                <view class="order-list--modif">{{item.createdTime}}</view>
+                <view class="order-list--modif">订单编号:{{item.orderNo}}</view>
+            </view>
+            <view>
+                <view class="order-list__money">金额:<text>¥</text>{{item.total}}</view>
+                <view class="order-list__commission">佣金:  ¥<text>{{item.amount}}</text>
+                </view>
+            </view>
+        </view>
+        <view class="noData" wx:if="{{orderList.length==0}}">暂无数据</view>
+    </scroll-view>
+</view>

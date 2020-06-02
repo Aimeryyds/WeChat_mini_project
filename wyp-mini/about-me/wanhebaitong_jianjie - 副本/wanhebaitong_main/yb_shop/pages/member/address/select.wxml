@@ -1,0 +1,25 @@
+<loading hidden="{{show}}">正在加载</loading>
+<view class="page" wx:if="{{show}}">
+    <block wx:if="{{list.length>0}}">
+        <view class="fui-list-group" wx:for="{{list}}">
+            <view class="fui-list address-item">
+                <view bindtap="select" class="fui-list-media" data-index="{{index}}">
+                    <radio checked="{{item.is_default>0?true:false}}" class="zoom-70" color="#fd5454" name="default"></radio>
+                </view>
+                <view bindtap="select" class="fui-list-inner" data-index="{{index}}">
+                    <view class="title">{{item.consigner}} {{item.phone}}</view>
+                    <view class="text">{{item.province}} {{item.city}} {{item.district}} {{item.address}}</view>
+                </view>
+            </view>
+        </view>
+    </block>
+    <view class="fui-loading empty" wx:if="{{list.length<1&&loaded}}">
+        <view class="text">没有数据</view>
+    </view>
+    <view class="fui-navbar">
+        <navigator class="btn-danger" hoverClass="none" openType="redirect" style="background:{{config.selectedColor!='#000000'?config.selectedColor:config.background}};color:{{config.selectedColor=='#000000'&&config.font_color=='black'?'#000000':'#ffffff'}};border:1px solid {{config.selectedColor!='#000000'?config.selectedColor:config.background}};" url="/yb_shop/pages/member/address/post?type=add&order=1">
+            <image class="image-48" src="/yb_shop/static/images/icon-white/add.png"></image>
+            <text>添加收货地址</text>
+        </navigator>
+    </view>
+</view>

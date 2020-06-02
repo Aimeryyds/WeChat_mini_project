@@ -1,0 +1,40 @@
+<view class="loading" wx:if="{{loading}}">
+    <image class="loading_img" src="../../image/loading-32-32.gif"></image>
+</view>
+<view class="loading_fail" wx:if="{{loading_fail}}"></view>
+<view class="{{loading_ok?'':'hidden'}}">
+    <view class="addevent1">选择参与的活动</view>
+    <view class="addevent2">
+        <text>点图片可查看活动详情，点此</text>
+        <text bindtap="do_cancle" style="color:#ff6767">取消选择</text>
+    </view>
+    <view class="elist mt10">
+        <block wx:for="{{events}}" wx:for-index="idx" wx:key="events">
+            <view class="elist_item" wx:if="{{!item.childlist}}">
+                <navigator class="elist_img" url="/pages/webview/webview?src={{item.address}}">
+                    <image src="{{item.pic}}"></image>
+                </navigator>
+                <view bindtap="do_event" class="elist_subject" data-idx="{{idx}}">
+                    <text>{{item.subject}}</text>
+                </view>
+            </view>
+            <block wx:if="{{item.childlist.length>0}}">
+                <view class="elist_item">
+                    <navigator class="elist_img" url="/pages/webview/webview?src={{item.address}}">
+                        <image src="{{item.pic}}"></image>
+                    </navigator>
+                    <view bindtap="do_show" class="elist_subject" data-idx="{{idx}}" data-show="{{item.show}}">
+                        <text>{{item.subject}}</text>
+                    </view>
+                </view>
+                <block wx:if="{{item.show==1}}">
+                    <view class="elist_item2" wx:for="{{item.childlist}}" wx:for-index="idx2" wx:for-item="item2" wx:key="events2">
+                        <view bindtap="do_event2" class="elist_subject" data-idx="{{idx}}" data-idx2="{{idx2}}">
+                            <text>{{item2.subject}}</text>
+                        </view>
+                    </view>
+                </block>
+            </block>
+        </block>
+    </view>
+</view>

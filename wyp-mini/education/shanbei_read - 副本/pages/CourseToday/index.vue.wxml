@@ -1,0 +1,36 @@
+<template name="4df81ec6">
+    <view class="_div data-v-3a07fd72 {{isHideTodayGuide?'course-today':'course-today show-guide'}}">
+        <swiper class="_swiper data-v-3a07fd72 swiper" indicatorDots="{{true}}" nextMargin="21px" previousMargin="40px">
+            <view class="_div data-v-3a07fd72" key="{{index}}" wx:for="{{expList}}" wx:for-item="exp" wx:key="index">
+                <swiper-item class="_swiper-item data-v-3a07fd72">
+                    <view class="_div data-v-3a07fd72 swiper-item-last" wx:if="{{index===expList.length-1}}">
+                        <view class="_div data-v-3a07fd72 title">·小调查</view>
+                        <view class="_div data-v-3a07fd72 question">你感觉今天有收获吗？</view>
+                        <radio-group bindchange="handleProxy" class="_radio-group data-v-3a07fd72 radio-group option-list" data-comkey="{{$k}}" data-eventid="{{'0-'+index}}">
+                            <view class="_div data-v-3a07fd72 radio" key="{{idx}}" wx:for="{{optionList}}" wx:for-index="idx" wx:for-item="opt" wx:key="idx">
+                                <radio checked="{{opt.checked}}" class="_radio data-v-3a07fd72" color="#ffa372" value="{{opt.value}}">{{opt.text}}</radio>
+                            </view>
+                        </radio-group>
+                        <button bindtap="handleProxy" class="_button data-v-3a07fd72 flex-vhc" data-comkey="{{$k}}" data-eventid="{{'1-'+index}}">完成</button>
+                    </view>
+                    <view bindtap="handleProxy" class="_div data-v-3a07fd72 swiper-item-hide" data-comkey="{{$k}}" data-eventid="{{'2-'+index}}" wx:elif="{{exp.resIsShow}}">
+                        <view class="_div data-v-3a07fd72 progress">{{index+1}}/{{expList.length-1}}</view>
+                        <view class="_div data-v-3a07fd72">
+                            <view class="_div data-v-3a07fd72 cn">{{exp.interpretation}}</view>
+                            <view class="_div data-v-3a07fd72 en">{{exp.expression}}</view>
+                        </view>
+                    </view>
+                    <view bindtap="handleProxy" class="_view data-v-3a07fd72 swiper-item-show" data-comkey="{{$k}}" data-eventid="{{'3-'+index}}" wx:else>
+                        <view class="_div data-v-3a07fd72 progress">{{index+1}}/{{expList.length-1}}</view>
+                        <view class="_div data-v-3a07fd72 content">{{exp.interpretation}}</view>
+                        <view class="_div data-v-3a07fd72 tip">
+                            <view class="_div data-v-3a07fd72">先回想</view>
+                            <view class="_div data-v-3a07fd72">再点击卡片查看释义哦～</view>
+                        </view>
+                    </view>
+                </swiper-item>
+            </view>
+        </swiper>
+        <image bindtap="handleProxy" class="_img data-v-3a07fd72 guide" data-comkey="{{$k}}" data-eventid="{{'4'}}" src="https://media-image1.baydn.com/storage_media_image/kvhfgj/425167065327db92a561c03e2fc69931.f7d6555ec0b63c6078363c0893fdd698.png" wx:if="{{!isHideTodayGuide}}"></image>
+    </view>
+</template>

@@ -1,0 +1,230 @@
+<import src="../common/footer.wxml"></import>
+<import src="../common/comment.wxml"></import>
+<import src="../common/simpleRecipe.wxml"></import>
+<import src="../common/mixrecommend.wxml"></import>
+<reloadView wx:if="{{showReloadView}}"></reloadView>
+<taskbarGuide wx:if="{{videoFileURL.length<=0}}"></taskbarGuide>
+<view class="recipe_container" wx:if="{{showPage}}">
+    <view bindtap="luckyMoneyDismiss" catchtouchmove="forbid" class="lucky-money-view" wx:if="{{showLuckyMoney&&showLuckyMoneyToggle}}">
+        <view catchtap="luckyMoneyDismiss" class="lucky-money-container">
+            <button bindgetuserinfo="luckyMoneyPressed" catchtap="luckyMoneyIntercept" class="lucky-money-button" openType="getUserInfo">
+                <image class="lucky-money-image" mode="aspectFit" src="{{activity.large_image}}"></image>
+            </button>
+            <image class="lucky-money-cancel" mode="aspectFit" src="../../images/alert_cancel.png"></image>
+        </view>
+    </view>
+    <view bindtap="negativeViewDismiss" catchtouchmove="forbid" class="navi-view" wx:if="{{showNegativeView}}">
+        <image class="navi-view-image" mode="aspectFit" src="{{activity.large_image}}"></image>
+        <image class="lucky-money-cancel" mode="aspectFit" src="../../images/alert_cancel.png"></image>
+    </view>
+    <view animation="{{animationData}}" class="recipe-purchase" wx:if="{{purchaseState!=2}}">
+        <text class="recipe-purchase-text">每天为你推荐最热菜谱</text>
+        <form reportSubmit bindsubmit="submitPurchase" class="recipe-purchase-form" wx:if="{{purchaseState==0}}">
+            <button class="recipe-purchase-apply" formType="submit" wx:if="{{logined}}">开启通知</button>
+            <button bindgetuserinfo="loginAction" class="recipe-purchase-apply" openType="getUserInfo" wx:if="{{!logined}}">开启通知</button>
+        </form>
+        <view class="recipe-purchase-view" wx:if="{{purchaseState==1}}">已开启</view>
+    </view>
+    <view style="min-height:100%; flex:1; background-color:white; padding-top:{{purchaseState==2?'0px':'86rpx'}}" wx:if="{{isIpad}}">
+        <view class="top-content" wx:if="{{!showError}}">
+            <view class="ipad-headline-container" style="background-image:url()">
+                <image class="ipad-headline-container-image" mode="aspectFill" src="{{imageURL}}"></image>
+                <video binderror="videoErrorCallback" class="ipad-headline-video" id="videoPlayer" poster="{{imageURL}}" src="{{videoFileURL}}" wx:if="{{videoFileURL.length>0}}"></video>
+                <image bindtap="videoPlay" class="ipad-video-play-button" src="/images/recipe_button_play.png" wx:elif="{{videoPageURL.length>0&&videoFileURL.length<=0}}"></image>
+                <image class="ipad-headline-image" mode="aspectFill" src="{{imageURL}}" wx:else></image>
+            </view>
+            <view>
+                <image bindtap="luckyMoneyShow" class="ipad-small-lucky-money-image" mode="aspectFit" src="{{activity.small_image}}" wx:if="{{logined&&showLuckyMoney&&!showLuckyMoneyToggle}}"></image>
+                <view class="ipad-title-label">{{recipeName}}</view>
+                <view class="ipad-brief-label">
+                    <text wx:if="{{viewsCount>0}}">{{viewsCount}}人浏览</text>
+                    <text wx:if="{{favosCount>0}}">·{{favosCount}}人收藏</text>
+                    <text wx:if="{{dishesCount>0}}">·{{dishesCount}}人做过</text>
+                </view>
+            </view>
+            <view class="ipad-author-view">
+                <image mode="aspectFill" src="{{authorAvatarURL}}"></image>
+                <view>{{authorNickname}}</view>
+            </view>
+            <view class="ipad-story-label">{{story}}</view>
+            <view class="ipad-ingredients-section-header" style="margin-bottom:32rpx" wx:if="{{ingredients.length>0}}">食材清单</view>
+            <view class="ipad-ingredient-cell" wx:for="{{ingredients}}" wx:key="index">
+                <view class="ipad-ingredient-cell-content">
+                    <view style="font-weight:bold">{{item.title}}</view>
+                    <view>{{item.note}}</view>
+                </view>
+            </view>
+            <view class="ipad-directions-section-header" style="margin-bottom:8rpx" wx:if="{{directions.length>0}}">烹饪步骤</view>
+            <view class="ipad-direction-cell" wx:for="{{directions}}" wx:key="index">
+                <image class="ipad-direction-cell-image" mode="aspectFill" src="{{item.image}}" wx:if="{{item.image.length>0}}"></image>
+                <view class="ipad-direction-cell-content">
+                    <span style="font-weight:bold;">{{item.position}}、</span>
+                    <span>{{item.content}}</span>
+                </view>
+            </view>
+            <view wx:if="{{tips}}">
+                <view class="ipad-tips-section-header">小贴士</view>
+                <view class="ipad-tips-content">{{tips}}</view>
+            </view>
+            <view class="ad_container" wx:if="{{tipCommercialId}}">
+                <ad adType="video" unitId="{{tipCommercialId}}"></ad>
+            </view>
+            <view wx:if="{{recipe.comments.length>0}}">
+                <view class="ipad-comments-section-header" style="margin-bottom:16rpx">评论</view>
+                <template is="ipad-comment-template" data="{{item:item,index:index}}" wx:for="{{recipe.comments}}" wx:key="key"></template>
+                <view bindtap="commentsMoreViewPressed" class="ipad-comments-more-view" wx:if="{{recipe.comments_count>recipe.comments.length}}">查看全部{{recipe.comments_count}}条评论</view>
+            </view>
+        </view>
+        <view class="no-recipe-container" wx:if="{{showError}}">
+            <image class="no-recipe-logo" src="/images/no-recipe-logo.png"></image>
+            <view class="no-recipe-text-one">菜谱审核中 无法查看</view>
+            <view class="no-recipe-text-two">看看“相关推荐”吧</view>
+        </view>
+        <view wx:if="{{recommends.length}}">
+            <view class="ipad-recommends-section-header" style="margin-bottom:32rpx">相关推荐</view>
+            <block wx:for="{{recommends}}" wx:key="key">
+                <view class="ipad-recipe-simple-item" wx:if="{{item.type==1}}">
+                    <template is="recommend-simple-recipe" data="{{...{recipe:item.recipe}}}"></template>
+                </view>
+                <view class="ad_container-item" wx:if="{{item.type==2}}">
+                    <view class="ad_container">
+                        <ad unitId="{{item.wx_commercial}}"></ad>
+                    </view>
+                </view>
+                <view class="ipad-recipe-normal-item" wx:if="{{item.type==3}}">
+                    <template is="recommend-normal-recipe" data="{{...{recipe:item.recipe}}}"></template>
+                </view>
+                <view class="ipad-recommend-simple-note" wx:if="{{item.type==4}}">
+                    <template is="recommend-simple-recipe" data="{{...{note:item.note}}}"></template>
+                </view>
+                <view class="ipad-recommend-normal-note" wx:if="{{item.type==5}}">
+                    <template is="recommend-normal-note" data="{{...{note:item.note}}}"></template>
+                </view>
+                <view class="ipad-recommend-small-recipe" wx:if="{{item.type==6}}">
+                    <template is="recommend-small-recipe" data="{{...{recipes:item.recipes}}}"></template>
+                </view>
+                <view class="ipad-recommend-small-note" wx:if="{{item.type==7}}">
+                    <template is="recommend-small-note" data="{{...{notes:item.notes}}}"></template>
+                </view>
+            </block>
+            <template is="menu-footer" data="{{footerState:footerState}}"></template>
+        </view>
+        <view class="ipad-view-bottom-margin" wx:else></view>
+        <view class="recipe-footer" style="height:{{isIpx?'134rpx':'100rpx'}}"></view>
+    </view>
+    <view style="min-height:100%; flex:1;background-color:white; padding-top: {{purchaseState==2?'0px':'86rpx'}}" wx:else>
+        <view class="top-content" wx:if="{{!showError}}">
+            <view class="headline-container" style="background-image:url({{imageURL}})">
+                <video bindended="onVideoPlayEnd" binderror="videoErrorCallback" class="headline-video" id="videoPlayer" poster="{{imageURL}}" src="{{videoFileURL}}" wx:if="{{videoFileURL.length>0}}"></video>
+                <image bindtap="videoPlay" class="video-play-button" src="/images/recipe_button_play.png" wx:if="{{videoPageURL.length>0&&videoFileURL.length<=0}}"></image>
+            </view>
+            <view>
+                <image bindtap="luckyMoneyShow" class="small-lucky-money-image" mode="aspectFit" src="{{activity.small_image}}" wx:if="{{logined&&showLuckyMoney&&!showLuckyMoneyToggle}}"></image>
+                <view class="title-label">{{recipeName}}</view>
+                <view class="brief-label">
+                    <text wx:if="{{viewsCount>0}}">{{viewsCount}}人浏览</text>
+                    <text wx:if="{{favosCount>0}}">·{{favosCount}}人收藏</text>
+                    <text wx:if="{{dishesCount>0}}">·{{dishesCount}}人做过</text>
+                </view>
+            </view>
+            <view class="story-label">{{story}}</view>
+            <view class="author-view">
+                <image mode="aspectFill" src="{{authorAvatarURL}}"></image>
+                <view>{{authorNickname}}</view>
+            </view>
+            <view class="ingredients-section-header" wx:if="{{ingredients.length>0}}">— 食材清单 —</view>
+            <view class="ingredient-cell" wx:for="{{ingredients}}" wx:key="index">
+                <view class="ingredient-cell-content">
+                    <view>{{item.title}}</view>
+                    <view>{{item.note}}</view>
+                </view>
+                <view class="ingredients-cell-seperator"></view>
+            </view>
+            <view class="directions-section-header" wx:if="{{directions.length>0}}">— 烹饪步骤 —</view>
+            <view class="direction-cell" wx:for="{{directions}}" wx:key="index">
+                <image class="direction-cell-image" mode="aspectFill" src="{{item.image}}" wx:if="{{item.image.length>0}}"></image>
+                <view class="direction-cell-content">
+                    <span style="font-weight:bold;">{{item.position}} </span>
+                    <span> {{item.content}}</span>
+                </view>
+            </view>
+            <view wx:if="{{tips}}">
+                <view class="tips-section-header">— 小贴士 —</view>
+                <view class="tips-content">{{tips}}</view>
+            </view>
+            <view class="ad_container" wx:if="{{tipCommercialId}}">
+                <ad adType="video" unitId="{{tipCommercialId}}"></ad>
+            </view>
+            <view wx:if="{{recipe.comments.length>0}}">
+                <view class="comments-section-header">— 评论 —</view>
+                <template is="comment-template" data="{{item:item,index:index}}" wx:for="{{recipe.comments}}" wx:key="key"></template>
+                <view bindtap="commentsMoreViewPressed" class="comments-more-view" wx:if="{{recipe.comments_count>recipe.comments.length}}">查看全部{{recipe.comments_count}}条评论</view>
+            </view>
+        </view>
+        <view class="no-recipe-container" wx:if="{{showError}}">
+            <image class="no-recipe-logo" src="/images/no-recipe-logo.png"></image>
+            <view class="no-recipe-text-one">菜谱审核中 无法查看</view>
+            <view class="no-recipe-text-two">看看“相关推荐”吧</view>
+        </view>
+        <view wx:if="{{recommends.length}}">
+            <view class="recommends-section-header">— 相关推荐 —</view>
+            <block wx:for="{{recommends}}" wx:key="key">
+                <view class="recipe-simple-item" wx:if="{{item.type==1}}">
+                    <template is="recommend-simple-recipe" data="{{...{recipe:item.recipe}}}"></template>
+                </view>
+                <view class="ad_container-item" wx:if="{{item.type==2}}">
+                    <view class="ad_container">
+                        <ad unitId="{{item.wx_commercial}}"></ad>
+                    </view>
+                </view>
+                <view class="recipe-normal-item" wx:if="{{item.type==3}}">
+                    <template is="recommend-normal-recipe" data="{{...{recipe:item.recipe}}}"></template>
+                </view>
+                <view class="note-simple-item" wx:if="{{item.type==4}}">
+                    <template is="recommend-simple-note" data="{{...{note:item.note}}}"></template>
+                </view>
+                <view class="note-normal-item" wx:if="{{item.type==5}}">
+                    <template is="recommend-normal-note" data="{{...{note:item.note}}}"></template>
+                </view>
+                <view class="recipe-small-item" wx:if="{{item.type==6}}">
+                    <template is="recommend-small-recipe" data="{{...{recipes:item.recipes}}}"></template>
+                </view>
+                <view class="note-small-item" wx:if="{{item.type==7}}">
+                    <template is="recommend-small-note" data="{{...{notes:item.notes}}}"></template>
+                </view>
+            </block>
+            <template is="menu-footer" data="{{footerState:footerState}}"></template>
+        </view>
+        <view class="recipe-footer" style="height:{{isIpx?'134rpx':'100rpx'}}"></view>
+    </view>
+    <button bindtap="returnToHome" class="back-button" style="bottom:{{isIpx?'34rpx':'0rpx'}}">
+        <text class="back-button-text">首页</text>
+    </button>
+    <button bindtap="returnToHome" class="back-button-bottom" hidden="{{!isIpx}}"></button>
+    <button bindtap="commentButtonPressed" class="comment-button" style="bottom:{{isIpx?'34rpx':'0rpx'}}">
+        <text class="comment-button-text">评论</text>
+    </button>
+    <button bindtap="commentButtonPressed" class="comment-button-bottom" hidden="{{!isIpx}}"></button>
+    <button bindgetuserinfo="collectionActionPressed" class="collection_button" openType="getUserInfo" style="bottom:{{isIpx?'34rpx':'0rpx'}}">
+        <text class="collection_text" style="color:{{collected?'#fff':'#fff'}}">{{collected?'已收藏':'收藏'}}</text>
+    </button>
+    <view bindtap="collectionActionPressed" class="collection_button_bottom" hidden="{{!isIpx}}"></view>
+    <button bindtap="shareButtonPressed" class="sharing-button" openType="share" style="bottom:{{isIpx?'34rpx':'0rpx'}}">
+        <text class="sharing-button-text">分享</text>
+    </button>
+    <button class="sharing-button-bottom" hidden="{{!isIpx}}" openType="share"></button>
+    <button appParameter="{{'recipes://www.douguo.com/details?id='+recipeID+'&_vs=6100'}}" binderror="launchAppError" class="download-app-button" openType="launchApp" style="bottom:{{isIpx?'216rpx':'182rpx'}}" wx:if="{{appScene}}">
+        <image class="download-app-icon" src="/images/open_app.png"></image>
+    </button>
+    <button bindtap="download_app" class="download-app-button" style="bottom:{{isIpx?'216rpx':'182rpx'}}" wx:if="{{logined&&!appScene}}">
+        <image class="download-app-icon" src="/images/download_app.png"></image>
+    </button>
+    <image bindtap="luckyMoneyShow" class="bottom-small-lucky-money-image" mode="aspectFit" src="{{activity.small_image}}" wx:if="{{!logined&&showLuckyMoney&&!showLuckyMoneyToggle}}"></image>
+    <view bindtap="alertCoverPressed" class="download-app-alert-cover" wx:if="{{showDownloadAlert}}"></view>
+    <view class="download-app-alert-container" wx:if="{{showDownloadAlert}}">
+        <view class="download-app-alert-title">在客服会话中回复数字 1
+下载「豆果美食」APP</view>
+        <button binderror="contactError" class="download-app-contact-button" openType="contact">前往下载：回复 1</button>
+        <view bindtap="alertCoverPressed" class="download-app-cancel-view">我知道了</view>
+    </view>
+</view>

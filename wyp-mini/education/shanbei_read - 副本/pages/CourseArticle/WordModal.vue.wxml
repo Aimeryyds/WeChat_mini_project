@@ -1,0 +1,35 @@
+<template name="313fb023">
+    <view catchtap="handleProxy" class="_div data-v-e4cbed90 word-modal" data-comkey="{{$k}}" data-eventid="{{'4'}}">
+        <view catchtap="handleProxy" class="_i data-v-e4cbed90 ib ib-times close" data-comkey="{{$k}}" data-eventid="{{'0'}}"></view>
+        <view class="_div data-v-e4cbed90 flex-vhc not-found" wx:if="{{wordNotFound}}">未找到单词：{{word}}</view>
+        <view class="_div data-v-e4cbed90" wx:else>
+            <view class="_div data-v-e4cbed90 meta">
+                <view class="_div data-v-e4cbed90 info">
+                    <view class="_div data-v-e4cbed90 word">{{word}}</view>
+                    <view class="_div data-v-e4cbed90 ipa-wrap">
+                        <view class="_div data-v-e4cbed90 ipa">/{{ipa}}/</view>
+                        <image bindtap="handleProxy" class="_img data-v-e4cbed90 speaker" data-comkey="{{$k}}" data-eventid="{{'1'}}" src="https://media-image1.baydn.com/storage_media_image/kvhfgj/661e57279ffca35926579f903b457601.27223c5d547b3ee4dc32e63d84c88970.png"></image>
+                    </view>
+                </view>
+            </view>
+            <view class="_div data-v-e4cbed90 collins" wx:if="{{COLLINS_DICT_ID===dictId}}">
+                <image class="_img data-v-e4cbed90 icon" src="https://media-image1.baydn.com/storage_media_image/kdbdns/30956c0ef6087c64f2cc777cefb27f9a.8cab7d3f577396beacd86d16aaec1f36.png"></image>
+                <view class="_div data-v-e4cbed90 text">正在使用</view>
+            </view>
+            <view class="_div data-v-e4cbed90 def-en">
+                <rich-text class="_rich-text data-v-e4cbed90" nodes="{{enDef}}"></rich-text>
+            </view>
+            <view class="_div data-v-e4cbed90 def-cn">
+                <view class="_div data-v-e4cbed90">{{pos}}</view>
+                <view class="_div data-v-e4cbed90">{{cnDef}}</view>
+            </view>
+            <view class="_div data-v-e4cbed90 btn-container">
+                <view class="_div data-v-e4cbed90 is-added" wx:if="{{isAdded}}">
+                    <view class="_i data-v-e4cbed90 ib ib-check check"></view>已加入生词本
+            </view>
+                <button catchtap="handleProxy" class="_button data-v-e4cbed90" data-comkey="{{$k}}" data-eventid="{{'2'}}" wx:else>+加入生词本</button>
+                <button catchtap="handleProxy" class="_button data-v-e4cbed90" data-comkey="{{$k}}" data-eventid="{{'3'}}">查看全部</button>
+            </view>
+        </view>
+    </view>
+</template>

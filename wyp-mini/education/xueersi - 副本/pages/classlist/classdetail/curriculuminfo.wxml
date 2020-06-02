@@ -1,0 +1,9 @@
+<view class="con-wrap _8874214">
+    <view class="flex-wrap _8874214" wx:if="{{list.length}}" wx:for="{{list}}" wx:key="index">
+        <view class="flex-left _8874214">第<text class="_8874214">{{item.class_num>9?item.class_num:'0'+item.class_num}}</text>讲</view>
+        <view class="flex-right {{item.status===1?'disabled':''}} _8874214">
+            <view class="_8874214">{{item.curriculum_name}}</view>
+            <view class="_8874214">{{item.class_date}} {{item.class_time_name}} | {{item.tea_name}}</view>
+        </view>
+    </view>
+</view>

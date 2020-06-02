@@ -1,0 +1,15 @@
+<view class="blank_one"></view>
+<view class="phone">
+    <view style="width:380rpx;">
+        <input bindinput="phone_input_fn" class="first_input" maxlength="11" placeholder="输入手机号" type="number"></input>
+    </view>
+    <view catchtap="setTimeFn" class="{{class_text}}">
+        <text>{{msg}}</text>
+    </view>
+</view>
+<view class="phone">
+    <view style="width:700rpx;">
+        <input bindinput="pass_input_fn" maxlength="6" placeholder="请输入验证码" type="number"></input>
+    </view>
+</view>
+<view catchtap="login_btn" class="login">绑定</view>

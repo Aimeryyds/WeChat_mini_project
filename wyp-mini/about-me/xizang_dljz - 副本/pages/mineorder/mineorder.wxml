@@ -1,0 +1,59 @@
+<view class="container">
+    <view class="empty-wrap" wx:if="{{!list||list.length==0}}">
+        <image src="../../images/empty/img_dingdan.png"></image>
+        <view class="text">
+            <text>暂无该订单信息</text>
+        </view>
+    </view>
+    <view class="tag-view">
+        <view catchtap="clickTag" class="{{selected==index?'selected':'unselected'}}" id="{{index}}" wx:for="{{tags}}" wx:key="tag">
+            <text>{{item}}</text>
+        </view>
+    </view>
+    <view class="order-list">
+        <view bindtap="orderDetail" class="order-cell" id="{{index}}" wx:for="{{list}}" wx:key="key">
+            <view class="cell__header">
+                <view class="header__title">
+                    <text>订单号：{{item.orderNo}}</text>
+                </view>
+                <text class="dheader__status" wx:if="{{item.status==1}}">待付款</text>
+                <text class="dheader__status" wx:elif="{{item.storeGroupMarketOrder}}">{{status_arr_group[item.storeGroupMarketOrder.groupStatus/10]}}</text>
+                <text class="dheader__status" wx:else>{{status_arr[item.status]}}</text>
+            </view>
+            <view class="cell__content">
+                <view class="content-item" wx:for="{{item.itemList}}" wx:for-item="cartItem" wx:key="key2">
+                    <image class="item-image" src="{{cartItem.pic}}"></image>
+                    <view class="item-right">
+                        <view class="item-row">
+                            <text class="item-title">{{cartItem.name}}</text>
+                            <text class="item-price">¥ {{cartItem.amount}}</text>
+                        </view>
+                        <view class="item-row">
+                            <view class="standards">{{cartItem.attrsStr}}</view>
+                            <text class="number">x {{cartItem.number}}</text>
+                        </view>
+                    </view>
+                </view>
+            </view>
+            <view class="cell__footer">
+                <view class="total__row">
+                    <text>共{{item.number}}件商品</text>
+                    <text>合计: ¥ <text class="price">{{item.price}}</text>(含运费: ¥ {{item.deliveryFee}})</text>
+                </view>
+                <view class="buttons__row">
+                    <view catchtap="concat" class="row__btn">联系卖家</view>
+                    <block wx:if="{{item.status==1}}">
+                        <view catchtap="cancel" class="row__btn" id="{{index}}">取消订单</view>
+                        <view catchtap="pay" class="row__btn" id="{{index}}">去付款</view>
+                    </block>
+                    <view catchtap="go2GroupDetail" class="row__btn" data-url="/pages/groupdetail/groupdetail?groupOrderId={{item.groupOrderId}}&goodsSn={{item.itemList[0].goodsSn}}&orderNo={{item.orderNo}}" wx:if="{{item.status>1&&item.payNo!=null&&item.payNo!=''&&item.groupOrderId>0}}">拼团详情</view>
+                    <view catchtap="go2Delivery" class="row__btn" id="{{item.orderNo}}" wx:if="{{item.status==3||item.status==4}}">查看物流</view>
+                    <view catchtap="receive" class="row__btn" id="{{index}}" wx:if="{{item.status==3}}">确认收货</view>
+                </view>
+            </view>
+        </view>
+    </view>
+    <view class="load-more" wx:if="{{showMore}}">
+        <text>继续拖动，查看更多订单</text>
+    </view>
+</view>

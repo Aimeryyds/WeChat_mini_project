@@ -1,0 +1,60 @@
+<template name="lucky-wheel$134ddc75">
+    <view class="_div data-v-28cc0885 wheel" style=" {{'padding-top:'+paddingTop+'px'+';'}}">
+        <template is="nav-bar$6acec6f9" data="{{...$root[$kk+'0'],$root:$root}}"></template>
+        <view class="_div data-v-28cc0885 reward  {{[isRotating?'blink':'']}}">
+            <image animation="{{aniData}}" bindtransitionend="handleProxy" class="_image data-v-28cc0885 pannel" data-comkey="{{$k}}" data-eventid="{{'0'}}" src="{{rewardPanelUrl}}"></image>
+            <view bindtap="handleProxy" class="_div data-v-28cc0885 pointer" data-comkey="{{$k}}" data-eventid="{{'1'}}"></view>
+        </view>
+        <view class="_div data-v-28cc0885 tips">
+            <view class="_div data-v-28cc0885 biscuit-count">你已有{{userInfo.biscuits}}个小饼干，可以抽奖{{canDrawTimes}}次</view>
+            <view class="_div data-v-28cc0885 tip">
+                <label class="_span data-v-28cc0885">注：签到可以获得小饼干，每次抽奖消耗2个小饼干</label>
+                <image class="_img data-v-28cc0885" src="/static/img/biscuit.png"></image>
+            </view>
+        </view>
+        <view class="_div data-v-28cc0885 info-tabs">
+            <view class="_div data-v-28cc0885 header">
+                <view bindtap="handleProxy" class="_div data-v-28cc0885 btn {{[showRewardsDetail?'active':'']}}" data-comkey="{{$k}}" data-eventid="{{'2'}}">奖品信息展示</view>
+                <view bindtap="handleProxy" class="_div data-v-28cc0885 btn {{[!showRewardsDetail?'active':'']}}" data-comkey="{{$k}}" data-eventid="{{'3'}}">我的抽奖记录</view>
+            </view>
+            <view class="_div data-v-28cc0885 body rewards" hidden="{{!showRewardsDetail}}">
+                <view class="_div data-v-28cc0885 reward-item" key="{{item}}" wx:if="{{item.is_biscuit==='NOT_BISCUIT'}}" wx:for="{{rewards}}" wx:key="item">
+                    <image class="_img data-v-28cc0885 logo" src="{{item.image_urls&&item.image_urls[0]}}"></image>
+                    <view class="_div data-v-28cc0885 info">
+                        <label class="_span data-v-28cc0885 name">{{item.name}}</label>
+                        <label class="_span data-v-28cc0885 price">￥{{item.price/100}}</label>
+                        <label class="_span data-v-28cc0885 des">{{item.remark}}</label>
+                    </view>
+                </view>
+            </view>
+            <view class="_div data-v-28cc0885 body records" hidden="{{!!showRewardsDetail}}">
+                <scroll-view scrollY bindscrolltolower="handleProxy" class="_scroll-view data-v-28cc0885 records-scroll" data-comkey="{{$k}}" data-eventid="{{'4'}}" wx:if="{{records.length>0}}">
+                    <view class="_div data-v-28cc0885 record-item" key="{{item}}" wx:for="{{records}}" wx:key="item">
+                        <label class="_span data-v-28cc0885 name">{{item.reward}}</label>
+                        <label class="_span data-v-28cc0885 date">{{item.created_at}}</label>
+                    </view>
+                </scroll-view>
+                <view class="_div data-v-28cc0885 records-empty" wx:else>暂无抽奖记录</view>
+            </view>
+        </view>
+        <view catchtouchmove="handleProxy" class="_div data-v-28cc0885 modal" data-comkey="{{$k}}" data-eventid="{{'7'}}" wx:if="{{isShowRewardModal}}">
+            <view class="_div data-v-28cc0885 inner">
+                <view class="_div data-v-28cc0885 card">
+                    <image bindtap="handleProxy" class="_img data-v-28cc0885 close-modal" data-comkey="{{$k}}" data-eventid="{{'5'}}" src="/static/img/close-grey.png"></image>
+                    <view class="_div data-v-28cc0885 title">恭喜你</view>
+                    <view class="_div data-v-28cc0885 content">
+                        <label class="_span data-v-28cc0885">抽中</label>
+                        <label class="_span data-v-28cc0885 reward-name">{{reward.name}}</label>
+                    </view>
+                    <image class="_img data-v-28cc0885 picture" src="{{reward.image_urls&&reward.image_urls[0]}}"></image>
+                </view>
+                <view class="_div data-v-28cc0885 bottom">
+                    <view class="_div data-v-28cc0885 tip">{{reward.is_biscuit==='NOT_BISCUIT'?'回复数字【3】领取奖品，请尽快领取':'已放入到你的账户了，快去抽奖吧～'}}</view>
+                    <button class="_button data-v-28cc0885 btn" openType="contact" wx:if="{{reward.is_biscuit==='NOT_BISCUIT'}}">去领奖</button>
+                    <view bindtap="handleProxy" class="_div data-v-28cc0885 btn" data-comkey="{{$k}}" data-eventid="{{'6'}}" wx:else>知道了</view>
+                </view>
+            </view>
+        </view>
+    </view>
+</template>
+<import src="nav-bar$6acec6f9"></import>

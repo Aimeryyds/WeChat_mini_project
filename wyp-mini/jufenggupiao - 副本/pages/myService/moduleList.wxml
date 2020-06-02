@@ -1,0 +1,35 @@
+<view class="_e022c2e">
+    <view class="network _32f532b _e022c2e" wx:if="{{$net$hasNet}}">
+        <image class="_32f532b" src="../../images/network.png"></image>
+        <text class="_32f532b">网络不可用，请检查网络设置</text>
+        <view class="net-text font28 animated flash infinite _32f532b">正在尝试重新连接...</view>
+    </view>
+    <view class="moduleList _e022c2e" wx:if="{{loaded}}">
+        <view class="customized _e022c2e">
+            <view class="title _e022c2e">
+                <text class="_e022c2e">可定制栏目：</text>
+                <i-icon bindtap="tap" class="del-btn _e022c2e" color="#ccc" size="24" type="delete_fill"></i-icon>
+            </view>
+            <view class="repeat_box _e022c2e">
+                <view catchtap="goDetail" class="box {{(index+1)%5==0||index+1==indexData.length&&(index+1)%5%2==1?'templete1':'templete'}} _e022c2e" data-wpygodetail-a="{{item}}" wx:for="{{indexData}}">
+                    <view class="templete_top _e022c2e">
+                        <image class="_e022c2e" src="{{(index+1)%5==0||index+1==indexData.length&&(index+1)%5%2==1?item.cover_big:item.cover_small}}"></image>
+                        <text class="_e022c2e">{{item.name}}</text>
+                    </view>
+                    <view class="templete_bottom _e022c2e">
+                        <view class="templete_desc _e022c2e">{{(index+1)%5==0||index+1==indexData.length&&(index+1)%5%2==1?item.desc:item.biref_desc}}</view>
+                        <view class="templete_updata _e022c2e">{{item.update_des}}</view>
+                        <view class="templete_num _e022c2e">{{item.subscribe_num}}人定制</view>
+                    </view>
+                    <view class="dz _e022c2e" wx:if="{{item.is_subscribe}}">已定制</view>
+                </view>
+            </view>
+        </view>
+        <view class="footer {{indexData.length<=4?'fixBt':''}} _e022c2e">
+      用心专为您的投资
+    </view>
+    </view>
+    <view catchtap="$backHome$goHome" class="box animated bounceIn _97a9f08 _e022c2e" wx:if="{{$backHome$isShow}}">
+        <image class="_97a9f08" lazyLoad="false" mode="scaleToFill" src="https://jfinfo.oss-cn-beijing.aliyuncs.com/jugupiao/images/share/home.png"></image>
+    </view>
+</view>

@@ -1,0 +1,14 @@
+<view bindtouchend="_onTouchEnd" bindtouchstart="_onTouchStart" class="{{bgClass}} _nav" style="padding-top:{{barHeight}}px; {{navBgStyle}} {{bgStyle}} {{nyStyle}}">
+    <view bindtap="_onTap" class="nav-back" wx:if="{{enable}}">
+        <image class="nav-icon" src="{{navIconUrl}}"></image>
+    </view>
+    <view class="loading">
+        <view wx:if="{{showLoading}}">
+            <image class="loading-icon"></image>
+        </view>
+        <text class="{{titleClass}} nav-text" style="{{navTitleStyle}} {{titleStyle}}">{{title}}</text>
+    </view>
+    <view class="slot">
+        <slot></slot>
+    </view>
+</view>

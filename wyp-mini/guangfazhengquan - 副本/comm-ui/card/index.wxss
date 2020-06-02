@@ -1,0 +1,235 @@
+.gf-card {
+    position: relative;
+    display: flex;
+    align-items: center;
+    line-height: 1.4;
+    background-color: #fff;
+    font-size: 14px;
+    color: #333;
+    margin: 10px 0 8px 0;
+}
+
+.gf-card .gf-card__bd {
+    flex: 1;
+    position: relative;
+    padding: 52rpx 0 57rpx;
+    margin: 0 30rpx;
+}
+
+.gf-card .gf-card__bd::after {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 200%;
+    height: 200%;
+    transform: scale(0.5);
+    transform-origin: 0 0;
+    pointer-events: none;
+    box-sizing: border-box;
+    border: 0 solid #eee;
+    border-bottom-width: 1px;
+}
+
+.gf-card .gf-card__image {
+    padding-right: 12px;
+}
+
+.gf-card .gf-card__image image {
+    width: 60px;
+    height: 60px;
+}
+
+.gf-card .gf-card__image:empty {
+    display: none;
+}
+
+.gf-card__title {
+    min-width: 65px;
+    padding-right: 10px;
+    font-weight: bold;
+    font-size: 32rpx;
+    line-height: 58rpx;
+    color: #333;
+    line-height: 44rpx;
+}
+
+.gf-card__title:empty {
+    display: none;
+}
+
+.gf-card__abstract {
+    font-size: 32rpx;
+    color: #666;
+    line-height: 58rpx;
+}
+
+.gf-card__info {
+    display: flex;
+    justify-content: space-around;
+    font-size: 32rpx;
+    margin-top: 32rpx;
+}
+
+.gf-card__info view:first-child {
+    flex: 1;
+}
+
+.gf-card__tag,.gf-card__extra,.gf-card__label {
+    color: #999;
+}
+
+.gf-card__tag,.gf-card__label {
+    margin-right: 8px;
+    margin-left: 8rpx;
+}
+
+.gf-card__tag {
+    margin-right: 90rpx;
+}
+
+.gf-card__no-pading {
+    padding: 0;
+}
+
+.gf-card__no-pading .gf-card__bd_padding {
+    padding: 12px 0 12px 15px;
+}
+
+.gf-card--access .gf-card__ft {
+    padding-right: 13px;
+}
+
+.gf-card--access .gf-card__ft::after {
+    position: absolute;
+    top: 50%;
+    right: 2px;
+    content: " ";
+    display: inline-block;
+    height: 6px;
+    width: 6px;
+    border-width: 2px 2px 0 0;
+    border-color: #c8c8c8;
+    border-style: solid;
+    transform: translateY(-50%) matrix(0.71,0.71,-0.71,0.71,0,0);
+}
+
+.gf-card--switch {
+    padding-top: 6px;
+    padding-bottom: 6px;
+}
+
+.gf-card_ear {
+    width: 12px;
+    height: 12px;
+}
+
+.gf-card_eyes {
+    width: 12px;
+    height: 12px;
+}
+
+.gf-card_audiotext {
+    color: #178fff;
+    border: 1px solid #8fd8ff;
+    border-radius: 4rpx;
+    font-size: 20rpx;
+    line-height: 44rpx;
+    width: 56rpx;
+    height: 32rpx;
+    line-height: 28rpx;
+    text-align: center;
+    margin-right: 16rpx;
+    position: absolute;
+    top: 56rpx;
+    left: 0rpx;
+}
+
+.gf-card_title {
+}
+
+.gf-card_audioDes {
+    border-radius: 16rpx;
+    display: flex;
+    background-color: #f6f7fb;
+}
+
+.gf-card_left image {
+    width: 88rpx;
+    height: 88rpx;
+    border-radius: 8rpx;
+    vertical-align: middle;
+    margin: 20rpx 14rpx 20rpx 30rpx;
+}
+
+.gf-card_middle {
+    width: 400rpx;
+}
+
+.gf-card_middle image {
+    width: 24rpx;
+    height: 24rpx;
+}
+
+.gf-card_middle_audiodes {
+    margin-top: 20rpx;
+    margin-bottom: 22prx;
+    font-size: 24rpx;
+    color: #999;
+}
+
+.gf-card_middle_name {
+    margin-right: 16rpx;
+    color: #333;
+    font-size: 28rpx;
+}
+
+.gf-card_right {
+    margin-left: 64rpx;
+    margin-top: 36rpx;
+}
+
+.gf-card_right image {
+    width: 56rpx;
+    height: 56rpx;
+}
+
+.gf-card_middle_time {
+    margin-top: 22rpx;
+}
+
+.gf-card_middle_time image {
+    margin-right: 8rpx;
+    vertical-align: middle;
+}
+
+.gf-card_middle_time text {
+    color: #999;
+    font-size: 24rpx;
+    line-height: 28rpx;
+}
+
+.gf-card_type {
+    display: flex;
+    align-items: center;
+    margin-bottom: 16rpx;
+    width: 632rpx;
+}
+
+.gf-card__audiotitle {
+    min-width: 65px;
+    padding-right: 10px;
+    font-weight: bold;
+    font-size: 32rpx;
+    line-height: 48rpx;
+    color: #333;
+    overflow: hidden;
+    width: 608rpx;
+    text-indent: 72rpx;
+    text-overflow: ellipsis;
+    word-wrap: break-word;
+    word-break: normal;
+    -webkit-line-clamp: 2;
+    display: -webkit-box;
+    -webkit-box-orient: vertical;
+}

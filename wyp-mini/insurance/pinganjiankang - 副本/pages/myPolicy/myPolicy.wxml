@@ -1,0 +1,35 @@
+<view class="swiper-tab">
+    <view bindtap="swichNav" class="swiper-tab-list {{currentTab==0?'on':''}}" data-current="0">全部</view>
+    <view bindtap="swichNav" class="swiper-tab-list {{currentTab==1?'on':''}}" data-current="1">保障中</view>
+</view>
+<view class="swiper-box">
+    <view wx:if="{{currentTab==0}}">
+        <view class="tab-list" wx:for="{{policyList}}" wx:key="{{key}}">
+            <view bindtap="policyDetail" class="tab-list-product" data-certno="{{item.certNo}}" data-polno="{{item.polNo}}" data-state="{{item.state}}">
+                <view class="t-list-text">
+                    <view class="t-product-text">{{item.productName}}</view>
+                    <view class="t-product-detail">保单号：{{item.polNo}}</view>
+                    <view class="t-product-detail">被保人：{{item.insurantName}}</view>
+                    <view class="t-product-detail">保障期限：{{item.effDate}}~{{item.matuDate}}</view>
+                    <view class="t-product-state">{{item.state}}</view>
+                </view>
+            </view>
+        </view>
+    </view>
+    <view wx:if="{{currentTab==1}}">
+        <view class="tab-list" wx:for="{{guaranteeList}}" wx:key="{{key}}">
+            <view bindtap="policyDetail" class="tab-list-product" data-certno="{{item.certNo}}" data-polno="{{item.polNo}}" data-state="{{item.state}}">
+                <view class="t-list-text">
+                    <view class="t-product-text">{{item.productName}}</view>
+                    <view class="t-product-detail">保单号：{{item.polNo}}</view>
+                    <view class="t-product-detail">被保人：{{item.insurantName}}</view>
+                    <view class="t-product-detail">保障期限：{{item.effDate}}~{{item.matuDate}}</view>
+                    <view class="t-product-state">{{item.state}}</view>
+                </view>
+            </view>
+        </view>
+    </view>
+</view>
+<van-button bindtap="unbind" class="unbind" size="large">解除绑定</van-button>
+<van-toast id="van-toast"></van-toast>
+<van-dialog id="van-dialog"></van-dialog>

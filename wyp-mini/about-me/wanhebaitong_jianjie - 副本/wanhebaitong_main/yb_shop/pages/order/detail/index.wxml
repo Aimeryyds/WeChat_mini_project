@@ -1,0 +1,167 @@
+<loading hidden="{{show}}">正在加载</loading>
+<view class="page navbar" wx:if="{{show}}">
+    <view class="fui-list bg" style="background:{{config.selectedColor!='#000000'?config.selectedColor:config.background}};color:{{config.selectedColor=='#000000'&&config.font_color=='black'?'#000000':'#ffffff'}};">
+        <view class="fui-list-inner">
+            <view class="row">
+                <view class="">
+                    <view class="statuscss">
+                        <view wx:if="{{info.order_status==0}}">待付款 </view>
+                        <view wx:elif="{{info.order_status==1}}"> 待发货 </view>
+                        <view wx:elif="{{info.order_status==2}}"> 待收货 </view>
+                        <view wx:elif="{{info.order_status==3}}"> 已完成 </view>
+                        <view wx:elif="{{info.order_status==4}}"> 退款中 </view>
+                        <view wx:elif="{{info.order_status==5}}"> 已退款 </view>
+                        <view wx:elif="{{info.order_status==-1}}"> 已取消 </view>
+                        <view wx:else> 未知状态 </view>
+                    </view>
+                </view>
+            </view>
+            <view class="order-price">订单金额(含运费):￥
+        <text>{{info.pay_money}}</text>
+            </view>
+        </view>
+        <view class="">
+            <image class="round image-88" src="/yb_shop/static/images/icon-white/money01.png"></image>
+        </view>
+    </view>
+    <view class="fui-list-group-title02">
+        <text class="shop">订单信息</text>
+    </view>
+    <view class="fui-cell-group">
+        <view class="fui-cell-group">
+            <view class="order-info">
+                <view class="fui-cell-label">订单编号：
+          <text class="fui-cell-label">{{info.order_no}}</text>
+                </view>
+                <view class="fui-cell-label">创建时间：
+          <text class="fui-cell-label">{{info.create_time}}</text>
+                </view>
+                <view class="fui-cell-label" wx:if="{{info.pay_time}}">支付时间：
+          <text class="fui-cell-label">{{info.pay_time}}</text>
+                </view>
+                <view class="fui-cell-label" wx:if="{{info.consign_time}}">发货时间：
+          <text class="fui-cell-label">{{info.consign_time}}</text>
+                </view>
+                <view class="fui-cell-label" wx:if="{{info.sign_time}}">签收时间：
+          <text class="fui-cell-label">{{info.sign_time}}</text>
+                </view>
+                <view class="fui-cell-label" wx:if="{{info.finish_time}}">完成时间：
+          <text class="fui-cell-label">{{info.finish_time}}</text>
+                </view>
+                <view class="fui-cell-label" wx:if="{{info.pay_status==1}}">支付方式：
+          <text class="fui-cell-label">微信</text>
+                </view>
+                <view class="fui-cell-label" wx:if="{{info.express==1}}">快递单号：
+          <text bindtap="fuzhi" class="fui-cell-label" data-cont="{{info.express_no}}">{{info.express_no+' ('+info.express_company+')'}}</text>
+                </view>
+                <block wx:if="{{info.mailing_type==1}}">
+                    <view class="fui-cell-label02">收货地址：
+          </view>
+                    <view class="fui-cell-label">
+                        <text class="fui-cell-label" style="display:block;">{{info.receiver_name}} {{info.receiver_mobile}}</text>
+                        <text class="fui-cell-label" style="display:block;">{{info.address.province+info.address.city+info.address.district+' '+info.receiver_address}}</text>
+                    </view>
+                </block>
+                <block wx:if="{{info.mailing_type==2}}">
+                    <view class="fui-cell-label02">上门自取：
+          </view>
+                    <view class="fui-cell-label">
+                        <text class="fui-cell-label" style="display:block;">{{info.receiver_name}} {{info.receiver_mobile}}</text>
+                        <text class="fui-cell-label" style="display:block;">自取时间：{{info.mention_time}}</text>
+                    </view>
+                </block>
+            </view>
+        </view>
+    </view>
+    <view class="fui-list-group-title02">
+        <text class="shop">订单商品</text>
+    </view>
+    <view class="fui-cell-group">
+        <view class="goods_li" style="background:#ffffff;" wx:for="{{info.goods}}">
+            <navigator class="fui-list goods-item" openType="redirect" url="/yb_shop/pages/goods/detail/index?id={{item.goods_id}}">
+                <view class="fui-list-media">
+                    <image class="round goods_img" src="{{item.pic.img_cover}}"></image>
+                </view>
+                <view class="fui-list-inner">
+                    <view class="text">{{item.goods_name}}</view>
+                    <view class="goods_desc">{{item.sku_name}}</view>
+                </view>
+                <view class="price text-right">
+                    <view class="text-right" style="color:#181a19;">￥
+              <text>{{item.price}}</text>
+                    </view>
+                    <view class="text-right">x
+              <text>{{item.num}}</text>
+                    </view>
+                </view>
+            </navigator>
+        </view>
+    </view>
+    <view class="fui-cell-group {{toggleCode?'toggleSend-group':''}}" wx:if="{{order.virtual>0&&order.virtual_str!=''}}">
+        <view bindtap="toggle" class="fui-cell" data-id="{{toggleCode}}" data-type="toggleCode">
+            <view class="fui-cell-text">发货信息</view>
+            <view class="fui-cell-remark"></view>
+        </view>
+        <view class="send-code send-code1">
+      {{order.virtual_str}}
+    </view>
+    </view>
+    <view class="fui-cell-group {{toggleCode1?'toggleSend-group':''}}" wx:if="{{order.isvirtualsend>0&&order.virtualsend_info!=null}}">
+        <view bindtap="toggle" class="fui-cell" data-id="{{toggleCode1}}" data-type="toggleCode1">
+            <view class="fui-cell-text">发货信息</view>
+            <view class="fui-cell-remark"></view>
+        </view>
+        <view class="send-code">
+      {{order.virtualsend_info}}
+    </view>
+    </view>
+    <view class="fui-list-group-title02">
+        <text class="shop">订单金额</text>
+    </view>
+    <view class="fui-cell-group price-cell-group">
+        <view class="fui-cell">
+            <view class="fui-cell-label">商品小计</view>
+            <view class="fui-cell-info"></view>
+            <view class="fui-cell-remark noremark">¥ {{info.order_money}}</view>
+        </view>
+        <view class="fui-cell" wx:if="{{info.mailing_type==1}}">
+            <view class="fui-cell-label">运费</view>
+            <view class="fui-cell-info"></view>
+            <view class="fui-cell-remark noremark">¥ {{info.shipping_money}}</view>
+        </view>
+        <view class="fui-cell" wx:if="{{info.discount_money!=0}}">
+            <view class="fui-cell-label">满减</view>
+            <view class="fui-cell-info"></view>
+            <view class="fui-cell-remark noremark">¥ {{info.discount_money}}</view>
+        </view>
+        <view class="fui-cell" wx:if="{{info.coupon_money!=0}}">
+            <view class="fui-cell-label">优惠券</view>
+            <view class="fui-cell-info"></view>
+            <view class="fui-cell-remark noremark">¥ {{info.coupon_money}}</view>
+        </view>
+        <view class="fui-cell" wx:if="{{info.rebate_money!=0}}">
+            <view class="fui-cell-label">会员折扣</view>
+            <view class="fui-cell-info"></view>
+            <view class="fui-cell-remark noremark">¥ {{info.rebate_money}}</view>
+        </view>
+        <view class="fui-cell">
+            <view class="fui-cell-label" style="width:auto;">实付费{{info.mailing_type==1?'(含运费)':''}}</view>
+            <view class="fui-cell-info"></view>
+            <view class="fui-cell-remark noremark">
+                <text class="text-danger">
+                    <text style="font-size:32rpx">¥ {{info.pay_money}}</text>
+                </text>
+            </view>
+        </view>
+        <view class="fui-cell">
+            <view class="fui-cell-label">留言</view>
+            <view class="fui-cell-info"></view>
+            <view class="fui-cell-remark noremark">{{info.buyer_message!=''?info.buyer_message:'无'}}</view>
+        </view>
+    </view>
+    <view class="fui-footer" wx:if="{{info.mailing_type==2&&info.order_status>0&&info.order_status<3}}">
+        <navigator bindtap="to_barcode" class="btn btn-danger" data-code="{{info.order_no}}" style="margin-right:140px;">
+      查看核销码
+    </navigator>
+    </view>
+</view>

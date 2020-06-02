@@ -1,0 +1,14 @@
+<view class="optional">
+    <view bindtap="__e" class="searchWrap btn" data-event-opts="{{[ [ 'tap',[ [ 'jumpSearch',['$event'] ] ] ] ]}}">
+        <image class="searchIcon" src="../../static/search.png"></image>
+        <text>搜股票名称/股票代码</text>
+    </view>
+    <view bindtap="__e" class="infoText" data-event-opts="{{[ [ 'tap',[ [ 'jumpBackWash',['$event'] ] ] ] ]}}">目前仅展示沪深A股，更多自选请至APP中查看</view>
+    <ths-unify-list bind:__l="__l" bind:jump="__e" bind:sortData="__e" class="ths-list" colorKey="{{colorKey}}" data-event-opts="{{[ [ '^sortData',[ ['sortData'] ] ],[ '^jump',[ ['jump'] ] ] ]}}" fixedTop="{{fixedTop}}" fixedType="{{1}}" infoTit="{{infoTit}}" inverted="{{inverted}}" isFixed="{{isTop}}" listActive="{{listActive}}" listData="{{listData}}" optionText="{{optionText}}" sortTypeStatus="{{sortTypeStatus}}" titArr="{{titArr}}" titDataType="{{titDataType}}" titShow="{{false}}" titText="{{titText}}" vueId="4fde2f40-1"></ths-unify-list>
+    <view class="btmBtn btn">
+        <view bindtap="__e" class="login" data-event-opts="{{[ [ 'tap',[ [ 'jumpSearch',['$event'] ] ] ] ]}}" wx:if="{{loginInfo.account}}">添加自选股</view>
+        <view class="noLogin" wx:else>
+            <button bindgetphonenumber="__e" data-event-opts="{{[ [ 'getphonenumber',[ [ 'getPhoneNumber',['$event'] ] ] ] ]}}" id="btnLogin" openType="getPhoneNumber" style="{{'background-color:'+'#fff'+';'+'color:'+'#000'+';'+'font-size:'+'30rpx'+';'}}" type="primary">授权同步自选股</button>
+        </view>
+    </view>
+</view>

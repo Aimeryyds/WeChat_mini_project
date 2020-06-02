@@ -1,0 +1,38 @@
+<view class="zan-panel zan-panel__no-margin-top zan-panel__no-border">
+    <view style="padding:24rpx 0;border-bottom: 1rpx solid #f4f4f4">
+        <tab bindquery="handleQuery" serverTime="{{serverTime}}"></tab>
+    </view>
+    <block wx:if="{{module.data.length>0}}" wx:for="{{module.data}}" wx:key="{{index}}">
+        <view bindtap="makestore" class="nearstore-list" data-store="{{item}}" wx:if="{{item.goodsList.length>0||item.projectList.length>0}}">
+            <view class="zan-badge">
+                <view class="zan-badge__count nearstore-count" wx:if="{{item.cartNum&&item.cartNum>0}}">{{item.cartNum||0}}</view>
+                <image class="nearstore-list__img " src="{{item.logo||'http://imgcdnali.wfenxiao.com.cn/xcx/c/icons/brand.png'}}"></image>
+            </view>
+            <view class="nearstore-list__main">
+                <text wx:if="{{item.storeType!=6}}">{{item.brandName}}-{{item.storeName}} </text>
+                <text wx:if="{{item.storeType==6}}">{{item.brandName}} 【{{item.storeName}}】 </text>
+                <view class="nearstore-list__support"></view>
+                <view class="nearstore-list__desc">
+                    <text>已售{{item.orderNum}}单</text>
+                    <text>距离{{item.distance>1000?item.distance/1000+'km':item.distance+'m'}}</text>
+                </view>
+                <view style="font-size:24rpx;color:rgba(0,0,0,0.43);margin-top:8rpx;">{{item.reviewsNum}}条评价  {{item.goodReviewsRate}}%好评</view>
+                <view class="nearstore__products-list">
+                    <view catchtap="handleServiceClick" class="nearstore__products" data-storedetail="{{projectitem}}" data-storeid="{{item.id}}" wx:if="{{item.projectList.length>0}}" wx:for="{{item.projectList}}" wx:for-item="projectitem" wx:key="{{index}}">
+                        <image class="nearstore__products--img" mode="aspectFill" src="{{projectitem.imgUrl}}"></image>
+                        <view class="nearstore__products-price">¥{{projectitem.price}}</view>
+                    </view>
+                    <view catchtap="makestoredetail" class="nearstore__products" data-store="{{item}}" data-storedetail="{{goodsitem}}" wx:if="{{!item.projectList.length>0&&item.goodsList.length>0}}" wx:for="{{item.goodsList}}" wx:for-item="goodsitem" wx:key="{{index}}">
+                        <image class="nearstore__products--img" src="{{goodsitem.imgUrl}}"></image>
+                        <view class="nearstore__products-price">¥{{goodsitem.price}}</view>
+                    </view>
+                </view>
+            </view>
+        </view>
+    </block>
+    <view bindtap="makedataSource" class="view-more" data-options="{{module.options}}" data-type="store" wx:if="{{module.total>20}}">
+        <text>查看更多</text>
+        <image class="view-more--img" src="http://imgcdnali.wfenxiao.com.cn/xcx/c/icons/arrow-bottom-red.png"></image>
+    </view>
+    <view class="nearstore-error" wx:if="{{module.data.length==0}}">{{locationType==0?'该城市暂无门店':'当前位置暂无门店'}}</view>
+</view>

@@ -1,0 +1,264 @@
+<import src="../../component/swiper/swiper.wxml"></import>
+<import src="../../component/list-item/line.wxml"></import>
+<import src="../../component/s-share-wrap/s-share-wrap.wxml"></import>
+<import src="../../component/goods-list/goods-list.wxml"></import>
+<form bindsubmit="confirm" class="purchase-window" reportSubmit="true" wx:if="{{show_choose}}">
+    <view catchtap="closeChoose" class="bg" disableScroll="true"></view>
+    <view class="purchase-form">
+        <view class="info">
+            <image class="image" mode="aspectFill" src="{{attrPic}}"></image>
+            <view class="content">
+                <text class="title">{{goods.name}}</text>
+                <view class="content_bottom">
+                    <text class="price-wrap">¥<text class="price">{{buy_type==4?attrGroupPrice:attrPrice}}</text>
+                    </text>
+                    <text class="desc" wx:if="{{goods.groupMarket.masterDiscount==1&&buy_type==4}}">团长优惠价：{{attrGroupMasterPrice}}</text>
+                    <text class="desc" wx:else>库存：{{attrStock}}</text>
+                    <text class="desc" wx:if="{{purchaseLimit==1&&buy_type==4}}">拼团限购: {{goods.groupMarket.purchaseMax}}件</text>
+                </view>
+            </view>
+        </view>
+        <view class="standard">
+            <block wx:for="{{attr_group}}" wx:for-index="idx">
+                <text>{{item.name}}</text>
+                <view>
+                    <text bindtap="bindAttrChange" class="{{select_attr_arr[idx]==index?'selected':''}}" id="{{idx}},{{index}}" wx:for="{{item.attrs}}" wx:for-item="attrItem">{{attrItem.value}}</text>
+                </view>
+            </block>
+        </view>
+        <template is="line" data></template>
+        <view class="counter">
+            <text class="label">购买数量</text>
+            <view class="stepper">
+                <view catchtap="bindMinus" class="icon-wrap left">
+                    <image src="/images/icon_del.png" style="width: 16px; height: 16px;"></image>
+                </view>
+                <input bindchange="bindKeyInput" type="number" value="{{input_number}}"></input>
+                <view catchtap="bindPlus" class="icon-wrap right">
+                    <image src="/images/icon_add.png" style="width: 16px; height: 16px;"></image>
+                </view>
+            </view>
+        </view>
+        <view catchtap="closeChoose" class="close-view">
+            <image class="image" src="../../images/goods/close.png"></image>
+        </view>
+    </view>
+    <view class="button-wrap">
+        <view catchtap="add2Cart" class="join-btn" wx:if="{{buy_type==3}}">加入购物车</view>
+        <button class="purchase-button z-index-top" formType="submit">确定</button>
+    </view>
+</form>
+<block wx:if="{{goods}}">
+    <import src="/wxParse/wxParse.wxml"></import>
+    <view class="container">
+        <view class="header" style="height: auto;">
+            <template is="swiper2" data="{{list:goods.masterPics}}" wx:if="{{goods.masterPics}}"></template>
+            <view class="group-banner" wx:if="{{goods.groupMarket}}">
+                <view class="banner__logo">
+                    <view class="logo__main">拼团</view>
+                    <text>限时火拼, 超值底价</text>
+                </view>
+                <view class="banner__time">
+                    <text>距结束仅剩</text>
+                    <view class="time-wrap">
+                        <view class="l-time big-font">
+                            <block wx:if="{{clock.day>0}}">
+                                <text class="l-cell">{{clock.day}}</text>天
+                </block>
+                            <text class="l-cell l-two ml5">{{clock.hr}}</text> 时 <text class="l-cell l-two">{{clock.min}}</text> 分
+                <text class="l-cell l-two">{{clock.sec}}</text> 秒
+            </view>
+                    </view>
+                </view>
+            </view>
+            <view class="shop-info">
+                <view class="groupon-header" wx:if="{{goods.groupMarket}}">
+                    <view class="price-wrap">
+                        <text class="new-price">
+                            <text class="small-price">¥</text> {{goods.groupMarket.groupMarketPrice}}</text>
+                    </view>
+                    <view class="mid">
+                        <text class="delete-price">¥{{goods.price}}</text>
+                        <view class="tag-wrap">
+                            <text class="tag-label">{{goods.groupMarket.attendNum}}人拼团</text>
+                            <text class="tag-label">拼团立省¥{{goods.save_price}}</text>
+                        </view>
+                    </view>
+                </view>
+                <view class="shop-title">{{goods.name}}</view>
+                <view class="shop-desc" wx:if="{{goods.brief}}">{{goods.brief?goods.brief:''}}</view>
+                <view class="header-footer" wx:if="{{!goods.groupMarket}}">
+                    <view class="price-wrap">
+                        <text class="new-price">
+                            <text class="small-price">¥</text> {{goods.price}}</text>
+                        <text class="old-price">市场价: <text class="small-price">¥</text>{{goods.marketPrice}}</text>
+                    </view>
+                    <text class="repertory">销量：{{goods.salesNum+goods.orderNum}}件</text>
+                </view>
+                <view class="discounts-wrap" wx:if="{{rebateLength>0}}">
+                    <view class="discounts-row" wx:if="{{mjList.length>0}}">
+                        <text class="label">满减</text>
+                        <text wx:for="{{mjList}}">{{index==0?'':','}}满{{item.price}}减{{item.discount}} </text>
+                    </view>
+                    <view class="discounts-row" wx:if="{{byList.length>0}}">
+                        <text class="label">包邮</text>
+                        <text wx:for="{{byList}}">{{index==0?'':','}}满{{item.price}}包邮</text>
+                    </view>
+                </view>
+            </view>
+        </view>
+        <view class="groupon-list" wx:if="{{goods.groupMarket&&goods.groupMarket.gatherFlag==1&&group_info.totalRows>0}}">
+            <navigator class="list-header" url="/pages/grouppersonlist/grouppersonlist?groupMarketId={{goods.groupMarket.groupMarketId}}&goodsSn={{goods.goodsSn}}">
+                <text>{{group_info.totalRows}}人在开团</text>
+                <view>
+                    <text>查看更多</text>
+                    <image src="/images/arrow.png"></image>
+                </view>
+            </navigator>
+            <view class="list-wrap">
+                <view class="item" wx:for="{{group_info.list}}">
+                    <image src="{{item.photo}}"></image>
+                    <view class="info">
+                        <view>{{item.nickName}}</view>
+                        <text>还差{{item.attendNum-item.nowNum}}人, {{item.coundown_str}}</text>
+                    </view>
+                    <navigator class="btn" url="/pages/groupdetail/groupdetail?groupOrderId={{item.groupOrderId}}&goodsSn={{goods.goodsSn}}">去参团</navigator>
+                </view>
+            </view>
+        </view>
+        <view class="content__detail rich-text">
+            <view class="tag-view">
+                <view class="selected">
+                    <text>商品详情</text>
+                </view>
+            </view>
+            <view class="custom-swiper">
+                <view class="cnt cnt1" id="cnt1" style="left: {{custom_left}}rpx; height: {{c1_h}}">
+                    <view class="detail__list" wx:if="{{goods.content==null}}">
+                        <image catchtap="previewImage" class="detail__item" data-src="{{item}}" mode="widthFix" src="{{item}}" wx:for="{{goods.pics}}" wx:key="*this"></image>
+                    </view>
+                    <view class="detail_list">
+                        <template is="wxParse" data="{{wxParseData:description.nodes}}"></template>
+                    </view>
+                </view>
+                <view class="cnt cnt2" id="cnt2" style="left: {{custom_left}}rpx; height: {{c2_h}}" wx:if="{{shop.openComment==1}}">
+                    <view class="empty-wrap" wx:if="{{!list||list.length==0}}">
+                        <image src="../../images/evaluate/img.png"></image>
+                        <view class="text">
+                            <text>暂无评价</text>
+                        </view>
+                    </view>
+                    <view class="cate-tab" wx:else>
+                        <view>
+                            <text>全部</text>
+                            <text>{{commentCount.totalNum}}</text>
+                        </view>
+                        <view>
+                            <text>好评</text>
+                            <text>{{commentCount.wellPercent}}{{commentCount.wellNum>0?'%':''}}</text>
+                        </view>
+                        <view>
+                            <text>中评</text>
+                            <text>{{commentCount.goodPercent}}{{commentCount.goodNum>0?'%':''}}</text>
+                        </view>
+                        <view>
+                            <text>差评</text>
+                            <text>{{commentCount.badPercent}}{{commentCount.badNum>0?'%':''}}</text>
+                        </view>
+                    </view>
+                    <view class="eva-list">
+                        <view bindtap="go2CommentDetail" class="eva-item" id="{{index}}" wx:for="{{list}}">
+                            <view class="top-info">
+                                <image class="avatar" src="{{item.photo}}"></image>
+                                <view>
+                                    <view class="nickname">{{item.username}}</view>
+                                    <view class="date">{{item.createTime}} <text wx:if="{{item.attrsStr}}">规格: {{item.attrsStr}}</text>
+                                    </view>
+                                </view>
+                            </view>
+                            <view class="eva-content">{{item.content}}</view>
+                            <view class="eva-imgs">
+                                <image catchtap="commentPicPreview" data-pidx="{{idx}}" id="{{index}}" src="{{item}}" style="background: lightgray" wx:for="{{item.pics}}" wx:for-index="idx" wx:key="picskey"></image>
+                            </view>
+                            <view class="mer-reply" wx:if="{{item.reply}}">
+              卖家回复：{{item.reply}}
+            </view>
+                            <view class="operation-wrap">
+                                <view catchtap="reply" class="comment-btn" id="{{index}}">
+                                    <image src="/images/evaluate/icon_comment.png"></image>
+                                    <text>评论 {{item.replyNum}}</text>
+                                </view>
+                                <view catchtap="zanComment" class="zan-btn" id="{{index}}">
+                                    <image src="/images/evaluate/icon_zan.png" wx:if="{{item.zanId==0}}"></image>
+                                    <image src="/images/evaluate/icon_zan_sel.png" wx:else></image>
+                                    <text>点赞 {{item.zanNum}}</text>
+                                </view>
+                            </view>
+                        </view>
+                    </view>
+                    <view class="load-more" wx:if="{{showMore}}">
+                        <text>继续拖动，查看更多</text>
+                    </view>
+                </view>
+            </view>
+        </view>
+        <view class="groupon-more" wx:if="{{module_list&&module_list.length>0}}">
+            <view class="more-header">更多拼团商品</view>
+            <template is="goods_list" data="{{title:'',list:module_list,listType:1}}"></template>
+            <navigator class="more-btn" hoverClass="hover" url="/pages/grouplist/grouplist">查看全部拼团商品</navigator>
+        </view>
+        <view class="footer__view" wx:if="{{goods.groupMarket}}">
+            <button class="footer-item" openType="contact" wx:if="{{shop.openOnlineService==1}}">
+                <image src="../../images/goods/icon_sevice.png"></image>
+                <text>联系客服</text>
+            </button>
+            <view catchtap="call" class="footer-item" wx:if="{{shop.openOnlineService==0}}">
+                <image src="../../images/goods/icon_sevice.png"></image>
+                <text>联系客服</text>
+            </view>
+            <navigator class="footer-item" openType="switchTab" url="../cart/cart">
+                <image src="../../images/goods/btn_cart.png"></image>
+                <text>购物车</text>
+                <view class="have-cart-tip" wx:if="{{cart_num>0}}"></view>
+            </navigator>
+            <view class="button-wrap">
+                <view catchtap="showChoose" class="join-btn" data-type="3">单独购买</view>
+                <view catchtap="showChoose" class="purchase-btn" data-type="4">立即开团</view>
+            </view>
+        </view>
+        <view class="footer__view" wx:else>
+            <button class="footer-item" openType="contact" wx:if="{{shop.openOnlineService==1}}">
+                <image src="../../images/goods/icon_sevice.png"></image>
+                <text>联系客服</text>
+            </button>
+            <view catchtap="call" class="footer-item" wx:if="{{shop.openOnlineService==0}}">
+                <image src="../../images/goods/icon_sevice.png"></image>
+                <text>联系客服</text>
+            </view>
+            <navigator class="footer-item" openType="switchTab" url="../cart/cart">
+                <image src="../../images/goods/btn_cart.png"></image>
+                <text>购物车</text>
+                <view class="have-cart-tip" wx:if="{{cart_num>0}}"></view>
+            </navigator>
+            <view class="button-wrap">
+                <view catchtap="showChoose" class="join-btn" data-type="1">加入购物车</view>
+                <view catchtap="showChoose" class="purchase-btn" data-type="2">立即购买</view>
+            </view>
+        </view>
+    </view>
+</block>
+<view bindtap="openSSWrap" class="s-share-btn" wx:if="{{isOpenDistribution&&userInfo.spokesman&&goods.openDistribution==1}}">
+    <image src="/images/spokesperson/generalize/icon_share.png"></image>
+</view>
+<view class="generate-wrap">
+    <view bindtap="closeGenWrap" class="bg" style="display: {{show_generate?'fixed':'none'}}"></view>
+    <view class="generate-box" style="display: {{show_generate?'block':'none'}}">
+        <view class="generating" style="width: {{box_w}}rpx; height: {{box_h}}rpx">
+            <image src="/images/wait.png"></image>
+            <text>图片生成中...</text>
+        </view>
+        <image bindtap="previewPhoto" class="pre-img" src="{{photo}}" style="width: {{generate_w}}rpx; height: {{generate_h}}rpx; left: {{generate_l}}; top: {{generate_t}}" wx:if="{{photo}}"></image>
+        <view bindtap="savePhoto" class="generate-btn" style="background: {{photo?'#b90404':'#707070'}}">保存图片到相册</view>
+    </view>
+</view>
+<template is="s-share-wrap" data="{{show_s_wrap:show_s_wrap}}"></template>

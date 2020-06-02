@@ -1,0 +1,23 @@
+<view style="padding-top: 65px">
+    <my-component bind:myevent="myEventListener" goHome="{{'gohome'}}" innerText="登录"></my-component>
+    <view class="main" style=" margin-top: {{myHight}}px"></view>
+    <view class="top">
+        <image class="topimg" src="../../Content/Img/topimg.png"></image>
+        <text>部分城市</text>
+    </view>
+    <view class="btn">
+        <view class="box">
+            <image src="../../Content/Img/wxlogoBai.png"></image>
+            <text>微信用户快速登录</text>
+            <view class="butbox">
+                <button bindgetphonenumber="getPhoneNumber" class="button" openType="getPhoneNumber">获取手机号码</button>
+            </view>
+        </view>
+    </view>
+    <view class="change">
+        <view class="box">
+            <text bindtap="nologin" class="t1">暂不登录</text>
+            <text bindtap="tologin" class="t2">手机号码注册/登录</text>
+        </view>
+    </view>
+</view>

@@ -1,0 +1,18 @@
+<view class="parent">
+    <text class="text-title">宝贝</text>
+    <view class="view_search">
+        <view class="view_searchbg">
+            <input bindchange="bindChange" class="input_search" placeholder="请输入关键词" placeholderStyle="color:#999999"></input>
+            <view class="view1">
+                <image bindtap="search" src="http://tws.cnweisou.com/images/search.png"></image>
+            </view>
+        </view>
+    </view>
+    <view class="view-hint">
+        <image src="http://tws.cnweisou.com/images/fire.png"></image>
+        <text class="text-prop">热门搜索</text>
+    </view>
+    <view class="view-btns">
+        <text bindtap="click" class="view-btns-text-normal" data-word="{{item}}" wx:for="{{keyword}}">{{item}}</text>
+    </view>
+</view>

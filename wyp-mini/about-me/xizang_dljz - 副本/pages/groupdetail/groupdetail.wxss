@@ -1,0 +1,323 @@
+.container {
+    background: #efefef;
+}
+
+.indicator-label {
+    font-size: 24rpx;
+    color: #ff768f;
+    background: #ffe7e7;
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 46rpx;
+}
+
+.groupon-info {
+    background: #fdf7f7;
+    width: 100%;
+    padding: 20rpx;
+}
+
+.groupon-info .shop-item {
+    display: flex;
+    background: #fff;
+}
+
+.groupon-info .shop-item>image {
+    width: 160rpx;
+    height: 160rpx;
+    flex: 0 0 auto;
+}
+
+.groupon-info .shop-item>view {
+    padding: 16rpx 20rpx;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    font-size: 32rpx;
+}
+
+.price-wrap .new-price {
+    font-size: 50rpx;
+    font-weight: bold;
+    color: #ff5374;
+    overflow: hidden;
+}
+
+.price-wrap .small-price {
+    font-size: 22rpx;
+    overflow: hidden;
+}
+
+.price-wrap .old-price {
+    margin-left: 16rpx;
+    color: #999;
+    display: inline-flex;
+    align-items: flex-end;
+    overflow: hidden;
+    font-size: 24rpx;
+}
+
+.two-line {
+    overflow: hidden;
+    text-overflow: ellipsis;
+    height: 2em;
+    display: -webkit-box;
+    word-break: break-all;
+    -webkit-box-orient: vertical;
+    -webkit-line-clamp: 2;
+}
+
+.join-list {
+    background: #fff;
+    width: 100%;
+    margin-top: 20rpx;
+    padding: 26rpx;
+}
+
+.join-list .list {
+    display: flex;
+    justify-content: center;
+}
+
+.join-list .item {
+    width: 70rpx;
+    height: 70rpx;
+    border: 1px solid #ff5777;
+    margin-right: 12rpx;
+    border-radius: 50%;
+    position: relative;
+}
+
+.join-list .item image {
+    width: 100%;
+    height: 100%;
+    border-radius: 50%;
+    overflow: hidden;
+}
+
+.join-list .item.leader::after {
+    content: '团长';
+    position: absolute;
+    bottom: -15rpx;
+    left: 50%;
+    transform: translateX(-50%);
+    display: block;
+    background: #ff5777;
+    color: #fff;
+    font-size: 20rpx;
+    width: 3em;
+    height: 30rpx;
+    text-align: center;
+    border-radius: 30rpx;
+    line-height: 30rpx;
+}
+
+.join-list .empty-item {
+    width: 70rpx;
+    height: 70rpx;
+    border-radius: 50%;
+    border: 1px dashed #ffb6c2;
+    background: #fdf7f7;
+    position: relative;
+    margin-right: 12rpx;
+}
+
+.join-list .empty-item::after {
+    content: '?';
+    color: #fdb7c3;
+    font-size: 40rpx;
+    position: absolute;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    text-align: center;
+    line-height: 70rpx;
+}
+
+.success-wrap text {
+    color: #2ad02a;
+}
+
+.time-wrap,.success-wrap {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-top: 40rpx;
+    font-size: 28rpx;
+}
+
+.fail-wrap {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-top: 40rpx;
+    font-size: 28rpx;
+}
+
+.time-wrap .l-time {
+    display: inline-flex;
+    align-items: center;
+    line-height: 1;
+}
+
+.time-wrap .l-cell {
+    padding: 6rpx 6rpx;
+    display: inline-block;
+    background: black;
+    border-radius: 4rpx;
+    color: #fff;
+    text-align: center;
+    margin: 0 10rpx;
+    min-width: 1.6em;
+}
+
+.groupon-info>.btn {
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 80rpx;
+    background: #ff5374;
+    color: #fff;
+    font-size: 30rpx;
+    margin-top: 20rpx;
+    border-radius: 8rpx;
+}
+
+.groupon-info>.btn.share-btn {
+    background: #2ad02a;
+}
+
+.common-row {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    background: #fff;
+    font-size: 30rpx;
+    width: 100%;
+    margin-top: 20rpx;
+    height: 80rpx;
+    padding: 0 26rpx;
+    color: #333;
+    padding-right: 10rpx;
+    box-sizing: border-box;
+}
+
+.common-row image {
+    width: 48rpx;
+    height: 48rpx;
+}
+
+.common-row>view {
+    display: flex;
+    align-items: center;
+    color: #999;
+    font-size: 26rpx;
+}
+
+.more-list {
+    background: #fff;
+    width: 100%;
+    margin-top: 20rpx;
+}
+
+.more-list .header {
+    display: flex;
+    justify-content: space-between;
+    font-size: 30rpx;
+    color: #333;
+    align-items: center;
+    border-bottom: 1px solid #efefef;
+    height: 80rpx;
+    padding: 0 26rpx;
+    padding-right: 10rpx;
+}
+
+.more-list .header>view {
+    color: #999;
+    font-size: 26rpx;
+    display: flex;
+    align-items: center;
+}
+
+.more-list .header image {
+    width: 48rpx;
+    height: 48rpx;
+}
+
+.more-list .list .item {
+    display: flex;
+    padding: 20rpx;
+}
+
+.more-list .list .item>image {
+    width: 188rpx;
+    height: 188rpx;
+    border-radius: 8rpx;
+    flex: 0 0 auto;
+    margin-right: 20rpx;
+}
+
+.more-list .list .item>view {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+    flex: 1;
+}
+
+.more-list .list .item .top {
+    display: flex;
+    flex-direction: column;
+}
+
+.more-list .list .item .bottom {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-end;
+}
+
+.more-list .list .item .bottom .btn {
+    padding: 16rpx 38rpx;
+    font-size: 30rpx;
+    color: #fff;
+    background: linear-gradient(to right,#ff8262,#ff5e73);
+    border-radius: 6rpx;
+}
+
+.more-list .list .item .name {
+    font-size: 30rpx;
+    color: #333;
+    display: -webkit-box;
+    word-break: break-all;
+    -webkit-box-orient: vertical;
+    line-height: 1em;
+    height: 1em;
+    overflow: hidden;
+    -webkit-line-clamp: 1;
+    text-overflow: ellipsis;
+}
+
+.more-list .list .item .desc {
+    font-size: 26rpx;
+    color: #999;
+    display: -webkit-box;
+    word-break: break-all;
+    -webkit-box-orient: vertical;
+    -webkit-line-clamp: 1;
+    line-height: 1em;
+    height: 1em;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    margin-top: 12rpx;
+}
+
+.more-list .list .item .count {
+    color: #ff768f;
+    font-size: 24rpx;
+    margin-top: 20rpx;
+}
+
+@import "../../wuBaseWxss/12.wxss";

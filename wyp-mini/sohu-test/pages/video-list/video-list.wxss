@@ -1,0 +1,114 @@
+@import "../../template/news-model/video-model.wxss";
+
+@import "../../wuBaseWxss/4.wxss";
+
+@import "../../wuBaseWxss/1.wxss";
+
+.container-info .bottom-loading {
+    height: 100rpx;
+    width: 100%;
+    font-size: 25rpx;
+    color: #737373;
+    margin-top: 30rpx;
+}
+
+.container-info .bottom-loading .tip {
+    margin-top: 10rpx;
+    margin-bottom: 15rpx;
+    font-size: 24rpx;
+    color: #f0492e;
+    text-align: center;
+}
+
+.container-info .bottom-loading .dot-loading {
+    width: 60rpx;
+    height: 60rpx;
+    margin: 10rpx auto;
+    overflow: hidden;
+}
+
+.container-info .bottom-loading .dot-loading .dot {
+    width: 24rpx;
+    height: 24rpx;
+    background-color: #fac0b7;
+    float: left;
+    animation: active .4s infinite;
+}
+
+.container-info .bottom-loading .dot-loading .dot:nth-child(1) {
+    animation-delay: 0s;
+}
+
+.container-info .bottom-loading .dot-loading .dot:nth-child(2) {
+    animation-delay: 0.1s;
+    margin-left: 6rpx;
+}
+
+.container-info .bottom-loading .dot-loading .dot:nth-child(4) {
+    animation-delay: 0.2s;
+    margin-left: 6rpx;
+    margin-top: 6rpx;
+}
+
+.container-info .bottom-loading .dot-loading .dot:nth-child(3) {
+    animation-delay: 0.3s;
+    margin-top: 6rpx;
+}
+
+@keyframes active {
+    0% {
+        background-color: #ee2f10;
+    }
+}
+
+@-webkit-keyframes active {
+    0% {
+        background-color: #ee2f10;
+    }
+}
+
+.refresh-result {
+    Transition: myfirst 2s ease-out;
+    width: 100%;
+}
+
+.refresh-result .detail {
+    background: #fff3f3;
+    height: 70rpx;
+    width: 100%;
+    color: #ee2f10;
+    font-size: 24rpx;
+    line-height: 72rpx;
+    display: -webkit-box;
+    display: -webkit-flex;
+    display: flex;
+}
+
+.refresh-result .detail .info-text {
+    width: 65%;
+}
+
+.refresh-result .detail .info-text text {
+    float: right;
+}
+
+.refresh-result .detail .info-img {
+    padding-top: 23rpx;
+    width: 35%;
+}
+
+.refresh-result .detail .info-img image {
+    width: 27rpx;
+    height: 27rpx;
+    margin-left: 10rpx;
+}
+
+.loading-begin {
+    height: 1080rpx;
+    padding: 0;
+    overflow: hidden;
+}
+
+.loading-begin image {
+    width: 100%;
+}

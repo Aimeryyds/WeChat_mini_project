@@ -1,0 +1,11 @@
+<template name="862daa46">
+    <view class="_div data-v-5d3e8c1c container">
+        <view class="_div data-v-5d3e8c1c card-index">今日知识卡片：{{current+1}} / {{cards.length}}</view>
+        <swiper bindchange="handleProxy" class="_swiper data-v-5d3e8c1c swiper" current="{{current}}" data-comkey="{{$k}}" data-eventid="{{'0'}}" nextMargin="30px" previousMargin="30px">
+            <swiper-item class="_swiper-item data-v-5d3e8c1c item" key="{{index}}" wx:for="{{cards}}" wx:for-item="card" wx:key="index">
+                <template is="e73a055e" data="{{...$root[$kk+'0-'+index],$root:$root}}"></template>
+            </swiper-item>
+        </swiper>
+    </view>
+</template>
+<import src="/pages/bookPlanAchievement/ShareCard.vue.wxml"></import>

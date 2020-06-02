@@ -1,0 +1,80 @@
+<import src="/dist/loadmore/index.wxml"></import>
+<import src="/pages/templates/tag/tuan.wxml"></import>
+<import src="/pages/templates/tag/seckill.wxml"></import>
+<view class="container" style="padding-top:194rpx;" wx:if="{{isShow}}">
+    <view class="products-fixedbar" style="z-index: 100;">
+        <view bindtap="handlesearch" class="search-wrap">
+            <view class="products-search">
+                <image class="products-search__img" src="http://imgcdnali.wfenxiao.com.cn/xcx/c/icons/ic_search.png"></image>
+                <view class="products-search__text">搜索商品</view>
+            </view>
+        </view>
+        <view class="products-tab">
+            <view bindtap="handleSwitchSort" data-sort="sales" style="color: {{sort=='sales'?'red':''}}">销量</view>
+            <view bindtap="handleSwitchSort" data-sort="new" style="color: {{sort=='new'?'red':''}}">新品</view>
+            <view bindtap="handleSwitchSort" data-sort="evaluateCount" style="color: {{sort=='evaluateCount'?'red':''}}">好评</view>
+            <view class="">
+                <text bindtap="handleSwitchSort" data-sort="price" style="color:{{sort=='price'?'red':''}}">价格</text>
+                <image class="products-sort-img" src="http://imgcdnali.wfenxiao.com.cn/xcx/c/icons/ic_price_sort_default.png" wx:if="{{sort!='price'}}"></image>
+                <image class="products-sort-img" src="http://imgcdnali.wfenxiao.com.cn/xcx/c/icons/ic_price_sort_up.png" wx:elif="{{order=='asc'}}"></image>
+                <image class="products-sort-img" src="http://imgcdnali.wfenxiao.com.cn/xcx/c/icons/ic_price_sort_down.png" wx:else></image>
+            </view>
+            <view>
+                <image bindtap="handleToggleMode" class="products-type-img" src="http://imgcdnali.wfenxiao.com.cn/xcx/c/icons/pro-type1.png" wx:if="{{mode=='grid'}}"></image>
+                <image bindtap="handleToggleMode" class="products-type-img" src="http://imgcdnali.wfenxiao.com.cn/xcx/c/icons/pro-type2.png" wx:else></image>
+            </view>
+        </view>
+    </view>
+    <scroll-view enableBackToTop scrollY bindscrolltolower="lower" scrollTop="{{scrollTop}}" style="width:100%;height: 100vh;">
+        <view class="products-wrap" style="margin-top:0rpx;" wx:if="{{mode=='grid'}}">
+            <view bindtap="makestore" class="products-list" data-goods="{{item}}" wx:if="{{products&&products.length>0}}" wx:for="{{products}}">
+                <image class="products-list__img" src="{{item.imgUrl}}"></image>
+                <view class="products-list__info">
+                    <view class="products-list__name">
+                        <view class="tuan__tag1" wx:if="{{item.activityType==2}}">
+                            <template is="tuan-tag" data="{{num:item.limitPeople}}"></template>
+                        </view>
+                        <view class="tuan__tag1" wx:if="{{item.activityType==1&&item.seckillStatus==2}}">
+                            <template is="seckill-tag" data></template>
+                        </view>
+                        <view class="zan-ellipsis--l2" style="text-indent:{{item.activityType==1&&item.seckillStatus==2||item.activityType==2?'70rpx':'0rpx'}};">{{item.name}}</view>
+                    </view>
+                    <view class="products-list__cont">
+                        <view class="products-list__price">
+                            <text>¥</text>{{item.price}}</view>
+                        <view class="products-list__stock">已售{{item.saleNum}}件</view>
+                        <view class="product-storename-2" wx:if="{{isShowStoreName}}">【{{item.brandName}}-{{item.storeName}}】</view>
+                    </view>
+                    <view style="font-size:24rpx;color:rgba(0,0,0,0.43);margin-top:10rpx;">{{item.reviewsNum}}条评价  {{item.goodReviewsRate}}%好评</view>
+                </view>
+            </view>
+        </view>
+        <view class="products-wrap products-wrap--type2" style="margin-top:0rpx;" wx:else>
+            <view bindtap="makestore" class="products-list2" data-goods="{{item}}" wx:if="{{products&&products.length>0}}" wx:for="{{products}}">
+                <view style="text-align:center;">
+                    <image class="products-list2__img" src="{{item.imgUrl}}"></image>
+                </view>
+                <view class="tuan__tag2" wx:if="{{item.activityType==2}}">
+                    <template is="tuan-tag" data="{{num:item.limitPeople}}"></template>
+                </view>
+                <view class="tuan__tag2" wx:if="{{item.activityType==1&&item.seckillStatus==2}}">
+                    <template is="seckill-tag" data></template>
+                </view>
+                <view class="products-list2__name zan-ellipsis--l2">{{item.name}}</view>
+                <view class="product-storename-1 zan-ellipsis" wx:if="{{isShowStoreName}}">【{{item.brandName}} - {{item.storeName}}】</view>
+                <view class="products-list__cont">
+                    <view class="products-list__price">
+                        <text>¥</text>{{item.price}}</view>
+                    <view class="products-list__stock">已售{{item.saleNum}}件</view>
+                </view>
+                <view style="font-size:24rpx;color:rgba(0,0,0,0.43);margin-top:10rpx;">{{item.reviewsNum}}条评价  {{item.goodReviewsRate}}%好评</view>
+            </view>
+        </view>
+        <view style="font-size: 28rpx; color:rgba(0,0,0,0.43);margin-top:100rpx;text-align:center;" wx:if="{{products.length==0}}">
+      暂无商品
+    </view>
+        <view id="loadmore">
+            <template is="zan-loadmore" data="{{loading:loadingmore}}"></template>
+        </view>
+    </scroll-view>
+</view>

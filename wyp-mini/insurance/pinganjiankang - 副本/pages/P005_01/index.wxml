@@ -1,0 +1,14 @@
+<view style="height:100rpx;">
+  这是内容
+</view>
+<view class="small_nav {{tabFixed?'small_navFix':''}}" id="tab-con">
+    <scroll-view scrollLeft="{{scrollLeft}}" scrollX="true">
+        <view class="small_nav_scroll">
+            <view bindtap="switchNav" class="{{id==''?'cur':' '}}" data-id="">全部</view>
+            <view bindtap="switchNav" class="{{id==item.categoryId?'cur':' '}}" data-id="{{item.categoryId}}" data-index="{{index}}" wx:for="{{typeList}}" wx:key="index">{{item.categoryName}}</view>
+        </view>
+    </scroll-view>
+</view>
+<view style="height:3000rpx;">
+  这是内容
+</view>

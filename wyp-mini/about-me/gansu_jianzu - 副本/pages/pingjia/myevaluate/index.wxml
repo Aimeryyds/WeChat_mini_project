@@ -1,0 +1,11 @@
+<import src="/dist/loadmore/index.wxml"></import>
+<view class="container" wx:if="{{isShow}}">
+    <scroll-view enableBackToTop scrollY bindscroll="handlescroll" bindscrolltolower="lower" scrollTop="{{scrollTop}}" style="width:100%;height: 100vh;margin-bottom:120rpx;">
+        <evaluatecontent bindrefresh="refreshList" evaluateData="{{evaluateData}}" sType="{{sType}}"></evaluatecontent>
+        <view id="loadmore">
+            <template is="zan-loadmore" data="{{loading:loadingmore}}"></template>
+        </view>
+        <wxc-abnor title="暂时没有数据" type="MESSAGE" wx:if="{{evaluateData.data.length==0}}"></wxc-abnor>
+        <navigator class="goto__evaluate-btn" hoverClass="none" url="/pages/orders/list/list?type=4" wx:if="{{evaluateData.data.length==0}}">去评价</navigator>
+    </scroll-view>
+</view>

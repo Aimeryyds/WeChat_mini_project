@@ -1,0 +1,150 @@
+<import src="/pages/templates/tag/manjian.wxml"></import>
+<import src="/dist/loadmore/index.wxml"></import>
+<view class="container" wx:if="{{isShow}}">
+    <view class="desc-info">
+        <image class="desc-info__img" src="{{storedetail.logo||'http://imgcdnali.wfenxiao.com.cn/xcx/c/icons/brand.png'}}"></image>
+        <view class="desc-info__text">
+            <view style="flex:1">
+                <view class="desc-info__title" wx:if="{{storedetail.storeType!=6}}">{{storedetail.brandName}}-{{storedetail.storeName}}</view>
+                <view class="desc-info__title" wx:if="{{storedetail.storeType==6}}">{{storedetail.brandName}} 【{{storedetail.storeName}}】</view>
+                <view class="desc-support"></view>
+            </view>
+            <view style="display: flex;align-items: center;">
+                <view style="flex:1">
+                    <view class="text-color">
+            {{storedetail.storeType==3?(storedetail.orderNum||0)+'人订过':'已售'+(storedetail.orderNum||0)+'单'}}
+            |
+            <text>{{storedetail.collectionNum||0}}人已收藏</text>
+                    </view>
+                </view>
+                <view class="desc-Collection">
+                    <view bindtap="collectionOn" class="desc-Collection__cont  {{storedetail.hasCollection?'desc-Collection__coll':'desc-Collection__no-coll'}}">
+                        <image src="{{storedetail.hasCollection?'http://imgcdnali.wfenxiao.com.cn/xcx/c/1120/collection2.png':'http://imgcdnali.wfenxiao.com.cn/xcx/c/1120/collection.png'}}"></image>
+                        <text>{{storedetail.hasCollection?'已收藏':'收藏'}}</text>
+                    </view>
+                </view>
+            </view>
+        </view>
+    </view>
+    <view class="desc-coupon" wx:if="{{couponlist.length>0}}">
+        <view class="desc-coupon_title desc-coupon_bottom_border">
+      店铺优惠券
+    </view>
+        <view>
+            <view class="desc-coupon-item" wx:for="{{couponlist}}">
+                <view bindtap="{{item.stock>0?'reciveCoupon':''}}" data-id="{{item.id}}" style="margin-bottom:20rpx">
+                    <coupon coupon="{{value:item.value,useTime:item.storeDetailUseTime,useEndTime:item.storeDetailUseEndTime,useThreshold:item.useThreshold,stock:item.stock,id:item.id,status:item.status,termOfValidity:item.termOfValidity}}" type="type5"></coupon>
+                </view>
+            </view>
+        </view>
+    </view>
+    <view class="desc-coupon" wx:if="{{storedetail.fullreductionMsg&&storedetail.fullreductionMsg.length>0}}">
+        <view class="desc-coupon_title desc-coupon_bottom_border">
+      店铺活动
+    </view>
+        <view class="manjian-container" wx:for="{{storedetail.fullreductionMsg}}">
+            <view style="margin-top:4rpx">
+                <template is="manjian-tag" data></template>
+            </view>
+            <view class="desc_manjian-value-container">
+                <view class="desc_manjian-value" wx:for="{{item.msg}}" wx:for-item="itemmsg">
+            {{itemmsg}}
+          </view>
+            </view>
+        </view>
+    </view>
+    <view class="zan-panel zan-panel__no-margin-top" style="margin-top:-20rpx">
+        <view class="shop__header-album">
+            <navigator hoverClass="navigator-hover" url="/pages/shop/album/album?shopId={{storedetail.id}}" wx:for="{{storedetail.photos}}">
+                <image class="shop__header-album__image{{storedetail.photos.length}}" src="{{item}}"></image>
+            </navigator>
+        </view>
+    </view>
+    <view class="desc-detail zan-form">
+        <view class="desc-coupon_title desc-coupon_bottom_border">
+      店铺信息
+    </view>
+        <view class="zan-cell zan-form__item" style="display: flex;align-items:flex-start;">
+            <view class="zan-form__item-label">
+                <image src="http://imgcdnali.wfenxiao.com.cn/xcx/c/icons/store-time.png"></image>
+                <text class="zan-form__title">营业时间：</text>
+            </view>
+            <view style="flex:1;">
+                <view wx:for="{{storedetail.openTimeJson}}">{{item.time}}</view>
+            </view>
+        </view>
+        <view class="zan-cell zan-form__item">
+            <view class="zan-form__item-label">
+                <image src="http://imgcdnali.wfenxiao.com.cn/xcx/c/icons/store-phone.png"></image>
+                <text class="zan-form__title">门店电话：</text>
+            </view>
+            <text class="zan-form__textColor">
+                <text wx:if="{{storedetail.areaNum}}">{{storedetail.areaNum}}-</text>{{storedetail.tel}}</text>
+            <image bindtap="calling" src="http://imgcdnali.wfenxiao.com.cn/xcx/c/icons/red-phone.png" style="width:45rpx;height:43rpx;"></image>
+        </view>
+        <view bindtap="handleStoreMap" class="zan-cell zan-form__item zan-cell--last-child" data-storedetail="{{storedetail}}" style="align-items:center;">
+            <view class="zan-form__item-label">
+                <image src="http://imgcdnali.wfenxiao.com.cn/xcx/c/icons/store-location.png" style="height:32rpx;"></image>
+                <text class="zan-form__title">门店地址：</text>
+            </view>
+            <text class="zan-cell__bd">{{storedetail.provinceName}}{{storedetail.cityName}}{{storedetail.areaName}}{{storedetail.detailAddress}}</text>
+            <image src="http://imgcdnali.wfenxiao.com.cn/xcx/c/icons/arrow_right.png" style="width:13rpx;height:22rpx;margin-left: 20rpx;"></image>
+        </view>
+    </view>
+    <view class="facilities" wx:if="{{storedetail.facilities.length>0&&storedetail.storeType==3}}">
+        <view class="fac-label">服务设施</view>
+        <view class="fac-content">
+            <text class="fac-item" wx:for="{{storedetail.facilities}}" wx:key="index">{{item.name}}</text>
+        </view>
+    </view>
+    <view wx:if="{{openevaluate==1}}">
+        <view class="evaluate-store__title">评价（{{storeEvaluateData.reviewsNum}}）  {{storeEvaluateData.goodReviewsRate}}%好评</view>
+        <evaluate-tab bindonquery="evaluateTab" pingjiaArray="{{pingjiaArray}}"></evaluate-tab>
+    </view>
+    <scroll-view enableBackToTop scrollY bindscroll="handlescroll" bindscrolltolower="lower" scrollTop="{{scrollTop}}" style="width:100%;height: 60vh;">
+        <view class="myevaluate" wx:if="{{isShow}}">
+            <view class="myevaluate-list" wx:for="{{storeEvaluateData.data}}" wx:for-index="dataindex">
+                <view class="myevaluate-list__item">
+                    <view class="myevaluate-baseInfo__wrap">
+                        <view class="myevaluate-baseInfo">
+                            <image class="myevaluate-baseInfo__img" src="{{item.avatarUrl}}"></image>
+                            <view class="myevaluate-baseInfo__cont">
+                                <view>{{item.nickName}}</view>
+                            </view>
+                        </view>
+                        <view class="myevaluate-list__start">商家打分：<image src="http://imgcdnali.wfenxiao.com.cn/xcx/c/1120/pingjia.png" wx:if="{{score<=item.businessScore}}" wx:for="{{[2,4,6,8,10]}}" wx:for-item="score"></image>
+                        </view>
+                    </view>
+                    <view style="margin-bottom:24rpx;" wx:for="{{item.evaluates}}" wx:for-index="dataindex2">
+                        <view class="myevaluate-list--fontcolor">{{item.firstEvaluateTimeStr}}  <text wx:if="{{item.properties}}">{{item.properties}}</text>
+                        </view>
+                        <view class="myevaluate-list__cont" wx:if="{{item.firstEvaluateContent}}">{{item.firstEvaluateContent}}</view>
+                        <view class="myevaluate-list__uploadimg" wx:if="{{item.firstEvaluateImgs}}">
+                            <image bindtap="onTapPic" data-imgindex="{{dataindex2}}" data-index="{{dataindex}}" data-link="{{item}}" data-type="first" src="{{item}}" style="margin-right:{{index==3?'0':'10rpx'}}" wx:for="{{item.firstEvaluateImgs}}"></image>
+                        </view>
+                        <view class="myevaluate-list__reply myevaluate-list--fontcolor" wx:if="{{item.firstBusinessReply}}">商家回复：{{item.firstBusinessReply}}</view>
+                        <view class="myevaluate-list__add" wx:if="{{item.secondEvaluateContent}}">
+                            <view class="myevaluate-list__add-title">{{item.days}}</view>
+                            <view class="myevaluate-list__cont">{{item.secondEvaluateContent}}</view>
+                            <view class="myevaluate-list__uploadimg" wx:if="{{item.secondEvaluateImgs}}">
+                                <image bindtap="onTapPic" data-imgindex="{{dataindex2}}" data-index="{{dataindex}}" data-link="{{item}}" data-type="second" src="{{item}}" style="margin-right:{{index==3?'0':'10rpx'}}" wx:for="{{item.secondEvaluateImgs}}"></image>
+                            </view>
+                            <view class="myevaluate-list__reply myevaluate-list--fontcolor" wx:if="{{item.secondBusinessReply}}">商家回复：{{item.secondBusinessReply}}</view>
+                        </view>
+                        <view class="myevaluate-product">
+                            <image class="myevaluate-product__img" src="{{item.imgs}}"></image>
+                            <view class="myevaluate-product__cont">
+                                <view style="margin-bottom:6rpx;">{{item.name}}</view>
+                                <view class="myevaluate-product__price" wx:if="{{item.price!=0}}">￥{{item.price}}</view>
+                            </view>
+                        </view>
+                    </view>
+                </view>
+            </view>
+            <wxc-abnor title="暂时没有数据" type="MESSAGE" wx:if="{{storeEvaluateData.data==0}}"></wxc-abnor>
+        </view>
+        <view id="loadmore">
+            <template is="zan-loadmore" data="{{loading:loadingmore}}"></template>
+        </view>
+    </scroll-view>
+</view>

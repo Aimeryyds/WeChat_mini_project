@@ -1,0 +1,33 @@
+<navigation-bar enable="{{enable}}" title="全部评论"></navigation-bar>
+<view class="container" style="padding-top:{{barHeight}}px;width:100%;">
+    <view bindtap="pageReload" class="cplist_nodata" wx:if="{{requeseFail}}">{{requeseFailTips}}</view>
+    <view class="cplist_nodata" wx:if="{{noData}}">{{noDataTips}}</view>
+    <view style="width:100%;" wx:else>
+        <view class="pllist">
+            <view class="plitem" wx:for="{{pllistDataList}}" wx:key="key">
+                <view class="avatarw">
+                    <image class="avatar" src="{{item.author.avatar_url}}"></image>
+                    <view class="n">{{item.author.nickname}}</view>
+                    <view class="time">{{item.create_time}}</view>
+                </view>
+                <view class="con">
+                    <navigator class="p" url="/pages/reply/reply?cid={{option.cid}}&id={{item.id}}&to={{item.author.nickname}}">{{item.content}}</navigator>
+                    <view class="quotbox" wx:if="{{item.reply&&item.reply.length>0}}">
+                        <block wx:for="{{item.reply}}" wx:key="key">
+                            <view class="n">{{item.author.nickname}}</view>
+                            <view class="c">{{item.content}}</view>
+                        </block>
+                    </view>
+                </view>
+            </view>
+        </view>
+    </view>
+</view>
+<view class=" " wx:if="{{showToast}}">
+    <view class="toast">
+        <rich-text nodes="{{toastTitle}}"></rich-text>
+    </view>
+</view>
+<loading hidden="{{requeseDone||!hasNextPage}}">
+ 加载中...
+</loading>

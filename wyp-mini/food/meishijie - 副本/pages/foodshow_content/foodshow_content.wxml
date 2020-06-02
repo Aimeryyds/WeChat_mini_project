@@ -1,0 +1,238 @@
+<navigation-bar title="晒美食" wx:if="{{showTopbar}}"></navigation-bar>
+<cover-view bindtap="tapBackbtn" class="backbtn" style="top:{{backbtnPos}}px" wx:if="{{!showTopbar}}">
+    <cover-image class="backbtnicon" src="{{backiconUrl}}"></cover-image>
+</cover-view>
+<view bindtap="pageReload" class="cplist_nodata" wx:if="{{requeseFail}}">{{requeseFailTips}}</view>
+<view wx:else>
+    <block wx:for="{{showData_items}}" wx:for-index="i" wx:key="key">
+        <block wx:if="{{i==0}}">
+            <view class="fsc_top">
+                <view class="c_head_swiper" wx:if="{{item.cook.top_list.length<2}}">
+                    <view class="videow" wx:if="{{item.cook.top_list[0].is_video=='1'}}">
+                        <video autoplay="{{i==0?vAutoplay_first:false}}" bindplay="playthis" class="videoitem" controls="{{true}}" data-index="{{i}}" enableProgressGesture="{{false}}" id="myVideo{{i}}" src="{{item.cook.top_list[0].vendor_video}}" style="width:{{item.cook.top_list[0].width/item.cook.top_list[0].height*1000}}rpx"></video>
+                        <image class="bgimg" src="{{item.cook.top_list[0].img}}"></image>
+                    </view>
+                    <view class="headerimg" id="topimg{{index}}" wx:else>
+                        <image class="img" mode="aspectFit" src="{{item.cook.top_list[0].img}}"></image>
+                        <image class="bgimg" src="{{item.cook.top_list[0].img}}"></image>
+                    </view>
+                </view>
+                <swiper autoplay="{{false}}" bindchange="swipeit" class="c_head_swiper" data-swiperid="{{i}}" indicatorActiveColor="#fff" indicatorColor="rgba(255, 255, 255, .3)" indicatorDots="{{item.cook.top_list.length>1?true:false}}" skipHiddenItemLayout="{{true}}" wx:else>
+                    <block wx:for="{{item.cook.top_list}}" wx:key="key">
+                        <swiper-item wx:if="{{item.is_video=='1'}}">
+                            <view class="videow">
+                                <video autoplay="{{i==0?vAutoplay_first:false}}" bindplay="playthis" class="videoitem" controls="{{true}}" data-index="{{i}}" enableProgressGesture="{{false}}" id="myVideo{{i}}" src="{{item.vendor_video}}" style="width:{{item.width/item.height*1000}}rpx;height:100%;" wx:if="{{item.height>=item.width}}"></video>
+                                <video autoplay="{{i==0?vAutoplay_first:false}}" bindplay="playthis" class="videoitem" controls="{{true}}" data-index="{{i}}" enableProgressGesture="{{false}}" id="myVideo{{i}}" src="{{item.vendor_video}}" style="height:{{item.height/item.width*1000}}rpx;width:100%;" wx:if="{{item.height<item.width}}"></video>
+                                <image class="bgimg" src="{{item.img}}"></image>
+                            </view>
+                        </swiper-item>
+                        <swiper-item wx:else>
+                            <view class="headerimg" id="topimg{{index}}">
+                                <image class="img" mode="aspectFit" src="{{item.img}}"></image>
+                                <image class="bgimg" src="{{item.img}}"></image>
+                            </view>
+                        </swiper-item>
+                    </block>
+                </swiper>
+            </view>
+            <view class="c_c3">
+                <view class="avatarw">
+                    <image class="avatar" src="{{item.author_info.avatar}}"></image>
+                    <view class="info">
+                        <view class="n">{{item.author_info.user_name}}</view>
+                        <view class="time">{{item.cook.create_time}}</view>
+                    </view>
+                </view>
+                <view class="cpdesw">
+                    <view class="cpdes" id="cpdes">{{item.cook.content}}</view>
+                    <view bindtap="tapOpenCpdesBtn" class="open_cpdes">展开<image src="{{moreArrowBlue}}"></image>
+                    </view>
+                </view>
+                <view class="linkrecipew" wx:if="{{item.recipe_info.id}}">
+                    <navigator class="recipeitem" hoverClass="navigator-hover" url="/pages/content/content?id={{item.recipe_info.id}}">
+                        <view class="recipeitemw">
+                            <view class="cpimgw" style="background:url({{item.recipe_info.img}}) center no-repeat;background-size:cover;"></view>
+                            <view class="cpinfow">
+                                <view class="cpnamew">
+                                    <text class="cpname">{{item.recipe_info.title}}</text>
+                                </view>
+                                <view class="tagw">
+                                    <view class="tag" wx:if="{{item.recipe_info.label[0]}}">
+                                        <view class="t" wx:if="{{item.recipe_info.label[0].name}}">{{item.recipe_info.label[0].name}}</view>
+                                        <view class="c" wx:if="{{item.recipe_info.label[0].desc}}">{{item.recipe_info.label[0].desc}}</view>
+                                    </view>
+                                </view>
+                                <view class="starw">
+                                    <view wx:for="{{[1,2,3,4,5]}}" wx:for-item="j">
+                                        <image src="{{starUrl1}}" wx:if="{{item.recipe_info.rate-j>=0}}"></image>
+                                        <image src="{{starUrl2}}" wx:elif="{{item.recipe_info.rate-j+1>0}}"></image>
+                                        <image src="{{starUrl3}}" wx:else></image>
+                                    </view>
+                                </view>
+                            </view>
+                            <view class="recipe_favbox">
+                                <view class="i">
+                                    <image src="../../images/fsrecipe_favicon1.png" wx:if="{{item.recipe_info.is_favored=='0'}}"></image>
+                                    <image src="../../images/fsrecipe_favicon2.png" wx:else></image>
+                                </view> {{item.recipe_info.favor_amount}}</view>
+                        </view>
+                    </navigator>
+                </view>
+                <navigator class="fsc_topictag" url="/pages/topiclist/topiclist?id={{item.cook.topic_info.topic_id}}" wx:if="{{item.cook.topic_info.topic_title}}">
+                    <image class="i" src="{{fsc_icon}}"></image>
+                    <view class="t">{{item.cook.topic_info.topic_title}}</view>
+                </navigator>
+                <view class="viewtip">浏览 {{item.cook.click_num}}</view>
+            </view>
+            <view class="fsc_zanbox">
+                <view class="zanbtn">
+                    <button bindgetuserinfo="tapFavBtn" class="zanicon" data-index="{{i}}" data-type="dozan" openType="getUserInfo" wx:if="{{item.cook.is_zan=='1'}}">
+                        <image class="i" src="{{icon42}}"></image>
+                        <view class="n">{{item.cook.zan_num}}</view>
+                    </button>
+                    <button bindgetuserinfo="tapFavBtn" class="zanicon" data-id="{{item.food_id}}" data-index="{{i}}" data-type="dozan" openType="getUserInfo" wx:else>
+                        <image class="i" src="{{icon41}}"></image>
+                        <view class="n">{{item.cook.zan_num}}</view>
+                    </button>
+                </view>
+                <view class="item" wx:if="{{si<15}}" wx:for="{{item.cook.zan_users}}" wx:for-index="si" wx:key="key">
+                    <image class="avatar" src="{{item.avatar}}"></image>
+                </view>
+            </view>
+            <view class="plbox">
+                <view class="pltitle" wx:if="{{item.cook.pl_num!='0'&&item.cook.pl_num!=0}}">评论 <view class="s" wx:if="{{item.cook.pl_num!='0'&&item.cook.pl_num!=0}}">({{item.cook.pl_num}})</view>
+                </view>
+            </view>
+            <view class="pllist">
+                <view class="plitem" wx:for="{{item.comment_list}}" wx:key="key">
+                    <view class="avatarw">
+                        <image class="avatar" src="{{item.author.avatar_url}}"></image>
+                        <view class="n">{{item.author.nickname}}</view>
+                        <view class="time">{{item.create_time}}</view>
+                    </view>
+                    <view class="con">
+                        <view class="p">{{item.content}}</view>
+                        <view class="quotbox" wx:if="{{item.reply&&item.reply.length>0}}">
+                            <block wx:for="{{item.reply}}" wx:key="key">
+                                <view class="n">{{item.author.nickname}}</view>
+                                <view class="c">{{item.content}}</view>
+                            </block>
+                        </view>
+                    </view>
+                </view>
+                <navigator class="moreplbtn" url="/pages/pl_list/pl_list?cid={{item.food_id}}" wx:if="{{item.cook.pl_num!='0'}}">查看全部{{item.cook.pl_num}}条评论<image class="i" src="../../images/arrow1.png"></image>
+                </navigator>
+            </view>
+        </block>
+        <block wx:else>
+            <view class="line"></view>
+            <view class="subtitle" wx:if="{{i==1}}">相关推荐</view>
+            <view class="avatarww">
+                <view class="avatarw">
+                    <image class="avatar" src="{{item.author_info.avatar}}"></image>
+                    <view class="info">
+                        <view class="n">{{item.author_info.user_name}}</view>
+                        <view class="time">{{item.cook.create_time}}</view>
+                    </view>
+                </view>
+            </view>
+            <view class="fsc_top">
+                <view class="c_head_swiper_new {{'c_head_swiper'+item.cook.top_list.length}}">
+                    <block wx:for="{{item.cook.top_list}}" wx:key="key">
+                        <view class="videow" wx:if="{{item.is_video=='1'}}">
+                            <video autoplay="{{i==0?vAutoplay_first:false}}" bindplay="playthis" class="videoitem" controls="{{true}}" data-index="{{i}}" enableProgressGesture="{{false}}" id="myVideo{{i}}" objectFit="contain" playBtnPosition="center" src="{{item.vendor_video}}" style="width:100%;height:100%;"></video>
+                            <image class="img" mode="aspectFill" src="{{item.img}}"></image>
+                        </view>
+                        <view class="headerimg" id="topimg{{index}}" wx:else>
+                            <image bindtap="showbigimg" class="img" data-img="{{item.img}}" data-index="{{i}}" mode="aspectFill" src="{{item.img}}"></image>
+                        </view>
+                    </block>
+                </view>
+            </view>
+            <view class="c_c3">
+                <view class="cpdesw">
+                    <view class="cpdes" id="cpdes">{{item.cook.content}}</view>
+                    <view bindtap="tapOpenCpdesBtn" class="open_cpdes">展开<image src="{{moreArrowBlue}}"></image>
+                    </view>
+                </view>
+                <view class="linkrecipew_style2" wx:if="{{item.recipe_info.id}}">
+                    <navigator class="recipeitem" hoverClass="navigator-hover" url="/pages/content/content?id={{item.recipe_info.id}}">
+                        <view class="recipeitemw">
+                            <view class="cpimgw" style="background:url({{item.recipe_info.img}}) center no-repeat;background-size:cover;"></view>
+                            <view class="cpinfow">
+                                <view class="cpnamew">
+                                    <text class="cpname">{{item.recipe_info.title}}</text>
+                                </view>
+                                <view class="tagw">
+                                    <view class="tag" wx:if="{{item.recipe_info.label[0]}}">
+                                        <view class="t" wx:if="{{item.recipe_info.label[0].name}}">{{item.recipe_info.label[0].name}}</view>
+                                        <view class="c" wx:if="{{item.recipe_info.label[0].desc}}">{{item.recipe_info.label[0].desc}}</view>
+                                    </view>
+                                </view>
+                            </view>
+                            <view class="recipe_favbox">
+                                <view class="i">
+                                    <image src="../../images/fsrecipe_favicon1.png" wx:if="{{item.recipe_info.is_favored=='0'}}"></image>
+                                    <image src="../../images/fsrecipe_favicon2.png" wx:else></image>
+                                </view> {{item.recipe_info.favor_amount}}</view>
+                        </view>
+                    </navigator>
+                </view>
+                <view class="viewtip">浏览 {{item.cook.click_num}}</view>
+            </view>
+            <view class="fsc_zanbox1">
+                <view class="zanbtn1">
+                    <button bindgetuserinfo="tapFavBtn" class="zanicon1" data-index="{{i}}" data-type="dozan" openType="getUserInfo" wx:if="{{item.cook.is_zan=='1'}}">
+                        <image class="i" src="{{icon42}}"></image>
+                    </button>
+                    <button bindgetuserinfo="tapFavBtn" class="zanicon1" data-id="{{item.food_id}}" data-index="{{i}}" data-type="dozan" openType="getUserInfo" wx:else>
+                        <image class="i" src="{{icon41}}"></image>
+                    </button>
+                </view>
+                <view class="item1" style="position:relative;z-index:{{100-si}}" wx:if="{{si<4}}" wx:for="{{item.cook.zan_users}}" wx:for-index="si" wx:key="key">
+                    <image class="avatar1" src="{{item.avatar}}"></image>
+                </view>
+                <view class="n" wx:if="{{item.cook.zan_num>0}}">{{item.cook.zan_num}}人赞</view>
+                <view class="fsc_topbtns1">
+                    <button bindgetuserinfo="tapFavBtn" class="fsc_topbtn2" data-index="{{i}}" data-type="dofav" openType="getUserInfo" wx:if="{{item.cook.is_favor=='1'}}">
+                        <image class="i" src="{{icon22}}"></image>{{item.cook.favor_amount}}</button>
+                    <button bindgetuserinfo="tapFavBtn" class="fsc_topbtn2" data-id="{{item.food_id}}" data-index="{{i}}" data-type="dofav" openType="getUserInfo" wx:else>
+                        <image class="i" src="{{icon21}}"></image>{{item.cook.favor_amount}}</button>
+                    <navigator class="moreplbtn2" url="/pages/pl_list/pl_list?cid={{item.food_id}}">
+                        <image class="i" src="{{icon1936_2}}"></image>{{item.cook.pl_num}}</navigator>
+                    <button class="fsc_topbtn2" data-index="{{i}}" openType="share">
+                        <image class="i" src="{{icon1936_1}}"></image>{{item.cook.share_num}}</button>
+                </view>
+            </view>
+            <view class="pllist1">
+                <view class="plitem1" wx:for="{{item.comment_list}}" wx:key="key">
+                    <view class="n">{{item.author.nickname}}：</view>
+                    <view class="p">{{item.content}}</view>
+                </view>
+                <navigator class="moreplbtn1" url="/pages/pl_list/pl_list?cid={{item.food_id}}" wx:if="{{item.cook.pl_num!='0'}}">查看更多评论</navigator>
+            </view>
+        </block>
+    </block>
+    <view class="fsc_topbtns2" wx:if="{{showBottombar}}">
+        <button bindgetuserinfo="tapFavBtn" class="fsc_topbtn2" data-index="0" data-type="dozan" openType="getUserInfo" wx:if="{{showData_items[0].cook.is_zan=='1'}}">
+            <image class="i" src="{{icon42}}"></image>{{showData_items[0].cook.zan_num||'0'}}</button>
+        <button bindgetuserinfo="tapFavBtn" class="fsc_topbtn2" data-id="{{showData_items[0].food_id}}" data-index="0" data-type="dozan" openType="getUserInfo" wx:else>
+            <image class="i" src="{{icon41}}"></image>{{showData_items[0].cook.zan_num||'0'}}</button>
+        <navigator class="fsc_topbtn2" url="/pages/pl_list/pl_list?cid={{showData_items[0].food_id}}">
+            <image class="i" src="{{icon1936_2}}"></image>{{showData_items[0].cook.pl_num}}</navigator>
+        <button bindgetuserinfo="tapFavBtn" class="fsc_topbtn2" data-index="0" data-type="dofav" openType="getUserInfo" wx:if="{{showData_items[0].cook.is_favor=='1'}}">
+            <image class="i" src="{{icon22}}"></image>{{showData_items[0].cook.favor_amount}}</button>
+        <button bindgetuserinfo="tapFavBtn" class="fsc_topbtn2" data-id="{{showData_items[0].food_id}}" data-index="0" data-type="dofav" openType="getUserInfo" wx:else>
+            <image class="i" src="{{icon21}}"></image>{{showData_items[0].cook.favor_amount}}</button>
+        <button class="fsc_topbtn2" data-index="0" openType="share">
+            <image class="i" src="{{icon31}}"></image>{{showData_items[0].cook.share_num}}</button>
+    </view>
+    <view class="toastw" wx:if="{{showToast}}">
+        <view class="toast">
+            <rich-text nodes="{{toastTitle}}"></rich-text>
+        </view>
+    </view>
+</view>
+<loading hidden="{{requeseDone}}">
+ 加载中...
+</loading>

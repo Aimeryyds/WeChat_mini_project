@@ -1,0 +1,43 @@
+<toast show="{{toast.show}}" title="{{toast.title}}"></toast>
+<view class="myevaluate">
+    <view class="myevaluate-list" wx:for="{{evaluateData.data}}" wx:for-index="dataindex">
+        <view class="myevaluate-list__item">
+            <view class="myevaluate-baseInfo__wrap">
+                <view class="myevaluate-baseInfo">
+                    <image class="myevaluate-baseInfo__img" src="{{item.avatarUrl}}"></image>
+                    <view class="myevaluate-baseInfo__cont">
+                        <view>{{item.nickName}}</view>
+                    </view>
+                </view>
+                <view style="font-size:24rpx;" wx:if="{{sType==1||sType==2||sType==3}}">{{item.evaluate==1?'好评':item.evaluate==2?'中评':'差评'}}</view>
+                <view class="myevaluate-list__start" wx:elif="{{sType==4||sType==5}}">商家打分：<image src="http://imgcdnali.wfenxiao.com.cn/xcx/c/1120/pingjia.png" wx:if="{{score<=item.businessScore}}" wx:for="{{[2,4,6,8,10]}}" wx:for-item="score"></image>
+                </view>
+                <view bindtap="handleReleaseBtn" data-index="{{dataindex}}" data-item="{{item}}" wx:else>
+                    <image class="myevaluate-list__ctrlbtn" src="http://imgcdnali.wfenxiao.com.cn/xcx/c/1120/ctrl-icon.png"></image>
+                </view>
+            </view>
+            <view class="myevaluate-list--fontcolor">{{item.firstEvaluateTimeStr}}  {{item.properties}}</view>
+            <view class="myevaluate-list__cont" wx:if="{{item.firstEvaluateContent}}">{{item.firstEvaluateContent}}</view>
+            <view class="myevaluate-list__uploadimg" wx:if="{{item.firstEvaluateImgs}}">
+                <image bindtap="onTapPic" data-index="{{dataindex}}" data-link="{{item}}" data-type="first" src="{{item}}" style="margin-right:{{index==3?'0':'10rpx'}}" wx:for="{{item.firstEvaluateImgs}}"></image>
+            </view>
+            <view class="myevaluate-list--fontcolor" wx:if="{{sType==4}}">2018-02-18入住</view>
+            <view class="myevaluate-list__reply myevaluate-list--fontcolor" wx:if="{{item.firstBusinessReply}}">商家回复：{{item.firstBusinessReply}}</view>
+            <view class="myevaluate-list__add" wx:if="{{item.secondEvaluateContent}}">
+                <view class="myevaluate-list__add-title">{{item.days}}</view>
+                <view class="myevaluate-list__cont">{{item.secondEvaluateContent}}</view>
+                <view class="myevaluate-list__uploadimg" wx:if="{{item.secondEvaluateImgs}}">
+                    <image bindtap="onTapPic" data-index="{{dataindex}}" data-link="{{item}}" data-type="second" src="{{item}}" style="margin-right:{{index==3?'0':'10rpx'}}" wx:for="{{item.secondEvaluateImgs}}"></image>
+                </view>
+                <view class="myevaluate-list__reply myevaluate-list--fontcolor" wx:if="{{item.secondBusinessReply}}">商家回复：{{item.secondBusinessReply}}</view>
+            </view>
+            <view class="myevaluate-product" wx:if="{{sType==8}}">
+                <image class="myevaluate-product__img" src="{{item.imgs}}" wx:if="{{item.imgs}}"></image>
+                <view class="myevaluate-product__cont">
+                    <view style="margin-bottom:6rpx;" wx:if="{{item.name}}">{{item.name}}</view>
+                    <view class="myevaluate-product__price" wx:if="{{item.price!=0}}">￥{{item.price}}</view>
+                </view>
+            </view>
+        </view>
+    </view>
+</view>

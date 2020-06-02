@@ -1,0 +1,24 @@
+<import src="/yb_shop/utils/wxParse/wxParse.wxml"></import>
+<loading hidden="{{show}}">正在加载</loading>
+<view class="page_tab" wx:if="{{show}}">
+    <view class="contact_tit">{{info.name}}</view>
+    <view class="contact_main">
+        <view bindtap="calling" class="contact_li" data-phone="{{info.phone}}">
+            <image class="contact_icon" mode="aspectFit" src="/yb_shop/static/images/phone_icon.png"></image>
+            <text class="text01">{{info.phone}}</text>
+            <view class="cl"></view>
+        </view>
+        <view bindtap="navigate" class="contact_li">
+            <image class="contact_icon" mode="aspectFit" src="/yb_shop/static/images/position_icon.png"></image>
+            <text class="text01">{{info.address}}</text>
+            <view class="cl"></view>
+        </view>
+    </view>
+    <view class="wxParse contact_info" wx:if="{{info.desc}}">
+        <template is="wxParse" data="{{wxParseData:wxParseData.nodes}}"></template>
+    </view>
+</view>
+<block wx:if="{{showtabbar}}">
+    <view style="height:100rpx"></view>
+    <include src="/yb_shop/pages/common/menu.wxml"></include>
+</block>

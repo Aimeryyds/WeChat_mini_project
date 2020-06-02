@@ -1,0 +1,19 @@
+<import src="../../common/template.wxml"></import>
+<view class="container">
+    <image src="{{backimg}}" style="position:fixed;top:0px;height:100%;width:100%"></image>
+    <view class="header"></view>
+    <view class="body">
+        <view catchtap="onItemClick" class="cell" data-index="{{row}}" wx:for="{{items}}" wx:for-index="row" wx:for-item="cell">
+            <image class="imageView" data-index="{{row}}" mode="scaleToFill" src="{{cell.image}}"></image>
+            <view class="title" data-index="{{row}}" style="width: {{windowWidth-105}}px">{{cell.title}}</view>
+        </view>
+        <template is="bottomlogo" data="{{AgentConfig:AgentConfig}}"></template>
+    </view>
+</view>
+<view class="qrcodeView" style="position: absolute;top: 5%;left:0px;width: {{windowWidth}}px;height: 500rpx;display:flex;align-items: center;justify-content: center;" wx:if="{{isShowQRCode}}">
+    <view style="width: 500rpx;height: 500rpx;display:flex;align-items: center;justify-content: flex-start;flex-direction: column;background-image: url(http://j.vzan.cc/content/images/miniapp/185357571017509174.png);background-repeat:no-repeat;background-size:100% 100%;" wx:if="{{isShowQRCode}}">
+        <image bindtap="previewImg" class="qrcode" data-img="{{userInfo.codeImg}}" src="{{userInfo.codeImg}}" style="width: 350rpx;height: 350rpx;margin-top:30rpx;"></image>
+        <text style="width: 300rpx;text-align:center;font-size:30rpx;padding-top:10rpx;">扫一扫关注我们
+        </text>
+    </view>
+</view>

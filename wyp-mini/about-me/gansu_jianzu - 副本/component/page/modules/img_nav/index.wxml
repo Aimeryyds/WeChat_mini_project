@@ -1,0 +1,8 @@
+<view class="zan-panel zan-panel__no-margin-top zan-panel__no-border">
+    <scroll-view scrollX class="imgNav-list  {{module.options.navs.length<5?'mod4':''}} {{module.options.navStyle=='type2'?'type1':'type2'}}" wx:if="{{module.options.navs.length>0}}">
+        <view bindtap="makecustome" class="imgNav-list__item" data-item="{{item}}" style=" width: {{module.options.navs.length<5?100/module.options.navs.length:'20'}}% " wx:if="{{item.imgUrl}}" wx:for="{{module.options.navs}}" wx:key="{{index}}">
+            <image src="{{item.imgUrl}}"></image>
+            <view class="imgNav-name">{{item.navName}}</view>
+        </view>
+    </scroll-view>
+</view>

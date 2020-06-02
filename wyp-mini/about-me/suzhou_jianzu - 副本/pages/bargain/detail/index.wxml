@@ -1,0 +1,73 @@
+<import src="../../../wxParse/wxParse.wxml"></import>
+<view style="width:100%;overflow: hidden;">
+    <swiper autoplay="true" duration="1000" indicatorDots="{{indicatorDots}}" interval="5000" style="height: 640rpx;">
+        <swiper-item catchtap="getToPage" data-link="{{item.linkurl==''?'index':item.linkurl}}" wx:for="{{data.res.images}}">
+            <image class="swiper-image" src="{{item}}" style="width:100%;height: 100%;display: block;"></image>
+        </swiper-item>
+    </swiper>
+    <view style="height: 80rpx;width: 100%;background-color: rgba(0,0,0,.4);margin-top: -80rpx;z-index: 3;position: absolute;color: #Fff;text-align: right;line-height: 80rpx;font-size: 30rpx;">
+        <text style="margin-left:20rpx;float: left;" wx:if="{{data.res.custom.countdown}}">{{data.res.custom.countdown}}</text>
+        <text style="margin-right: 40rpx;">{{time}}</text>
+    </view>
+    <view style="height: 80rpx;width: 100%;background-color: #FF605D;color: #Fff;text-align: right;line-height: 80rpx;display: flex;flex-direction: row;justify-content: space-between;font-size: 28rpx;">
+        <view style="margin-left: 40rpx;">
+            <block wx:if="{{data.res.type=='1'}}">
+			底价:¥ <text style="font-size: 50rpx;">{{data.res.end_price}}</text> 原价:¥ <text>{{data.res.start_price}}</text>
+            </block>
+            <block wx:elif="{{data.res.type=='0'}}">
+			原价:¥ <text style="font-size: 50rpx;">{{data.res.start_price}}</text>
+                <text style="margin-left:20rpx;" wx:if="{{data.res.custom.cutmore}}">{{data.res.custom.cutmore}}</text>
+            </block>
+        </view>
+        <text style="margin-right: 40rpx;">{{data.res.act_times}}人参与</text>
+    </view>
+    <view class="wrap">
+        <view class="title">
+            <view style="width: 80%;display: flex;flex-direction: column">
+                <text style="font-weight: bolder;font-size: 28rpx;border-right: 1rpx solid #f3f3f3;padding-right: 20rpx;">{{data.res.title}}</text>
+                <text style="font-size: 26rpx;color:#ccc;">{{data.res.title2}}</text>
+            </view>
+        </view>
+    </view>
+    <view class="kanjia">
+        <view class="head">
+            <view style="width: 10rpx;height: 30rpx;background-color:#FD5454; margin-right: 20rpx;"></view>
+            <view>砍价流程</view>
+        </view>
+        <view class="body">
+            <view class="box">选择心仪商品</view>
+            <view class="box">邀请好友砍价</view>
+            <view class="box" style="margin-right: 0;">砍到最低价后支付</view>
+        </view>
+    </view>
+    <view style="padding: 20rpx 20rpx 40rpx;display: flex;flex-direction: row;justify-content: center;background-color: #fff;margin-bottom: 120rpx;">
+        <view style="border-bottom: 4rpx solid #FEAAAA;padding:0 12rpx 6rpx;font-size: 32rpx;font-weight: bolder;">图文详情</view>
+    </view>
+    <view style="margin-left: 12rpx;">
+        <template is="wxParse" data="{{wxParseData:contain.nodes}}" wx:if="{{goods.goods.goods_content!=''}}"></template>
+    </view>
+    <view class="footer">
+        <view bindtap="toback" class="left"> 首页
+		<image src="../../../images/icon_home.png" style="width: 70rpx;height: 70rpx;"></image>
+        </view>
+        <view bindtap="tocorder" class="item">
+            <view bindtap="tosubmitorder" class="yuanjia" data-id="{{data.res.goods_id}}">原价购买</view>
+        </view>
+        <view bindtap="tobargain" class="item" data-id="{{data.res.id}}" wx:if="{{data.swi=='0'}}">
+            <view class="kanjias" wx:if="{{!data.act_swi.id}}">立即砍价</view>
+            <view class="kanjias" wx:else>立即砍价</view>
+        </view>
+        <view class="item" wx:elif="{{data.swi=='1'}}">
+            <view class="kanjias">尚未开始</view>
+        </view>
+        <view class="item" wx:elif="{{data.swi=='2'}}">
+            <view class="kanjias">已经结束</view>
+        </view>
+        <view class="item" wx:elif="{{data.swi=='3'}}">
+            <view class="kanjias">库存不足</view>
+        </view>
+        <view bindtap="tolist" class="left"> 我的
+		<image src="../../../images/tabBar/menu_3.png" style="width: 70rpx;height: 70rpx;"></image>
+        </view>
+    </view>
+</view>

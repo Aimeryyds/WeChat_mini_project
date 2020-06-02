@@ -1,0 +1,46 @@
+<view class="nav">
+    <view bindtap="tagtag_info" class="nav_item" data-n="0">
+        <view class="nav_default {{tag==0?'nav_red':''}}">最新推荐</view>
+    </view>
+    <view bindtap="tagtag_info" class="nav_item" data-n="1">
+        <view class="nav_default {{tag==1?'nav_red':''}}">一周热门</view>
+    </view>
+    <view bindtap="tagtag_info" class="nav_item" data-n="2">
+        <view class="nav_default {{tag==2?'nav_red':''}}">人气菜肴</view>
+    </view>
+    <view bindtap="tagtag_info" class="nav_item" data-n="3">
+        <view class="nav_default {{tag==3?'nav_red':''}}">最受欢迎</view>
+    </view>
+    <view bindtap="tagtag_info" class="nav_item" data-n="4">
+        <view class="nav_default {{tag==4?'nav_red':''}}">全部菜谱</view>
+    </view>
+</view>
+<swiper bindchange="swiper_list_change" class="swiper_list" current="{{tag}}" duration="300" skipHiddenItemLayout="true" style="height:{{height}}px;">
+    <swiper-item wx:for="12345" wx:key="L5">
+        <scroll-view bindscrolltolower="list_onReachBottom" enableBackToTop="true" scrollY="true">
+            <view class="rlist">
+                <navigator class="rlist_item" url="../recipe_info/recipe_info?id={{item.id}}" wx:for="{{list[index]}}" wx:key="list0">
+                    <image class="rlist_img r4{{open_v==1?item.r4:''}}" src="{{item.fcover}}"></image>
+                    <view class="rlist_detail">
+                        <text class="rlist_t">{{item.title}}</text>
+                        <text class="rlist_c">{{item.mainingredient}}</text>
+                        <text class="rlist_n" wx:if="{{item.collnum>0}}">{{item.collnum}}人收藏</text>
+                    </view>
+                </navigator>
+            </view>
+            <view class="loading_end" wx:if="{{loading_end[index]}}"></view>
+            <view class="loading" wx:if="{{tag==index&&loading}}">
+                <image class="loading_img" src="../../image/loading-32-32.gif"></image>
+            </view>
+            <view class="loading_fail" wx:if="{{tag==index&&loading_fail}}"></view>
+        </scroll-view>
+    </swiper-item>
+</swiper>
+<view class="btn_do">
+    <form catchsubmit="shareSubmit" reportSubmit="true">
+        <button class="share" formType="submit" openType="share">
+            <image class="icon_fav" src="../../image/share.png"></image>
+            <text>分享给朋友</text>
+        </button>
+    </form>
+</view>

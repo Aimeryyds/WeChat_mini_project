@@ -1,0 +1,74 @@
+<import src="/dist/toptips/index.wxml"></import>
+<import src="/dist/toast/index.wxml"></import>
+<template is="zan-toptips" data="{{zanTopTips:zanTopTips}}"></template>
+<template is="zan-toast" data="{{zanToast:zanToast}}"></template>
+<view class="container">
+    <form bindreset="formReset" bindsubmit="formSubmit">
+        <input hidden name="id" type="hidden" value="{{formData.id}}"></input>
+        <input hidden name="infoType" type="hidden" value="{{formData.infoType}}"></input>
+        <view style="margin-bottom:120rpx">
+            <view class="zan-panel zan-panel__no-margin-top">
+                <view class="zan-form" style="border: 0rpx;">
+                    <view class="zan-cell zan-form__item">
+                        <text class="zan-form__title-presence">选择区域</text>
+                        <navigator class="zan-form__input zan-cell__bd" hoverClass="none" url="/component/address_picker/index?provinceCode={{formData.provinceCode}}&cityCode={{formData.cityCode}}&districtCode={{formData.districtCode}}">
+                            <text>{{formData.provinceCode?formData.provinceName:'省'}} - {{formData.cityCode?formData.cityName:'市'}}{{formData.districtCode?' - '+formData.districtName:formData.districtCode==''?'':' - 区'}}</text>
+                            <input hidden name="provinceCode" type="hidden" value="{{formData.provinceCode}}"></input>
+                            <input hidden name="cityCode" type="hidden" value="{{formData.cityCode}}"></input>
+                            <input hidden name="districtCode" type="hidden" value="{{formData.districtCode}}"></input>
+                        </navigator>
+                    </view>
+                    <view class="zan-cell zan-form__item zan-cell--last-child">
+                        <text class="zan-form__title-presence">详细地址</text>
+                        <input class="zan-form__input zan-cell__bd" maxlength="50" name="address" onChange="onValueChange" placeholder="街道、楼牌号，50字以内" value="{{formData.address}}"></input>
+                    </view>
+                </view>
+            </view>
+            <view class="zan-panel" wx:if="{{infoType=='2'}}">
+                <view class="zan-cell zan-form__item zan-cell--last-child">
+                    <text class="zan-form__title">价格</text>
+                    <input class="zan-form__input zan-cell__bd" name="price" placeholder="请输入金额，或面议" value="{{formData.price}}"></input>
+                </view>
+            </view>
+            <view class="zan-panel">
+                <view class="zan-cell zan-form__item">
+                    <text class="zan-form__title-presence">标题</text>
+                    <input class="zan-form__input zan-cell__bd" maxlength="30" name="title" placeholder="请输入标题" value="{{formData.title}}"></input>
+                </view>
+                <view class="zan-cell zan-form__item zan-cell--last-child">
+                    <text class="zan-form__title-presence">描述</text>
+                    <textarea autoHeight class="zan-form__input zan-cell__bd" maxlength="100" name="describe" placeholder="不得超过100字" style="margin-left:-4rpx" value="{{formData.describe}}"></textarea>
+                </view>
+            </view>
+            <view class="zan-panel">
+                <view class="zan-cell zan-form__item">
+                    <text class="zan-form__title-presence">联系人</text>
+                    <input class="zan-form__input zan-cell__bd" maxlength="10" name="linkman" placeholder="" value="{{formData.linkman}}"></input>
+                </view>
+                <view class="zan-cell zan-form__item">
+                    <text class="zan-form__title-presence">手机号</text>
+                    <input class="zan-form__input zan-cell__bd" maxlength="11" name="mobile" placeholder="" type="number" value="{{formData.mobile}}"></input>
+                </view>
+                <view class="zan-cell zan-form__item zan-cell--last-child">
+                    <text class="zan-form__title">上传图片</text>
+                    <view class="zan-form__input zan-cell__bd">
+                        <view style="display:flex;align-items-center;justify-content:flex-start">
+                            <view style="position:relative;margin-right:20rpx;display:flex;align-items:center;justify-content:center;width:120rpx;height:120rpx;border:1px solid #eee" wx:for="{{formData.imgUrl}}" wx:key="{{index}}">
+                                <image mode="scaleToFill" src="{{item}}" style="width:120rpx;height:120rpx"></image>
+                                <image data-index="{{index}}" mode="scaleToFill" ontap="handleRemoveImg" src="http://imgcdnali.wfenxiao.com.cn/xcx/c/gongqiu/delete.png" style="position:absolute;top:0;right:0;width:28rpx;height:28rpx"></image>
+                            </view>
+                            <view ontap="handleChooseImg" style="margin-right:20rpx;display:flex;align-items:center;justify-content:center;width:120rpx;height:120rpx;border:1px solid #eee" wx:if="{{!formData.imgUrl||formData.imgUrl.length<3}}">
+                                <image mode="scaleToFill" src="http://imgcdnali.wfenxiao.com.cn/xcx/c/gongqiu/upload.png" style="width:60rpx;height:60rpx"></image>
+                            </view>
+                            <input hidden name="imgUrl" type="hidden" value="{{formData.imgUrl}}"></input>
+                        </view>
+                    </view>
+                </view>
+            </view>
+        </view>
+        <view class="zan-btn-wrap" style="display:flex;align-items:center;justify-content:center;background-color:#fff;height:112rpx;border-top: 1px solid #e1e1e1;position:fixed;bottom:0;left:0;right:0;padding:0 120rpx;">
+            <button class="zan-btn zan-btn--danger zan-btn--plain" data-type="save" formType="submit" style="padding:0 60rpx;margin-top:20rpx;" wx:if="{{formData.status!==2}}">保 存</button>
+            <button class="zan-btn zan-btn--danger" data-type="publish" formType="submit" style="padding:0 60rpx; margin-right:auto;">发 布</button>
+        </view>
+    </form>
+</view>

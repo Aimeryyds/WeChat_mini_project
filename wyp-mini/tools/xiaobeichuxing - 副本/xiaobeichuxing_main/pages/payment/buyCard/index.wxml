@@ -1,0 +1,105 @@
+<view class="page">
+    <my-component bind:myevent="myEventListener" innerText="购买骑行卡"></my-component>
+    <view class="main" style=" margin-top: {{myHight}}px"></view>
+    <view bindtap="selectCard" class="content card" data-item="{{item}}" wx:for="{{cardTop}}" wx:key="index">
+        <image src="{{smallSelect==item.id?big:bigNo}}"></image>
+        <view class="left">
+            <view style="font-size:24rpx;">购卡骑行更省钱</view>
+            <view class="title" style="font-size:36rpx;">
+                <view>{{item.name}}</view>
+                <view wx:if="{{item.type==6}}">·首月特惠</view>
+            </view>
+            <view class="down">
+                <text class="font-big" style="color:rgba(209,163,72,1)">￥{{item.specialprice}}</text>
+                <text style="color:#cdcdcd;font-size:28rpx;margin-left:18rpx;text-decoration:line-through;">￥{{item.price}}</text>
+            </view>
+        </view>
+        <view class="right">
+            <view class="area">限{{item.areaname}}使用</view>
+            <view class="discount">立省{{item.shen}}元</view>
+        </view>
+        <view class="btn" wx:if="{{item.type==6}}">到期自动续费{{item.price}}元/月,可随时取消</view>
+    </view>
+    <scroll-view scrollX class="scroll-header">
+        <view class="small scroll-view-item card {{smallSelect==item.id?'smallSelect':'smallSelectNo'}}" wx:for="{{scrollCard}}">
+            <view bindtap="selectCard" data-item="{{item}}">
+                <view class="cardType">{{item.name}}</view>
+                <view class="centerMain">
+                    <view class="tian" wx:if="{{item.type!=0}}">{{item.expireday}}天</view>
+                    <view class="tian" wx:else>{{item.daycount}}次/{{item.expireday}}天</view>
+                    <view class="newOrOld">
+                        <view class="price">
+                            <span>￥</span>{{item.specialprice}}</view>
+                        <view class="specialprice">￥{{item.price}}</view>
+                    </view>
+                    <view class="automaticM" wx:if="{{item.type==6}}">
+                        <view>到期自动续费{{item.price}}元/月</view>
+                        <view>可随时取消</view>
+                    </view>
+                    <view class="lis" wx:else>立省{{item.shen}}元</view>
+                </view>
+            </view>
+        </view>
+    </scroll-view>
+    <view class="rule {{istopShow==true?'istop':'istopNo'}}" wx:if="{{card.length>0}}">
+        <view class="automatic" wx:if="{{monthly}}">
+            <view class="automaticTitle">自动续费声明:</view>
+            <view>1.首月价仅在每个用户首次开通连续包月时生效，次月将以{{obj.price}}元/月续费；</view>
+            <view>2.购买连续包月套餐后，我们将会在畅骑月卡到期前一天，按正常续费价格为您自动续费并延长30天有效期；</view>
+            <view>3.扣费成功后不支持退款，如需取消自动续费服务，在“钱包-自动续费”关闭骑行卡自动续费即可。</view>
+        </view>
+        <view class="shiyong">使用规则：</view>
+        <view class="rules">
+            <view>1.若用户当前无骑行卡，购买骑行卡后立即生效，骑行卡适用{{obj.areaname}}。</view>
+            <view wx:if="{{obj.type!=0}}">2.畅骑卡生效期间，每日最多可骑行{{obj.daycount}}次，每次最多可骑行{{obj.minute}}分钟或{{obj.mile}}公里，超出部分依据计费规则计费；用户最多可拥有2张未过期的畅骑卡，新购买的畅骑卡在上一张畅骑卡失效的次日开始生效; </view>
+            <view wx:if="{{obj.type==0}}">2.次数卡生效期间，每次骑行消耗1次骑行次数，每次最多骑行{{obj.minute}}分钟或{{obj.mile}}公里，超出部分依据计费规则计费；次数使用完毕或者超出有效期，即视为失效；用户最多可拥有2张未失效的次数卡，次数卡购买后立即生效；</view>
+            <view>3.用户不能同时购买限城市骑行卡和全国通用骑行卡；</view>
+            <view>4.若用户同时有多张骑行卡在有效期内，结算时优惠权益不可叠加，默认为用户使用最优权益的骑行卡，即畅骑卡优先于次数卡；</view>
+            <view>5.骑行卡在订单结算时是否可用，以关锁时骑行卡是否在有效期内为准；</view>
+            <view>6.骑行卡仅可抵扣正常骑行费用，不可抵扣调度费，请规范骑行；</view>
+            <view>7.骑行卡购买后不支持更换或退款，不能转赠；</view>
+            <view>8.小呗骑行卡限小呗出行微信小程序、支付宝小程序及客户端最新版可用，如您的客户端版本过低，请及时升级客户端，以免影响骑行卡使用；</view>
+            <view>9.以上规则自2020年4月26日发布生效。</view>
+        </view>
+    </view>
+    <view bindtap="showModal" class="paymentNew" wx:if="{{card.length>0}}">立即购买</view>
+    <view class="no" wx:if="{{card==0}}">
+        <image class="noqi" mode="widthFix" src="../../../Content/images/wallet/noqi.png"></image>
+        <view>暂无骑行卡！</view>
+    </view>
+    <view class="modals modals-bottom-dialog" hidden="{{hideModal}}">
+        <view bindtap="hideModal" class="modals-cancel"></view>
+        <view animation="{{animationData}}" class="bottom-dialog-body bottom-pos">
+            <view class="head">
+                <image bindtap="close" src="../../../Content/images/wallet/09.png"></image>
+                <text>购买骑行卡</text>
+            </view>
+            <view class="bottom">
+                <view class="details">
+                    <view class="left">
+                        <image src="../../../Content/images/wallet/10.png"></image>
+                    </view>
+                    <view class="right">
+                        <view style="font-size:30rpx">
+                            <text>{{obj.name}}</text>
+                            <text>{{obj.expireday==0?'(长期有效)':'(有效期'+obj.expireday+'天)'}}</text>
+                        </view>
+                        <view class="price">
+                            <text style="font-size:28rpx;color:#FE0000;">￥{{obj.specialprice}}</text>
+                            <text style="font-size:24rpx;color:#CDCDCD;text-decoration:line-through;margin-left:17rpx;">￥{{obj.price}}</text>
+                        </view>
+                        <view class="ara" style="color:#999999;font-size:20rpx;">
+							限{{obj.areaname}}使用
+						</view>
+                    </view>
+                </view>
+                <view class="yinZhi">
+                    <view>应支付 </view>
+                    <view>￥
+						<span>{{obj.specialprice}}</span>元</view>
+                </view>
+                <view bindtap="pay" class="payment">确认支付</view>
+            </view>
+        </view>
+    </view>
+</view>

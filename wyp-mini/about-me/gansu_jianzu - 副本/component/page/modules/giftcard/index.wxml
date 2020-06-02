@@ -1,0 +1,11 @@
+<import src="./card.wxml"></import>
+<view class="giftcard-template__title" wx:if="{{module.options.title}}">{{module.options.title}}</view>
+<scroll-view scrollX class="giftcard-template__list">
+    <view bindtap="onTapGiftCardBuy" class="giftcard-template__item" data-id="{{item.id}}" wx:for="{{module.options.giftCards}}" wx:key="{{index}}">
+        <template is="giftcard" data="{{ text:item.name,imgUrl:item.imgUrl[0] }}"></template>
+    </view>
+    <view bindtap="makedataSource" class="giftcard-template__item giftcard-template__link" data-options="{{module.options}}" data-type="giftcard" hoverClass="none" wx:if="{{module.options.giftCards.length>2}}">
+        <text>查看更多</text>
+        <image class="giftcard-template__linkimg" src="http://imgcdnali.wfenxiao.com.cn/xcx/c/giftcard/arrow_right.png"></image>
+    </view>
+</scroll-view>

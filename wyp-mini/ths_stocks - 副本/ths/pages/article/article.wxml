@@ -1,0 +1,29 @@
+<view>
+    <i-toast bind:__l="__l" id="toast" vueId="9fa026dc-1"></i-toast>
+    <page-wrap bind:__l="__l" vueId="9fa026dc-2" vueSlots="{{['default']}}">
+        <view class="artWrap" wx:if="{{!loading}}">
+            <view class="artTitle">{{title}}</view>
+            <view class="artInfo">
+                <text class="artFrom">{{from}}</text>
+                <text class="artDate">{{date}}</text>
+            </view>
+            <view class="artCont">
+                <jyf-parser bind:__l="__l" html="{{article_article}}" vueId="{{'9fa026dc-3'+','+'9fa026dc-2'}}"></jyf-parser>
+            </view>
+            <view class="artRelief">免责声明：本文转载上述内容出于传递更多信息之目的，不代表同花顺财经观点。同花顺力求保证数据的完全正确，如有错漏请以证监会指定上市公司信息披露平台为准。各类信息服务基于人工智能算法，投资据此操作，风险自担。</view>
+            <button appParameter="wechat" binderror="__e" class="{{[ 'backToApp '+(backToAppShow?'backToAppActive':'') ]}}" data-event-opts="{{[ [ 'error',[ [ 'launchAppError',['$event'] ] ] ] ]}}" openType="launchApp" wx:if="{{fromApp}}">
+                <text>打开同花顺</text>
+                <image class="backToAppIcon" src="../../static/point.png"></image>
+            </button>
+            <view class="{{[ 'artBot '+(isX?'artBotIphoneX':'') ]}}">
+                <view class="artBotShare">
+                    <text class="artBotShareText">分享至：</text>
+                    <button class="artBotShareBtn" openType="share">
+                        <image class="artBotShareIcon" src="../../static/wechat.png"></image>
+                    </button>
+                </view>
+            </view>
+        </view>
+    </page-wrap>
+    <canvas canvasId="shareCanvas" style="width:420px;height:336px;position:absolute;left:-420px;"></canvas>
+</view>

@@ -1,0 +1,100 @@
+<cover-view class="anchor-info-container" hidden="{{hidePannel}}" wx:if="{{hasReady}}">
+    <cover-view class="anchor-info-content">
+        <cover-view bindtap="goToNoble" class="room-id">
+            <cover-view class="id-name">直播间ID {{anchorInfo.asid||0}}<cover-image class="fix-img" src="./images/1x1.png"></cover-image>
+            </cover-view>
+            <cover-view class="noble-value">
+                <cover-view>贡献榜 {{nobleNum}}<cover-image class="fix-img" src="./images/1x1.png"></cover-image>
+                </cover-view>
+            </cover-view>
+        </cover-view>
+        <cover-view class="user-info" wx:if="{{!officeData.isOfficial}}">
+            <cover-image bindtap="noticeChange" class="avatar" data-isOffice="0" src="{{anchorInfo.avatar||'./images/default-anchor.png'}}"></cover-image>
+            <cover-view class="user-info-icon">
+                <cover-view class="username">{{anchorInfo.title||anchorInfo.nickName||'YY主播'}}<cover-image class="fix-img" src="./images/1x1.png"></cover-image>
+                </cover-view>
+                <cover-view class="num">
+                    <cover-image class="viewer_icon" src="/images/viewer_icon2.png"></cover-image>
+                    <cover-view class="viewer-num">{{anchorInfo.users||0}}<cover-image class="fix-img" src="./images/1X1.png"></cover-image>
+                    </cover-view>
+                </cover-view>
+            </cover-view>
+            <button class="user-attention user-attentioned" data-subscribe="0" data-uid="{{anchorInfo.uid}}" wx:if="{{isFollowed}}">
+                 已关注
+            </button>
+            <button bindgetuserinfo="getuserinfo" class="user-attention" data-subscribe="1" data-type="follow" data-uid="{{anchorInfo.uid}}" openType="getUserInfo" wx:if="{{!followStatus&&anchorInfo.uid&&anchorInfo.liveOn}}">
+                关注
+            </button>
+        </cover-view>
+        <cover-view class="official-main" wx:else>
+            <cover-view bindtap="noticeChange" class="official-info" data-isOffice="1">
+                <cover-image class="official-logo" src="./images/official-channel-{{officeData.logo}}.png"></cover-image>
+                <cover-image class="official-img" src="{{officeData.img||'./images/default-office.png'}}"></cover-image>
+                <cover-view class="official-user-num">
+                    <cover-image class="viewer_icon" src="/images/viewer_icon.png"></cover-image>{{anchorInfo.users}}</cover-view>
+            </cover-view>
+            <cover-view class="anchor-info" wx:if="{{officeData.isOfficial}}">
+                <cover-view bindtap="noticeChange" class="anchor-nick" data-isOffice="0">{{anchorInfo.title||anchorInfo.nickName||'YY主播'}}</cover-view>
+                <button bindgetuserinfo="getuserinfo" class="anchor-attention {{followStatus?'hasFollow':''}}" data-subscribe="{{followStatus?0:1}}" data-type="{{followStatus?'hasFollow':'follow'}}" data-uid="{{anchorInfo.uid}}" openType="getUserInfo" wx:if="{{anchorInfo.uid}}">
+                    <cover-view class="follow-icon">
+                        <cover-image src="./images/follow-icon.png"></cover-image>
+                    </cover-view>
+                </button>
+            </cover-view>
+        </cover-view>
+        <cover-view class="anchor-info link-anchorInfo" wx:if="{{linkMicInfo.uid}}">
+            <cover-view bindtap="openNewRoom" class="anchor-nick" data-sid="{{linkMicInfo.sid}}" data-url="{{'/pages/room/room?sid='+linkMicInfo.sid+'&ssid='+linkMicInfo.ssid+'&uid='+linkMicInfo.uid}}">{{linkMicInfo.nick||'YY主播'}}</cover-view>
+            <button bindgetuserinfo="getuserinfo" class="anchor-attention {{linkMicFollowStatus?'hasFollow':''}}" data-linkmic="true" data-subscribe="{{linkMicFollowStatus?0:1}}" data-type="{{linkMicFollowStatus?'hasFollow':'follow'}}" data-uid="{{linkMicInfo.uid}}" openType="getUserInfo">
+                <cover-view class="follow-icon">
+                    <cover-image src="./images/follow-icon.png"></cover-image>
+                </cover-view>
+            </button>
+        </cover-view>
+    </cover-view>
+</cover-view>
+<cover-view class="unLive-attention" hidden="{{hidePannel}}" style="bottom: {{xModel?154:114}}rpx;" wx:if="{{!followStatus&&unLiveReq&&!anchorInfo.liveOn}}">
+    <button bindgetuserinfo="getuserinfo" data-notice="unLive" data-subscribe="1" data-type="follow" data-uid="{{anchorInfo.uid}}" openType="getUserInfo">
+        <cover-image src="./images/unLive-attention.png"></cover-image>
+    </button>
+</cover-view>
+<cover-view animation="{{animationData}}" bindtap="hideNotice" class="notice-info" hidden="{{hidePannel}}" wx:if="{{showNotice&&anchorInfo.uid&&anchorInfo.liveOn}}">
+    <cover-view catchtap="keepNotice" class="notic-wrapper">
+        <cover-view class="notice-main">
+            <cover-view class="notice-nick">{{isOffice==1?officeData.name:anchorInfo.nick||anchorInfo.liveName}}</cover-view>
+            <cover-view class="id-fans">
+                <cover-view class="notice-id" wx:if="{{isOffice==1}}">
+                    直播间ID {{anchorInfo.asid}}
+                </cover-view>
+                <cover-view class="notice-id" wx:else>
+                    直播间ID {{anchorInfo.asid}} <cover-view style="display: inline-block;width: 20rpx;"></cover-view> 粉丝 {{anchorInfo.fans}}
+                </cover-view>
+            </cover-view>
+            <cover-view class="notice-detail">{{bulletin}}</cover-view>
+            <button bindgetuserinfo="getuserinfo" class="notice-focus notice-focused" data-subscribe="{{followStatus?0:1}}" data-uid="{{anchorInfo.uid}}" openType="getUserInfo" wx:if="{{isOffice==0&&followStatus}}">
+                 已关注
+            </button>
+            <button bindgetuserinfo="getuserinfo" class="notice-focus" data-subscribe="{{followStatus?0:1}}" data-type="follow" data-uid="{{anchorInfo.uid}}" openType="getUserInfo" wx:if="{{isOffice==0&&!followStatus}}">
+                 关注
+            </button>
+        </cover-view>
+        <cover-view class="notice-img">
+            <cover-view class="notice-line"></cover-view>
+            <cover-view class="notice-office-bg {{!officeData.img?'default-office-bg':''}}" wx:if="{{isOffice==1}}">
+                <cover-image src="{{officeData.img||'./images/default-office.png'}}"></cover-image>
+            </cover-view>
+            <cover-image src="{{anchorInfo.avatar||'./images/default-anchor.png'}}" wx:else></cover-image>
+        </cover-view>
+    </cover-view>
+</cover-view>
+<cover-view bindtap="hideToast" class="inform-wrapper" hidden="{{hidePannel}}" wx:if="{{showInformToast}}">
+    <cover-view class="inform-toast">
+        <cover-image class="inform-bg" src="./images/inform-bg.png"></cover-image>
+        <cover-view class="inform-main">
+            <cover-view class="inform-tips">是否开启"开播通知我"</cover-view>
+            <cover-view class="inform-bth">
+                <button catchtap="informBtn" class="btn-off" data-type="0">取消</button>
+                <button catchtap="informBtn" data-type="1"> 开启</button>
+            </cover-view>
+        </cover-view>
+    </cover-view>
+</cover-view>

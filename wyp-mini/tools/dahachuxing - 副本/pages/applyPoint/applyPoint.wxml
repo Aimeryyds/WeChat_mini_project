@@ -1,0 +1,27 @@
+<view style="height: 100%">
+    <view style="display: flex;flex-direction: column;height: 100%">
+        <view style="flex:1">
+            <map showLocation bindregionchange="regionchange" id="pointMap" latitude="{{latitude}}" longitude="{{longitude}}" markers="{{markers}}" polygons="{{polygons}}" scale="{{scale}}" style="width: 100%; height: 100%;z-index: 99">
+                <view class="point-image">
+                    <image src="../../images/map/pin.png" style="height:35px;width:20px"></image>
+                </view>
+            </map>
+        </view>
+        <view style="background-color: #fff;display: flex;flex-direction: column;justify-content: space-between;padding: 36rpx">
+            <view>
+                <text>申请位置</text>
+                <view style="background-color: #f6f6f6;margin: 20rpx;padding: 20rpx;text-align: center;position:relative">
+                    <view class="location-load" wx:if="{{isLoading}}">
+                        <view class="load"></view>
+                        <view class="load"></view>
+                        <view class="load"></view>
+                        <view class="load"></view>
+                        <view class="load"></view>
+                    </view>
+          {{address}}
+        </view>
+            </view>
+            <button bindtap="commitPoint" style="margin: 36rpx 60rpx;background-color:{{mainColor}};color: {{textColor}}">提交</button>
+        </view>
+    </view>
+</view>

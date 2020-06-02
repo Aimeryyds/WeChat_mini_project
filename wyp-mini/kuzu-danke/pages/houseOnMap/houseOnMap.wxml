@@ -1,0 +1,63 @@
+<view class="map-wrapper">
+    <map bindcallouttap="__e" bindregionchange="__e" bindtap="__e" circles="{{circles}}" data-event-opts="{{[ [ 'regionchange',[ [ 'regionChange',['$event'] ] ] ],[ 'callouttap',[ [ 'clickCallout',['$event'] ] ] ],[ 'tap',[ [ 'hideList',['$event'] ] ] ] ]}}" id="map" latitude="{{latitude}}" longitude="{{longitude}}" markers="{{markers}}" scale="{{14}}" showLocation="{{true}}">
+        <cover-view class="map-search">
+            <cover-view bindtap="__e" class="city-wrapper" data-event-opts="{{[ [ 'tap',[ [ 'chooseCity',['$event'] ] ] ] ]}}">
+                <cover-image class="city-img" src="https://public.danke.com.cn/public-20180814-Fvtdr8iGXGeY08nf4Rf3TzuJ0529"></cover-image>
+                <cover-view>{{city}}</cover-view>
+            </cover-view>
+            <cover-view class="border"></cover-view>
+            <cover-view bindtap="__e" class="search-wrapper" data-event-opts="{{[ [ 'tap',[ [ 'chooseLocation',['$event'] ] ] ] ]}}">
+                <cover-image class="search-img" src="https://public.danke.com.cn/public-20180814-FsgF3DwfKv4ah3jqN0TCTMbjDrcK"></cover-image>
+                <cover-view>你想住哪 ？</cover-view>
+            </cover-view>
+            <cover-view class="border"></cover-view>
+            <cover-view bindtap="__e" class="toindex-img-wrapper" data-event-opts="{{[ [ 'tap',[ [ 'toIndex',['$event'] ] ] ] ]}}">
+                <cover-image class="toindex-img" src="https://public.danke.com.cn/public-20180814-Fmx4sHS2Ft3cASlwtJIlqRtqOySv"></cover-image>
+            </cover-view>
+        </cover-view>
+        <cover-view class="location">
+            <cover-image class="location-img" src="https://public.danke.com.cn/public-20180814-FvlDsZIqYAZ3d0aXflTpUtHl2Cq-"></cover-image>
+        </cover-view>
+        <cover-view bindtap="__e" class="movetoloaction" data-event-opts="{{[ [ 'tap',[ [ 'moveToLoaction',['$event'] ] ] ] ]}}">
+            <cover-image class="movetoloaction-img" src="https://public.danke.com.cn/public-20180814-FhtAc8si75kz51ApOGQVEIpat2Jo"></cover-image>
+        </cover-view>
+        <cover-view class="room-list-wrapper" wx:if="{{showList}}">
+            <cover-view class="room-name">{{mapAddress+'（'+roomNum+'）'}}</cover-view>
+            <cover-view class="room-list">
+                <cover-view bindtap="__e" class="room-item" data-event-opts="{{[ [ 'tap',[ [ 'toDetail',['$event'] ] ] ] ]}}" id="{{item.public_id+'&'+item.rent_type}}" wx:for="{{roomList}}" wx:key="index">
+                    <cover-view class="item-img-wrapper">
+                        <cover-image class="item-img" src="{{item.list_pic}}"></cover-image>
+                        <cover-view class="mark" style="{{'background-color:'+'#'+item.promotion_info.bg_color+';'}}" wx:if="{{item.promotion_info}}">{{''+item.promotion_info.promotion_title+''}}</cover-view>
+                    </cover-view>
+                    <cover-view class="item-detail-wrapper">
+                        <cover-view class="item-detail">
+                            <cover-view class="detail-name">{{item.name}}</cover-view>
+                            <cover-view class="price-wrapper">
+                                <cover-view class="frist-month" wx:if="{{item.promotion_info.promotion_price_title==='首月租金'}}">首月</cover-view>
+                                <cover-view class="price">{{''+(item.promotion_info?item.promotion_info.promotion_price:item.price)+'元/月'}}</cover-view>
+                                <cover-view wx:if="{{item.promotion_info}}">
+                                    <cover-view class="original-price">{{''+item.price+'元/月'}}</cover-view>
+                                    <cover-view class="del"></cover-view>
+                                </cover-view>
+                            </cover-view>
+                            <cover-view class="pattern-wrapper">
+                                <cover-view class="type">{{rentTypes[item.rent_type]+'·'}}</cover-view>
+                                <cover-view class="pattern">{{''+item.direction+' | '+item.area+' | '+item.floor_num+'/'+item.floor_total_num+'层'+''}}</cover-view>
+                            </cover-view>
+                            <cover-view class="station">{{item.nearest_subway_title}}</cover-view>
+                            <cover-view class="description">
+                                <cover-view class="description-item" wx:for="{{item.list_tags}}" wx:key="index">{{''+item+''}}</cover-view>
+                            </cover-view>
+                        </cover-view>
+                        <cover-view class="list-border"></cover-view>
+                    </cover-view>
+                </cover-view>
+                <cover-view class="nomore-wrapper">
+                    <cover-view class="nomore-border"></cover-view>
+                    <cover-view class="nomore">该小区没有更多房源了</cover-view>
+                    <cover-view class="nomore-border"></cover-view>
+                </cover-view>
+            </cover-view>
+        </cover-view>
+    </map>
+</view>

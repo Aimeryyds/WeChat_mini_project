@@ -1,0 +1,22 @@
+<view class="page__hd">
+    <view class="to_center tou"></view>
+    <view class="user_box to_center">
+        <image binderror="setDefault" class="headImg" mode="widthFix" src="{{faceImg}}"></image>
+    </view>
+    <view class="left_center pd-top-10">
+        <text class="name">姓名：</text>
+        <text space="emsp">{{facePerson.userName}} </text>
+        <text class="name">工号：</text>
+        <text space="emsp">{{facePerson.userId}} </text>
+    </view>
+    <view class="left_center person-department">
+        <text class="name">部门：</text>
+        <text>{{facePerson.departmentName}}</text>
+    </view>
+    <view class="to_center">
+        <button bindtap="saveRegisterInfo" class="qr-btn" type="primary">确认识别{{qrbtn}}</button>
+    </view>
+    <view class="to_center">
+        <button bindtap="toFace" class="closs-btn" style="background-color: #5c5c5c;" type="primary">重新识别</button>
+    </view>
+</view>

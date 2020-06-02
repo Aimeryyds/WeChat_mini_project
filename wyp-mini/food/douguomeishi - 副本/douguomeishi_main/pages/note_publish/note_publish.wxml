@@ -1,0 +1,29 @@
+<view class="publish-images-container">
+    <scroll-view class="images-scroll-h" scrollIntoView="{{toView}}" scrollX="true">
+        <view catchtap="showImages" class="publish-image-container" data-item="{{item.filePath}}" id="{{'index_'+index+1}}" wx:for="{{imageDatas}}" wx:key="{{item.filePath.length}}">
+            <image class="publish-image" mode="aspectFill" src="{{item.filePath}}"></image>
+            <image class="publish-loading" src="/images/uploading.gif" wx:if="{{item.state==0}}"></image>
+            <view catchtap="uploadImageRetry" class="publish-reload-container" data-item="{{item}}" wx:elif="{{item.state==2}}">
+                <text class="publish-reload">{{'点击重试'}}</text>
+            </view>
+            <view catchtap="deleteImage" class="publish-delete-image-container" data-item="{{item.filePath}}" id="index_0">
+                <image class="publish-delete-image" mode="aspectFill" src="/images/image_delete.png"></image>
+            </view>
+        </view>
+        <view bindtap="chooseImages" class="publish-image-container" wx:if="{{imageDatas.length<9}}">
+            <view class="publish-image-background-container">
+                <image class="publish-image-background" mode="aspectFill" src="/images/image_upload.png"></image>
+            </view>
+        </view>
+    </scroll-view>
+</view>
+<input bindinput="onNoteTitleInput" class="publish-title" maxlength="30" placeholder="标题"></input>
+<view class="line-separator"></view>
+<view class="publish-conatiner" style="margin-bottom:{{isIpx?'182rpx':'148rpx'}}">
+    <textarea adjustPosition="{{false}}" bindblur="onContentBlur" bindfocus="onContentFocus" bindinput="onNoteContentInput" class="publish-content" fixed="{{false}}" maxlength="1000" placeholder="说说你的心得~" style="height:{{noteContentHeight}}px" value="{{noteContent}}"></textarea>
+</view>
+<form reportSubmit bindsubmit="formSubmit">
+    <view class="publish-submit-container" style="height:{{isIpx?'162rpx':'128rpx'}}">
+        <button class="publish-submit-button" formType="submit">发布</button>
+    </view>
+</form>

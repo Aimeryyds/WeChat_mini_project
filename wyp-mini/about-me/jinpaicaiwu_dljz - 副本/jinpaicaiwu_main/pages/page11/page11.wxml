@@ -1,0 +1,15 @@
+<import src="../../components/container.wxml"></import>
+<view id="scroll_container" style="background-image:none;background-color:transparent;background-repeat:repeat;background-position:top left;">
+    <template is="container" data="{{plugins:plugindatas,position:'relative'}}"></template>
+    <block wx:if="{{showBar}}">
+        <view style="height:{{tabs.isIphoneX?140:100}}rpx;"></view>
+        <view class="tabBar {{tabs.isIphoneX?'isIphoneX':''}}" style="color:{{tabs.color}};border-color:{{tabs.borderStyle}};background-color:{{tabs.backgroundColor}};border-top-color:{{tabs.borderTopColor}};">
+            <view class="barList" style="color:{{pageid==item.pagePath?tabs.selectedColor:tabs.color}}" wx:for="{{tabs.list}}" wx:key="{{index}}">
+                <view bindtap="switchTab" class="barList-content" data-tab="{{item}}" data-url="{{item.pagePath}}">
+                    <image class="icon" src="{{pageid==item.pagePath?item.selectedIconPath:item.iconPath}}" wx:if="{{item.iconPath}}"></image>
+                    <view>{{item.text}}</view>
+                </view>
+            </view>
+        </view>
+    </block>
+</view>

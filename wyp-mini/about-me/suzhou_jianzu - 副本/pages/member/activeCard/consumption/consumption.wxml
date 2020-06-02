@@ -1,0 +1,18 @@
+<scroll-view class="couponNum" scrollX="true">
+    <view bindtap="clickTitle" class="newTitle {{sub==index?'active':''}}" data-index="{{index}}" wx:for="{{list}}">{{item}}</view>
+</scroll-view>
+<view class="signCard" wx:for="{{consumption}}">
+    <view class="icon">
+        <image src="http://tws.cnweisou.com/images/transactionAC.png"></image>
+    </view>
+    <view class="left">
+        <view class="cardRecord">{{item.note}}</view>
+    </view>
+    <view class="right" wx:if="{{sub==0}}">-{{item.fee}}</view>
+    <view class="right" wx:if="{{sub==1}}">+{{item.fee}}</view>
+</view>
+<view class="noConsumption" wx:if="{{consumption.length==0}}">
+    <image mode="aspectFit" src="../../../../images/consumptionNo.png"></image>
+    <text>暂时没有记录喔</text>
+</view>
+<loading wx:if="{{loading}}"></loading>

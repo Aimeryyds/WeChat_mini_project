@@ -1,0 +1,8 @@
+<template name="zan-switch">
+    <view bindtap="_handleZanSwitchChange" class="zan-switch zan-switch--{{checked?'on':'off'}} {{disabled?'zan-swtich--disabled':''}}" data-checked="{{checked}}" data-component-id="{{componentId}}" data-disabled="{{disabled}}" data-loading="{{loading}}">
+        <view class="zan-switch__circle">
+            <view class="zan-switch__loading" hidden="{{!loading}}"></view>
+        </view>
+        <view class="zan-switch__bg"></view>
+    </view>
+</template>

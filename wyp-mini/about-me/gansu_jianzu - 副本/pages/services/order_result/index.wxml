@@ -1,0 +1,43 @@
+<import src="/dist/result/index.wxml"></import>
+<view class="container" style="padding-bottom:120rpx;" wx:if="{{result}}">
+    <view class="order-result__hint">
+        <image class="order-result__img" src="http://imgcdnali.wfenxiao.com.cn/xcx/c/order/order-result.png"></image>
+        <text class="order-result__title">预约成功</text>
+        <view style="font-size:24rpx;">
+            <text style="color:#000">已支付：</text>
+            <text style="color: #001010"> ￥{{order.total}}</text>
+        </view>
+        <view class="order-result__text">
+            <text>请提前60分钟到店，与商家确认预约</text>
+            <text>{{order.invalidTime}}后预约失效，已支付金额将不予退还</text>
+        </view>
+    </view>
+    <service_order_project appointmentPeople="{{order.appointmentPeople}}" serviceList="{{order.serviceList}}"></service_order_project>
+    <view class="order__info order__item">
+        <view class="item__top" wx:if="{{order.appointmentTime}}">
+            <text class="order__lablel">到店时间:</text>
+            <view class="order__cont">{{order.arrviedFullTime}}</view>
+        </view>
+        <view wx:if="{{order.bookerInfo&&order.bookerInfo.length>0}}">
+            <view wx:for="{{order.bookerInfo}}">
+                <view class="item__bottom" wx:if="{{(item.type=='text'||item.type=='textarea')&&item.value}}">
+                    <text class="order__lablel">{{item.label}}:</text>
+                    <view class="order__cont">{{item.value}}</view>
+                </view>
+                <view class="item__bottom" wx:if="{{(item.type=='radio'||item.type=='checkbox')&&item.value&&item.value.length}}">
+                    <text class="order__lablel">{{item.label}}:</text>
+                    <view class="order__cont" style="margin-right:10rpx;" wx:for="{{item.value}}" wx:for-item="text">{{text}}</view>
+                </view>
+                <view class="item__bottom" style="display:flex;" wx:if="{{item.type=='upload'&&item.value&&item.value.length}}">
+                    <text class="order__lablel">{{item.label}}:</text>
+                    <view class="order__img__container">
+                        <image bind:tap="preview" class="order__img" data-current="{{imgindex}}" data-urls="{{item.value}}" mode="aspectFill" src="{{img}}" wx:for="{{item.value}}" wx:for-index="imgindex" wx:for-item="img"></image>
+                    </view>
+                </view>
+            </view>
+        </view>
+    </view>
+    <service_store_address bindhandlephone="call" store="{{order.store}}"></service_store_address>
+    <view bindtap="onTapResultAction" class="order-state__btn">查看订单</view>
+</view>
+<template is="resultPage" data="{{result:result,content:content}}" wx:else></template>

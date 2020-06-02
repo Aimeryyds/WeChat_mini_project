@@ -1,0 +1,9 @@
+<block wx:if="{{list.length>0}}">
+    <view class="buycell" wx:for="{{list}}">
+        <text class="time">{{item.buy_time}}</text>
+        <text class="name">{{item.buy_info}}</text>
+        <text class="price">￥{{item.totalPrice}}</text>
+    </view>
+    <view class="line"></view>
+</block>
+<view class="nobuy" wx:else>暂无购买记录</view>

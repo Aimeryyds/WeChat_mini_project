@@ -1,0 +1,15 @@
+<view class="custormer">
+    <image mode="widthFix" src="/assets/images/zclhb/bg.gif" style="width:100%"></image>
+    <button class="custormer-buttom" openType="contact" sendMessagePath="/pages/activity/customer/customer" sessionFrom="" wx:if="{{auth}}"></button>
+    <button bindgetuserinfo="getUserInfo" class="openauth" openType="getUserInfo" wx:else></button>
+</view>
+<view class="popup" wx:if="{{authPopup}}">
+    <view class="popup-content">
+        <view class="">
+      需要授权
+    </view>
+        <view class="popup-footer">
+            <button bindgetuserinfo="getUserInfo" class="getuser" openType="getUserInfo" size="mini" type="primary">授权</button>
+        </view>
+    </view>
+</view>

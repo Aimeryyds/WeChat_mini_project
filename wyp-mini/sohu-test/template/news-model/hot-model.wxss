@@ -1,0 +1,118 @@
+.hot-item {
+    margin: 70rpx 30rpx 0 30rpx;
+    border-radius: 7rpx;
+    background-color: #fff;
+    position: relative;
+    padding-top: 25rpx;
+    display: block;
+}
+
+.hot-item .time {
+    position: absolute;
+    top: -93rpx;
+    left: 15rpx;
+    height: 70rpx;
+    line-height: 70rpx;
+    font-size: 20rpx;
+    color: #a6a6a6;
+    padding-left: 25rpx;
+    vertical-align: middle;
+}
+
+.hot-item .time:after {
+    content: '';
+    position: absolute;
+    left: -1px;
+    top: -2px;
+    bottom: 0;
+    width: 4px;
+    background-color: #e5e5e5;
+    z-index: -1;
+}
+
+.hot-item.first-item .time:after {
+    top: 50%;
+}
+
+.hot-item .time:before {
+    content: '';
+    position: absolute;
+    top: 50%;
+    left: -4px;
+    width: 10px;
+    height: 10px;
+    border-radius: 100%;
+    transform: translate(0,-51%);
+    background-color: #e5e5e5;
+}
+
+.hot-item .title {
+    font-size: 34rpx;
+    color: #333333;
+    line-height: 45rpx;
+    margin: 0 20rpx;
+    text-overflow: ellipsis;
+    display: -webkit-box;
+    -webkit-box-orient: vertical;
+    -webkit-line-clamp: 2;
+    overflow: hidden;
+    max-height: 90rpx;
+    font-weight: bold;
+}
+
+.hot-item .summary {
+    font-size: 24rpx;
+    color: #c2c2c2;
+    line-height: 30rpx;
+    margin: 15rpx 20rpx;
+    text-overflow: ellipsis;
+    display: -webkit-box;
+    -webkit-box-orient: vertical;
+    -webkit-line-clamp: 2;
+    overflow: hidden;
+    max-height: 60rpx;
+    border-top: 3rpx dashed #e4e4e4;
+    padding-top: 20rpx;
+}
+
+.hot-item .news-pic {
+    width: 100%;
+    height: 310rpx;
+    overflow: hidden;
+    border-bottom-left-radius: 7rpx;
+    border-bottom-right-radius: 7rpx;
+}
+
+.hot-item .news-pic image {
+    width: 100%;
+    height: 100%;
+}
+
+.bottom-tip {
+    font-size: 28rpx;
+    color: #666666;
+    height: 115rpx;
+    line-height: 115rpx;
+    text-align: center;
+}
+
+.hot-item button {
+    text-align: left;
+    border-top-style: none;
+    border-right-style: none;
+    border-bottom-style: none;
+    border-left-style: none;
+    padding-left: 0;
+    padding-right: 0;
+    border-radius: 0;
+    background-color: transparent;
+    overflow: visible;
+}
+
+.hot-item button::after {
+    border: none;
+}
+
+.hot-item button.button-hover {
+    background-color: transparent;
+}

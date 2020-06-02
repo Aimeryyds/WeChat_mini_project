@@ -1,0 +1,14 @@
+<template name="31e93c2c">
+    <view class="_view data-v-09a318f5 bottom-tab" wx:if="{{visible}}">
+        <view class="_view data-v-09a318f5 tab-box" key="{{index}}" wx:for="{{tabData}}" wx:for-item="tabObject" wx:key="index">
+            <view class="_view data-v-09a318f5" wx:if="{{tabObject.active}}">
+                <image class="_image data-v-09a318f5 icon" src="{{tabObject.activeIcon}}"></image>
+                <view class="_view data-v-09a318f5 active-color">{{tabObject.name}}</view>
+            </view>
+            <view bindtap="handleProxy" class="_view data-v-09a318f5" data-comkey="{{$k}}" data-componentName="tabItems" data-eventid="{{'31e93c2c-0-'+index}}" wx:else>
+                <image class="_image data-v-09a318f5 icon" src="{{tabObject.icon}}"></image>
+                <view class="_view data-v-09a318f5">{{tabObject.name}}</view>
+            </view>
+        </view>
+    </view>
+</template>

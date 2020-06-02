@@ -1,0 +1,59 @@
+<template name="28b9e905">
+    <view class="_view 28b9e905 content loginPage">
+        <view class="_view 28b9e905 login-title">
+            <view class="_view 28b9e905" hidden="{{!(mode==modeEnum.pwd)}}">密码登录</view>
+            <view class="_view 28b9e905" hidden="{{!(mode==modeEnum.code)}}">手机快捷登录</view>
+            <view class="_view 28b9e905" hidden="{{!(mode==modeEnum.retrieve)}}">重置密码登录</view>
+            <view class="_view 28b9e905 login-subtitle">欢迎来到蘑菇租房</view>
+        </view>
+        <view class="_view 28b9e905 login-form">
+            <view class="_view 28b9e905 mg-border-bottom form-item">
+                <template is="0e2552d0" data="{{...$root['0'],...$root[$kk+'28b9e905-0'],$root:$root}}"></template>
+            </view>
+            <view class="_view 28b9e905 mg-border-bottom mg-flex form-item" wx:if="{{mode==modeEnum.code||mode==modeEnum.retrieve}}">
+                <view class="_view 28b9e905 mg-flex-col">
+                    <template is="0e2552d0" data="{{...$root['0'],...$root[$kk+'28b9e905-1'],$root:$root}}"></template>
+                </view>
+                <view bindtap="handleProxy" class="_view 28b9e905 mg-border-left mg-flex mg-flex_both_center right-item" data-comkey="{{$k}}" data-eventid="{{'28b9e905-2'}}">
+                    <image class="_image 28b9e905 item-img" src="{{picCodeUrl}}"></image>
+                </view>
+            </view>
+            <view class="_view 28b9e905 mg-border-bottom mg-flex form-item" wx:if="{{mode==modeEnum.code||mode==modeEnum.retrieve}}">
+                <view class="_view 28b9e905 mg-flex-col">
+                    <template is="0e2552d0" data="{{...$root['0'],...$root[$kk+'28b9e905-2'],$root:$root}}"></template>
+                </view>
+                <view class="_view 28b9e905 mg-border-left right-item" wx:if="{{mode==modeEnum.code||mode==modeEnum.retrieve}}">
+                    <view class="_view 28b9e905 placeholder txtcenter" wx:if="{{timeStep<step}}">
+                        <text class="_text 28b9e905 text-orange">{{timeStep}}s</text>
+                        <text class="_text 28b9e905">重新获取</text>
+                    </view>
+                    <view bindtap="handleProxy" class="_view 28b9e905 text-orange txtcenter" data-comkey="{{$k}}" data-eventid="{{'28b9e905-4'}}" wx:else>获取验证码</view>
+                </view>
+            </view>
+            <view class="_view 28b9e905 mg-border-bottom mg-flex form-item" wx:if="{{mode==modeEnum.pwd||mode==modeEnum.retrieve}}">
+                <template is="0e2552d0" data="{{...$root['0'],...$root[$kk+'28b9e905-3'],$root:$root}}"></template>
+            </view>
+            <view class="_view 28b9e905 form-item-desc">
+                <view class="_view 28b9e905 text-desc" wx:if="{{timeStep<=30}}">
+                    <text class="_text 28b9e905">若未收到短信验证码，请选择</text>
+                    <text bindtap="handleProxy" class="_text 28b9e905 text-orange" data-comkey="{{$k}}" data-eventid="{{'28b9e905-6'}}">接听语音验证码</text>
+                </view>
+            </view>
+            <template is="aa10e628" data="{{...$root['0'],...$root[$kk+'28b9e905-4'],$root:$root,$slotdefault:'28b9e905-default-28b9e905-4'}}"></template>
+            <view class="_view 28b9e905 form-item-desc">
+                <text bindtap="handleProxy" class="_text 28b9e905" data-comkey="{{$k}}" data-eventid="{{'28b9e905-8'}}" wx:if="{{mode==modeEnum.code}}">密码登录</text>
+                <text bindtap="handleProxy" class="_text 28b9e905 desc-text" data-comkey="{{$k}}" data-eventid="{{'28b9e905-9'}}" wx:if="{{mode==modeEnum.pwd||mode==modeEnum.retrieve}}">手机快捷登录</text>
+                <text class="_text 28b9e905 mg-border-left form-line" wx:if="{{mode==modeEnum.pwd}}"></text>
+                <text bindtap="handleProxy" class="_text 28b9e905 desc-text" data-comkey="{{$k}}" data-eventid="{{'28b9e905-10'}}" wx:if="{{mode==modeEnum.pwd}}">忘记密码</text>
+            </view>
+        </view>
+        <view class="_view 28b9e905 login-bottom" wx:if="{{mode==modeEnum.code||mode==modeEnum.retrieve}}">
+            <view class="_view 28b9e905 text-lightgray">新用户初次登录将自动注册，注册成功即视为已阅读并同意</view>
+            <view class="_view 28b9e905">
+                <text bindtap="handleProxy" class="_text 28b9e905 text-dark" data-comkey="{{$k}}" data-eventid="{{'28b9e905-11'}}">《用户使用条款及隐私声明》</text>及<text bindtap="handleProxy" class="_text 28b9e905 text-dark" data-comkey="{{$k}}" data-eventid="{{'28b9e905-12'}}">《蘑菇租房隐私政策》</text>
+            </view>
+        </view>
+    </view>
+</template>
+<import src="/components/mgInput.vue.wxml"></import>
+<import src="/components/mgButton.vue.wxml"></import>

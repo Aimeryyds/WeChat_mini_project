@@ -1,0 +1,35 @@
+<view class="recordList _79e7dc6">
+    <view class="network _32f532b _79e7dc6" wx:if="{{$net$hasNet}}">
+        <image class="_32f532b" src="../../images/network.png"></image>
+        <text class="_32f532b">网络不可用，请检查网络设置</text>
+        <view class="net-text font28 animated flash infinite _32f532b">正在尝试重新连接...</view>
+    </view>
+    <view class="option_save _79e7dc6">
+        <image bindload="isload" class="option_save_bg _79e7dc6" hidden="{{!Img_isLoad}}" src="{{info.image}}"></image>
+        <image class="option_save_bg _79e7dc6" hidden="{{Img_isLoad}}" src="https://jfinfo.oss-cn-beijing.aliyuncs.com/jugupiao/images/enter/full_default.png"></image>
+        <view class="option_save_follow _79e7dc6" wx:if="{{info.subscribe_num||info.desc}}">
+            <text class="overflow_line _79e7dc6">{{info.desc}}</text>
+        {{info.subscribe_num}}人关注
+      </view>
+    </view>
+    <view class="list-container _79e7dc6">
+        <view catchtap="goDetail" class="list-container-box _79e7dc6" data-wpygodetail-a="{{item}}" wx:for="{{list}}">
+            <view class="list-box-c _79e7dc6">
+                <image class="list-box-i fade_in _79e7dc6" src="{{item.cover||'https://jfinfo.oss-cn-beijing.aliyuncs.com/jugupiao/images/service/img_zw.png'}}"></image>
+                <view class="acrt-right _79e7dc6">
+                    <view class="acrt-right-tle _79e7dc6">{{item.title}}</view>
+                    <view class="acrt-right-date _79e7dc6">{{item.created_at}}</view>
+                </view>
+            </view>
+        </view>
+    </view>
+    <view class="foot-load _0a8cc92 _79e7dc6" wx:if="{{$loadFooter$loadComplete}}">
+        <view class="_0a8cc92" wx:if="{{$loadFooter$curStatus==1}}">
+            <i-icon class="_0a8cc92" color="#999" size="20" type="enterinto"></i-icon>上拉加载更多</view>
+        <view class="_0a8cc92" wx:if="{{$loadFooter$curStatus==2}}">正在加载...</view>
+        <view class="_0a8cc92" wx:if="{{$loadFooter$curStatus==3}}">没有更多数据</view>
+    </view>
+    <view catchtap="$backHome$goHome" class="box animated bounceIn _97a9f08 _79e7dc6" wx:if="{{$backHome$isShow}}">
+        <image class="_97a9f08" lazyLoad="false" mode="scaleToFill" src="https://jfinfo.oss-cn-beijing.aliyuncs.com/jugupiao/images/share/home.png"></image>
+    </view>
+</view>

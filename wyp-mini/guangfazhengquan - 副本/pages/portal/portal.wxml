@@ -1,0 +1,36 @@
+<include src="../../components/circus/network/network.wxml"></include>
+<view class="v v-portal">
+    <view class="header">
+        <view class="portrait-box" wx:if="{{userInfo.avatarUrl}}">
+            <image class="portrait" src="{{userInfo.avatarUrl}}"></image>
+        </view>
+        <view class="portrait-box" wx:else>
+            <image class="portrait" src="../avatarImg.png"></image>
+        </view>
+        <view class="name" wx:if="{{userInfo.nickName}}">{{userInfo.nickName}}</view>
+        <button bindgetuserinfo="onGotUserInfo" class="name unname" openType="getUserInfo" wx:else>点击获取</button>
+    </view>
+    <view class="applications">
+        <view class="list" wx:for="{{downloadInfo}}" wx:key="{{index}}">
+            <view bindtap="intoDownload" class="help" data-appid="{{item.appId}}" data-apppath="{{item.appPath}}" data-color="{{item.navColor}}" data-text="{{item._id}}" wx:if="{{index!=downloadInfo.length-1}}">
+                <view class="icon" style="background-image: url('{{item.image}}')"></view>
+                <view class="info">
+                    <view class="title">{{item.name}}</view>
+                    <view class="subtitle">{{item.desc}}</view>
+                </view>
+                <view class="more"></view>
+            </view>
+            <view bindtap="intoDownload" class="help" data-appid="{{item.appId}}" data-apppath="{{item.appPath}}" data-color="{{item.navColor}}" data-text="{{item._id}}" wx:if="{{index==downloadInfo.length-1}}">
+                <view class="icon" style="background-image: url('{{item.image}}')"></view>
+                <view class="info">
+                    <view class="title">{{item.name}}</view>
+                    <view class="subtitle">{{item.desc}}</view>
+                </view>
+                <view class="more"></view>
+            </view>
+        </view>
+    </view>
+    <view bindtap="goToWelfare" class="banner" style="background-image: url('{{bannerInfo.image}}')"></view>
+</view>
+<include src="../../components/circus/toast/toast.wxml"></include>
+<include src="../../components/circus/confirm/confirm.wxml"></include>

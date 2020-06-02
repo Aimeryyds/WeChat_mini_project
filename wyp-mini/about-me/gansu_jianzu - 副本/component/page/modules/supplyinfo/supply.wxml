@@ -1,0 +1,17 @@
+<template name="supply">
+    <view bindtap="handlesupply" class="supplyinfo-detail" data-id="{{id}}">
+        <image class="supplyinfo-detail-img" src="{{imgsrc||'http://imgcdnali.wfenxiao.com.cn/xcx/c/gongqiu/normal-img.png'}}"></image>
+        <view class="supplyinfo-detail-right">
+            <view class="supplyinfo-detail-name">
+                <image src="{{type==2?'http://imgcdnali.wfenxiao.com.cn/xcx/c/gongqiu/gong.png':'http://imgcdnali.wfenxiao.com.cn/xcx/c/gongqiu/qiu.png'}}"></image>
+                <view class=" zan-ellipsis--l2">{{title}}</view>
+            </view>
+            <view class="supplyinfo-detail-footer">
+                <view class="supplyinfo-detail-time">{{time}}</view>
+                <view catchtap="handlephone" class="supplyinfo-detail-phone" data-mobile="{{mobile}}">
+                    <image src="http://imgcdnali.wfenxiao.com.cn/xcx/c/gongqiu/phone.png"></image>
+                </view>
+            </view>
+        </view>
+    </view>
+</template>

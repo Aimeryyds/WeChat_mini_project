@@ -1,0 +1,25 @@
+<view>
+    <view class="dress" wx:if="{{item.detailed_name}}" wx:for="{{items}}" wx:key="index">
+        <view bindtap="choseAddress" class="radio" data-index="{{index}}">
+            <radio checked="{{item.checked}}"></radio>
+        </view>
+        <view bindtap="choseAddress" class="text" data-index="{{index}}">
+            <view class="people">
+                <text>{{item.reciever_name}}</text>
+                <text style="margin-left:20px">{{item.phone}}</text>
+            </view>
+            <view>
+                <text>{{item.detailed_addr}}</text>
+            </view>
+        </view>
+        <view class="edit">
+            <navigator url="../meal_add_edit/meal_add_edit?id={{item.id}}">
+                <image src="edit.png"></image>
+            </navigator>
+        </view>
+    </view>
+</view>
+<view bindtap="add_address" class="footer">
+    <image src="ad.png"></image>
+    <navigator class="footer_text" url="">添加地址</navigator>
+</view>

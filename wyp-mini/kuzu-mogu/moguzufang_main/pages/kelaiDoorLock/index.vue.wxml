@@ -1,0 +1,51 @@
+<template name="2ba2ca72">
+    <view class="_view 2ba2ca72">
+        <view class="_view 2ba2ca72 kelai" wx:if="{{loaded}}">
+            <view class="_view 2ba2ca72 empty" wx:if="{{isEmpty}}">
+                <image class="_image 2ba2ca72" src="https://assets.mgzf.com/appimg/d641329b28fce9cf29e314db00dd7c77.png"></image>
+                <label class="_span 2ba2ca72">您还没有使用智能门锁</label>
+            </view>
+            <view class="_view 2ba2ca72 contain" wx:else>
+                <view bindtap="handleProxy" class="_view 2ba2ca72 locationInfo" data-comkey="{{$k}}" data-eventid="{{'2ba2ca72-0'}}">
+                    <view class="_view 2ba2ca72 iconfont mgic-location"></view>
+                    <view class="_view 2ba2ca72 locationTitle">{{activeLease.roomAddress}}</view>
+                    <view class="_view 2ba2ca72 iconfont mgic-angle-r"></view>
+                </view>
+                <swiper autoplay="{{false}}" bindchange="handleProxy" class="_swiper 2ba2ca72 myLocks" current="{{swiperStyle.current}}" data-comkey="{{$k}}" data-eventid="{{'2ba2ca72-3'}}" wx:if="{{activeLease.deviceList&&activeLease.deviceList.length}}">
+                    <swiper-item class="_swiper-item 2ba2ca72" key="{{index}}" wx:for="{{activeLease.deviceList}}" wx:key="index">
+                        <view class="_view 2ba2ca72 ammeterStateComponent {{[item.lockItem.status===0||item.lockItem.status===10?'grayBg':'']}}">
+                            <view class="_view 2ba2ca72 bg bg1" style="background-color: rgba(96, 107, 154, .1)"></view>
+                            <view class="_view 2ba2ca72 bg bg2" style="background-color: rgba(96, 107, 154, .2)"></view>
+                            <view class="_view 2ba2ca72 bg bg3" style="background-color: rgba(96, 107, 154, .2)"></view>
+                            <view class="_view 2ba2ca72 bg bg4" style="background-color: rgba(96, 107, 154, .3)"></view>
+                            <view class="_view 2ba2ca72 swiper-item myLockItemContainer {{[item.lockItem.status?'active':'']}}" style="box-shadow: 0 0 2rem rgba(96, 107, 154, .8)">
+                                <view bindtap="handleProxy" class="_view 2ba2ca72 myLockItem" data-comkey="{{$k}}" data-eventid="{{'2ba2ca72-1-'+index}}">
+                                    <view class="_view 2ba2ca72 status" wx:if="{{item.lockItem.status===5&&showCutDown}}">( {{timeStep}} S)</view>
+                                    <view class="_view 2ba2ca72 statusTxt">{{mapLockStatus[item.lockItem.status]}}</view>
+                                    <view class="_view 2ba2ca72 rest {{[item.lockItem.battery<20?'warnColor':'']}}" wx:if="{{item.lockItem.status!==0}}">剩余电量 {{item.lockItem.battery}} %</view>
+                                </view>
+                            </view>
+                        </view>
+                        <view class="_view 2ba2ca72 time-validity text-center">授权有效期至{{item.lockItem.authValdEndTime}}</view>
+                        <image bindtap="handleProxy" class="_image 2ba2ca72 btn" data-comkey="{{$k}}" data-eventid="{{'2ba2ca72-2-'+index}}" src="https://assets.mgzf.com/appimg/433b73256b7f514086140a79299d3942.png" wx:if="{{activeLease.isShowTempPassword}}"></image>
+                        <view class="_view 2ba2ca72 text-center lock-name">{{item.lockItem.name}}</view>
+                    </swiper-item>
+                </swiper>
+                <view class="_view 2ba2ca72 indicator-dots" wx:if="{{activeLease.deviceList&&activeLease.deviceList.length>1}}">
+                    <view class="_view 2ba2ca72 dotItem {{[swiperStyle.current==index?'active':'']}}" wx:for="{{activeLease.deviceList}}" wx:key="index"></view>
+                </view>
+                <view class="_view 2ba2ca72 use-note text-center">
+                    <text bindtap="handleProxy" class="_text 2ba2ca72" data-comkey="{{$k}}" data-eventid="{{'2ba2ca72-4'}}">使用说明</text>
+                </view>
+            </view>
+        </view>
+        <view class="_view 2ba2ca72 dialog-lease-list" wx:if="{{showSwitchLeaseDialog}}">
+            <view class="_view 2ba2ca72 title">请选择房间</view>
+            <view class="_view 2ba2ca72 ul" key="{{index}}" wx:for="{{leaseList}}" wx:key="index">
+                <view bindtap="handleProxy" class="_view 2ba2ca72 li {{[index===activeLease.activeIndex?'actived':'']}}" data-comkey="{{$k}}" data-eventid="{{'2ba2ca72-5-'+index}}">{{item.roomAddress}}</view>
+            </view>
+        </view>
+        <template is="a4a139fc" data="{{...$root['0'],...$root[$kk+'2ba2ca72-1'],$root:$root,$slotdefault:'2ba2ca72-default-2ba2ca72-1',$slottitle:'2ba2ca72-title-2ba2ca72-1',$slotcontent:'2ba2ca72-content-2ba2ca72-1'}}"></template>
+    </view>
+</template>
+<import src="/components/mgDialog.vue.wxml"></import>

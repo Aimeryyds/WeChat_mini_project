@@ -1,0 +1,40 @@
+<view class="{{anonymousState__temp}}" wx:if="{{$taroCompReady}}">
+    <view catchtap="hideDateTime" class="mask"></view>
+    <view class="datetime-picker">
+        <view class="datetime-header">
+            <text bindtap="removeDueDate" class="remove-duedate">移除</text>
+            <form bindsubmit="confirmDueDate" reportSubmit="{{true}}" wx:if="{{isFormBtn}}">
+                <button class="confirm-duedate btn-none" formType="submit">确定</button>
+            </form>
+            <text bindtap="confirmDueDate" class="confirm-duedate" wx:else>确定</text>
+        </view>
+        <view class="datetime-body">
+            <picker-view bindchange="changeDate" indicatorStyle="height: 50px;" style="width: 100%; height: 250px;" value="{{datetimeDate}}" wx:if="{{dateTimeMode==='date'}}">
+                <picker-view-column>
+                    <view style="line-height: 50px" wx:for="{{years}}" wx:for-index="idx" wx:key="idx">{{item}}年</view>
+                </picker-view-column>
+                <picker-view-column>
+                    <view style="line-height: 50px" wx:for="{{months}}" wx:for-index="idx" wx:key="idx">{{item}}月</view>
+                </picker-view-column>
+                <picker-view-column>
+                    <view style="line-height: 50px" wx:for="{{days}}" wx:for-index="idx" wx:key="idx">{{item}}日</view>
+                </picker-view-column>
+            </picker-view>
+            <picker-view bindchange="changeTime" indicatorStyle="height: 50px;" style="width: 100%; height: 250px;" value="{{datetimeTime}}" wx:else>
+                <picker-view-column class="date">
+                    <view style="line-height: 50px" wx:for="{{dates}}" wx:for-index="idx" wx:key="idx">{{item}}</view>
+                </picker-view-column>
+                <picker-view-column>
+                    <view style="line-height: 50px" wx:for="{{hours}}" wx:for-index="idx" wx:key="idx">{{item}}点</view>
+                </picker-view-column>
+                <picker-view-column>
+                    <view style="line-height: 50px" wx:for="{{minutes}}" wx:for-index="idx" wx:key="idx">{{item}}分</view>
+                </picker-view-column>
+            </picker-view>
+        </view>
+        <view class="datetime-footer">
+            <text>时间</text>
+            <switch bindchange="switchDateTime" checked="{{dateTimeMode==='time'}}"></switch>
+        </view>
+    </view>
+</view>

@@ -1,0 +1,102 @@
+<template name="gongping-combo">
+    <view class="combo comboB {{sourceB.effectLv>0?'effect-lv':''}} {{sourceB.start?'start':''}} {{sourceB.end?'end':''}}" wx:if="{{sourceB&&sourceB.effectLv>0}}">
+        <view class="flow-light">
+            <image class="mask-bg" src="./template/gongping-combo/images/combo-{{sourceB.effectLv}}.png" wx:if="{{sourceB&&sourceB.effectLv>0}}"></image>
+        </view>
+        <image class="combo-image" src="./template/gongping-combo/images/combo-bg-{{sourceB.effectLv}}.png"></image>
+        <view class="text-content">
+            <view class="nick">{{sourceB.fromNick}}</view>
+            <view class="text">送<view class="gift-name">{{sourceB.giftName}}<image class="fix-img" src="./images/1x1.png"></image>
+                </view>
+            </view>
+            <image class="gift" src="{{sourceB.giftImg}}"></image>
+            <view class="number number-gift">
+                <image class="x" src="./template/gongping-combo/images/text_x.png"></image>
+                <view class="num">
+                    <image class="num-img {{sourceB.num?'num-'+sourceB.numArr[0]:''}}" src="./template/gongping-combo/images/{{sourceB.numArr[0]}}.png" wx:if="{{sourceB.numArr[0]}}"></image>
+                    <image class="num-img {{sourceB.num?'num-'+sourceB.numArr[1]:''}}" src="./template/gongping-combo/images/{{sourceB.numArr[1]}}.png" wx:if="{{sourceB.numArr[1]}}"></image>
+                    <image class="num-img {{sourceB.num?'num-'+sourceB.numArr[2]:''}}" src="./template/gongping-combo/images/{{sourceB.numArr[2]}}.png" wx:if="{{sourceB.numArr[2]}}"></image>
+                    <image class="num-img {{sourceB.num?'num-'+sourceB.numArr[3]:''}}" src="./template/gongping-combo/images/{{sourceB.numArr[3]}}.png" wx:if="{{sourceB.numArr[3]}}"></image>
+                </view>
+            </view>
+            <view class="combo-advanced">
+                <image class="x-advanced" src="./template/gongping-combo/images/continue-x.png"></image>
+                <view class="num-advanced">
+                    <image class="advanced-img {{sourceB.nowCombo?'num-advanced-'+sourceB.nowComboArr[0]:''}}" src="./template/gongping-combo/images/{{sourceB.nowComboArr[0]}}-advanced.png" wx:if="{{sourceB.nowComboArr[0]}}"></image>
+                    <image class="advanced-img {{sourceB.nowCombo?'num-advanced-'+sourceB.nowComboArr[1]:''}}" src="./template/gongping-combo/images/{{sourceB.nowComboArr[1]}}-advanced.png" wx:if="{{sourceB.nowComboArr[1]}}"></image>
+                    <image class="advanced-img {{sourceB.nowCombo?'num-advanced-'+sourceB.nowComboArr[2]:''}}" src="./template/gongping-combo/images/{{sourceB.nowComboArr[2]}}-advanced.png" wx:if="{{sourceB.nowComboArr[2]}}"></image>
+                    <image class="advanced-img {{sourceB.nowCombo?'num-advanced-'+sourceB.nowComboArr[3]:''}}" src="./template/gongping-combo/images/{{sourceB.nowComboArr[3]}}-advanced.png" wx:if="{{sourceB.nowComboArr[3]}}"></image>
+                </view>
+            </view>
+        </view>
+    </view>
+    <view class="combo comboB {{sourceB.effectLv>0?'effect-lv':''}} {{sourceB.start?'start':''}} {{sourceB.end?'end':''}}" wx:if="{{sourceB&&sourceB.effectLv<=0}}">
+        <image class="combo-image" src="./template/gongping-combo/images/combo-bg-{{sourceB.effectLv}}.png"></image>
+        <view class="text-content">
+            <view class="nick">{{sourceB.fromNick}}</view>
+            <view class="text">送<view class="gift-name">{{sourceB.giftName}}<image class="fix-img" src="./images/1x1.png"></image>
+                </view>
+            </view>
+            <image class="gift" src="{{sourceB.giftImg}}"></image>
+            <view class="number">
+                <image class="x" src="./template/gongping-combo/images/text_x.png"></image>
+                <view class="num">
+                    <image class="text-img {{sourceB.num?'num-'+sourceB.numArr[0]:''}}" src="./template/gongping-combo/images/{{sourceB.numArr[0]}}.png" wx:if="{{sourceB.numArr[0]}}"></image>
+                    <image class="text-img {{sourceB.num?'num-'+sourceB.numArr[1]:''}}" src="./template/gongping-combo/images/{{sourceB.numArr[1]}}.png" wx:if="{{sourceB.numArr[1]}}"></image>
+                    <image class="text-img {{sourceB.num?'num-'+sourceB.numArr[2]:''}}" src="./template/gongping-combo/images/{{sourceB.numArr[2]}}.png" wx:if="{{sourceB.numArr[2]}}"></image>
+                    <image class="text-img {{sourceB.num?'num-'+sourceB.numArr[3]:''}}" src="./template/gongping-combo/images/{{sourceB.numArr[3]}}.png" wx:if="{{sourceB.numArr[3]}}"></image>
+                </view>
+            </view>
+        </view>
+    </view>
+    <view class="combo comboA {{sourceA.effectLv>0?'effect-lv':''}}  {{sourceA.start?'start':''}} {{sourceA.end?'end':''}}" wx:if="{{sourceA&&sourceA.effectLv>0}}">
+        <view class="flow-light">
+            <image class="mask-bg" src="./template/gongping-combo/images/combo-{{sourceA.effectLv}}.png" wx:if="{{sourceA&&sourceA.effectLv>0}}"></image>
+        </view>
+        <image class="combo-image" src="./template/gongping-combo/images/combo-bg-{{sourceA.effectLv}}.png"></image>
+        <view class="text-content">
+            <view class="nick">{{sourceA.fromNick}}</view>
+            <view class="text">送<view class="gift-name">{{sourceA.giftName}}<image class="fix-img" src="./images/1x1.png"></image>
+                </view>
+            </view>
+            <image class="gift" src="{{sourceA.giftImg}}"></image>
+            <view class="number number-gift">
+                <image class="x" src="./template/gongping-combo/images/text_x.png"></image>
+                <view class="num">
+                    <image class="num-img {{sourceA.num?'num-'+sourceA.numArr[0]:''}}" src="./template/gongping-combo/images/{{sourceA.numArr[0]}}.png" wx:if="{{sourceA.numArr[0]}}"></image>
+                    <image class="num-img {{sourceA.num?'num-'+sourceA.numArr[1]:''}}" src="./template/gongping-combo/images/{{sourceA.numArr[1]}}.png" wx:if="{{sourceA.numArr[1]}}"></image>
+                    <image class="num-img {{sourceA.num?'num-'+sourceA.numArr[2]:''}}" src="./template/gongping-combo/images/{{sourceA.numArr[2]}}.png" wx:if="{{sourceA.numArr[2]}}"></image>
+                    <image class="num-img {{sourceA.num?'num-'+sourceA.numArr[3]:''}}" src="./template/gongping-combo/images/{{sourceA.numArr[3]}}.png" wx:if="{{sourceA.numArr[3]}}"></image>
+                </view>
+            </view>
+            <view class="combo-advanced">
+                <image class="x-advanced" src="./template/gongping-combo/images/continue-x.png"></image>
+                <view class="num-advanced">
+                    <image class="advanced-img {{sourceA.nowCombo?'num-advanced-'+sourceA.nowComboArr[0]:''}}" src="./template/gongping-combo/images/{{sourceA.nowComboArr[0]}}-advanced.png" wx:if="{{sourceA.nowComboArr[0]}}"></image>
+                    <image class="advanced-img {{sourceA.nowCombo?'num-advanced-'+sourceA.nowComboArr[1]:''}}" src="./template/gongping-combo/images/{{sourceA.nowComboArr[1]}}-advanced.png" wx:if="{{sourceA.nowComboArr[1]}}"></image>
+                    <image class="advanced-img {{sourceA.nowCombo?'num-advanced-'+sourceA.nowComboArr[2]:''}}" src="./template/gongping-combo/images/{{sourceA.nowComboArr[2]}}-advanced.png" wx:if="{{sourceA.nowComboArr[2]}}"></image>
+                    <image class="advanced-img {{sourceA.nowCombo?'num-advanced-'+sourceA.nowComboArr[3]:''}}" src="./template/gongping-combo/images/{{sourceA.nowComboArr[3]}}-advanced.png" wx:if="{{sourceA.nowComboArr[3]}}"></image>
+                </view>
+            </view>
+        </view>
+    </view>
+    <view class="combo comboA {{sourceA.effectLv>0?'effect-lv':''}}  {{sourceA.start?'start':''}} {{sourceA.end?'end':''}}" wx:if="{{sourceA&&sourceA.effectLv<=0}}">
+        <image class="combo-image" src="./template/gongping-combo/images/combo-bg-{{sourceA.effectLv}}.png"></image>
+        <view class="text-content">
+            <view class="nick">{{sourceA.fromNick}}</view>
+            <view class="text">送<view class="gift-name">{{sourceA.giftName}}<image class="fix-img" src="./images/1x1.png"></image>
+                </view>
+            </view>
+            <image class="gift" src="{{sourceA.giftImg}}"></image>
+            <view class="number">
+                <image class="x" src="./template/gongping-combo/images/text_x.png"></image>
+                <view class="num">
+                    <image class="text-img {{sourceA.num?'num-'+sourceA.numArr[0]:''}}" src="./template/gongping-combo/images/{{sourceA.numArr[0]}}.png" wx:if="{{sourceA.numArr[0]}}"></image>
+                    <image class="text-img {{sourceA.num?'num-'+sourceA.numArr[1]:''}}" src="./template/gongping-combo/images/{{sourceA.numArr[1]}}.png" wx:if="{{sourceA.numArr[1]}}"></image>
+                    <image class="text-img {{sourceA.num?'num-'+sourceA.numArr[2]:''}}" src="./template/gongping-combo/images/{{sourceA.numArr[2]}}.png" wx:if="{{sourceA.numArr[2]}}"></image>
+                    <image class="text-img {{sourceA.num?'num-'+sourceA.numArr[3]:''}}" src="./template/gongping-combo/images/{{sourceA.numArr[3]}}.png" wx:if="{{sourceA.numArr[3]}}"></image>
+                </view>
+            </view>
+        </view>
+    </view>
+</template>

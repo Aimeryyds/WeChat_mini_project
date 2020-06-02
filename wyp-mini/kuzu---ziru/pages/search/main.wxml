@@ -1,0 +1,59 @@
+<view class="search-wrapper _div data-v-69bef5a5">
+    <view class="search-bar bb1 _div data-v-69bef5a5">
+        <view class="iconfont icon-zm_ic_title_searchsv search-icon _i data-v-69bef5a5"></view>
+        <input bindconfirm="__e" bindinput="__e" class="input data-v-69bef5a5" data-event-opts="{{[ [ 'confirm',[ [ 'handleEnter',['$event'] ] ] ],[ 'input',[ [ 'handleInput',['$event'] ] ] ] ]}}" focus="{{true}}" placeholder="你想住在哪？" placeholderStyle="color: #999;" value="{{inputValue}}"></input>
+        <view bindtap="__e" class="iconfont icon-zrk_ic_cleanall clear-icon _i data-v-69bef5a5" data-event-opts="{{[ [ 'tap',[ [ 'handleClear',['$event'] ] ] ] ]}}" wx:if="{{inputValue}}"></view>
+        <label bindtap="__e" class="cancel-btn _span data-v-69bef5a5" data-event-opts="{{[ [ 'tap',[ [ 'handleCancel',['$event'] ] ] ] ]}}">取消</label>
+    </view>
+    <scroll-view class="search-area data-v-69bef5a5" scrollY="{{true}}" wx:if="{{!(searchList&&searchList.length)}}">
+        <view class="padding-area _div data-v-69bef5a5">
+            <view class="search-history search-block active _div data-v-69bef5a5" wx:if="{{history&&history.length}}">
+                <view class="title _h3 data-v-69bef5a5">搜索历史</view>
+                <view class="tags _div data-v-69bef5a5">
+                    <label bindtap="__e" class="zr-tag plain big _span data-v-69bef5a5" data-event-opts="{{[ [ 'tap',[ [ 'handleJumpList',['$0'],[ [ ['history','',i] ] ] ] ] ] ]}}" wx:for="{{history}}" wx:for-index="i" wx:key="i">{{item.name}}</label>
+                </view>
+            </view>
+            <view class="{{['search-hot search-block _div data-v-69bef5a5',skeletonFlag?'active':'']}}" wx:if="{{hot&&hot.length}}">
+                <view class="title _h3 data-v-69bef5a5">热门搜索</view>
+                <view class="tags _div data-v-69bef5a5">
+                    <label bindtap="__e" class="zr-tag plain big _span data-v-69bef5a5" data-event-opts="{{[ [ 'tap',[ [ 'handleJumpList',['$0'],[ [ ['hot','',i] ] ] ] ] ] ]}}" wx:for="{{hot}}" wx:for-index="i" wx:key="i">{{item.name}}</label>
+                </view>
+            </view>
+            <view class="search-hot search-block active _div data-v-69bef5a5" wx:if="{{!hot}}">
+                <view class="title-skeleton _h3 data-v-69bef5a5"></view>
+                <view class="tags-skeleton _div data-v-69bef5a5">
+                    <label class="zr-tag plain big _span data-v-69bef5a5"></label>
+                    <label class="zr-tag plain big _span data-v-69bef5a5"></label>
+                    <label class="zr-tag plain big _span data-v-69bef5a5"></label>
+                    <label class="zr-tag plain big _span data-v-69bef5a5"></label>
+                    <label class="zr-tag plain big _span data-v-69bef5a5"></label>
+                    <label class="zr-tag plain big _span data-v-69bef5a5"></label>
+                </view>
+            </view>
+            <view class="search-around search-block _div data-v-69bef5a5" wx:if="{{around&&around.length}}">
+                <view class="title _h3 data-v-69bef5a5">周边热搜</view>
+                <view class="tags _div data-v-69bef5a5">
+                    <view bindtap="__e" class="around-line bb1 _p data-v-69bef5a5" data-event-opts="{{[ [ 'tap',[ [ 'handleJumpList',['$0'],[ [ ['around','',i] ] ] ] ] ] ]}}" wx:for="{{around}}" wx:for-index="i" wx:key="i">{{item.name+''}}<label class="sub _span data-v-69bef5a5">{{item.memo}}</label>
+                    </view>
+                </view>
+            </view>
+        </view>
+    </scroll-view>
+    <scroll-view class="search-area result-area data-v-69bef5a5" scrollY="{{true}}" wx:else>
+        <view class="result-wrapper _div data-v-69bef5a5" wx:if="{{searchList}}">
+            <view bindtap="__e" class="result-item _div data-v-69bef5a5" data-event-opts="{{[ [ 'tap',[ [ 'handleJumpList',['$0'],[ [ ['searchList','',i] ] ] ] ] ] ]}}" wx:for="{{searchList}}" wx:for-index="i" wx:key="i">
+                <image alt="icon" class="icon _img data-v-69bef5a5" src="{{item.icon}}"></image>
+                <view class="info-wrapper bb1 _div data-v-69bef5a5">
+                    <view class="detail _div data-v-69bef5a5">
+                        <view class="name _h3 data-v-69bef5a5">
+                            <rich-text nodes="{{item.displayName}}"></rich-text>
+                        </view>
+                        <view class="memo _p data-v-69bef5a5">{{item.memo}}</view>
+                    </view>
+                    <view class="num _div data-v-69bef5a5">{{''+(item.housenum||'')+''}}</view>
+                </view>
+            </view>
+        </view>
+    </scroll-view>
+    <view bindtap="__e" class="clear-history _div data-v-69bef5a5" data-event-opts="{{[ [ 'tap',[ [ 'handleClearHistory',['$event'] ] ] ] ]}}">清除历史记录</view>
+</view>

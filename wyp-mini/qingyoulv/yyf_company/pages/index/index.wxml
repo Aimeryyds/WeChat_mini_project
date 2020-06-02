@@ -1,0 +1,234 @@
+<import src="ad.wxml"></import>
+<import src="adnav.wxml"></import>
+<import src="adnotice.wxml"></import>
+<import src="../public/adsense.wxml"></import>
+<view class="container">
+    <block wx:if="{{hide_search=='0'}}">
+        <block wx:if="{{head_color!=''}}">
+            <import src="search.wxml"></import>
+            <template is="search" data="{{head_color:head_color}}"></template>
+        </block>
+        <block wx:else>
+            <import src="search1.wxml"></import>
+            <template is="search" data="{{tcolor:tcolor}}"></template>
+        </block>
+    </block>
+    <view class="swiper {{slide_close=='1'?'hide':''}}">
+        <swiper autoplay="true" duration="1200" indicatorDots="true" interval="3000" style="height:{{slide_height}}rpx;">
+            <swiper-item wx:for="{{slide}}" wx:for-index="fidx" wx:key="{{index}}">
+                <image bindtap="slideAction" class="nav-icon" data-id="{{fidx}}" mode="widthFix" src="{{item.images}}"></image>
+            </swiper-item>
+        </swiper>
+    </view>
+    <template is="ad" data="{{adSlide:adSlide}}"></template>
+    <view class="bus-bg {{nav_close=='1'?'hide':''}}" wx:if="{{nav_style==0}}">
+        <view class="bus">
+            <view bindtap="{{item.cateurl=='tel'?'tel':''}}{{item.cateurl=='driver'?'driver':''}}{{item.cateurl!='driver'&&item.cateurl!='tel'?'navto':''}}" class="bus-item" data-nid="{{nid}}" wx:for="{{cats}}" wx:for-index="nid" wx:key="{{index}}">
+                <image src="{{item.thumb}}"></image>
+                <text>{{item.name}}</text>
+            </view>
+        </view>
+    </view>
+    <view class="bus-bg {{nav_close=='1'?'hide':''}}" wx:if="{{nav_style==1}}">
+        <view class="bus bus2">
+            <view bindtap="{{item.cateurl=='tel'?'tel':''}}{{item.cateurl=='driver'?'driver':''}}{{item.cateurl!='driver'&&item.cateurl!='tel'?'navto':''}}" class="bus-item2" data-nid="{{nid}}" style="{{nav_height!=''?'height:'+nav_height+'px':''}}" wx:for="{{cats}}" wx:for-index="nid" wx:key="{{index}}">
+                <image src="{{item.thumb}}" style="{{nav_height!=''?'height:'+nav_height+'px':''}}"></image>
+            </view>
+        </view>
+    </view>
+    <view class="bus-bg {{nav_close=='1'?'hide':''}}" wx:if="{{nav_style==2}}">
+        <view class="bus bus3">
+            <view bindtap="{{item.cateurl=='tel'?'tel':''}}{{item.cateurl=='driver'?'driver':''}}{{item.cateurl!='driver'&&item.cateurl!='tel'?'navto':''}}" class="bus-item3" data-nid="{{nid}}" style="height:{{nav_height}}px" wx:for="{{cats}}" wx:for-index="nid" wx:key="{{index}}">
+                <image src="{{item.thumb}}" style="height:{{nav_height}}px"></image>
+            </view>
+        </view>
+    </view>
+    <template is="adnav" data="{{adNav:adNav}}"></template>
+    <view class="{{notice_close=='1'?'hide':''}} notice">
+        <view class="sound">
+            <image binderror="imgError" src="{{horn!=''?horn:''}}"></image>
+        </view>
+        <view class="notice-text">
+            <text>{{sysinfo.notice}}</text>
+        </view>
+    </view>
+    <template is="adnotice" data="{{adNotice:adNotice}}"></template>
+    <template is="adsense" data="{{adsense:adsense}}"></template>
+    <view class="{{adsense.ad_img||adsense.ad1_img?'mt15':''}}" wx:for="{{list}}" wx:for-index="fidx" wx:key="{{fidx}}">
+        <block wx:if="{{item.type==''||item.type==undefined}}">
+            <import src="adcontent.wxml"></import>
+            <template is="adcontent" data="{{item:item,fidx:fidx}}"></template>
+        </block>
+        <block wx:if="{{item.type==9}}">
+            <import src="title.wxml"></import>
+            <view class="service" style="margin-top:{{item.mt}}px">
+                <template is="title" data="{{item:item}}"></template>
+                <view class="service-div">
+                    <scroll-view scrollX class="scroll_view">
+                        <view class="service-item service-item2" style="width:{{list[fidx].thumb_width}}px;" wx:for="{{item.list}}" wx:key="{{index2}}">
+                            <navigator url="{{item.url}}">
+                                <image src="{{item.thumb}}" style="height:{{list[fidx].thumb_height}}px;"></image>
+                                <view class="service-item-text">
+                                    <text>{{item.title}}</text>
+                                </view>
+                            </navigator>
+                        </view>
+                    </scroll-view>
+                </view>
+            </view>
+        </block>
+        <block wx:if="{{item.type==1}}">
+            <import src="title.wxml"></import>
+            <view class="service" style="margin-top:{{item.mt}}px">
+                <template is="title" data="{{item:item}}"></template>
+                <view class="service-div">
+                    <view class="service-item" wx:for="{{item.list}}" wx:key="{{index2}}">
+                        <navigator url="{{item.url}}">
+                            <image src="{{item.thumb}}" style="height:{{list[fidx].thumb_height}}px"></image>
+                            <view class="service-item-text">
+                                <text>{{item.title}}</text>
+                            </view>
+                        </navigator>
+                    </view>
+                </view>
+            </view>
+        </block>
+        <block wx:if="{{item.type==2}}">
+            <import src="title.wxml"></import>
+            <view class="news" style="margin-top:{{item.mt}}px">
+                <template is="title" data="{{item:item}}"></template>
+                <view class="news-div">
+                    <view class="news-item" wx:for="{{item.list}}" wx:key="{{index1}}">
+                        <view class="news-item-img">
+                            <navigator url="{{item.url}}">
+                                <image src="{{item.thumb}}"></image>
+                            </navigator>
+                        </view>
+                        <view class="news-item-content">
+                            <navigator url="{{item.url}}">
+                                <view class="news-item-title">
+                                    <text>{{item.title}}</text>
+                                </view>
+                                <view class="news-item-other" wx:if="{{hide_time=='0'}}">{{item.addtime}}</view>
+                            </navigator>
+                        </view>
+                    </view>
+                </view>
+            </view>
+        </block>
+        <block wx:if="{{item.type==4}}">
+            <import src="title.wxml"></import>
+            <view class="news" style="margin-top:{{item.mt}}px">
+                <template is="title" data="{{item:item}}"></template>
+                <view class="news-div">
+                    <view class="news-item" style="margin-bottom:8rpx;" wx:for="{{item.list}}" wx:key="{{index1}}">
+                        <view class="news-item-content1">
+                            <view class="news-item-title1 {{hide_time=='1'?'w100':''}}">
+                                <navigator url="{{item.url}}">
+                                    <text>{{item.title}}</text>
+                                </navigator>
+                            </view>
+                            <view class="news-item-other1" wx:if="{{hide_time=='0'}}">{{item.addtime}}</view>
+                        </view>
+                    </view>
+                </view>
+            </view>
+        </block>
+        <block wx:if="{{item.type==5}}">
+            <import src="title.wxml"></import>
+            <view class="service " style="margin-top:{{item.mt}}px">
+                <template is="title" data="{{item:item}}"></template>
+                <view class="image-item" wx:for="{{item.list}}" wx:key="{{index2}}">
+                    <navigator url="{{item.url}}">
+                        <image src="{{item.thumb}}"></image>
+                        <view class="image-item-bg image-position"></view>
+                        <view class="image-item-text image-position">{{item.title}}</view>
+                    </navigator>
+                </view>
+            </view>
+        </block>
+        <block wx:if="{{item.type==3}}">
+            <import src="title.wxml"></import>
+            <import src="../../../wxParse/wxParse.wxml"></import>
+            <view class="service " style="margin-top:{{item.mt}}px">
+                <template is="title" data="{{item:item}}"></template>
+                <view class="">
+                    <view class="wxParse">
+                        <template is="wxParse" data="{{wxParseData:contentList[item.id].nodes}}"></template>
+                    </view>
+                </view>
+            </view>
+        </block>
+        <block wx:if="{{item.type==6}}">
+            <import src="title.wxml"></import>
+            <view class="service" style="margin-top:{{item.mt}}px">
+                <template is="title" data="{{item:item}}"></template>
+                <view class="service-div">
+                    <view bindtap="navigateMini" class="service-item" data-fid="{{fidx}}" data-sid="{{sidx}}" wx:for="{{item.list}}" wx:for-index="sidx" wx:key="{{sidx}}">
+                        <image src="{{item.thumb}}"></image>
+                        <view class="service-item-text">
+                            <text>{{item.title}}</text>
+                        </view>
+                    </view>
+                </view>
+            </view>
+        </block>
+        <block wx:if="{{item.type==7}}">
+            <import src="title.wxml"></import>
+            <view class="service " style="margin-top:{{item.mt}}px">
+                <template is="title" data="{{item:item}}"></template>
+                <view class="image-item video-item" wx:for="{{item.list}}" wx:for-index="sidx" wx:key="{{index2}}">
+                    <video autoplay="true" objectFit="fill" src="{{item.videosrc}}" wx:if="{{item.show_video}}"></video>
+                    <block wx:if="{{!item.show_video}}">
+                        <image src="{{item.thumb}}"></image>
+                        <view bindtap="playVideo" class="playimg_div" data-fidx="{{fidx}}" data-sidx="{{sidx}}">
+                            <image src="../../resource/images/play.png"></image>
+                        </view>
+                        <view bindtap="playVideo" class="image-item-bg image-position" data-fidx="{{fidx}}" data-sidx="{{sidx}}"></view>
+                        <view class="image-item-text image-position">
+                            <view class="video_text">{{item.title}}</view>
+                        </view>
+                    </block>
+                </view>
+            </view>
+        </block>
+    </view>
+</view>
+<block wx:if="{{form.isshow=='1'}}">
+    <view class="entitle2" wx:if="{{title_style=='2'}}">
+        <view class="title_line2" style="border-color:{{tcolor}}"></view>
+        <view class="center_title2" style="color:{{tcolor}}">
+          {{form.catname}}
+        </view>
+        <view class="title_line2" style="border-color:{{tcolor}}"></view>
+    </view>
+    <view class="entitle" wx:if="{{title_style=='1'}}">
+        <view class="title_line" style="border-color:{{tcolor}}"></view>
+        <view class="center_title" style="color:{{tcolor}}">
+            {{form.catname}}
+        </view>
+        <view class="title_line" style="border-color:{{tcolor}}"></view>
+    </view>
+    <view class="title" style="border-left-color:{{tcolor}}" wx:if="{{title_style=='0'}}">
+       {{form.catname}}
+  </view>
+    <view class="title3 mb10" wx:if="{{title_style=='3'}}">
+        <view class="title3_left">
+            <view class="title3_left_border" style="border-left-color:{{tcolor}}"></view>
+            <view class="title3_name"> {{form.catname}}</view>
+        </view>
+    </view>
+    <import src="message.wxml"></import>
+    <template is="form" data="{{form:form}}"></template>
+    <button bindtap="submitClick" class="fb-btn" style="background-color:{{tcolor}}">提交</button>
+</block>
+<view class="copyright {{blist.copyright.copyright==''?'mt0':''}}">
+    <block wx:if="{{blist.copyright.copyright!=''}}">
+        <import src="../public/copy.wxml"></import>
+        <template is="copy" data="{{blist:blist}}"></template>
+    </block>
+</view>
+<block wx:if="{{hide_tabbar=='0'}}">
+    <import src="../public/foot.wxml"></import>
+    <template is="foot" data="{{blist:blist}}"></template>
+</block>

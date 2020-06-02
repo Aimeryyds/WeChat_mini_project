@@ -1,0 +1,153 @@
+<view class="userinfo">
+    <image binderror="pic_error" class="avatar loads" src="{{userInfo.avatar}}"></image>
+    <image class="vip_icon" src="/image/vip_icon.png" wx:if="{{vip}}"></image>
+    <view class="userdata">
+        <view class="username">{{userInfo.username}}</view>
+        <view class="usersign">{{userInfo.plug_sign}}</view>
+        <view class="useritem">
+            <text>{{userInfo.usertotal}}</text>赞与收藏</view>
+        <view class="useritem">
+            <text>{{userInfo.followedcount}}</text>粉丝</view>
+        <view class="useritem">
+            <text>{{userInfo.followingcount}}</text>关注</view>
+    </view>
+    <view class="useraction">
+        <block wx:if="{{show_guanzhu}}">
+            <block wx:if="{{guanzhu==3}}">
+                <button bindtap="do_follow" class="follow" wx:if="{{haveuid}}">
+                    <text>＋ 关注</text>
+                </button>
+                <button bindgetuserinfo="clickinfo" class="follow" openType="getUserInfo" wx:else>
+                    <text>＋ 关注</text>
+                </button>
+            </block>
+            <button bindtap="do_unfollow" wx:if="{{guanzhu==2}}">
+                <image src="/image/favstate_icon_1.png"></image>
+            </button>
+            <button bindtap="do_unfollow" wx:if="{{guanzhu==1}}">
+                <image src="/image/favstate_icon_2.png"></image>
+            </button>
+        </block>
+        <button openType="share">
+            <image src="/image/share_icon_white.png"></image>
+        </button>
+    </view>
+</view>
+<view class="nav">
+    <view bindtap="my_info" class="nav_item" data-n="0">
+        <view class="nav_default {{info==0?'nav_red':''}}">菜谱</view>
+    </view>
+    <view bindtap="my_info" class="nav_item" data-n="1">
+        <view class="nav_default {{info==1?'nav_red':''}}">帖子</view>
+    </view>
+    <view bindtap="my_info" class="nav_item" data-n="2">
+        <view class="nav_default {{info==2?'nav_red':''}}">收藏</view>
+    </view>
+</view>
+<swiper bindchange="swiper_list_change" class="swiper_list" current="{{info}}" duration="300" skipHiddenItemLayout="true" style="height:{{height}}px;">
+    <swiper-item>
+        <scroll-view bindscrolltolower="list_onReachBottom" enableBackToTop="true" scrollY="true">
+            <view class="rlist">
+                <navigator class="rlist_item" url="/pages/recipe_info/recipe_info?id={{item.id}}" wx:for="{{list[0]}}" wx:key="list0">
+                    <image class="rlist_img r4{{open_v==1?item.r4:''}}" src="{{item.fcover}}"></image>
+                    <view class="rlist_detail">
+                        <text class="rlist_t">{{item.title}}</text>
+                        <text class="rlist_c">{{item.mainingredient}}</text>
+                        <text class="rlist_n" wx:if="{{item.collnum>0}}">{{item.collnum}}人收藏</text>
+                    </view>
+                </navigator>
+            </view>
+            <view class="loading_end" wx:if="{{loading_end[0]}}"></view>
+            <view class="loading" wx:if="{{info==0&&loading}}">
+                <image class="loading_img" src="../../image/loading-32-32.gif"></image>
+            </view>
+            <view class="loading_fail" wx:if="{{info==0&&loading_fail}}"></view>
+            <view class="loading_nodata" wx:if="{{loading_nodata[0]}}">还没有发布过菜谱</view>
+        </scroll-view>
+    </swiper-item>
+    <swiper-item>
+        <scroll-view bindscrolltolower="list_onReachBottom" enableBackToTop="true" scrollY="true">
+            <view class="plist">
+                <view class="plist_item" wx:for="{{list[1]}}" wx:key="list1">
+                    <view class="plist_item_u">
+                        <view class="plist_nu">
+                            <image class="plist_img_u" src="{{item.avatar}}"></image>
+                            <image class="vip_icon" src="/image/vip_icon.png" wx:if="{{vip}}"></image>
+                        </view>
+                        <view class="plist_nu2">{{item.username}}</view>
+                        <view class="plist_item_time">{{item.dateline}}<text wx:if="{{item.city}}">，{{item.city}}</text>
+                        </view>
+                    </view>
+                    <navigator class="plist_item_c" url="/pages/pai_info/pai_info?id={{item.id}}">
+                        <view class="plist_item_t">
+                            <block wx:if="{{item.title}}">
+                                <view class="plist_item_b">
+                                    <text class="plist_tip2" wx:if="{{item.digest==2}}">精</text>
+                                    <text class="plist_tip" wx:if="{{item.type==2}}">问答</text>
+                                    <text class="plist_tip" wx:if="{{item.type==3}}">投票</text>
+                                    <text>{{item.title}}</text>
+                                </view>
+                                <text>{{item.subject}}</text>
+                            </block>
+                            <block wx:else>
+                                <text class="plist_tip2" wx:if="{{item.digest==2}}">精</text>
+                                <text class="plist_tip" wx:if="{{item.type==2}}">问答</text>
+                                <text class="plist_tip" wx:if="{{item.type==3}}">投票</text>
+                                <text>{{item.subject}}</text>
+                            </block>
+                        </view>
+                        <view class="plist_item_pic">
+                            <image src="{{photo.pic}}" wx:if="{{index<3}}" wx:for="{{item.photo}}" wx:for-item="photo" wx:key="photo"></image>
+                            <view class="plist_item_num" wx:if="{{item.photo.length>3}}">{{item.photo.length}}</view>
+                        </view>
+                    </navigator>
+                    <view class="plist_item_ac">
+{{item.likenum}}个喜欢，{{item.replynum}}条评论<block wx:if="{{item.type==3}}">，{{item.partnum}}人投票</block>
+                    </view>
+                </view>
+            </view>
+            <view class="loading_end" wx:if="{{loading_end[1]}}"></view>
+            <view class="loading" wx:if="{{info==1&&loading}}">
+                <image class="loading_img" src="../../image/loading-32-32.gif"></image>
+            </view>
+            <view class="loading_fail" wx:if="{{info==1&&loading_fail}}"></view>
+            <view class="loading_nodata" wx:if="{{loading_nodata[1]}}">还没有发布过帖子</view>
+        </scroll-view>
+    </swiper-item>
+    <swiper-item>
+        <scroll-view bindscrolltolower="list_onReachBottom" enableBackToTop="true" scrollY="true">
+            <view class="rlist">
+                <navigator class="rlist_item" url="/pages/recipe_info/recipe_info?id={{item.id}}" wx:for="{{list[2]}}" wx:key="list2">
+                    <image class="rlist_img r4{{open_v==1?item.r4:''}}" src="{{item.fcover}}"></image>
+                    <view class="rlist_detail">
+                        <text class="rlist_t">{{item.title}}</text>
+                        <text class="rlist_c">{{item.mainingredient}}</text>
+                        <text class="rlist_n" wx:if="{{item.collnum>0}}">{{item.collnum}}人收藏</text>
+                    </view>
+                </navigator>
+            </view>
+            <view class="loading_end" wx:if="{{loading_end[2]}}"></view>
+            <view class="loading" wx:if="{{info==2&&loading}}">
+                <image class="loading_img" src="../../image/loading-32-32.gif"></image>
+            </view>
+            <view class="loading_fail" wx:if="{{info==2&&loading_fail}}"></view>
+            <view class="loading_nodata" wx:if="{{loading_nodata[2]}}">还没有收藏过菜谱</view>
+            <block wx:if="{{WeekRecipeList.length>0}}">
+                <view class="s2_1">为您推荐</view>
+                <view class="rlist" style="padding:0 0 0 40rpx;">
+                    <navigator class="rlist_item" url="/pages/recipe_info/recipe_info?id={{item.id}}" wx:for="{{WeekRecipeList}}" wx:key="WeekRecipeList">
+                        <image class="rlist_img r4{{open_v==1?item.r4:''}}" src="{{item.fcover}}"></image>
+                        <view class="rlist_detail">
+                            <text class="rlist_t">{{item.title}}</text>
+                            <text class="rlist_c">{{item.mainingredient}}</text>
+                            <text class="rlist_n" wx:if="{{item.collnum>0}}">{{item.collnum}}人收藏</text>
+                        </view>
+                    </navigator>
+                </view>
+                <view>　</view>
+                <navigator class="ca" url="/pages/classify/classify?id=1" wx:if="{{WeekRecipeList.length>0&&info==2}}">更多菜谱</navigator>
+                <view>　</view>
+            </block>
+        </scroll-view>
+    </swiper-item>
+</swiper>

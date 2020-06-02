@@ -1,0 +1,27 @@
+<template name="446228fa">
+    <view class="_view 446228fa {{'card-room'+passClass}}">
+        <image class="_image 446228fa card-room-loading" src="/static/blank/card-room.png" wx:if="{{!item||!item.title}}"></image>
+        <view bindtap="handleProxy" class="_view 446228fa card-room-content" data-comkey="{{$k}}" data-eventid="{{'446228fa-0'}}" wx:if="{{item}}">
+            <view class="_view 446228fa card-img">
+                <template is="0e24a461" data="{{...$root['0'],...$root[$kk+'446228fa-0'],$root:$root}}"></template>
+            </view>
+            <view class="_view 446228fa card-room-desc">
+                <view class="_view 446228fa card-row mg-ellipsis card-title">{{item.title}}</view>
+                <view class="_view 446228fa card-row mg-ellipsis card-subtitle" wx:if="{{item.subTitle}}">{{item.subTitle}}</view>
+                <view class="_view 446228fa card-row mg-ellipsis card-subtitle" wx:if="{{item.thirdTitle}}">所属店面：{{item.thirdTitle}}</view>
+                <view class="_view 446228fa card-row mg-ellipsis card-subtitle" wx:if="{{item.location}}">
+                    <text class="_text 446228fa mgic-location"></text>{{item.location}}</view>
+                <view class="_view 446228fa card-row mg-flex" wx:if="{{item.labels&&item.labels.length}}">
+                    <template is="0255ce1c" data="{{...$root['0'],...$root[$kk+'446228fa-1-'+index],$root:$root}}" wx:for="{{item.labels}}" wx:for-item="label" wx:key="index"></template>
+                </view>
+                <view class="_view 446228fa card-row">
+                    <text class="_text 446228fa card-pirce">{{item.showPrice}}</text>
+                    <text class="_text 446228fa card-unit">元/月{{item.isMaxShowPrice?'':'起'}}</text>
+                </view>
+            </view>
+            <image class="_image 446228fa adIcon" src="{{item.adIconUrl}}" wx:if="{{item.adIconUrl}}"></image>
+        </view>
+    </view>
+</template>
+<import src="/components/mgImage.vue.wxml"></import>
+<import src="/components/mgAutoImage.vue.wxml"></import>

@@ -1,0 +1,17 @@
+<view catchtouchmove="false" class="container">
+    <view class="phone-number">
+        <text>{{phoneText}}</text>
+        <input bindinput="userValue" cursorSpacing="{{topSpacing}}" maxlength="11" placeholder="{{inputNumMes}}" placeholderClass="holderText" type="number" value="{{userAccount}}"></input>
+    </view>
+    <view class="getbtn">
+        <button bindtap="jumpPage" class="button" disabled="{{numDisable}}" style="opacity: {{opacity}}">{{getCodeText}}</button>
+    </view>
+    <view class="login">
+        <text bindtap="toLogin" class="login">{{navigateMes}}</text>
+    </view>
+</view>
+<view animation="{{$taltoast$animationData}}" class="tal-toast-container toast" style="top:{{$taltoast$vertical}}%;" wx:if="{{$taltoast$toastVisible}}">
+    <view class="tal-toast">
+        <text>{{$taltoast$toastMessage}}</text>
+    </view>
+</view>

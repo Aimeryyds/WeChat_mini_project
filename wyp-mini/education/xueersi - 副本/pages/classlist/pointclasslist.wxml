@@ -1,0 +1,106 @@
+<view class="choose">
+    <view class="transparent-mask" wx:if="{{!transparentMask}}"></view>
+    <view>
+        <view class="classlist" hidden="{{!cardInfo.length}}">
+            <view class="course-card-centers" wx:for="{{$card$cardInfo}}" wx:for-index="_index" wx:key="index">
+                <view bindtap="$card$goClassInfo" class="card-padding" data-wpygoclassinfo-a="{{item}}">
+                    <view class="card-top">
+                        <text class="card-title">{{item.className}}</text>
+                        <text class="back-view {{$card$classType[item.classType].class}}">{{$card$classType[item.classType].test}}</text>
+                    </view>
+                    <view class="icon-test">
+                        <text class="iconfont icon-home_classdetailpage"></text>
+                        <text class="text">{{item.classtimeNames}}</text>
+                    </view>
+                    <view class="icon-test" hidden="{{item.classType==1}}">
+                        <text class="iconfont icon-home_classdetailpage2"></text>
+                        <text class="text">{{item.districtName?item.districtName:''}}{{item.venueName}}</text>
+                    </view>
+                    <view class="card-state">
+                        <text class="date">{{item.startDate}} 至 {{item.endDate}}</text>
+                        <block wx:if="{{$card$bottomLine}}">
+                            <text class="state-btn {{$card$tipColor[item.claQuotaNum]}} " wx:if="{{item.classType!=1}}"> {{$card$tip[item.claQuotaNum]?$card$tip[item.claQuotaNum]:item.claQuotaNum}}</text>
+                        </block>
+                    </view>
+                    <view class="card-teachers">
+                        <view class="teachers-list">
+                            <view catchtap="$card$goDetail" class="teachers" data-wpygodetail-a="{{item.teachers}}" data-wpygodetail-b="0" wx:if="{{item.classType==4&&item.teachers.length>=2}}">
+                                <view class="parents">
+                                    <view class="teachers-info">
+                                        <image binderror="$card$minImgError" class="user-img" data-wpyminimgerror-a="{{_index}}" data-wpyminimgerror-b="0" mode="widthFix" src="{{item.teachers[0].teacherPictureUrl}}" wx:if="{{item.teachers[0].teacherPictureUrl}}"></image>
+                                        <image class="default-img" src="{{$card$DefaultImg}}" wx:else></image>
+                                    </view>
+                                </view>
+                                <view>
+                                    <view class="names">{{item.teachers[0].teacherName?item.teachers[0].teacherName:'待定'}}</view>
+                                    <view class="tea-label">授课</view>
+                                </view>
+                                <view class="parents">
+                                    <view class="teachers-info">
+                                        <image binderror="$card$minImgError" class="user-img" data-wpyminimgerror-a="{{_index}}" data-wpyminimgerror-b="1" mode="widthFix" src="{{item.teachers[1].teacherPictureUrl}}" wx:if="{{item.teachers[1].teacherPictureUrl}}"></image>
+                                        <image class="default-img" src="{{$card$DefaultImg}}" wx:else></image>
+                                    </view>
+                                </view>
+                                <view>
+                                    <view class="names">{{item.teachers[1].teacherName?item.teachers[1].teacherName:'待定'}}</view>
+                                    <view class="tea-label">授课</view>
+                                </view>
+                            </view>
+                            <view catchtap="$card$goDetail" class="teachers" data-wpygodetail-a="{{item.teachers}}" data-wpygodetail-b="0" wx:if="{{!item.strengTutor&&(item.teachers.length<2||item.classType!=4)}}">
+                                <view class="parents">
+                                    <view class="teachers-info">
+                                        <image binderror="$card$minImgError" class="user-img" data-wpyminimgerror-a="{{_index}}" data-wpyminimgerror-b="0" mode="widthFix" src="{{item.teachers[0].teacherPictureUrl}}" wx:if="{{item.teachers[0].teacherPictureUrl}}"></image>
+                                        <image class="default-img" src="{{$card$DefaultImg}}" wx:else></image>
+                                    </view>
+                                </view>
+                                <view>
+                                    <view class="names">{{item.teachers[0].teacherName?item.teachers[0].teacherName:'待定'}}</view>
+                                    <view class="tea-label">授课</view>
+                                </view>
+                            </view>
+                            <view catchtap="$card$goDetail" class="teachers" data-wpygodetail-a="{{item.tutors}}" data-wpygodetail-b="0" wx:if="{{item.classType==2}}">
+                                <view class="parents">
+                                    <view class="teachers-info">
+                                        <image binderror="$card$ImgError" class="user-img" data-wpyimgerror-a="{{_index}}" mode="widthFix" src="{{item.tutors[0].tutorPictureUrl}}" wx:if="{{item.tutors[0].tutorPictureUrl}}"></image>
+                                        <image class="default-img" src="{{$card$DefaultImg}}" wx:else></image>
+                                    </view>
+                                </view>
+                                <view>
+                                    <view class="names">{{item.tutors[0].tutorSysName?item.tutors[0].tutorSysName:'待定'}}</view>
+                                    <view class="tea-label">{{item.strengTutor?'老师':'辅导'}}</view>
+                                </view>
+                            </view>
+                            <view class="ellipsis" wx:if="{{item.teachers.length>=3}}">
+                                <text></text>
+                                <text></text>
+                                <text></text>
+                            </view>
+                        </view>
+                        <view class="card-price">
+                            <view>
+                                <text class="card-price-icon">￥</text>{{item.actualPrice}}</view>
+                            <view class="card-price-origin" wx:if="{{item.promotionPrice>0&&item.originPrice>item.promotionPrice}}">原价: <text class="origin-price">￥{{item.originPrice}}</text>
+                            </view>
+                        </view>
+                    </view>
+                </view>
+            </view>
+        </view>
+        <view class="no-list-tip" hidden="{{cardInfo.length}}">没有找到您心仪的班级，更换个条件试试吧</view>
+        <view class="weui-loadmore load">
+            <view class="weui-loading" wx:if="{{loadingWord==='正在加载'}}"></view>
+            <view class="weui-loadmore__tips" hidden="{{!cardInfo.length}}">{{loadingWord}}</view>
+        </view>
+    </view>
+    <view class="select-tutor">
+        <view></view>
+    </view>
+    <view animation="{{$taltoast$animationData}}" class="tal-toast-container toast" style="top:{{$taltoast$vertical}}%;" wx:if="{{$taltoast$toastVisible}}">
+        <view class="tal-toast">
+            <text>{{$taltoast$toastMessage}}</text>
+        </view>
+    </view>
+</view>
+<view bindtap="$gohomeview$backfunc" class="goHome" wx:if="{{isShare}}">
+    <text class="iconfont icon-home"></text>
+</view>

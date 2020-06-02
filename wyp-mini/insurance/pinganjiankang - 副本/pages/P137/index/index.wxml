@@ -1,0 +1,223 @@
+<pa-sticky bindstickyscroll="getScrollTop" scroll="{{curNodes}}">
+    <view slot="stickychild">
+        <view style="margin-bottom:4vw;">
+            <view class="section__ctn">
+                <image mode="widthFix" src="{{imgurl.topImgUrl}}" style="padding-bottom:18rpx; background-color: #eeeeee;"></image>
+            </view>
+            <view class="section">
+                <view class="flex-row header">
+                    <view class="title">保障计划</view>
+                    <view bindtap="seePlan" class="blue pull-right blue-end">查看详情</view>
+                </view>
+                <view class="plantab">
+                    <view bindtap="tabPlan" class="{{tabplan=='10'?'active':''}}" data-plan="10">小宝贝版</view>
+                    <view bindtap="tabPlan" class="{{tabplan=='12'?'active':''}}" data-plan="12">好少年版</view>
+                </view>
+                <view class="flex-row content has-pdtop">
+                    <view>投保年龄
+              </view>
+                    <view class="pull-right">{{buyAge}}</view>
+                </view>
+                <view class="flex-row content">
+                    <view>一般医疗保障金
+                <text bindtap="toggle" class="qst" data-qst="yby">?</text>
+                    </view>
+                    <view class="pull-right">{{bzj}}万</view>
+                </view>
+                <view class="content detail" wx:if="{{yby}}">
+                    <view>因意外伤害或在等待期30天后因患疾病，在医院接受治疗的，我们依照约定给付下列保险金：</view>
+                    <view>1、住院医疗费用：床位费、加床费、重症监护室床位费、护理费、膳食费、检查检验费、治疗费、药品费、医生费、手术费、救护车使用费</view>
+                    <view>2、指定门诊医疗费用：门诊手术费、门诊肾透析费、器官移植后的门诊抗排异治疗费、门诊恶性肿瘤化疗/放疗/免疫治疗/内分泌治疗/靶向治疗费用</view>
+                    <view>3、住院前后7天门急诊费用</view>
+                </view>
+                <view class="flex-row content">
+                    <view>恶性肿瘤保障金
+                <text bindtap="toggle" class="qst" data-qst="exz">?</text>
+                    </view>
+                    <view class="pull-right">额外{{bzj}}万</view>
+                </view>
+                <view class="content detail" wx:if="{{exz}}">
+                    <view>等待期30天后初次确诊罹患恶性肿瘤，在医院接受治疗的，在一般医疗保险金累计给付达到保额后，我们依照约定给付下列保险金：</view>
+                    <view>1、恶性肿瘤住院医疗费用：床位费、加床费、重症监护室床位费、护理费、膳食费、检查检验费、治疗费、药品费、医生费、手术费、救护车使用费</view>
+                    <view>2、恶性肿瘤特殊门诊医疗费用：化疗/放疗/免疫治疗/内分泌治疗/靶向治疗费用</view>
+                    <view>3、恶性肿瘤住院前后7天门急诊费用</view>
+                </view>
+                <view class="flex-row content">
+                    <view>重大疾病保险金
+                
+              </view>
+                    <view class="pull-right">6万</view>
+                </view>
+                <view class="flex-row content">
+                    <view>轻症疾病保险金
+                
+              </view>
+                    <view class="pull-right">20万</view>
+                </view>
+                <view class="flex-row content">
+                    <view>意外医疗保险金
+                
+              </view>
+                    <view class="pull-right">1万</view>
+                </view>
+                <view class="flex-row content" wx:if="{{tabplan=='12'}}">
+                    <view>航空意外身故/伤残保险金
+               
+              </view>
+                    <view class="pull-right">100万</view>
+                </view>
+                <view class="flex-row content" wx:if="{{tabplan=='12'}}">
+                    <view>公共客运汽车意外身故/伤残保险金
+                
+              </view>
+                    <view class="pull-right">20万</view>
+                </view>
+                <view class="flex-row content" wx:if="{{tabplan=='12'}}">
+                    <view>骑行意外身故/伤残保险金
+                
+              </view>
+                    <view class="pull-right">20万</view>
+                </view>
+                <view class="flex-row content">
+                    <view>年免赔额
+                <text bindtap="toggle" class="qst" data-qst="nmp">?</text>
+                    </view>
+                    <view class="pull-right">意外医疗保险金100元/次，其他医疗保险金年累计1万元</view>
+                </view>
+                <view class="content detail" wx:if="{{nmp}}">当年度产生的、报销范围内的医疗费用，自付部分只要累计超过1万，则1万以上的医疗费用可以计入赔付。1万以下的部分可以拿到单位或者其他保险公司进行报销。
+            </view>
+                <view class="flex-row content has-pdbottom">
+                    <view>保障期间</view>
+                    <view class="pull-right">1年</view>
+                </view>
+                <view class="flex-row baofei">
+                    <view class="orange title">￥{{price}}</view>
+                    <view bindtap="openPdf" class="blue pull-right blue-end" data-pdfurl="https://m.health.pingan.com/provision/rate/ikb_children_matching_rate.pdf">查看保费</view>
+                </view>
+                <view class="stand"></view>
+            </view>
+        </view>
+        <pa-flex paClass="pa-nav-flex">
+            <view bindtap="getNavIndex" class="pa-nav-li {{navcur==index?'pa-active':''}}" data-index="{{index}}" slot="flexchild" wx:for="{{navlist}}" wx:key="navlist">
+                <text>{{item}}</text>
+            </view>
+        </pa-flex>
+        <view class="paNodes" id="cpxq">
+            <image mode="widthFix" src="{{imgurl.cpxq1}}"></image>
+            <image bindtap="openPdf" data-pdfurl="https://m.health.pingan.com/provision/ikangbao_disease_list.pdf" mode="widthFix" src="{{imgurl.cpxq2}}"></image>
+            <image mode="widthFix" src="{{imgurl.cpxq3}}"></image>
+            <image mode="widthFix" src="{{imgurl.cpxq5}}"></image>
+        </view>
+        <view class="paNodes" id="cjwt">
+            <image mode="widthFix" src="{{imgurl.cjwt}}"></image>
+        </view>
+        <view class="txxx paNodes" id="wytb">
+            <view class="header">
+                <view class="title">填写投保信息</view>
+            </view>
+            <view>
+                <text class="qst">1</text>本人信息（投保人）
+        </view>
+            <view class="bbr">
+                <view class="flex-row">
+                    <view>姓名</view>
+                    <view>
+                        <input bindblur="bindAname" maxlength="32" placeholder="请输入您的姓名" value="{{applicant.name}}"></input>
+                    </view>
+                </view>
+                <view class="flex-row">
+                    <view>身份证</view>
+                    <view>
+                        <input bindblur="bindAidno" maxlength="18" placeholder="身份证" type="idcard" value="{{applicant.idno}}"></input>
+                    </view>
+                </view>
+                <view class="flex-row">
+                    <view>手机号码</view>
+                    <view>
+                        <input bindblur="bindAmobile" maxlength="11" placeholder="手机号码" type="idcard" value="{{applicant.contactInfo.mobile}}"></input>
+                    </view>
+                </view>
+            </view>
+            <view>
+                <text class="qst">2</text>为谁投保（被保人）
+        </view>
+            <view>
+                <radio-group bindchange="relationChange" class="radio-group">
+                    <label class="radio {{item.checked?'active':''}}" id="{{value}}" wx:for="{{relations}}" wx:key="value">
+                        <radio checked="{{item.checked}}" value="{{item.value}}"></radio> {{item.name}}
+              <image class="checked" src="{{imgurl.checkedImg}}" wx:if="{{item.checked}}"></image>
+                    </label>
+                </radio-group>
+            </view>
+            <view class="bbr" wx:if="{{relationshipWithApplicant!=1}}">
+                <view class="flex-row">
+                    <view>姓名</view>
+                    <view>
+                        <input bindblur="bindBname" maxlength="32" placeholder="请输入姓名" value="{{beibaoren.name}}"></input>
+                    </view>
+                </view>
+                <view class="flex-row">
+                    <view>身份证</view>
+                    <view>
+                        <input bindblur="bindBidno" maxlength="18" placeholder="身份证" type="idcard" value="{{beibaoren.idno}}"></input>
+                    </view>
+                </view>
+            </view>
+            <view>
+                <text class="qst">3</text>被保人社保情况
+        </view>
+            <view class="">
+                <radio-group bindchange="socialSecuritysChange" class="radio-group">
+                    <label class="radio {{item.checked?'active':''}}" id="{{value}}" wx:for="{{socialSecuritys}}" wx:key="value">
+                        <radio checked="{{item.checked}}" value="{{item.value}}"></radio> {{item.name}}
+              <image class="checked" src="{{imgurl.checkedImg}}" wx:if="{{item.checked}}"></image>
+                    </label>
+                </radio-group>
+            </view>
+            <view>
+                <text class="qst">4</text>选择保障计划
+        </view>
+            <view class="">
+                <radio-group bindchange="planChange" class="radio-group">
+                    <label class="radio {{item.checked?'active':''}}" id="{{value}}" wx:for="{{plans}}" wx:key="value">
+                        <radio checked="{{item.checked}}" value="{{item.benLevel}}"></radio> {{item.name}}
+              <image class="checked" src="{{imgurl.checkedImg}}" wx:if="{{item.checked}}"></image>
+                    </label>
+                </radio-group>
+            </view>
+            <image mode="widthFix" src="{{imgurl.copyRightUrl}}" style="margin-top:30rpx;"></image>
+        </view>
+        <view class="bottom">
+            <view class="provisions">
+                <checkbox-group bindchange="agreeChange">
+                    <label class="checkbox" wx:for="{{agreeItems}}" wx:key="{{item.value}}">
+                        <checkbox checked="{{item.checked}}" color="#fc611d" value="{{item.value}}"></checkbox>我已阅读并了解
+          </label>
+                    <text bindtap="openPdf" class="blue" data-pdfurl="https://m.health.pingan.com/provision/ikangbao_children_matching_provision.pdf">《保险条款》</text>和
+          <text bindtap="openPdf" class="blue" data-pdfurl="/mgr/makePdf.do?filename=A000000082-3.pdf">《重要声明》</text>
+                </checkbox-group>
+            </view>
+            <view class="btm-nav">
+                <view bindtap="toIndex" class="icon">
+                    <image src="{{imgurl.icon1}}" style="width: 50rpx;"></image>
+                </view>
+                <view class="icon">
+                    <button openType="contact">
+                        <image src="{{imgurl.icon2}}" style="width: 50rpx;"></image>
+                    </button>
+                </view>
+                <view class="price">
+          ￥{{totalPrem}}
+        </view>
+                <view bindtap="buy" class="buy">
+          立即投保
+        </view>
+            </view>
+        </view>
+    </view>
+</pa-sticky>
+<view class="share">
+    <button hoverClass="none" openType="share">
+        <image src="{{imgurl.share}}"></image>
+    </button>
+</view>

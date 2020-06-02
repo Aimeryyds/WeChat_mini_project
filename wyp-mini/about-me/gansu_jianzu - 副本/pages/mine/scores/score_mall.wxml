@@ -1,0 +1,50 @@
+<import src="/component/carousel/carouselT.wxml"></import>
+<import src="/dist/loadmore/index.wxml"></import>
+<import src="/dist/toast/index.wxml"></import>
+<view class="container" wx:if="{{isShow}}">
+    <view class="zan-panel zan-panel__no-margin-top">
+        <template is="carouselT" data="{{images:bannerList}}"></template>
+        <view bindtap="handlesearch" class="score-search__wrap">
+            <view class="score-search">
+                <icon size="16" type="search"></icon>
+                <text style="color:rgba(0,0,0,0.43); margin-left:16rpx;">{{keyword||'搜索店内的商品'}}</text>
+            </view>
+        </view>
+        <view class="score-list__tab">
+            <view bindtap="handleSwitchSort" data-sort="points" style="color:{{sort=='points'?'#f22222':''}}">积分兑换</view>
+            <view bindtap="handleSwitchSort" data-sort="sales" style="color:{{sort=='sales'?'#f22222':''}}">销量</view>
+            <view bindtap="handleSwitchSort" data-sort="times" style="color:{{sort=='times'?'#f22222':''}}">新品</view>
+            <view style="display:flex;align-items:center;">
+                <picker bindchange="bindPickerChange" range="{{array}}" value="{{index}}">
+                    <view class="picker">{{array[index]}}</view>
+                </picker>
+                <view class="down-icon"></view>
+            </view>
+        </view>
+        <scroll-view enableBackToTop scrollY bindscroll="handlescroll" bindscrolltolower="lower" scrollTop="{{scrollTop}}" style="width:100%;height:60vh;">
+            <view class="score-list">
+                <view bindtap="toDetail" class="score-list__item" data-id="{{item.id}}" wx:for="{{goodsList}}">
+                    <view class="score-list__img">
+                        <image src="{{item.imgUrl}}" style="width:370rpx;height:370rpx" wx:if="{{item.type==0}}"></image>
+                        <view class="coupon__img" wx:if="{{item.type==1}}">
+                            <image src="{{item.imgUrl}}"></image>
+                        </view>
+                        <view class="giftcard__img" wx:if="{{item.type==2}}">
+                            <image src="{{item.imgUrl}}"></image>
+                        </view>
+                    </view>
+                    <view class="score-list__name zan-ellipsis">{{item.goodsName}}</view>
+                    <view class="score-list__footer">
+                        <view class="score-list__num">{{item.price}}积分</view>
+                        <image catchtap="toPay" data-id="{{item.id}}" src="http://imgcdnali.wfenxiao.com.cn/xcx/c/plus1.png" style="width:48rpx;height:48rpx"></image>
+                    </view>
+                </view>
+            </view>
+            <wxc-abnor type="SEARCH" wx:if="{{goodsList.length==0}}"></wxc-abnor>
+        </scroll-view>
+    </view>
+    <view id="loadmore">
+        <template is="zan-loadmore" data="{{loading:loadmore}}"></template>
+    </view>
+    <template is="zan-toast" data="{{zanToast:zanToast}}"></template>
+</view>

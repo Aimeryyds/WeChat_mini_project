@@ -1,0 +1,341 @@
+@import "../../__wuBaseWxss__/0.wxss";
+
+.main {
+    background-color: #ededed;
+    padding-bottom: 100rpx;
+}
+
+.confirm-box {
+    font-size: 28rpx;
+    background-color: #fff;
+    padding-left: 20rpx;
+    padding-right: 20rpx;
+}
+
+.orders-number {
+    min-height: 90rpx;
+    line-height: 90rpx;
+}
+
+.orders-detail {
+    position: relative;
+    height: 120rpx;
+    padding: 35rpx 20rpx 35rpx 170rpx;
+}
+
+.orders-detail image {
+    position: absolute;
+    left: 0;
+    top: 20rpx;
+    width: 150rpx;
+    height: 150rpx;
+}
+
+.orders-detail view {
+    line-height: 60rpx;
+}
+
+.orders-detail .orders-status {
+    position: absolute;
+    right: 20rpx;
+    top: 35rpx;
+    height: 120rpx;
+    line-height: 120rpx;
+}
+
+.orders-footer {
+    height: 60rpx;
+    line-height: 60rpx;
+    padding: 15rpx 20rpx 15rpx 0;
+}
+
+.delivery-top,.delivery-desc {
+    position: relative;
+    min-height: 90rpx;
+    line-height: 90rpx;
+    text-align: center;
+    padding-right: 38rpx;
+}
+
+.delivery-top::after {
+    position: absolute;
+    right: 20rpx;
+    top: 34rpx;
+    content: '';
+    width: 16rpx;
+    height: 16rpx;
+    border-top: 4rpx solid #999;
+    border-right: 4rpx solid #999;
+    transform: rotate(45deg);
+}
+
+.delivery-middle {
+    height: 200rpx;
+}
+
+.delivery_addr-no-content {
+    display: flex;
+    align-items: center;
+}
+
+.delivery_addr-no-content .delivery_addr-no-plus {
+    font-size: 120rpx;
+    margin-left: 190rpx;
+}
+
+.delivery_addr-no-tex {
+    margin-top: 20rpx;
+}
+
+.delivery_addr-no-list {
+    position: relative;
+    height: 120rpx;
+    padding: 35rpx 20rpx 35rpx 30rpx;
+    box-sizing: border-box;
+    width: 100%;
+}
+
+.delivery_addr-no-list image {
+    position: absolute;
+    left: 25rpx;
+    top: 45rpx;
+    width: 100rpx;
+    height: 100rpx;
+}
+
+.delivery_addr-no-list view:nth-child(2) {
+    padding: 10rpx 0 10rpx 0;
+}
+
+.delivery_addr-no-list .pickupaddr {
+    height: 110rpx;
+}
+
+.confirm-msg {
+    height: 90rpx;
+    padding: 20rpx 30rpx;
+}
+
+.confirm-msg-box {
+    background-color: #f7f7f7;
+    border: #e1e1e1 1px solid;
+    color: #b5b5b5;
+    height: 100%;
+    padding-left: 30rpx;
+    line-height: 94rpx;
+}
+
+.confirm-msg-box image {
+    width: 60rpx;
+    height: 60rpx;
+    vertical-align: middle;
+    margin-right: 20rpx;
+}
+
+.confirm-msg-box input {
+    display: inline-block;
+    vertical-align: middle;
+    width: 550rpx;
+}
+
+.pay_way {
+    padding-top: 30rpx;
+    padding-bottom: 30rpx;
+    display: none;
+}
+
+.pay_way image {
+    width: 114px;
+    height: 33px;
+    margin-right: 10rpx;
+    position: relative;
+    border: 1rpx solid transparent;
+}
+
+.pay_way image.active::after {
+    position: absolute;
+    right: -10px;
+    top: -10px;
+    transform: rotate(45deg);
+    content: "";
+    display: inline-block;
+    height: 20px;
+    width: 20px;
+}
+
+.pay_way_list {
+    position: relative;
+    display: inline-block;
+    height: 35px;
+}
+
+.pay_way_list icon {
+    position: absolute;
+    right: 5px;
+    top: -1px;
+    width: 8px;
+    height: 8px;
+}
+
+.confirm-footer {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    height: 100rpx;
+    line-height: 100rpx;
+    padding: 0 0rpx 0 30rpx;
+    box-sizing: border-box;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    background-color: #fff;
+    border-top: 1rpx solid #e1e1e1;
+    z-index: 999;
+    font-size: 28rpx;
+}
+
+.confirm-pay {
+    padding-left: 25rpx;
+    padding-right: 25rpx;
+}
+
+.invoice-box {
+    border-bottom: 0;
+}
+
+.icon-edit {
+    font-size: 20px;
+    display: inline-block;
+    vertical-align: middle;
+    margin-right: 10rpx;
+}
+
+.descfr {
+    width: 520rpx;
+    min-height: 90rpx;
+    line-height: 40rpx;
+    word-break: break-all;
+    text-align: right;
+    margin-right: -20rpx;
+    margin-top: 23rpx;
+}
+
+.body {
+    width: 100%;
+    height: 100%;
+    position: fixed;
+    bottom: 0px;
+    top: 0px;
+    background: rgba(0,0,0,0.5);
+    z-index: 1;
+}
+
+.window {
+    width: 80%;
+    background: #ffffff;
+    overflow: hidden;
+    z-index: 9000;
+    color: #aaaaaa;
+    text-align: center;
+    margin: auto;
+    padding-left: 10px;
+    padding-right: 10px;
+    border-radius: 16px;
+    position: fixed;
+    top: 45%;
+    left: 50%;
+    -webkit-transform: translateX(-50%) translateY(-50%);
+}
+
+.contain {
+    font-size: 30rpx;
+    color: #aaaaaa;
+    padding: 20rpx;
+}
+
+.input>input {
+    border: 1px solid #f5f5f5;
+    height: 60rpx;
+    line-height: 60rpx;
+    text-align: left;
+}
+
+.contain>view {
+    height: 60rpx;
+    line-height: 60rpx;
+    padding: 20rpx;
+}
+
+.contain_button {
+    display: flex;
+}
+
+.contain_button>button {
+    font-size: 30rpx;
+    height: 80rpx;
+    line-height: 80rpx;
+    width: 48%;
+}
+
+.tex {
+    color: #a1a1a1;
+}
+
+.qrcode-order {
+    text-align: center;
+}
+
+.qrcode-order .desc {
+    float: left;
+}
+
+.qrcode-order image {
+    width: 600rpx;
+}
+
+.pickupinbox {
+    display: flex;
+    flex-direction: row;
+}
+
+.pickupinbox view {
+    height: 70rpx;
+    line-height: 70rpx;
+}
+
+.pickupinbox .p1 {
+    width: 30%;
+}
+
+.pickupinbox .p2 {
+    width: 45%;
+}
+
+.pickupinbox .p3 {
+    width: 25%;
+    color: #FF5700;
+    text-align: right;
+}
+
+.li_add {
+    position: absolute;
+    bottom: 0;
+    right: 16rpx;
+}
+
+.newcenter {
+    display: flex;
+    align-items: center;
+}
+
+.newadd {
+    border: 1px solid #e5e5e5;
+    padding: 0 16rpx;
+}
+
+.newtxt {
+    border-top: 1px solid #e5e5e5;
+    padding: 0 16rpx;
+    border-bottom: 1px solid #e5e5e5;
+}

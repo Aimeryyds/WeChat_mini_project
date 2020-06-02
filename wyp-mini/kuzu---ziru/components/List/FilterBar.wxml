@@ -1,0 +1,106 @@
+<view class="_div">
+    <view class="{{['filter-bar-wrapper _div',fixed?'fixed':'']}}" id="filterBar">
+        <view bindtap="__e" class="{{['filter-bar-item _div',FilterType.location===filterIndex?'active':'']}}" data-event-opts="{{[ [ 'tap',[ [ 'switchFilter',['$0'],['FilterType.location'] ] ] ] ]}}">
+            <label class="{{['_span',isSelectedPlaceType?'mcolor':'']}}">{{placeText}}</label>
+            <view class="iconfont icon-zrk_ic_triangle_norm select-icon _i"></view>
+        </view>
+        <view bindtap="__e" class="{{['filter-bar-item _div',FilterType.type===filterIndex?'active':'']}}" data-event-opts="{{[ [ 'tap',[ [ 'switchFilter',['$0'],['FilterType.type'] ] ] ] ]}}">
+            <label class="{{['_span',isSelectedType?'mcolor':'']}}">{{typeText}}</label>
+            <view class="iconfont icon-zrk_ic_triangle_norm select-icon _i"></view>
+        </view>
+        <view bindtap="__e" class="{{['filter-bar-item _div',FilterType.price===filterIndex?'active':'']}}" data-event-opts="{{[ [ 'tap',[ [ 'switchFilter',['$0'],['FilterType.price'] ] ] ] ]}}">
+            <label class="{{['_span',currentPriceText?'mcolor':'']}}">{{priceText}}</label>
+            <view class="iconfont icon-zrk_ic_triangle_norm select-icon _i"></view>
+        </view>
+        <view bindtap="__e" class="{{['filter-bar-item _div',FilterType.filter===filterIndex?'active':'']}}" data-event-opts="{{[ [ 'tap',[ [ 'switchFilter',['$0'],['FilterType.filter'] ] ] ] ]}}">
+            <label class="{{['_span',isSelectedOtherFilter?'mcolor':'']}}">筛选</label>
+            <view class="iconfont icon-zrk_ic_triangle_norm select-icon _i"></view>
+        </view>
+        <view bindtap="__e" class="{{['filter-bar-item sort-item _div',FilterType.sort===filterIndex?'active':'']}}" data-event-opts="{{[ [ 'tap',[ [ 'switchFilter',['$0'],['FilterType.sort'] ] ] ] ]}}">
+            <view class="{{['iconfont icon-zrk_ic_rank sort-icon _i',isSelectedSort?'mcolor':'']}}"></view>
+        </view>
+    </view>
+    <view class="{{['quick-filter-padding quick-filter-wrapper _div',fixed?'fixed':'']}}" id="quickFilterBar" wx:if="{{quickFilterOptions.length!==0}}">
+        <scroll-view scrollX="{{true}}">
+            <view class="quick-filter _div">
+                <view bindtap="__e" class="{{['quick-filter-item _div',!!qf.bg_img&&!qf.style?'no-padding':'',qf.active?'active':'']}}" data-event-opts="{{[ [ 'tap',[ [ 'handleSelectQuickFilter',['$0'],[ [ ['quickFilterOptions','',i] ] ] ] ] ] ]}}" style="{{'background:'+(qf.style&&qf.style.background||'')+';'+'color:'+(qf.style&&qf.style.color||'')+';'}}" wx:for="{{quickFilterOptions}}" wx:for-index="i" wx:for-item="qf" wx:key="i">
+                    <image class="pic _img" src="{{qf.bg_img}}" wx:if="{{!qf.style&&qf.bg_img}}"></image>
+                    <image class="icon _img" src="{{qf.icon}}" wx:if="{{qf.icon}}"></image>
+                    <label class="text _span" wx:if="{{qf.style||!qf.bg_img}}">{{''+qf.title+''}}</label>
+                </view>
+                <view class="place-holder _div"></view>
+            </view>
+        </scroll-view>
+    </view>
+    <view class="{{['filter-wrapper _div',isFullFilter?'full':'',filterActive?'active':'',showFilter?'show':'',filterIndex===FilterType.sort?'short':'']}}">
+        <view class="{{['location _div',filterIndex===FilterType.location?'active':'']}}">
+            <view class="location-wrapper _div">
+                <scroll-view class="location-block block1 active" scrollY="{{true}}">
+                    <view class="list-wrapper _div">
+                        <view bindtap="__e" class="{{['list _div',item.active?'active':'']}}" data-event-opts="{{[ [ 'tap',[ [ 'handleSelectPlace1',[i] ] ] ] ]}}" wx:for="{{placeType}}" wx:for-index="i" wx:key="i">{{''+item.name+''}}</view>
+                    </view>
+                </scroll-view>
+                <scroll-view class="{{['location-block block2',isShowPlaceBlock2?'active':'']}}" scrollTop="{{locationBlock2ScrollTop}}" scrollWithAnimation="{{true}}" scrollY="{{true}}">
+                    <view class="list-wrapper _div">
+                        <view bindtap="__e" class="{{['list _div',item.active?'active':'']}}" data-event-opts="{{[ [ 'tap',[ [ 'handleSelectPlace2',[i] ] ] ] ]}}" wx:for="{{placeBlock2Data}}" wx:for-index="i" wx:key="i">{{''+(item.district_name||item.subway_name)+''}}</view>
+                    </view>
+                </scroll-view>
+                <scroll-view class="{{['location-block block3',isShowPlaceBlock3?'active':'']}}" scrollTop="{{locationBlock3ScrollTop}}" scrollWithAnimation="{{true}}" scrollY="{{true}}" wx:if="{{placeBlock3Data}}">
+                    <view class="list-wrapper _div">
+                        <view bindtap="__e" class="{{['list _div',item.active?'active':'']}}" data-event-opts="{{[ [ 'tap',[ [ 'handleSelectPlace3',[i] ] ] ] ]}}" wx:for="{{placeBlock3Data}}" wx:for-index="i" wx:key="i">{{''+(item.bizcircle_name||item.subway_station_name)+''}}</view>
+                    </view>
+                </scroll-view>
+            </view>
+        </view>
+        <view class="type _div" wx:if="{{filterIndex===FilterType.type}}">
+            <view class="filter-type-tab-wrapper _div">
+                <view bindtap="__e" class="{{['filter-type-tab _div',index===typeIndex?'active':'']}}" data-event-opts="{{[ [ 'tap',[ [ 'handleSelectTypeTab',[index] ] ] ] ]}}" wx:for="{{typeFilterData}}" wx:key="value">{{''+item.title+''}}</view>
+            </view>
+            <scroll-view class="filter-inner" scrollY="{{true}}">
+                <view class="filter-type-wrapper _div" wx:if="{{typeFilterData&&typeFilterData.length}}">
+                    <view class="type-section _div" hidden="{{!(index===typeIndex)}}" wx:for="{{typeFilterData}}" wx:key="value">
+                        <view class="filter-block bb1 _div" wx:for="{{item.extra}}" wx:for-index="i" wx:for-item="select" wx:key="i">
+                            <view class="title _h3">{{select.title}}</view>
+                            <check-box bind:__l="__l" bind:updateChildrenValue="__e" bind:updateValue="__e" childrenValue="{{select.childrenData}}" class="vue-ref-in-for" data-event-opts="{{[ [ '^updateValue',[ [ '__set_sync',['$0','data','$event'],[ [ ['typeFilterData','value',item.value],['extra','',i,''] ] ] ] ] ],[ '^updateChildrenValue',[ [ '__set_sync',['$0','childrenData','$event'],[ [ ['typeFilterData','value',item.value],['extra','',i,''] ] ] ] ] ],[ '^updateChildrenValue',[ [ '__set_sync',['$0','childrenData','$event'],[ [ ['typeFilterData','value',item.value],['extra','',i,''] ] ] ] ] ] ]}}" data-ref="typeCheckbox" select="{{select.children}}" value="{{select.data}}" vueId="{{'1-'+index+'-'+i}}"></check-box>
+                        </view>
+                    </view>
+                </view>
+            </scroll-view>
+            <view class="filter-button-group _div">
+                <view bindtap="__e" class="btn s _div" data-event-opts="{{[ [ 'tap',[ [ 'handleTypeReset',['$event'] ] ] ] ]}}">重置</view>
+                <view bindtap="__e" class="btn l mbg _div" data-event-opts="{{[ [ 'tap',[ [ 'handleTypeConfirm',[false] ] ] ] ]}}">确定</view>
+            </view>
+        </view>
+        <view class="price _div" wx:if="{{filterIndex===FilterType.price}}">
+            <view class="price-wrapper _div">
+                <scroll-view class="price-block active" scrollY="{{true}}">
+                    <view class="list-wrapper _div">
+                        <view bindtap="__e" class="{{['list _div',item.active?'active':'']}}" data-event-opts="{{[ [ 'tap',[ [ 'handleSelectPrice',[i] ] ] ] ]}}" wx:for="{{priceData}}" wx:for-index="i" wx:key="i">{{''+item.title+''}}</view>
+                    </view>
+                </scroll-view>
+            </view>
+        </view>
+        <view class="filter _div" wx:if="{{filterIndex===FilterType.filter}}">
+            <scroll-view class="filter-inner" scrollY="{{true}}" wx:if="{{otherFilterData}}">
+                <view class="filter-block bb1 _div" wx:for="{{otherFilterData}}" wx:for-index="__i0__" wx:key="key">
+                    <view class="title _h3">{{item.title}}</view>
+                    <check-box bind:__l="__l" bind:updateChildrenValue="__e" bind:updateValue="__e" childrenValue="{{item.childrenData}}" class="vue-ref-in-for" data-event-opts="{{[ [ '^updateValue',[ [ '__set_sync',['$0','data','$event'],[ [ ['otherFilterData','key',item.key,''] ] ] ] ] ],[ '^updateChildrenValue',[ [ '__set_sync',['$0','childrenData','$event'],[ [ ['otherFilterData','key',item.key,''] ] ] ] ] ],[ '^updateChildrenValue',[ [ '__set_sync',['$0','childrenData','$event'],[ [ ['otherFilterData','key',item.key,''] ] ] ] ] ] ]}}" data-ref="filterCheckbox" select="{{item.children}}" value="{{item.data}}" vueId="{{'2-'+__i0__}}"></check-box>
+                </view>
+            </scroll-view>
+            <view class="filter-button-group _div">
+                <view bindtap="__e" class="btn s _div" data-event-opts="{{[ [ 'tap',[ [ 'handleOtherFilterReset',['$event'] ] ] ] ]}}">重置</view>
+                <view bindtap="__e" class="btn l mbg _div" data-event-opts="{{[ [ 'tap',[ [ 'handleOtherFilterConfirm',['$event'] ] ] ] ]}}">确定</view>
+            </view>
+        </view>
+        <view class="sort _div" wx:if="{{filterIndex===FilterType.sort}}">
+            <view class="sort-wrapper _div">
+                <scroll-view class="sort-block active" scrollY="{{true}}">
+                    <view class="list-wrapper _div" wx:if="{{sortData.children}}">
+                        <view bindtap="__e" class="{{['list _div',item.active?'active':'']}}" data-event-opts="{{[ [ 'tap',[ [ 'handleSelectSort',['$0',i],['sortData.key'] ] ] ] ]}}" wx:for="{{sortData.children}}" wx:for-index="i" wx:key="i">{{''+item.title+''}}</view>
+                    </view>
+                </scroll-view>
+            </view>
+        </view>
+    </view>
+    <view bindtap="__e" class="{{['shadow-wrapper _div',filterActive?'active':'']}}" data-event-opts="{{[ [ 'tap',[ ['switchFilter'] ] ] ]}}" wx:if="{{showFilter}}"></view>
+</view>

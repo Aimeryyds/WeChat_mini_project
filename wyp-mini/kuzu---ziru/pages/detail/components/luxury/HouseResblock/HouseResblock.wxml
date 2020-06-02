@@ -1,0 +1,20 @@
+<view class="house-resblock-wrapper house-detail bb1 _div data-v-1a1c109a" wx:if="{{!!houseResblock}}">
+    <view class="title hz-style _h3 data-v-1a1c109a">小区介绍<label bindtap="__e" class="more-btn _span data-v-1a1c109a" data-event-opts="{{[ [ 'tap',[ [ 'handleJumpResblock',['$event'] ] ] ] ]}}">小区详情<view class="iconfont icon-zrk_ic_arrowright _i data-v-1a1c109a"></view>
+        </label>
+    </view>
+    <view class="content _div data-v-1a1c109a">
+        <view class="resblock hz-style _div data-v-1a1c109a">
+            <view class="resblock-info _div data-v-1a1c109a">
+                <view class="resblock-name _h3 data-v-1a1c109a">{{houseResblock.resblock.name}}</view>
+                <view class="resblock-detail _p data-v-1a1c109a" wx:for="{{houseResblock.resblock.item}}" wx:for-index="i" wx:key="i">
+                    <label class="_span data-v-1a1c109a">{{item.name}}</label>
+                    <label class="_span data-v-1a1c109a">{{''+item.value}}</label>
+                </view>
+            </view>
+            <view class="resblock-pic _div data-v-1a1c109a">
+                <image alt="photo" class="_img data-v-1a1c109a" mode="aspectFill" src="{{resblockPic}}" wx:if="{{resblockPic}}"></image>
+            </view>
+        </view>
+        <view bindtap="__e" class="resblock-more hz-style _div data-v-1a1c109a" data-event-opts="{{[ [ 'tap',[ [ 'handleJumpResblockList',['$event'] ] ] ] ]}}">同小区在租<label class="hz-style _span data-v-1a1c109a">{{houseResblock.resblock.house_num}}</label>套房源</view>
+    </view>
+</view>

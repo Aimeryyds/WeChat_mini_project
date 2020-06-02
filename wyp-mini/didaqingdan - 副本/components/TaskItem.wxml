@@ -1,0 +1,8 @@
+<view bindtap="anonymousFunc0" class="{{(isMounted?'':'task-unready')+' '+(props.item.status==0?'':styles['completed']+' completed')+' '+(toggleAnimating?styles['task-item-hide']+' task-item-hide':'')+' '+styles['task-item']}}" wx:if="{{$taroCompReady}}">
+    <view catchtap="anonymousFunc1" class="{{''+styles['toggle-complete']}}">
+        <view class="{{'icon '+styles['icon']+' icon-left '+(props.item.kind==='TEXT'?'icon-checkbox-'+props.item.priority:'icon-checklist-'+props.item.priority)}}" wx:if="{{props.item.status===0}}"></view>
+        <view class="{{'icon '+styles['icon']+' icon-left icon-checkbox-completed'}}" wx:else></view>
+    </view>
+    <text class="{{''+styles['task-title']}}">{{props.item.title}}</text>
+    <text class="{{styles['preview-duedate']+' preview-duedate '+(isOverdue?'overdue '+styles['overdue']:'')}}">{{previewDueDate}}</text>
+</view>

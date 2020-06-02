@@ -1,0 +1,20 @@
+<scroll-view bindscrolltolower="__e" class="homepage-wrapper data-v-9e32d976" data-event-opts="{{[ [ 'scrolltolower',[ [ 'handleReachBottom',['$event'] ] ] ] ]}}" scrollTop="{{scrollTop}}" scrollWithAnimation="{{false}}" scrollY="{{!scrollLock}}">
+    <view class="padding-area _div data-v-9e32d976">
+        <search-bar bind:__l="__l" bind:setCity="__e" cityName="{{currentCity}}" class="data-v-9e32d976" data-event-opts="{{[ [ '^setCity',[ ['setCity'] ] ] ]}}" defaultPlaceholder="{{defaultPlaceholder}}" mode="homepage" vueId="1"></search-bar>
+        <place-holder bind:__l="__l" class="data-v-9e32d976" height="80rpx" vueId="2"></place-holder>
+        <banner bannerData="{{bannerData}}" bind:__l="__l" class="data-v-9e32d976" vueId="3"></banner>
+        <homepage-nav bind:__l="__l" class="data-v-9e32d976" navData="{{navData}}" vueId="4"></homepage-nav>
+        <activity-entrance activityData="{{activityData}}" bind:__l="__l" class="data-v-9e32d976" vueId="5"></activity-entrance>
+        <recommend-banner bind:__l="__l" class="data-v-9e32d976" recommendBannerData="{{recommendBannerData}}" vueId="6"></recommend-banner>
+    </view>
+    <view class="io-hook _div data-v-9e32d976"></view>
+    <place-holder bind:__l="__l" class="data-v-9e32d976" display="{{fixed&&!noQuickFilterBar?'block':'none'}}" height="88px" vueId="7"></place-holder>
+    <place-holder bind:__l="__l" class="data-v-9e32d976" display="{{fixed&&noQuickFilterBar?'block':'none'}}" height="48px" vueId="8"></place-holder>
+    <z-list bind:__l="__l" bind:scrollToListAndFix="__e" class="data-v-9e32d976 vue-ref" data-event-opts="{{[ [ '^scrollToListAndFix',[ ['scrollToListAndFix'] ] ] ]}}" data-ref="list" fixed="{{fixed}}" minHeight="{{minHeight}}" mode="homepage" refresh="{{!!currentCityCode}}" vueId="9"></z-list>
+    <floating-action-bar bind:__l="__l" class="data-v-9e32d976" from="index" vueId="10"></floating-action-bar>
+    <view class="network-modal-shadow _div data-v-9e32d976" wx:if="{{netError}}"></view>
+    <view bindtap="__e" class="network-modal _div data-v-9e32d976" data-event-opts="{{[ [ 'tap',[ [ 'handleRetry',['$event'] ] ] ] ]}}" wx:if="{{netError}}">
+        <view class="iconfont icon-shuaxin _i data-v-9e32d976"></view>
+        <label class="_span data-v-9e32d976">网络异常，点击重试</label>
+    </view>
+</scroll-view>

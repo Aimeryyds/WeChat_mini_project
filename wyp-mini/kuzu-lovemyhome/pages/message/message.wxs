@@ -1,0 +1,29 @@
+var replace = ({
+    name: (function(value) {
+        var rep = getRegExp('\x5cd+', 'g');
+        return (value.replace(rep, ''))
+    }),
+    content: (function(value, message_type, types, faceMap, resources_host) {
+        var ret = '';
+        if (message_type == types.img) {
+            ret = '[图片]'
+        };
+        if (message_type == types.text) {
+            for (var i = 0; i < faceMap.length; i++) {
+                if (value.indexOf(faceMap[((nt_0 = (i), null == nt_0 ? undefined : 'number' === typeof nt_0 ? nt_0 : "" + nt_0))][(0)]) != -1) {
+                    console.log(faceMap[((nt_1 = (i), null == nt_1 ? undefined : 'number' === typeof nt_1 ? nt_1 : "" + nt_1))][(0)].replace('[', '\\x5c[').replace(']', '\\x5c]'));
+                    var rep = getRegExp(faceMap[((nt_2 = (i), null == nt_2 ? undefined : 'number' === typeof nt_2 ? nt_2 : "" + nt_2))][(0)].replace('[', '\\x5c[').replace(']', '\\x5c]'), 'g');
+                    console.log(rep);
+                    value = value.replace(rep, '\x3cimg src\x3d\x22' + resources_host + faceMap[((nt_3 = (i), null == nt_3 ? undefined : 'number' === typeof nt_3 ? nt_3 : "" + nt_3))][(1)] + '\x22 \x3e');
+                    console.log(value)
+                }
+            };
+            ret = value
+        };
+        return (ret)
+    }),
+});
+module.exports = ({
+    name: replace.name,
+    content: replace.content,
+});

@@ -1,0 +1,30 @@
+<view bindtap="closeActionSheet" class="weui-mask {{show?'':'weui-mask_hidden'}} {{maskClass}}" wx:if="{{mask}}"></view>
+<view class="weui-actionsheet {{show?'weui-actionsheet_toggle':''}} {{extClass}}">
+    <view class="weui-actionsheet__title" wx:if="{{title}}">
+        <view class="weui-actionsheet__title-text">{{title}}</view>
+    </view>
+    <slot name="title" wx:else></slot>
+    <view class="{{!showCancel&&index===actions.length-1?'weui-actionsheet__action':'weui-actionsheet__menu'}}" wx:for="{{actions}}" wx:for-item="actionItem" wx:key="index">
+        <block wx:if="{{utils.isNotSlot(actionItem)}}">
+            <view bindtap="buttonTap" class="weui-actionsheet__cell {{item.type==='warn'?'weui-actionsheet__cell_warn':''}}" data-groupindex="{{index}}" data-index="{{actionIndex}}" data-value="{{item.value}}" wx:for="{{actionItem}}" wx:for-index="actionIndex" wx:key="item.tex">
+                {{item.text}}
+            </view>
+        </block>
+        <slot name="{{actionItem}}" wx:else></slot>
+    </view>
+    <view class="weui-actionsheet__action" wx:if="{{showCancel}}">
+        <view bindtap="closeActionSheet" class="weui-actionsheet__cell" data-type="close" id="iosActionsheetCancel">{{cancelText}}</view>
+    </view>
+</view>
+<wxs module="utils">
+var join = (function(a, b) {
+    return (a + b)
+});
+var isNotSlot = (function(v) {
+    return (typeof v !== 'string')
+});
+module.exports = ({
+    join: join,
+    isNotSlot: isNotSlot,
+});
+</wxs>

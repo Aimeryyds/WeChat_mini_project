@@ -1,0 +1,26 @@
+<view class="homepage-btn-wrapper _div data-v-10163756">
+    <view class="homepage-btn _div data-v-10163756" wx:if="{{navData}}">
+        <view bindtap="__e" class="homepage-btn-item _div data-v-10163756" data-event-opts="{{[ [ 'tap',[ [ 'handleJumpPage',['$0'],[ [ ['navData','',index,'parameter'] ] ] ] ] ] ]}}" data-index="{{index}}" data-title="首页入口" wx:for="{{navData}}" wx:key="index">
+            <image alt="sharehouse" class="homepage-btn-icon _img data-v-10163756" src="{{item.img}}"></image>
+            <view class="homepage-btn-text _h2 data-v-10163756">{{item.title}}</view>
+        </view>
+    </view>
+    <view class="homepage-btn homepage-skeleton _div data-v-10163756" wx:else>
+        <view class="homepage-btn-item _div data-v-10163756">
+            <image alt="sharehouse" class="homepage-btn-icon _img data-v-10163756"></image>
+            <view class="homepage-btn-text _h2 data-v-10163756"></view>
+        </view>
+        <view class="homepage-btn-item _div data-v-10163756">
+            <image alt="sharehouse" class="homepage-btn-icon _img data-v-10163756"></image>
+            <view class="homepage-btn-text _h2 data-v-10163756"></view>
+        </view>
+        <view class="homepage-btn-item _div data-v-10163756">
+            <image alt="sharehouse" class="homepage-btn-icon _img data-v-10163756"></image>
+            <view class="homepage-btn-text _h2 data-v-10163756"></view>
+        </view>
+        <view class="homepage-btn-item _div data-v-10163756">
+            <image alt="sharehouse" class="homepage-btn-icon _img data-v-10163756"></image>
+            <view class="homepage-btn-text _h2 data-v-10163756"></view>
+        </view>
+    </view>
+</view>

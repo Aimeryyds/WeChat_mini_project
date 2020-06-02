@@ -1,0 +1,29 @@
+<import src="/dist/toast/index.wxml"></import>
+<view class="container">
+    <template is="zan-toast" data="{{zanToast:zanToast}}"></template>
+    <view class="search-wrap" style="margin-bottom: 10rpx;">
+        <view bindtap="makesearch" class="search-box">
+            <image class="search-img" src="http://imgcdnali.wfenxiao.com.cn/xcx/c/icons/ic_search.png" style="width: 28rpx; height: 28rpx;"></image>
+            <text>输入收货地址</text>
+        </view>
+    </view>
+    <view bindtap="makesetting" class="location-wrap">
+        <image src="http://imgcdnali.wfenxiao.com.cn/xcx/c/icons/location-icon.png"></image>点击定位到当前位置</view>
+    <text class="myAddressd__title" wx:if="{{list.length>0}}">我的收货地址</text>
+    <view class="myAddressd-list-wrap" wx:if="{{isShow}}">
+        <view bindtap="addressLocation" class="myAddressd-list" data-address="{{item}}" style="border-left:{{item.id==id?'red solid 12rpx':'0'}}" wx:for="{{list}}">
+            <view class="myAddressd-list__info active">
+                <view class="myAddressd-list__info-user">
+                    <text>{{item.name}}</text>
+                    <text>{{item.phone}}</text>
+                </view>
+                <view class="myAddressd-list__detail">{{item.province}}{{item.city}}{{item.district}}{{item.title}}{{item.address}}</view>
+            </view>
+            <view catchtap="editaddress" class="myAddressd-list__edit" data-address="{{item}}">
+                <image src="http://imgcdnali.wfenxiao.com.cn/xcx/c/icons/add-edit.png"></image>
+            </view>
+        </view>
+    </view>
+    <phonemodal showModal="{{showModal}}" url="{{url}}"></phonemodal>
+    <button bindtap="newaddress" class="new-myAddressd-btn" loading="{{loading}}" size="{{warnSize}}" type="warn"> 新建收货地址 </button>
+</view>

@@ -1,0 +1,134 @@
+<view class="page">
+    <my-component bind:myevent="myEventListener" innerText=""></my-component>
+    <view class="main" style=" margin-top: {{myHight}}px"></view>
+    <view class="uk-cont" wx:if="{{unlockType}}">
+        <view class="uk-top">
+            <text class="{{batperc>40?'pre':'pre on'}}">{{batperc}}%</text>
+            <image class="dcimg" src="{{dcimg}}"></image>
+            <text class="longkm">约可行驶{{km}}公里</text>
+        </view>
+        <view>
+            <image class="carimg" src="{{carimg}}"></image>
+            <view class="carno">车牌编号:{{carno}}</view>
+        </view>
+        <view class="spicer">
+            <view class="jifei">
+                <view class="t1">
+                    <image src="../../../Content/Img/guize_1.png"></image>
+                    <text>计费规则</text>
+                </view>
+                <view class="t2" wx:if="{{vehRule.charge_type==1}}">
+                    <view class="item">
+                        <view class="dian"></view>
+                        <view class="txt">
+              {{vehRule.startmin}}分钟内{{vehRule.startprice}}元；超过{{vehRule.startmin}}分钟，超过的部分
+              <text class="blue">{{vehRule.everyprice}}元/{{vehRule.everymin}}分钟</text>；24小时内封顶金额{{vehRule.maxprice}}元。
+            </view>
+                    </view>
+                    <view class="item">
+                        <view class="dian"></view>
+                        <view class="txt">
+                            <text class="blue">不足{{vehRule.freetime}}分钟免费。</text>
+                        </view>
+                    </view>
+                </view>
+                <view class="t2" wx:if="{{vehRule.charge_type==2}}">
+                    <view class="item">
+                        <view class="dian"></view>
+                        <view class="txt">
+              {{vehRule.startmin}}分钟{{vehRule.startmile}}公里内{{vehRule.startprice}}元;超过{{vehRule.startmile}}公里,超过的部分
+              <text class="blue">{{vehRule.everymileprice}}元/{{vehRule.everymile}}公里</text>,超过{{vehRule.startmin}}分钟,超过的部分
+              <text class="blue">{{vehRule.everyprice}}元/{{vehRule.everymin}}分钟</text>;24小时内封顶金额{{vehRule.maxprice}}元。
+            </view>
+                    </view>
+                    <view class="item">
+                        <view class="dian"></view>
+                        <view class="txt">
+                            <text class="blue">不足{{vehRule.freetime}}分钟且不足{{vehRule.freemile}}公里免费。</text>
+                        </view>
+                    </view>
+                </view>
+            </view>
+            <view class="jifei zhuyi">
+                <view class="t1">
+                    <image src="../../../Content/Img/guize_2.png"></image>
+                    <text>注意</text>
+                </view>
+                <view class="t2">
+                    <view class="item">
+                        <view class="dian"></view>
+                        <view class="txt" wx:if="{{mode==1}}">
+              请在停车站点内还车。
+            </view>
+                        <view class="txt" wx:else>
+              请在站点内还车,区域内但非站点内将无法还车。
+            </view>
+                    </view>
+                    <view class="item">
+                        <view class="dian"></view>
+                        <view class="txt" wx:if="{{mode==1}}">
+              站点外还车需加收{{trafficfare}}元, 运营区域外还车需加收{{outwardfee}}元调度费。
+            </view>
+                        <view class="txt" wx:else>
+              运营区域外还车将加收{{outwardfee}}元调度费。
+            </view>
+                    </view>
+                    <view class="item">
+                        <view class="dian"></view>
+                        <view class="txt">
+             未满16周岁禁止骑行，严禁骑车载人。
+            </view>
+                    </view>
+                </view>
+            </view>
+        </view>
+        <view>
+            <view class="img-list">
+                <view class="list-item img-cen">
+                    <image class="img" src="{{img00}}"></image>
+                </view>
+                <view class="list-item info">
+                    <view class="l-tit">电量选择</view>
+                    <view class="l-tit2">为了给您提供更好的出行服务,请尽量选择电量高于40%的车骑行。</view>
+                </view>
+            </view>
+            <view class="img-list">
+                <view class="list-item img-cen">
+                    <image class="img" src="{{img01}}"></image>
+                </view>
+                <view class="list-item info">
+                    <view class="l-tit">服务区域</view>
+                    <view class="l-tit2">超出服务区域归还车辆将收取一定的调度费。超出服务区域骑行车辆将会播报语言提示,继续骑行车辆将会断电</view>
+                </view>
+            </view>
+            <view class="img-list">
+                <view class="list-item img-cen">
+                    <image class="img" src="{{img02}}"></image>
+                </view>
+                <view class="list-item info">
+                    <view class="l-tit">还车区域</view>
+                    <view class="l-tit2">还车时确保车辆已到达附近的停车网点</view>
+                </view>
+            </view>
+            <view class="img-list">
+                <view class="list-item img-cen">
+                    <image class="img" src="{{img03}}"></image>
+                </view>
+                <view class="list-item info">
+                    <view class="l-tit">禁还区域</view>
+                    <view class="l-tit2">禁还区域内无法还车</view>
+                </view>
+            </view>
+        </view>
+        <view class="fot-btn">
+            <button bindtap="SureUnlockFirstFn2" class="loginBtn" data-first="true">确认用车</button>
+        </view>
+    </view>
+    <view wx:else>
+        <view class="nk-lod">
+            <image class="carimg lod-nk10" src="{{carimg}}"></image>
+            <view class="carno">正在开锁...
+        </view>
+        </view>
+    </view>
+</view>

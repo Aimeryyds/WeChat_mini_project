@@ -1,0 +1,394 @@
+<view class="index-container _ca22c6c">
+    <view class="network _32f532b _ca22c6c" wx:if="{{$net$hasNet}}">
+        <image class="_32f532b" src="../images/network.png"></image>
+        <text class="_32f532b">网络不可用，请检查网络设置</text>
+        <view class="net-text font28 animated flash infinite _32f532b">正在尝试重新连接...</view>
+    </view>
+    <view class="_ca22c6c">
+        <view class="header-container _ca22c6c">
+            <view class="tab-nav-container _2822864 _ca22c6c">
+                <view class="search-box _2822864">
+                    <image catchtap="$tabNav$goMine" class="icon _2822864" src="https://jfinfo.oss-cn-beijing.aliyuncs.com/jugupiao/images/live/mine.png"></image>
+                    <view catchtap="$tabNav$goSearch" class="_2822864">
+                        <image class="search_btn _2822864" src="https://jfinfo.oss-cn-beijing.aliyuncs.com/jugupiao/images/live/se.png"></image>
+                        <view class="search_box _2822864">搜索股票名称/代码进行AI诊股</view>
+                    </view>
+                </view>
+                <view class="tab-nav _2822864">
+                    <view catchtap="$tabNav$STOCK_LIVE" class="box {{$tabNav$tab==0?'active':''}} _2822864">
+                        <image class="_2822864" src="http://jfinfo.oss-cn-beijing.aliyuncs.com/jugupiao/images/live/live.png" wx:if="{{$tabNav$tab==0}}"></image>
+                        <image class="_2822864" src="http://jfinfo.oss-cn-beijing.aliyuncs.com/jugupiao/images/live/live%402x.png" wx:else></image>
+                        <view class="_2822864">股市播报</view>
+                    </view>
+                    <view catchtap="$tabNav$MY_SERVICE" class="box {{$tabNav$tab==1?'active':''}} _2822864">
+                        <image class="_2822864" src="http://jfinfo.oss-cn-beijing.aliyuncs.com/jugupiao/images/live/service1%402x.png" wx:if="{{$tabNav$tab==1}}"></image>
+                        <image class="_2822864" src="http://jfinfo.oss-cn-beijing.aliyuncs.com/jugupiao/images/live/service%402x.png" wx:else></image>
+                        <view class="_2822864">我的服务</view>
+                    </view>
+                    <view catchtap="$tabNav$CHOOSE_STOCK" class="box {{$tabNav$tab==2?'active':''}} _2822864">
+                        <image class="_2822864" src="http://jfinfo.oss-cn-beijing.aliyuncs.com/jugupiao/images/live/stock1%402x.png" wx:if="{{$tabNav$tab==2}}"></image>
+                        <image class="_2822864" src="http://jfinfo.oss-cn-beijing.aliyuncs.com/jugupiao/images/live/stock%402x.png" wx:else></image>
+                        <view class="_2822864">自选股</view>
+                    </view>
+                    <view catchtap="$tabNav$QA" class="box {{$tabNav$tab==3?'active':''}} _2822864">
+                        <image class="_2822864" src="http://jfinfo.oss-cn-beijing.aliyuncs.com/jugupiao/images/live/ask1%402x.png" wx:if="{{$tabNav$tab==3}}"></image>
+                        <image class="_2822864" src="http://jfinfo.oss-cn-beijing.aliyuncs.com/jugupiao/images/live/ask%402x.png" wx:else></image>
+                        <view class="_2822864">问答</view>
+                    </view>
+                </view>
+                <view class="nav-hua _2822864" wx:if="{{$tabNav$toggleTab}}">
+                    <view class="_2822864">
+                        <text catchtap="$tabNav$STOCK_LIVE" class="{{$tabNav$tab==0?'cur':''}} _2822864">播报</text>
+                    </view>
+                    <view class="_2822864">
+                        <text bindtap="$tabNav$MY_SERVICE" class="{{$tabNav$tab==1?'cur':''}} _2822864">服务</text>
+                    </view>
+                    <view class="_2822864">
+                        <text catchtap="$tabNav$CHOOSE_STOCK" class="{{$tabNav$tab==2?'cur':''}} _2822864">自选股</text>
+                    </view>
+                    <view class="_2822864">
+                        <text catchtap="$tabNav$QA" class="{{$tabNav$tab==3?'cur':''}} _2822864">问答</text>
+                    </view>
+                    <view class="_2822864">
+                        <text catchtap="$tabNav$goSearch" class="_2822864">诊股</text>
+                    </view>
+                    <view class="_2822864">
+                        <image catchtap="$tabNav$showMore" class="more-btn _2822864" src="https://jfinfo.oss-cn-beijing.aliyuncs.com/jugupiao/images/live/add%402x.png"></image>
+                    </view>
+                </view>
+                <view bindtap="$tabNav$up$hideBox" catchtouchmove="$tabNav$up$hideBox" class="options _d90bd31 _2822864" wx:if="{{$tabNav$isShow}}">
+                    <view class="common-default-mask _95fb186 _d90bd31"></view>
+                    <view class="box _d90bd31">
+                        <view class="arrows _d90bd31"></view>
+                        <view catchtap="$tabNav$up$callTel" class="per _d90bd31">
+                            <image class="_d90bd31" src="https://jfinfo.oss-cn-beijing.aliyuncs.com/jugupiao/images/mine/phone.png"></image>
+                  人工咨询
+              </view>
+                        <view catchtap="$tabNav$up$gomine" class="_d90bd31">
+                            <image class="_d90bd31" src="https://jfinfo.oss-cn-beijing.aliyuncs.com/jugupiao/images/mine/me.png"></image>
+                  我的
+              </view>
+                    </view>
+                </view>
+            </view>
+        </view>
+        <view class="module-container _9be05b7 _ca22c6c">
+            <view class="_9be05b7" hidden="{{$tabSwitch$tab!=0}}">
+                <view class="stock-container _5d580f8 _9be05b7">
+                    <view class="stock-index _5d580f8">
+                        <view class="notic-bar _857fa44 _5d580f8" id="noticContainer" wx:if="{{$tabSwitch$live$swiperZj$showNotic}}">
+                            <image class="laba _857fa44" src="https://jfinfo.oss-cn-beijing.aliyuncs.com/jugupiao/images/live/brodost.png"></image>
+                            <view class="swiper-box _857fa44">
+                                <swiper autoplay="true" circular="true" class="swiper_container _857fa44" interval="2000" vertical="true">
+                                    <navigator class="_857fa44" openType="navigate" url="/pages/record/recordDetails?id={{item.id}}&is_index=1" wx:for="{{$tabSwitch$live$swiperZj$zjList}}">
+                                        <swiper-item catchtouchmove="$tabSwitch$live$swiperZj$stopTouchMove" class="_857fa44">
+                                            <view class="swiper_item _857fa44">回顾:{{item.title}}
+                 <image class="_857fa44" src="https://jfinfo.oss-cn-beijing.aliyuncs.com/jugupiao/images/live/enter.png"></image>
+                                            </view>
+                                        </swiper-item>
+                                    </navigator>
+                                </swiper>
+                            </view>
+                        </view>
+                        <view class="tips1 animated slideInDown flex {{$tabSwitch$live$isMiniNav?'fixedTop':''}} _5d580f8" style="top:{{$tabSwitch$live$isMiniNav?'130rpx':$tabSwitch$live$hasReviewHistort?'360rpx':'270rpx'}}" wx:if="{{$tabSwitch$live$liveNewsNumber}}">
+                            <view catchtap="$tabSwitch$live$newsRefesh" class="_5d580f8">
+                {{$tabSwitch$live$liveNewsNumber}}条新消息
+                <view class="point _5d580f8"></view>
+                            </view>
+                        </view>
+                        <view class="not_customized_templete _5d580f8" style="border:{{$tabSwitch$live$liveList.length-1==$tabSwitch$live$index?'none':''}}" wx:for="{{$tabSwitch$live$liveList}}" wx:for-index="$tabSwitch$live$index" wx:for-item="$tabSwitch$live$item" wx:key="$tabSwitch$live$index">
+                            <view class="n_t_title _5d580f8">
+                                <view catchtap="$tabSwitch$live$showTeacherModal" class="n_t_t_left _5d580f8" data-wpyshowteachermodal-a="{{$tabSwitch$live$item}}">
+                                    <image class="_5d580f8" src="{{$tabSwitch$live$item.lecturer.avatar||'http://jfinfo.oss-cn-beijing.aliyuncs.com/jugupiao_admin/storage/timg.jpg'}}"></image>
+                                    <view class="name_box _5d580f8">
+                                        <view class="per_name font30 _5d580f8">{{$tabSwitch$live$item.lecturer.name}}</view>
+                                        <view class="per_time _5d580f8">{{$tabSwitch$live$item.created_at}}</view>
+                                    </view>
+                                </view>
+                                <view class="tj _5d580f8" wx:if="{{$tabSwitch$live$item.is_top==1}}">
+                                    <image class="tj_img _5d580f8" src="https://jfinfo.oss-cn-beijing.aliyuncs.com/jugupiao/images/live/recommend.png"></image>
+                    推荐
+                  </view>
+                            </view>
+                            <view class="n_t_content _5d580f8">
+                                <view catchtap="$tabSwitch$live$check" class="summry _5d580f8" data-wpycheck-a="{{$tabSwitch$live$item}}" wx:if="{{!$tabSwitch$live$item.isCheck}}">
+                                    <rich-text class="_5d580f8" nodes="{{$tabSwitch$live$item.nodes}}"></rich-text>
+                                </view>
+                                <view catchtap="$tabSwitch$live$check" class="summry_all _5d580f8" data-wpycheck-a="{{$tabSwitch$live$item}}" wx:if="{{$tabSwitch$live$item.isCheck}}">
+                                    <rich-text class="_5d580f8" nodes="{{$tabSwitch$live$item.nodes}}"></rich-text>
+                                </view>
+                                <scroll-view scrollX class="scroll-view_H _5d580f8" scrollWithAnimation="{{$tabSwitch$live$true}}" wx:if="{{$tabSwitch$live$item.text_img.length}}">
+                                    <view class="_5d580f8" style="width:{{$tabSwitch$live$item.imgBoxWidth}}rpx">
+                                        <image catchtap="$tabSwitch$live$clickIMG" class="tj_img _5d580f8" data-id="{{$tabSwitch$live$item.id}}" data-wpyclickimg-a="{{$tabSwitch$live$item.text_img}}" data-wpyclickimg-b="{{i}}" src="{{imgItem}}" wx:for="{{$tabSwitch$live$item.text_img}}" wx:for-index="i" wx:for-item="imgItem"></image>
+                                    </view>
+                                </scroll-view>
+                                <view catchtap="$tabSwitch$live$goArticle" class="article_xg _5d580f8" data-wpygoarticle-a="{{$tabSwitch$live$item.article}}" wx:if="{{$tabSwitch$live$item.article.title}}">
+                                    <text class="article_xg_d _5d580f8">相关文章推荐:</text>
+                                    <text class="article_xg_t overflow_line _5d580f8">{{$tabSwitch$live$item.article.title}}</text>
+                                    <image class="_5d580f8" mode="widthFix" src="https://jfinfo.oss-cn-beijing.aliyuncs.com/jugupiao/images/live/out.png"></image>
+                                </view>
+                                <view class="action_btn _5d580f8">
+                                    <image catchtap="$tabSwitch$live$shareModal" class="_5d580f8" data-wpysharemodal-a="{{$tabSwitch$live$item}}" src="https://jfinfo.oss-cn-beijing.aliyuncs.com/jugupiao/images/live/save%402x.png" wx:if="{{$tabSwitch$live$item.content_text}}"></image>
+                                    <button class="_5d580f8" data-id="{{$tabSwitch$live$item.id}}" data-name="shareBtn" hoverStopPropagation="true" openType="share" plain="true">
+                                        <image class="_5d580f8" src="https://jfinfo.oss-cn-beijing.aliyuncs.com/jugupiao/images/live/share.png"></image>
+                                    </button>
+                                    <image catchtap="$tabSwitch$live$add" class="animated bounceIn _5d580f8" data-id="{{$tabSwitch$live$item.id}}" data-wpyadd-a="1" src="https://jfinfo.oss-cn-beijing.aliyuncs.com/jugupiao/images/live/collection.png" wx:if="{{!$tabSwitch$live$item.is_favorites}}"></image>
+                                    <image catchtap="$tabSwitch$live$add" class="animated bounceIn _5d580f8" data-id="{{$tabSwitch$live$item.id}}" data-wpyadd-a="2" src="https://jfinfo.oss-cn-beijing.aliyuncs.com/jugupiao/images/live/al_save.png" wx:else></image>
+                                </view>
+                            </view>
+                        </view>
+                        <view class="foot-load _0a8cc92 _5d580f8" wx:if="{{$tabSwitch$live$loadFooter$loadComplete}}">
+                            <view class="_0a8cc92" wx:if="{{$tabSwitch$live$loadFooter$curStatus==1}}">
+                                <i-icon class="_0a8cc92" color="#999" size="20" type="enterinto"></i-icon>上拉加载更多</view>
+                            <view class="_0a8cc92" wx:if="{{$tabSwitch$live$loadFooter$curStatus==2}}">正在加载...</view>
+                            <view class="_0a8cc92" wx:if="{{$tabSwitch$live$loadFooter$curStatus==3}}">没有更多数据</view>
+                        </view>
+                        <view catchtouchmove="$tabSwitch$live$true" class="full-photo _5d580f8" wx:if="{{$tabSwitch$live$showShare}}">
+                            <view class="save-photo _5d580f8">
+                                <image bindtap="$tabSwitch$live$closeShare" class="sav-photo-img _5d580f8" mode="widthFix" src="https://jfinfo.oss-cn-beijing.aliyuncs.com/jugupiao/images/saveimg/clo.png"></image>
+                                <view class="save-photo-title flex _5d580f8">
+            巨丰股票
+            <image class="_5d580f8" mode="widthFix" src="https://jfinfo.oss-cn-beijing.aliyuncs.com/jugupiao/images/saveimg/logo.png"></image>
+                                </view>
+                                <view class="save-photo-week flex _5d580f8">{{$tabSwitch$live$shareImgWord.wordTime}}<text class="_5d580f8">{{$tabSwitch$live$shareImgWord.wordWeek}}</text>
+                                </view>
+                                <view class="save-photo-content _5d580f8">{{$tabSwitch$live$shareImgWord.wordContent}}</view>
+                                <view bindtap="$tabSwitch$live$saveImg" class="sav-btn-box _5d580f8">
+                                    <image class="_5d580f8" mode="widthFix" src="https://jfinfo.oss-cn-beijing.aliyuncs.com/jugupiao/images/saveimg/photo.png"></image>
+                                    <text class="_5d580f8">保存到相册</text>
+                                </view>
+                            </view>
+                        </view>
+                        <view catchtouchmove="$tabSwitch$live$true" class="full-photo _5d580f8" wx:if="{{$tabSwitch$live$teacherModalStatus}}">
+                            <view class="teacher-photo _5d580f8">
+                                <image catchtap="$tabSwitch$live$closeTeacherModal" class="teacher-photo-close _5d580f8" mode="widthFix" src="https://jfinfo.oss-cn-beijing.aliyuncs.com/jugupiao/images/saveimg/clo.png"></image>
+                                <image class="teacher-portrait _5d580f8" src="{{$tabSwitch$live$teacherInfo.avatar}}"></image>
+                                <view class="teacher-name flex _5d580f8">{{$tabSwitch$live$teacherInfo.name}}</view>
+                                <view class="teacher-card flex _5d580f8">执业证书号：{{$tabSwitch$live$teacherInfo.card||'-'}}</view>
+                                <view class="teacher-des flex _5d580f8">本内容仅为传递更多信息，不作为投资建议，我们力求信息上的完整、准确，但不做任何保证。股市有风险，投资需谨慎。</view>
+                            </view>
+                        </view>
+                    </view>
+                    <view bindtap="$tabSwitch$live$ask$goAsk" class="ask-question flex _a3953f2 _5d580f8">问</view>
+                    <painter bind:imgOK="$tabSwitch$live$imgComplete" class="canImg2 _5d580f8" palette="{{$tabSwitch$live$plate}}" wx:if="{{$tabSwitch$live$isComplete2}}"></painter>
+                </view>
+            </view>
+            <view class="_9be05b7" hidden="{{$tabSwitch$tab!=1}}">
+                <view class="stock-container stock-container1 _c5c75a6 _9be05b7">
+                    <view class="no _c5c75a6" wx:if="{{$tabSwitch$myService$isLoad}}">
+                        <view class="empty _dbd904a _c5c75a6">
+                            <image class="robot _dbd904a" src="https://jfinfo.oss-cn-beijing.aliyuncs.com/jugupiao/images/ask/empty.png"></image>
+                            <text class="text _dbd904a">{{$tabSwitch$myService$empty$text}}</text>
+                            <button bindtap="$tabSwitch$myService$canCustomized" class="button _c5c75a6">我要定制</button>
+                        </view>
+                    </view>
+                    <view class="not_customized _c5c75a6" wx:if="{{!$tabSwitch$myService$isLoad}}">
+                        <view class="not_customized_templete _c5c75a6" wx:for="{{$tabSwitch$myService$mySubData}}">
+                            <view class="n_t_title _c5c75a6">
+                                <view class="n_t_t_left _c5c75a6">
+                                    <image class="_c5c75a6" src="{{item.image}}"></image>
+                                    <text class="_c5c75a6">{{item.name}}</text>
+                                </view>
+                                <text class="_c5c75a6">{{item.created_at}}</text>
+                            </view>
+                            <view class="n_t_content _c5c75a6" wx:if="{{item.catalog=='cjgcj'}}">
+                                <view class="_c5c75a6" id="video_zw">
+                                    <video class="_c5c75a6" customCache="{{$tabSwitch$myService$false}}" hidden="{{!$tabSwitch$myService$showVideo||!$tabSwitch$myService$showVideo1}}" id="myVideo" poster="{{item.videoCover}}" src="{{item.videoUrl}}"></video>
+                                </view>
+                                <view catchtap="$tabSwitch$myService$goVideo" class="lookAll _c5c75a6" data-wpygovideo-a="{{item}}">查看全部</view>
+                            </view>
+                            <view catchtap="$tabSwitch$myService$goDetail1" class="n_t_content _c5c75a6" data-wpygodetail1-a="{{item}}" wx:else>
+                                <view class="summry _c5c75a6">
+            {{item.content}}
+          </view>
+                                <view class="imgBox _c5c75a6">
+                                    <image class="_c5c75a6" mode="widthFix" src="{{item.cover}}"></image>
+                                </view>
+                            </view>
+                        </view>
+                    </view>
+                    <view class="footer {{$tabSwitch$myService$mySubData.length>1?'':'fixBt'}} {{$tabSwitch$myService$isLoad?'fixBt2':''}} _c5c75a6" wx:if="{{$tabSwitch$myService$isCom}}">
+      用心专为您的投资
+    </view>
+                    <view bindtap="$tabSwitch$myService$canCustomized" class="customized_toltip _c5c75a6" wx:if="{{$tabSwitch$myService$check==1}}">
+                        <text class="_c5c75a6">还有其他的服务，快去看看吧</text>
+                        <view class="_c5c75a6">我要定制</view>
+                    </view>
+                </view>
+            </view>
+            <view class="_9be05b7" hidden="{{$tabSwitch$tab!=2}}">
+                <view class="stock-container _0ab6393 _9be05b7">
+                    <view class="stock-index _0ab6393">
+                        <view catchtap="$tabSwitch$stock$goIndustry" class="stock-every {{item.changeRate<0?'green-bg color-green':'red-bg color-red'}} _0ab6393" data-wpygoindustry-a="{{item}}" wx:for="{{$tabSwitch$stock$singleInfo}}">
+                            <view class="stock-name font30 _0ab6393">{{item.name}}</view>
+                            <view class="stock-cur _0ab6393">{{item.cur}}</view>
+                            <view class="stock-change _0ab6393">
+                                <text class="_0ab6393">{{item.change>0?'+':''}}{{item.change}}</text>
+                                <text class="_0ab6393">{{item.changeRate>0?'+':''}}{{item.changeRate}}%</text>
+                            </view>
+                        </view>
+                    </view>
+                    <view class="stock-list _0ab6393">
+                        <view class="left-list _0ab6393">
+                            <view bindtap="$tabSwitch$stock$goWeburl" class="word font30 flex _0ab6393" hidden="{{!$tabSwitch$stock$stock.length}}">
+            编辑
+          </view>
+                            <view catchtap="$tabSwitch$stock$goIndustry" class="name-list flex-column _0ab6393" data-wpygoindustry-a="{{item}}" wx:for="{{$tabSwitch$stock$stock}}">
+                                <view class="name font34 _0ab6393">{{item.name}}</view>
+                                <view class="code font30 _0ab6393">{{item.code}}</view>
+                            </view>
+                        </view>
+                        <scroll-view scrollX bindscroll="$tabSwitch$stock$scroll" bindscrolltolower="$tabSwitch$stock$lower" bindscrolltoupper="$tabSwitch$stock$upper" class="right-list _0ab6393" scrollIntoView="{{$tabSwitch$stock$toView}}" scrollWithAnimation="{{$tabSwitch$stock$true}}">
+                            <view class="top-nav _0ab6393" style="width:{{$tabSwitch$stock$slideWidth}}rpx">
+                                <view class="_0ab6393" wx:for="{{$tabSwitch$stock$title}}"> {{item.name}}</view>
+                            </view>
+                            <view class="content _0ab6393" style="width:{{$tabSwitch$stock$slideWidth}}rpx" wx:for="{{$tabSwitch$stock$stock}}" wx:for-index="idx" wx:for-item="itemName">
+                                <view class="_0ab6393" wx:for="{{$tabSwitch$stock$title}}">
+                                    <view class="{{itemName['total_change']=='--'||itemName['total_change']==0?'color-grey':itemName['total_change']<0?'color-green':'color-red'}} _0ab6393" wx:if="{{item.key=='total_change'}}">{{itemName['total_change']>0?'+':''}}{{itemName['total_change']}}{{itemName['total_change']!=='--'?'%':''}}</view>
+                                    <view class="{{itemName['changeRate']=='停牌'?'color-dark':itemName['changeRate']==0?'color-grey':itemName['changeRate']<0?'color-green':'color-red'}} _0ab6393" wx:elif="{{item.key=='changeRate'}}">{{itemName['changeRate']>0?'+':''}}{{itemName['changeRate']}}{{itemName['changeRate']!=='停牌'?'%':''}}</view>
+                                    <view bindtap="$tabSwitch$stock$goAskStock" class="askStock _0ab6393" data-code="{{itemName['code']}}" data-name="{{itemName['name']}}" wx:elif="{{item.key=='ask'}}">去问股</view>
+                                    <view bindtap="$tabSwitch$stock$diagnostic" class="askStock _0ab6393" data-code="{{itemName['code']}}" wx:elif="{{item.key=='dia'}}">去诊股</view>
+                                    <view class="_0ab6393" wx:else>{{itemName[item.key]}}</view>
+                                </view>
+                            </view>
+                        </scroll-view>
+                    </view>
+                    <view class="foot-bt _0ab6393">
+                        <navigator class="btn font30 _0ab6393" hoverClass="none" url="/pages/search" wx:if="{{$tabSwitch$stock$singleInfo.length}}">+添加自选股</navigator>
+                    </view>
+                </view>
+            </view>
+            <view class="_9be05b7" hidden="{{$tabSwitch$tab!=3}}">
+                <view class="question-container _9b30173 _9be05b7">
+                    <view class="search-box _9b30173" wx:if="{{!$tabSwitch$question$isHas}}">
+                        <i-icon class="_9b30173" color="#917B7B" size="20" type="search"></i-icon>
+                        <input bindconfirm="$tabSwitch$question$confirm" bindinput="$tabSwitch$question$real" class="_9b30173" confirmType="确认" placeholder="搜索热门问题" placeholderStyle="color:#917B7B" type="text" value="{{$tabSwitch$question$inputVal}}"></input>
+                    </view>
+                    <view class="empty _dbd904a _9b30173" wx:if="{{$tabSwitch$question$isHas}}">
+                        <image class="robot _dbd904a" src="https://jfinfo.oss-cn-beijing.aliyuncs.com/jugupiao/images/ask/empty.png"></image>
+                        <text class="text _dbd904a">{{$tabSwitch$question$empty$text}}</text>
+                        <button bindtap="$tabSwitch$question$goAsk" class="button _9b30173">去提问</button>
+                    </view>
+                    <view class="empty _9b30173" wx:if="{{$tabSwitch$question$goback&&!$tabSwitch$question$isHas}}">
+                        <image class="robot _9b30173" src="https://jfinfo.oss-cn-beijing.aliyuncs.com/jugupiao/images/ask/empty.png"></image>
+                        <text class="text _9b30173">没有类似的提问</text>
+                        <button bindtap="$tabSwitch$question$goAll" class="button _9b30173">返回</button>
+                    </view>
+                    <view class="que-list _9b30173" style="border:{{$tabSwitch$question$question.length-1==idx?'none':''}}" wx:for="{{$tabSwitch$question$question}}" wx:for-index="idx">
+                        <view class="per-box flex _9b30173">
+                            <image class="_9b30173" src="{{item.user_avatar}}"></image>
+                            <view class="rig-box _9b30173">
+                                <view class="name font30 _9b30173">{{item.user_name}}</view>
+                                <view class="time _9b30173">{{item.ques_time}}</view>
+                            </view>
+                            <image class="fine-logo _9b30173" mode="widthFix" src="https://jfinfo.oss-cn-beijing.aliyuncs.com/jugupiao/images/mine/fine1.png" wx:if="{{item.answer_type=='1'}}"></image>
+                        </view>
+                        <view catchtap="$tabSwitch$question$check" class="text font32 _9b30173" data-wpycheck-a="{{item.qusetion_id}}" data-wpycheck-b="qc" wx:if="{{!item.qc}}">
+               {{item.question}}
+            </view>
+                        <view catchtap="$tabSwitch$question$check" class="text2 font32 _9b30173" data-wpycheck-a="{{item.qusetion_id}}" data-wpycheck-b="qc" wx:else>
+               {{item.question}}
+            </view>
+                        <view class="_9b30173" wx:if="{{item.answer}}">
+                            <view class="per-box flex _9b30173">
+                                <image class="_9b30173" src="{{item.teacher_avatar||'http://jfinfo.oss-cn-beijing.aliyuncs.com/jugupiao_admin/storage/timg.jpg'}}"></image>
+                                <view class="rig-box _9b30173">
+                                    <view class="name font30 _9b30173">{{item.teacher_name||'巨丰股票'}}</view>
+                                    <view class="time _9b30173">{{item.answer_time}}</view>
+                                </view>
+                            </view>
+                            <view catchtap="$tabSwitch$question$check" class="text font32 _9b30173" data-wpycheck-a="{{item.qusetion_id}}" data-wpycheck-b="ac" wx:if="{{!item.ac}}">
+                    {{item.answer}}
+                </view>
+                            <view catchtap="$tabSwitch$question$check" class="text2 font32 _9b30173" data-wpycheck-a="{{item.qusetion_id}}" data-wpycheck-b="ac" wx:else>
+                  {{item.answer}}
+                </view>
+                        </view>
+                        <view class="no-answer flex _9b30173" wx:else>老师暂时还没有回复，多等等哦~</view>
+                    </view>
+                    <view class="foot-load _0a8cc92 _9b30173" wx:if="{{$tabSwitch$question$loadFooter$loadComplete}}">
+                        <view class="_0a8cc92" wx:if="{{$tabSwitch$question$loadFooter$curStatus==1}}">
+                            <i-icon class="_0a8cc92" color="#999" size="20" type="enterinto"></i-icon>上拉加载更多</view>
+                        <view class="_0a8cc92" wx:if="{{$tabSwitch$question$loadFooter$curStatus==2}}">正在加载...</view>
+                        <view class="_0a8cc92" wx:if="{{$tabSwitch$question$loadFooter$curStatus==3}}">没有更多数据</view>
+                    </view>
+                    <view bindtap="$tabSwitch$question$ask$goAsk" class="ask-question flex _a3953f2 _9b30173" wx:if="{{$tabSwitch$question$isShowAsk}}">问</view>
+                </view>
+            </view>
+        </view>
+    </view>
+    <view class="tailor-container _450cec9 _ca22c6c" wx:if="{{!$tailor$isFirst}}">
+        <view catchtouchmove="$tailor$personal$true" class="_4e714a6 _450cec9" hidden="{{$tailor$cur!=0}}">
+            <view class="common-default-mask _95fb186 _4e714a6"></view>
+            <view class="personal-tailor _4e714a6">
+                <i-icon bindtap="$tailor$personal$tap" class="del-btn _4e714a6" color="#ccc" size="22" type="delete_fill"></i-icon>
+                <view class="title _4e714a6">
+                尊敬的[<open-data class="_4e714a6" type="userNickName"></open-data>]您好，定制您的投资专属服务
+                专业团队将会根据您的信息为您量身打造投资专案
+          </view>
+                <view class="section _4e714a6">
+                    <block wx:for="{{$tailor$personal$completeArray}}" wx:for-index="$tailor$personal$index" wx:for-item="$tailor$personal$item" wx:key="$tailor$personal$key">
+                        <picker bindchange="$tailor$personal$bindAreaChange" class="_4e714a6" customItem="{{$tailor$personal$customItem}}" mode="region" value="{{$tailor$personal$region}}" wx:if="{{$tailor$personal$item.key=='region'}}">
+                            <view class="cell-container-first-login-xxs _4e714a6">
+                                <view class="cell-title-text font32 _4e714a6">所在区域</view>
+                                <view class="_4e714a6">
+                                    <view class="choose-text font32 _4e714a6" wx:if="{{!$tailor$personal$region[0]}}">请选择</view>
+                                    <view class="value-text-cell font32 _4e714a6" wx:else>{{$tailor$personal$region[0]+','}}{{$tailor$personal$region[1]&&$tailor$personal$region[1]+','}}{{$tailor$personal$region[2]&&$tailor$personal$region[2]}}</view>
+                                    <i-icon class="_4e714a6" color="#495060" size="20" type="unfold"></i-icon>
+                                </view>
+                            </view>
+                        </picker>
+                        <picker bindchange="$tailor$personal$cellBox$bindChange" class="_ca00910 _4e714a6" data-com-index="{{$tailor$personal$index}}" range="{{$tailor$personal$item.value}}" rangeKey="{{'name'}}" value="{{$tailor$personal$item.index}}" wx:else>
+                            <view class="cell-container-first-login-xxs _ca00910">
+                                <view class="cell-title-text font32 _ca00910">{{$tailor$personal$item.title}}</view>
+                                <view class="_ca00910">
+                                    <view class="choose-text font32 _ca00910" wx:if="{{!$tailor$personal$item.value[$tailor$personal$item.index]}}">请选择</view>
+                                    <view class="value-text-cell font32 _ca00910" wx:else>{{$tailor$personal$item.value[$tailor$personal$item.index].name}}</view>
+                                    <i-icon class="_ca00910" color="#495060" size="20" type="unfold"></i-icon>
+                                </view>
+                            </view>
+                        </picker>
+                    </block>
+                </view>
+                <view class="tailor-footer-choose flex _4e714a6">
+                    <button bindtap="$tailor$personal$skip" class="customized _4e714a6">跳过</button>
+                    <button bindtap="$tailor$personal$customizedsss" class="skip _4e714a6">定制</button>
+                </view>
+            </view>
+        </view>
+        <view catchtouchmove="$tailor$column$true" class="_61868b2 _450cec9" hidden="{{$tailor$cur!=1}}">
+            <view class="common-default-mask _95fb186 _61868b2"></view>
+            <view class="column-tailor _61868b2">
+                <view class="title _61868b2">
+                    <text class="_61868b2">您希望看到哪些栏目</text>
+                    <i-icon bindtap="$tailor$column$skip" class="del-btn _61868b2" color="#ccc" size="22" type="delete_fill"></i-icon>
+                </view>
+                <view class="list _61868b2">
+                    <view catchtap="$tailor$column$chooseColumn" class="box _61868b2" data-wpychoosecolumn-a="{{item}}" wx:for="{{$tailor$column$list}}">
+                        <text class="tit _61868b2">{{item.name}}</text>
+                        <image class="_61868b2" mode="" src="{{item.image}}"></image>
+                        <view class="mask-bg _61868b2" wx:if="{{item.is_default}}"></view>
+                    </view>
+                </view>
+                <view class="tailor-footer-choose flex _61868b2">
+                    <button bindtap="$tailor$column$skip" class="customized _61868b2">跳过</button>
+                    <button bindtap="$tailor$column$custom" class="skip _61868b2">定制</button>
+                </view>
+            </view>
+        </view>
+        <view catchtouchmove="$tailor$tailorSuc$true" class="_0080fd0 _450cec9" hidden="{{$tailor$cur!=2}}">
+            <view class="common-default-mask _95fb186 _0080fd0"></view>
+            <view class="common-fullscreen _0080fd0">
+                <view class="suc-box _0080fd0">
+                    <view class="bg _0080fd0">
+                        <image class="_0080fd0" mode="" src="http://jfinfo.oss-cn-beijing.aliyuncs.com/jugupiao/images/enter/suc.png"></image>
+                    </view>
+                    <view class="common-slot-text-word font30 _450cec9">
+                您已经完成私人定制，投资专业团队将会根据您的需求，为您量身打造适合您的投资专案
+            </view>
+                    <button bindtap="$tailor$close" class="common-slot-close-btn font34 _450cec9">关闭</button>
+                </view>
+            </view>
+        </view>
+    </view>
+</view>

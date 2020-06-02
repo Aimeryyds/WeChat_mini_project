@@ -1,0 +1,21 @@
+<template name="swiper2">
+    <swiper autoplay="true" circular="true" class="full-width" indicatorDots="true" interval="3000">
+        <swiper-item class="home-swiper-item" wx:for="{{list}}" wx:key="idx">
+            <image mode="aspectFill" src="{{item}}"></image>
+        </swiper-item>
+    </swiper>
+</template>
+<template name="swiper">
+    <swiper autoplay="true" circular="true" class="full-width" indicatorDots="true" interval="3000">
+        <swiper-item class="home-swiper-item" wx:for="{{banner_list}}" wx:key="idx">
+            <image bindtap="go2BannerLink" data-target="{{item.target}}" data-targetid="{{item.targetId}}" mode="aspectFill" src="{{item.pic}}"></image>
+        </swiper-item>
+    </swiper>
+</template>
+<template name="module_swiper">
+    <swiper autoplay="true" circular="true" class="full-width" indicatorDots="true" interval="3000">
+        <swiper-item class="home-swiper-item" wx:for="{{list}}" wx:key="idx">
+            <image bindtap="go2BannerLink" data-target="{{item.target}}" data-targetid="{{item.targetId}}" mode="aspectFill" src="{{item.pic}}"></image>
+        </swiper-item>
+    </swiper>
+</template>

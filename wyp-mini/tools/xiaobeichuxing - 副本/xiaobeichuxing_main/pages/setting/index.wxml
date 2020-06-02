@@ -1,0 +1,18 @@
+<view class="page">
+    <my-component bind:myevent="myEventListener" innerText="设置"></my-component>
+    <view class="main" style=" margin-top: {{myHight}}px"></view>
+    <view class="set-list" wx:for="{{setting}}" wx:key="index">
+        <navigator url="{{item.url}}">
+            <view class="list08">
+                <view>{{item.text}}</view>
+                <view bindtap="{{item.bintap}}" class="right">
+                    <text>{{item.rightNav}}</text>
+                    <image class="ad-r-img" src="{{right}}"></image>
+                </view>
+            </view>
+        </navigator>
+    </view>
+    <view class="btn">
+        <button bindtap="Cancellation" class="sub">退出登录</button>
+    </view>
+</view>

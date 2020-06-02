@@ -1,0 +1,6 @@
+<import src="../news/footer-view.wxml"></import>
+<import src="../../wxParse/wxParse.wxml"></import>
+<view bindscrolltolower="nextPage" scrollY="true" style="height:100%;">
+    <include src="item-product.wxml" wx:for="{{articles}}" wx:key="Id"></include>
+    <template is="bottomlogo" data="{{AgentConfig:AgentConfig}}"></template>
+</view>

@@ -1,0 +1,80 @@
+<import src="../../component/list-item/list-item.wxml"></import>
+<import src="../../component/list-item/line.wxml"></import>
+<view class="container">
+    <view class="center-header">
+        <image src="{{wxUserInfo.photo}}"></image>
+        <text>{{wxUserInfo.nickName}}</text>
+    </view>
+    <view class="order-wrap">
+        <navigator url="../mineorder/mineorder">
+            <view class="order-header">
+                <text>我的订单</text>
+                <view>
+                    <text>查看全部</text>
+                    <image class="arrow" mode="aspectFill" src="../../images/arrow.png"></image>
+                </view>
+            </view>
+        </navigator>
+        <view class="order-menu">
+            <navigator class="menu-item" url="../mineorder/mineorder?status=1">
+                <image src="../../images/pcenter/icon_daifu.png"></image>
+                <text>待付款</text>
+                <view class="badge-value" wx:if="{{status_num.number1>0}}">{{status_num.number1}}</view>
+            </navigator>
+            <navigator class="menu-item" url="../mineorder/mineorder?status=2">
+                <image src="../../images/pcenter/icon_daifahuo.png"></image>
+                <text>待发货</text>
+                <view class="badge-value" wx:if="{{status_num.number2>0}}">{{status_num.number2}}</view>
+            </navigator>
+            <navigator class="menu-item" url="../mineorder/mineorder?status=3">
+                <image src="../../images/pcenter/icon_daishouhuo2.png"></image>
+                <text>待收货</text>
+                <view class="badge-value" wx:if="{{status_num.number3>0}}">{{status_num.number3}}</view>
+            </navigator>
+            <navigator class="menu-item" url="../mineorder/mineorder?status=4">
+                <image src="../../images/pcenter/icon_complete.png"></image>
+                <text>已完成</text>
+            </navigator>
+        </view>
+    </view>
+    <view class="table-group">
+        <view bindtap="chooseAddr">
+            <template is="list-item" data="{{icon:'/images/pcenter/icon_map.png',width:'44rpx',height:'44rpx',title:'收货地址',arrow:true}}"></template>
+        </view>
+        <template is="line" data></template>
+        <navigator url="../coupon/coupon">
+            <template is="list-item" data="{{icon:'/images/pcenter/icon_quan.png',width:'44rpx',height:'44rpx',title:'优惠券',arrow:true}}"></template>
+        </navigator>
+        <template is="line" data></template>
+        <navigator url="../mineaward/mineaward">
+            <template is="list-item" data="{{icon:'/images/pcenter/icon_gift.png',width:'44rpx',height:'44rpx',title:'我的奖品',arrow:true}}"></template>
+        </navigator>
+        <template is="line" data></template>
+        <navigator url="../grouporderlist/grouporderlist">
+            <template is="list-item" data="{{icon:'/images/pcenter/icon_pin.png',width:'44rpx',height:'44rpx',title:'我的拼团',arrow:true}}"></template>
+        </navigator>
+    </view>
+    <view class="table-group" wx:if="{{isOpenDistribution}}">
+        <view catchtap="go2Spokesman">
+            <template is="list-item" data="{{icon:'/images/pcenter/icon_sale.png',width:'44rpx',height:'44rpx',title:spokesAlias,arrow:true}}"></template>
+        </view>
+    </view>
+    <view class="table-group">
+        <view bindtap="concat">
+            <template is="list-item" data="{{icon:'/images/pcenter/icon_sevice.png',width:'44rpx',height:'44rpx',title:'联系客服',arrow:true}}"></template>
+        </view>
+        <block wx:if="shop.openOnlineService==1">
+            <template is="line" data></template>
+            <button class="online-service" openType="contact">
+                <template is="list-item" data="{{icon:'/images/icon_online_service.png',width:'44rpx',height:'44rpx',title:'在线客服',arrow:true}}"></template>
+            </button>
+        </block>
+        <template is="line" data></template>
+        <view bindtap="openSetting">
+            <template is="list-item" data="{{icon:'/images/pcenter/icon_authority.png',width:'44rpx',height:'44rpx',title:'授权设置',arrow:true}}"></template>
+        </view>
+    </view>
+    <navigator class="copyright" style="line-height:14px;text-align:center;margin-top:40rpx;margin-bottom:40rpx" url="../support/support">
+        <text style="color:#999;font-size:28rpx; ">微电铺小程序提供技术支持</text>
+    </navigator>
+</view>

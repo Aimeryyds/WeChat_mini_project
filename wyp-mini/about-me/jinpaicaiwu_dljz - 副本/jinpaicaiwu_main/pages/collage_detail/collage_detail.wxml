@@ -1,0 +1,90 @@
+<view class="progress">
+    <view class="progress1">
+        <text class="iconfont icon-liwu bg bg1"></text>
+        <text class="text">1.选择商品开团/参团</text>
+    </view>
+    <view class="progress1">
+        <text class="iconfont icon-jiantou bg"></text>
+    </view>
+    <view class="progress1">
+        <text class="iconfont {{apptype=='alipay'?'icon-zhifubao':'icon-weixin'}} bg2 bg"></text>
+        <text class="text">2.邀请好友参团</text>
+    </view>
+    <view class="progress1">
+        <text class="iconfont icon-jiantou bg"></text>
+    </view>
+    <view class="progress1">
+        <text class="iconfont icon-cc-check-square bg3 bg"></text>
+        <text class="text">3.人满成团</text>
+    </view>
+</view>
+<view class="detail">
+    <view class="item">
+        <view class="detail_c">
+            <view class="deta_img">
+                <image mode="aspectFit" src="{{detail.feature_img}}"></image>
+            </view>
+            <view class="cc_add">
+                <view class="cc_addt">
+                    <text class="cc_text">{{detail.title}}</text>
+                </view>
+                <view class="cc_addc">
+                    <text class="cc_text1">原价：￥{{detail.pprice}}/件</text>
+                    <text class="cc_text2">{{detail.number}}人团：{{detail.price}}/件</text>
+                </view>
+            </view>
+        </view>
+    </view>
+</view>
+<view class="item" wx:if="{{!had_full&&order.pay_status=='2'}}">
+    <view class="item_t">
+        <text class="iconfont icon-jilu bg4"></text>
+        <text class="text red" wx:if="{{detail.lefttime<=0}}">拼团失败！</text>
+        <text class="text red" wx:elif="{{order.num}}">已开团，离成团还差{{order.num}}人</text>
+        <text class="text red" wx:else>已开团，离成团还差1人</text>
+    </view>
+    <view class="item_t1">
+        <text class="red">剩</text>
+        <text class="time">{{loopday.hour+loopday.day*24}}</text>
+        <text>:</text>
+        <text class="time">{{loopday.minute}}</text>
+        <text>:</text>
+        <text class="time">{{loopday.second}}</text>
+        <text class="red">自动结束</text>
+    </view>
+    <view class="item_t red">快去邀请好友参团吧！</view>
+</view>
+<view class="erm" wx:if="{{!had_full&&order.pay_status=='2'}}">
+    <text class="error_tips" wx:if="{{error_show}}">二维码生成失败，请检查小程序是否正式发布</text>
+    <image mode="widthFix" src="{{qrurl}}"></image>
+</view>
+<view class="look_detail">
+    <button bindtap="toOrderDetail" wx:if="{{oid}}">查看订单详情</button>
+    <button bindtap="goToHome" wx:elif="{{detail.lefttime<=0||had_full}}">已结束,点击立即开团</button>
+    <button bindtap="toConfirm" wx:else>立即参团</button>
+</view>
+<view>
+    <view bindtap="changState" class="mask" wx:if="{{currentState}}"></view>
+    <view class="dig  {{showBar?'dig_detail-special':''}}" wx:if="{{currentState}}">
+        <view class="detail-cart-box" style="padding-bottom: 20rpx;">
+            <view class="detail-cart-list">
+                <view class="detail-cart-list-top">
+                    <icon bindtap="changState" class="digClose" color="#aaa" size="23" type="cancel"></icon>
+                </view>
+                <scroll-view scrollY style="max-height: 250px;">
+                    <view class="detail-cart-property">
+                        <view class="property-list border_bottom" wx:for="{{propertys}}" wx:for-index="id" wx:key="index">
+                            <view class="property-list-name">{{item.name}}</view>
+                            <view class="property-list-li" wx:if="{{item.ispic}}">
+                                <image bindtap="switchDetState" class="{{detail.detail_state}}" data-did="{{detail.id}}" data-id="{{id}}" data-index="{{index}}" data-pid="{{item.id}}" src="{{detail.pic}}" wx:for="{{item.details}}" wx:for-item="detail" wx:key="index2"></image>
+                            </view>
+                            <view class="property-list-li" wx:else>
+                                <text bindtap="switchDetState" class="{{detail.detail_state}}" data-did="{{detail.id}}" data-id="{{id}}" data-index="{{index}}" data-pid="{{item.id}}" wx:for="{{item.details}}" wx:for-item="detail" wx:key="index3">{{detail.detail_name}}</text>
+                            </view>
+                        </view>
+                    </view>
+                </scroll-view>
+            </view>
+        </view>
+    </view>
+</view>

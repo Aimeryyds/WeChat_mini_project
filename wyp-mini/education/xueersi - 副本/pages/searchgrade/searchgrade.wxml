@@ -1,0 +1,9 @@
+<view class="container">
+    <view class="attention" wx:if="{{note}}">{{note}}</view>
+    <view class="grade-container" wx:for="{{gradeArray}}" wx:for-index="idx" wx:key="gradearray">
+        <view class="grade">{{item[idx].name}}</view>
+        <view class="gradeitem-container">
+            <view bindtap="getGradeId" class="grade-item {{itemGradeId===_item.grd_id?'checked':''}}" data-wpygetgradeid-a="{{_item}}" wx:for="{{item.data}}" wx:for-index="i" wx:for-item="_item" wx:key="grd_name">{{_item.grd_custom_name}}</view>
+        </view>
+    </view>
+</view>

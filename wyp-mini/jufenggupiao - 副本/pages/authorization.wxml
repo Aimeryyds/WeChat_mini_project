@@ -1,0 +1,16 @@
+<view class="_780201e">
+    <view class="network _32f532b _780201e" wx:if="{{$net$hasNet}}">
+        <image class="_32f532b" src="../images/network.png"></image>
+        <text class="_32f532b">网络不可用，请检查网络设置</text>
+        <view class="net-text font28 animated flash infinite _32f532b">正在尝试重新连接...</view>
+    </view>
+    <view class="container _780201e" hidden="{{!isAuthStatus}}">
+        <view class="login _780201e">
+            <image class="_780201e" src="https://jfinfo.oss-cn-beijing.aliyuncs.com/jugupiao/images/enter/jf.png"></image>
+        </view>
+        <view class="ts font30 _780201e">申请获取以下权限</view>
+        <view class="de font30 _780201e">获得你的公开信息（昵称，头像等）</view>
+        <button bindgetuserinfo="bindGetUserInfo" class="auth-btn _780201e" lang="zh_CN" openType="getUserInfo" wx:if="{{canIUse}}">授权登录</button>
+        <view class="_780201e" wx:else>请升级微信版本</view>
+    </view>
+</view>

@@ -1,0 +1,21 @@
+<navigation-bar enable="{{enable}}" title="分类"></navigation-bar>
+<view bindtap="pageReload" class="cplist_nodata" wx:if="{{requeseFail}}">{{requeseFailTips}}</view>
+<view wx:else>
+    <view class="sort_w" style="padding-top:{{barHeight}}px">
+        <view class="sort_item" wx:if="{{item.title!='疾病调理'&&item.title!='脏腑调理'&&item.title!='功能性调理'}}" wx:for="{{sortDetail}}" wx:key="key">
+            <view class="sort_t">
+                <image class="sort_icon" src="{{item.icon_selected}}"></image>{{item.title}}</view>
+            <view class="sort_c">
+                <view class="sort_iw" wx:for="{{item.sub_cates}}" wx:key="key">
+                    <navigator data-class="{{item.sub_cates.length>0?'yes':'no'}}" hoverClass="navigator-hover" url="/pages/searchRecipe/searchRecipe?keyword={{item.title}}&&type={{item.type}}&&cid={{item.id}}">
+                        <view>{{item.title}}</view>
+                    </navigator>
+                    <navigator hoverClass="navigator-hover" url="/pages/searchRecipe/searchRecipe?keyword={{item.title}}&&type={{item.type}}&&cid={{item.id}}" wx:for="{{item.sub_cates}}" wx:key="key">{{item.title}}</navigator>
+                </view>
+            </view>
+        </view>
+    </view>
+</view>
+<loading hidden="{{requeseDone}}">
+ 加载中...
+</loading>

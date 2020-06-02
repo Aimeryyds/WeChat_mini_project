@@ -1,0 +1,68 @@
+<template name="gongping-danmu-cover">
+    <cover-view class="bullet-wrapper">
+        <cover-view class="bullet-track">
+            <block wx:for="{{gongpingInfo}}" wx:key="index">
+                <cover-view class="bullet-text bullet-danmu {{index}}" wx:if="{{item.text.text}}">
+                    <cover-view class="nick-shadow">
+                        <cover-view class="nick-txt">
+                            {{item.text.nick}}：
+                            <cover-view class="txt">{{item.text.text}}
+                                <cover-image class="fix-img" src="./images/1x1.png" style="vertical-align: middle;"></cover-image>
+                            </cover-view>
+                        </cover-view>
+                    </cover-view>
+                </cover-view>
+                <cover-view class="bullet-text bullet-danmu {{index}} me" wx:if="{{item.myTxt}}">
+                    <cover-view class="nick-shadow">
+                        <cover-view class="nick-txt">
+                            {{item.nick}}：
+                            <cover-view class="txt">{{item.myTxt}}
+                                <cover-image class="fix-img" src="./images/1x1.png" style="vertical-align: middle;"></cover-image>
+                            </cover-view>
+                        </cover-view>
+                    </cover-view>
+                </cover-view>
+                <cover-view class="bullet-text bullet-sysinfo {{index}}" wx:if="{{item.text.sysInfo}}">
+                    <cover-view class="sysinfo nick-shadow">{{item.text.sysInfo}}</cover-view>
+                </cover-view>
+                <cover-view class="bullet-text bullet-user {{index}}" wx:if="{{item.text.userInfo}}">
+                    <cover-view class="nick nick-shadow">{{item.text.userInfo}}<cover-image class="fix-img" src="./images/1x1.png"></cover-image>
+                    </cover-view>
+                </cover-view>
+                <cover-view class="bullet-text bullet-gift {{index}}" wx:if="{{item.text.sendFlowerNick}}">
+                    <cover-view class="inner">
+                        <cover-view class="nick">
+                            <cover-view class="nick-txt" style="vertical-align: middle;">
+                                {{item.text.sendFlowerNick}}
+                                <cover-image class="fix-img" src="./images/1x1.png"></cover-image>
+                                <cover-view class="gift">
+                                    <cover-view style="display: flex; align-items: center;">
+                                        <cover-view style="line-height:36rpx;">送</cover-view>
+                                        <cover-image class="flower_free" src="./template/gongping-danmu/images/flower_free.png"></cover-image>
+                                    </cover-view>
+                                </cover-view>
+                            </cover-view>
+                        </cover-view>
+                    </cover-view>
+                </cover-view>
+                <cover-view class="bullet-text bullet-gift {{index}}" wx:if="{{item.text.giftImg}}">
+                    <cover-view class="inner">
+                        <cover-view class="nick">
+                            <cover-view class="nick-txt" style="vertical-align: middle;">
+                                {{item.text.nick}}
+                                <cover-image class="fix-img" src="./images/1x1.png"></cover-image>
+                            </cover-view>
+                            <cover-view class="gift">
+                                <cover-view style="display: flex; align-items: center;">
+                                    <cover-view style="line-height:36rpx;">送了{{item.text.giftCount}}个{{item.text.giftName}}<cover-image class="fix-img" src="./images/1x1.png"></cover-image>
+                                    </cover-view>
+                                    <cover-image class="giftImg" src="{{item.text.giftImg}}"></cover-image>
+                                </cover-view>
+                            </cover-view>
+                        </cover-view>
+                    </cover-view>
+                </cover-view>
+            </block>
+        </cover-view>
+    </cover-view>
+</template>

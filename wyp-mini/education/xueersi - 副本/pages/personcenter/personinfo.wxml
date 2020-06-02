@@ -1,0 +1,99 @@
+<view>
+    <view class="my-heads">
+        <view bindtap="goInfo" class="my-heads-card">
+            <view class="card-padding">
+                <image binderror="errorImg" mode="aspectFill" src="{{studentInfo.pic}}" wx:if="{{studentInfo.pic}}"></image>
+                <image src="{{defaultImg}}" wx:else></image>
+                <view class="explain">
+                    <text class="name">{{studentInfo.studentName}}</text>
+                    <text class="mun">编号：{{studentInfo.studentNum}}</text>
+                </view>
+                <text class="iconfont icon-home_classdetailpage4"></text>
+            </view>
+        </view>
+    </view>
+    <view class="label-list">
+        <view class="label-padding">
+            <view bindtap="buyCouse" class="icon-cens">
+                <view class="icons">
+                    <image src="../../common/img/icon1.png"></image>
+                    <text class="icon-mun" hidden="{{userInfoNum.buycoursecount===0}}">{{userInfoNum.buycoursecount}}</text>
+                </view>
+                <text class="icon-text">购课单</text>
+            </view>
+            <view bindtap="toUnpaid" class="icon-cens">
+                <view class="icons">
+                    <image src="../../common/img/icon2.png"></image>
+                    <text class="icon-mun" hidden="{{userInfoNum.unpaidcount===0}}">{{userInfoNum.unpaidcount}}</text>
+                </view>
+                <text class="icon-text">待付款</text>
+            </view>
+            <view bindtap="toPaid" class="icon-cens">
+                <view class="icons">
+                    <image src="../../common/img/icon4.png"></image>
+                </view>
+                <text class="icon-text">已付款</text>
+            </view>
+            <view bindtap="refund" class="icon-cens">
+                <view class="icons">
+                    <image src="../../common/img/icon3.png"></image>
+                </view>
+                <text class="icon-text">退款</text>
+            </view>
+        </view>
+    </view>
+    <view class="func-list">
+        <view class="list-block">
+            <button bindtap="sharefunc" class="share-button" openType="share">转发</button>
+            <image src="../../common/img/share.png"></image>
+            <view class="content">
+                <text class="text">分享给朋友</text>
+                <text class="iconfont icon-home_classdetailpage4"></text>
+            </view>
+        </view>
+        <view bindtap="getMask" class="list-block">
+            <image src="../../common/img/download.png"></image>
+            <view class="content">
+                <text class="text">更多学而思服务</text>
+                <text class="iconfont icon-home_classdetailpage4"></text>
+            </view>
+        </view>
+    </view>
+    <view class="func-list bom-list">
+        <view class="list-block">
+            <button bindtap="feedbackFunc" class="share-button" openType="feedback">反馈</button>
+            <image src="../../common/img/yjfk.png"></image>
+            <view class="content">
+                <text class="text">意见反馈</text>
+                <text class="iconfont icon-home_classdetailpage4"></text>
+            </view>
+        </view>
+    </view>
+    <view bindtap="quit" class="switching-button">切换账号</view>
+</view>
+<view class="app-cen" wx:if="{{$appmask$isHide}}">
+    <view class="app-mask"></view>
+    <view class="app-center">
+        <view class="app-con">
+            <view class="title">每一位学而思家长的必备APP</view>
+            <image src="http://static-xesapi.speiyou.cn/1536045641131.png"></image>
+            <view class="test" wx:if="{{$appmask$SystemInfo}}">
+                <view>请在App Store内搜索“学而思”</view>
+                <view>下载学而思APP</view>
+            </view>
+            <view class="test" wx:else>
+                <view>请在各大应用商店内搜索“学而思”</view>
+                <view>（应用宝、360手机助手、华为应用市场等）下载学而思APP</view>
+            </view>
+            <view bindtap="$appmask$goHide" class="btn">知道了</view>
+        </view>
+    </view>
+</view>
+<view bindtap="$gohomeview$backfunc" class="goHome" wx:if="{{isShare}}">
+    <text class="iconfont icon-home"></text>
+</view>
+<view animation="{{$taltoast$animationData}}" class="tal-toast-container" style="top:{{$taltoast$vertical}}%;" wx:if="{{$taltoast$toastVisible}}">
+    <view class="tal-toast">
+        <text>{{$taltoast$toastMessage}}</text>
+    </view>
+</view>

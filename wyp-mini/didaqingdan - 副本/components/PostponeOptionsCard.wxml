@@ -1,0 +1,55 @@
+<view class="{{'postpone-options-card '+styles.poc}}" wx:if="{{$taroCompReady}}">
+    <form bindsubmit="anonymousFunc0" data-key="15m" reportSubmit="{{true}}">
+        <button class="{{'postpone-items '+styles.pocItem+' '+styles.btnNone}}" formType="submit">
+            <view class="{{'postpone-icon '+styles.pocItemIcon}}">
+                <view class="{{'icon icon-postpone '+styles.IconView+' '+styles.icon}}"></view>
+                <view class="{{'cover-text '+styles.IconView+' '+styles.coverText}}">15</view>
+            </view>
+            <view class="{{'postpone-text '+styles.postponeText}}">15分钟</view>
+        </button>
+    </form>
+    <form bindsubmit="anonymousFunc1" data-key="30m" reportSubmit="{{true}}">
+        <button class="{{'postpone-items '+styles.pocItem+' '+styles.btnNone}}" formType="submit">
+            <view class="{{'postpone-icon '+styles.pocItemIcon}}">
+                <view class="{{'icon icon-postpone '+styles.IconView+' '+styles.icon}}"></view>
+                <view class="{{'cover-text '+styles.IconView+' '+styles.coverText}}">30</view>
+            </view>
+            <view class="{{'postpone-text '+styles.postponeText}}">30分钟</view>
+        </button>
+    </form>
+    <form bindsubmit="anonymousFunc2" data-key="1h" reportSubmit="{{true}}">
+        <button class="{{'postpone-items '+styles.pocItem+' '+styles.btnNone}}" formType="submit">
+            <view class="{{'postpone-icon '+styles.pocItemIcon}}">
+                <view class="{{'icon icon-postpone '+styles.IconView+' '+styles.icon}}"></view>
+                <view class="{{'cover-text '+styles.IconView+' '+styles.coverText}}">1h</view>
+            </view>
+            <view class="{{'postpone-text '+styles.postponeText}}">1小时</view>
+        </button>
+    </form>
+    <form bindsubmit="anonymousFunc3" data-key="3h" reportSubmit="{{true}}">
+        <button class="{{'postpone-items '+styles.pocItem+' '+styles.btnNone}}" formType="submit">
+            <view class="{{'postpone-icon '+styles.pocItemIcon}}">
+                <view class="{{'icon icon-postpone '+styles.IconView+' '+styles.icon}}"></view>
+                <view class="{{'cover-text '+styles.IconView+' '+styles.coverText}}">3h</view>
+            </view>
+            <view class="{{'postpone-text '+styles.postponeText}}">3小时</view>
+        </button>
+    </form>
+    <view class="{{'postpone-items '+styles.pocItem}}" data-key="next_period" wx:if="{{!props.isRepeatTask}}"></view>
+    <form bindsubmit="anonymousFunc4" data-key="1d" reportSubmit="{{true}}">
+        <button class="{{'postpone-items '+styles.pocItem+' '+styles.btnNone}}" formType="submit">
+            <view class="{{'postpone-icon '+styles.pocItemIcon}}">
+                <view class="{{'icon icon-tomorrow '+styles.IconView+' '+styles.icon}}"></view>
+            </view>
+            <view bindtap="anonymousFunc5" class="{{'postpone-text '+styles.postponeText}}">明天</view>
+        </button>
+    </form>
+    <form bindsubmit="anonymousFunc6" data-key="next_period" reportSubmit="{{true}}" wx:if="{{props.isRepeatTask}}">
+        <button class="{{'postpone-items '+styles.pocItem+' '+styles.btnNone}}" formType="submit">
+            <view class="{{'postpone-icon '+styles.pocItemIcon}}">
+                <view class="{{'icon icon-skip '+styles.IconView+' '+styles.icon}}"></view>
+            </view>
+            <view class="{{'postpone-text '+styles.postponeText}}">跳过此周期</view>
+        </button>
+    </form>
+</view>

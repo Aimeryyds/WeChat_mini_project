@@ -1,0 +1,389 @@
+page {
+    width: 100%;
+    height: 100%;
+    color: #333;
+    background: #fff;
+    display: -webkit-box;
+    display: -webkit-flex;
+    display: flex;
+    -webkit-box-orient: vertical;
+    -webkit-box-direction: normal;
+    flex-direction: column;
+}
+
+.blue {
+    color: #3dbcc5;
+}
+
+.header {
+    display: -webkit-box;
+    display: -webkit-flex;
+    display: flex;
+    width: 706rpx;
+    height: 88rpx;
+    position: sticky;
+    top: 0;
+    margin: 0 auto;
+    line-height: 88rpx;
+    font-size: 24rpx;
+    background: #fff;
+    border-top: 1rpx solid #f0f0f0;
+    border-bottom: 1rpx solid #f0f0f0;
+    z-index: 9;
+}
+
+.header .info {
+    -webkit-box-flex: 1;
+    flex: 1;
+}
+
+.header .check-all {
+    -webkit-box-flex: 1;
+    flex: 1;
+    text-align: center;
+}
+
+.header .edit-btn {
+    -webkit-box-flex: 1;
+    flex: 1;
+    text-align: right;
+}
+
+.header .edit-btn image {
+    width: 20rpx;
+    height: 22rpx;
+    padding-right: 10rpx;
+}
+
+.header .del-btn {
+    -webkit-box-flex: 1;
+    flex: 1;
+    text-align: right;
+    color: #ff4c59;
+}
+
+.check-icon {
+    height: 200rpx;
+    line-height: 200rpx;
+    padding: 0 56rpx 0 16rpx;
+}
+
+.check-icon image {
+    width: 36rpx;
+    height: 36rpx;
+}
+
+.container-body {
+    width: 100%;
+    height: 1275rpx;
+    background: #fff;
+    padding: 24rpx 24rpx 0 24rpx;
+    box-sizing: border-box;
+}
+
+.conference-item {
+    display: -webkit-box;
+    display: -webkit-flex;
+    display: flex;
+    -webkit-box-align: center;
+    align-items: center;
+}
+
+.room-detail {
+    padding: 30rpx 0rpx;
+    border-bottom: 1px solid #f7f8f9;
+    display: -webkit-box;
+    display: -webkit-flex;
+    display: flex;
+    position: relative;
+}
+
+.room-detail view {
+    box-sizing: border-box;
+}
+
+.room-img {
+    position: relative;
+}
+
+.room-img image {
+    display: block;
+    width: 260rpx;
+    height: 180rpx;
+    background-color: #f7f8f9;
+}
+
+.room-img view {
+    position: absolute;
+    top: 0rpx;
+    padding: 0 10rpx;
+    height: 28rpx;
+    text-align: center;
+    background: #3dbcc5;
+    font-size: 20rpx;
+    line-height: 28rpx;
+    color: #fff;
+}
+
+.room-img .triangle {
+    content: "";
+    position: absolute;
+    top: 0;
+    right: -5rpx;
+    border-top: 15rpx solid #fb8506;
+    border-bottom: 14rpx solid #fb8506;
+    border-right: 7rpx dashed transparent;
+}
+
+.has_rent {
+    width: 116rpx;
+    height: 94rpx;
+    position: absolute;
+    top: 87rpx;
+    left: 0rpx;
+}
+
+.mask_footlist {
+    width: 260rpx;
+    height: 180rpx;
+    background: #d8d8d8;
+    opacity: .5;
+}
+
+.roomOther-info {
+    position: relative;
+    margin-left: 30rpx;
+    font-size: 26rpx;
+}
+
+.other-title {
+    width: 400rpx;
+    font-size: 28rpx;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+    overflow: hidden;
+    color: #000;
+}
+
+.distence-info {
+    margin-top: 6rpx;
+    width: 400rpx;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    font-size: 24rpx;
+    color: #999;
+}
+
+.room-price {
+    display: -webkit-box;
+    display: -webkit-flex;
+    display: flex;
+    -webkit-box-align: end;
+    align-items: flex-end;
+    margin-top: 20rpx;
+    font-size: 24rpx;
+    color: #ff4c59;
+}
+
+.room-price .sale {
+    font-size: 32rpx;
+    font-weight: 700;
+    line-height: 32rpx;
+}
+
+.room-price .normal {
+    color: #999;
+    text-decoration: line-through;
+    line-height: 24rpx;
+    margin-left: 10rpx;
+}
+
+.type-tag {
+    position: absolute;
+    bottom: 0rpx;
+    right: 10rpx;
+    width: 100rpx;
+    height: 46rpx;
+    border-radius: 23rpx;
+    font-size: 20rpx;
+    color: #fff;
+    background: #3dbcc6;
+    text-align: center;
+    line-height: 46rpx;
+}
+
+.gray .other-title,.gray .distence-info,.gray .room-price {
+    color: #cecece;
+}
+
+.gray .type-tag {
+    background: #cecece;
+}
+
+.no_room {
+    display: -webkit-box;
+    display: -webkit-flex;
+    display: flex;
+    -webkit-box-orient: vertical;
+    -webkit-box-direction: normal;
+    flex-direction: column;
+    -webkit-box-align: center;
+    align-items: center;
+    margin: 200rpx 0 0 0;
+}
+
+.no_room image {
+    width: 272rpx;
+    height: 272rpx;
+}
+
+.no_room text {
+    margin-top: 30rpx;
+    font-size: 28rpx;
+    color: #999;
+}
+
+.jump-btn {
+    width: 284rpx;
+    height: 72rpx;
+    margin-top: 30rpx;
+    text-align: center;
+    line-height: 72rpx;
+    font-size: 28rpx;
+    color: #fff;
+    background: #3dbcc6;
+    border-radius: 36rpx;
+}
+
+.recommend {
+    background: #f3f4f6;
+    text-align: center;
+    height: 65rpx;
+    line-height: 60rpx;
+    color: #666;
+    margin: 20rpx 0;
+}
+
+.recommend image {
+    width: 24rpx;
+    height: 24rpx;
+    position: relative;
+    left: -20rpx;
+    top: 4rpx;
+}
+
+.recommend view {
+    display: inline-block;
+    font-size: 28rpx;
+}
+
+.listInt {
+    color: #999;
+}
+
+.menu_box {
+    display: -webkit-box;
+    display: -webkit-flex;
+    display: flex;
+    height: 90rpx;
+}
+
+.menu1,.menu2 {
+    -webkit-box-flex: 1;
+    flex: 1;
+    font-size: 30rpx;
+    line-height: 80rpx;
+    text-align: center;
+    color: #999;
+    position: relative;
+}
+
+.borders {
+    font-size: 32rpx;
+    color: #000;
+    font-weight: 700;
+}
+
+.tab1,.tab2 {
+    height: 300rpx;
+}
+
+.border_line {
+    width: 40rpx;
+    height: 6rpx;
+    background: #19c8cc;
+    position: absolute;
+    bottom: 15rpx;
+    left: 168rpx;
+}
+
+.no_footlist {
+    text-align: center;
+    margin-top: 290rpx;
+}
+
+.footlist_img {
+    width: 283rpx;
+    height: 161rpx;
+}
+
+.footlist_word {
+    font-size: 28rpx;
+    color: #999;
+    text-align: center;
+    line-height: 40px;
+    margin-top: 40rpx;
+    margin-bottom: 20rpx;
+}
+
+.footlist_btn {
+    width: 283rpx;
+    height: 72rpx;
+    border: 2px solid #3dbcc6;
+    border-radius: 100px;
+    color: #3dbcc6;
+    font-size: 28rpx;
+    text-align: center;
+    line-height: 72rpx;
+    margin: 0 auto;
+}
+
+.rent-type {
+    float: left;
+    width: 60rpx;
+    font-weight: 700;
+    color: #999;
+}
+
+.rentType_part {
+    font-size: 24rpx;
+    color: #999;
+}
+
+.new-mianji-box {
+    display: block;
+    margin-left: 60rpx;
+    width: 360rpx;
+    line-height: 40rpx;
+    height: 40rpx;
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+}
+
+.otherroom-tag {
+    display: -webkit-box;
+    display: -webkit-flex;
+    display: flex;
+    font-size: 20rpx;
+    margin-top: 10rpx;
+}
+
+.otherroom-tag view {
+    border: 2rpx solid #999;
+    color: #999;
+    padding: 5rpx 10rpx;
+    margin-right: 20rpx;
+    border-radius: 6rpx;
+}

@@ -1,0 +1,69 @@
+<template name="formModule">
+    <view class="form-module">
+        <view class="moduleTitle" wx:if="{{moduleInfo.pattern.e}}">
+            <text class="lines left-lines"></text>
+            <text>{{moduleInfo.content.title}}</text>
+            <text class="lines right-lines"></text>
+        </view>
+        <view class="emptyModule" style="background-color:{{moduleInfo.pattern.bg.t==1?moduleInfo.pattern.bg.c:''}}" wx:if="{{moduleInfo.content.formData==undefined}}">
+            <view class="emptyModuleText delFormText">当下表单已被删除</view>
+        </view>
+        <view wx:else>
+            <view class="emptyModule" style="background-color:{{moduleInfo.pattern.bg.t==1?moduleInfo.pattern.bg.c:''}}" wx:if="{{moduleInfo.content.formData.length==0}}">
+                <view class="emptyModuleText">当下表单暂无表单项。</view>
+            </view>
+            <view class="form-container" style="background-color:{{moduleInfo.pattern.bg.t==1?moduleInfo.pattern.bg.c:''}}" wx:else>
+                <form bindsubmit="submitFormHandler" data-formdata="{{moduleInfo.content.formData}}" data-formid="{{moduleInfo.content.formId}}" data-moduleid="{{moduleInfo.id}}">
+                    <view class="form-item" wx:for="{{moduleInfo.content.formData}}" wx:key="index">
+                        <view class="item-title-bar" wx:if="{{!item.nameHide}}">
+                            <view class="item-title">
+                                <view class="item-must" wx:if="{{item.must}}">*</view>{{item.name}}：</view>
+                        </view>
+                        <view class="item-content">
+                            <view wx:if="{{item.type==0}}">
+                                <input class="item-input" maxlength="100" name="{{item.id}}" placeholder="{{item.placeholder}}" value="{{item.input}}"></input>
+                                <view class="item-must-float" wx:if="{{item.nameHide&&item.must}}">*</view>
+                            </view>
+                            <view wx:if="{{item.type==1}}">
+                                <radio-group class="radio-group" name="{{item.id}}">
+                                    <radio checked="{{option.selected}}" class="radio" color="#333" value="{{option.name}}" wx:for="{{item.input}}" wx:for-item="option" wx:key="index">
+                                        <text>{{option.name}}</text>
+                                    </radio>
+                                </radio-group>
+                            </view>
+                            <view wx:if="{{item.type==2}}">
+                                <checkbox-group class="beautify-checkbox-group" name="{{item.id}}">
+                                    <label bindtap="checkedOption" class="jz-beautify-checkbox-wrapper" data-index="{{index}}" data-itemid="{{item.id}}" data-moduleid="{{moduleInfo.id}}" data-option="{{option}}" wx:for="{{item.input}}" wx:for-item="option" wx:key="index">
+                                        <view class="jz-beautify-checkbox {{option.selected?'jz-beautify-checkbox-checked':''}}">
+                                            <view class="jz-beautify-checkbox-inner">{{option.name}}</view>
+                                        </view>
+                                        <checkbox checked="{{option.selected}}" value="{{option.name}}"></checkbox>
+                                    </label>
+                                </checkbox-group>
+                            </view>
+                            <view class="textarea-wrap" wx:if="{{item.type==3}}">
+                                <textarea autoHeight bindblur="bindTextAreaBlur" class="item-textarea" data-item="{{item}}" data-module="{{moduleInfo}}" hidden="{{item.hidden}}" maxlength="999" name="{{item.id}}" placeholder="{{item.placeholder}}" value="{{item.val}}"></textarea>
+                                <view class="item-must-float" wx:if="{{item.nameHide&&item.must}}">*</view>
+                            </view>
+                            <view wx:if="{{item.type==4}}">
+                                <input hidden="true" name="{{item.id}}" placeholder="{{item.placeholder}}" value="{{item.val}}"></input>
+                                <view class="item-input">
+                                    <text class="upload-text" wx:if="{{!item.val}}">{{item.placeholder}}</text>
+                                    <text bindtap="previewModuleImage" class="upload-text" data-img="{{item.path}}" data-sbp="true" wx:if="{{item.val}}">图片上传成功，点击预览</text>
+                                </view>
+                                <view class="item-must-float" wx:if="{{item.nameHide&&item.must}}">*</view>
+                                <view bindtap="uploadHandler" class="file-upload-btn" data-itemid="{{item.id}}" data-module="{{moduleInfo}}">{{!item.val?'点击上传':'重新上传'}}</view>
+                            </view>
+                            <view class="item-input-wrap" wx:if="{{item.type==5}}">
+                                <input adjustPosition="false" class="item-input" cursorSpacing="20" maxlength="100" name="{{item.id}}" placeholder="{{item.placeholder}}" value="{{item.val}}"></input>
+                                <view bindtap="showCalendar" class="hide-input" data-date="{{item.val}}" data-item="{{item}}" data-module="{{moduleInfo}}"></view>
+                                <view class="item-must-float" wx:if="{{item.nameHide&&item.must}}">*</view>
+                            </view>
+                        </view>
+                    </view>
+                    <button bindgetuserinfo="formUserInfoHandler" class="form-submit-button" formType="submit" openType="getUserInfo" style="background-color:{{globalColor}}">{{moduleInfo.content.btnName}}</button>
+                </form>
+            </view>
+        </view>
+    </view>
+</template>

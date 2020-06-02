@@ -1,0 +1,18 @@
+<template name="canvas-poster">
+    <view catchtap="onPosterClose" catchtouchmove="blank" class="canvas-poster tips-content-circle">
+        <view class="tips-info-circle">
+            <canvas canvasId="forWechat" class="circle_pic"></canvas>
+            <view class="c-save" hidden="{{sharePoster.saveHidden}}">
+                <text>海报已保存至相册，快去朋友圈分享吧</text>
+                <image catchtap="onPosterClose" class="close" src="../../images/icon-poster-close.png"></image>
+            </view>
+        </view>
+        <view class="tip-auth" hidden="{{!sharePoster.needGotoSettings}}">
+            <view class="tit">请开启保存到相册的权限，开启后将自动保存海报</view>
+            <view class="opts">
+                <button catchtap="onCancelGotoSettings" class="cancel">取消</button>
+                <button catchtap="onGotoSettings" class="confirm">确定</button>
+            </view>
+        </view>
+    </view>
+</template>

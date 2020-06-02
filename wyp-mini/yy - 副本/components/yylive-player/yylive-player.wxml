@@ -1,0 +1,14 @@
+<view class="yylive-player {{ratio<1&&!isFixedSize?'vertical':'landscape'}}" style="height:{{playerHeight}}; width: {{playerWidth}};}}">
+    <live-player autoplay bindnetstatus="netstatus" bindstatechange="statechange" class="my-player" id="myLivePlayer" mode="live" objectFit="fillCrop" src="{{liveUrl}}" style="height:{{pageLoading||isHidden||playEndMessage?0:playerHeight}}; width: {{playerWidth}};"></live-player>
+    <cover-view class="player-loading" hidden="{{pageLoading||!isLoading}}">
+        <cover-view class="loading-inner">
+            <cover-image class="loading-logo" src="./images/logo.png"></cover-image>
+            <cover-view class="loading-light">
+                <cover-image class="lightshine" src="./images/lightshine-1.png"></cover-image>
+                <cover-image class="loading-light-goto" src="./images/light.png"></cover-image>
+            </cover-view>
+            <cover-view class="tips" hidden="{{!playEndMessage}}" wx:if="{{playEndMessage==='end'}}">主播暂未开播，{{playOtherLeaveTime}}秒后带你看好看的~{{endSymbol}}</cover-view>
+            <cover-view class="tips" hidden="{{!playEndMessage}}" wx:else>{{playEndMessage}}</cover-view>
+        </cover-view>
+    </cover-view>
+</view>

@@ -1,0 +1,12 @@
+<view class="range-slider" style="{{'width:'+width+'rpx;height:'+height+'rpx'}}">
+    <view class="range-bar" style="{{'width:100%;height:'+barHeight+'rpx'}}">
+        <view class="range-bar-bg" style="{{'background-color:'+backgroundColor+''}}"></view>
+        <view class="range-bar-progress" style="{{'margin-left:'+progressBarLeft+'rpx;width:'+progressBarWidth+'rpx;background-color:'+activeColor+''}}"></view>
+    </view>
+    <view bindtouchend="__e" bindtouchmove="__e" bindtouchstart="__e" class="block" data-event-opts="{{[ [ 'touchstart',[ [ '_onBlockTouchStart',['$event'] ] ] ],[ 'touchmove',[ [ '_onBlockTouchMove',['$event'] ] ] ],[ 'touchend',[ [ '_onBlockTouchEnd',['$event'] ] ] ] ]}}" data-left="{{minBlockLeft}}" data-tag="minBlock" style="{{'width:'+blockSize+'rpx;height:'+blockSize+'rpx;margin-left:'+minBlockLeft+'rpx;'}}">
+        <slot name="minBlock"></slot>
+    </view>
+    <view bindtouchend="__e" bindtouchmove="__e" bindtouchstart="__e" class="block" data-event-opts="{{[ [ 'touchstart',[ [ '_onBlockTouchStart',['$event'] ] ] ],[ 'touchmove',[ [ '_onBlockTouchMove',['$event'] ] ] ],[ 'touchend',[ [ '_onBlockTouchEnd',['$event'] ] ] ] ]}}" data-left="{{maxBlockLeft}}" data-tag="maxBlock" style="{{'width:'+blockSize+'rpx;height:'+blockSize+'rpx;margin-left:'+maxBlockLeft+'rpx;'}}">
+        <slot name="maxBlock"></slot>
+    </view>
+</view>

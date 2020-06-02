@@ -1,0 +1,514 @@
+.mg-dialog {
+    z-index: 1000;
+    position: fixed;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    display: -webkit-box;
+    display: -webkit-flex;
+    display: -ms-flexbox;
+    display: flex;
+    -webkit-box-orient: vertical;
+    -webkit-box-direction: normal;
+    flex-direction: column;
+    -webkit-box-align: center;
+    -ms-flex-align: center;
+    align-items: center;
+    -webkit-box-pack: center;
+    -ms-flex-pack: center;
+    justify-content: center;
+}
+
+.mg-dialog .mg-dialog-mask {
+    position: fixed;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0,0,0,0.7);
+    z-index: 10;
+}
+
+.mg-dialog .mg-dialog-container {
+    display: -webkit-box;
+    display: -webkit-flex;
+    display: -ms-flexbox;
+    display: flex;
+    -webkit-box-orient: vertical;
+    -webkit-box-direction: normal;
+    flex-direction: column;
+    -webkit-box-pack: center;
+    -ms-flex-pack: center;
+    justify-content: center;
+    z-index: 20;
+    background-color: #fff;
+    border-radius: 6rpx;
+    width: 80%;
+    max-width: 700rpx;
+    min-width: 540rpx;
+    margin-top: -100rpx;
+}
+
+.mg-dialog .mg-dialog-title {
+    font-size: 36rpx;
+    color: #000;
+    display: -webkit-box;
+    display: -webkit-flex;
+    display: -ms-flexbox;
+    display: flex;
+    -webkit-box-align: center;
+    -ms-flex-align: center;
+    align-items: center;
+    -webkit-box-pack: center;
+    -ms-flex-pack: center;
+    justify-content: center;
+    min-height: 88rpx;
+    padding: 30rpx 40rpx 0rpx;
+}
+
+.mg-dialog .mg-dialog-content {
+    padding: 20rpx 40rpx 40rpx;
+    font-size: 30rpx;
+    color: #555;
+    text-align: center;
+}
+
+.mg-dialog .mg-dialog-footer {
+    display: -webkit-box;
+    display: -webkit-flex;
+    display: -ms-flexbox;
+    display: flex;
+    -webkit-box-align: center;
+    -ms-flex-align: center;
+    align-items: center;
+    border-top: 1rpx solid #E9E9E9;
+}
+
+.mg-dialog .mg-dialog-button {
+    height: 94rpx;
+    -webkit-box-flex: 1;
+    flex: 1;
+    display: -webkit-box;
+    display: -webkit-flex;
+    display: -ms-flexbox;
+    display: flex;
+    -webkit-box-align: center;
+    -ms-flex-align: center;
+    align-items: center;
+    -webkit-box-pack: center;
+    -ms-flex-pack: center;
+    justify-content: center;
+    font-size: 34rpx;
+    color: #666666;
+    border-right: 1rpx solid #E9E9E9;
+}
+
+.mg-dialog .mg-dialog-button:last-child {
+    border-right: none;
+    color: #FF7000;
+}
+
+.mg-dialog .mg-dialog-button-hover {
+    background-color: #ddd;
+}
+
+.kelai {
+    background: #fff;
+    min-height: 100vh;
+}
+
+.empty {
+    width: 100%;
+    padding-top: 200rpx;
+    -webkit-box-orient: vertical;
+    -webkit-box-direction: normal;
+    flex-direction: column;
+    display: -webkit-box;
+    display: -webkit-flex;
+    display: -ms-flexbox;
+    display: flex;
+    -webkit-box-align: center;
+    -ms-flex-align: center;
+    align-items: center;
+    color: #999;
+    line-height: 30rpx;
+    font-size: 28rpx;
+}
+
+.empty image {
+    display: block;
+    width: 300rpx;
+    height: 300rpx;
+    margin-bottom: 30rpx;
+}
+
+.locationInfo {
+    font-size: 30rpx;
+    height: 100rpx;
+    border-top: 1rpx solid #eee;
+    border-bottom: 1rpx solid #eee;
+    color: #797979;
+    display: -webkit-box;
+    display: -webkit-flex;
+    display: -ms-flexbox;
+    display: flex;
+    -webkit-box-align: center;
+    -ms-flex-align: center;
+    align-items: center;
+    -webkit-box-pack: justify;
+    -ms-flex-pack: justify;
+    justify-content: space-between;
+}
+
+.locationInfo .mgic-location {
+    margin: 0 14rpx 0 20rpx;
+}
+
+.locationInfo .mgic-angle-r {
+    margin-right: 20rpx;
+}
+
+.locationInfo .locationTitle {
+    width: 100%;
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+}
+
+.bg {
+    border-radius: 50%;
+    width: 50%;
+    height: 50%;
+    top: 25%;
+    left: 25%;
+    position: absolute;
+    opacity: 0;
+}
+
+.bg1 {
+    animation: bgkey1 ease 2.8s infinite;
+}
+
+.bg2 {
+    animation: bgkey1 ease 2.8s infinite;
+    animation-delay: -0.7s;
+}
+
+.bg3 {
+    animation: bgkey1 ease 2.8s infinite;
+    animation-delay: -1.4s;
+}
+
+.bg4 {
+    animation: bgkey1 ease 2.8s infinite;
+    animation-delay: -2.1s;
+}
+
+@-webkit-keyframes bgkey1 {
+    0% {
+        opacity: 0;
+        transform: scale(1);
+    }
+
+    5% {
+        opacity: 0;
+        transform: scale(1);
+    }
+
+    6% {
+        opacity: 1;
+        transform: scale(1);
+    }
+
+    95% {
+        opacity: 0;
+        transform: scale(2);
+    }
+
+    100% {
+        opacity: 0;
+        transform: scale(1);
+    }
+}
+
+@keyframes bgkey1 {
+    0% {
+        opacity: 0;
+        transform: scale(1);
+    }
+
+    5% {
+        opacity: 0;
+        transform: scale(1);
+    }
+
+    6% {
+        opacity: 1;
+        transform: scale(1);
+    }
+
+    95% {
+        opacity: 0;
+        transform: scale(2);
+    }
+
+    100% {
+        opacity: 0;
+        transform: scale(1);
+    }
+}
+
+.ammeterStateComponent {
+    position: relative;
+    width: 300px;
+    height: 300px;
+    border-radius: 50%;
+    margin: 80rpx auto 0;
+}
+
+.grayBg .bg1 {
+    background-color: rgba(222,222,222,0.4)!important;
+}
+
+.grayBg .bg2 {
+    background-color: rgba(222,222,222,0.6)!important;
+}
+
+.grayBg .bg3 {
+    background-color: rgba(222,222,222,0.7)!important;
+}
+
+.grayBg .bg4 {
+    background-color: rgba(222,222,222,0.8)!important;
+}
+
+.grayBg .myLockItemContainer {
+    box-shadow: 0 0 2rem rgba(222,222,222,0.8)!important;
+}
+
+.myLocks {
+    height: 920rpx!important;
+    background-color: #fff;
+    z-index: 1;
+}
+
+.myLockItemContainer {
+    width: 50%;
+    height: 50%;
+    top: 25%;
+    left: 25%;
+    border-radius: 50%;
+    background: #fff;
+    position: absolute;
+    z-index: 10;
+}
+
+.myLockItem {
+    border-radius: 100%;
+    display: -webkit-box;
+    display: -webkit-flex;
+    display: -ms-flexbox;
+    display: flex;
+    -webkit-box-orient: vertical;
+    -webkit-box-direction: normal;
+    flex-direction: column;
+    -webkit-box-align: center;
+    -ms-flex-align: center;
+    align-items: center;
+    -webkit-box-pack: center;
+    -ms-flex-pack: center;
+    justify-content: center;
+    width: 100%;
+    height: 100%;
+}
+
+#myCanvas-0,#myCanvas-1,#myCanvas-2,#myCanvas-3 {
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    width: 100%;
+    height: 100%;
+}
+
+.myLockItem .status {
+    color: #FB5B3A;
+}
+
+.myLockItem .statusTxt {
+    color: #424242;
+    font-size: 36rpx;
+    line-height: 60rpx;
+}
+
+.myLockItem .rest {
+    color: #686868;
+    font-size: 28rpx;
+}
+
+.myLockItem .warnColor {
+    color: red;
+}
+
+.text-center {
+    text-align: center;
+}
+
+.time-validity {
+    color: #9B9B9B;
+    font-size: 24rpx;
+    margin-top: 20rpx;
+}
+
+.lock-name {
+    color: #9B9B9B;
+    margin-top: 20rpx;
+}
+
+.kelai image.btn {
+    display: block;
+    width: 300rpx;
+    height: 60rpx;
+    margin: 30rpx auto;
+}
+
+.indicator-dots {
+    width: 100%;
+    display: -webkit-box;
+    display: -webkit-flex;
+    display: -ms-flexbox;
+    display: flex;
+    -webkit-box-align: center;
+    -ms-flex-align: center;
+    align-items: center;
+    -webkit-box-pack: center;
+    -ms-flex-pack: center;
+    justify-content: center;
+}
+
+.indicator-dots .dotItem {
+    width: 14rpx;
+    height: 14rpx;
+    border: 1rpx solid #c7c7c7;
+    border-radius: 100%;
+    margin: 0 10rpx;
+}
+
+.indicator-dots .dotItem.active {
+    background-color: #C7C7C7;
+}
+
+.use-note {
+    color: #6A80A4;
+    font-size: 30rpx;
+    position: fixed;
+    bottom: 20px;
+    left: 0;
+    right: 0;
+    text-align: center;
+    z-index: 0;
+}
+
+.dialog-lease-list {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: rgba(254,255,254,0.9);
+    width: 100vw;
+    height: 100vh;
+    display: block;
+    z-index: 10;
+}
+
+.dialog-lease-list .title {
+    margin-top: 24vh;
+    font-size: 32rpx;
+    display: block;
+    color: #010101;
+    border-bottom: 1rpx solid #ccc;
+    line-height: 80rpx;
+    margin-right: 30rpx;
+    padding-left: 40rpx;
+}
+
+.dialog-lease-list .ul {
+    max-height: 68vh;
+    overflow: scroll;
+    -webkit-overflow-scrolling: touch;
+}
+
+.dialog-lease-list .ul .li {
+    color: #3D3D3D;
+    font-size: 30rpx;
+    display: block;
+    padding: 30rpx 70rpx 30rpx 0;
+    border-bottom: 1rpx solid #ccc;
+    margin-left: 56rpx;
+}
+
+.dialog-lease-list .li.actived {
+    background: url(https://assets.mgzf.com/appimg/9e0efc0330d6982ffddf5167bae66643.png) no-repeat 95% center;
+    background-size: 30rpx;
+}
+
+.pwd-dialog .mg-dialog-content {
+    padding-bottom: 0;
+}
+
+.pwd-dialog .mg-dialog-body {
+    margin-top: 10rpx;
+    text-align: center;
+}
+
+.pwd-dialog .content {
+    width: 100%;
+}
+
+.pwd-dialog .h2 {
+    margin: 20rpx 0 30rpx 0;
+}
+
+.pwd-dialog .h3 {
+    margin-top: 20rpx;
+}
+
+.pwd-dialog .h4 {
+    margin: 10rpx 0;
+}
+
+.pwd-dialog .h5 {
+    color: #FFB117;
+    font-size: 24rpx;
+}
+
+.pwd-dialog .buttonbottom {
+    display: -webkit-box;
+    display: -webkit-flex;
+    display: -ms-flexbox;
+    display: flex;
+    border-top: 1rpx solid #ccc;
+    margin: 20rpx -30rpx 0;
+    line-height: 3;
+    font-size: 32rpx;
+}
+
+.pwd-dialog .buttonbottom view {
+    -webkit-box-flex: 1;
+    flex: 1;
+    text-align: center;
+}
+
+.pwd-dialog .buttonbottom view:last-child {
+    border-left: 1rpx solid #ccc;
+    color: #FF7003;
+}
+
+.tipContent {
+    font-size: 28rpx;
+    color: #ffb117;
+    margin-top: 20rpx;
+}

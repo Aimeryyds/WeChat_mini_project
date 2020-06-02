@@ -1,0 +1,67 @@
+<view class="mine _8ba848e">
+    <view class="network _32f532b _8ba848e" wx:if="{{$net$hasNet}}">
+        <image class="_32f532b" src="../../images/network.png"></image>
+        <text class="_32f532b">网络不可用，请检查网络设置</text>
+        <view class="net-text font28 animated flash infinite _32f532b">正在尝试重新连接...</view>
+    </view>
+    <view class="mine_con _8ba848e">
+        <image class="bg _8ba848e" src="https://jfinfo.oss-cn-beijing.aliyuncs.com/jugupiao/images/mine/bgg.png"></image>
+        <view class="top-box _8ba848e">
+            <image class="_8ba848e" src="{{user.avatarUrl||'https://jfinfo.oss-cn-beijing.aliyuncs.com/jugupiao/images/mine/avtor.png'}}"></image>
+            <view class="right_info _8ba848e">
+                <view class="user _8ba848e">尊敬的用户: </view>
+                <view class="user _8ba848e">{{user.nickName}}</view>
+                <view class="_8ba848e" wx:if="{{isload}}">
+                    <view class="evalua flex _8ba848e" wx:if="{{userType.isExist}}">{{userType.level_label}}投资者</view>
+                    <view catchtap="goSdx" class="evalua flex paddingLr _8ba848e" wx:else>一分钟测评，了解自己<i-icon class="_8ba848e" size="12" type="enter"></i-icon>
+                    </view>
+                </view>
+            </view>
+        </view>
+    </view>
+    <view class="list-container _8ba848e">
+        <image class="_8ba848e" src="https://jfinfo.oss-cn-beijing.aliyuncs.com/jugupiao/images/mine/questions.png"></image>
+        <view catchtap="jump" class="rig-box _8ba848e" data-page="/pages/qa/myQuestion">
+            <text class="_8ba848e">我的提问</text>
+            <i-icon class="_8ba848e" color="#999" size="18" type="enter"></i-icon>
+        </view>
+    </view>
+    <view class="list-container _8ba848e">
+        <image class="_8ba848e" src="https://jfinfo.oss-cn-beijing.aliyuncs.com/jugupiao/images/mine/shoucang.png"></image>
+        <view catchtap="jump" class="rig-box _8ba848e" data-page="/pages/mine/collection">
+            <text class="_8ba848e">我的收藏</text>
+            <i-icon class="_8ba848e" color="#999" size="18" type="enter"></i-icon>
+        </view>
+    </view>
+    <view class="list-container _8ba848e">
+        <image class="_8ba848e" src="https://jfinfo.oss-cn-beijing.aliyuncs.com/jugupiao/images/mine/organization.png"></image>
+        <view catchtap="goSdx" class="rig-box _8ba848e">
+            <text class="_8ba848e">风险评测</text>
+            <i-icon class="_8ba848e" color="#999" size="18" type="enter"></i-icon>
+        </view>
+    </view>
+    <view class="list-container _8ba848e">
+        <image class="_8ba848e" src="https://jfinfo.oss-cn-beijing.aliyuncs.com/jugupiao/images/mine/iphone.png"></image>
+        <view catchtap="callTel" class="rig-box _8ba848e">
+            <text class="_8ba848e">联系客服</text>
+            <view class="_8ba848e">
+                <text class="_8ba848e" style="margin-right: 16rpx">400-633-5058</text>
+                <i-icon class="_8ba848e" color="#999" size="18" type="enter"></i-icon>
+            </view>
+        </view>
+    </view>
+    <view class="list-container _8ba848e">
+        <image class="_8ba848e" src="https://jfinfo.oss-cn-beijing.aliyuncs.com/jugupiao/images/mine/statement.png"></image>
+        <view catchtap="jump" class="rig-box _8ba848e" data-page="/pages/mine/disclaimer">
+            <text class="_8ba848e">免责声明</text>
+            <i-icon class="_8ba848e" color="#999" size="18" type="enter"></i-icon>
+        </view>
+    </view>
+    <view class="list-container _8ba848e">
+        <image class="_8ba848e" src="https://jfinfo.oss-cn-beijing.aliyuncs.com/jugupiao/images/mine/mine.png"></image>
+        <view catchtap="jump" class="rig-box _8ba848e" data-page="/pages/mine/aboutUs">
+            <text class="_8ba848e">关于我们</text>
+            <i-icon class="_8ba848e" color="#999" size="18" type="enter"></i-icon>
+        </view>
+    </view>
+</view>

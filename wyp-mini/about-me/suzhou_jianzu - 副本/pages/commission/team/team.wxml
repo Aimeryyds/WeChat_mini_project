@@ -1,0 +1,24 @@
+<scroll-view bindscrolltolower="bottom" scrollY="true" style="height: {{height}}rpx;background-color:#e5e5e5">
+    <view class="container">
+        <view class="tabClass">
+            <text bindtap="tabClick" class="normalClass {{index==1?'selectClass':''}}" data-index="1">一级 {{arr[1]}}</text>
+            <text bindtap="tabClick" class="normalClass {{index==2?'selectClass':''}}" data-index="2">二级 {{arr[2]}}</text>
+            <text bindtap="tabClick" class="normalClass {{index==3?'selectClass':''}}" data-index="3">三级 {{arr[3]}}</text>
+        </view>
+        <view class="showList">
+            <view class="smallTitle">成员信息 已成为分销商的下线</view>
+            <view class="list" wx:if="{{data.list[index]}}" wx:for="{{data.list}}">
+                <image src="{{item.avatar}}"></image>
+                <view class="content">
+                    <text class="name">{{item.nickname}}</text>
+                    <text class="time">注册时间：{{item.createtime}}</text>
+                </view>
+                <view class="right">
+                    <text class="money">消费:{{item.moneycount}}元 </text>
+                    <text class="order">{{item.ordercount}}个订单</text>
+                </view>
+            </view>
+        </view>
+    </view>
+</scroll-view>
+<loading wx:if="{{loading}}"></loading>

@@ -1,0 +1,10 @@
+<view class="{{['top-preview _div data-v-3d472ef9',skeletonFlag?'active':'']}}">
+    <block wx:if="{{roomData&&previewImage}}">
+        <image binderror="__e" bindtap="__e" class="top-image data-v-3d472ef9" data-event-opts="{{[ [ 'tap',[ ['handleOpenVR'] ] ],[ 'error',[ [ 'handleImageError',[0] ] ] ] ]}}" mode="aspectFill" src="{{previewImage}}" wx:if="{{!isImageError[0]}}"></image>
+        <image class="top-image error data-v-3d472ef9" mode="aspectFill" src="{{errorImageSrc}}" wx:if="{{isImageError[0]}}"></image>
+        <view class="image-center-wrapper _div data-v-3d472ef9" wx:if="{{vrLink}}">
+            <view bindtap="__e" class="{{['iconfont zz4_0 _i data-v-3d472ef9',vrLink?'icon-vr':'']}}" data-event-opts="{{[ [ 'tap',[ ['handleOpenVR'] ] ] ]}}"></view>
+        </view>
+        <view class="top-shadow _div data-v-3d472ef9"></view>
+    </block>
+</view>

@@ -1,0 +1,51 @@
+<view class="body">
+    <view class="content">
+        <view class="content_t">
+            <view class="code">
+                <image mode="widthFix" src="{{qrurl}}"></image>
+            </view>
+            <view class="people">
+                <view class="header_top_L" wx:if="{{canIUseAvatarUrl}}">
+                    <open-data class="thumb" type="userAvatarUrl"></open-data>
+                </view>
+                <image src="{{headphoto}}" wx:else></image>
+            </view>
+        </view>
+        <view class="content_b">
+            <text class="d1">{{weixin_nickname}}的店铺</text>
+            <text class="d2">成为分销商一起轻松赚大钱</text>
+        </view>
+    </view>
+</view>
+<view class="fx_footer">
+    <view class="tab1 default">
+        <view bindtap="tosy" class="tab1" hoverClass="navigator-hover" url="/pages/fxdp_sy/fxdp_sy">
+            <view class="tab-img">
+                <text class="iconfont icon-dianpu"></text>
+            </view>
+            <view class="tab-title">
+                <text>店铺首页</text>
+            </view>
+        </view>
+    </view>
+    <view class="tab1 active">
+        <view bindtap="toqrc" class="tab1" hoverClass="navigator-hover">
+            <view class="tab-img">
+                <text class="iconfont icon-erweima"></text>
+            </view>
+            <view class="tab-title">
+                <text>二维码</text>
+            </view>
+        </view>
+    </view>
+    <view class="tab1 default">
+        <view bindtap="tohome" class="tab1" hoverClass="navigator-hover">
+            <view class="tab-img">
+                <text class="iconfont icon-fenxiao"></text>
+            </view>
+            <view class="tab-title">
+                <text>我的分销</text>
+            </view>
+        </view>
+    </view>
+</view>

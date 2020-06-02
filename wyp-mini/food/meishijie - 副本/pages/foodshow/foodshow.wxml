@@ -1,0 +1,272 @@
+<navigation-bar bgStyle="{{bgStyle}}" enable="{{enable}}" title="食秀"></navigation-bar>
+<view class="container" style="padding-top:{{barHeight}}px">
+    <view bindtap="pageReload" class="cplist_nodata" wx:if="{{requeseFail}}">{{requeseFailTips}}</view>
+    <view class="fs_topw" style="top:{{barHeight}}px">
+        <view class="fs_top">
+            <scroll-view class="toptabitemw" scrollLeft="{{tab_scleft}}" scrollWithAnimation="{{true}}" scrollX="{{true}}">
+                <view class="toptabitemlist">
+                    <view bindtap="switchtopic" class="toptabitem {{currenttab==i?'active':''}}" data-id="{{item.topic_id}}" data-index="{{i}}" style="background:#f5f5f5 url({{item.topic_img}}) center no-repeat;background-size:cover;" wx:for="{{toptabs.item}}" wx:for-index="i" wx:key="key">
+                        <view class="t">#{{item.topic_title}}</view>
+                    </view>
+                </view>
+            </scroll-view>
+        </view>
+    </view>
+    <view class="tj_w" style="height:{{contentHeight}}px;top:{{contentTop}}px;">
+        <swiper bindchange="switchtopic1" class="cswiper" current="{{currenttab}}" data-id="{{toptabs.item[currenttab+1].topic_id}}" data-index="{{currenttab+1}}">
+            <swiper-item class="cswiper_item" wx:for="{{toptabs.item}}" wx:for-index="i" wx:key="key">
+                <scroll-view bindscrolltolower="onScvReachBottom" scrollY="{{true}}" style="height:100%;width:100%;">
+                    <view class="wfw" wx:if="{{i==currenttab}}">
+                        <view class="wf_left" id="wf_left">
+                            <block wx:for="{{wfdata_left}}" wx:key="key">
+                                <view class="wf-item wf-type-1" wx:if="{{item.type=='1'}}">
+                                    <navigator class="wf-itemw" url="/pages/content/content?id={{item.recipe.id}}">
+                                        <view class="imgw" style="background-image:url({{item.recipe.img}});padding-top:{{100/item.wh_ratio}}%">
+                                            <view class="vicon"></view>
+                                        </view>
+                                        <view class="infow">
+                                            <view class="title">{{item.recipe.title}}</view>
+                                            <view class="descw">
+                                                <view class="desc" wx:if="{{item.recipe.label[0].name||item.recipe.label[0].desc}}">
+                                                    <view class="p">{{item.recipe.label[0].name}} | {{item.recipe.label[0].desc}}</view>
+                                                    <view class="bgc"></view>
+                                                </view>
+                                            </view>
+                                            <view class="userw">
+                                                <view class="avatar">
+                                                    <view class="avatarw">
+                                                        <image class="img" src="{{item.recipe.author.avatar_url}}"></image>
+                                                    </view>
+                                                    <view class="n">{{item.recipe.author.nickname}}</view>
+                                                </view>
+                                                <view class="view">
+                                                    <view class="i"></view>{{item.recipe.viewed_amount}}</view>
+                                            </view>
+                                        </view>
+                                    </navigator>
+                                </view>
+                                <view class="wf-item wf-type-7" wx:if="{{item.type=='7'}}">
+                                    <navigator class="wf-itemw" url="/pages/content/content?id={{item.video_recipe.id}}">
+                                        <view class="imgw" style="background-image:url({{item.video_recipe.img}});padding-top:{{100/item.wh_ratio}}%">
+                                            <view class="vicon"></view>
+                                        </view>
+                                        <view class="infow">
+                                            <view class="title">{{item.video_recipe.title}}</view>
+                                            <view class="descw">
+                                                <view class="desc" wx:if="{{item.video_recipe.label[0].name||item.video_recipe.label[0].desc}}">
+                                                    <view class="p">{{item.video_recipe.label[0].name}} | {{item.video_recipe.label[0].desc}}</view>
+                                                    <view class="bgc"></view>
+                                                </view>
+                                            </view>
+                                            <view class="userw">
+                                                <view class="avatar">
+                                                    <view class="avatarw">
+                                                        <image class="img" src="{{item.video_recipe.author.avatar_url}}"></image>
+                                                    </view>
+                                                    <view class="n">{{item.video_recipe.author.nickname}}</view>
+                                                </view>
+                                                <view class="view">
+                                                    <view class="i"></view>{{item.video_recipe.viewed_amount}}</view>
+                                            </view>
+                                        </view>
+                                    </navigator>
+                                </view>
+                                <view class="wf-item wf-type-8" wx:if="{{item.type=='8'}}">
+                                    <navigator class="wf-itemw" url="/pages/article/article?id={{item.video_article.id}}">
+                                        <view class="imgw" style="background-image:url({{item.video_article.img}});padding-top:{{100/item.wh_ratio}}%">
+                                            <view class="vicon"></view>
+                                        </view>
+                                        <view class="infow">
+                                            <view class="title">{{item.video_article.title}}</view>
+                                            <view class="descw">
+                                                <view class="desc" wx:if="{{item.video_article.label[0].name||item.video_article.label[0].desc}}">
+                                                    <view class="p">{{item.video_article.label[0].name}} | {{item.video_article.label[0].desc}}</view>
+                                                    <view class="bgc"></view>
+                                                </view>
+                                            </view>
+                                            <view class="userw">
+                                                <view class="avatar">
+                                                    <view class="avatarw">
+                                                        <image class="img" src="{{item.video_article.author.avatar_url}}"></image>
+                                                    </view>
+                                                    <view class="n">{{item.video_article.author.nickname}}</view>
+                                                </view>
+                                                <view class="view">
+                                                    <view class="i"></view>{{item.video_article.viewed_amount}}</view>
+                                            </view>
+                                        </view>
+                                    </navigator>
+                                </view>
+                                <view class="wf-item wf-type-9" wx:if="{{item.type=='9'}}">
+                                    <navigator class="wf-itemw" url="/pages/foodshow_content/foodshow_content?id={{item.works.id}}">
+                                        <view class="imgw" style="background-image:url({{item.works.img}});padding-top:{{100/item.wh_ratio}}%">
+                                            <view class="vicon" wx:if="{{item.works.is_video!='0'}}"></view>
+                                        </view>
+                                        <view class="infow">
+                                            <view class="title">{{item.works.content}}</view>
+                                            <view class="descw">
+                                                <view class="desc" wx:if="{{item.works.topic_info.topic_title}}">
+                                                    <view class="p"># {{item.works.topic_info.topic_title}}</view>
+                                                    <view class="bgc"></view>
+                                                </view>
+                                            </view>
+                                            <view class="userw">
+                                                <view class="avatar">
+                                                    <view class="avatarw">
+                                                        <image class="img" src="{{item.works.author.avatar_url}}"></image>
+                                                    </view>
+                                                    <view class="n">{{item.works.author.nickname}}</view>
+                                                </view>
+                                                <view class="view">{{item.works.time}}</view>
+                                            </view>
+                                        </view>
+                                    </navigator>
+                                </view>
+                            </block>
+                        </view>
+                        <view class="wf_right" id="wf_right">
+                            <block wx:for="{{wfdata_right}}" wx:key="key">
+                                <view class="wf-item wf-type-1" wx:if="{{item.type=='1'}}">
+                                    <navigator class="wf-itemw" url="/pages/content/content?id={{item.recipe.id}}">
+                                        <view class="imgw" style="background-image:url({{item.recipe.img}});padding-top:{{100/item.wh_ratio}}%">
+                                            <view class="vicon"></view>
+                                        </view>
+                                        <view class="infow">
+                                            <view class="title">{{item.recipe.title}}</view>
+                                            <view class="descw">
+                                                <view class="desc" wx:if="{{item.recipe.label[0].name||item.recipe.label[0].desc}}">
+                                                    <view class="p">{{item.recipe.label[0].name}} | {{item.recipe.label[0].desc}}</view>
+                                                    <view class="bgc"></view>
+                                                </view>
+                                            </view>
+                                            <view class="userw">
+                                                <view class="avatar">
+                                                    <view class="avatarw">
+                                                        <image class="img" src="{{item.recipe.author.avatar_url}}"></image>
+                                                    </view>
+                                                    <view class="n">{{item.recipe.author.nickname}}</view>
+                                                </view>
+                                                <view class="view">
+                                                    <view class="i"></view>{{item.recipe.viewed_amount}}</view>
+                                            </view>
+                                        </view>
+                                    </navigator>
+                                </view>
+                                <view class="wf-item wf-type-7" wx:if="{{item.type=='7'}}">
+                                    <navigator class="wf-itemw" url="/pages/content/content?id={{item.video_recipe.id}}">
+                                        <view class="imgw" style="background-image:url({{item.video_recipe.img}});padding-top:{{100/item.wh_ratio}}%">
+                                            <view class="vicon"></view>
+                                        </view>
+                                        <view class="infow">
+                                            <view class="title">{{item.video_recipe.title}}</view>
+                                            <view class="descw">
+                                                <view class="desc" wx:if="{{item.video_recipe.label[0].name||item.video_recipe.label[0].desc}}">
+                                                    <view class="p">{{item.video_recipe.label[0].name}} | {{item.video_recipe.label[0].desc}}</view>
+                                                    <view class="bgc"></view>
+                                                </view>
+                                            </view>
+                                            <view class="userw">
+                                                <view class="avatar">
+                                                    <view class="avatarw">
+                                                        <image class="img" src="{{item.video_recipe.author.avatar_url}}"></image>
+                                                    </view>
+                                                    <view class="n">{{item.video_recipe.author.nickname}}</view>
+                                                </view>
+                                                <view class="view">
+                                                    <view class="i"></view>{{item.video_recipe.viewed_amount}}</view>
+                                            </view>
+                                        </view>
+                                    </navigator>
+                                </view>
+                                <view class="wf-item wf-type-8" wx:if="{{item.type=='8'}}">
+                                    <navigator class="wf-itemw" url="/pages/article/article?id={{item.video_article.id}}">
+                                        <view class="imgw" style="background-image:url({{item.video_article.img}});padding-top:{{100/item.wh_ratio}}%">
+                                            <view class="vicon"></view>
+                                        </view>
+                                        <view class="infow">
+                                            <view class="title">{{item.video_article.title}}</view>
+                                            <view class="descw">
+                                                <view class="desc" wx:if="{{item.video_article.label[0].name||item.video_article.label[0].desc}}">
+                                                    <view class="p">{{item.video_article.label[0].name}} | {{item.video_article.label[0].desc}}</view>
+                                                    <view class="bgc"></view>
+                                                </view>
+                                            </view>
+                                            <view class="userw">
+                                                <view class="avatar">
+                                                    <view class="avatarw">
+                                                        <image class="img" src="{{item.video_article.author.avatar_url}}"></image>
+                                                    </view>
+                                                    <view class="n">{{item.video_article.author.nickname}}</view>
+                                                </view>
+                                                <view class="view">
+                                                    <view class="i"></view>{{item.video_article.viewed_amount}}</view>
+                                            </view>
+                                        </view>
+                                    </navigator>
+                                </view>
+                                <view class="wf-item wf-type-9" wx:if="{{item.type=='9'}}">
+                                    <navigator class="wf-itemw" url="/pages/foodshow_content/foodshow_content?id={{item.works.id}}">
+                                        <view class="imgw" style="background-image:url({{item.works.img}});padding-top:{{100/item.wh_ratio}}%">
+                                            <view class="vicon" wx:if="{{item.works.is_video!='0'}}"></view>
+                                        </view>
+                                        <view class="infow">
+                                            <view class="title">{{item.works.content}}</view>
+                                            <view class="descw">
+                                                <view class="desc" wx:if="{{item.works.topic_info.topic_title}}">
+                                                    <view class="p"># {{item.works.topic_info.topic_title}}</view>
+                                                    <view class="bgc"></view>
+                                                </view>
+                                            </view>
+                                            <view class="userw">
+                                                <view class="avatar">
+                                                    <view class="avatarw">
+                                                        <image class="img" src="{{item.works.author.avatar_url}}"></image>
+                                                    </view>
+                                                    <view class="n">{{item.works.author.nickname}}</view>
+                                                </view>
+                                                <view class="view">{{item.works.time}}</view>
+                                            </view>
+                                        </view>
+                                    </navigator>
+                                </view>
+                            </block>
+                        </view>
+                    </view>
+                </scroll-view>
+            </swiper-item>
+        </swiper>
+    </view>
+    <loading hidden="{{requeseDone||requeseFail||noData}}">
+ 加载中...
+</loading>
+    <view class="bottomline" wx:if="{{bottomline}}">- 这就是我的底线了 -</view>
+    <view class="toastw" wx:if="{{showToast}}">
+        <view class="toast">
+            <rich-text nodes="{{toastTitle}}"></rich-text>
+        </view>
+    </view>
+</view>
+<view class="tabbarw" style="padding-bottom:{{barHeight==88?'32px':'0px'}}">
+    <view class="tabbar" style="padding-bottom:{{barHeight==88?'32px':'0px'}}">
+        <navigator class="item" hoverClass="none" openType="redirect" url="/pages/index/index">
+            <image src="/images/i1.png"></image>
+            <text>推荐</text>
+        </navigator>
+        <navigator appId="wx93d17942795dec0e" class="item" hoverClass="none" target="miniProgram">
+            <image src="/images/i8.png"></image>
+            <text>好物</text>
+        </navigator>
+        <navigator class="item" hoverClass="none" openType="redirect" url="/pages/whattoeat/whattoeat_xcc">
+            <image src="/images/i7.png"></image>
+            <text>吃什么</text>
+        </navigator>
+        <navigator class="item current" hoverClass="none" openType="redirect" url="/pages/foodshow/foodshow">
+            <image src="/images/i2_fill.png"></image>
+            <text>食秀</text>
+        </navigator>
+        <navigator class="item" hoverClass="none" openType="redirect" url="/pages/mine/mine">
+            <image src="/images/i4.png"></image>
+            <text>我的</text>
+        </navigator>
+    </view>
+</view>

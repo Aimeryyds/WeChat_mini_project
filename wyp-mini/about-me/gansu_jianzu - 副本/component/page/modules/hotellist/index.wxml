@@ -1,0 +1,43 @@
+<view class="zan-panel zan-panel__no-margin-top zan-panel__no-border">
+    <view bindtap="gotoDetail" class="a-hotel" data-id="{{item.id}}" wx:if="{{module.data.length>0}}" wx:for="{{module.data}}" wx:key="{{index}}">
+        <image class="a-hotle_icon" mode="aspectFill" src="{{item.imgUrl}}" wx:if="{{item.imgUrl}}"></image>
+        <image class="a-hotle_icon" src="http://imgcdnali.wfenxiao.com.cn/xcx/c/hotel/hotel_default.png" wx:else></image>
+        <view class="a-hotle_content">
+            <view class="zan-ellipsis" style="font-size:26rpx">{{item.brandName}}-{{item.storeName}}</view>
+            <view class="hotel_middle">
+                <text class="zan-ellipsis">距您{{formatdistance.format(item.distance)}} | {{item.areaName}}</text>
+                <view class="hotel_price-content" style="width:290rpx;display:flex; flex-direction: row-reverse" wx:if="{{item.price>0}}">
+                    <text style="font-size: 22rpx;color: #1A1616;margin-left:4rpx;margin-top:6rpx">起</text>
+                    <wxc-price _pid="{{_pid}}" class="hotel_price" icon="sub">{{item.price}}</wxc-price>
+                </view>
+                <view style="width:130rpx;display:flex; flex-direction: row-reverse" wx:else>
+                    <text style="font-size: 22rpx;color: #1A1616;margin-left:4rpx;margin-top:6rpx">暂无报价</text>
+                </view>
+            </view>
+            <view>
+                <text class="hotel_score" wx:if="{{item.evaluateScore>=0}}">{{item.evaluateScore}}分</text>
+                <text class="hotel_score" wx:else>暂无评分</text>
+                <text class="hotel_evaluate">{{item.commentNum}}评价</text>
+            </view>
+        </view>
+    </view>
+    <view bindtap="makedataSource" class="view-more" data-options="{{module.options}}" data-type="store" wx:if="{{module.data.length>0}}">
+        <text>查看更多</text>
+        <image class="view-more--img" src="http://imgcdnali.wfenxiao.com.cn/xcx/c/icons/arrow-bottom-red.png"></image>
+    </view>
+    <view class="hotels-error" wx:if="{{!module.data||module.data.length==0}}">{{'当前位置暂无酒店'}}</view>
+</view>
+<wxs module="formatdistance">
+function format(distance) {
+    var distanceString = '';
+    if (distance >= 1000) {
+        distanceString = (distance / 1000).toFixed(2) + 'km'
+    } else {
+        distanceString = distance + 'm'
+    };
+    return (distanceString)
+};
+module.exports = ({
+    format: format,
+});
+</wxs>

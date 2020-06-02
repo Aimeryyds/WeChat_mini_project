@@ -1,0 +1,42 @@
+<template name="card$68f19830">
+    <view bindtap="handleProxy" class="_div data-v-1324d440 inner {{type}}" data-comkey="{{$k}}" data-eventid="{{'7'}}">
+        <image class="_image data-v-1324d440 slide-image" src="{{item.origin_img_urls[0]}}"></image>
+        <view class="_div data-v-1324d440 bg"></view>
+        <view class="_div data-v-1324d440 content">
+            <view class="_div data-v-1324d440 date">
+                <label class="_span data-v-1324d440 day">{{item.day}}</label>
+                <label class="_span data-v-1324d440 month">{{item.month}}</label>
+                <label class="_span data-v-1324d440">.</label>
+                <label class="_span data-v-1324d440 year">{{item.year}}</label>
+            </view>
+            <view class="_div data-v-1324d440 english">{{item.content}}</view>
+            <view class="_div data-v-1324d440 translation">{{item.translation}}</view>
+            <view class="_div data-v-1324d440 author">— {{item.author}}</view>
+        </view>
+        <view catchtap="handleProxy" class="_div data-v-1324d440 tools" data-comkey="{{$k}}" data-eventid="{{'2'}}">
+            <image catchtap="handleProxy" class="_img data-v-1324d440 tool-share-btn" data-comkey="{{$k}}" data-eventid="{{'0'}}" src="/static/img/share.png"></image>
+            <form bindsubmit="handleProxy" class="_form data-v-1324d440" data-comkey="{{$k}}" data-eventid="{{'1'}}" reportSubmit="{{true}}">
+                <button class="_button data-v-1324d440" formType="submit" hoverClass="hover">
+                    <image class="_img data-v-1324d440 tool-record-btn" src="/static/img/record.png"></image>
+                </button>
+            </form>
+            <label class="_span data-v-1324d440">{{item.join_num}}</label>
+        </view>
+        <view catchtap="handleProxy" catchtouchmove="handleProxy" class="_div data-v-1324d440 share-modal" data-comkey="{{$k}}" data-eventid="{{'6'}}" wx:if="{{isShowShareModal}}">
+            <view class="_div data-v-1324d440 modal-inner {'show':isShowShareModal}">
+                <view class="_div data-v-1324d440 header">— 分享 —</view>
+                <view class="_div data-v-1324d440 body">
+                    <button bindtap="handleProxy" class="_button data-v-1324d440 share share-friend" data-comkey="{{$k}}" data-eventid="{{'3'}}" openType="share">
+                        <image class="_img data-v-1324d440" src="/static/img/share-friend.png"></image>
+                        <view class="_div data-v-1324d440">分享好友</view>
+                    </button>
+                    <view bindtap="handleProxy" class="_div data-v-1324d440  share share-circle" data-comkey="{{$k}}" data-eventid="{{'4'}}">
+                        <image class="_img data-v-1324d440" src="/static/img/share-circle.png"></image>
+                        <view class="_div data-v-1324d440">分享海报</view>
+                    </view>
+                </view>
+                <view bindtap="handleProxy" class="_div data-v-1324d440 footer" data-comkey="{{$k}}" data-eventid="{{'5'}}"> 取消</view>
+            </view>
+        </view>
+    </view>
+</template>

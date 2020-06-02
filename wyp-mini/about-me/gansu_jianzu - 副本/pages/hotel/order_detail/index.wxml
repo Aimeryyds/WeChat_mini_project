@@ -1,0 +1,61 @@
+<import src="/dist/toptips/index.wxml"></import>
+<import src="/dist/toast/index.wxml"></import>
+<template is="zan-toast" data="{{zanToast:zanToast}}"></template>
+<template is="zan-toptips" data="{{zanTopTips:zanTopTips}}"></template>
+<view class="container">
+    <view class="order-status" style="line-height:{{orderDetail.status===60?'44rpx':'80rpx'}}">
+    {{orderDetail.orderStatusName}} <text style="font-size:24rpx;color: #F22222" wx:if="{{orderDetail.status===10}}">（还剩{{minute}}分{{seconds}}秒）</text>
+        <view style="font-size:24rpx;color: #808080" wx:if="{{orderDetail.status===60}}">{{orderDetail.cancelMsg}}</view>
+    </view>
+    <navigator class="hotel-detail" hoverClass="none" url="/pages/shop/products/products?storeid={{orderDetail.store.id}}">
+        <view class="hotel-detail-left">
+            <image src="http://imgcdnali.wfenxiao.com.cn/xcx/c/hotel/hotel.png"></image>
+            <view style="flex:1">
+                <view class="hotel-name">{{orderDetail.store.brandName}}-{{orderDetail.store.storeName}}</view>
+                <view class="hotel-address">{{orderDetail.store.provinceName}}{{orderDetail.store.cityName}}{{orderDetail.store.areaName}}{{orderDetail.store.detailAddress}}</view>
+            </view>
+        </view>
+        <view class="arrow-box">
+            <image src="http://imgcdnali.wfenxiao.com.cn/xcx/c/order/arrow-right.png" style="width:16rpx; height:24rpx;"></image>
+        </view>
+    </navigator>
+    <view class="order-detail" style="height:{{orderDetail.couponFee?'392rpx':'336rpx'}}">
+        <view class="order-detail-item">
+            <view>{{orderDetail.roomName}}</view>
+            <view>共{{orderDetail.bookDays}}晚</view>
+        </view>
+        <view class="order-detail-item">
+            <view>房间价格</view>
+            <view>￥{{orderDetail.roomPrice}}</view>
+        </view>
+        <view class="order-detail-item">
+            <view>抵离时间</view>
+            <view>{{orderDetail.bookInTime}} ~ {{orderDetail.bookOutTime}}</view>
+        </view>
+        <view class="order-detail-item">
+            <view>入住人</view>
+            <view>{{orderDetail.custNames}}</view>
+        </view>
+        <view class="order-detail-item">
+            <view>应付金额</view>
+            <view>￥{{orderDetail.total}}</view>
+        </view>
+        <view class="order-detail-item" wx:if="{{orderDetail.couponFee}}">
+            <view>代金券</view>
+            <view>￥{{orderDetail.couponFee}}</view>
+        </view>
+        <view class="order-detail-item">
+            <view>实付金额</view>
+            <view>{{orderDetail.status===10?'尚未支付':'￥'+orderDetail.total}}</view>
+        </view>
+    </view>
+    <view class="order-No">
+        <view>订单编号： {{orderDetail.orderNo}}</view>
+        <view>下单时间： {{orderDetail.createdTime}}</view>
+    </view>
+    <view class="order-btns">
+        <button catchtap="toEvaluate" class="zan-btn zan-btn--small order-actions-btn" wx:if="{{evaluate}}">去评价</button>
+        <button catchtap="toCancelOrder" class="zan-btn zan-btn--small order-actions-btn" wx:if="{{cancel}}">取消订单</button>
+        <button catchtap="toPayOrder" class="zan-btn zan-btn--small order-actions-btn" wx:if="{{pay}}">去支付</button>
+    </view>
+</view>

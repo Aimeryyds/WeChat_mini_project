@@ -1,0 +1,9 @@
+<view class="zan-panel zan-panel__no-margin-top zan-panel__no-border">
+    <view bindtap="makedataSource" class="zan-panel--header-title" data-options="{{module.options}}" data-type="miaosha">
+        <view style="flex:1">{{'秒杀'}}</view>
+        <view class="zan-panel--header-subtitle" wx:if="{{module.total>module.options.showCount}}"> 查看全部{{module.total}}个> </view>
+    </view>
+    <view wx:for="{{module.data}}" wx:key="index">
+        <miao-item data="{{item}}"></miao-item>
+    </view>
+</view>

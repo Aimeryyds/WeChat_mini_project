@@ -1,0 +1,48 @@
+<template name="followList-tpl">
+    <view class="anchor-info-list">
+        <view class="anchor-info-item" wx:for="{{followList}}" wx:key="index">
+            <view class="anchor-info-item__avatar">
+                <image class="anchor-info-item__avatar__img" src="{{item.avatar||item.snapshot}}"></image>
+                <view class="anchor-info-item__avatar__liveicon" wx:if="{{item.status}}">
+                    <image src="../../images/ico_live.gif"></image>
+                </view>
+            </view>
+            <view bindtap="setGotoUrlDisable" class="anchor-info-item__info">
+                <navigator class="anchor-info__wrapper" hoverClass="none" openType="navigate" url="/pages/room/room?sid={{item.sid}}&ssid={{item.ssid}}&uid={{item.uid}}&snapshot={{item.snapshot||item.img}}">
+                    <view>
+                        <view class="anchor-info__nickname">{{item.nick}}</view>
+                        <view class="anchor-info-fans__wrapper">粉丝
+                                <text class="anchor-info-fans__amount">{{item.fans}}</text>人</view>
+                    </view>
+                </navigator>
+                <view class="broadcast-btn">
+                    <image catchtap="broadcastBtn" data-index="{{index}}" data-notify="{{item.notify}}" data-sid="{{item.sid}}" data-ssid="{{item.ssid}}" data-subuid="{{item.uid}}" src="../../pages/follow/images/{{item.notify}}-btn.png" wx:if="{{item.notify==1||item.notify==0}}"></image>
+                </view>
+                <form bindsubmit="submitFollowForm" data-attention="{{item.state?'1':'0'}}" data-index="{{index}}" data-subuid="{{item.uid}}" reportSubmit="true">
+                    <button catchtap="attentionClick" class="follow-button {{item.state==0?'unfollow-button':''}}" formType="submit" hoverClass="none">
+                        <image class="follow-btn__img" src="../../pages/follow/images/follow_icon.png" wx:if="{{item.state==0}}"></image> {{item.state==0?'关注':'已关注'}}
+                        </button>
+                </form>
+            </view>
+        </view>
+    </view>
+</template>
+<template name="searchAnchor-tpl">
+    <view class="anchor-info-list">
+        <navigator bindtap="setGotoUrlDisable" class="anchor-info-item" hoverClass="none" openType="navigate" url="/pages/room/room?sid={{item.entLiveSid}}&ssid={{item.entLiveSsid}}&uid={{item.uid}}&snapshot={{item.snapshot||item.posterUrl||item.img}}" wx:for="{{list}}" wx:key="index">
+            <view class="anchor-info-item__avatar">
+                <image class="anchor-info-item__avatar__img" src="{{item.avatar||item.posterUrl||'/images/default-anchor.png'}}"></image>
+                <image class="anchor-info-item__avatar__liveicon" src="../../images/live_icon.png" wx:if="{{item.liveOn}}"></image>
+            </view>
+            <view class="anchor-info-item__info">
+                <view class="anchor-info__wrapper">
+                    <view>
+                        <view class="anchor-info__nickname">{{item.name}}</view>
+                        <view class="anchor-info-fans__wrapper">粉丝
+                                <text class="anchor-info-fans__amount">{{item.subscribe||item.users}}</text>人</view>
+                    </view>
+                </view>
+            </view>
+        </navigator>
+    </view>
+</template>

@@ -1,0 +1,230 @@
+.filter {
+    top: 0;
+    position: sticky;
+    z-index: 1;
+}
+
+.filter.fixed {
+    position: fixed;
+    top: 0;
+    width: 100%;
+    z-index: 1;
+}
+
+.filter.fixed::before {
+    content: "";
+    display: block;
+    position: fixed;
+    width: 100%;
+    height: 100%;
+    background: rgba(0,0,0,0.2);
+    z-index: 0;
+}
+
+.filter .ul {
+    display: -webkit-box;
+    display: -webkit-flex;
+    display: -ms-flexbox;
+    display: flex;
+    padding: 25rpx 0;
+    font-size: 26rpx;
+    border-bottom: 1rpx solid #e5e5e5;
+    background: #fff;
+    position: relative;
+    z-index: 1;
+}
+
+.filter .ul .li {
+    -webkit-box-flex: 1;
+    flex: 1;
+    text-align: center;
+}
+
+.filter .ul .li:after {
+    content: " ";
+    display: inline-block;
+    vertical-align: middle;
+    background: url("https://assets.mgzf.com/appimg/dc3d5a3b499474ee94bce72347c56c39.svg");
+    width: 16rpx;
+    height: 10rpx;
+    background-size: 100%;
+    background-repeat: no-repeat;
+    margin-left: 10rpx;
+}
+
+.filter .ul .li.selected {
+    color: #f65000;
+}
+
+.filter .ul .li.selected:after {
+    background-image: url("https://assets.mgzf.com/appimg/36385b7da3252d0d7f025c9bbe5ddab0.svg");
+}
+
+.filter .ul .li.active:after {
+    transform: rotate(-180deg);
+}
+
+.filter .ul .li+.li {
+    border-left: 1px solid #ccc;
+}
+
+.filter .dl {
+    position: absolute;
+    width: 100%;
+    background: #fff;
+    max-height: 800rpx;
+    overflow: auto;
+    z-index: 1;
+}
+
+.filter .dl .dd {
+    border-bottom: 1rpx solid #e5e5e5;
+    line-height: 3;
+    text-align: center;
+    font-size: 26rpx;
+}
+
+.filter .dl .dd.selected {
+    color: #f65000;
+}
+
+.card-room {
+    position: relative;
+    width: 670rpx;
+    padding: 38rpx 0 30rpx;
+}
+
+.card-room-loading {
+    display: block;
+    height: 230rpx;
+}
+
+.card-room-content {
+    position: relative;
+    display: -webkit-box;
+    display: -webkit-flex;
+    display: -ms-flexbox;
+    display: flex;
+}
+
+.card-room-desc {
+    margin-left: 30rpx;
+    width: 416rpx;
+}
+
+.card-room .card-img {
+    position: relative;
+    width: 224rpx;
+    height: 180rpx;
+}
+
+.card-room .card-row {
+    margin-bottom: 10rpx;
+}
+
+.card-room .card-row:last-child {
+    margin-bottom: 0;
+}
+
+.card-room .mgic-location {
+    font-size: 22rpx;
+}
+
+.card-room .card-title {
+    font-size: 30rpx;
+    color: #000;
+}
+
+.card-room .card-subtitle {
+    font-size: 24rpx;
+    color: #999;
+}
+
+.card-room .card-tag {
+    margin-right: 10rpx;
+}
+
+.card-room .card-pirce {
+    font-size: 32rpx;
+    color: #FF7000;
+}
+
+.card-room .card-unit {
+    font-size: 24rpx;
+    color: #FF7000;
+}
+
+.card-room .tags {
+    font-size: 20rpx;
+}
+
+.card-room .tags text {
+    padding: 2rpx;
+    display: inline-block!important;
+}
+
+.card-room .tags .label-type2 {
+    background-color: #f6e9fe;
+    color: #a323f2;
+}
+
+.card-room .tags .label-type3 {
+    background-color: #e5f1ff;
+    color: #007aff;
+}
+
+.card-room .tags .label-type4 {
+    background-color: #e7f5fe;
+    color: #189bfa;
+}
+
+.card-room .tags .label-payment-monthly {
+    background-color: #ffeacc;
+    color: #ff7200;
+}
+
+.card-room .tags .label-type-xyz {
+    background-color: #E3F8F4;
+    color: #21C4A8;
+}
+
+.top {
+    display: -webkit-box;
+    display: -webkit-flex;
+    display: -ms-flexbox;
+    display: flex;
+    -webkit-box-align: center;
+    -ms-flex-align: center;
+    align-items: center;
+    padding: 40rpx;
+    font-size: 36rpx;
+}
+
+.top image {
+    width: 110rpx;
+    height: 110rpx;
+    border-radius: 50%;
+    margin-right: 30rpx;
+}
+
+.padding {
+    height: 15rpx;
+    background: #f8f8f8;
+}
+
+.room-list-content {
+    padding-left: 30rpx;
+    padding-right: 30rpx;
+}
+
+.empty {
+    font-size: 24rpx;
+    margin-top: 130rpx;
+    text-align: center;
+    padding-bottom: 50rpx;
+}
+
+.empty image {
+    width: 276rpx;
+    height: 276rpx;
+}

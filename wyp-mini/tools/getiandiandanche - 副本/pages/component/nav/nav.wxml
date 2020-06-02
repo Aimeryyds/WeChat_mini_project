@@ -1,0 +1,11 @@
+<view class="topbar">
+    <view class="status" style="height:{{statusHeight}}px"></view>
+    <view class="navbar" style="height:{{navHeight}}px">
+        <view bindtap="backClick" class="navbar_back">
+            <slot name="left"></slot>
+        </view>
+        <view class="navbar_title" style="height:{{navHeight}}px">
+            <slot class="title" name="center"></slot>
+        </view>
+    </view>
+</view>

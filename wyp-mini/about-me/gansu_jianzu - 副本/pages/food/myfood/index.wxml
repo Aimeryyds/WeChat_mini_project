@@ -1,0 +1,21 @@
+<import src="../../templates/orders/tabbar.wxml"></import>
+<import src="/dist/loadmore/index.wxml"></import>
+<import src="/dist/toptips/index.wxml"></import>
+<import src="/dist/toast/index.wxml"></import>
+<template is="zan-toast" data="{{zanToast:zanToast}}"></template>
+<template is="zan-toptips" data="{{zanTopTips:zanTopTips}}"></template>
+<view class="container orders-container">
+    <template is="orders-tabbar" data="{{statusType:statusType,currentType:currentType}}"></template>
+    <view class="no-order" hidden="{{orderList&&orderList.length>0||loading?true:false}}">
+        <image class="no-order-img" src="http://imgcdnali.wfenxiao.com.cn/xcx/c/icons/no_order.png"></image>
+        <view class="text">暂无订单</view>
+    </view>
+    <scroll-view enableBackToTop bindscrolltolower="lower" class="order-list" hidden="{{!orderList||loading?true:false}}" scrollY="true" style="margin-top:110rpx; height:calc(100vh - 110rpx)">
+        <view class="food_order_item" wx:for="{{orderList}}" wx:key="{{index}}">
+            <food_order bind:orderpaied="onOrderPaid" bind:timeover="onTimeOver" index="{{index}}" item="{{item}}"></food_order>
+        </view>
+        <view id="loadmore">
+            <template is="zan-loadmore" data="{{loading:loadmore}}"></template>
+        </view>
+    </scroll-view>
+</view>

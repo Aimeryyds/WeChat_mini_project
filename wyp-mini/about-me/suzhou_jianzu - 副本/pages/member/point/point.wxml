@@ -1,0 +1,28 @@
+<view class="view-head">
+    <view class="view-moneyinfo">
+        <text class="text-money-prefix">账户积分</text>
+        <text class="text-money">{{pay_point}}</text>
+        <text class="text-money" style="margin-bottom:6rpx;margin-left:2rpx;"></text>
+    </view>
+</view>
+<view class="account-item" wx:for="{{accounts}}">
+    <view class="info-item">
+        <view class="info-left">
+            <view style="position: relative;">
+                <view style="position: absolute;">
+                    <view class="lline"></view>
+                </view>
+                <view class="yuan" style="position:relative;top:90rpx;left:-8rpx" wx:if="{{index==0}}"></view>
+                <view class="yuan1" style="position:relative;top:90rpx;left:-8rpx" wx:else></view>
+            </view>
+        </view>
+        <view class="info-right">
+            <view class="info-first">
+                <text>积分:</text>
+                <text style="color:red">{{item.pay_points}}</text>
+            </view>
+            <text>{{item.change_time}}</text>
+            <text>{{item.desc}}</text>
+        </view>
+    </view>
+</view>

@@ -1,0 +1,15 @@
+<template name="top-ad-model">
+    <view class="top-ad-title">
+        <text>推荐小程序</text>
+    </view>
+    <view class="top-ad-list">
+        <view bindtap="onAdClick" class="top-ad-item" data-appid="{{item.appletId}}" data-forward-type="{{item.forwardType}}" data-link="{{item.link}}" data-name="{{item.name}}" wx:for="{{topAppletAdArticles}}" wx:key="index">
+            <view class="icon">
+                <image src="{{item.image}}"></image>
+            </view>
+            <view class="name">
+                <text>{{item.name}}</text>
+            </view>
+        </view>
+    </view>
+</template>

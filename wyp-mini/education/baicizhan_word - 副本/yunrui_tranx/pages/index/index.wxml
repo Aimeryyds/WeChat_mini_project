@@ -1,0 +1,90 @@
+<view class="container">
+    <view wx:if="{{!showContent}}">
+        <image class="bgimg" mode="widthFix" src="{{pic}}"></image>
+        <view bindtap="contact" class="copy text-center">{{copycontent}}</view>
+    </view>
+    <view style="position: relative;" wx:else>
+        <view class="swiperlst">
+            <swiper circular autoplay="{{true}}" class="swiper" indicatorActiveColor="#ffffff" indicatorColor="rgba(255, 255, 255, .3)" indicatorDots="{{true}}" interval="{{2000}}" wx:if="{{content.swiper&&content.swiper.length>0}}">
+                <swiper-item wx:if="{{item.src}}" wx:for="{{content.swiper}}" wx:key="{{index}}">
+                    <view bindtap="urlTo" data-type="{{item.url_type?item.url_type:'navigate'}}" data-url="{{item.url}}">
+                        <image class="slide-image" data-id="{{index}}" mode="widthFix" src="{{item.src}}" style="width:100%;display: block; "></image>
+                    </view>
+                </swiper-item>
+            </swiper>
+            <view class="stars">
+                <form bindsubmit="toGetStar" reportSubmit="true">
+                    <button class="form_btn" formType="submit">Submit</button>
+                    <image class="stars_icon" mode="widthFix" src="../../resource/images/stars.png"></image>
+                    <text class="stars_nums">{{score_after}}</text>
+                </form>
+            </view>
+            <view class="float_ad {{count%2==0?'shake':''}}" style="right:{{float_ad_right}}rpx;bottom:{{float_ad_bottom}}rpx;" wx:if="{{float_ad_switch=='1'}}">
+                <form bindsubmit="toWebView" reportSubmit="true">
+                    <button class="web_view_btn" formType="submit">Submit</button>
+                    <image mode="widthFix" src="{{float_ad_img}}"></image>
+                </form>
+            </view>
+            <ad unitId="{{ad_id}}" wx:if="{{ad_id}}"></ad>
+            <view class="tran_content">
+                <text bindtap="changeLang" class="languages">{{lang}}</text>
+                <view class="langlist" wx:if="{{showlanglist}}">
+                    <view bindtap="sureLang" class="lang_one" data-idx="{{index}}" wx:for="{{langlist}}" wx:key="{{index}}">
+            {{item}}
+          </view>
+                </view>
+                <text class="line"></text>
+                <input bindconfirm="getTranContent" bindinput="showDelete" class="tran_val" placeholder="请输入需翻译的句子" type="text" value="{{tran_val}}"></input>
+                <image bindtap="clear" class="delete" mode="widthFix" src="../../resource/images/delete.png" wx:if="{{show_delete}}"></image>
+            </view>
+        </view>
+        <view class="body" id="body" style="top:{{ad_id?'560':'450'}}rpx">
+            <view class="translist">
+                <block wx:for="{{list}}" wx:key="{{index}}">
+                    <view class="every_one" wx:if="{{item.type=='tran_content'}}">
+                        <image class="icon" mode="widthFix" src="../../resource/images/icon01.png"></image>
+                        <view class="every_content">
+                            <view class="arrow-left1"></view>
+                            <view class="org_text">{{item.org_text}}</view>
+                            <view class="line2"></view>
+                            <view class="trans_text">{{item.trans_text}}</view>
+                            <form bindsubmit="playVoice" data-text="{{item.trans_text}}" reportSubmit="true">
+                                <button class="form_speech" formType="submit">Submit</button>
+                                <image class="speech" mode="widthFix" src="../../resource/images/icon05.png"></image>
+                            </form>
+                        </view>
+                    </view>
+                    <view class="adlist" wx:else>
+                        <form bindsubmit="toDetail" data-id="{{item.id}}" reportSubmit="true">
+                            <button class="ad_btn" formType="submit">Submit</button>
+                            <view style="width: 100%;overflow: hidden;">
+                                <image mode="widthFix" src="{{item.img}}"></image>
+                            </view>
+                            <view class="ad-content">
+                                <text class="ad-type">跟读</text>
+                                <text>{{item.title}}</text>
+                            </view>
+                        </form>
+                    </view>
+                </block>
+            </view>
+        </view>
+        <view class="tape_loading" wx:if="{{loading}}">
+            <view wx:if="{{!cancel}}">松开结束 上划取消</view>
+            <view class="cancel" wx:else>松开手指以取消</view>
+            <view class="lang">请说中文</view>
+            <image mode="widthFix" src="../../resource/images/loading.gif"></image>
+        </view>
+        <view bind:longpress="tape" bind:touchend="stopRecord" bind:touchmove="cancelTape" bind:touchstart="handletouchtart" class="tape {{loading?'on':''}}">
+            <text class="tape_text">点击这</text>
+            <image class="icon2" mode="widthFix" src="../../resource/images/icon02.png"></image>
+            <text class="tape_text">说中文</text>
+            <image catchtap="help" class="icon3" mode="widthFix" src="../../resource/images/icon03.png" wx:if="{{!loading}}"></image>
+        </view>
+        <image class="star_icon" mode="widthFix" src="../../resource/images/icon10.png" style="width: 64rpx;" wx:if="{{score_add>=1}}"></image>
+        <view class="add_star" wx:if="{{score_add>=1}}">
+            <text>+{{score_add}}</text>
+        </view>
+    </view>
+    <button catchgetuserinfo="bindGetUserInfo" class="getInfo {{islogin?'hide':''}}" openType="getUserInfo" wx:if="{{canIUse}}">授权登录</button>
+</view>

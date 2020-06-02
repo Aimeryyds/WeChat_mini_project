@@ -1,0 +1,76 @@
+<view style="width:100%;overflow:hidden;">
+    <view class="goods">
+        <image class="img" src="{{data.goods.thumb}}"></image>
+        <view class="g_wrap">
+            <text style="font-size: 34rpx;line-height: 60rpx;height: 112rpx;font-weight: bolder;overflow: hidden;text-overflow:ellipsis;white-space: nowrap;">{{data.goods.title}}</text>
+            <view style="display: flex;flex-direction: row;justify-content: space-between;">
+                <view>{{data.goods.groupnum}}人团：<text style="color:#F27C79;">¥ {{data.goods.groupsprice}}/</text>1件</view>
+                <view>已有<text>{{data.goods.fightnum}}</text>人参团</view>
+            </view>
+        </view>
+    </view>
+    <view style="padding:24rpx 16rpx;font-size: 26rpx;">支付开团并邀请1人参加,人数不足自动退款,详见下方拼团玩法</view>
+    <view style="padding: 0 20rpx;display: flex;flex-direction: row;justify-content: space-between;text-align: center;font-size: 28rpx;margin-bottom: 60rpx;width:700rpx;">
+        <view bindtap="tofight" class="item white" data-id="{{data.goods.id}}">我要参团</view>
+        <view bindtap="toopen" class="item red" data-id="{{data.goods.id}}">我要开团</view>
+    </view>
+    <view class="pintuan">
+        <view class="store">
+            <view class="row1">
+                <view class="fangzi"></view>
+                <view>拼团玩法</view>
+            </view>
+            <view class="row1">
+                <view style="text-align: center;line-height: 30rpx;font-size: 24rpx;margin-right: 20rpx;">查看详情</view>
+                <image src="../../images/rightArrow.png" style="height: 30rpx;width: 20rpx;"></image>
+            </view>
+        </view>
+        <view class="foot">
+            <view class="p_item">
+                <view class="num"> 1 </view>
+                <text>选择
+			心仪商品</text>
+            </view>
+            <view class="p_item">
+                <view class="num"> 2 </view>
+                <text>支付开团
+			或参团</text>
+            </view>
+            <view class="p_item">
+                <view class="num"> 3 </view>
+                <text>邀请好友
+			参团支付</text>
+            </view>
+            <view class="p_item">
+                <view class="num"> 4 </view>
+                <text>达到人数
+			团购成功</text>
+            </view>
+        </view>
+    </view>
+    <view style="display: flex;flex-direction: row;justify-content: center;align-items: center;height: 80rpx;">
+        <view style="height: 2rpx;background-color: #ccc;margin: 60rpx 0 30rpx;position: relative;text-align: center;width: 50%;">
+            <text style="position: absolute;top:-20rpx;left: 30%;font-size: 28rpx;background-color: #fff;z-index: 3;line-height: 40rpx;padding:0 20rpx;letter-spacing: 4rpx;">更多好团
+		</text>
+        </view>
+    </view>
+    <view class="container-class">
+        <view class="container-goods">
+            <view class="main-goods">
+                <view bindtap="todetail" class="single-goods" data-id="{{item.id}}" style="width: 45%;box-sizing: border-box;" wx:for="{{data.teams}}">
+                    <image class="avatar" src="{{item.thumb}}" style="width:100%;height: 345rpx;"></image>
+                    <view style="display: flex;flex-direction: column;border-top: none;overflow: hidden;">
+                        <text class="title" style="height: 60rpx;width:320rpx;overflow: hidden;text-overflow:ellipsis;white-space: nowrap;font-size: 30rpx;overflow: hidden;text-overflow:ellipsis;white-space: nowrap;display: block;">{{item.title}}</text>
+                        <view class="summary">
+                            <text class="price">￥{{item.singleprice}}元 <text style="font-size: 26rpx;text-decoration: line-through;width: 340rpx;">{{item.price}}
+							</text>
+                            </text>
+                            <text class="price">{{item.fightnum}}人参团</text>
+                        </view>
+                    </view>
+                </view>
+            </view>
+        </view>
+    </view>
+</view>
+<loading wx:if="{{loading}}"></loading>

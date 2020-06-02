@@ -1,0 +1,14 @@
+<view class="container">
+    <view class="oneType" wx:if="{{item.items}}" wx:for="{{list}}" wx:key="index">
+        <view style="margin-bottom: 16rpx;">
+            <text class="line"></text>{{item.name}}</view>
+        <view class="childlist">
+            <view catchtap="toSureGrade" class="child" data-idx="{{items.id}}" wx:for="{{item.items}}" wx:for-index="idx" wx:for-item="items">
+                <image class="ic1" src="{{items.img}}" wx:if="{{items.img}}"></image>
+                <image class="ic1" src="../../resource/images/ic1.png" wx:else></image>
+                <text class="grade_name">{{items.name}}</text>
+                <view class="cur_grade" wx:if="{{cur_idx==items.id}}">已选</view>
+            </view>
+        </view>
+    </view>
+</view>

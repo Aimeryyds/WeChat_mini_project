@@ -1,0 +1,21 @@
+<template name="fc2eca8e">
+    <view class="_div data-v-32751f44">
+        <view class="_div data-v-32751f44 sale-image" key="{{saleImage}}" wx:for="{{saleImages}}" wx:for-item="saleImage" wx:key="saleImage">
+            <image alt class="_img data-v-32751f44" mode="widthFix" src="{{saleImage}}"></image>
+        </view>
+        <view class="_div data-v-32751f44 {{['fill',isIpx?'fix-iphonex-margin':'']}}"></view>
+        <view class="_div data-v-32751f44 {{['button-group',isIpx?'fix-iphonex':'']}}" wx:if="{{isAndroid}}">
+            <view class="_div data-v-32751f44 price">
+                <label class="_span data-v-32751f44 rmb">¥</label>
+            {{price}}
+        </view>
+            <view class="_div data-v-32751f44 description flex-vhc">限时优惠</view>
+            <view class="_div data-v-32751f44 original-price">原价¥{{originalPrice}}</view>
+            <view bindtap="handleProxy" class="_div data-v-32751f44 join flex-vhc" data-comkey="{{$k}}" data-eventid="{{'1'}}" wx:if="{{isLogin}}">立即加入</view>
+            <button bindgetuserinfo="handleProxy" class="_button data-v-32751f44 join flex-vhc" data-comkey="{{$k}}" data-eventid="{{'0'}}" openType="getUserInfo" wx:else>立即加入</button>
+        </view>
+        <view bindtap="handleProxy" class="_div data-v-32751f44 {{['button-group','join-ios',isIpx?'fix-iphonex':'']}}" data-comkey="{{$k}}" data-eventid="{{'2'}}" wx:else>
+            <view class="_div data-v-32751f44">立即加入</view>
+        </view>
+    </view>
+</template>

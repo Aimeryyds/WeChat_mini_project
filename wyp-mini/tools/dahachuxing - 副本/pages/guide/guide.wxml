@@ -1,0 +1,12 @@
+<view style="height: 100%;display: flex;flex-direction: column;background-color: #fff;">
+    <view class="container">
+        <swiper autoplay="{{autoplay}}" circular="true" duration="{{duration}}" indicatorDots="true" interval="{{interval}}" nextMargin="60rpx" style="height: 120vw;width: 100vw;">
+            <swiper-item wx:for="{{imgUrls}}" wx:key="item.index">
+                <image class="slide-image" src="{{item}}"></image>
+            </swiper-item>
+        </swiper>
+    </view>
+    <view style="flex:1;display:flex;align-items: center;">
+        <button bindtap="toMap" class="guide-btn">立即体验</button>
+    </view>
+</view>

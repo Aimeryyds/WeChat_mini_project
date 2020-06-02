@@ -1,0 +1,132 @@
+<navigation-bar enable="{{enable}}" title=""></navigation-bar>
+<view class="container" style="padding-top:{{barHeight}}px">
+    <view bindtap="pageReload" class="cplist_nodata" wx:if="{{requeseFail}}">{{requeseFailTips}}</view>
+    <view class="wenzhangw">
+        <view class="wenzhang_title">{{wenzhangdata.title}}</view>
+        <view class="wenzhang_view" wx:if="{{wenzhangdata}}">
+      {{wenzhangdata.click_num}}浏览　{{wenzhangdata.create_time}}
+    </view>
+        <view class="wenzhang_itemw" wx:for="{{wenzhangdata.content}}" wx:key="key">
+            <view class="wenzhang_item" wx:if="{{item.type=='txt'}}">{{item.data}}</view>
+            <view class="wenzhang_item" wx:if="{{item.type=='img'}}">
+                <image class="img" src="{{item.data}}" style="width:100%;height:{{item.height/item.width*750}}rpx"></image>
+            </view>
+            <view class="wenzhang_item" wx:if="{{item.type=='txt_title'}}">
+                <view class="title">{{item.data}}</view>
+            </view>
+        </view>
+        <view bindtap="addXcc" class="addXccBtn" wx:if="{{wenzhangdata.title}}">收藏到我的小程序</view>
+        <cover-view class="addXccbox" wx:if="{{showAddXcc}}">
+            <cover-image src="{{addXccimg}}" style="width:100%;height:auto;position:absolute;left:0px;top:{{barHeight}}px"></cover-image>
+            <button bindtap="hideAddXcc" class="hideXccboxbtn">我知道了</button>
+        </cover-view>
+        <view class="wenzhang_bottomad" wx:if="{{wenzhangdata}}">
+            <ad adTheme="white" adType="video" unitId="adunit-2551a6c0095e454c"></ad>
+        </view>
+    </view>
+    <view class="tj_w" wx:if="{{wenzhangdata}}">
+        <view class="tj_titlew" wx:if="{{tjInfo}}">
+            <view class="tj_title">为你推荐</view>
+        </view>
+        <view wx:for="{{tjInfo}}" wx:for-index="fi_i" wx:key="key">
+            <view wx:if="{{fi_i==6}}">
+                <view class="feed_ad">
+                    <ad unitId="adunit-4af4f70c66c67424"></ad>
+                </view>
+            </view>
+            <view wx:if="{{fi_i==23}}">
+                <view class="feed_ad">
+                    <ad unitId="adunit-afa66724a0a19947"></ad>
+                </view>
+            </view>
+            <view wx:if="{{fi_i==43}}">
+                <view class="feed_ad">
+                    <ad unitId="adunit-43e3228a3dfc4bac"></ad>
+                </view>
+            </view>
+            <view wx:if="{{fi_i==63}}">
+                <view class="feed_ad">
+                    <ad unitId="adunit-c943def20849d578"></ad>
+                </view>
+            </view>
+            <view wx:if="{{fi_i==83}}">
+                <view class="feed_ad">
+                    <ad unitId="adunit-5a32ee28f667016b"></ad>
+                </view>
+            </view>
+            <view wx:if="{{fi_i==103}}">
+                <view class="feed_ad">
+                    <ad unitId="adunit-2991c1e626740292"></ad>
+                </view>
+            </view>
+            <view wx:if="{{item.img_show_type==1}}">
+                <navigator class="recipeitem" hoverClass="navigator-hover" url="/pages/wenzhang/wenzhang?id={{item.id}}" wx:if="{{item.images.length==1}}">
+                    <view class="recipeitemw">
+                        <view class="cpimgw" style="background:#f8f8f8 url({{item.images[0]}}) center no-repeat;background-size:cover;"></view>
+                        <view class="cpinfow">
+                            <view class="cpnamew">
+                                <view class="cpname">{{item.title}}</view>
+                            </view>
+                            <view class="viewdata">
+                                <image src="{{iconUrl2}}"></image>
+                                <text>{{item.click_num}}</text>
+                                <text>{{item.create_time}}</text>
+                            </view>
+                        </view>
+                    </view>
+                </navigator>
+                <navigator class="recipeitem_3pic" hoverClass="navigator-hover" url="/pages/wenzhang/wenzhang?id={{item.id}}" wx:else>
+                    <view class="cpinfoww_3pic">
+                        <view class="cpnamew">
+                            <view class="cpname">{{item.title}}</view>
+                        </view>
+                        <view class="recipeitemw_3pic">
+                            <view class="cpimgw_3pic">
+                                <view class="cpimgww_3pic" style="background:#f8f8f8 url({{item.images[0]}}) center no-repeat;background-size:cover;"></view>
+                                <view class="cpimgww_3pic center" style="background:#f8f8f8 url({{item.images[1]}}) center no-repeat;background-size:cover;"></view>
+                                <view class="cpimgww_3pic" style="background:#f8f8f8 url({{item.images[2]}}) center no-repeat;background-size:cover;"></view>
+                            </view>
+                        </view>
+                        <view class="cpinfow_3pic">
+                            <view class="viewdata_3pic">
+                                <image src="{{iconUrl2}}"></image>
+                                <text>{{item.click_num}}</text>
+                                <text>{{item.create_time}}</text>
+                            </view>
+                        </view>
+                    </view>
+                </navigator>
+            </view>
+            <view wx:elif="{{item.img_show_type==2}}">
+                <navigator class="recipeitem_big" hoverClass="navigator-hover" url="/pages/wenzhang/wenzhang?id={{item.id}}">
+                    <view class="recipeitemw_big">
+                        <view class="cpname">{{item.title}}</view>
+                        <view class="cpimgw_big" style="background:#f8f8f8 url({{item.images[0]}}) center no-repeat;background-size:cover;"></view>
+                        <view class="cpinfow_big">
+                            <view class="viewdata_big">
+                                <image src="{{iconUrl2}}"></image>
+                                <text>{{item.click_num}}</text>
+                                <text>{{item.create_time}}</text>
+                            </view>
+                        </view>
+                    </view>
+                </navigator>
+            </view>
+        </view>
+    </view>
+    <loading hidden="{{requeseDone||!hasNextPage||requeseFail||noData}}">
+   加载中...
+  </loading>
+    <view class="bottomline" wx:if="{{bottomline}}">- 这就是我的底线了 -</view>
+    <view class="share_bottom_w" wx:if="{{wenzhangdata}}">
+        <button bindtap="tapShareBtn" class="share_bottom" openType="share">
+            <image src="{{shareicon}}"></image>
+            <view class="txt">分享给朋友</view>
+        </button>
+    </view>
+    <view class="toastw" wx:if="{{showToast}}">
+        <view class="toast">
+            <rich-text nodes="{{toastTitle}}"></rich-text>
+        </view>
+    </view>
+</view>

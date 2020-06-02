@@ -1,0 +1,24 @@
+<template name="f5958b94">
+    <view class="_view f5958b94 {{'roomAgent'+passClass}}">
+        <view class="_view f5958b94 div">
+            <template is="0e24a461" data="{{...$root['0'],...$root[$kk+'f5958b94-0'],$root:$root}}"></template>
+            <view class="_view f5958b94 p">
+                <view class="_view f5958b94 span">{{roomAgent.name}}</view>
+                <template is="0255ce1c" data="{{...$root['0'],...$root[$kk+'f5958b94-1-'+index],$root:$root}}" wx:for="{{brokerIcons}}" wx:key="index"></template>
+            </view>
+            <view class="_view f5958b94 phone-button">
+                <template is="aa10e628" data="{{...$root['0'],...$root[$kk+'f5958b94-2'],$root:$root,$slotdefault:'f5958b94-default-f5958b94-2'}}" wx:if="{{phoneNum}}"></template>
+            </view>
+        </view>
+        <view class="_view f5958b94 ul" wx:if="{{roomAgent.service&&roomAgent.service.length>0}}">
+            <view class="_view f5958b94 li" key="{{index}}" wx:for="{{roomAgent.service}}" wx:key="index">
+                <view class="_view f5958b94 var">{{item.serviceScore}}分</view>
+                <view class="_view f5958b94 span">{{item.serviceName}}</view>
+                <view class="_view f5958b94 p"></view>
+            </view>
+        </view>
+    </view>
+</template>
+<import src="/components/mgImage.vue.wxml"></import>
+<import src="/components/mgAutoImage.vue.wxml"></import>
+<import src="/components/mgButton.vue.wxml"></import>

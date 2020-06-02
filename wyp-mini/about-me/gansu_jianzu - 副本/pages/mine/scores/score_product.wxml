@@ -1,0 +1,54 @@
+<import src="../../templates/products/carousel.wxml"></import>
+<import src="../../templates/score/index.wxml"></import>
+<import src="/dist/quantity/index.wxml"></import>
+<import src="/dist/tab/index.wxml"></import>
+<import src="/dist/toptips/index.wxml"></import>
+<import src="/dist/toast/index.wxml"></import>
+<import src="../../../utils/wxParse/wxParse.wxml"></import>
+<import src="../../templates/scorestorelist/index.wxml"></import>
+<view class="container" style="padding-bottom:100rpx;display:{{loading?'none':''}};position:{{showDialog?'fixed':''}}">
+    <template is="zan-toptips" data="{{zanTopTips:zanTopTips}}"></template>
+    <template is="zan-toast" data="{{zanToast:zanToast}}"></template>
+    <template is="carousel" data="{{images:goods.images,height:height}}" wx:if="{{goods.type==0}}"></template>
+    <view class="coupon-img__wrap" wx:if="{{goods.type==1}}">
+        <view class="coupon-img">
+            <image src="{{goods.images[0].imgUrl}}"></image>
+        </view>
+    </view>
+    <view class="giftcard-img__wrap" wx:if="{{goods.type==2}}">
+        <view class="giftcard-img">
+            <image src="{{goods.images[0].imgUrl}}"></image>
+        </view>
+    </view>
+    <view class="product-name-box">
+        <view class="name">{{goods.name}}</view>
+        <button class="btn-share" openType="share">
+            <image src="http://imgcdnali.wfenxiao.com.cn/xcx/c/icons/share.png" style="width:30rpx; height: 30rpx"></image>
+            <view class="share">分享</view>
+        </button>
+    </view>
+    <template is="score" data="{{type:goods.type,coupon:goods.coupon,card:goods.card}}" wx:if="{{goods.type!=0}}"></template>
+    <view class="product-price-container">
+        <image class="score-image" src="http://imgcdnali.wfenxiao.com.cn/xcx/c/icons/ic_score.png"></image>
+        <view class="product-show-price">{{goods.goprice||'0.00'}}</view>
+        <view class="product-show-price-label">积分</view>
+    </view>
+    <view class="product-show-spec-dialog-number">
+        <view class="product-show-spec-dialog-number-label">购买数量</view>
+        <view class="product-show-spec-dialog-number-row">
+            <view class="product-show-spec-dialog-number-tip">剩余{{goods.gstock}}件</view>
+            <template is="zan-quantity" data="{{...formData.num,componentId:'num',size:'small'}}"></template>
+        </view>
+    </view>
+    <view class="product-show-tab">
+        <template is="zan-tab" data="{{tab:tabs,componentId:'tabs'}}"></template>
+    </view>
+    <template is="storelist" data="{{show:showDialog,list:goods.coupon.storeList||goods.card.storeList}}"></template>
+    <view style="padding:5px;background:white" wx:if="{{tabs.selectedId=='1'}}">
+        <template is="wxParse" data="{{wxParseData:content.nodes}}"></template>
+    </view>
+    <view class="product-show-footer">
+        <view bindtap="handleBuyNow" class="product-show-buy-now" wx:if="{{goods.gstock>0}}">立即兑换</view>
+        <view class="product-show-foot-empty" wx:if="{{goods.gstock==0}}">暂无库存</view>
+    </view>
+</view>

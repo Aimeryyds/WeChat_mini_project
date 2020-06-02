@@ -1,0 +1,73 @@
+<import src="../template/foodlist/foodlist.wxml"></import>
+<view class="container orders-container" wx:if="{{isShow}}">
+    <view class="food_detail">
+        <view class="food_detail_status">
+            <view class="food_detail_top">
+                <view class="food_detail_topstatus" wx:if="{{detail.diningType==1}}">{{orderstatus1[detail.orderStatus]}}</view>
+                <view class="food_detail_topstatus" wx:if="{{detail.diningType==0}}">{{orderstatus[detail.orderStatus]}}</view>
+                <view class="food_detail_time">{{detail.useTime}}</view>
+            </view>
+            <view class="food_detail_message" wx:if="{{detail.diningType==1}}">{{orderstatusinfo1[detail.orderStatus]}}</view>
+            <view class="food_detail_message" wx:if="{{detail.diningType==0}}">{{orderstatusinfo[detail.orderStatus]}}</view>
+        </view>
+        <view class="qrcode" wx:if="{{detail.diningType==0}}">
+            <view style="font-size:28rpx;">用餐凭证</view>
+            <view style="color:#A8A8A8;">提供给商家兑换码，领取餐食</view>
+            <view>兑换码：{{detail.verificationNo}}</view>
+        </view>
+        <view class="food_detail_user">
+            <view class="food_detail_userinfo" wx:if="{{detail.diningType==0&&detail.useTime}}">
+                <view class="food_user_label">用餐时间</view>
+                <view class="food_user_info">{{detail.useTime}}</view>
+            </view>
+            <view class="food_detail_userinfo" wx:if="{{detail.diningTableNo}}">
+                <view class="food_user_label">桌号</view>
+                <view class="food_user_info">{{detail.diningTableType}} {{detail.diningTableNo}}</view>
+            </view>
+            <view class="food_detail_userinfo" wx:if="{{detail.reserveName}}">
+                <view class="food_user_label">预订人</view>
+                <view class="food_user_info">{{detail.reserveName}}</view>
+            </view>
+            <view class="food_detail_userinfo" wx:if="{{detail.reserveMobile}}">
+                <view class="food_user_label">预订人手机</view>
+                <view class="food_user_info">{{detail.reserveMobile}}</view>
+            </view>
+        </view>
+        <view class="food_user_product">
+            <template is="foodlist" data="{{order:detail,show:true}}"></template>
+            <view class="callstore">
+                <image bindtap="makePhone" data-phone="{{detail.tel}}" src="http://imgcdnali.wfenxiao.com.cn/xcx/c/food/call.png"></image>
+                <view bindtap="makePhone" data-phone="{{detail.tel}}"> 联系商家</view>
+                <block wx:if="{{detail.actionList}}" wx:for="{{detail.actionList}}" wx:key="{{index}}">
+                    <view style="width:2rpx;height:24rpx;background:#e0e0e0;margin:9rpx 20rpx;" wx:if="{{item=='cancel'}}"></view>
+                    <view bindtap="cancelOrder" data-id="{{detail.id}}" wx:if="{{item=='cancel'}}">取消订单</view>
+                </block>
+            </view>
+        </view>
+        <view class="food_detail_orderinfo">
+            <view class="food_detail_userinfo">
+                <view class="food_user_label">订单编号</view>
+                <view class="food_user_info">{{detail.orderNo}}</view>
+            </view>
+            <view class="food_detail_userinfo">
+                <view class="food_user_label" wx:if="{{detail.createdTime}}">下单时间</view>
+                <view class="food_user_info">{{detail.createdTime}}</view>
+            </view>
+            <view class="food_detail_userinfo" wx:if="{{detail.customer&&detail.customer.nickName}}">
+                <view class="food_user_label">姓名</view>
+                <view class="food_user_info">{{detail.customer.nickName}}</view>
+            </view>
+            <view class="food_detail_userinfo" wx:if="{{detail.customer&&detail.customer.mobile}}">
+                <view class="food_user_label">联系电话</view>
+                <view class="food_user_info">{{detail.customer.mobile}}</view>
+            </view>
+            <view class="food_detail_userinfo" wx:if="{{detail.userMsg}}">
+                <view class="food_user_label">备注</view>
+                <view class="food_user_info">{{detail.userMsg}}</view>
+            </view>
+        </view>
+        <view class="show-footer" wx:if="{{detail.actionList&&detail.actionList.length>0}}">
+            <view bindtap="toPayOrder" class="btn-primary" data-id="{{detail.orderNo}}" wx:if="{{item=='pay'}}" wx:for="{{detail.actionList}}" wx:key="{{index}}">去支付</view>
+        </view>
+    </view>
+</view>

@@ -1,0 +1,14 @@
+<view class="star_contaienr" wx:if="{{isSmall}}">
+    <block wx:for="{{recipeStars}}" wx:key="item">
+        <image class="star_icon" src="../../images/star_rating_bar_normal.png" wx:if="{{item==0}}"></image>
+        <image class="star_icon" src="../../images/star_rating_bar_half.png" wx:elif="{{item==1}}"></image>
+        <image class="star_icon" src="../../images/star_rating_bar_focus.png" wx:elif="{{item==2}}"></image>
+    </block>
+</view>
+<view class="star_contaienr" wx:else>
+    <block wx:for="{{recipeStars}}" wx:key="item">
+        <image class="big_star_icon" src="../../images/star_rating_bar_normal.png" wx:if="{{item==0}}"></image>
+        <image class="big_star_icon" src="../../images/star_rating_bar_half.png" wx:elif="{{item==1}}"></image>
+        <image class="big_star_icon" src="../../images/star_rating_bar_focus.png" wx:elif="{{item==2}}"></image>
+    </block>
+</view>

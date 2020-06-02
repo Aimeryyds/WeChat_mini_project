@@ -1,0 +1,41 @@
+<view class="zan-panel zan-panel__no-magrin-top imgaDvert-list zan-panel__no-border" wx:if="{{module.options.adsStyle=='type1'||module.options.adsStyle=='type2'||module.options.adsStyle=='type3'||module.options.adsStyle=='type4'}}">
+    <image bindload="setImgAdvertWH" bindtap="makecustome" data-aid="{{module.aid}}" data-imgurl="{{item.imgUrl}}" data-index="{{index}}" data-item="{{item}}" src="{{item.imgUrl}}" style=" width: {{( 750-(module.options.navs.length-1)*(module.options.imgGap||0) )/module.options.navs.length}}rpx;  height: {{( 750-(module.options.navs.length-1)*(module.options.imgGap||0) )/module.options.navs.length*item.height/item.width||250}}rpx" wx:for="{{module.options.navs}}" wx:key="{{index}}"></image>
+</view>
+<view class="zan-panel zan-panel__no-magrin-top imgaDvert-list zan-panel__no-border" wx:if="{{module.options.adsStyle=='type5'||module.options.adsStyle=='type6'}}">
+    <image bindtap="makecustome" data-item="{{item}}" src="{{item.imgUrl}}" style=" width: {{index==1&&module.options.adsStyle=='type5'?466-module.options.imgGap+'rpx':index==0&&module.options.adsStyle=='type5'?284-module.options.imgGap+'rpx':index==1&&module.options.adsStyle=='type6'?284-module.options.imgGap+'rpx':index==0&&module.options.adsStyle=='type6'?466-module.options.imgGap+'rpx':'0px'}};height:284rpx;" wx:if="{{index==1||index==0}}" wx:for="{{module.options.navs}}"></image>
+</view>
+<view class="zan-panel zan-panel__no-magrin-top zan-panel__no-border imgaDvert-list" wx:if="{{module.options.adsStyle=='type7'}}">
+    <view style="width:{{314-module.options.imgGap}}rpx;height:500rpx;">
+        <image bindtap="makecustome" data-item="{{module.options.navs[0]}}" src="{{module.options.navs[0].imgUrl}}" style="width:{{314-module.options.imgGap}}rpx;height:500rpx;"></image>
+    </view>
+    <view class="imageType7">
+        <image bindtap="makecustome" data-item="{{item}}" src="{{item.imgUrl}}" style=" width: {{436-module.options.imgGap*1.5}}rpx;height: {{250-module.options.imgGap}}rpx " wx:if="{{index==1||index==2}}" wx:for="{{module.options.navs}}"></image>
+    </view>
+</view>
+<view class="zan-panel zan-panel__no-magrin-top zan-panel__no-border imgaDvert-list" wx:if="{{module.options.adsStyle=='type8'}}">
+    <view class="imageType7">
+        <image bindtap="makecustome" data-item="{{item}}" src="{{item.imgUrl}}" style=" width: {{436-module.options.imgGap}}rpx;height: {{250-module.options.imgGap}}rpx " wx:if="{{index==0||index==1}}" wx:for="{{module.options.navs}}"></image>
+    </view>
+    <view style="width:{{314-module.options.imgGap}}rpx;height:500rpx;">
+        <image bindtap="makecustome" data-item="{{module.options.navs[2]}}" src="{{module.options.navs[2].imgUrl}}" style="width:{{314-module.options.imgGap}}rpx;height:500rpx;"></image>
+    </view>
+</view>
+<view class="zan-panel zan-panel__no-magrin-top zan-panel__no-border imgaDvert-list" wx:if="{{module.options.adsStyle=='type9'}}">
+    <view style="width:{{314-module.options.imgGap}}rpx;height:500rpx;">
+        <image bindtap="makecustome" data-item="{{module.options.navs[0]}}" src="{{module.options.navs[0].imgUrl}}" style="width:{{314-module.options.imgGap}}rpx;height:500rpx;"></image>
+    </view>
+    <view class="imageType7">
+        <image bindtap="makecustome" data-item="{{module.options.navs[1]}}" src="{{module.options.navs[1].imgUrl}}" style="width: {{436-module.options.imgGap}}rpx;height: {{250-module.options.imgGap}}rpx; "></image>
+        <view class="imageType8" style="width: {{436-module.options.imgGap}}rpx;">
+            <image bindtap="makecustome" data-item="{{item}}" src="{{item.imgUrl}}" style=" width: {{218-module.options.imgGap}}rpx;height: {{250-module.options.imgGap}}rpx " wx:if="{{index==2||index==3}}" wx:for="{{module.options.navs}}"></image>
+        </view>
+    </view>
+</view>
+<view class="zan-panel zan-panel__no-magrin-top zan-panel__no-border imgaDvert-list" wx:if="{{module.options.adsStyle=='type10'}}">
+    <image bindtap="makecustome" data-item="{{module.options.navs[0]}}" src="{{module.options.navs[0].imgUrl}}" style="width:{{250-module.options.imgGap}}rpx;height:500rpx;"></image>
+    <view class="imageType7">
+        <image bindtap="makecustome" data-item="{{module.options.navs[1]}}" src="{{module.options.navs[1].imgUrl}}" style="width:{{250-module.options.imgGap}}rpx;height:{{250-module.options.imgGap}}rpx;"></image>
+        <image bindtap="makecustome" data-item="{{module.options.navs[2]}}" src="{{module.options.navs[2].imgUrl}}" style="width:{{250-module.options.imgGap}}rpx;height:{{250-module.options.imgGap}}rpx;"></image>
+    </view>
+    <image bindtap="makecustome" data-item="{{module.options.navs[3]}}" src="{{module.options.navs[3].imgUrl}}" style="width:{{250-module.options.imgGap}}rpx;height:500rpx;"></image>
+</view>

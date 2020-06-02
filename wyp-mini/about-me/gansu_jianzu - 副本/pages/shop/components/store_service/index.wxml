@@ -1,0 +1,125 @@
+<view class="container">
+    <scroll-view enableBackToTop scrollY bindscrolltolower="onReachBottom" scrollTop="{{scrollTop}}" style="width:100%;height: 100vh;" wx:if="{{shopService.shop}}">
+        <store-header bindsetStoreDetail="setStoreDetail" shopId="{{shopId}}"></store-header>
+        <view class="zan-panel zan-panel__no-margin-top" style="margin-top:-20rpx">
+            <view class="shop__header-album">
+                <navigator hoverClass="navigator-hover" url="../../shop/album/album?shopId={{shopId}}" wx:for="{{shopService.shop.photos}}">
+                    <image class="shop__header-album__image{{shopService.shop.photos.length}}" src="{{item}}"></image>
+                </navigator>
+            </view>
+        </view>
+        <view class="zan-panel shop__info">
+            <view bindtap="handleOpenMap" class="shop__info-item">
+                <image class="shop__info-item-icon" mode="scaleToFill" src="http://imgcdnali.wfenxiao.com.cn/xcx/c/address-grey.png"></image>
+                <view class="shop__info-item-text">{{shopService.shop.provinceName}}{{shopService.shop.cityName}}{{shopService.shop.areaName}}{{shopService.shop.detailAddress}}</view>
+                <view class="shop__info-item-lt">></view>
+            </view>
+            <view bindtap="callShop" class="shop__info-item" data-areanum="{{shopService.shop.areaNum}}" data-phone="{{shopService.shop.tel}}">
+                <image class="shop__info-item-icon" mode="scaleToFill" src="http://imgcdnali.wfenxiao.com.cn/xcx/c/phone-grey.png"></image>
+                <view class="shop__info-item-text" wx:if="{{shopService.shop.areaNum}}">{{shopService.shop.areaNum}}-{{shopService.shop.tel}}</view>
+                <view class="shop__info-item-text" wx:if="{{!shopService.shop.areaNum}}">{{shopService.shop.tel}}</view>
+                <view class="shop__info-item-lt" style="margin-right: 10rpx;">免费咨询</view>
+                <view class="shop__info-item-lt">></view>
+            </view>
+            <navigator class="shop__info-item" styel="border-bottom: 0;" url="{{shopService.shop.reservationType=='staff'?'/pages/services/workers/index?shopId='+shopId:shop.reservationType=='project'?'/pages/services/services/index?shopId='+shopId:'/pages/services/order_create/index?storeId='+shopId}}" wx:if="{{shopService.shop.modules.reservation.options.show==1}}">
+                <view class="shop__info-item__icon-order">订</view>
+                <view class="shop__info-item-text">{{shopService.shop.modules.reservation.options.title||'立即预约'}}</view>
+                <view class="shop__info-item-lt">></view>
+            </navigator>
+        </view>
+        <view class="zan-panel workers-list" wx:if="{{shopService.shop.modules.person.total>0}}">
+            <view class="workers-list__title">
+                <view class="workers-list__title-name">{{shopService.shop.modules.person.options.title||'服务人员'}}</view>
+                <view class="shop__info-item-lt" style="margin-right: 10rpx;">
+                    <navigator hoverClass="navigator-hover" url="/pages/services/workers/index?shopId={{shopId}}">
+            全部{{shopService.shop.modules.person.total}}位{{shopService.shop.modules.person.options.title}}
+          </navigator>
+                </view>
+                <view class="shop__info-item-lt">></view>
+            </view>
+            <view class="workers-list__list">
+                <navigator class="workers-list__item" data-id="{{item.id}}" url="/pages/services/worker_detail/index?shopId={{shopId}}&workerId={{item.id}}" wx:for="{{shopService.shop.modules.person.data}}">
+                    <image class="workers-list__item__avatar" mode="scaleToFit" src="{{item.headImg}}"></image>
+                    <view class="workers-list__item__name">{{item.serverName}}</view>
+                    <view class="workers-list__item__title">{{item.jobTitle||'-'}}</view>
+                    <view class="workers-list__item__desc" style="visibility:{{item.showNum==1?'visible':'hidden'}}">{{item.num}}人预约</view>
+                </navigator>
+            </view>
+        </view>
+        <view class="zan-panel services-list" wx:if="{{shopService.shop.modules.project.total>0}}">
+            <view class="workers-list__title">
+                <view class="workers-list__title-name">{{shopService.shop.modules.project.options.title||'服务项目'}}</view>
+                <navigator class="shop__info-item-lt" style="margin-right: 10rpx;" url="/pages/services/services/index?shopId={{shopId}}">
+          全部{{shopService.shop.modules.project.total}}个{{shopService.shop.modules.project.options.title}}
+        </navigator>
+                <view class="shop__info-item-lt">></view>
+            </view>
+            <navigator class="services-list__item" data-id="{{item.id}}" url="/pages/services/service_detail/index?shopId={{shopId}}&serviceId={{item.id}}" wx:for="{{shopService.shop.modules.project.data}}">
+                <image class="services-list__item__avatar" mode="aspectFill" src="{{item.imgUrl}}"></image>
+                <view class="services-list__item__detail">
+                    <view class="services-list__item__name">
+                        <wxc-elip>
+                            <text> {{item.serviceName}}</text>
+                        </wxc-elip>
+                    </view>
+                    <view class="services-list__item__desc">
+                        <wxc-elip>
+                            <text> {{item.description}}</text>
+                        </wxc-elip>
+                    </view>
+                    <view class="services-list__item__detail__price">
+                        <text class="services-list__item__detail__price-cur">￥{{item.price}}</text>
+                        <wxc-label typeColor="#F87E27">{{item.payPre==1?item.prePayMsg:item.payTypeName}}</wxc-label>
+                        <text class="services-list__item__detail__price-old" wx:if="{{item.payPre==1}}">￥{{item.prePrice}}</text>
+                    </view>
+                </view>
+            </navigator>
+        </view>
+        <view class="zan-panel services-list" wx:if="{{shopService.products.data.length>0}}">
+            <view class="workers-list__title">
+                <view class="workers-list__title-name">{{shopService.shop.modules.goods.options.title||'商品'}}</view>
+                <view class="shop__info-item-lt" style="margin-right: 10rpx;">全部{{shopService.products.total}}个商品</view>
+            </view>
+            <navigator class="services-list__item" data-id="{{item.id}}" url="/pages/products/show/show?id={{item.id}}&isFromShop=true&isService=true" wx:for="{{shopService.products.data}}">
+                <image class="services-list__item__avatar" mode="scaleToFit" src="{{item.imgUrl}}"></image>
+                <view class="services-list__item__detail">
+                    <view class="services-list__item__name">
+                        <view class="tuan__tag1" wx:if="{{item.activityType==1}}">
+                            <view class="seckill-tag">
+                                <image src="http://imgcdnali.wfenxiao.com.cn/xcx/c/tuan/seckill.png"></image>
+                                <view>秒杀</view>
+                            </view>
+                        </view>
+                        <view class="tuan__tag1" wx:elif="{{item.activityType==2}}">
+                            <view class="tuan-tag">{{item.limitPeople||0}}人团</view>
+                        </view>
+                        <view class="tuan__tag1" wx:elif="{{item.activityType==3}}">
+                            <view class="manjian-tag">满减</view>
+                        </view>
+                        <view class="services-list__name zan-ellipsis--l2" style="text-indent:{{item.activityType==0?'0rpx':'12rpx'}}">{{item.name}}</view>
+                    </view>
+                    <view class="services-list__price-wrap">
+                        <view class="services-list__item__detail__price">
+                            <text class="services-list__item__detail__price-cur">￥{{item.price}}</text>
+                            <view class="products-list__stock" style="flex:2">{{item.activityType==2?'已团':'已售'}}{{item.saleNum}}件</view>
+                        </view>
+                        <view class="goods-list__btn" wx:if="{{item.activityType==1}}">马上抢</view>
+                        <view class="goods-list__btn" wx:elif="{{item.activityType==2}}">去开团</view>
+                    </view>
+                </view>
+            </navigator>
+        </view>
+        <view class="shop__info-services" wx:if="{{shopService.shop.facilities.length>0}}">
+            <view class="shop__info-services-label">商家信息</view>
+            <view bindtap="jumpstoredetail" class="shop__info-services-fac" data-id="{{shopId}}" data-openevaluate="{storeDetail.openEvaluate}">
+                <view style="flex:1;height:60rpx;overflow:hidden;">
+                    <text class="shop__info-services-item" wx:for="{{shopService.shop.facilities}}">{{item.name}}</text>
+                </view>
+                <view class="navigator-arrow"></view>
+            </view>
+        </view>
+        <view id="loadmore" wx:if="{{shopService.loadmore}}">
+            <wxc-loadmore icon="{{true}}" text="努力加载中..."></wxc-loadmore>
+        </view>
+    </scroll-view>
+</view>

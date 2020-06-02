@@ -1,0 +1,77 @@
+<import src="/pages/templates/orders/orderitemlistmoreproducts.wxml"></import>
+<import src="/dist/toast/index.wxml"></import>
+<import src="/dist/toptips/index.wxml"></import>
+<template is="zan-toast" data="{{zanToast:zanToast}}"></template>
+<template is="zan-toptips" data="{{zanTopTips:zanTopTips}}"></template>
+<view class="container">
+    <form bindsubmit="formSubmit">
+        <view class="apply-form__goodsList">
+            <template is="order-more-goods" data="{{ goods:applyformData.goodsList,goodsTotal:applyformData.goodsTotal||applyformData.goodsNum,giveawayList:applyformData.giveawayList||[] }}"></template>
+        </view>
+        <view class="apply-form">
+            <view class="zan-panel" wx:if="{{modifyType=='modifyForm'}}">
+                <view class="zan-cell zan-cell--access" hoverClass="none">
+                    <view class="zan-cell__bd">退款类型</view>
+                    <view class="zan-cell__ft" style="flex:1">
+                        <picker bindchange="refundType" range="{{applyformData.refundType==1?refundType1:refundType2}}" rangeKey="name">
+                            <view class="picker" wx:if="{{refundTypeData.name}}">{{refundTypeData.name}}</view>
+                            <view class="picker" wx:else>请选择</view>
+                        </picker>
+                    </view>
+                </view>
+            </view>
+            <view class="zan-panel" wx:if="{{applyformData.refundType==2||applyformData.refundType==3}}">
+                <view class="zan-cell zan-cell--access" hoverClass="none">
+                    <view class="zan-cell__bd">货物状态</view>
+                    <view class="zan-cell__ft">
+                        <picker bindchange="expressStatus" range="{{expressStatus}}" rangeKey="name" value="{{index}}">
+                            <view class="picker" wx:if="{{expressStatusData.name}}">{{expressStatusData.name}}</view>
+                            <view class="picker" wx:else>请选择</view>
+                        </picker>
+                    </view>
+                </view>
+            </view>
+            <view class="zan-panel">
+                <view class="zan-cell zan-cell--access" hoverClass="none">
+                    <view class="zan-cell__bd">退款原因</view>
+                    <view class="zan-cell__ft">
+                        <picker bindchange="refundReason" range="{{refunReason}}" rangeKey="name" value="{{index}}">
+                            <view class="picker" wx:if="{{refundReasonData.name}}">{{refundReasonData.name}}</view>
+                            <view class="picker" wx:else>请选择</view>
+                        </picker>
+                    </view>
+                </view>
+                <view class="apply-cause" style="display:{{toggle?'block':'none'}}">
+                    <input maxlength="200" name="detail" placeholder="请输入退款原因..." value="{{applyformData.detail&&toggle?applyformData.detail:''}}"></input>
+                </view>
+            </view>
+        </view>
+        <view class="apply-form__price">
+            <text>退款金额：</text>
+            <view class="apply-form__price-info">￥{{applyformData.toPayTotal||applyformData.amount}}</view>
+        </view>
+        <view class="apply-form__price-hint">最多退￥{{applyformData.toPayTotal||applyformData.amount}}，含运费{{applyformData.freight||applyformData.freight}}元</view>
+        <view class="apply-form__note">
+            <view class="zan-cell zan-form__item">
+                <text class="zan-form__title">退款说明：</text>
+                <input class="zan-form__input zan-cell__bd" maxlength="200" name="remark" placeholder="选填" value="{{applyformData.remark?applyformData.remark:''}}"></input>
+            </view>
+        </view>
+        <view class="apply-form__upload">
+            <view class="apply-form__upload-title">上传凭证</view>
+            <view class="apply-form__upload-img">
+                <view class="apply-form__upload-proofUrl" wx:for="{{applyformData.proofUrl}}" wx:key="{{index}}">
+                    <image bindtap="onTapPic" data-link="{{item}}" mode="scaleToFill" src="{{item}}" style="width:200rpx;height:200rpx"></image>
+                    <image class="apply-form__upload-handleRemoveImg" data-index="{{index}}" mode="scaleToFill" ontap="handleRemoveImg" src="http://imgcdnali.wfenxiao.com.cn/xcx/c/gongqiu/delete.png"></image>
+                </view>
+                <view class="apply-form__upload-handleChooseImg" ontap="handleChooseImg" wx:if="{{!applyformData.proofUrl||applyformData.proofUrl.length<3}}">
+                    <image mode="scaleToFill" src="http://imgcdnali.wfenxiao.com.cn/xcx/c/1120/img-upload.png" style="width:48rpx;height:44rpx"></image>
+                    <view class="apply-form__upload-handleChooseImg-style">上传凭证</view>
+                    <view class="apply-form__upload-handleChooseImg-style">(最多三张)</view>
+                </view>
+                <input hidden name="proofUrl" type="hidden" value="{{applyformData.proofUrl}}"></input>
+            </view>
+        </view>
+        <button class="apply-form__submit" formType="submit" loading="{{loading}}" type=""> 提交 </button>
+    </form>
+</view>

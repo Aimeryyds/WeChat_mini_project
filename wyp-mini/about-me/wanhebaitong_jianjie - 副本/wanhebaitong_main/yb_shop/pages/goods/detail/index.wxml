@@ -1,0 +1,161 @@
+<import src="/yb_shop/utils/wxParse/wxParse.wxml"></import>
+<include src="../../index/login.wxml"></include>
+<loading hidden="{{show}}">正在加载</loading>
+<view class="page comment-block" wx:if="{{!dispaly}}">
+    <view class="goods-detail-goods">
+        <view class="goods-advs" style="width:{{advWidth}}px;height:{{advWidth}}px;">
+            <swiper autoplay="{{autoplay}}" circular="{{circular}}" class="index-adcs-sqiper" duration="{{duration}}" indicatorDots="{{indicatorDots}}" interval="{{interval}}" style="width:{{advWidth}}px;height:{{advWidth}}px;">
+                <swiper-item wx:for="{{goods.pic}}" wx:for-index="idx">
+                    <image class="goodsadvimg" src="{{item.img_cover}}"></image>
+                </swiper-item>
+            </swiper>
+        </view>
+        <view class="fui-cell-group fui-detail-group">
+            <view class="fui-cell">
+                <view class="fui-cell-text price" style="display:flex;justify-content:space-between;">
+                    <view style=" width:50%;float:left;">
+                        <text class="text-danger">￥{{goods.price}}</text>
+                        <text class="sale_count">销量：{{goods.sales}}</text>
+                    </view>
+                    <navigator class="good_share" url="/yb_shop/pages/poster/index?title={{goods.goods_name}}&share_type=goods&id={{goods.goods_id}}&img={{goods.pic[0].img_cover}}&price={{goods.price}}&original_price={{goods.market_price}}">
+                        <view class="share_lines">
+                            <image class="icon30" src="/yb_shop/static/images/icon/poster.png"></image>
+                            <text>海报</text>
+                        </view>
+                    </navigator>
+                    <button class="good_share" openType="share">
+                        <view class="share_lines">
+                            <image class="icon30" src="/yb_shop/static/images/icon/share1.png"></image>
+                            <text>分享</text>
+                        </view>
+                    </button>
+                    <view bindtap="favorite" class="share_lines favorite-item" data-logprice="{{goods.price}}">
+                        <image class="icon30" src="{{goods.favorites?'/yb_shop/static/images/icon-red/like.png':'/yb_shop/static/images/icon/good_like.png'}}"></image>
+                        <text class="{{goods.favorites?'active':''}}">关注</text>
+                    </view>
+                </view>
+            </view>
+            <view class="goods-subtitle" wx:if="{{goods.goods_name}}">
+                <text class="fui-tag">{{goods.goods_name}}</text>
+            </view>
+            <view class="goods_intro">
+                <text>{{goods.introduction}}</text>
+            </view>
+        </view>
+        <view class="discount_box" wx:if="{{goods.activity.length>0}}">
+            <view class="discount_tit">减免</view>
+            <view class="discount_list" wx:for="{{goods.activity}}">
+                <view class="discount_li">满{{item.satisfy_money}}减{{item.discount_money}}</view>
+                <view class="discount_time">{{item.end_time}}前可用</view>
+                <view class="clear"></view>
+            </view>
+        </view>
+        <view class="fui-cell-group" style="margin-top:20rpx;">
+            <view class="title">
+                <view class="fui-tab fui-tab-danger" id="tab">
+                    <view bindtap="goodsTab" class="item {{info}}" data-tap="info">商品详情</view>
+                    <view bindtap="goodsTab" class="item {{para}}" data-tap="para">商品属性</view>
+                </view>
+            </view>
+        </view>
+        <view class="goods-detail-info {{info}}" wx:if="{{info=='active'}}">
+            <view class="wxParse" style="margin:0.5rem;">
+                <template is="wxParse" data="{{wxParseData:wxParseData.nodes}}"></template>
+            </view>
+        </view>
+        <view bindtap="emptyActive" class="fui-mask {{active}}"></view>
+        <view class="goods-detail-para {{para}}" wx:if="{{para=='active'}}">
+            <view class="para_info" wx:if="{{goods.goods_attr.length==0}}">暂无商品属性</view>
+            <view class="fui-cell-group">
+                <view class="fui-cell" wx:for="{{goods.goods_attr}}" wx:for-index="idx">
+                    <view class="fui-cell-label">{{item.attr_value}}</view>
+                    <view class="fui-cell-info overflow">{{item.attr_value_name}}</view>
+                </view>
+            </view>
+        </view>
+        <view class="fui-modal picker-modal {{slider}}" wx:if="{{tempname=='select-picker'}}">
+            <view class="option-picker">
+                <view class="option-picker-inner">
+                    <view class="option-picker-cell goodinfo">
+                        <view class="closebtn">
+                            <i class="icon icon-roundclose"></i>
+                        </view>
+                        <view class="img">
+                            <image class="thumb" src="{{goods.pic['0'].img_cover}}" style="width:100%;height:100%;" wx:if="{{goods.sku_pic==''}}"></image>
+                            <image class="thumb" src="{{goods.sku_pic}}" style="width:100%;height:100%;" wx:if="{{goods.sku_pic!=''}}"></image>
+                        </view>
+                        <view class="info info-price text-danger">
+                            <span>￥
+                <span class="price">{{goods.price}}</span>
+                            </span>
+                        </view>
+                        <view class="info info-total">库存
+              <text class="total text-danger">{{goods.stock}}</text> 件
+            </view>
+                        <view class="info info-titles">
+                            <text wx:if="{{goods.goods_spec_format.length>0}}"> {{specsTitle==''?'请选择规格':'已选：'+specsTitle}}</text>
+                        </view>
+                    </view>
+                    <view class="option-picker-options">
+                        <view class="option-picker-cell option spec" wx:for="{{goods.goods_spec_format}}" wx:for-index="idx" wx:for-item="spec">
+                            <view class="title">{{spec.spec_name}}</view>
+                            <view class="select">
+                                <a bindtap="specsTap" class="btn btn-sm nav spec-item" data-id="{{spec.spec_id}}" data-idx="{{idx}}" data-spec_name="{{item.spec_value_name}}" data-thumb="{{item.thumb}}" data-vid="{{item.spec_value_id}}" href="javascript:;" style="color:{{specsData[idx].vid==item.spec_value_id?'#ff0000':'#666666'}};border:1px solid {{specsData[idx].vid==item.spec_value_id?'#ff0000':'#ffffff'}};" wx:for="{{spec.value}}">{{item.spec_value_name}}</a>
+                            </view>
+                        </view>
+                        <view class="fui-cell-group02 nomargin">
+                            <view class="fui-cell02">
+                                <view class="fui-cell-label">数量</view>
+                                <view class="fui-cell-info"></view>
+                                <view class="fui-cell-mask noremark">
+                                    <view bindtap="number" class="fui-number" data-id="{{goods.id}}" data-max="{{goods.stock}}" data-min="{{goods.min_buy}}" data-value="{{total}}">
+                                        <view class="minus {{total<=goods.min_buy?'disabled':''}}" data-action="minus"></view>
+                                        <input class="num" disabled="false" name="" type="tel" value="{{total}}"></input>
+                                        <view class="plus {{total>=goods.stock&&goods.stock!=0?'disabled02':''}}" data-action="plus"></view>
+                                    </view>
+                                </view>
+                            </view>
+                            <view class="clear"></view>
+                        </view>
+                    </view>
+                    <view class="fui-navbar">
+                        <a class="nav-item btn cartbtn" href="javascript:;" style="display:none;">加入购物车</a>
+                        <a class="nav-item btn buybtn" href="javascript:;" style="display:none;">立刻购买</a>
+                        <a bindtap="emptyActive" class="nav-item btn confirmbtn {{canBuy?'':'disabled'}}" href="javascript:;" style="background:{{config.selectedColor!='#000000'?config.selectedColor:config.background}};color:{{config.selectedColor=='#000000'&&config.font_color=='black'?'#000000':'#ffffff'}};" wx:if="{{buyType=='select'}}">{{canBuy?'确定':'库存不足'}}</a>
+                        <a bindtap="{{canBuy?'buyNow':''}}" class="confirmbtn {{canBuy&&optionid!=0?'':'disabled'}}" data-hasoption="{{goods.hasoption}}" data-id="{{goods.id}}" data-optionid="{{optionid}}" data-total="{{total}}" href="javascript:;" style="background:{{config.selectedColor!='#000000'?config.selectedColor:config.background}};color:{{config.selectedColor=='#000000'&&config.font_color=='black'?'#000000':'#ffffff'}};" wx:if="{{buyType=='buy'}}">{{canBuy?'确定购买':'库存不足'}}</a>
+                        <a bindtap="{{canBuy?'getCart':''}}" class="nav-item btn confirmbtn {{canBuy&&optionid!=0?'':'disabled'}}" data-hasoption="{{goods.hasoption}}" data-id="{{goods.id}}" data-optionid="{{optionid}}" data-total="{{total}}" href="javascript:;" style="background:{{config.selectedColor!='#000000'?config.selectedColor:config.background}};color:{{config.selectedColor=='#000000'&&config.font_color=='black'?'#000000':'#ffffff'}};width:100% !important;margin:0 !important;" wx:if="{{buyType=='cart'}}">{{canBuy?'确定加入购物车':'库存不足'}}</a>
+                    </view>
+                </view>
+            </view>
+        </view>
+    </view>
+    <include src="/yb_shop/pages/common/city-picker.wxml"></include>
+    <view class="fui-mask {{showPicker?'show':''}}" style="z-index: 10"></view>
+    <view class="fui-navbar bottom-buttons" style="bottom:{{menu_show?100:0}}rpx;">
+        <navigator class="nav-item external" openType="reLaunch" url="/yb_shop/pages/index/index">
+            <image class="icon20" src="{{icons.index}}"></image>
+            <view class="label">首页</view>
+        </navigator>
+        <view class="nav-item cart-item" style="position: relative">
+            <view class="service_box">
+                <contact-button class="user_service" sessionFrom="weapp" size="20" type="default-light"></contact-button>
+                <contact-button class="user_service" sessionFrom="weapp" size="20" type="default-light"></contact-button>
+                <contact-button class="user_service" sessionFrom="weapp" size="20" type="default-light"></contact-button>
+                <contact-button class="user_service" sessionFrom="weapp" size="20" type="default-light"></contact-button>
+            </view>
+            <image class="icon20" src="{{icons.service02}}"></image>
+            <view class="label">客服</view>
+        </view>
+        <navigator bindtap="url" class="nav-item cart-item" id="menucart">
+            <view class="badge {{goods.cart<=0?'out':'in'}}" wx:if="{{goods.cart}}">{{goods.cart}}</view>
+            <image class="icon20" src="{{icons.cart}}"></image>
+            <view class="label">购物车</view>
+        </navigator>
+        <view bindtap="selectPicker" class="cartbtn" data-buytype="cart" data-tap="{{active}}" style="color:{{config.selectedColor!='#000000'?config.selectedColor:config.background}};border-left:1px solid #ebebeb;border-right:1px solid #ebebeb">加入购物车</view>
+        <view bindtap="selectPicker" class="buybtn" data-buytype="buy" data-tap="{{active}}" style="background:{{config.selectedColor!='#000000'?config.selectedColor:config.background}};color:{{config.selectedColor=='#000000'&&config.font_color=='black'?'#000000':'#ffffff'}};">立刻购买</view>
+    </view>
+    <block wx:if="{{showtabbar}}">
+        <view style="height:100rpx"></view>
+        <include src="/yb_shop/pages/common/menu.wxml"></include>
+    </block>
+</view>

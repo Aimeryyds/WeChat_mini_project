@@ -1,0 +1,60 @@
+<navigation-bar title="组菜结果"></navigation-bar>
+<view class="cplistw" style="padding-top:{{barHeight}}px">
+    <view bindtap="pageReload" class="cplist_nodata" wx:if="{{requeseFail}}">{{requeseFailTips}}</view>
+    <view class="cplist_nodata" wx:if="{{noData}}">{{noDataTips}}</view>
+    <view wx:else>
+        <view class="tagsw">
+            <view class="t">配菜：</view>
+            <scroll-view scrollX class="tags">
+                <view bindtap="checktag" class="tag {{tools.ischecked(item,foodsnameArr_checked)?'tag_checked':''}}" data-foodname="{{item}}" wx:if="{{item!=''}}" wx:for="{{foodsnameArr}}" wx:key="key">{{item}}</view>
+            </scroll-view>
+        </view>
+        <view class="zctip">{{smartData.desc}}</view>
+        <view wx:for="{{smartResult}}" wx:key="key">
+            <navigator class="recipeitem" hoverClass="navigator-hover" url="/pages/content/content?id={{item.id}}">
+                <view class="recipeitemw">
+                    <view class="cpimgw">
+                        <image src="{{item.img}}"></image>
+                    </view>
+                    <view class="cpinfow">
+                        <view class="cpnamew">
+                            <text class="cpname">{{item.title}}</text>
+                        </view>
+                        <view class="ratew">
+                            <view class="ppd">
+                                <view class="big">{{item.match_rate}}</view>
+                                <view class="small">%</view>
+                            </view>
+                            <view class="p">匹配度</view>
+                        </view>
+                        <view class="starw">
+                            <view wx:for="{{[1,2,3,4,5]}}" wx:for-item="i" wx:key="key">
+                                <image src="{{starUrl1}}" wx:if="{{item.rate-i>=0}}"></image>
+                                <image src="{{starUrl2}}" wx:elif="{{item.rate-i+1>0}}"></image>
+                                <image src="{{starUrl3}}" wx:else></image>
+                            </view>
+                        </view>
+                        <view class="foods">{{item.foods}}</view>
+                    </view>
+                </view>
+            </navigator>
+        </view>
+    </view>
+    <view class="bottomline" wx:if="{{bottomline}}">- 这就是我的底线了 -</view>
+</view>
+<loading hidden="{{requeseDone||!hasNextPage||requeseFail||noData}}">
+ 加载中...
+</loading>
+<wxs module="tools">
+function ischecked(item, arr) {
+    for (var i = 0; i < arr.length; i++) {
+        if (item === arr[((nt_0 = (i), null == nt_0 ? undefined : 'number' === typeof nt_0 ? nt_0 : "" + nt_0))]) {
+            return (true)
+        }
+    };
+    return (false)
+};
+module.exports = ({
+    ischecked: ischecked,
+});
+</wxs>

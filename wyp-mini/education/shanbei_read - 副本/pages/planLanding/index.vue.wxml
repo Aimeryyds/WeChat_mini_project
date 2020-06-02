@@ -1,0 +1,68 @@
+<template name="65833585">
+    <view class="_div data-v-72f17b4c">
+        <view class="_div data-v-72f17b4c tab-container" wx:if="{{scrollTop>BANNER_HEIGHT}}">
+            <view bindtap="handleProxy" class="_div data-v-72f17b4c tab flex-vhc" data-comkey="{{$k}}" data-eventid="{{'0'}}" style=" {{detailStyle}}">
+                <view class="_div data-v-72f17b4c">计划详情</view>
+                <view class="_div data-v-72f17b4c indicator" wx:if="{{toView==='detail'}}"></view>
+            </view>
+            <view bindtap="handleProxy" class="_div data-v-72f17b4c tab flex-vhc" data-comkey="{{$k}}" data-eventid="{{'1'}}" style=" {{booklistStyle}}">
+                <view class="_div data-v-72f17b4c">主题书单</view>
+                <view class="_div data-v-72f17b4c indicator" wx:if="{{toView==='booklist'}}"></view>
+            </view>
+        </view>
+        <scroll-view scrollY bindscroll="handleProxy" class="_scroll-view data-v-72f17b4c scroll-container" data-comkey="{{$k}}" data-eventid="{{'5'}}" scrollIntoView="{{toView}}" scrollWithAnimation="{{true}}" style=" {{'height:'+scrollContainerHeight+';'}}">
+            <view class="_div data-v-72f17b4c" style="font-size: 0">
+                <image class="_img data-v-72f17b4c banner" mode="widthFix" src="{{head_image.url}}" wx:if="{{head_image.url}}"></image>
+            </view>
+            <view class="_div data-v-72f17b4c {{[scrollTop>BANNER_HEIGHT?'tab-container tab-sticky':'tab-container']}}">
+                <view bindtap="handleProxy" class="_div data-v-72f17b4c tab flex-vhc" data-comkey="{{$k}}" data-eventid="{{'2'}}" style=" {{detailStyle}}">
+                    <view class="_div data-v-72f17b4c">计划详情</view>
+                    <view class="_div data-v-72f17b4c indicator" wx:if="{{toView==='detail'}}"></view>
+                </view>
+                <view bindtap="handleProxy" class="_div data-v-72f17b4c tab flex-vhc" data-comkey="{{$k}}" data-eventid="{{'3'}}" style=" {{booklistStyle}}">
+                    <view class="_div data-v-72f17b4c">主题书单</view>
+                    <view class="_div data-v-72f17b4c indicator" wx:if="{{toView==='booklist'}}"></view>
+                </view>
+            </view>
+            <view class="_div data-v-72f17b4c tab-placeholder" wx:if="{{scrollTop>BANNER_HEIGHT}}"></view>
+            <view class="_div data-v-72f17b4c image-container" id="detail">
+                <image class="_img data-v-72f17b4c image-item" key="{{image.name}}" mode="widthFix" src="{{image.url}}" wx:for="{{detail1_images}}" wx:for-item="image" wx:key="image.name"></image>
+            </view>
+            <view class="_div data-v-72f17b4c plan-container" id="booklist" style=" {{'background-image:'+'url('+books_bg_image.url+')'+';'}}" wx:if="{{books_bg_image.url}}">
+                <template is="53266cce" data="{{...$root[$kk+'0-'+index],$root:$root}}" wx:for="{{plans}}" wx:for-item="plan" wx:key="plan.book_plan_id"></template>
+            </view>
+            <view class="_div data-v-72f17b4c image-container">
+                <image class="_img data-v-72f17b4c image-item" key="{{image.name}}" mode="widthFix" src="{{image.url}}" wx:for="{{detail2_images}}" wx:for-item="image" wx:key="image.name"></image>
+            </view>
+        </scroll-view>
+        <view class="_div data-v-72f17b4c" wx:if="{{isAndroid}}">
+            <view class="_div data-v-72f17b4c tip flex-vhc {{[isIpx?'ipx':'']}}" wx:if="{{isSelected}}">{{'已选书单：'+selectedPlan.title+'·'+selectedPlan.total_days+'天'}}</view>
+            <view class="_div data-v-72f17b4c button-container {{[isIpx?'ipx':'']}}" wx:if="{{isSelected}}">
+                <view class="_div data-v-72f17b4c">
+                    <view class="_div data-v-72f17b4c price">
+                        <label class="_span data-v-72f17b4c cny">¥</label>
+                        <label class="_span data-v-72f17b4c">{{formattedPrice}}</label>
+                    </view>
+                    <view class="_div data-v-72f17b4c original-price">原价¥{{formattedOriginalPrice}}</view>
+                </view>
+                <view class="_div data-v-72f17b4c tag-container">
+                    <view class="_div data-v-72f17b4c discount-tag flex-vhc">限时优惠</view>
+                </view>
+                <button bindtap="handleProxy" class="_button data-v-72f17b4c button flex-vhc" data-comkey="{{$k}}" data-eventid="{{'7'}}" wx:if="{{isLogin}}">立即参与</button>
+                <button bindgetuserinfo="handleProxy" class="_button data-v-72f17b4c button flex-vhc" data-comkey="{{$k}}" data-eventid="{{'6'}}" openType="getUserInfo" wx:else>立即参与</button>
+            </view>
+            <view class="_div data-v-72f17b4c button-container {{[isIpx?'ipx':'']}}" wx:else>
+                <view class="_div data-v-72f17b4c price">
+                    <label class="_span data-v-72f17b4c cny">¥</label>
+                    <label class="_span data-v-72f17b4c">{{formattedMinPrice}}</label>
+                    <label class="_span data-v-72f17b4c text">起</label>
+                </view>
+                <button bindtap="handleProxy" class="_button data-v-72f17b4c button flex-vhc" data-comkey="{{$k}}" data-eventid="{{'9'}}" wx:if="{{isLogin}}">选择书单</button>
+                <button bindgetuserinfo="handleProxy" class="_button data-v-72f17b4c button flex-vhc" data-comkey="{{$k}}" data-eventid="{{'8'}}" openType="getUserInfo" wx:else>选择书单</button>
+            </view>
+        </view>
+        <view bindtap="handleProxy" class="_div data-v-72f17b4c button-container-ios flex-vhc {{[isIpx?'ipx':'']}}" data-comkey="{{$k}}" data-eventid="{{'10'}}" wx:else>立即加入</view>
+        <view class="_div data-v-72f17b4c fill" wx:if="{{isIpx}}"></view>
+    </view>
+</template>
+<import src="/pages/planLanding/PlanItem.vue.wxml"></import>

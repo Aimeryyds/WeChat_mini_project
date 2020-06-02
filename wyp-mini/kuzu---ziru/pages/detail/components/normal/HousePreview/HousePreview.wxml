@@ -1,0 +1,28 @@
+<view class="_div data-v-4f22b54f">
+    <view class="house-preview-wrapper _div data-v-4f22b54f" wx:if="{{roomData&&roomData.previewImg}}">
+        <swiper bindchange="__e" circular="{{true}}" class="preview-swiper data-v-4f22b54f" current="{{current}}" data-event-opts="{{[ [ 'change',[ [ 'swiperChange',['$event'] ] ] ] ]}}">
+            <swiper-item bindtap="__e" class="media-item data-v-4f22b54f" data-event-opts="{{[ [ 'tap',[ [ 'handlePreviewClick',['$0'],[ [ ['imgUrls','',i] ] ] ] ] ] ]}}" wx:for="{{$root.l0}}" wx:for-index="i" wx:key="i">
+                <image alt="房源图片" binderror="__e" class="slide-image data-v-4f22b54f" data-event-opts="{{[ [ 'error',[ [ 'handleImageError',[i] ] ] ] ]}}" mode="aspectFill" src="{{item.m0}}" wx:if="{{!isImageError[i]}}"></image>
+                <image alt="房源图片" class="slide-image error data-v-4f22b54f" mode="aspectFill" src="{{errorImageSrc}}" wx:else></image>
+                <view catchtap="__e" class="image-center-wrapper _div data-v-4f22b54f" data-event-opts="{{[ [ 'tap',[ [ 'handlePreviewClick',['$0'],[ [ ['imgUrls','',i] ] ] ] ] ] ]}}" wx:if="{{item[$orig].type==='video'||item[$orig].type==='vr'}}">
+                    <view class="{{['iconfont _i data-v-4f22b54f',item[$orig].type==='vr'?'icon-vr':'',item[$orig].type==='video'?'icon-videoplay':'']}}"></view>
+                </view>
+            </swiper-item>
+        </swiper>
+        <view class="top-shadow _div data-v-4f22b54f"></view>
+        <view class="slider-bar _div data-v-4f22b54f">
+            <scroll-view class="slider-text data-v-4f22b54f" scrollX="{{true}}">
+                <view class="text-wrapper _div data-v-4f22b54f">
+                    <label bindtap="__e" class="{{['text _span data-v-4f22b54f',i===target?'active':'']}}" data-event-opts="{{[ [ 'tap',[ [ 'handleJumpImg',[i] ] ] ] ]}}" wx:for="{{sliderText}}" wx:for-index="i" wx:for-item="t" wx:key="i">{{t}}</label>
+                </view>
+            </scroll-view>
+        </view>
+    </view>
+    <block wx:else>
+        <view class="offline-holder _div data-v-4f22b54f" wx:if="{{isOffline}}">
+            <view class="img _div data-v-4f22b54f"></view>
+            <view class="text _p data-v-4f22b54f">该房源已下架，再看看其他房源吧</view>
+        </view>
+        <view class="house-preview-skeleton _div data-v-4f22b54f" wx:else></view>
+    </block>
+</view>

@@ -1,0 +1,32 @@
+<navigationTopbar bindtap="MethodComponent" id="mineTopBar" navTxt="{{navTxtStr}}" navtype="2" showWhiteBackground="{{navTopBackShow}}"></navigationTopbar>
+<view class="page_container details_con" style="top:{{navHeight}}px; height: {{pageHeight}}px;">
+    <view class="amount">
+        <text class="left" wx:if="{{type==1}}">充值个数</text>
+        <text class="left" wx:if="{{type==2}}">扣除个数</text>
+        <text class="right">
+            <text>{{details.tokenAmountStr}}</text>果
+		</text>
+    </view>
+    <view class="list_con">
+        <view class="list_item" wx:if="{{type==2}}">
+            <text class="left">被赠送人</text>
+            <text class="right">{{details.toUserName}}</text>
+        </view>
+        <view class="list_item">
+            <text class="left">商品名称</text>
+            <text class="right">{{details.bizDesc}}</text>
+        </view>
+        <view class="list_item">
+            <text class="left">当前状态</text>
+            <text class="right">{{details.transStatus}}</text>
+        </view>
+        <view class="list_item">
+            <text class="left">时间</text>
+            <text class="right">{{details.transTime}}</text>
+        </view>
+        <view class="list_item">
+            <text class="left">交易单号</text>
+            <text class="right">{{details.transId}}</text>
+        </view>
+    </view>
+</view>

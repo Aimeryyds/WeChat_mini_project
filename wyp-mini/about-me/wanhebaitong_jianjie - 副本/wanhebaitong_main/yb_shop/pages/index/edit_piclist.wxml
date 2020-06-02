@@ -1,0 +1,10 @@
+<view class="default_pic_list" id="recommand" style="background:{{item.bg_color}}" wx:if="{{item.list.length>0}}">
+    <view class="default_pic_items{{item.style_type}} items col{{item.column_num}}">
+        <view class="item_box" wx:for="{{item.list}}" wx:for-item="val">
+            <navigator bindtap="to_url" data-appid="{{val.appid}}" data-key="{{val.key?val.key:1}}" data-lat="{{val.lat}}" data-lng="{{val.lng}}" data-path="{{val.path}}" data-phone="{{val.phone}}" data-url="{{val.url}}" hoverClass="none">
+                <image data-arr="{{item.arr}}" data-url="{{val.imgurl}}" mode="widthFix" src="{{val.imgurl}}" style="width:100%;border-radius:{{item.radian}}%;"></image>
+                <text class="list_tit" style="color:{{item.text_color}};">{{val.name}}</text>
+            </navigator>
+        </view>
+    </view>
+</view>

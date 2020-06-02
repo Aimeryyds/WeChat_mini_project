@@ -1,0 +1,65 @@
+<navigation-bar enable="{{enable}}" title="我的发布"></navigation-bar>
+<view class="container">
+    <view bindtap="pageReload" class="cplist_nodata" wx:if="{{requeseFail}}">{{requeseFailTips}}</view>
+    <view class="nui_w" wx:if="{{noUserInfo}}">
+        <view class="nui_tip">使用本功能需要您的授权允许哦~</view>
+        <button bindgetuserinfo="getInfo" class="nui_button" openType="getUserInfo">授权</button>
+    </view>
+    <view style="padding-top:{{barHeight}}px;width:100%;" wx:else>
+        <view wx:if="{{tab==1}}">
+            <view class="cplist_nodata" wx:if="{{noData}}">{{noDataTips_post}}</view>
+            <view wx:for="{{mypostdata}}" wx:for-index="{{i}}" wx:key="key">
+                <view style="position:relative;">
+                    <navigator class="recipeitem" hoverClass="navigator-hover" url="/pages/foodshow_content/foodshow_content?id={{item.fineFood.id}}" wx:if="{{item.fineFood.checked==2}}">
+                        <view class="recipeitemw">
+                            <view class="cpimgw" style="background:#f5f5f5 url({{item.fineFood.img}}) center no-repeat;background-size:cover;">
+                                <view class="vicon" wx:if="{{item.fineFood.is_video!='0'}}"></view>
+                            </view>
+                            <view class="cpinfow">
+                                <view class="fsnamew">
+                                    <view class="fsname">{{item.fineFood.content}}</view>
+                                </view>
+                                <view class="fstagw">
+                                    <block wx:if="{{item.fineFood.topic_info.topic_title}}">
+                                        <view class="fstag"># {{item.fineFood.topic_info.topic_title}}</view>
+                                        <view class="line"></view>
+                                    </block>
+                                </view>
+                                <view class="viewdata">
+                                    <view class="state state{{item.fineFood.checked}}">{{item.fineFood.checked_desc}}<text wx:if="{{item.fineFood.checked_reason}}">:</text>{{item.fineFood.checked_reason}}</view>
+                                </view>
+                            </view>
+                        </view>
+                    </navigator>
+                    <view class="recipeitem" wx:else>
+                        <view class="recipeitemw">
+                            <view class="cpimgw" style="background:#f5f5f5 url({{item.fineFood.img}}) center no-repeat;background-size:cover;">
+                                <view class="vicon" wx:if="{{item.fineFood.is_video!='0'}}"></view>
+                            </view>
+                            <view class="cpinfow">
+                                <view class="fsnamew">
+                                    <view class="fsname">{{item.fineFood.content}}</view>
+                                </view>
+                                <view class="fstagw">
+                                    <block wx:if="{{item.fineFood.topic_info.topic_title}}">
+                                        <view class="fstag"># {{item.fineFood.topic_info.topic_title}}</view>
+                                        <view class="line"></view>
+                                    </block>
+                                </view>
+                                <view class="viewdata">
+                                    <view class="state state{{item.fineFood.checked}}">{{item.fineFood.checked_desc}}<text wx:if="{{item.fineFood.checked_reason}}">:</text>{{item.fineFood.checked_reason}}</view>
+                                </view>
+                            </view>
+                        </view>
+                    </view>
+                    <view bindtap="delmypost" class="delbtn" data-id="{{item.fineFood.id}}" data-index="{{i}}">
+                        <image class="delicon" src="{{delicon}}"></image>
+                    </view>
+                </view>
+            </view>
+        </view>
+    </view>
+</view>
+<loading hidden="{{requeseDone||!hasNextPage}}">
+ 加载中...
+</loading>

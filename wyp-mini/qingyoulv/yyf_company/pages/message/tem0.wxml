@@ -1,0 +1,69 @@
+<template name="form">
+    <image mode="widthFix" src="{{form.thumb}}" style="width:100%;" wx:if="{{form.thumb}}"></image>
+    <view class="container">
+        <view class="form-desc">
+    {{form.desc}}
+  </view>
+        <view class="fb-mobile" wx:if="{{form.t1show==1}}">
+            <view class="label">
+                <text wx:if="{{form.t1full==1}}">*</text>{{form.t1name}}：
+    </view>
+            <view class="mobile-box">
+                <input bindinput="t1" class="mobile"></input>
+            </view>
+        </view>
+        <view class="fb-mobile" wx:if="{{form.t2show==1}}">
+            <view class="label">
+                <text wx:if="{{form.t2full==1}}">*</text>{{form.t2name}}：
+    </view>
+            <view class="mobile-box">
+                <input bindinput="t2" class="mobile"></input>
+            </view>
+        </view>
+        <view class="fb-mobile" wx:if="{{form.t3show==1}}">
+            <view class="label">
+                <text wx:if="{{form.t3full==1}}">*</text>{{form.t3name}}：
+    </view>
+            <view class="mobile-box">
+                <input bindinput="t3" class="mobile"></input>
+            </view>
+        </view>
+        <view class="fb-mobile" wx:if="{{form.t4show==1}}">
+            <view class="label">
+                <text wx:if="{{form.t4full==1}}">*</text>{{form.t4name}}：
+    </view>
+            <view class="mobile-box">
+                <input bindinput="t4" class="mobile"></input>
+            </view>
+        </view>
+        <view class="fb-mobile" wx:if="{{form.rshow==1}}">
+            <view class="label">
+                <text wx:if="{{form.rfull==1}}">*</text>{{form.rname}}:</view>
+            <view class="choice">
+                <radio-group bindchange="radioChange" class="radio-group">
+                    <view class="radio" wx:for="{{form.rvalue}}">
+                        <radio value="{{item}}"></radio>{{item}}
+        </view>
+                </radio-group>
+            </view>
+        </view>
+        <view class="fb-mobile" wx:if="{{form.cshow==1}}">
+            <view class="label">
+                <text wx:if="{{form.cfull==1}}">*</text>{{form.cname}}:</view>
+            <view class="choice">
+                <checkbox-group bindchange="checkChange" class="checkbox-group">
+                    <view class="checkbox" wx:for="{{form.cvalue}}">
+                        <checkbox value="{{item}}"></checkbox>{{item}}
+          </view>
+                </checkbox-group>
+            </view>
+        </view>
+        <view class="fb-body" wx:if="{{form.ashow==1}}">
+            <view class="label">
+                <text wx:if="{{form.afull==1}}">*</text>{{form.aname}}：</view>
+            <view class="fb-body-content">
+                <textarea bindinput="textareaBlur" class="content"></textarea>
+            </view>
+        </view>
+    </view>
+</template>

@@ -1,0 +1,22 @@
+<template name="comment">
+    <view class="comment-content" wx:for="{{commentList}}" wx:for-index="key" wx:key="commentId">
+        <view class="com-authorimg" data-openid="{{item.userInfo.openId}}" style="margin-bottom:99rpx;">
+            <image binderror="userAvatarError" class="com-authorimg-info" data-index="{{item.commentId}}" mode="aspectFill" src="{{item.authorimg}}"></image>
+        </view>
+        <view class="com-right">
+            <view style="display:flex;justify-content:space-between;margin-bottom:20rpx;">
+                <view class="com-author-content">
+                    <view class="com-author-name">
+              {{item.author}}
+              </view>
+                </view>
+                <view class="com-author-loc-time">
+                    <text>{{item.timeFormat}}</text>
+                </view>
+            </view>
+            <view catchtap="toReply" class="com-info" data-commentid="{{item.commentId}}" data-ctype="{{ctype}}" data-nickname="{{item.userInfo.nickName}}">
+          {{item.content}}
+        </view>
+        </view>
+    </view>
+</template>

@@ -1,0 +1,102 @@
+<view class="newhouse-search">
+    <view class="input-box">
+        <view class="input-wrap">
+            <input bindinput="getinputvalue" placeholder="请输入小区或商圈名称" value="{{value}}"></input>
+            <image bindtap="delsearch" src="/img/resources/del-search.png" wx:if="{{value}}"></image>
+        </view>
+        <view bindtap="backpage">取消</view>
+    </view>
+    <view class="hot-search" wx:if="{{hotkeywords!=''}}">
+        <text>热门搜索</text>
+    </view>
+    <view class="hotkeywords" wx:if="{{hotkeywords!=''}}">
+        <view bindtap="hotkeywordsclick" data-cityid="{{item.cityid}}" data-estateid="{{item.estateid}}" data-jumpurl="{{item.jumpurl}}" data-name="{{item.estatename}}" data-recommendtype="{{item.recommendtype}}" wx:for="{{hotkeywords}}" wx:key="index">{{item.estatename}}</view>
+    </view>
+    <view class="tabbangdan">
+        <scroll-view scrollX class="scrollMenu">
+            <view bindtap="bangdan" class="{{bangdancur==index?'cur':''}}" data-id="{{item.id}}" data-index="{{index}}" wx:for="{{searlistTab}}" wx:key="index">{{item.name}}<text class="sanjiao"></text>
+            </view>
+        </scroll-view>
+    </view>
+    <view class="tabbangdanCon">
+        <view class="bangdanItem" data-estateid="{{item.estateid}}" wx:for="{{searlistCon}}" wx:key="index">
+            <view class="bangdanleft">
+                <view class="num">
+                    <image src="/img/bjnewhouse/num_{{index+1}}.png"></image>
+                </view>
+                <view class="bandan_info">
+                    <view class="title">{{item.estatename}}</view>
+                    <view>
+                        <text class="leixing">{{item.propertytypestr}}</text>{{item.area}}/{{item.businessarea}}</view>
+                </view>
+            </view>
+            <view class="bangdanright">
+                <text>{{item.averageprice}}元/㎡</text>
+            </view>
+        </view>
+    </view>
+    <view class="tabloupan">
+        <scroll-view scrollX class="scrollMenu">
+            <text bindtap="bintheme" class="{{thiscur==index?'cur':''}}" data-index="{{index}}" data-themeid="{{item.themeid}}" wx:for="{{themedata}}" wx:key="index">{{item.themename}}</text>
+        </scroll-view>
+    </view>
+    <view class="tabloupanCon">
+        <scroll-view scrollX class="scrollMenu2">
+            <view bindtap="themCon" class="tabloupanConItem" data-estateid="{{item.estateID}}" wx:for="{{tabsCon}}" wx:key="index">
+                <view class="themImage">
+                    <image src="{{item.coverImageName==null||item.coverImageName==''?'https://res.5i5j.com/cache/weixin/common/default_house_list_404.png':item.coverImageName}}"></image>
+                    <view class="imagetag">{{item.totalPrice}}</view>
+                </view>
+                <view class="themtitle">{{item.estateName}}</view>
+                <view class="themadrs">{{item.estateAreaName}}/{{item.businessArea}}</view>
+            </view>
+        </scroll-view>
+    </view>
+    <view class="hot-search" wx:if="{{history.length>0}}">
+        <text>历史搜索</text>
+    </view>
+    <view class="history">
+        <view bindtap="routergo" data-cityid="{{item.cityid}}" data-properttypeid="{{item.properytypeid}}" data-searchid="{{item.estateid}}" data-type="{{item.type}}" wx:for="{{history}}" wx:key="index">{{item.name}}</view>
+    </view>
+</view>
+<view class="mind-search" wx:if="{{value}}">
+    <view class="scroll-wrap">
+        <scroll-view>
+            <view bindtap="routergo" class="mind-search-list" data-id="{{item.id}}" data-name="{{item.name}}" data-parentid="{{item.parentid}}" data-type="areaList" wx:for="{{areaList}}" wx:key="index">
+                <view class="display">
+                    <rich-text nodes="{{areaList_info[index].name}}"></rich-text>
+                </view>
+                <text class="quyuStyle orange">区域</text>
+                <text class="hui textright" wx:if="{{item.count}}">{{item.count}}楼盘</text>
+            </view>
+            <view bindtap="routergo" class="mind-search-list" data-estateid="{{item.estateid}}" data-estatename="{{item.estatename}}" data-type="sqList" wx:for="{{sqList}}" wx:key="index">
+                <view class="display">
+                    <rich-text nodes="{{sqList_info[index].name}}"></rich-text>
+                </view>
+                <text class="quyuStyle blue">商圈</text>
+                <text class="hui textright" wx:if="{{item.count}}">{{item.count}}楼盘</text>
+            </view>
+            <view bindtap="routergo" class="mind-search-list" data-id="{{item.id}}" data-name="{{item.name}}" data-type="{{item.type}}" wx:for="{{subwayList}}" wx:key="index">
+                <view class="display">
+                    <rich-text nodes="{{subwayList_info[index].name}}"></rich-text>
+                </view>
+                <text class="quyuStyle ditie">地铁</text>
+                <text class="hui textright" wx:if="{{item.count}}">{{item.count}}楼盘</text>
+            </view>
+            <view bindtap="routergo" class="mind-search-list" data-estateid="{{item.estateid}}" data-estatename="{{item.estatename}}" wx:for="{{estateList}}" wx:key="index">
+                <view class="display">
+                    <rich-text nodes="{{child_info[index].estatename}}"></rich-text>
+                </view>
+                <text class="quyuStyle zhuangtai">{{item.salestatusstr}}状态</text>
+                <text class="quyuStyle zhuzhai">{{item.propertytypestr}}</text>
+                <text class="red textright" wx:if="{{item.averageprice}}">{{item.averageprice}}元/㎡</text>
+                <view class="adr">
+                    <rich-text nodes="{{child_info[index].address}}"></rich-text>
+                </view>
+            </view>
+        </scroll-view>
+    </view>
+    <view class="search-empty" wx:if="{{estateList=='empty'&&areaList=='empty'&&sqList=='empty'&&stationList=='empty'&&subwayList=='empty'}}">
+    没有找到相关数据
+  </view>
+</view>

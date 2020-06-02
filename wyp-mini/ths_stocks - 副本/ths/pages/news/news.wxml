@@ -1,0 +1,32 @@
+<view class="container">
+    <view class="newsListWrap">
+        <view class="newsListItemWrap" wx:for="{{list}}" wx:key="index">
+            <view bindtap="__e" class="newsListItemWrapNoImg" data-event-opts="{{[ [ 'tap',[ [ 'handleShowArticle',['$event'] ] ] ] ]}}" data-seq="{{item.seq}}" wx:if="{{!item.imgurl}}">
+                <view class="newsListItemTitle">{{item.title}}</view>
+                <view class="newsListItemDes">{{item.summ}}</view>
+                <view class="newsListItemInfo">
+                    <view class="newsListItemFrom" wx:if="{{item.source}}">{{item.source}}</view>
+                    <view class="newsListItemAgo">{{item.ctime}}</view>
+                </view>
+            </view>
+            <view bindtap="__e" class="{{[ 'newsListItemWrapImg '+(item.readBefore?'newsListItemWrapReadBefore':'') ]}}" data-event-opts="{{[ [ 'tap',[ [ 'handleShowArticle',['$event'] ] ] ] ]}}" data-seq="{{item.seq}}" wx:else>
+                <view class="newsListItemImg">
+                    <image class="newsListItemImgInner" src="{{'https:'+item.imgurl}}"></image>
+                </view>
+                <view class="newsListItemInnerWrap">
+                    <view class="newsListItemTitle">{{item.title}}</view>
+                    <view class="newsListItemInfo">
+                        <view class="newsListItemFrom" wx:if="{{item.source}}">{{item.source}}</view>
+                        <view class="newsListItemAgo">{{item.ctime}}</view>
+                    </view>
+                </view>
+            </view>
+        </view>
+    </view>
+    <view class="newsListLoadMoreWrap">
+        <image class="newsListLoadMoreImg" src="../../static/load.png" wx:if="{{!nomore&&!reGet}}"></image>
+        <view class="newsListLoadMoreText" wx:if="{{!nomore&&!reGet}}">正在加载更多</view>
+        <view class="newsListLoadMoreText" wx:if="{{nomore&&!reGet}}">没有更多了~</view>
+        <view bindtap="__e" class="newsListLoadMoreText" data-event-opts="{{[ [ 'tap',[ [ 'reGetData',['$event'] ] ] ] ]}}" wx:if="{{reGet}}">暂无数据，点击重试</view>
+    </view>
+</view>

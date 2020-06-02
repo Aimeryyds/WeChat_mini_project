@@ -1,0 +1,119 @@
+<view class="_4f070c0">
+    <view class="network _32f532b _4f070c0" wx:if="{{$net$hasNet}}">
+        <image class="_32f532b" src="../../images/network.png"></image>
+        <text class="_32f532b">网络不可用，请检查网络设置</text>
+        <view class="net-text font28 animated flash infinite _32f532b">正在尝试重新连接...</view>
+    </view>
+    <block wx:if="{{loaded}}">
+        <import src="../../components/wxParse/wxParse.wxml"></import>
+        <view class="_4f070c0">
+            <view class="artice _4f070c0">
+                <text class="title _4f070c0">{{bothData.articleInfo.title}}</text>
+                <view class="moduleDetail _4f070c0">
+                    <view bindtap="toExplain" class="module_left _4f070c0">
+                        <image class="_4f070c0" src="{{bothData.columnistInfo.image}}"></image>
+                        <view class="module_option _4f070c0">
+                            <view class="_4f070c0">{{bothData.columnistInfo.name}}</view>
+                            <view class="_4f070c0">{{bothData.columnistInfo.desc}}</view>
+                            <view class="date _4f070c0">{{bothData.articleInfo.created_at}}</view>
+                        </view>
+                    </view>
+                    <view class="module_right _4f070c0">
+                        <view catchtap="addDy" class="{{bothData.columnistInfo.is_subscribe?'subscribe':''}} _4f070c0" data-wpyadddy-a="{{bothData.columnistInfo}}">
+                            <text class="word animated fadeIn _4f070c0" wx:if="{{bothData.columnistInfo.is_subscribe}}">取消定制</text>
+                            <text class="word animated fadeIn _4f070c0" wx:else>定制</text>
+                        </view>
+                        <text class="_4f070c0">已有{{bothData.columnistInfo.subscribe_num}}人定制</text>
+                    </view>
+                </view>
+                <view class="module_content _4f070c0">
+                    <video class="_4f070c0" customCache="{{false}}" poster="{{bothData.articleInfo.videoCover}}" src="{{bothData.articleInfo.videoUrl}}"></video>
+                    <template is="wxParse" data="{{wxParseData:video.nodes}}"></template>
+                    <view class="teacher _4f070c0" wx:if="{{bothData.guestInfo}}">
+                        <text class="_4f070c0">作者：{{bothData.guestInfo.name}}</text>
+                        <view catchtap="toTeacher" class="_4f070c0" data-wpytoteacher-a="{{bothData.guestInfo.id}}">讲师简介</view>
+                    </view>
+                </view>
+                <view class="module_method _4f070c0">
+                    <button class="_4f070c0" data-name="shareBtn" openType="share" plain="true">
+                        <image class="_4f070c0" src="https://jfinfo.oss-cn-beijing.aliyuncs.com/jugupiao/images/live/share.png"></image>
+                    </button>
+                    <image bindtap="add" class="animated bounceIn _4f070c0" data-wpyadd-a="1" src="https://jfinfo.oss-cn-beijing.aliyuncs.com/jugupiao/images/live/collection.png" wx:if="{{!bothData.articleInfo.is_collect}}"></image>
+                    <image bindtap="add" class="animated bounceIn _4f070c0" data-wpyadd-a="2" src="https://jfinfo.oss-cn-beijing.aliyuncs.com/jugupiao/images/live/al_save.png" wx:else></image>
+                </view>
+            </view>
+            <view class="tj _4f070c0" wx:if="{{bothData.articleList.length}}">
+                <view class="block _c5d98df _4f070c0">
+                    <image class="icon _4f070c0" src="https://jfinfo.oss-cn-beijing.aliyuncs.com/jugupiao/images/service/history.png"></image>
+                    <text class="_c5d98df">{{$anotherblocks$text}}</text>
+                </view>
+                <view class="tj_box _4f070c0">
+                    <view bindtap="redictUrl" class="tj_temp _4f070c0" data-wpyredicturl-a="{{item}}" wx:for="{{bothData.articleList}}">
+                        <image class="_4f070c0" src="{{item.cover}}"></image>
+                        <view class="tj_content _4f070c0">
+                            <view class="_4f070c0">{{item.title}}</view>
+                            <view class="_4f070c0">{{item.created_at}}</view>
+                        </view>
+                    </view>
+                </view>
+                <view bindtap="goList" class="lokkMore _4f070c0" wx:if="{{bothData.articleNum>4&&!query.no_show}}">
+                    <text class="_4f070c0">更多推荐</text>
+                    <image class="_4f070c0" src="https://jfinfo.oss-cn-beijing.aliyuncs.com/jugupiao/images/service/enter.png"></image>
+                </view>
+            </view>
+            <view class="articeAfter _8ca7e77 _4f070c0">
+                <view class="si-teacher _8ca7e77" wx:if="{{$after$authorData.author_name}}">
+                    <view class="no-bar _8ca7e77">
+                        <text class="_8ca7e77">{{$after$authorData.author_name}}</text>
+                        <text class="_8ca7e77">{{$after$authorData.certificate}}</text>
+                    </view>
+                    <view class="no-bar _8ca7e77">
+                        <text class="_8ca7e77">执笔顾问</text>
+                        <text class="_8ca7e77">执业证书号</text>
+                    </view>
+                </view>
+                <navigator class="_8ca7e77" hoverClass="none" url="/pages/myService/team" wx:if="{{!$after$authorData.author_name}}">
+                    <view class="team _8ca7e77">
+                        <view class="team_desc _8ca7e77">
+                            <view class="_8ca7e77">执笔投顾团队</view>
+                            <view class="_8ca7e77">用心专为您的投资</view>
+                        </view>
+                        <image class="preson _8ca7e77" src="https://jfinfo.oss-cn-beijing.aliyuncs.com/jugupiao/images/service/pers.png"></image>
+                    </view>
+                </navigator>
+                <view class="team team1 _8ca7e77">
+                    <view class="team_desc _8ca7e77">
+                        <view class="_8ca7e77">投诉与建议</view>
+                    </view>
+                    <view catchtap="$after$callTel" class="team_tel _8ca7e77">
+                        <image class="_8ca7e77" src="https://jfinfo.oss-cn-beijing.aliyuncs.com/jugupiao/images/service/team.png"></image>
+                        <view class="tel _8ca7e77">
+                            <view class="_8ca7e77">400-633-5058</view>
+                            <view class="_8ca7e77" style="margin-left:10rpx;">
+              9:00<text class="_8ca7e77">AM</text>  ～  18:00<text class="_8ca7e77">PM</text>
+                            </view>
+                        </view>
+                    </view>
+                </view>
+                <navigator class="_8ca7e77" hoverClass="none" url="/pages/mine/risk">
+                    <view class="team team1 team2 _8ca7e77">
+                        <view class="team_desc _8ca7e77">
+                            <view class="_8ca7e77">风险揭示说明</view>
+                        </view>
+                        <view class="team_summry _8ca7e77">
+                            <view class="_8ca7e77" style="margin-bottom: {{$after$userType.isExist?'14rpx':'0'}}">股市有风险，投资需谨慎<text class="_8ca7e77"></text>
+                            </view>
+                            <view class="_8ca7e77" wx:if="{{$after$userType.isExist}}">根据风险测评结果，您属于{{$after$userType.level_label}}投资者</view>
+                        </view>
+                    </view>
+                </navigator>
+            </view>
+            <view class="footer _9f298ed _4f070c0">
+      用心专为您的投资
+    </view>
+        </view>
+    </block>
+    <view catchtap="$backHome$goHome" class="box animated bounceIn _97a9f08 _4f070c0" wx:if="{{$backHome$isShow}}">
+        <image class="_97a9f08" lazyLoad="false" mode="scaleToFill" src="https://jfinfo.oss-cn-beijing.aliyuncs.com/jugupiao/images/share/home.png"></image>
+    </view>
+</view>

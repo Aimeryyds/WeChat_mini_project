@@ -1,0 +1,45 @@
+<import src="../../../wxParse/wxParse.wxml"></import>
+<swiper autoplay="true" duration="1000" indicatorDots="true" interval="5000" style="height: 640rpx;">
+    <swiper-item catchtap="getToPage" data-link="{{item.linkurl==''?'index':item.linkurl}}" wx:for="{{data.thumb_url}}">
+        <image class="swiper-image" src="{{item}}" style="width:100%;height: 100%;display: block;"></image>
+    </swiper-item>
+</swiper>
+<view class="wrap">
+    <view class="title">
+        <view class="tip">{{data.groupnum}}人成团</view>
+        <text style="font-weight: bolder;">{{data.title}}</text>
+    </view>
+    <view class="desc">{{data.description}}</view>
+    <view class="sub_wrap">
+        <view class="price">
+            <text style="color:#636363;">¥ <text style="font-size: 32rpx;color:#FD5B5B; ">{{data.groupsprice}}</text>/{{data.units}}    </text>
+            <text style="text-decoration: line-through;">¥{{data.price}}</text>
+        </view>
+        <view class="join">已有<text style="color:#636363;">{{data.fightnum}}</text>人参团,销量:<text style="color:#636363;">{{data.sales}}      </text>
+        </view>
+    </view>
+</view>
+<view class="tishi">*开团并邀请1人参团，人数不足自动退款，详见拼团玩法</view>
+<view style="padding: 20rpx 20rpx 40rpx;display: flex;flex-direction: row;justify-content: center;background-color: #fff;">
+    <view style="border-bottom: 4rpx solid #FEAAAA;padding:0 12rpx 6rpx;font-size: 32rpx;font-weight: bolder;">图文详情</view>
+</view>
+<view style="width: 100%;overflow: hidden;text-align: center;" wx:if="{{data.content!=''}}">
+    <template is="wxParse" data="{{wxParseData:contain.nodes}}"></template>
+</view>
+<view style="height:150rpx;width:100%;"></view>
+<view class="footer">
+    <view bindtap="toback" class="left">
+        <image src="https://tws.cnweisou.com/images/icon_home.png" style="width: 70rpx;height: 70rpx;"></image>
+    </view>
+    <view bindtap="tocorder" class="item" data-id="{{data.id}}" style="background-color: #FF8080;">
+        <text>¥ <text style="font-size: 36rpx;">{{data.singleprice}}</text>
+        </text>
+        <text>单独购买</text>
+    </view>
+    <view bindtap="tooperation" class="item" data-id="{{data.id}}" style="background-color: #FD5454;">
+        <text>¥ <text style="font-size: 36rpx;">{{data.groupsprice}}</text>
+        </text>
+        <text>{{data.groupnum}}人成团</text>
+    </view>
+</view>
+<loading wx:if="{{loading}}"></loading>

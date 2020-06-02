@@ -1,0 +1,6 @@
+<view class="container">
+    <image class="logo" src="{{shop.logo}}"></image>
+    <text class="name">{{shop.name}}</text>
+    <button bindgetuserinfo="wxLogin" class="login-btn" openType="getUserInfo" withCredentials="true" wx:if="{{canIUse}}">微信授权登录</button>
+    <view wx:else>请升级微信版本</view>
+</view>

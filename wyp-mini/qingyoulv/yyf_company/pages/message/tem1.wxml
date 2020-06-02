@@ -1,0 +1,77 @@
+<template name="form">
+    <image mode="widthFix" src="{{form.thumb}}" style="width:100%;" wx:if="{{form.thumb}}"></image>
+    <view style="font-size:14px; color:#666; width:95%; margin:0 auto; line-height:20px;{{form.thumb=='0'?'margin-top:10px':''}}" wx:if="{{form.desc}}">{{form.desc}}</view>
+    <view class="order_input" style="margin-top:5rpx;">
+        <view class="order_item" wx:if="{{form.t1show==1}}">
+            <view class="order_title">
+                <view class="title">
+                    <text wx:if="{{form.t1full==1}}">*</text>{{form.t1name}}</view>
+                <view class="info">
+                    <input bindinput="t1" type="text"></input>
+                </view>
+            </view>
+        </view>
+        <view class="order_item" wx:if="{{form.t2show==1}}">
+            <view class="order_title">
+                <view class="title">
+                    <text wx:if="{{form.t2full==1}}">*</text>{{form.t2name}}</view>
+                <view class="info">
+                    <input bindinput="t2" type="text"></input>
+                </view>
+            </view>
+        </view>
+        <view class="order_item" wx:if="{{form.t3show==1}}">
+            <view class="order_title">
+                <view class="title">
+                    <text wx:if="{{form.t3full==1}}">*</text>{{form.t3name}}</view>
+                <view class="info">
+                    <input bindinput="t3" type="text"></input>
+                </view>
+            </view>
+        </view>
+        <view class="order_item" wx:if="{{form.t4show==1}}">
+            <view class="order_title">
+                <view class="title">
+                    <text wx:if="{{form.t4full==1}}">*</text>{{form.t4name}}</view>
+                <view class="info">
+                    <input bindinput="t4" type="text"></input>
+                </view>
+            </view>
+        </view>
+        <view class="order_item item_radio" wx:if="{{form.rshow==1}}">
+            <view class="order_title">
+                <view class="title">
+                    <text wx:if="{{form.rfull==1}}">*</text>{{form.rname}}</view>
+                <view class="info">
+                    <radio-group bindchange="radioChange" class="radio-group">
+                        <view class="radio" wx:for="{{form.rvalue}}">
+                            <radio value="{{item}}"></radio>{{item}}
+        </view>
+                    </radio-group>
+                </view>
+            </view>
+        </view>
+        <view class="order_item item_radio" wx:if="{{form.cshow==1}}">
+            <view class="order_title">
+                <view class="title">
+                    <text wx:if="{{form.cfull==1}}">*</text>{{form.cname}}</view>
+                <view class="info">
+                    <checkbox-group bindchange="checkChange" class="checkbox-group">
+                        <view class="radio" wx:for="{{form.cvalue}}">
+                            <checkbox value="{{item}}"></checkbox>{{item}}
+        </view>
+                    </checkbox-group>
+                </view>
+            </view>
+        </view>
+        <view class="order_item order_content" wx:if="{{form.ashow==1}}">
+            <view class="order_title">
+                <view class="title">
+                    <text wx:if="{{form.afull==1}}">*</text>{{form.aname}}</view>
+                <view class="info">
+                    <textarea bindinput="textareaBlur" class="content"></textarea>
+                </view>
+            </view>
+        </view>
+    </view>
+</template>

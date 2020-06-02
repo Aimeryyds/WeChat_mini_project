@@ -1,0 +1,46 @@
+<template name="gongping-danmu">
+    <view bind:longpress="longpressGongPing" bind:touchend="touchGongPingEnd" bind:touchmove="touchGongPingMove" bind:touchstart="touchGongPingStart" class="bullet-wrapper landscape-wrapper">
+        <view class="bullet-track">
+            <block wx:for="{{gongpingInfo}}" wx:key="index">
+                <view class="bullet-text bullet-danmu {{index}}" wx:if="{{item.text.text}}">
+                    <text class="nick">{{item.text.nick}}：</text>
+                    <text class="txt">{{item.text.text}}</text>
+                </view>
+                <view class="bullet-text bullet-danmu {{index}} me" wx:if="{{item.myTxt}}">
+                    <view class="nick">
+                        {{item.nick}}：
+                        <view class="txt">{{item.myTxt}}
+                            <image class="fix-img" src="./images/1x1.png"></image>
+                        </view>
+                    </view>
+                </view>
+                <view class="bullet-text bullet-sysinfo {{index}}" wx:if="{{item.text.sysInfo}}">
+                    <text class="sysinfo">{{item.text.sysInfo}}</text>
+                </view>
+                <view class="bullet-text bullet-user {{index}}" wx:if="{{item.text.userInfo}}">
+                    <text class="nick">{{item.text.userInfo}}</text>
+                </view>
+                <view class="bullet-text bullet-gift {{index}}" wx:if="{{item.text.sendFlowerNick}}">
+                    <view class="inner">
+                        <view class="nick">
+                            <view class="nick-txt">{{item.text.sendFlowerNick}}</view>
+                            <view class="gift">送
+                                <image class="flower_free" src="./template/gongping-danmu/images/flower_free.png"></image>
+                            </view>
+                        </view>
+                    </view>
+                </view>
+                <view class="bullet-text bullet-gift {{index}}" wx:if="{{item.text.giftImg}}">
+                    <view class="inner">
+                        <view class="nick">
+                            <view class="nick-txt">{{item.text.nick}}</view>
+                            <view class="gift">送了{{item.text.giftCount}}个{{item.text.giftName}}
+                                <image class="giftImg" src="{{item.text.giftImg}}"></image>
+                            </view>
+                        </view>
+                    </view>
+                </view>
+            </block>
+        </view>
+    </view>
+</template>

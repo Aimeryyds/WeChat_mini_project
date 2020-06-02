@@ -1,0 +1,17 @@
+<import src="/dist/loadmore/index.wxml"></import>
+<import src="/pages/giftcard/templates/card/index.wxml"></import>
+<import src="/pages/giftcard/templates/carddetail/index.wxml"></import>
+<view class="container">
+    <scroll-view enableBackToTop bindscrolltolower="lower" scrollY="true" style="width:100%;height:calc(100vh - 108rpx)">
+        <view class="giftcard-my">
+            <navigator url="/pages/giftcard/detail/index?id={{item.id}}" wx:for="{{mycardData}}">
+                <template is="carddetail" data="{{status:item.status,imgUrl:item.imgUrl,text:item.name,price:item.originalPrice,range:item.platformRange,validTime:item.validTimeStr,forever:item.forever}}"></template>
+            </navigator>
+            <view id="loadmore">
+                <template is="zan-loadmore" data="{{loading:loadingmore}}"></template>
+            </view>
+        </view>
+        <view class="giftcard-nodata" wx:if="{{mycardData.length==0}}">暂时无数据</view>
+    </scroll-view>
+    <view bindtap="receiveLinkUrl" class="giftcard__btn">查看赠送记录</view>
+</view>

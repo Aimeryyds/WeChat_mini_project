@@ -1,0 +1,30 @@
+<template name="5c4a9a5a">
+    <view class="_div data-v-e7027422 {{isHideLectureGuide?'course-lecture':'course-lecture show-guide'}}">
+        <view class="_div data-v-e7027422 progress-container">
+            <view class="_div data-v-e7027422 bar-container">
+                <view class="_div data-v-e7027422 bar" style=" {{'width:'+(currentSentIdx+1)*100/sentenceList.length+'%'+';'}}"></view>
+            </view>
+            <view class="_div data-v-e7027422 text">{{currentSentIdx+1}}/{{sentenceList.length}}</view>
+        </view>
+        <view class="_div data-v-e7027422 sentence">
+            <view class="_div data-v-e7027422 label">·原句</view>
+            <view class="_div data-v-e7027422 content">
+                <rich-text class="_rich-text data-v-e7027422" nodes="{{currentSent.sentence_content}}"></rich-text>
+            </view>
+        </view>
+        <view class="_div data-v-e7027422 expression" key="{{index}}" wx:for="{{expList}}" wx:for-item="exp" wx:key="index">
+            <view class="_div data-v-e7027422 meta">{{exp.expression}}</view>
+            <view class="_div data-v-e7027422 detail">
+                <view class="_div data-v-e7027422 trans">{{exp.interpretation}}</view>
+                <rich-text class="_rich-text data-v-e7027422" nodes="{{exp.notes}}"></rich-text>
+            </view>
+        </view>
+        <view class="_div data-v-e7027422 btn-group">
+            <view class="_div data-v-e7027422" wx:if="{{currentSentIdx===0}}"></view>
+            <button bindtap="handleProxy" class="_button data-v-e7027422 btn flex-vhc" data-comkey="{{$k}}" data-eventid="{{'0'}}" wx:if="{{currentSentIdx>0}}">上一个</button>
+            <button bindtap="handleProxy" class="_button data-v-e7027422 btn flex-vhc" data-comkey="{{$k}}" data-eventid="{{'1'}}" wx:if="{{currentSentIdx<sentenceList.length-1}}">下一个</button>
+            <button bindtap="handleProxy" class="_button data-v-e7027422 btn flex-vhc finish" data-comkey="{{$k}}" data-eventid="{{'2'}}" wx:if="{{currentSentIdx===sentenceList.length-1}}">完成</button>
+        </view>
+        <image bindtap="handleProxy" class="_img data-v-e7027422 guide" data-comkey="{{$k}}" data-eventid="{{'3'}}" src="https://media-image1.baydn.com/storage_media_image/kvhfgj/e644d6c41e1bb51f24429cfa9a9d4261.032484bacd13ec0506267356f6d494c4.png" wx:if="{{!isHideLectureGuide}}"></image>
+    </view>
+</template>

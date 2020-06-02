@@ -1,0 +1,101 @@
+<view class="home-container">
+    <view class="box">
+        <view class="cu-bar search bg-white">
+            <view class="search-form round">
+                <text class="cuIcon-search"></text>
+                <input confirmType="search" placeholder="搜索保险产品" type="text"></input>
+            </view>
+            <view class="action">
+                <button class="cu-btn bg-blue shadow-blur round">搜索</button>
+            </view>
+            <view bindtap="goPhoneCall" class="cu-avatar bg-white">
+                <text class="iconfont.iconservice"></text>
+            </view>
+        </view>
+    </view>
+    <view class="header">
+        <swiper autoplay="false" bindchange="cardSwiper" circular="true" class="card-swiper {{DotStyle?'square-dot':'round-dot'}}" duration="500" indicatorActiveColor="#0081ff" indicatorColor="#8799a3" indicatorDots="true" interval="5000">
+            <swiper-item class="{{cardCur==index?'cur':''}}" wx:for="{{swiperList}}">
+                <view class="swiper-item">
+                    <image mode="aspectFill" src="{{item.url}}" wx:if="{{item.type=='image'}}"></image>
+                    <video autoplay loop muted controls="{{false}}" objectFit="cover" showPlayBtn="{{false}}" src="{{item.url}}" wx:if="{{item.type=='video'}}"></video>
+                </view>
+            </swiper-item>
+        </swiper>
+    </view>
+    <view class="padding bg-white solid-bottom">
+        <view class="cu-tag bg-orange light radius"></view>
+        <text decode="{{true}}" space="{{true}}" style="font-size:26rpx">&nbsp;&nbsp;&nbsp;&nbsp;一份保险，一份安心</text>
+    </view>
+    <swiper class="menus line-black">
+        <swiper-item class="menu-list">
+            <view bindtap="goh5Claim" class="menu">
+                <image src="/images/buy.png"></image>
+                <view class="menu-name">理赔办理</view>
+            </view>
+            <view bindtap="goOrder" class="menu">
+                <image src="/images/detail.png"></image>
+                <view class="menu-name">订单查询</view>
+            </view>
+            <view bindtap="goProposal" class="menu">
+                <image src="/images/search.png"></image>
+                <view class="menu-name">保单查询</view>
+            </view>
+            <view bindtap="goMy" class="menu">
+                <image src="/images/user.png"></image>
+                <view class="menu-name">我的信息</view>
+            </view>
+        </swiper-item>
+    </swiper>
+    <view class="home-content">
+        <view bindtap="goForm" class="padding-0 padding-bottom" data-type="CP00063">
+            <image class="advimg in-image" src="{{adv}}"></image>
+        </view>
+        <view class="content-title">
+            <view class="title">E保卡</view>
+        </view>
+        <view class="cu-card article {{isCard?'no-card':''}}">
+            <view class="bg-white">
+                <view class="flex padding-xs align-start">
+                    <view bindtap="goProductInfo" class="flex-sub bg-blue light padding-xl margin-xs radius">
+                        <view>E保卡激活  <text class="cuIcon-qr_code"></text>
+                        </view>
+                        <view class="text-sm">E-Card Activate</view>
+                    </view>
+                    <view bindtap="goQueryProposal" class="flex-sub bg-orange light padding-xl margin-xs radius">
+                        <view>E 保卡查询
+         <text class="cuIcon-order"></text>
+                        </view>
+                        <view class="text-sm">E-Card Search</view>
+                    </view>
+                </view>
+            </view>
+            <view class="content-title">
+                <view class="title">如何购买保险</view>
+            </view>
+            <view bindtap="goh5Buynote" class="cu-item shadow" style="background:#FFF;">
+                <view class="content">
+                    <image src="/images/qa.png"></image>
+                    <view class="desc">
+                        <view class="flex-sub text-left">
+                            <view class=" text-sm padding-xs">
+                                <text class="text-grey">第一步：通过手机号进行用户注册</text>
+                            </view>
+                            <view class=" text-sm padding-xs">
+                                <text class="text-grey">第二步：注册用户进行实名认证</text>
+                            </view>
+                            <view class="soild-bottom text-sm padding-xs">
+                                <text class="text-grey">第三步：用户登录后进行投保</text>
+                            </view>
+                        </view>
+                        <view class="padding-xs">
+                            <view class="cu-tag bg-red light sm round">电动车保险</view>
+                            <view class="cu-tag bg-green light sm round">实名认证</view>
+                            <view class="cu-tag bg-blue light sm round">在线投保</view>
+                        </view>
+                    </view>
+                </view>
+            </view>
+        </view>
+    </view>
+</view>

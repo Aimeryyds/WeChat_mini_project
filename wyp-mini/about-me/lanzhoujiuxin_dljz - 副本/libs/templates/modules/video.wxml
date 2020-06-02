@@ -1,0 +1,16 @@
+<template name="videoModule">
+    <view class="videoModule">
+        <view class="moduleTitle" wx:if="{{moduleInfo.pattern.e}}">
+            <text class="lines left-lines"></text>
+            <text>{{moduleInfo.content.title}}</text>
+            <text class="lines right-lines"></text>
+        </view>
+        <view class="videoPanel" style="background-color:{{moduleInfo.pattern.bg.t==1?moduleInfo.pattern.bg.c:''}}">
+            <video bindfullscreenchange="videoFullScreenChange" class="video" poster="{{moduleInfo.content.postFilePath}}" src="{{moduleInfo.content.filePath}}" style="border-radius:8rpx;"></video>
+            <view class="videoDescription" style="color:{{moduleInfo.pattern.de.t==2?moduleInfo.pattern.de.c:''}}" wx:if="{{moduleInfo.pattern.de.t!=1}}">
+                <template is="wxParse" data="{{wxParseData:moduleInfo.content.desc.nodes}}"></template>
+            </view>
+        </view>
+    </view>
+</template>
+<import src="/libs/wxParse/wxParse.wxml"></import>

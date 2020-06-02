@@ -1,0 +1,17 @@
+<import src="../../../pages/templates/card/card.wxml"></import>
+<view class="container">
+    <view class="cards_card-list" wx:if="{{cardlist.length>0}}">
+        <view class="cards-list_card-item" data-id="{{card.customerCardId}}" ontap="chooseCard" wx:for="{{cardlist}}" wx:for-item="card">
+            <template is="card" data="{{type:'small',cardName:card.cardName,platformName:card.platformName,cardNo:card.cardNo,termOfValidity:card.termOfValidity,logo:card.logo,cover:card.cover,coverValue:card.coverValue,type:'big'}}"></template>
+            <view style="text-align:center;font-size: 12px; color: #999;">{{card.rightsDiscount==2?'会员折扣'+card.discount+'折':''}}{{card.rightsPoints==2?'每消费'+card.money+'元,送'+card.point+'积分':''}}</view>
+        </view>
+        <view style="margin-top:80rpx">
+            <button class="zan-btn zan-btn--danger zan-btn--plain" ontap="nocard" style="font-size: 28rpx">暂不使用</button>
+        </view>
+    </view>
+    <view class="cards_no-card" wx:else>
+        <image src="http://imgcdnali.wfenxiao.com.cn/xcx/c/no_card.png" style="margin-top:100px;width:214rpx;height:150rpx"></image>
+        <text style="margin-top:20px;font-size:32rpx;color:#bbb;font-weight:bold">暂无可用会员卡</text>
+        <text style="margin-top:20px;font-size:28rpx;color:#ccc;">获取方式,可留意店家信息</text>
+    </view>
+</view>

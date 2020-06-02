@@ -1,0 +1,30 @@
+<template name="ae4a1946">
+    <view class="_div data-v-c69ae49c container" wx:if="{{!loading}}">
+        <view class="_div data-v-c69ae49c card-bg">
+            <view class="_div data-v-c69ae49c card-circle-gap">
+                <view class="_div data-v-c69ae49c circle left-circle"></view>
+                <view class="_div data-v-c69ae49c circle right-circle"></view>
+            </view>
+            <view class="_div data-v-c69ae49c card">
+                <view class="_div data-v-c69ae49c reading-done-icon"></view>
+                <view class="_div data-v-c69ae49c personal-info">
+                    <view class="_div data-v-c69ae49c avatar-outline">
+                        <image class="_img data-v-c69ae49c avatar" src="{{avatar}}"></image>
+                    </view>
+                    <view class="_div data-v-c69ae49c nickname">{{nickname}}</view>
+                </view>
+                <view class="_div data-v-c69ae49c prompt">在「扇贝阅读」读完一本英文原版书</view>
+                <image class="_img data-v-c69ae49c cover" src="{{cover}}"></image>
+                <view class="_div data-v-c69ae49c title">{{title}}</view>
+                <view class="_div data-v-c69ae49c word-count">读完 {{count}} 字</view>
+                <view class="_div data-v-c69ae49c reading-time">
+                    <view class="_i data-v-c69ae49c ib ib-clock-circle-o"></view>
+                    <label class="_span data-v-c69ae49c">阅读{{time}}</label>
+                </view>
+            </view>
+        </view>
+        <template is="7caa4dd5" data="{{...$root[$kk+'0'],$root:$root}}"></template>
+        <navigator class="_navigator data-v-c69ae49c next" hoverClass="none" openType="redirect" url="{{url}}" wx:if="{{nextArticleId}}">下一章</navigator>
+    </view>
+</template>
+<import src="/components/ShareButtonsGroup.vue.wxml"></import>

@@ -1,0 +1,61 @@
+<import src="/yb_shop/pages/pintuan/pages/template/orderslist.wxml"></import>
+<scroll-view class="scroll-view-x" scrollLeft="{{scrollLeft}}" scrollX="true">
+    <view class="scroll-view-item">
+        <view bindtap="swichNav" class="{{currentTab==0?'on':''}} font" data-current="0">全部</view>
+    </view>
+    <view class="scroll-view-item">
+        <view bindtap="swichNav" class="{{currentTab==1?'on':''}} font" data-current="1">待付款</view>
+    </view>
+    <view class="scroll-view-item">
+        <view bindtap="swichNav" class="{{currentTab==2?'on':''}} font" data-current="2">待成团</view>
+    </view>
+    <view class="scroll-view-item">
+        <view bindtap="swichNav" class="{{currentTab==3?'on':''}} font" data-current="3">待发货</view>
+    </view>
+    <view class="scroll-view-item">
+        <view bindtap="swichNav" class="{{currentTab==4?'on':''}} font" data-current="4">待收货</view>
+    </view>
+    <view class="scroll-view-item">
+        <view bindtap="swichNav" class="{{currentTab==5?'on':''}} font" data-current="5">退款中</view>
+    </view>
+    <view class="scroll-view-item">
+        <view bindtap="swichNav" class="{{currentTab==6?'on':''}} font" data-current="6">已完成</view>
+    </view>
+</scroll-view>
+<swiper bindchange="bindChange" class="swiper-box" current="{{currentTab}}" duration="300" style="height: {{windowHeight-35}}px;">
+    <swiper-item>
+        <scroll-view bindscrolltolower="scrolltolower" class="scroll-view-y" lowerThreshold="50" scrollTop="{{scrollTop}}" scrollWithAnimation="true" scrollY="true" style="height: {{windowHeight-35}}px;">
+            <template is="ordersList" data="{{ordersList:ordersList,loading:loading}}"></template>
+        </scroll-view>
+    </swiper-item>
+    <swiper-item>
+        <scroll-view bindscrolltolower="scrolltolower" class="scroll-view-y" lowerThreshold="50" scrollTop="{{scrollTop}}" scrollWithAnimation="true" scrollY="true" style="height: {{windowHeight-35}}px;">
+            <template is="ordersList" data="{{ordersList:ordersList,loading:loading}}"></template>
+        </scroll-view>
+    </swiper-item>
+    <swiper-item>
+        <scroll-view bindscrolltolower="scrolltolower" class="scroll-view-y" lowerThreshold="50" scrollTop="{{scrollTop}}" scrollWithAnimation="true" scrollY="true" style="height: {{windowHeight-35}}px;">
+            <template is="ordersList" data="{{ordersList:ordersList,loading:loading}}"></template>
+        </scroll-view>
+    </swiper-item>
+    <swiper-item>
+        <scroll-view bindscrolltolower="scrolltolower" class="scroll-view-y" lowerThreshold="50" scrollTop="{{scrollTop}}" scrollWithAnimation="true" scrollY="true" style="height: {{windowHeight-35}}px;">
+            <template is="ordersList" data="{{ordersList:ordersList,loading:loading}}"></template>
+        </scroll-view>
+    </swiper-item>
+    <swiper-item>
+        <scroll-view bindscrolltolower="scrolltolower" class="scroll-view-y" lowerThreshold="50" scrollTop="{{scrollTop}}" scrollWithAnimation="true" scrollY="true" style="height: {{windowHeight-35}}px;">
+            <template is="ordersList" data="{{ordersList:ordersList,loading:loading}}"></template>
+        </scroll-view>
+    </swiper-item>
+    <swiper-item>
+        <scroll-view bindscrolltolower="scrolltolower" class="scroll-view-y" lowerThreshold="50" scrollTop="{{scrollTop}}" scrollWithAnimation="true" scrollY="true" style="height: {{windowHeight-35}}px;">
+            <template is="ordersList" data="{{ordersList:ordersList,loading:loading}}"></template>
+        </scroll-view>
+    </swiper-item>
+    <swiper-item>
+        <scroll-view bindscrolltolower="scrolltolower" class="scroll-view-y" lowerThreshold="50" scrollTop="{{scrollTop}}" scrollWithAnimation="true" scrollY="true" style="height: {{windowHeight-35}}px;">
+            <template is="ordersList" data="{{ordersList:ordersList,loading:loading}}"></template>
+        </scroll-view>
+    </swiper-item>
+</swiper>

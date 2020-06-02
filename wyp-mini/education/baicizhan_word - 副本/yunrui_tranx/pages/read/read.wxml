@@ -1,0 +1,24 @@
+<view class="container">
+    <ad unitId="{{ad_id}}" wx:if="{{ad_id}}"></ad>
+    <view class="content">
+        <view>{{content}}</view>
+        <view class="flex voice" wx:if="{{finish}}">
+            <view catchtap="play" class="flex" data-type="standard">
+                <text class="margin-right-10">标准</text>
+                <image src="../../resource/images/icon05.png" style="width: 30rpx;height: 30rpx;"></image>
+            </view>
+            <view class="line"></view>
+            <view catchtap="play" class="flex" data-type="my">
+                <text class="margin-right-10">我的</text>
+                <image src="../../resource/images/icon05.png" style="width: 30rpx;height: 30rpx;"></image>
+            </view>
+        </view>
+    </view>
+    <view class="des" wx:if="{{finish}}">一天可以发布一条哦</view>
+    <view class="handle-btns" wx:if="{{finish}}">
+        <view catchtap="handleData" class="stress btn-common" data-type="stress">重读</view>
+        <view catchtap="handleData" class="btn-common" data-type="release">发布</view>
+    </view>
+    <image class="loading" mode="widthFix" src="../../resource/images/loading.gif" wx:if="{{!finish}}"></image>
+    <view catchtap="recordings" class="end-btn" wx:if="{{!finish}}">点击结束</view>
+</view>

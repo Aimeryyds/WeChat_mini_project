@@ -1,0 +1,49 @@
+<template name="c3669b56">
+    <view class="_div data-v-5dca4020 bookplan-wrapper plan-progress" style=" {{'background-image:'+'url('+coverUrl+')'+';'}}" wx:if="{{!isLoading}}">
+        <view class="_div data-v-5dca4020 img-overlay"></view>
+        <view class="_div data-v-5dca4020 logo"></view>
+        <view class="_div data-v-5dca4020 container">
+            <view class="_div data-v-5dca4020 progress-card">
+                <template is="417013ec" data="{{...$root[$kk+'0'],$root:$root}}"></template>
+                <view class="_div data-v-5dca4020 progress-title">书籍进度</view>
+                <view class="_div data-v-5dca4020 progress-number">{{completedArticleAmount}}/{{totalArticleAmount}}章</view>
+            </view>
+            <view class="_div data-v-5dca4020 progress-card">
+                <template is="417013ec" data="{{...$root[$kk+'1'],$root:$root}}"></template>
+                <view class="_div data-v-5dca4020 progress-title">完成天数</view>
+                <view class="_div data-v-5dca4020 progress-number">{{completedDays}}/{{totalDays}}天</view>
+            </view>
+        </view>
+        <view class="_div data-v-5dca4020 desc">
+            <view class="_div data-v-5dca4020">计划有效期内，读完全部书籍，即可获得计划完成奖励！</view>
+            <navigator class="_navigator data-v-5dca4020 nav" url="/pages/planFinish/main">查看细则</navigator>
+        </view>
+        <template is="30d1c216" data="{{...$root[$kk+'2'],$root:$root}}"></template>
+        <view class="_div data-v-5dca4020 achievement">
+            <view class="_div data-v-5dca4020 item title">
+                <view class="_div data-v-5dca4020 title-text">当日成就</view>
+                <view class="_div data-v-5dca4020 item-value status">
+                    <view class="_div data-v-5dca4020" style="color: #ffcf00" wx:if="{{isFinished}}">
+                        <view class="_i data-v-5dca4020 ib ib-check"></view>
+                    已完成
+                </view>
+                    <view class="_div data-v-5dca4020" wx:else>未完成</view>
+                </view>
+            </view>
+            <view class="_div data-v-5dca4020 item">
+                <view class="_div data-v-5dca4020">阅读章节</view>
+                <view class="_div data-v-5dca4020 item-value">{{articleAmount}}章</view>
+            </view>
+            <view class="_div data-v-5dca4020 item">
+                <view class="_div data-v-5dca4020">阅读量</view>
+                <view class="_div data-v-5dca4020 item-value">{{wordAmount}}词</view>
+            </view>
+            <view class="_div data-v-5dca4020 item">
+                <view class="_div data-v-5dca4020">阅读时长</view>
+                <view class="_div data-v-5dca4020 item-value">{{readTimeMins}}分钟</view>
+            </view>
+        </view>
+    </view>
+</template>
+<import src="/pages/planProgress/ProgressCircle.vue.wxml"></import>
+<import src="/components/Calendar.vue.wxml"></import>

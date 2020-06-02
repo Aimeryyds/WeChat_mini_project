@@ -1,0 +1,162 @@
+<view class="wrap">
+    <view class="w_item">
+        <view class="w_left">订单状态：</view>
+        <view class="w_right">{{result.order_status_desc}}</view>
+    </view>
+    <view class="w_item">
+        <view class="w_left">订单编号：</view>
+        <text class="w_right" selectable="true">{{result.ordersn}}</text>
+    </view>
+    <view class="w_item">
+        <view class="w_left">下单时间：</view>
+        <view class="w_right">{{times}}</view>
+    </view>
+</view>
+<view class="line"></view>
+<view class="wrap">
+    <view class="w_item">
+        <view class="w_left">商品金额：</view>
+        <view class="w_right" wx:if="{{result.paytype==33}}">{{result.price}}<text style="color:red;margin-left:10rpx;">(会员卡抵扣{{result.goods_list[0].price}}元)</text>
+        </view>
+        <view class="w_right" wx:else>{{result.price}}</view>
+    </view>
+    <view class="w_item">
+        <view class="w_left">收货地址：</view>
+        <view class="w_right">{{result.address_info.province}}{{result.address_info.city}}{{result.address_info.area}}{{result.address_info.address}}</view>
+    </view>
+    <view class="w_item">
+        <view class="w_left">收货人：</view>
+        <view class="w_right">{{result.address_info.realname}}</view>
+    </view>
+</view>
+<view class="line"></view>
+<block wx:if="{{result.store}}">
+    <view class="wrap">
+        <view class="w_item">
+            <view class="w_left">门店名称：</view>
+            <view class="w_right">{{result.store.storename}}</view>
+        </view>
+        <view class="w_item">
+            <view class="w_left">门店地址：</view>
+            <view class="w_right">{{result.store.address}}</view>
+        </view>
+        <view class="w_item">
+            <view class="w_left">配送人员：</view>
+            <view class="w_right">{{result.store.realname}}</view>
+        </view>
+        <view class="w_item">
+            <view class="w_left">联系电话：</view>
+            <view class="w_right">{{result.store.mobile}}</view>
+        </view>
+    </view>
+    <view class="line"></view>
+</block>
+<view class="store">
+    <view bindtap="joinDetail" class="st_item" data-id="{{item.goodsid}}" wx:for="{{result.goods_list}}" wx:key="index">
+        <image class="img" src="{{item.thumb}}"></image>
+        <view class="view_td">
+            <view class="title">{{item.title}}</view>
+            <view class="view_ps">
+                <view class="price">￥
+                        <text style="font-size:32rpx;"> {{item.price}}</text>
+                </view>
+                <view class="sum">x {{item.total}}</view>
+            </view>
+        </view>
+    </view>
+</view>
+<view class="line"></view>
+<block wx:if="{{result.remark}}">
+    <view class="wrap">
+        <view class="w_item">
+            <view class="w_left">备注：</view>
+            <view class="w_right">{{result.remark}}</view>
+        </view>
+    </view>
+    <view class="line"></view>
+</block>
+<view class="Subtotal">
+    <view class="Sub_item" wx:if="{{result.discountprice!='0.00'}}">
+        <view>商品优惠</view>
+        <view class="red">
+            <text>-￥{{result.discountprice}}</text>
+        </view>
+    </view>
+    <view class="Sub_item">
+        <view>邮费</view>
+        <view class="red">
+            <text wx:if="{{result.dispatchprice=='0.00'}}">包邮</text>
+            <text wx:else>￥{{result.dispatchprice}}</text>
+        </view>
+    </view>
+    <view class="Sub_item">
+        <view>商品总额</view>
+        <view class="red">
+            <text>￥{{result.goodsprice}}</text>
+        </view>
+    </view>
+    <view class="Sub_item" wx:if="{{result.couponprice!='0.00'}}">
+        <view>优惠券优惠</view>
+        <view class="red">
+            <text>-￥{{result.couponprice}}</text>
+        </view>
+    </view>
+    <view class="Sub_item" wx:if="{{result.deductcredit!='0'}}">
+        <view>积分抵扣</view>
+        <view class="red">
+            <text>-￥{{result.deductcredit}}</text>
+        </view>
+    </view>
+    <view class="total">
+        实付金额：
+        <text class="red">￥{{result.price}}</text>
+    </view>
+</view>
+<view class="line"></view>
+<view class="seller" wx:if="{{refundMsg}}">
+    <view>退款详情:</view>
+    <view class="refundMsg">{{refundMsg}}</view>
+    <view class="refundReply" wx:if="{{refundReply}}">卖家回复:{{refundReply}}</view>
+</view>
+<view class="Order">
+    <block wx:if="{{status=='1'}}">
+        <view bindtap="evaluation" data-index="{{result.id}}" style="background:64C164;color: #fff;" wx:if="{{result.iscomment=='0'&&result.status=='3'}}">评价</view>
+        <block wx:else></block>
+    </block>
+    <view bindtap="logistics" data-index="{{result.id}}" style="background:#64C164;color: #fff;" wx:elif="{{status=='2'}}">查看物流信息</view>
+    <block wx:else></block>
+</view>
+<view class="Order" wx:if="{{currIndex==0}}">
+    <view bindtap="pay" data-index="{{result.id}}" style="background:#64C164;color: #fff;">支付订单</view>
+    <view bindtap="cancel" data-index="{{result.id}}" style="background-color:#64C164;color: #fff;">取消订单</view>
+</view>
+<view class="Order" style="justify-content: space-between;" wx:if="{{currIndex==1&&refundstate==0&&!hexiao}}">
+    <view bindtap="applyRefund" data-index="{{result.id}}" style="background-color:#64C164;color: #fff;">申请退款</view>
+    <view bindtap="show" data-index="{{result.id}}" style="background-color:#FFB45D;color: #fff;margin:20rpx 0 0 20rpx;" wx:if="{{url}}">消费码</view>
+</view>
+<view class="Order" style="justify-content: space-between;" wx:if="{{currIndex==2&&refundstate==0&&!hexiao}}">
+    <view bindtap="applyRefund" data-index="{{result.id}}" style="background-color:#64C164;color: #fff;">申请退款</view>
+    <view bindtap="show" data-index="{{result.id}}" style="background-color:#FFB45D;color: #fff;margin:20rpx 0 0 20rpx;" wx:if="{{url}}">消费码</view>
+</view>
+<view class="Order" wx:if="{{currIndex==3&&refundstate==0}}">
+    <view data-index="{{result.id}}" style="background:#64C164;color:#fff;">交易完成</view>
+</view>
+<view class="Order" wx:if="{{status==-1&&refundstate==0}}">
+    <view data-index="{{result.id}}" style="background:#64C164;color:#fff;">交易关闭</view>
+</view>
+<view class="Order" wx:if="{{refundstate!=0}}">
+    <view bindtap="viewprogress" data-index="{{result.id}}" style="background-color:#64C164;color: #fff;width:280rpx;">查看退款进度</view>
+    <view bindtap="withdraw" data-index="{{result.id}}" style="background-color:#64C164;color: #fff;">取消申请</view>
+    <view bindtap="complaint" data-index="{{result.id}}" style="background-color:#64C164;color: #fff;">提出问题</view>
+</view>
+<movable-area style="height: 100%;width: 100%;position: fixed;right: 0;top:0; pointer-events: none;" wx:if="{{customerserver}}">
+    <movable-view inertia class="movableView" damping="30" direction="all" friction="1" style="height: 50px; width: 50px; position: absolute;z-index: 100;top:60%;right:10rpx;pointer-events: auto;" x="325">
+        <contact-button sessionFrom="weapp" size="80" style="opacity:0;" type="default-light" wx:if="{{customerserver}}"></contact-button>
+        <view style="width:74rpx;height:74rpx;background-image:url({{customerserver}});background-size:cover;position:absolute;top:0;right:0x;"></view>
+    </movable-view>
+</movable-area>
+<view bindtap="show" style="position: fixed;top:0;width:100%;height: 100%;background-color: rgba(0,0,0,.8);" wx:if="{{show=='2'}}">
+    <image mode="widthFix" src="{{url}}" style="width: 60%;margin:20% 20%;position: fixed;top:12%;" wx:if="{{show=='2'}}"></image>
+</view>
+<view bindtap="to_use" style="width:94%;height:75rpx;line-height:75rpx;font-size:25rpx;text-align:center;border-radius:8rpx;background-color:#1AAD19;color: #fff;margin:20rpx  3% " wx:if="{{hexiao}}">确认核销</view>
+<view style="width:100%;height:100rpx;"></view>

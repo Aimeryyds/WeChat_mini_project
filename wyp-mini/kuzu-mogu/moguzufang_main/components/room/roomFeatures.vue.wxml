@@ -1,0 +1,11 @@
+<template name="243dd36c">
+    <view class="_view 243dd36c {{'roomFeatures'+passClass}}" wx:if="{{roomFeatures.length>0}}">
+        <view class="_view 243dd36c h1">房源特色</view>
+        <view class="_view 243dd36c {{'ul '+(more?'more':'')}}">
+            <view class="_view 243dd36c li" key="{{index}}" wx:for="{{roomFeatures}}" wx:key="index">{{item}}</view>
+        </view>
+        <view class="_view 243dd36c p" wx:if="{{roomFeatures.length>5}}">
+            <text bindtap="handleProxy" class="_text 243dd36c span" data-comkey="{{$k}}" data-eventid="{{'243dd36c-0'}}">{{more?'收起':'更多'}}</text>
+        </view>
+    </view>
+</template>

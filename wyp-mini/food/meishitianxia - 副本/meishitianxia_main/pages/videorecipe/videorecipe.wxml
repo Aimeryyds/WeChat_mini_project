@@ -1,0 +1,26 @@
+<view class="vlist">
+    <navigator class="vlist_item" url="../recipe_info/recipe_info?id={{item.id}}" wx:for="{{recipelist}}" wx:key="recipelist_new">
+        <view class="vlist_c load">
+            <image class="vlist_img  r4{{item.r4}}" src="{{item.sosopic}}"></image>
+        </view>
+        <view class="vlist_detail2">
+            <view class="vlist_b1">{{item.title}}</view>
+            <view class="vlist_b2" wx:if="{{item.collnum>0}}">{{item.collnum}}人收藏</view>
+        </view>
+        <view class="time" wx:if="{{item.videotime}}">{{item.videotime}}</view>
+    </navigator>
+</view>
+<view class="btn_do">
+    <form catchsubmit="shareSubmit" reportSubmit="true">
+        <button class="share" formType="submit" openType="share">
+            <image class="icon_fav" src="../../image/share.png"></image>
+            <text>分享给朋友</text>
+        </button>
+    </form>
+</view>
+<view class="loading" wx:if="{{loading}}">
+    <image class="loading_img" src="../../image/loading-32-32.gif"></image>
+</view>
+<view class="loading_end" wx:if="{{loading_end}}"></view>
+<view class="loading_fail" wx:if="{{loading_fail}}"></view>
+<view>　</view>

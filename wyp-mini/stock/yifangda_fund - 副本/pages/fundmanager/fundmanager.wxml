@@ -1,0 +1,20 @@
+<view bindtap="back" class="goback">
+    <view>
+        <image src="../image/back.jpg" style="width:25px;height:20px;"></image>
+    </view>
+    <view class="bk">返回</view>
+</view>
+<view class="list1">
+    <view class="head">
+        <view>基金经理{{fundmanager}}管理的基金有：</view>
+    </view>
+    <view class="list2">
+        <view class="item" wx:for="{{fundlist}}" wx:for-item="it">
+            <view bindtap="getcode" class="name" id="{{it.arrfirstcode}}">
+                <view bindtap="gogogo">
+      {{it.arrname}}
+    </view>
+            </view>
+        </view>
+    </view>
+</view>

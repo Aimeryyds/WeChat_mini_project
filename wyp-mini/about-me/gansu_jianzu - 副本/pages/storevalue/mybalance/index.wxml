@@ -1,0 +1,23 @@
+<view class="container">
+    <view class="mybanlance-info">
+        <view class="mybanlance-info__left">
+            <view>我的余额（元）</view>
+            <view class="mybanlance-info__price">{{balanceData.balance}}</view>
+        </view>
+        <navigator class="mybanlance-info__btn" hoverClass="none" url="/pages/storevalue/mystore/index">充值</navigator>
+    </view>
+    <view class="gongqiu__tab">
+        <view bindtap="statusTap" class="gongqiu__tab-item {{index==currentType?'gongqiu__tab--active':''}}" data-index="{{index}}" wx:for="{{statusType}}" wx:key="index">
+        {{item}}
+    </view>
+    </view>
+    <scroll-view enableBackToTop scrollY bindscroll="handlescroll" bindscrolltolower="lower" scrollTop="{{scrollTop}}" style="width:100%;height: 70vh;">
+        <view class="mybanlance-list" wx:for="{{balanceList}}" wx:key="index">
+            <view class="mybanlance-list__left">
+                <view>{{item.operateType}}</view>
+                <view class="mybanlance-list__time">{{item.createdTime}}   {{item.operateDetail}}</view>
+            </view>
+            <view class="mybanlance-list__price" style="color:{{item.operateType=='消费'?'#f22222':'green'}}">{{item.operateType=='消费'?'-':'+'}}¥{{item.accountAmount}}</view>
+        </view>
+    </scroll-view>
+</view>

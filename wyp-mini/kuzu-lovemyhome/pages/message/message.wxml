@@ -1,0 +1,61 @@
+<view class="xiaoxiBox">
+    <view class="xiaoxi_list_box">
+        <view bindtap="toLogin" class="listItem" wx:if="{{loginStatus==0}}">
+            <view class="list_head">
+                <image mode="widthFix" src="https://res.5i5j.com/cache/weixin/common/moHead.png"></image>
+            </view>
+            <view class="list_con">
+                <view class="listInfos">
+                    <view class="list_name">点击注册/登录</view>
+                </view>
+                <view class="list_con_main">登录后可与经纪人在线咨询</view>
+            </view>
+        </view>
+        <view class="listItem" wx:if="{{loginStatus==1&&list.length>0}}" wx:for="{{list}}" wx:for-index="k">
+            <view bindtap="toIm" data-bid="{{v.brokerInfo.hx_id}}" wx:for="{{item}}" wx:for-item="v">
+                <view class="list_head">
+                    <image binderror="imgError" data-index="{{index}}" data-k="{{k}}" mode="widthFix" src="{{v.brokerInfo.join_head_img==null||v.brokerInfo.join_head_img==''?'https://res.5i5j.com/weixin/common/default_broker_404.png':v.brokerInfo.join_head_img}}"></image>
+                </view>
+                <view class="list_con">
+                    <view class="listInfos">
+                        <view class="list_name">{{v.brokerInfo.name}}</view>
+                        <view class="list_tags">{{v.brokerInfo.shopname}}</view>
+                    </view>
+                    <view class="list_con_main">
+                        <rich-text nodes="{{v.message_text_content}}" space="nbsp"></rich-text>
+                    </view>
+                </view>
+                <view class="list_time">
+                    <view class="listDays">{{v.in_date}}</view>
+                    <text class="listNums" wx:if="{{v.is_viewed_num>0&&v.is_viewed_num<=99}}">{{v.is_viewed_num}}</text>
+                    <text class="listNums" wx:elif="{{v.is_viewed_num>99}}">...</text>
+                </view>
+            </view>
+        </view>
+        <view class="yixianshi" hidden="{{showAllData}}">没有更多了</view>
+    </view>
+    <view class="noMessage" wx:if="{{loginStatus==1&&list.length==0}}">
+        <image src="https://res.5i5j.com/cache/weixin/common/no-house.png"></image>
+        <view class="noText">
+            <text>您还没有与经纪人的对话</text>
+            <text>快去发现你心仪的房子吧！</text>
+        </view>
+        <view bindtap="toSale" class="mesBtn">去发现</view>
+    </view>
+</view>
+<view class="bottom-nav _flex _row _icenter _around">
+    <view bindtap="toHome" class="b-navitem">
+        <image src="/img/resources/bar-home.png"></image>
+        <text>首页</text>
+    </view>
+    <view class="b-navitem b-nav-cur">
+        <image src="/img/resources/bar-message-cur.png"></image>
+        <text>消息</text>
+        <text class="messageNumber" wx:if="{{unReadNum>0}}">{{unReadNum}}</text>
+    </view>
+    <view bindtap="toUser" class="b-navitem">
+        <image src="/img/resources/bar-my.png"></image>
+        <text>我的</text>
+    </view>
+</view>
+<wxs module="replace" src="message.wxs" />

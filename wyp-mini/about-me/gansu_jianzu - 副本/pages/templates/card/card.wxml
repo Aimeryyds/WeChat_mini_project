@@ -1,0 +1,17 @@
+<template name="card">
+    <view class="cards_card-item cards_card-item-{{type||'small'}}" onTap="onTapCard" style="background: {{cover==2?'url('+coverValue+') no-repeat ':coverValue}};background-size: cover; ">
+        <view class="cards_card-item_header">
+            <image class="cards_card-item_header-logo" mode="scaleToFill" src="{{logo}}"></image>
+            <text class="cards_card-item_header-store">{{platformName}}</text>
+        </view>
+        <view class="cards_card-item_name">
+            {{cardName}}
+        </view>
+        <view class="cards_card-item_num" wx:if="{{cardNo}}">
+            NO: {{cardNo}}
+        </view>
+        <view class="cards_card-item_tip" wx:if="{{status==3}}">
+          {{status==3?'已过期':''}}
+        </view>
+    </view>
+</template>

@@ -1,0 +1,22 @@
+<view class="openCity">
+    <view class="container">
+        <view class="top" id="scroll-views-top" wx:if="{{isHide}}">
+            <view class="top-message">当前定位城市：</view>
+            <view class="top-city">{{locationCity}}</view>
+            <view class="top-message">所有已经开通学而思的城市：</view>
+        </view>
+        <scroll-view scrollIntoView="{{scrollInfo.intoview}}" scrollWithAnimation="scroll-with-animation" scrollY="{{scrollInfo.scrollY}}" style="height:{{getHei}}px">
+            <view class="container-city" wx:for="{{Citylist}}" wx:for-index="city_index" wx:for-item="item_city" wx:key="city_index">
+                <view class="container-city-index" id="{{city_index}}">{{city_index}}</view>
+                <view class="container-cityName" wx:for="{{Citylist[city_index]}}" wx:for-index="citylist_index" wx:for-item="item_citylist" wx:key="citylist_index">
+                    <view bindtap="getCityCode" class="container-city-name" data-wpygetcitycode-a="{{item_citylist}}">
+                                {{item_citylist.name}}<text class="iconfont icon-duigou" wx:if="{{item_citylist.active}}"></text>
+                    </view>
+                </view>
+            </view>
+        </scroll-view>
+        <view class="container-index">
+            <view bindtap="rollpos" class="container-index-item" data-wpyrollpos-a="{{item_letter}}" wx:for="{{Cityletter}}" wx:for-index="letter_index" wx:for-item="item_letter" wx:key="letter_index">{{item_letter}}</view>
+        </view>
+    </view>
+</view>

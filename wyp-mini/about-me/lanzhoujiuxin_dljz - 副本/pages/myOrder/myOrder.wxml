@@ -1,0 +1,190 @@
+<view class="swiper-tab">
+    <view class="swiper-tab-list {{currentTab==0?'on':''}}">
+        <view bindtap="swichNav" class="navItem" data-current="0" style="color: {{currentTab==0?globalColor:''}}; border-color: {{currentTab==0?globalColor:''}}">全部</view>
+    </view>
+    <view class="swiper-tab-list {{currentTab==1?'on':''}}">
+        <view bindtap="swichNav" class="navItem" data-current="1" style="color: {{currentTab==1?globalColor:''}}; border-color: {{currentTab==1?globalColor:''}}">待支付</view>
+    </view>
+    <view class="swiper-tab-list {{currentTab==2?'on':''}}">
+        <view bindtap="swichNav" class="navItem" data-current="2" style="color: {{currentTab==2?globalColor:''}}; border-color: {{currentTab==2?globalColor:''}}">进行中</view>
+    </view>
+    <view class="swiper-tab-list {{currentTab==3?'on':''}}">
+        <view bindtap="swichNav" class="navItem" data-current="3" style="color: {{currentTab==3?globalColor:''}}; border-color: {{currentTab==3?globalColor:''}}">已完成</view>
+    </view>
+    <view class="swiper-tab-list {{currentTab==4?'on':''}}">
+        <view bindtap="swichNav" class="navItem" data-current="4" style="color: {{currentTab==4?globalColor:''}}; border-color: {{currentTab==4?globalColor:''}}">已取消 </view>
+    </view>
+</view>
+<swiper bindchange="bindChange" class="swiper-box" current="{{currentTab}}" duration="300" style="height:{{winHeight-40}}px">
+    <swiper-item class="myOrderSwiperItem">
+        <view class="service-main service-main-nav">
+            <view class="order-content" wx:if="{{orderList.length>0}}" wx:for="{{orderList}}" wx:for-item="orderInfo">
+                <view class="order-item-wrap">
+                    <view class="order-item-header">
+                        <text class="orderId">{{formType==1?'咨询单':'订单'}}号：{{orderInfo.orderNum}}</text>
+                        <text class="order-status" style="color: {{globalColor}};">{{orderInfo.statusStr}}</text>
+                    </view>
+                    <view class="order-item-content">
+                        <view class="order-img-wrap {{orderInfo.service.status==1?'order-img-off':''}}{{orderInfo.service.status==2?'order-img-delete':''}}">
+                            <image class="spread" src="{{orderInfo.service.pic.url}}"></image>
+                        </view>
+                        <view class="order-info-wrap">
+                            <view class="order-name ellipsis">{{orderInfo.service.name}}</view>
+                            <view class="order-abstract ellipsis">{{orderInfo.service.summary}}</view>
+                            <view class="order-price-wrap">
+                                <text class="selling-price" style="color: {{globalColor}};">￥{{orderInfo.service.promotionPrice>0?orderInfo.service.promotionPrice:orderInfo.service.price}}</text>
+                                <text class="original-price" wx:if="{{orderInfo.service.promotionPrice>0}}">￥{{orderInfo.service.price}}</text>
+                            </view>
+                        </view>
+                    </view>
+                    <view class="order-item-footer" wx:if="{{orderInfo.status==0}}">
+                        <view bindtap="finishOrder" class="order-btn complete-btn" data-orderId="{{orderInfo.id}}" style="color: {{globalColor}}; border-color: {{globalColor}}">完成{{formType==1?'咨询':'预约'}}</view>
+                        <view bindtap="cancelOrder" class="order-btn cancel-btn" data-orderId="{{orderInfo.id}}" data-payType="{{orderInfo.payType}}">取消{{formType==1?'咨询':'预约'}}</view>
+                    </view>
+                    <view class="order-item-footer" wx:if="{{orderInfo.status==3}}">
+                        <view bindtap="payOrder" class="order-btn complete-btn" data-order="{{orderInfo}}" style="color: {{globalColor}}; border-color: {{globalColor}}">立即支付</view>
+                        <view bindtap="waitPayCancel" class="order-btn cancel-btn" data-orderId="{{orderInfo.id}}" data-status="{{orderInfo.status}}">取消{{formType==1?'咨询':'预约'}}</view>
+                    </view>
+                </view>
+            </view>
+            <view class="orderEmpty" wx:if="{{orderList.length==0}}">
+                <view class="imageWrap">
+                    <image class="spread" src="http://qz.faisys.com/image/wxImage/empty-3.png"></image>
+                </view>
+                <view class="des">还没有相关的订单呢</view>
+            </view>
+        </view>
+    </swiper-item>
+    <swiper-item class="myOrderSwiperItem">
+        <view class="service-main service-main-nav">
+            <view class="order-content" wx:if="{{orderList.length>0}}" wx:for="{{orderListWaitPay}}" wx:for-item="orderInfo">
+                <view class="order-item-wrap">
+                    <view class="order-item-header">
+                        <text class="orderId">{{formType==1?'咨询单':'订单'}}号：{{orderInfo.orderNum}}</text>
+                        <text class="order-status" style="color: {{globalColor}};">{{orderInfo.statusStr}}</text>
+                    </view>
+                    <view class="order-item-content">
+                        <view class="order-img-wrap {{orderInfo.service.status==1?'order-img-off':''}}{{orderInfo.service.status==2?'order-img-delete':''}}">
+                            <image class="spread" src="{{orderInfo.service.pic.url}}"></image>
+                        </view>
+                        <view class="order-info-wrap">
+                            <view class="order-name ellipsis">{{orderInfo.service.name}}</view>
+                            <view class="order-abstract ellipsis">{{orderInfo.service.summary}}</view>
+                            <view class="order-price-wrap">
+                                <text class="selling-price" style="color: {{globalColor}};">￥{{orderInfo.service.promotionPrice>0?orderInfo.service.promotionPrice:orderInfo.service.price}}</text>
+                                <text class="original-price" wx:if="{{orderInfo.service.promotionPrice>0}}">￥{{orderInfo.service.price}}</text>
+                            </view>
+                        </view>
+                    </view>
+                    <view class="order-item-footer">
+                        <view bindtap="payOrder" class="order-btn complete-btn" data-order="{{orderInfo}}" style="color: {{globalColor}}; border-color: {{globalColor}}">立即支付</view>
+                        <view bindtap="waitPayCancel" class="order-btn cancel-btn" data-orderId="{{orderInfo.id}}" data-status="{{orderInfo.status}}">取消{{formType==1?'咨询':'预约'}}</view>
+                    </view>
+                </view>
+            </view>
+            <view class="orderEmpty" wx:if="{{orderListWaitPay.length==0}}">
+                <view class="imageWrap">
+                    <image class="spread" src="http://qz.faisys.com/image/wxImage/empty-3.png"></image>
+                </view>
+                <view class="des">还没有相关的订单呢</view>
+            </view>
+        </view>
+    </swiper-item>
+    <swiper-item class="myOrderSwiperItem">
+        <view class="service-main service-main-nav">
+            <view class="order-content" wx:if="{{orderListProcess.length>0}}" wx:for="{{orderListProcess}}" wx:for-item="orderInfo">
+                <view class="order-item-wrap">
+                    <view class="order-item-header">
+                        <text class="orderId">{{formType==1?'咨询单':'订单'}}号：{{orderInfo.orderNum}}</text>
+                        <text class="order-status" style="color: {{globalColor}};">{{orderInfo.statusStr}}</text>
+                    </view>
+                    <view class="order-item-content">
+                        <view class="order-img-wrap {{orderInfo.service.status==1?'order-img-off':''}}{{orderInfo.service.status==2?'order-img-delete':''}}">
+                            <image class="spread" src="{{orderInfo.service.pic.url}}"></image>
+                        </view>
+                        <view class="order-info-wrap">
+                            <view class="order-name ellipsis">{{orderInfo.service.name}}</view>
+                            <view class="order-abstract ellipsis">{{orderInfo.service.summary}}</view>
+                            <view class="order-price-wrap">
+                                <text class="selling-price" style="color: {{globalColor}};">￥{{orderInfo.service.promotionPrice>0?orderInfo.service.promotionPrice:orderInfo.service.price}}</text>
+                                <text class="original-price" wx:if="{{orderInfo.service.promotionPrice>0}}">￥{{orderInfo.service.price}}</text>
+                            </view>
+                        </view>
+                    </view>
+                    <view class="order-item-footer" wx:if="{{orderInfo.status!=5}}">
+                        <view bindtap="finishOrder" class="order-btn complete-btn" data-orderId="{{orderInfo.id}}" style="color: {{globalColor}}; border-color: {{globalColor}}">完成{{formType==1?'咨询':'预约'}}</view>
+                        <view bindtap="cancelOrder" class="order-btn cancel-btn" data-orderId="{{orderInfo.id}}" data-payType="{{orderInfo.payType}}">取消{{formType==1?'咨询':'预约'}}</view>
+                    </view>
+                </view>
+            </view>
+            <view class="orderEmpty" wx:if="{{orderListProcess.length==0}}">
+                <view class="imageWrap">
+                    <image class="spread" src="http://qz.faisys.com/image/wxImage/empty-3.png"></image>
+                </view>
+                <view class="des">还没有相关的订单呢</view>
+            </view>
+        </view>
+    </swiper-item>
+    <swiper-item class="myOrderSwiperItem">
+        <view class="service-main service-main-nav">
+            <view class="order-content" wx:if="{{orderListFinish.length>0}}" wx:for="{{orderListFinish}}" wx:for-item="orderInfo">
+                <view class="order-item-wrap">
+                    <view class="order-item-header">
+                        <text class="orderId">{{formType==1?'咨询单':'订单'}}号：{{orderInfo.orderNum}}</text>
+                        <text class="order-status" style="color: {{globalColor}};">{{orderInfo.statusStr}}</text>
+                    </view>
+                    <view class="order-item-content">
+                        <view class="order-img-wrap {{orderInfo.service.status==1?'order-img-off':''}}{{orderInfo.service.status==2?'order-img-delete':''}}">
+                            <image class="spread" src="{{orderInfo.service.pic.url}}"></image>
+                        </view>
+                        <view class="order-info-wrap">
+                            <view class="order-name ellipsis">{{orderInfo.service.name}}</view>
+                            <view class="order-abstract ellipsis">{{orderInfo.service.summary}}</view>
+                            <view class="order-price-wrap">
+                                <text class="selling-price" style="color: {{globalColor}};">￥{{orderInfo.service.promotionPrice>0?orderInfo.service.promotionPrice:orderInfo.service.price}}</text>
+                                <text class="original-price" wx:if="{{orderInfo.service.promotionPrice>0}}">￥{{orderInfo.service.price}}</text>
+                            </view>
+                        </view>
+                    </view>
+                </view>
+            </view>
+            <view class="orderEmpty" wx:if="{{orderListFinish.length==0}}">
+                <view class="imageWrap">
+                    <image class="spread" src="http://qz.faisys.com/image/wxImage/empty-3.png"></image>
+                </view>
+                <view class="des">还没有相关的订单呢</view>
+            </view>
+        </view>
+    </swiper-item>
+    <swiper-item class="myOrderSwiperItem">
+        <view class="service-main service-main-nav">
+            <view class="order-content" wx:if="{{orderListCancel.length>0}}" wx:for="{{orderListCancel}}" wx:for-item="orderInfo">
+                <view class="order-item-wrap">
+                    <view class="order-item-header">
+                        <text class="orderId">{{formType==1?'咨询单':'订单'}}号：{{orderInfo.orderNum}}</text>
+                        <text class="order-status" style="color: {{globalColor}};">{{orderInfo.statusStr}}</text>
+                    </view>
+                    <view class="order-item-content">
+                        <view class="order-img-wrap {{orderInfo.service.status==1?'order-img-off':''}}{{orderInfo.service.status==2?'order-img-delete':''}}">
+                            <image class="spread" src="{{orderInfo.service.pic.url}}"></image>
+                        </view>
+                        <view class="order-info-wrap">
+                            <view class="order-name ellipsis">{{orderInfo.service.name}}</view>
+                            <view class="order-abstract ellipsis">{{orderInfo.service.summary}}</view>
+                            <view class="order-price-wrap">
+                                <text class="selling-price" style="color: {{globalColor}};">￥{{orderInfo.service.promotionPrice>0?orderInfo.service.promotionPrice:orderInfo.service.price}}</text>
+                                <text class="original-price" wx:if="{{orderInfo.service.promotionPrice>0}}">￥{{orderInfo.service.price}}</text>
+                            </view>
+                        </view>
+                    </view>
+                </view>
+            </view>
+            <view class="orderEmpty" wx:if="{{orderListCancel.length==0}}">
+                <view class="imageWrap">
+                    <image class="spread" src="http://qz.faisys.com/image/wxImage/empty-3.png"></image>
+                </view>
+                <view class="des">还没有相关的订单呢</view>
+            </view>
+        </view>
+    </swiper-item>
+</swiper>

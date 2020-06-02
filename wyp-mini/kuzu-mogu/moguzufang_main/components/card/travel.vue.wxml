@@ -1,0 +1,27 @@
+<template name="8fecc90e">
+    <view class="_view 8fecc90e">
+        <view class="_view 8fecc90e roomCard-container" key="{{index}}" wx:for="{{list}}" wx:key="index">
+            <view class="_view 8fecc90e time-box">
+                <image alt class="_img 8fecc90e time-icon" src="https://assets.mgzf.com/h5-static/images/travel/time.png"></image>
+                <text class="_text 8fecc90e date">{{item.weekText}}</text>
+                <text class="_text 8fecc90e time">{{item.timeText}}</text>
+            </view>
+            <view bindtap="handleProxy" class="_view 8fecc90e" data-comkey="{{$k}}" data-eventid="{{'8fecc90e-0-'+index}}">
+                <view class="_view 8fecc90e map-box">
+                    <image class="_image 8fecc90e map-image" src="{{'http://api.map.baidu.com/staticimage/v2?ak=n5MVVYYkXAD90EC9mMALA1hU&copyright=1&center='+item.lng+','+item.lat+'&width=345&height=160&zoom=16&markers='+item.lng+','+item.lat+'&markerStyles=-1,http://image.mgzf.com/common/vic/renter/h5/vic_h5_mapicon.png'}}"></image>
+                    <view class="_view 8fecc90e locationTips">{{item.location}}</view>
+                </view>
+                <view class="_view 8fecc90e title-box">
+                    <text class="_text 8fecc90e price">{{item.showPrice}}元/月</text>
+                    <text class="_text 8fecc90e">{{item.title}}</text>
+                    <text class="_text 8fecc90e mgic-angle-r"></text>
+                </view>
+                <view class="_view 8fecc90e title-box">{{item.subTitle}}</view>
+            </view>
+            <view class="_view 8fecc90e btn-box">
+                <view bindtap="handleProxy" class="_view 8fecc90e btn btnLeft" data-comkey="{{$k}}" data-eventid="{{'8fecc90e-1-'+index}}">电话咨询</view>
+                <view bindtap="handleProxy" class="_view 8fecc90e btn btnRight" data-comkey="{{$k}}" data-eventid="{{'8fecc90e-2-'+index}}">导航一下</view>
+            </view>
+        </view>
+    </view>
+</template>

@@ -1,0 +1,38 @@
+<block wx:if="{{show}}">
+    <view class="class_box">
+        <scroll-view scrollLeft="{{scroll_left}}" scrollWithAnimation="true" scrollX="true" style=" white-space: nowrap;">
+            <view class="cate {{class_id=='0'?'active':''}}">
+                <text bindtap="cate_select" data-id="0" data-index="" data-name="全部">全部</text>
+            </view>
+            <view class="cate {{class_id==item.id?'active':''}}" wx:for="{{cate}}">
+                <text bindtap="cate_select" data-id="{{item.id}}" data-index="{{index}}" data-name="{{item.name}}">{{item.name}}</text>
+            </view>
+        </scroll-view>
+    </view>
+    <view class="product_list product_type2" wx:if="{{list.length!=0}}">
+        <navigator class="product_item item_2" url="/yb_shop/pages/paycontent/info/index?id={{val.id}}" wx:for="{{list}}" wx:for-item="val">
+            <view class="lock" wx:if="{{val.free==0&&(val.price==0&&!isvip||val.price>0&&!val.isbuy)}}">
+                <image mode="aspectFit" src="/yb_shop/static/images/lock.png"></image>
+            </view>
+            <view class="views">
+                <view class="imgs">
+                    <image mode="aspectFit" src="/yb_shop/static/images/view.png"></image>
+                </view>
+                <text>{{val.view}}</text>
+            </view>
+            <view class="product_img">
+                <image mode="aspectFill" src="{{val.image}}" style="height:100%;"></image>
+            </view>
+            <view class="title" style="color:{{item.text_color}};font-size:{{item.font_size*2.2}}rpx;">
+            {{val.title}}
+          </view>
+            <view class="clear"></view>
+        </navigator>
+        <view class="clear"></view>
+    </view>
+    <view class="load_info" wx:if="{{loaded}}">没有更多内容了</view>
+    <block wx:if="{{showtabbar}}">
+        <view style="height:100rpx"></view>
+        <include src="/yb_shop/pages/common/menu.wxml"></include>
+    </block>
+</block>

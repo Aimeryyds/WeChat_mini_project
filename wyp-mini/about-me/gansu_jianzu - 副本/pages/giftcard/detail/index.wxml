@@ -1,0 +1,45 @@
+<import src="/dist/toast/index.wxml"></import>
+<import src="/pages/giftcard/templates/card/index.wxml"></import>
+<import src="/pages/giftcard/templates/carddetail/index.wxml"></import>
+<import src="/pages/giftcard/templates/storelist/index.wxml"></import>
+<import src="./_giverecord.wxml"></import>
+<import src="./_footer.wxml"></import>
+<view class="container">
+    <view class="">
+        <template is="carddetail" data="{{type:type,status:cardData.status,price:cardData.originalPrice,balance:cardData.balance,imgUrl:cardData.imgUrl,text:cardData.name,showType:'detail'}}"></template>
+        <view class="giftcard-form">
+            <view class="giftcard-form__cardnum" style="cardData.status==40 || cardData.status==50?'giftcard-form__cardnum--style':'giftcard-form__cardnum'" wx:if="{{cardData.status==30||cardData.status==40||cardData.status==50||cardData.status==70&&isReceiver==1}}">
+        卡号: {{cardData.giftCardNo}}
+      </view>
+            <view class="giftcard-form__item">
+                <text>购买时间:</text>
+                <view class="giftcard-form__item-cont">{{cardData.createTime}}</view>
+            </view>
+            <view class="giftcard-form__item">
+                <text>已经付款:</text>
+                <view class="giftcard-form__item-cont">{{cardData.price}}元</view>
+            </view>
+            <view class="giftcard-form__item">
+                <text>适用门店:</text>
+                <view class="giftcard-form__link" wx:if="{{cardData.storeList.length==''}}">全平台</view>
+                <view bindtap="toggleStoreDialog" class="giftcard-form__link" wx:else>查看全部门店></view>
+            </view>
+            <view class="giftcard-form__item">
+                <text>有效期限:</text>
+                <view class="giftcard-form__item-cont">{{cardData.forever==1?'永久':cardData.validTimeStr}}</view>
+            </view>
+            <view class="giftcard-form__item" wx:if="{{cardData.remark}}">
+                <text>使用须知:</text>
+                <view class="giftcard-form__item-cont">{{cardData.remark}}</view>
+            </view>
+        </view>
+        <view class="giftcard-receive__status" wx:if="{{cardData.status==20||cardData.status==60}}">
+            <image class="giftcard-receive__img" src="http://imgcdnali.wfenxiao.com.cn/xcx/c/giftcard/time-icon.png"></image>
+            <view>等待领取</view>
+        </view>
+        <template is="giveRecord" data="{{type:type,status:cardData.status,receiveRecord:cardData.status,avatarUrl:cardData.avatarUrl,receiverNickName:cardData.receiverNickName,receiveTime:cardData.receiveTime}}"></template>
+    </view>
+    <template is="footer" data="{{status:cardData.status,avatarUrl:cardData.avatarUrl,receiverNickName:cardData.receiverNickName,receiveTime:cardData.receiveTime}}"></template>
+    <template is="storelist" data="{{show:showDialog,list:cardData.storeList}}"></template>
+    <template is="zan-toast" data="{{zanToast:zanToast}}"></template>
+</view>

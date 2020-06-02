@@ -1,0 +1,22 @@
+<view>
+    <scroll-view scrollY class="group-content {{isIphoneX?'fix-iphonex-content':''}}">
+        <table bind:checkedchange="tableCheckedChange" bind:iconclick="tableIconClick" bind:move="tableMove" columns="{{columns}}" dataSource="{{dataSource}}" moveable="{{moveable}}" perRowHeight="{{perItemHeight}}"></table>
+    </scroll-view>
+    <view class="group-add {{isIphoneX?'fix-iphonex-add':''}}">
+        <view bindtap="showDialog" class="group-bottom">
+            <view>
+                <image src="./add.png"></image>
+            </view>
+            <view>添加分组</view>
+        </view>
+    </view>
+    <modal class="modal_bottom" contentPadding="0" id="modal_1">
+        <view slot="content">
+            <input bindfocus="focus" bindinput="hanleinp" class="dialog__input" maxlength="6" placeholder="最多六个字" type="text" value="{{inputVal}}" wx:if="{{content}}"></input>
+        </view>
+    </modal>
+    <view class="gropu-delete" wx:if="{{deleteOnoff}}">已删除</view>
+    <view class="button-group {{isIphoneX?'fix-iphonex-button':''}}"></view>
+</view>
+<include src="../../../components/circus/toast/toast.wxml"></include>
+<include src="../../../components/circus/loading/loading.wxml"></include>

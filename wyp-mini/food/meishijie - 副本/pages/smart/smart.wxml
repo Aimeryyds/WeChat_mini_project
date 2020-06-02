@@ -1,0 +1,66 @@
+<navigation-bar title="智能组菜"></navigation-bar>
+<view class="smart_w1" style="padding-top:{{barHeight}}px">
+    <view class="desw">
+        <view class="num">1</view>
+        <rich-text class="p" nodes="点击下方按钮<br/>添加你现有的食材"></rich-text>
+    </view>
+    <view class="desw">
+        <view class="num">2</view>
+        <rich-text class="p" nodes="根据你的食材<br/>为你智能推荐菜谱"></rich-text>
+    </view>
+    <view class="addsc_btnw">
+        <view bindtap="addSc" class="btn">
+            <view class="icon">
+                <view class="i1"></view>
+                <view class="i2"></view>
+            </view>
+            <text>添加食材</text>
+        </view>
+    </view>
+    <view class="bottombar">
+        <image src="{{shareicon}}"></image>
+        <text>分享</text>
+        <button class="share_bottom" openType="share"></button>
+    </view>
+</view>
+<view class="smart_w2" style="padding-top:{{barHeight}}px" wx:if="{{scChecked.length>0}}">
+    <view class="smart_w2_tw">
+        <view class="t1">已选择：</view>
+        <view class="t2">最多可选5种食材</view>
+    </view>
+    <view class="sc_checked_list">
+        <view class="sc_checked_item" wx:for="{{scChecked}}" wx:key="key">
+            <view class="imgw">
+                <image src="{{item.img}}"></image>
+            </view>
+            <view class="t">{{item.title}}</view>
+            <view bindtap="removeSc" class="x" data-id="{{item.id}}" data-img="{{item.icon}}" data-title="{{item.title}}"></view>
+        </view>
+    </view>
+    <view class="addsc_btnw" wx:if="{{scChecked.length<5}}">
+        <view bindtap="addSc" class="btn">
+            <view class="icon">
+                <view class="i1"></view>
+                <view class="i2"></view>
+            </view>
+            <text>添加食材</text>
+        </view>
+    </view>
+    <navigator class="zc_bigbtn" url="/pages/smartResult/smartResult?foodsname={{foodsName}}&&foodsid={{foodsId}}">开始组菜</navigator>
+</view>
+<view class="smart_w3 {{smartW3Show}}" style="padding-top:{{barHeight}}px">
+    <view class="sw3_inputw" style="top:{{barHeight}}px">
+        <input bindinput="bindScInput" class="sw3_inputw_it" focus="{{sw3InputFocus}}" placeholder="请输入食材名" placeholderStyle="color:#ccc;" value="{{scInputValue}}"></input>
+        <view bindtap="shutSw3" class="sw3_exitbtn">取消</view>
+    </view>
+    <scroll-view class="scTipslist" scrollY="true">
+        <view class="scTipsitemw">
+            <view bindtap="bindTipScClick" class="scTipsitem" data-id="{{item.id}}" data-img="{{item.icon}}" data-title="{{item.title}}" wx:for="{{scTipsRes}}" wx:key="key">
+                <view class="imgw">
+                    <image src="{{item.icon}}"></image>
+                </view>
+                <view class="n">{{item.title}}</view>
+            </view>
+        </view>
+    </scroll-view>
+</view>

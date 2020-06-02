@@ -1,0 +1,343 @@
+@import "libs/calendar/index.wxss";
+
+@import "libs/timepicker/index.wxss";
+
+.wxapp_body {
+    height: 100%;
+    background: #f4f4f4;
+}
+
+.container {
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-between;
+    padding: 200rpx 0;
+    box-sizing: border-box;
+    font-size: 28rpx;
+}
+
+.cusTabBarPosition {
+    width: 100%;
+    height: 96rpx;
+}
+
+.main {
+    font-family: 微软雅黑,'microsoft yahei',宋体,新宋体,sans-serif;
+}
+
+.ellipsis {
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+
+text {
+    font-family: "微软雅黑";
+}
+
+::-webkit-scrollbar {
+    width: 0;
+    height: 0;
+    color: transparent;
+}
+
+::-webkit-input-placeholder {
+    color: #888;
+}
+
+.service-footer {
+    width: 100%;
+    height: 96rpx;
+    position: fixed;
+    bottom: 0;
+    left: 0;
+}
+
+.header {
+    height: 400rpx;
+    position: relative;
+    border-bottom: 1rpx dashed transparent;
+    overflow: hidden;
+    margin-bottom: 18rpx;
+    background-color: #fff;
+}
+
+.header .header-bg {
+    width: 110%;
+    height: 240rpx;
+    background: #4A88ED;
+    position: absolute;
+    top: 0;
+    left: -5%;
+    border-bottom-left-radius: 50%;
+    border-bottom-right-radius: 50%;
+    overflow: hidden;
+}
+
+.header .header-icon-wrap {
+    width: 120rpx;
+    height: 120rpx;
+    border-radius: 50%;
+    position: absolute;
+    top: 90rpx;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    margin: auto;
+    overflow: hidden;
+    border: 4rpx solid rgba(255,255,255,0.5);
+}
+
+.footer {
+    text-align: center;
+    font-size: 24rpx;
+    color: #999;
+    background-color: #f4f4f4;
+    height: 80rpx;
+    line-height: 80rpx;
+    overflow: hidden;
+}
+
+.footer .des {
+    display: inline-block;
+    position: relative;
+    top: -2rpx;
+}
+
+.footer .icon-footer {
+    font-size: 24rpx;
+    display: inline-block;
+    width: 46rpx;
+    color: #999;
+}
+
+.spread {
+    width: 100%;
+    height: 100%;
+}
+
+.company-name {
+    position: absolute;
+    bottom: 30rpx;
+    left: 50%;
+    transform: translateX(-50%);
+    font-size: 28rpx;
+    color: #353535;
+    width: 100%;
+    text-align: center;
+}
+
+button::after {
+    border: none;
+}
+
+.cus-service {
+    position: fixed;
+    margin-left: 670rpx;
+    top: 800rpx;
+    z-index: 9999;
+}
+
+.cus-service .service-item {
+    width: 72rpx;
+    height: 72rpx;
+    line-height: 72rpx;
+    margin-bottom: 20rpx;
+    display: block;
+    border-radius: 50%;
+    text-align: center;
+    cursor: pointer;
+    opacity: 0.9;
+}
+
+.cus-service .service-support {
+    background: linear-gradient(to right,#5c97ff 0%,#3dbeff 100%);
+}
+
+.cus-service .service-phone {
+    background-color: #4A4A4A;
+}
+
+.cus-service .serviceWeixinWrap {
+    position: relative;
+}
+
+.cus-service .service-weixin {
+    background-color: #5BC142;
+}
+
+.cus-service .service-home {
+    background-color: #4A4A4A;
+}
+
+.cus-service .contactBtn {
+    opacity: 0;
+    width: 72rpx;
+    height: 72rpx;
+    line-height: 72rpx;
+    border-radius: 50%;
+    text-align: center;
+    position: absolute;
+    top: 0rpx;
+}
+
+.cus-service .service-phone:after {
+    width: 32rpx;
+    height: 32rpx;
+}
+
+.cus-service .service-weixin:after {
+    width: 40rpx;
+    height: 32rpx;
+}
+
+.tabbar_box {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    z-index: 9999;
+    width: 100%;
+    height: 96rpx;
+    border-top: 1rpx solid #c2c2c4;
+    background-color: #fff;
+}
+
+.tabbar_nav {
+    float: left;
+    align-items: center;
+    font-size: 28rpx;
+    height: 100%;
+    text-align: center;
+}
+
+.tabbar_icon {
+    width: 52rpx;
+    height: 52rpx;
+    margin-top: 6rpx;
+}
+
+.tabbarText {
+    font-size: 21rpx;
+    color: #999;
+    text-align: center;
+    bottom: 4rpx;
+    position: relative;
+}
+
+.iconfont {
+    font-family: "iconfont"!important;
+    font-size: 38rpx;
+    font-style: normal;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+}
+
+@font-face {
+    font-family:'iconfont';src:url('//qz.faisys.com/css/fontsIcon/icomoon.eot?v=12');src:url('//qz.faisys.com/css/fontsIcon/icomoon.ttf?v=12');src:url('//qz.faisys.com/css/fontsIcon/icomoon.woff?v=12');font-weight:normal;font-style:normal;
+}
+
+.icon-weixin:before {
+    content: "\e90d";
+}
+
+.icon-weixin {
+    color: #fff;
+}
+
+.icon-phone:before {
+    content: "\e907";
+}
+
+.icon-phone {
+    color: #fff;
+}
+
+.icon-support:before {
+    content: "\e90c";
+}
+
+.icon-support {
+    color: #fff;
+}
+
+.icon-name:before {
+    content: "\e90a";
+}
+
+.icon-msg:before {
+    content: "\e90b";
+}
+
+.icon-share:before {
+    content: "\e901";
+}
+
+.icon-turn:before {
+    content: "\e900";
+}
+
+.icon-waitpay:before {
+    content: "\e914";
+}
+
+.icon-go:before {
+    content: "\e904";
+}
+
+.icon-list:before {
+    content: "\e915";
+}
+
+.icon-cancel:before {
+    content: "\e916";
+}
+
+.icon-addr:before {
+    content: "\e908";
+}
+
+.icon-call:before {
+    content: "\e909";
+}
+
+.icon-time:before {
+    content: "\e906";
+}
+
+.icon-home:before {
+    content: "\e905";
+}
+
+.icon-home {
+    color: #fff;
+}
+
+.icon-footer:before {
+    content: "\e90c";
+}
+
+.icon-weixinFriend:before {
+    content: "\e90e";
+}
+
+.icon-weixinFriend {
+    color: #fff;
+}
+
+.icon-weixinShare:before {
+    content: "\e90d";
+}
+
+.icon-weixinShare {
+    color: #fff;
+}
+
+.icon-close:before {
+    content: "\e917";
+}
+
+.icon-close {
+    color: #fff;
+}

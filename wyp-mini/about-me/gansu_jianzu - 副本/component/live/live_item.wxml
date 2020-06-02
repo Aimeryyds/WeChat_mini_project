@@ -1,0 +1,57 @@
+<view class="item" url="/pages/live/detail/index?id={{live.id}}" wx:if="{{live}}">
+    <wxc-toast isShow="{{toast.show}}" text="{{toast.title}}"></wxc-toast>
+    <view class="item-label">
+    {{live.startTime}} 
+  </view>
+    <view catchtap="handleTapLive" class="item-content">
+        <view class="item-content--title" hoverClass="none">
+      {{live.theme}}
+    </view>
+        <view class="item-content--center">
+            <view class="item-content--center-left">
+                <image src="http://imgcdnali.wfenxiao.com.cn/xcx/c/live/time.png"></image>
+                <text class="time">{{render.timeStr(live.startTime,live.endTime)}}</text>
+                <view class="status {{live.status==2?'living':'normal'}}">{{render.status(live.status)}}</view>
+            </view>
+        </view>
+        <view class="item-content--footer">
+            <view class="item-content--footer-left">主讲人：{{live.speaker}}</view>
+            <view class="item-content--footer-right">
+                <form catchsubmit="handleFavorite" reportSubmit="{{true}}">
+                    <button class="{{live.isFavorite?'favorite-btn':'unfavorite-btn'}}" formType="submit" id="favoriteBtn">
+            {{live.favoriteUsers}}
+          </button>
+                </form>
+            </view>
+        </view>
+    </view>
+</view>
+<wxs module="render">
+function status(status) {
+    switch (status) {
+        case 1:
+            return ('未开始');
+        case 2:
+            return ('直播中');
+        case 3:
+            return ('已结束');
+    }
+};
+
+function timeStr(startTime, endTime) {
+    return (formatTime(startTime) + ' - ' + formatTime(endTime))
+};
+
+function formatTime(time) {
+    var reg = getRegExp("-", "g");
+    var timeStr = time.replace(reg, '/');
+    var date = getDate(timeStr);
+    var hh = date.getHours() > 9 ? date.getHours() : '0' + date.getHours();
+    var mm = date.getMinutes() > 9 ? date.getMinutes() : '0' + date.getMinutes();
+    return (hh + ':' + mm)
+};
+module.exports = ({
+    status: status,
+    timeStr: timeStr,
+});
+</wxs>

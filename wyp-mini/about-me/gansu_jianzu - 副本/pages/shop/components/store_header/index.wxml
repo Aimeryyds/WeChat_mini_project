@@ -1,0 +1,41 @@
+<view class="header" id="header">
+    <view bindtap="jumpstoredetail" data-id="{{shopId}}" data-openevaluate="{{storeDetail.openEvaluate}}">
+        <image class="logo" src="{{storeDetail.logo?storeDetail.logo:'http://imgcdnali.wfenxiao.com.cn/xcx/c/icons/brand.png'}}"></image>
+        <view class="freight">
+            <view class="shop-header-name zan-ellipsis" style="max-width:{{storeDetail.hasCoupons==0?'500rpx':'460rpx'}}">{{storeDetail.brandName}}-{{storeDetail.storeName}}</view>
+            <view hidden="{{storeDetail.hasCoupons==0}}">
+                <image src="http://imgcdnali.wfenxiao.com.cn/xcx/c/icons/coupon.png" style="width:30rpx; height:30rpx;margin-left:40rpx"></image>
+            </view>
+        </view>
+        <view style="display:flex;">
+            <view style="flex:1;">
+                <view class="freight">
+                    <view class="type">{{storeDetail.storeType==3?(storeDetail.orderNum||0)+'人订过':'已售'+(storeDetail.orderNum||0)+'单'}}</view>
+                    <view class="item_intro" style="font-size:22rpx; margin-left:10rpx;" wx:if="{{storeDetail.openEvaluate==1}}">{{storeDetail.goodReviewsRate||0}}%好评</view>
+                </view>
+                <view style=" display: flex; ">
+                    <view class="welcome ellipsis" style="flex: 1;">
+                        <text wx:if="{{storeDetail.storeType==2||storeDetail.storeType==4&&storeDetail.goodsPattern==1||!storeDetail.storeType&&storeDetail.goodsPattern==1}}">￥{{storeDetail.minSendFee||0}}起送 | </text>
+          配送费: ￥{{storeDetail.deliveryFee}}元 </view>
+                    <view class="desc-Collection" style="margin-right:70rpx;">
+                        <view catchtap="collectionOn" class="desc-Collection__cont  {{storeDetail.hasCollection?'desc-Collection__coll':'desc-Collection__no-coll'}}" data-hascollection="{{storeDetail.hasCollection}}">
+                            <image src="{{storeDetail.hasCollection?'http://imgcdnali.wfenxiao.com.cn/xcx/c/1120/collection2.png':'http://imgcdnali.wfenxiao.com.cn/xcx/c/1120/collection.png'}}"></image>
+                            <text>{{storeDetail.hasCollection?'已收藏':'收藏'}}</text>
+                        </view>
+                    </view>
+                </view>
+            </view>
+        </view>
+        <image class="arrow" src="http://imgcdnali.wfenxiao.com.cn/xcx/c/icons/arrow_right.png"></image>
+        <view class="shop-header-manjian" wx:if="{{fullreductionMsg&&fullreductionMsg.length>0}}">
+            <view style="margin-top:4rpx">
+                <wxc-label textColor="#fff" type="fill" typeColor="#9A6BFF">
+                    <text>满减</text>
+                </wxc-label>
+            </view>
+            <text class="shop-header-manjian-content shop-header-manjian-text">{{storeDetail.fullreductionMsg[0].msg[0]}}</text>
+            <text class="shop-header-manjian-text">{{storeDetail.fullreductionMsg.length}}个活动</text>
+            <image src="http://imgcdnali.wfenxiao.com.cn/xcx/c/icons/arrow_right.png" style="  width: 13rpx;  height: 22rpx;"></image>
+        </view>
+    </view>
+</view>

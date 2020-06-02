@@ -1,0 +1,120 @@
+<template name="487cb6cb">
+    <view bindtap="handleProxy" class="_div data-v-07fa4496 course-detail" data-comkey="{{$k}}" data-eventid="{{'11'}}">
+        <view class="_div data-v-07fa4496 tab-container">
+            <view bindtap="handleProxy" class="_div data-v-07fa4496 tab {{[tabIndex===0?'highlight':'']}}" data-comkey="{{$k}}" data-eventid="{{'0'}}">目录</view>
+            <view bindtap="handleProxy" class="_div data-v-07fa4496 tab {{[tabIndex===1?'highlight':'']}}" data-comkey="{{$k}}" data-eventid="{{'1'}}">进度</view>
+        </view>
+        <view class="_div data-v-07fa4496" wx:if="{{tabIndex===0}}">
+            <view class="_div data-v-07fa4496 course-item">
+                <view class="_div data-v-07fa4496 background" style=" {{'background-image:'+'url('+backgroundUrl+')'+';'}}" wx:if="{{backgroundUrl}}"></view>
+                <view class="_div data-v-07fa4496 course">
+                    <image class="_img data-v-07fa4496 cover" src="{{coverUrl}}"></image>
+                    <view class="_div data-v-07fa4496">
+                        <view class="_div data-v-07fa4496 title">{{title}}</view>
+                        <view class="_div data-v-07fa4496 description">
+                            <label class="_span data-v-07fa4496 normal">课程已完成</label>
+                            <label class="_span data-v-07fa4496 highlight">{{progress}}%</label>
+                        </view>
+                        <view class="_div data-v-07fa4496 progress">
+                            <view class="_div data-v-07fa4496 text">{{finishedAmount}}/{{totalAmount}}课</view>
+                            <view class="_div data-v-07fa4496 bar-container">
+                                <view class="_div data-v-07fa4496 bg"></view>
+                                <view class="_div data-v-07fa4496 indicator" style=" {{'width:'+progress+'%'+';'}}"></view>
+                            </view>
+                        </view>
+                    </view>
+                </view>
+            </view>
+            <view class="_div data-v-07fa4496 detail">
+                <view class="_div data-v-07fa4496 meta">
+                    <view class="_div data-v-07fa4496 selector">
+                        <view catchtap="handleProxy" class="_div data-v-07fa4496 label" data-comkey="{{$k}}" data-eventid="{{'2'}}">
+                            <view class="_div data-v-07fa4496 text" wx:if="{{currentBookId==='all'}}">全部</view>
+                            <view class="_div data-v-07fa4496 text" wx:else>{{currentBook.name_cn}}</view>
+                            <view class="_i data-v-07fa4496 ib ib-caret-down"></view>
+                        </view>
+                        <view class="_div data-v-07fa4496 option-list" wx:if="{{selectorIsShow}}">
+                            <view bindtap="handleProxy" class="_div data-v-07fa4496 {{currentBookId==='all'?'option highlight':'option'}}" data-comkey="{{$k}}" data-eventid="{{'3'}}">全部</view>
+                            <view bindtap="handleProxy" class="_div data-v-07fa4496 {{currentBookId===book.book_id?'option highlight':'option'}}" data-comkey="{{$k}}" data-eventid="{{'4-'+index}}" key="{{index}}" wx:for="{{books}}" wx:for-item="book" wx:key="index">{{book.name_cn+'（'+book.article_amount+'课）'}}</view>
+                        </view>
+                    </view>
+                    <view class="_div data-v-07fa4496 desc">共{{books.length}}本书</view>
+                </view>
+                <view class="_div data-v-07fa4496 book-list">
+                    <view class="_div data-v-07fa4496 tip">
+                        <view class="_i data-v-07fa4496 ib ib-fa-lightbulb-o"></view>
+                    每天零点准时解锁，敬请期待
+                </view>
+                    <view class="_div data-v-07fa4496 book" key="{{index}}" wx:for="{{filteredBooks}}" wx:for-item="book" wx:key="index">
+                        <view class="_div data-v-07fa4496 title">{{'《'+book.name_cn+'》'+'（'+book.article_amount+'课）'}}</view>
+                        <view class="_div data-v-07fa4496 article-list">
+                            <view bindtap="handleProxy" class="_div data-v-07fa4496 article" data-comkey="{{$k}}" data-eventid="{{'5-'+index+'-'+idx}}" key="{{idx}}" wx:for="{{book.article_items}}" wx:for-index="idx" wx:for-item="article" wx:key="idx">
+                                <view class="_div data-v-07fa4496 {{article.status===1?'title-cn lock':'title-cn'}}">{{idx+1+'. '+article.title_cn}}</view>
+                                <view class="_div data-v-07fa4496 state">
+                                    <button class="_button data-v-07fa4496 start" wx:if="{{article.status===2}}">开始</button>
+                                    <view class="_i data-v-07fa4496 ib ib-lock-o lock" wx:if="{{article.status===1}}"></view>
+                                    <view class="_i data-v-07fa4496 ib ib-check check" wx:if="{{article.status===4}}"></view>
+                                </view>
+                            </view>
+                        </view>
+                    </view>
+                </view>
+            </view>
+        </view>
+        <view class="_div data-v-07fa4496" wx:if="{{tabIndex===1}}">
+            <view class="_div data-v-07fa4496 meta-container">
+                <view class="_div data-v-07fa4496 title">{{title}}</view>
+                <view class="_div data-v-07fa4496 progress-number" wx:if="{{isAllowReward}}">学习进度：{{completedDays}}/{{leastDays}}天</view>
+                <view class="_div data-v-07fa4496 progress-container" wx:if="{{isAllowReward}}">
+                    <view class="_div data-v-07fa4496 progress-bar">
+                        <view class="_div data-v-07fa4496 progress-indicator" style=" {{'width:'+rewardProgress+'%'+';'}}"></view>
+                    </view>
+                    <view bindtap="handleProxy" class="_div data-v-07fa4496 rule" data-comkey="{{$k}}" data-eventid="{{'6'}}" wx:if="{{reawrdStatus!==10}}">详见规则</view>
+                    <view bindtap="handleProxy" class="_div data-v-07fa4496 btn-1" data-comkey="{{$k}}" data-eventid="{{'8'}}" wx:if="{{reawrdStatus===20}}">领奖学金</view>
+                    <button bindtap="handleProxy" class="_button data-v-07fa4496 btn-2" data-comkey="{{$k}}" data-eventid="{{'7'}}" wx:elif="{{reawrdStatus===21}}">领奖学金</button>
+                    <view class="_div data-v-07fa4496 btn-3" wx:elif="{{reawrdStatus===22}}">申请中</view>
+                    <view class="_div data-v-07fa4496 btn-4" wx:elif="{{reawrdStatus===23}}">
+                        <view class="_i data-v-07fa4496 ib ib-check"></view>奖学金已领
+                </view>
+                    <view class="_div data-v-07fa4496 btn-5" wx:elif="{{reawrdStatus===11}}">奖学金失效</view>
+                    <view class="_div data-v-07fa4496" wx:else></view>
+                </view>
+                <view class="_div data-v-07fa4496 stats-container">
+                    <view class="_div data-v-07fa4496 stats">
+                        <view class="_div data-v-07fa4496 label">今日阅读</view>
+                        <view class="_div data-v-07fa4496">
+                            <label class="_span data-v-07fa4496 text">{{todayWordCount}}</label>
+                            <label class="_span data-v-07fa4496 label">词</label>
+                        </view>
+                    </view>
+                    <view class="_div data-v-07fa4496 stats">
+                        <view class="_div data-v-07fa4496 label">累计阅读</view>
+                        <view class="_div data-v-07fa4496">
+                            <label class="_span data-v-07fa4496 text">{{totalWordCount}}</label>
+                            <label class="_span data-v-07fa4496 label">词</label>
+                        </view>
+                    </view>
+                    <view class="_div data-v-07fa4496 stats" wx:if="{{!isAllowReward}}">
+                        <view class="_div data-v-07fa4496 label">累计学习</view>
+                        <view class="_div data-v-07fa4496">
+                            <label class="_span data-v-07fa4496 text">{{completedDays}}</label>
+                            <label class="_span data-v-07fa4496 label">天</label>
+                        </view>
+                    </view>
+                </view>
+            </view>
+            <view class="_div data-v-07fa4496 calendar-container">
+                <template is="30d1c216" data="{{...$root[$kk+'0'],$root:$root}}"></template>
+                <view class="_div data-v-07fa4496 order-tip">* 本课程在{{formattedDate}}购买</view>
+            </view>
+            <view bindtap="handleProxy" class="_div data-v-07fa4496 modal flex-vhc" data-comkey="{{$k}}" data-eventid="{{'10'}}" wx:if="{{isTipShow}}">
+                <view class="_div data-v-07fa4496 body">
+                    <view class="_div data-v-07fa4496 title">奖学金申请规则</view>
+                    <view class="_div data-v-07fa4496 tip">条件1：自购买日起，{{totalDays}}天内有{{leastDays}}天的学习记录。</view>
+                    <view class="_div data-v-07fa4496 tip">条件2：学习记录达标后的10天内提交申请。</view>
+                </view>
+            </view>
+        </view>
+    </view>
+</template>
+<import src="/components/Calendar.vue.wxml"></import>

@@ -1,0 +1,21 @@
+<view class="zan-panel zan-panel__no-magrin-top zan-panel__no-border brand-panel">
+    <view bindtap="makedataSource" class="zan-panel--header-title" data-options="{{module.options}}" data-type="brands" wx:if="{{module.options.title}}">
+        <view style="flex:1">{{module.options.title}}</view>
+        <view class="zan-panel--header-subtitle" wx:if="{{!module.noShowMore}}">更多{{noShowMore}}></view>
+    </view>
+    <scroll-view scrollX class="brandSale" wx:if="{{module.data&&module.data.length>0}}">
+        <view bindtap="makestorelist" class="brand-item" data-brand="{{item}}" style="width:{{module.data.length>=5?'20%':'25%'}};padding:{{module.data.length>=5?'0':'0 19rpx'}}" wx:for="{{module.data}}" wx:key="{{index}}">
+            <view class="brandSale-item">
+                <image class="brand-item-image" src="{{item.logo||'http://imgcdnali.wfenxiao.com.cn/xcx/c/icons/brand.png'}}"></image>
+                <text style="margin-top: 15rpx; color: #333;font-size: 24rpx;overflow:hidden;width:100%;" wx:if="{{module.options.showName==1}}">{{item.showBrandName}}</text>
+            </view>
+        </view>
+        <view bindtap="makedataSource" class="brand-item" data-options="{{module.options}}" data-type="brands" style="padding: 0 40rpx;border-left: 1rpx solid #ccc;width: auto;" wx:if="{{module.data.length>4}}">
+            <view class="brandSale-item">
+                <text style="margin-top: 15rpx; color: #333;writing-mode: vertical-lr;font-size: 24rpx;color: #999;letter-spacing: 2rpx;">更多品牌</text>
+                <image src="http://imgcdnali.wfenxiao.com.cn/xcx/c/icons/more.png" style="width:20rpx;height: 20rpx;"></image>
+            </view>
+        </view>
+    </scroll-view>
+    <wxc-cc class="brand-error" wx:else>{{locationType==0?'该城市暂无品牌':'当前位置暂无品牌'}}</wxc-cc>
+</view>

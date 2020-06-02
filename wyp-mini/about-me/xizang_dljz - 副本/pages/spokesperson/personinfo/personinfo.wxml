@@ -1,0 +1,72 @@
+<view class="container">
+    <view class="info-wrap">
+        <view class="info__row">
+            <text>头像</text>
+            <image src="{{userInfo.photo}}" wx:if="{{userInfo.photo}}"></image>
+        </view>
+        <view class="info__row">
+            <text>昵称</text>
+            <view>{{userInfo.nickName}}</view>
+        </view>
+        <view class="info__row">
+            <text>微信号</text>
+            <view>{{userInfo.spokesman.wechat}}</view>
+        </view>
+        <view class="info__row">
+            <text>手机号</text>
+            <view>{{userInfo.spokesman.phone}}</view>
+        </view>
+        <view class="info__row">
+            <text>姓名</text>
+            <view>{{userInfo.spokesman.username?userInfo.spokesman.username:'无'}}</view>
+        </view>
+        <view class="info__row">
+            <text>身份证号</text>
+            <view>{{userInfo.spokesman.idCard?userInfo.spokesman.idCard:'无'}}</view>
+        </view>
+        <view class="info__row">
+            <text>上级</text>
+            <view>{{userInfo.spokesman.pname?userInfo.spokesman.pname:'无'}}</view>
+        </view>
+        <view class="info__row">
+            <text>加入时间</text>
+            <view>{{userInfo.spokesman.createTime}}</view>
+        </view>
+    </view>
+    <view class="withdraw-title">提现账户</view>
+    <view class="account-list">
+        <view bindtap="choose" class="account-item" id="1">
+            <image class="bg" src="/images/spokesperson/withdraw/bg_wechat.png"></image>
+            <view class="item-content">
+                <image src="/images/spokesperson/withdraw/icon_{{userInfo.payway==1?'sel':'nor'}}_light.png"></image>
+                <view class="info">
+                    <text>微信零钱账号</text>
+                    <view>{{userInfo.wxAuthname?userInfo.wxAuthname:'暂未添加'}}</view>
+                </view>
+                <view catchtap="modify" class="btn" id="1">{{userInfo.wxAuthname?'修改':'添加'}}</view>
+            </view>
+        </view>
+        <view bindtap="choose" class="account-item" id="2">
+            <image class="bg" src="/images/spokesperson/withdraw/bg_alipay.png"></image>
+            <view class="item-content">
+                <image src="/images/spokesperson/withdraw/icon_{{userInfo.payway==2?'sel':'nor'}}_light.png"></image>
+                <view class="info">
+                    <text>支付宝账号</text>
+                    <view>{{userInfo.alipayAccount?userInfo.alipayAccount:'暂未添加'}}</view>
+                </view>
+                <view catchtap="modify" class="btn" id="2">{{userInfo.alipayAccount?'修改':'添加'}}</view>
+            </view>
+        </view>
+        <view bindtap="choose" class="account-item" id="3">
+            <image class="bg" src="/images/spokesperson/withdraw/bg_card.png"></image>
+            <view class="item-content">
+                <image src="/images/spokesperson/withdraw/icon_{{userInfo.payway==3?'sel':'nor'}}_light.png"></image>
+                <view class="info">
+                    <text>银行卡账号</text>
+                    <view>{{userInfo.bankAccount?userInfo.bankAccount:'暂未添加'}}</view>
+                </view>
+                <view catchtap="modify" class="btn" id="3">{{userInfo.bankAccount?'修改':'添加'}}</view>
+            </view>
+        </view>
+    </view>
+</view>

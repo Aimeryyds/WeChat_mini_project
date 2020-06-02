@@ -1,0 +1,25 @@
+<view content="no-referrer" name="referrer"></view>
+<view class="page">
+    <web-view src="{{privacy_url}}" wx:if="{{userPrivacy}}"></web-view>
+    <view class="title_style">登录蛋壳公寓</view>
+    <input bindinput="phoneNumInput" class="inputstyle" id="phoneNum" maxlength="11" placeholder="请输入手机号" placeholderClass="inpClass" type="number"></input>
+    <input bindinput="yzmInput" class="inputstyle" id="yzm" maxlength="4" placeholder="请输入验证码" placeholderClass="inpClass" type="number"></input>
+    <button bindtap="getVerificationCode" class="yzm" data-id="2" disabled="{{disabled}}" style="background:#fff;">
+            {{time}}
+    </button>
+    <view class="err-info">
+        <text>{{errInfo}}</text>
+    </view>
+    <view bindtap="confirm" class="login" disabled="{{disable_con}}" style="background:{{bg_con}}">登录</view>
+    <view class="clause">登录即代表你同意 <text bindtap="toSecrecy">《用户使用条款》</text>和<text bindtap="toProtect">《隐私保护政策》</text>
+    </view>
+    <view class="hidden" hidden="{{flag}}">
+        <view class="yzm-img">
+            <view class="yzm-title">{{errImg}}</view>
+            <image bindtap="changeImg" src="{{yzmPhone}}"></image>
+            <input bindinput="yzmimgInput" class="inp_img" maxlength="5" placeholder="不区分大小写" placeholderClass="inpYzm" value="{{yzmimgValue}}"></input>
+            <view bindtap="yzmqd" class="yzm-qd" style="background:{{confirm_bg}}">提交</view>
+        </view>
+    </view>
+    <image catchtap="closeEvent" class="close" src="https://public.danke.com.cn/public-20180822-FkcpajzSjGVkOZ4o_MSfENHygn2e"></image>
+</view>

@@ -1,0 +1,68 @@
+<view class="nav">
+    <view bindtap="tagtag_info" class="nav_item" data-n="{{index}}" id="navs{{index}}" wx:for="{{navs}}" wx:key="navs">
+        <view class="nav_default {{tag==index?'nav_red':''}}">{{item.name}}</view>
+    </view>
+</view>
+<swiper bindchange="swiper_list_change" class="swiper_list" current="{{tag}}" duration="300" skipHiddenItemLayout="true" style="height:{{height}}px;">
+    <swiper-item wx:for="{{navs}}" wx:key="navs">
+        <scroll-view bindscrolltolower="loadMore" bindtouchend="handletouchend" bindtouchstart="handletouchtart" enableBackToTop="true" scrollY="true">
+            <view class="infos" style="height:61rpx;"></view>
+            <view class="refresh {{tag==index&&refresh?'':'out'}}">加载中...</view>
+            <view class="clist mt10" wx:if="{{index==0}}">
+                <navigator class="clist_item" url="../pai_info/pai_info?id={{item.id}}" wx:for="{{top_pai}}" wx:key="top_pai">
+                    <text class="clist_tip">{{item.type==3?'投票':'置顶'}}</text>{{item.subject}}
+</navigator>
+            </view>
+            <view class="plist" wx:if="{{item.type=='pai'}}">
+                <view class="plist_item" wx:for="{{list[index]}}" wx:key="listindex">
+                    <view class="plist_item_u">
+                        <navigator class="plist_nu" url="/pages/space/space?uid={{item.uid}}">
+                            <image class="plist_img_u" src="{{item.avatar}}"></image>
+                            <image class="vip_icon" src="/image/vip_icon.png" wx:if="{{item.vip}}"></image>
+                        </navigator>
+                        <navigator class="plist_nu2" url="/pages/space/space?uid={{item.uid}}">{{item.username}}</navigator>
+                        <view class="plist_item_time">{{item.diettime}}<text wx:if="{{item.city}}">，{{item.city}}</text>
+                        </view>
+                    </view>
+                    <navigator class="plist_item_c" url="../pai_info/pai_info?id={{item.id}}">
+                        <view class="plist_item_t">
+                            <block wx:if="{{item.title}}">
+                                <view class="plist_item_b">
+                                    <text class="plist_tip2" wx:if="{{item.digest==2}}">精</text>
+                                    <text class="plist_tip" wx:if="{{item.type==2}}">问答</text>
+                                    <text class="plist_tip" wx:if="{{item.type==3}}">投票</text>
+                                    <text>{{item.title}}</text>
+                                </view>
+                                <text>{{item.subject}}</text>
+                            </block>
+                            <block wx:else>
+                                <text class="plist_tip2" wx:if="{{item.digest==2}}">精</text>
+                                <text class="plist_tip" wx:if="{{item.type==2}}">问答</text>
+                                <text class="plist_tip" wx:if="{{item.type==3}}">投票</text>
+                                <text>{{item.subject}}</text>
+                            </block>
+                        </view>
+                        <view class="plist_item_pic">
+                            <image src="{{photo.pic}}" wx:if="{{index<3}}" wx:for="{{item.photo}}" wx:for-item="photo" wx:key="photo"></image>
+                            <view class="plist_item_num" wx:if="{{item.photo.length>3}}">{{item.photo.length}}</view>
+                        </view>
+                    </navigator>
+                    <view class="plist_item_ac">
+{{item.likenum}}个喜欢，{{item.replynum}}条评论<block wx:if="{{item.type==3}}">，{{item.partnum}}人投票</block>
+                    </view>
+                </view>
+            </view>
+            <view class="loading_end" wx:if="{{loading_end[index]}}"></view>
+            <view class="loading" wx:if="{{tag==index&&loading&&index!=0}}">
+                <image class="loading_img" src="../../image/loading-32-32.gif"></image>
+            </view>
+            <view class="loading_fail" wx:if="{{tag==index&&loading_fail}}"></view>
+        </scroll-view>
+    </swiper-item>
+</swiper>
+<button bindtap="pai_do" class="add_pai" wx:if="{{haveuid}}">
+    <view>+</view>发帖子
+</button>
+<button bindgetuserinfo="clickinfo" class="add_pai" openType="getUserInfo" wx:else>
+    <view>+</view>发帖子
+</button>

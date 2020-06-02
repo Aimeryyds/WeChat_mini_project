@@ -1,0 +1,77 @@
+<template name="newsModule">
+    <view class="article-module">
+        <view class="moduleTitle" wx:if="{{moduleInfo.pattern.e}}">
+            <view class="titleText">{{moduleInfo.content.title}}</view>
+            <view bindtap="toNewsPage" class="moreText" wx:if="{{moduleInfo.pattern.all}}">查看全部<view class="iconfont icon-turn  view-more"></view>
+            </view>
+        </view>
+        <view class="emptyModule" style="background-color:{{moduleInfo.pattern.bg.t==1?moduleInfo.pattern.bg.c:''}}" wx:if="{{moduleInfo.content.selectedList.length==0}}">
+            <view class="emptyModuleText">您还没有添加任何文章，赶紧添加吧。</view>
+        </view>
+        <view wx:else>
+            <view class="article-container" style="background-color:{{moduleInfo.pattern.bg.t==1?moduleInfo.pattern.bg.c:''}}">
+                <view wx:if="{{moduleInfo.content.style==0||moduleInfo.content.style==3}}">
+                    <view bindtap="toNewsDetail" class="news-item" data-newsid="{{news.id}}" wx:for="{{moduleInfo.content.selectedList}}" wx:for-item="news" wx:key="news.id">
+                        <view class="news-item-wrapper">
+                            <view class="news-img" wx:if="{{moduleInfo.content.style==0}}">
+                                <image src="{{defaultImg.getDefaultImg( news.picList[0] )}}"></image>
+                            </view>
+                            <view class="news-info">
+                                <view class="info-wrapper">
+                                    <view class="news-title">
+                                        <view class="stick" wx:if="{{news.top&&moduleInfo.content.style==0}}">置顶</view>{{news.title}}</view>
+                                    <view class="news-abstract">{{trim.trimSummary(news.summary)}}</view>
+                                </view>
+                                <view class="news-time">{{timeFormat.datetimeFormat(news.publicTime)}}</view>
+                            </view>
+                            <view class="item-wrapper-border"></view>
+                        </view>
+                    </view>
+                </view>
+                <view wx:elif="{{moduleInfo.content.style==1}}">
+                    <scroll-view>
+                        <view class="style-wrapper" style="width:{{moduleInfo.content.selectedList.length*444}}rpx;">
+                            <view bindtap="toNewsDetail" class="article-style" data-newsid="{{news.id}}" wx:for="{{moduleInfo.content.selectedList}}" wx:for-item="news" wx:key="news.id">
+                                <image class="article-style-img" src="{{defaultImg.getDefaultImg( news.picList[0] )}}"></image>
+                                <view class="article-desc-wrap">
+                                    <view class="article-title">{{news.title}}</view>
+                                    <view class="article-desc">{{trim.trimSummary(news.summary)}}</view>
+                                </view>
+                            </view>
+                        </view>
+                    </scroll-view>
+                </view>
+                <view class="style-wrapper" wx:elif="{{moduleInfo.content.style==2}}">
+                    <view bindtap="toNewsDetail" class="article-item" data-newsid="{{news.id}}" wx:for="{{moduleInfo.content.selectedList}}" wx:for-item="news" wx:key="news.id">
+                        <view class="article-title">{{news.title}}</view>
+                        <view class="article-imgList">
+                            <image class="article-img" src="{{defaultImg.getDefaultImg(pic)}}" wx:for="{{news.picList}}" wx:for-item="pic" wx:key="index"></image>
+                        </view>
+                    </view>
+                </view>
+            </view>
+        </view>
+    </view>
+</template>
+<wxs module="timeFormat">
+var datetimeFormat = (function(value) {
+    if (!value) return ('');;
+    return (value.split(" ")[(0)])
+});
+module.exports.datetimeFormat = datetimeFormat;
+</wxs>
+<wxs module="defaultImg">
+var getDefaultImg = (function(url) {
+    if (!url) return ("http://qz.faisys.com/image/wxImage/default_img.png");;
+    return (url)
+});
+module.exports.getDefaultImg = getDefaultImg;
+</wxs>
+<wxs module="trim">
+var trimSummary = (function(val) {
+    if (!val) return ("");;
+    var reg = getRegExp('(^\x5cs*)|(\x5cs*$)', 'g');
+    return (val.replace(reg, ""))
+});
+module.exports.trimSummary = trimSummary;
+</wxs>

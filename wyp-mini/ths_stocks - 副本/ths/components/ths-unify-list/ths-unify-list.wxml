@@ -1,0 +1,46 @@
+<view class="thsUnifyList">
+    <view class="{{['titWrap',isFixed?'isFixed':'']}}" style="{{'top:'+fixedTop+';'}}">
+        <block wx:if="{{titShow}}">
+            <view class="titText">{{titText}}</view>
+            <view class="optionWrap">
+                <view bindtap="__e" class="{{['optItem',listActive==index+1?'active':'']}}" data-event-opts="{{[ [ 'tap',[ [ 'changeList',[index+1] ] ] ] ]}}" wx:for="{{optionText}}" wx:key="*this">
+                    <text>{{item}}</text>
+                </view>
+            </view>
+        </block>
+        <view class="contentWrap tit">
+            <view class="item stockName">股票名称</view>
+            <view class="item" wx:for="{{infoTit}}" wx:key="*this">
+                <text bindtap="__e" data-event-opts="{{[ [ 'tap',[ [ 'sortData',[index+1] ] ] ] ]}}">{{item}}</text>
+                <view bindtap="__e" class="sortWrap" data-event-opts="{{[ [ 'tap',[ [ 'sortData',[index+1] ] ] ] ]}}" wx:if="{{sortType==index+1&&!showShorBtn}}">
+                    <view class="{{['upSort',inverted?'active':'']}}"></view>
+                    <view class="{{['downSort',!inverted?'active':'']}}"></view>
+                </view>
+            </view>
+        </view>
+    </view>
+    <view class="paddingBox" style="{{'height:'+(isFixed?paddingHeight:0)+';'}}"></view>
+    <view class="stockWrap">
+        <view bindtap="__e" class="contentWrap items" data-event-opts="{{[ [ 'tap',[ [ 'jump',['$0'],[ [ ['listData','code',items[$orig].code] ] ] ] ] ] ]}}" wx:for="{{$root.l1}}" wx:for-index="__i0__" wx:for-item="items" wx:key="code">
+            <view class="item stockName">
+                <view class="name">{{items.f0}}</view>
+                <view class="code">{{items.f1}}</view>
+            </view>
+            <view class="{{['item',items[$orig]&&items[$orig][colorKey]>0?'up':'',items[$orig]&&items[$orig][colorKey]<0?'down':'']}}" wx:for="{{items.l0}}" wx:key="$orig">
+                <text class="{{[items[$orig]&&items[$orig][ item[$orig] ]>0&&item[$orig]!='newPrice'?'up':'',items[$orig]&&items[$orig][ item[$orig] ]<0&&item[$orig]!='newPrice'?'down':'',items[$orig]&&items[$orig][ item[$orig] ]==0&&item[$orig]!='newPrice'?'zero':'']}}" wx:if="{{titDataType[index]==1}}">
+                    <text wx:if="{{item[$orig]=='gain'&&items[$orig].suspend&&items[$orig].suspend!='--'}}">停牌</text>
+                    <text wx:else>{{''+item.f2+''}}</text>
+                </text>
+                <block wx:else>
+                    <text class="{{[items[$orig]&&items[$orig][ item[$orig] ]>0&&item[$orig]!='newPrice'?'up':'',items[$orig]&&items[$orig][ item[$orig] ]<0&&item[$orig]!='newPrice'?'down':'',items[$orig]&&items[$orig][ item[$orig] ]==0&&item[$orig]!='newPrice'?'zero':'']}}" wx:if="{{titDataType[index]==2}}">{{''+item.f3+''}}</text>
+                    <text class="{{[items[$orig]&&items[$orig][ item[$orig] ]>0&&item[$orig]!='newPrice'?'up':'',items[$orig]&&items[$orig][ item[$orig] ]<0&&item[$orig]!='newPrice'?'down':'',items[$orig]&&items[$orig][ item[$orig] ]==0&&item[$orig]!='newPrice'?'zero':'']}}" wx:else>{{''+item.f4+''}}</text>
+                </block>
+            </view>
+        </view>
+    </view>
+    <view class="loadmore" wx:if="{{load}}">
+        <view class="text">{{''+loadText+''}}<image class="loading" src="../../static/load.png" wx:if="{{load==2}}"></image>
+        </view>
+    </view>
+    <view class="speicalText" wx:if="{{showSpecialText}}">{{''+specialText+''}}</view>
+</view>

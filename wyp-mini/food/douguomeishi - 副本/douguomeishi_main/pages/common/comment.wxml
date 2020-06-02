@@ -1,0 +1,113 @@
+<template name="reply-template">
+    <view bindtap="commentViewPressed" class="reply-item" data-comment-id="{{item.id}}" data-user-id="{{item.u.id}}" data-user-name="{{item.u.n}}" wx:if="{{item!=null}}">
+        <view class="comment-user-view">
+            <image class="comment-author-image" mode="aspectFill" src="{{item.u.p}}"></image>
+            <view class="comment-information-view">
+                <view class="comment-favo-view">
+                    <text class="comment-favo-view-author">{{item.u.n}}</text>
+                    <image class="comment-favo-view-prime-icon" src="/images/prime.png" wx:if="{{item.u.is_prime}}"></image>
+                    <view class="comment-favo-view-level" wx:if="{{item.u.lv}}">LV.{{item.u.lv}}</view>
+                    <view class="comment-favo-view-blank"></view>
+                    <button bindgetuserinfo="favoViewPressed" catchtap="emptyFunction" class="comment-favo-button" data-comment-index="{{index}}" openType="getUserInfo">
+                        <image class="comment-favo-view-favo-icon" src="{{item.like?'/images/comment_favo.png':'/images/comment_unfavo.png'}}"></image>
+                        <text style="color:{{item.like?'#FF342A':'#333333'}}" wx:if="{{item.like_count>0}}"> {{item.like_count}}</text>
+                        <text style="color:#333333" wx:if="{{item.like_count<=0}}"> 赞</text>
+                    </button>
+                </view>
+                <view class="comment-time-view">{{item.time}}</view>
+            </view>
+        </view>
+        <view class="comment-content-veiw">
+            <text style="font-weight:bold" wx:if="{{item.reply_user.n.length&&item.reply_id!=commentID}}">@{{item.reply_user.n}}</text>
+            <text>{{item.content[0].c}}</text>
+        </view>
+    </view>
+</template>
+<template name="reply-comment-template">
+    <view bindtap="commentViewPressed" class="comment-item" data-comment-id="{{comment.id}}" data-user-id="{{comment.u.id}}" data-user-name="{{comment.u.n}}" wx:if="{{comment!=null}}">
+        <view class="comment-user-view">
+            <image class="comment-author-image" mode="aspectFill" src="{{comment.u.p}}"></image>
+            <view class="comment-information-view">
+                <view class="comment-favo-view">
+                    <text class="comment-favo-view-author">{{comment.u.n}}</text>
+                    <image class="comment-favo-view-prime-icon" src="/images/prime.png" wx:if="{{comment.u.is_prime}}"></image>
+                    <view class="comment-favo-view-level" wx:if="{{comment.u.lv}}">LV.{{comment.u.lv}}</view>
+                    <view class="comment-favo-view-blank"></view>
+                    <button bindgetuserinfo="commentFavoViewPressed" catchtap="emptyFunction" class="'comment-favo-button" data-comment-index="{{index}}" openType="getUserInfo">
+                        <image class="comment-favo-view-favo-icon" src="{{comment.like?'/images/comment_favo.png':'/images/comment_unfavo.png'}}"></image>
+                        <text style="color:{{comment.like?'#FF342A':'#333333'}}" wx:if="{{comment.like_count>0}}"> {{comment.like_count}}    </text>
+                        <text style="color:#333333" wx:if="{{comment.like_count<=0}}"> 赞    </text>
+                    </button>
+                    <image class="comment-favo-view-reply-favo" src="/images/comment_reply.png"></image>
+                </view>
+                <view class="comment-time-view">{{comment.time}}</view>
+            </view>
+        </view>
+        <view class="comment-content-veiw">{{comment.content[0].c}}</view>
+    </view>
+</template>
+<template name="ipad-comment-template">
+    <view bindtap="commentViewPressed" class="ipad-comment-item" data-comment-id="{{item.id}}" data-user-id="{{item.u.id}}" data-user-name="{{item.u.n}}" wx:if="{{item!=null}}">
+        <view class="ipad-comment-user-view">
+            <image class="ipad-comment-author-image" mode="aspectFill" src="{{item.u.p}}"></image>
+            <view class="ipad-comment-information-view">
+                <view class="ipad-comment-favo-view">
+                    <text class="ipad-comment-favo-view-author">{{item.u.n}}</text>
+                    <image class="ipad-comment-favo-view-prime-icon" src="/images/prime.png" wx:if="{{item.u.is_prime}}"></image>
+                    <view class="ipad-comment-favo-view-level" wx:if="{{item.u.lv}}">LV.{{item.u.lv}}</view>
+                    <view class="ipad-comment-favo-view-blank"></view>
+                    <button bindgetuserinfo="favoViewPressed" catchtap="emptyFunction" class="ipad-comment-favo-button" data-comment-index="{{index}}" openType="getUserInfo">
+                        <image class="ipad-comment-favo-view-favo-icon" src="{{item.like?'/images/comment_favo.png':'/images/comment_unfavo.png'}}"></image>
+                        <text style="color:{{item.like?'#FF342A':'#333333'}}" wx:if="{{item.like_count>0}}"> {{item.like_count}}</text>
+                        <text style="color:#333333" wx:if="{{item.like_count<=0}}"> 赞</text>
+                    </button>
+                    <view class="ipad-comment-reply-view-blank"></view>
+                    <image class="ipad-comment-favo-view-reply-favo" src="/images/comment_reply.png"></image>
+                </view>
+                <view class="ipad-comment-time-view">{{item.time}}</view>
+            </view>
+        </view>
+        <view class="ipad-comment-content-veiw">{{item.content[0].c}}</view>
+        <view catchtap="replyViewPressed" class="ipad-comment-reply-container-view" data-comment-id="{{item.id}}" wx:if="{{item.child_comments.length}}">
+            <view class="ipad-comment-reply-view" wx:for="{{item.child_comments}}" wx:for-item="reply" wx:key="key">
+                <text class="ipad-comment-reply-user">{{reply.u.n}}</text>
+                <text class="ipad-comment-reply-user">：</text>
+                <text class="ipad-comment-reply-user" wx:if="{{reply.reply_user.n.length&&reply.reply_id!=item.id}}">@{{reply.reply_user.n}}</text>
+                <text class="ipad-comment-reply-content">{{reply.content[0].c}}</text>
+            </view>
+            <view class="ipad-comment-reply-count-view" wx:if="{{item.ccc>item.child_comments.length}}">共{{item.ccc}}条回复</view>
+        </view>
+    </view>
+</template>
+<template name="comment-template">
+    <view bindtap="commentViewPressed" class="comment-item" data-comment-id="{{item.id}}" data-user-id="{{item.u.id}}" data-user-name="{{item.u.n}}" wx:if="{{item!=null}}">
+        <view class="comment-user-view">
+            <image class="comment-author-image" mode="aspectFill" src="{{item.u.p}}"></image>
+            <view class="comment-information-view">
+                <view class="comment-favo-view">
+                    <text class="comment-favo-view-author">{{item.u.n}}</text>
+                    <image class="comment-favo-view-prime-icon" src="/images/prime.png" wx:if="{{item.u.is_prime}}"></image>
+                    <view class="comment-favo-view-level" wx:if="{{item.u.lv}}">LV.{{item.u.lv}}</view>
+                    <view class="comment-favo-view-blank"></view>
+                    <button bindgetuserinfo="favoViewPressed" catchtap="emptyFunction" class="comment-favo-button" data-comment-index="{{index}}" openType="getUserInfo">
+                        <image class="comment-favo-view-favo-icon" src="{{item.like?'/images/comment_favo.png':'/images/comment_unfavo.png'}}"></image>
+                        <text style="color:{{item.like?'#FF342A':'#333333'}}" wx:if="{{item.like_count>0}}"> {{item.like_count}}    </text>
+                        <text style="color:#333333" wx:if="{{item.like_count<=0}}"> 赞    </text>
+                    </button>
+                    <image class="comment-favo-view-reply-favo" src="/images/comment_reply.png"></image>
+                </view>
+                <view class="comment-time-view">{{item.time}}</view>
+            </view>
+        </view>
+        <view class="comment-content-veiw">{{item.content[0].c}}</view>
+        <view catchtap="replyViewPressed" class="comment-reply-container-view" data-comment-id="{{item.id}}" wx:if="{{item.child_comments.length}}">
+            <view class="comment-reply-view" wx:for="{{item.child_comments}}" wx:for-item="reply" wx:key="key">
+                <text class="comment-reply-user">{{reply.u.n}}</text>
+                <text class="comment-reply-user">：</text>
+                <text class="comment-reply-user" wx:if="{{reply.reply_user.n.length&&reply.reply_id!=item.id}}">@{{reply.reply_user.n}}</text>
+                <text class="comment-reply-content">{{reply.content[0].c}}</text>
+            </view>
+            <view class="comment-reply-count-view" wx:if="{{item.ccc>item.child_comments.length}}">共{{item.ccc}}条回复</view>
+        </view>
+    </view>
+</template>

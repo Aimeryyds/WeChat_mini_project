@@ -1,0 +1,34 @@
+<template name="a276d51a">
+    <view class="_div data-v-599fd388 order-info">
+        <view class="_div data-v-599fd388 tip-header">
+            <view class="_i data-v-599fd388 ib ib-check-circle" style="font-size: 50px;"></view>
+            <view class="_div data-v-599fd388 tip-meta">
+                <view class="_div data-v-599fd388">{{isPurchase?'购买成功!':'升级成功'}}</view>
+                <view class="_div data-v-599fd388 tip-str">
+                {{infoStr}}
+            </view>
+            </view>
+        </view>
+        <view class="_div data-v-599fd388 tip-body-container">
+            <view class="_div data-v-599fd388 tip-body">
+                <view class="_div data-v-599fd388 order-book">
+                    <image alt="{{book.titleEn}}" class="_img data-v-599fd388 book-cover" src="{{book.cover}}"></image>
+                    <view class="_div data-v-599fd388 book-meta">
+                        <view class="_div data-v-599fd388 title-en two-line-ellipsis">{{book.titleEn}}</view>
+                        <view class="_div data-v-599fd388 title-cn one-line-ellipsis">{{book.titleCn}}</view>
+                        <view class="_div data-v-599fd388 author">{{author}}</view>
+                    </view>
+                </view>
+                <view class="_div data-v-599fd388 {{avaiableServices.length?'book-service':''}}">
+                    <template is="c4f6426a" data="{{...$root[$kk+'0'],$root:$root}}"></template>
+                </view>
+            </view>
+        </view>
+        <view class="_div data-v-599fd388 tip-footer">
+            <view class="_div data-v-599fd388">
+                <view class="_i data-v-599fd388 ib ib-bell-o" style="font-size: 19px;"></view>已开通读书提醒功能</view>
+            <view class="_div data-v-599fd388" style="color: #aaa;font-size: 13px;">可在「我的」-「提醒设置」中修改</view>
+        </view>
+    </view>
+</template>
+<import src="/components/ServiceList.vue.wxml"></import>

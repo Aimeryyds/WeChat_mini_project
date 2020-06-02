@@ -1,0 +1,14 @@
+<template name="mineUser">
+    <view style="display: flex;text-align: center;padding: 54rpx 0rpx;background-color:{{color||'#FF9300'}}">
+        <view style="padding: 0 30rpx;">
+            <image class="user-img" src="{{avatarUrl?avatarUrl:'http://imgcdnali.wfenxiao.com.cn/xcx/c/icons/avatar.png'}}"></image>
+        </view>
+        <view style="font-size: 30rpx;color:#fff;text-align: left;display: flex; justify-content: center; flex-direction:column;">
+            <view style="margin-bottom: 26rpx;">{{nickName?nickName:'- -'}}</view>
+            <view bindtap="handleMakeUrl" data-url="{{mobile?'/pages/login/verify_cell?mobile='+mobile+'&fomatMobile='+mobile:'/pages/login/login'}}">
+                <view style="font-size: 22rpx;" wx:if="{{mobile}}">{{mobile}} 更换绑定手机 > ></view>
+                <view style="font-size: 22rpx;text-decoration:underline" wx:else>绑定手机 ></view>
+            </view>
+        </view>
+    </view>
+</template>

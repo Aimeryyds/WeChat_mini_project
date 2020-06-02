@@ -1,0 +1,21 @@
+<form bindreset="formReset" bindsubmit="formSubmit">
+    <view class="cardNum">
+        <view class="icon1">
+            <image src="http://tws.cnweisou.com/images/icon_member.png"></image>
+        </view>
+        <input bindinput="realnameCont" class="content1" placeholder="请填写姓名" placeholderStyle="font-size:27rpx;color:#666;" type="text" value="{{realname}}"></input>
+    </view>
+    <view class="cardNum">
+        <view class="icon1">
+            <image src="http://tws.cnweisou.com/images/phoneCard.png"></image>
+        </view>
+        <input bindinput="mobileCont" class="content1" maxlength="11" placeholder="请填写手机号" placeholderStyle="font-size:27rpx;color:#666;" type="number" value="{{mobile}}"></input>
+    </view>
+    <view class="cardNum">
+        <view class="icon1">
+            <image src="http://tws.cnweisou.com/images/price.png"></image>
+        </view>
+        <text class="content1">{{money}}</text>
+    </view>
+    <button class="clickRecharge" formType="submit" type="submit">立即充值</button>
+</form>

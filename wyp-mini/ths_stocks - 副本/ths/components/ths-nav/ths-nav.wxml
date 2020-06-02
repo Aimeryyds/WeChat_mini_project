@@ -1,0 +1,41 @@
+<view class="navWrap">
+    <cover-view class="navBar" style="{{'height:'+(sysInfo.rheight?sysInfo.rheight+'px':'120rpx')+';'+'background-color:'+navInfo.bgColor+';'}}">
+        <cover-view class="contentWrap" style="{{'height:'+sysInfo.cheight+'px'+';'}}">
+            <cover-view class="leftContent">
+                <cover-view wx:if="{{loginInfo.account}}">
+                    <cover-image bindtap="__e" class="headBtn" data-event-opts="{{[ [ 'tap',[ [ 'itemClick',[1] ] ] ] ]}}" src="{{headUrl}}" wx:if="{{headUrl}}"></cover-image>
+                </cover-view>
+                <cover-view class="login" wx:else>
+                    <button bindgetphonenumber="__e" class="{{[platform=='ios'?'ios':'']}}" data-event-opts="{{[ [ 'getphonenumber',[ [ 'getPhoneNumber',['$event'] ] ] ] ]}}" id="btnLogin" openType="getPhoneNumber" style="{{'background-color:'+'#fff'+';'+'color:'+'#000'+';'+'font-size:'+'30rpx'+';'}}" type="primary">登录</button>
+                </cover-view>
+            </cover-view>
+            <cover-view class="{{['middleContent',platform=='ios'?'ios':'']}}">{{navInfo.title}}</cover-view>
+            <cover-view class="wxBtn"></cover-view>
+        </cover-view>
+    </cover-view>
+    <cover-view class="paddingBlock" style="{{'height:'+(sysInfo.rheight?sysInfo.rheight+'px':'120rpx')+';'}}"></cover-view>
+    <cover-view bindtap="__e" class="accountBg" data-event-opts="{{[ [ 'tap',[ [ 'showMenu',['$event'] ] ] ] ]}}" hidden="{{!showAccount}}">
+        <cover-view catchtap="__e" class="accountWrap" data-event-opts="{{[ [ 'tap',[ [ '',['$event'] ] ] ] ]}}" style="{{'top:'+sysInfo.rheight+'px'+';'}}">
+            <cover-view bindtap="__e" class="management accountItem" data-event-opts="{{[ [ 'tap',[ [ 'itemClick',[1] ] ] ] ]}}">
+                <cover-image class="icon" src="/static/22.png"></cover-image>
+                <cover-view class="text">帐号管理</cover-view>
+            </cover-view>
+            <cover-view bindtap="__e" class="feedback accountItem" data-event-opts="{{[ [ 'tap',[ [ 'itemClick',[2] ] ] ] ]}}">
+                <cover-image class="icon" src="/static/22.png"></cover-image>
+                <cover-view class="text">意见反馈</cover-view>
+            </cover-view>
+        </cover-view>
+    </cover-view>
+    <cover-view class="guidanceBg" style="{{'top:'+sysInfo.rheight-3+'px'+';'}}" wx:if="{{showGuidance}}">
+        <cover-image class="cornerWrap" src="/static/arrowGrey.png" style="{{'right:'+sysInfo.meunLeft-5+'px'+';'}}"></cover-image>
+        <cover-view class="addGuidance">
+            <cover-view class="contentText">
+                <cover-view class="text_one">添加到我的小程序</cover-view>
+                <cover-view class="text_two">同花顺-让投资更简单</cover-view>
+            </cover-view>
+            <cover-view bindtap="__e" class="closeWrap" data-event-opts="{{[ [ 'tap',[ [ 'closeGuidance',['$event'] ] ] ] ]}}">
+                <cover-image class="close" src="/static/close.png"></cover-image>
+            </cover-view>
+        </cover-view>
+    </cover-view>
+</view>

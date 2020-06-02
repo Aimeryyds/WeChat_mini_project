@@ -1,0 +1,11 @@
+<view class="page">
+    <taskbarGuide></taskbarGuide>
+    <block wx:for="{{primaryTags}}" wx:key="key">
+        <view class="primary-item">{{item.name}}</view>
+        <view class="minor" style="color: {{colors[index%5]}}" wx:if="{{item.tags.length>0}}">
+            <view bindtap="minorItemDidPress" class="minor-item" data-name="{{item.name}}" wx:for="{{item.tags}}" wx:key="key">
+                <view class="minor-item-name">{{item.name}}</view>
+            </view>
+        </view>
+    </block>
+</view>

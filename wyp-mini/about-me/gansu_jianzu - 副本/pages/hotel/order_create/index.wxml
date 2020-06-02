@@ -1,0 +1,50 @@
+<wxc-toast _pid="{{_pid}}" isShow="{{$toast.show}}" text="{{errorvalue}}"></wxc-toast>
+<view class="container">
+    <form bindreset="formReset" bindsubmit="formSubmit" class="form" reportSubmit="true">
+        <scroll-view scrollY id="sId" style="height:calc(100vh - 120rpx)">
+            <view class="hotel-order-create_top">
+                <view class="hotel-name">{{order.storeName}}</view>
+                <view class="hotel-name hotel-line" style="font-size:24rpx">{{order.roomName}}{{order.hasWindow==1?' | 有窗':' | 无窗'}}{{order.hasBreakfase?' | 含早':' | 不含早'}}{{order.checkWifi?' | wifi':''}} </view>
+                <view class="hotel-choose-time">
+                    <hotel-intime bindchangetime="handleToHotelOrder" isTimeChangeable="{{false}}"></hotel-intime>
+                </view>
+                <view class="hotel-address">
+                    <image src="http://imgcdnali.wfenxiao.com.cn/xcx/c/icons/ico-addr_light.png" style="width:24rpx;height:24rpx;margin-left:40rpx;margin-right:20rpx"></image>
+                    <wxc-elip>
+                        <text style="color:#ffffff;font-size:24rpx;line-height:80rpx">{{order.provinceName}}{{order.cityName}}{{order.detailAddress}}</text>
+                    </wxc-elip>
+                </view>
+            </view>
+            <view style="background:#fff; margin-top:26rpx">
+                <view class="form-item">
+                    <text class="form-item-key">房间数</text>
+                    <wxc-counter bind:changenumber="onChangeNumber" color="#333" max="{{10000}}" min="1" number="1"></wxc-counter>
+                </view>
+                <view class="form-people">
+                    <view class="form-item" style="margin-left:{{index==number-1?0:'310rpx'}}" wx:for="{{number}}">
+                        <text></text>
+                        <input name="people{{index}}" placeholder="每间填1位入住人姓名" style="font-size: 14px;width:310rpx;float:right"></input>
+                    </view>
+                    <view class="form-people-key">
+                        <text class="form-item-key">入住人姓名</text>
+                        <text class="form-item-key" style="color:#f00">*</text>
+                    </view>
+                </view>
+                <view class="form-people">
+                    <view class="form-item">
+                        <text></text>
+                        <input maxlength="11" name="phone" placeholder="请写入联系方式" style="font-size:14px;width:310rpx;float:right" type="number"></input>
+                    </view>
+                    <view class="form-people-key">
+                        <text class="form-item-key">联系方式</text>
+                        <text class="form-item-key" style="color:#f00">*</text>
+                    </view>
+                </view>
+            </view>
+        </scroll-view>
+        <view class="bottom">
+            <wxc-price _pid="{{_pid}}" class="price" icon="sub">{{totalPrice}}</wxc-price>
+            <button class="submit" formType="submit">提交预约</button>
+        </view>
+    </form>
+</view>

@@ -1,0 +1,27 @@
+<view class="house-detail _div data-v-330df4ad">
+    <view class="block-title _h2 data-v-330df4ad">房屋详情</view>
+    <view class="air-test _div data-v-330df4ad" wx:if="{{air_test_config}}">
+        <view class="tag _div data-v-330df4ad" style="{{tagStyle}}">{{air_test_config.title_text}}</view>
+        <view class="{{['desc _p data-v-330df4ad',descClass]}}">{{air_test_config.desc}}</view>
+        <label bindtap="__e" class="link _span data-v-330df4ad" data-event-opts="{{[ [ 'tap',[ [ 'handleJumpH5',['$0'],['air_test_config.link'] ] ] ] ]}}" wx:if="{{air_test_config.link}}">
+            <label class="{{['status _span data-v-330df4ad',statusClass]}}">{{air_test_config.status_text}}</label>
+            <view class="iconfont icon-arrowforward _i data-v-330df4ad"></view>
+        </label>
+    </view>
+    <view class="detail _div data-v-330df4ad">
+        <label class="detail-50 _span data-v-330df4ad" wx:for="{{base}}" wx:for-index="__i0__" wx:key="name">
+            <label class="tag-name _span data-v-330df4ad">{{item.name}}</label>{{item.value+''}}</label>
+        <label class="detail-100 _span data-v-330df4ad" wx:if="{{lease&&lease.sign_and_checkin_date}}">
+            <label class="tag-name _span data-v-330df4ad">入住</label>{{lease.sign_and_checkin_date+''}}</label>
+        <label class="detail-100 _span data-v-330df4ad" wx:if="{{lease&&lease.sign_duration}}">
+            <label class="tag-name _span data-v-330df4ad">租期</label>{{lease.sign_duration+''}}</label>
+        <label class="detail-100 _span data-v-330df4ad" wx:if="{{resblock&&resblock.name}}">
+            <label class="tag-name _span data-v-330df4ad">小区</label>
+            <label bindtap="__e" class="value _span data-v-330df4ad" data-event-opts="{{[ [ 'tap',[ [ 'handleJumpResblock',['$0'],['resblock.id'] ] ] ] ]}}">
+                <label class="_span data-v-330df4ad">{{resblock.name}}</label>
+                <view class="iconfont icon-arrowforward _i data-v-330df4ad"></view>
+            </label>
+        </label>
+    </view>
+    <view class="tips _p data-v-330df4ad" wx:if="{{bottom_notice_desc}}">{{bottom_notice_desc}}</view>
+</view>

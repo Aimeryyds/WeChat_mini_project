@@ -1,0 +1,55 @@
+<template name="calendar">
+    <view bindtap="closeCalendar" catchtouchmove="catchTouch" class="calendar-wrap" wx:if="{{show}}">
+        <view catchtap="catchTouch" class="flex box box-tb box-align-center calendar-box">
+            <view class="calendar gray-color box box-tb">
+                <view class="top-handle fs28 box box-lr box-align-center box-pack-center fk-top-handle">
+                    <view catchtap="choosePrevMonth" class="prev box box-rl" data-handle="prev">
+                        <view class="prev-handle box box-lr box-align-center box-pack-center iconfont icon-turn prev-btn"></view>
+                    </view>
+                    <view class="date-area fk-datre-area box box-lr box-align-center box-pack-center">
+                        <picker bindchange="chooseMonth" catchtap="catchTouch" end="2050-12" fields="month" mode="date" start="1920-01" value="{{formatDate.getformatDate(curYear,curMonth)}}">
+                            <view class="picker">
+          {{curYear||'--'}} 年 {{curMonth||'--'}} 月
+          <view class="iconfont icon-turn next-btn picker-btn"></view>
+                            </view>
+                        </picker>
+                    </view>
+                    <view catchtap="chooseNextMonth" class="next box box-lr" data-handle="next">
+                        <view class="next-handle box box-lr box-align-center box-pack-center iconfont icon-turn next-btn"></view>
+                    </view>
+                </view>
+                <view class="weeks fk-weeks box box-lr box-pack-center box-align-center">
+                    <view class="flex week fs28" data-idx="{{index}}" wx:for="{{weeksCh}}" wx:key="{{index}}">{{item}}</view>
+                </view>
+                <view bindtouchmove="calendarTouchmove" bindtouchstart="calendarTouchstart" class="days box box-lr box-wrap fk-box-wrap">
+                    <view class="grid fk-grid disable-day-color box box-align-center box-pack-center" data-idx="{{index}}" wx:if="{{empytGrids}}" wx:for="{{empytGrids}}" wx:key="{{index}}">
+                        <view class="day fk-day box box-align-center box-pack-center">{{item}}</view>
+                    </view>
+                    <view catchtap="tapDayItem" class="grid fk-grid normal-day-color box box-align-center box-pack-center" data-disable="{{item.disable}}" data-idx="{{index}}" wx:for="{{days}}" wx:key="{{index}}">
+                        <view class="day-with-dot box box-tb box-align-center box-pack-center">
+                            <view class="todo-dot" style="background-color: {{todoLabelColor}}" wx:if="{{item.showTodoLabel&&todoLabelPos==='top'}}"></view>
+                            <view class="day fk-day border-radius {{item.choosed?'day-choosed-color':''}} {{item.disable?'disable-day-color disable-day-circle':''}} box box-align-center box-pack-center" style="background-color:{{item.choosed?globalColor:''}}">{{item.day}}</view>
+                            <view class="todo-dot" style="background-color: {{todoLabelColor}}" wx:if="{{item.showTodoLabel&&todoLabelPos==='bottom'}}"></view>
+                        </view>
+                    </view>
+                    <view class="grid fk-grid disable-day-color box box-align-center box-pack-center" data-idx="{{index}}" wx:for="{{lastEmptyGrids}}" wx:key="{{index}}">
+                        <view class="day fk-day box box-align-center box-pack-center">{{item}}</view>
+                    </view>
+                </view>
+                <view catchtap="comfirmDay" class="btn-wrap box box-lr box-pack-center box-align-center" style="background-color:{{globalColor}}">
+                    <view>确定</view>
+                </view>
+            </view>
+        </view>
+    </view>
+</template>
+<wxs module="formatDate">
+var getformatDate = (function(year, month) {
+    var date = "";
+    if (year && month) {
+        date = year + "-" + month
+    };
+    return (date)
+});
+module.exports.getformatDate = getformatDate;
+</wxs>

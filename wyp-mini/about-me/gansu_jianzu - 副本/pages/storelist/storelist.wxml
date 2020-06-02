@@ -1,0 +1,46 @@
+<import src="/dist/loadmore/index.wxml"></import>
+<view class="container" wx:if="{{isShow}}">
+    <scroll-view enableBackToTop scrollY bindscrolltolower="lower" scrollTop="{{scrollTop}}" style="width:100%;height: 100vh;">
+        <view class="brand-detail">
+            <view class="brand-img">
+                <image src="{{brand.logo||'http://imgcdnali.wfenxiao.com.cn/xcx/c/icons/brand.png'}}"></image>
+            </view>
+            <view class="brand-name">
+                <text>{{brand.brandName}}</text>
+            </view>
+        </view>
+        <view class="store-list" wx:for="{{storelist}}">
+            <view bindtap="makestore" class="store-detail" data-store="{{item}}">
+                <view class="store-name">
+                    <view style="font-size: 32rpx;margin-right: 20rpx;">{{item.storeName}}</view>
+                </view>
+                <view class="store-address">
+                    <image src="http://imgcdnali.wfenxiao.com.cn/xcx/c/store/address.png"></image>
+            {{item.provinceName}}{{item.cityName}}{{item.areaName}}{{item.detailAddress}}
+            | <text>{{item.distance>1000?item.distance/1000+'km':item.distance+'m'}}</text>
+                </view>
+                <view class="store-time">
+                    <image src="http://imgcdnali.wfenxiao.com.cn/xcx/c/store/time.png"></image>
+                    <view style="">
+              营业时间：
+            </view>
+                    <view style="flex: 1;">
+                        <view style="margin-right: 15rpx;" wx:for="{{item.openTimeJson}}" wx:for-item="time">{{time.time}}</view>
+                    </view>
+                </view>
+                <view class="store-coupon">
+                    <wxc-label style="margin-right: 10rpx;" type="fill" typeColor="#f5a623" wx:if="{{item.hasCoupon==1}}">券</wxc-label>
+                    <wxc-label style="margin-right: 10rpx;" type="fill" typeColor="#9a6bff" wx:if="{{item.hasDiscount==1}}">满减</wxc-label>
+                    <wxc-label style="margin-right: 10rpx;" type="fill" typeColor="#cc74ff" wx:if="{{item.hasGroup==1}}">拼团</wxc-label>
+                    <wxc-label style="margin-right: 10rpx;" type="fill" typeColor="#f45454" wx:if="{{item.hasSeckill==1}}">秒杀</wxc-label>
+                </view>
+            </view>
+            <view class="store-distance">
+                <image bindtap="makePhone" data-phone="{{item.managerMobile}}" src="http://imgcdnali.wfenxiao.com.cn/xcx/c/store/phone.png"></image>
+            </view>
+        </view>
+        <view id="loadmore">
+            <template is="zan-loadmore" data="{{loading:loadingmore}}"></template>
+        </view>
+    </scroll-view>
+</view>

@@ -1,0 +1,12 @@
+<template name="dragup">
+    <view class="bottom-back" id="bottom-back" style="height: {{dragup.currentDomHeight}}rpx;">
+        <view class="process" wx:if="{{!dragup.isDone}}">
+            <image class="icon" src="../../images/dragup.png"></image>
+            <text>上拉返回首页</text>
+        </view>
+        <view class="done" wx:else>
+            <image class="icon" src="../../images/dragup-release.png"></image>
+            <text>松开返回首页</text>
+        </view>
+    </view>
+</template>

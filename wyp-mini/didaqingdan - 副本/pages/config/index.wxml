@@ -1,0 +1,42 @@
+<view class="{{'container '+(isReady?'':'hide')}}" wx:if="{{$taroCompReady}}">
+    <view class="section-wrapper">
+        <view class="title top">智能日期识别</view>
+        <view class="section">
+            <view class="control">
+                <text class="detail">文本输入识别</text>
+                <switch bindchange="bindNlpEnabledChange" checked="{{nlpenabled}}"></switch>
+            </view>
+            <view class="help">在微信服务号输入文本添加任务，或转发文本到微信服务号时，自动识别文本中的日期和时间信息并设置提醒。</view>
+        </view>
+        <view class="section">
+            <view class="control">
+                <text class="detail">移除任务文本中的日期</text>
+                <switch bindchange="bindDateKeptInText" checked="{{!dateKeptInText}}"></switch>
+            </view>
+            <view class="help">通过微信服务号添加任务时，移除任务中识别到的日期文本。</view>
+        </view>
+    </view>
+    <view class="section-wrapper">
+        <view class="title">微信提醒设置</view>
+        <view class="section">
+            <view class="control">
+                <text class="detail">微信任务提醒</text>
+                <switch bindchange="bindReminderChange" checked="{{remind}}"></switch>
+            </view>
+            <view class="help">开启后，你将同时在微信中收到任务提醒。</view>
+        </view>
+    </view>
+    <view class="section-wrapper">
+        <view class="title"></view>
+        <view bindtap="anonymousFunc0" class="picker control timezone-control">
+            <view class="detail">时区</view>
+            <view class="value">
+                <view class="timezone-name">{{anonymousState__temp}}</view>
+                <view class="arrow">
+                    <view class="icon icon-left icon-chervon-right"></view>
+                </view>
+            </view>
+        </view>
+        <timezone-picker compid="{{$compid__31}}"></timezone-picker>
+    </view>
+</view>

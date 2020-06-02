@@ -1,0 +1,35 @@
+<view class="bg_color">
+    <form bindsubmit="submitAccount" reportSubmit="true">
+        <view class="list">
+            <view class="list_item">
+                <view class="t">
+                    <text>选择收款方式:</text>
+                </view>
+                <view class="b">
+                    <picker bindchange="accountsChange" range="{{accounts}}" value="{{aindex}}">
+                        <view class="picker">
+                {{accounts[aindex]}}
+            </view>
+                    </picker>
+                </view>
+            </view>
+            <view class="list_item">
+                <view class="t">
+                    <text>收款账号:</text>
+                </view>
+                <view class="b">
+                    <input bindinput="chesta" name="account_no" placeholder="请输入收款账号" placeholderClass="place" type="text" value="{{accinfo.account_no}}"></input>
+                </view>
+            </view>
+            <view class="list_item">
+                <view class="t">
+                    <text>收款人:</text>
+                </view>
+                <view class="b">
+                    <input bindblur="chestb" bindchange="chestb" bindinput="chestb" name="account_info" placeholder="请输入收款人姓名" placeholderClass="place" type="text" value="{{accinfo.account_info}}"></input>
+                </view>
+            </view>
+        </view>
+        <button class="bu {{act==2?'active':''}}" formType="submit">提交</button>
+    </form>
+</view>

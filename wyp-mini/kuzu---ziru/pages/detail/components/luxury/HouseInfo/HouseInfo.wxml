@@ -1,0 +1,82 @@
+<view class="house-info hz-style _div data-v-67a63acb">
+    <view class="{{['house-info-wrapper _div data-v-67a63acb',skeletonFlag?'active':'',true?'hz-style':'']}}" wx:if="{{!!(!loadingFlag&&houseInfo)}}">
+        <view class="hz-price _div data-v-67a63acb">
+            <view class="price-row _div data-v-67a63acb">
+                <label class="price _span data-v-67a63acb">￥<price bind:__l="__l" class="data-v-67a63acb" fontSize="20px" offset="{{21}}" priceObj="{{houseInfo.priceObj.price}}" vueId="1" width="14px"></price>{{''+price+''}}</label>
+            </view>
+            <view class="payment _div data-v-67a63acb">
+                <label class="desc _span data-v-67a63acb">服务费另计，详情见付款方式</label>
+                <label bindtap="__e" class="payment-way _span data-v-67a63acb" data-event-opts="{{[ [ 'tap',[ [ 'handleOpenModal',['$event'] ] ] ] ]}}">付款方式<view class="iconfont icon-zrk_ic_arrowright _i data-v-67a63acb"></view>
+                </label>
+            </view>
+            <view class="name _div data-v-67a63acb">{{houseInfo.name}}</view>
+        </view>
+        <view class="tags _div data-v-67a63acb">
+            <label class="{{['zr-tag _span data-v-67a63acb',item.hot?'hot':'',item.bg_img?'img':'',!item.bg_img?'b-1px':'']}}" wx:for="{{houseInfo.tags}}" wx:for-index="i" wx:key="i">
+                <image alt class="image _img data-v-67a63acb" src="{{item.bg_img}}" wx:if="{{item.bg_img}}"></image>
+                <label class="_span data-v-67a63acb" wx:else>{{item.title}}</label>
+            </label>
+        </view>
+        <view class="fake-pager _div data-v-67a63acb">
+            <view class="pager active _div data-v-67a63acb"></view>
+            <view class="pager _div data-v-67a63acb"></view>
+            <view class="pager _div data-v-67a63acb"></view>
+            <view class="pager _div data-v-67a63acb"></view>
+        </view>
+    </view>
+    <view class="house-skeleton-wrapper _div data-v-67a63acb" wx:else>
+        <view class="price-row _div data-v-67a63acb">
+            <label class="price _span data-v-67a63acb"></label>
+            <label class="payment-way _span data-v-67a63acb"></label>
+        </view>
+        <view class="name _div data-v-67a63acb"></view>
+        <view class="banner _div data-v-67a63acb"></view>
+        <view class="tags _div data-v-67a63acb">
+            <label class="zr-tag _span data-v-67a63acb"></label>
+            <label class="zr-tag _span data-v-67a63acb"></label>
+            <label class="zr-tag _span data-v-67a63acb"></label>
+            <label class="zr-tag _span data-v-67a63acb"></label>
+            <label class="zr-tag _span data-v-67a63acb"></label>
+        </view>
+        <view class="info l bt1 mt10 _div data-v-67a63acb"></view>
+        <view class="info s bt1 mt10 _div data-v-67a63acb"></view>
+        <view class="info bt1 mt10 _div data-v-67a63acb"></view>
+        <view class="info s bt1 mt10 _div data-v-67a63acb"></view>
+        <view class="info l bt1 mt10 _div data-v-67a63acb"></view>
+        <view class="info l bt1 mt10 _div data-v-67a63acb"></view>
+    </view>
+    <popup-wrapper backgroundColor="#fff" bind:__l="__l" class="data-v-67a63acb vue-ref" data-ref="paymentPopup" height="85%" maskClick="{{true}}" maskShow="{{true}}" popupId="{{1}}" transition="slider" type="bottom" vueId="2" vueSlots="{{['default']}}">
+        <view class="_div data-v-67a63acb" wx:if="{{modalData}}">
+            <view class="modal-block pay-modal _div data-v-67a63acb">
+                <view class="modal-title _h3 data-v-67a63acb">付款方式</view>
+                <view class="modal-content _div data-v-67a63acb" wx:if="{{modalData}}">
+                    <view bindtap="__e" class="modal-line bb1 _div data-v-67a63acb" data-event-opts="{{[ [ 'tap',[ [ 'handleOpenH5',['$0'],[ [ ['modalData.details','',i,'more_link'] ] ] ] ] ] ]}}" wx:for="{{modalData.details}}" wx:for-index="i" wx:key="i">
+                        <view class="top _div data-v-67a63acb">
+                            <label class="way _span data-v-67a63acb">{{''+item.title+''}}<view class="iconfont icon-aui-icon-question mcolor _i data-v-67a63acb" wx:if="{{item.more_link}}"></view>
+                            </label>
+                            <label class="price-d _span data-v-67a63acb">￥<price bind:__l="__l" class="data-v-67a63acb" offset="{{17}}" priceObj="{{item.rent_fee}}" vueId="{{'3-'+i+','+'2'}}" width="12px"></price>{{''+item.rent_fee_unit+''}}</label>
+                        </view>
+                        <view class="bottom _div data-v-67a63acb">押金： ￥<price bind:__l="__l" class="data-v-67a63acb" fontSize="14px" offset="{{14.8333}}" priceObj="{{item.deposit}}" vueId="{{'4-'+i+','+'2'}}"></price>{{''+item.deposit_unit+'， 服务费： ￥'}}<price bind:__l="__l" class="data-v-67a63acb" fontSize="14px" offset="{{14.8333}}" priceObj="{{item.service_fee}}" vueId="{{'5-'+i+','+'2'}}"></price>{{''+item.service_fee_unit+''}}</view>
+                    </view>
+                </view>
+            </view>
+            <view class="modal-block pay-modal _div data-v-67a63acb">
+                <view class="modal-title _h3 data-v-67a63acb">说明</view>
+                <view class="modal-content _div data-v-67a63acb" wx:if="{{modalData}}">
+                    <view class="desc _p data-v-67a63acb" wx:for="{{modalData.reminder}}" wx:for-index="i" wx:key="i">{{item}}</view>
+                </view>
+            </view>
+        </view>
+        <view class="_div data-v-67a63acb" wx:else>
+            <view class="skeleton s h _div data-v-67a63acb"></view>
+            <view class="skeleton l _div data-v-67a63acb"></view>
+            <view class="skeleton s _div data-v-67a63acb"></view>
+            <view class="skeleton l _div data-v-67a63acb"></view>
+            <view class="skeleton l _div data-v-67a63acb"></view>
+            <view class="skeleton s _div data-v-67a63acb"></view>
+            <view class="skeleton l _div data-v-67a63acb"></view>
+            <view class="skeleton l _div data-v-67a63acb"></view>
+            <view class="skeleton _div data-v-67a63acb"></view>
+        </view>
+    </popup-wrapper>
+</view>

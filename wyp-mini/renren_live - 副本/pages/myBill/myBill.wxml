@@ -1,0 +1,44 @@
+<navigationTopbar bindtap="MethodComponent" id="mineTopBar" navTxt="{{navTxtStr}}" navtype="2" showWhiteBackground="{{navTopBackShow}}"></navigationTopbar>
+<view class="bill_top" style="top:{{navHeight}}px;">
+    <text class="line_icon"></text>
+    <view bindtap="onRecharge" class="{{rechargeCss}}">
+        <text>充值</text>
+    </view>
+    <view bindtap="onConsume" class="{{consumeCss}}">
+        <text>消耗</text>
+    </view>
+</view>
+<view class="page_container bill_main" style="top:{{pageTop}}px;min-height: {{pageHeight}}px;">
+    <view class="remain">
+	   账户余额<text class="remain_num">{{amountNum}}</text>
+        <text class="remain_icon">果</text>
+    </view>
+    <view wx:if="{{type==1}}" wx:for="{{rechangeList}}" wx:key="index">
+        <view bindtap="toBillDetails" class="bill_item" data-item="{{item}}">
+            <view class="name">
+                <text class="left">{{item.bizDesc}}</text>
+                <text class="right">
+                    <text>{{item.tokenAmountStr}}</text>果
+				</text>
+            </view>
+            <view class="time">
+                <text class="left">{{item.transTime}}</text>
+                <text class="right">{{item.transStatus}}</text>
+            </view>
+        </view>
+    </view>
+    <view wx:if="{{type==2}}" wx:for="{{consumeList}}" wx:key="index">
+        <view bindtap="toBillDetails" class="bill_item" data-item="{{item}}">
+            <view class="name">
+                <text class="left">{{item.bizDesc}}</text>
+                <text class="right">
+                    <text>{{item.tokenAmountStr}}</text>果
+				</text>
+            </view>
+            <view class="time">
+                <text class="left">{{item.transTime}}</text>
+                <text class="right">{{item.transStatus}}</text>
+            </view>
+        </view>
+    </view>
+</view>

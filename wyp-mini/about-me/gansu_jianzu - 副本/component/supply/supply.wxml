@@ -1,0 +1,23 @@
+<import src="/dist/loadmore/index.wxml"></import>
+<import src="../../pages/templates/supply/supply.wxml"></import>
+<import src="./tab.wxml"></import>
+<view class="container supply-container" style="display:{{loading?'none':''}}">
+    <view bindtap="bindsupplysearch" class="search-wrap">
+        <view class="supply-search">
+            <image class="supply-search__img" src="http://imgcdnali.wfenxiao.com.cn/xcx/c/icons/ic_search.png"></image>
+            <view class="supply-search__input">{{query.title||'搜索供求'}}</view>
+        </view>
+    </view>
+    <template is="supply-tab" data="{{tab:tab,componentId:'tab',addresses:addresses,addressIndex:addressIndex,types:types,typeIndex:typeIndex,classifies:classifies,classifyIndex:classifyIndex,selectAddress:selectAddress,selectClassify:selectClassify}}" wx:if="{{!(type=='group')}}"></template>
+    <view class="no-supply" hidden="{{supplys&&supplys.length>0||loading?true:false}}">
+        <view class="text">暂无符合条件的供求信息</view>
+    </view>
+    <scroll-view enableBackToTop bindscrolltolower="lower" scrollY="true" style="width:100%;height:calc( 100vh - {{type=='group'?'118rpx':'210rpx'}})">
+        <view class="a-supply" wx:for="{{supplys}}" wx:key="{{index}}">
+            <template is="supply" data="{{id:item.id,title:item.title,mobile:item.mobile,imgsrc:item.imgUrl,time:item.publishTime,type:item.infoType}}"></template>
+        </view>
+        <view id="loadmore">
+            <template is="zan-loadmore" data="{{loading:loadmore}}"></template>
+        </view>
+    </scroll-view>
+</view>

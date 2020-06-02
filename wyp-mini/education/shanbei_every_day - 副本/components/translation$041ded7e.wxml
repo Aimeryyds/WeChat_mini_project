@@ -1,0 +1,26 @@
+<template name="translation$041ded7e">
+    <view class="_div data-v-48f51b31 translation">
+        <view class="_div data-v-48f51b31 content">
+            <image class="_img data-v-48f51b31 avatar" src="{{translation.userinfo.avatar}}"></image>
+            <view class="_div data-v-48f51b31 right">
+                <view class="_div data-v-48f51b31 top">
+                    <view class="_div data-v-48f51b31 nickname">{{translation.userinfo.nickname}}</view>
+                    <view class="_div data-v-48f51b31 tool">
+                        <image bindtap="handleProxy" class="_img data-v-48f51b31 share-trans" data-comkey="{{$k}}" data-eventid="{{'0'}}" src="/static/img/share-m.png"></image>
+                        <view bindtap="handleProxy" class="_div data-v-48f51b31 love" data-comkey="{{$k}}" data-eventid="{{'1'}}">
+                            <label class="_span data-v-48f51b31" style=" {{'color:'+(translation.is_liked?'#fe6135':'#999999')+';'}}">{{translation.like}}</label>
+                            <image class="_img data-v-48f51b31 icon" src="{{translation.is_liked?'/static/img/love-active.png':'/static/img/love-inactive.png'}}"></image>
+                        </view>
+                    </view>
+                </view>
+                <label class="_span data-v-48f51b31 date">{{translation.showDate}}</label>
+                <view class="_div data-v-48f51b31 text">{{translation.content}}</view>
+                <view class="_div data-v-48f51b31 bottom">
+                    <label bindtap="handleProxy" class="_span data-v-48f51b31 del" data-comkey="{{$k}}" data-eventid="{{'2'}}" hidden="{{!mine}}">删除</label>
+                </view>
+            </view>
+        </view>
+        <view bindtap="handleProxy" class="_div data-v-48f51b31 share-btn" data-comkey="{{$k}}" data-eventid="{{'3'}}" id="share-my-translation" wx:if="{{mine}}">{{!showCheckin?'分享集赞':'签到'}}</view>
+        <view class="_div data-v-48f51b31 line"></view>
+    </view>
+</template>

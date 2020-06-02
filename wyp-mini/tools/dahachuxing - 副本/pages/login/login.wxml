@@ -1,0 +1,52 @@
+<view class="loginForm">
+    <form bindsubmit="formSubmit">
+        <view class="bg">
+            <image mode="{{mode}}" src="{{src}}"></image>
+        </view>
+        <view class="wx-login" wx:if="{{isWXLogin}}">
+            <view style="width:85%;margin:auto">
+                <button bindgetphonenumber="getPhoneNumber" openType="getPhoneNumber" style="background-color:{{mainColor}};color:{{textColor}};">微信授权登录</button>
+                <view class="agreement">点击登录，即表示已经阅读并同意<text bindtap="toAgreement">《用户协议》</text>
+                </view>
+            </view>
+            <view class="login-check">
+                <view bindtap="denyLogin">
+                    <text>暂不登录</text>
+                </view>
+                <view bindtap="changeLoginType">
+                    <text>手机号注册/登录</text>
+                </view>
+            </view>
+        </view>
+        <view wx:else>
+            <view class="inputView">
+                <view class="phone">
+                    <text>手机号:</text>
+                    <input bindinput="inputPhone" maxlength="11" placeholder="请输入手机号" type="number"></input>
+                    <text style="width:250rpx;"></text>
+                </view>
+                <view class="split"></view>
+                <view class="authCode">
+                    <text>验证码:</text>
+                    <input bindinput="inputAuth" maxlength="4" name="authCode" placeholder="请输入验证码" type="number"></input>
+                    <text bindtap="getAuth" style="color:{{mainColor}}">{{authCodeBtn}}</text>
+                </view>
+            </view>
+            <view class="submit">
+                <view class="btn-group">
+                    <button disabled="{{disabled}}" formType="submit" style="background-color:{{disabled?'#d0d0d0':mainColor}};color:{{disabled?'#000':textColor}}">登录</button>
+                    <view class="agreement">点击登录，即表示已经阅读并同意<text bindtap="toAgreement">《用户协议》</text>
+                    </view>
+                </view>
+                <view class="login-check">
+                    <view bindtap="denyLogin">
+                        <text>暂不登录</text>
+                    </view>
+                    <view bindtap="changeLoginType">
+                        <text>微信授权登录</text>
+                    </view>
+                </view>
+            </view>
+        </view>
+    </form>
+</view>

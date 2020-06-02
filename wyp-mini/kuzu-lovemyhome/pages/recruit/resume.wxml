@@ -1,0 +1,59 @@
+<form bindsubmit="submitInfo">
+    <view class="joinBox marbottom">
+        <view class="joinBanner">
+            <image role="banner" src="https://res.5i5j.com/cache/weixin/common/jiaruBanner.jpg"></image>
+        </view>
+        <view class="joinBanner xiansty">
+            <image role="banner" src="https://res.5i5j.com/cache/weixin/common/jiarutopimg.png"></image>
+        </view>
+        <view bindtap="ynLoginChange" class="joincont">
+            <view class="group_from">
+                <picker bindchange="bindPickerChange" class="kuangsty" disabled="{{cityOrHide}}" range="{{cityArray}}" rangeKey="{{'name'}}" value="{{cityArray[rangekey].value}}">
+                    <view class="grouplable picker">城市</view>
+                    <view class="groupinput lookmore">
+                        <input data-cityId="cityId" data-cityName="cityName" disabled="true" name="cityName" placeholder="城市" placeholderStyle="color:#bababa;" type="text" value="{{cityArray[rangekey].name}}"></input>
+                    </view>
+                </picker>
+            </view>
+            <view class="group_from mart">
+                <view class="grouplable">姓名</view>
+                <view class="groupinput">
+                    <input bindinput="getJobName" disabled="{{cityOrHide}}" name="userName" placeholder="求职者姓名" placeholderStyle="color:#bababa;" type="text" value="{{userName}}"></input>
+                </view>
+            </view>
+            <view class="group_from mart">
+                <view class="grouplable">手机号</view>
+                <view class="groupinput">
+                    <input bindinput="getPhoneNumber" class="codeInput" disabled="{{cityOrHide}}" maxlength="11" name="userPhone" placeholder="求职者手机号" placeholderStyle="color:#bababa;" type="idcard" value="{{userPhone}}"></input>
+                </view>
+            </view>
+            <view bindtap="storesTap" class="group_from">
+                <view class="grouplable">意向门店</view>
+                <view class="groupinput lookmore">
+                    <input disabled="true" placeholder="有无意向门店" placeholderStyle="color:#bababa;" type="text" value="{{storesTxt}}"></input>
+                    <input name="storesmode" placeholder="有无意向门店" placeholderStyle="color:#bababa;" type="hidden" value="{{storesVal}}"></input>
+                </view>
+            </view>
+            <view class="group_from" wx:if="{{storesVal==1&&cityName!=''}}">
+                <view class="grouplable picker">门店</view>
+                <view bindtap="storesChange" class="groupinput lookmore">
+                    <input bindinput="getStoresName" disabled="true" name="storesName" placeholder="门店" placeholderStyle="color:#bababa;" type="text" value="{{storesName}}"></input>
+                </view>
+            </view>
+        </view>
+        <view class="jrbot">
+            <image role="banner" src="https://res.5i5j.com/weixin/recruit/img/jrbanner.jpg"></image>
+        </view>
+    </view>
+    <view class="sellFoot mflex">
+        <view class="delivery mfauto">
+            <button formType="submit">确认投递</button>
+        </view>
+    </view>
+    <view bindtap="ynStores" class="radio-layer-box" hidden="{{storesHide}}">
+        <view class="radio-layer b-s">
+            <view bindtap="ynStoresTap" class="radio-item" data-name="有" data-val="1">有</view>
+            <view bindtap="ynStoresTap" class="radio-item" data-name="无" data-val="0">无</view>
+        </view>
+    </view>
+</form>

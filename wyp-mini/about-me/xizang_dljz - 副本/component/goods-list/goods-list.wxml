@@ -1,0 +1,30 @@
+<template name="goods_list">
+    <view class="recommon-wrap">
+        <view class="recommon-title">{{title}}</view>
+        <view class="recommon-list" wx:if="{{listType==2}}">
+            <navigator class="recommon-item" url="../shopdetail/shopdetail?goodsSn={{item.goodsSn}}" wx:for="{{list}}">
+                <image class="item-image {{item.groupMarket?'is_group':''}}" src="{{item.thumb}}" wx:if="{{item.thumb}}"></image>
+                <view class="item-right">
+                    <text class="item-title">{{item.name}}</text>
+                    <view class="item-bottom">
+                        <text class="item-price">¥ {{item.price}}</text>
+                        <view catchtap="join2Cart" class="join-btn" id="{{item.goodsSn}}">
+                            <image src="../../images/icon_cart.png"></image>
+                        </view>
+                    </view>
+                </view>
+            </navigator>
+        </view>
+        <view class="recommon-grid" wx:else>
+            <navigator class="recommon-item" url="../shopdetail/shopdetail?goodsSn={{item.goodsSn}}" wx:for="{{list}}">
+                <image class="{{item.groupMarket?'is_group':''}}" src="{{item.thumb}}" wx:if="{{item.thumb}}"></image>
+                <view class="item-footer">
+                    <view class="item-left">
+                        <text class="item-title">{{item.name}}</text>
+                        <text class="item-price">¥ {{item.price}}</text>
+                    </view>
+                </view>
+            </navigator>
+        </view>
+    </view>
+</template>

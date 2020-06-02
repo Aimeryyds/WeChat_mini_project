@@ -1,0 +1,310 @@
+<view class="{{['page',bindscroll?'rentEvt_filter':'']}}">
+    <skeleton-index bind:__l="__l" class="vue-ref" data-ref="skeleton" vueId="8dd740cc-1" wx:if="{{showSkeleton}}"></skeleton-index>
+    <block wx:else>
+        <view class="body">
+            <view class="search_move">
+                <view class="search_part">
+                    <picker bindchange="__e" class="header-mean" data-event-opts="{{[ [ 'change',[ [ 'changeArea',['$event'] ] ] ] ]}}" range="{{cityNameList}}" value="{{$root.g0}}">
+                        <view class="site-city">
+                            <view class="site-city-val">{{cityNameList[$root.g1]}}</view>
+                        </view>
+                    </picker>
+                    <view class="down_img"></view>
+                    <view class="line1"></view>
+                    <view bindtap="__e" class="search" data-event-opts="{{[ [ 'tap',[ [ 'inputclick',['$event'] ] ] ] ]}}">
+                        <input class="sch-ipt" disabled="{{true}}" id="home_inp" placeholderClass="inpClass" value="{{value_text}}"></input>
+                    </view>
+                    <view bindtap="__e" class="del-btn" data-event-opts="{{[ [ 'tap',[ [ 'delKeywords',['$event'] ] ] ] ]}}" wx:if="{{del_btn}}">
+                        <image src="https://public.danke.com.cn/public-20190801-FpvUmIqPTRdDJ65QA3wso1L9tPZW"></image>
+                    </view>
+                </view>
+                <view bindtap="__e" class="map_part" data-event-opts="{{[ [ 'tap',[ [ 'toMap',['$event'] ] ] ] ]}}">
+                    <image mode="widthFix" src="https://public.danke.com.cn/public-20190724-Fg6bN2g6_Uho2vkrxoZmVuVFacRm"></image>
+                    <view>地图</view>
+                </view>
+            </view>
+            <view class="banner" wx:if="{{has_banner}}">
+                <swiper autoplay="{{true}}" circular="{{true}}" class="banner_swiper" duration="{{500}}" indicatorActiveColor="#ffffff" indicatorColor="rgba(255,255,255,.5)" indicatorDots="{{true}}" interval="{{3000}}">
+                    <swiper-item wx:for="{{banner_list}}" wx:key="index">
+                        <image bindtap="__e" class="slide-image" data-address="{{item.resource_data}}" data-bannerType="{{item.resource_type}}" data-event-opts="{{[ [ 'tap',[ [ 'to_banner',['$event'] ] ] ] ]}}" data-isCanShare="{{item.is_can_share}}" data-name="{{item.name}}" data-shareUrl="{{item.shareUrl}}" src="{{item.images}}"></image>
+                    </swiper-item>
+                </swiper>
+            </view>
+            <view class="nav_part">
+                <view bindtap="__e" class="hz nav-list" data-event-opts="{{[ [ 'tap',[ [ 'selectRentType1',['$event'] ] ] ] ]}}" data-text="合租">
+                    <image mode="widthFix" src="https://public.danke.com.cn/public-20190724-FgOUOxQSeO1s5gsCXp7SgANa-CkC"></image>
+                    <view>合租</view>
+                </view>
+                <view bindtap="__e" class="zz nav-list" data-event-opts="{{[ [ 'tap',[ [ 'selectRentType1',['$event'] ] ] ] ]}}" data-text="整租">
+                    <image mode="widthFix" src="https://public.danke.com.cn/public-20190724-Fgv7fNi21ymo2vkI1_lrpjA9gp32"></image>
+                    <view>整租</view>
+                </view>
+                <view bindtap="__e" class="yz nav-list" data-event-opts="{{[ [ 'tap',[ [ 'month_yz',['$event'] ] ] ] ]}}">
+                    <image mode="widthFix" src="https://public.danke.com.cn/public-20190724-FiVttXLdJRE3_dggwABWvlItgJbA"></image>
+                    <view>月租</view>
+                </view>
+                <view bindtap="__e" class="th nav-list" data-event-opts="{{[ [ 'tap',[ [ 'tehui',['$event'] ] ] ] ]}}">
+                    <image mode="widthFix" src="https://public.danke.com.cn/public-20190724-Fr9KVWLknRdht8t9Yk9vvyhWhBvE"></image>
+                    <view>特惠房源</view>
+                </view>
+                <view bindtap="__e" class="th nav-list" data-event-opts="{{[ [ 'tap',[ [ 'orderRoom',['$event'] ] ] ] ]}}">
+                    <image mode="widthFix" src="https://public.danke.com.cn/public-20191126-FrgzYpSW5hiwOPaITuGQa0cu-aj1" style="margin-top:-11rpx;"></image>
+                    <view style="margin-top:14rpx;">房源定制</view>
+                </view>
+            </view>
+            <view bindtap="__e" class="{{[list_Nav_onoff?'list-Nav':'list-Nav-active']}}" data-event-opts="{{[ [ 'tap',[ [ 'listNav',['$event'] ] ] ] ]}}">
+                <view bindtap="__e" class="Nav-tag hzz" data-event-opts="{{[ [ 'tap',[ [ 'rentEvt_hzz',['$event'] ] ] ] ]}}" data-nav="0">
+                    <text class="{{[colorRent?'blue':'']}}">{{textRent}}</text>
+                    <view class="{{[colorRent?'nav-icon-blue':'nav-icon']}}"></view>
+                </view>
+                <view bindtap="__e" class="{{['Nav-tag resultPosText',resultPosText?'blue':'']}}" data-event-opts="{{[ [ 'tap',[ [ 'rentEvt_Pos',['$event'] ] ] ] ]}}" data-nav="1">
+                    <text>{{pos_text}}</text>
+                    <view class="{{[resultPosText?'nav-icon-blue':'nav-icon']}}"></view>
+                </view>
+                <view bindtap="__e" class="{{['Nav-tag resultPriceText',resultPriceText?'blue':'']}}" data-event-opts="{{[ [ 'tap',[ [ 'rentEvt_Pri',['$event'] ] ] ] ]}}" data-nav="2">
+                    <text>{{price_text}}</text>
+                    <view class="{{[resultPriceText?'nav-icon-blue':'nav-icon']}}"></view>
+                </view>
+                <view bindtap="__e" class="{{['Nav-tag moreSelect',moreSelect?'blue':'']}}" data-event-opts="{{[ [ 'tap',[ [ 'rentEvt_more',['$event'] ] ] ] ]}}" data-nav="3">
+                    <text>更多</text>
+                    <view class="{{[moreSelect?'nav-icon-blue':'nav-icon']}}"></view>
+                </view>
+                <view bindtap="__e" class="Nav-tag filter_part" data-event-opts="{{[ [ 'tap',[ [ 'rentEvt_filter',['$event'] ] ] ] ]}}" data-nav="4">
+                    <image class="filter" src="https://public.danke.com.cn/public-20190724-Fj0PGh0j9c8ET5isb_iDRU5HaxRs" wx:if="{{posEvt_onoff}}"></image>
+                    <image class="filter" src="https://public.danke.com.cn/public-20191105-FqMBVP8YhYgIoLbtDlaQITQM-6jT" wx:if="{{!posEvt_onoff}}"></image>
+                </view>
+            </view>
+            <view catchtap="__e" class="layer-box" data-event-opts="{{[ [ 'tap',[ [ 'closeLayer',['$event'] ] ] ] ]}}" wx:if="{{layerBox}}">
+                <view catchtap="__e" class="layer-rent" data-event-opts="{{[ [ 'tap',[ [ 'default_stop',['$event'] ] ] ] ]}}" wx:if="{{showLayer_1}}">
+                    <view class="hz_part">
+                        <view class="hz_title">{{hezuTitle}}<text>{{hezuSubTitle}}</text>
+                        </view>
+                        <view class="hz_select">
+                            <view catchtap="__e" class="{{[rent_btn_1?'btn_on':'']}}" data-event-opts="{{[ [ 'tap',[ [ 'selectRentType3',['$event'] ] ] ] ]}}" data-position="top" data-value="{{hz_btn_1.value}}">全部</view>
+                            <view catchtap="__e" class="{{[rent_btn_2?'btn_on':'']}}" data-event-opts="{{[ [ 'tap',[ [ 'selectRentType4',['$event'] ] ] ] ]}}" data-position="top" data-value="{{hz_btn_2.value}}">2居</view>
+                            <view catchtap="__e" class="{{[rent_btn_3?'btn_on':'']}}" data-event-opts="{{[ [ 'tap',[ [ 'selectRentType5',['$event'] ] ] ] ]}}" data-position="top" data-value="{{hz_btn_3.value}}">3居</view>
+                            <view catchtap="__e" class="{{[rent_btn_4?'btn_on':'']}}" data-event-opts="{{[ [ 'tap',[ [ 'selectRentType6',['$event'] ] ] ] ]}}" data-position="top" data-value="{{hz_btn_4.value}}">4居+</view>
+                        </view>
+                    </view>
+                    <view class="zz_part">
+                        <view class="zz_title">{{zhengzuTitle}}<text>{{zhengzuSubTitle}}</text>
+                        </view>
+                        <view class="zz_select">
+                            <view catchtap="__e" class="{{[rent_btn_zz1?'btn_on':'']}}" data-event-opts="{{[ [ 'tap',[ [ 'selectRentTypeZz1',['$event'] ] ] ] ]}}" data-position="top" data-value="{{zz_btn_1.value}}">全部</view>
+                            <view catchtap="__e" class="{{[rent_btn_zz2?'btn_on':'']}}" data-event-opts="{{[ [ 'tap',[ [ 'selectRentTypeZz2',['$event'] ] ] ] ]}}" data-position="top" data-value="{{zz_btn_2.value}}">1居</view>
+                            <view catchtap="__e" class="{{[rent_btn_zz3?'btn_on':'']}}" data-event-opts="{{[ [ 'tap',[ [ 'selectRentTypeZz3',['$event'] ] ] ] ]}}" data-position="top" data-value="{{zz_btn_3.value}}">2居</view>
+                            <view catchtap="__e" class="{{[rent_btn_zz4?'btn_on':'']}}" data-event-opts="{{[ [ 'tap',[ [ 'selectRentTypeZz4',['$event'] ] ] ] ]}}" data-position="top" data-value="{{zz_btn_4.value}}">3居+</view>
+                        </view>
+                    </view>
+                    <view class="btn_part">
+                        <view catchtap="__e" class="btn_cz" data-event-opts="{{[ [ 'tap',[ [ 'btn_cz',['$event'] ] ] ] ]}}">重置</view>
+                        <view catchtap="__e" class="btn_qd" data-event-opts="{{[ [ 'tap',[ [ 'btn_qd',['$event'] ] ] ] ]}}">确定</view>
+                    </view>
+                </view>
+                <view catchtap="__e" class="layer-pos-box" data-event-opts="{{[ [ 'tap',[ [ 'default_stop',['$event'] ] ] ] ]}}" wx:if="{{showLayer_2}}">
+                    <view class="first">
+                        <view catchtap="__e" class="{{[showPos==0?'blue':'']}}" data-event-opts="{{[ [ 'tap',[ [ 'posEvt',['$event'] ] ] ] ]}}" data-index="{{0}}">不限</view>
+                        <view catchtap="__e" class="{{[showPos==1?'blue':'']}}" data-event-opts="{{[ [ 'tap',[ [ 'posEvt',['$event'] ] ] ] ]}}" data-index="{{1}}" wx:if="{{pos_near}}">附近</view>
+                        <view catchtap="__e" class="{{[showPos==2?'blue':'']}}" data-event-opts="{{[ [ 'tap',[ [ 'posEvt',['$event'] ] ] ] ]}}" data-index="{{2}}">地铁</view>
+                        <view catchtap="__e" class="{{[showPos==3?'blue':'']}}" data-event-opts="{{[ [ 'tap',[ [ 'posEvt',['$event'] ] ] ] ]}}" data-index="{{3}}">区域</view>
+                    </view>
+                    <scroll-view catchtap="__e" class="second" data-event-opts="{{[ [ 'tap',[ [ 'default_stop',['$event'] ] ] ] ]}}" lowerThreshold="50" scrollY="true" wx:if="{{secondBox}}">
+                        <view catchtap="__e" class="layer-near" data-event-opts="{{[ [ 'tap',[ [ 'selectPos',['$event'] ] ] ] ]}}" wx:if="{{showPos==1}}">
+                            <view catchtap="__e" class="{{[textPos==item.value?'blue':'']}}" data-code="{{item.value}}" data-event-opts="{{[ [ 'tap',[ [ 'selectNear',['$event'] ] ] ] ]}}" data-title="{{item.name}}" wx:for="{{layerPos}}" wx:key="index">{{item.name}}</view>
+                        </view>
+                        <view catchtap="__e" class="layer-subway" data-event-opts="{{[ [ 'tap',[ [ 'selectPos',['$event'] ] ] ] ]}}" wx:if="{{showPos==2}}">
+                            <view catchtap="__e" class="{{[textSubway==item.name?'blue':'']}}" data-event-opts="{{[ [ 'tap',[ [ 'subwayEvt',['$event'] ] ] ] ]}}" data-index="{{index}}" data-name="{{item.name}}" wx:for="{{layerSubway}}" wx:key="index">{{item.name}}</view>
+                        </view>
+                        <view catchtap="__e" class="layer-area" data-event-opts="{{[ [ 'tap',[ [ 'selectPos',['$event'] ] ] ] ]}}" wx:if="{{showPos==3}}">
+                            <view catchtap="__e" class="{{[textTrade==item.name?'blue':'']}}" data-event-opts="{{[ [ 'tap',[ [ 'areaEvt',['$event'] ] ] ] ]}}" data-index="{{index}}" data-name="{{item.name}}" wx:for="{{layerArea}}" wx:key="index">{{item.name}}</view>
+                        </view>
+                    </scroll-view>
+                    <scroll-view class="three" lowerThreshold="50" scrollY="true" wx:if="{{secondBox&&threeBox}}">
+                        <view class="layer-station" wx:if="{{showStation}}">
+                            <view data-index="{{index}}" wx:if="{{showSubwayList==index}}" wx:for="{{layerSubway}}" wx:key="index">
+                                <view catchtap="__e" class="{{[resultPosText==index?'blue':'']}}" data-event-opts="{{[ [ 'tap',[ [ 'selectStation',['$event'] ] ] ] ]}}" data-index="{{index}}" data-station="{{item.name}}" wx:for="{{item.options}}" wx:key="index">{{item.name}}</view>
+                            </view>
+                        </view>
+                        <view class="layer-trade" wx:if="{{showTrade}}">
+                            <view data-index="{{index}}" wx:if="{{showTradeList==index}}" wx:for="{{layerArea}}" wx:key="index">
+                                <view catchtap="__e" class="{{[resultPosText==index?'blue':'']}}" data-event-opts="{{[ [ 'tap',[ [ 'selectTrade',['$event'] ] ] ] ]}}" data-index="{{index}}" data-name="{{item.name}}" wx:for="{{item.options}}" wx:key="index">{{item.name}}</view>
+                            </view>
+                        </view>
+                    </scroll-view>
+                </view>
+                <view catchtap="__e" class="layer-price" data-event-opts="{{[ [ 'tap',[ [ 'default_stop',['$event'] ] ] ] ]}}" wx:if="{{showLayer_3}}">
+                    <view catchtap="__e" class="{{[colorPrice==index?'blue':'']}}" data-code="{{item.value}}" data-event-opts="{{[ [ 'tap',[ [ 'selectPrice',['$event'] ] ] ] ]}}" data-index="{{index}}" data-title="{{item.name}}" wx:for="{{layerPrice}}" wx:key="index">{{item.name}}</view>
+                </view>
+                <view catchtap="__e" class="layer-more" data-event-opts="{{[ [ 'tap',[ [ 'default_stop',['$event'] ] ] ] ]}}" wx:if="{{showLayer_4}}">
+                    <scroll-view lowerThreshold="50" scrollY="true">
+                        <view class="more-type">
+                            <view class="type-title">{{newRoomFeaturesTitle}}</view>
+                            <view class="type-list">
+                                <text catchtap="__e" class="{{[items.g2!=-1?'active_on':'']}}" data-event-opts="{{[ [ 'tap',[ [ 'selectFeatures',['$event'] ] ] ] ]}}" data-index="{{index}}" data-name="{{items[$orig].name}}" data-value="{{items[$orig].value}}" wx:for="{{$root.l0}}" wx:for-item="items" wx:key="index">{{items[$orig].name}}</text>
+                            </view>
+                        </view>
+                        <view class="more-type">
+                            <view class="type-title">{{newFacingsTitle}}</view>
+                            <view class="type-list">
+                                <text catchtap="__e" class="{{[items.g3!=-1?'active_on':'']}}" data-event-opts="{{[ [ 'tap',[ [ 'selectFacings',['$event'] ] ] ] ]}}" data-index="{{index}}" data-name="{{items[$orig].name}}" data-value="{{items[$orig].value}}" wx:for="{{$root.l1}}" wx:for-item="items" wx:key="index">{{items[$orig].name}}</text>
+                            </view>
+                        </view>
+                        <view class="more-type">
+                            <view class="type-title">{{newAreaLevelsTitle}}</view>
+                            <view class="type-list">
+                                <text catchtap="__e" class="{{[items.g4!=-1?'active_on':'']}}" data-event-opts="{{[ [ 'tap',[ [ 'selectAreaLevels',['$event'] ] ] ] ]}}" data-index="{{index}}" data-name="{{items[$orig].name}}" data-value="{{items[$orig].value}}" wx:for="{{$root.l2}}" wx:for-item="items" wx:key="index">{{items[$orig].name}}</text>
+                            </view>
+                        </view>
+                        <view class="more-type">
+                            <view class="type-title">{{newStylesTitle}}</view>
+                            <view class="type-list">
+                                <text catchtap="__e" class="{{[items.g5!=-1?'active_on':'']}}" data-event-opts="{{[ [ 'tap',[ [ 'selectStyles',['$event'] ] ] ] ]}}" data-index="{{index}}" data-name="{{items[$orig].name}}" data-value="{{items[$orig].value}}" wx:for="{{$root.l3}}" wx:for-item="items" wx:key="index">{{items[$orig].name}}</text>
+                            </view>
+                        </view>
+                        <view class="more-type">
+                            <view class="type-title">{{newStatusTitle}}</view>
+                            <view class="type-list">
+                                <text catchtap="__e" class="{{[items.g6!=-1?'active_on':'']}}" data-event-opts="{{[ [ 'tap',[ [ 'selectStatus',['$event'] ] ] ] ]}}" data-index="{{index}}" data-name="{{items[$orig].name}}" data-value="{{items[$orig].value}}" wx:for="{{$root.l4}}" wx:for-item="items" wx:key="index">{{items[$orig].name}}</text>
+                            </view>
+                        </view>
+                        <view class="more-type">
+                            <view class="type-title">{{newRentTimeTitle}}</view>
+                            <view class="type-list">
+                                <text catchtap="__e" class="{{[items.g7!=-1?'active_on':'']}}" data-event-opts="{{[ [ 'tap',[ [ 'selectRentTime',['$event'] ] ] ] ]}}" data-index="{{index}}" data-name="{{items[$orig].name}}" data-value="{{items[$orig].value}}" wx:for="{{$root.l5}}" wx:for-item="items" wx:key="index">{{items[$orig].name}}</text>
+                            </view>
+                        </view>
+                    </scroll-view>
+                    <view class="submit-btn">
+                        <view catchtap="__e" class="reset" data-event-opts="{{[ [ 'tap',[ [ 'resetCustomMore',['$event'] ] ] ] ]}}">重置</view>
+                        <view catchtap="__e" class="sure" data-event-opts="{{[ [ 'tap',[ [ 'selectCustomMore',['$event'] ] ] ] ]}}">确定</view>
+                    </view>
+                </view>
+                <view catchtap="__e" class="layer-sort" data-event-opts="{{[ [ 'tap',[ [ 'default_stop',['$event'] ] ] ] ]}}" wx:if="{{showLayer_5}}">
+                    <view catchtap="__e" class="{{[colorSort==index?'blue':'']}}" data-code="{{item.value}}" data-event-opts="{{[ [ 'tap',[ [ 'sortEvt',['$event'] ] ] ] ]}}" data-index="{{index}}" data-text="{{item.name}}" wx:for="{{layerSort}}" wx:key="index">{{item.name}}</view>
+                </view>
+            </view>
+            <view class="select-area" wx:if="{{isFromWXAd}}">
+                <text bindtap="__e" class="{{['sel-item',tracficIsSelected?'blue':'']}}" data-event-opts="{{[ [ 'tap',[ [ 'handleSelHouse',[0] ] ] ] ]}}" wx:if="{{showHouseSel}}">通勤好房</text>
+                <text bindtap="__e" class="{{['sel-item',liveIsSelected?'blue':'']}}" data-event-opts="{{[ [ 'tap',[ [ 'handleSelHouse',[1] ] ] ] ]}}" wx:if="{{showLiveSel}}">居住好房</text>
+                <text bindtap="__e" class="{{['sel-item',priceIsSelected?'blue':'']}}" data-event-opts="{{[ [ 'tap',[ [ 'handleSelHouse',[2] ] ] ] ]}}">低价好房</text>
+                <text bindtap="__e" class="{{['sel-item',qualityIsSelected?'blue':'']}}" data-event-opts="{{[ [ 'tap',[ [ 'handleSelHouse',[3] ] ] ] ]}}">品质好房</text>
+            </view>
+            <view class="listNoRoom" wx:if="{{no_room}}">
+                <view class="listNoRoom_topPart">
+                    <view class="title_topPart">抱歉!没有找到房源</view>
+                    <view bindtap="__e" class="call_part" data-event-opts="{{[ [ 'tap',[ [ 'phoneCall',['$event'] ] ] ] ]}}">
+                        <image src="https://public.danke.com.cn/public-20190610-Fm2hk_Z3B70mI83djKrZ9tNhGkKC"></image>
+                        <view>立即呼叫</view>
+                    </view>
+                </view>
+                <view class="listNoRoom_Part">
+                    <view class="input_part">
+                        <input bindinput="__e" class="input_phone" data-event-opts="{{[ [ 'input',[ [ 'bindKeyInput',['$event'] ] ] ] ]}}" maxlength="11" placeholder="请输入手机号码" type="number" value="{{inputValue}}" wx:if="{{isLogin}}"></input>
+                        <view bindtap="__e" class="btn_submit_click" data-event-opts="{{[ [ 'tap',[ [ 'click_btn',['$event'] ] ] ] ]}}" wx:if="{{isLogin}}">确定</view>
+                        <view bindtap="__e" class="btn_yuyue_click" data-event-opts="{{[ [ 'tap',[ [ 'click_btn_yuyue',['$event'] ] ] ] ]}}" wx:if="{{!isLogin}}">预约房源</view>
+                    </view>
+                    <view class="sub_title_part" wx:if="{{isLogin}}">请填写手机号，我们将为您推荐最合适的房源</view>
+                </view>
+            </view>
+            <view class="container-body" wx:if="{{!no_room}}">
+                <navigator class="conference-item" data-public_id="{{item.roomId}}" url="{{'../detail/detail?id='+item.roomId+'&isMonth='+item.isMonth+'&rent_type='+item.rentType+'&from_app='}}" wx:for="{{roomList0}}" wx:key="index">
+                    <view class="room-detail">
+                        <view class="room-img">
+                            <image class="room-video" src="https://public.danke.com.cn/public-20190415-FlPfVj1mfNDoG3JCh9hyX6-cdWsK" wx:if="{{item.hasVideo}}"></image>
+                            <image class="room-imgsrc" lazyLoad="true" src="{{item.roomPictureUrl}}"></image>
+                        </view>
+                        <view class="roomOther-info">
+                            <view class="{{[isClick_pro==item.roomId?'already_click':'other-title']}}" style="{{'color:'+(item.isClick?'#999':'')+';'}}">
+                                <image src="https://public.danke.com.cn/public-20200109-FlnJ3mt7rJfI5_V0E8OLkDXQB_7_" style="width:28rpx;height:28rpx;margin-right:10rpx;" wx:if="{{item.subletStatus}}"></image>{{''+item.name+''}}</view>
+                            <view class="detail-info">
+                                <text>
+                                    <text class="rent-type" wx:if="{{item.rentType==1}}">整租</text>
+                                    <text class="rent-type" wx:if="{{item.rentType==2}}">合租</text>
+                                    <text class="rent-type" wx:if="{{item.rentType==3}}">月租</text>
+                                    <text class="new-mianji-box">{{'· '+item.facing+' | 约'+item.roomArea+' ㎡ | '+item.floorCount+'/'+item.floorTotalCount+'层'}}</text>
+                                </text>
+                            </view>
+                            <view class="distence-info" wx:if="{{item.distance!=''}}">
+                                <text>{{item.distance}}</text>
+                            </view>
+                            <view class="otherroom-tag" wx:if="{{!item.promotionInfo.promotionLabel}}">
+                                <view wx:if="{{index<3}}" wx:for="{{item.roomFeatures}}" wx:key="index">{{item}}</view>
+                            </view>
+                            <view class="otherroom-tag" wx:if="{{item.promotionInfo.promotionLabel}}">
+                                <view style="{{'background:'+'#FF4C59'+';'+'border:'+'1px solid #FF4C59'+';'+'color:'+'#ffffff'+';'}}">{{item.promotionInfo.promotionLabel}}</view>
+                                <view wx:if="{{index<2}}" wx:for="{{item.roomFeatures}}" wx:key="index">{{item}}</view>
+                            </view>
+                            <view class="room-price" wx:if="{{item.promotionInfo.promotionLabel&&item.promotionInfo.promotionPrice}}">
+                                <text class="first-month" style="margin:0 15rpx 0 0;" wx:if="{{item.promotionInfo.promotionPriceTitle==='首月租金'}}">首月</text>
+                                <text class="sale">{{item.promotionInfo.promotionPrice}}</text>
+                                <text style="margin:0 10rpx;line-height:24rpx;">{{''+item.priceUnit+''}}</text>
+                                <text class="normal">{{item.price+item.priceUnit}}</text>
+                            </view>
+                            <view class="room-price" wx:if="{{!item.promotionInfo.promotionLabel&&item.price}}">
+                                <text class="sale">{{item.price}}</text>
+                                <text style="margin-right:10rpx;line-height:24rpx;margin-left:10rpx;">{{item.priceUnit}}</text>
+                            </view>
+                        </view>
+                        <view class="nav_border"></view>
+                    </view>
+                </navigator>
+            </view>
+            <view class="container-body" style="{{'min-height:'+(no_room?'340px':'')+';'+'padding-bottom:'+'140upx'+';'}}">
+                <view class="search_result" wx:if="{{search_result}}">
+                    <image class="search_icon" src="https://public.danke.com.cn/public-20190612-FohGOzupAdII000D3a8v0Mu8C-nL"></image>
+                    <view class="search_elseRoom" wx:if="{{search_result_data1}}">未找到满足条件的房源，为您推荐其他房源</view>
+                    <view class="search_elseRoom" wx:if="{{search_result_data2}}">为您推荐其他房源</view>
+                </view>
+                <navigator class="conference-item" data-public_id="item.public_id" url="{{'../detail/detail?id='+item.public_id+'&rent_type='+item.rent_type+'&from_app='}}" wx:for="{{roomList1}}" wx:key="index">
+                    <view class="room-detail">
+                        <view class="room-img">
+                            <image class="room-video" src="https://public.danke.com.cn/public-20190415-FlPfVj1mfNDoG3JCh9hyX6-cdWsK" wx:if="{{item.hasVideo}}"></image>
+                            <image class="room-imgsrc" src="{{item.list_pic}}"></image>
+                        </view>
+                        <view class="roomOther-info">
+                            <view class="{{[isClick_pro==item.public_id?'already_click':'other-title']}}" style="{{'color:'+(item.isClick?'#999':'')+';'}}">{{item.name}}</view>
+                            <view class="detail-info">
+                                <text>
+                                    <text class="rent-type" wx:if="{{item.rent_type==1}}">整租</text>
+                                    <text class="rent-type" wx:if="{{item.rent_type==2}}">合租</text>
+                                    <text class="rent-type" wx:if="{{item.rent_type==3}}">月租</text>
+                                    <text class="new-mianji-box">{{'· '+item.direction+'\n\t\t\t\t\t\t\t\t\t\t| '+item.area+' | '+item.floor_num+'/'+item.floor_total_num+'层'}}</text>
+                                </text>
+                            </view>
+                            <view class="distence-info" wx:if="{{item.nearest_subway_title!=''}}">
+                                <text>{{item.nearest_subway_title}}</text>
+                            </view>
+                            <view class="otherroom-tag">
+                                <view wx:if="{{index<3}}" wx:for="{{item.list_tags}}" wx:key="index">{{item}}</view>
+                            </view>
+                            <view class="room-price" wx:if="{{item.promotion_info.type}}">
+                                <text class="first-month" style="margin:0 15rpx 0 0;" wx:if="{{item.promotion_info.promotion_price_title==='首月租金'}}">首月</text>
+                                <text class="sale">{{item.promotion_info.promotion_price}}</text>
+                                <text style="margin:0 10rpx;line-height:24rpx;">{{''+item.price_unit+''}}</text>
+                                <text class="normal">{{item.price+item.price_unit}}</text>
+                            </view>
+                            <view class="room-price" wx:if="{{!item.promotion_info.type}}">
+                                <text class="sale">{{item.price}}</text>
+                                <text style="margin-right:10rpx;line-height:24rpx;margin-left:10rpx;">{{item.price_unit}}</text>
+                            </view>
+                        </view>
+                        <view class="nav_border"></view>
+                    </view>
+                </navigator>
+                <view class="no_room" wx:if="{{no_room}}">
+                    <image src="http://public.danke.com.cn/public-20190610-Fvd6d25R1F1HZZVRRMzT5fbPk_7K"></image>
+                    <view class="noRoom_title">没有找到符合条件的房源</view>
+                    <view bindtap="__e" class="order_room_btn" data-event-opts="{{[ [ 'tap',[ [ 'orderRoom',['$event'] ] ] ] ]}}">房源定制</view>
+                </view>
+            </view>
+        </view>
+        <view class="bargain" wx:if="{{bargain_onoff}}">
+            <image bindtap="__e" class="bargain_img" data-addresAct="{{resource_data_act}}" data-event-opts="{{[ [ 'tap',[ [ 'toBargain',['$event'] ] ] ] ]}}" data-isCanShare="{{pop_is_can_share}}" data-name="{{popup_name}}" data-shareUrl="{{pop_shareUrl}}" data-typeAct="{{resource_type_act}}" id="index_active" mode="widthFix" src="{{image_popup}}"></image>
+            <image bindtap="__e" class="close_bargain" data-event-opts="{{[ [ 'tap',[ [ 'close_bargain',['$event'] ] ] ] ]}}" src="https://public.danke.com.cn/public-20190214-Fm7GVzAnb9uANhEjkGmf4B0rvs4k" style=";"></image>
+        </view>
+        <view class="bargain_active" wx:if="{{bargain_active_onoff}}">
+            <image bindtap="__e" data-addresAct="{{resource_data_act}}" data-event-opts="{{[ [ 'tap',[ [ 'toBargain',['$event'] ] ] ] ]}}" data-isCanShare="{{pop_is_can_share}}" data-name="{{popup_name}}" data-shareUrl="{{pop_shareUrl}}" data-typeAct="{{resource_type_act}}" id="small_active" src="{{image_icon}}" style="width:160rpx;height:160rpx;"></image>
+            <image bindtap="__e" class="bargain_active_close" data-event-opts="{{[ [ 'tap',[ [ 'close_bargain_active',['$event'] ] ] ] ]}}" src="https://public.danke.com.cn/public-20190214-Fm7GVzAnb9uANhEjkGmf4B0rvs4k"></image>
+        </view>
+    </block>
+</view>

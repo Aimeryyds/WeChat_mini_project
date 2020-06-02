@@ -1,0 +1,12 @@
+<template name="storelist">
+    <view bindtap="couponShow" class="zan-dialog {{show?'zan-dialog--show':''}}">
+        <view class="zan-dialog__mask">
+            <view class="couponlist-wrap">
+                <view class="couponlist-wrap__title">赠送的优惠券</view>
+                <scroll-view enableBackToTop scrollY scrollTop="{{scrollTop}}" style="width:100%;height:520rpx;">
+                    <view class="coupon-list" wx:for="{{list}}">{{item.name}}</view>
+                </scroll-view>
+            </view>
+        </view>
+    </view>
+</template>

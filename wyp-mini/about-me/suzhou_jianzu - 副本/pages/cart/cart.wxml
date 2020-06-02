@@ -1,0 +1,61 @@
+<view class="view-empty" wx:if="{{empty}}">
+    <image src="http://tws.cnweisou.com/images/noInfo.png"></image>
+    <text class="hint">暂时没有相关商品～～</text>
+    <view class="btn">
+    赶快去<text catchtap="getToPage">逛逛</text>吧
+    </view>
+</view>
+<view wx:else>
+    <scroll-view scrollY="true" style="width:100%;height:{{height}}px">
+        <view class="container carts-list  bb" wx:for="{{carts}}" wx:for-index="i" wx:key="index">
+            <view class="carts-item-title">
+                <image src="http://tws.cnweisou.com/images/icon_store.png"></image>
+                <text>{{item[0].store_name}}</text>
+            </view>
+            <view animation="{{move_arr[i][index]=='1'?animationData:''}}" bindtouchend="buttonEnd" bindtouchstart="buttonStart" class="carts-item" data-i="{{i}}" data-index="{{index}}" wx:for="{{item}}">
+                <icon catchtap="bindCheckbox" color="red" data-index="{{index}}" data-merchid="{{item.merchid}}" size="20" type="success_circle" wx:if="{{item.selected}}"></icon>
+                <icon catchtap="bindCheckbox" data-index="{{index}}" data-merchid="{{item.merchid}}" size="20" type="circle" wx:else></icon>
+                <view bindtap="joinDetail" data-goodsid="{{item.goodsid}}" data-index="{{index}}">
+                    <image class="carts-image" mode="aspectFill" src="{{item.thumb}}"></image>
+                </view>
+                <view bindtap="joinDetail" class="carts_right" data-goodsid="{{item.goodsid}}">
+                    <view class="carts_title" hidden="{{item.showEdit}}">{{item.title}}</view>
+                    <view class="carts_optiontitle" hidden="{{item.showEdit}}">{{item.optiontitle}}</view>
+                    <view class="carts_wrap">
+                        <view class="carts_item1" hidden="{{item.showEdit}}">
+                            <text class="text-red">￥{{item.marketprice}}</text>
+                        </view>
+                    </view>
+                    <view class="num" hidden="{{item.showEdit}}">x{{item.total}}</view>
+                    <view catchtap="editNum" class="editNumbox" data-index="{{index}}" data-merchid="{{item.merchid}}" hidden="{{item.showEdit}}">
+                        <image class="editNum" mode="scaleToFill" src="https://tws.cnweisou.com/images/icon_edit_jc.png"></image>
+                    </view>
+                    <view catchtap="noTap" class="edit-box" wx:if="{{item.showEdit}}">
+                        <view class="carts_item2">
+                            <view catchtap="bindPlus" class="carts_text" data-index="{{index}}" data-merchid="{{item.merchid}}">+</view>
+                            <input bindinput="bindManual" catchtap="bindManual" class="carts_input" data-index="{{index}}" data-merchid="{{item.merchid}}" type="number" value="{{item.total}}"></input>
+                            <view catchtap="bindMinus" class="carts_text" data-index="{{index}}" data-merchid="{{item.merchid}}">-</view>
+                        </view>
+                        <view catchtap="SaveEditNum" class="over" data-index="{{index}}" data-merchid="{{item.merchid}}">
+                            <text>完成</text>
+                        </view>
+                    </view>
+                    <view catchtap="deleteCart" class="deleteCart" data-index="{{index}}" data-merchid="{{item.merchid}}">删除</view>
+                </view>
+            </view>
+        </view>
+        <view style="width:100%;height:100rpx;"></view>
+    </scroll-view>
+    <view class="carts-footer">
+        <view bindtap="bindSelectAll" class="carts-footer-left">
+            <icon color="red" size="20" type="success_circle" wx:if="{{selectedAllStatus}}"></icon>
+            <icon size="20" type="circle" wx:else></icon>
+            <text>全选:</text>
+            <text style="color:#FF6A6A;">￥{{total}}</text>
+        </view>
+        <view class="carts-footer-right">
+            <view bindtap="bindCheckout" class="button">立即结算</view>
+        </view>
+    </view>
+</view>
+<loading wx:if="{{loading}}"></loading>

@@ -1,0 +1,9 @@
+<view class="i-class i-collapse-item " id="{{name}}">
+    <view bindtap="trigger" class="i-collapse-item-title-wrap">
+        <i-icon iClass="{{showContent?'i-collapse-item-arrow-show':'i-collapse-item-arrow'}}" size="16" type="enter"></i-icon>
+        <text class="i-collapse-item-title i-class-title">{{title}}</text>
+    </view>
+    <view class="i-collapse-item-content {{showContent}}  i-class-content">
+        <slot name="content"></slot>
+    </view>
+</view>

@@ -1,0 +1,62 @@
+<view class="{{['list-wrapper _div data-v-66fa6e6a',mode==='homepage'?'min':'']}}">
+    <filter-bar bind:__l="__l" bind:requestList="__e" bind:scrollToListAndFix="__e" class="data-v-66fa6e6a vue-ref" data-event-opts="{{[ [ '^requestList',[ ['requestList'] ] ],[ '^scrollToListAndFix',[ ['scrollToListAndFix'] ] ] ]}}" data-ref="filterBar" fixed="{{mode==='list'||fixed}}" initFilterData="{{initFilterData}}" mode="{{mode}}" params="{{params}}" vueId="1"></filter-bar>
+    <view class="{{['list-content _div data-v-66fa6e6a',skeletonFlag?'active':'',mode==='list'?'pt':'',noQFB?'no-quick-filter':'']}}" style="{{'min-height: '+minHeight+'px'}}" wx:if="{{listData}}">
+        <view class="not-found _div data-v-66fa6e6a" wx:if="{{isNotFound}}">未搜到对应房源，以下是推荐房源</view>
+        <view class="_div data-v-66fa6e6a" wx:for="{{$root.l0}}" wx:for-item="houseData" wx:key="index">
+            <view bindtap="__e" class="list-item-wrapper _div data-v-66fa6e6a" data-event-opts="{{[ [ 'tap',[ [ 'handleShowDetail',['$0'],[ [ ['listData','',index] ] ] ] ] ] ]}}" wx:if="{{houseData[$orig].house_type}}">
+                <view class="list-item-image _div data-v-66fa6e6a">
+                    <image alt="房源图片" binderror="__e" class="image data-v-66fa6e6a" data-event-opts="{{[ [ 'error',[ [ 'handlePicError',['$0'],[ [ ['listData','',index] ] ] ] ] ] ]}}" src="{{houseData.m0}}"></image>
+                    <view class="image-tag-wrapper _div data-v-66fa6e6a">
+                        <view class="image-tag iconfont icon-vr _i data-v-66fa6e6a" wx:if="{{houseData[$orig].has_3d}}"></view>
+                        <view class="image-tag iconfont icon-videoplay _i data-v-66fa6e6a" wx:if="{{houseData[$orig].has_video}}"></view>
+                    </view>
+                    <image class="first-photo-style data-v-66fa6e6a" src="{{houseData[$orig].first_photo_style}}" wx:if="{{houseData[$orig].first_photo_style}}"></image>
+                </view>
+                <view class="list-item-content _div data-v-66fa6e6a">
+                    <view class="top _div data-v-66fa6e6a">
+                        <view class="name _div data-v-66fa6e6a" wx:if="{{houseData[$orig].house_type!==8}}">{{''+houseData[$orig].type_text+'·'+houseData[$orig].name+''}}</view>
+                        <view class="name _div data-v-66fa6e6a" wx:else>
+                            <label class="hz-style _span data-v-66fa6e6a">{{houseData[$orig].type_text}}</label>{{'·'+houseData[$orig].name+''}}</view>
+                        <view class="detail _div data-v-66fa6e6a">
+                            <label class="area _span data-v-66fa6e6a">{{houseData[$orig].area+'㎡ | '+houseData[$orig].bedroom+'室'+houseData[$orig].parlor+'厅'}}</label>
+                            <label class="price _span data-v-66fa6e6a">
+                                <view class="price-wrapper _div data-v-66fa6e6a" wx:if="{{houseData[$orig].price[0]}}">
+                                    <label class="flashsale _span data-v-66fa6e6a" wx:if="{{houseData[$orig].sale_img}}">
+                                        <image alt class="_img data-v-66fa6e6a" src="{{houseData[$orig].sale_img}}"></image>
+                                    </label>
+                                    <label class="rmb _span data-v-66fa6e6a">¥</label>
+                                    <label class="price-n _span data-v-66fa6e6a" style="{{'width:'+'9px'+';'+'height:'+'12px'+';'+'background-image:'+'url('+houseData[$orig].price[0]+')'+';'+'background-size:'+'auto '+'12px'+';'+'background-position:'+'-'+item*12+'px'+';'}}" wx:for="{{houseData[$orig].price[1]}}" wx:for-index="i" wx:key="i"></label>
+                                    <label class="unit _span data-v-66fa6e6a">{{houseData[$orig].price_unit}}</label>
+                                </view>
+                            </label>
+                        </view>
+                        <view class="place _div data-v-66fa6e6a">
+                            <view class="iconfont icon-zm_ic_address _i data-v-66fa6e6a"></view>{{''+houseData[$orig].subway_station_info+''}}</view>
+                    </view>
+                    <view class="bottom _div data-v-66fa6e6a">
+                        <view class="tags _div data-v-66fa6e6a">
+                            <label class="{{['zr-tag _span data-v-66fa6e6a',houseData[$orig].house_type===8?'hz-style':'',!tag.style&&tag.bg_img?'image-tag':'',tag.style?'styled-tag':'']}}" style="{{'background:'+(tag.style&&tag.style.background||'')+';'+'color:'+(tag.style&&tag.style.color||'')+';'}}" wx:for="{{houseData[$orig].tags}}" wx:for-index="i" wx:for-item="tag" wx:key="i">
+                                <image class="image _img data-v-66fa6e6a" src="{{tag.bg_img}}" wx:if="{{!tag.style&&tag.bg_img}}"></image>
+                                <label class="_span data-v-66fa6e6a" wx:else>{{tag.title}}</label>
+                            </label>
+                        </view>
+                    </view>
+                </view>
+            </view>
+        </view>
+        <view class="loading-end _div data-v-66fa6e6a" wx:if="{{!isListEnd}}">
+            <list-item bind:__l="__l" class="data-v-66fa6e6a" vueId="2"></list-item>
+            <view class="text-shadow _div data-v-66fa6e6a"></view>
+        </view>
+        <view class="end _div data-v-66fa6e6a" wx:if="{{isListEnd}}">{{endText}}</view>
+    </view>
+    <view class="{{['list-skeleton list-content active _div data-v-66fa6e6a',mode==='list'?'pt':'']}}" wx:if="{{!listData&&mode}}">
+        <list-item bind:__l="__l" class="data-v-66fa6e6a" vueId="3"></list-item>
+        <list-item bind:__l="__l" class="data-v-66fa6e6a" vueId="4"></list-item>
+        <list-item bind:__l="__l" class="data-v-66fa6e6a" vueId="5"></list-item>
+        <list-item bind:__l="__l" class="data-v-66fa6e6a" vueId="6"></list-item>
+        <list-item bind:__l="__l" class="data-v-66fa6e6a" vueId="7"></list-item>
+        <list-item bind:__l="__l" class="data-v-66fa6e6a" vueId="8"></list-item>
+        <list-item bind:__l="__l" class="data-v-66fa6e6a" vueId="9"></list-item>
+    </view>
+</view>

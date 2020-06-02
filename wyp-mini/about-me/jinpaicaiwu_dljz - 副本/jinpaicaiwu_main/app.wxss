@@ -1,0 +1,175 @@
+@import "__wuBaseWxss__/1.wxss";
+
+@import "__wuBaseWxss__/2.wxss";
+
+.container {
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-between;
+    padding: 200rpx 0;
+    box-sizing: border-box;
+}
+
+#scroll_container {
+    position: relative;
+    width: 100%;
+    height: 100%;
+}
+
+#canvas {
+    position: relative;
+    padding: 0!important;
+    width: 100%;
+    height: 100%;
+}
+
+.wp_content {
+    font-family: 'Microsoft YaHei',-apple-system-font,Helvetica Neue,Helvetica,sans-serif;
+    position: relative;
+    width: 100%;
+    height: 100%;
+}
+
+.mod_wrapper {
+    position: relative;
+    height: 150px;
+    box-sizing: border-box;
+}
+
+.freelayout .mod_wrapper {
+    position: absolute;
+    left: 0;
+    top: 0;
+}
+
+.tabBar {
+    position: fixed;
+    bottom: 0px;
+    left: 0;
+    width: 100%;
+    background-color: #fff;
+    height: 100rpx;
+    box-sizing: border-box;
+    z-index: 500;
+    border-top: 1px solid black;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 24rpx;
+}
+
+.tabBar .barList {
+    flex: 1;
+    height: 100rpx;
+    display: inline-block;
+    text-align: center;
+    cursor: pointer;
+}
+
+.tabBar .barList-content {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+    width: 100%;
+    height: 100%;
+    align-items: center;
+}
+
+.tabBar .barList-content image {
+    width: 50rpx;
+    height: 50rpx;
+}
+
+.tabBar .barList-content view {
+    line-height: 30rpx;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    display: -webkit-box;
+    -webkit-line-clamp: 1;
+    -webkit-box-orient: vertical;
+    word-wrap: break-word;
+    word-break: break-all;
+}
+
+.tabBar .barList .selectedIcon {
+    display: none;
+}
+
+.tabBar .barList.on .selectedIcon {
+    display: block;
+}
+
+.tabBar .barList.on .icon {
+    display: none;
+}
+
+.has_bar {
+    bottom: 100rpx!important;
+}
+
+.tabBar.isIphoneX {
+    height: 140rpx;
+    padding-bottom: 40rpx;
+}
+
+.cart_bg_color2 {
+    color: #fff!important;
+}
+
+.icon-wujiaoxing {
+    color: #c71f3b!important;
+}
+
+.property-list-li text.active {
+    color: #fff;
+}
+
+.fx_footer {
+    width: 100%;
+    margin: 0 auto;
+    position: fixed;
+    bottom: 0;
+    border-top: 1px solid #e1e1e1;
+    background: #FFF;
+    z-index: 20;
+    display: flex;
+    height: 50px;
+    line-height: 50px;
+}
+
+.fx_footer .tab1 {
+    display: flex;
+    border-right: 1px solid #e1e1e1;
+    flex: 1;
+    justify-content: center;
+}
+
+.fx_footer .tab-img {
+    height: 50px;
+}
+
+.fx_footer .tab-img image {
+    background-size: 20px 20px;
+    width: 32px;
+    height: 32px;
+    margin: 0 auto;
+    margin-top: 10px;
+}
+
+.fx_footer .tab-title {
+    font-size: 12px;
+    color: #ccc;
+}
+
+.fx_footer .active {
+    color: #ffffff;
+}
+
+.fx_footer .active1 {
+    background: -webkit-gradient(to right,0% 0%,0% 100%,from(#ff4777),to(#ff980f));
+    background: linear-gradient(to right,#ff4777,#ff980f);
+}
+
+@import "__wuBaseWxss__/4.wxss";

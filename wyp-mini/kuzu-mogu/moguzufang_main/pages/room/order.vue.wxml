@@ -1,0 +1,52 @@
+<template name="6bc324fe">
+    <view class="_view 6bc324fe order">
+        <view class="_view 6bc324fe room">
+            <image class="_image 6bc324fe" src="{{room.photo}}"></image>
+            <view class="_view 6bc324fe">
+                <view class="_view 6bc324fe h1">{{room.title}}</view>
+                <view class="_view 6bc324fe h1">{{room.title2}}</view>
+                <view class="_view 6bc324fe h2">{{room.subTitle}}</view>
+            </view>
+        </view>
+        <view class="_view 6bc324fe ul">
+            <view class="_view 6bc324fe li">
+                <text class="_text 6bc324fe left">
+                    <text class="_text 6bc324fe">看房时间</text>
+                </text>
+                <text bindtap="handleProxy" class="_text 6bc324fe right" data-comkey="{{$k}}" data-eventid="{{'6bc324fe-0'}}">{{viewTimeStr||'请选择看房时间'}}</text>
+            </view>
+            <view class="_view 6bc324fe li">
+                <text class="_text 6bc324fe left">
+                    <text class="_text 6bc324fe">联系电话</text>
+                </text>
+                <view class="_view 6bc324fe right">
+                    <input type bindinput="handleProxy" class="_input 6bc324fe" data-comkey="{{$k}}" data-eventid="{{'6bc324fe-1'}}" maxlength="11" value="{{phoneNum}}"></input>
+                </view>
+            </view>
+            <view class="_view 6bc324fe">
+                <textarea bindinput="handleProxy" class="_textarea 6bc324fe" data-comkey="{{$k}}" data-eventid="{{'6bc324fe-2'}}" maxlength="50" placeholder="添加留言" value="{{remark}}" wx:if="{{!showLoginDialog}}"></textarea>
+                <view class="_view 6bc324fe" style="height:240rpx;" wx:if="{{showLoginDialog}}"></view>
+            </view>
+        </view>
+        <button bindtap="handleProxy" class="_button 6bc324fe submit" data-comkey="{{$k}}" data-eventid="{{'6bc324fe-3'}}">提交</button>
+        <view class="_view 6bc324fe dateTimePick" wx:if="{{visible}}">
+            <view class="_view 6bc324fe dateTimePick-content">
+                <view class="_view 6bc324fe dateTimePick-title">看房行程</view>
+                <picker-view bindchange="handleProxy" class="_picker-view 6bc324fe" data-comkey="{{$k}}" data-eventid="{{'6bc324fe-4'}}" value="{{value}}">
+                    <picker-view-column class="_picker-view-column 6bc324fe" style="flex:2">
+                        <view class="_view 6bc324fe item" key="{{index}}" wx:for="{{dateArray}}" wx:key="index">{{item}}</view>
+                    </picker-view-column>
+                    <picker-view-column class="_picker-view-column 6bc324fe">
+                        <view class="_view 6bc324fe item" key="{{index}}" wx:for="{{hourArray}}" wx:key="index">{{item}}</view>
+                    </picker-view-column>
+                    <picker-view-column class="_picker-view-column 6bc324fe">
+                        <view class="_view 6bc324fe item" key="{{index}}" wx:for="{{minuteArray}}" wx:key="index">{{item}}</view>
+                    </picker-view-column>
+                </picker-view>
+                <button bindtap="handleProxy" class="_button 6bc324fe" data-comkey="{{$k}}" data-eventid="{{'6bc324fe-5'}}">确认</button>
+            </view>
+        </view>
+        <template is="aa63a2de" data="{{...$root['0'],...$root[$kk+'6bc324fe-3'],$root:$root}}" wx:if="{{showLoginDialog}}"></template>
+    </view>
+</template>
+<import src="/components/loginDialog.vue.wxml"></import>

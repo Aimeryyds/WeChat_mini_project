@@ -1,0 +1,39 @@
+<template name="11b244cb">
+    <view catchtap="handleProxy" class="_div data-v-40a30e56 word-detail" data-comkey="{{$k}}" data-eventid="{{'3'}}">
+        <view bindtap="handleProxy" class="_i data-v-40a30e56 ib ib-times close" data-comkey="{{$k}}" data-eventid="{{'0'}}"></view>
+        <view class="_div data-v-40a30e56 meta-container">
+            <view class="_div data-v-40a30e56 meta">
+                <view class="_div data-v-40a30e56 info">
+                    <view class="_div data-v-40a30e56 word">{{word}}</view>
+                    <view class="_div data-v-40a30e56 ipa-wrap">
+                        <view class="_div data-v-40a30e56 ipa">/{{ipa}}/</view>
+                        <image bindtap="handleProxy" class="_img data-v-40a30e56 speaker" data-comkey="{{$k}}" data-eventid="{{'1'}}" src="https://media-image1.baydn.com/storage_media_image/kvhfgj/661e57279ffca35926579f903b457601.27223c5d547b3ee4dc32e63d84c88970.png"></image>
+                    </view>
+                </view>
+            </view>
+            <view class="_div data-v-40a30e56 collins" wx:if="{{COLLINS_DICT_ID===dictId}}">
+                <image class="_img data-v-40a30e56 icon" src="https://media-image1.baydn.com/storage_media_image/kdbdns/30956c0ef6087c64f2cc777cefb27f9a.8cab7d3f577396beacd86d16aaec1f36.png"></image>
+                <view class="_div data-v-40a30e56 text">正在使用</view>
+            </view>
+            <view class="_div data-v-40a30e56" key="{{index}}" wx:for="{{cnDefs}}" wx:for-item="definition" wx:key="index">
+                <view class="_div data-v-40a30e56 def-cn">
+                    <rich-text class="_rich-text data-v-40a30e56 def-en" nodes="{{enDefs[index].def}}"></rich-text>
+                    <view class="_div data-v-40a30e56">{{definition.pos+definition.def}}</view>
+                </view>
+            </view>
+        </view>
+        <view class="_div data-v-40a30e56 example-container" wx:if="{{examples.length}}">
+            <view class="_div data-v-40a30e56 title">例句</view>
+            <view class="_div data-v-40a30e56 example" key="{{index}}" wx:for="{{examples}}" wx:for-item="example" wx:key="index">
+                <rich-text class="_rich-text data-v-40a30e56 en" nodes="{{example.content_en}}"></rich-text>
+                <view class="_div data-v-40a30e56 cn">{{example.content_cn}}</view>
+            </view>
+        </view>
+        <view class="_div data-v-40a30e56 btn-container">
+            <view class="_div data-v-40a30e56 is-added" wx:if="{{isAdded}}">
+                <view class="_i data-v-40a30e56 ib ib-check check"></view>已加入生词本
+        </view>
+            <button bindtap="handleProxy" class="_button data-v-40a30e56 flex-vhc" data-comkey="{{$k}}" data-eventid="{{'2'}}" wx:else>+加入生词本</button>
+        </view>
+    </view>
+</template>

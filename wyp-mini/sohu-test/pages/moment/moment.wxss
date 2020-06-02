@@ -1,0 +1,247 @@
+@import "../../template/relevant-model/news-relevant.wxss";
+
+@import "../../template/news-comment/comment.wxss";
+
+@import "../../wuBaseWxss/9.wxss";
+
+@import "template/loading.wxss";
+
+@import "../../wuBaseWxss/3.wxss";
+
+@import "../../wuBaseWxss/0.wxss";
+
+@import "../../wuBaseWxss/2.wxss";
+
+.container {
+    display: block;
+    font-size: 36rpx;
+    color: #333;
+    font-family: SourceHanSansCN Normal;
+    overflow: hidden;
+    padding-bottom: 200rpx;
+}
+
+.container .art-detail .article-title {
+    font-size: 44rpx;
+    font-weight: bold;
+    color: #333333;
+    padding: 30rpx 28rpx 0 28rpx;
+    line-height: 50rpx;
+}
+
+.container .art-detail .article-info {
+    padding: 30rpx;
+    color: #d6d6d6;
+    font-size: 24rpx;
+    overflow: hidden;
+}
+
+.container .art-detail .article-info .time {
+    float: left;
+}
+
+.container .art-detail .article-info .media {
+    float: right;
+}
+
+.article-content {
+    font-size: 34rpx;
+    line-height: 48rpx;
+    word-spacing: 4rpx;
+    color: #333;
+    padding: 0 28rpx;
+    min-height: 20rpx;
+}
+
+.article-content view {
+    word-break: break-all;
+    overflow: auto;
+    text-align: justify;
+    border-radius: 6rpx;
+}
+
+.article-item {
+    margin-bottom: 50rpx;
+}
+
+.art_video {
+    width: 100%;
+}
+
+button {
+    border-top-style: none;
+    border-right-style: none;
+    border-bottom-style: none;
+    border-left-style: none;
+    text-align: left;
+    background-color: #fff;
+    overflow: visible;
+    padding-left: 0;
+    padding-right: 0;
+    margin-left: 0;
+    margin-right: 0;
+    webkit-tap-highlight-color: transparent;
+    font-size: 30rpx;
+    line-height: 50rpx;
+    word-spacing: 4rpx;
+    color: #5c5c5c;
+    min-height: 0rpx;
+    font-family: SourceHanSansCN Normal;
+}
+
+button::after {
+    border-top-style: none;
+    border-right-style: none;
+    border-bottom-style: none;
+    border-left-style: none;
+    webkit-tap-highlight-color: transparent;
+}
+
+.bg_cont {
+    width: 100%;
+    height: 100%;
+    overflow: hidden;
+}
+
+.event-progress {
+    margin: 50rpx 30rpx;
+}
+
+.event-progress .tit {
+    font-size: 30rpx;
+    font-weight: bold;
+    color: #333333;
+}
+
+.event-progress .events .event-item {
+    margin-top: 20rpx;
+}
+
+.event-progress .events .event-item .time {
+    display: inline-block;
+    width: 16%;
+    vertical-align: top;
+    position: relative;
+    padding-left: 16rpx;
+    overflow: hidden;
+}
+
+.event-progress .events .event-item .time:before {
+    content: '';
+    position: absolute;
+    left: 0;
+    top: 50%;
+    transform: translate(0,-50%);
+    width: 12rpx;
+    height: 12rpx;
+    background-color: #cdcdcd;
+    border-radius: 100%;
+}
+
+.event-progress .events .event-item .time text {
+    font-size: 24rpx;
+    color: #cdcdcd;
+    line-height: 1;
+    vertical-align: middle;
+}
+
+.event-progress .events .event-item .title {
+    display: inline-block;
+    width: 78%;
+    margin-left: 2%;
+}
+
+.event-progress .events .event-item .title text {
+    font-size: 28rpx;
+    color: #333333;
+}
+
+.event-progress .btns {
+    text-align: center;
+    margin-top: 20rpx;
+    position: relative;
+}
+
+.event-progress .btns .btn-unfold:after {
+    content: '';
+    position: absolute;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    top: -200rpx;
+    background-image: linear-gradient(to bottom,rgba(255,255,255,0),rgba(255,255,255,1));
+}
+
+.event-progress .btns .btn-unfold text,.event-progress .btns .btn-fold text {
+    padding: 10rpx 40rpx;
+    text-align: center;
+    height: 60rpx;
+    box-sizing: border-box;
+    font-size: 26rpx;
+    color: #fff;
+    background-color: #EE2F10;
+    border-radius: 40rpx;
+    display: inline-block;
+    position: relative;
+    z-index: 2;
+}
+
+.hot-points {
+    margin: 50rpx 30rpx;
+}
+
+.hot-points .tit {
+    font-size: 30rpx;
+    font-weight: bold;
+    color: #333333;
+}
+
+.hot-points .list {
+    margin-top: 20rpx;
+}
+
+.hot-points .list .point {
+    position: relative;
+    padding-left: 110rpx;
+    overflow: hidden;
+    min-height: 150rpx;
+    margin-top: 30rpx;
+}
+
+.hot-points .list .point .user-info text {
+    font-size: 24rpx;
+    text-overflow: ellipsis;
+    display: -webkit-box;
+    -webkit-box-orient: vertical;
+    -webkit-line-clamp: 1;
+    overflow: hidden;
+    max-width: 200rpx;
+    color: #333;
+    max-height: 30rpx;
+}
+
+.hot-points .list .point .user-info text.time {
+    position: absolute;
+    right: 20rpx;
+    top: 0;
+    color: #999;
+    font-size: 22rpx;
+}
+
+.hot-points .list .point .user-info image.avatar {
+    width: 72rpx;
+    height: 72rpx;
+    border-radius: 100%;
+    position: absolute;
+    left: 0;
+    top: 0;
+}
+
+.hot-points .list .point .content {
+    margin-top: 20rpx;
+    font-size: 30rpx;
+    line-height: 35rpx;
+    color: #666;
+    font-size: 26rpx;
+    margin-bottom: 4rpx;
+}

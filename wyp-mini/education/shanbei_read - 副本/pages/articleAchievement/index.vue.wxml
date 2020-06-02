@@ -1,0 +1,58 @@
+<template name="150de910">
+    <view class="_div data-v-2469d503">
+        <view class="_div data-v-2469d503 container">
+            <template is="807ddebe" data="{{...$root[$kk+'0'],$root:$root}}" wx:if="{{isShowUnlockModal}}"></template>
+            <view class="_div data-v-2469d503 card">
+                <view class="_div data-v-2469d503 reading-done-img"></view>
+                <view class="_div data-v-2469d503 card-book-info">
+                    <view class="_div data-v-2469d503 cover">
+                        <image class="_img data-v-2469d503 cover-img" src="{{cover}}"></image>
+                        <view class="_div data-v-2469d503 progress">
+                            <view class="_div data-v-2469d503 progress-bg"></view>
+                            <view class="_div data-v-2469d503 progress-number">
+                                <label class="_span data-v-2469d503 progress-percentage">{{progress||0}}</label>
+                                <label class="_span data-v-2469d503 progress-unit">%</label>
+                            </view>
+                        </view>
+                    </view>
+                    <view class="_div data-v-2469d503 book-info">
+                        <view class="_div data-v-2469d503 book-title">{{bookTitle}}</view>
+                        <view class="_div data-v-2469d503 article-title">{{articleTitle}}</view>
+                    </view>
+                </view>
+                <view class="_div data-v-2469d503 card-achievement">
+                    <view class="_div data-v-2469d503 personal-info">
+                        <view class="_div data-v-2469d503 avatar-outline">
+                            <image class="_img data-v-2469d503 avatar" src="{{avatar}}"></image>
+                        </view>
+                        <view class="_div data-v-2469d503 personal-info-text">
+                            <view class="_div data-v-2469d503 nickname">{{nickname}}</view>
+                            <view class="_div data-v-2469d503 prompt">正在「扇贝阅读」读英文原版好书</view>
+                        </view>
+                    </view>
+                    <view class="_div data-v-2469d503 achievement-info">
+                        <view class="_div data-v-2469d503 achievement-info-bg">
+                            <view class="_i data-v-2469d503 ib ib-clock-circle-o"></view>
+                            <label class="_span data-v-2469d503">阅读{{time}}</label>
+                        </view>
+                        <view class="_div data-v-2469d503 achievement-info-bg">
+                            <view class="_div data-v-2469d503 word-icon"></view>
+                            <label class="_span data-v-2469d503 word-count-number">读完 {{count}} 字</label>
+                        </view>
+                    </view>
+                </view>
+            </view>
+            <view class="_div data-v-2469d503 shadow"></view>
+            <template is="7caa4dd5" data="{{...$root[$kk+'1'],$root:$root}}"></template>
+            <view bindtap="handleProxy" class="_div data-v-2469d503 next" data-comkey="{{$k}}" data-eventid="{{'1'}}">
+                <view class="_div data-v-2469d503 unlock-btn" wx:if="{{isTryout}}">
+                    <view class="_div data-v-2469d503 unlock"></view>
+                    <label class="_span data-v-2469d503">解锁全书</label>
+                </view>
+                <label class="_span data-v-2469d503" wx:else>下一章</label>
+            </view>
+        </view>
+    </view>
+</template>
+<import src="/components/UnlockModal.vue.wxml"></import>
+<import src="/components/ShareButtonsGroup.vue.wxml"></import>

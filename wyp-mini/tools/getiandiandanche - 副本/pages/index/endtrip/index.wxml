@@ -1,0 +1,29 @@
+<view class="page">
+    <my-component bind:myevent="myEventListener" innerText="行程结束"></my-component>
+    <view class="main" style=" margin-top: {{myHight}}px"></view>
+    <view class="top">
+        <view class="title">行程结束</view>
+        <view bindtap="showTripCont" class="txq">行程详情<image class="ad-ri15" src="{{wcIconri}}"></image>
+        </view>
+    </view>
+    <view class="pay-num">
+        <view class="num">{{Cost}}元</view>
+        <view class="sm-num">骑行费用</view>
+    </view>
+    <view class="trip">
+        <view class="bor-r">
+            <view class="trip-one-t">{{longTime}}分钟</view>
+            <view class="trip-one-b">骑行时间</view>
+        </view>
+        <view>
+            <view class="trip-one-t">{{longKm}}公里</view>
+            <view class="trip-one-b">骑行距离</view>
+        </view>
+    </view>
+    <view>
+        <view wx:if="{{code==0}}">
+            <view class="secc-c23">骑行费用已从您的余额中扣除，感谢您的使用！</view>
+        </view>
+        <view class="paybtn" wx:else></view>
+    </view>
+</view>

@@ -1,0 +1,43 @@
+var inlineTags = ({
+    abbr: 1,
+    b: 1,
+    big: 1,
+    code: 1,
+    del: 1,
+    em: 1,
+    i: 1,
+    ins: 1,
+    label: 1,
+    q: 1,
+    small: 1,
+    span: 1,
+    strong: 1,
+});
+module.exports = ({
+    getStyle: (function(style, display) {
+        if (style) {
+            var i;
+            var j;
+            var res = "";
+            if ((i = style.indexOf("display")) != -1) res = style.substring(i, (j = style.indexOf(';', i)) == -1 ? style.length : j);
+            else res = "display:" + display;
+            if (style.indexOf("flex") != -1) res += ';' + style.match(getRegExp("flex[:-][^;]+/g")).join(';');;
+            return (res)
+        } else return ("display:" + display)
+    }),
+    getNode: (function(item, imgLoad) {
+        if (!imgLoad) {
+            var img = ({
+                name: "img",
+                attrs: JSON.parse(JSON.stringify(item.attrs)),
+            });
+            delete(img.attrs.src);
+            img.attrs.style += ";width:20px !important;height:20px !important";
+            return ([img])
+        } else return ([item])
+    }),
+    useRichText: (function(item) {
+        if (item.c || inlineTags[((nt_0 = (item.name), null == nt_0 ? undefined : 'number' === typeof nt_0 ? nt_0 : "" + nt_0))] || (item.attrs.style && item.attrs.style.indexOf("display:inline") != -1)) return (false);;
+        return (true)
+    }),
+});

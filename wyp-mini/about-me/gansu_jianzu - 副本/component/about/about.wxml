@@ -1,0 +1,27 @@
+<view class="container" style="background-color:#fff;padding: 0  24rpx;" wx:if="{{about}}">
+    <view class="about-header">
+        <view class="about-header__title">{{about.nickName}}</view>
+        <image class="about-header__logo" src="{{about.headImg}}"></image>
+    </view>
+    <view class="about-content">
+    {{about.about.aboutUs}}
+  </view>
+    <view class="about-cells">
+        <view bindtap="makephone" class="about-cell" data-phone="{{cellphone:about.link.phone,telephone:about.link.telephone}}" wx:if="{{about.link.isShow}}">
+            <image class="about-cell__icon" src="http://imgcdnali.wfenxiao.com.cn/xcx/c/icons/about/phone.png"></image>
+            <text class="about-cell__title">联系我们</text>
+        </view>
+        <view class="about-cell" wx:if="{{about.online.isShow}}">
+            <image class="about-cell__icon" src="http://imgcdnali.wfenxiao.com.cn/xcx/c/icons/about/contact.png"></image>
+            <button plain class="about-contact-btn" openType="contact" style="border:0">在线客服</button>
+        </view>
+        <view bindtap="makemap" class="about-cell" wx:if="{{about.address.isShow}}">
+            <image class="about-cell__icon" src="http://imgcdnali.wfenxiao.com.cn/xcx/c/icons/about/location.png"></image>
+            <text class="about-cell__title">{{about.address.addressInfo}}</text>
+            <view class="about-cell__ft">></view>
+        </view>
+    </view>
+    <view class="about-album">
+        <image bindtap="onTapImg" class="about-img" data-link="{{item}}" src="{{item}}" wx:for="{{about.images}}" wx:key="index"></image>
+    </view>
+</view>

@@ -1,0 +1,95 @@
+<view style="display:flex;flex-direction:column;">
+    <view class="top-img">
+        <image mode="{{mode}}" src="{{src}}"></image>
+    </view>
+    <view class="top-tip" wx:if="{{type==1&&deposit!=''}}">
+        <text>缴付押金</text>
+    </view>
+    <view wx:if="{{type==1&&deposit!=''}}">
+        <view class="content" wx:if="{{depositState==0||depositState==6}}">
+            <view bindtap="select" class="modeList {{selected==-2?'selected':''}}" data-money="{{depositMoney}}" data-selected="-2" style="{{selected==-2?'box-shadow: 0 0 10rpx '+mainColor:''}}">
+                <view class="item-title">
+                    <text class="item-name">{{deposit}}</text>
+                </view>
+                <view class="item-content">
+                    <view class="use-tip2">
+                        <text class="item-time">可选择缴付押金</text>
+                    </view>
+                    <view class="item-money">￥{{depositMoney}}</view>
+                </view>
+            </view>
+        </view>
+        <view class="content" wx:if="{{depositState==1}}">
+            <view bindtap="returnDeposit" class="modeList">
+                <view class="item-title">
+                    <text class="item-name">{{deposit}}</text>
+                </view>
+                <view class="item-content">
+                    <view class="use-tip2">
+                        <text class="item-time">点击退还押金</text>
+                    </view>
+                    <view class="item-money">￥{{depositMoney}}</view>
+                </view>
+            </view>
+        </view>
+        <view class="content" wx:if="{{depositState==2||depositState==3||depositState==4||depositState==5}}">
+            <view class="modeList">
+                <view class="item-title">
+                    <text class="item-name">{{deposit}}</text>
+                </view>
+                <view class="item-content">
+                    <view class="use-tip2">
+                        <text class="item-time">押金状态</text>
+                    </view>
+                    <view class="item-money">￥{{depositMoney}}</view>
+                </view>
+            </view>
+        </view>
+    </view>
+    <view class="top-tip">
+        <text>选择套餐</text>
+        <view bindtap="toHistoryRidePackage">
+      购买记录
+      <text class="iconfont icon-you"></text>
+        </view>
+    </view>
+    <view class="content">
+        <view bindtap="select" class="modeList {{item.memberFeeId?item.memberFeeId==selected?'selected':'':item.rideCardId==selected?'selected':''}}" data-money="{{item.money}}" data-selected="{{item.memberFeeId?item.memberFeeId:item.rideCardId}}" style="{{item.memberFeeId?item.memberFeeId==selected?'box-shadow: 0 0 10rpx '+mainColor:'':item.rideCardId==selected?'box-shadow: 0 0 10rpx '+mainColor:''}}" wx:for="{{setMeal}}" wx:key="index">
+            <view class="item-title">
+                <text class="item-name">{{item.name}}</text>
+            </view>
+            <view class="item-content">
+                <view class="use-tip1" wx:if="{{type==0}}">
+                    <view>
+                        <text class="item-time">可用骑行次数: {{item.maxRide?item.maxRide+'次':'无限制'}}</text>
+                        <text class="item-time" wx:if="{{item.type==0}}">(按天)</text>
+                        <text class="item-time" wx:if="{{item.type==1}}">(按周)</text>
+                        <text class="item-time" wx:if="{{item.type==2}}">(按月)</text>
+                        <text class="item-time" wx:if="{{item.type==3}}">(按季)</text>
+                        <text class="item-time" wx:if="{{item.type==4}}">(按半年)</text>
+                        <text class="item-time" wx:if="{{item.type==5}}">(按年)</text>
+                    </view>
+                    <view class="item-time">
+            单次{{item.timeCount?item.timeCount+'分钟内可免费骑行':'无限制时长免费骑行'}}
+          </view>
+                </view>
+                <view class="use-tip2" wx:if="{{type==1}}">
+                    <text class="item-time" wx:if="{{item.type==0}}">按天</text>
+                    <text class="item-time" wx:if="{{item.type==1}}">按周</text>
+                    <text class="item-time" wx:if="{{item.type==2}}">按月</text>
+                    <text class="item-time" wx:if="{{item.type==3}}">按季</text>
+                    <text class="item-time" wx:if="{{item.type==4}}">按半年</text>
+                    <text class="item-time" wx:if="{{item.type==5}}">按年</text>
+                </view>
+                <view class="item-money">￥{{item.money/100}}</view>
+            </view>
+        </view>
+    </view>
+    <text class="pay-tip">购买须知</text>
+    <view class="explain">
+        <text wx:for="{{payTip}}" wx:key="index">{{item}}</text>
+    </view>
+    <view class="pay-btn" style="bottom: {{isSelect?'0':'-100rpx'}}">
+        <text bindtap="auth" style="background: {{mainColor}};color: {{textColor}}">{{btnText}}</text>
+    </view>
+</view>

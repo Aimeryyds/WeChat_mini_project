@@ -1,0 +1,42 @@
+<import src="../../component/swiper/swiper.wxml"></import>
+<import src="../../component/home-menu/home-menu.wxml"></import>
+<import src="../../component/goods-list/goods-list.wxml"></import>
+<import src="../../component/ad-win/ad-win.wxml"></import>
+<import src="../../component/album/album.wxml"></import>
+<import src="../../component/recommend/recommend.wxml"></import>
+<import src="../../component/s-share-wrap/s-share-wrap.wxml"></import>
+<view class="container" style="background:#fff;">
+    <navigator style="background:#ededed;border-radius:4rpx;width:96%;font-size:24rpx;position:relative;margin:2%;height:60rpx;display:flex;align-items:center;" url="../search/search">
+        <icon color="gray" size="12" style="padding-left:10rpx;" type="search"></icon>
+        <view style="padding-left:20rpx;color:gray;">请输入商品名称</view>
+    </navigator>
+    <template is="swiper" data="{{banner_list:banner_list}}" wx:if="{{banner_list}}"></template>
+    <block wx:for="{{module_list}}" wx:for-item="moduleItem" wx:key="key">
+        <template is="menus" data="{{list:moduleItem.object.list,use_wxshare_btn:use_wxshare_btn,openOnlineService:shop.openOnlineService}}" wx:if="{{moduleItem.type==2}}"></template>
+        <template is="cate_menus" data="{{list:moduleItem.list}}" wx:if="{{moduleItem.type==3}}"></template>
+        <view class="ad-list" wx:if="{{moduleItem.type==4}}">
+            <image bindtap="go2BannerLink" data-target="{{moduleItem.object.target}}" data-targetid="{{moduleItem.object.targetId}}" mode="widthFix" src="{{moduleItem.object.pic}}" wx:if="{{moduleItem.object.pic}}"></image>
+        </view>
+        <template is="advertisement" data="{{list:moduleItem.object.list}}" wx:if="{{moduleItem.type==5}}"></template>
+        <template is="recommend" data="{{album:moduleItem.object}}" wx:if="{{moduleItem.type==6}}"></template>
+        <template is="category" data="{{album:moduleItem.object}}" wx:if="{{moduleItem.type==7}}"></template>
+        <template is="goods_list" data="{{title:'热门推荐',list:moduleItem.list,listType:shop.goodsConfig.hotListType}}" wx:if="{{moduleItem.type==8}}"></template>
+        <template is="goods_list" data="{{title:'新品上市',list:moduleItem.list,listType:shop.goodsConfig.newListType}}" wx:if="{{moduleItem.type==9}}"></template>
+        <template is="goods_list" data="{{title:'精品推荐',list:moduleItem.list,listType:shop.goodsConfig.bestListType}}" wx:if="{{moduleItem.type==10}}"></template>
+    </block>
+</view>
+<view bindtap="openSSWrap" class="s-share-btn" wx:if="{{isOpenDistribution&&userInfo.spokesman}}">
+    <image src="/images/spokesperson/generalize/icon_share.png"></image>
+</view>
+<view class="generate-wrap">
+    <view bindtap="closeGenWrap" class="bg" style="display: {{show_generate?'fixed':'none'}}"></view>
+    <view class="generate-box" style="display: {{show_generate?'block':'none'}}">
+        <view class="generating" style="width: {{box_w}}rpx; height: {{box_h}}rpx">
+            <image src="/images/wait.png"></image>
+            <text>图片生成中...</text>
+        </view>
+        <image bindtap="previewPhoto" class="pre-img" src="{{photo}}" style="width: {{generate_w}}rpx; height: {{generate_h}}rpx; left: {{generate_l}}; top: {{generate_t}}" wx:if="{{photo}}"></image>
+        <view bindtap="savePhoto" class="generate-btn" style="background: {{photo?'#b90404':'#707070'}}">保存图片到相册</view>
+    </view>
+</view>
+<template is="s-share-wrap" data="{{show_s_wrap:show_s_wrap}}"></template>

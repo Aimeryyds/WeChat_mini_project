@@ -1,0 +1,54 @@
+<view style="display:flex;flex-direction:column;height:100vh">
+    <view></view>
+    <map showLocation id="statusMap" latitude="{{latitude}}" longitude="{{longitude}}" polygons="{{polygons}}" scale="{{scale}}" style="width:100%;flex:1"></map>
+    <view style="background: #fff">
+        <view style="display: flex;justify-content:center;padding:40rpx 0;border-bottom: 2rpx solid #f0f0f0">
+            <view style="margin-right: 20rpx">
+                <image src="/images/machineStatus/huanche_icon@3x.png" style="height: 80rpx;width:80rpx"></image>
+            </view>
+            <view style="display:flex;flex-direction: column;">
+                <text>请在红色运营区域内骑行，P点还车</text>
+                <view style="font-size: 28rpx;color: #888;display: flex;align-items: center" wx:if="{{dispatchConfig}}">
+          违规还车调度费用
+          站外
+          <view style="color: red;font-size:32rpx">
+            {{dispatchConfig.parkPointFee}}元
+          </view>
+          ，界外
+          <view style="color: red;font-size:32rpx">
+            {{dispatchConfig.areaFee}}元
+          </view>
+                </view>
+            </view>
+        </view>
+        <view class="bottom-status">
+            <view class="bottom-soc">
+                <view style="margin-right: 20rpx">
+          NO:{{machineNO}}
+        </view>
+                <image src="/images/machineStatus/dianliang5.png" wx:if="{{socNumber>80}}"></image>
+                <image src="/images/machineStatus/dianliang4.png" wx:if="{{socNumber>60&&socNumber<=80}}"></image>
+                <image src="/images/machineStatus/dianliang3.png" wx:if="{{socNumber>40&&socNumber<=60}}"></image>
+                <image src="/images/machineStatus/dianliang2.png" wx:if="{{socNumber>20&&socNumber<=40}}"></image>
+                <image src="/images/machineStatus/dianliang1.png" wx:if="{{socNumber>0&&socNumber<=20}}"></image>
+                <image src="/images/machineStatus/dianliang0.png" wx:if="{{socNumber<=0}}"></image>
+                <view>
+          可骑行{{surplusMileage}}公里
+        </view>
+            </view>
+            <view style="color: #888;font-size: 30rpx" wx:if="{{baseTime_C}}">{{baseTime_C}}</view>
+            <view bindtap="valuationRule" style="display: flex;align-items: center">
+                <text style="color: #888;font-size: 30rpx">{{baseTime_A}}</text>
+                <text class="iconfont icon-to " style="color:{{mainColor}};margin-left: 4rpx"></text>
+            </view>
+            <view style="display: flex;width: 100%;margin-top: 20rpx">
+                <button bindtap="exchange" style="width:30%;color: #000;background: #fff">换一辆</button>
+                <button bindtap="unlock" style="width:60%;color: {{textColor}};background:{{mainColor}}">确认开锁</button>
+            </view>
+            <view style="color: #333;font-size: 30rpx;display:flex">
+        请文明骑行
+      </view>
+        </view>
+    </view>
+    <ad-dialog bind:knownTap="knownTap" imgUrls="{{boundImage}}" mainColor="{{mainColor}}" setTop="50%" textColor="{{textColor}}" visible="{{guideDialog}}"></ad-dialog>
+</view>

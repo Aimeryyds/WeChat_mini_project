@@ -1,0 +1,15 @@
+<template name="book">
+    <view bindtap="toBookDetail" class="book-card" data-bookid="{{bookInfo.id}}">
+        <view class="card-pic">
+            <image class="spread" src="{{bookInfo.pic.url}}"></image>
+        </view>
+        <view class="card-title">{{bookInfo.name}}</view>
+        <view class="card-sub-title ellipsis">{{bookInfo.summary}}</view>
+        <view class="card-price-wrap">
+            <text class="selling-price" style="color:{{globalColor}};">￥{{bookInfo.promotionPrice>0?bookInfo.promotionPrice:bookInfo.price}}</text>
+            <text class="original-price" wx:if="{{bookInfo.promotionPrice>0}}">￥{{bookInfo.price}}</text>
+            <text class="promotion" style="background-color:{{globalColor}};" wx:if="{{bookInfo.promotionPrice>0}}">促销</text>
+            <view class="booking-btn" style="background-color:{{globalColor}};">{{formItem.bn}}</view>
+        </view>
+    </view>
+</template>

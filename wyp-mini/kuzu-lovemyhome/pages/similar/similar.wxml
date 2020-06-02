@@ -1,0 +1,26 @@
+<view class="similar">
+    <view class=" list _flex _column _wrap ">
+        <view bindtap="_dispatch" class=" item _flex _column _wrap _between _icenter " data-bindtap="navigateTo" data-type="details" data-value="{{item.other.house.id}}" hidden="{{item.other==undefined?true:false}}" wx:for="{{state.city.datas}}" wx:key="index">
+            <view class=" _image ">
+                <image binderror="_dispatch" data-binderror="imageError" data-idx="{{index}}" data-value="{{item.other.house.id}}" mode="aspectFit" src="{{item.other==undefined?'https://res.5i5j.com/cache/weixin/common/default_list.jpg':item.other.house.imgurl?item.other.house.imgurl:'https://res.5i5j.com/cache/weixin/common/default_list.jpg'}}"></image>
+            </view>
+            <view class=" title _flex ">
+                <text>{{item.other.house.housetitle||'　　'}}</text>
+            </view>
+            <view class=" detail _flex ">
+                <text>{{item.bedroom+'室'+item.livingroom+'厅'+item.toilet+'卫'}}</text>
+                <text>{{item.buildarea}}㎡</text>
+                <text class=" _auto ">{{['不限','东','西','南','北','东南','西南','东北','西北','东西','南北'][item.heading]}}</text>
+                <text>{{state.index==0?item.price+'万':item.price+'元/月'}}</text>
+            </view>
+            <view class=" where _flex ">
+                <text hidden="{{item.areaname==''?true:false}}">{{item.areaname}}</text>
+                <text class=" _auto ">{{item.communityname}}</text>
+                <text class="{{state.index==0?'':'border'}}">{{state.index==0?item.onePrice+'元/㎡':item.rentmode==1?'整租':'合租'}}</text>
+            </view>
+        </view>
+        <view class="list-loading" hidden="{{state.loading}}">
+            <text>正在加载</text>
+        </view>
+    </view>
+</view>

@@ -1,0 +1,30 @@
+<template name="bd138500">
+    <view class="_div data-v-6665ce15" wx:if="{{groups}}">
+        <navigator class="_navigator data-v-6665ce15 search" url="/pages/search/main">
+            <view class="_i data-v-6665ce15 ib ib-search"></view>
+            <label class="_span data-v-6665ce15">输入你想要搜索的书籍</label>
+        </navigator>
+        <image alt="bookplan-landing" bindtap="handleProxy" class="_img data-v-6665ce15 bookplan-landing" data-comkey="{{$k}}" data-eventid="{{'0'}}" src="{{url}}" wx:if="{{url}}"></image>
+        <view class="_div data-v-6665ce15 banner" wx:else></view>
+        <view class="_div data-v-6665ce15 home-plan-container">
+            <view class="_div data-v-6665ce15 item-header plan-margin">
+                <view class="_div data-v-6665ce15 indicator"></view>
+                <view class="_div data-v-6665ce15 title">读书计划</view>
+                <view class="_div data-v-6665ce15 slogan">带你轻松读懂英文书</view>
+            </view>
+            <template is="2c82d03e" data="{{...$root[$kk+'0'],$root:$root}}"></template>
+            <view bindtap="handleProxy" class="_div data-v-6665ce15 all" data-comkey="{{$k}}" data-eventid="{{'1'}}">
+                <view class="_div data-v-6665ce15">查看全部计划</view>
+                <view class="_div data-v-6665ce15 arrow-right"></view>
+            </view>
+        </view>
+        <view class="_div data-v-6665ce15 item-header book-margin">
+            <view class="_div data-v-6665ce15 indicator"></view>
+            <view class="_div data-v-6665ce15 title">电子书</view>
+            <view class="_div data-v-6665ce15 slogan">英文原版好书尽在这里</view>
+        </view>
+        <template is="2c51f5e4" data="{{...$root[$kk+'1-'+index],$root:$root}}" wx:for="{{groups}}" wx:for-item="group" wx:key="group.id"></template>
+    </view>
+</template>
+<import src="/components/HomePlanList.vue.wxml"></import>
+<import src="/pages/login/Bundle.vue.wxml"></import>

@@ -1,0 +1,190 @@
+<navigator class="topSearch" hoverClass="none" url="../index/search">
+    <view class="seachBox">
+        <image backgroundSize="cover" src="../../images/search_icon.png"></image>
+        <input disabled="disabled" focus="{{focus}}" placeholder="输入您想找的区域/商圈或者写字楼名称" type="text" value=""></input>
+    </view>
+</navigator>
+<view class="filterWrap">
+    <view bindtap="selectedFun" class="{{params.district_name||params.circle_name||params.line_show||params.station_show?'':'default'}} tab-item" data-val="0">{{params.district_name||params.line_show?params.district_name?params.district_name+(params.station_show?'-'+params.station_show:params.circle_name?'-'+params.circle_name:''):params.line_show+(params.station_show?'-'+params.station_show:''):'位置'}}</view>
+    <view bindtap="selectedFun" class="{{params.area_show?'':'default'}} tab-item" data-val="1">{{params.area_show?params.area_show:'面积'}}</view>
+    <view bindtap="selectedFun" class="{{comm.html_decode(params.avg_show)||params.price_show?'':'default'}} tab-item" data-val="2">{{tabArr.curEdIndex==0?comm.html_decode(params.avg_show)?comm.html_decode(params.avg_show):'价格':params.price_show?params.price_show:'价格'}}</view>
+    <view bindtap="selectedFun" class="{{selected==3?'':'default'}} tab-item" data-val="3">更多</view>
+</view>
+<view bindtap="closeFun" class="ul01 filterMask {{selected==0?'show':'hidden'}}">
+    <view catchtap="emptyFun" class="filterCon">
+        <view class="filterPosition">
+            <view class="filterPosTop">
+                <view bindtap="tabFun" class="SLtab" data-key="curHdIndex">
+                    <view class="{{tabArr.curHdIndex==0?'active':''}}" data-id="0">商圈</view>
+                    <view class="{{tabArr.curHdIndex==1?'active':''}}" data-id="1">地铁站</view>
+                </view>
+            </view>
+            <view class="{{tabArr.curHdIndex==2?'hide':'show'}}">
+                <view class="filterPosList" wx:if="{{tabArr.curHdIndex==0}}">
+                    <view class="leftPosition">
+                        <view bindtap="tabFunWay" class="filterLeft" data-key="curSdIndex">
+                            <view bindtap="goTap" class="{{tabArr.curSdIndex==item.district_id?'active':''}}" data-district_id="0" data-id="0" wx:if="{{!item.district_id}}" wx:for="{{district}}" wx:key="district_id">{{item.name}}</view>
+                            <view bindtap="directTap" class="{{tabArr.curSdIndex==item.district_id?'active':''}}" data-id="{{item.district_id}}" data-name="{{item.name}}" wx:if="{{item.district_id}}" wx:for="{{district}}" wx:key="district_id">{{item.name}}</view>
+                        </view>
+                    </view>
+                    <view bindtap="tabFunlab" class="filterRight" data-key="curSdIndexR">
+                        <view bindtap="goTap" class="{{tabArr.curSdIndexR===item.id?'active':''}}" data-circle_id="{{item.id}}" data-district_id="{{item.district_id}}" data-id="{{item.id}}" wx:for="{{areas}}" wx:key="id">{{item.name}}</view>
+                    </view>
+                </view>
+                <view wx:if="{{tabArr.curHdIndex==1}}">
+                    <view class="leftPosition">
+                        <view bindtap="tabFunWay" class="filterLeft" data-key="curLdIndex">
+                            <view bindtap="goTap" class="{{tabArr.curLdIndex==item.subway_line?'active':''}}" data-id="0" data-subway_line="0" wx:if="{{!item.subway_line}}" wx:for="{{subway}}" wx:key="subway_line">{{item.name}}</view>
+                            <view bindtap="ditieTap" class="{{tabArr.curLdIndex==item.subway_line?'active':''}}" data-id="{{item.subway_line}}" wx:if="{{item.subway_line}}" wx:for="{{subway}}" wx:key="subway_line">{{item.name}}</view>
+                        </view>
+                    </view>
+                    <view bindtap="tabFunlab" class="filterRight" data-key="curLdIndexR">
+                        <view bindtap="goTap" class="{{tabArr.curLdIndexR==(item.val||item.name)?'active':''}}" data-id="{{item.val||item.name}}" data-station="{{item.station}}" data-subway_line="{{item.subway_line}}" wx:for="{{stations}}" wx:key="val">{{item.val||item.name}}</view>
+                    </view>
+                </view>
+            </view>
+        </view>
+    </view>
+</view>
+<view bindtap="closeFun" class="ul02 filterMask {{selected==1?'show':'hidden'}}">
+    <view catchtap="emptyFun" class="filterCon">
+        <view class=" filterMeasure">
+            <view bindtap="tabFun" class="listMeasure" data-key="curIndexA">
+                <view bindtap="goTap" class="{{tabArr.curIndexA==item.val?'active':''}}" data-area="{{item.val}}" data-id="{{item.val}}" wx:for="{{ul_areas}}" wx:key="val">{{item.show}}</view>
+            </view>
+        </view>
+    </view>
+</view>
+<view bindtap="closeFun" class="ul03 filterMask {{selected==2?'show':'hidden'}}">
+    <view catchtap="emptyFun" class="filterCon">
+        <view class="filterPriceList">
+            <view class="leftPosition">
+                <view class="filterLeft">
+                    <view bindtap="tabFun" class="priceTab" data-key="curEdIndex">
+                        <view class="{{tabArr.curEdIndex==0?'active':''}}" data-id="0" hoverClass="none">按单价</view>
+                        <view class="{{tabArr.curEdIndex==1?'active':''}}" data-id="1" hoverClass="none">按总价</view>
+                    </view>
+                </view>
+            </view>
+            <view class="{{tabArr.curEdIndex==2?'hide':'show'}}">
+                <view class="priceRightbox" wx:if="{{tabArr.curEdIndex==0}}">
+                    <view class=" rightPosition">
+                        <view bindtap="tabFun" class="filterRight" data-key="curAIndex">
+                            <view bindtap="goTap" class="{{tabArr.curAIndex==item.val?'active':''}}" data-avg_price="{{item.val}}" data-id="{{item.val}}" wx:for="{{avg_price}}" wx:key="val">{{comm.html_decode(item.show)}}</view>
+                        </view>
+                    </view>
+                </view>
+                <view class="priceRightbox" wx:if="{{tabArr.curEdIndex==1}}">
+                    <view class="rightPosition">
+                        <view bindtap="tabFun" class="filterRight" data-key="curPIndex">
+                            <view bindtap="goTap" class="{{tabArr.curPIndex==item.val?'active':''}}" data-id="{{item.val}}" data-price="{{item.val}}" wx:for="{{price}}" wx:key="val">{{item.show}}</view>
+                        </view>
+                    </view>
+                </view>
+            </view>
+        </view>
+    </view>
+</view>
+<view bindtap="closeFun" class=" ul04 filterMask {{selected==3?'show':'hidden'}}">
+    <view catchtap="emptyFun" class="filterCon">
+        <view class="filterMoreAuto">
+            <view class="filterMoreComm">
+                <text class="filterMoreComm_title">类型</text>
+                <view class="listFilterMore">
+                    <view bindtap="clickTypeFun" class="{{bangongtype===item.val?'cur':''}}" data-id="{{item.val}}" hoverClass="none" wx:for="{{house_type}}" wx:key="val">
+                        <icon>
+                            <image backgroundSize="cover" class="iconAllAble" src="{{comm.getTypeUrl(imgurls,item.val)}}"></image>
+                        </icon>
+                        <text>{{item.show}}</text>
+                    </view>
+                </view>
+            </view>
+            <view class="filterMoreComm">
+                <text class="filterMoreComm_title">装修</text>
+                <view class="listFilterMore">
+                    <view bindtap="clickTypeZX" class="{{zhuangxiutype===item.val?'cur':''}}" data-id="{{item.val}}" hoverClass="none" wx:for="{{house_zhuangxiu}}" wx:key="val">
+                        <text>{{item.show}}</text>
+                    </view>
+                </view>
+            </view>
+            <view class="filterMoreComm">
+                <text class="filterMoreComm_title">特色</text>
+                <view bindtap="filterFun" class="listFilterMore">
+                    <view bindtap="clickTypeTS" class="{{item.checked?'cur':''}}" data-id="{{item.val}}" data-key="house_is_register" hoverClass="none" wx:for="{{house_is_register}}" wx:key="val">
+                        <text>{{item.show}}</text>
+                    </view>
+                    <block wx:if="{{bangongtype!=5}}">
+                        <view bindtap="clickTypeTS" class="{{item.checked?'cur':''}}" data-id="{{item.val}}" data-key="house_house_type" hoverClass="none" wx:for="{{house_house_type}}" wx:key="val">
+                            <text>{{item.show}}</text>
+                        </view>
+                    </block>
+                    <block wx:if="{{bangongtype!=5}}">
+                        <view bindtap="clickTypeTS" class="{{item.checked?'cur':''}}" data-id="{{item.tag_id}}" data-key="tag" hoverClass="none" wx:for="{{tag}}" wx:key="tag_id">
+                            <text>{{item.name}}</text>
+                        </view>
+                    </block>
+                </view>
+            </view>
+        </view>
+        <view class="filterMoreBt">
+            <view bindtap="clickTypeClear" class="btClearAll" hoverClass="none">
+                <image backgroundSize="cover" src="../../images/detele_icon3.png"></image>
+                <text>清空条件</text>
+            </view>
+            <view bindtap="goTap" class="btSubFilter" data-obj="{{searchobj}}">确定</view>
+        </view>
+    </view>
+</view>
+<scroll-view bindscroll="scrollTopFun" bindscrolltolower="upper" class="scroll_container" id="cont_scroll" scrollTop="{{scrollTop.scroll_top}}" scrollY="true" style="height:{{windowHeight}}px;">
+    <view class="nohouse" wx:if="{{nohouse}}">
+        <image src="../../images/no_data.png"></image>
+        <view class="v1">Sorry，暂无满足您筛选条件的房源</view>
+        <view class="v2">联系顾问：<text>{{msg_template}}</text>
+        </view>
+    </view>
+    <view bindtouchmove="move" class="listPro" wx:if="{{!nohouse}}">
+        <navigator class="listbox" data-id="{{item.building_id}}" url="../building/building?building_id={{item.building_id}}" wx:for="{{building_items}}" wx:key="building_id">
+            <view class="listProLeft">
+                <image src="{{item.thumb_image}}"></image>
+                <text class="corner" wx:if="{{item.house_type==5}}">共享办公</text>
+            </view>
+            <view class="listProRight">
+                <view class="listProRight_title">{{item.point_name||item.name}}</view>
+                <view class="listProRight_about" wx:if="{{item.isPoint===1&&item.gongwei_number_min}}">工位数：{{item.gongwei_number_min}}-{{item.gongwei_number_max}}</view>
+                <view class="listProRight_about" wx:if="{{item.isPoint!==1&&item.area_min}}">{{item.area_min}}-{{item.area_max}}㎡</view>
+                <view class="listProRight_about">{{item.district_name}}-{{item.street_name}}</view>
+                <view class="listProRight_about">{{item.subway_display}}</view>
+                <text class="listProRight_price" wx:if="{{item.price!=0}}">
+                    <text>{{item.price}}</text>{{comm.html_decode(item.price_unit)}}</text>
+                <view class="labelPro">
+                    <text class="tag t{{index%5+1}}" wx:for="{{item.building_tags}}" wx:key="name">{{item.name}}</text>
+                </view>
+            </view>
+        </navigator>
+    </view>
+</scroll-view>
+<view class="botFixed" wx:if="{{scrollTop.goTop_show}}">
+    <view catchtap="showFn" class="botTel">
+        <text>免费咨询</text>
+        <icon class="iconTelphone">
+            <image backgroundSize="cover" src="../../images/Telphone_icon.png"></image>
+        </icon>
+    </view>
+    <view bindtap="onClickButton" class="btSort" data-index="0">
+        <image backgroundSize="cover" src="../../images/btSort_icon.png"></image>
+    </view>
+    <view catchtap="goTopFun" class="btToTop">
+        <image backgroundSize="cover" src="../../images/backtop_icon.png"></image>
+    </view>
+</view>
+<view bindtap="closeFun" class="orderWrap {{showDialog?'dialog_show':''}}">
+    <view catchtap="emptyFun" class="orderList">
+        <view bindtap="goTap" class=" {{ordertype===item.val?'cur':''}}" data-id="{{item.val}}" data-listorder="{{item.val}}" data-order="{{item.val}}" hoverClass="none" wx:for="{{listorder}}" wx:key="val">{{item.show}}</view>
+    </view>
+</view>
+<view class="loadingWrap {{subsucc?'':'hide'}}">
+    <view class="loadingWrap_Box">
+        <loading wx:if="{{showLoading}}">加载中</loading>
+    </view>
+</view>
+<wxs module="comm" src="../../utils/common.wxs" />

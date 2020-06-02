@@ -1,0 +1,27 @@
+<template name="timepicker">
+    <view bindtap="closeTimepicker" catchtouchmove="catchTouch" class="calendar-wrap" wx:if="{{show}}">
+        <view catchtap="catchTouch" class="flex box box-tb box-align-center timepicker-box">
+            <view class="calendar pink-color box box-tb">
+                <view class="header-wrap box box-lr box-pack-center box-align-center">
+                    <view catchtap="initCalendarDay" class="flex week iconfont icon-turn prev-btn" data-type="prev"></view>
+                    <view catchtap="tapDayItem" class="flex week fs22 {{item.choosed?'day-choosed':''}} {{item.disable?'day-disable':''}}" data-day="{{item.day}}" data-disable="{{item.disable}}" data-idx="{{index}}" data-month="{{item.month}}" data-year="{{item.year}}" style="color:{{item.choosed?globalColor:''}}" wx:for="{{lastFiveDaysList}}" wx:key="{{index}}">
+                        <view class="week-day fs-26 {{item.disable?'day-disable':''}}" style="color:{{item.choosed?globalColor:''}}">周{{item.weeks}}</view>
+            {{item.date}}
+            <view class="active-bar" style="background-color:{{globalColor}}"></view>
+                    </view>
+                    <view catchtap="initCalendarDay" class="flex week iconfont icon-turn next-btn" data-type="next"></view>
+                </view>
+                <view class="days box box-lr box-wrap time-wrap">
+                    <view catchtap="tapTimeItem" class="grid normal-day-color box box-align-center box-pack-center" data-disable="{{item.disable}}" data-forbidden="{{item.forbidden}}" data-idx="{{index}}" data-time="{{item.time}}" wx:if="{{!item.disable}}" wx:for="{{allTimeList}}" wx:key="{{index}}">
+                        <view class="box box-tb box-align-center box-pack-center">
+                            <view class="day time fs-26 border-radius box box-align-center box-pack-center {{item.choosed?'time-choosed-color':''}}  {{item.forbidden?'time-forbidden-bg':''}}" style="background-color:{{item.choosed?globalColor:'#f4f4f4'}}">{{item.time}}</view>
+                        </view>
+                    </view>
+                </view>
+                <view catchtap="comfirmTime" class="btn-wrap box box-lr box-pack-center box-align-center" style="background-color:{{globalColor}}">
+                    <view>确定</view>
+                </view>
+            </view>
+        </view>
+    </view>
+</template>

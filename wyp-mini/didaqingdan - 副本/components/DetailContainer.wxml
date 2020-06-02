@@ -1,0 +1,11 @@
+<view class="detail-container" wx:if="{{$taroCompReady}}">
+    <view class="{{anonymousState__temp}}">
+        <input bindblur="anonymousFunc0" bindfocus="listenFocus" class="task-title" maxlength="{{512}}" placeholder="准备做什么？" placeholderStyle="color: #ced2d8" value="{{model.title}}"></input>
+        <input bindblur="anonymousFunc1" bindfocus="listenFocus" class="task-desc" maxlength="{{2048}}" placeholder="描述" placeholderStyle="color: #ced2d8" value="{{model.desc}}" wx:if="{{model.desc}}"></input>
+    </view>
+    <view class="{{'body '+(model.kind==='TEXT'?'text':'')}}">
+        <textarea autoHeight="{{true}}" bindblur="anonymousFunc2" bindfocus="listenFocus" class="{{(isDateTimeShow?'hide':'')+' '+(isFirstRender?'hide':'')}}" maxlength="{{160000}}" placeholder="描述" placeholderStyle="color: #ced2d8" value="{{model.content}}" wx:if="{{model.kind==='TEXT'}}"></textarea>
+        <view class="{{'fake-textarea '+(isDateTimeShow?'':'hide')}}" wx:if="{{model.kind==='TEXT'}}">{{model.content||''}}</view>
+        <subtask-list compid="{{$compid__21}}" wx:if="{{model.kind==='CHECKLIST'}}"></subtask-list>
+    </view>
+</view>

@@ -1,0 +1,70 @@
+<swiper autoplay="{{autoplay}}" class="banner" duration="{{duration}}" indicatorDots="{{indicatorDots}}" interval="{{interval}}">
+    <swiper-item wx:for="{{imgUrls}}" wx:key="*this">
+        <image bindtap="navigateTo" class="slide-image" id="{{item.link}}" src="{{item.img}}"></image>
+    </swiper-item>
+</swiper>
+<view class="course">
+    <navigator class="course-button" url="../course/java/java">
+        <image class="course-icon" src="../../static/images/icon-java.png"></image>
+    JAVA
+  </navigator>
+    <navigator class="course-button" url="../course/python/python">
+        <image class="course-icon" src="../../static/images/icon-python.png"></image>
+    Python
+  </navigator>
+    <navigator class="course-button" url="../course/java/java">
+        <image class="course-icon" src="../../static/images/icon-android.png"></image>
+    Android
+  </navigator>
+    <navigator class="course-button" url="../course/java/java">
+        <image class="course-icon" src="../../static/images/icon-rjcs.png"></image>
+    软件测试
+  </navigator>
+    <navigator class="course-button" url="../course/php/php">
+        <image class="course-icon" src="../../static/images/icon-php.png"></image>
+    PHP
+  </navigator>
+    <navigator class="course-button" url="../course/java/java">
+        <image class="course-icon" src="../../static/images/icon-ios.png"></image>
+    IOS
+  </navigator>
+    <navigator openType="switchTab" url="../course/course">
+        <view class="course-more">更多》</view>
+    </navigator>
+</view>
+<view class="app-container">
+    <view class="app-line"></view>
+    <view class="app-title">卓越培训</view>
+    <view class="app-desc">国内15所实训基地，2017年超过60000人次接受培训，与国内超过700所大学及教育机构合作，国家级工程实践教育中心、国家信息技术紧缺人才培养工程“521计划”资格、中国服务外包示范培训中心、教育部软件工程专业大学生实训基地、国家商务部唯一指定中国服务外包人才培训中心、科技部第三批众创空间。</view>
+</view>
+<view class="app-container">
+    <view class="app-line"></view>
+    <view class="app-title">师资力量</view>
+    <scroll-view scrollX class="scroll-view-teachers">
+        <view class="scroll-view-teachers-items" wx:for="{{teachers}}" wx:key="*this">
+            <image src="{{item.img}}"></image>
+            <view class="scroll-view-teachers-items-name">{{item.name}}</view>
+            <view class="scroll-view-teachers-items-desc">{{item.desc}}</view>
+        </view>
+    </scroll-view>
+</view>
+<view class="app-container">
+    <view class="app-line"></view>
+    <view class="app-title">结业明星</view>
+    <scroll-view scrollX class="scroll-view-teachers">
+        <view class="scroll-view-teachers-items" wx:for="{{students}}" wx:key="*this">
+            <image src="{{item.img}}"></image>
+            <view class="scroll-view-teachers-items-name">{{item.name}}</view>
+            <view class="scroll-view-teachers-items-desc">{{item.desc}}</view>
+        </view>
+    </scroll-view>
+</view>
+<view class="app-container">
+    <view class="app-line"></view>
+    <view class="app-title">教学环境</view>
+    <scroll-view scrollX class="scroll-view-environment">
+        <view class="scroll-view-environment-items" wx:for="{{environment}}" wx:key="*this">
+            <image src="{{item}}"></image>
+        </view>
+    </scroll-view>
+</view>

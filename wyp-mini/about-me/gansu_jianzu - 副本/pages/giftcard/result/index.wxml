@@ -1,0 +1,27 @@
+<import src="/dist/toptips/index.wxml"></import>
+<template is="zan-toptips" data="{{zanTopTips:zanTopTips}}"></template>
+<view class="page" wx:if="{{!loading}}">
+    <view class="zan-msg">
+        <view class="zan-msg__icon-area">
+            <icon size="93" type="success" wx:if="{{result}}"></icon>
+            <icon size="93" type="warn" wx:else></icon>
+            <view style="margin:10rpx; font-size:40rpx; color:#06BF04">{{content.resultTxt}}</view>
+        </view>
+        <view class="zan-msg__text-area">
+            <view class="zan-msg__desc">{{content.name}}</view>
+            <view class="zan-msg__title" style="margin-top:20rpx">￥{{content.price}}</view>
+        </view>
+        <view class="zan-msg__opr-area">
+            <view class="zan-btn-area">
+                <button bindtap="onTapResultAction" class="zan-btn" openType="share" type="primary">{{content.btnText}}</button>
+                <button bindtap="onTapResultActionExt" class="zan-btn  zan-btn--primary zan-btn--plain" style="margin-top:40rpx;">{{content.btnExtText}}</button>
+            </view>
+        </view>
+        <navigator url="/pages/giftcard/mygiftcard/index">
+            <view class="zan-msg__text-area">
+                <text style="font-size:28rpx;">礼品如要自用则需激活，</text>
+                <text style="font-size:28rpx; color:#1E90FF">点击去激活</text>
+            </view>
+        </navigator>
+    </view>
+</view>

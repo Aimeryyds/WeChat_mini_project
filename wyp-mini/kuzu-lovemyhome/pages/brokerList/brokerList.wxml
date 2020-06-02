@@ -1,0 +1,115 @@
+<view class="load_style" hidden="{{!loading}}">
+    <view class="loading">
+        <image class="loading-img" src="/img/resources/load.png"></image>
+    </view>
+</view>
+<view class="house-list-box">
+    <view bindtap="filterMaskFn" catchtouchmove="preventTouchMove" class="filter-mask" hidden="{{filterMask}}" style="z-index:{{zindex}};"></view>
+    <view class="list-top">
+        <view class="search-box">
+            <view class="search-inp flexbox" hidden="{{search}}">
+                <image class="search-icon" src="/img/resources/search-icon.png"></image>
+                <text bindtap="toSearch" class="inp">{{searchCon}}</text>
+                <image bindtap="delInp" class="search-del" src="/img/resources/del-search.png" wx:if="{{searchCon!='请输入经纪人姓名、电话或商圈、店面'}}"></image>
+            </view>
+        </view>
+        <view class="filter-box flexbox flex_al_center">
+            <view bindtap="filterTabFn" class="filter-nav flex1 {{filnav==item.name||item.newname?'filter-cur':''}}" data-index="{{index}}" data-name="{{item.name}}" wx:for="{{tabTxt}}" wx:key="index">
+                <text class="name">{{item.newname||item.name}}</text>
+                <text class="arrow"></text>
+            </view>
+        </view>
+        <view catchtouchmove="preventTouchMove" class="filter-con-box">
+            <view class="filter-con quyu" hidden="{{tab[0]}}">
+                <view class="quyu-nav1">
+                    <view class="filter-info">
+                        <text bindtap="quyuFn" class="{{nameCur1=='区域'?'sub1-cur':''}}" data-barid="1" data-name="区域">区域</text>
+                    </view>
+                </view>
+                <view class="quyu-nav2" hidden="{{quyuNav2}}">
+                    <scroll-view class="filter-info" scrollY="true">
+                        <view bindtap="buxianFn2" class="qy{{nameCur2=='不限'?'sub2-cur':''}}" data-name="不限">
+                            <text>不限</text>
+                        </view>
+                        <view bindtap="quyuFn2" class="{{nameCur11==item.id?'sub2-cur':''}}" data-barid="{{quYuBar2}}" data-districtid="{{item.id}}" data-index="{{index}}" data-name="{{item.name}}" wx:if="{{!item.lineid&&!item.nearid}}" wx:for="{{filterArea}}" wx:key="id">
+                            <text>{{item.name}}</text>
+                        </view>
+                        <view bindtap="quyuFn2" class="{{nameCur21==item.lineid?'sub2-cur':''}}" data-barid="{{quYuBar2}}" data-dtlineid="{{item.lineid}}" data-index="{{index}}" data-name="{{item.name}}" wx:if="{{item.lineid}}" wx:for="{{filterArea}}" wx:key="id">
+                            <text>{{item.name}}</text>
+                        </view>
+                        <view bindtap="quyuFn2" class="{{nameCur31==item.nearid?'sub2-cur':''}}" data-barid="{{quYuBar2}}" data-index="{{index}}" data-name="{{item.name}}" data-nearid="{{item.nearid}}" wx:if="{{item.nearid}}" wx:for="{{filterArea}}" wx:key="id">
+                            <text>{{item.name}}</text>
+                        </view>
+                    </scroll-view>
+                </view>
+                <view class="quyu-nav3" hidden="{{quyuNav3}}">
+                    <scroll-view class="filter-info" scrollY="true">
+                        <view bindtap="buxianFn3" class="{{nameCur3=='不限'?'sub2-cur':''}}" data-bxbarid="{{quYuBxBar3}}" data-districtid="{{quyuId}}" data-districtname="{{quyuName}}" data-name="不限">
+                            <text>不限</text>
+                        </view>
+                        <view bindtap="quyuFn3" class="{{nameCur3==item.id?'sub2-cur':''}}" data-barid="{{quYuBar3}}" data-districtid="{{quyuId}}" data-index="{{index}}" data-name="{{item.name}}" data-sqid="{{item.id}}" wx:for="{{filterArea2}}" wx:key="id">
+                            <text>{{item.name}}</text>
+                        </view>
+                    </scroll-view>
+                </view>
+            </view>
+            <view class="filter-con filter-price" hidden="{{tab[1]}}">
+                <view class="filter-shaixuan">
+                    <view class="filtag-con">
+                        <text bindtap="shaixuanFn" class="{{shaixuanName==item.name?'sub-cur':''}}" data-btype="{{item.btype}}" data-index="{{index}}" wx:for="{{shaixuanTypeList}}">{{item.name}}</text>
+                    </view>
+                </view>
+            </view>
+            <view class="filter-con filter-lx" hidden="{{tab[2]}}">
+                <view class="filter-info">
+                    <view class="filtag-con">
+                        <text bindtap="paixuFn" class="{{paixuName==item.name?'sub-cur':''}}" data-index="{{index}}" data-psort="{{item.psort}}" wx:for="{{paixuTypeList}}">{{item.name}}</text>
+                    </view>
+                </view>
+            </view>
+        </view>
+    </view>
+    <scroll-view bindscrolltolower="loadMore" class="page-box" data-barid="{{loadbarid}}" data-districtid="{{quyuId}}" data-sqid="{{quyuSqId}}" hidden="{{listHidden}}" lowerThreshold="50" scrollTop="{{scrollTop}}" scrollX="false" scrollY="true">
+        <view bindtap="brokerDeatil" class="brokerItem" data-brokerid="{{item.brokerid}}" data-citycode="{{item.citycode}}" wx:for="{{brokerlist_data}}" wx:key="index">
+            <view class="item_head">
+                <image binderror="avatarError" data-imgindex="{{index}}" mode="widthFix" src="{{item.brokerimg==null||item.brokerimg==''?'/img/resources/default_broker_404.png':item.brokerimg}}"></image>
+            </view>
+            <view class="item_broker">
+                <view class="item_namebox">
+                    <view class="name">{{item.bname}}</view>
+                    <view class="fen" wx:if="{{dkscoreArr[index]>0}}">
+                        <text>{{dkscoreArr[index]}}</text>分 </view>
+                    <view class="ping" wx:if="{{item.pjcnt>0}}">
+                        <text>{{item.pjcnt}}</text>人评价</view>
+                </view>
+                <view class="squan">
+                    <text wx:if="{{item.sqname!=null}}">{{item.sqname+' · '}}</text>
+                    <text wx:if="{{item.shopname!=null}}">{{item.shopname+' · '}}</text>
+                    <text>{{item.nx+'年'}}</text>
+                </view>
+                <view class="cheng">
+                    <view class="lishi">
+                        <view class="pdlishi" wx:if="{{item.rent_turnover_cnt>0||item.sell_turnover_cnt>0}}">历史成交（<view class="qsty" wx:if="{{item.sell_turnover_cnt>0}}">买卖<text class="colors">{{item.sell_turnover_cnt}}</text>套</view>
+                            <view class="qsty" wx:if="{{item.rent_turnover_cnt>0}}">租赁<text class="colors">{{item.rent_turnover_cnt}}</text>套</view>） </view>
+                        <text wx:if="{{item.sell_30_showings>0}}">近30天买卖带看<text class="colors">{{item.sell_30_showings}}</text>次</text>
+                        <text wx:if="{{item.rent_30_showings>0}}">近30天租赁带看<text class="colors">{{item.rent_30_showings}}</text>次</text>
+                    </view>
+                </view>
+                <view class="jiaoliu">
+                    <view catchtap="tel" class="tel" data-bid="{{item.brokerid}}" data-index="{{index}}" data-jobleave="{{item.job_leave}}" id="{{item.mobile}}">
+                        <image src="/img/resources/tel_icon.png"></image>
+                    </view>
+                    <view catchtap="toIm" class="mes" data-bid="{{item.brokerid}}" data-index="{{index}}" data-leave="{{item.job_leave}}">
+                        <image src="/img/resources/mes_icon.png"></image>
+                    </view>
+                </view>
+            </view>
+        </view>
+        <view class="yixianshi" hidden="{{showAllData}}">已显示全部数据</view>
+    </scroll-view>
+    <view class="data-no" hidden="{{houseNo}}">
+        <image src="https://res.5i5j.com/cache/weixin/common/no-house.png"></image>
+        <text>没有找到相关经纪人</text>
+    </view>
+</view>
+<text class="count-num" hidden="{{loadingCount}}">共有 {{countNum}} 位经纪人</text>

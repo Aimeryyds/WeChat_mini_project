@@ -1,0 +1,19 @@
+<template name="237389f4">
+    <view class="_view 237389f4" wx:if="{{status==0}}"></view>
+    <view class="_view 237389f4 payView" wx:elif="{{status===1}}">
+        <icon class="_icon 237389f4" size="70" type="success"></icon>
+        <view class="_view 237389f4">支付成功</view>
+        <button appParameter="0" class="_button 237389f4" openType="launchApp" type="primary">返回App</button>
+    </view>
+    <view class="_view 237389f4 payView" wx:elif="{{status===2}}">
+        <icon class="_icon 237389f4" size="70" type="warn"></icon>
+        <view class="_view 237389f4">您已取消支付</view>
+        <button bindtap="handleProxy" class="_button 237389f4" data-comkey="{{$k}}" data-eventid="{{'237389f4-0'}}" type="primary">再次支付</button>
+        <button appParameter="-2" class="_button 237389f4" openType="launchApp">返回App</button>
+    </view>
+    <view class="_view 237389f4 payView" wx:elif="{{status===3}}">
+        <icon class="_icon 237389f4" size="70" type="warn"></icon>
+        <view class="_view 237389f4">支付失败</view>
+        <button appParameter="-1" class="_button 237389f4" openType="launchApp" type="primary">返回App</button>
+    </view>
+</template>

@@ -1,0 +1,12 @@
+<view bindtap="homeGuideDismiss" catchtouchmove="forbid" class="home-guide" wx:if="{{!hidden}}">
+    <view catchtap="homeGuidePressed" class="home-guide-container">
+        <view class="home-guide-first-title"><text>1.点击右上角 </text>
+            <image class="home-taskbar-image" src="/images/function_icon.png"></image>
+            <text> 按钮可将豆果美食添加到【我的小程序】</text>
+        </view>
+        <image class="home-guide-first-image" src="/images/guide_first.png"></image>
+        <view class="home-guide-second-title">2.添加后可通过微信首页下拉任务栏，随时快速访问豆果美食</view>
+        <image class="home-guide-second-image" src="/images/guide_second.png"></image>
+        <view catchtap="homeGuideDismiss" class="home-guide-confirm-button">我知道了</view>
+    </view>
+</view>

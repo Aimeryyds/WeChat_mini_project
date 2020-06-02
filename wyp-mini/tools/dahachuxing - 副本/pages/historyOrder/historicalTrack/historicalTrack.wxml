@@ -1,0 +1,64 @@
+<view class="historical-track">
+    <map circles="{{circles}}" id="historyMap" latitude="{{latitude}}" longitude="{{longitude}}" markers="{{markers}}" polygons="{{polygons}}" polyline="{{polyline}}" scale="{{scale}}"></map>
+    <view class="card">
+        <view class="card-item">
+            <view style="justify-content: space-between;padding: 30rpx 40rpx 0 40rpx;">
+                <view style="color: #000;">{{item.startTime}}</view>
+                <view style="font-size: 26rpx;">NO.{{item.userCode}}</view>
+            </view>
+            <view class="line" style="background-color: {{mainColor}}"></view>
+            <view style="justify-content: space-around;padding: 20rpx 0 30rpx 0;">
+                <view>
+                    <view>
+                        <text>{{item.time}}</text> 分钟</view>
+                    <view style="text-align: center">骑行时长</view>
+                </view>
+                <view>
+                    <view>
+                        <text>{{item.mileage}}</text> 公里</view>
+                    <view style="text-align: center">骑行距离</view>
+                </view>
+                <view catchtap="showDetail">
+                    <view>
+                        <text>{{item.money/100}}</text> 元
+            <i class="iconfont icon-you" style="color: {{mainColor}}"></i>
+                    </view>
+                    <view style="text-align: center">骑行费用</view>
+                </view>
+            </view>
+            <view style="justify-content: space-around;border-top: 1px solid #d0d0d0;padding: 30rpx 20rpx;">
+                <view catchtap="activeSheet" style="padding: 20rpx 0;text-align: center;background-color: {{mainColor}};color: {{textColor}};width: 55%;border-radius: 50rpx;"> 
+          对此订单有疑问?
+        </view>
+            </view>
+        </view>
+    </view>
+    <view class="zhezao" wx:if="{{faultDialog}}">
+        <view class="questionnaire">
+            <view class="questionnaire-title">
+                <text class="iconfont icon-xieyi icon" style="color: #ff6622"></text>
+        本次订单使用车辆时间较短
+      </view>
+            <view style="padding: 30px 15px;wxcs_style_padding: 40rpx 30rpx 60rpx 30rpx;">
+                <view style="font-size: 28rpx;">车辆是不是有什么问题？</view>
+                <view class="questionnaire-body">
+                    <view catchtap="sendReport" data-item="拧把不走">
+            拧把不走
+          </view>
+                    <view catchtap="sendReport" data-item="车辆被破坏">
+            车辆被破坏
+          </view>
+                    <view catchtap="sendReport" data-item="刹车失灵">
+            刹车失灵
+          </view>
+                    <view catchtap="sendReport" data-item="没有问题">
+            没有问题
+          </view>
+                </view>
+                <view catchtap="sendReport" data-item="其他，详见故障上报" data-jump="toFault" style="margin-top: 30rpx;font-size: 28rpx;text-align: center;color: #ff8686;">
+          问题不被囊括？点击前往故障上报 > 
+        </view>
+            </view>
+        </view>
+    </view>
+</view>

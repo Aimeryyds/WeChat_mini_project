@@ -1,0 +1,23 @@
+<navigation-bar enable="{{enable}}" title="选择话题"></navigation-bar>
+<view class="container">
+    <view class="topicbox" style="padding-top:{{barHeight}}px">
+        <view class="fs_top">
+            <scroll-view class="toptabitemw" scrollLeft="{{tab_scleft}}" scrollWithAnimation="{{true}}" scrollX="{{true}}">
+                <view class="toptabitemlist">
+                    <view bindtap="switchtopic" class="toptabitem {{currenttab==i?'active':''}}" data-id="{{item.topic_id}}" data-index="{{i}}" style="background:#f5f5f5 url({{item.topic_img}}) center no-repeat;background-size:cover;" wx:for="{{toptabs.item}}" wx:for-index="i" wx:key="key">
+                        <view class="t">{{item.topic_title}}</view>
+                    </view>
+                </view>
+            </scroll-view>
+        </view>
+        <scroll-view scrollY bindscrolltolower="lower" class="topic_list" style="height:{{cHeight}}rpx;">
+            <view bindtap="checkthistopic" class="topic_listitem" data-topicid="{{item.topic_id}}" data-topictitle="{{item.topic_title}}" wx:for="{{topic_list}}" wx:key="key">
+                <image class="i" src="{{item.topic_id==0?uncheckicon1:topicicon2}}"></image>
+                <view class="topictitle">{{item.topic_title}}</view>
+            </view>
+        </scroll-view>
+    </view>
+</view>
+<loading hidden="{{requeseDone||requeseFail||noData}}">
+发布中...
+</loading>

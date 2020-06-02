@@ -1,0 +1,16 @@
+<view class=" _flex _column _wrap " id="switch">
+    <view class=" _flex _row _auto _nowrap " id="bar_position">
+        <text>定位城市</text>
+    </view>
+    <view class=" _flex _row _auto _nowrap " id="loc">
+        <image src="https://res.5i5j.com/cache/weixin/common/index-position.png"></image>
+        <text class=" _auto ">{{citylocation}}</text>
+    </view>
+    <view class=" _flex _row _auto _nowrap " id="bar_hot">
+        <text>热门城市</text>
+    </view>
+    <view class=" _flex _row _wrap _start " id="tag">
+        <text bindtap="setLocation" data-id="{{item.id}}" data-name="{{item.name}}" data-x="{{item.x}}" data-y="{{item.y}}" xmlns:wx="" wx:if="{{item.id!=66}}" wx:for="{{citylist}}" wx:key="index">{{item.name}}
+    </text>
+    </view>
+</view>

@@ -1,0 +1,42 @@
+<import src="/yb_shop/utils/wxParse/wxParse.wxml"></import>
+<view class="page" style="background-image: url({{page_bg_img}});background-color:{{page_bg_color}};" wx:if="{{show}}">
+    <include src="login.wxml"></include>
+    <cover-view class="page_pop_box" wx:if="{{openImg}}">
+        <cover-image bindtap="to_url" data-appid="{{page_config.open_img.appid}}" data-key="{{page_config.open_img.key?page_config.open_img.key:1}}" data-lat="{{page_config.open_img.lat}}" data-lng="{{page_config.open_img.lng}}" data-path="{{page_config.open_img.path}}" data-phone="{{page_config.open_img.phone}}" data-url="{{page_config.open_img.url}}" src="{{page_config.open_img.imgurl}}"></cover-image>
+        <cover-view class="pop_bg"></cover-view>
+        <cover-view bindtap="openImg_show" class="pop_close">
+            <cover-image src="/yb_shop/static/images/icon/close.png"></cover-image>
+        </cover-view>
+    </cover-view>
+    <block wx:if="{{!display}}" wx:for="{{index}}">
+        <include src="search.wxml" wx:if="{{item.type=='search'}}"></include>
+        <include src="banner.wxml" wx:if="{{item.type=='banner'}}"></include>
+        <include src="navigation.wxml" wx:if="{{item.type=='navigation'}}"></include>
+        <include src="advert.wxml" wx:if="{{item.type=='advert'}}"></include>
+        <include src="goods.wxml" wx:if="{{item.type=='goods'}}"></include>
+        <include src="blank.wxml" wx:if="{{item.type=='blank'}}"></include>
+        <include src="line.wxml" wx:if="{{item.type=='blankline'}}"></include>
+        <include src="headline.wxml" wx:if="{{item.type=='headline'}}"></include>
+        <include src="article.wxml" wx:if="{{item.type=='article_list'}}"></include>
+        <include src="product.wxml" wx:if="{{item.type=='product_list'}}"></include>
+        <include src="edit_button.wxml" wx:if="{{item.type=='edit_button'}}"></include>
+        <include src="position.wxml" wx:if="{{item.type=='position'}}"></include>
+        <include src="rich_text.wxml" wx:if="{{item.type=='rich_text'}}"></include>
+        <include src="edit_piclist.wxml" wx:if="{{item.type=='edit_piclist'}}"></include>
+        <include src="floaticon.wxml" wx:if="{{item.type=='floaticon'}}"></include>
+        <include src="video.wxml" wx:if="{{item.type=='edit_video'}}"></include>
+        <include src="comment.wxml" wx:if="{{item.type=='comment'}}"></include>
+        <include src="form_submit.wxml" wx:if="{{item.type=='message_board'}}"></include>
+        <include src="store_door.wxml" wx:if="{{item.type=='store_door'}}"></include>
+        <include src="tripartite.wxml" wx:if="{{item.type=='tripartite'}}"></include>
+        <include src="quartet.wxml" wx:if="{{item.type=='quartet'}}"></include>
+        <include src="power_form.wxml" wx:if="{{item.type=='edit_form'}}"></include>
+        <include src="kefu.wxml" wx:if="{{item.type=='customer'}}"></include>
+        <include src="phone.wxml" wx:if="{{item.type=='phone'}}"></include>
+        <include src="ad.wxml" wx:if="{{item.type=='ad'}}"></include>
+        <include src="notice.wxml" wx:if="{{item.type=='announcement'}}"></include>
+    </block>
+    <official-account binderror="official_account_err" bindload="official_account_load" wx:if="{{official_account}}"></official-account>
+    <view style="height:100rpx" wx:if="{{showtabbar}}"></view>
+</view>
+<include src="/yb_shop/pages/common/menu.wxml" wx:if="{{showtabbar}}"></include>

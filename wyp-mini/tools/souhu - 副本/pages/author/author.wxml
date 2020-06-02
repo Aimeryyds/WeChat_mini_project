@@ -1,0 +1,39 @@
+<view class="warpper">
+    <view class="header">
+        <navigation-bar title="{{authorName}}" titleColor="#ffffff"></navigation-bar>
+        <view class="author-info">
+            <view class="avatar">
+                <image mode="aspectFill" src="{{authorAvatar}}"></image>
+            </view>
+            <view class="info">
+                <view class="status">
+                    <view class="group">
+                        <text class="label text-info">文章</text>
+                        <text class="number text-default">{{articleCount}}</text>
+                    </view>
+                    <view class="group">
+                        <text class="label text-info">阅读</text>
+                        <text class="number text-default">{{totalPV}}</text>
+                    </view>
+                </view>
+                <view bind:tap="toggleDescription" class="description {{needBreak?breakStatus?'':'expand':''}}">
+                    <text class="text-info {{needBreak?breakStatus?'break':'':''}}">{{description}}</text>
+                    <image class="arrow" src="/images/arrow.svg" wx:if="{{needBreak}}"></image>
+                </view>
+            </view>
+        </view>
+    </view>
+    <view class="body">
+        <view class="tab-bar">
+            <text class="item active">最新</text>
+        </view>
+        <view class="item-list">
+            <scroll-view enableBackToTop scrollY bindscrolltolower="onReachBottom" class="item-list-scroll" lowerThreshold="300">
+                <feed-list list="{{newsList}}" pvId="{{pvId}}" spmB="{{bCode}}" spmC="fd-t"></feed-list>
+                <view class="loading" wx:if="{{!isFinished}}">加载中</view>
+                <view class="loading" wx:if="{{isFinished}}">已经到底了</view>
+                <view class="loading" wx:if="{{isError}}">网络异常</view>
+            </scroll-view>
+        </view>
+    </view>
+</view>

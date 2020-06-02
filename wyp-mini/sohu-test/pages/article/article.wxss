@@ -1,0 +1,276 @@
+@import "../../template/relevant-model/news-relevant.wxss";
+
+@import "../../template/news-comment/comment.wxss";
+
+@import "../../wuBaseWxss/9.wxss";
+
+@import "template/loading.wxss";
+
+@import "../../wuBaseWxss/3.wxss";
+
+@import "../../wuBaseWxss/0.wxss";
+
+@import "../../wuBaseWxss/2.wxss";
+
+.container {
+    display: block;
+    font-size: 36rpx;
+    color: #333;
+    font-family: SourceHanSansCN Normal;
+    overflow: hidden;
+    padding-bottom: 200rpx;
+}
+
+.container .art-detail .article-title {
+    font-size: 44rpx;
+    font-weight: bold;
+    color: #333333;
+    padding: 30rpx 28rpx 0 28rpx;
+    line-height: 50rpx;
+}
+
+.container .art-detail .article-info {
+    padding: 30rpx;
+    color: #d6d6d6;
+    font-size: 24rpx;
+    overflow: hidden;
+}
+
+.container .art-detail .article-info .time {
+    float: left;
+}
+
+.container .art-detail .article-info .media {
+    float: right;
+}
+
+.art-mb-media {
+    margin-left: 30rpx;
+}
+
+.art-correlation-t {
+    font-size: 30rpx;
+    font-weight: bold;
+    color: #333333;
+}
+
+.article-content {
+    font-size: 34rpx;
+    line-height: 48rpx;
+    word-spacing: 4rpx;
+    color: #333;
+    padding: 0 28rpx;
+    min-height: 20rpx;
+}
+
+.article-content view {
+    word-break: break-all;
+    overflow: auto;
+    text-align: justify;
+    border-radius: 6rpx;
+}
+
+.article-item {
+    margin-bottom: 50rpx;
+}
+
+.pro-container {
+    height: auto;
+    font-family: PingFang SC;
+}
+
+.rank-list-container {
+    font-size: 30rpx;
+    color: #1a1a1a;
+}
+
+.com-block {
+    padding: 0 30rpx;
+    position: relative;
+    height: 40rpx;
+}
+
+.no-com-tips {
+    text-align: center;
+    height: 100rpx;
+    line-height: 100rpx;
+    font-size: 26rpx;
+    color: #929292;
+}
+
+.art_video {
+    width: 100%;
+}
+
+button {
+    border-top-style: none;
+    border-right-style: none;
+    border-bottom-style: none;
+    border-left-style: none;
+    text-align: left;
+    background-color: #fff;
+    overflow: visible;
+    padding-left: 0;
+    padding-right: 0;
+    margin-left: 0;
+    margin-right: 0;
+    webkit-tap-highlight-color: transparent;
+    font-size: 30rpx;
+    line-height: 50rpx;
+    word-spacing: 4rpx;
+    color: #5c5c5c;
+    min-height: 0rpx;
+    font-family: SourceHanSansCN Normal;
+}
+
+button::after {
+    border-top-style: none;
+    border-right-style: none;
+    border-bottom-style: none;
+    border-left-style: none;
+    webkit-tap-highlight-color: transparent;
+}
+
+.bg_cont {
+    width: 100%;
+    height: 100%;
+    overflow: hidden;
+}
+
+.fadeout {
+    -animation-name: fadeOut;
+    -animation-duration: 0.5s;
+    -animation-iteration-count: 1;
+    -animation-delay: 0s;
+}
+
+@-webkit-keyframes fadeOut {
+    0% {
+        opacity: 1;
+    }
+
+    25% {
+        opacity: 0.2;
+    }
+
+    50% {
+        opacity: 0.5;
+    }
+
+    75% {
+        opacity: 0.7;
+    }
+
+    100% {
+        opacity: 0;
+    }
+}
+
+@keyframes fadeOut {
+    0% {
+        opacity: 1;
+    }
+
+    25% {
+        opacity: 0.2;
+    }
+
+    50% {
+        opacity: 0.5;
+    }
+
+    75% {
+        opacity: 0.7;
+    }
+
+    100% {
+        opacity: 0;
+    }
+}
+
+#btn-launch-app {
+    position: fixed;
+    bottom: 120rpx;
+    right: 0;
+    width: 220rpx;
+    height: 70rpx;
+    z-index: 9999;
+}
+
+#btn-launch-app button {
+    width: 100%;
+    height: 100%;
+    line-height: 70rpx;
+    background-color: #fed116;
+    border-radius: 0;
+    border-top-left-radius: 35rpx;
+    border-bottom-left-radius: 35rpx;
+    font-size: 28rpx;
+    color: #7c5b4c;
+    text-align: center;
+}
+
+.image-gallery {
+    position: fixed;
+    left: 0;
+    top: 0;
+    bottom: 0;
+    right: 0;
+    background-color: #000000;
+    z-index: 10000;
+}
+
+.image-gallery .gallery {
+    width: 100%;
+    height: 100%;
+}
+
+.image-gallery .gallery .slide-image {
+    width: 100%;
+}
+
+.image-gallery .gallery .slide-image image {
+    width: 100%;
+    height: 100%;
+}
+
+.image-gallery .bottom-bar {
+    position: absolute;
+    left: 0;
+    right: 0;
+    bottom: 50rpx;
+    z-index: 10001;
+    color: #fff;
+    height: 60rpx;
+    font-size: 30rpx;
+}
+
+.image-gallery .bottom-bar .page-number {
+    float: left;
+    margin-left: 30rpx;
+}
+
+.image-gallery .bottom-bar .operator {
+    float: right;
+    height: 100%;
+    margin-right: 30rpx;
+}
+
+.image-gallery .bottom-bar .operator .btn {
+    display: inline-block;
+    width: 55rpx;
+    height: 45rpx;
+    text-align: center;
+    background-color: transparent;
+    position: relative;
+    margin-left: 50rpx;
+}
+
+.image-gallery .bottom-bar .operator .btn image {
+    width: 46rpx;
+    height: 46rpx;
+    position: absolute;
+    left: 0;
+    top: 50%;
+    transform: translate(0,-50%);
+}

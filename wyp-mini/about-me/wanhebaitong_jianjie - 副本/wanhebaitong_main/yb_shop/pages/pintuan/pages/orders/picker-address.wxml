@@ -1,0 +1,27 @@
+<import src="/pages/template/toast.wxml"></import>
+<template is="toast" data="{{toast:toast}}"></template>
+<view class="container">
+    <view class="address-group}" wx:if="{{address.length>0}}">
+        <view style="margin-bottom:10px;" wx:for="{{address}}" wx:key="unique">
+            <view bindtap="userAddress" class="address-info flex" data-id="{{item.id}}">
+                <view class="flex-col info-top">
+                    <view class="flex-grow-0">
+                        <text class="flex-grow-1"></text>
+				收货人：{{item.userName}} <text class="flex-row" style="float: right;">{{item.telNumber}}</text>
+                    </view>
+                    <view class="mt-24">{{item.province}} {{item.city}} {{item.county}} {{item.address}}</view>
+                </view>
+            </view>
+            <view class="clearfix"></view>
+        </view>
+    </view>
+    <view class="no-address text-center bg-fff" wx:else>
+        <image src="/resource/no-address.png"></image>
+    </view>
+</view>
+<view class="text-center">
+    <view class="add-btn add-by-user flex-row">
+        <view bindtap="editAddress" class="flex-grow-2" data-id="0" data-status="open" style="border-right: 1px solid #fff">添加地址</view>
+        <view bindtap="onKeyAddress" class="flex-grow-1">一键获取微信地址</view>
+    </view>
+</view>

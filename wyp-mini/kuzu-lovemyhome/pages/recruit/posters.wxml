@@ -1,0 +1,39 @@
+<view class="page">
+    <form bindsubmit="formSubmit">
+        <view class="certificationBox">
+            <view class="cerbanner">
+                <image role="banner" src="https://res.5i5j.com/cache/weixin/common/cel_banner.jpg"></image>
+            </view>
+            <view class="dinzhiCont" hidden="{{filterMask}}">
+                <text class="tit">推荐人： {{uname}}_{{userid}}</text>
+                <view class="group_from">
+                    <picker bindchange="bindPickerChange" class="kuangsty" range="{{cityArray}}" rangeKey="{{'name'}}" value="{{cityArray[rangekey].value}}">
+                        <view class="grouplable picker">所属城市</view>
+                        <view class="groupinput lookmore">
+                            <input data-cityId="cityId" data-cityName="cityName" disabled="true" name="cityName" placeholder="所属城市" placeholderStyle="color:#bababa;" type="text" value="{{cityArray[rangekey].name}}"></input>
+                        </view>
+                    </picker>
+                </view>
+                <view class="group_from touxiangsty">
+                    <view class="grouplable">上传头像</view>
+                    <view bindtap="uploadImageBtn" class="dzgroupbox">
+                        <view class="groicon">
+                            <image src="{{srcImage}}"></image>
+                        </view>
+                    </view>
+                </view>
+                <view class="queren">
+                    <button ariaDisabled="false" formType="submit" role="button">生成海报</button>
+                </view>
+            </view>
+        </view>
+    </form>
+</view>
+<view class="siqing-box" hidden="{{showOneButtonDialog}}">
+    <image bindtap="hbImg" class="siqing-banner" mode="widthFix" src="{{haibaoImg}}"></image>
+    <image bindtap="sqClose" class="siqing-colse" mode="widthFix" src="/img/resources/icon-close.png"></image>
+</view>
+<view class="siqing-bg" hidden="{{showOneButtonDialog}}"></view>
+<view class="loading" hidden="{{loadinghide}}">
+    <image class="loading-img" src="/img/resources/load.png"></image>
+</view>

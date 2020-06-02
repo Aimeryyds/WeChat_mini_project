@@ -1,0 +1,67 @@
+<navigation-bar title="{{keyword}}"></navigation-bar>
+<view class="cplistw">
+    <view class="filterw" style="top:{{barHeight}}px">
+        <view bindtap="switchTab" class="filteritem {{filter==i?'current':''}}" data-index="{{i}}" data-order="{{item.keys}}" wx:for="{{tabData.data}}" wx:for-index="i">{{item.title}}</view>
+    </view>
+    <view bindtap="pageReload" class="cplist_nodata" wx:if="{{requeseFail}}">{{requeseFailTips}}</view>
+    <view class="cplist_nodata" wx:if="{{noData}}">{{noDataTips}}</view>
+    <view style="padding-top:{{barHeight+44}}px" wx:else>
+        <view wx:if="{{topResults&&filter==0}}">
+            <navigator class="sclistitem" hoverClass="navigator-hover" url="/pages/sc_content/sc_content?id={{topResults.id}}&&title={{topResults.title}}">
+                <view class="scw">
+                    <view class="sc_title">
+                        <text>{{topResults.title}}</text>
+                    </view>
+                    <view class="sc_heat sc_heat1" wx:if="{{topResults.heat_level==1}}">{{topResults.heat_word}}</view>
+                    <view class="sc_heat sc_heat2" wx:elif="{{topResults.heat_level==2}}">{{topResults.heat_word}}</view>
+                    <view class="sc_heat sc_heat3" wx:elif="{{topResults.heat_level==3}}">{{topResults.heat_word}}</view>
+                    <view class="sc_img">
+                        <image src="{{topResults.image}}"></image>
+                    </view>
+                </view>
+            </navigator>
+        </view>
+        <view wx:if="{{item.item_type!=11}}" wx:for="{{searchResult}}" wx:for-index="i" wx:key="key">
+            <view style="margin:20rpx 30rpx;border-bottom:1rpx solid #eee;" wx:if="{{i==6}}">
+                <ad adTheme="white" adType="video" unitId="adunit-4e94775d16ae4ca3"></ad>
+            </view>
+            <view style="margin:20rpx 30rpx;border-bottom:1rpx solid #eee;" wx:if="{{i==16}}">
+                <ad adTheme="white" adType="video" unitId="adunit-dad3e2b7a3ba60bc"></ad>
+            </view>
+            <navigator class="recipeitem" hoverClass="navigator-hover" url="/pages/content/content?id={{item.id}}">
+                <view class="recipeitemw">
+                    <view class="cpimgw" style="background:rgba(0,0,0,0.05) url({{item.img}}) center no-repeat;background-size:cover;">
+                        <view class="v_icon" wx:if="{{item.item_type==3}}"></view>
+                    </view>
+                    <view class="cpinfow">
+                        <view class="cpnamew">
+                            <text class="cpname">{{item.title}}</text>
+                        </view>
+                        <view class="starw" wx:if="{{!item.desc}}">
+                            <view wx:for="{{[1,2,3,4,5]}}" wx:for-item="i" wx:key="key">
+                                <image src="{{starUrl1}}" wx:if="{{item.rate-i>=0}}"></image>
+                                <image src="{{starUrl2}}" wx:elif="{{item.rate-i+1>0}}"></image>
+                                <image src="{{starUrl3}}" wx:else></image>
+                            </view>
+                        </view>
+                        <view class="viewdata">
+                            <view class="auw">
+                                <image src="{{item.author.avatar_url}}"></image>
+                                <text>{{item.author.nickname}}</text>
+                            </view>
+                            <view class="iw">
+                                <image src="{{iconUrl1}}"></image>
+                                <text>{{item.favor_amount}}</text>
+                                <image src="{{iconUrl2}}"></image>
+                                <text>{{item.viewed_amount}}</text>
+                            </view>
+                        </view>
+                    </view>
+                </view>
+            </navigator>
+        </view>
+    </view>
+</view>
+<loading hidden="{{requeseDone||!hasNextPage||requeseFail||noData}}">
+ 加载中...
+</loading>

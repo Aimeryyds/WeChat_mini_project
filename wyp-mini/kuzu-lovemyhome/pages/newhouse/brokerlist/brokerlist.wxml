@@ -1,0 +1,18 @@
+<view class="broker-wrap">
+    <view class="sort">明星经纪人</view>
+    <view class="super broker-item">
+        <view class="name-img">
+            <image binderror="imgloadError" class="headimg" data-sort="super" src="{{brokerData.super.avatarsImageName}}"></image>
+            <view>{{brokerData.super.agencyName}}</view>
+        </view>
+        <image bindtap="givecall" class="broker-tel" data-bid="{{brokerData.super.erpAgencyID}}" data-index="{{0}}" data-tel="{{brokerData.super.agencyCellphone}}" data-teltype="明星经纪人" src="https://res.5i5j.com/cache/weixin/newhouse/broker-tel.png"></image>
+    </view>
+    <view class="sort">热门经纪人</view>
+    <view class="broker-item" wx:for="{{brokerData.common}}" wx:key="{{item.agencyID}}">
+        <view class="name-img">
+            <image binderror="imgloadError" class="headimg" data-index="{{index}}" data-sort="common" src="{{item.avatarsImageName}}"></image>
+            <view>{{item.agencyName}}</view>
+        </view>
+        <image bindtap="givecall" class="broker-tel" data-bid="{{item.erpAgencyID}}" data-index="{{index}}" data-tel="{{item.agencyCellphone}}" data-teltype="热门经纪人" src="https://res.5i5j.com/cache/weixin/newhouse/broker-tel.png"></image>
+    </view>
+</view>

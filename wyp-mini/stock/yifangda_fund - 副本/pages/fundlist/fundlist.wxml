@@ -1,0 +1,160 @@
+<view bindtap="back" class="goback">
+    <view>
+        <image src="../image/back.jpg" style="width:25px;height:20px;"></image>
+    </view>
+    <view class="bk">返回</view>
+</view>
+<view class="list1">
+    <view wx:if="{{fundstyle==='stockfund'}}">
+        <view wx:for="{{stockfundstyle}}" wx:for-item="it">
+            <view class="head">
+                <view>{{it.style}}</view>
+            </view>
+            <view class="list2">
+                <view wx:if="{{item.subtype===it.style}}" wx:for="{{stockfund}}" wx:for-index="idx">
+                    <view class="item">
+                        <view bindtap="getcode" class="name" id="{{item.code}}">
+                            <view bindtap="gogogo">
+        {{item.name}}
+      </view>
+                        </view>
+                    </view>
+                    <view class="hr2"></view>
+                </view>
+            </view>
+        </view>
+    </view>
+    <view wx:if="{{fundstyle==='mixedfund'}}">
+        <view wx:for="{{mixedfundstyle}}" wx:for-item="it">
+            <view class="head">
+                <view>{{it.style}}</view>
+            </view>
+            <view class="list2">
+                <view wx:if="{{item.subtype===it.style}}" wx:for="{{mixedfund}}" wx:for-index="idx">
+                    <view class="item">
+                        <view bindtap="getcode" class="name" id="{{item.code}}">
+                            <view bindtap="gogogo">
+        {{item.name}}
+      </view>
+                        </view>
+                    </view>
+                    <view class="hr2"></view>
+                </view>
+            </view>
+        </view>
+    </view>
+    <view wx:if="{{fundstyle==='indexfund'}}">
+        <view wx:for="{{indexfundstyle}}" wx:for-item="it">
+            <view class="head">
+                <view>{{it.style}}</view>
+            </view>
+            <view class="list2">
+                <view wx:if="{{item.subtype===it.style}}" wx:for="{{indexfund}}" wx:for-index="idx">
+                    <view class="item">
+                        <view bindtap="getcode" class="name" id="{{item.code}}">
+                            <view bindtap="gogogo">
+        {{item.name}}
+      </view>
+                        </view>
+                    </view>
+                    <view class="hr2"></view>
+                </view>
+            </view>
+        </view>
+    </view>
+    <view wx:if="{{fundstyle==='bondfund'}}">
+        <view wx:for="{{bondfundstyle}}" wx:for-item="it">
+            <view class="head">
+                <view>{{it.style}}</view>
+            </view>
+            <view class="list2">
+                <view wx:if="{{item.subtype===it.style}}" wx:for="{{bondfund}}" wx:for-index="idx">
+                    <view class="item">
+                        <view bindtap="getcode" class="name" id="{{item.code}}">
+                            <view bindtap="gogogo">
+        {{item.name}}
+      </view>
+                        </view>
+                    </view>
+                    <view class="hr2"></view>
+                </view>
+            </view>
+        </view>
+    </view>
+    <view wx:if="{{fundstyle==='monetaryfund'}}">
+        <view wx:for="{{monetaryfundstyle}}" wx:for-item="it">
+            <view class="head">
+                <view>{{it.style}}</view>
+            </view>
+            <view class="list2">
+                <view wx:if="{{item.subtype===it.style}}" wx:for="{{monetaryfund}}" wx:for-index="idx">
+                    <view class="item">
+                        <view bindtap="getcode" class="name" id="{{item.code}}">
+                            <view bindtap="gogogo">
+        {{item.name}}
+      </view>
+                        </view>
+                    </view>
+                    <view class="hr2"></view>
+                </view>
+            </view>
+        </view>
+    </view>
+    <view wx:if="{{fundstyle==='commodityfund'}}">
+        <view wx:for="{{commodityfundstyle}}" wx:for-item="it">
+            <view class="head">
+                <view>{{it.style}}</view>
+            </view>
+            <view class="list2">
+                <view wx:if="{{item.subtype===it.style}}" wx:for="{{commodityfund}}" wx:for-index="idx">
+                    <view class="item">
+                        <view bindtap="getcode" class="name" id="{{item.code}}">
+                            <view bindtap="gogogo">
+        {{item.name}}
+      </view>
+                        </view>
+                    </view>
+                    <view class="hr2"></view>
+                </view>
+            </view>
+        </view>
+    </view>
+    <view wx:if="{{fundstyle==='qdiifund'}}">
+        <view wx:for="{{qdiifundstyle}}" wx:for-item="it">
+            <view class="head">
+                <view>{{it.style}}</view>
+            </view>
+            <view class="list2">
+                <view wx:if="{{item.subtype===it.style}}" wx:for="{{qdiifund}}" wx:for-index="idx">
+                    <view class="item">
+                        <view bindtap="getcode" class="name" id="{{item.code}}">
+                            <view bindtap="gogogo">
+        {{item.name}}
+      </view>
+                        </view>
+                    </view>
+                    <view class="hr2"></view>
+                </view>
+            </view>
+        </view>
+    </view>
+    <view wx:if="{{fundstyle==='foffund'}}">
+        <view wx:for="{{foffundstyle}}" wx:for-item="it">
+            <view class="head">
+                <view>{{it.style}}</view>
+            </view>
+            <view class="list2">
+                <view wx:if="{{item.subtype===it.style}}" wx:for="{{foffund}}" wx:for-index="idx">
+                    <view class="item">
+                        <view bindtap="getcode" class="name" id="{{item.code}}">
+                            <view bindtap="gogogo">
+        {{item.name}}
+      </view>
+                        </view>
+                    </view>
+                    <view class="hr2"></view>
+                </view>
+            </view>
+        </view>
+    </view>
+</view>

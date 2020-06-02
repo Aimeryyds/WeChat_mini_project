@@ -1,0 +1,14 @@
+<pop-manager show="{{show}}" type="center">
+    <view class="dialog--container {{bottom?'dialog--bottom':''}}">
+        <view class="dialog__header {{header?'dialog__header_add':'header'}}" wx:if="{{title}}">{{title}}</view>
+        <view class="dialog__content {{title?'dialog__content--title':''}}">
+            <text class="content" wx:if="{{message}}">{{message}}</text>
+            <slot name="content"></slot>
+        </view>
+        <view class="dialog__footer {{buttonsShowVertical?'dialog__footer--vertical':'dialog__footer--horizon'}}">
+            <btn bind:btnclick="handleButtonClick" bind:getphonenumber="handlePhoneResponse" bind:getuserinfo="handleUserInfoResponse" bind:opensetting="handleOpenSettingResponse" class="dialog__button" customClass="{{index===0?'dialog__button-inside--first':'dialog__button-inside'}}" data-open-type="{{item.openType}}" data-type="{{item.type}}" openType="{{item.openType}}" wx:for="{{buttons}}" wx:key="{{ item.text }}-{{ item.type }}">
+                <view style="color: {{item.color||'#333'}}">{{item.text}}</view>
+            </btn>
+        </view>
+    </view>
+</pop-manager>

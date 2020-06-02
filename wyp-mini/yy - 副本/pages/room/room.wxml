@@ -1,0 +1,65 @@
+<view class="room-container" style="top:{{fixedChatPosition}}px">
+    <view class="prev-player-main change-player" wx:if="{{prevPlayer&&!isLoading}}">
+        <view class="change-player-bg" style="background-image: url({{changePlayerBg}})"></view>
+        <view class="prev-player-tips">下拉换个直播看看</view>
+        <view class="change-player-icon">
+            <image class="icon-down" src="./images/icon-down.png"></image>
+            <view class="icon-dot-main">
+                <view class="icon-dot-1 icon-dot"></view>
+                <view class="icon-dot-2 icon-dot"></view>
+                <view class="icon-dot-3 icon-dot"></view>
+            </view>
+        </view>
+    </view>
+    <view animation="{{animationData}}" class="room-main" style="height: {{isLoading?'1px':''}}">
+        <status-bar hidePannel="{{isLoading}}" id="headerBar" statusBar="{{statusBar}}" statusBarHeight="{{statusBarHeight}}"></status-bar>
+        <anchor-info bindhiidoEvent="onHiidoEvent" bindshareInfoChange="onShareInfoChange" bindupdateLiveTitle="onUpdateLiveTitle" bindupdateSnapshot="onUpdateSnapshot" hidePannel="{{isLoading}}" id="anchorInfo" linkMicInfo="{{linkMicInfo}}" nobleNum="{{nobleNum}}" sid="{{sid}}" ssid="{{ssid}}" statusBarHeight="{{statusBarHeight}}" uid="{{uid}}" usercount="{{usercount}}" xModel="{{xModel}}"></anchor-info>
+        <view style="margin-top:{{fixedPlayerPosition}}; {{ratio>=1?'position: relative;':''}}">
+            <yylive-player bindgetOpenId="onGetOpenId" bindhidePageLoading="onHidePageLoading" bindplayNextVideo="nextLive" bindplayerRectChange="onPlayerRectChange" bindresetVideoInfo="onResetVideoInfo" bindsetRatio="onSetRatio" bindupdateEncodedChannel="onUpdateEncodedChannel" id="yylivePlayer" isEncodedChannel="{{isEncodedChannel}}" limitChannal="{{limitChannal}}" pageLoading="{{isLoading}}" sid="{{sid}}" slideInfo="{{slideInfo}}" snapshot="{{snapshot}}" ssid="{{ssid}}" uid="{{uid}}"></yylive-player>
+            <cover-view bind:touchend="touchend" bind:touchmove="touchmove" bind:touchstart="touchstart" class="cover-player {{ratio<1?'portrai-cover-player':''}}" style="height:{{playerHeight}}" wx:if="{{hasReady&&ratio>=1}}"></cover-view>
+            <cover-view bind:touchend="touchend" bind:touchmove="touchmove" bind:touchstart="touchstart" class="cover-player portrai-cover-player" style="margin-top:{{statusBarHeight}}px;bottom: {{portraiSlideBottom}}rpx;" wx:if="{{hasReady&&ratio<1}}"></cover-view>
+        </view>
+        <view hidden="{{isLoading}}" style="height:{{gongpingHeight}}px;">
+            <gongping bindchatInputShowChange="onChatInputShowChange" bindfixChatInput="onFixChatInput" bindgetRoomActivity="getRoomActivity" bindgetRoomAttentionList="getRoomAttentionList" bindhiidoEvent="onHiidoEvent" bindhiidoSetUid="onHiidoSetUid" bindlimitChannal="onLimitChannal" bindlinkMicInfo="onLinkMicInfo" bindroomActivity="onRoomActivity" bindroomRecommendShowEvent="roomRecommendShowEvent" bindshowGiftTimerChange="onGiftTimerChange" bindshowRecommendPage="showRecommendPage" binduidChange="onUidChange" bindupdateEncodedChannel="onUpdateEncodedChannel" bindupdateNobleNum="onUpdateNobleNum" bindusercountChange="onUsercountChange" gongpingHeight="{{gongpingHeight}}" id="gongping" isLeavePage="{{isLeavePage}}" isRatioReady="{{isRatioReady}}" networkStatus="{{networkStatus}}" queryParams="{{queryParams}}" ratio="{{ratio}}" roomStatus="{{roomStatus}}" shareInfo="{{shareInfo}}" sharedOid="{{sharedOid}}" sid="{{sid}}" ssid="{{ssid}}" uid="{{uid}}" userUid="{{userUid}}"></gongping>
+            <cover-view bind:touchend="touchend" bind:touchmove="touchmove" bind:touchstart="touchstart" class="gongping-slide" style="height:{{gongpingHeight}}px;bottom: {{portraiSlideBottom}}rpx;" wx:if="{{hasReady&&ratio>=1}}"></cover-view>
+        </view>
+        <cover-view bindtap="showNoFlowerTips" class="ios-gift-timer" hidden="{{!(showIosGiftTimer&&isHideChatInput)||isLoading}}" style="bottom: {{xModel?52:8}}rpx;" wx:if="{{showIosGiftTimer}}">
+            <cover-image class="ios-gift-timer__img" src="/components/gongping/template/gongping-tool/images/flower_small_bg.png"></cover-image>
+            <cover-view class="ios-gift-timer__msk">{{iosGiftTime}}s</cover-view>
+            <canvas canvasId="iosGiftCanvas" class="ios-gift-timer__canvas"></canvas>
+        </cover-view>
+        <cover-view bindtap="activityLinkClick" class="room-activity-area" data-action="{{activityData.action}}" data-type="{{activityData.actionType}}" hidden="{{isLoading}}" style="bottom: {{xModel?144:100}}rpx;" wx:if="{{hasReady&&activityData}}">
+            <cover-image src="{{activityData.image}}"></cover-image>
+        </cover-view>
+        <cover-view class="recommend-btn-tips" hidden="{{isLoading}}" style="bottom: {{xModel?124:80}}rpx;left: {{xModel?250:243}}rpx;" wx:if="{{hasReady&&isFirstEnterRoom&&roomRecommendTipsTxt&&hideRoomRecommendTipsTxt}}">
+            <cover-view class="recommend-btn-tips__txt">{{roomRecommendTipsTxt+' '}}</cover-view>
+            <cover-image class="recommend-btn-tips__bottom" src="/pages/room/images/ico_ bubble.png"></cover-image>
+        </cover-view>
+    </view>
+    <view class="player-loading" hidden="{{!isLoading}}">
+        <view class="loading-main">
+            <view class="loading-bg" style="background-image: url({{snapshot}})"></view>
+            <image class="loading-icon" src="/images/yybear_loading.gif"></image>
+            <view class="loading-tips">加载中...</view>
+        </view>
+        <view class="encodedChannel" wx:if="{{isEncodedChannel}}">
+            <view class="encodedChannel-tips">请输入该频道密码</view>
+            <input bindconfirm="checkPasswd" bindinput="inputPasswd" class="encodedChannel-input" password="true"></input>
+            <view bindtap="cancleCheck" class="encodedChannel-btn btn-cancle">取消</view>
+            <view bindtap="checkPasswd" class="encodedChannel-btn btn-sure">确定</view>
+        </view>
+    </view>
+    <view class="next-player-main change-player" wx:if="{{nextPlayer&&!isLoading}}">
+        <view class="change-player-bg" style="background-image: url({{changePlayerBg}})"></view>
+        <view class="change-player-icon">
+            <view class="icon-dot-main">
+                <view class="icon-dot-3 icon-dot"></view>
+                <view class="icon-dot-2 icon-dot"></view>
+                <view class="icon-dot-1 icon-dot"></view>
+            </view>
+            <image class="icon-down" src="./images/icon-up.png"></image>
+        </view>
+        <view class="next-player-tips">上拉换个直播看看</view>
+    </view>
+</view>
+<cover-image catchtap="gotoOtherPrograme" class="invite-entry" src="./images/invite.png" wx:if="{{showInvite}}"></cover-image>

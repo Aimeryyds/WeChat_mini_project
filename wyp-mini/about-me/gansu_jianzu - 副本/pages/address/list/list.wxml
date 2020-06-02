@@ -1,0 +1,50 @@
+<view class="container about-conter" wx:if="{{isShow}}">
+    <view wx:if="{{list.length>0}}">
+        <view class="address-list-title" wx:if="{{order}}">
+            <text>范围内地址</text>
+        </view>
+        <view class="addressList" wx:for="{{list}}" wx:key="*this">
+            <view bindtap="makeorder" class="addressList--item" data-address="{{item}}" style="border-left: {{item.id==order.consignee.id?'5rpx red solid':'0'}}; color: #333;">
+                <view class="addressList--item__title">
+                    <view style="margin-bottom: 18rpx;display:flex;">
+                        <text style="margin-right: 80rpx;">{{item.name}}</text>
+                        <text>{{item.phone}}</text>
+                    </view>
+                    <view class="zan-ellipsis--l2" style="">
+                        <text>{{item.province}}{{item.city}}{{item.district}}{{item.title}}{{item.address}}</text>
+                    </view>
+                </view>
+                <view catchtap="editaddress" data-item="{{item}}" style=";width:100rpx;display:flex;align-items: center;justify-content: center;">
+                    <image src="http://imgcdnali.wfenxiao.com.cn/xcx/c/order/ic_edit_address.png" style="width:40rpx; height: 40rpx"></image>
+                </view>
+            </view>
+        </view>
+    </view>
+    <view wx:if="{{outlist.length>0}}">
+        <view class="address-list-title" wx:if="{{order}}">
+            <text>超区地址</text>
+        </view>
+        <view class="addressList" style="color:#999999;" wx:for="{{outlist}}" wx:key="*this">
+            <view class="addressList--item" data-address="{{item}}" style="">
+                <view class="addressList--item__title">
+                    <view style="margin-bottom: 18rpx;display:flex;">
+                        <text style="margin-right: 80rpx;">{{item.name}}</text>
+                        <text>{{item.phone}}</text>
+                    </view>
+                    <view class="zan-ellipsis--l2" style="">
+                        <text>{{item.province}}{{item.city}}{{item.district}}{{item.title}}{{item.address}}</text>
+                    </view>
+                </view>
+                <view catchtap="editaddress" data-item="{{item}}" style=";width:100rpx;display:flex;align-items: center;justify-content: center;">
+                    <image src="http://imgcdnali.wfenxiao.com.cn/xcx/c/order/ic_edit_address.png" style="width:40rpx; height: 40rpx"></image>
+                </view>
+            </view>
+        </view>
+    </view>
+    <view wx:if="{{!list.length>0&&!outlist.length>0}}">
+        <view style="height:300rpx; line-height: 300rpx; font-size: 40rpx; text-align: center;">暂无收货地址，请添加</view>
+    </view>
+    <view class="list-addBtn-wrap">
+        <button catchtap="makenew" class="list-addBtn">新建收货地址</button>
+    </view>
+</view>

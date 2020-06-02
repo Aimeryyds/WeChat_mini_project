@@ -1,0 +1,21 @@
+<view class="container">
+    <view class="account">
+        <view class="account__info">可提现金额（元）</view>
+        <view class="account__mod">
+            <view class="account__money">{{toCenterData.balance}}</view>
+            <button class="account__btn" ontap="withdrawLink" type="button">提现</button>
+        </view>
+        <view class="account__withdraw">
+            <text class="account__withdraw-money">待结算佣金:{{toCenterData.freeze}}元</text>
+        </view>
+    </view>
+    <view class="center-form">
+        <view class="center-form__item" ontap="withdrahistorywLink">
+            <view class="center-form__label" style="color:rgba(0,0,0,0.65)">已提现:{{toCenterData.gained}}元</view>
+            <view class="form__item-link">
+                <view class="form__item-text">提现记录</view>
+                <image class="form__item-linkImg" src="http://imgcdnali.wfenxiao.com.cn/xcx/c/icons/item-link.png"></image>
+            </view>
+        </view>
+    </view>
+</view>

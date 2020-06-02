@@ -1,0 +1,11 @@
+<template name="cusservice">
+    <view class="cus-service">
+        <view bindtap="backToHome" class="service-item service-home iconfont icon-home" wx:if="{{flag.cusServiceOpen&&!cusService.isTabbarPath}}"></view>
+        <view bindtap="makePhoneCall" class="iconfont icon-phone service-item service-phone" wx:if="{{flag.cusServiceOpen}}"></view>
+        <view class="serviceWeixinWrap">
+            <view class="service-item service-weixin iconfont icon-weixin" wx:if="{{flag.cusServiceOpen&&cusService.show}}"></view>
+            <contact-button class="service-weixin contactBtn" type="default-light" wx:if="{{flag.cusServiceOpen&&cusService.show}}"></contact-button>
+        </view>
+        <view bindtap="showServiceAdvertising" class="service-item service-support iconfont icon-support" wx:if="{{cusService.supportOpen}}"></view>
+    </view>
+</template>

@@ -1,0 +1,13 @@
+<view class="main">
+    <view style="margin: 24rpx 40rpx;color: #797979">选择充值金额</view>
+    <view class="balance">
+        <view bindtap="selectBalance" class="balance-item {{item.input?'balance-item-long':''}}" data-id="{{item.id}}" data-money="{{item.value}}" style="{{item.id==selected?'border: 6rpx solid '+mainColor:''}}" wx:for="{{items}}" wx:key="index">
+            <input autoFocus="true" bindinput="otherBalance" disabled="{{item.radioCan}}" maxlength="4" placeholder="请输入整数金额" style="color:{{mainColor}};flex:1;font-size: 36rpx" type="digit" value="{{selfMoney}}" wx:if="{{selected==50&&item.input}}"></input>
+            <view wx:else>
+                <view class="balance-item-money {{item.input?'BIM-input':'BIM-label'}}" style="{{item.id==selected?'color: '+mainColor:''}}">{{item.name}}</view>
+                <view class="balance-item-tip {{item.input?'BIT-input':''}}" style="{{item.id==selected?'color: #F47F7F':''}}">{{item.tip}}</view>
+            </view>
+        </view>
+    </view>
+    <button bindtap="auth" disabled="{{disabled}}" style="background-color: {{mainColor}};color:{{textColor}}"> 立即充值 </button>
+</view>

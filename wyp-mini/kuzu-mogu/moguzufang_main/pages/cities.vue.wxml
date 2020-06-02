@@ -1,0 +1,21 @@
+<template name="424e15a6">
+    <view class="_view 424e15a6 cityList-container">
+        <scroll-view class="_scroll-view 424e15a6 cityList-scroll" scrollY="true">
+            <view class="_view 424e15a6 location-view">当前定位城市：<view class="_view 424e15a6 currentCityByIpBox">
+                    <text bindtap="handleProxy" class="_text 424e15a6 currentCityByIp {{locationCity&&currentCity.cityId==locationCity.cityId?'active':''}}" data-comkey="{{$k}}" data-eventid="{{'424e15a6-0'}}" wx:if="{{type===1||type===2}}">{{type===1?locationCity.cityName:'定位失败，点击重新定位'}}</text>
+                    <text class="_text 424e15a6 currentCityByIp" wx:else>{{type===0?'定位中...':'您当前所在城市暂未开通服务'}}</text>
+                </view>
+            </view>
+            <view class="_view 424e15a6">
+                <view class="_view 424e15a6 list-group" key="{{index}}" wx:for="{{cityList}}" wx:for-item="city" wx:key="index">
+                    <view class="_view 424e15a6 list-group-title">{{city.letter}}</view>
+                    <view class="_view 424e15a6" style="padding: 0">
+                        <view bindtap="handleProxy" class="_view 424e15a6 list-group-item" data-comkey="{{$k}}" data-eventid="{{'424e15a6-1-'+index+'-'+idx}}" key="{{idx}}" wx:for="{{city.list}}" wx:for-index="idx" wx:key="idx">
+                            <text class="_text 424e15a6 name {{currentCity.cityId==item.cityId?'active':''}}">{{item.cityName}}</text>
+                        </view>
+                    </view>
+                </view>
+            </view>
+        </scroll-view>
+    </view>
+</template>

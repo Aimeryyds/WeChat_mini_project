@@ -1,0 +1,12 @@
+var f = (({
+    toFix: ((function(value) {
+        return (value.toFixed(2))
+    })),
+    timetostr: ((function(date) {
+        return (date.toDateString())
+    })),
+}));
+module.exports = (({
+    toFix: f.toFix,
+    timetostr: f.timetostr,
+}));

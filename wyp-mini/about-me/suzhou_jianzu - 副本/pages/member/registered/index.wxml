@@ -1,0 +1,84 @@
+<template name="data">
+    <view class="container">
+        <image src="http://tws.cnweisou.com/images/registered.jpg"></image>
+        <view class="Pending">
+            <text style="float:none">{{data.msg}}    </text>
+        </view>
+        <form bindreset="formReset" bindsubmit="formSubmit">
+            <view class="box">
+                <view class="name dr">
+                    <text class="word">商户名称</text>
+                    <text class="xing">*</text>
+                    <input name="merchname" placeholder="商户名称" type="text" value="{{data.result.merchname}}"></input>
+                </view>
+                <view class="name dr">
+                    <text class="word">主营项目</text>
+                    <text class="xing">*</text>
+                    <input name="salecate" placeholder="例如鞋帽、化妆品" type="text" value="{{data.result.salecate}}"></input>
+                </view>
+                <view class=" bor goods1 dr">
+                    <text class="word word1">简单介绍</text>
+                    <text class="xing">*</text>
+                    <input class="textarea" name="desc" placeholder="简单介绍下商品" type="text" value="{{data.result.desc}}"></input>
+                </view>
+            </view>
+            <view class="box">
+                <view class="name dr">
+                    <text class="word">联系人</text>
+                    <text class="xing">*</text>
+                    <input name="realname" placeholder="您的称呼" type="text" value="{{data.result.realname}}"></input>
+                </view>
+                <view class="name bor dr">
+                    <text class="word">电话</text>
+                    <text class="xing">*</text>
+                    <input bindblur="phone" maxlength="11" name="mobile" placeholder="请输入您的电话" type="number" value="{{data.result.mobile}}"></input>
+                </view>
+                <view class="name bor dr">
+                    <text class="word">地址</text>
+                    <text class="xing">*</text>
+                    <input class="address" name="address" placeholder="请输入您的地址" type="text" value="{{data.result.address}}"></input>
+                </view>
+                <view class="contact">
+                    <text>请仔细填写联系方式，以保证我们能尽快联系到您</text>
+                </view>
+            </view>
+            <view class="box">
+                <view class="name dr">
+                    <text class="word">账号</text>
+                    <text class="xing">*</text>
+                    <input name="uname" placeholder="请输入您的账号" type="text" value="{{data.result.uname}}"></input>
+                </view>
+                <view class="name bor dr">
+                    <text class="word">密码</text>
+                    <text class="xing">*</text>
+                    <input name="upass" placeholder="请输入您的密码" type="password" value="{{data.result.upass}}"></input>
+                </view>
+                <view class="contact">
+                    <text>用于登陆多用户后台，请认证填写哦</text>
+                </view>
+            </view>
+            <view class="box">
+                <view class="name" style="border:none">
+                    <checkbox-group bindchange="checked">
+                        <label>
+                            <checkbox checked="true" name="xxxxxxxxxxxxx" value="asdddddddddddddddddddddd"></checkbox>
+                        </label>
+                    </checkbox-group>
+                    <text class="detector">我已阅读并了解 </text>
+                    <text bindtap="xieyi" class="shenqing">【入驻申请协议】</text>
+                </view>
+            </view>
+            <view class="btn">
+                <button class="btn" formType="submit" type="submit">立即申请入驻</button>
+            </view>
+        </form>
+    </view>
+</template>
+<template is="data" data="{{data:data}}"></template>
+<view class="{{xieyi=='1'?'dn':'db'}} wrap">
+    <view class="title">{{data.result.applytitle}}</view>
+    <view class="content">
+        <rich-text nodes="{{data.result.applycontent}}"></rich-text>
+    </view>
+    <view bindtap="tijiao" class="sub">确认</view>
+</view>

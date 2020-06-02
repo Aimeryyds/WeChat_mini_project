@@ -1,0 +1,283 @@
+<view class="topImage">
+    <image bindtouchend="touchEnd" bindtouchstart="touchStart" src="{{detailData.albumnew[0].photo[0].imageName}}"></image>
+</view>
+<view class="loupanInfo title_anchor menu0" id="head_img">
+    <view class="infoTitle">{{detailData.baseMessage.content}}</view>
+    <view class="infoWorld">北五环国奥居住区新房在售</view>
+    <view class="infoTags">
+        <text class="isTatus">{{detailData.baseMessage.saleStatus_desc}}</text>
+        <text wx:for="{{detailData.baseMessage.tagList}}" wx:key="index">{{item}}</text>
+    </view>
+    <view class="infoMain">
+        <view class="infoStyle">
+            <view class="name">均价</view>
+            <view class="nameCon">
+                <text class="red">{{detailData.baseMessage.lastAveragePrice}}</text>
+            </view>
+        </view>
+        <view class="infoStyle">
+            <view class="name">总价</view>
+            <view class="nameCon">{{detailData.baseMessage.lastRoomMinPrice}}</view>
+        </view>
+        <view class="infoStyle">
+            <view class="name">户型</view>
+            <view class="nameCon">2/3/4居</view>
+        </view>
+        <view class="infoStyle">
+            <view class="name">建筑面积</view>
+            <view class="nameCon">{{detailData.baseMessage.show_BuildArea}}199/387㎡</view>
+        </view>
+        <view class="infoStyle">
+            <view class="name">开盘</view>
+            <view class="nameCon">{{detailData.baseMessage.openingDate}}2020.09.14</view>
+        </view>
+        <view class="infoStyle">
+            <view class="name">更多信息</view>
+            <view class="nameMore"></view>
+        </view>
+        <view class="infoAdr">
+            <view class="name">地址</view>
+            <view class="nameInfo">{{detailData.baseMessage.address}}顺义水色西路西侧东侧3号西南角约</view>
+            <view class="adrHred">周边</view>
+        </view>
+    </view>
+    <view class="loupanBottom">
+        <view>
+            <image mode="widthFix" src="/img/bjnewhouse/bj_ling.png"></image>开盘提醒我</view>
+        <view>
+            <image mode="widthFix" src="/img/bjnewhouse/bj_xian.png"></image>变价提醒我</view>
+    </view>
+</view>
+<view class="scroll_view {{isFixed==true?'menuStyleFixed':''}}">
+    <scroll-view class="header_scroll" scrollX="true">
+        <view bindtap="toNode" class="header_title {{index==header_current?'cur':''}}" data-index="{{index}}" wx:for="{{header_tag}}" wx:key="index">
+      {{item}}
+      <view class="list">
+                <view class="line" hidden="{{index==header_current?false:true}}"></view>
+            </view>
+        </view>
+    </scroll-view>
+</view>
+<view class="paddboth {{isFixed==true?'mt-30':''}} ">
+    <view class="bgStyle padb20 title_anchor menu1">
+        <view class="title overflow ">
+            <view class="title_name">专享优惠</view>
+        </view>
+        <view class="vipItem">
+            <view class="vipCon">
+                <view class="vipCon_1">
+                    <image src="/img/bjnewhouse/bj_hui.png"></image>限时优惠</view>
+                <view class="vipCon_2">认购9.9折，月底35%首付再享9.9折</view>
+            </view>
+            <view class="vipbtn">领取</view>
+        </view>
+        <view class="vipItem">
+            <view class="vipCon">
+                <view class="vipCon_1">
+                    <image src="/img/bjnewhouse/bj_hui.png"></image>限时优惠</view>
+                <view class="vipCon_2">认购9.9折，月底35%首付再享9.9折</view>
+            </view>
+            <view class="vipbtn">领取</view>
+        </view>
+    </view>
+    <view class="bgStyle padb20 title_anchor menu2">
+        <view class="title overflow">
+            <view class="title_name">户型介绍</view>
+            <view class="whole">查看全部</view>
+        </view>
+        <view class="housetypetab">
+            <text bindtap="changTab" class="{{currentTab==index?'active':''}}" data-current="{{index}}" wx:for="{{detailData.houseType}}" wx:key="index">{{item.label}}({{item.count}})</text>
+        </view>
+        <view class="housetypeCon {{currentTab==index?'show':'hidden'}}" wx:for="{{detailData.houseType}}" wx:key="index">
+            <view class="typeItem" wx:for="{{item.data}}" wx:for-item="items" wx:key="index2">
+                <view class="huxing">
+                    <view class="huxingImage">
+                        <image src="{{items.houseTypeImageName==null||items.houseTypeImageName==''?'https://res.5i5j.com/cache/weixin/common/default_house_list_404.png':items.houseTypeImageName}}"></image>
+                    </view>
+                    <view class="huxingInfo">
+                        <view class="ting">{{items.houseTypeLabel}}<text>{{items.saleStatus_desc}}在售</text>
+                        </view>
+                        <view class="are">{{items.areaAndHead}}</view>
+                        <view class="price">{{items.houseTypePrice}}</view>
+                    </view>
+                </view>
+                <view class="zixun">
+                    <text>房贷首付</text>
+                </view>
+            </view>
+        </view>
+    </view>
+    <view class="bgStyle2 title_anchor menu3">
+        <view class="title overflow marLR32">
+            <view class="title_name">楼盘动态（{{detailData.lastArticle.count}}）</view>
+            <view class="whole">全部户型</view>
+        </view>
+        <view class="moveItem marLR32" wx:for="{{detailData.lastArticle.data}}" wx:key="index">
+            <view class="moveTitle">{{item.title}}</view>
+            <view class="moveInfo">
+                <rich-text nodes="{{conRich[index]}}"></rich-text>
+            </view>
+            <view class="moveBottom overflow">
+                <text class="btn">{{item.tab}}</text>
+                <text class="time">{{item.publishDate}}</text>
+            </view>
+        </view>
+        <view class="moveItemBottom">订阅楼盘动态和销控信息</view>
+    </view>
+    <view class="bgStyle padb20 title_anchor menu4">
+        <view class="title overflow">
+            <view class="title_name">置业顾问</view>
+            <view class="whole">查看全部</view>
+        </view>
+        <view class="brokerItem" wx:if="{{index<3}}" wx:for="{{detailData.consultantList}}" wx:key="index">
+            <view class="brokerInfor">
+                <view class="brokerHead">
+                    <image mode="widthFix" src="{{item.avatarsImageName==null||item.avatarsImageName==''?'https://res.5i5j.com/cache/weixin/common/default_broker_404.png':item.avatarsImageName}}"></image>
+                </view>
+                <view class="brokerInfoCon">
+                    <view class="name">{{item.agencyName}}</view>
+                    <view class="shangquan">{{item.agencyShop}}</view>
+                    <view class="num">{{item.referCount}}人咨询过他</view>
+                </view>
+            </view>
+            <view class="brokerRight">
+                <view class="tel">
+                    <image src="/img/bjnewhouse/bj_tel.png"></image>
+                </view>
+                <view class="ailiao">
+                    <image src="/img/bjnewhouse/bj_ailiao.png"></image>
+                </view>
+            </view>
+        </view>
+    </view>
+    <view class="bgStyle padb20 title_anchor menu5">
+        <view class="title overflow">
+            <view class="title_name">位置及周边配套</view>
+            <view class="whole">查看全部</view>
+        </view>
+        <view class="adrBox">
+            <view class="name">位置</view>
+            <view class="nameCon">朝阳·望京  望京大街9号</view>
+        </view>
+        <view class="adrBox">
+            <view class="name">配套</view>
+            <view class="nameBtn">咨询楼盘具体位置和周边设施情况<image src="/img/bjnewhouse/bj_zixun.png"></image>
+            </view>
+        </view>
+        <view class="swiperTabs" wx:if="{{latitude!=0&&longitude!=0}}">
+            <scroll-view scrollX class="scrollStyle">
+                <view bindtap="chooseCircum" class="tabbox" data-index="{{index}}" wx:for="{{circum_list}}" wx:key="index">
+                    <text class="swiper-tab-item {{circum_current==index?'active':''}}">{{item}}</text>
+                </view>
+            </scroll-view>
+        </view>
+        <cover-view class="mapSty">
+            <map id="myMap" latitude="{{latitude}}" longitude="{{longitude}}" markers="{{markers}}" scale="14" wx:if="{{latitude!=0&&longitude!=0}}"></map>
+        </cover-view>
+        <view class="circum" wx:if="{{latitude!=0&&longitude!=0}}">
+            <scroll-view>
+                <view class="circum_con">
+                    <view class="ditie" wx:for="{{line}}" wx:key="index">
+                        <view class="lu">
+                            <text class="zhan">{{item.title}}</text>
+                            <text class="xian">({{item.address}})</text>
+                        </view>
+                        <view class="mi">{{item._distance}}m</view>
+                    </view>
+                </view>
+            </scroll-view>
+        </view>
+    </view>
+    <view class="bgStyle2 title_anchor menu6">
+        <view class="title overflow marLR32">
+            <view class="title_name">楼栋信息</view>
+        </view>
+        <image class="buildingImage marLR32" mode="widthFix" src="https://res.5i5j.com/cache/weixin/common/home-banner.png"></image>
+        <view class="buildingItem">
+            <view class="buildingTitle">楼栋名称</view>
+            <view class="buildingTitle">单元</view>
+            <view class="buildingTitle">户数</view>
+        </view>
+        <view class="buildingItem2" wx:for="{{detailData.building.data}}" wx:key="index">
+            <view class="buildingTitle2">{{item.buildingName}}</view>
+            <view class="buildingTitle2">{{item.unitNum}}</view>
+            <view class="buildingTitle2">{{item.familyNum}}</view>
+        </view>
+        <view class="buildItemBottom">查看全部5栋信息</view>
+    </view>
+    <view class="bgStyle padb20 title_anchor menu7">
+        <view class="title overflow">
+            <view class="title_name">猜你喜欢</view>
+        </view>
+        <view class="houseItem">
+            <view class="houseItem_img">
+                <image mode="widthFix" src="http://image2.5i5j.com//group1/M00/E8/0A/CgqJMV62iCqAZ1rHAAc5RntodbI358.jpg"></image>
+                <view class="bjicon3d">
+                    <image src="/img/bjnewhouse/bj_3d.png"></image>
+                </view>
+            </view>
+            <view class="houseItem_con">
+                <view class="houseItem_1">
+                    <text>天竺悦府</text>
+                    <view class="tag">在售</view>
+                </view>
+                <view class="houseItem_2">住宅/顺义/后沙峪</view>
+                <view class="houseItem_3">
+                    <text>小户型</text>
+                    <text>交通便利</text>
+                    <text>低总价</text>
+                    <text>非毛坯</text>
+                </view>
+                <view class="houseItem_4">
+                    <view class="red">
+                        <text class="big">24000</text>元/㎡</view>
+                    <view class="are">建面57-129㎡</view>
+                </view>
+            </view>
+        </view>
+        <view class="houseItem">
+            <view class="houseItem_img">
+                <image mode="widthFix" src="http://image2.5i5j.com//group1/M00/E8/0A/CgqJMV62iCqAZ1rHAAc5RntodbI358.jpg"></image>
+                <view class="bjicon3d">
+                    <image src="/img/bjnewhouse/bj_3d.png"></image>
+                </view>
+            </view>
+            <view class="houseItem_con">
+                <view class="houseItem_1">
+                    <text>天竺悦府</text>
+                    <view class="tag">在售</view>
+                </view>
+                <view class="houseItem_2">住宅/顺义/后沙峪</view>
+                <view class="houseItem_3">
+                    <text>小户型</text>
+                    <text>交通便利</text>
+                    <text>低总价</text>
+                    <text>非毛坯</text>
+                </view>
+                <view class="houseItem_4">
+                    <view class="red">
+                        <text class="big">24000</text>元/㎡</view>
+                    <view class="are">建面57-129㎡</view>
+                </view>
+            </view>
+        </view>
+    </view>
+</view>
+<view class="questions">
+    <image src="/img/bjnewhouse/bj_top.png"></image>提问
+</view>
+<view style="height:220rpx;width:100%;"></view>
+<view class="bjnewBottom">
+    <view class="bjnew">
+        <view class="bjnewLeft">
+            <view class="follow">
+                <image src="/img/bjnewhouse/bj_guanzhu.png"></image>关注</view>
+            <view class="share">
+                <image src="/img/bjnewhouse/bj_share.png"></image>分享</view>
+        </view>
+        <view class="bjnewRight">
+            <view class="zxBtn">在线咨询</view>
+            <view class="dhBtn">电话咨询</view>
+        </view>
+    </view>
+</view>

@@ -1,0 +1,38 @@
+<view class="segement" style="color:{{textColor}}">
+    <wxc-popup align="top" class="Options_Pop">
+        <view class="options-pop" style="width:100%;background-color: #fff">
+            <view bindtap="onOptionChecked" data-index="{{index}}" style="font-size:28rpx;padding:24rpx;border-bottom:1rpx solid #e5e5e5;display:flex;align-items:center;justify-content:space-between" wx:for="{{currentOptions}}" wx:key="index">
+                <view style="color: {{item.checked?'red':''}}">{{item.title}}</view>
+                <wxc-icon color="{{item.checked?'red':''}}" size="22" type="right"></wxc-icon>
+            </view>
+        </view>
+    </wxc-popup>
+    <wxc-popup align="top" bindonhide="hideFilterPop" class="Filter_Pop" modal="{{true}}">
+        <slot></slot>
+    </wxc-popup>
+    <view bindtap="onSwitch" class="label-with-line" data-index="{{index}}" wx:for="{{segements}}" wx:key="index">
+        <view style="color:{{item.checked?activeTextColor:textColor}}" wx:if="{{item.title}}">
+        {{item.title}}
+      </view>
+        <view class="time" wx:if="{{item.value&&item.value.length>0}}">
+            <view>
+                <view style="font-size:22rpx;color:{{item.checked?activeTextColor:textColor}}"> {{item.value[0]}}</view>
+                <view style="font-size:22rpx;color:{{item.checked?activeTextColor:textColor}}">{{item.value[1]}}</view>
+            </view>
+            <text style="margin-left:10rpx;color:{{item.checked?activeTextColor:textColor}}">{{item.value[2]}}</text>
+        </view>
+        <view wx:if="{{item.options&&item.options.length>0||item.value&&item.value.length>0}}">
+            <view class="triangle-down {{item.checked?'triangle-down--active':''}}"></view>
+        </view>
+        <view style="margin-left:8rpx;display:flex;flex-direction:column" wx:if="{{item.sort}}">
+            <view class="triangle-up {{item.checked&&(!item.order||item.order=='ascend')?'triangle-up--active':''}}"></view>
+            <view class="triangle-down {{item.checked&&item.order=='descend'?'triangle-down--active':''}}" style="margin-top:4rpx"></view>
+        </view>
+    </view>
+    <view bindtap="showFilterPop" class="label" wx:if="{{filter}}">
+        <view style="color: {{filterActive?'red':'#1a1616'}}">
+      筛选
+    </view>
+        <view class="triangle-down {{item.checked?'triangle-down--active':''}}"></view>
+    </view>
+</view>

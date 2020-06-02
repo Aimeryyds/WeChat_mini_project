@@ -1,0 +1,93 @@
+<view class="newhouse-search common-padding">
+    <view class="search-box">
+        <view bindtap="routego" class="choose-city" data-path="choosecity">{{cityname}}</view>
+        <view bindtap="routesearch" class="search-box-input">
+            <image src="https://res.5i5j.com/cache/weixin/newhouse/search.png"></image>
+            <text>搜索房源</text>
+        </view>
+    </view>
+</view>
+<view class="banner" wx:if="{{data.bannerInfo.length>0}}">
+    <swiper autoplay="true" circular="true" displayMultipleItems="1" duration="500" indicatorActiveColor="#fff" indicatorColor="#5d656d" indicatorDots="true" interval="5000">
+        <swiper-item wx:for="{{data.bannerInfo}}" wx:key="{{item.bannerImageName}}">
+            <view bindtap="routerview" class="box swiper-item" data-routename="banner" data-targeturl="{{item.targetURL}}">
+                <image lazyLoad src="{{item.bannerImageName}}"></image>
+            </view>
+        </swiper-item>
+    </swiper>
+</view>
+<view class="banner" wx:if="{{data.bannerInfo.length==0}}">
+    <view class="banner-none">
+        <image src="{{imgurlhost+'/cache/weixin/newhouse/banner.png'}}"></image>
+    </view>
+</view>
+<view class="nav-bar">
+    <view bindtap="routego" data-opendataid="{{item.opendataid}}" data-path="{{item.pathto}}" wx:for="{{navArr}}">
+        <image src="{{item.url}}"></image>
+        <text>{{item.text}}</text>
+    </view>
+</view>
+<view class="tips" wx:if="{{data.dynamic.length>0}}">
+    <image class="tipe-image" src="{{imgurlhost+'/cache/weixin/newhouse/tips.png'}}"></image>
+    <view class="tip-loop">
+        <swiper autoplay="true" circular="true" duration="500" interval="3000" vertical="true">
+            <swiper-item bindtap="{{item.articleEstates?'routego':''}}" data-estateid="{{item.articleEstates.estateID}}" data-path="detail" data-propertytypeid="{{item.articleEstates.propertyTypeID}}" data-routename="dynamic" wx:for="{{data.dynamic}}" wx:key="{{item.articleID}}">
+                <view class="tip-title-wrap">
+                    <view class="tip-title">{{item.articleEstates.estateName}}</view>
+                    <view class="tip-sub-title">{{item.title}}</view>
+                </view>
+                <image class="tip-image" src="{{item.homeArticleImageName}}"></image>
+            </swiper-item>
+        </swiper>
+    </view>
+</view>
+<view class="setbg">
+    <view class="card" wx:if="{{data.guide.length>0}}">
+        <view class="card_list">
+            <scroll-view scrollX class="scroll-view_H">
+                <view bindtap="routerview" class="card_wrap" data-routename="guide" data-targeturl="{{item.targetURL}}" wx:for="{{data.guide}}">
+                    <image lazyLoad src="{{imgurlhost+'/cache/weixin/newhouse/guide-'+index+'.png'}}"></image>
+                    <view class="guide-text">{{item.title}}</view>
+                </view>
+            </scroll-view>
+        </view>
+    </view>
+    <view class="recommend common-padding" wx:if="{{data.hotEstate.length>0}}">
+        <view class="title">
+            <view>为您推荐</view>
+            <view bindtap="routego" data-path="list">
+      查看更多
+      <image src="/img/resources/right.png"></image>
+            </view>
+        </view>
+        <view>
+            <view bindtap="routego" class="list-item" data-estateid="{{item.estateID}}" data-path="detail" data-propertytypeid="{{item.propertyTypeID}}" wx:for="{{data.hotEstate}}">
+                <view class="image-wrap">
+                    <image class="icon3d" src="../../img/resources/icon3d.png" wx:if="{{item.is3d==1}}"></image>
+                    <image lazyLoad="true" src="{{item.coverImageName}}"></image>
+                </view>
+                <view class="content">
+                    <view class="item-1">
+                        <text>{{item.estateName}}</text>
+                        <view class="tag">{{item.saleStatus_desc}}</view>
+                    </view>
+                    <view class="item-2">
+                        <text>{{item.propertyTypeName}}</text>·
+          <text>{{item.estateAreaName}}</text>-
+          <text>{{item.estateAddress}}</text>
+                    </view>
+                    <view class="item-3">
+                        <view class="item-tag" wx:for="{{item.tagList}}" wx:for-item="itemthis">{{itemthis}}</view>
+                    </view>
+                    <view class="item-4">
+                        <text>{{item.show_price}}</text>
+                        <text wx:if="{{item.minBuildArea&&item.maxBuildArea}}">建面{{item.minBuildArea}}-{{item.maxBuildArea}}㎡</text>
+                    </view>
+                </view>
+            </view>
+        </view>
+    </view>
+</view>
+<view class="loading" hidden="{{loadstatus}}">
+    <image class="loading-img" src="/img/resources/load.png"></image>
+</view>

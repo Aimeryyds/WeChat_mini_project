@@ -1,0 +1,59 @@
+<view class="red-pack-result container">
+    <view class="title ">累计送出红包11111个</view>
+    <view class="count-down">
+        <span>距离结束还有</span>
+        <van-count-down useSlot bind:change="onCountDownChange" class="van-count-down" time="{{time}}">
+            <text class="item">{{timeData.days}}</text>
+            <text>天</text>
+            <text class="item">{{timeData.hours}}</text>
+            <text>时</text>
+            <text class="item">{{timeData.minutes}}</text>
+            <text>分</text>
+            <text class="item">{{timeData.seconds}}</text>
+            <text>秒</text>
+        </van-count-down>
+    </view>
+    <view class="result">
+        <view class="start">
+            <view class="result-title">瓜分总金额</view>
+            <view class="result-desc">￥888</view>
+        </view>
+    </view>
+    <view class="click">
+        <view bindtap="createImage" class="btn">
+            <span>
+                <van-icon name="https://weixin.zsins.com/api/cshop-server/cshop-server/images/activity/wechat_logo.png" style="margin-right:5px"></van-icon>
+        邀请好友领更多红包
+      </span>
+        </view>
+        <view class="tips">邀请新用户并注册成功，获得更多红包 </view>
+    </view>
+    <view class="share">
+        <view class="tab">
+            <span class="active">邀请记录</span>
+            <span>提现攻略</span>
+        </view>
+        <view class="tab-content">
+      sss
+    </view>
+    </view>
+    <van-overlay bind:click="onClickHide" show="{{showOverlay}}">
+        <view class="wrapper">
+            <view class="block">
+                <view>
+                    <image class="img" mode="widthFix" src="{{shareImage}}" width="100%" wx:if="shareImage!== ''"></image>
+                </view>
+                <view class="sharePop-ft">
+                    <view>分享至好友</view>
+                    <view class="bc">
+                        <p>保存海报到相册</p>
+                        <p>分享朋友圈</p>
+                    </view>
+                </view>
+            </view>
+        </view>
+    </van-overlay>
+</view>
+<view style="width:0;height:0;overflow: hidden;">
+    <canvas canvasId="myCanvas" style="dispaly:none;width:{{canvasWidth}}px; height:{{canvasHeight}}px;"></canvas>
+</view>

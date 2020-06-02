@@ -1,0 +1,30 @@
+<view class="bg_color">
+    <view class="my-list-nav medium_font">
+        <view bindtap="changActive" class="{{activeIndex=='100'?'active':''}}" data-id="100">全部</view>
+        <view bindtap="changActive" class="{{activeIndex=='1'?'active':''}}" data-id="1">一级分销</view>
+        <view bindtap="changActive" class="{{activeIndex=='2'?'active':''}}" data-id="2">二级分销</view>
+        <view bindtap="changActive" class="{{activeIndex=='3'?'active':''}}" data-id="3">三级分销</view>
+    </view>
+    <view class="list">
+        <view class="item">
+            <text class="count">累计消费：￥{{total_spending}}</text>
+        </view>
+        <view wx:if="{{datas.length}}">
+            <view class="item" wx:for="{{datas}}" wx:key="index">
+                <view class="item_l">
+                    <image src="{{item.weixin_headimgurl?item.weixin_headimgurl:item.headphoto?item.headphoto:defaulthead}}"></image>
+                </view>
+                <view class="item_c">
+                    <text>{{item.mobile?item.mobile:item.email}}</text>
+                    <text>{{item.weixin_nickname}} {{item.levelname}}</text>
+                    <text>佣金{{item.levelcommission}}</text>
+                </view>
+                <view class="item_r">
+                    <text>累计消费：￥{{item.spending}}</text>
+                </view>
+            </view>
+            <view bindtap="loadmore" class="no" wx:if="{{morebutton}}">加载更多</view>
+        </view>
+        <view class="no1" wx:else>没有记录！</view>
+    </view>
+</view>

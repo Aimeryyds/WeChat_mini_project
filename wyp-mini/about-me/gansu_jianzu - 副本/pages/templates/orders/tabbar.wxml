@@ -1,0 +1,9 @@
+<template name="orders-tabbar">
+    <view class="orders-top">
+        <view class="status-box">
+            <view bindtap="statusTap" class="order_status-label {{index==currentType?'order_active':''}}" data-index="{{index}}" wx:for="{{statusType}}" wx:key="{{index}}">
+        {{item}}
+    </view>
+        </view>
+    </view>
+</template>

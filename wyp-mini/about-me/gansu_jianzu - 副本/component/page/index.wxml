@@ -1,0 +1,29 @@
+<view class="modules">
+    <block wx:for="{{modules}}" wx:key="{{index}}">
+        <carousel module="{{...item}}" style="display:block;margin-bottom: {{item.options.gap>0?item.options.gap+'rpx':'0px'}}" wx:if="{{item.moduleName=='banner'&&item.options&&item.options.navs}}"></carousel>
+        <brands module="{{...item}}" style="display:block;margin-bottom: {{item.options.gap>0?item.options.gap+'rpx':'0px'}}" wx:if="{{item.moduleName=='brand'&&item.data}}"></brands>
+        <coupon module="{{...item}}" style="display:block;margin-bottom: {{item.options.gap>0?item.options.gap+'rpx':'0px'}}" wx:if="{{item.moduleName=='couponList'}}"></coupon>
+        <img-advert module="{{...item}}" style="display:block;margin-bottom: {{item.options.gap>0?item.options.gap+'rpx':'0px'}}" wx:if="{{item.moduleName=='imageAdvert'}}"></img-advert>
+        <img-nav module="{{...item}}" style="display:block;margin-bottom: {{item.options.gap>0?item.options.gap+'rpx':'0px'}}" wx:if="{{item.moduleName=='imageNav'}}"></img-nav>
+        <miaosha module="{{...item}}" style="display:block;margin-bottom: {{item.options.gap>0?item.options.gap+'rpx':'0px'}}" wx:if="{{item.moduleName=='seckillList'&&item.data&&item.data.length}}"></miaosha>
+        <nearstore module="{{...item}}" serverTime="{{serverTime}}" style="display:block;margin-bottom: {{item.options.gap>0?item.options.gap+'rpx':'0px'}}" wx:if="{{item.moduleName=='storeList'&&item.data}}"></nearstore>
+        <newsinfo module="{{...item}}" style="display:block;margin-bottom: {{item.options.gap>0?item.options.gap+'rpx':'0px'}}" wx:if="{{item.moduleName=='infoList'}}"></newsinfo>
+        <products module="{{...item}}" style="display:block;margin-bottom: {{item.options.gap>0?item.options.gap+'rpx':'0px'}}" wx:if="{{(item.moduleName=='goods'||item.moduleName=='goodsList')&&item.data}}"></products>
+        <services module="{{...item}}" style="display:block;margin-bottom: {{item.options.gap>0?item.options.gap+'rpx':'0px'}}" wx:if="{{item.moduleName=='projectList'&&item.data}}"></services>
+        <supplyinfo module="{{...item}}" style="display:block;margin-bottom: {{item.options.gap>0?item.options.gap+'rpx':'0px'}}" wx:if="{{item.moduleName=='supplyBuyList'}}"></supplyinfo>
+        <title module="{{...item}}" style="display:block;margin-bottom: {{item.options.gap>0?item.options.gap+'rpx':'0px'}}" wx:if="{{item.moduleName=='title'}}"></title>
+        <tuan module="{{...item}}" style="display:block;margin-bottom: {{item.options.gap>0?item.options.gap+'rpx':'0px'}}" wx:if="{{item.moduleName=='groupPurchaseList'}}"></tuan>
+        <cvideo module="{{...item}}" style="display:block;margin-bottom: {{item.options.gap>0?item.options.gap+'rpx':'0px'}}" wx:if="{{item.moduleName=='videoComponent'&&item.options}}"></cvideo>
+        <vipcard module="{{...item}}" style="display:block;margin-bottom: {{item.options.gap>0?item.options.gap+'rpx':'0px'}}" wx:if="{{item.moduleName=='cardsList'&&item.data}}"></vipcard>
+        <giftcard module="{{...item}}" style="display:block;margin-bottom: {{item.options.gap>0?item.options.gap+'rpx':'0px'}}" wx:if="{{item.moduleName=='giftCard'}}"></giftcard>
+        <c-form data="{{item.data}}" style="display:block;margin-bottom: {{item.options.gap>0?item.options.gap+'rpx':'0px'}}" wx:if="{{item.moduleName=='customForm'&&item.data.formId}}"></c-form>
+        <comment style="display:block;margin-bottom: {{item.options.gap>0?item.options.gap+'rpx':'0px'}}" wx:if="{{item.moduleName=='message'}}"></comment>
+        <img-advert-fx module="{{...item}}" style="display:block;margin-bottom: {{item.options.gap>0?item.options.gap+'rpx':'0px'}}" wx:if="{{item.moduleName=='fxImageAdvert'&&(item.options.isOnlyFxShow==0||item.options.isOnlyFxShow==1&&item.options.isFx==1)}}"></img-advert-fx>
+        <hotel module="{{...item}}" style="display:block;margin-bottom: {{item.options.gap>0?item.options.gap+'rpx':'0px'}}" wx:if="{{item.moduleName=='hotel'&&item.data}}"></hotel>
+        <groups module="{{...item}}" style="display:block;margin-bottom: {{item.options.gap>0?item.options.gap+'rpx':'0px'}}" wx:if="{{item.moduleName=='groups'}}"></groups>
+        <text-nav module="{{...item}}" style="display:block;margin-bottom: {{item.options.gap>0?item.options.gap+'rpx':'0px'}}" wx:if="{{item.moduleName=='textNav'}}"></text-nav>
+        <img-text module="{{...item}}" style="display:block;margin-bottom: {{item.options.gap>0?item.options.gap+'rpx':'0px'}}" wx:if="{{item.moduleName=='imgtext'}}"></img-text>
+        <notice module="{{...item}}" style="display:block;margin-bottom: {{item.options.gap>0?item.options.gap+'rpx':'0px'}}" wx:if="{{item.moduleName=='notice'}}"></notice>
+        <hotels module="{{...item}}" style="display:block;margin-bottom: {{item.options.gap>0?item.options.gap+'rpx':'0px'}}" wx:if="{{item.moduleName=='hotelList'}}"></hotels>
+    </block>
+</view>

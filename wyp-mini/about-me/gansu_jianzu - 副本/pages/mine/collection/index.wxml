@@ -1,0 +1,109 @@
+<view class="container">
+    <view class="tab-wrap">
+        <wxc-tab activeLineColor="#fff" activeTextColor="red" bind:tabchange="onTabChange" componentId="collection" defaultIndex="{{tabType.collectionType.key}}">
+            <view slot="tablabel" style="background-color: #fff;">
+                <wxc-tab-label componentId="collection" tabIndex="{{index}}" wx:for="{{tabs.collectionTabs}}" wx:for-item="tab" wx:key="{{tab.title}}">
+                    <view class="demo-tab__label">
+                        <view class="demo-tab__text {{tabType.collectionType.key===index?'demo-tab--active':''}}">
+                  {{tab.title}}
+              </view>
+                    </view>
+                </wxc-tab-label>
+            </view>
+        </wxc-tab>
+        <view class="products-tab" wx:if="{{tabType.collectionType.key==0}}">
+            <view bindtap="handleSwitchSort" data-sort="sales" style="color: {{tabType.goodsType.sort=='sales'?'red':''}}">销量</view>
+            <view bindtap="handleSwitchSort" data-sort="new" style="color: {{tabType.goodsType.sort=='new'?'red':''}}">新品</view>
+            <view class="">
+                <text bindtap="handleSwitchSort" data-sort="price" style="color:{{tabType.goodsType.sort=='price:asc'||tabType.goodsType.sort=='price:desc'?'red':''}}">价格</text>
+                <image class="products-sort-img" src="http://imgcdnali.wfenxiao.com.cn/xcx/c/icons/ic_price_sort_default.png" wx:if="{{tabType.goodsType.sort!='price:asc'&&tabType.goodsType.sort!='price:desc'}}"></image>
+                <image class="products-sort-img" src="http://imgcdnali.wfenxiao.com.cn/xcx/c/icons/ic_price_sort_up.png" wx:elif="{{tabType.goodsType.sort=='price:asc'}}"></image>
+                <image class="products-sort-img" src="http://imgcdnali.wfenxiao.com.cn/xcx/c/icons/ic_price_sort_down.png" wx:else></image>
+            </view>
+            <view>
+                <image bindtap="handleToggleMode" class="products-type-img" src="http://imgcdnali.wfenxiao.com.cn/xcx/c/icons/pro-type1.png" wx:if="{{tabType.goodsType.mode=='grid'}}"></image>
+                <image bindtap="handleToggleMode" class="products-type-img" src="http://imgcdnali.wfenxiao.com.cn/xcx/c/icons/pro-type2.png" wx:else></image>
+            </view>
+        </view>
+        <view class="store-tab" wx:if="{{tabType.collectionType.key==1}}">
+            <view bindtap="handleTabStoreChange" class="store-tab-item {{tabType.storeType.key==index?'store-tab-item-active':''}}" data-key="{{index}}" wx:for="{{tabs.storesTabs}}">{{item.title}}</view>
+        </view>
+    </view>
+    <scroll-view enableBackToTop scrollY bindscrolltolower="lower" scrollTop="{{query.goods.scrollTop}}" style="width:100%;height: 100vh;padding-top: 146rpx;" wx:if="{{tabType.collectionType.key==0}}">
+        <view class="products-wrap" style="margin-top:0rpx;" wx:if="{{tabType.goodsType.mode=='grid'}}">
+            <view bindtap="jumpgood" class="products-list" data-id="{{item.id}}" wx:if="{{goodsList&&goodsList.length>0}}" wx:for="{{goodsList}}" wx:key="index">
+                <image class="products-list__img" src="{{item.imgUrl}}"></image>
+                <view class="products-list__info">
+                    <view class="products-list__name">{{item.name}}</view>
+                    <view class="products-list__name" data-storeid="{{item.storeId}}" style="margin-top:16rpx;display:flex;justify-content:space-between;color:rgba(0,0,0,0.43);">{{item.storeName}}</view>
+                    <view class="products-list__cont">
+                        <text class="products-list__extendPrice"> ¥{{item.price}}</text>
+                    </view>
+                    <view class="products-list__name" style="margin-top:16rpx;display:flex;justify-content:space-between;color:rgba(0,0,0,0.43);">已售{{item.saleNum}}件</view>
+                    <div catchtap="goodscollection" class="products-list__collection" data-id="{{item.id}}" data-index="{{index}}">
+                        <image class="products-list__joinImg" src="http://imgcdnali.wfenxiao.com.cn/xcx/c/1120/collection.png"></image>
+                        <view class="products-list__joinText">已收藏</view>
+                    </div>
+                </view>
+            </view>
+        </view>
+        <view class="products-wrap products-wrap--type2" style="margin-top:0rpx;" wx:else>
+            <navigator bindtap="jumpgood" class="products-list2" data-id="{{item.id}}" wx:if="{{goodsList&&goodsList.length>0}}" wx:for="{{goodsList}}" wx:key="index">
+                <view style="text-align:center;">
+                    <image class="products-list2__img" src="{{item.imgUrl}}"></image>
+                </view>
+                <view class="tuan__tag2" wx:if="{{item.activityType==2}}">
+                    <template is="tuan-tag" data="{{num:item.limitPeople}}"></template>
+                </view>
+                <view class="tuan__tag2" wx:if="{{item.activityType==1&&product.seckillStatus==2}}">
+                    <template is="seckill-tag" data></template>
+                </view>
+                <view class="products-list2__name zan-ellipsis--l2">{{item.name}}</view>
+                <view class="product-storename-1 zan-ellipsis">【{{item.brandName}} - {{item.storeName}}】</view>
+                <view class="products-list__cont">
+                    <view class="product-list__price-wrap">
+                        <view class="products-list__price">
+                            <text>¥</text>{{item.price}}</view>
+                        <view class="products-list__stock">已售{{item.saleNum}}件</view>
+                    </view>
+                    <view catchtap="goodscollection" class="product-list-coll-img" data-id="{{item.id}}" data-index="{{index}}">
+                        <image src="http://imgcdnali.wfenxiao.com.cn/xcx/c/1120/collection.png"></image>
+                        <view>已收藏</view>
+                    </view>
+                </view>
+            </navigator>
+        </view>
+        <view style="font-size: 28rpx; color:rgba(0,0,0,0.43);margin-top:100rpx;text-align:center;" wx:if="{{goodsList.length==0}}">
+      暂无商品
+    </view>
+        <wxc-loadmore icon="{{true}}" text="正在努力加载中..." wx:if="{{query.stores.goods.loadingmore}}"></wxc-loadmore>
+    </scroll-view>
+    <scroll-view enableBackToTop scrollY bindscrolltolower="lower" scrollTop="{{query.stores.scrollTop}}" style="width:100%;height: 100vh;padding-top: 158rpx;" wx:if="{{tabType.collectionType.key==1}}">
+        <view class="products-wrap" style="margin-top:0rpx;">
+            <view bindtap="jumpstore" class="products-list" data-id="{{item.id}}" wx:if="{{storesList&&storesList.length>0}}" wx:for="{{storesList}}" wx:key="index">
+                <image class="products-list__img" src="{{item.logo||'http://imgcdnali.wfenxiao.com.cn/xcx/c/icons/brand.png'}}"></image>
+                <view class="products-list__info">
+                    <view class="products-list__name">{{item.storeName}}</view>
+                    <view class="products-list__cont">
+                        <text class="products-list__costPrice">已售{{item.orderNum||0}}单</text>
+                        <view class="product-activity" wx:if="{{item.hasCoupons}}">劵</view>
+                        <view class="product-activity" wx:if="{{item.hasGrouppurchase}}">拼</view>
+                        <view class="product-activity" wx:if="{{item.hasSeckill}}">秒</view>
+                        <view class="product-activity" wx:if="{{item.hasFullreduction}}">减</view>
+                    </view>
+                    <view catchtap="handleOpenstore" class="products-list__name" data-storeid="{{item.storeId}}" style="margin-top:16rpx;display:flex;justify-content:space-between;color:rgba(0,0,0,0.43);">{{item.collectionNum||0}}人关注</view>
+                    <div catchtap="storecollection" class="products-list__collection" data-id="{{item.id}}" data-index="{{index}}" style="bottom: 37rpx;">
+                        <image class="products-list__joinImg" src="http://imgcdnali.wfenxiao.com.cn/xcx/c/1120/collection.png"></image>
+                        <view class="products-list__joinText">已收藏</view>
+                    </div>
+                </view>
+            </view>
+        </view>
+        <view style="height:100%;background-color:#fff;" wx:if="{{storesList.length==0}}">
+            <view style="font-size: 28rpx; color:rgba(0,0,0,0.43);margin-top:100rpx;text-align:center;">
+        暂无商品
+      </view>
+        </view>
+        <wxc-loadmore icon="{{true}}" text="正在努力加载中..." wx:if="{{query.stores.loadingmore}}"></wxc-loadmore>
+    </scroll-view>
+</view>

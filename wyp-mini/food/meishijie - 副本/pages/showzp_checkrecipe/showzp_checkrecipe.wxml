@@ -1,0 +1,65 @@
+<navigation-bar enable="{{enable}}" title="关联菜谱"></navigation-bar>
+<view class="container" style="padding-top:{{barHeight}}px;">
+    <view class="searchboxw">
+        <view class="bgw">
+            <view class="searchiconw">
+                <image src="../../images/searchicon.png"></image>
+            </view>
+            <view class="searchinputw">
+                <input bindconfirm="dosearch" bindinput="inputing" class="searchinput" confirmType="search" placeholder="您是照哪篇菜谱做的？"></input>
+            </view>
+        </view>
+        <view bindtap="dosearch" class="searchbtn">搜索</view>
+    </view>
+    <view class="list_t" wx:if="{{liststyle=='search'}}">
+        <text wx:if="{{inputing_str_searching}}">"{{inputing_str_searching}}"的</text>搜索结果：</view>
+    <view class="list_t" wx:elif="{{recent_recipe_items.length>0}}">以下是您浏览过的菜谱</view>
+    <view class="cplistw" wx:if="{{recent_recipe}}">
+        <view class="nodata" wx:if="{{nodata&&liststyle=='search'}}">没有搜索到内容</view>
+        <view class="nodata" wx:if="{{nodata&&liststyle=='recent'}}">您最近没有浏览过菜谱</view>
+        <view class="cpitemw" wx:for="{{recent_recipe_items}}" wx:key="key">
+            <view bindtap="checkthisrecipe" class="recipeitem" data-recipeid="{{item.id}}" data-recipetitle="{{item.title}}" hoverClass="navigator-hover">
+                <view class="recipeitemw">
+                    <view class="cpimgw">
+                        <image src="{{item.img}}"></image>
+                        <view class="vicon" wx:if="{{item.is_video=='1'}}"></view>
+                    </view>
+                    <view class="cpinfow">
+                        <view class="cpnamew">
+                            <text class="cpname">{{item.title}}</text>
+                        </view>
+                        <view class="tagw">
+                            <view class="tag" wx:if="{{item.label[0]}}">
+                                <view class="t" wx:if="{{item.label[0].name}}">{{item.label[0].name}}</view>
+                                <view class="c" wx:if="{{item.label[0].desc}}">{{item.label[0].desc}}</view>
+                            </view>
+                        </view>
+                        <view class="starw">
+                            <view wx:for="{{[1,2,3,4,5]}}" wx:for-item="i" wx:key="key">
+                                <image src="../../images/star1.png" wx:if="{{item.rate-i>=0}}"></image>
+                                <image src="../../images/star2.png" wx:elif="{{item.rate-i+1>0}}"></image>
+                                <image src="../../images/star3.png" wx:else></image>
+                            </view>
+                        </view>
+                        <view class="viewdata">
+                            <view class="au">
+                                <image src="{{item.author.avatar_url}}"></image>
+                                <view class="strong">{{item.author.nickname}}</view>
+                            </view>
+                            <view class="vd">
+                                <image src="../../images/cplisticon1.png"></image>
+                                <text class="em">{{item.favor_amount||0}}</text>
+                                <image src="../../images/cplisticon2.png"></image>
+                                <text class="em">{{item.viewed_amount||0}}</text>
+                            </view>
+                        </view>
+                    </view>
+                </view>
+            </view>
+        </view>
+        <view class="bottomline" wx:if="{{!hasNextPage}}">- 这就是我的底线了 -</view>
+    </view>
+</view>
+<loading hidden="{{requeseDone||requeseFail||noData}}">
+加载中...
+</loading>

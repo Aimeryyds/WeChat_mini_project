@@ -1,0 +1,34 @@
+<view class="class-tab">
+    <text bindtap="tabClick" class="{{tabClasss[0]}}" data-index="0">全部评价</text>
+    <text bindtap="tabClick" class="{{tabClasss[1]}}" data-index="1">待评价</text>
+    <text bindtap="tabClick" class="{{tabClasss[2]}}" data-index="2">已评价</text>
+</view>
+<view class="order-item" wx:for="{{comments}}">
+    <view class="view-title">
+        <text>购买时间:{{item.add_time}}</text>
+    </view>
+    <view class="carts-item">
+        <view>
+            <image class="carts-image" mode="aspectFill" src="{{item.image}}"></image>
+        </view>
+        <view class="carts-text">
+            <text class="carts-title">{{item.goods_name}}</text>
+            <view class="carts-subtitle">
+                <text>￥{{item.shop_price}}</text>
+            </view>
+            <view class="order-footer">
+                <text bindtap="addevaluate" class="btn-pay" data-index="{{index}}" wx:if="{{item.is_comment==0}}">评价订单</text>
+                <text bindtap="details" class="btn-pay" data-index="{{index}}" wx:else>查看订单</text>
+            </view>
+        </view>
+    </view>
+    <view class="order-down" wx:if="{{item.is_comment==1}}">
+        <text>评价:</text>
+        <image class="stars" src="/images/stars4.gif" wx:if="{{item.service_rank==4}}"></image>
+        <image class="stars" src="/images/stars1.gif" wx:if="{{item.service_rank==1}}"></image>
+        <image class="stars" src="/images/stars2.gif" wx:if="{{item.service_rank==2}}"></image>
+        <image class="stars" src="/images/stars3.gif" wx:if="{{item.service_rank==3}}"></image>
+        <image class="stars" src="/images/stars5.gif" wx:if="{{item.service_rank==5}}"></image>
+        <text style="margin-left:20rpx">{{item.content}}</text>
+    </view>
+</view>

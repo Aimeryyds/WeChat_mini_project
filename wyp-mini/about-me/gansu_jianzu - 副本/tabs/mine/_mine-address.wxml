@@ -1,0 +1,28 @@
+<template name="mineAddress">
+    <view class="zan-panel  zan-panel__with-top-border ">
+        <view bindtap="handleMakeUrl" class="zan-cell zan-cell--access" data-url="/pages/address/list/list">
+            <view class="zan-cell__bd" style="display:flex; align-items: center ;">
+                <view class="menu-name">地址管理</view>
+            </view>
+            <view class="zan-cell__ft" style="width:20rpx;height:20rpx"></view>
+        </view>
+    </view>
+    <view class="zan-panel  zan-panel__with-top-border " style="display:flex;flex-flow: row wrap;">
+        <block wx:for="{{menus}}" wx:key="index">
+            <view bindtap="{{item.bindtap}}" style="position:relative;display:flex;flex-direction:column;align-items:center;justify-content:center;width:187.5rpx;height:187.5rpx;" wx:if="{{item.bindtap}}">
+                <template is="cell" data="{{item:item}}"></template>
+            </view>
+            <view bindtap="handleMakeUrl" data-url="{{item.url}}" style="position:relative;display:flex;flex-direction:column;align-items:center;justify-content:center;width:187.5rpx;height:187.5rpx;" wx:elif="{{item.url}}">
+                <template is="cell" data="{{item:item}}"></template>
+            </view>
+            <view style="position:relative;display:flex;flex-direction:column;align-items:center;justify-content:center;width:187.5rpx;height:187.5rpx;" wx:else>
+                <template is="cell" data="{{item:item}}"></template>
+            </view>
+        </block>
+    </view>
+</template>
+<template name="cell">
+    <button plain openType="contact" style="border:0px;left:0;top:0;width:100%;height:100%;position:absolute;" wx:if="{{item.type=='contact'}}"></button>
+    <image mode="scaleToFill" src="{{item.icon}}" style="width:48rpx;height:48rpx;"></image>
+    <view style="color:#000;font-size:24rpx;margin-top:16rpx;">{{item.title}}</view>
+</template>

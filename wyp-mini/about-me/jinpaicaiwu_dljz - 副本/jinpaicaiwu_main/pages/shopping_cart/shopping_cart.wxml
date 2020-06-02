@@ -1,0 +1,72 @@
+<import src="../../common/package/prompt.wxml"></import>
+<view class="main">
+    <view wx:if="{{foods.length}}">
+        <view class="cart-top border_bottom">
+            <icon bindtap="selectAll" class="total-select  cart-pro-select-top" color="{{insidepage_themecolor}}" type="success" wx:if="{{selectAllStatus}}"></icon>
+            <icon bindtap="selectAll" class="total-select  cart-pro-select-top" type="circle" wx:else></icon>
+            <text bindtap="selectAll" class="cart-top-tex">购物车</text>
+        </view>
+        <view class="cart-box">
+            <view class="cart-list border_bottom" wx:for="{{foods}}" wx:key="{{index}}">
+                <view class="pro-checked">
+                    <icon bindtap="selectList" class="cart-pro-select" color="{{insidepage_themecolor}}" data-index="{{index}}" type="success" wx:if="{{item.selected}}"></icon>
+                    <icon bindtap="selectList" class="cart-pro-select" data-index="{{index}}" type="circle" wx:else></icon>
+                </view>
+                <view class="navigator-hover-view">
+                    <navigator url="../details/details?id={{item.cid}}">
+                        <image class="cart-thumb" src="{{item.image}}"></image>
+                    </navigator>
+                </view>
+                <view class="pro_detail_txt">
+                    <navigator url="../details/details?id={{item.cid}}">
+                        <text class="cart-pro-name">{{item.title}}</text>
+                    </navigator>
+                    <text class="cart-pro-price cart_color">￥{{item.sum}}</text>
+                    <text class="cart-pro-sku">{{item.skuchecked}}</text>
+                    <view class="cart-count-box">
+                        <view bindtap="minusCount" class="text-view" data-index="{{index}}">
+                            <text class="cart-count-down inner-block">-</text>
+                        </view>
+                        <input bindblur="bindManual" bindconfirm="bindManual" class="cart-count-num inner-block" data-index="{{index}}" value="{{item.num}}"></input>
+                        <view bindtap="addCount" class="text-view" data-index="{{index}}">
+                            <text class="cart-count-add inner-block">+</text>
+                        </view>
+                    </view>
+                    <icon bindtap="deleteList" class="cart-del" color="#aaa" data-index="{{index}}" size="23" type="cancel"></icon>
+                </view>
+            </view>
+            <view class="back" wx:if="{{show_homeBar&&!showBar}}">
+                <text bindtap="backHome" class="backHome">首页</text>|
+                <text bindtap="backTop" class="backTop">顶部</text>
+            </view>
+        </view>
+        <view class="cart-footer {{showBar?'has_bar':''}}">
+            <icon bindtap="selectAll" class="total-select" color="{{insidepage_themecolor}}" type="success" wx:if="{{selectAllStatus}}"></icon>
+            <icon bindtap="selectAll" class="total-select" type="circle" wx:else></icon>
+            <text bindtap="selectAll" class="cart-toatl-tex fl">全选</text>
+            <text bindtap="toConfirm" class="cart-toatl-qjs {{totleNum>0?'cart-toatl-js':''}} fr">去结算<text>({{totleNum}})</text>
+            </text>
+            <view class="cart-toatl-js-price fr">
+                <view class="cart-toatl-price small_font color2">合计:<text class="cart_color normal_font">￥{{totalPrice}}</text>
+                </view>
+                <view class="cart-toatl-addPri color2 small_font">不含运费</view>
+            </view>
+        </view>
+    </view>
+    <view class="back" wx:if="{{!foods.length&&show_homeBar&&!showBar}}">
+        <text bindtap="backHome" class="backHome">首页</text>|
+        <text bindtap="backTop" class="backTop">顶部</text>
+    </view>
+    <block wx:if="{{showBar}}">
+        <view style="height:110rpx;"></view>
+        <view class="tabBar" style="color:{{tabs.color}};border-color:{{tabs.borderStyle}};background-color:{{tabs.backgroundColor}};border-top-color:{{tabs.borderTopColor}};">
+            <view class="barList" style="color:{{pageid==item.pagePath?tabs.selectedColor:tabs.color}}" wx:for="{{tabs.list}}" wx:key="{{index}}">
+                <view bindtap="switchTab" class="barList-content" data-tab="{{item}}" data-url="{{item.pagePath}}">
+                    <image class="icon" src="{{pageid==item.pagePath?item.selectedIconPath:item.iconPath}}"></image>
+                    <view>{{item.text}}</view>
+                </view>
+            </view>
+        </view>
+    </block>
+</view>
+<template is="prompt" data="{{prompt:prompt}}"></template>

@@ -1,0 +1,107 @@
+<import src="/dist/toptips/index.wxml"></import>
+<template is="zan-toptips" data="{{zanTopTips:zanTopTips}}"></template>
+<phonemodal showModal="{{showPhoneModal}}" url="/pages/login/login"></phonemodal>
+<view class="container" wx:if="{{loadSuccess}}">
+    <view class="order_create_top">
+        <view class="order_create_tips" wx:if="{{options.storeInfo.show}}">
+            <view class="order_create_tip_head">小贴士</view>
+            <view class="order_create_tip" wx:for="{{options.storeInfo.infos}}" wx:key="{{index}}">{{item}}</view>
+        </view>
+        <view class="order_create-service-container" wx:if="{{from==='project'&&options.service.show}}">
+            <view class="order_create-service">
+                <image class="order_create-service-img" src="{{service.serviceImg}}"></image>
+                <view class="order_create-service-right">
+                    <text class="order_create-service-name">{{service.serviceName}}</text>
+                    <text class="order_create-service-sku" wx:if="{{service.skus.length>0}}">服务类型: {{service.selectedSpecValue}}</text>
+                    <text class="order_create-service-price">￥{{service.servicePrice}}</text>
+                </view>
+            </view>
+        </view>
+        <view class="order_create-uploads-container" wx:if="{{from==='staff'&&options.service.show&&isRelationProject}}">
+            <view class="order_create-uploads-lable-container">
+                <text class="order_create-item-label">选择{{options.serviceProject.labelName||'服务项目'}}</text>
+            </view>
+            <view class="order_create-servicelist">
+                <view class="order_create-servicelist-item" wx:for="{{serviceList}}" wx:for-item="service" wx:key="{{index}}">
+                    <view class="order_create-servicelist-item-top">
+                        <image bindtap="toogleCheckbox" class="order_create-item-paytype-radio-img" data-index="{{index}}" src="{{service.cheked?'http://imgcdnali.wfenxiao.com.cn/xcx/c/1222/ic_service_checkbox_checked.png':'http://imgcdnali.wfenxiao.com.cn/xcx/c/1222/ic_service_radio_default.png'}}"></image>
+                        <text bindtap="toogleCheckbox" class="order_create-servicelist-item-name" data-index="{{index}}">{{service.serviceName}}</text>
+                        <text class="order_create-servicelist-item-price">￥{{service.price}}</text>
+                    </view>
+                    <view catchtap="showSpecDialog" class="order_create-service-item-bottom" data-index="{{index}}" wx:if="{{service.skus.length>0}}">
+                        <text class="order_create-service-item-bottom-tip1" wx:if="{{!(service.selectSku&&service.selectSku.id)}}">服务类型选择></text>
+                        <text class="order_create-service-item-bottom-tip2" wx:else>服务类型:{{service.selectSku.propertiesName}}</text>
+                    </view>
+                </view>
+            </view>
+        </view>
+        <view class="order_create-staff-container">
+            <view class="order_create-item" wx:if="{{from!='service'&&options.staff.show||from=='service'&&options.staff.show&&isRelationStaff}}">
+                <view class="order_create-item-container">
+                    <text class="order_create-item-label">{{options.staff.title||'服务人员'}}</text>
+                    <view bindtap="handleSelectStaff" class="order_create-item-staff">
+                        <wxc-icon color="#979797" style="margin-bottom:8rpx" type="arrow-right"></wxc-icon>
+                        <view class="order_create-item-staff-content" wx:if="{{staff.id}}">
+                            <image class="order_create-item-staff-img" src="{{staff.headImg}}"></image>
+                            <text class="order_create-item-label">{{staff.serverName}}</text>
+                        </view>
+                        <view class="order_create-item-tip" wx:else>
+              {{options.staff.required?'必选':'可选'}}
+            </view>
+                    </view>
+                </view>
+            </view>
+            <view class="order_create-item" wx:if="{{options.arrivedTime.show}}">
+                <view class="order_create-item-container">
+                    <text class="order_create-item-label">{{options.arrivedTime.title||'到店时间'}}</text>
+                    <view bindtap="showTimeDialog" class="order_create-item-staff">
+                        <wxc-icon color="#979797" style="margin-bottom:8rpx" type="arrow-right"></wxc-icon>
+                        <view class="order_create-item-staff-content" wx:if="{{arrivedDate.arrivedYear}}">
+                            <text class="order_create-item-label">{{arrivedDate.arrivedMonth}}月{{arrivedDate.arrivedDay}}日 {{arrivedDate.arrivedTime}}</text>
+                        </view>
+                        <view class="order_create-item-tip" wx:else>
+              {{options.arrivedTime.required?'必选':'可选'}}
+            </view>
+                    </view>
+                </view>
+            </view>
+            <view class="order_create-item" wx:if="{{options.arrivedNum.show}}">
+                <view class="order_create-item-container">
+                    <text class="order_create-item-label">{{options.arrivedNum.title}}</text>
+                    <view class="order_create-item-staff">
+                        <wxc-counter bind:changenumber="handleZanQuantityChange" max="{{arrivedNum.max}}" min="{{arrivedNum.min}}" number="{{arrivedNum.quantity}}"></wxc-counter>
+                    </view>
+                </view>
+            </view>
+        </view>
+        <view style="margin-top:20rpx">
+            <customer-form form="{{form}}" id="customer_form" textareaObj="{{textareaObj}}"></customer-form>
+        </view>
+        <view class="order_create-staff-container" wx:if="{{payWay.length>1}}">
+            <view class="order_create-item">
+                <view class="order_create-item-container">
+                    <text class="order_create-item-label">支付方式</text>
+                    <view class="order_create-item-staff" style="flex-grow:1;margin-right:100rpx;">
+                        <view bindtap="handleUpdatePayType" class="order_create-item-paytype-raido" data-paytype="{{item}}" wx:for="{{payWay}}">
+                            <image class="order_create-item-paytype-radio-img" src="{{payType==item?'http://imgcdnali.wfenxiao.com.cn/xcx/c/1222/ic_service_radio_checked.png':'http://imgcdnali.wfenxiao.com.cn/xcx/c/1222/ic_service_radio_default.png'}}"></image>
+                            <text class="order_create-item-paytype-radio-text">{{item==='payOnline'?'在线支付':'到店支付'}}</text>
+                        </view>
+                    </view>
+                </view>
+            </view>
+        </view>
+    </view>
+    <view class="order-btn-container">
+        <button bindtap="createOrder" class="zan-btn zan-btn--large zan-btn--danger" style="width:290rpx">
+      {{payType==='payOnline'?'去支付':'提交预约'}}
+    </button>
+        <view style="flex-grow:1">
+            <view style="margin-left:40rpx;" wx:if="{{payType==='payOnline'}}">
+                <text style="color:#f22222;font-size:32rpx;">￥</text>
+                <text style="color:#f22222;font-size:48rpx;">{{total}}</text>
+            </view>
+        </view>
+    </view>
+    <spec-dialog bind:createorder="handleSpecDialogOk" bind:hidedialog="hideSpecDialog" service="{{serviceList[serviceIndex]}}" show="{{showSpecModal}}"></spec-dialog>
+    <arrivedtime-dialog bind:hide="hideTimeDialog" bind:ok="handleUpdateDateTime" dateList="{{dateList}}" show="{{showDialog}}"></arrivedtime-dialog>
+</view>

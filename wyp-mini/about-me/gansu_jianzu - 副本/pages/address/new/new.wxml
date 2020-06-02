@@ -1,0 +1,51 @@
+<import src="/dist/toast/index.wxml"></import>
+<view class="container about-conter">
+    <form bindsubmit="formSubmit">
+        <view style="margin-bottom:30rpx; background-color: #fff; ">
+            <view class="zan-cell zan-form__item ">
+                <text class="isrequired">收货人:</text>
+                <input bindinput="onCommentChange" class="zan-form__input zan-cell__bd" id="name" maxlength="20" name="name" placeholder="请填写收货人姓名" placeholderStyle="color: #ccc;" value="{{item.name?item.name:''}}"></input>
+            </view>
+            <view class="zan-cell zan-form__item">
+                <text class="isrequired">联系电话:</text>
+                <input bindinput="onCommentChange" class="zan-form__input zan-cell__bd" id="phone" maxlength="11" name="phone" placeholder="请填写收货手机号码" placeholderStyle="color: #ccc;" type="number" value="{{item.phone?item.phone:''}}"></input>
+            </view>
+            <view class="zan-cell zan-form__item">
+                <navigator hoverClass="none" style="width:100%;" url="/component/address_picker/index?provinceCode={{item.provinceCode}}&cityCode={{item.cityCode}}&districtCode={{item.districtCode}}">
+                    <view style="display: flex; justify-content: space-between; align-items: center; ">
+                        <view>
+                            <text class="isrequired" style="font-size: 28rpx;">收货地区:</text>
+                            <text>{{item.province?item.province:'省'}} - {{item.city?item.city:'市'}}{{item.district?' - '+item.district:item.district==''?'':' - 区'}}</text>
+                        </view>
+                        <image src="http://imgcdnali.wfenxiao.com.cn/xcx/c/icons/arrow_right.png" style="width: 10rpx; height: 18rpx;"></image>
+                    </view>
+                </navigator>
+            </view>
+            <view bindtap="makesearch" class="zan-cell zan-form__item" style="align-items:flex-start;">
+                <text class="{{order||isAddress?'isrequired':''}}" style="width: 140rpx;">地图定位:</text>
+                <view style="flex:1; display: flex; justify-content: space-between; align-items: center;" wx:if="{{item.title}}">
+                    <text>{{item.title}}</text>
+                    <image src="http://imgcdnali.wfenxiao.com.cn/xcx/c/icons/arrow_right.png" style="width: 10rpx; height: 18rpx;"></image>
+                </view>
+                <view style="display:flex; justify-content: space-between; align-items: center;flex:1;" wx:else>
+                    <view style=" display:flex;justify-content: space-between;  align-items: center; ">
+                        <image src="http://imgcdnali.wfenxiao.com.cn/xcx/c/icons/ico-addr.png" style="width: 30rpx; height: 30rpx;"></image>
+                        <text style="color:#ccc;font-size: 28rpx;">点击选择</text>
+                    </view>
+                    <image src="http://imgcdnali.wfenxiao.com.cn/xcx/c/icons/arrow_right.png" style="width: 10rpx; height: 18rpx;"></image>
+                </view>
+            </view>
+            <view class="zan-cell zan-form__item ">
+                <text class="isrequired">详细地址:</text>
+                <input bindinput="onCommentChange" class="zan-form__input zan-cell__bd" id="address" maxlength="20" name="address" placeholder="街道门牌信息" placeholderStyle="color: #ccc;" value="{{item.address?item.address:''}}"></input>
+            </view>
+        </view>
+        <view class="new-btn-Wrap" style="margin-top:70rpx;">
+            <button class="new-btn" disabled="{{!isbtn}}" formType="submit">保 
+
+
+存</button>
+        </view>
+    </form>
+</view>
+<template is="zan-toast" data="{{zanToast:zanToast}}"></template>

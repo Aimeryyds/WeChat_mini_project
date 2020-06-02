@@ -1,0 +1,13 @@
+<template name="3de86ee9">
+    <view class="_view 3de86ee9 {{'location'+passClass}}">
+        <view class="_view 3de86ee9 h1">地理位置</view>
+        <view bindtap="handleProxy" class="_view 3de86ee9 img" data-comkey="{{$k}}" data-eventid="{{'3de86ee9-0'}}">
+            <template is="0e24a461" data="{{...$root['0'],...$root[$kk+'3de86ee9-0'],$root:$root}}"></template>
+        </view>
+        <view class="_view 3de86ee9 p" wx:if="{{location.address}}">
+            <view class="_i 3de86ee9 iconfont icon-location"></view>{{location.address}}</view>
+        <view class="_view 3de86ee9 p" wx:if="{{location.nearestSubway}}">
+            <view class="_i 3de86ee9 iconfont icon-roomDetailMetro"></view>{{location.nearestSubway}}</view>
+    </view>
+</template>
+<import src="/components/mgImage.vue.wxml"></import>

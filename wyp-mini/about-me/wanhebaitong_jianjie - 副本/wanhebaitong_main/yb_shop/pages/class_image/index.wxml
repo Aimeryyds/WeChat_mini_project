@@ -1,0 +1,18 @@
+<block wx:if="{{show}}">
+    <view class="class_list">
+        <navigator hoverClass="none" url="/yb_shop/pages/image/index?id={{item.group_id}}" wx:for="{{list}}">
+            <view class="class_li">
+                <image src="{{item.pic.img_cover?item.pic.img_cover:default_img}}" style="height:{{height}}px;"></image>
+                <text class="n01">{{item.group_name}}</text>
+            </view>
+        </navigator>
+    </view>
+    <view class="clear"></view>
+    <view class="fui-loading empty" wx:if="{{list.length==0}}">
+        <view class="text">暂无相关分类</view>
+    </view>
+    <block wx:if="{{showtabbar}}">
+        <view style="height:100rpx"></view>
+        <include src="/yb_shop/pages/common/menu.wxml"></include>
+    </block>
+</block>

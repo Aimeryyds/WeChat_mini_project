@@ -1,0 +1,123 @@
+<import src="/component/carousel/carouselT.wxml"></import>
+<import src="../../../utils/wxParse/wxParse.wxml"></import>
+<view class="container" style="padding-bottom: 120rpx;" wx:if="{{service.id}}">
+    <template is="carouselT" data="{{...carousel}}"></template>
+    <view class="zan-panel zan-panel__no-margin-top">
+        <view class="store">
+            <view class="store__detail">
+                <view class="store__detail-name">{{service.serviceName}}</view>
+                <view class="store__detail-priceContainer">
+                    <view class="store__detail-price">
+                        <text style="font-size:28rpx">￥</text>{{service.price}}
+                    </view>
+                    <wxc-label typeColor="#F87E27">{{service.payPre==1?service.prePayMsg:service.payTypeName}}</wxc-label>
+                    <view wx:if="{{service.payPre==1}}">
+                        <text class="store__detail-preprice">￥{{service.prePrice}}</text>
+                    </view>
+                </view>
+            </view>
+            <button class="btn-share" openType="share">
+                <image mode="scaleToFill" src="http://imgcdnali.wfenxiao.com.cn/xcx/c/share1.png" style="padding:8rpx;background-color: #e5e5e5;border-radius: 50%;width:48rpx; height: 48rpx"></image>
+            </button>
+        </view>
+    </view>
+    <view bindtap="toogleSpecDialog" class="zan-panel" wx:if="{{service.skus.length>0}}">
+        <view class="product-show-spec-container">
+            <view class="product-show-spec-left">
+                <view class="product-show-spec-text {{formData.num&&formData.num.hasSelect?'product-show-spec-text-width':''}}">{{service&&service.selectedSku?'已选':'规格'}}</view>
+                <view class="product-show-spec-value" wx:if="{{service&&service.selectedSku}}">{{service.selectedSpecValue}}</view>
+            </view>
+            <image class="rightarrow" src="http://imgcdnali.wfenxiao.com.cn/xcx/c/icons/arrow_right.png"></image>
+        </view>
+    </view>
+    <view class="zan-panel">
+        <view class="worker__desc">
+            <view class="worker__desc-title">
+                项目介绍
+            </view>
+            <view class="worker__desc-content-{{showDescExpand&&descCollspand?'collspand':'default'}}">{{service.description}}</view>
+            <view bindtap="toggleDescExpand" class="worker__desc-expand" wx:if="{{showDescExpand}}">
+                <text>{{descCollspand?'更多':'收起'}}</text>
+                <image class="worker__desc-expand__arrow" mode="scaleToFill" src="{{descCollspand?'http://imgcdnali.wfenxiao.com.cn/xcx/c/arrow-down.png':'http://imgcdnali.wfenxiao.com.cn/xcx/c/arrow-up.png'}}"></image>
+            </view>
+        </view>
+    </view>
+    <view class="zan-panel">
+        <view class="worker__desc" style="padding:0;">
+            <view class="worker__desc-title" style="padding:0 24rpx;">
+                项目详情
+            </view>
+            <view style="padding:10rpx">
+                <template is="wxParse" data="{{wxParseData:content.nodes}}"></template>
+            </view>
+        </view>
+    </view>
+    <view class="zan-panel services-list" wx:if="{{service.personList&&service.personList.length>0}}">
+        <view class="services-list__title">
+            服务人员价目表
+        </view>
+        <view class="services-list__item" data-id="{{item.id}}" hidden="{{workersCollspand&&index>1}}" wx:for="{{service.personList}}">
+            <image class="services-list__item__avatar" mode="scaleToFit" src="{{item.headImg}}" style="background-color: #f1f1f1;"></image>
+            <view class="services-list__item__detail">
+                <view class="services-list__item__name">{{item.serverName}}</view>
+                <view class="services-list__item__desc">{{item.jobTitle}}</view>
+            </view>
+            <text class="services-list__item__price">￥{{item.price}}</text>
+        </view>
+        <view bindtap="toggleWorkersExpand" class="worker__desc-expand" wx:if="{{showWorkersExpand}}">
+            <text>{{workersCollspand?'更多':'收起'}}</text>
+            <image class="worker__desc-expand__arrow" mode="scaleToFill" src="{{workersCollspand?'http://imgcdnali.wfenxiao.com.cn/xcx/c/arrow-down.png':'http://imgcdnali.wfenxiao.com.cn/xcx/c/arrow-up.png'}}"></image>
+        </view>
+    </view>
+    <view class="zan-panel" wx:if="{{service.openEvaluate==1}}">
+        <navigator hoverClass="none" url="/pages/pingjia/productevaluate/index?sType=2&sid={{service.id}}&storeId={{service.storeId}}">
+            <view class="zan-cell zan-cell--access">
+                <view class="zan-cell__bd">评价（{{service.reviewsNum}}）</view>
+                <view class="zan-cell__ft" style="color:#f22222;">{{service.goodReviewsRate}}%好评</view>
+            </view>
+        </navigator>
+    </view>
+    <view class="zan-panel services-list">
+        <view class="services-list__title">
+            商户信息
+        </view>
+        <view class="storeContainer">
+            <view bindtap="handleLocation" class="store" data-lat="{{service.store.lat}}" data-lng="{{service.store.lng}}">
+                <image class="store-item-icon" src="http://imgcdnali.wfenxiao.com.cn/xcx/c/1222/ic_location.png"></image>
+                <view class="store__detail">
+                    <view class="store-item-name">{{service.store.detailAddress}}</view>
+                </view>
+                <view class="store-item-right">
+                    <text class="store-item-right-tip"></text>
+                    <image class="rightarrow" src="http://imgcdnali.wfenxiao.com.cn/xcx/c/icons/arrow_right.png"></image>
+                </view>
+            </view>
+        </view>
+        <view class="storeContainer">
+            <view bindtap="handlePhone" class="store" data-areanum="{{service.store.areaNum}}" data-phone="{{service.store.tel}}">
+                <image class="store-item-icon" src="http://imgcdnali.wfenxiao.com.cn/xcx/c/1222/ic_phone.png"></image>
+                <view class="store__detail">
+                    <view class="store-item-name">{{service.store.areaNum?service.store.areaNum+'-':''}}{{service.store.tel}}</view>
+                </view>
+                <view class="store-item-right">
+                    <text class="store-item-right-tip">免费咨询</text>
+                    <image class="rightarrow" src="http://imgcdnali.wfenxiao.com.cn/xcx/c/icons/arrow_right.png"></image>
+                </view>
+            </view>
+        </view>
+    </view>
+    <view bindtap="createOrder" class="order-btn-container">
+        <button class="zan-btn zan-btn--large zan-btn--danger" style="width:290rpx">
+            立即预约
+        </button>
+        <view style="flex-grow:1">
+            <view style="margin-left:40rpx;">
+                <text style="color:#f22222;font-size:32rpx;">￥</text>
+                <text style="color:#f22222;font-size:48rpx;">{{selectSku?selectSku.price:service.price}}</text>
+                <text class="yuyuetip" wx:if="{{service.showNum==1}}">(已预约{{service.num}}人)</text>
+            </view>
+        </view>
+    </view>
+    <spec-dialog bind:createorder="createOrder" bindhidedialog="hideSpecDialog" service="{{service}}" show="{{showSpecModal}}"></spec-dialog>
+    <phonemodal showModal="{{showPhoneModal}}" url="{{url}}"></phonemodal>
+</view>

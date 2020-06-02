@@ -1,0 +1,12 @@
+<view class="zz4-intro house-detail _div data-v-101bf44f" wx:if="{{zz_4_title_middle}}">
+    <view class="block-title _h2 data-v-101bf44f">{{zz_4_title_middle}}</view>
+    <view class="intro-list _div data-v-101bf44f" wx:for="{{zz_4_feature_middle}}" wx:for-index="__i0__" wx:key="title">
+        <view class="title _div data-v-101bf44f">
+            <view class="name _h3 data-v-101bf44f" wx:if="{{item.title}}">
+                <image class="icon _img data-v-101bf44f" src="{{item.img2}}" wx:if="{{item.img2}}"></image>{{''+item.title+''}}</view>
+            <view bindtap="__e" class="desc _p data-v-101bf44f" data-event-opts="{{[ [ 'tap',[ [ 'handleJumpH5',[item.parameter&&item.parameter.url] ] ] ] ]}}" wx:if="{{item.sub_title}}">{{''+item.sub_title}}<view class="iconfont icon-arrowforward _i data-v-101bf44f" wx:if="{{item.parameter&&item.parameter.url}}"></view>
+            </view>
+        </view>
+        <image bindtap="__e" class="img _img data-v-101bf44f" data-event-opts="{{[ [ 'tap',[ [ 'handleJumpH5',[item.parameter&&item.parameter.url] ] ] ] ]}}" src="{{item.img}}" wx:if="{{item.img}}"></image>
+    </view>
+</view>

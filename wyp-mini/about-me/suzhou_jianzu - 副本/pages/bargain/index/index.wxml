@@ -1,0 +1,28 @@
+<view class="view_search" style="padding: 0 20rpx;">
+    <form bindsubmit="formSubmit" class="view_searchbg" style="overflow: hidden;">
+        <view bindtap="search" class="view1">
+            <image bindtap="search" src="http://tws.cnweisou.com/images/search.png" style="color:{{data.style.iconcolor}};width: 40rpx;height: 40rpx;padding-left: 20rpx;padding-top: 4rpx;"></image>
+        </view>
+        <label>
+            <view class="img_wrap" style=""></view>
+            <button hidden class="img_btn" formType="submit" name="Search" style=""></button>
+        </label>
+        <input bindconfirm="formSubmit" name="keyword" placeholder="请输入关键字..." style="position: absolute;left: 100rpx;top: 0;height: 50rpx;background-color: #fff;font-size: 28rpx;line-height: 50rpx;width: 80%;" type="text"></input>
+    </form>
+</view>
+<view class="container-class">
+    <view class="container-goods">
+        <view class="main-goods">
+            <view bindtap="todetail" class="single-goods" data-id="{{item.id}}" data-mid="{{item.mid}}" style="width: 45%;box-sizing: border-box;" wx:for="{{data}}">
+                <image class="avatar" src="{{item.images}}" style="width:100%;height: 345rpx;"></image>
+                <view style="display: flex;flex-direction: column;border-top: none;overflow: hidden;">
+                    <text class="title" style="height: 60rpx;width:320rpx;overflow: hidden;text-overflow:ellipsis;white-space: nowrap;font-size: 30rpx;overflow: hidden;text-overflow:ellipsis;white-space: nowrap;display: block;">{{item.title}}</text>
+                    <view class="summary">
+                        <text class="price">原价 ￥{{item.start_price}}元 
+							</text>
+                    </view>
+                </view>
+            </view>
+        </view>
+    </view>
+</view>

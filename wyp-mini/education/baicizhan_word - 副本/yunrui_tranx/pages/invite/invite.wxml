@@ -1,0 +1,50 @@
+<view class="container">
+    <view class="header">
+        <view class="line">
+            <text class="circle left"></text>
+        </view>
+        <view class="title">邀请奖励</view>
+        <view class="line">
+            <text class="circle right"></text>
+        </view>
+    </view>
+    <view class="invite_img" wx:if="{{invite_img}}">
+        <button class="share_btn" openType="share">转发</button>
+        <image mode="widthFix" src="{{invite_img}}"></image>
+    </view>
+    <view class="invite_users">
+        <view wx:if="{{json.length>0}}">
+            <view class="">你已经邀请了{{json.length}}位新学员</view>
+            <view class="numbers" wx:for="{{json}}" wx:key="{{index}}">
+                <view class="flex">
+                    <image mode="widthFix" src="{{item.sub_user.avatar}}" style="width: 128rpx;border-radius: 50%;overflow:hidden;"></image>
+                    <view class="user_info">
+                        <view>{{item.sub_user.nickname}}</view>
+                        <view class="flex study_info">
+                            <view class="flex" style="margin-right: 18rpx;">
+                                <image mode="widthFix" src="../../resource/images/icon11.png" style="width: 32rpx;margin-right: 6rpx;"></image>
+                                <text>{{item.sub_checkin.count}}</text>
+                            </view>
+                            <view class="flex">
+                                <image mode="widthFix" src="../../resource/images/icon12.png" style="width: 32rpx;margin-right: 6rpx;"></image>
+                                <text>学习{{tools.parse(item.sub_user.credit2)}}天</text>
+                            </view>
+                        </view>
+                    </view>
+                </view>
+                <view class="flex">
+                    <image mode="widthFix" src="../../resource/images/icon10.png" style="width: 32rpx;"></image>
+                    <text style="color: #ff6600;">+1星</text>
+                </view>
+            </view>
+            <view style="font-size: 24rpx;margin-top: 50rpx;">没有更多了...</view>
+        </view>
+        <view style="margin-top: 70rpx;" wx:else>你还没有邀请任何新人学习, 快点击去邀请吧</view>
+    </view>
+</view>
+<wxs module="tools">
+function parse(data) {
+    return (parseInt(data))
+};
+module.exports.parse = parse;
+</wxs>

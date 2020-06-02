@@ -1,0 +1,22 @@
+<view>
+    <view catchtap="getOrderDetail" class="cu-list menu-avatar" data-orderid="{{item.orderId}}" style="margin-top: 5rpx;" wx:for="{{orderInsrcardList}}" wx:key="item">
+        <view class="cu-item">
+            <view class="cu-avatar radius lg" style="background-image:url({{cardzm}});"></view>
+            <view class="content">
+                <view class="text">
+                    <text class="text-cut">{{item.productName}}</text>
+                </view>
+                <view class="text-gray text-sm flex">
+                    <text class="text-cut">方案:{{item.caseName}}</text>
+                </view>
+            </view>
+            <view class="action" style="width: 200rpx;">
+                <view class="text-grey text-xs">{{item.showCreateTime}}</view>
+            </view>
+        </view>
+    </view>
+    <view class="noDataMessage" style="text-align: center;margin-top: 10rpx;" wx:if="{{orderInsrcardList==null||orderInsrcardList.length<1}}">暂无订单</view>
+</view>
+<view class="cu-load load-modal" wx:if="{{loadModal}}">
+    <view class="gray-text">加载中...</view>
+</view>

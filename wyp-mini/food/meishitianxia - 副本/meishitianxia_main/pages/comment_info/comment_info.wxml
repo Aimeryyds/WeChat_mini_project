@@ -1,0 +1,38 @@
+<view bindtap="back" class="title_h1 mt20">{{title}}</view>
+<view class="comment_list">
+    <view class="comment_list_item" wx:for="{{list}}" wx:key="commentlist">
+        <view class="comment_list_u">
+            <navigator class="comment_list_nu" url="/pages/space/space?uid={{item.authorid}}">
+                <image class="comment_list_img_u" src="{{item.avatar}}"></image>
+                <image class="vip_icon" src="/image/vip_icon.png" wx:if="{{item.vip}}"></image>
+            </navigator>
+            <navigator class="comment_list_nu2" url="/pages/space/space?uid={{item.authorid}}">{{item.author}}</navigator>
+            <view class="comment_list_time">{{item.floors}}#　{{item.dateline}}</view>
+        </view>
+        <view class="comment_list_q" wx:if="{{item.cmessage!=''}}">
+            <view>
+{{item.cmessage}}
+</view>
+        </view>
+        <view class="comment_list_t">
+            <block wx:for="{{item.message}}" wx:key="message">
+                <text wx:if="{{item.type=='txt'}}">{{item.value}}</text>
+                <image class="face" mode="widthFix" src="{{item.value}}" wx:if="{{item.type=='img'}}"></image>
+            </block>
+        </view>
+        <image class="load" mode="widthFix" src="{{item.pic}}" wx:if="{{item.pic!=''}}"></image>
+    </view>
+</view>
+<view class="loading" wx:if="{{loading}}">
+    <image class="loading_img" src="../../image/loading-32-32.gif"></image>
+</view>
+<view class="loading_end" wx:if="{{loading_end}}"></view>
+<view class="loading_fail" wx:if="{{loading_fail}}"></view>
+<view>　</view>
+<view>　</view>
+<view>　</view>
+<view>　</view>
+<view class="btn_bottom" style="padding-bottom:{{statusBarHeight>30?'40':'0'}}rpx">
+    <button bindtap="comment_do" formType="submit" plain="true" wx:if="{{haveuid}}">写评论/上传我做的这道菜</button>
+    <button bindgetuserinfo="clickinfo" data-type="comment" openType="getUserInfo" plain="true" wx:else>写评论/上传我做的这道菜</button>
+</view>

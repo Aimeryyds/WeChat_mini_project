@@ -1,0 +1,39 @@
+<loading hidden="{{show}}">正在加载</loading>
+<view class="page footer" wx:if="{{show}}">
+    <block wx:if="{{list.length>0}}">
+        <view class="fui-list-group" style="margin-top:0;" wx:for="{{list}}">
+            <view class="fui-list address-item noclick">
+                <view class="fui-list-inner">
+                    <view class="title" style="font-size:34rpx;">{{item.consigner}}, {{item.phone}}</view>
+                    <view class="text" style="padding-bottom:16rpx;font-size:28rpx;color:#999;padding-top:6rpx;">{{item.province}} {{item.city}} {{item.district}} {{item.address}}</view>
+                    <view class="bar">
+                        <view bindtap="deleteItem" class="pull-right btn-del" data-id="{{item.id}}">
+                            <image class="image-32" src="/yb_shop/static/images/icon/delete.png"></image>
+                            <text>删除</text>
+                        </view>
+                        <navigator class="pull-right btn-edit" hoverClass="none" style="margin-right:10rpx;" url="/yb_shop/pages/member/address/post?id={{item.id}}&consigner={{item.consigner}}&phone={{item.phone}}&areas={{item.province}} {{item.city}} {{item.district}}&address={{item.address}}&type=member">
+                            <image class="image-32" src="/yb_shop/static/images/icon/edit.png"></image>
+                            <text>编辑</text>
+                        </navigator>
+                        <label bindtap="setDefault" data-id="{{item.id}}">
+                            <radio checked="{{item.is_default>0?true:false}}" class="zoom-70" color="#fd5454" name="default"></radio>设为默认地址
+              </label>
+                    </view>
+                </view>
+            </view>
+        </view>
+    </block>
+    <view class="fui-loading empty" wx:if="{{list.length<1&&loaded}}">
+        <view class="text">没有数据</view>
+    </view>
+    <view class="fui-navbar" style="bottom:{{showtabbar?100:0}}rpx;">
+        <navigator class="nav-item btn btn-danger" hoverClass="none" style="font-size:34rpx;background:{{config.selectedColor!='#000000'?config.selectedColor:config.background}};color:{{config.selectedColor=='#000000'&&config.font_color=='black'?'#000000':'#ffffff'}};border:1px solid {{config.selectedColor!='#000000'?config.selectedColor:config.background}};" url="/yb_shop/pages/member/address/post?&type=add">
+            <image class="image-48" src="/yb_shop/static/images/icon-white/add.png"></image>
+            <text>添加收货地址</text>
+        </navigator>
+    </view>
+    <block wx:if="{{showtabbar}}">
+        <view style="height:100rpx"></view>
+        <include src="/yb_shop/pages/common/menu.wxml"></include>
+    </block>
+</view>

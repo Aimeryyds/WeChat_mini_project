@@ -1,0 +1,59 @@
+<view class="page">
+    <wux-tabs controlled bindchange="onTabsChange" current="{{currentIndex}}" theme="positive" wuxClass="bordered">
+        <wux-tab key="0" title="全部订单"></wux-tab>
+        <wux-tab key="1" title="已付款"></wux-tab>
+        <wux-tab key="2" title="待付款"></wux-tab>
+    </wux-tabs>
+    <swiper bindchange="onSwiperChange" current="{{currentIndex}}" style="height: {{orderList.length*245}}rpx;">
+        <swiper-item>
+            <view key="0">
+                <wux-wing-blank size="default">
+                    <block wx:for="{{orderList}}" wx:for-item="order" wx:key="orderId">
+                        <view wx:if="{{order.stateName=='已取消'}}">
+                            <wux-card bordered="{{false}}" extra="{{order.casePrice}}元" id="{{order.orderId}}" title="{{order.stateName}}" wuxClass="cu-list menu sm-border card-menu margin-top">
+                                <view slot="body">电动车保险</view>
+                                <view slot="footer">订单创建时间: {{order.showCreateTime}}</view>
+                            </wux-card>
+                        </view>
+                        <view wx:else>
+                            <wux-card bordered="{{false}}" catchtap="orderDetail" extra="{{order.casePrice}}元" id="{{order.orderId}}" title="{{order.stateName}}" wuxClass="cu-list menu sm-border card-menu margin-top">
+                                <view slot="body">电动车保险</view>
+                                <view slot="footer">订单创建时间: {{order.showCreateTime}}</view>
+                            </wux-card>
+                        </view>
+                    </block>
+                    <view class="noDataMessage" wx:if="{{orderList==null||orderList.length<1}}">暂无订单</view>
+                </wux-wing-blank>
+            </view>
+        </swiper-item>
+        <swiper-item>
+            <view key="1">
+                <wux-wing-blank size="default">
+                    <wux-card bordered="{{false}}" catchtap="orderDetail" extra="{{order.casePrice}}元" id="{{order.orderId}}" title="{{order.stateName}}" wuxClass="cu-list menu sm-border card-menu margin-top" wx:for="{{isPayOrderList}}" wx:for-item="order" wx:key="orderId">
+                        <view slot="body">{{order.productName}}</view>
+                        <view slot="footer">{{order.showCreateTime}}</view>
+                    </wux-card>
+                    <view class="noDataMessage" wx:if="{{isPayOrderList==null||isPayOrderList.length<1}}">暂无订单</view>
+                </wux-wing-blank>
+            </view>
+        </swiper-item>
+        <swiper-item>
+            <view class="content" key="2">
+                <wux-wing-blank size="default">
+                    <view style="height: 10rpx;"></view>
+                    <block wx:for="{{noPayOrderList}}" wx:for-item="order" wx:key="orderId">
+                        <wux-card catchtap="orderDetail" extra="{{order.casePrice}}元" id="{{order.orderId}}" title="{{order.stateName}}">
+                            <view slot="body">{{order.productName}}</view>
+                            <view slot="footer">{{order.showCreateTime}}</view>
+                        </wux-card>
+                        <view style="height: 10rpx;"></view>
+                    </block>
+                    <view class="noDataMessage" wx:if="{{noPayOrderList==null||noPayOrderList.length<1}}">暂无订单</view>
+                </wux-wing-blank>
+            </view>
+        </swiper-item>
+    </swiper>
+</view>
+<view class="cu-load load-modal" wx:if="{{loadModal}}">
+    <view class="gray-text">加载中...</view>
+</view>

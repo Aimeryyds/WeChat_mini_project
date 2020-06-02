@@ -1,0 +1,60 @@
+<template name="personal-center$228be7c1">
+    <view class="_div data-v-9414e85e personal-center">
+        <view class="_div data-v-9414e85e header" style=" {{'height:'+headerHeight+'px'+';'+'background-image:'+(userInfo.avatar?'url('+userInfo.avatar+')':'none')+';'}}">
+            <image class="_img data-v-9414e85e avatar" src="{{userInfo&&userInfo.avatar}}"></image>
+            <view class="_div data-v-9414e85e bg">
+                <view class="_div data-v-9414e85e info">
+                    <view class="_div data-v-9414e85e">{{userInfo.nickname}}</view>
+                    <view class="_div data-v-9414e85e biscuit">
+                        <image class="_img data-v-9414e85e" src="/static/img/biscuit-white.png"></image>
+                        <label class="_span data-v-9414e85e">我的饼干：{{userInfo.biscuits}}</label>
+                    </view>
+                </view>
+            </view>
+        </view>
+        <view class="_div data-v-9414e85e data-card">
+            <view class="_div data-v-9414e85e publish-count">
+                <view class="_div data-v-9414e85e num">{{userInfo.checkin_count}}</view>
+                <view class="_div data-v-9414e85e text">签到天数</view>
+            </view>
+            <view class="_div data-v-9414e85e love-count">
+                <view class="_div data-v-9414e85e num">{{userDataInfo.like_count}}</view>
+                <view class="_div data-v-9414e85e text">收到的赞</view>
+            </view>
+        </view>
+        <view class="_div data-v-9414e85e menus">
+            <navigator class="_a data-v-9414e85e checkin" url="/pages/checkin/main">
+                <view class="_div data-v-9414e85e title">
+                    <view class="_div data-v-9414e85e left">
+                        <image class="_img data-v-9414e85e" src="/static/img/personal-checkin.png"></image>
+                        <label class="_span data-v-9414e85e">签到日历</label>
+                    </view>
+                    <view class="_div data-v-9414e85e right">
+                        <label class="_span data-v-9414e85e">{{month}}</label>
+                        <image class="_img data-v-9414e85e arrow" src="/static/img/arrow-right.png"></image>
+                    </view>
+                </view>
+                <view class="_div data-v-9414e85e week">
+                    <view class="_div data-v-9414e85e day  {{[day&&day.today?'today':'',day&&day.checkin?'checked':'']}}" key="{{day}}" wx:for="{{week}}" wx:for-item="day" wx:key="day">{{day&&day.day}}</view>
+                </view>
+                <view class="_div data-v-9414e85e tips">{{userInfo.today_is_checked?'今日签到成功！':'今天还没有学习，发布作品就可以签到领饼干哦~'}}</view>
+            </navigator>
+            <view class="_div data-v-9414e85e menu-list">
+                <navigator class="_a data-v-9414e85e menu" url="/pages/personal-works/main?type=record">
+                    <view class="_div data-v-9414e85e left">
+                        <image class="_img data-v-9414e85e" src="/static/img/personal-record.png"></image>
+                        <label class="_span data-v-9414e85e">语音作品</label>
+                    </view>
+                    <image class="_img data-v-9414e85e arrow" src="/static/img/arrow-right.png"></image>
+                </navigator>
+                <button class="_button data-v-9414e85e menu" openType="contact" sessionFrom="{{feedUser}}">
+                    <view class="_div data-v-9414e85e left">
+                        <image class="_img data-v-9414e85e" src="/static/img/contact.svg"></image>
+                        <label class="_span data-v-9414e85e">帮助与反馈</label>
+                    </view>
+                    <image class="_img data-v-9414e85e arrow" src="/static/img/arrow-right.png"></image>
+                </button>
+            </view>
+        </view>
+    </view>
+</template>

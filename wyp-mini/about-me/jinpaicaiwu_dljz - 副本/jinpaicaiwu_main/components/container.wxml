@@ -1,0 +1,21 @@
+<template name="subcontainer">
+    <view class="mod_wrapper" id="{{item.id}}" style="{{item.globalstylestr}}" wx:for="{{plugins}}" wx:key="{{item.id}}">
+        <wpswiper id="comp_{{item.id}}" layerid="{{item.id}}" param="{{item.childprop}}" wx:if="{{item.type=='swiper'}}"></wpswiper>
+        <wpmedia id="comp_{{item.id}}" layerid="{{item.id}}" param="{{item.childprop}}" wx:elif="{{item.type=='media'}}"></wpmedia>
+        <wptitle id="comp_{{item.id}}" layerid="{{item.id}}" param="{{item.childprop}}" wx:elif="{{item.type=='title'}}"></wptitle>
+        <wpcustomer_service id="comp_{{item.id}}" layerid="{{item.id}}" param="{{item.childprop}}" wx:elif="{{item.type=='customer_service'}}"></wpcustomer_service>
+        <wpform id="comp_{{item.id}}" layerid="{{item.id}}" param="{{item.childprop}}" wx:elif="{{item.type=='form'}}"></wpform>
+    </view>
+</template>
+<template name="container">
+    <view class="mod_wrapper" id="{{item.id}}" style="{{item.globalstylestr}}" wx:for="{{plugins}}" wx:key="{{item.id}}">
+        <wpswiper id="comp_{{item.id}}" layerid="{{item.id}}" param="{{item.childprop}}" wx:if="{{item.type=='swiper'}}"></wpswiper>
+        <wpfreelayout id="comp_{{item.id}}" layerid="{{item.id}}" param="{{item.childprop}}" wx:elif="{{item.type=='freelayout'}}">
+            <template is="subcontainer" data="{{plugins:item._children,position:'absolute'}}"></template>
+        </wpfreelayout>
+        <wpmedia id="comp_{{item.id}}" layerid="{{item.id}}" param="{{item.childprop}}" wx:elif="{{item.type=='media'}}"></wpmedia>
+        <wptitle id="comp_{{item.id}}" layerid="{{item.id}}" param="{{item.childprop}}" wx:elif="{{item.type=='title'}}"></wptitle>
+        <wpcustomer_service id="comp_{{item.id}}" layerid="{{item.id}}" param="{{item.childprop}}" wx:elif="{{item.type=='customer_service'}}"></wpcustomer_service>
+        <wpform children="{{item._children}}" id="comp_{{item.id}}" layerid="{{item.id}}" param="{{item.childprop}}" wx:elif="{{item.type=='form'}}"></wpform>
+    </view>
+</template>

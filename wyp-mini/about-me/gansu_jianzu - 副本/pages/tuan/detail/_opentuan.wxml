@@ -1,0 +1,42 @@
+<template name="opentuan">
+    <view class="jointuan">
+        <view class="jointuan-item">
+            <image class="jointuan-item__img" src="{{imgUrl}}"></image>
+            <view class="jointuan-item__cont">
+                <view class="jointuan-item__title zan-ellipsis--l2">{{goodsName}}</view>
+                <view class="jointuan-item__info">
+                    <view class="jointuan-item__price">
+                        <text>￥</text>{{groupPrice}}</view>
+                    <template is="tuan-tag" data="{{num:limitPeople}}"></template>
+                    <view class="jointuan-item__mun">已团{{boughtNum}}件</view>
+                </view>
+            </view>
+        </view>
+        <view class="jointuan-info">
+            <template is="members" data="{{members:members}}"></template>
+            <block wx:if="{{status==1}}">
+                <view class="jointuan-info__time">
+          仅剩<text>{{remainPeople}}</text>个名额,
+          <text>
+                        <block wx:if="{{leftTime.days!='00'}}">{{leftTime.days}}天</block> {{leftTime.hours}}：{{leftTime.minutes}}：{{leftTime.seconds}}</text>后结束
+        </view>
+                <button class="btn-share jointuan-info__btn" openType="share" wx:if="{{currentUserStatus==1}}">分享好友参团</button>
+                <view bindtap="handleBuy" class="jointuan-info__btn" data-type="join" wx:else>一键参团</view>
+            </block>
+            <block wx:elif="{{status==2}}">
+                <view class="jointuan-info__time">团已满</view>
+                <view bindtap="handleBuy" class="jointuan-info__btn" wx:if="{{eventStatus==2}}">我来发起拼团</view>
+                <navigator class="jointuan-info__btn" hoverClass="none" openType="switchTab" url="/tabs/home/index" wx:else>查看更多拼团活动</navigator>
+            </block>
+            <block wx:else>
+                <view class="jointuan-info__time">拼团失败</view>
+                <view bindtap="handleBuy" class="jointuan-info__btn" wx:if="{{eventStatus==2}}">再次开团</view>
+                <navigator class="jointuan-info__btn" hoverClass="none" openType="switchTab" url="/tabs/home/index" wx:else>查看更多拼团活动</navigator>
+            </block>
+        </view>
+        <template is="steps" data></template>
+    </view>
+</template>
+<import src="/pages/templates/tag/tuan.wxml"></import>
+<import src="./_members.wxml"></import>
+<import src="./_steps.wxml"></import>

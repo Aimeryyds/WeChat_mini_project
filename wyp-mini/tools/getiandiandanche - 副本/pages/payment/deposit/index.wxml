@@ -1,0 +1,21 @@
+<view class="page">
+    <my-component bind:myevent="myEventListener" innerText="押金充值"></my-component>
+    <view class="main" style=" margin-top: {{myHight}}px"></view>
+    <form bindsubmit="formSubmit">
+        <view class="balance">
+            <view id="myDeposit">￥{{deposit}}</view>
+            <view class="dep-sm">押金随时可退</view>
+            <view class="backs boom" id="trigger1">
+                <view class="section">
+                    <picker bindchange="bindPickerChange" range="{{array}}" value="{{index}}">
+                        <view class="picker">
+                            <image class="cz-img17" src="{{wxfx}}"></image>
+                            <text>{{array[index]}}</text>
+                        </view>
+                    </picker>
+                </view>
+            </view>
+            <button class="backDeposit" disabled="{{disabled}}" formType="submit" style="padding-top: 0;background:#fccf00;" type="primary">立即缴纳</button>
+        </view>
+    </form>
+</view>

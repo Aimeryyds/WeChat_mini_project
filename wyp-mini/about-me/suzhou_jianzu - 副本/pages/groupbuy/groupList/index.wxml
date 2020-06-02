@@ -1,0 +1,101 @@
+<view class="top">
+    <view bindtap="select" class="t_item {{select=='0'?'b_bottom':''}}" data-index="0">组团中</view>
+    <view bindtap="select" class="t_item {{select=='1'?'b_bottom':''}}" data-index="1">组团成功</view>
+    <view bindtap="select" class="t_item {{select=='-1'?'b_bottom':''}}" data-index="-1">组团失败</view>
+</view>
+<block wx:if="{{select=='0'}}">
+    <view bindtap="toDetail" class="item" data-id="{{item.id}}" data-teamid="{{item.teamid}}" wx:for="{{data}}">
+        <view class="i_dindan">
+            <view>订单号:{{item.orderno}}</view>
+            <view>
+                <text class="red">团购进行中</text>
+            </view>
+        </view>
+        <view class="i_store">
+            <view class="is_left">
+                <image class="i_img" src="{{item.thumb}}"></image>
+                <view class="mt20">{{item.title}}</view>
+            </view>
+            <view class="i_price">
+                <view>
+                    <text class="red">￥{{item.groupsprice}}</text>/{{item.units}}</view>
+                <view>*{{item.goodsnum}}</view>
+            </view>
+        </view>
+        <view class="i_yunfei">运费：
+        <text class="red">￥{{item.freight}}元</text>，共
+        <text class="red">{{item.goodsnum}}</text>个商品，总额：
+        <text class="red">￥{{item.price}}</text>元</view>
+        <view class="i_cantuan">
+            <view>查看团详情</view>
+        </view>
+    </view>
+</block>
+<block wx:if="{{select=='1'}}">
+    <view bindtap="toDetail" class="item" data-id="{{item.id}}" data-teamid="{{item.teamid}}" wx:for="{{data}}">
+        <view class="i_dindan">
+            <view>订单号:{{item.orderno}}</view>
+            <view>
+                <text class="red">团购已成功</text>
+            </view>
+        </view>
+        <view class="i_store">
+            <view class="is_left">
+                <image class="i_img" src="{{item.thumb}}"></image>
+                <view class="mt20">{{item.title}}</view>
+            </view>
+            <view class="is_right">
+                <image class="i_fail" src="https://tws.cnweisou.com/images/success_1.png"></image>
+                <view class="i_price">
+                    <view>
+                        <text class="red">￥{{item.groupsprice}}</text>/{{item.units}}</view>
+                    <view>*{{item.goodsnum}}</view>
+                </view>
+            </view>
+        </view>
+        <view class="i_yunfei">运费：
+        <text class="red">￥{{item.freight}}元</text>，共
+        <text class="red">{{item.goodsnum}}</text>个商品，总额：
+        <text class="red">￥{{item.price}}</text>元</view>
+        <view class="i_cantuan">
+            <view class="mr20">再拼一单</view>
+            <view>查看团详情</view>
+        </view>
+    </view>
+</block>
+<block wx:if="{{select=='-1'}}">
+    <view class="item" wx:for="{{data}}">
+        <view class="i_dindan">
+            <view>订单号:{{item.orderno}}</view>
+            <view>
+                <text class="red">团购已过期</text>
+            </view>
+        </view>
+        <view class="i_store">
+            <view class="is_left">
+                <image class="i_img" src="{{item.thumb}}"></image>
+                <view class="mt20">{{item.title}}</view>
+            </view>
+            <view class="is_right">
+                <image class="i_fail" src="https://tws.cnweisou.com/images/fail.png"></image>
+                <view class="i_price">
+                    <view>
+                        <text class="red">￥{{item.groupsprice}}</text>/{{item.units}}</view>
+                    <view>*{{item.goodsnum}}</view>
+                </view>
+            </view>
+        </view>
+        <view class="i_yunfei">运费：
+        <text class="red">￥{{item.freight}}元</text>，共
+        <text class="red">{{item.goodsnum}}</text>个商品，总额：
+        <text class="red">￥{{item.price}}</text>元</view>
+        <view class="i_cantuan">
+            <view class="mr20">再拼一单</view>
+            <view bindtap="toDetail" data-id="{{item.id}}" data-teamid="{{item.teamid}}">查看团详情</view>
+        </view>
+    </view>
+</block>
+<view class="nodata" wx:if="{{data==''}}">
+    <image src="https://tws.cnweisou.com/images/becomeRegister.png"></image>
+</view>
+<loading wx:if="{{loading}}"></loading>

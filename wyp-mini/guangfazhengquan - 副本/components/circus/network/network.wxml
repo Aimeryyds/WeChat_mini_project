@@ -1,0 +1,10 @@
+<view class="v-network">
+    <view animation="{{_network.error.animation}}" class="notice error" wx:if="{{_network.error.show}}">
+        <view class="icon"></view>
+        <view class="msg">网络情况不佳，请稍后重试</view>
+    </view>
+    <view animation="{{_network.recover.animation}}" class="notice recover" wx:if="{{_network.recover.show}}">
+        <view class="icon"></view>
+        <view class="msg">网络连接已恢复</view>
+    </view>
+</view>

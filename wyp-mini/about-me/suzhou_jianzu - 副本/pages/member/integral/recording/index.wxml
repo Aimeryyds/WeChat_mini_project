@@ -1,0 +1,31 @@
+<view class="page">
+    <view class="rec">
+        <view class="section_tp">
+            <view class="border" style="width: 100%">全部纪录</view>
+        </view>
+    </view>
+    <view bindtap="toreceived" class="list" data-id="{{item.id}}" wx:for="{{data.list}}">
+        <view class="title">
+            <view>
+                <text>订单号：{{item.logno}}</text>
+            </view>
+            <view style="margin-right: 20rpx;">
+                <block wx:if="{{item.status=='1'&&item.paystatus=='0'}}">待支付</block>
+                <block wx:elif="{{item.status=='2'}}">待发货</block>
+                <block wx:elif="{{item.status=='2'&&item.paystatus=='2'}}">已完成</block>
+            </view>
+        </view>
+        <view class="item">
+            <view style="display: flex;flex-direction: row;">
+                <image class="left" src="{{item.thumb}}"></image>
+                <view class="center">
+                    <view style="overflow: hidden;text-overflow:ellipsis;white-space: nowrap;display: flex;flex-direction: row;">
+                        <view class="tip">商品</view>{{item.title}}</view>
+                </view>
+            </view>
+            <view class="right">
+                <view style="">{{item.credit}}积分</view>
+            </view>
+        </view>
+    </view>
+</view>

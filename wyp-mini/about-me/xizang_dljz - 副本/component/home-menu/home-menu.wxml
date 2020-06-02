@@ -1,0 +1,38 @@
+<template name="cate_menus">
+    <view class="home-menu">
+        <view bindtap="go2BannerLink" class="menu-item" data-target="1" data-targetid="{{item.id}}" wx:for="{{list}}">
+            <image src="{{item.icon?item.icon:'http://imgs.bukepay.com/common/bukepay_640_640.png'}}"></image>
+            <text>{{item.name}}</text>
+        </view>
+    </view>
+</template>
+<template name="menus">
+    <view class="home-menu">
+        <block wx:for="{{list}}">
+            <block wx:if="{{item.target==4&&item.targetId=='2'}}">
+                <button class="menu-item" openType="share" wx:if="{{use_wxshare_btn}}">
+                    <image src="{{item.pic}}"></image>
+                    <text>{{item.name}}</text>
+                </button>
+                <button catchtap="share" class="menu-item" wx:else>
+                    <image src="{{item.pic}}"></image>
+                    <text>{{item.name}}</text>
+                </button>
+            </block>
+            <block wx:elif="{{item.target==4&&item.targetId=='3'}}">
+                <button class="menu-item" openType="contact" wx:if="{{openOnlineService==1}}">
+                    <image src="{{item.pic}}"></image>
+                    <text>{{item.name}}</text>
+                </button>
+                <view bindtap="call" class="menu-item" wx:else>
+                    <image src="{{item.pic}}"></image>
+                    <text>{{item.name}}</text>
+                </view>
+            </block>
+            <view bindtap="go2MenuLink" class="menu-item" data-target="{{item.target}}" data-targetid="{{item.targetId}}" wx:else>
+                <image src="{{item.pic}}"></image>
+                <text>{{item.name}}</text>
+            </view>
+        </block>
+    </view>
+</template>

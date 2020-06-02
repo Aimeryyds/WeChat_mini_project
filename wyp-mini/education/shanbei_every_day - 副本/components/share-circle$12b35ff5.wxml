@@ -1,0 +1,85 @@
+<template name="share-circle$12b35ff5">
+    <view class="_div data-v-a60a9436 share-page" style=" {{'padding-top:'+paddingTop+'px'+';'}}">
+        <template is="nav-bar$6acec6f9" data="{{...$root[$kk+'0'],$root:$root}}"></template>
+        <view class="_div data-v-a60a9436 content" wx:if="{{shareTranslation}}">
+            <view class="_div data-v-a60a9436 top">
+                <view class="_div data-v-a60a9436 author-other" wx:if="{{shareOthers}}">
+                    <image class="_img data-v-a60a9436" src="{{userInfo&&userInfo.avatar}}"></image>
+                    <view class="_div data-v-a60a9436 right">
+                        <view class="_div data-v-a60a9436 nickname">{{userInfo&&userInfo.nickname}}</view>
+                        <label class="_span data-v-a60a9436">pick一个精彩翻译作品</label>
+                    </view>
+                </view>
+                <view class="_div data-v-a60a9436 author" wx:else>
+                    <image class="_img data-v-a60a9436" src="{{translation.userinfo&&translation.userinfo.avatar}}"></image>
+                    <view class="_div data-v-a60a9436">{{translation.userinfo&&translation.userinfo.nickname}}</view>
+                    <label class="_span data-v-a60a9436">的翻译作品</label>
+                </view>
+                <view class="_div data-v-a60a9436 sentence origin">
+                    <view class="_div data-v-a60a9436 title">
+                    原句
+                </view>
+                    <view class="_div data-v-a60a9436 text">{{challenge.content}}</view>
+                    <view class="_div data-v-a60a9436 from">—— {{challenge.source}}</view>
+                </view>
+                <view class="_div data-v-a60a9436  sentence trans">
+                    <view class="_div data-v-a60a9436 title">
+                    翻译
+                </view>
+                    <view class="_div data-v-a60a9436 text">{{translation.content}}</view>
+                    <view class="_div data-v-a60a9436 from">—— {{translation.userinfo&&translation.userinfo.nickname}}</view>
+                </view>
+            </view>
+            <view class="_div data-v-a60a9436 bottom">
+                <view class="_div data-v-a60a9436 tips">
+                    <view class="_div data-v-a60a9436">长按识别小程序码</view>
+                    <view class="_div data-v-a60a9436">
+                        <label class="_span data-v-a60a9436">{{shareOthers?'查看更多精彩翻译':'快来帮我点赞吧'}}</label>
+                        <image class="_img data-v-a60a9436" src="/static/img/look-right.png"></image>
+                    </view>
+                </view>
+                <image class="_img data-v-a60a9436" src="{{mpCode}}"></image>
+            </view>
+        </view>
+        <view class="_div data-v-a60a9436 record-content" wx:if="{{shareRecord}}">
+            <view class="_div data-v-a60a9436 inner">
+                <view class="_div data-v-a60a9436 author">
+                    <image class="_img data-v-a60a9436" src="{{record.userinfo&&record.userinfo.avatar}}"></image>
+                    <view class="_div data-v-a60a9436">{{record.userinfo&&record.userinfo.nickname}}</view>
+                    <label class="_span data-v-a60a9436">的语音作品</label>
+                </view>
+                <view class="_div data-v-a60a9436 record">
+                {{record.audio_length}}
+            </view>
+                <view class="_div data-v-a60a9436 origin-sentence">
+                {{dailyQuote.content}}
+            </view>
+                <view class="_div data-v-a60a9436 translation">{{dailyQuote.translation}}</view>
+                <view class="_div data-v-a60a9436 from">—— {{dailyQuote.author}}</view>
+                <view class="_div data-v-a60a9436 bottom-code">
+                    <view class="_div data-v-a60a9436 left">
+                        <image class="_img data-v-a60a9436" src="https://media-image1.baydn.com/storage_media_image/ccdbwr/96caf63038a166a849543af7b3c6e33a.3399d7dbef8a6636e02d2a633c93d160.png"></image>
+                        <label class="_span data-v-a60a9436">长按识别小程序码</label>
+                        <view class="_div data-v-a60a9436">给我的语音作品点赞吧</view>
+                    </view>
+                    <image class="_img data-v-a60a9436" src="{{mpCode}}"></image>
+                </view>
+            </view>
+        </view>
+        <view class="_div data-v-a60a9436 share-btns">
+            <view class="_div data-v-a60a9436 tip">分享上方卡片，召唤好友点赞</view>
+            <view class="_div data-v-a60a9436 btns">
+                <button class="_button data-v-a60a9436 share share-friend" openType="share">
+                    <image class="_img data-v-a60a9436" src="/static/img/share-friend.png"></image>
+                    <view class="_div data-v-a60a9436">微信好友</view>
+                </button>
+                <view class="_div data-v-a60a9436 sep">- - - -</view>
+                <view bindtap="handleProxy" class="_div data-v-a60a9436  share share-circle" data-comkey="{{$k}}" data-eventid="{{'0'}}">
+                    <image class="_img data-v-a60a9436" src="/static/img/share-circle.png"></image>
+                    <view class="_div data-v-a60a9436">生成海报</view>
+                </view>
+            </view>
+        </view>
+    </view>
+</template>
+<import src="nav-bar$6acec6f9"></import>

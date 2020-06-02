@@ -1,0 +1,30 @@
+<view class="fui-icon-group nomargin">
+    <navigator class="fui-icon-col" hoverClass="none" url="/yb_shop/pages/order/index?status=0">
+        <view class="badge" wx:if="{{member.pending_payment>0}}">{{member.pending_payment}}</view>
+        <view class="icon">
+            <image src="{{icons.paying48}}"></image>
+        </view>
+        <view class="text">待付款</view>
+    </navigator>
+    <navigator class="fui-icon-col" hoverClass="none" url="/yb_shop/pages/order/index?status=1">
+        <view class="badge" wx:if="{{member.pending_shipment>0}}">{{member.pending_shipment}}</view>
+        <view class="icon">
+            <image src="{{icons.box48}}"></image>
+        </view>
+        <view class="text">待发货</view>
+    </navigator>
+    <navigator class="fui-icon-col" hoverClass="none" url="/yb_shop/pages/order/index?status=2">
+        <view class="badge" wx:if="{{member.pending_receipt>0}}">{{member.pending_receipt}}</view>
+        <view class="icon">
+            <image src="{{icons.car48}}"></image>
+        </view>
+        <view class="text">待收货</view>
+    </navigator>
+    <navigator class="fui-icon-col" hoverClass="none" url="/yb_shop/pages/order/index?status=4">
+        <view class="badge" wx:if="{{member.refund>0}}">{{member.refund}}</view>
+        <view class="icon">
+            <image src="{{icons.refund48}}"></image>
+        </view>
+        <view class="text">退换货</view>
+    </navigator>
+</view>

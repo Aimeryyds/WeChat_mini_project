@@ -1,0 +1,100 @@
+<form bindsubmit="bindFormSubmit">
+    <view class="page">
+        <view class="view-title" style="margin-left: 0;">
+            <image src="http://tws.cnweisou.com/images/payicon.png"></image>
+            <view>自营店铺</view>
+        </view>
+        <view class="items">
+            <view class="carts-item">
+                <view>
+                    <image class="carts-image" mode="aspectFill" src="{{data.thumb}}"></image>
+                </view>
+                <view class="carts-text">
+                    <text class="carts-title">{{data.title}} </text>
+                    <text class="carts-key-name">{{data.optiontitle}}</text>
+                </view>
+                <view class="carts-right" style="width: 200rpx;align-items:flex-end;">
+                    <text class="text-red" style="margin-bottom: 0rpx;font-size: 24rpx;">￥ {{data.price}} </text>
+                    <text class="text-price" style="font-size: 24rpx;">x {{data.total}}</text>
+                    <view bindtap="show" data-index="{{index}}" style="margin-top: 20rpx;width: 120rpx;display: inline-block;;font-size: 28rpx;background-color: orange;display: flex;flex-direction: row;justify-content: center;align-items: center;padding: 6rpx ;border-radius: 6rpx;text-align: center;">评价
+                    </view>
+                </view>
+            </view>
+        </view>
+        <view style="line-height: 100rpx;margin-left: 20rpx;color:gray;font-size: 30rpx;font-weight: bolder;">整单评价</view>
+        <view style="font-size: 30rpx;background-color: #fff;margin-bottom: 160rpx;">
+            <view style="line-height: 80rpx;display: flex;flex-direction: row;padding-left: 20rpx;">
+                <view style="width:150rpx">评分</view>
+                <image src="../../../images/xinr.png" style="width: 10rpx;height: 10rpx;display: block;margin-top: 35rpx;margin-right: 10rpx;"></image>
+                <view style="display:flex;flex-direction: row;">
+                    <block wx:if="{{xin=='1'}}">
+                        <image bindtap="xin" data-index="1" src="https://tws.cnweisou.com/images/xinp.png" style="width: 50rpx;height: 50rpx;display: block;margin-top: 15rpx;margin-right: 10rpx;"></image>
+                        <image bindtap="xin" data-index="2" src="https://tws.cnweisou.com/images/xinu.png" style="width: 50rpx;height: 50rpx;display: block;margin-top: 15rpx;margin-right: 10rpx;"></image>
+                        <image bindtap="xin" data-index="3" src="https://tws.cnweisou.com/images/xinu.png" style="width: 50rpx;height: 50rpx;display: block;margin-top: 15rpx;margin-right: 10rpx;"></image>
+                        <image bindtap="xin" data-index="4" src="https://tws.cnweisou.com/images/xinu.png" style="width: 50rpx;height: 50rpx;display: block;margin-top: 15rpx;margin-right: 10rpx;"></image>
+                        <image bindtap="xin" data-index="5" src="https://tws.cnweisou.com/images/xinu.png" style="width: 50rpx;height: 50rpx;display: block;margin-top: 15rpx;margin-right: 10rpx;"></image>
+                    </block>
+                    <block wx:elif="{{xin=='2'}}">
+                        <image bindtap="xin" data-index="1" src="https://tws.cnweisou.com/images/xinp.png" style="width: 50rpx;height: 50rpx;display: block;margin-top: 15rpx;margin-right: 10rpx;"></image>
+                        <image bindtap="xin" data-index="2" src="https://tws.cnweisou.com/images/xinp.png" style="width: 50rpx;height: 50rpx;display: block;margin-top: 15rpx;margin-right: 10rpx;"></image>
+                        <image bindtap="xin" data-index="3" src="https://tws.cnweisou.com/images/xinu.png" style="width: 50rpx;height: 50rpx;display: block;margin-top: 15rpx;margin-right: 10rpx;"></image>
+                        <image bindtap="xin" data-index="4" src="https://tws.cnweisou.com/images/xinu.png" style="width: 50rpx;height: 50rpx;display: block;margin-top: 15rpx;margin-right: 10rpx;"></image>
+                        <image bindtap="xin" data-index="5" src="https://tws.cnweisou.com/images/xinu.png" style="width: 50rpx;height: 50rpx;display: block;margin-top: 15rpx;margin-right: 10rpx;"></image>
+                    </block>
+                    <block wx:elif="{{xin=='3'}}">
+                        <image bindtap="xin" data-index="1" src="https://tws.cnweisou.com/images/xinp.png" style="width: 50rpx;height: 50rpx;display: block;margin-top: 15rpx;margin-right: 10rpx;"></image>
+                        <image bindtap="xin" data-index="2" src="https://tws.cnweisou.com/images/xinp.png" style="width: 50rpx;height: 50rpx;display: block;margin-top: 15rpx;margin-right: 10rpx;"></image>
+                        <image bindtap="xin" data-index="3" src="https://tws.cnweisou.com/images/xinp.png" style="width: 50rpx;height: 50rpx;display: block;margin-top: 15rpx;margin-right: 10rpx;"></image>
+                        <image bindtap="xin" data-index="4" src="https://tws.cnweisou.com/images/xinu.png" style="width: 50rpx;height: 50rpx;display: block;margin-top: 15rpx;margin-right: 10rpx;"></image>
+                        <image bindtap="xin" data-index="5" src="https://tws.cnweisou.com/images/xinu.png" style="width: 50rpx;height: 50rpx;display: block;margin-top: 15rpx;margin-right: 10rpx;"></image>
+                    </block>
+                    <block wx:elif="{{xin=='4'}}">
+                        <image bindtap="xin" data-index="1" src="https://tws.cnweisou.com/images/xinp.png" style="width: 50rpx;height: 50rpx;display: block;margin-top: 15rpx;margin-right: 10rpx;"></image>
+                        <image bindtap="xin" data-index="2" src="https://tws.cnweisou.com/images/xinp.png" style="width: 50rpx;height: 50rpx;display: block;margin-top: 15rpx;margin-right: 10rpx;"></image>
+                        <image bindtap="xin" data-index="3" src="https://tws.cnweisou.com/images/xinp.png" style="width: 50rpx;height: 50rpx;display: block;margin-top: 15rpx;margin-right: 10rpx;"></image>
+                        <image bindtap="xin" data-index="4" src="https://tws.cnweisou.com/images/xinp.png" style="width: 50rpx;height: 50rpx;display: block;margin-top: 15rpx;margin-right: 10rpx;"></image>
+                        <image bindtap="xin" data-index="5" src="https://tws.cnweisou.com/images/xinu.png" style="width: 50rpx;height: 50rpx;display: block;margin-top: 15rpx;margin-right: 10rpx;"></image>
+                    </block>
+                    <block wx:elif="{{xin=='5'}}">
+                        <image bindtap="xin" data-index="1" src="https://tws.cnweisou.com/images/xinp.png" style="width: 50rpx;height: 50rpx;display: block;margin-top: 15rpx;margin-right: 10rpx;"></image>
+                        <image bindtap="xin" data-index="2" src="https://tws.cnweisou.com/images/xinp.png" style="width: 50rpx;height: 50rpx;display: block;margin-top: 15rpx;margin-right: 10rpx;"></image>
+                        <image bindtap="xin" data-index="3" src="https://tws.cnweisou.com/images/xinp.png" style="width: 50rpx;height: 50rpx;display: block;margin-top: 15rpx;margin-right: 10rpx;"></image>
+                        <image bindtap="xin" data-index="4" src="https://tws.cnweisou.com/images/xinp.png" style="width: 50rpx;height: 50rpx;display: block;margin-top: 15rpx;margin-right: 10rpx;"></image>
+                        <image bindtap="xin" data-index="5" src="https://tws.cnweisou.com/images/xinp.png" style="width: 50rpx;height: 50rpx;display: block;margin-top: 15rpx;margin-right: 10rpx;"></image>
+                    </block>
+                    <block wx:else>
+                        <image bindtap="xin" data-index="1" src="https://tws.cnweisou.com/images/xinu.png" style="width: 50rpx;height: 50rpx;display: block;margin-top: 15rpx;margin-right: 10rpx;"></image>
+                        <image bindtap="xin" data-index="2" src="https://tws.cnweisou.com/images/xinu.png" style="width: 50rpx;height: 50rpx;display: block;margin-top: 15rpx;margin-right: 10rpx;"></image>
+                        <image bindtap="xin" data-index="3" src="https://tws.cnweisou.com/images/xinu.png" style="width: 50rpx;height: 50rpx;display: block;margin-top: 15rpx;margin-right: 10rpx;"></image>
+                        <image bindtap="xin" data-index="4" src="https://tws.cnweisou.com/images/xinu.png" style="width: 50rpx;height: 50rpx;display: block;margin-top: 15rpx;margin-right: 10rpx;"></image>
+                        <image bindtap="xin" data-index="5" src="https://tws.cnweisou.com/images/xinu.png" style="width: 50rpx;height: 50rpx;display: block;margin-top: 15rpx;margin-right: 10rpx;"></image>
+                    </block>
+                </view>
+                <text style="background-color: gray;height: 40rpx;border-radius: 8rpx;margin-top: 20rpx;padding:0 10rpx;margin-left: 20rpx;line-height: 40rpx;font-size: 28rpx" wx:if="{{xin=='0'}}">没有评分</text>
+                <block wx:else></block>
+            </view>
+            <view style="line-height: 150rpx;display: flex;flex-direction: row;padding-left: 20rpx;">
+                <view style="width:150rpx">晒图</view>
+                <view style="">
+                    <view class="gallery">
+                        <view class="item" style="margin-top: 25rpx;" wx:for="{{images}}">
+                            <image bindtap="previewImage" id="{{index}}" mode="aspectFill" src=" {{item}}" style="width: 100rpx; height: 100rpx"></image>
+                            <view bindtap="delete" class="delete" data-index="{{index}}">
+                                <image src="https://tws.cnweisou.com/images/icon_delete.png" style="left: 33%;"></image>
+                            </view>
+                        </view>
+                        <view class="item" style="margin-top: 25rpx;">
+                            <image bindtap="chooseImage" class="button-upload" src="https://tws.cnweisou.com/images/icon_add.png" style=""></image>
+                        </view>
+                    </view>
+                </view>
+            </view>
+            <view style="line-height: 150rpx;display: flex;flex-direction: row;padding-left: 20rpx;">
+                <view style="width:150rpx">评论</view>
+                <image src="../../../images/xinr.png" style="width: 10rpx;height: 10rpx;margin-top: 75rpx;margin-right: 10rpx;line-height: 150rpx;vertical-align: middle;"></image>
+                <textarea id="" name="text" placeholder="说点什么吧！" style="height: 150rpx;line-height: 30rpx;padding-right: 20rpx;padding-left: 10rpx;"></textarea>
+            </view>
+            <button formType="submit" style="position: fixed;bottom:0;width:94%;margin:10rpx 3%;z-index: 9" type="warn">提交评价</button>
+        </view>
+    </view>
+</form>

@@ -1,0 +1,23 @@
+<view>
+    <view class="order-top">订单金额:<text>￥{{orderDetail.price/100}}</text>
+        <text class="order-state">{{orderDetail.stateName}}</text>
+    </view>
+</view>
+<view class="tab-list">
+    <view class="tab-list-product">
+        <image class="list-img" src="{{orderDetail.imgIcon}}"></image>
+        <view class="t-list-text">
+            <text class="t-product-text">{{orderDetail.name}}</text>
+            <text class="t-product-detail">{{orderDetail.subTitle}}</text>
+            <view class="t-product-state">
+                <text class="t-product-price">￥{{orderDetail.price/100}}</text>
+            </view>
+        </view>
+    </view>
+</view>
+<view class="order-detail">
+    <text class="order-number">订单号:{{orderDetail.id}}</text>
+    <text class="order-number">订单日期:{{orderDetail.createTime}}</text>
+    <text class="jiankang">平安健康险官网地址:<text class="jiankang-url">www.health.pingan.com</text>
+    </text>
+</view>

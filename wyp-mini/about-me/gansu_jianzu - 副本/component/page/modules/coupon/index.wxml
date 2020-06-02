@@ -1,0 +1,17 @@
+<view class="zan-panel zan-panel__no-margin-top">
+    <scroll-view scrollX class="coupon-list1" wx:if="{{module.data.length==1}}">
+        <view class="coupon__item__type1 " wx:for="{{module.data}}" wx:key="{{index}}">
+            <coupon bindreceivecoupon="receivecoupon" color="{{module.options.color}}" coupon="{{item}}" type="type1"></coupon>
+        </view>
+    </scroll-view>
+    <scroll-view scrollX class="coupon-list2" wx:if="{{module.data.length==2}}">
+        <view class="coupon__item__type2" wx:for="{{module.data}}" wx:key="{{index}}">
+            <coupon bindreceivecoupon="receivecoupon" color="{{module.options.color}}" coupon="{{item}}" type="type2"></coupon>
+        </view>
+    </scroll-view>
+    <scroll-view scrollX class="coupon-list3" wx:if="{{module.data.length>=3}}">
+        <view class="coupon__item__type3 " wx:for="{{module.data}}" wx:key="{{index}}">
+            <coupon bindreceivecoupon="receivecoupon" color="{{module.options.color}}" coupon="{{item}}" type="type3"></coupon>
+        </view>
+    </scroll-view>
+</view>

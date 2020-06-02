@@ -1,0 +1,14 @@
+<template name="orders-btns-detail">
+    <view class="order-btns-detail-box">
+        <view class="left-box">
+            <view class="line1"></view>
+            <view class="icon"></view>
+        </view>
+        <view class="right-box">
+            <view class="right-box-time">{{order.timeShow}}</view>
+            <view class="action-detail-box">
+                <view catchtap="payOrder" class="order-btn-zhifu" data-id="{{order.id}}" data-no="{{order.orderNo}}" data-oto="1" wx:if="{{item=='pay'}}" wx:for="{{order.actionList}}" wx:key="{{index}}">去支付(还剩{{order.remainMinutesText}})</view>
+            </view>
+        </view>
+    </view>
+</template>

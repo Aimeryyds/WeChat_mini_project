@@ -1,0 +1,64 @@
+<view wx:if="{{type=='type1'}}">
+    <view bindtap="bindCoupon" class="common-content type1-content" data-coupon="{{coupon}}" style="border-top-color: {{color||'#fb355c'}}">
+        <view class="common-money type1-money" style="color: {{color||'#fb355c'}}">
+            <text style="font-size: 32rpx;">￥</text>{{coupon.value}}</view>
+        <view class="type1-limit">
+            <view style="font-size: 28rpx;color:#000;">{{coupon.useThreshold==0?'无门槛使用':'满'+coupon.useThreshold+'元使用'}}</view>
+            <view style="margin: 8rpx 0;">{{coupon.rangeOfUse==1?'全平台可用':'部分门店可用'}}</view>
+            <view style="white-space: nowrap;">{{coupon.status==2?'领取后'+coupon.termOfValidity+'天内有效':'有效期'+coupon.useTime+'~'+coupon.useEndTime}}</view>
+        </view>
+        <view class="common-button type1-button" style="background-color: {{color||'#fb355c'}}">立即领取</view>
+    </view>
+</view>
+<view wx:if="{{type=='type2'}}">
+    <view bindtap="bindCoupon" class="common-content type2-content" data-coupon="{{coupon}}" style="border-top-color: {{color||'#fb355c'}}">
+        <view class="type2-limit">
+            <view class="common-money type2-money" style="color: {{color||'#fb355c'}}">
+                <text style="font-size: 32rpx;">￥</text>{{coupon.value}}</view>
+            <view class="type2-limit_info">
+                <view style="font-size: 24rpx;color:#000;">{{coupon.useThreshold==0?'无门槛使用':'满'+coupon.useThreshold+'元使用'}}</view>
+                <view style="margin-top: 8rpx;">{{coupon.rangeOfUse==1?'全平台可用':'部分门店可用'}}</view>
+            </view>
+        </view>
+        <view>
+            <view class="common-button" style="background-color: {{color||'#fb355c'}}">立即领取</view>
+        </view>
+    </view>
+</view>
+<view wx:if="{{type=='type3'}}">
+    <view bindtap="bindCoupon" class="common-content type3-content" data-coupon="{{coupon}}" style="border-top-color: {{color||'#fb355c'}}">
+        <view class="type3-limit">
+            <view class="common-money type3-money" style="color: {{color||'#fb355c'}}">
+                <text style="font-size: 24rpx;">￥</text>{{coupon.value}}</view>
+            <view class="type3-button" style="background-color: {{color||'#fb355c'}}">领</view>
+        </view>
+        <view style="font-size: 20rpx;color:#000;">{{coupon.useThreshold==0?'无门槛使用':'满'+coupon.useThreshold+'元使用'}}</view>
+        <view style="font-size: 18rpx;color: #9B9B9B ;margin: 3rpx 0;">{{coupon.rangeOfUse==1?'全平台可用':'部分门店可用'}}</view>
+    </view>
+</view>
+<view wx:if="{{type=='type4'}}">
+    <view class="common-content type1-content " style="border-top-color: {{coupon.overTime?'#CDCDCD':'#fb355c'}}">
+        <view class="common-money type1-money" style="color: {{coupon.overTime?'#CDCDCD':'#fb355c'}}">
+            <text style="font-size: 32rpx;">￥</text>{{coupon.value}}</view>
+        <view class="type1-limit {{coupon.overTime?'type4-limit':''}}">
+            <view style="font-size: 28rpx;color: {{coupon.overTime?'#9B9B9B':'#000'}};">{{coupon.useThreshold==0?'无门槛使用':'满'+coupon.useThreshold+'元使用'}}</view>
+            <view style="margin: 8rpx 0;">{{coupon.rangeOfUse==1?'全平台可用':'部分门店可用'}}</view>
+            <view style="white-space: nowrap;">{{coupon.status==2?'领取后'+coupon.termOfValidity+'天内有效':'有效期'+coupon.startTime+'~'+coupon.endTime}}</view>
+        </view>
+        <view class="coupon4-button" wx:if="{{coupon.overTime}}">
+            <view class="coupon4-overTime">已过期</view>
+        </view>
+    </view>
+</view>
+<view wx:if="{{type=='type5'}}">
+    <view class="common-content type1-content" style="border-top-color: {{coupoon.stock>0?'#fb355c':'#CDCDCD'}}">
+        <view class="common-money type1-money" style="color: {{coupoon.stock>0?'#fb355c':'#CDCDCD'}}">
+            <text style="font-size: 32rpx;">￥</text>{{coupon.value}}</view>
+        <view class="type1-limit {{coupoon.stock>0?'':'type4-limit'}}">
+            <view style="font-size: 28rpx;color:#000;">{{coupon.useThreshold==0?'无门槛使用':'满'+coupon.useThreshold+'元使用'}}</view>
+            <view style="margin: 8rpx 0;">{{coupon.rangeOfUse==1?'全平台可用':'部分门店可用'}}</view>
+            <view style="white-space: nowrap;">{{coupon.status==2?'领取后'+coupon.termOfValidity+'天内有效':'有效期'+coupon.useTime+'~'+coupon.useEndTime}}</view>
+        </view>
+        <view class="common-button type1-button" style="background-color: {{coupoon.stock>0?'#fb355c':'#CDCDCD'}}">{{coupon.stock>0?'立即领取':'已抢完'}}</view>
+    </view>
+</view>

@@ -1,0 +1,9 @@
+<view class="{{isRec?'single-pic-wrapper feed-item-wrapper in-rec':'single-pic-wrapper feed-item-wrapper'}}">
+    <view class="article">
+        <view class="title">{{config.title}}</view>
+        <item-detail config="{{config}}" hasAuthor="{{hasAuthor}}" isTop="{{config.isTop}}" noPv="{{noPv}}"></item-detail>
+    </view>
+    <view class="img-container" wx:if="{{showCover}}">
+        <image class="img-wrapper" mode="aspectFill" src="{{cover}}"></image>
+    </view>
+</view>

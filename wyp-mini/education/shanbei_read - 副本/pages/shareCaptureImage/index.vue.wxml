@@ -1,0 +1,13 @@
+<template name="570da4ea">
+    <view class="_div data-v-30d386a0 container">
+        <view class="_div data-v-30d386a0 loading" wx:if="{{isDataReady}}">
+            <view class="_div data-v-30d386a0 save-success" wx:if="{{isSaved}}">图片已经保存，快去相册分享海报吧~</view>
+            <button class="_button data-v-30d386a0 notice" openType="openSetting" wx:if="{{isAuthError}}">保存失败，点击开启保存权限</button>
+            <button class="_button data-v-30d386a0 notice" wx:if="{{isSystemError}}">请在手机系统设置选项中，允许微信访问你的相册</button>
+        </view>
+        <image class="_img data-v-30d386a0 article" src="{{url}}" wx:if="{{type==='article'}}"></image>
+        <image class="_img data-v-30d386a0 knowledge" mode="widthFix" src="{{url}}" wx:elif="{{type==='knowledge'}}"></image>
+        <image class="_img data-v-30d386a0 plan-poster {{[height===753?'long':'',height===577?'short':'']}}" src="{{url}}" wx:elif="{{type==='plan-poster'}}"></image>
+        <image class="_img data-v-30d386a0 book" src="{{url}}" wx:else></image>
+    </view>
+</template>

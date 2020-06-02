@@ -1,0 +1,48 @@
+<import src="/pages/templates/tag/manjian.wxml"></import>
+<import src="/dist/loadmore/index.wxml"></import>
+<view class="container" wx:if="{{isShow}}">
+    <scroll-view enableBackToTop scrollY bindscrolltolower="lower" scrollTop="{{scrollTop}}" style="width:100%;height: 100vh;" wx:if="{{list&&list.length>0}}">
+        <view style="margin-bottom:20rpx;" wx:for="{{list}}">
+            <navigator hoverClass="none" openType="redirect" url="/pages/shop/products/products?storeid={{item.storeId}}">
+                <view class="manjian-title">
+                    <view class="manjian-title__top">
+                        <image class="manjian-title__img" src="http://imgcdnali.wfenxiao.com.cn/xcx/c/icons/store.png"></image>
+                        <view>{{item.brandName}}-{{item.storeName}}</view>
+                    </view>
+                    <view class="manjian-title__bottom">
+                        <view class="manjian-tag">
+                            <template is="manjian-tag" data></template>
+                        </view>
+                        <view class="manjian-msg">
+                            <view wx:for="{{item.fullreductionMsg}}" wx:for-item="msg">{{msg}}</view>
+                        </view>
+                    </view>
+                </view>
+            </navigator>
+            <view class="manjian-list">
+                <navigator hoverClass="none" openType="redirect" url="/pages/products/show/show?id={{goods.goodsId}}" wx:for="{{item.goodsList}}" wx:for-item="goods">
+                    <view class="manjian-list__item">
+                        <image class="manjian-list__img" src="{{goods.imgUrl}}"></image>
+                        <view class="manjian-list__cont">
+                            <view class="zan-ellipsis">{{goods.goodsName}}</view>
+                            <view class="manjian-list__ctrl">
+                                <view class="manjian-list__price">
+                                    <text>￥</text>{{goods.price}}</view>
+                                <view class="manjian-list__btn">立即购买</view>
+                            </view>
+                        </view>
+                    </view>
+                </navigator>
+            </view>
+            <navigator hoverClass="none" openType="redirect" url="/pages/shop/products/products?storeid={{item.storeId}}">
+                <view class="manjian-list__more">查看更多</view>
+            </navigator>
+        </view>
+        <view id="loadmore">
+            <template is="zan-loadmore" data="{{loading:loadingmore}}"></template>
+        </view>
+    </scroll-view>
+    <view style="font-size: 28rpx; color:rgba(0,0,0,0.43);margin-top:100rpx;text-align:center;" wx:if="{{list&&list.length==0}}">
+      暂无数据
+    </view>
+</view>

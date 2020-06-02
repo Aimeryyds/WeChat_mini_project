@@ -1,0 +1,6 @@
+<view style="display:inherit;">
+    <slot wx:if="{{(!html||!html.length||!html[0].name&&!html[0].type)&&!nodes.length}}"></slot>
+    <view animation="{{showAnimation}}" bindtap="__e" bindtouchmove="__e" bindtouchstart="__e" class="_contain" data-event-opts="{{[ [ 'tap',[ [ 'tap',['$event'] ] ] ],[ 'touchstart',[ [ 'touchstart',['$event'] ] ] ],[ 'touchmove',[ [ 'touchmove',['$event'] ] ] ] ]}}" style="{{(selectable?'user-select:text;-webkit-user-select:text;':'')+(showWithAnimation?'opacity:0;':'')}}">
+        <trees bind:__l="__l" loadVideo="{{loadVideo}}" nodes="{{nodes.length?nodes:html&&html.length&&(html[0].name||html[0].type)?html:[]}}" vueId="6b79763c-1"></trees>
+    </view>
+</view>

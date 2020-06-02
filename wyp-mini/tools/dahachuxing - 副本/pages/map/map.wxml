@@ -1,0 +1,157 @@
+<view style="display: flex;flex-direction: column;height: 99%">
+    <view class="top-title" style="padding-top: {{topHeight}}px;background:{{headColor}};color:{{textColor}}">
+        <view>{{title}}</view>
+    </view>
+    <view class="map-header" style="background:{{headColor}};color:{{textColor}}">
+        <view bindtap="toMyInfo" class="my-info">
+            <image src="{{myImage}}"></image>
+        </view>
+        <view style="flex:5;display: flex;justify-content: space-evenly">
+            <view bindtap="changeShowType" class="header-content" data-type="1">
+                <text class="{{showType==1?'content-active':''}}" style="margin-bottom: 6rpx;color: {{headColor=='#ffffff'?'#000000':textColor}}">电单车</text>
+                <view style="{{showType==1?headColor=='#ffffff'?'border-bottom: 6rpx solid #000000':'border-bottom: 6rpx solid '+textColor:''}};margin: 0 20rpx;"></view>
+            </view>
+            <view bindtap="changeShowType" class="header-content" data-type="2">
+                <text class="{{showType==2?'content-active':''}}" style="margin-bottom: 6rpx;color: {{headColor=='#ffffff'?'#000000':textColor}}">{{modelType!=nll&&modelType==0?'还车点':'禁停区'}}</text>
+                <view style="{{showType==2?headColor=='#ffffff'?'border-bottom: 6rpx solid #000000':'border-bottom: 6rpx solid '+textColor:''}};margin: 0 20rpx;"></view>
+            </view>
+        </view>
+        <view style="flex:1"></view>
+    </view>
+    <map showLocation bindmarkertap="markertap" bindregionchange="regionchange" bindtap="tabMap" circles="{{circles}}" id="myMap" latitude="{{latitude}}" longitude="{{longitude}}" markers="{{markers}}" polygons="{{polygon}}" polyline="{{polyline}}" scale="{{scale}}" style="width:100%;flex:1;z-index:99">
+        <cover-view class="borrow" wx:if="{{showView&&!flag&&!guideDialog}}">
+            <cover-view class="borrowStatus" style="border: 1px {{mainColor}} solid;">
+                <cover-view class="status">
+                    <cover-view class="status-item" style="color:{{mainColor}};width: 30%;">
+                        <cover-view class="borrowStatus-content">
+              {{machineNO.length<=9?machineNO:longMachineNO}}
+            </cover-view>
+                        <cover-view class="title">车辆编号</cover-view>
+                    </cover-view>
+                    <cover-view class="status-item" style="color:{{mainColor}};width: 25%;">
+                        <cover-view class="borrowStatus-content">{{time}}</cover-view>
+                        <cover-view class="title">骑行时间</cover-view>
+                    </cover-view>
+                    <cover-view class="status-item" style="color:{{mainColor}};width: 25%;">
+                        <cover-view class="borrowStatus-content">{{mileage}}</cover-view>
+                        <cover-view class="title">骑行里程</cover-view>
+                    </cover-view>
+                    <cover-view class="status-item" style="color:{{mainColor}};width: 20%;">
+                        <cover-view class="borrowStatus-content">{{money}}</cover-view>
+                        <cover-view class="title">预计费用</cover-view>
+                    </cover-view>
+                </cover-view>
+                <cover-view class="status-btn">
+                    <cover-view bindtap="returnBike" style="width:45%;background:{{mainColor}};color:{{textColor}}" wx:if="{{isPark}}">用完还车</cover-view>
+                    <cover-view bindtap="parkRide" style="width:45%;background:{{mainColor}};color:{{textColor}}" wx:if="{{isPark}}">临时停车</cover-view>
+                    <cover-view bindtap="returnBike" style="width:45%;background:{{mainColor}};color:{{textColor}}" wx:if="{{isRide}}">用完还车</cover-view>
+                    <cover-view bindtap="continueRide" style="width:45%;background:{{mainColor}};color:{{textColor}}" wx:if="{{isRide}}">继续骑行</cover-view>
+                </cover-view>
+            </cover-view>
+        </cover-view>
+        <cover-view class="left-controller" wx:if="{{!guideDialog}}">
+            <cover-image catchtap="refresh" src="/images/map/refresh.png" style="margin-bottom: 40rpx"></cover-image>
+            <cover-image catchtap="moveTo" src="/images/map/dw.png"></cover-image>
+        </cover-view>
+        <cover-view class="right-controller" wx:if="{{!guideDialog}}">
+            <cover-image catchtap="showExtraMenu" src="/images/map/question@3x.png" style="margin-bottom: 40rpx"></cover-image>
+            <cover-image catchtap="contact" src="/images/map/help.png"></cover-image>
+        </cover-view>
+        <cover-view catchtap="scanCode" class="center-controller" wx:if="{{!showView&&!guideDialog}}">
+            <cover-image src="{{scanImage}}" style="height:110rpx;width: 280rpx"></cover-image>
+        </cover-view>
+        <cover-view catchtap="hideEx" class="zhezao" style="width:100%" wx:if="{{showEx}}">
+            <cover-view catchtap="exMenu" class="ex-controller">
+                <cover-view class="ex-controller-content">
+                    <cover-view class="ex-column">
+                        <cover-view catchtap="toHelp" class="ex-item">
+                            <cover-image src="{{helpImage}}"></cover-image>
+                            <cover-view>常见问题</cover-view>
+                        </cover-view>
+                        <cover-view style="width:2rpx;background:#e0e0e0"></cover-view>
+                        <cover-view catchtap="toApplyPoint" class="ex-item">
+                            <cover-image src="{{applyPointImage}}"></cover-image>
+                            <cover-view>申请还车点</cover-view>
+                        </cover-view>
+                    </cover-view>
+                    <cover-view style="height:2rpx;background:#e0e0e0"></cover-view>
+                    <cover-view class="ex-column">
+                        <cover-view catchtap="toFault" class="ex-item">
+                            <cover-image src="{{faultImage}}"></cover-image>
+                            <cover-view>故障上报</cover-view>
+                        </cover-view>
+                        <cover-view style="width:2rpx;background:#e0e0e0"></cover-view>
+                        <cover-view catchtap="toAdvice" class="ex-item">
+                            <cover-image src="{{adviceImage}}"></cover-image>
+                            <cover-view>意见反馈</cover-view>
+                        </cover-view>
+                    </cover-view>
+                </cover-view>
+            </cover-view>
+        </cover-view>
+        <cover-view catchtap="hideContactEx" class="zhezao" style="width:100%;" wx:if="{{showContact}}">
+            <cover-view catchtap="exMenu" class="ex-controller" style="background-color: #f0f0f0;">
+                <cover-view class="ex-contact-content">
+                    <cover-view class="contact-header">
+            客服电话
+          </cover-view>
+                    <block wx:for="{{phoneList}}" wx:key="index">
+                        <cover-view class="contact-line"></cover-view>
+                        <cover-view catchtap="phoneCall" class="contact-item" data-phone="{{item.phone}}" style="color: {{mainColor}}">
+                            <cover-view style="display: flex;font-size:28rpx;flex-wrap: wrap;flex:1">
+                                <cover-view style="width:40%">{{item.phone}}</cover-view>
+                                <cover-view style="width:50%" wx:if="{{item.time!=''}}">{{'('+item.time+')'}}</cover-view>
+                            </cover-view>
+                            <cover-view style="background: {{mainColor}};color:{{textColor}};border-radius: 50rpx;padding: 10rpx 30rpx;font-size: 28rpx">呼叫</cover-view>
+                        </cover-view>
+                    </block>
+                    <cover-view catchtap="hideContactEx" class="contact-btn">取消</cover-view>
+                </cover-view>
+            </cover-view>
+        </cover-view>
+        <view catchtap="toSearch" class="map-center-search" style="top: {{searchHeight}}px">
+            <view class="search-btn">
+                <icon color="#fff" size="10" style="margin-right: 1px" type="search"></icon>
+        {{isInGeo?'搜索目的地能否还车':'该区域还未开通服务'}}
+      </view>
+            <view class="triangle"></view>
+        </view>
+        <view class="map-center-marker">
+            <image src="/images/map/pin.png"></image>
+        </view>
+        <view class="header-main" wx:if="{{!showView}}">
+            <view class="main-btn-top" style="background:{{mainColor}};color:{{textColor}}" wx:if="{{topImage.length==0}}">
+                <view class="main">
+                    <view style="margin: 10rpx 0">请在地图上的站点内还车!
+          </view>
+                    <view style="margin-bottom: 12rpx">体验更快借还车，请打开手机蓝牙和位置服务!
+          </view>
+                </view>
+            </view>
+            <view class="main-btn-top-image" wx:else>
+                <view>
+                    <image bindtap="toTarget" data-url="{{topImage[0].target}}" mode="cover" src="{{topImage[0].src}}" style="height: {{topImageHeight}}px;width: {{topImageWidth}}px"></image>
+                </view>
+            </view>
+        </view>
+    </map>
+    <view class="zhezao" style="padding-top:200rpx;" wx:if="{{flag}}">
+        <view class="t_w">
+            <view class="tanchu_view">
+                <view>
+                    <view class="guide-body" style="background-color:{{mainColor}}">
+                        <view class="body-text">
+              请打开蓝牙后点击重试!
+            </view>
+                        <image src="{{guideImage}}" style="height: 45vw;width:100%;display:block"></image>
+                    </view>
+                    <view class="guide-bottom">
+                        <view bindtap="retry" class="retry" style="background-color: {{mainColor}};color: {{textColor}}">重试</view>
+                        <view bindtap="cancel" class="cancel">取消</view>
+                    </view>
+                </view>
+            </view>
+        </view>
+    </view>
+    <ad-dialog bind:knownTap="knownTap" imgUrls="{{boundImage}}" mainColor="{{mainColor}}" textColor="{{textColor}}" visible="{{guideDialog}}"></ad-dialog>
+</view>

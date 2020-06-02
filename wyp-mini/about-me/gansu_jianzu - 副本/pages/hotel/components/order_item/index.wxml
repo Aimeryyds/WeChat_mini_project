@@ -1,0 +1,38 @@
+<view bindtap="_gotoDetails">
+    <view class="order-state-row-box">
+        <view class="order-state-direction-row">
+            <image src="http://imgcdnali.wfenxiao.com.cn/xcx/c/hotel/hotel.png"></image>
+            <view class="order-name_text">{{item.store.brandName}}-{{item.store.storeName}}</view>
+        </view>
+        <view class="order-state_text">{{orderStatusName}}</view>
+    </view>
+    <view class="order-detail">
+        <view class="order-address">{{item.provinceName}}{{item.cityName}}{{item.areaName}}{{item.detailAddress}}</view>
+        <view class="order-date">
+            <text>入住 <text style="color:#000">{{bookInTime}}</text>
+            </text>
+            <text>离店 <text style="color:#000">{{bookOutTime}}</text>
+            </text>
+            <text>{{item.bookDays}}晚/{{item.bookNum}}间</text>
+        </view>
+    </view>
+    <view class="orders-btns">
+        <view>
+            <text style="font-size: 24rpx;">{{item.roomName}} </text>
+            <text class="room-price">
+                <text style="font-size: 24rpx;"> ￥</text>{{item.roomPrice}}</text>
+        </view>
+        <view class="action-box">
+            <view wx:if="{{pay}}">
+                <button catchtap="_payOrder" class="zan-btn zan-btn--small order-actions-btn" data-id="{{item.id}}" data-no="{{item.orderNo}}">去支付</button>
+            </view>
+            <view wx:if="{{cancel}}">
+                <button catchtap="_cancelOrder" class="zan-btn zan-btn--small order-actions-btn" data-id="{{item.id}}">取消订单</button>
+            </view>
+            <view wx:if="{{item.status===70}}">
+                <button catchtap="_gotoEvaluate" class="zan-btn zan-btn--small order-actions-btn" data-id="{{item.id}}" wx:if="{{evaluate}}">去评价</button>
+                <text class="shengyutime" wx:if="{{!evaluate}}">已评价</text>
+            </view>
+        </view>
+    </view>
+</view>

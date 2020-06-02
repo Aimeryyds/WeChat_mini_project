@@ -1,0 +1,113 @@
+<loading wx:if="{{loading}}"></loading>
+<swiper autoplay="{{autoplay}}" class="swiper" duration="{{duration}}" indicatorDots="{{indicatorDots}}" interval="{{interval}}">
+    <swiper-item class="swiperitem" wx:if="{{isAdvs}}" wx:for="{{advs}}">
+        <image src="{{item.thumb}}"></image>
+    </swiper-item>
+    <swiper-item class="swiperitem" wx:if="{{isAdvs==false}}" wx:for="{{imgUrls}}">
+        <image src="{{item}}"></image>
+    </swiper-item>
+    <view class="shop">
+        <form bindsubmit="formSubmit" reportSubmit="true">
+            <input bindconfirm="formSubmit" bindinput="inputchange" placeholder="请输入需要搜索的商品名称" style="background-color: #fff;font-size: 27rpx;line-height: 52rpx;padding: 0 60rpx 0 20rpx;border-radius: 10rpx;" type="text"></input>
+            <image bindtap="formSubmit" src="http://tws.cnweisou.com/images/search.png" style="width: 30rpx;padding:6rpx;height: 30rpx;position: absolute;right: 0;top:10rpx;"></image>
+        </form>
+        <view class="shopLeft" wx:if="{{shopinfo.logo}}">
+            <image src="{{shopinfo.logo}}"></image>
+        </view>
+        <view class="shopLeft" wx:else>
+            <image src="http://img02.tooopen.com/images/20150928/tooopen_sy_143912755726.jpg"></image>
+        </view>
+        <view class="shopRight">
+            <text class="title">{{shopinfo.merchname}}</text>
+            <view class="star">
+                <image src="http://tws.cnweisou.com/images/xinp.png" wx:for="{{averscore}}"></image>
+            </view>
+            <text class="sales">销量：{{totalsales}}</text>
+            <text class="collection">收藏：{{totalfavor}}</text>
+        </view>
+    </view>
+    <view class="cover"></view>
+    <view class="customerTel">
+        <image bindtap="giveTelePhone" data-tel="{{shopinfo.mobile}}" src="http://tws.cnweisou.com/images/shopTel_icon.png"></image>
+        <image bindtap="sceneCode" src="http://tws.cnweisou.com/images/shopCode_icon.png"></image>
+    </view>
+</swiper>
+<scroll-view class="couponNum" scrollX="true">
+    <view bindtap="clickTitle" class="newTitle {{sub==0?'active':''}}" data-id="{{item.id}}" data-index="0">
+        <text class="num">{{totalgoods}}</text>
+        <text class="type">全部商品</text>
+    </view>
+    <view bindtap="clickTitle" class="newTitle {{sub==1?'active':''}}" data-id="{{item.id}}" data-index="1">
+        <text class="num">{{totalrecommands}}</text>
+        <text class="type">推荐</text>
+    </view>
+    <view bindtap="clickTitle" class="newTitle {{sub==2?'active':''}}" data-id="{{item.id}}" data-index="2">
+        <text class="num">{{totalnewgoods}}</text>
+        <text class="type">上新</text>
+    </view>
+    <view bindtap="joinIndu" class="newTitle {{sub==3?'active':''}}" data-id="{{item.id}}" data-index="3">
+        <view class="shopNum">
+            <image src="http://tws.cnweisou.com/images/shopIndu.png"></image>
+        </view>
+        <text class="type">店铺简介</text>
+    </view>
+</scroll-view>
+<view class="goodsList1 carts-list1" wx:if="{{sub==0}}">
+    <view bindtap="tapGoods" class="carts-item1" data-object-id="{{item.id}}" wx:if="{{goods}}" wx:for="{{goods}}" wx:key="objectId">
+        <view class="imgView">
+            <image class="carts-image1" mode="aspectFill" src="{{item.thumb}}"></image>
+        </view>
+        <view class="carts-text1">
+            <text class="carts-title1">{{item.title}}</text>
+            <text class="carts-price1">￥{{item.marketprice}}元</text>
+            <text class="carts-price3">销量:{{item.sales}}</text>
+        </view>
+    </view>
+    <view class="noShopGoods" wx:if="{{!goods}}">
+        <image src="http://tws.cnweisou.com/images/noShopGood.png"></image>
+        <text>目前没有商品喔</text>
+    </view>
+    <view></view>
+</view>
+<view class="goodsList1 carts-list1" wx:if="{{sub==1}}">
+    <view bindtap="tapGoods" class="carts-item1" data-object-id="{{item.id}}" wx:if="{{indexrecommands}}" wx:for="{{indexrecommands}}" wx:key="objectId">
+        <view class="imgView">
+            <image class="carts-image1" mode="aspectFill" src="{{item.thumb}}"></image>
+        </view>
+        <view class="carts-text1">
+            <text class="carts-title1">{{item.title}}</text>
+            <text class="carts-price1">￥{{item.marketprice}}元</text>
+            <text class="carts-price3">销量:{{item.sales}}</text>
+        </view>
+    </view>
+    <view class="noShopGoods" wx:if="{{!indexrecommands}}">
+        <image src="http://tws.cnweisou.com/images/noShopGood.png"></image>
+        <text>目前没有商品喔</text>
+    </view>
+</view>
+<view class="goodsList1 carts-list1" wx:if="{{sub==2}}">
+    <view bindtap="tapGoods" class="carts-item1" data-object-id="{{item.id}}" wx:if="{{newgoods}}" wx:for="{{newgoods}}" wx:key="objectId">
+        <view class="imgView">
+            <image class="carts-image1" mode="aspectFill" src="{{item.thumb}}"></image>
+        </view>
+        <view class="carts-text1">
+            <text class="carts-title1">{{item.title}}</text>
+            <text class="carts-price1">￥{{item.marketprice}}元</text>
+            <text class="carts-price3">销量:{{item.sales}}</text>
+        </view>
+    </view>
+    <view class="noShopGoods" wx:if="{{!newgoods}}">
+        <image src="http://tws.cnweisou.com/images/noShopGood.png"></image>
+        <text>目前没有商品喔</text>
+    </view>
+</view>
+<view class="showCodeImg" wx:if="{{showshopcode}}">
+    <view class="code_inner">
+        <view bindtap="closeShopCode" class="codeTop">
+            <text>X</text>
+        </view>
+        <view class="codeMid">
+            <image bindtap="previewCodeImg" src="{{shopCodeImg}}"></image>
+        </view>
+    </view>
+</view>

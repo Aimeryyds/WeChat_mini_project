@@ -1,0 +1,23 @@
+<navigation-bar enable="{{enable}}" title="评论"></navigation-bar>
+<view class="container">
+    <view bindtap="pageReload" class="cplist_nodata" wx:if="{{requeseFail}}">{{requeseFailTips}}</view>
+    <view style="padding-top:{{barHeight}}px;width:100%;" wx:else>
+        <view class="plw">
+            <view class="pl_textareaw">
+                <form bindsubmit="sendPl" data-id="{{option.id}}" wx:if="{{is_login}}">
+                    <textarea autoFocus="true" class="ta" confirmType="send" cursorSpacing="30rpx" data-id="{{option.cid}}" data-type="dopl" focus="{{isfocus}}" name="content" placeholder="回复 {{option.to}}" type="text" value="{{emptystring}}"></textarea>
+                    <button class="submitbtn" formType="submit">提交</button>
+                </form>
+                <button bindgetuserinfo="tapFavBtn" class="ta_btn" data-id="{{option.cid}}" data-type="dopl" openType="getUserInfo" wx:else>回复 {{option.to}}</button>
+            </view>
+        </view>
+    </view>
+</view>
+<view class=" " wx:if="{{showToast}}">
+    <view class="toast">
+        <rich-text nodes="{{toastTitle}}"></rich-text>
+    </view>
+</view>
+<loading hidden="{{requeseDone||!hasNextPage}}">
+ 加载中...
+</loading>

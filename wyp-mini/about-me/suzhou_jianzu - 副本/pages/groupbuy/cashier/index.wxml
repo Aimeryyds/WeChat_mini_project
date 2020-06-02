@@ -1,0 +1,18 @@
+<view class="view-title">
+    <text style="color:rgb(255, 106, 106);">订单已经提交成功</text>
+    <image bindtap="toStart" src="../../../images/icon_home_selected.png" style="margin-right: 30rpx;"></image>
+</view>
+<view class="subtotal">
+    <view class="fsp bb">
+        <view>订单编号</view>
+        <view>{{orderno}}</view>
+    </view>
+    <view class="fsp">
+        <view>订单金额</view>
+        <view>¥ {{money}}</view>
+    </view>
+</view>
+<view class="goods">
+    <button bindtap="pay" type="primary" wx:if="{{wxpay}}">微信支付</button>
+    <image class="weixin_app_payimg" src="{{data.weixin_app_payimg}}" wx:else></image>
+</view>

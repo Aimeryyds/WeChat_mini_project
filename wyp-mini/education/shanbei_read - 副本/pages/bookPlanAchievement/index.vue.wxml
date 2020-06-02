@@ -1,0 +1,53 @@
+<template name="b6914b98">
+    <view class="_div data-v-53dfc209 plan-achievement" wx:if="{{!loading}}">
+        <view class="_div data-v-53dfc209 error-display" wx:if="{{isError}}">网络错误，请下拉刷新试一试~</view>
+        <view class="_div data-v-53dfc209 need-more-container" wx:if="{{!todayTask.article_amount}}">
+            <image class="_img data-v-53dfc209" src="https://media-image1.baydn.com/storage_media_image/kvhfgj/1561afb9b2b25158a3ae3cad3b2724a4.5e3a1389bbf3743e0fc6108585d1e53c.png"></image>
+            <view class="_div data-v-53dfc209 tip-title">温馨提示</view>
+            <view class="_div data-v-53dfc209 tip">这章你之前已经读过啦</view>
+            <view class="_div data-v-53dfc209 tip">今天还需要读{{bookplanInfo.daily_amount}}章新内容哦~</view>
+            <button bindtap="handleProxy" class="_button data-v-53dfc209" data-comkey="{{$k}}" data-eventid="{{'0'}}">查看目录</button>
+        </view>
+        <view class="_div data-v-53dfc209 need-more-container" wx:if="{{inProgerss}}">
+            <image class="_img data-v-53dfc209" src="https://media-image1.baydn.com/storage_media_image/kvhfgj/4e25f9bcf8c7f7af08b53765c27b79a5.d07c35a770df5a3bb758a3dc84ed05ce.png"></image>
+            <view class="_div data-v-53dfc209 step-wrap">
+                <view class="_div data-v-53dfc209 step" key="{{index}}" wx:for="{{steps}}" wx:for-item="step" wx:key="index">
+                    <view class="_div data-v-53dfc209 line {{[step?'finished':'']}}" wx:if="{{index!==0}}"></view>
+                    <view class="_div data-v-53dfc209 check-mark {{[step?'finished':'']}}">
+                        <view class="_i data-v-53dfc209 ib ib-check" style="font-weight:bold"></view>
+                    </view>
+                </view>
+            </view>
+            <view class="_div data-v-53dfc209 tip-title">太棒了，你已经读完{{todayTask.article_amount}}章啦</view>
+            <view class="_div data-v-53dfc209 tip">今日任务{{bookplanInfo.daily_amount}}章</view>
+            <button bindtap="handleProxy" class="_button data-v-53dfc209" data-comkey="{{$k}}" data-eventid="{{'1'}}">下一章</button>
+        </view>
+        <view class="_div data-v-53dfc209 share {{[!bookplanInfo.has_knowledge_card?'pt34':'']}}" wx:if="{{todayTask.is_finished}}">
+            <view class="_div data-v-53dfc209 lectures" wx:if="{{lectures.length}}">
+                <view class="_div data-v-53dfc209 header">今日章节精讲</view>
+                <view class="_div data-v-53dfc209 lecture" key="{{lecture.article_lecture_id}}" wx:for="{{lectures}}" wx:for-item="lecture" wx:key="lecture.article_lecture_id">
+                    <view class="_div data-v-53dfc209 title">{{lecture.title_cn}}</view>
+                    <view bindtap="handleProxy" class="_div data-v-53dfc209 nav" data-comkey="{{$k}}" data-eventid="{{'2-'+index}}">
+                        <label class="_span data-v-53dfc209 nav-text">查看</label>
+                        <view class="_i data-v-53dfc209 nav-icon ib ib-chevron-right"></view>
+                    </view>
+                </view>
+            </view>
+            <template is="862daa46" data="{{...$root[$kk+'1'],$root:$root}}" wx:if="{{bookplanInfo.has_knowledge_card}}"></template>
+            <template is="e73a055e" data="{{...$root[$kk+'0'],$root:$root}}" wx:else></template>
+            <view class="_div data-v-53dfc209 button-container">
+                <button class="_button data-v-53dfc209 button-wechat" openType="share">
+                    <view class="_i data-v-53dfc209 ib ib-wechat"></view>转发给好友
+            </button>
+                <button bindtap="handleProxy" class="_button data-v-53dfc209 button-wechat-moments" data-comkey="{{$k}}" data-eventid="{{'4'}}">
+                    <view class="_i data-v-53dfc209 ib ib-wechat-moments"></view>生成海报分享
+            </button>
+            </view>
+        </view>
+        <view bindtap="handleProxy" class="_div data-v-53dfc209 fullscreen" data-comkey="{{$k}}" data-eventid="{{'5'}}" wx:if="{{bookplanInfo.has_knowledge_card&&isShowSlideGuide}}">
+            <image class="_img data-v-53dfc209 guide" src="https://media-image1.baydn.com/storage_media_image/kdbdns/67e35e157ce00adf6a4748899a90d174.495d27d139be7ac0c4d9ce4d1b4cf5d7.png"></image>
+        </view>
+    </view>
+</template>
+<import src="/pages/bookPlanAchievement/KnowledgeCardPoster.vue.wxml"></import>
+<import src="/pages/bookPlanAchievement/ShareCard.vue.wxml"></import>

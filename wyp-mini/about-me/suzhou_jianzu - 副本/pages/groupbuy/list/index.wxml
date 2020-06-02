@@ -1,0 +1,25 @@
+<scroll-view bindscrolltolower="bottom" scrollY="true" style="height: {{height-134}}rpx;background-color:#fff">
+    <view class="view_search" style="padding: 0 20rpx;">
+        <form bindsubmit="formSubmit" class="view_searchbg" style="overflow: hidden;">
+            <view bindtap="formSubmit" class="view1">
+                <image bindtap="search" src="http://tws.cnweisou.com/images/search.png" style="color:{{data.style.iconcolor}};width: 40rpx;height: 40rpx;padding-left: 20rpx;padding-top: 4rpx;"></image>
+            </view>
+            <label>
+                <view class="img_wrap" style=""></view>
+                <button hidden class="img_btn" formType="submit" name="Search" style=""></button>
+            </label>
+            <input bindconfirm="formSubmit" bindinput="bindinput" name="keyword" placeholder="请输入关键字..." style="position: absolute;left: 100rpx;top: 0;height: 50rpx;background-color: #fff;font-size: 28rpx;line-height: 50rpx;width: 80%;" type="text"></input>
+        </form>
+    </view>
+    <view bindtap="toDetail" class="g_item" data-id="{{item.id}}" wx:for="{{data}}">
+        <image class="g_img" src="{{item.thumb}}"></image>
+        <view class="g_text">
+            <text style="font-size: 32rpx;font-weight: bolder;overflow: hidden;text-overflow:ellipsis;white-space: nowrap;">{{item.title}}</text>
+            <text style="font-size: 24rpx;line-height: 30rpx;color:#959595;">{{item.description}}</text>
+            <text style="color:#Ff8080;font-size: 26rpx;text-decoration:line-through;line-height: 30rpx;">原价：￥{{item.price}} </text>
+            <text style="background-image: url('https://tws.cnweisou.com/images/bg.png');background-size: 100% 60rpx;background-repeat: no-repeat; width: 462rpx;height: 60rpx;padding-left: 70rpx;line-height: 60rpx;font-size: 28rpx;display: block;color:#fff">{{item.groupnum}}人团 ¥ {{item.groupsprice}}/1{{item.units}}
+		</text>
+        </view>
+    </view>
+</scroll-view>
+<loading wx:if="{{loading}}"></loading>

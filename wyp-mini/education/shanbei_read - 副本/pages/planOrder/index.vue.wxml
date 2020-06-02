@@ -1,0 +1,50 @@
+<template name="268ad2bc">
+    <view class="_div data-v-5d33de5e order-container" wx:if="{{plan}}">
+        <view class="_div data-v-5d33de5e order-info">
+            <view class="_div data-v-5d33de5e order-info-basic">
+                <view class="_div data-v-5d33de5e cover" style=" {{'background-image:'+'url('+plan.cover_url+')'+';'}}" wx:if="{{plan.cover_url}}"></view>
+                <view class="_div data-v-5d33de5e info-details">
+                    <view class="_div data-v-5d33de5e title">扇贝·读书计划</view>
+                    <view class="_div data-v-5d33de5e sub-title">{{plan.title}}</view>
+                    <view class="_div data-v-5d33de5e price-container">
+                        <view class="_div data-v-5d33de5e price">￥{{plan.price}}</view>
+                        <view class="_div data-v-5d33de5e original-price">原价￥{{plan.original_price}}</view>
+                    </view>
+                </view>
+            </view>
+            <view class="_div data-v-5d33de5e description">
+                <view class="_div data-v-5d33de5e title">计划书单</view>
+                <view class="_div data-v-5d33de5e content">
+                    <view class="_div data-v-5d33de5e book" key="{{book.book_id}}" wx:for="{{plan.books}}" wx:for-item="book" wx:key="book.book_id">
+                        <view class="_div data-v-5d33de5e">《{{book.name_cn}}》</view>
+                        <view class="_div data-v-5d33de5e">{{book.article_amount}}章</view>
+                    </view>
+                </view>
+            </view>
+        </view>
+        <view class="_div data-v-5d33de5e date-container">
+            <view class="_div data-v-5d33de5e date-item">
+                <view class="_div data-v-5d33de5e">计划时长：</view>
+                <view class="_div data-v-5d33de5e">{{plan.total_days}}天</view>
+            </view>
+            <view class="_div data-v-5d33de5e date-item">
+                <view class="_div data-v-5d33de5e">开始日期：</view>
+                <view class="_div data-v-5d33de5e">{{startTime}}</view>
+            </view>
+            <view class="_div data-v-5d33de5e date-item">
+                <view class="_div data-v-5d33de5e">结束日期：</view>
+                <view class="_div data-v-5d33de5e">{{endTime}}</view>
+            </view>
+        </view>
+        <view class="_div data-v-5d33de5e purchase-container">
+            <view class="_div data-v-5d33de5e not-support" wx:if="{{plan.status===3}}">书籍快读完啦，暂不支持加入计划</view>
+            <view class="_div data-v-5d33de5e btn-group-wrapper" wx:else>
+                <view class="_div data-v-5d33de5e price {{[plan.status!==1?'disabled':'']}}">
+                    <label class="_span data-v-5d33de5e">合计：</label>
+                    <label class="_span data-v-5d33de5e number">¥{{plan.price}}</label>
+                </view>
+                <view bindtap="handleProxy" class="_div data-v-5d33de5e purchase-btn {{[plan.status!==1?'disabled':'']}}" data-comkey="{{$k}}" data-eventid="{{'0'}}">{{plan.status===1?'去付款':'已购买'}}</view>
+            </view>
+        </view>
+    </view>
+</template>

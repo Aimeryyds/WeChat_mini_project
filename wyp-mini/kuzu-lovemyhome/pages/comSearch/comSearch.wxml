@@ -1,0 +1,32 @@
+<view class="search-box flexbox">
+    <view class="search-inp flexbox" hidden="{{search}}">
+        <image class="search-icon" src="/img/resources/search-icon.png"></image>
+        <input bindconfirm="bindconfirm" bindinput="searchInpFn" class="inp" confirmType="search" placeholder="请输入小区或商圈名称" type="text" value="{{inputValue}}"></input>
+        <image bindtap="delInp" class="search-del" src="/img/resources/del-search.png" wx:if="{{inputValue}}"></image>
+    </view>
+    <view bindtap="cancelFn" class="search-cancel">取消</view>
+</view>
+<view class="lianxiang-box" wx:if="{{lianxiangList.length!=0}}">
+    <view class="lianxiang">
+        <view bindtap="toListLink" class="down-item flexbox" data-name="{{item.searchName}}" data-parentid="{{item.parentId}}" data-searchid="{{item.searchId}}" data-searchtype="{{item.searchType}}" wx:for="{{lianxiangList}}" wx:key="index">
+            <text class="con flex1">{{item.searchName}}</text>
+            <text class="tao">{{item.dealtotal}}套</text>
+        </view>
+    </view>
+</view>
+<view class="search-con-box">
+    <view class="search-con" wx:if="{{historyRecord.length!=0}}">
+        <view class="title">历史搜索</view>
+        <view bindtap="historyDelFn" class="history-btn empty-btn">
+            <image src="/img/resources/empty-icon.png"></image>
+        </view>
+        <view class="history-search">
+            <view class="history-item" wx:for="{{historyRecord}}" wx:key="index">
+                <view bindtap="historyLinkFn" class="history" data-keywords="" data-name="{{item.value[0]}}" data-parentid="{{item.value[4]}}" data-searchid="{{item.value[2]}}" data-searchtype="{{item.value[3]}}">
+                    <text class="content">{{item.value[0]}}</text>
+                    <text class="label" wx:if="{{item.value[1]}}">{{item.value[1]}}</text>
+                </view>
+            </view>
+        </view>
+    </view>
+</view>

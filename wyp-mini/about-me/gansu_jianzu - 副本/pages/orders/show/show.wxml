@@ -1,0 +1,146 @@
+<import src="../../templates/orders/orderitemlistmoreproducts.wxml"></import>
+<import src="../../templates/orders/orderaddress.wxml"></import>
+<import src="../../templates/orders/ordero2obtns.wxml"></import>
+<import src="/dist/toptips/index.wxml"></import>
+<import src="/dist/toast/index.wxml"></import>
+<template is="zan-toast" data="{{zanToast:zanToast}}"></template>
+<template is="zan-toptips" data="{{zanTopTips:zanTopTips}}"></template>
+<view class="container" hidden="{{loading}}">
+    <view class="{{orderDetail.actionList&&orderDetail.actionList.length>0?'container_bottom':''}}">
+        <view class="zan-card order2-detail-state" style="background-color:{{color||'#FF9300'}}; height: 140rpx">
+            <image class="order2-detail-state-icon" src="{{orderDetail.orderStatus==10?'http://imgcdnali.wfenxiao.com.cn/xcx/c/order/order2_pay.png':orderDetail.orderStatus==50?'http://imgcdnali.wfenxiao.com.cn/xcx/c/order/order2_deliver.png':orderDetail.orderStatus==60?'http://imgcdnali.wfenxiao.com.cn/xcx/c/order/order2_take.png':orderDetail.orderStatus==70?'http://imgcdnali.wfenxiao.com.cn/xcx/c/order/order2_done.png':'http://imgcdnali.wfenxiao.com.cn/xcx/c/order/order2_close.png'}}"></image>
+            <view class="order-detail-state-text">
+                <view class="order2-state-text1">{{orderDetail.orderStatus==10?'等待买家付款':orderDetail.orderStatus==20?'交易关闭('+orderDetail.cancelReason+')':orderDetail.orderStatus==50?'等待商家发货':orderDetail.orderStatus==60?'卖家已发货':'交易完成'}}</view>
+                <view class="order2-state-text2" wx:if="{{orderDetail.orderStatus==10}}">时间还剩{{orderDetail.remainMinutesText}}</view>
+            </view>
+        </view>
+        <view class="zan-panel">
+            <view wx:if="{{orderDetail.distributionType==1}}">
+                <view class="zan-card  view-direction-between">
+                    <view class="order2-text1">提货时间：</view>
+                    <view class="order2-text1">{{orderDetail.distributionDate}} {{distributionTime}}</view>
+                </view>
+                <view class="zan-card view-direction-between order-view-border-bottom">
+                    <view style="display:flex;flex-direction: row;">
+                        <view>提货人：</view>
+                        <view>{{orderDetail.pickupman}}</view>
+                    </view>
+                    <view class="order2-text1">{{orderDetail.pickupmanMobile}}</view>
+                </view>
+                <view bindtap="call" class="view-direction-middle" data-phone="{{orderDetail.managerMobile}}" data-tel="{{orderDetail.tel}}">
+                    <image class="order2-call" src="http://imgcdnali.wfenxiao.com.cn/xcx/c/order/blue-call.png"></image>
+                    <view class="order2-call-text">联系提货点</view>
+                </view>
+            </view>
+            <view hidden="{{orderDetail.distributionType==1}}">
+                <template is="orders-address" data="{{addressData:orderDetail.consignee,fromorder:true}}"></template>
+            </view>
+            <view class="order-no_state" wx:if="{{orderDetail.idCard}}">
+                <view class="state-label2">收件人身份证号：</view>
+                <view class="state-value">{{orderDetail.idCard}}</view>
+            </view>
+        </view>
+        <view class="zan-panel">
+            <view bindtap="gotoshop" class="zan-card view-direction-between" style="border-bottom: 1rpx solid #f1f1f1;">
+                <view class="order2-detail-store">
+                    <image class="order2-detail-store-icon" src="http://imgcdnali.wfenxiao.com.cn/xcx/c/icons/store.png"></image>
+                    <view>{{orderDetail.brandName}}-{{orderDetail.storeName}}</view>
+                </view>
+                <image class="arrow-right" src="http://imgcdnali.wfenxiao.com.cn/xcx/c/icons/arrow-right.png" style="width: 16rpx; height: 24rpx;"></image>
+            </view>
+            <view wx:if="{{orderDetail.goodsList}}">
+                <template is="order-more-goods" data="{{ goods:orderDetail.goodsList,goodsTotal:orderDetail.goodsTotal,showName:true,giveawayList:orderDetail.giveawayList||[] }}"></template>
+            </view>
+            <order-refund-action actionList="{{orderDetail.actionList}}" orderid="{{orderDetail.id}}" refundId="{{orderDetail.refundId}}"></order-refund-action>
+        </view>
+        <view class="zan-panel">
+            <view class="zan-card view-direction-between">
+                <view class="state-label">商品金额：</view>
+                <view class="state-label">￥{{orderDetail.goodsTotalMoney}}</view>
+            </view>
+            <view class="zan-card view-direction-between" wx:if="{{orderDetail.distributionType!=1}}">
+                <view class="state-label">{{orderDetail.distributionType==2?'配送费：':'运费：'}}</view>
+                <view class="state-label">+￥{{orderDetail.freight}}</view>
+            </view>
+            <view class="zan-card view-direction-between" wx:if="{{orderDetail.fullMoney}}">
+                <view class="state-label">满减</view>
+                <view class="state-label">-￥{{orderDetail.fullMoney||'0.00'}}</view>
+            </view>
+            <view class="zan-card view-direction-row-reverse" wx:if="{{orderDetail.fullMoney}}">
+                <view class="state-label">+{{orderDetail.fullPoint||0}}积分</view>
+            </view>
+            <view class="zan-card view-direction-between">
+                <view class="order-direction-row">
+                    <view class="state-label">会员卡：</view>
+                </view>
+                <view class="state-label" wx:if="{{orderDetail.isDiscountShare==2}}">{{orderDetail.activityType==2?'团购':orderDetail.activityType==1?'秒杀':''}}商品不能与其他优惠共享</view>
+                <view class="state-label" wx:elif="{{orderDetail.cardDiscount&&orderDetail.cardDiscount>0}}">-￥{{orderDetail.cardDiscount}}</view>
+                <view class="state-label" wx:else>+{{orderDetail.cardPoint}}积分</view>
+            </view>
+            <view class="zan-card view-direction-between ">
+                <view class="order-direction-row">
+                    <view class="state-label">优惠券：</view>
+                </view>
+                <view class="state-label" wx:if="{{orderDetail.isDiscountShare==2}}">{{orderDetail.activityType==2?'团购':orderDetail.activityType==1?'秒杀':''}}商品不能与其他优惠共享</view>
+                <view class="state-label" wx:else>-￥{{orderDetail.couponDiscount}}</view>
+            </view>
+            <view class="zan-card view-direction-between order-view-border-bottom">
+                <view class="state-label">礼品卡</view>
+                <view class="state-label">-￥{{orderDetail.giftCardDiscount||'0.00'}}</view>
+            </view>
+            <view class="zan-card view-direction-between order-view-border-bottom" wx:if="{{orderDetail.couponFee&&orderDetail.couponFee>0}}">
+                <view class="state-label">代金券</view>
+                <view class="state-label">-￥{{orderDetail.couponFee||'0.00'}}</view>
+            </view>
+            <view class="zan-card view-direction-between order-view-border-bottom">
+                <view class="state-label">储值抵扣</view>
+                <view class="state-label">-￥{{orderDetail.rechargeAmount||'0.00'}}</view>
+            </view>
+            <view class="zan-card view-direction-between">
+                <view class="state-value">实付：</view>
+                <view style="color:#ff0000;font-size:28rpx">￥{{orderDetail.total}}</view>
+            </view>
+        </view>
+        <view class="zan-panel" style="margin-bottom:30rpx">
+            <view class="zan-card order2-no_state">
+                <view class="state-label">订单编号：</view>
+                <view class="state-label"> {{orderDetail.orderNo}}</view>
+            </view>
+            <view class="order2-no_state">
+                <view class="state-label">下单时间：</view>
+                <view class="state-label">{{orderDetail.createdTime}}</view>
+            </view>
+            <view class="order2-no_state order-view-border-bottom">
+                <view class="state-label">配送方式：</view>
+                <view class="state-label">{{orderDetail.distributionType==1?'门店自提':orderDetail.distributionType==2?'送货上门':'物流发货'}}</view>
+            </view>
+            <view class="order2-no_state" wx:if="{{orderDetail.leaveMessage&&orderDetail.leaveMessage.length>0}}" wx:for="{{orderDetail.leaveMessage}}">
+                <view class="state-label">{{item.fieldname}}：</view>
+                <view class="state-label">{{item.value||'无'}}</view>
+            </view>
+            <view class="order2-no_state" wx:if="{{orderDetail.leaveMessage.length==0}}">
+                <view class="state-label">买家备注：</view>
+                <view class="state-label">{{orderDetail.userMsg?orderDetail.userMsg:'无'}}</view>
+            </view>
+        </view>
+    </view>
+    <view class="o2o-extra" wx:if="{{orderDetail.actionList&&orderDetail.actionList.length>0}}">
+        <template is="orders-o2o-btns" data="{{order:orderDetail,hiddenLessTime:true}}"></template>
+    </view>
+    <wxc-dialog _pid="{{_pid}}" bindcancel="onCancel" bindconfirm="onConfirm" class="wxc-dialog" confirmText="我知道了" title="以下商品购买数量超过限制">
+        <view wx:for="{{errGoodList}}" wx:key="{{index}}">
+            <view class="reject-reason">
+                <image src="{{item.img}}"></image>
+                <view class="reject-reason-content">
+                    <wxc-elip line="2">
+                        <text style="font-size:24rpx">{{item.goodsName}}</text>
+                    </wxc-elip>
+                    <view class="reject-reason-price">
+                        <text style="color:#ff2222; font-size:24rpx">￥{{item.price}}</text>
+                        <text style="color:#cccccc; font-size:24rpx">X{{item.quantity}}</text>
+                    </view>
+                </view>
+            </view>
+        </view>
+    </wxc-dialog>
+</view>

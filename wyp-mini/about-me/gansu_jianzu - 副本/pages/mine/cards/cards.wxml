@@ -1,0 +1,14 @@
+<import src="../../../pages/templates/card/card.wxml"></import>
+<view class="container">
+    <view class="cards_card-list" wx:if="{{cardlist.length>0}}">
+        <navigator style="margin-top: 40rpx" url="/pages/mine/cards/card_detail?id={{item.id}}" wx:for="{{cardlist}}">
+            <template is="card" data="{{cardName:item.cardName,platformName:item.platformName,cardNo:item.cardNo,termOfValidity:item.termOfValidity,status:item.status,logo:item.logo,cover:item.cover,coverValue:item.coverValue,type:'big'}}"></template>
+            <view style="text-align:center;font-size: 12px; color: #999;">{{item.rightsDiscount==2?'会员折扣'+item.discount+'折':''}}{{item.rightsPoints==2?'每消费'+item.money+'元,送'+item.point+'积分':''}}</view>
+        </navigator>
+    </view>
+    <view class="cards_no-card" wx:else>
+        <image src="http://imgcdnali.wfenxiao.com.cn/xcx/c/no_card.png" style="margin-top:100px;width:214rpx;height:150rpx"></image>
+        <text style="margin-top:20px;font-size:32rpx;color:#bbb;font-weight:bold">暂无会员卡</text>
+        <text style="margin-top:20px;font-size:28rpx;color:#ccc;">获取方式,可留意店家信息</text>
+    </view>
+</view>

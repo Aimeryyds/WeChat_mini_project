@@ -1,0 +1,45 @@
+<view class="name">
+    <text>联系人</text>
+</view>
+<form bindsubmit="formSubmit">
+    <view class="section">
+        <text>姓名:</text>
+        <input autoFocus bindinput="formChange" data-type="name" name="name" placeholder="姓名" value="{{addsdata.name}}"></input>
+    </view>
+    <view class="section gender">
+        <radio-group bindchange="formChange" class="radio-group" data-type="gender">
+            <view>
+                <text>先生</text>
+                <radio checked="{{!addsdata.gender||addsdata.gender=='F'}}" color="#f19b38" name="gender" value="F"></radio>
+            </view>
+            <view style="margin-left:15px">
+                <text>女士</text>
+                <radio checked="{{addsdata.gender=='M'}}" color="#f19b38" name="gender" value="M"></radio>
+            </view>
+        </radio-group>
+    </view>
+    <view class="section phone">
+        <text>电话:</text>
+        <view class="relative">
+            <input bindinput="formChange" data-type="phone" maxlength="12" name="phone" placeholder="电话" type="number" value="{{addsdata.phone}}"></input>
+            <image bindtap="clearPhone" src="cl.png" wx:if="{{addsdata.phone}}"></image>
+        </view>
+    </view>
+    <view class="name">
+        <text>收货地址</text>
+    </view>
+    <view class="section">
+        <text>地址:</text>
+        <view bindtap="tapSearchLoc" class="relative detail">
+            <input confirmType="search" disabled="true" name="detailed_name" placeholder="" value="{{addsdata.detailed_name}}"></input>
+            <image class="image" src="ps.png"></image>
+        </view>
+    </view>
+    <view class="section">
+        <text>楼号/门牌号:</text>
+        <input bindinput="formChange" data-type="house_number" name="house_number" placeholder="" value="{{addsdata.house_number}}"></input>
+    </view>
+    <view class="footer">
+        <button formType="submit">保存地址</button>
+    </view>
+</form>

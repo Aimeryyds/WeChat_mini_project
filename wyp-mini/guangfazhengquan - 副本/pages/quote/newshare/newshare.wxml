@@ -1,0 +1,53 @@
+<include src="../../../components/circus/network/network.wxml"></include>
+<include src="../../../components/circus/toast/toast.wxml"></include>
+<include src="../../../components/circus/loading/loading.wxml"></include>
+<view class="pagebody">
+    <view class="yearlist" wx:for="{{myData}}" wx:key="year">
+        <view class="yeartitle">{{item.year}}年</view>
+        <view class="yearbody clearfix" wx:for="{{item.cont}}" wx:key="month">
+            <view class="line" wx:if="{{item.month>0}}"></view>
+            <view class="month">
+                <view class="outer">
+                    <view>{{item.month}}月</view>
+                </view>
+            </view>
+            <view class="lists-body" wx:for="{{item.shares}}" wx:key="tradingcode">
+                <view bindtap="showmore" class="lists {{item.tradingcode==showBgData.code&&showBgData.isShowBg?'show-bg':''}}" data-code="{{item.tradingcode}}">
+                    <view class="list-header">
+                        <view class="{{item.type=='bond'?'ipocolor':''}} name">{{item.secuabbr}}</view>
+                        <view class="code">{{item.tradingcode}}</view>
+                        <view class="{{item.ipoStatus=='今日上市'||item.ipoStatus=='今日申购'?'todaycolor':''}} type">{{item.ipoStatus}}</view>
+                        <view class="date">{{item.bookstartdateon_s}}</view>
+                        <view class="{{item.hidden?'image-down':'image-up'}}"></view>
+                    </view>
+                    <view class="{{item.hidden?'hide':'show'}} list-content">
+                        <view class="title1">
+                            <view class="tite">申购代码</view>
+                            <view class="tite">发行价</view>
+                            <view class="tite">市盈率</view>
+                        </view>
+                        <view class="content1">
+                            <view>{{item.applycode}}</view>
+                            <view>{{item.issueprice}}</view>
+                            <view>{{item.pe}}</view>
+                        </view>
+                        <view class="title2">
+                            <view class="tite">申购上限</view>
+                            <view class="tite">中签率</view>
+                            <view class="tite">上市日期</view>
+                        </view>
+                        <view class="content2">
+                            <view>{{item.bookmaxon}}</view>
+                            <view>{{item.succresultratedate}}</view>
+                            <view>{{item.listingdate_s}}</view>
+                        </view>
+                        <view class="content3 clearfix">
+                            <view class="tite">所属行业</view>
+                            <view class="industry">{{item.induname}}</view>
+                        </view>
+                    </view>
+                </view>
+            </view>
+        </view>
+    </view>
+</view>

@@ -1,0 +1,27 @@
+<template name="43631deb">
+    <view class="_view 43631deb content my">
+        <view class="_view 43631deb mg-flex mg-flex_sa_center my-user">
+            <view class="_view 43631deb my-user-logo">
+                <image class="_image 43631deb my-user-img" src="{{userInfo.userLogo||defaultUserLogo}}"></image>
+            </view>
+            <view bindtap="handleProxy" class="_view 43631deb my-user-name" data-comkey="{{$k}}" data-eventid="{{'43631deb-0'}}" wx:if="{{!isLogin}}">登录/注册</view>
+            <view class="_view 43631deb my-user-name" wx:if="{{isLogin}}">{{userName}}</view>
+            <view class="_view 43631deb my-user-real" wx:if="{{userInfo.isVerified==1}}">实名</view>
+        </view>
+        <view class="_view 43631deb mg-flex mg-flex_avg my-option-group">
+            <view class="_view 43631deb my-option" key="{{k}}" wx:for="{{options}}" wx:for-index="k" wx:key="k">
+                <text class="_text 43631deb option-tips" hidden="{{!(item.tips>0)}}">{{item.tips>99?'99+':item.tips}}</text>
+                <view bindtap="handleProxy" class="_view 43631deb mg-flex mg-flex-v mg-flex_sa_center" data-comkey="{{$k}}" data-eventid="{{'43631deb-1-'+k}}">
+                    <view class="_view 43631deb {{'option-icon '+item.iconClass}}"></view>
+                    <view class="_view 43631deb option-title">{{item.title}}</view>
+                </view>
+            </view>
+        </view>
+        <view class="_view 43631deb">
+            <template is="3adba4a9" data="{{...$root['0'],...$root[$kk+'43631deb-0'],$root:$root}}"></template>
+        </view>
+        <template is="3a5abe60" data="{{...$root['0'],...$root[$kk+'43631deb-1-'+index],$root:$root}}" wx:for="{{entries}}" wx:key="index"></template>
+    </view>
+</template>
+<import src="/components/swiper/promote.vue.wxml"></import>
+<import src="/components/mgRow.vue.wxml"></import>

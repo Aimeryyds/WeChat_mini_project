@@ -1,0 +1,81 @@
+<view wx:if="{{skillPriceshow}}">
+    <scroll-view class="couponNum" scrollX="true">
+        <view bindtap="clickTitle" class="newTitle {{sub==index?'active':''}}" data-id="{{item.id}}" data-index="{{index}}" wx:for="{{times}}">
+            <text class="num">{{item.time}}:00</text>
+            <text class="type" wx:if="{{item.status==-1}}">已开抢</text>
+            <text class="type" wx:if="{{item.status==0}}">抢购中</text>
+            <text class="type" wx:if="{{item.status==1}}">即将开始</text>
+        </view>
+    </scroll-view>
+    <view class="shopList">
+        <view class="title">
+            <view class="titleLine"></view>
+            <view class="titleLeft">
+                <view wx:if="{{buying==-1}}">
+还可以继续抢购喔
+</view>
+                <view wx:if="{{buying==0||buying==1}}">
+                    <text wx:if="{{buying==0}}">抢购中</text>
+                    <text wx:if="{{buying==1}}">即将开始</text>
+先下单先得喔
+</view>
+            </view>
+            <view class="titleRight" wx:if="{{nowShop}}">
+                <text class="isStart" wx:if="{{buying==1}}">距开始</text>
+                <text class="isStart" wx:else>距结束</text>
+                <text class="hour">
+{{clock.clock_hour}}</text>
+:
+<text class="hour">
+{{clock.clock_min}}</text>
+:
+<text class="hour">
+{{clock.clock_sec}}</text>
+            </view>
+            <view class="titleRight" wx:else>
+                <view wx:if="{{buying==0||buying==1}}">
+                    <text class="isStart" wx:if="{{buying==0}}">距结束</text>
+                    <text class="isStart" wx:if="{{buying==1}}">距开始</text>
+                    <text class="hour">
+{{clock.clock_hour}}</text>
+:
+<text class="hour">
+{{clock.clock_min}}</text>
+:
+<text class="hour">
+{{clock.clock_sec}}</text>
+                </view>
+            </view>
+        </view>
+        <view class="line"></view>
+        <view bindtap="joinDetail" class="goodsList" data-index="{{index}}" wx:for="{{goods}}">
+            <view class="left">
+                <image mode="aspectFit" src="{{item.thumb}}"></image>
+            </view>
+            <view class="center">
+                <text class="top">{{item.title}}</text>
+                <text class="middle">￥{{item.price}}</text>
+                <view class="bottom">
+￥{{item.marketprice}}
+<text class="line"></text>
+                </view>
+            </view>
+            <view class="right">
+                <text class="btnGreen" wx:if="{{buying==1}}">
+等待抢购
+</text>
+                <text class="btn" wx:else>
+去抢购
+</text>
+            </view>
+            <view class="percentage" wx:if="{{buying==-1||buying==0}}">
+                <view class="hasSell">
+                    <text>已售</text>
+                    <text>{{item.percent}}%</text>
+                </view>
+                <progress activeColor="#FF5555" percent="{{item.percent}}"></progress>
+            </view>
+        </view>
+    </view>
+</view>
+<loading wx:if="{{loading}}"></loading>

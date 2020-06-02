@@ -1,0 +1,45 @@
+<view class="container">
+    <view class="order_create-item" wx:for="{{form}}">
+        <view class="order_create-item-container" wx:if="{{item.type==='text'}}">
+            <text class="order_create-item-label">{{item.label}}</text>
+            <view class="order_create-item-staff">
+                <input bindblur="handleBlur" bindfocus="handleFocus" bindinput="handleNameChange" class="order_create_input" cursorSpacing="50" data-index="{{index}}" maxlength="{{item.validate=='phone'?11:-1}}" placeholder="{{item.placeholder}}" placeholderClass="order_create_input_palceholder" type="{{item.validate=='phone'?'number':item.validate=='idcard'?'idcard':'text'}}" value="{{customer.customerName.name}}"></input>
+            </view>
+        </view>
+        <view class="order_create-item-container" wx:if="{{item.type==='textarea'}}">
+            <text class="order_create-item-label">{{item.label}}</text>
+            <view bind:tap="jumpTextarea" class="order_create-item-staff" data-index="{{index}}">
+                <text class="order_create_textarea_palceholder">{{formData[index].value||item.placeholder}}</text>
+                <wxc-icon color="#979797" style="margin-bottom:8rpx" type="arrow-right"></wxc-icon>
+            </view>
+        </view>
+        <view class="order_create-item-container" style="padding:12rpx 0 0 0" wx:if="{{item.type==='radio'}}">
+            <view class="order_create-item-label">{{item.label}}</view>
+            <view class="order_create-item-staff">
+                <view bindtap="handleRadioClick" class="{{option.checked?'order_create_user_radio_item_focus':'order_create_user_radio_item'}}" data-index="{{index}}" data-optionindex="{{optionIndex}}" data-value="{{option.value}}" wx:for="{{item.options}}" wx:for-index="optionIndex" wx:for-item="option">{{option.value}}</view>
+            </view>
+        </view>
+        <view class="order_create-item-container" style="padding:12rpx 0 0 0" wx:if="{{item.type==='checkbox'}}">
+            <view class="order_create-item-label">{{item.label}}</view>
+            <view class="order_create-item-staff">
+                <view bindtap="handleCheckboxClick" class="{{option.checked?'order_create_user_radio_item_focus':'order_create_user_radio_item'}}" data-index="{{index}}" data-optionindex="{{optionIndex}}" data-value="{{option.value}}" wx:for="{{item.options}}" wx:for-index="optionIndex" wx:for-item="option">{{option.value}}</view>
+            </view>
+        </view>
+        <view class="order_create-uploads-container" wx:if="{{item.type==='upload'}}">
+            <view class="order_create-uploads-lable-container">
+                <text class="order_create-item-label">{{item.label||'添加图片'}}</text>
+            </view>
+            <view class="order_create-uploads">
+                <view class="upload--img-container" wx:for="{{formData[index].value}}" wx:for-index="imgindex" wx:for-item="image" wx:key="{{imgindex}}">
+                    <image mode="scaleToFill" src="{{image}}" style="width:200rpx;height:200rpx"></image>
+                    <image bind:tap="handleRemoveImg" class="upload--remove" data-imgindex="{{imgindex}}" data-index="{{index}}" mode="scaleToFill" src="http://imgcdnali.wfenxiao.com.cn/xcx/c/gongqiu/delete.png"></image>
+                </view>
+                <view bind:tap="handleChooseImg" class="upload--action" data-index="{{index}}" wx:if="{{formData[index].value.length<3}}">
+                    <image mode="scaleToFill" src="http://imgcdnali.wfenxiao.com.cn/xcx/c/1222/ic_service_upload.png" style="width:48rpx;height:44rpx"></image>
+                    <text class="order_create-uploads-tip" style="margin-top:10rpx;">上传凭证</text>
+                    <text class="order_create-uploads-tip" style="margin-top:4rpx;">(最多三张)</text>
+                </view>
+            </view>
+        </view>
+    </view>
+</view>

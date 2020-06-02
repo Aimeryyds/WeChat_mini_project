@@ -1,0 +1,171 @@
+<view class="wx_user_login_box" wx:if="{{display}}">
+    <view class="wx_user_face" style="background:#06cf5b;">
+        <image src="/yb_shop/static/images/wx_user_login.png"></image>
+    </view>
+    <view class="wx_login_info">
+        <text>请您授权微信登录</text>
+        <text>否则部分功能无法正常使用</text>
+    </view>
+    <button bindgetuserinfo="onGotUserInfo" class="wx_user_login" lang="zh_CN" openType="getUserInfo" style="background:#06cf5b;">授权登录</button>
+</view>
+<block wx:if="{{show}}">
+    <block wx:if="{{!display}}">
+        <import src="../template/toast.wxml"></import>
+        <template is="toast" data="{{toast:toast}}"></template>
+        <view class="grouping" wx:if="{{groupInfo.groupStatus=='拼团中'}}">
+            <block wx:if="{{groupInfo.isSelf}}">
+                <view class="group-goods bg-fff">
+                    <image mode="aspectFill" src="{{groupInfo.goods.img}}"></image>
+                    <view class="goods-info pull-right">
+                        <view class="goods-title">{{groupInfo.goods.name}}</view>
+                        <view class="goods-sale">{{groupInfo.goods.groupNum}}人团·已团{{groupInfo.goods.saleNum}}{{groupInfo.goods.unit}}</view>
+                        <view class="goods-price">¥{{groupInfo.goods.gprice}}</view>
+                    </view>
+                </view>
+                <view class="notice text-center bg-fff">
+                    <view class="">
+            还差
+            <text class="text-red">{{leftnum}}</text>人，
+            <text>{{leftTime}}</text>后结束
+          </view>
+                    <view style="padding: 30rpx 24rpx;">
+                        <button class="btn" openType="share">邀请好友参团</button>
+                    </view>
+                </view>
+                <view class="group-info mt-20">
+                    <view class="user-img text-center bg-fff">
+                        <text class="group-header">团长</text>
+                        <image mode="aspectFill" src="{{item.user_headimg}}" wx:for="{{groupMember}}" wx:key="unique"></image>
+                    </view>
+                    <view class="goods-title-1 mt-10 flex-row bg-fff">
+                        <view class="flex-grow-0 flex-y-center" style="line-height: 90rpx;">商品名称</view>
+                        <view class="flex-grow-1" style="line-height:90rpx;text-align: right;">
+                            <text>{{groupInfo.goods.name}}</text>
+                        </view>
+                    </view>
+                    <view class="group-time flex-row bg-fff">
+                        <view class="flex-grow-0">参团时间</view>
+                        <view class="flex-grow-1" style="padding-right: 24rpx;text-align: right;">
+              {{groupInfo.createTime}}
+            </view>
+                    </view>
+                </view>
+            </block>
+            <block wx:else>
+                <view class="group-goods bg-fff">
+                    <image mode="aspectFill" src="{{groupInfo.goods.img}}"></image>
+                    <view class="goods-info pull-right">
+                        <view class="goods-title">{{groupInfo.goods.name}}</view>
+                        <view class="goods-sale">{{groupInfo.goods.groupNum}}人团·已团{{groupInfo.goods.saleNum}}{{groupInfo.goods.unit}}</view>
+                        <view class="goods-price">¥{{groupInfo.goods.gprice}}</view>
+                    </view>
+                </view>
+                <view class="group-info text-center bg-fff mt-20">
+                    <view class="user-img">
+                        <text class="group-header">团长</text>
+                        <image mode="aspectFill" src="{{item.user_headimg}}" wx:for="{{groupMember}}" wx:key="unique"></image>
+                    </view>
+                    <view class="mt-10">
+            仅剩
+            <text class="text-red" style="padding: 0 10rpx;">{{leftnum}}</text>个名额，{{leftTime}}后结束
+          </view>
+                    <view class="mt-20" style="padding: 20rpx 24rpx;">
+                        <button bindtap="showModal" class="btn" data-statu="open">一键参团</button>
+                    </view>
+                </view>
+            </block>
+        </view>
+        <view class="grouped" wx:if="{{groupInfo.groupStatus=='拼团成功'}}">
+            <block wx:if="{{groupInfo.isSelf}}">
+                <view class="notice text-center bg-fff">
+                    <view class="warn-primary">拼团成功</view>
+                    <view class="warn-notice">商家正在努力发货，请耐心等待！</view>
+                    <button bindtap="goToHome" class="btn">去首页逛逛</button>
+                </view>
+                <view class="user-img text-center bg-fff">
+                    <text class="group-header">团长</text>
+                    <image mode="aspectFill" src="{{item.user_headimg}}" wx:for="{{groupInfo.groupMember}}" wx:key="unique"></image>
+                </view>
+                <view class="list-group mt-20 bg-fff">
+                    <view class="list-item">商品名称</view>
+                    <view class="list-item-aside goods-title">{{groupInfo.goods.name}}</view>
+                </view>
+                <view class="list-group bg-fff">
+                    <view class="list-item">收货人</view>
+                    <view class="list-item-aside">
+            {{groupInfo.address.userName}} {{groupInfo.address.telNumber}}
+          </view>
+                </view>
+                <view class="list-group bg-fff">
+                    <view class="list-item">收货地址</view>
+                    <view class="list-item-aside">
+            {{groupInfo.address.province}} {{groupInfo.address.city}} {{groupInfo.address.county}} {{groupInfo.address.address}}
+          </view>
+                </view>
+                <view class="list-group bg-fff">
+                    <view class="list-item">参团时间</view>
+                    <view class="list-item-aside">{{groupInfo.createTime}}</view>
+                </view>
+            </block>
+            <block wx:else>
+                <view class="group-goods bg-fff">
+                    <image mode="aspectFill" src="{{groupInfo.goods.img}}"></image>
+                    <view class="goods-info pull-right">
+                        <view class="goods-title">{{groupInfo.goods.name}}</view>
+                        <view class="goods-sale">
+              {{groupInfo.goods.groupNum}}人团·已{{groupInfo.goods.saleNum}}团件
+            </view>
+                    </view>
+                </view>
+                <view class="user-img text-center bg-fff">
+                    <text class="group-header">团长</text>
+                    <image mode="aspectFill" src="{{item.user_headimg}}" wx:for="{{groupInfo.groupMember}}" wx:key="unique"></image>
+                </view>
+                <view class="text-center">团已满</view>
+                <button bindtap="showGoodsDetail" class="btn" data-id="{{groupInfo.gid}}">再次一键开团</button>
+            </block>
+        </view>
+        <view class="groupFail" wx:if="{{groupInfo.groupStatus=='拼团失败'}}">
+            <view class="group-goods bg-fff">
+                <image mode="aspectFill" src="{{groupInfo.goods.img}}"></image>
+                <view class="goods-info pull-right">
+                    <view class="goods-title">{{groupInfo.goods.name}}</view>
+                    <view class="goods-sale">
+            {{groupInfo.goods.groupNum}}人团·已{{groupInfo.goods.saleNum}}团件
+          </view>
+                    <view class="goods-price">￥{{groupInfo.goods.gprice}}</view>
+                </view>
+            </view>
+            <view class="group-item bg-fff mt-20">
+                <view class="user-img text-center">
+                    <text class="group-header">团长</text>
+                    <image mode="aspectFill" src="{{item.user_headimg}}" wx:for="{{groupMember}}" wx:key="unique"></image>
+                </view>
+                <view class="text-center group-fail-text">拼团不成功，款项将原路返还</view>
+                <button bindtap="showGoodsDetail" class="btn" data-id="{{groupInfo.gid}}">再次一键开团</button>
+            </view>
+        </view>
+        <view bindtap="showModal" class="drawer_screen" data-statu="close" wx:if="{{showModalStatus}}"></view>
+        <view animation="{{animationData}}" class="modal" wx:if="{{showModalStatus}}">
+            <view bindtap="showModal" class="modal-close pull-right" data-statu="close">
+                <image src="../../resource/off.png" style="width: 30rpx;height: 30rpx;"></image>
+            </view>
+            <view class="clearfix"></view>
+            <view class="modal-title">
+                <view class="goods-img">
+                    <image mode="aspectFit" src="{{groupInfo.goods.img}}"></image>
+                </view>
+                <view class="goods-price">¥{{groupInfo.goods.gprice*num}}</view>
+            </view>
+            <view class="number pull-left">
+                <text class="pull-left" style="padding-left: 24rpx;">数量</text>
+                <text bindtap="plus" class="plus pull-right">十</text>
+                <text class="buy-value pull-right">{{num}}</text>
+                <text bindtap="minus" class="minus pull-right">一</text>
+            </view>
+            <view class="modal-footer">
+                <view bindtap="goToBuy" class="btn_pt">确定</view>
+            </view>
+        </view>
+    </block>
+</block>

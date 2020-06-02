@@ -1,0 +1,64 @@
+<import src="../template/toast.wxml"></import>
+<template is="toast" data="{{toast:toast}}"></template>
+<view bindtap="showAddressList" class="address bg-fff flex-row flex-y-center" wx:if="{{address&&address.telNumber}}">
+    <image class="pull-left flex-grow-0" src="../../resource/address.png"></image>
+    <view class="address-info flex-grow-1">
+        <view class="flex-row flex-y-center address-top">
+            <text class="add-name flex-grow-0">{{address.userName}}</text>
+            <text class="flex-grow-0">{{address.telNumber}}</text>
+        </view>
+        <view class="flex-row flex-y-center address-dt">
+			{{address.province}}
+			{{address.city}}
+			{{address.county}} 
+			{{address.address}}
+		</view>
+    </view>
+    <image class="pull-right" src="../../resource/left-b.png"></image>
+</view>
+<view bindtap="showAddressList" class="no-address " wx:else>
+    <view class="add-by-user bg-fff flex-row flex-y-center">
+        <image class="flex-grow-0" src="../../resource/add-red.png"></image>
+        <text class="flex-grow-1">请选择收货地址</text>
+        <image class="left flex-grow-0" src="../../resource/left-b.png"></image>
+    </view>
+</view>
+<view class="goods-item flex-row">
+    <image mode="aspectFill" src="{{goodsInfo.img}}"></image>
+    <view class="goods-info flex-grow-1">
+        <view class="goods-title flex-row">{{goodsInfo.name}}</view>
+        <view class="goods-property flex-row">
+            <view class="flex-grow-1">
+                <view class="goods-spec" wx:for="{{goodsProp}}" wx:key="unique">
+                    <text>{{item.pname}}</text>{{item.name}}
+				</view>
+            </view>
+            <view class="goods-price flex-grow-1">¥{{goodsPrice}}</view>
+        </view>
+    </view>
+    <view class="clearfix"></view>
+</view>
+<view class="buy-num flex-row flex-y-center">
+    <view class="flex-grow-1 flex-x-left">
+        <text class="buy-num-text">购买数量</text>
+    </view>
+    <view class="flex-grow-0 flex-x-right buy-num-play">
+        <image bindtap="minus" class="flex-grow-0 minus" src="../../resource/minus.png" wx:if="{{goodsNum>1}}"></image>
+        <image bindtap="minus" class="flex-grow-0 minus" src="../../resource/not-minus.png" wx:else></image>
+        <view class="flex-grow-0 flex-y-center flex-x-center buy-value">{{goodsNum}}</view>
+        <image bindtap="plus" class="flex-grow-0 plus" src="../../resource/plus.png" wx:if="{{goodsNum<goodsInfo.stock}}"></image>
+        <image bindtap="plus" class="flex-grow-0 plus" src="../../resource/not-plus.png" wx:else></image>
+    </view>
+</view>
+<view class="flex-row freight">
+    <view class="flex-grow-1 flex-y-center freight-title">运费</view>
+    <view class="flex-grow-0 flex-y-center freight-money">¥{{freight}}</view>
+</view>
+<view class="flex-row footer">
+    <view class="flex-grow-1 flex-y-center footer-title">
+        <text style="margin-top: -3pt;">总计：</text>
+        <text class="goods-price">¥{{totalPrice}}</text>
+		(运费¥{{freight}})
+	</view>
+    <view bindtap="goToPay" class="flex-grow-0 btn flex-y-center flex-x-center">立即支付</view>
+</view>

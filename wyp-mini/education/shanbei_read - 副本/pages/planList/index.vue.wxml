@@ -1,0 +1,44 @@
+<template name="b3be93f4">
+    <view class="_div data-v-488ae151">
+        <view class="_div data-v-488ae151 plan-list">
+            <view class="_div data-v-488ae151 plan-list-container" wx:if="{{userBookPlans.length}}">
+                <navigator class="_navigator data-v-488ae151" key="{{plan.id}}" url="{{plan.url+'?id='+plan.id}}" wx:for="{{userBookPlans}}" wx:for-item="plan" wx:key="plan.id">
+                    <form reportSubmit bindsubmit="handleProxy" class="_form data-v-488ae151" data-comkey="{{$k}}" data-eventid="{{'0-'+index}}">
+                        <button class="_button data-v-488ae151 plan-item" formType="submit" style=" {{'background-image:'+'url('+plan.cover_url+')'+';'}}">
+                            <view class="_div data-v-488ae151 meta">
+                                <view class="_div data-v-488ae151">{{plan.title}}</view>
+                                <view class="_div data-v-488ae151 valid-date">计划时间： {{plan.started_at}}-{{plan.ended_at}}</view>
+                                <view class="_div data-v-488ae151 nav soon" wx:if="{{plan.status===1}}">明日开始</view>
+                                <view class="_div data-v-488ae151 nav progress" wx:elif="{{plan.status===2}}">进行中</view>
+                                <view class="_div data-v-488ae151 nav end" wx:elif="{{plan.status===3}}">已完成</view>
+                                <view class="_div data-v-488ae151 nav end" wx:else>已结束</view>
+                                <view class="_div data-v-488ae151 allow-reward">{{plan.allow_reward?'（参与返现）':'（不参与返现）'}}</view>
+                            </view>
+                        </button>
+                    </form>
+                </navigator>
+                <navigator class="_navigator data-v-488ae151 more" hoverClass="navigator-hover" url="{{'/pages/planLanding/main?id='+LANDING_PAGE_ID}}">
+                查看全部读书计划
+                <view class="_i data-v-488ae151 ib ib-chevron-right chevron" style="margin-left: -2px;"></view>
+                </navigator>
+            </view>
+            <view class="_div data-v-488ae151 empty" wx:else>
+                <image class="_img data-v-488ae151" src="https://media-image1.baydn.com/storage_media_image/kvhfgj/91233d101e02d0c37efc9b46a6cac8ed.5e3403453f7c6f5fc2d7bd3de2b48e96.png"></image>
+                <view class="_div data-v-488ae151 desc">
+                    <view class="_div data-v-488ae151">还没有正在参与的计划哦</view>
+                    <view class="_div data-v-488ae151">快去挑选一份喜欢的书单开始阅读吧</view>
+                </view>
+                <view class="_div data-v-488ae151 home-plan-container">
+                    <template is="2c82d03e" data="{{...$root[$kk+'0'],$root:$root}}"></template>
+                </view>
+                <navigator class="_navigator data-v-488ae151 more" hoverClass="navigator-hover" url="{{'/pages/planLanding/main?id='+LANDING_PAGE_ID}}">
+                查看全部读书计划
+                <view class="_i data-v-488ae151 ib ib-chevron-right chevron" style="margin-left: -2px;"></view>
+                </navigator>
+            </view>
+        </view>
+        <template is="6309aa41" data="{{...$root[$kk+'1'],$root:$root,$for:{default:'data-v-488ae151-default-1'},$slotdefault:'data-v-488ae151-default-1'}}" wx:if="{{isShowLoginModal}}"></template>
+    </view>
+</template>
+<import src="/components/HomePlanList.vue.wxml"></import>
+<import src="/components/Login.vue.wxml"></import>

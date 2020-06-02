@@ -1,0 +1,71 @@
+<view class="house-space-wrap house-detail _div data-v-6516ec56">
+    <block wx:if="{{space}}">
+        <view class="house-space _div data-v-6516ec56" wx:if="{{item[$orig]}}" wx:for="{{$root.l0}}" wx:key="name">
+            <view class="name _h3 data-v-6516ec56">{{item[$orig].name}}</view>
+            <view class="info _div data-v-6516ec56">
+                <label class="value _span data-v-6516ec56">{{item[$orig].area+'㎡'}}</label>
+                <label class="line _span data-v-6516ec56" wx:if="{{item[$orig].face}}">|</label>
+                <label class="value _span data-v-6516ec56" wx:if="{{item[$orig].face}}">{{item[$orig].face}}</label>
+                <label class="line _span data-v-6516ec56" wx:if="{{item[$orig].tags&&item[$orig].tags.length}}">|</label>
+                <label class="value _span data-v-6516ec56" wx:if="{{item[$orig].tags&&item[$orig].tags.length}}">{{item.g0}}</label>
+            </view>
+            <view class="feat-tags _div data-v-6516ec56">
+                <label bindtap="__e" class="tag _span data-v-6516ec56" data-event-opts="{{[ [ 'tap',[ [ 'handleJumpH5',[item[$orig].style_module.parameter&&item[$orig].style_module.parameter.url] ] ] ] ]}}" wx:if="{{item[$orig].style_module&&item[$orig].style_module.title}}">
+                    <image alt class="icon _img data-v-6516ec56" src="{{item[$orig].style_module.img}}" wx:if="{{item[$orig].style_module.img}}"></image>
+                    <label class="_span data-v-6516ec56">{{item[$orig].style_module.title}}</label>
+                    <view class="iconfont icon-zrk_ic_arrowright _i data-v-6516ec56"></view>
+                </label>
+                <label bindtap="__e" class="tag _span data-v-6516ec56" data-event-opts="{{[ [ 'tap',[ [ 'handleOpenModal',['videoPopup','$0'],[ [ ['space','name',item[$orig].name,'video'] ] ] ] ] ] ]}}" wx:if="{{item[$orig].video_title}}">
+                    <image alt class="icon _img data-v-6516ec56" src="{{item[$orig].video_img}}" wx:if="{{item[$orig].video_img}}"></image>
+                    <label class="_span data-v-6516ec56">{{item[$orig].video_title}}</label>
+                    <view class="iconfont icon-zrk_ic_arrowright _i data-v-6516ec56"></view>
+                </label>
+                <label bindtap="__e" class="tag _span data-v-6516ec56" data-event-opts="{{[ [ 'tap',[ [ 'handleOpenModal',['deviceListPopup',index] ] ] ] ]}}" wx:if="{{item[$orig].config.length}}">
+                    <label class="_span data-v-6516ec56">{{item[$orig].config.length+'件物品配置'}}</label>
+                    <view class="iconfont icon-zrk_ic_arrowright _i data-v-6516ec56"></view>
+                </label>
+            </view>
+            <view class="img-list _div data-v-6516ec56">
+                <block wx:for="{{imgListArray[index].displayList}}" wx:for-index="i" wx:for-item="photo" wx:key="*this">
+                    <image alt binderror="__e" bindtap="__e" class="img _img data-v-6516ec56" data-event-opts="{{[ [ 'tap',[ [ 'handlePreviewImg',[index,i] ] ] ],[ 'error',[ [ 'handleImageError',[index*100+i] ] ] ] ]}}" src="{{photo}}" wx:if="{{!isImageError[index*100+i]}}"></image>
+                    <image class="img error data-v-6516ec56" mode="aspectFill" src="{{errorImageSrc}}" wx:else></image>
+                </block>
+                <view bindtap="__e" class="more-btn _p data-v-6516ec56" data-event-opts="{{[ [ 'tap',[ [ 'handleShowMore',[index] ] ] ] ]}}" wx:if="{{imgListArray[index].more}}">{{'展开剩余'+imgListArray[index].list.length-3+'张图片'}}</view>
+            </view>
+            <view class="hr-line _div data-v-6516ec56" wx:if="{{index!==space.length-1}}"></view>
+        </view>
+    </block>
+    <popup-wrapper backgroundColor="#fff" bind:__l="__l" bind:closeCallback="__e" class="data-v-6516ec56 vue-ref" data-event-opts="{{[ [ '^closeCallback',[ ['handleVideoClose'] ] ] ]}}" data-ref="videoPopup" height="700rpx" maskClick="{{true}}" maskShow="{{true}}" popupId="{{1}}" transition="slider" type="bottom" vueId="1" vueSlots="{{['default']}}">
+        <view class="scene-nav data-v-6516ec56">
+            <view class="_div data-v-6516ec56">
+                <view bindtap="__e" class="{{['item _div data-v-6516ec56',currentSelectVideoIndex===index?'active':'']}}" data-event-opts="{{[ [ 'tap',[ [ 'handleNavSelect',['$0',index],[ [ ['videos','title',video.title] ] ] ] ] ] ]}}" wx:for="{{videos}}" wx:for-item="video" wx:key="title">{{video.title}}</view>
+            </view>
+        </view>
+        <view class="popup-desc _p data-v-6516ec56" wx:if="{{currentDesc}}">{{currentDesc}}</view>
+        <video class="popup-video data-v-6516ec56" id="video" src="{{currentVideo}}" wx:if="{{currentVideo}}"></video>
+        <block wx:else>
+            <image alt="poster" class="popup-video _img data-v-6516ec56" src="{{currentPoster}}" wx:if="{{currentPoster}}"></image>
+        </block>
+    </popup-wrapper>
+    <popup-wrapper backgroundColor="#fff" bind:__l="__l" class="data-v-6516ec56 vue-ref" contentClass="no-pb" data-ref="deviceListPopup" height="75%" maskClick="{{true}}" maskShow="{{true}}" popupId="{{2}}" transition="slider" type="bottom" vueId="2" vueSlots="{{['default']}}">
+        <view class="config-header _div data-v-6516ec56">
+            <view class="room-name _h3 data-v-6516ec56">起居室</view>
+            <view class="info _div data-v-6516ec56">
+                <label class="value _span data-v-6516ec56">{{space[currentSelectConfigIndex].area+'㎡'}}</label>
+                <label class="line _span data-v-6516ec56" wx:if="{{space[currentSelectConfigIndex].face}}">|</label>
+                <label class="value _span data-v-6516ec56" wx:if="{{space[currentSelectConfigIndex].face}}">{{space[currentSelectConfigIndex].face}}</label>
+                <label class="line _span data-v-6516ec56" wx:if="{{space[currentSelectConfigIndex].tags&&space[currentSelectConfigIndex].tags.length}}">|</label>
+                <label class="value _span data-v-6516ec56" wx:if="{{space[currentSelectConfigIndex].tags&&space[currentSelectConfigIndex].tags.length}}">{{$root.g1}}</label>
+            </view>
+        </view>
+        <scroll-view class="config-list data-v-6516ec56" scrollY="{{true}}">
+            <view class="item _div data-v-6516ec56" wx:for="{{space[currentSelectConfigIndex].config}}" wx:for-index="__i0__" wx:key="code">
+                <view class="image-wrap _div data-v-6516ec56">
+                    <image alt="icon" class="{{['image data-v-6516ec56',!item.icon?'no-data':'']}}" mode="widthFit" src="{{item.icon}}"></image>
+                    <label class="ai-device _span data-v-6516ec56" wx:if="{{item.is_ai===1}}">智能设备</label>
+                </view>
+                <view class="name _div data-v-6516ec56">{{item.name}}</view>
+            </view>
+        </scroll-view>
+    </popup-wrapper>
+</view>

@@ -1,0 +1,85 @@
+<navigationTopbar navTxt="{{navTxtStr}}" navtype="2" showWhiteBackground="{{navTopBackShow}}"></navigationTopbar>
+<view class="page_container" style="top:{{navHeight}}px;">
+    <view class="user_con">
+        <view class="user_header">
+            <image class="header_url" src="{{userHead}}"></image>
+        </view>
+        <block wx:if="{{isLogin}}">
+            <view class="user_msg">
+                <view class="name">{{userName}}
+            </view>
+                <view class="uid">UID: {{userId}}</view>
+                <view class="dengji010">
+                    <dengJi backgroundcolor="{{backgroundcolor}}" iconUrl="{{iconUrl}}" level="{{level}}" typeStr="1"></dengJi>
+                    <view class="dengji_pro">
+                        <text class="pro_line" style="width: {{progressPercent}}%"></text>
+                        <text class="pro_num">{{totalExp}}</text>
+                    </view>
+                </view>
+            </view>
+            <image bindtap="onSignShow" class="signMine" src="./../../images/sign/sign_mine.png" wx:if="{{signCanShow}}"></image>
+        </block>
+        <view bindtap="onLogin" class="newL" wx:else>登录/注册</view>
+    </view>
+    <view class="wallet" wx:if="{{platForm!='ios'}}">
+        <image class="wallet_icon" src="./../../images/mine_wallet.png"></image>
+        <text class="wallet_txt">我的账户</text>
+        <image bindtap="toPayment" class="charge_btn" src="./../../images/recharge.png"></image>
+    </view>
+    <view class="fruit" wx:if="{{platForm!='ios'}}">
+        <view class="fruit_num">{{tokensAmount}}</view>
+        <view class="fruit_txt">果</view>
+    </view>
+    <view class="mine_list">
+        <view bindtap="toMyInterest" class="list_item">
+            <image class="item_icon" src="./../../images/mine_focus.png"></image>
+            <text class="item_txt">我的关注</text>
+            <image class="item_btn" src="./../../images/mine_btn.png"></image>
+        </view>
+        <view bindtap="toViewHistory" class="list_item">
+            <image class="item_icon" src="./../../images/mine_history.png"></image>
+            <text class="item_txt">观看历史</text>
+            <image class="item_btn" src="./../../images/mine_btn.png"></image>
+        </view>
+        <view class="list_item" wx:if="{{isLogin}}">
+            <button bindtap="toKefu" class="btn_servers" openType="contact" sessionFrom="{\"source\":\"{{huodongStr}}\",\"userId\":\"{{userId}}\",\"nickName\":\"{{userName}}\",\"avatarUrl\":\"{{userHead}}\"}" type="default">
+                <image class="item_icon" src="./../../images/mine_service.png"></image>
+                <text class="item_txt">联系客服</text>
+                <image class="item_btn" src="./../../images/mine_btn.png"></image>
+            </button>
+        </view>
+        <view class="list_item" wx:else>
+            <button bindtap="toKefu" class="btn_servers" type="default">
+                <image class="item_icon" src="./../../images/mine_service.png"></image>
+                <text class="item_txt">联系客服</text>
+                <image class="item_btn" src="./../../images/mine_btn.png"></image>
+            </button>
+        </view>
+        <view bindtap="toMyBill" class="list_item" wx:if="{{platForm!='ios'}}">
+            <image class="item_icon" src="./../../images/mine_bill.png"></image>
+            <text class="item_txt">我的账单</text>
+            <image class="item_btn" src="./../../images/mine_btn.png"></image>
+        </view>
+        <view class="list_item">
+            <image class="item_icon" src="./../../images/mine_dingyue.png"></image>
+            <text class="item_txt">预约成功通知</text>
+            <text class="item_num">已订阅{{dingyueNum}}次</text>
+        </view>
+    </view>
+</view>
+<view class="guessYouLike {{showCon}}">
+    <view class="title">
+        <text class="line left"></text>猜你喜欢<text class="line right"></text>
+    </view>
+    <view class="list_con">
+        <view catchtap="toLiveRoomFun" class="item" data-item="{{item}}" wx:for="{{electAnchor}}" wx:key="index">
+            <view class="videoicon">
+                <image class="video_icon" src="./../../images/video_icon_new.png"></image>
+                <text class="icon_txt">直播中</text>
+            </view>
+            <image class="img" src="{{item.cover_img_url}}"></image>
+        </view>
+    </view>
+</view>
+<signIn bind:closeSign="oncloseSign" bind:signShare="onSignShare" bind:success="onasignsuccess" id="signInCon"></signIn>
+<login bind:getUserInfo="getAuthor" id="login"></login>

@@ -1,0 +1,2114 @@
+.playMaskBg {
+    width: 100%;
+    height: 100%;
+    background-color: black;
+}
+
+.giftCanvas {
+    position: fixed;
+    top: 0;
+    width: 100%;
+    height: 100vh;
+}
+
+.sendGift-area {
+    position: fixed;
+    top: 0;
+    width: 100%;
+    height: 90%;
+    z-index: 100;
+}
+
+.msgCanvas {
+    position: fixed;
+    top: 0;
+    width: 100%;
+    height: 100vh;
+    z-index: 3;
+}
+
+.player-area {
+    position: absolute;
+    top: 0;
+    width: 100%;
+    height: 100vh;
+    z-index: -100;
+}
+
+.livePlayer {
+    position: absolute;
+    top: 0;
+    width: 100%;
+    left: 0;
+    background-color: #160a29;
+    overflow: hidden;
+    disable-scroll: true;
+}
+
+.liveSkin {
+    position: absolute;
+    width: 100vw;
+    height: 100vh;
+    top: 0;
+    left: 50%;
+    transform: translateX(-50%);
+}
+
+page {
+    width: 100%;
+    height: 100%;
+    background-color: #160a29;
+    overflow-y: hidden;
+}
+
+.navigation {
+    position: fixed;
+    width: 100%;
+    height: 92rpx;
+    left: 55rpx;
+    top: 40rpx;
+    z-index: 202;
+    opacity: 0;
+}
+
+.backArrow {
+    position: absolute;
+    width: 80rpx;
+    height: 100rpx;
+    left: 10rpx;
+    top: 40rpx;
+    z-index: 203;
+}
+
+.backArrow-img {
+    width: 35rpx;
+    height: 35rpx;
+    margin-top: 32rpx;
+}
+
+.navigation .navContainer {
+    float: left;
+    width: 100%;
+    height: 100%;
+    overflow: hidden;
+}
+
+.avatar {
+    position: relative;
+    float: left;
+    height: 80rpx;
+    top: 50%;
+    transform: translateY(-50%);
+}
+
+.avatar .icon {
+    float: left;
+    position: relative;
+    width: 60rpx;
+    height: 60rpx;
+    overflow: hidden;
+    margin-right: 10rpx;
+    top: 50%;
+    transform: translateY(-50%);
+}
+
+.avatar .icon .head {
+    float: left;
+    width: 100%;
+    height: 100%;
+    border-radius: 50%!important;
+}
+
+.avatar .icon .vj {
+    float: left;
+    width: 20rpx;
+    height: 20rpx;
+    position: absolute;
+    bottom: 0;
+    right: 0;
+}
+
+.avatar .content {
+    position: relative;
+    float: left;
+    top: 50%;
+    transform: translateY(-50%);
+    height: 60rpx;
+}
+
+.content .name {
+    min-height: 30rpx;
+    font-family: "PingFangSC-Regular-Regular";
+    font-size: 24rpx;
+    color: white;
+    overflow: hidden;
+    white-space: nowrap;
+}
+
+.content .count {
+    float: left;
+    min-height: 30rpx;
+}
+
+.content .count .number {
+    float: left;
+    font-size: 22rpx;
+    color: #fff;
+    margin-right: 10rpx;
+    font-weight: 800;
+}
+
+.content .count .watch {
+    float: left;
+    font-family: "PingFangSC-Regular-Regular";
+    font-size: 22rpx;
+    color: white;
+    white-space: nowrap;
+    letter-spacing: 1rpx;
+    opacity: 0.5;
+}
+
+.avatar .line {
+    position: relative;
+    float: left;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 2rpx;
+    height: 50%;
+    background: rgba(215,215,216,0.3);
+}
+
+.guard {
+    position: relative;
+    float: left;
+    top: 50%;
+    transform: translateY(-50%);
+    height: 48rpx;
+}
+
+.guard .g1 {
+    float: left;
+    width: 48rpx;
+    height: 48rpx;
+    margin-left: 10rpx;
+    margin-right: 10rpx;
+    border-radius: 50%;
+}
+
+.guard .g2 {
+    float: left;
+    width: 48rpx;
+    height: 48rpx;
+    border-radius: 50%;
+}
+
+.content .start {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+}
+
+.content .start .image {
+    width: 20rpx;
+    height: 20rpx;
+}
+
+.content .start .text {
+    font-family: "PingFangSC-Regular-Regular";
+    width: 56rpx;
+    font-size: 18rpx;
+    color: white;
+    margin-left: 5rpx;
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+}
+
+.content .start-number {
+    display: flex;
+    font-family: "PingFangSC-Regular-Regular";
+    font-size: 30rpx;
+    color: #ffd600;
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+    letter-spacing: 1rpx;
+    line-height: 150%;
+}
+
+.avatar .focusBtn {
+    position: relative;
+    float: left;
+    width: 110rpx;
+    height: 48rpx;
+    background-color: #ffd600;
+    color: #000;
+    text-align: center;
+    font-size: 24rpx;
+    line-height: 48rpx;
+    border-radius: 24rpx;
+    margin-left: 10rpx;
+    margin-right: 10rpx;
+    font-weight: 600;
+    top: 50%;
+    transform: translateY(-50%);
+}
+
+.avatar .focusBtn.active {
+    background-color: #e9e8ee;
+    color: #85848a;
+}
+
+.avatar .focus {
+    width: 50rpx;
+    height: 50rpx;
+    margin-left: 13rpx;
+}
+
+.charm {
+    position: fixed;
+    width: 710rpx;
+    height: 172rpx;
+    left: 50%;
+    transform: translateX(-50%);
+    z-index: 1000;
+}
+
+.cline {
+    width: 100%;
+    height: 1rpx;
+    background: rgba(255,255,255,0.2);
+}
+
+.charm-content {
+    float: left;
+    height: 60rpx;
+    background-color: rgba(1,5,27,0.3);
+    border-radius: 30rpx;
+    margin-top: 21rpx;
+}
+
+.charm-content .star {
+    float: left;
+    width: 24rpx;
+    height: 24rpx;
+    margin-top: 18rpx;
+    margin-left: 16rpx;
+}
+
+.charm-content .starName {
+    float: left;
+    font-family: "PingFangSC-Regular-Regular";
+    font-size: 24rpx;
+    line-height: 60rpx;
+    opacity: 0.5;
+    color: white;
+    margin-left: 10rpx;
+    overflow: hidden;
+    white-space: nowrap;
+}
+
+.charm-content .start-number {
+    float: left;
+    font-family: "PingFangSC-Regular-Regular";
+    font-size: 30rpx;
+    line-height: 60rpx;
+    color: #fff;
+    overflow: hidden;
+    white-space: nowrap;
+    letter-spacing: 1rpx;
+    margin-left: 10rpx;
+}
+
+.charm-content .line {
+    float: left;
+    width: 2rpx;
+    height: 50%;
+    margin-left: 10rpx;
+    margin-right: 10rpx;
+    margin-top: 15rpx;
+    background: rgba(255,255,255,0.2);
+}
+
+.charm-content .moon {
+    float: left;
+    width: 24rpx;
+    height: 24rpx;
+    margin-top: 18rpx;
+}
+
+.charm-content .moonName {
+    float: left;
+    font-family: "PingFangSC-Regular-Regular";
+    font-size: 24rpx;
+    line-height: 60rpx;
+    opacity: 0.5;
+    color: white;
+    margin-left: 10rpx;
+    overflow: hidden;
+    white-space: nowrap;
+}
+
+.charm-content .moon-number {
+    float: left;
+    font-family: "PingFangSC-Regular-Regular";
+    font-size: 30rpx;
+    line-height: 60rpx;
+    color: #fff;
+    margin-left: 10rpx;
+    margin-right: 16rpx;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+    letter-spacing: 1rpx;
+}
+
+.partner-content {
+    position: fixed;
+    bottom: 15rpx;
+    height: 60rpx;
+    background-color: #ffd600;
+    border-radius: 30rpx;
+    margin-top: 21rpx;
+}
+
+.partner-content .partner-icon {
+    float: left;
+    width: 24rpx;
+    height: 24rpx;
+    margin-top: 18rpx;
+    margin-left: 16rpx;
+}
+
+.partner-content .partner-text {
+    float: left;
+    font-family: "PingFangSC-Regular-Regular";
+    font-size: 24rpx;
+    line-height: 60rpx;
+    color: black;
+    margin-left: 10rpx;
+    margin-right: 16rpx;
+    overflow: hidden;
+    white-space: nowrap;
+}
+
+.rightControl {
+    position: fixed;
+    width: 100rpx;
+    height: 470rpx;
+    right: 21rpx;
+    top: 219rpx;
+    z-index: 2000;
+}
+
+.right_Control_img {
+    margin-left: 10rpx;
+    width: 94rpx;
+    height: 470rpx;
+}
+
+.dingyue-btn {
+    position: absolute;
+    top: 0;
+    width: 100rpx;
+    height: 123rpx;
+    color: rgba(255,255,255,0);
+    background-color: rgba(255,255,255,0);
+}
+
+.contact-btn {
+    position: absolute;
+    top: 124rpx;
+    width: 100rpx;
+    height: 123rpx;
+    color: rgba(255,255,255,0);
+    background-color: rgba(255,255,255,0);
+}
+
+.rank-btn {
+    position: absolute;
+    top: 247rpx;
+    width: 100rpx;
+    height: 123rpx;
+    color: rgba(255,255,255,0);
+    background-color: rgba(255,255,255,0);
+}
+
+.next-btn {
+    position: absolute;
+    top: 370rpx;
+    width: 100rpx;
+    height: 123rpx;
+    color: rgba(255,255,255,0);
+    background-color: rgba(255,255,255,0);
+}
+
+.giftBagControl {
+    position: absolute;
+    width: 100rpx;
+    height: 100rpx;
+    bottom: 20rpx;
+    right: 168rpx;
+}
+
+.giftBagControl .giftBagImg {
+    position: absolute;
+    width: 91rpx;
+    height: 91rpx;
+    top: 7rpx;
+}
+
+.openBag-btn {
+    position: absolute;
+    top: 15rpx;
+    left: -5rpx;
+    width: 120rpx;
+    height: 120rpx;
+    color: rgba(255,0,0,0);
+    background-color: rgba(255,0,0,0);
+}
+
+.liveControl {
+    position: absolute;
+    width: 100%;
+    height: 120rpx;
+    display: flex;
+    flex-direction: row;
+    bottom: 20rpx;
+    z-index: 9999999;
+}
+
+.liveControl .inputLiveMsg {
+    width: 300rpx;
+    height: 60rpx;
+    margin-top: 20rpx;
+    margin-left: 35rpx;
+    border-radius: 60rpx;
+    background-color: rgba(255,255,255,0.2);
+    min-height: 30rpx;
+    font-family: "PingFangSC-Regular-Regular";
+    font-size: 24rpx;
+    color: rgba(255,255,255,0.8);
+    line-height: 60rpx;
+    padding-left: 27rpx;
+}
+
+.liveControl .btnShare {
+    position: absolute;
+    margin-top: 20rpx;
+    width: 60rpx;
+    height: 60rpx;
+    right: 30rpx;
+}
+
+.liveControl .btnChat {
+    position: absolute;
+    margin-top: 20rpx;
+    width: 60rpx;
+    height: 60rpx;
+    right: 111rpx;
+}
+
+.liveControl .btnGift {
+    position: absolute;
+    margin-top: 20rpx;
+    width: 60rpx;
+    height: 60rpx;
+    right: 192rpx;
+    opacity: 1;
+}
+
+.liveControl .share-btn {
+    position: absolute;
+    top: 15rpx;
+    right: 20rpx;
+    width: 80rpx;
+    height: 80rpx;
+    line-height: 80rpx;
+    color: rgba(255,0,0,0);
+    background-color: rgba(255,0,0,0);
+}
+
+.liveControl .chat-btn {
+    position: absolute;
+    top: 15rpx;
+    right: 101rpx;
+    width: 80rpx;
+    height: 80rpx;
+    line-height: 80rpx;
+    color: rgba(255,0,0,0);
+    background-color: rgba(255,0,0,0);
+}
+
+.liveControl .contact-btn {
+    position: absolute;
+    top: 15rpx;
+    right: 15rpx;
+    width: 80rpx;
+    height: 80rpx;
+    line-height: 80rpx;
+    color: rgba(255,0,0,0);
+    background-color: rgba(255,0,0,0);
+}
+
+.liveMsg {
+    position: absolute;
+    display: flex;
+    width: 100%;
+    height: 100rpx;
+    bottom: 0;
+    background-color: rgba(255,255,255,0.9);
+    flex-direction: row;
+    z-index: 999;
+}
+
+.liveMsg .msgBg {
+    display: flex;
+    width: 560rpx;
+    height: 70rpx;
+    border: 1px solid #fff;
+    border-radius: 35rpx;
+    background-color: rgba(255,255,255,0.9);
+    margin-top: 15rpx;
+    margin-left: 15rpx;
+    color: #c8c8cd;
+    line-height: 70rpx;
+    padding-left: 22rpx;
+}
+
+.userInput {
+    position: fixed;
+    bottom: 0;
+    line-height: 100rpx;
+    z-index: 99999;
+    display: flex;
+    width: 520rpx;
+    height: 100rpx;
+    padding-left: 25rpx;
+    color: #333;
+}
+
+.liveMsg .btnSend {
+    position: absolute;
+    display: flex;
+    flex-direction: row-reverse;
+    width: 120rpx;
+    height: 70rpx;
+    border-radius: 35rpx;
+    background-color: #1994fb;
+    margin-top: 15rpx;
+    right: 15rpx;
+    line-height: 70rpx;
+    text-align: center;
+    color: #fff;
+}
+
+.btnSendInputMsg {
+    position: absolute;
+    top: 0;
+    right: 0;
+    width: 160rpx;
+    height: 120rpx;
+    line-height: 120rpx;
+    color: rgba(255,0,0,0);
+    background-color: rgba(255,0,0,0);
+}
+
+.btnBind {
+    position: absolute;
+    bottom: 22rpx;
+    left: 0;
+    width: 362rpx;
+    height: 120rpx;
+    line-height: 120rpx;
+    color: rgba(255,0,0,0);
+    background-color: rgba(255,0,0,0);
+}
+
+.checkInLib {
+    position: absolute;
+    display: flex;
+    top: 412rpx;
+    height: 62rpx;
+    border-radius: 31rpx;
+    align-items: center;
+    justify-content: space-between;
+    z-index: 204;
+}
+
+.checkInLib .checkInBg {
+    display: flex;
+    height: 50rpx;
+    border-radius: 25rpx;
+    margin-left: 8rpx;
+    margin-right: 8rpx;
+    align-items: center;
+}
+
+.checkInLib .checkInBg .icon {
+    margin-left: 18rpx;
+    width: 20rpx;
+    height: 20rpx;
+}
+
+.checkInLib .checkInBg .level {
+    margin-left: 5rpx;
+    color: white;
+    font-size: 20rpx;
+}
+
+.checkInLib .checkInBg .line {
+    width: 2rpx;
+    height: 24rpx;
+    margin-left: 20rpx;
+    margin-right: 5rpx;
+    margin-top: 15%;
+    margin-bottom: 15%;
+    background: rgba(255,255,255,0.3);
+}
+
+.checkInLib .checkInBg .name {
+    max-width: 220rpx;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    color: white;
+    font-size: 26rpx;
+    margin-left: 20rpx;
+}
+
+.checkInLib .checkInBg .checkStr {
+    color: rgba(255,255,255,0.5);
+    font-size: 26rpx;
+    margin-left: 20rpx;
+    margin-right: 18rpx;
+}
+
+.sendGiftNum {
+    position: fixed;
+    width: 100%;
+    height: 600rpx;
+    top: 300rpx;
+}
+
+.sendGiftNum .sg3v {
+    position: absolute;
+    display: flex;
+    top: 0rpx;
+    left: -100px;
+    width: 100%;
+    height: 150rpx;
+    align-items: flex-end;
+    justify-content: space-between;
+}
+
+.sendGiftNum .sg2v {
+    position: absolute;
+    display: flex;
+    top: 150rpx;
+    left: -100px;
+    width: 100%;
+    height: 150rpx;
+    align-items: flex-end;
+    justify-content: space-between;
+}
+
+.sendGiftNum .sg1v {
+    position: absolute;
+    display: flex;
+    top: 300rpx;
+    left: -100px;
+    width: 100%;
+    height: 150rpx;
+    align-items: flex-end;
+    justify-content: space-between;
+}
+
+.sendGiftNum .giftBg {
+    width: 310rpx;
+    height: 80rpx;
+}
+
+.sendGiftNum .userImg {
+    position: absolute;
+    width: 60rpx;
+    height: 60rpx;
+    border-radius: 50%;
+    left: 10rpx;
+    bottom: 10rpx;
+}
+
+.sendGiftNum .giftName {
+    position: absolute;
+    color: white;
+    font-size: 28rpx;
+    left: 80rpx;
+    bottom: 13rpx;
+}
+
+.sendGiftNum .giftImg {
+    position: absolute;
+    width: 150rpx;
+    height: 150rpx;
+    left: 200rpx;
+}
+
+.sgNum {
+    position: absolute;
+    font-family: "PingFang";
+    width: 300rpx;
+    height: 60rpx;
+    left: 330rpx;
+    bottom: 4rpx;
+    color: #ffc800;
+    font-size: 60rpx;
+    font-weight: bloder;
+}
+
+.sgNumBg {
+    position: absolute;
+    font-family: "PingFang";
+    width: 300rpx;
+    height: 60rpx;
+    left: 335rpx;
+    color: rgba(0,0,0,0.3);
+    font-size: 60rpx;
+    font-weight: bloder;
+}
+
+.liveEnd {
+    position: absolute;
+    width: 100%;
+    bottom: 0rpx;
+    display: flex;
+    flex-direction: column;
+    opacity: 0;
+    transform: translateY(20px);
+    z-index: 1980;
+}
+
+.liveEnd .liveEndTitle {
+    display: flex;
+    height: 90rpx;
+    background-color: rgba(247,208,8,0.9);
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.liveEndTitle .t1 {
+    font-family: "PingFang";
+    color: black;
+    font-size: 30rpx;
+    font-weight: bolder;
+    margin-left: 30rpx;
+}
+
+.liveEndTitle .t2 {
+    text-align: right;
+    width: 50%;
+    font-family: "PingFang";
+    color: black;
+    font-size: 30rpx;
+    font-weight: bolder;
+    margin-right: 30rpx;
+}
+
+.liveEnd .liveEndMain {
+    display: flex;
+    flex-direction: column;
+    background-color: rgba(0,0,0,1);
+    height: 584rpx;
+    align-items: center;
+}
+
+.liveEndCount {
+    display: flex;
+    align-items: stretch;
+}
+
+.liveEndCount .c1,.c3 {
+    width: 263rpx;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-top: 40rpx;
+}
+
+.liveEndCount .c2 {
+    display: flex;
+    width: 222rpx;
+    flex-direction: column;
+    align-items: center;
+    margin-top: 40rpx;
+}
+
+.liveEndCount .t {
+    color: white;
+    font-size: 30rpx;
+}
+
+.liveEndCount .num {
+    color: #ffd600;
+    width: 100%;
+    font-size: 30rpx;
+    text-align: center;
+    margin-top: 28rpx;
+}
+
+.liveEndCount .line {
+    width: 2rpx;
+    height: 30rpx;
+    background: rgba(215,215,216,0.3);
+    margin-top: 67rpx;
+}
+
+.liveEndBtnBack {
+    position: absolute;
+    bottom: 190rpx;
+    width: 492rpx;
+    height: 90rpx;
+    border-radius: 45rpx;
+    background: #ffd600;
+    font-size: 30rpx;
+    font-weight: bolder;
+    display: flex;
+    line-height: 90rpx;
+    text-align: center;
+    align-items: center;
+    justify-content: center;
+}
+
+.liveEndBtnFollow {
+    position: fixed;
+    bottom: 70rpx;
+    width: 492rpx;
+    height: 90rpx;
+    font-size: 30rpx;
+    font-weight: bolder;
+    display: flex;
+    align-items: center;
+    vertical-align: center;
+    justify-content: center;
+    flex-direction: column;
+}
+
+.liveEndBtnFollow .bg {
+    width: 492rpx;
+    height: 90rpx;
+}
+
+.liveEndBtnFollow .txt {
+    position: absolute;
+    color: white;
+}
+
+.rankListView {
+    position: fixed;
+    width: 100%;
+    height: 695rpx;
+    bottom: 0rpx;
+    display: flex;
+    flex-direction: column;
+    transform: translateY(20px);
+    background-color: rgba(1,5,27,0.9);
+    z-index: 990;
+}
+
+.rankListView .topTitleView {
+    display: flex;
+    height: 90rpx;
+    background-color: rgba(1,5,27,1);
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+}
+
+.topTitleView .topTitleIcon {
+    width: 33rpx;
+    height: 30rpx;
+}
+
+.topTitleView .topTitleLabel {
+    font-family: "PingFang";
+    color: #fdd444;
+    font-size: 30rpx;
+    font-weight: bolder;
+    margin-left: 12rpx;
+}
+
+.rankcellList {
+    height: 584rpx;
+    overflow-y: scroll;
+}
+
+.rankcellList .rankCell {
+    position: relative;
+    display: flex;
+    width: 100%;
+    height: 100rpx;
+    align-items: center;
+}
+
+.rankCell .cellRank {
+    margin-left: 25rpx;
+    width: 40rpx;
+    height: 40rpx;
+}
+
+.rankCell .cellRankLabel {
+    width: 38rpx;
+    font-family: "PingFang";
+    color: #fdd444;
+    font-size: 24rpx;
+    margin-left: 25rpx;
+    text-align: center;
+}
+
+.rankCell .cellHeader {
+    margin-left: 25rpx;
+    width: 60rpx;
+    height: 60rpx;
+    border-radius: 50%;
+}
+
+.rankCell .cellLevelRect {
+    display: flex;
+    margin-left: 29rpx;
+    width: 66rpx;
+    height: 32rpx;
+    border-radius: 16rpx;
+    background: #f32861;
+    flex-direction: row;
+    align-items: center;
+}
+
+.cellLevelRect .cellLevelIcon {
+    margin-left: 8rpx;
+    width: 18rpx;
+    height: 15rpx;
+}
+
+.cellLevelRect .cellLevel {
+    width: 33rpx;
+    text-align: center;
+    color: white;
+    font-size: 18rpx;
+}
+
+.rankCell .cellName {
+    margin-left: 20rpx;
+    width: 350rpx;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+    overflow: hidden;
+    color: white;
+    font-size: 28rpx;
+}
+
+.rankCell .cellSubCount {
+    width: 130rpx;
+    text-align: right;
+    position: absolute;
+    color: #fdd444;
+    right: 65rpx;
+    font-size: 28rpx;
+}
+
+.rankCell .cellStarIcon {
+    position: absolute;
+    width: 24rpx;
+    height: 24rpx;
+    right: 33rpx;
+}
+
+.rankCellBottomLine {
+    position: absolute;
+    width: 570rpx;
+    height: 2px;
+    background: rgba(30,34,52,0.9);
+    bottom: 0rpx;
+    right: 0rpx;
+}
+
+.touchMask {
+    position: absolute;
+    width: 100%;
+    height: 90%;
+    top: 0;
+}
+
+.noRankList {
+    display: flex;
+    flex-direction: column;
+    background-color: rgba(1,5,27,0.9);
+    height: 584rpx;
+    align-items: center;
+}
+
+.noRankListIcon {
+    margin-top: 128rpx;
+    width: 180rpx;
+    height: 146rpx;
+    justify-content: center;
+}
+
+.noRankListText {
+    width: 100%;
+    margin-top: 20rpx;
+    font-family: "PingFangSC-Light";
+    font-size: 24rpx;
+    color: #ffffff;
+    opacity: 0.5;
+    text-align: center;
+}
+
+.bag_ios_box {
+    position: absolute;
+    bottom: 0;
+    width: 100%;
+    height: 389rpx;
+    background: rgba(5,5,32,0.9);
+    opacity: 0;
+    z-index: 991;
+}
+
+.bag_ios_title {
+    margin-top: 21rpx;
+    color: white;
+    font-size: 28rpx;
+    text-align: center;
+}
+
+.bag_ios_title_line {
+    position: absolute;
+    width: 100%;
+    height: 2rpx;
+    top: 81rpx;
+    background: #232532;
+}
+
+.bag_ios_control_bg {
+    position: absolute;
+    width: 100%;
+    height: 90rpx;
+    bottom: 0rpx;
+    background: #01051b;
+}
+
+.bag_ios_container {
+    position: absolute;
+    width: 100%;
+    height: 218rpx;
+    bottom: 90rpx;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+}
+
+.bag_ios_button_bg {
+    position: absolute;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    bottom: 20rpx;
+    right: 20rpx;
+    width: 310rpx;
+    height: 50rpx;
+    border-radius: 25rpx;
+    border: 1px solid #5F626F;
+}
+
+.bag_ios_button_dj {
+    width: 155rpx;
+    height: 50rpx;
+    color: #fed530;
+    font-size: 28rpx;
+    line-height: 50rpx;
+    text-align: center;
+}
+
+.bag_ios_button_line {
+    width: 2rpx;
+    height: 50rpx;
+    background: #5F626F;
+}
+
+.bag_ios_button_gx {
+    width: 155rpx;
+    height: 50rpx;
+    color: white;
+    font-size: 28rpx;
+    line-height: 50rpx;
+    text-align: center;
+}
+
+.bag-contact-btn {
+    position: absolute;
+    bottom: 20rpx;
+    right: 175rpx;
+    width: 155rpx;
+    height: 50rpx;
+    color: rgba(255,0,0,0);
+    background-color: rgba(255,0,0,0);
+}
+
+.bag_box {
+    position: fixed;
+    bottom: 0;
+    width: 100%;
+    height: 389rpx;
+    background: rgba(5,5,32,0.9);
+    opacity: 0;
+    z-index: 990;
+}
+
+.bag_title {
+    position: absolute;
+    display: flex;
+    width: 100%;
+    top: 21rpx;
+    align-items: center;
+}
+
+.bag_t_g {
+    width: 374rpx;
+    color: #83848f;
+    font-size: 28rpx;
+    text-align: center;
+}
+
+.bag_t_b {
+    width: 374rpx;
+    color: #ffe400;
+    font-size: 28rpx;
+    text-align: center;
+}
+
+.bag_t_line {
+    width: 2rpx;
+    height: 40rpx;
+    background: #232532;
+}
+
+.bag_title_loc {
+    position: absolute;
+    width: 130rpx;
+    height: 6rpx;
+    top: 75rpx;
+    left: 497rpx;
+    background: #ffe400;
+}
+
+.bag_title_line {
+    position: absolute;
+    width: 100%;
+    height: 2rpx;
+    top: 81rpx;
+    background: #232532;
+}
+
+.bag_control_bg {
+    position: absolute;
+    width: 100%;
+    height: 90rpx;
+    bottom: 0rpx;
+    background: #01051b;
+}
+
+.bag_button_gx {
+    position: absolute;
+    bottom: 20rpx;
+    right: 20rpx;
+    width: 160rpx;
+    height: 50rpx;
+    border-radius: 25rpx;
+    border: 1px solid #5F626F;
+    font-size: 26rpx;
+    color: white;
+    text-align: center;
+    line-height: 50rpx;
+}
+
+.bag_container {
+    position: absolute;
+    width: 100%;
+    height: 218rpx;
+    bottom: 90rpx;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+}
+
+.bag_gift {
+    display: flex;
+    width: 185.5rpx;
+    height: 218rpx;
+    align-items: center;
+    flex-direction: column;
+    justify-content: center;
+}
+
+.bag_gift_img {
+    width: 100rpx;
+    height: 100rpx;
+}
+
+.bag_gift_name {
+    width: 185.5rpx;
+    font-size: 26rpx;
+    color: white;
+    text-align: center;
+}
+
+.bag_gift_num {
+    width: 185.5rpx;
+    font-size: 26rpx;
+    color: #fed530;
+    text-align: center;
+}
+
+.bag_gift_line {
+    width: 2rpx;
+    height: 146rpx;
+    background: #232532;
+}
+
+.gift_box {
+    position: fixed;
+    bottom: 0;
+    width: 100%;
+    height: 632rpx;
+    background: rgba(5,5,32,0.9);
+    opacity: 0;
+    transform: translateY(20px);
+}
+
+.onePay {
+    position: absolute;
+    width: 730rpx;
+    height: 70rpx;
+    bottom: 610rpx;
+    right: 10rpx;
+}
+
+.gift_title {
+    position: absolute;
+    display: flex;
+    width: 100%;
+    top: 21rpx;
+}
+
+.gift_t_g {
+    width: 374rpx;
+    color: #ffe400;
+    font-size: 28rpx;
+    text-align: center;
+}
+
+.gift_t_b {
+    width: 374rpx;
+    color: #83848f;
+    font-size: 28rpx;
+    text-align: center;
+}
+
+.gift_t_line {
+    width: 2rpx;
+    height: 40rpx;
+    background: #232532;
+}
+
+.gift_title_loc {
+    position: absolute;
+    width: 130rpx;
+    height: 6rpx;
+    top: 75rpx;
+    left: 122rpx;
+    background: #ffe400;
+}
+
+.gift_title_line {
+    position: absolute;
+    width: 100%;
+    height: 2rpx;
+    top: 81rpx;
+    background: #232532;
+}
+
+.gift_page {
+    position: absolute;
+    width: 100%;
+    top: 512rpx;
+    height: 35rpx;
+    line-height: 5rpx;
+    text-align: center;
+}
+
+.page_item {
+    margin-right: 12rpx;
+    display: inline-block;
+    width: 12rpx;
+    height: 12rpx;
+    background: #5F626F;
+    border-radius: 50%;
+}
+
+.page_item.active {
+    background: #fff;
+}
+
+.gift_bottom {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    width: 100%;
+    overflow: hidden;
+    height: 90rpx;
+    background-color: #01051b;
+}
+
+.gift_bottom .icon01 {
+    margin-left: 10rpx;
+    margin-right: 10rpx;
+    display: inline-block;
+    float: left;
+    width: 77rpx;
+    height: 45rpx;
+}
+
+.btn_box {
+    float: left;
+    position: relative;
+    width: 410rpx;
+    height: 70rpx;
+    overflow: hidden;
+}
+
+.btn_box .btn_con {
+    position: absolute;
+    top: 0;
+    width: 930rpx;
+}
+
+.btn_con .btn_item {
+    float: left;
+    margin-right: 5rpx;
+    width: 90rpx;
+    height: 50rpx;
+    line-height: 50rpx;
+    text-align: center;
+    font-size: 24rpx;
+    color: #5F626F;
+    border-radius: 25rpx;
+    border: 1px solid #5F626F;
+}
+
+.btn_con .btn_item.active {
+    color: #090B26;
+    background: #fff;
+    border: 1px solid transparent;
+}
+
+.amount_con {
+    position: absolute;
+    right: 20rpx;
+    bottom: 20rpx;
+    height: 50rpx;
+    line-height: 50rpx;
+    text-align: center;
+    border-radius: 25rpx;
+    border: 1px solid #5F626F;
+}
+
+.amount_con .amount_txt {
+    float: left;
+    margin-left: 10rpx;
+    height: 50rpx;
+    line-height: 50rpx;
+    color: #fff;
+    font-size: 24rpx;
+}
+
+.amount_con .amount {
+    float: right;
+    height: 50rpx;
+    line-height: 50rpx;
+    color: #FFD609;
+    font-size: 24rpx;
+    text-align: right;
+}
+
+.amount_con .amount_icon {
+    float: right;
+    margin: 17rpx 8rpx 5rpx 0rpx;
+    width: 20rpx;
+    height: 22rpx;
+}
+
+.nextMask {
+    position: fixed;
+    top: 0;
+    width: 100%;
+    height: 100vh;
+    background: #160a29;
+    opacity: 0;
+    z-index: 99999;
+}
+
+.liveTransition {
+    width: 100%;
+    height: 100vh;
+}
+
+.livePk {
+    position: fixed;
+    width: 100%;
+    height: 100rpx;
+    background: rgba(1,5,27,0.5);
+    opacity: 0;
+    z-index: 101;
+}
+
+.livePk .leftLine {
+    position: absolute;
+    top: 11rpx;
+    left: 20rpx;
+    background: #084BF5;
+    width: 355rpx;
+    height: 10rpx;
+    border-radius: 5rpx;
+}
+
+.livePk .rightLine {
+    position: absolute;
+    top: 11rpx;
+    left: 20rpx;
+    background: #D50749;
+    width: 710rpx;
+    height: 10rpx;
+    border-radius: 5rpx;
+}
+
+.livePk .pkStar {
+    position: absolute;
+    top: 0rpx;
+    margin-left: 5rpx;
+    left: 355rpx;
+    width: 31rpx;
+    height: 31rpx;
+}
+
+.showPkData {
+    position: absolute;
+    display: flex;
+    width: 100%;
+    height: 90rpx;
+    top: 0;
+    flex-direction: row;
+    justify-content: center;
+}
+
+.showPkData .left {
+    position: absolute;
+    left: 20rpx;
+    width: 60rpx;
+    height: 90rpx;
+}
+
+.left .leftName {
+    position: absolute;
+    bottom: 15rpx;
+    height: 28rpx;
+    color: #9799a1;
+    font-size: 28rpx;
+    line-height: 28rpx;
+}
+
+.left .leftResult {
+    position: absolute;
+    bottom: 5rpx;
+    width: 51rpx;
+    height: 50rpx;
+}
+
+.showPkData .leftStarCount {
+    position: absolute;
+    bottom: 15rpx;
+    left: 92rpx;
+    width: 200rpx;
+    height: 28rpx;
+    color: #FFD600;
+    font-size: 28rpx;
+    line-height: 28rpx;
+}
+
+.showPkData .rightStarCount {
+    position: absolute;
+    flex-direction: row-reverse;
+    bottom: 15rpx;
+    right: 92rpx;
+    width: 200rpx;
+    height: 28rpx;
+    color: #FFD600;
+    font-size: 28rpx;
+    line-height: 28rpx;
+    text-align: right;
+}
+
+.showPkData .right {
+    position: absolute;
+    flex-direction: row-reverse;
+    right: 20rpx;
+    width: 60rpx;
+    height: 90rpx;
+}
+
+.right .rightName {
+    position: absolute;
+    bottom: 15rpx;
+    height: 28rpx;
+    color: #9799a1;
+    font-size: 28rpx;
+    line-height: 28rpx;
+}
+
+.right .rightResult {
+    position: absolute;
+    bottom: 5rpx;
+    width: 51rpx;
+    height: 50rpx;
+}
+
+.showPkData .statusBar {
+    position: absolute;
+    width: 311rpx;
+    height: 90rpx;
+    display: flex;
+    justify-content: center;
+    align-items: flex-end;
+    bottom: 5rpx;
+}
+
+.showPkData .statusBar .title {
+    color: #9799a1;
+    font-size: 28rpx;
+    line-height: 50rpx;
+    height: 50rpx;
+    padding-right: 20rpx;
+}
+
+.showPkData .statusBar .time {
+    color: white;
+    font-size: 28rpx;
+    width: 97rpx;
+    height: 50rpx;
+    line-height: 50rpx;
+}
+
+.jumpPlayer {
+    position: absolute;
+    top: 100rpx;
+    left: 50%;
+    width: 100rpx;
+    height: 150rpx;
+    opacity: 0;
+    z-index: 1100;
+}
+
+.jumpPlayer .jumpImg {
+    position: relative;
+    margin-left: 20rpx;
+    margin-top: 60rpx;
+    width: 40rpx;
+    height: 40rpx;
+}
+
+.gift-contact-btn {
+    position: absolute;
+    width: 395rpx;
+    height: 84rpx;
+    line-height: 84rpx;
+    top: -400px;
+    left: 39rpx;
+    color: rgba(255,0,0,0);
+    background-color: rgba(255,0,0,0);
+}
+
+.liveshow_pay_box {
+    position: fixed;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    z-index: 1000;
+    width: 100%;
+    height: 500rpx;
+    background: #fff;
+    overflow: hidden;
+    border: 0;
+    box-sizing: border-box;
+    background: rgba(255,255,255,0.95);
+}
+
+.liveshow_pay_title {
+    height: 100rpx;
+    line-height: 100rpx;
+    font-size: 40rpx;
+    text-align: center;
+    color: #333;
+    background: #fff;
+    box-sizing: border-box;
+}
+
+.pay_con {
+    padding-left: 5rpx;
+    height: 400rpx;
+    overflow: hidden;
+    background: rgba(255,255,255,0);
+}
+
+.pay_item {
+    position: relative;
+    float: left;
+    margin-left: 20rpx;
+    margin-top: 30rpx;
+    width: 220rpx;
+    height: 120rpx;
+    border-radius: 15rpx;
+    border: 3rpx solid #FFF165;
+    text-align: center;
+    color: #282828;
+    background: #fff;
+}
+
+.pay_item .tag {
+    position: absolute;
+    left: 0;
+    top: 0;
+    width: 67rpx;
+    height: 66rpx;
+}
+
+.pay_item .item_first {
+    margin-top: 24rpx;
+    font-size: 30rpx;
+}
+
+.pay_con .pay_item .item_second {
+    display: flex;
+    justify-content: space-between;
+    font-size: 22rpx;
+    text-align: center;
+    color: #282828;
+}
+
+.pay_con .pay_item .item_second .item_price {
+    padding-right: 5rpx;
+    width: 50%;
+    text-align: right;
+}
+
+.pay_con .pay_item .item_second .item_red {
+    padding-left: 5rpx;
+    width: 50%;
+    text-align: left;
+    color: #ff6934;
+}
+
+.pay_con .pay_item .item_third {
+    font-size: 22rpx;
+    text-align: center;
+    color: #282828;
+}
+
+.liveShow_pay_amount {
+    padding: 20rpx 25rpx 0rpx;
+    height: 50rpx;
+    font-size: 28rpx;
+    background: rgba(255,255,255,0);
+}
+
+.liveShow_pay_amount cover-view {
+    display: inline;
+    background: rgba(255,255,255,0);
+}
+
+.liveShow_pay_amount .yellow {
+    padding: 0 8rpx 0 15rpx;
+    color: #FFE400;
+    background: rgba(255,255,255,0);
+}
+
+.liveShow_pay_amount .gray {
+    color: #999;
+    background: rgba(255,255,255,0);
+}
+
+.pay_con .pay_more {
+    line-height: 120rpx;
+    text-align: center;
+    font-size: 30rpx;
+    color: #282828;
+    background: #FFE600;
+}
+
+.pay_con .pay_item.active {
+    background: #FFF165;
+}
+
+.waiting-for-you {
+    position: absolute;
+    width: 100%;
+    height: 100vh;
+    background: rgba(0,0,0,0.4);
+    opacity: 0;
+    z-index: 5;
+}
+
+.waiting-for-you .wfy {
+    position: absolute;
+    width: 460rpx;
+    height: 620rpx;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%,-50%);
+}
+
+.waiting-for-you .wfy-btn {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%,-50%);
+    width: 460rpx;
+    height: 620rpx;
+    line-height: 620rpx;
+    color: rgba(255,255,255,0);
+    background-color: rgba(255,255,255,0);
+}
+
+.wfy-action-btn {
+    position: absolute;
+    width: 490rpx;
+    height: 84rpx;
+    line-height: 84rpx;
+    top: -400px;
+    left: 39rpx;
+    color: rgba(255,0,0,0);
+    background-color: rgba(255,0,0,0);
+}
+
+.bag_gift_multiple {
+    position: absolute;
+    display: flex;
+    bottom: 20rpx;
+    left: 20rpx;
+    width: 130rpx;
+    height: 50rpx;
+    color: white;
+    font-size: 24rpx;
+    line-height: 50rpx;
+    text-align: center;
+    border-radius: 25rpx;
+    border: 1px solid #5F626F;
+    align-items: center;
+    justify-content: center;
+    background-color: transparent;
+}
+
+.bag_gift_multiple.active {
+    color: #7A3218;
+    border: 1px solid #FED530;
+    background-color: #FED530;
+}
+
+.bag_gift_multiple_btn {
+    position: absolute;
+    bottom: 20rpx;
+    left: 20rpx;
+    width: 130rpx;
+    height: 80rpx;
+    line-height: 80rpx;
+    color: rgba(255,0,0,0);
+    background-color: rgba(255,0,0,0);
+}
+
+.multipleArrow {
+    margin-right: 20rpx;
+    width: 17rpx;
+    height: 11rpx;
+}
+
+.bag_multiple_layer {
+    position: absolute;
+    width: 200rpx;
+    bottom: 88rpx;
+    left: 20rpx;
+    z-index: 1000;
+}
+
+.bag_multiple_con {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    border-radius: 8rpx;
+    border: 0px solid #24283c;
+    background: #24283c;
+}
+
+.bag_multiple_con .btn_item {
+    width: 200rpx;
+    height: 54rpx;
+    line-height: 54rpx;
+    text-align: center;
+    font-size: 24rpx;
+    color: white;
+    background: #24283c;
+}
+
+.bag_multiple_con .btn_item.active {
+    background: #3a3e50;
+}
+
+.bag_multiple_layer .multipleBgArrow {
+    margin-left: 50rpx;
+    width: 34rpx;
+    height: 13rpx;
+}
+
+.liveFollow {
+    position: fixed;
+    width: 452rpx;
+    height: 121rpx;
+    bottom: 25%;
+    right: 0rpx;
+    transform: translateX(20px);
+    opacity: 0;
+}
+
+.liveFollowBg {
+    position: absolute;
+    width: 370rpx;
+    height: 99rpx;
+    right: 0rpx;
+}
+
+.liveFollowHeadMask {
+    position: absolute;
+    width: 127rpx;
+    height: 121rpx;
+}
+
+.liveFollowHead {
+    position: absolute;
+    width: 110rpx;
+    height: 110rpx;
+    margin-left: 10rpx;
+    border-radius: 50%!important;
+    background: #ffc6dd;
+}
+
+button::after {
+    border: none;
+}
+
+.gift_con_new {
+    position: absolute;
+    top: 82rpx;
+    width: 100%;
+    height: 440rpx;
+}
+
+.gift_con_new .gift_H {
+    width: 100%;
+    height: 100%;
+    overflow-y: scroll;
+}
+
+.gift_con_new .gift_item {
+    position: relative;
+    margin-top: 18rpx;
+    float: left;
+    width: 25%;
+    height: 200rpx;
+    text-align: center;
+}
+
+.gift_item .icon {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 64rpx;
+    height: 64rpx;
+}
+
+.gift_item .gift_icon {
+    display: block;
+    margin: 0 auto;
+    width: 100rpx;
+    height: 100rpx;
+}
+
+.gift_item .gift_name {
+    margin-top: 15rpx;
+    margin-bottom: 10rpx;
+    font-size: 24rpx;
+    color: #fff;
+    text-align: center;
+}
+
+.gift_item .gift_num {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 22rpx;
+    line-height: 22rpx;
+    color: #fff;
+    text-align: center;
+}
+
+.gift_item .gift_quan {
+    margin: 0 auto;
+    width: 115rpx;
+    height: 34rpx;
+    background: #FFD600;
+    border-top-left-radius: 8rpx;
+    border-bottom-left-radius: 8rpx;
+}
+
+.gift_item .gift_quan .quan_txt {
+    float: left;
+    width: 40rpx;
+    height: 34rpx;
+    line-height: 34rpx;
+    color: #1B1200;
+    font-size: 24rpx;
+    text-align: center;
+}
+
+.gift_item .gift_quan .quan_num {
+    float: right;
+    margin-top: 2rpx;
+    margin-right: 2rpx;
+    width: 73rpx;
+    height: 30rpx;
+    line-height: 30rpx;
+    color: #FFD600;
+    font-size: 14rpx;
+    text-align: center;
+    background: #12142C;
+}
+
+.gift_guo {
+    margin-top: 2rpx;
+    margin-left: 3rpx;
+    width: 20rpx;
+    height: 22rpx;
+}
+
+.sendGiftCanvas {
+    position: fixed;
+    width: 100vw;
+    height: 600rpx;
+    bottom: 0;
+    left: 0;
+    z-index: 999;
+}
+
+.actionGift {
+    position: absolute;
+    width: 100vw;
+    height: 440rpx;
+    top: 82rpx;
+}
+
+.yiyuan {
+    position: fixed;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%,-50%);
+    width: 510rpx;
+    height: 380rpx;
+}
+
+.yiyuan .bg {
+    position: absolute;
+    left: 0;
+    top: 0;
+    z-index: 0;
+    width: 510rpx;
+    height: 380rpx;
+}
+
+.yiyuan .title {
+    position: absolute;
+    left: 32rpx;
+    top: 109rpx;
+    z-index: 1;
+    width: 455rpx;
+    line-height: 36rpx;
+    font-size: 26rpx;
+    color: #FEC995;
+    word-break: break-all;
+    word-wrap: break-word;
+    white-space: pre-line;
+    text-align: center;
+}
+
+.yiyuan .btns {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    position: absolute;
+    left: 33rpx;
+    right: 0;
+    bottom: 30rpx;
+    z-index: 1;
+    width: 444rpx;
+    font-size: 26rpx;
+    color: #661100;
+}
+
+.yiyuan .btn {
+    margin-right: 22rpx;
+    width: 211rpx;
+    height: 81rpx;
+    line-height: 81rpx;
+    text-align: center;
+    background: #fff;
+    border-radius: 10rpx;
+}
+
+.yiyuan .btn .btn_img {
+    position: absolute;
+    z-index: 0;
+    width: 211rpx;
+    height: 81rpx;
+    border-radius: 10rpx;
+}
+
+.yiyuan .btn .btn_txt {
+    position: absolute;
+    z-index: 1;
+    width: 211rpx;
+    height: 81rpx;
+    line-height: 81rpx;
+    text-align: center;
+    border-radius: 10rpx;
+}
+
+.poster-con {
+    position: absolute;
+    width: 100vw;
+    height: 100vh;
+    top: 0;
+    left: 0;
+}
+
+.poster {
+    width: 100%;
+    height: 100%;
+    filter: blur(8px);
+    transform: scale(1.1);
+}

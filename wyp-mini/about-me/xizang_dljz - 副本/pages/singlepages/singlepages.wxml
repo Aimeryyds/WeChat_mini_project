@@ -1,0 +1,9 @@
+<import src="/wxParse/wxParse.wxml"></import>
+<view class="container">
+    <view class="content__detail rich-text">
+        <view class="detail__intro" wx:if="{{pages.intro}}">{{pages.intro}}</view>
+        <view class="detail_list" style="padding: 0 26rpx; padding-bottom: 120rpx;">
+            <template is="wxParse" data="{{wxParseData:description.nodes}}"></template>
+        </view>
+    </view>
+</view>

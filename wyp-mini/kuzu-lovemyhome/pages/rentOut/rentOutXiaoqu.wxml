@@ -1,0 +1,39 @@
+<view class="search-wrap">
+    <view class="search-box">
+        <view class="search-inp">
+            <image class="search-icon" src="/img/resources/search-icon.png"></image>
+            <input bindconfirm="bindconfirm" bindinput="searchInpFn" class="inp" confirmType="search" focus="true" placeholder="请输入小区名称" placeholderClass="placeholder-inp" type="text" value="{{commNameVal}}"></input>
+            <view bindtap="delInp" class="search-del">
+                <image src="/img/resources/del-search.png"></image>
+            </view>
+        </view>
+    </view>
+</view>
+<view class="lianxiang-box" wx:if="{{lianxiangList.length!=0}}">
+    <view class="lianxiang">
+        <view bindtap="toRentOutTap" class="down-item" data-communityid="{{item.communityid}}" data-communityname="{{item.address}}" data-historyname="{{item.alias}}" wx:for="{{lianxiangList}}" wx:key="index">{{item.alias}}</view>
+    </view>
+</view>
+<view class="search-con" hidden="{{historyHidden}}">
+    <view class="title">历史搜索</view>
+    <view class="history-search">
+        <view bindtap="historyLinkTap" class="history-item" data-communityid="{{item.value[2]}}" data-communityname="{{item.value[1]}}" data-historyname="{{item.value[0]}}" wx:for="{{historyRecord}}" wx:key="index">
+            <image src="https://res.5i5j.com/cache/weixin/common/timeIcon.png"></image>
+            <text>{{item.value[0]}}</text>
+        </view>
+    </view>
+</view>
+<view bindtap="historyDelFn" class="empty-btn" hidden="{{historyHidden}}">清空历史记录</view>
+<view class="no-data" hidden="{{noHistoryHidden}}">
+    <image src="https://res.5i5j.com/cache/weixin/common/no-house.png"></image>
+    <view class="no-text">
+        <text>还没有搜索历史</text>
+        <text>赶快搜搜看吧</text>
+    </view>
+</view>
+<view class="no-data" hidden="{{nolxHidden}}">
+    <image src="https://res.5i5j.com/cache/weixin/common/no-house.png"></image>
+    <view class="no-text">
+        <text>没有找到房源，换个条件实施</text>
+    </view>
+</view>

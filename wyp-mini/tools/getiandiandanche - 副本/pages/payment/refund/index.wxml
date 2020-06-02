@@ -1,0 +1,24 @@
+<view class="page">
+    <my-component bind:myevent="myEventListener" innerText="申请退押金"></my-component>
+    <view class="main" style=" margin-top: {{myHight}}px"></view>
+    <form catchsubmit="formSubmit">
+        <view class="section" wx:for="{{from}}">
+            <view class="section__title">{{item.name}} ： </view>
+            <input class="input" disabled="{{!item.type}}" maxlength="{{item.number}}" name="{{item.text}}" placeholder="{{item.placeholder}}" value="{{item.value}}"></input>
+        </view>
+        <view class="prompt">
+            <view>温馨提示:</view>
+            <view>尊敬的用户，您好！您的押金退款无法原路返还，需要您填写身份认证信息及本人银行卡号，审核通过后葛天出行将通过您提交的银行卡退还押金</view>
+            <view>
+                <view>第三方支付通道关闭原因： </view>
+                <view>1、您缴纳押金的时间超过1年,微信原支付通道自动关闭；</view>
+                <view>2、您缴纳押金的时间超过3个月,支付宝原支付通道自动关闭；</view>
+                <view>3、在您缴纳押金后,您的支付宝或微信账号更改过绑定的银行 卡、手机号码；</view>
+                <view>4、在您缴纳押金后,您的葛天出行账号更改过绑定的手机号码。</view>
+            </view>
+        </view>
+        <view class="btn">
+            <button class="btnBtn" formType="submit">提交申请</button>
+        </view>
+    </form>
+</view>

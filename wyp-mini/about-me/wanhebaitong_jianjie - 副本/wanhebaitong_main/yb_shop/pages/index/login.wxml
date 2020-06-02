@@ -1,0 +1,14 @@
+<view class="wx_user_login_box" wx:if="{{display}}">
+    <view class="wx_user_login">
+        <view class="wx_login_info_tit">
+            <text>登录并授权</text>
+        </view>
+        <view class="wx_login_info">
+            <text wx:if="{{pid&&pid>0}}">邀请人</text>
+            <text wx:else>申请获取以下权限</text>
+            <text wx:if="{{pid&&pid>0}}">{{p_name}}</text>
+            <text wx:else>获得你的公开信息(昵称，头像)</text>
+        </view>
+        <button bindgetuserinfo="onGotUserInfo" class="wx_user_login_btn" lang="zh_CN" openType="getUserInfo" style="background:#f7f7f7;color:#1aad19;height:3rem;line-height:3rem;border:0;">允许</button>
+    </view>
+</view>

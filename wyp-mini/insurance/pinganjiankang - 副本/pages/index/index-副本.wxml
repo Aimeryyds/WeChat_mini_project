@@ -1,0 +1,14 @@
+<view class="container">
+    <swiper autoplay="{{autoplay}}" class="swiper" duration="{{duration}}" indicatorDots="{{indicatorDots}}" interval="{{interval}}" wx:if="{{pictures.length}}">
+        <swiper-item wx:for="{{pictures}}" wx:key="{{index}}">
+            <image bindtap="toProduct" class="slide-image" data-product="{{item.clickUrl}}" src="{{item.downLoadUrl}}"></image>
+        </swiper-item>
+    </swiper>
+    <image mode="widthFix" src="{{imgurl.top}}" wx:if="{{!pictures.length}}"></image>
+    <image bindtap="toProduct" class="pdimg" data-product="P156" mode="widthFix" src="{{imgurl.esb2020}}"></image>
+    <image bindtap="toProduct" class="pdimg" data-product="P158" mode="widthFix" src="{{imgurl.kaws2020}}"></image>
+    <image bindtap="toProduct" class="pdimg" data-product="G111" mode="widthFix" src="{{imgurl.ejb2018}}"></image>
+    <image bindtap="toProduct" class="pdimg" data-product="P160" mode="widthFix" src="{{imgurl.lnylsgb}}"></image>
+    <image bindtap="toProduct" class="pdimg" data-product="P157" mode="widthFix" src="{{imgurl.esbbzxb}}"></image>
+    <image bindtap="" data-product="P171-old" mode="widthFix" src="{{imgurl.more}}"></image>
+</view>

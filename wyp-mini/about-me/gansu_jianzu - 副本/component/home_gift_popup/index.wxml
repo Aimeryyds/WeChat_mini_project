@@ -1,0 +1,100 @@
+<template name="vipcards">
+    <view class="vipcards-container">
+        <view class="cards_card-item-big" style="background: {{cards[0].cover==2?'url('+cards[0].coverValue+') no-repeat ':cards[0].coverValue}};background-size: 506rpx 296rpx; " wx:if="{{cards.length===1}}">
+            <view class="cards_card-item_header-big">
+                <image class="cards_card-item_header-logo-big" mode="scaleToFill" src="{{cards[0].logo}}"></image>
+                <text class="cards_card-item_header-store-big">{{cards[0].platformName}}</text>
+            </view>
+            <view class="cards_card-item_name-big">
+        {{cards[0].cardName}}
+      </view>
+            <view class="cards_card-item_num-big" wx:if="{{cards[0].cardNo}}">
+        NO: {{cards[0].cardNo}}
+      </view>
+        </view>
+        <view class="cards_card-item" style="background: {{cards[index].cover==2?'url('+cards[index].coverValue+') no-repeat ':cards[index].coverValue}};background-size: 252rpx 144rpx; " wx:if="{{cards.length>1&&index<4}}" wx:for="{{cards}}" wx:for-item="card">
+            <view class="cards_card-item_header">
+                <image class="cards_card-item_header-logo" mode="scaleToFill" src="{{card.logo}}"></image>
+                <text class="cards_card-item_header-store">{{card.platformName}}</text>
+            </view>
+            <view class="cards_card-item_name">
+        {{card.cardName}}
+      </view>
+            <view class="cards_card-item_num" wx:if="{{card.cardNo}}">
+        NO: {{card.cardNo}}
+      </view>
+        </view>
+    </view>
+</template>
+<template name="giftcards">
+    <view class="giftcard-container">
+        <view class="giftcard-onlyone" wx:if="{{giftcards.length===1}}">
+            <view class="giftcard-onlyone-bg">
+                <image mode="scaleToFill" src="{{giftcards[0].imgUrl[0]}}"></image>
+            </view>
+            <view class="giftcard-onlyone-text zan-ellipsis">{{giftcards[0].name}}</view>
+        </view>
+        <view class="giftcard-more" wx:if="{{giftcards.length>1&&index<4}}" wx:for="{{giftcards}}" wx:for-item="giftcard">
+            <view class="giftcard-more-bg">
+                <image mode="scaleToFill" src="{{giftcard.imgUrl[0]}}"></image>
+            </view>
+            <view class="giftcard-more-text zan-ellipsis">{{giftcard.name}}</view>
+        </view>
+    </view>
+</template>
+<template name="coupons">
+    <view class="coupon_container">
+        <view class="coupon_item" wx:if="{{index<4}}" wx:for="{{coupons}}" wx:for-item="coupon">
+            <view class="coupon__money-text">
+                <view style="color: #FB355C;font-size:40rpx">
+                    <text class="coupon__sign">¥</text>
+                    <text class="coupon__money">{{coupon.value}}</text>
+                </view>
+                <view class="coupon__useThreshold">{{coupon.useThreshold==0?'无门槛使用':'满'+coupon.useThreshold+'元使用'}}</view>
+            </view>
+            <view class="coupon__limit">
+                <view class="coupon__limit1">{{coupon.rangeOfUse==1?'全平台可用':'部分门店可用'}}</view>
+                <view class="coupon__date"> {{coupon.status==2?'领取后'+coupon.termOfValidity+'天内有效':'有效期'+coupon.useTime+'~'+coupon.useEndTime}}</view>
+            </view>
+        </view>
+    </view>
+</template>
+<wxc-popup align="center" animationMode="center" id="home_gift_popup" modal="{{true}}">
+    <view class="container">
+        <view class="top">
+            <view class="header" wx:if="{{list.length&&list[index].name!=='share'}}">
+                <text class="header-pre">恭喜您获得</text>
+                <text class="header-post" wx:if="{{list.length&&list[index].name==='coupon'}}">{{list[index].data.length}}张优惠券</text>
+                <text class="header-post" wx:if="{{list.length&&list[index].name==='score'}}">积分</text>
+                <text class="header-post" wx:if="{{list.length&&list[index].name==='gift'}}">{{list[index].data.length}}张礼品卡</text>
+                <text class="header-post" wx:if="{{list.length&&list[index].name==='card'}}">{{list[index].data.length}}张会员卡</text>
+            </view>
+            <view class="content">
+                <view wx:if="{{list.length&&list[index].name==='coupon'}}">
+                    <template is="coupons" data="{{coupons:list[index].data}}"></template>
+                </view>
+                <view class="score-container" wx:if="{{list.length&&list[index].name==='score'}}">
+                    <image class="score-container-img" src="http://imgcdnali.wfenxiao.com.cn/xcx/c/1229/home_gift_score_logo.png"></image>
+                    <text>+{{list[index].data.score}}积分</text>
+                </view>
+                <view wx:if="{{list.length&&list[index].name==='gift'}}">
+                    <template is="giftcards" data="{{giftcards:list[index].data}}"></template>
+                </view>
+                <view wx:if="{{list.length&&list[index].name==='card'}}">
+                    <template is="vipcards" data="{{cards:list[index].data}}"></template>
+                </view>
+                <view class="share-container" wx:if="{{list.length&&list[index].name==='share'}}">
+                    <image class="share-img" src="http://imgcdnali.wfenxiao.com.cn/xcx/c/1229/bg_home_share.png"></image>
+                    <button data-shareimg="{{list[index].data.shareimg}}" data-sharemsg="{{list[index].data.sharemsg}}" openType="share">
+                        <view class="share-btn">立即分享</view>
+                    </button>
+                </view>
+            </view>
+            <view class="footer" wx:if="{{list.length&&list[index].name!=='share'}}">
+        奖励详情可到
+        <text>"小程序-{{tabName}}"</text> 中查看
+      </view>
+        </view>
+        <image bindtap="hide" class="close" src="http://imgcdnali.wfenxiao.com.cn/xcx/c/1229/ic_close.png"></image>
+    </view>
+</wxc-popup>

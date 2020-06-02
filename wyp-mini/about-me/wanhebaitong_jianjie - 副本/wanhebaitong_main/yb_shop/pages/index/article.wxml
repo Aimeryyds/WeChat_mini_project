@@ -1,0 +1,17 @@
+<view class="index_advan" style="background:{{item.bg_color}}" wx:if="{{item.list.length!=0}}">
+    <view class="index_advan_list article{{item.style_type}}" wx:if="{{item.list.length!=0}}">
+        <view class="advan_li" wx:for="{{item.list}}" wx:for-item="val">
+            <navigator url="{{val.url}}">
+                <image mode="aspectFill" src="{{val.imgurl}}"></image>
+                <view class="advan_info">
+                    <view class="advan_tit" style="color:{{item.text_color}};font-size:{{item.font_size*2.2}}rpx;">{{val.name}}</view>
+                    <view class="advan_memo" style="font-size:{{item.font_size/3*2*2.6}}rpx;">{{val.description}}
+            </view>
+                </view>
+                <view class="clear"></view>
+            </navigator>
+        </view>
+        <view class="clear"></view>
+    </view>
+    <view class="clear"></view>
+</view>

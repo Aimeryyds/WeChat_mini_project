@@ -1,0 +1,32 @@
+<view class="{{['house-desc house-detail data-v-59943ddd',skeletonFlag?'active':'']}}" wx:if="{{roomData}}">
+    <view class="block-title _h2 data-v-59943ddd">房源简介</view>
+    <view class="config-list data-v-59943ddd" wx:if="{{config&&config.length}}">
+        <view class="config-item data-v-59943ddd" wx:for="{{config}}" wx:for-index="__i0__" wx:key="code">
+            <label class="ai-tag _span data-v-59943ddd" wx:if="{{item.is_ai===1}}">智能</label>
+            <image class="icon _img data-v-59943ddd" src="{{item.icon}}"></image>
+            <view class="name _p data-v-59943ddd">{{item.name}}</view>
+        </view>
+        <view bindtap="__e" class="config-item data-v-59943ddd" data-event-opts="{{[ [ 'tap',[ [ 'handleAlertApp',['$event'] ] ] ] ]}}">
+            <view class="config-more data-v-59943ddd" wx:if="{{roomData.config.length>4}}">全部</view>
+        </view>
+    </view>
+    <view class="description _p data-v-59943ddd" wx:if="{{introduction&&!isTurn}}">{{introduction}}</view>
+    <view class="turn-wrap data-v-59943ddd" wx:if="{{isTurn}}">
+        <view class="turn-info data-v-59943ddd">
+            <image class="avatar _img data-v-59943ddd" src="{{turn.customer_avatar}}"></image>
+            <view class="turn data-v-59943ddd">
+                <view class="turn-title _p data-v-59943ddd">转租者</view>
+                <view class="turn-name _p data-v-59943ddd">{{turn.customer_name}}</view>
+            </view>
+            <view bindtap="__e" class="turn-link data-v-59943ddd" data-event-opts="{{[ [ 'tap',[ [ 'handleJumpH5',[turn.reserve_prompt&&turn.reserve_prompt.link_url] ] ] ] ]}}">什么是转租</view>
+        </view>
+        <view class="turn-content data-v-59943ddd" wx:if="{{turn.describe}}">
+            <view class="description _p data-v-59943ddd">
+                <rich-text nodes="{{turnDescribe}}"></rich-text>
+            </view>
+        </view>
+    </view>
+    <view bindtap="__e" class="middle-banner data-v-59943ddd" data-event-opts="{{[ [ 'tap',[ [ 'handleJumpH5',[roomData.zz_youxuan_banner.middle.parameter&&roomData.zz_youxuan_banner.middle.parameter.url] ] ] ] ]}}" wx:if="{{roomData.zz_youxuan_banner&&roomData.zz_youxuan_banner.middle}}">
+        <image alt class="image data-v-59943ddd" mode="widthFix" src="{{roomData.zz_youxuan_banner.middle.img}}"></image>
+    </view>
+</view>

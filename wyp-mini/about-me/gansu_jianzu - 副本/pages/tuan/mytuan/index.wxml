@@ -1,0 +1,37 @@
+<import src="/pages/templates/tag/tuan.wxml"></import>
+<import src="/dist/loadmore/index.wxml"></import>
+<view class="container">
+    <scroll-view enableBackToTop scrollY bindscroll="handlescroll" bindscrolltolower="lower" scrollTop="{{scrollTop}}" style="width:100%;height: 100vh;">
+        <view class="mytuan__list" wx:for="{{mytuanList}}">
+            <navigator class="mytuan-list__top" hoverClass="none" url="{{'/pages/tuan/detail/index?id='+item.id}}">
+                <image class="mytuan-list__img" src="{{item.imgUrl}}"></image>
+                <view class="mytuan-list__cont">
+                    <view class="mytuan-list__title zan-ellipsis--l2">{{item.goodsName}}</view>
+                    <view class="mytuan-list__num">
+                        <template is="tuan-tag" data="{{num:item.limitPeople}}"></template>
+                        <view class="mytuan-list__time" wx:if="{{item.status==1}}">
+                还差{{item.remainPeople}}人,剩余
+                <text style="color:red">{{item.leftTime.days}}</text> 天
+                <text style="color:red">{{item.leftTime.hours}}</text> :
+                <text style="color:red">{{item.leftTime.minutes}}</text> :
+                <text style="color:red">{{item.leftTime.seconds}}</text>
+                        </view>
+                    </view>
+                    <view class="mytuan-list__priceInfo">
+                        <view class="mytuan-list__price">
+                            <text>￥</text>{{item.groupPrice}}</view>
+                        <view class="mytuan-list__hint {{item.status==2?'mytuan-list__hint2':item.status==3?'mytuan-list__hint3':''}}">{{item.status==1?'拼团中':item.status==2?'拼团成功':item.status==3?'拼团失败':''}}</view>
+                    </view>
+                </view>
+            </navigator>
+            <view class="mytuan-list__ctrl">
+                <navigator class="mytuan-list__btn" url="{{'/pages/tuan/detail/index?id='+item.id}}" wx:if="{{item.status==1}}">邀请好友参团</navigator>
+                <navigator class="mytuan-list__btn" url="{{'/pages/orders/o2oshow/show?id='+item.orderId}}">查看订单详情</navigator>
+            </view>
+        </view>
+        <view class="noData" wx:if="{{mytuanList.length==0}}">暂无数据</view>
+        <view id="loadmore">
+            <template is="zan-loadmore" data="{{loading:loadingmore}}"></template>
+        </view>
+    </scroll-view>
+</view>

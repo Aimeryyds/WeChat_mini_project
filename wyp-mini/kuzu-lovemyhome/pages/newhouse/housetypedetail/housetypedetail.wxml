@@ -1,0 +1,51 @@
+<view class="housetype-wrap">
+    <view class="loop-wrap">
+        <swiper autoplay="true" bindchange="loopchange" circular="true" duration="500" interval="3000">
+            <swiper-item data-albumname="{{item.mainAlbumName}}" wx:for="{{detailData.info.photo}}" wx:key="item.estateID">
+                <view class="swiper-inner">
+                    <image src="{{item.protoRoomImageName}}"></image>
+                    <image bindtap="routergo" class="icon_3d" data-targeturl="{{item.tagUrl3D}}" src="/img/resources/icon3d.png" wx:if="{{item.tagUrl3D!=''}}"></image>
+                </view>
+            </swiper-item>
+        </swiper>
+        <view class="albumcount">{{albumindex+'/'+detailData.info.photo.length}}</view>
+    </view>
+    <view class="base-info">
+        <view class="type-name">
+            <view>{{detailData.info.houseLabel}}</view>
+            <view>{{detailData.info.saleStatus_desc}}</view>
+        </view>
+        <view class="which-type">{{detailData.info.houseTypeName}}</view>
+        <view class="total-price">{{detailData.info.totalPrice}}</view>
+        <view class="other-info">
+            <view class="other-info-item">面积 <text>{{detailData.info.buildArea}}</text>
+            </view>
+            <view class="other-info-item">物业类型 <text>{{detailData.info.propertyTypeName}}</text>
+            </view>
+            <view class="other-info-item">朝向 <text>{{detailData.info.aspect}}</text>
+            </view>
+        </view>
+    </view>
+    <view wx:if="{{detailData.houseList.length>0}}">
+        <view class="item-title">
+            <text>户型 ({{detailData.houseList.length}})</text>
+            <view bindtap="housetypelist" class="more" data-type="housetype">查看更多 <image src="/img/resources/right.png"></image>
+            </view>
+        </view>
+        <view class="hx-scroll">
+            <scroll-view scrollX="true">
+                <view bindtap="housetypedetail" class="housetype" data-housetypeid="{{item.houseTypeID}}" wx:for="{{detailData.houseList}}" wx:key="{{item.houseTypeID}}">
+                    <image src="{{item.houseTypeImageName}}"></image>
+                    <view class="hx-item hx-item-type">
+                        <view>{{item.houseTypeLabel}}</view>
+                        <view>{{item.saleStatus_desc}}</view>
+                    </view>
+                    <view class="hx-area">
+            {{item.buildArea}} {{item.aspect}}
+          </view>
+                    <view class="hx-price">{{item.houseTypePrice}}</view>
+                </view>
+            </scroll-view>
+        </view>
+    </view>
+</view>

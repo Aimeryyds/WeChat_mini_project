@@ -1,0 +1,28 @@
+<form>
+    <view class="section">
+        <view class="section__title">姓名</view>
+        <input name="name" placeholder="请输入姓名" type="text" value="{{bookData.name}}"></input>
+    </view>
+    <view class="section">
+        <view class="section__title">手机号</view>
+        <input name="phone" placeholder="请输入手机号" type="number" value="{{bookData.phone}}"></input>
+    </view>
+    <view class="time_box">
+        <view class="star_time">
+            <view class="time_input">
+                <picker bindchange="listenerTime" mode="date" name="booktime" value="{{bookData.book_time}}">{{bookData.book_time?bookData.book_time:'请选择预约时间'}}</picker>
+            </view>
+        </view>
+        <view class="clear"></view>
+    </view>
+    <view class="section">
+        <textarea name="content" placeholder="报名留言" value="{{bookData.content}}"></textarea>
+    </view>
+    <view class="btn-area">
+        <button formType="submit">提交</button>
+    </view>
+</form>
+<block wx:if="{{showtabbar}}">
+    <view style="height:100rpx"></view>
+    <include src="/yb_shop/pages/common/menu.wxml"></include>
+</block>

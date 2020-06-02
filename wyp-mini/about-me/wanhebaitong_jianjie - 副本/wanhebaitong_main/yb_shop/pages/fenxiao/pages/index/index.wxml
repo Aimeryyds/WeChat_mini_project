@@ -1,0 +1,120 @@
+<block wx:if="{{show}}">
+    <view class="after-navber" style="padding-bottom:{{showtabbar?130:0}}rpx;" wx:if="{{user_info&&user_info.is_distributor==1}}">
+        <view class="info">
+            <view class="info-title">
+                <view class="tc">
+                    <image class="info-img" src="{{user_info.user_headimg}}"></image>
+                </view>
+                <view class="info-block">
+                    <view class="info-up info-blod tc">{{user_info.nick_name}}</view>
+                    <view class="info-bottom tc02">{{shareSetting.other[3]}}：{{user_info.parent}}</view>
+                </view>
+            </view>
+            <view class="info-content flex-row">
+                <view class="info-left">
+                    <view class="info-label" style="padding-bottom:0 !important;">
+                        <view class="info-first" style="margin-bottom:0 !important;margin-top:16rpx;">{{shareSetting.other[1]}}：{{user_info.price}}元</view>
+                    </view>
+                </view>
+                <view class="info-right" style="margin-top:0 !important;">
+                    <navigator class="" openType="navigate" url="../cash/cash">
+                        <view class="info-btn" style="padding:5px 15px;">提现</view>
+                    </navigator>
+                </view>
+            </view>
+        </view>
+        <view class="new-block flex-row">
+            <view class="flex-grow-1 flex-x-center">
+                <view class="text-more">
+                    <view class="text-more" style="color:#22af19;margin-bottom: 16rpx;">{{shareSetting.other[2]}}</view>
+                    <view class="text-more">{{user_info.get_price}}元</view>
+                </view>
+            </view>
+            <view class="flex-grow-1 flex-x-center">
+                <view class="text-more">
+                    <view class="text-more" style="color:#ff8f17;margin-bottom: 16rpx;">{{shareSetting.other[4]}}</view>
+                    <view class="text-more">{{user_info.order_money_un}}元</view>
+                </view>
+            </view>
+            <view class="flex-grow-1 flex-x-center">
+                <view class="text-more">
+                    <view class="text-more" style="color:#ff8f17;margin-bottom: 16rpx;">预估佣金</view>
+                    <view class="text-more">{{user_info.order_money_yj}}元</view>
+                </view>
+            </view>
+        </view>
+        <view class="list flex-row">
+            <navigator class="item border-bottom" url="../share-money/share-money?title={{shareSetting.other[5]}}">
+                <view class="list-img flex-x-center">
+                    <image class="img" src="../../images/img-share-price.png"></image>
+                </view>
+                <view class="list-content text-more">{{shareSetting.other[5]}}</view>
+                <view class="flex-x-center list-content">
+                    <view class="list-red">{{user_info.total_price}}</view>元</view>
+            </navigator>
+            <navigator class="item border-bottom border-between" url="../share-order/share-order?title={{shareSetting.other[6]}}">
+                <view class="list-img flex-x-center">
+                    <image class="img" src="../../images/img-share-order.png"></image>
+                </view>
+                <view class="list-content text-more">{{shareSetting.other[6]}}</view>
+                <view class="flex-x-center list-content">
+                    <view class="list-red">{{user_info.order_share_money}}</view>元</view>
+            </navigator>
+            <navigator class="item border-bottom" url="../share-team/share-team?title={{shareSetting.other[8]}}">
+                <view class="list-img flex-x-center">
+                    <image class="img" src="../../images/img-share-team.png"></image>
+                </view>
+                <view class="list-content text-more">{{shareSetting.other[8]}}</view>
+                <view class="flex-x-center list-content">
+                    <view class="list-red">{{user_info.team_count}}</view>人</view>
+            </navigator>
+        </view>
+        <view class="list flex-row">
+            <navigator class="item border-bottom" url="../cash-detail/cash-detail?title={{shareSetting.other[7]}}">
+                <view class="list-img flex-x-center">
+                    <image class="img" src="../../images/img-share-cash.png"></image>
+                </view>
+                <view class="list-content text-more">{{shareSetting.other[7]}}</view>
+            </navigator>
+            <navigator class="item border-bottom border-between" url="../share-qrcode/share-qrcode?title={{shareSetting.other[9]}}">
+                <view class="list-img flex-x-center">
+                    <image class="img" src="../../images/img-share-qrcode.png"></image>
+                </view>
+                <view class="list-content text-more">{{shareSetting.other[9]}}</view>
+            </navigator>
+            <view class="item border-bottom"></view>
+        </view>
+        <view class="notice" wx:if="{{share_setting.level!=0}}">分享小程序首页或商品详情页均可{{shareSetting.other[10]}}</view>
+    </view>
+    <view class="after-navber" style="background-color:#fff;height:100%" wx:if="{{user_info&&user_info.is_distributor==0}}">
+        <view style="padding-top:150rpx">
+            <view class="flex-row flex-x-center">
+                <view class="">
+                    <image src="../../images/icon-share-tip.png" style="width:420rpx;height:240rpx;"></image>
+                </view>
+            </view>
+            <view class="flex-row flex-x-center" style="padding:80rpx 0 88rpx 0;">您还不是分销商。请先提交申请！</view>
+            <view class="felx-row flex-x-center">
+                <form bindsubmit="apply" reportSubmit="true">
+                    <button class="flex-x-center flex-y-center" formType="submit" style="width:560rpx;height:80rpx;border-radius:40rpx;background-color:#ff4544;color:#fff;">立即申请</button>
+                </form>
+            </view>
+        </view>
+    </view>
+    <view class="after-navber" style="background-color:#fff;height:100%" wx:if="{{user_info&&user_info.is_distributor==2}}">
+        <view style="padding-top:150rpx">
+            <view class="flex-row flex-x-center">
+                <view class="">
+                    <image src="../../images/icon-share-tip.png" style="width:420rpx;height:240rpx;"></image>
+                </view>
+            </view>
+            <view class="flex-row flex-x-center" style="padding:80rpx 0 88rpx 0;">正在审核中，请耐心等待</view>
+            <view class="felx-row flex-x-center">
+                <form bindsubmit="home" reportSubmit="true">
+                    <button class="flex-x-center flex-y-center" formType="submit" style="width:560rpx;height:80rpx;border-radius:40rpx;background-color:#ff4544;color:#fff;">首页逛逛</button>
+                </form>
+            </view>
+        </view>
+    </view>
+</block>
+<include src="/yb_shop/pages/common/menu.wxml" wx:if="{{showtabbar}}"></include>

@@ -1,0 +1,119 @@
+<navigation-bar enable="{{enable}}" title="食街" wx:if="{{showtopbar}}"></navigation-bar>
+<view class="container" style="padding-top:{{barHeight}}px">
+    <view bindtap="pageReload" class="cplist_nodata" wx:if="{{requeseFail}}">{{requeseFailTips}}</view>
+    <view class="topbarww">
+        <view class="topbarw">
+            <view class="topbar">
+                <view class="h1">食街</view>
+            </view>
+        </view>
+    </view>
+    <cover-view bindtap="tapBackbtn" class="backbtn" style="top:{{backbtnPos}}px" wx:if="{{!showTopbar}}">
+        <cover-image class="backbtnicon" src="../../images/nav_icon_black.png"></cover-image>
+    </cover-view>
+    <view class="bgimgset" id="bgimgset">
+        <view class="bgimgitem {{activeimg==i?'show':''}}" data-index="{{i}}" style="background:url({{item.img}}) center no-repeat;background-size:100% 100%;" wx:for="{{fsdata.top_items}}" wx:for-index="i" wx:key="key"></view>
+    </view>
+    <view class="topbg"></view>
+    <swiper bindchange="switchtopswiper" circular="{{true}}" class="topswiper" nextMargin="150rpx" previousMargin="30rpx">
+        <swiper-item class="{{activeimg==i?'active':''}}" wx:for="{{fsdata.top_items}}" wx:for-index="i" wx:key="key">
+            <view class="scaler">
+                <navigator class="topitemw" style="background-image:url({{item.img}});" url="/pages/article/article?id={{item.id}}">
+                    <view class="title">{{item.title}}</view>
+                    <view class="avatarw">
+                        <view class="imgw">
+                            <image class="img" src="{{item.author.avatar_url}}"></image>
+                        </view>
+                        <view class="aun">{{item.author.nickname}}</view>
+                    </view>
+                </navigator>
+            </view>
+        </swiper-item>
+    </swiper>
+    <view class="tj_w" style="margin-top:{{248-barHeight_rpx}}rpx;">
+        <view class="listtitlew">
+            <scroll-view class="switcherw" id="switcherw" scrollX="{{true}}">
+                <view class="switcher" id="switcher">
+                    <view bindtap="switchtab" class="li {{item.id==currentTab?'current':''}}" data-tab="{{item.id}}" wx:for="{{tjtabs.items}}" wx:key="key">
+                        <view class="w">
+                            <view class="strong">{{item.title}}</view>
+                            <view class="em">{{item.desc}}</view>
+                        </view>
+                    </view>
+                </view>
+            </scroll-view>
+        </view>
+        <view class="listtitlew1" style="top:{{barHeight+44}}px" wx:if="{{showtopbar}}">
+            <scroll-view class="switcherw1" id="switcherw1" scrollX="{{true}}">
+                <view class="switcher1" id="switcher1">
+                    <view bindtap="switchtab" class="li {{item.id==currentTab?'current':''}}" data-tab="{{item.id}}" wx:for="{{tjtabs.items}}" wx:key="key">
+                        <view class="w">
+                            <view class="strong">{{item.title}}</view>
+                        </view>
+                    </view>
+                </view>
+            </scroll-view>
+        </view>
+        <view class="wfw">
+            <view class="wf_left">
+                <view class="wf-item {{item.is_video?'.wf-type-v':''}}" wx:for="{{wfdata_left}}" wx:key="key">
+                    <navigator class="wf-itemw" url="/pages/article/article?id={{item.id}}">
+                        <view class="imgw" style="background-image:url({{item.img}});padding-top:{{100/item.wh_ratio}}%">
+                            <view class="vicon"></view>
+                        </view>
+                        <view class="infow">
+                            <view class="title">{{item.title}}</view>
+                            <view class="tagw" wx:if="{{item.tag}}">
+                                <view class="tag">{{item.tag}}</view>
+                            </view>
+                            <view class="userw">
+                                <view class="avatar">
+                                    <view class="avatarw">
+                                        <image class="img" src="{{item.author.avatar_url}}"></image>
+                                    </view>
+                                    <view class="n">{{item.author.nickname}}</view>
+                                </view>
+                                <view class="view">
+                                    <view class="i"></view>{{item.viewed_amount}}</view>
+                            </view>
+                        </view>
+                    </navigator>
+                </view>
+            </view>
+            <view class="wf_right">
+                <view class="wf-item {{item.is_video?'.wf-type-v':''}}" wx:for="{{wfdata_right}}" wx:key="key">
+                    <navigator class="wf-itemw" url="/pages/article/article?id={{item.id}}">
+                        <view class="imgw" style="background-image:url({{item.img}});padding-top:{{100/item.wh_ratio}}%">
+                            <view class="vicon"></view>
+                        </view>
+                        <view class="infow">
+                            <view class="title">{{item.title}}</view>
+                            <view class="tagw" wx:if="{{item.tag}}">
+                                <view class="tag">{{item.tag}}</view>
+                            </view>
+                            <view class="userw">
+                                <view class="avatar">
+                                    <view class="avatarw">
+                                        <image class="img" src="{{item.author.avatar_url}}"></image>
+                                    </view>
+                                    <view class="n">{{item.author.nickname}}</view>
+                                </view>
+                                <view class="view">
+                                    <view class="i"></view>{{item.viewed_amount}}</view>
+                            </view>
+                        </view>
+                    </navigator>
+                </view>
+            </view>
+        </view>
+    </view>
+    <loading hidden="{{requeseDone||!hasNextPage||requeseFail||noData}}">
+ 加载中...
+</loading>
+    <view class="bottomline" wx:if="{{bottomline}}">- 这就是我的底线了 -</view>
+    <view class="toastw" wx:if="{{showToast}}">
+        <view class="toast">
+            <rich-text nodes="{{toastTitle}}"></rich-text>
+        </view>
+    </view>
+</view>

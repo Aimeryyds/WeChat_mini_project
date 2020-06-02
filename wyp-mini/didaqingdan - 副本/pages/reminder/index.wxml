@@ -1,0 +1,42 @@
+<view class="{{styles['container']+' '+(isReady?'':'hide')}}" wx:if="{{$taroCompReady}}">
+    <view class="{{anonymousState__temp}}">
+        <view class="{{''+styles['detail-card']}}">
+            <view class="{{''+styles['detail-header']}}">
+                <view class="{{anonymousState__temp2}}"></view>
+                <view class="{{styles['time-area']}}">{{anonymousState__temp3}}</view>
+                <view class="{{'icon icon-repeat-task '+styles['icon-repeat-task']}}" wx:if="{{anonymousState__temp8}}"></view>
+                <view class="{{styles['project-name']+' '+( taskWillRepeat?'':styles['repeat-margin-offset'] )}}">{{anonymousState__temp4}}</view>
+            </view>
+            <view class="{{styles['detail-body']}}">
+                <view class="{{styles['task-title']}}">{{task.title}}</view>
+                <view class="{{styles['task-desc']}}">
+                    <text>{{anonymousState__temp5}}</text>
+                </view>
+                <view class="{{styles['sub-task-list']}}" wx:if="{{anonymousState__temp9}}">
+                    <view class="{{styles['sub-task-item']}}" wx:for="{{task.items}}" wx:for-index="_anonIdx2" wx:key="id">{{'- '+item.title}}</view>
+                </view>
+            </view>
+        </view>
+    </view>
+    <view class="{{styles['btn-group']+' '+(isFullScreenMode?styles['full-screen']:'')}}">
+        <navigator class="{{styles['btn-look-detail']+' '+styles['func-btn']}}" openType="exit" target="miniProgram">
+            <view class="{{styles['btn-icon']+' icon icon-reminder-ignore'}}"></view>
+            <view class="{{styles['btn-text']}}">忽略</view>
+        </navigator>
+        <view bindtap="markDone" class="{{styles['btn-completed']+' '+styles['func-btn']}}">
+            <view class="{{styles['btn-icon']+' icon icon-reminder-complete'}}"></view>
+            <view class="{{styles['btn-text']}}">完成</view>
+        </view>
+        <view bindtap="openDialog" class="{{styles['btn-postpone']+' '+styles['func-btn']}}">
+            <view class="{{styles['btn-icon']+' icon icon-reminder-postpone'}}"></view>
+            <view class="{{styles['btn-text']}}">暂缓</view>
+        </view>
+    </view>
+    <view class="{{anonymousState__temp6}}">
+        <view bindtap="closeDialog" class="{{styles['mask']}}"></view>
+        <view class="{{styles['dialog-content']+' '+(isFullScreenMode?styles['full-screen']:'')}}">
+            <postpone-options-card compid="{{$compid__32}}"></postpone-options-card>
+            <view bindtap="closeDialog" class="{{styles['btn-cancel']}}">取消</view>
+        </view>
+    </view>
+</view>

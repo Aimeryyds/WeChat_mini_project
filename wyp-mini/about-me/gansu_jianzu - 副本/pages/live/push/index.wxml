@@ -1,0 +1,4 @@
+<view class="container">
+    <pusher bind:onpushstop="handleStopPush" live="{{live}}" wx:if="{{live&&auth}}"></pusher>
+    <wxc-abnor bind:abnortap="handleOpenSetting" button="去设置" title="无法开始直播，请先打开摄像头及录音权限" type="NOT_FOUND" wx:if="{{auth==false}}"></wxc-abnor>
+</view>

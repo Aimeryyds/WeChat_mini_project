@@ -1,0 +1,23 @@
+<view class="index_new_goods" id="recommand" style="background:{{item.bg_color}}" wx:if="{{item.list!=0}}">
+    <view class="goods_style{{item.style_type}}">
+        <navigator hoverClass="none" url="{{val.url}}" wx:for="{{item.list}}" wx:for-item="val">
+            <view class="goods_item">
+                <image class="goods_pic" mode="aspectFill" src="{{val.imgurl}}"></image>
+                <view class="goods_info_box">
+                    <view class="goods_info">
+                        <text style="font-size:{{item.font_size*2.2}}rpx;color:{{item.text_color}};">{{val.name}}</text>
+                    </view>
+                    <view class="goods_desc">
+                        <text style="font-size:{{item.title_size*4.5/5*2.2}}rpx">{{val.description}}</text>
+                    </view>
+                </view>
+                <view class="clear"></view>
+                <view class="index_price price">
+                    <text class="text">￥</text>
+                    <text class="text02">{{val.price}}</text>
+                </view>
+                <view class="index_buy_icon"></view>
+            </view>
+        </navigator>
+    </view>
+</view>

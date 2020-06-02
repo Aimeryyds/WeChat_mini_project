@@ -1,0 +1,9 @@
+<template name="footer">
+    <view class="giftcard-footer" wx:if="{{status==10||status==80}}">
+        <button bindtap="onTapResultAction" class="giftcard-footer__btn1" data-type="give" openType="share" type="primary">赠送好友</button>
+        <button bindtap="onOwnUse" class="giftcard-footer__btn2" type="primary">自己用</button>
+    </view>
+    <view class="giftcard-footer" wx:if="{{status==20||status==60}}">
+        <button bindtap="revokeLargess" class="giftcard-footer__btn1" type="primary">撤销赠送</button>
+    </view>
+</template>

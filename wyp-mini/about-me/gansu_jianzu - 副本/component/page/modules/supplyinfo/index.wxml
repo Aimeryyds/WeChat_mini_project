@@ -1,0 +1,8 @@
+<import src="./supply.wxml"></import>
+<view class="zan-panel zan-panel__no-margin-top">
+    <template is="supply" data="{{id:item.id,title:item.title,mobile:item.mobile,imgsrc:item.imgUrl,time:item.publishTime,type:item.infoType}}" wx:for="{{module.data}}" wx:key="{{index}}"></template>
+    <view bindtap="makedataSource" class="view-more" data-options="{{module.options}}" data-type="supplyinfo" wx:if="{{module.total>20}}">
+        <text>查看更多</text>
+        <image class="view-more--img" src="http://imgcdnali.wfenxiao.com.cn/xcx/c/icons/arrow-bottom-red.png"></image>
+    </view>
+</view>

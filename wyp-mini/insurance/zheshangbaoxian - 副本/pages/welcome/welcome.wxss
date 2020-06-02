@@ -1,0 +1,53 @@
+.animated {
+    animation-duration: 1s;
+    animation-fill-mode: both;
+}
+
+.animated.infinite {
+    animation-iteration-count: infinite;
+}
+
+@-webkit-keyframes pulse {
+    0% {
+        transform: scaleX(1);
+    }
+
+    50% {
+        transform: scale3d(1.05,1.05,1.05);
+    }
+
+    to {
+        transform: scaleX(1);
+    }
+}
+
+@keyframes pulse {
+    0% {
+        transform: scaleX(1);
+    }
+
+    50% {
+        transform: scale3d(1.05,1.05,1.05);
+    }
+
+    to {
+        transform: scaleX(1);
+    }
+}
+
+.pulse {
+    animation-name: pulse;
+}
+
+.weclome {
+    height: calc(100vh);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.weclome .logo {
+    text-align: center;
+    width: 100px;
+    height: 100px;
+}

@@ -1,0 +1,50 @@
+<import src="../../../utils/wxParse/wxParse.wxml"></import>
+<view class="container" hidden="{{loading}}">
+    <scroll-view enableBackToTop scrollY="true" style="height:calc(100vh - 100rpx)">
+        <view class="supplyDetail__mod">
+            <view class="supplyDetail__top-left">
+                <view class="supplyDetail__title">
+                    <image class="supplyDetail--tag" src="http://imgcdnali.wfenxiao.com.cn/xcx/c/gongqiu/qiu.png" wx:if="{{detailData.infoTypeName=='求'}}"></image>
+                    <image class="supplyDetail--tag" src="http://imgcdnali.wfenxiao.com.cn/xcx/c/gongqiu/gong.png" wx:if="{{detailData.infoTypeName=='供'}}"></image>
+          {{detailData.title}}
+        </view>
+                <view class="supplyDetail__time">发布时间：{{detailData.publishTime}}</view>
+            </view>
+            <button class="supplyDetail__item-imgWrap" openType="share">
+                <image src="http://imgcdnali.wfenxiao.com.cn/xcx/c/gongqiu/share-icon.png" style="width:30rpx; height: 30rpx"></image>
+            </button>
+        </view>
+        <view class="supplyDetail__item-wrap">
+            <view class="supplyDetail__item">
+                <text class="supplyDetail__item-title">联系商家</text>
+                <view class="supplyDetail__item-text">{{detailData.linkman}}</view>
+                <view class="supplyDetail__item-imgWrap" ontap="onPhone">
+                    <image class="supplyDetail__item-img" src="http://imgcdnali.wfenxiao.com.cn/xcx/c/gongqiu/phone_gray.png" style="height:32rpx;"></image>
+                </view>
+            </view>
+            <view class="supplyDetail__item">
+                <text class="supplyDetail__item-title">价格</text>
+                <view class="supplyDetail__item-text">{{detailData.price&&detailData.price>0?'￥'+detailData.price:'面议'}}</view>
+            </view>
+            <view class="supplyDetail__item supplyDetail__item--padding">
+                <text class="supplyDetail__item-title">地址</text>
+                <view class="supplyDetail__item-text">{{detailData.cityName}}{{detailData.districtName}}{{detailData.address}}</view>
+                <view class="supplyDetail__item-imgWrap"></view>
+            </view>
+        </view>
+        <view class="supplyDetail__info">
+            <view class="supplyDetail__info-title">详细信息</view>
+            <view class="supplyDetail__info-content">
+                <template is="wxParse" data="{{wxParseData:content.nodes}}"></template>
+            </view>
+        </view>
+        <view class="supplyDetail-more-pic-layout">
+            <image bindtap="onTapPic" class="supplyDetail-more-pic" data-link="{{item}}" src="{{item}}" wx:for="{{detailData.imgUrl}}"></image>
+        </view>
+        <comment wx:if="{{detailData.isMessage==1}}"></comment>
+    </scroll-view>
+    <view class="supplyDetail__phoneBtn" ontap="onPhone">
+        <image class="supplyDetail__phoneBtn-img" src="http://imgcdnali.wfenxiao.com.cn/xcx/c/gongqiu/phone_plane.png"></image>
+        <view>联系电话</view>
+    </view>
+</view>

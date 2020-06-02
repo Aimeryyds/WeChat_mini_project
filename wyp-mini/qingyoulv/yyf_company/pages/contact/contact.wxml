@@ -1,0 +1,19 @@
+<map showLocation bindmarkertap="gomap" controls="{{controls}}" id="map" latitude="{{info.jing}}" longitude="{{info.wei}}" markers="{{markers}}" scale="14" style="width: 100%; height: 250px;" wx:if="{{info.c_templet=='1'}}"></map>
+<block wx:if="{{info.c_templet=='0'}}">
+    <import src="tem0.wxml"></import>
+    <template is="info" data="{{info:info}}"></template>
+</block>
+<block wx:if="{{info.c_templet=='1'}}">
+    <import src="tem1.wxml"></import>
+    <template is="info" data="{{info:info}}"></template>
+</block>
+<view class="copyright {{blist.copyright.copyright==''?'mt0':''}}">
+    <block wx:if="{{blist.copyright.copyright!=''}}">
+        <import src="../public/copy.wxml"></import>
+        <template is="copy" data="{{blist:blist}}"></template>
+    </block>
+</view>
+<block wx:if="{{hide_tabbar=='0'}}">
+    <import src="../public/foot.wxml"></import>
+    <template is="foot" data="{{blist:blist}}"></template>
+</block>

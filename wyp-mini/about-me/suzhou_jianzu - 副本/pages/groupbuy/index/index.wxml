@@ -1,0 +1,36 @@
+<swiper autoplay="true" duration="1000" indicatorDots="true" interval="5000">
+    <swiper-item catchtap="getToPage" data-link="{{item.linkurl==''?index:item.linkurl}}" wx:for="{{advs}}" wx:key="{{index}}">
+        <image class="swiper-image" src="{{item.thumb}}" style="width:100%;height: 100%;display: block;"></image>
+    </swiper-item>
+</swiper>
+<view class="func-area" style="background-color:{{data.style.background}}">
+    <view bindtap="toList" class="menu_view" data-id="{{item.id}}" style="width:25%;" wx:for="{{category}}" wx:key="{{index}}">
+        <image class="orange" mode="aspectFill" src="{{item.thumb}}" style="border-radius:50%;"></image>
+        <text>{{item.name}}</text>
+    </view>
+</view>
+<view class="hotSale">
+    <view class="hotLine"></view>
+    <view class="hotTitle">
+        <text>正在热卖</text>
+        <text>HOTSALE</text>
+    </view>
+    <view class="hotLine"></view>
+</view>
+<view bindtap="toDetail" class="g_item" data-id="{{item.id}}" wx:for="{{recgoods}}" wx:key="{{index}}">
+    <image class="g_img" src="{{item.thumb}}"></image>
+    <view class="g_text">
+        <text style="font-size: 32rpx;font-weight: bolder;">{{item.title}}</text>
+        <text style="font-size: 24rpx;line-height: 30rpx;color:#959595;">{{item.description}}</text>
+        <text style="color:#Ff8080;font-size: 26rpx;text-decoration:line-through;line-height: 30rpx;">原价：￥{{item.price}}</text>
+        <view class="toDetailCont" style="background-image: url('https://tws.cnweisou.com/images/bg.png');background-size: 100% 60rpx;background-repeat: no-repeat; width: 462rpx;height: 60rpx;padding-left: 70rpx;line-height: 60rpx;font-size: 28rpx;display: block;color:#fff;position:relative;">{{item.groupnum}}人团 ¥ {{item.groupsprice}}/{{item.units}}
+    <text>去拼团</text>
+        </view>
+    </view>
+</view>
+<view class="footerTip" wx:if="{{recgoods.length>4}}">
+    <view class="lineWidth"></view>
+    <view class="footerTxt">没有更多拼团了哟</view>
+    <view class="lineWidth"></view>
+</view>
+<loading wx:if="{{loading}}"></loading>

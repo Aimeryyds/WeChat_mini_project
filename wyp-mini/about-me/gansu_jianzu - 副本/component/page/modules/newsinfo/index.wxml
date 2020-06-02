@@ -1,0 +1,8 @@
+<import src="./news.wxml"></import>
+<view class="zan-panel zan-panel__no-margin-top zan-panel__no-border">
+    <template is="news" data="{{id:item.id,title:item.title,imgsrc:item.cover,time:item.publishTime}}" wx:for="{{module.data}}" wx:key="{{index}}"></template>
+    <view bindtap="makedataSource" class="view-more" data-options="{{module.options}}" data-type="newsinfo" wx:if="{{module.total>20}}">
+        <text>查看更多</text>
+        <image class="view-more--img" src="http://imgcdnali.wfenxiao.com.cn/xcx/c/icons/arrow-bottom-red.png"></image>
+    </view>
+</view>

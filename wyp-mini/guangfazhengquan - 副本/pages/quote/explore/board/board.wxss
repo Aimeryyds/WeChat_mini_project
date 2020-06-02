@@ -1,0 +1,296 @@
+.v-quote-stocks .head {
+    box-sizing: border-box;
+    display: table;
+    width: 100%;
+    height: 30px;
+    vertical-align: middle;
+    padding: 5px 20px 5px 0;
+}
+
+.v-quote-stocks .head .cell {
+    display: table-cell;
+    vertical-align: middle;
+    color: #999;
+    font-size: 14px;
+}
+
+.v-quote-stocks .head .stock-name {
+    width: 44%;
+}
+
+.v-quote-stocks .head .stock-now {
+    width: 28%;
+    text-align: center;
+}
+
+.v-quote-stocks .head .stock-rise {
+    width: 28%;
+    text-align: right;
+}
+
+.v-quote-stocks .body.c-line-bottom:before {
+    position: absolute;
+    bottom: -10px;
+    border: 1px solid #f00;
+}
+
+.v-quote-stocks .body .row {
+    position: relative;
+    box-sizing: border-box;
+    display: table;
+    width: 100%;
+    vertical-align: middle;
+    padding: 9px 20px 9px 0;
+    z-index: 1;
+}
+
+.v-quote-stocks .body .row.c-line-top:before {
+    top: -2px;
+}
+
+.v-quote-stocks .body .cell {
+    display: table-cell;
+    vertical-align: middle;
+}
+
+.v-quote-stocks .body .stock {
+    width: 100%;
+    height: 100%;
+}
+
+.v-quote-stocks .body .stock-name-code {
+    margin-top: 2px;
+    width: 45%;
+}
+
+.v-quote-stocks .body .stock-name {
+    margin-top: 1px;
+    font-size: 18px;
+    line-height: 18px;
+    height: 18px;
+    color: #333;
+}
+
+.v-quote-stocks .body .stock-code {
+    margin-top: 8px;
+    font-size: 14px;
+    line-height: 14px;
+    color: #999;
+}
+
+.v-quote-stocks .body .stock-now {
+    position: relative;
+    font-size: 18px;
+    line-height: 18px;
+    font-weight: bold;
+    width: 28%;
+    text-align: center;
+    color: #333;
+}
+
+.v-quote-stocks .body .stock-rise,.v-quote-stocks .body .stock-handover {
+    position: relative;
+    top: 2px;
+    font-size: 18px;
+    line-height: 18px;
+    font-weight: bold;
+    width: 28%;
+    text-align: right;
+    color: #999;
+}
+
+.v-quote-stocks .body .stock-handover {
+    color: #666;
+}
+
+.v-paging {
+    position: relative;
+    width: 100%;
+    height: 60px;
+    font-size: 13px;
+    color: #999;
+}
+
+.v-paging .loading .icon-loading {
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    margin-left: -40px;
+    margin-top: -10px;
+    width: 20px;
+    height: 20px;
+    background-image: url("data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACgAAAAoCAMAAAC7IEhfAAAB5lBMVEUAAABpaWmFhYW/v7/d3d3T09Pf3990dHStra2cnJxzc3PQ0NCGhobe3t7AwMCYmJh0dHTj4+O5ubmhoaF6enpnZ2eCgoJ7e3vIyMjj4+Nubm7d3d2/v7+UlJSUlJTg4ODExMR0dHR8fHzGxsaPj49ubm7a2trIyMitra2qqqrPz8+wsLCsrKzf39/BwcGgoKCNjY22trZvb2+QkJDExMScnJx0dHRoaGhoaGiHh4fU1NSBgYHR0dFvb2+Pj4/e3t6/v7/g4ODd3d3a2tq9vb2bm5uUlJR3d3dxcXGQkJBvb2/Q0NCcnJxxcXHh4eHc3NzQ0NDExMS9vb2UlJR3d3ebm5tycnKVlZV2dnbb29vZ2dmQkJDY2Ni5ubmjo6PY2NjJycmOjo58fHzk5OS2traioqJtbW3k5OTKysq2trajo6N8fHy9vb2cnJzExMR2dnbd3d3g4OC+vr6bm5vPz8/Ozs61tbXk5OSkpKR9fX2jo6Ph4eFvb2/a2trQ0NBpaWlnZ2fS0tKCgoKdnZ2SkpLGxsa4uLiFhYV3d3fFxcWtra2srKygoKCPj496enp5eXnj4+PZ2dm8vLyvr6+qqqqHh4dubm7c3NzIyMi7u7u6urqhoaGTk5NxcXHU1NTJycmioqKOjo5lVOHJAAAAe3RSTlMA8eYvLuZmZkkvLgwMCAgICPf39/bv5q6trKxyZGQ2NDMyHvn4+Pb25+fm5uTIyK2sqnRzZmZgXlxKSUk6OC8fH/n5+fn5+fn59fTn5+fm5ubm5ubmycnHx66urqysqoSEhISCgoKCd3d3d3dxcXBwYV9fX0pKOzo6OiD57KgUAAACBElEQVQ4y83Q51MaURQF8AMIqDQpGkERMJbExG7sRtN777333ssuAUIRVDAQC3b9T73rurrsro7jJ8+XN3PnN+e9+7Cj0qlSdW4JFgcDqk2ByWl1mugMBgMBOopcp11FilDHMP+erMPnEyyr3wgy1n4BVlaz7JwyNJynSqcAXVR4zgjFfGJI/uCX6SM31y7fQ6cz0FFP8AU6ilUdaCF4nUZGvV680S3/5IWPgOcQY/XwE181e7IPaL8aj+8SwRq/3z9Z70FeWZ4wKmwphO9mPD466hDB22lOHhaUYE+QS6XEjaYHNRwty4UfqC7leJz76/130+kj0kYH1VVCml56nyS+N7+wrXRrQ6HQvLYbsvSU/KWU9IAPOS5aOSRHGVSDz8U/Kzkjh+pBLmvwax3n6r7JYZd6nKLuwrbS+9IrHR1srZCxgdKF7G6NxFUll5pyP9z8sDYbjSbe58LWSCSZrHpkEY1Ks1Fy0saC47McbRKNaoklGrzQvNWsqXcFqLhBMnJK3JhIXCoHvEczNs2qs4eP0SbuK7ORO+I3trUZ6GjITMdeIX/P/ny8nhkJX6OR0e22QJrPmalY7Dv2DQ3vxc/FkXD4CxRjuDw1HWsG/g8NjwH3qfKsURGW08W2AQH+tlPlAWVIFz+FAPGMKpWh+Z6t2bwOLY32Rgs2Cb/MFsJ/z07KMgPWmw6gjxzXAAAAAElFTkSuQmCC");
+    background-size: 20px 20px;
+    background-repeat: no-repeat;
+    -webkit-animation: kf-v-loading-rotate 2s steps(1,end) infinite;
+}
+
+@-webkit-keyframes kf-v-loading-rotate {
+    from {
+        -webkit-transform: rotateZ(0);
+    }
+
+    8.33333% {
+        -webkit-transform: rotateZ(30deg);
+    }
+
+    16.66666% {
+        -webkit-transform: rotateZ(60deg);
+    }
+
+    25% {
+        -webkit-transform: rotateZ(90deg);
+    }
+
+    33.33333% {
+        -webkit-transform: rotateZ(120deg);
+    }
+
+    41.66666% {
+        -webkit-transform: rotateZ(150deg);
+    }
+
+    50% {
+        -webkit-transform: rotateZ(180deg);
+    }
+
+    58.33333% {
+        -webkit-transform: rotateZ(210deg);
+    }
+
+    66.66666% {
+        -webkit-transform: rotateZ(240deg);
+    }
+
+    75% {
+        -webkit-transform: rotateZ(270deg);
+    }
+
+    83.33333% {
+        -webkit-transform: rotateZ(300deg);
+    }
+
+    91.66666% {
+        -webkit-transform: rotateZ(330deg);
+    }
+
+    to {
+        -webkit-transform: rotateZ(360deg);
+    }
+}
+
+.v-paging .loading .text {
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    margin-left: -10px;
+    margin-top: -10px;
+    width: 60px;
+    height: 20px;
+    line-height: 20px;
+}
+
+.v-paging .done,.v-paging .hide,.v-paging .more,.v-paging .fail {
+    width: 100%;
+    height: 60px;
+    line-height: 60px;
+    text-align: center;
+}
+
+.v-network {
+    position: fixed;
+    top: -36px;
+    z-index: 9999;
+    width: 100%;
+    height: 36px;
+}
+
+.v-network>.notice {
+    position: absolute;
+    top: 0;
+    width: 100%;
+    height: 36px;
+}
+
+.v-network>.notice .icon {
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    margin-top: -10px;
+    width: 20px;
+    height: 20px;
+    background-size: cover;
+}
+
+.v-network>.notice .msg {
+    position: absolute;
+    left: 50%;
+    line-height: 36px;
+    font-size: 14px;
+    color: #fff;
+}
+
+.v-network .error {
+    background-color: #f70e22;
+}
+
+.v-network .error .icon {
+    margin-left: -90px;
+    background-image: url("data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACgAAAAoCAMAAAC7IEhfAAAAP1BMVEUAAAD///////////////////////////////////////////////////////////////////////////////9Du/pqAAAAFHRSTlMAwBBAgPBgMKBQIN9wsJDg0K9/zxAhu6QAAAFgSURBVDjLhZTptoMgDIQNEBZ327z/s9649JYRqPPDc0g+JgmoHcqk10aq+LKYQMqTZIot9sUnsBItcuidKpgdNMMxmXPZ+2lHN1PYaXTx2Inbt1rkosZcsbvfXf2N41Dre0TS6QSmPmHizMKqX9815EWGj4nOG/JUnPPlLDL/F3ZZIoh65J4kctQzLAscqKhugXg14RsgWr6FuwqIkVErq3EBEk7OQkdlvPpQgnEv4fSBKsEkYjtqgdiNV3BtgNCNU5Aewa4Juio4PIJWI+foz2Daj6d/Ar1IOO8HlGgyGJmED4Op+y1zIlHE/AaTiL9Gwo62GbsehA+rRbjHzjWBAfdx3uA1Vdmsw93wSsHgIzhC1jBYOKIAHyHlJ8/w9gK3GBxgrJ0gXf8aIMneOT+IrAFjgRWNEExvDU2mqBJFNcRke91m/bYveaz1bUlQ7Fp327v1S00esKIDOzpVCvfEH/IIGaXmZkJ1AAAAAElFTkSuQmCC");
+}
+
+.v-network .error .msg {
+    margin-left: -60px;
+}
+
+.v-network .recover {
+    background-color: #51c332;
+}
+
+.v-network .recover .icon {
+    margin-left: -60px;
+    background-image: url("data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACgAAAAoCAMAAAC7IEhfAAAAOVBMVEUAAAD///////////////////////////////////////////////////////////////////////8KOjVvAAAAEnRSTlMA8BAw0IDAYN+wn09AkCDgcKDpU9fDAAABQ0lEQVQ4y5WU25KtIAxECRAuguju///YY3ncpDDizPQLZbFI6Ehi7mq1MJfazKvKknApLWVGWSYcCuHzCQGHiO1jNAK21X0/3boBVHS4fGDRDIoHutgb50G7UdoJ3t45Zx7kLlK48eBsK4MU10nC0i895tXZSz8z+FCOvvkYm3nVBj7XHnqmAjoXHVCHLKfl9SdwxefM7CbbuRtHMqaBnrkFskFopiLMOMkUUM2OMOcE3A1DvCRvR07c8ABu8FY4BQb1qIST1GJGSOEErL08Qg5cL08vuJCacyD5hUIKJ17y+Wz9+KT1kPAo/y9QzavqZYOR3sEE/rZCfOMiyP6yuaK0a5q3a0L++wAwjZCeR0oCDeVqHhQ1Fwm+6bHn661+Ccj26TQ8yyBlD1Ccj+YUAnMIaRjNSjETLlGO5lWu8qGqavAPQikPkTu1TvcAAAAASUVORK5CYII=");
+}
+
+.v-network .recover .msg {
+    margin-left: -30px;
+}
+
+.v-quote-explore-board {
+    padding-left: 15px;
+    margin-bottom: 10px;
+}
+
+.v-quote-explore-board .head,.v-quote-explore-board .body {
+    padding-right: 5px;
+}
+
+.v-quote-explore-board .body .row {
+    padding-right: 0;
+}
+
+.v-quote-explore-board .board-name,.v-quote-explore-board .board-rise {
+    font-size: 18px;
+    line-height: 18px;
+    height: 18px;
+}
+
+.v-quote-explore-board .board-name {
+    width: 35%;
+}
+
+.v-quote-explore-board .board-rise {
+    width: 30%;
+    text-align: center;
+    font-weight: bold;
+}
+
+.v-quote-explore-board .stock-name-code {
+    width: 35%;
+    text-align: center;
+}
+
+.v-quote-explore-board .stock-name-code .stock-name {
+    font-size: 16px;
+    line-height: 16px;
+}

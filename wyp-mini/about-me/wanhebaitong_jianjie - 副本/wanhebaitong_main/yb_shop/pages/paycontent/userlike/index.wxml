@@ -1,0 +1,14 @@
+<block wx:if="{{list.length>0}}">
+    <navigator class="same" url="/yb_shop/pages/paycontent/info/index?id={{item.id}}" wx:for="{{list}}">
+        <view class="cover">
+            <image class="img" mode="aspectFill" src="{{item.image}}"></image>
+        </view>
+        <view class="info">
+            <text class="title">{{item.title}}</text>
+            <view class="num">
+                <image mode="aspectFit" src="/yb_shop/static/images/play.png"></image>{{item.view}}</view>
+        </view>
+    </navigator>
+    <view class="line"></view>
+</block>
+<view class="nobuy" wx:if="{{list.length==0}}">暂无喜欢记录</view>

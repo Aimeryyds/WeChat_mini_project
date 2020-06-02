@@ -1,0 +1,12 @@
+<view class="house-air house-detail _div data-v-52ae4e46" wx:if="{{houseAir.title}}">
+    <view class="title hz-style _h3 data-v-52ae4e46">{{houseAir.title}}</view>
+    <view class="list _div data-v-52ae4e46" wx:for="{{houseAir.data}}" wx:for-index="i" wx:key="title">
+        <view class="info _div data-v-52ae4e46">
+            <view class="list-title _p data-v-52ae4e46">{{item.title}}</view>
+            <view bindtap="__e" class="value _p data-v-52ae4e46" data-event-opts="{{[ [ 'tap',[ [ 'handleJumpH5',['$0'],[ [ ['houseAir.data','title',item.title,'link'] ] ] ] ] ] ]}}">{{item.value}}</view>
+        </view>
+        <label class="link-icon _span data-v-52ae4e46" wx:if="{{item.link}}">
+            <view class="iconfont icon-zrk_ic_arrowright _i data-v-52ae4e46"></view>
+        </label>
+    </view>
+</view>

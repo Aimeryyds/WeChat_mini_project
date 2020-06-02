@@ -1,0 +1,5 @@
+<template name="btnModule">
+    <button bindtap="jumpCtrl" class="btnModule moduleButton" data-jinfo="{{item.subModuleInfo.content.jInfo}}" openType="{{item.subModuleInfo.content.jInfo&&item.subModuleInfo.content.jInfo.t==5?'share':item.subModuleInfo.content.jInfo.t==7?'contact':''}}" style="height:{{item.subModuleInfo.pattern.h+4}}rpx;">
+        <a class="flBtn floatBtnStyle{{item.subModuleInfo.content.btnStyle}}" style="{{item.subModuleInfo.pattern.btnStyle}}">{{item.subModuleInfo.content.text}}</a>
+    </button>
+</template>

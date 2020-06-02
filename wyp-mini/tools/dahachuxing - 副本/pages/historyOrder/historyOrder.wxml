@@ -1,0 +1,21 @@
+<view class="historyOrder">
+    <view class="historyOrderWarp">
+        <view wx:if="{{historyOrders.length>0}}">
+            <view bindtap="toTrack" class="historyRecord" data-item="{{item}}" wx:for="{{historyOrders}}" wx:key="accountId">
+                <label class="label">
+                    <text class="iconfont icon-rideRecord " style="color:{{mainColor}};font-size: 60rpx;margin-right:6rpx;"></text>
+                    <label class="label1">
+                        <text>里程：{{item.mileage}}km</text>
+                        <text>时长：{{item.time}}</text>
+                    </label>
+                </label>
+                <label class="label">
+                    <text style="color: {{mainColor}}">{{item.money/100}}元</text>
+                </label>
+            </view>
+        </view>
+        <view class="noRecord" wx:else>
+            <text>{{tip}}</text>
+        </view>
+    </view>
+</view>

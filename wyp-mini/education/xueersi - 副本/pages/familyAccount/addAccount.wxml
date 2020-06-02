@@ -1,0 +1,103 @@
+<view class="add-account">
+    <view class="box">
+        <view class="btn-box">
+            <view bindtap="checkTab" class="add-has" data-wpychecktab-a="1" wx:if="{{isHas}}">
+                <view class="has-font">添加已有学员</view>
+            </view>
+            <view bindtap="checkTab" class="add-nohas" data-wpychecktab-a="2" wx:if="{{isHas}}">
+                <view class="nohas-font">添加新学员</view>
+            </view>
+            <view bindtap="checkTab" class="dis-has" data-wpychecktab-a="1" wx:if="{{!isHas}}">
+                <view class="nohave-font">添加已有学员</view>
+            </view>
+            <view bindtap="checkTab" class="dis-nohas" data-wpychecktab-a="2" wx:if="{{!isHas}}">
+                <view class="have-font">添加新学员</view>
+            </view>
+        </view>
+    </view>
+    <view class="num-box1" wx:if="{{isHas}}">
+        <text class="number">账号</text>
+        <input bindinput="numberChange" class="number-input" placeholder="请输入手机号/学员编号/邮箱" placeholderClass="holderstyle" value="{{stuName}}"></input>
+    </view>
+    <view class="num-box" wx:if="{{isHas}}">
+        <text class="number">密码</text>
+        <input bindinput="passChange" class="number-input" placeholder="请输入密码" placeholderClass="holderstyle" type="password" value="{{password}}"></input>
+    </view>
+    <block wx:if="{{!isHas}}">
+        <view class="num-box1">
+            <view class="number">城市</view>
+            <view bindtap="$chooseForm$selectCity" class="number-input">
+                <view class="number-font {{$chooseForm$city?'tx_black':''}}">{{$chooseForm$city||'请选择孩子所在城市'}}</view>
+            </view>
+        </view>
+        <view class="num-box">
+            <text class="number">姓名</text>
+            <input bindinput="$chooseForm$nameChange" class="number-input" placeholder="请输入孩子的真实姓名" placeholderClass="holderstyle" value="{{$chooseForm$name}}"></input>
+        </view>
+        <view class="num-box">
+            <view class="number">年级</view>
+            <view bindtap="$chooseForm$selectGrade" class="number-input">
+                <view class="number-font {{$chooseForm$grade?'tx_black':''}}">{{$chooseForm$grade||'请选择孩子所在年级'}}</view>
+            </view>
+        </view>
+        <view class="number-box">
+            <text class="number">性别</text>
+            <view bindtap="$chooseForm$chooseType" class="man-box" data-wpychoosetype-a="1" wx:if="{{$chooseForm$isMan!==1}}">
+                <image class="man-img" src="https://static-xesapi.speiyou.cn/xesFeProject/xesFeSource/xesImagesLibrary/1590042776136.png"></image>
+                <view class="man-font">男</view>
+            </view>
+            <view class="chooseman-box" wx:if="{{$chooseForm$isMan===1}}">
+                <image class="man-img" src="https://static-xesapi.speiyou.cn/xesFeProject/xesFeSource/xesImagesLibrary/1590046773166.png"></image>
+                <view class="chooseman-font">男</view>
+            </view>
+            <view bindtap="$chooseForm$chooseType" class="woman-box" data-wpychoosetype-a="2" wx:if="{{$chooseForm$isMan!==2}}">
+                <image class="man-img" src="https://static-xesapi.speiyou.cn/xesFeProject/xesFeSource/xesImagesLibrary/1590044621687.png"></image>
+                <view class="man-font">女</view>
+            </view>
+            <view class="choosewoman-box" wx:if="{{$chooseForm$isMan===2}}">
+                <image class="man-img" src="https://static-xesapi.speiyou.cn/xesFeProject/xesFeSource/xesImagesLibrary/1590046810046.png"></image>
+                <view class="chooseman-font">女</view>
+            </view>
+        </view>
+    </block>
+    <view bindtap="submission" class="sure-add {{canSubmit?'high':''}}" wx:if="{{isHas}}">
+        <view class="sure-btn">确认添加</view>
+    </view>
+    <view bindtap="submission" class="sure-add {{canPass?'high':''}}" wx:if="{{!isHas}}">
+        <view class="sure-btn">确认添加</view>
+    </view>
+    <view class="grade_wrapper" wx:if="{{$gradeSelect$isShow}}">
+        <view class="grade_content">
+            <view class="grade_content_header">
+                <text>选择年级</text>
+                <image bindtap="$gradeSelect$close" src="https://static-xesapi.speiyou.cn/xesFeProject/xesFeSource/xesImagesLibrary/1583907340171.png"></image>
+            </view>
+            <view class="grade_content_wrapper">
+                <view wx:for="{{$gradeSelect$gradeList}}" wx:for-index="idx" wx:key="idx">
+                    <view class="grade_item">
+                        <view class="grade_row_title">{{item[idx].name}}</view>
+                        <view class="grade_row_wrapper">
+                            <view bindtap="$gradeSelect$submit" class="class_grade_button {{$gradeSelect$currentGradeId===_item.id?'selected':''}}" data-wpysubmit-a="{{_item}}" wx:for="{{item.grades}}" wx:for-item="_item" wx:key="index">{{_item.name}}</view>
+                        </view>
+                    </view>
+                </view>
+            </view>
+        </view>
+    </view>
+    <view class="city_wrapper" wx:if="{{$citySelect$isShow}}">
+        <view class="city_content">
+            <view class="city_content_header">
+                <text>选择城市</text>
+                <image bindtap="$citySelect$close" src="https://static-xesapi.speiyou.cn/xesFeProject/xesFeSource/xesImagesLibrary/1583907340171.png"></image>
+            </view>
+            <view class="city_content_wrapper">
+                <view class="city_content_prov">
+                    <view bindtap="$citySelect$selceCity" class="city_content_prov_item {{index===$citySelect$currentIndex?'city_content_prov_checked':''}}" data-index="{{index}}" wx:for="{{$citySelect$cityList}}" wx:key="index">{{item.name}}</view>
+                </view>
+                <view class="city_content_city">
+                    <view bindtap="$citySelect$submit" class="city_content_city_item {{_item.local_city===$citySelect$currentAreaCode?'city_content_prov_checked':''}}" data-info="{{_item}}" data-wpysubmit-a="{{_item}}" data-wpysubmit-b="{{_index}}" wx:if="{{_item.has_school}}" wx:for="{{$citySelect$cityList[$citySelect$currentIndex].cityDtoList}}" wx:for-index="_index" wx:for-item="_item" wx:key="_index">{{_item.name}}</view>
+                </view>
+            </view>
+        </view>
+    </view>
+</view>

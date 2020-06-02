@@ -1,0 +1,53 @@
+<navigationTopbar backgroundColor="{{backgroundColor}}" bindtap="MethodComponent" borderBottom="{{borderBottom}}" id="mineTopBar" navBackUrl="{{navBackUrl}}" navTxt="{{navTxtStr}}" navtype="2" showWhiteBackground="{{navTopBackShow}}"></navigationTopbar>
+<view class="page_container" style="top: 0px;">
+    <view class="person_con" style="padding-top:{{navHeight}}px;">
+        <view class="head">
+            <image class="head_img" src="./../../images/default_header.png" wx:if="{{!userMsg.head_url}}"></image>
+            <image class="head_img" src="{{userMsg.head_url}}" wx:else></image>
+            <view class="status" wx:if="{{isLive!=0}}">
+                <image src="./../../images/live_status.png"></image>
+        直播中
+      </view>
+        </view>
+        <view class="name">
+            <text class="name_txt">{{userMsg.user_name}}</text>
+            <view bindtap="toChatPage" class="animationSlow has_guanzhu {{canChatCss}}" style="{{isChat==0?'opacity:0.3':'opacity: 1'}}">私聊ta</view>
+            <view bindtap="clickCancelFocused" class="has_guanzhu" wx:if="{{isFocused}}">
+                <image class="right_icon" src="./../../images/right-icon.png"></image>
+        已关注</view>
+            <image bindtap="clickOnFocused" class="no_guanzhu" src="./../../images/guanzhu.png" wx:else></image>
+        </view>
+        <view class="uid">
+            <text>粉丝 {{userMsg.sub_count}}</text>UID {{uid}}
+    </view>
+        <view class="renzheng" wx:if="{{userMsg.userRedAndVipInfoResponse&&userMsg.userRedAndVipInfoResponse.red_host_flag==6}}">
+            <image src="./../../images/renzheng.png"></image>{{userMsg.auth_description}}
+    </view>
+        <view class="msg">
+            <image class="vj_img" src="./../../images/vj.png" wx:if="{{userMsg.userRedAndVipInfoResponse&&userMsg.userRedAndVipInfoResponse.red_host_flag==6}}"></image>
+            <image class="gender_female" src="./../../images/gender_female.png" wx:if="{{userMsg.gender!=1}}"></image>
+            <image class="gender_male" src="./../../images/gender_male.png" wx:if="{{userMsg.gender==1}}"></image>
+            <dengJi backgroundcolor="{{levelbgcolor}}" iconUrl="{{levelUrl}}" level="{{level}}" typeStr="1"></dengJi>
+            <view class="dengji_con">
+                <dengJi backgroundcolor="{{wealthbgcolor}}" iconUrl="{{wealthUrl}}" level="{{wealthLevel}}" typeStr="2"></dengJi>
+            </view>
+        </view>
+    </view>
+    <view class="tag_con" wx:if="{{tagList&&tagList.length>0}}">
+        <text class="txt">TA的标签</text>
+        <view class="tag" style="background: linear-gradient(to right, {{item.colorLeft}},{{item.colorRight}})" wx:for="{{tagList}}" wx:key="index">{{item.txt}}</view>
+    </view>
+    <view class="none" hidden="{{hasVideo}}">小主还没有上传视频呦～</view>
+    <view class="video_con" hidden="{{!hasVideo}}">
+        <view bindtap="toShortRoom" class="item" data-item="{{item}}" style="margin-left: {{videoLeft}}px;margin-top: {{videoLeft}}px;" wx:for="{{videoList}}" wx:key="index">
+            <image class="img" mode="aspectFill" src="{{item.coverUrl}}"></image>
+            <view class="bottom">
+                <view class="num">
+                    <image class="icon" src="./../../images/shortIcon.png"></image>
+            {{item.viewerCount}}
+          </view>
+                <view class="txt">{{item.title}}</view>
+            </view>
+        </view>
+    </view>
+</view>

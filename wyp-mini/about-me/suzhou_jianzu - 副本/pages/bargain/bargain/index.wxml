@@ -1,0 +1,96 @@
+<import src="../../../wxParse/wxParse.wxml"></import>
+<view class="cont" style="">
+    <view class="wrap" style="">
+        <image class="img ml20" src="{{data.res.head_image}}"></image>
+        <view class="wrap_view" style="">
+            <view>{{data.res.nickname}}</view>
+            <view>开砍时间：{{data.res.created_time}}</view>
+        </view>
+        <image bindtap="toindex" class="wrap_img" src="../../../images/icon_home.png" style=""></image>
+    </view>
+    <view class="goods">
+        <image class="img" src="{{data.ewei_detail.thumb}}"></image>
+        <view class="g_wrap">
+            <text class="text1" style="">{{data.res2.title}}</text>
+            <text class="text2" style="">库存：<text style="color:#F27C79;">{{data.res2.stock}}</text> | 已售 {{data.ewei_detail.sales}} </text>
+        </view>
+    </view>
+    <view class="price" style="">
+        <view class="p_wrap" style="">
+            <text class="p_text" style="">当前成交价</text>
+            <view class="p_view" style="">
+                <text class="mt24" style="">¥ {{data.res.now_price}}</text>
+                <text>原价 ¥ {{data.res2.start_price}}</text>
+            </view>
+        </view>
+        <view class="p_wrap" style="">
+            <text class="p_text" style="">已砍金额</text>
+            <view class="p_view" style="">
+                <text class="mt16" style=""> ¥ {{data.res.bargain_price}}</text>
+                <text>砍价次数 {{data.res.bargain_times}}次</text>
+            </view>
+        </view>
+    </view>
+    <view class="swi" style="" wx:if="{{data.swi=='111'}}">
+        <view class="s_view1" style="">
+            <view bindtap="tosubmitorder" class="s_comm" data-id="{{data.res.id}}" wx:if="{{data.trade_swi=='0'}}">立即购买</view>
+            <view class="s_comm" wx:elif="{{data.trade_swi=='1'}}">已经下单</view>
+            <view class="s_comm" wx:elif="{{data.trade_swi=='2'}}">已经结束</view>
+            <view class="s_comm" wx:elif="{{data.trade_swi=='3'}}">库存不足</view>
+            <view class="s_comm" wx:elif="{{data.trade_swi=='4'}}">没到底价</view>
+        </view>
+        <view style="width: 44%;font-size: 28rpx;margin-right: 3%;text-align: center;line-height: 80rpx;background-color: #FD5454;border-radius: 10rpx;display:flex;flex-direction:row;justify-content:center;align-items:center;">
+            <view bindtap="toorder" class="s_comm" id="{{data.res.order}}" wx:if="{{data.trade_swi=='1'}}">查看订单</view>
+            <view bindtap="kanjia" class="s_comm" data-id="{{data.res.id}}" wx:elif="{{data.myself_swi&&data.trade_swi!='1'}}">砍一刀</view>
+            <block wx:elif="{{!data.myself_swi&&data.trade_swi!='1'}}">
+                <image src="https://tws.cnweisou.com/images/Bargain.gif" style="width:60rpx;height:60rpx;margin-right:20rpx;"></image>
+                <view bindtap="kanjias" class="s_comm">找人帮砍</view>
+            </block>
+        </view>
+    </view>
+    <view class="swi" style="" wx:elif="{{data.swi=='222'}}">
+        <view class="s_view1" style="">
+            <view bindtap="tosubmitorder" class="s_comm" data-id="{{data.res.id}}">我也要砍</view>
+        </view>
+        <view bindtap="kanjia" data-id="{{data.res.id}}" style="width: 44%;font-size: 28rpx;margin-right: 3%;text-align: center;line-height: 80rpx;border-radius: 10rpx;display:flex;flex-direction:row;justify-content:center;align-items:center;background-color: #FD5454;">
+            <image src="https://tws.cnweisou.com/images/Bargain.gif" style="width:60rpx;height:60rpx;margin-right:20rpx;"></image>
+            <view class="s_comm">帮砍一刀</view>
+        </view>
+    </view>
+    <view class="list">
+        <view bindtap="tab" class="item {{tab=='1'?'active':''}}" data-index="1">亲友团</view>
+        <view bindtap="tab" class="item {{tab=='2'?'active':''}}" data-index="2">商品详情</view>
+        <view bindtap="tab" class="item {{tab=='3'?'active':''}}" data-index="3">活动规则</view>
+        <view bindtap="tab" class="item {{tab=='4'?'active':''}}" data-index="4">参与榜</view>
+    </view>
+    <block wx:if="{{tab=='1'}}">
+        <block wx:if="{{data.res3}}">
+            <view style="display: flex;flex-direction: row;font-size: 28rpx;padding:0 3%;text-align: center;line-height: 80rpx;background-color: #FFF8E4;border-bottom: 1rpx solid  #f3f3f3;" wx:for="{{data.res3}}">
+                <text style="width: 45%;">{{item.nickname}}</text>
+                <text style="width: 25%;text-align:right;" wx:if="{{item.bargain_price<=0}}">{{item.bargain_price}} 元</text>
+                <text style="width: 25%;text-align:right;" wx:elif="{{item.bargain_price>0}}">-{{item.bargain_price}} 元</text>
+                <text style="width: 35%;text-align: right;">{{item.bargain_time}}</text>
+            </view>
+        </block>
+    </block>
+    <block wx:if="{{tab=='2'}}">
+        <template is="wxParse" data="{{wxParseData:contents.nodes}}" wx:if="{{content}}"></template>
+    </block>
+    <block wx:if="{{tab=='3'}}">
+        <view style="width:95%;margin:20rpx auto 0;font-size:28rpx;text-align:left;" wx:if="{{rule!=''}}">
+            <template is="wxParse" data="{{wxParseData:rules.nodes}}"></template>
+        </view>
+    </block>
+    <block wx:if="{{tab=='4'}}">
+        <block wx:if="{{data.res4}}">
+            <view style="display: flex;flex-direction: row;font-size: 28rpx;padding:0 3%;text-align: center;line-height: 80rpx;background-color: #FFF8E4;border-bottom: 1rpx solid  #f3f3f3;" wx:for="{{data.res4}}">
+                <image src="{{item.head_image}}" style="background-color: #fff;width: 60rpx;height: 60rpx;margin-top: 10rpx;"></image>
+                <text style="width: 30%;">{{item.nickname}}</text>
+                <text style="width: 25%;text-align:right;" wx:if="{{item.bargain_price<=0}}">{{item.bargain_price}} 元</text>
+                <text style="width: 25%;text-align:right;" wx:elif="{{item.bargain_price>0}}">-{{item.bargain_price}} 元</text>
+                <text style="width: 35%;text-align: right;">{{item.update_time}}</text>
+            </view>
+        </block>
+    </block>
+</view>
+<image bindtap="kanjias" class="{{bargains=='1'?'actives':'uactives'}}" src="https://tws.cnweisou.com/images/share.jpg" style="width:100%;height:{{height}}rpx;position:fixed;top:0;left:0;z-index:3;"></image>

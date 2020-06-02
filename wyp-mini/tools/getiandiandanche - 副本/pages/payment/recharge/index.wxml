@@ -1,0 +1,33 @@
+<view class="page">
+    <my-component bind:myevent="myEventListener" innerText="钱包充值"></my-component>
+    <view class="main" style=" margin-top: {{myHight}}px"></view>
+    <view class="tit">
+        <text class="user">{{account}}</text>
+        <text class="ye-user">充值余额</text>
+    </view>
+    <view class="pay-list">
+        <view class="list-con ">
+            <view class="list " wx:for="{{payList}}" wx:key="index">
+                <view bindtap="select" class="epl {{state==index?'select':''}}" data-amount="{{item.type==3?item.volumeAmount:item.amount}}" data-id="{{index}}">
+                    <text class="ad-css29 ad-h29">充值 {{item.type==3?item.volumeAmount:item.amount}} 元  </text>
+                    <text class="ad-css29" wx:if="{{item.type==1&&item.giveamount!=0}}">(赠送{{item.giveamount}}元)</text>
+                    <text class="ad-css29" wx:if="{{item.type==3&&item.minmount!=0}}">(赠送{{item.minmount}}元优惠券×{{item.receiveqty}})</text>
+                </view>
+            </view>
+        </view>
+    </view>
+    <view class="shuoming">
+        <view class="title">用户充值说明</view>
+        <view class="info">
+            <view>尊敬的用户，为使阁下知悉充值服务规则，充值之前需阅读如下条款：</view>
+            <view>1、用户应预估本人骑行量，“骑多少，充多少”,避免过量充值。</view>
+            <view>2、如您使用本充值服务充值余额，享受充值优惠，即视为您支付骑行预付，充值余额恕不退还。</view>
+            <view>3、因特殊原因需退款者，按照您骑行时同意的用户协议处理。</view>
+        </view>
+    </view>
+    <view class="fot">
+        <view class="cz-sm">充值即表示阅读并同意<text bindtap="userProtocol" style="color:#333333">《葛天支付协议》</text>
+        </view>
+        <button bindtap="Recharge" class="sub">立即充值</button>
+    </view>
+</view>

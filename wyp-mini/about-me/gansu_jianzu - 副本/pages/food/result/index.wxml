@@ -1,0 +1,32 @@
+<import src="/dist/result/index.wxml"></import>
+<import src="../../templates/card/card.wxml"></import>
+<import src="/dist/toast/index.wxml"></import>
+<template is="zan-toast" data="{{zanToast:zanToast}}"></template>
+<template is="resultPage" data="{{result:result,content:content}}"></template>
+<view hidden="{{!autoPushCards||autoPushCards.length<=0}}">
+    <view data-id="{{item.id}}" wx:for="{{autoPushCards}}" wx:key="{{index}}">
+        <view bindtap="receivevip" class="vipcard-wrap" data-id="{{item.id}}" data-index="{{index}}">
+            <view class="vipcard-name">
+                <image src="http://imgcdnali.wfenxiao.com.cn/xcx/c/icons/vip-card.png"></image>
+                <text>{{item.cardName}}</text>
+            </view>
+            <view class="vipcard-btn">
+        {{isReceived[index]?'已领取':'领取'}}
+      </view>
+        </view>
+    </view>
+</view>
+<view class="zan-dialog {{showDialog?'zan-dialog--show':''}}">
+    <view bindtap="toggleDialog" class="zan-dialog__mask"></view>
+    <view class="coupon-dialog__container">
+        <view class="coupon-dialog_card">
+            <view class="coupon_congratulate">恭喜你获得</view>
+            <view style="margin-left:44rpx; margin-right:44rpx;margin-bottom:54rpx">
+                <template is="card" data="{{cover:autoPushCard.cover,logo:autoPushCard.logo,coverValue:autoPushCard.coverValue,platformName:platformName,cardName:autoPushCard.cardName,cardNo:autoPushCard.cardNo,status:autoPushCard.status}}"></template>
+            </view>
+        </view>
+        <view class="coupon-dialog__close">
+            <image bindtap="close" src="http://imgcdnali.wfenxiao.com.cn/xcx/c/icons/close_coupon.png" style="width:60rpx; height:60rpx"></image>
+        </view>
+    </view>
+</view>

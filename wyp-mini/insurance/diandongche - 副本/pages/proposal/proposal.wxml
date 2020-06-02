@@ -1,0 +1,29 @@
+<view class="proposal" wx:for="{{proposalList}}" wx:for-item="proposal" wx:key="proposalId">
+    <view class="cu-form-group margin-top">
+        <view class="title">产品名称</view>
+      {{proposal.productName}}
+    </view>
+    <view class="cu-form-group">
+        <view class="title">购买时间</view>
+      {{proposal.buyDate}}
+    </view>
+    <view class="cu-form-group">
+        <view class="title">被保险人</view>
+      {{proposal.insuredName}}
+    </view>
+    <view class="cu-form-group">
+        <view class="title">保单号</view>
+      {{proposal.insuranceNo}}
+    </view>
+    <view class="cu-form-group">
+        <view class="title">保单状态</view>
+      {{proposal.stateName}}
+    </view>
+    <view class="cu-form-group">
+        <view class="title">电子保单</view>
+      点击查看
+    </view>
+</view>
+<view class="cu-load load-modal" wx:if="{{loadModal}}">
+    <view class="gray-text">加载中...</view>
+</view>

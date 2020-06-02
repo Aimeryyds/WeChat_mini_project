@@ -1,0 +1,22 @@
+<view class="main">
+    <view class="logistics-top confirm-box medium_font border_bottom2">
+        <image src="{{product[0].product_thumb}}"></image>
+        <view>
+            <view class="normal_font">
+                <text>物流状态：</text>
+                <text>{{status}}</text>
+            </view>
+            <view>
+                <text>承运来源：</text>
+                <text>{{logisticname}}</text>
+            </view>
+            <view>
+                <text>运单编号：</text>
+                <text>{{logisticno}}</text>
+            </view>
+        </view>
+    </view>
+    <view class="logistics-bottom">
+        <view class="logistics-item" wx:for="{{info}}">{{item}}</view>
+    </view>
+</view>

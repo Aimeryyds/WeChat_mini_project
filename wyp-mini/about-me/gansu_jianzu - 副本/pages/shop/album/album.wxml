@@ -1,0 +1,8 @@
+<view class="container">
+    <view class="album-list">
+        <view class="album__item" wx:for="{{albums}}">
+            <image bindtap="onTapPic" class="album__img" data-src="{{item.url}}" src="{{item.url}}"></image>
+            <view class="album__desc">{{item.materialName}}</view>
+        </view>
+    </view>
+</view>

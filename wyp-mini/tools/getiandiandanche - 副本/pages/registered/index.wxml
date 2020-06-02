@@ -1,0 +1,21 @@
+<view class="page">
+    <form bindreset="formReset" bindsubmit="formSubmit">
+        <view class="log-cont">
+            <view class="password section" wx:for="{{registerList}}" wx:key="index">
+                <view class="icon">
+                    <image src="{{item.icon}}"></image>
+                </view>
+                <view style="float:left;width:65%">
+                    <input bindinput="bindKeyInput" name="{{item.name}}" placeholder="{{item.placeholder}}" type="{{item.type}}" value="{{item.value}}"></input>
+                </view>
+                <view class="con-yzm" wx:if="{{index==0}}">
+                    <button bindtap="clickVerify" class="{{is_show?'show':'hide'}}" disabled="{{disabled}}" type="button">获取验证码</button>
+                    <button class="{{is_show?'hide':'show'}}" disabled="{{disabled}}" type="button">{{last_time}}后重新发送</button>
+                </view>
+            </view>
+            <view class="fot-btn">
+                <button class="loginBtn" formType="submit">注册</button>
+            </view>
+        </view>
+    </form>
+</view>

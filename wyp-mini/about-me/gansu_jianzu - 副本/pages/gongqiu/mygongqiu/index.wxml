@@ -1,0 +1,50 @@
+<import src="/dist/toast/index.wxml"></import>
+<import src="/dist/loadmore/index.wxml"></import>
+<view class="container">
+    <view class="gongqiu__tab">
+        <view bindtap="statusTap" class="gongqiu__tab-item {{index==currentType?'gongqiu__tab--active':''}}" data-index="{{index}}" wx:for="{{statusType}}">
+        {{item}}
+    </view>
+    </view>
+    <scroll-view enableBackToTop scrollY bindscroll="handlescroll" bindscrolltolower="lower" scrollTop="{{scrollTop}}" style="width:100%;height: 100vh; padding-bottom:120rpx;">
+        <view class="gongqiu__list-wrap">
+            <view class="gongqiu__list" wx:for="{{gongqiuList}}">
+                <view class="gongqiu__list-top">
+                    <image class="gongqiu__list-img" src="{{item.imgUrl||'http://imgcdnali.wfenxiao.com.cn/xcx/c/gongqiu/normal-img.png'}}"></image>
+                    <view class="gongqiu__list-content">
+                        <view class="gongqiu__list-text">
+                            <image class="gongqiu__list--tag" src="http://imgcdnali.wfenxiao.com.cn/xcx/c/gongqiu/gong.png" wx:if="{{item.infoType==2}}"></image>
+                            <image class="gongqiu__list--tag" src="http://imgcdnali.wfenxiao.com.cn/xcx/c/gongqiu/qiu.png" wx:if="{{item.infoType==3}}"></image>
+                            <view class="gongqiu__list-text--l2 zan-ellipsis--l2" style="text-indent:{{item.infoType!==0?'42':'0'}}rpx;">{{item.title}}</view>
+                        </view>
+                        <view class="gongqiu__list-b">
+                            <view class="gongqiu__list-time" wx:if="{{query.status==2}}">发布于：{{item.publishTime}}</view>
+                            <view class="gongqiu__list-time" wx:if="{{query.status==1}}">创建于：{{item.modifyTime}}</view>
+                            <view bindtap="delReason" class="gongqiu__list-remvoe" data-item="{{item}}" wx:if="{{item.del==2}}">{{item.delName}}</view>
+                        </view>
+                    </view>
+                </view>
+                <view class="gongqiu__ctrl">
+                    <view class="gongqiu__ctrl-item" data-id="{{item.id}}" data-infotype="{{item.infoType}}" ontap="editData" wx:if="{{item.del==1}}">
+                        <image class="gongqiu__ctrl-img" src="http://imgcdnali.wfenxiao.com.cn/xcx/c/gongqiu/edit-icon.png"></image>
+                        <view>编辑</view>
+                    </view>
+                    <view class="gongqiu__ctrl-item2" wx:if="{{item.del==2}}">
+                        <image class="gongqiu__ctrl-img" src="http://imgcdnali.wfenxiao.com.cn/xcx/c/gongqiu/edit-icon-no.png"></image>
+                        <view>编辑</view>
+                    </view>
+                    <view bindtap="removeData" class="gongqiu__ctrl-item" data-id="{{item.id}}">
+                        <image class="gongqiu__ctrl-img" src="http://imgcdnali.wfenxiao.com.cn/xcx/c/gongqiu/remove-icon.png"></image>
+                        <view>删除</view>
+                    </view>
+                </view>
+            </view>
+        </view>
+        <view class="noData" wx:if="{{gongqiuList.length==0}}">暂无数据</view>
+        <view id="loadmore">
+            <template is="zan-loadmore" data="{{loading:loadingmore}}"></template>
+        </view>
+    </scroll-view>
+    <view bindtap="handleReleaseBtn" class="gongqiu__addBtn">+发布</view>
+    <template is="zan-toast" data="{{zanToast:zanToast}}"></template>
+</view>

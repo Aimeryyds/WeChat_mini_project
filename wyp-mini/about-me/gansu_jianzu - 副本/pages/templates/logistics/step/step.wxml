@@ -1,0 +1,19 @@
+<template name="state-step">
+    <view class="state-step">
+        <image class="state-step-icon" hidden="{{index!=0}}" src="{{item.optType==50?'http://imgcdnali.wfenxiao.com.cn/xcx/c/order/pay_order_select.png':item.optType==11?'http://imgcdnali.wfenxiao.com.cn/xcx/c/order/pay_order_select.png':item.optType==20?'http://imgcdnali.wfenxiao.com.cn/xcx/c/order/cancel_order_select.png':item.optType==51?'http://imgcdnali.wfenxiao.com.cn/xcx/c/order/store_order_select.png':item.optType==60?'http://imgcdnali.wfenxiao.com.cn/xcx/c/order/deliver_order_select.png':item.optType==70?'http://imgcdnali.wfenxiao.com.cn/xcx/c/order/cancel_order_select.png':item.optType==52?'http://imgcdnali.wfenxiao.com.cn/xcx/c/order/deliver_order_select.png':'http://imgcdnali.wfenxiao.com.cn/xcx/c/order/submit_order_select.png'}}"></image>
+        <image class="state-step-icon" hidden="{{index==0}}" src="{{item.optType==50?'http://imgcdnali.wfenxiao.com.cn/xcx/c/order/pay_order_unselect.png':item.optType==11?'http://imgcdnali.wfenxiao.com.cn/xcx/c/order/pay_order_unselect.png':item.optType==20?'http://imgcdnali.wfenxiao.com.cn/xcx/c/order/cancel_order_unselect.png':item.optType==51?'http://imgcdnali.wfenxiao.com.cn/xcx/c/order/store_order_unselect.png':item.optType==60?'http://imgcdnali.wfenxiao.com.cn/xcx/c/order/deliver_order_unselect.png':item.optType==70?'http://imgcdnali.wfenxiao.com.cn/xcx/c/order/cancel_order_unselect.png':item.optType==52?'http://imgcdnali.wfenxiao.com.cn/xcx/c/order/deliver_order_unselect.png':'http://imgcdnali.wfenxiao.com.cn/xcx/c/order/submit_order_unselect.png'}}"></image>
+        <view class="state-step-right-box">
+            <view class="state-step-right-box-detail-box">
+                <view class="state-step-right-box-detail-box_text">{{item.optType==50?'已支付':item.optType==11?'待支付':item.optType==20?item.optUserType==1?'订单已取消':'超时未支付取消':item.optType==51?'商家已接单':item.optType==60?'配货员取货配送':item.optType==70?'订单已完成':item.optType==52?'待提货':'订单提交成功'}}</view>
+                <view class="state-step-right-box-detail-box_time">{{item.modifiedTime?item.modifiedTime:item.createdTime}}</view>
+            </view>
+            <view class="state-step-right-box-detail-box">
+                <view class="state-step-right-box-detail-box-desc">{{item.detail}}</view>
+                <image bindtap="call" class="state-step-call" data-mobile="{{item.mobile}}" src="http://imgcdnali.wfenxiao.com.cn/xcx/c/icons/phone.png" wx:if="{{item.optType==60}}"></image>
+            </view>
+            <view class="arrow-left">
+                <text></text>
+            </view>
+        </view>
+    </view>
+</template>

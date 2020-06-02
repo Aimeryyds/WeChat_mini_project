@@ -1,0 +1,10 @@
+<block wx:if="{{$taroCompReady}}">
+    <view class="{{''+styles.container}}" wx:if="{{type}}">
+        <view class="{{anonymousState__temp}}"></view>
+        <view class="{{'text '+styles.text}}">{{anonymousState__temp2}}</view>
+        <view class="{{'btn-group '+styles['btn-group']+' '+(isFullScreenMode?styles['full-screen']:'')}}">
+            <view bindtap="gotoHome" class="{{'btn '+styles.btn+' '+styles['btn-come-in-mini-program']}}">进入小程序</view>
+            <navigator class="{{styles['btn-close']+' '+styles.btn}}" openType="exit" target="miniProgram">关闭</navigator>
+        </view>
+    </view>
+</block>

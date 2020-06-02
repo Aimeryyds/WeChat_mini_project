@@ -1,0 +1,60 @@
+<view class="page 1footer-navbar" wx:if="{{show}}">
+    <view class="del_item" wx:for="{{list}}" wx:for-index="key" wx:for-item="val">
+        <view bindtouchend="touchE" bindtouchmove="touchM" bindtouchstart="touchS" class="inner txt" data-index="{{key}}" style="{{val.txtStyle}}">
+            <view class="fui-list-group cartlist {{val.sku?'':'invalid'}}">
+                <view class="fui-list noclick">
+                    <view bindtap="number" class="fui-number small" data-id="{{val.cart_id}}" data-max="{{val.sku.stock}}" data-min="{{val.minbuy}}" data-sku_id="{{val.sku_id}}" data-value="{{val.num}}">
+                        <view class="minus {{val.num<=1?'disabled':''}}" data-action="minus"></view>
+                        <input class="num shownum" disabled="false" name="" type="tel" value="{{val.num}}"></input>
+                        <view class="plus {{val.num>=val.sku.stock?'disabled02':''}}" data-action="plus"></view>
+                    </view>
+                    <radio bindtap="itemClick" checked="{{checkObj[val.cart_id]?true:''}}" class="zoom-70" color="#ef4f4f" data-goodsid="{{val.goods_id}}" data-id="{{val.cart_id}}"></radio>
+                    <view class="fui-list-media02">
+                        <image class="round" src="{{val.pic.img_cover}}"></image>
+                    </view>
+                    <view>
+                        <view class="fui-list-inner">
+                            <view class="subtitle">{{val.goods_name}}</view>
+                            <view class="text cart-option">
+                                <view class="choose-option">{{val.sku.sku_name}}</view>
+                            </view>
+                        </view>
+                        <view class="fui-list-angle">
+                            <text class="invalid_info">该商品已失效！</text>
+                            <text class="price" wx:if="{{val.sku}}">￥{{val.sku.price}}</text>
+                        </view>
+                    </view>
+                </view>
+            </view>
+        </view>
+        <view bindtap="delItem" class="inner del" data-id="{{val.cart_id}}" data-index="{{key}}"></view>
+    </view>
+    <view class="center" wx:if="{{empty}}">
+        <view>
+            <image class="cart_empty" src="/yb_shop/static/images/cart_big.png"></image>
+            <view class="text-cancel">购物车还是空的</view>
+            <navigator class="btn btn-danger" openType="reLaunch" style="width:80%;margin:0.5rem auto;height:90rpx;line-height:90rpx;background:{{config.selectedColor!='#000000'?config.selectedColor:config.background}};color:{{config.selectedColor=='#000000'&&config.font_color=='black'?'#000000':'#ffffff'}};border:1px solid {{config.selectedColor!='#000000'?config.selectedColor:config.background}}" url="/yb_shop/pages/index/index">到处逛逛吧</navigator>
+        </view>
+    </view>
+    <view class="cart_space"></view>
+    <view class="fui-footer" style="bottom:{{showtabbar?100:0}}rpx ;" wx:if="{{!empty}}">
+        <view class="tool">
+            <view class="check">
+                <label bindtap="checkAllClick">
+                    <radio checked="{{ischeckall?true:''}}" class="zoom-70" color="#ef4f4f"></radio>全选
+        </label>
+            </view>
+            <view class="text">
+                <view class="title" wx:if="{{!edit}}">合计：<text class="text-danger">{{order_money}}元</text>
+                </view>
+            </view>
+            <view bindtap="edit" class="btns">
+                <text class="btn pay_btn {{checkNum>0?'':'disabled'}}" data-action="pay" style="background:{{config.selectedColor!='#000000'?config.selectedColor:config.background}};color:{{config.selectedColor=='#000000'&&config.font_color=='black'?'#000000':'#ffffff'}};border:1px solid {{config.selectedColor!='#000000'?config.selectedColor:config.background}};width:114px;" wx:if="{{!edit}}">结算({{total}})</text>
+            </view>
+        </view>
+    </view>
+    <block wx:if="{{showtabbar}}">
+        <view style="height:100rpx"></view>
+        <include src="/yb_shop/pages/common/menu.wxml"></include>
+    </block>
+</view>

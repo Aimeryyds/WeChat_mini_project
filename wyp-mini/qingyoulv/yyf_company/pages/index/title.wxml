@@ -1,0 +1,38 @@
+<template name="title">
+    <block wx:if="{{item.hide_navbar=='0'&&item.show_diynav=='0'}}">
+        <view class="entitle2" wx:if="{{item.title_style=='2'}}">
+            <view class="title_line2" style="border-color:{{item.tcolor}}"></view>
+            <view class="center_title2" style="color:{{item.tcolor}}">
+                <navigator url="{{item.url}}">{{item.name}}</navigator>
+            </view>
+            <view class="title_line2" style="border-color:{{item.tcolor}}"></view>
+        </view>
+        <view class="entitle" wx:if="{{item.title_style=='1'}}">
+            <view class="title_line" style="border-color:{{item.tcolor}}"></view>
+            <view class="center_title" style="color:{{item.tcolor}}">
+                <navigator url="{{item.url}}">{{item.name}}</navigator>
+            </view>
+            <view class="title_line" style="border-color:{{item.tcolor}}"></view>
+        </view>
+        <view class="title" style="border-left-color:{{item.tcolor}}" wx:if="{{item.title_style=='0'}}">
+            <view>{{item.name}}</view>
+            <navigator url="{{item.url}}">
+                <view class="more">MORE</view>
+            </navigator>
+        </view>
+        <view class="title3 mb10" wx:if="{{item.title_style=='3'}}">
+            <view class="title3_left">
+                <view class="title3_left_border" style="border-left-color:{{item.tcolor}}"></view>
+                <view class="title3_name">{{item.name}}</view>
+            </view>
+            <navigator url="{{item.url}}">
+                <view class="more">MORE</view>
+            </navigator>
+        </view>
+    </block>
+    <view class="diy_nav" style="height:{{item.nav_height}}px" wx:if="item.show_diynav=='1'">
+        <navigator url="{{item.url}}">
+            <image src="{{item.nav_thumb}}" style="height:{{item.nav_height}}px"></image>
+        </navigator>
+    </view>
+</template>

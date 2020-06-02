@@ -1,0 +1,49 @@
+<view>
+    <my-component bind:myevent="myEventListener" innerText="我的行程"></my-component>
+    <view class="main" style=" margin-top: {{myHight}}px"></view>
+    <view class="page">
+        <view wx:if="{{neworderList.length==0}}">
+            <view class="ad-tit07">还没有骑行记录，赶快体验一下吧...</view>
+        </view>
+        <view wx:else>
+            <view class="con-list" wx:for="{{neworderList}}" wx:key="index">
+                <view style="height: 24px;">
+                    <view class="l-time-day">{{item.stime}}</view>
+                    <view bindtap="orderContMap" class="ad-css25" data-amount="{{item.amount}}" data-etime="{{item.etime}}" data-mile="{{item.mile}}" data-orderno="{{item.orderno}}" data-paystatus="0" data-ridingtime="{{item.ridingtime}}" data-stime="{{item.stime}}" data-vid="{{item.vid}}" wx:if="{{item.paystatus==0}}">
+                        <view class="ad-cssbtn25" data-orderno="{{item.orderno}}">
+                            <text style="color: #03A9F4;">去支付</text>
+                            <image class="ad-r-img" src="{{right}}"></image>
+                        </view>
+                    </view>
+                    <view bindtap="orderContMap" class="ad-css25" data-amount="{{item.amount}}" data-etime="{{item.etime}}" data-mile="{{item.mile}}" data-orderno="{{item.orderno}}" data-paystatus="1" data-ridingtime="{{item.ridingtime}}" data-stime="{{item.stime}}" data-vid="{{item.vid}}" wx:else>
+                        <view class="ad-cssbtn25" data-orderno="{{item.orderno}}">
+                            <text>已完成</text>
+                            <image class="ad-r-img" src="{{right}}"></image>
+                        </view>
+                    </view>
+                </view>
+                <view class="l-cont">
+                    <view style="flex:2; padding-top: .1px;">
+                        <view class="timeview">
+                            <image class="timeimg" src="../../../Content/Img/time.png"></image>
+                        </view>
+                        <text>{{item.ridingtime}}分钟</text>
+                    </view>
+                    <view class="moynum" data-amount="{{item.amount}}" data-etime="{{item.etime}}" data-mile="{{item.mile}}" data-orderno="{{item.orderno}}" data-ridingtime="{{item.ridingtime}}" data-stime="{{item.stime}}" data-vid="{{item.vid}}">
+                        <text>{{item.amount}}元</text>
+                    </view>
+                </view>
+            </view>
+        </view>
+        <cover-view bindtap="hideModal" catchtouchmove="preventTouchMove" class="modal-mask" wx:if="{{showModalkf}}"></cover-view>
+        <view class="ad-wind25" wx:if="{{showModalkf}}">
+            <view class="w-tit">选择支付方式</view>
+            <radio-group bindchange="radioChange" class="radio-group">
+                <label class="radio" wx:for="{{items}}" wx:key="index">
+                    <radio checked="{{item.checked}}" value="{{item.name}}"></radio> {{item.value}}
+        </label>
+            </radio-group>
+            <button bindtap="Payagin" class="add-btn26">确定</button>
+        </view>
+    </view>
+</view>

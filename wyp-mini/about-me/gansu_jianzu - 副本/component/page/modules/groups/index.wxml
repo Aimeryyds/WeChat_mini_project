@@ -1,0 +1,107 @@
+<template name="supply">
+    <view class="zan-panel zan-panel__no-margin-top zan-panel__no-border">
+        <navigator class="supplyinfo-detail" hoverClass="none" url="{{'/pages/gongqiu/supplyDetail/index?id='+item.id}}" wx:for="{{list}}">
+            <image class="supplyinfo-detail-img" src="{{item.imgsrc||'http://imgcdnali.wfenxiao.com.cn/xcx/c/gongqiu/normal-img.png'}}"></image>
+            <view class="supplyinfo-detail-right">
+                <view class="supplyinfo-detail-name">
+                    <image src="{{item.infoType==2?'http://imgcdnali.wfenxiao.com.cn/xcx/c/gongqiu/gong.png':'http://imgcdnali.wfenxiao.com.cn/xcx/c/gongqiu/qiu.png'}}"></image>
+                    <view class=" zan-ellipsis--l2">{{item.title}}</view>
+                </view>
+                <view class="supplyinfo-detail-footer">
+                    <view class="supplyinfo-detail-time">{{item.publishTime}}</view>
+                    <view catchtap="handlephone" class="supplyinfo-detail-phone" data-mobile="{{item.mobile}}">
+                        <image src="http://imgcdnali.wfenxiao.com.cn/xcx/c/gongqiu/phone.png"></image>
+                    </view>
+                </view>
+            </view>
+        </navigator>
+        <view class="services-error" wx:if="{{list.length==0}}">暂无供求资讯信息</view>
+    </view>
+</template>
+<template name="service">
+    <view class="zan-panel zan-panel__no-margin-top zan-panel__no-border">
+        <navigator class="services__projectItem" hoverClass="none" url="{{'/pages/services/service_detail/index?shopId='+item.storeId+'&serviceId='+item.id}}" wx:for="{{list}}" wx:key="{{index}}">
+            <image alt="" class="services__img" mode="aspectFill" src="{{item.imgUrl||'http://img.wfxiao.com.cn/yk/images/2018/02/07/8a868f5246c24527bfbcddeff4e29409.jpg'}}"></image>
+            <view class="services__right">
+                <text class="services__name">{{item.serviceName}}<text wx:if="{{isShowStoreName}}">({{item.brandName}})</text>
+                </text>
+                <text class="services__desc">项目介绍</text>
+                <view class="services__priceContainer">
+                    <view class="services__price1">
+                        <text class="services__price1_t">￥</text>
+                        <text class="services__price1_p">{{item.price}}</text>
+                    </view>
+                </view>
+                <view class="services__desc">{{item.reviewsNum}}条评价  {{item.goodReviewsRate}}%好评</view>
+            </view>
+        </navigator>
+        <view class="services-error" wx:if="{{list.length==0}}">暂无服务项目</view>
+    </view>
+</template>
+<template name="info">
+    <view class="zan-panel zan-panel__no-margin-top zan-panel__no-border">
+        <navigator class="zan-panel zan-panel__no-margin-top newsinfo-detail" hoverClass="none" url="{{'/pages/sources/newsinfo/newsinfodetail?id='+item.id}}" wx:for="{{list}}">
+            <image class="newsinfo-detail-img" src="{{item.cover}}"></image>
+            <view class="newsinfo-detail-right">
+                <view class="newsinfo-detail-name zan-ellipsis--l2">{{item.title}}</view>
+                <view class="newsinfo-detail-time">{{item.publishTime}}</view>
+            </view>
+        </navigator>
+    </view>
+    <view class="services-error" wx:if="{{list.length==0}}">暂无新闻资讯信息</view>
+</template>
+<template name="products">
+    <view class="products-wrap">
+        <navigator class="products" hoverClass="none" style="margin-bottom: {{index>list.length-3?'2rpx':'6rpx'}}" url="{{'/pages/products/show/show?id='+item.id}}" wx:for="{{list}}">
+            <image mode="scaleToFill" src="{{item.imgUrl}}" style="width:368rpx;height:368rpx;align-self:center;"></image>
+            <view class="product-name zan-ellipsis--l2">{{item.name}}</view>
+            <view class="product-storename zan-ellipsis" wx:if="{{isShowStoreName}}">
+                <image src="http://imgcdnali.wfenxiao.com.cn/xcx/c/store.png" style="width:34rpx;height:34rpx;margin-right:8rpx;"></image>
+                <view>{{item.brandName}}-{{item.storeName}}</view>
+            </view>
+            <view class="products-cont">
+                <view class="products-price">
+                    <text style="font-size:24rpx">￥</text>{{item.price}}
+          </view>
+                <view class="products-stock">已售{{item.saleNum||0}}件</view>
+            </view>
+            <view style="font-size:24rpx;color:rgba(0,0,0,0.43);margin-top:8rpx;">{{item.reviewsNum}}条评价  {{item.goodReviewsRate}}%好评</view>
+        </navigator>
+    </view>
+    <view class="services-error" wx:if="{{list.length==0}}">暂无商品</view>
+</template>
+<import src="./news.wxml"></import>
+<view class="continer">
+    <scroll-view scrollLeft="{{scrollLeft}}" scrollX="{{true}}" style="border-bottom: 1rpx solid #F4F4F4;display:block;height: {{height}}rpx;">
+        <view class="single-list" style=" width: {{width}}rpx;min-width: 662rpx;height:88rpx; background-color:#fff;" wx:if="{{group.options.showType=='type1'}}">
+            <view catchtap="bindCheckItem" class="single-item" data-index="{{index}}" data-item="{{item}}" style=" color: {{checkindex==index?'red':'#000'}}; " wx:for="{{group.options.groups}}" wx:key="index">{{item.name}}</view>
+        </view>
+        <view class="twoline-list" style=" width: {{width}}px;min-width: 750rpx; " wx:if="{{group.options.showType=='type2'}}">
+            <view catchtap="bindCheckItem" class="twoline-item" data-index="{{index}}" data-item="{{item}}" style=" color: {{checkindex==index?'red':'#000'}}; " wx:for="{{group.options.groups}}" wx:key="index">{{item.name}}</view>
+        </view>
+    </scroll-view>
+    <view catchtap="showMore" class="fixedBox" id="group" wx:if="{{group.options.showType=='type1'}}">
+        <image src="http://imgcdnali.wfenxiao.com.cn/xcx/c/icons/arrow-button.png" style="width: 30rpx;height: 14rpx;transform: rotate( {{showMore?180:0}}deg )"></image>
+    </view>
+    <view bind:touchend="hideMore" catch:touchmove="catchmove" class="single-more-wrap" wx:if="{{showMore}}">
+        <view class="single-more" style="top: {{moreTop}}rpx;">
+            <view catchtap="bindCheckMoreItem" class="more-single-item" data-index="{{index}}" data-item="{{item}}" style=" color: {{checkindex==index?'red':'#787878'}}; " wx:for="{{group.options.groups}}" wx:key="index">{{item.name}}</view>
+        </view>
+    </view>
+    <view class="group-goods-list" wx:if="{{group.options.groups[checkindex].groupType=='goods'}}">
+        <template is="products" data="{{list:group.data,total:group.total,isShowStoreName:isShowStoreName}}"></template>
+    </view>
+    <view class="group-news-list" wx:if="{{group.options.groups[checkindex].groupType=='news'}}">
+        <template is="info" data="{{list:group.data,total:group.total}}"></template>
+    </view>
+    <view class="group-services-list" wx:if="{{group.options.groups[checkindex].groupType=='project'}}">
+        <template is="service" data="{{list:group.data,total:group.total,isShowStoreName:isShowStoreName}}"></template>
+    </view>
+    <view class="group-services-list" wx:if="{{group.options.groups[checkindex].groupType=='supply'}}">
+        <template is="supply" data="{{list:group.data,total:group.total}}"></template>
+    </view>
+    <view bindtap="makedataSource" class="view-more" data-options="{{group.options}}" data-type="supplyinfo" wx:if="{{group.total>group.options.groups[checkindex].limitNum}}">
+        <text>查看更多</text>
+        <image class="view-more--img" src="http://imgcdnali.wfenxiao.com.cn/xcx/c/icons/arrow-bottom-red.png"></image>
+    </view>
+</view>

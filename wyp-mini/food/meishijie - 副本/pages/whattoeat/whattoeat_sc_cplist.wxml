@@ -1,0 +1,39 @@
+<navigation-bar enable="{{true}}" title="相关菜谱"></navigation-bar>
+<view class="container" style="padding-top:{{barHeight}}px;">
+    <navigator class="recipeitem" hoverClass="navigator-hover" url="/pages/content/content?id={{item.id}}" wx:for="{{cplist.data.items}}" wx:for-index="i" wx:key="key">
+        <view class="recipeitemw">
+            <view class="cpimgw" style="background:#f5f5f5 url({{item.img}}) center no-repeat;background-size:cover;"></view>
+            <view class="cpinfow">
+                <view class="cpnamew">
+                    <text class="cpname">{{item.title}}</text>
+                </view>
+                <view class="tagw">
+                    <view class="tag" wx:if="{{item.label[0]}}">
+                        <view class="t" wx:if="{{item.label[0].name}}">{{item.label[0].name}}</view>
+                        <view class="c" wx:if="{{item.label[0].desc}}">{{item.label[0].desc}}</view>
+                    </view>
+                </view>
+                <view class="starw">
+                    <view wx:for="{{[1,2,3,4,5]}}" wx:for-item="i" wx:key="key">
+                        <image src="../../images/star1.png" wx:if="{{item.rate-i>=0}}"></image>
+                        <image src="../../images/star2.png" wx:elif="{{item.rate-i+1>0}}"></image>
+                        <image src="../../images/star3.png" wx:else></image>
+                    </view>
+                </view>
+                <view class="viewdata">
+                    <image class="i" src="../../images/cplisticon1.png"></image>
+                    <text class="p">{{item.favor_amount}}</text>
+                    <image class="i" src="../../images/cplisticon2.png"></image>
+                    <text class="p">{{item.viewed_amount}}</text>
+                    <view class="avatarw">
+                        <image class="ava" src="{{item.author.avatar_url}}"></image>
+                        <view class="name">{{item.author.nickname}}</view>
+                    </view>
+                </view>
+            </view>
+        </view>
+    </navigator>
+</view>
+<loading hidden="{{requeseDone}}">
+ 加载中...
+</loading>

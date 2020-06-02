@@ -1,0 +1,62 @@
+<view class="card" style="background-image:url(http://tws.cnweisou.com/images/cardBgC.png);background-size: 100% 100%" wx:if="{{cardsn}}">
+    <view class="cardLogo">
+        <image mode="widthFix" src="{{logoUrl}}"></image>
+    </view>
+    <image class="bg" src="{{backurl}}"></image>
+    <view class="vipCont">
+        <view class="vipcard">VIP
+            <text class="cardType">{{title}}</text>
+        </view>
+    </view>
+    <view class="numCard">
+        N0.{{cardsn}}
+    </view>
+</view>
+<view class="card" style="background-image:url(http://tws.cnweisou.com/images/cardBgC.png);background-size: 100% 100%" wx:else>
+    <view class="vipCont">
+        <view bindtap="joinCardIndex" class="nocard">您目前还没有会员卡
+        </view>
+    </view>
+</view>
+<view class="memberInfo">
+    <view class="infoTitle">会员卡信息</view>
+    <view class="integralSum">
+        <image class="image1" src="http://tws.cnweisou.com/images/integralSumC.png"></image>
+        <text class="itemTitle">总积分</text>
+        <text class="itemNum">{{credit1}}</text>
+    </view>
+    <view class="integralSum">
+        <image src="http://tws.cnweisou.com/images/balanceC.png"></image>
+        <text class="itemTitle">会员卡余额</text>
+        <text class="itemNum">{{credit2}}</text>
+    </view>
+    <view class="integralSum3">
+        <view class="minusImg">
+            <image src="http://tws.cnweisou.com/images/saveC.png"></image>
+        </view>
+        <view class="minus">
+            <view class="minusTitle">下单立减</view>
+            <view class="minusTip">下单就打折，支付时自动抵扣现金</view>
+            <view class="minusTip">会员价结算专享受</view>
+        </view>
+    </view>
+</view>
+<view class="separate"></view>
+<view class="memberInfo">
+    <view bindtap="recharge" class="cardupdate" wx:if="{{cardsn}}">
+        <image class="image5" src="http://tws.cnweisou.com/images/onlineRechargeC.png"></image>
+        <text class="itemTitle1">在线充值</text>
+        <text class="arrowright1">></text>
+    </view>
+    <view bindtap="joinCardIndex" class="cardupdate" wx:else>
+        <image class="image5" src="http://tws.cnweisou.com/images/onlineRechargeC.png"></image>
+        <text class="itemTitle1">在线开卡</text>
+        <text class="arrowright1">></text>
+    </view>
+    <view bindtap="joinconsumption" class="cardupdate" wx:if="{{cardsn}}">
+        <image class="image6" src="http://tws.cnweisou.com/images/consumption.png"></image>
+        <text class="itemTitle1">我的账单</text>
+        <text class="arrowright1">></text>
+    </view>
+</view>
+<loading wx:if="{{loading}}"></loading>

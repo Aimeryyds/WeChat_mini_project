@@ -1,0 +1,95 @@
+<template name="wxapp_banner">
+    <view catchtap="getToPage" data-link="{{item.link}}" mode="widthFix" style="width: 100%; height: 320rpx;margin-bottom:30rpx ;overflow: hidden;" wx:for="{{data}}">
+        <image src="{{item.thumb}}" style="width: 100%;height: 100%;"></image>
+    </view>
+</template>
+<template name="wxapp_article">
+    <view class="article_wrap_block">
+        <view catchtap="getToPage" class="article_title_block" data-link="{{item.link}}" wx:for="{{data.data}}">
+            <image src="{{item.resp_img}}" style="width:100%;height: 300rpx;"></image>
+            <view class="article_detail" style="color:black;text-align: center;">{{item.article_title}}</view>
+        </view>
+    </view>
+</template>
+<template name="wxapp_indexrecommand">
+    <view class="main-goods" style="border: none;">
+        <view style="height: 60rpx;line-height: 60rpx;margin-bottom: 20rpx;margin-left: 20rpx;">
+            <text>推荐商品</text>
+        </view>
+        <view style="display: flex;flex-direction: row;flex-wrap:wrap;">
+            <view catchtap="getToPage" class="single-goods" data-link="{{item.link}}" style="width: 362rpx;padding: 10rpx;box-sizing: border-box;" wx:for="{{data}}">
+                <image class="avatar" mode="widthFix" src="{{item.thumb}}" style="width:100%"></image>
+                <text class="title" style="height: 80rpx;">{{item.title}}</text>
+                <view class="summary">
+							  <text class="price">￥{{item.minprice}}元</text>
+                    <image class="summary_img" src="http://tws.cnweisou.com/images/empty_cart_buy.png" style="background-color: red;width: 20px; height: 20px;border-radius: 50%;"></image>
+                </view>
+            </view>
+        </view>
+    </view>
+</template>
+<template name="wxapp_cube">
+    <block wx:if="{{data.data}}">
+        <view class="ad-cube-left" style="height: 400rpx;">
+            <image catchtap="getToPage" src="{{data.data[0].img}}" style="width:100%;height:100%;padding:9px 7px;box-sizing:border-box;"></image>
+        </view>
+        <view class="ad-cube-right" style="height: 400rpx;">
+            <view class="ad-cube-right1">
+                <image catchtap="getToPage" src="{{data.data[1].img}}" style="width:100%;height:100%;padding:9px 7px;box-sizing:border-box;"></image>
+            </view>
+            <view class="ad-cube-right2">
+                <image catchtap="getToPage" src="{{data.data[2].img}}" style="padding:9px 7px;box-sizing:border-box;"></image>
+                <image catchtap="getToPage" src="{{data.data[3].img}}" style="padding:9px 7px;box-sizing:border-box;"></image>
+            </view>
+        </view>
+    </block>
+</template>
+<template name="wxapp_nav">
+    <view class="func-area">
+        <view catchtap="getToPage" wx:for="{{data}}">
+            <image class="orange" mode="aspectFill" src="{{item.icon}}"></image>
+            <text>{{item.navname}}</text>
+        </view>
+    </view>
+</template>
+<template name="wxapp_notice">
+    <view>
+        <view class="notice-image">
+            <image class="avatar" mode="aspectFill" src="http://tws.cnweisou.com/images/ic_notice.png"></image>
+        </view>
+        <swiper autoplay="true" class="notice-message" duration="1000" indicatorDots="" interval="8000" vertical="vertical">
+            <swiper-item catchtap="getToPage" data-link="{{item.link}}" wx:for="{{data.data}}">
+                <text>{{item.title}}</text>
+            </swiper-item>
+        </swiper>
+    </view>
+</template>
+<template name="wxapp_search">
+    <view class="view_search" style="background-color: #eff8eb;">
+        <view bindtap="search" class="view_searchbg" style="background-color: #fff;border-radius: 6px;">
+            <view bindtap="search" class="view1">
+                <image bindtap="search" src="http://tws.cnweisou.com/images/search.png"></image>
+            </view>
+            <text bindtap="search" class="input_search" placeholder="请输入您所搜索的商品" style="color:#ccc;text-align: left;padding-right: 10px;">{{data.params.text}}</text>
+        </view>
+    </view>
+</template>
+<template name="wxapp_adv">
+    <swiper autoplay="true" duration="1000" indicatorDots="true" interval="5000">
+        <swiper-item catchtap="getToPage" data-link="{{item.link}}" wx:for="{{data}}">
+            <image class="swiper-image" mode="aspectFill" src="{{item.thumb}}"></image>
+        </swiper-item>
+    </swiper>
+</template>
+<view style="overflow: hidden;">
+    <block wx:for="{{data.result}}">
+        <template is="wxapp_adv" data="{{data:item.data}}" wx:if="{{index=='adv'}}"></template>
+        <template is="wxapp_article" data="{{data:item}}" wx:if="{{index=='article'}}"></template>
+        <template is="wxapp_banner" data="{{data:item.data}}" wx:if="{{index=='banner'}}"></template>
+        <template is="wxapp_cube" data="{{data:item}}" wx:if="{{index=='cube'}}"></template>
+        <template is="wxapp_indexrecommand" data="{{data:item.data}}" wx:if="{{index=='indexrecommand'}}"></template>
+        <template is="wxapp_nav" data="{{data:item.data}}" wx:if="{{index=='nav'}}"></template>
+        <template is="wxapp_notice" data="{{data:item}}" wx:if="{{index=='notice'}}"></template>
+        <template is="wxapp_search" data="{{data:item}}" wx:if="{{index=='search'}}"></template>
+    </block>
+</view>

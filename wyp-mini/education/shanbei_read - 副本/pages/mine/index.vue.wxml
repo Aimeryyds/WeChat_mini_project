@@ -1,0 +1,38 @@
+<template name="101a71f2">
+    <view class="_div data-v-99480a86">
+        <view class="_div data-v-99480a86">
+            <image class="_img data-v-99480a86 top-image" mode="{{widthFix}}" src="https://media-image1.baydn.com/storage_media_image/kvhfgj/0e59b26e7481f600f03568d834ad7a17.0afaa6a6ed3fef3f780c0e6a2f08c0f4.jpg?x-oss-process=image/quality,q_80/resize,p_100"></image>
+            <view class="_div data-v-99480a86 avatar-container">
+                <view class="_div data-v-99480a86 avatar-frame">
+                    <image alt class="_img data-v-99480a86 avatar" src="{{avatarUrl}}"></image>
+                </view>
+                <view class="_div data-v-99480a86 meta">
+                    <view class="_div data-v-99480a86 nick-name">{{nickName}}</view>
+                    <view class="_div data-v-99480a86 user-id">
+                    扇贝ID：{{userId}}
+                    <label bindtap="handleProxy" class="_span data-v-99480a86 copy" data-comkey="{{$k}}" data-eventid="{{'0'}}">复制</label>
+                    </view>
+                </view>
+            </view>
+            <form reportSubmit bindsubmit="handleProxy" class="_form data-v-99480a86" data-comkey="{{$k}}" data-eventid="{{'1'}}" style="width: 100%">
+                <button class="_button data-v-99480a86 item" formType="submit">
+                    <image alt="icon" class="_img data-v-99480a86 icon-img" src="https://media-image1.baydn.com/storage_media_image/kdbdns/42fe57146709058989d8e9ef3db8c8ac.ad5f67be84eb91a48bac59f6b743fd4f.png"></image>
+                    <view class="_div data-v-99480a86 item-text">生词本</view>
+                    <view class="_i data-v-99480a86 ib ib-chevron-right chevron"></view>
+                </button>
+            </form>
+            <view class="_div data-v-99480a86 divider"></view>
+            <form reportSubmit bindsubmit="handleProxy" class="_form data-v-99480a86" data-comkey="{{$k}}" data-eventid="{{'2-'+index}}" key="{{index}}" style="width: 100%" wx:for="{{myItems}}" wx:key="index">
+                <button class="_button data-v-99480a86 {{index===myItems.length-1?'item last':'item'}}" formType="{{index!==myItems.length-2?'submit':''}}" openType="{{index===myItems.length-2?'share':''}}">
+                    <image alt class="_img data-v-99480a86 icon-img" src="{{item.icon}}"></image>
+                    <view class="_div data-v-99480a86 item-text">{{item.text}}</view>
+                    <view class="_i data-v-99480a86 ib ib-chevron-right chevron"></view>
+                </button>
+            </form>
+        </view>
+        <template is="807ddebe" data="{{...$root[$kk+'0'],$root:$root}}" wx:if="{{isShowUnlockModal}}"></template>
+        <template is="6309aa41" data="{{...$root[$kk+'1'],$root:$root,$for:{default:'data-v-99480a86-default-1'},$slotdefault:'data-v-99480a86-default-1'}}" wx:if="{{isShowLoginModal}}"></template>
+    </view>
+</template>
+<import src="/components/UnlockModal.vue.wxml"></import>
+<import src="/components/Login.vue.wxml"></import>

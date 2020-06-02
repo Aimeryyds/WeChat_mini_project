@@ -1,0 +1,73 @@
+<view class="main">
+    <view class="delivery-box confirm-box confirm-title cart_bg_color2">
+        <text>收款信息</text>
+    </view>
+    <view class="delivery-box confirm-box">
+        <view class="delivery-top border_bottom" wx:if="{{para.paytype=='0'}}">
+            <text class="fl">说明</text>
+            <view class="picker fr">
+                <text>{{data.description}}</text>
+            </view>
+        </view>
+        <block wx:elif="{{para.paytype=='1'}}">
+            <view class="delivery-top border_bottom" wx:if="{{para.fullname_display}}">
+                <text class="fl">姓名</text>
+                <view class="picker fr">
+                    <text>{{para.fullname}}</text>
+                </view>
+            </view>
+            <view class="delivery-top border_bottom" wx:if="{{para.account_display}}">
+                <text class="fl">帐号</text>
+                <view class="picker fr">
+                    <text>{{para.account}}</text>
+                </view>
+            </view>
+            <view class="delivery-top" wx:if="{{para.desc_display}}">
+                <text class="fl">商家说明</text>
+            </view>
+            <view class="delivery-top" wx:if="{{para.desc_display}}">
+                <text class="fl descfl">{{para.desc}}</text>
+            </view>
+            <view class="imageview" wx:if="{{para.recep_display}}">
+                <image src="{{para.recep}}"></image>
+            </view>
+        </block>
+        <block wx:elif="{{para.paytype=='2'}}">
+            <view class="delivery-top border_bottom" wx:if="{{para.fullnames_display}}">
+                <text class="fl">姓名</text>
+                <view class="picker fr">
+                    <text>{{para.fullnames}}</text>
+                </view>
+            </view>
+            <view class="delivery-top border_bottom" wx:if="{{para.bank_display}}">
+                <text class="fl">开户行</text>
+                <view class="picker fr">
+                    <text>{{para.bank}}</text>
+                </view>
+            </view>
+            <view class="delivery-top border_bottom" wx:if="{{para.bacount_display}}">
+                <text class="fl">银行帐号</text>
+                <view class="picker fr">
+                    <text>{{para.bacount}}</text>
+                </view>
+            </view>
+            <view class="delivery-top border_bottom" wx:if="{{para.baddress_display}}">
+                <text class="fl">开户地址</text>
+                <view class="picker fr">
+                    <text>{{para.baddress}}</text>
+                </view>
+            </view>
+            <view class="delivery-top" wx:if="{{para.descs_display}}">
+                <text class="fl">商家说明</text>
+            </view>
+            <view class="delivery-top" wx:if="{{para.descs_display}}">
+                <text class="fl descfl">{{para.descs}}</text>
+            </view>
+        </block>
+    </view>
+    <view class="confirm-footer">
+        <text class="cart-toatl-price">实付款:<text class="cart_color strong">￥{{total_price||0}}</text>
+        </text>
+        <text bindtap="submitOrder" class="confirm-pay cart_bg_color2">确认提交</text>
+    </view>
+</view>

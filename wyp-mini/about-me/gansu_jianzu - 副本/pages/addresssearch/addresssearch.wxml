@@ -1,0 +1,31 @@
+<view class="container">
+    <view class="search-wrap " style="margin-bottom:6rpx;">
+        <view bindtap="makeCitys" class="search-city">
+            <text class="zan-ellipsis">{{cityName}}</text>
+            <image src="http://imgcdnali.wfenxiao.com.cn/xcx/c/icons/arrow-button.png" style="width:26rpx;height:14rpx; "></image>
+        </view>
+        <view class="search-cont">
+            <input bindconfirm="searchCtiy" bindinput="changevalue" confirmType="搜索" placeholder="搜索地址" style="width: 95%;" value="{{inputValue||''}}"></input>
+            <image bindtap="clearValue" src="http://imgcdnali.wfenxiao.com.cn/xcx/c/icons/del-search.png" style="width:30rpx;height:30rpx;background-color:#666;border-radius: 50%;" wx:if="{{inputValue}}"></image>
+        </view>
+        <view bindtap="handleSearch" class="search-button">
+            <text>搜索</text>
+        </view>
+    </view>
+    <view>
+        <view class="search-list zan-panel " style="margin-top: 78rpx; background-color: #fff;">
+            <view bindtap="bindaddress" class="zan-cell zan-cell--access search-item" data-item="{{item}}" wx:if="{{addresslist.length>0}}" wx:for="{{addresslist}}">
+                <view class="zan-cell__bd" style="display:flex; align-items: center ;">
+                    <view class="addr-img" style="margin-right: 20rpx;width:30rpx">
+                        <image src="http://imgcdnali.wfenxiao.com.cn/xcx/c/icons/ico-addr.png" style="width:30rpx; height: 30rpx;"></image>
+                    </view>
+                    <view class="item-content" style="flex:1;">
+                        <view class="item-title" style="font-size:28rpx;">{{item.title}} </view>
+                        <view class="item-address" style="font-size: 24rpx;color: #999;">{{item.address}}</view>
+                    </view>
+                </view>
+            </view>
+        </view>
+        <view style="margin-top: 200rpx;font-size: 28rpx;text-align:center;" wx:if="{{addresslist&&addresslist.length==0||addresslist&&addresslist.length>0&&addresslist[0]==null}}">城市与地址不匹配，请搜索【{{cityName}}】的地址</view>
+    </view>
+</view>

@@ -1,0 +1,39 @@
+<view class="fp_box">
+    <view class="load_style" hidden="{{!loading}}">
+        <view class="loading">
+            <image class="loading-img" src="/img/resources/load.png"></image>
+        </view>
+    </view>
+    <view class="tab_fixed">
+        <view class="tab_fp">
+            <text bindtap="clickTab" class="tab-item {{currentTab==0?'active':''}}" data-current="0">最新</text>
+            <text bindtap="clickTab" class="tab-item {{currentTab==1?'active':''}}" data-current="1">次数最多</text>
+        </view>
+    </view>
+    <view class="bor-top">
+        <view class="fp_item_box" wx:for="{{fplist_data}}" wx:key="index">
+            <view class="fp_top">
+                <view bindtap="brokerDeatil" class="fp_head" data-brokerid="{{item.id}}" data-citycode="{{item.citycode}}">
+                    <image mode="widthFix" src="{{item.header==null||item.header==''?'/img/resources/default_broker_404.png':item.header}}"></image>
+                </view>
+                <view class="fp_count">
+                    <view class="cishu">
+                        <text>{{item.username}}</text>
+                        <text>（共带看{{item.dkcount}}次）</text>
+                    </view>
+                    <view class="shijian">最新带看：{{item.dktime}}</view>
+                </view>
+                <view class="fp_lian">
+                    <view bindtap="toIm" class="liao_icon" data-bid="{{item.id}}" data-index="{{index}}" data-leave="{{item.job_leave}}">
+                        <image src="/img/resources/mes_icon.png"></image>
+                    </view>
+                    <view bindtap="dk_tel" class="tel_icon" data-bid="{{item.id}}" data-index="{{index}}" data-jobleave="{{item.job_leave}}" id="{{item.handset}}">
+                        <image src="/img/resources/tel_icon.png"></image>
+                    </view>
+                </view>
+            </view>
+            <view class="fp_con">{{item.memo}}</view>
+        </view>
+        <view class="yixianshi" hidden="{{showAllData}}">已显示全部数据</view>
+    </view>
+</view>

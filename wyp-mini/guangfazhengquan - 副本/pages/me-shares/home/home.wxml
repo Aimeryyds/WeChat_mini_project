@@ -1,0 +1,46 @@
+<modal contentPadding="0" id="modal_1">
+    <view>
+ 一个对话框
+ </view>
+    <view slot="content">
+        <input bindinput="bindinput" data-key="content" placeholder="{{contnet}}" type="text"></input>
+    </view>
+</modal>
+<button bindtap="showDialog">显示modal</button>
+<view class="section" style="margin-top:50px;">
+    <view class="section__title">movable-view区域小于movable-area</view>
+    <m-movable-area height="{{perItemHeight*items.length}}">
+        <m-movable-view bind:change="posChange" data-idx="{{index}}" height="{{perItemHeight}}" index="{{index}}" moveable="{{moveable}}" wx:for="{{items}}" wx:key="color">
+            <view style="height: {{perItemHeight}}rpx; width: 100%; background: {{item.color}};"></view>
+        </m-movable-view>
+    </m-movable-area>
+</view>
+<table bind:checkedchange="tableCheckedChange" bind:iconclick="tableIconClick" bind:move="tableMove" columns="{{columns}}" dataSource="{{dataSource}}" moveable="{{moveable}}" perRowHeight="{{perItemHeight}}" trStyle="{{trStyle}}"></table>
+<view>哈哈哈</view>
+<tab bindtabchange="handleTabChange" fixed="{{tabconf.fixed}}" height="{{tabconf.height}}" list="{{tabconf.list}}" scroll="{{tabconf.scroll}}" selectedId="{{tabconf.selectedId}}"></tab>
+<navigator url="../../info/login/login">去登录广发通</navigator>
+<button bindtap="confirmSyncStockGroup">将广发通自选股合并到小程序</button>
+<view style="padding:8px;border:1px solid;margin:3px;">
+    <view style="display:flex;font-size:24rpx;justify-content:space-between;">
+        <input bindinput="bindinput" data-key="code" placeholder="股票代码" value="{{code}}"></input>
+        <picker bindchange="bindPicker" data-picker="exchange" range="{{exchanges}}" rangeKey="label" value="{{exchangeIndex}}">
+            <view class="picker">
+        {{exchanges[exchangeIndex].label||'选择市场'}}
+      </view>
+        </picker>
+        <picker bindchange="bindPicker" data-picker="accountType" range="{{accountTypes}}" rangeKey="label" value="{{accountTypeIndex}}">
+            <view class="picker">
+        {{accountTypes[accountTypeIndex].label||'写入账户'}}
+      </view>
+        </picker>
+        <picker bindchange="bindPicker" data-picker="group" range="{{groups[accountTypes[accountTypeIndex].name]}}" rangeKey="cname" value="{{groupIndex}}">
+            <view class="picker">
+        {{groups[accountTypes[accountTypeIndex].name][groupIndex].cname||'分组'}}
+      </view>
+        </picker>
+    </view>
+    <button bindtap="addStock">添加股票</button>
+</view>
+<button bindtap="showSelector">添加分组到小程序账户</button>
+<button bindtap="showGFTSelector">添加分组到广发通账户</button>
+<zxgroup-selector id="selector"></zxgroup-selector>

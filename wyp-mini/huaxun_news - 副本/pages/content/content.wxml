@@ -1,0 +1,39 @@
+<import src="../../wxParse/wxParse.wxml"></import>
+<view class="contentBox" wx:if="{{cur!=0}}" wx:for="{{list}}" wx:key="key">
+    <text class="contentTitle">{{item.title}}</text>
+    <view class="contentMsg">
+        <text class="conTime">{{item.time}} {{item.from}}</text>
+        <view class="conCheck">
+            <image src="../../images/icon_check.png"></image>{{item.readNum}}</view>
+    </view>
+    <view class="conMain">
+        <template is="wxParse" data="{{wxParseData:article.nodes}}"></template>
+    </view>
+    <image bindtap="images" class="navImg" data-url="{{ban.data.ad[1005][0].url}}" src="{{ban.data.ad[1005][0].pic}}" wx:if="{{ban.data.ad}}"></image>
+</view>
+<view wx:if="{{cur==0}}" wx:for="{{mainList}}">
+    <text class="contentTitle">{{item.News_Title}}</text>
+    <view class="contentMsg">
+        <text class="conTime">{{filter.dateFn(item.update_time)}}  来源：{{item.From}}</text>
+        <view class="conCheck">
+            <image src="../../images/icon_check.png"></image>{{item.Read_cnt}}</view>
+    </view>
+    <view class="conMain">
+        <template is="wxParse" data="{{wxParseData:article.nodes}}"></template>
+    </view>
+    <view class="banners-box">
+        <image bindtap="images" class="navImg" data-url="{{ban.data.ad[1005][0].url}}" src="{{ban.data.ad[1005][0].pic}}" wx:if="{{ban.data.ad}}"></image>
+    </view>
+</view>
+<view class="ads-box" style="{{adsInfo.adsBoxStyle}}" wx:if="{{adsInfo.show}}">
+    <view class="ads-inner" style="{{adsInfo.adsInnerStyle}}">
+        <button class="ads-contact-btn" lang="zh_CN" openType="contact" wx:if="{{adsInfo.type=='contact'}}"></button>
+        <button bindgetphonenumber="getPhoneNumber" class="ads-contact-btn" lang="zh_CN" openType="getPhoneNumber" wx:if="{{adsInfo.type=='auth-phone'}}"></button>
+        <button bindgetuserinfo="getUserInfo" class="ads-contact-btn" lang="zh_CN" openType="getUserInfo" wx:if="{{adsInfo.type=='auth-userinfo'}}"></button>
+        <view bindtap="closeAdsClick" class="ads-close" data-ads="{{adsInfo}}" wx:if="{{adsInfo.showClose}}">
+            <view class="ads-close-icon"></view>
+        </view>
+        <image bindtap="openAds" data-ads="{{adsInfo}}" mode="{{adsInfo.imageMode}}" src="{{adsInfo.imageUrl}}" style="{{adsInfo.adsImageStyle}}"></image>
+    </view>
+</view>
+<wxs module="filter" src="../../utils/date.wxs" />

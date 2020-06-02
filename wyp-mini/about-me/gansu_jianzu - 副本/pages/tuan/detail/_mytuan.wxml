@@ -1,0 +1,108 @@
+<template name="mytuan">
+    <view class="opentuan" wx:if="{{status==1}}">
+        <view class="opentuan-item">
+            <image class="opentuan-item__img" src="{{imgUrl}}"></image>
+            <view class="opentuan-item__cont">
+                <view class="opentuan-item__time">
+                    <text>
+                        <block wx:if="{{leftTime.days!='00'}}">{{leftTime.days}}天</block> {{leftTime.hours}}: {{leftTime.minutes}}: {{leftTime.seconds}} </text> 后结束
+        </view>
+                <view class="opentuan-item__num">仅剩<text>{{remainPeople}}</text>个名额</view>
+                <view class="jointuan-item__info">
+                    <view class="jointuan-item__price">
+                        <text>￥</text>{{groupPrice}}</view>
+                </view>
+            </view>
+        </view>
+        <view class="jointuan-info opentuan-info">
+            <template is="members" data="{{members:members}}"></template>
+            <button class="jointuan-info__btn" openType="share">邀请好友参团</button>
+        </view>
+        <view class="opentuan-form">
+            <view class="opentuan-form__item">
+                <view class="opentuan-form__label">商品名称:</view>
+                <view class="opentuan-form__cont">{{goodsName}}</view>
+            </view>
+            <view class="opentuan-form__item" style="margin-bottom:0;">
+                <view class="opentuan-form__label">参团时间:</view>
+                <view class="opentuan-form__cont">{{participatedTime}}</view>
+            </view>
+        </view>
+        <template is="steps" data></template>
+    </view>
+    <view class="succsesstuan" wx:elif="{{status==2}}">
+        <view class="jointuan-info succsesstuan-info">
+            <view class="succsesstuan__hint">
+                <view class="succsesstuan__hint--color">拼团成功</view>
+                <view>商家正在发货，请耐心等待...</view>
+            </view>
+            <template is="members" data="{{members:members}}"></template>
+            <navigator class="jointuan-info__btn" hoverClass="none" openType="switchTab" url="/tabs/home/index">查看更多拼团活动</navigator>
+        </view>
+        <view class="opentuan-form">
+            <view class="opentuan-form__item">
+                <view class="opentuan-form__label">商品名称:</view>
+                <view class="opentuan-form__cont">{{goodsName}}</view>
+            </view>
+            <block wx:if="{{pickupman!=''}}">
+                <view class="opentuan-form__item" style="letter-spacing:10rpx;">
+                    <view class="opentuan-form__label">自提人:</view>
+                    <view class="opentuan-form__cont">{{pickupman}}</view>
+                </view>
+                <view class="opentuan-form__item">
+                    <view class="opentuan-form__label">自提电话:</view>
+                    <view class="opentuan-form__cont">{{pickupmanMobile}}</view>
+                </view>
+                <view class="opentuan-form__item">
+                    <view class="opentuan-form__label">自提时间:</view>
+                    <view class="opentuan-form__cont">{{distributionDate}}</view>
+                </view>
+            </block>
+            <block wx:else>
+                <view class="opentuan-form__item" style="letter-spacing:10rpx;">
+                    <view class="opentuan-form__label">收货人:</view>
+                    <view class="opentuan-form__cont">{{consignee.name}}</view>
+                </view>
+                <view class="opentuan-form__item">
+                    <view class="opentuan-form__label">收货地址:</view>
+                    <view class="opentuan-form__cont">{{consignee.province}} {{consignee.city}} {{consignee.district}} {{title}}{{address}}</view>
+                </view>
+            </block>
+            <view class="opentuan-form__item" style="margin-bottom:0;">
+                <view class="opentuan-form__label">成团时间:</view>
+                <view class="opentuan-form__cont">{{succeedTime}}</view>
+            </view>
+        </view>
+    </view>
+    <view class="succsesstuan" wx:else>
+        <view class="jointuan-info succsesstuan-info">
+            <view class="succsesstuan__hint">
+                <view class="succsesstuan__hint--color" style="color:red">拼团失败</view>
+            </view>
+            <template is="members" data="{{members:members}}"></template>
+            <view bindtap="handleBuy" class="jointuan-info__btn" wx:if="{{eventStatus==2}}">再次开团</view>
+            <navigator class="jointuan-info__btn" hoverClass="none" openType="switchTab" url="/tabs/home/index" wx:else>查看更多拼团活动</navigator>
+        </view>
+        <view class="opentuan-form">
+            <view class="opentuan-form__item">
+                <view class="opentuan-form__label">商品名称:</view>
+                <view class="opentuan-form__cont">{{goodsName}}</view>
+            </view>
+            <view class="opentuan-form__item" style="letter-spacing:10rpx;">
+                <view class="opentuan-form__label">收货人:</view>
+                <view class="opentuan-form__cont">{{consignee.name}}</view>
+            </view>
+            <view class="opentuan-form__item">
+                <view class="opentuan-form__label">收货地址:</view>
+                <view class="opentuan-form__cont">{{consignee.province}} {{consignee.city}} {{consignee.district}} {{title}}{{address}}</view>
+            </view>
+            <view class="opentuan-form__item" style="margin-bottom:0;">
+                <view class="opentuan-form__label">参团时间:</view>
+                <view class="opentuan-form__cont">{{participatedTime}}</view>
+            </view>
+        </view>
+    </view>
+</template>
+<import src="/pages/templates/tag/tuan.wxml"></import>
+<import src="./_members.wxml"></import>
+<import src="./_steps.wxml"></import>

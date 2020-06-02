@@ -1,0 +1,40 @@
+<view class="cc_video">
+    <view class="authBox" wx:if="{{isPlayAuth}}">{{authmessage}}</view>
+    <view class="ccH5PlayerBox" wx:if="{{videoBoxShow}}">
+        <video bindfullscreenchange="vFullScreen" bindpause="vPause" bindplay="vPlay" bindtimeupdate="vTimeupdate" class="ccVideo" controls="{{videoControls}}" id="ccVideo" objectFit="fill" poster="{{videoPoster}}" showCenterPlayBtn="{{cPlayBtn}}" src="{{videoSrc}}"></video>
+        <cover-view bindtap="clickBtnsShow" class="ccH5FadeOut" wx:if="{{btnsShow}}">
+            <cover-view catchtap="videoPlay" class="ccPlayBtn" wx:if="{{interFaceShow}}">
+                <cover-image class="btnBg" src="{{!isPlaying?'../../images/ccPlayBtn.png':'../../images/ccPauseBtn.png'}}"></cover-image>
+            </cover-view>
+            <cover-view catchtap="fullScreen" class="fullBtn" wx:if="{{interFaceShow}}">
+                <cover-image class="btnBg" src="../../images/ccFullBtn.png"></cover-image>
+            </cover-view>
+            <cover-view catchtap="clickSpShow" class="ccH5sp" wx:if="{{interFaceShow}}">
+        {{ccH5spTxt}}
+      </cover-view>
+            <cover-view class="ccH5spul" wx:if="{{spShow}}">
+                <cover-view catchtap="changeSpeed" data-key="{{index}}" data-num="{{spList[index].num}}" data-txt="{{spList[index].txt}}" hoverClass="btnhover" wx:for="{{spList}}" wx:key="{{index}}">
+          {{spList[index].txt}}
+        </cover-view>
+            </cover-view>
+            <cover-view catchtap="clickHdShow" class="ccH5hd" wx:if="{{interFaceShow}}">
+        {{ccH5hdTxt}}
+      </cover-view>
+            <cover-view class="ccH5hdul" wx:if="{{hdShow}}">
+                <cover-view catchtap="changeQuality" data-txt="{{videoSrcList[index].desp}}" data-url="{{videoSrcList[index].playurl}}" wx:for="videoSrcList" wx:key="{{index}}">
+          {{videoSrcList[index].desp}}
+        </cover-view>
+            </cover-view>
+        </cover-view>
+    </view>
+    <view class="ccH5Progress" wx:if="{{videoBoxShow}}">
+        <text class="ccCur">{{ccH5TimeCurrent}}</text>
+        <view class="ccH5ProgressBar">
+            <progress activeColor="#ff920a" backgroundColor="#a5a5a5" percent="{{percent}}" strokeWidth="2"></progress>
+            <view bindtouchend="dragTimeEnd" bindtouchmove="dragTime" class="ccH5DragBtn" style="left:{{dragBtnleft}}px;;">
+                <image class="btnBg" src="../../images/ccDragBtn.png"></image>
+            </view>
+        </view>
+        <text class="ccDur">{{ccH5TimeTotal}}</text>
+    </view>
+</view>

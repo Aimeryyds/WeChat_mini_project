@@ -1,0 +1,17 @@
+<template name="hot-model">
+    <form bindsubmit="onSubmit" bindtap="gotoArticle" class="hot-item{{index==0?' first-item':''}}" data-index="{{index}}" data-link="{{item.link}}" data-newsid="{{item.newsId}}" data-newstype="{{item.newsType}}" data-recominfo="{{item.recominfo}}" data-templatetype="{{item.templateType}}" reportSubmit="true" wx:for="{{articleList}}" wx:key="newsId">
+        <button formType="submit">
+            <view class="time">{{item.timeHour}}</view>
+            <view class="title" style="color: #999999;" wx:if="{{clickedMap[item.newsId]==item.newsId}}">{{item.title}}</view>
+            <view class="title" wx:else>{{item.title}}</view>
+            <view class="summary">{{item.summary}}</view>
+            <view class="news-pic">
+                <image lazyLoad="true" mode="aspectFill" src="{{item.pics[0]}}" wx:if="{{item.pics&&item.pics.length>0}}"></image>
+                <image lazyLoad="true" mode="aspectFill" src="{{item.smallPic}}" wx:else></image>
+            </view>
+        </button>
+    </form>
+    <view class="bottom-tip">
+        <text>热点新闻已读完，分享一下吧~</text>
+    </view>
+</template>

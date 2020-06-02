@@ -1,0 +1,92 @@
+<view>
+    <view class="title">定位</view>
+    <view bindtap="tapSearchLoc" class="search">
+        <image src="../../static/icons/search.png"></image>
+        <input confirmType="search" disabled="true" placeholder="请输入要查询的位置" placeholderStyle="color:#231b19" value="{{location}}"></input>
+    </view>
+    <view class="container1">
+        <view class="container-wrap">
+            <view class="item-li" wx:for="{{shops}}" wx:key="{{item.id}}">
+                <view bindtap="tapSelectShop" class="item-title" data-index="{{index}}" data-sid="{{item.id}}" wx:if="{{!item.selected}}">
+                    <view class="num1">
+                        <view class="fx">
+                            <view>
+                                <text class="color">{{item.name}}</text>
+                            </view>
+                        </view>
+                        <view class="text">
+                            <text>{{item.distance}}</text>
+                        </view>
+                    </view>
+                    <view>
+                        <view style="color:#ccc">
+                            <text>{{item.city_id+item.dist_id+item.detailed_addr}}</text>
+                        </view>
+                    </view>
+                </view>
+                <view class="item-content" wx:else>
+                    <view class="detail">
+                        <view class="num1 cc">
+                            <view class="fx">
+                                <view>
+                                    <image src="../../static/icons/pos.png"></image>
+                                </view>
+                                <view>
+                                    <text style="margin-left:6px;">{{item.name}}</text>
+                                </view>
+                            </view>
+                            <view class="text">
+                                <text>{{item.distance}}</text>
+                            </view>
+                        </view>
+                        <view class="New_flex">
+                            <text style="flex: 1;padding-right:2px">{{item.city_id+item.dist_id+item.detailed_addr}}</text>
+                            <view class="switch" wx:if="{{item.delivery_type=='0,1'||item.delivery_type=='1,0'}}">
+                                <text bindtap="open" class="switch_l {{selected?'default':'active'}}">自提</text>
+                                <text bindtap="close" class="switch_r {{selected1?'default':'active'}}">外送</text>
+                            </view>
+                        </view>
+                        <view animation="{{animationOpen}}" wx:if="{{showOpen&&item.delivery_type!='1'||item.delivery_type=='0'}}">
+                            <view class="detail_sty">
+                                <text>取单时间:</text>
+                            </view>
+                            <view>
+                                <radio-group bindchange="resetGetTime" class="radio-group" data-sid="{{item.id}}">
+                                    <label wx:for="{{gettypes}}" wx:for-item="type" wx:key="{{type.id}}">
+                                        <view class="radio">
+                                            <view>
+                                                <radio checked="{{type.checked}}" color="#08bb06" disabled="{{type.disabled}}" value="{{type.id}}"></radio>{{type.title}}
+								</view>
+                                        </view>
+                                    </label>
+                                </radio-group>
+                                <view class="section {{showtime?'show':'hide'}}">
+                                    <picker bindchange="resetGetTimeVal" end="{{etime}}" mode="time" start="{{stime}}" value="{{stime}}">
+                                        <view class="picker">请选择取单时间: 
+								<block wx:if="{{gettime}}">{{gettime}}</block>
+                                            <block wx:else>{{stime}} - {{etime}}</block>
+                                        </view>
+                                    </picker>
+                                </view>
+                            </view>
+                        </view>
+                        <view class="dd">
+                            <button catchtap="tapMeal" data-sid="{{item.id}}">开始点单</button>
+                        </view>
+                    </view>
+                </view>
+            </view>
+        </view>
+    </view>
+    <view style="color:#ff862c;text-align:center;" wx:if="{{!shops.length}}">未找到匹配门店</view>
+    <view class="b1" hidden="{{flag}}">
+        <view class="b2">
+            <image src="/common/shopclose.png"></image>
+        </view>
+        <view class="t_w">
+            <cover-view bindtap="closeMask" class="t_image">
+                <cover-image src="/common/qcm.png"></cover-image>
+            </cover-view>
+        </view>
+    </view>
+</view>

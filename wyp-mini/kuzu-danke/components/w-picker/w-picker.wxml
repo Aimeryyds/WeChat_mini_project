@@ -1,0 +1,148 @@
+<view class="w-picker">
+    <view bindtap="__e" catchtouchmove="__e" class="{{['mask',showPicker?'show':'']}}" data-event-opts="{{[ [ 'tap',[ [ 'maskTap',['$event'] ] ] ],[ 'touchmove',[ [ '',['$event'] ] ] ] ]}}"></view>
+    <view class="{{['w-picker-cnt',showPicker?'show':'']}}">
+        <view catchtouchmove="__e" class="w-picker-hd" data-event-opts="{{[ [ 'touchmove',[ [ '',['$event'] ] ] ] ]}}">
+            <view bindtap="__e" class="w-picker-btn" data-event-opts="{{[ [ 'tap',[ [ 'pickerCancel',['$event'] ] ] ] ]}}">取消</view>
+            <view bindtap="__e" class="w-picker-btn" data-event-opts="{{[ [ 'tap',[ [ 'pickerConfirm',['$event'] ] ] ] ]}}" style="{{'color:'+themeColor+';'}}">确定</view>
+        </view>
+        <view class="w-picker-view" wx:if="{{mode=='linkage'}}">
+            <picker-view bindchange="__e" bindtouchend="__e" bindtouchstart="__e" data-event-opts="{{[ [ 'change',[ [ 'bindChange',['$event'] ] ] ],[ 'touchstart',[ [ 'touchStart',['$event'] ] ] ],[ 'touchend',[ [ 'touchEnd',['$event'] ] ] ] ]}}" indicatorStyle="{{itemHeight}}" value="{{pickVal}}">
+                <picker-view-column wx:for="{{data}}" wx:for-index="colIndex" wx:for-item="col" wx:key="colIndex">
+                    <view class="w-picker-item" wx:for="{{col}}" wx:key="index">{{item.label}}</view>
+                </picker-view-column>
+            </picker-view>
+        </view>
+        <view class="w-picker-view" wx:if="{{mode=='half'}}">
+            <picker-view bindchange="__e" bindtouchend="__e" bindtouchstart="__e" data-event-opts="{{[ [ 'change',[ [ 'bindChange',['$event'] ] ] ],[ 'touchstart',[ [ 'touchStart',['$event'] ] ] ],[ 'touchend',[ [ 'touchEnd',['$event'] ] ] ] ]}}" indicatorStyle="{{itemHeight}}" value="{{pickVal}}">
+                <picker-view-column>
+                    <view class="w-picker-item" wx:for="{{data.years}}" wx:key="index">{{item+'年'}}</view>
+                </picker-view-column>
+                <picker-view-column>
+                    <view class="w-picker-item" wx:for="{{data.months}}" wx:key="index">{{item+'月'}}</view>
+                </picker-view-column>
+                <picker-view-column>
+                    <view class="w-picker-item" wx:for="{{data.days}}" wx:key="index">{{item+'日'}}</view>
+                </picker-view-column>
+                <picker-view-column>
+                    <view class="w-picker-item" wx:for="{{data.areas}}" wx:key="index">{{item.label}}</view>
+                </picker-view-column>
+            </picker-view>
+        </view>
+        <view class="w-picker-view" wx:if="{{mode=='date'}}">
+            <picker-view bindchange="__e" bindtouchend="__e" bindtouchstart="__e" data-event-opts="{{[ [ 'change',[ [ 'bindChange',['$event'] ] ] ],[ 'touchstart',[ [ 'touchStart',['$event'] ] ] ],[ 'touchend',[ [ 'touchEnd',['$event'] ] ] ] ]}}" indicatorStyle="{{itemHeight}}" value="{{pickVal}}">
+                <picker-view-column>
+                    <view class="w-picker-item" wx:for="{{data.years}}" wx:key="index">{{item+'年'}}</view>
+                </picker-view-column>
+                <picker-view-column>
+                    <view class="w-picker-item" wx:for="{{data.months}}" wx:key="index">{{item+'月'}}</view>
+                </picker-view-column>
+                <picker-view-column>
+                    <view class="w-picker-item" wx:for="{{data.days}}" wx:key="index">{{item+'日'}}</view>
+                </picker-view-column>
+            </picker-view>
+        </view>
+        <view class="w-picker-view" wx:if="{{mode=='yearMonth'}}">
+            <picker-view bindchange="__e" bindtouchend="__e" bindtouchstart="__e" data-event-opts="{{[ [ 'change',[ [ 'bindChange',['$event'] ] ] ],[ 'touchstart',[ [ 'touchStart',['$event'] ] ] ],[ 'touchend',[ [ 'touchEnd',['$event'] ] ] ] ]}}" indicatorStyle="{{itemHeight}}" value="{{pickVal}}">
+                <picker-view-column>
+                    <view class="w-picker-item" wx:for="{{data.years}}" wx:key="index">{{item+'年'}}</view>
+                </picker-view-column>
+                <picker-view-column>
+                    <view class="w-picker-item" wx:for="{{data.months}}" wx:key="index">{{item+'月'}}</view>
+                </picker-view-column>
+            </picker-view>
+        </view>
+        <view class="w-picker-view" wx:if="{{mode=='dateTime'}}">
+            <picker-view bindchange="__e" bindtouchend="__e" bindtouchstart="__e" data-event-opts="{{[ [ 'change',[ [ 'bindChange',['$event'] ] ] ],[ 'touchstart',[ [ 'touchStart',['$event'] ] ] ],[ 'touchend',[ [ 'touchEnd',['$event'] ] ] ] ]}}" indicatorStyle="{{itemHeight}}" value="{{pickVal}}">
+                <picker-view-column>
+                    <view class="w-picker-item" wx:for="{{data.years}}" wx:key="index">{{item+'年'}}</view>
+                </picker-view-column>
+                <picker-view-column>
+                    <view class="w-picker-item" wx:for="{{data.months}}" wx:key="index">{{item+'月'}}</view>
+                </picker-view-column>
+                <picker-view-column>
+                    <view class="w-picker-item" wx:for="{{data.days}}" wx:key="index">{{item+'日'}}</view>
+                </picker-view-column>
+                <picker-view-column>
+                    <view class="w-picker-item" wx:for="{{data.hours}}" wx:key="index">{{item+'时'}}</view>
+                </picker-view-column>
+                <picker-view-column>
+                    <view class="w-picker-item" wx:for="{{data.minutes}}" wx:key="index">{{item+'分'}}</view>
+                </picker-view-column>
+                <picker-view-column>
+                    <view class="w-picker-item" wx:for="{{data.seconds}}" wx:key="index">{{item+'秒'}}</view>
+                </picker-view-column>
+            </picker-view>
+        </view>
+        <view class="w-picker-view" wx:if="{{mode=='range'}}">
+            <picker-view bindchange="__e" bindtouchend="__e" bindtouchstart="__e" data-event-opts="{{[ [ 'change',[ [ 'bindChange',['$event'] ] ] ],[ 'touchstart',[ [ 'touchStart',['$event'] ] ] ],[ 'touchend',[ [ 'touchEnd',['$event'] ] ] ] ]}}" indicatorStyle="{{itemHeight}}" value="{{pickVal}}">
+                <picker-view-column>
+                    <view class="w-picker-item" wx:for="{{data.fyears}}" wx:key="index">{{item}}</view>
+                </picker-view-column>
+                <picker-view-column>
+                    <view class="w-picker-item" wx:for="{{data.fmonths}}" wx:key="index">{{item}}</view>
+                </picker-view-column>
+                <picker-view-column>
+                    <view class="w-picker-item" wx:for="{{data.fdays}}" wx:key="index">{{item}}</view>
+                </picker-view-column>
+                <picker-view-column>
+                    <view class="w-picker-item">-</view>
+                </picker-view-column>
+                <picker-view-column>
+                    <view class="w-picker-item" wx:for="{{data.tyears}}" wx:key="index">{{item}}</view>
+                </picker-view-column>
+                <picker-view-column>
+                    <view class="w-picker-item" wx:for="{{data.tmonths}}" wx:key="index">{{item}}</view>
+                </picker-view-column>
+                <picker-view-column>
+                    <view class="w-picker-item" wx:for="{{data.tdays}}" wx:key="index">{{item}}</view>
+                </picker-view-column>
+            </picker-view>
+        </view>
+        <view class="w-picker-view" wx:if="{{mode=='time'}}">
+            <picker-view bindchange="__e" bindtouchend="__e" bindtouchstart="__e" data-event-opts="{{[ [ 'change',[ [ 'bindChange',['$event'] ] ] ],[ 'touchstart',[ [ 'touchStart',['$event'] ] ] ],[ 'touchend',[ [ 'touchEnd',['$event'] ] ] ] ]}}" indicatorStyle="{{itemHeight}}" value="{{pickVal}}">
+                <picker-view-column>
+                    <view class="w-picker-item" wx:for="{{data.hours}}" wx:key="index">{{item+'时'}}</view>
+                </picker-view-column>
+                <picker-view-column>
+                    <view class="w-picker-item" wx:for="{{data.minutes}}" wx:key="index">{{item+'分'}}</view>
+                </picker-view-column>
+                <picker-view-column>
+                    <view class="w-picker-item" wx:for="{{data.seconds}}" wx:key="index">{{item+'秒'}}</view>
+                </picker-view-column>
+            </picker-view>
+        </view>
+        <view class="w-picker-view" wx:if="{{mode=='selector'}}">
+            <picker-view bindchange="__e" bindtouchend="__e" bindtouchstart="__e" data-event-opts="{{[ [ 'change',[ [ 'bindChange',['$event'] ] ] ],[ 'touchstart',[ [ 'touchStart',['$event'] ] ] ],[ 'touchend',[ [ 'touchEnd',['$event'] ] ] ] ]}}" indicatorStyle="{{itemHeight}}" value="{{pickVal}}">
+                <picker-view-column>
+                    <view class="w-picker-item" wx:for="{{data}}" wx:key="index">{{item.label}}</view>
+                </picker-view-column>
+            </picker-view>
+        </view>
+        <view class="w-picker-view" wx:if="{{mode=='limit'}}">
+            <picker-view bindchange="__e" bindtouchend="__e" bindtouchstart="__e" data-event-opts="{{[ [ 'change',[ [ 'bindChange',['$event'] ] ] ],[ 'touchstart',[ [ 'touchStart',['$event'] ] ] ],[ 'touchend',[ [ 'touchEnd',['$event'] ] ] ] ]}}" indicatorStyle="{{itemHeight}}" value="{{pickVal}}">
+                <picker-view-column>
+                    <view class="w-picker-item" wx:for="{{data.date}}" wx:key="index">{{item.label}}</view>
+                </picker-view-column>
+                <picker-view-column>
+                    <view class="w-picker-item" wx:for="{{data.hours}}" wx:key="index">{{item.label+'时'}}</view>
+                </picker-view-column>
+                <picker-view-column>
+                    <view class="w-picker-item" wx:for="{{data.minutes}}" wx:key="index">{{item.label+'分'}}</view>
+                </picker-view-column>
+            </picker-view>
+        </view>
+        <view class="w-picker-view" wx:if="{{mode=='limitHour'}}">
+            <picker-view bindchange="__e" bindtouchend="__e" bindtouchstart="__e" data-event-opts="{{[ [ 'change',[ [ 'bindChange',['$event'] ] ] ],[ 'touchstart',[ [ 'touchStart',['$event'] ] ] ],[ 'touchend',[ [ 'touchEnd',['$event'] ] ] ] ]}}" indicatorStyle="{{itemHeight}}" value="{{pickVal}}">
+                <picker-view-column>
+                    <view class="w-picker-item" wx:for="{{data.date}}" wx:key="index">{{item.label}}</view>
+                </picker-view-column>
+                <picker-view-column>
+                    <view class="w-picker-item" wx:for="{{data.areas}}" wx:key="index">{{item.label}}</view>
+                </picker-view-column>
+                <picker-view-column>
+                    <view class="w-picker-item" wx:for="{{data.hours}}" wx:key="index">{{item.label+'时'}}</view>
+                </picker-view-column>
+            </picker-view>
+        </view>
+    </view>
+</view>

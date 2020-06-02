@@ -1,0 +1,6 @@
+<import src="../../templates/logistics/step/step.wxml"></import>
+<view class="container" hidden="{{loading}}">
+    <view data-id="{{item.id}}" wx:for="{{steps}}" wx:key="{{index}}">
+        <template is="state-step" data="{{item:item,index:index}}"></template>
+    </view>
+</view>

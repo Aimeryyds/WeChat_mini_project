@@ -1,0 +1,62 @@
+<view class="container">
+    <view class="header">
+        <swiper autoplay="{{autoplay}}" duration="{{duration}}" indicatorDots="{{indicatorDots}}" interval="{{interval}}">
+            <swiper-item wx:if="{{item!=''}}" wx:for="{{shopbanners}}">
+                <image class="slide-image" mode="widthFix" src="{{item}}"></image>
+            </swiper-item>
+        </swiper>
+    </view>
+    <view class="main_title">
+        <view class="titleFirst">
+            <image src="https://tws.cnweisou.com/images/wxshop/galnceStore.png"></image>
+            <view>云品V购体验店</view>
+            <image src="https://tws.cnweisou.com/images/wxshop/galnceStoreshare.png"></image>
+        </view>
+        <view class="titleSecond">
+            <view></view>
+            <view class="starImg">
+                <image src="{{item}}" wx:for="{{imgStars}}"></image>
+                <text>5分</text>
+            </view>
+            <view class="txt">转发</view>
+        </view>
+    </view>
+    <view class="mainLine"></view>
+    <view class="main_addr">
+        <view class="address">
+            <image src="https://tws.cnweisou.com/images/wxshop/galnceStoreAddr.png"></image>
+            <view>{{addr_2}}</view>
+            <view class="lineWidth"></view>
+            <view>距离210米</view>
+            <view bindtap="gotoMap">导航</view>
+        </view>
+    </view>
+    <view class="mainLine"></view>
+    <view class="mainTel">
+        <view>商家电话：{{phone}}</view>
+        <image bindtap="makeCall" data-phone="{{phone}}" src="https://tws.cnweisou.com/images/wxshop/galnceStoreTel.png"></image>
+    </view>
+    <view class="mainLine"></view>
+    <view class="mainTel">
+        <view>营业时间：{{time1}}-{{tiem2}}</view>
+    </view>
+    <view class="mainLine"></view>
+    <view class="mainTxt">
+        <view>{{textarea}}</view>
+    </view>
+    <view class="mainLine"></view>
+</view>
+<view class="modelTab">
+    <view bindtap="goToIndex" class="modelTab_item">
+        <view>
+            <image src="https://tws.cnweisou.com/images/wxshop/galnceStoreindex.png"></image>首页</view>
+    </view>
+    <view bindtap="gobackstore" class="modelTab_item">
+        <view>
+            <image src="https://tws.cnweisou.com/images/wxshop/galnceStoreback.png"></image>返回修改</view>
+    </view>
+    <view class="modelTab_item">
+        <view bindtap="gotoauthorize">
+            <image src="https://tws.cnweisou.com/images/wxshop/galnceStorepiblic.png"></image>确认发布</view>
+    </view>
+</view>

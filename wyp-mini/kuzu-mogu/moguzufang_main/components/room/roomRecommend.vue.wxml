@@ -1,0 +1,18 @@
+<template name="90f9f126">
+    <view class="_view 90f9f126 {{'roomRecommend'+passClass}}" wx:if="{{roomRecommend.list&&roomRecommend.list.length>0}}">
+        <view class="_view 90f9f126 h1">{{roomRecommend.name}}<template is="0e24a461" data="{{...$root['0'],...$root[$kk+'90f9f126-0'],$root:$root}}" wx:if="{{roomRecommend.pictureUrl}}"></template>
+        </view>
+        <scroll-view class="_scroll-view 90f9f126 roomRecommend-scroll" scrollX="true">
+            <view class="_view 90f9f126 ul">
+                <view bindtap="handleProxy" class="_view 90f9f126 li" data-comkey="{{$k}}" data-eventid="{{'90f9f126-0-'+index}}" key="{{index}}" wx:for="{{roomRecommend.list}}" wx:key="index">
+                    <template is="0e24a461" data="{{...$root['0'],...$root[$kk+'90f9f126-1-'+index],$root:$root}}"></template>
+                    <view class="_view 90f9f126 h2 mg-ellipsis">{{item.title}}</view>
+                    <view class="_view 90f9f126 h3 mg-ellipsis">{{item.subTitle}}</view>
+                    <view class="_view 90f9f126 h4 mg-ellipsis">
+                        <text class="_text 90f9f126 var">{{item.showPrice}}</text>元/月</view>
+                </view>
+            </view>
+        </scroll-view>
+    </view>
+</template>
+<import src="/components/mgImage.vue.wxml"></import>

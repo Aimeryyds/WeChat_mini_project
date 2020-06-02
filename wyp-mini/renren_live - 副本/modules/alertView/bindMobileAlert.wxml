@@ -1,0 +1,20 @@
+<cover-view class="drawer_screen" wx:if="{{showModalStatus}}"></cover-view>
+<cover-view class="drawer_box" wx:if="{{showModalStatus}}">
+    <cover-view bindtap="btnCloseAction" class="btn_close">
+        <cover-image class="img_close" mode="center" src="../../images/btn_close.png" wx:if="{{showCloseBtn}}"></cover-image>
+    </cover-view>
+    <block wx:if="{{hasSubTitle}}">
+        <cover-view class="drawer_title">{{titleString}}</cover-view>
+        <cover-view class="drawer_subtitle">{{subTitleString}}</cover-view>
+    </block>
+    <cover-view class="drawer_title_only" wx:if="{{!hasSubTitle}}">{{titleString}}</cover-view>
+    <cover-view class="btnContainer" wx:if="{{hasCancelBtn}}">
+        <cover-view bindtap="btnCancelAction" class="btn_cancel">{{cancelTitleString}}</cover-view>
+        <cover-view bindtap="btnOkAction" class="btn_ok">{{okTitleString}}</cover-view>
+    </cover-view>
+    <cover-view class="btn_ok_only" wx:if="{{!hasCancelBtn}}">
+        <button bindgetphonenumber="getPhoneNumber" class="btn_auth" openType="getPhoneNumber" style="width:100%;height:35px;">
+            <cover-view class="text_auth">{{okTitleString}}</cover-view>
+        </button>
+    </cover-view>
+</cover-view>

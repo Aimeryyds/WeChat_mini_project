@@ -1,0 +1,944 @@
+@import "../../wuBaseWxss/18.wxss";
+
+@import "../../wuBaseWxss/13.wxss";
+
+@import "../../wuBaseWxss/12.wxss";
+
+.indexList {
+    width: 100%;
+}
+
+.indexList .weui-cell:before {
+    left: 0;
+    border-color: #f5f5f5;
+}
+
+.indexList .weui-cells:before {
+    border-color: #f5f5f5;
+}
+
+.indexList .weui-cells:after {
+    border-color: #f5f5f5;
+}
+
+.indexList .weui-cell {
+    height: 69rpx;
+}
+
+.indexList .index-word {
+    height: 44rpx;
+    background-color: #f5f5f5;
+    font-size: 28rpx;
+    line-height: 44rpx;
+    padding-left: 36rpx;
+    border: 0;
+    color: #454545;
+}
+
+.indexList .weui-cell__bd {
+    font-size: 26rpx;
+    color: #454545;
+}
+
+.indexList .index-title {
+    display: -webkit-box;
+    display: -webkit-flex;
+    display: flex;
+    width: 100rpx;
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    right: 12rpx;
+    font-size: 24rpx;
+    color: #454545;
+    text-align: right;
+    z-index: 20;
+}
+
+.indexList .weui-cell__ft_in-radio {
+    height: 30rpx;
+    margin-right: 100rpx;
+}
+
+.indexList .weui-cell__ft_in-radio .weui-icon-radio {
+    vertical-align: top;
+}
+
+.indexList .blue {
+    color: #3D9BFC;
+}
+
+page {
+    height: 100%;
+}
+
+.choose-fixed {
+    height: 100%;
+    overflow-y: hidden;
+}
+
+.home-centent {
+    -webkit-box-flex: 1;
+    flex: 1;
+}
+
+.clearfix:after {
+    visibility: hidden;
+    display: block;
+    font-size: 0;
+    content: '';
+    clear: both;
+    height: 0;
+}
+
+.choose {
+    font-size: 34rpx;
+    height: 100%;
+    width: 100%;
+    display: -webkit-box;
+    display: -webkit-flex;
+    display: flex;
+    -webkit-box-orient: vertical;
+    -webkit-box-direction: normal;
+    flex-direction: column;
+}
+
+.choose .top {
+    position: fixed;
+    top: 0;
+    z-index: 1;
+    width: 100%;
+    box-shadow: 0 5rpx 18rpx rgba(19,39,121,0.1);
+}
+
+.choose .classlist {
+    padding: 18rpx;
+    width: inherit;
+}
+
+.choose .no-list-tip {
+    color: #949494;
+    font-size: 26rpx;
+    margin: 300rpx auto;
+    text-align: center;
+}
+
+.choose .choose-type {
+    height: 94rpx;
+    display: -webkit-box;
+    display: -webkit-flex;
+    display: flex;
+    -webkit-box-pack: justify;
+    justify-content: space-between;
+    -webkit-box-align: center;
+    align-items: center;
+    padding: 0 40rpx;
+    background-color: #fff;
+    position: relative;
+}
+
+.choose .choose-type .choose-picker {
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%,-50%);
+}
+
+.choose .choose-type .choose-picker .choose-center {
+    display: -webkit-box;
+    display: -webkit-flex;
+    display: flex;
+    -webkit-box-align: center;
+    align-items: center;
+}
+
+.choose .choose-type .choose-picker .test {
+    font-family: PingFang-SC-Bold;
+    font-size: 32rpx;
+    color: #1082FF;
+}
+
+.choose .choose-type .choose-picker .iconfont-darkblue {
+    height: 24rpx;
+    width: 24rpx;
+    color: #1082FF;
+    margin-left: 12rpx;
+}
+
+.choose .choose-type .region {
+    font-family: PingFang-SC-Regular;
+    font-size: 32rpx;
+    color: #1C234B;
+    display: -webkit-box;
+    display: -webkit-flex;
+    display: flex;
+    -webkit-box-align: center;
+    align-items: center;
+}
+
+.choose .choose-type .region .iconfont-darkblue {
+    height: 24rpx;
+    width: 24rpx;
+    margin-left: 12rpx;
+}
+
+.choose .choose-type .icon-icon30 {
+    font-size: 48rpx;
+    color: #2B3257;
+}
+
+.choose .choose-type .users {
+    position: relative;
+}
+
+.choose .choose-type .users .opent-btn {
+    position: absolute;
+    top: 0;
+    left: 0;
+    z-index: 9;
+    opacity: 0;
+}
+
+.choose .choose-type .users .user-logo {
+    height: 47rpx;
+    width: 50rpx;
+    border-radius: 100%;
+}
+
+.choose .choose-type .users .user-mun {
+    position: absolute;
+    top: 10rpx;
+    left: -28rpx;
+    height: 28rpx;
+    width: 32rpx;
+    background: url('http://static-xesapi.speiyou.cn/1527658787377.png') no-repeat;
+    background-size: 100% 100%;
+    font-size: 22rpx;
+    color: #fff;
+    display: -webkit-box;
+    display: -webkit-flex;
+    display: flex;
+    -webkit-box-align: center;
+    align-items: center;
+}
+
+.choose .choose-type .users .user-mun text {
+    padding-left: 8rpx;
+}
+
+.choose .choose-type .users .double-mun {
+    position: absolute;
+    top: 11rpx;
+    left: -38rpx;
+    height: 28rpx;
+    width: 40rpx;
+    background: url('http://static-xesapi.speiyou.cn/1527658779261.png') no-repeat;
+    background-size: 100% 100%;
+    font-size: 22rpx;
+    color: #fff;
+    display: -webkit-box;
+    display: -webkit-flex;
+    display: flex;
+    -webkit-box-align: center;
+    align-items: center;
+    -webkit-box-pack: center;
+    justify-content: center;
+}
+
+.choose .choose-type .users .double-mun text {
+    padding: 0;
+}
+
+.choose .choose-type .users .infinite-mun {
+    position: absolute;
+    top: 11rpx;
+    left: -44rpx;
+    height: 28rpx;
+    width: 48rpx;
+    background: url('http://static-xesapi.speiyou.cn/1527658767744.png') no-repeat;
+    background-size: 100% 100%;
+    font-size: 22rpx;
+    color: #fff;
+    display: -webkit-box;
+    display: -webkit-flex;
+    display: flex;
+    -webkit-box-align: center;
+    align-items: center;
+    -webkit-box-pack: center;
+    justify-content: center;
+}
+
+.choose .choose-type .users .infinite-mun text {
+    padding: 0;
+}
+
+.choose .choose-grade {
+    font-size: 30rpx;
+    line-height: 94rpx;
+    text-align: center;
+    background-color: #fff;
+    color: #1082FF;
+}
+
+.choose .grade {
+    position: relative;
+    display: inline-block;
+}
+
+.choose .icon-grade {
+    display: inline-block;
+    width: 40rpx;
+    height: 40rpx;
+    transform: rotate(-90deg);
+    position: absolute;
+    right: -50rpx;
+    top: 16rpx;
+}
+
+.choose .page-section-spacing {
+    overflow: hidden;
+}
+
+.choose .flex-wrp {
+    display: -webkit-box;
+    display: -webkit-flex;
+    display: flex;
+    width: 100%;
+    padding-left: 20rpx;
+    background-color: #fff;
+}
+
+.choose .flex-blue {
+    color: #2e8eff;
+}
+
+.choose .flex-item {
+    width: 183rpx;
+    height: 94rpx;
+    font-size: 30rpx;
+    text-align: center;
+    line-height: 94rpx;
+    position: relative;
+    word-break: break-all;
+    word-wrap: break-word;
+}
+
+.choose .flex-item .triangle {
+    width: 0;
+    height: 0;
+    border-bottom: 18rpx solid #2e8eff;
+    border-left: 18rpx solid transparent;
+    display: inline-block;
+    vertical-align: middle;
+    margin-left: 20rpx;
+}
+
+.choose .flex-item .icon-choose {
+    display: inline-block;
+    width: 28rpx;
+    height: 29rpx;
+    margin-right: 10rpx;
+    position: absolute;
+    top: 34rpx;
+    left: 26rpx;
+}
+
+.choose .go-center {
+    background: url(https://cdninsight.speiyou.com/1517904216919_21583.png) no-repeat;
+    background-size: 100% 100%;
+    width: 120rpx;
+    height: 120rpx;
+    position: fixed;
+    right: 20rpx;
+    bottom: 112rpx;
+}
+
+.choose .class-item {
+    margin-bottom: 18rpx;
+}
+
+.choose .list {
+    position: fixed;
+    bottom: 0;
+    background-color: #fe5722;
+    height: 92rpx;
+    width: 100%;
+    font-size: 34rpx;
+    line-height: 92rpx;
+    text-align: center;
+    color: #fff;
+}
+
+.choose .mask {
+    position: fixed;
+    z-index: 9;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0,0,0,0.7);
+}
+
+.choose .filter .class-area {
+    position: fixed;
+    width: 620rpx;
+    height: 100%;
+    top: 0;
+    right: -620rpx;
+    z-index: 11;
+    background-color: #fff;
+    transition: right .2s linear;
+}
+
+.choose .filter .class-area .header {
+    height: 106rpx;
+    line-height: 106rpx;
+    text-align: center;
+    display: inline-block;
+    margin: 0 0 0 230rpx;
+    color: #454545;
+    font-size: 28rpx;
+}
+
+.choose .filter .class-area .back-button {
+    display: inline-block;
+    width: 80rpx;
+    height: 60rpx;
+}
+
+.choose .filter .class-area .back {
+    left: 2rpx;
+    width: 20rpx;
+    height: 20rpx;
+    transform: rotate(45deg);
+    border: 2px solid #999;
+    border-width: 0 0 2rpx 2rpx;
+    display: inline-block;
+    margin: 0 0 0 44rpx;
+}
+
+.choose .filter .class-area .select-area {
+    -webkit-box-orient: horizontal;
+    -webkit-box-direction: normal;
+    flex-direction: row;
+    height: 100%;
+    font-size: 26rpx;
+}
+
+.choose .filter .class-area .select-area .flex-item {
+    width: 152rpx;
+    font-size: 26rpx;
+}
+
+.choose .filter .class-area .select-area .first-line {
+    -webkit-box-orient: vertical;
+    -webkit-box-direction: normal;
+    flex-direction: column;
+    border-top: 1px solid #e5e5ea;
+}
+
+.choose .filter .class-area .select-area .first-line .first-item {
+    width: 104rpx;
+    height: 100rpx;
+    padding: 0 24rpx 0 24rpx;
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+    text-align: left;
+}
+
+.choose .filter .class-area .select-area .first-line .first-select {
+    background-color: #f0f4f5;
+    color: #3d9bfc;
+}
+
+.choose .filter .class-area .select-area .second-line {
+    -webkit-box-orient: vertical;
+    -webkit-box-direction: normal;
+    flex-direction: column;
+    width: 180rpx;
+    height: 100%;
+    background-color: #f5f8f9;
+    border-top: 1px solid #e5e5ea;
+}
+
+.choose .filter .class-area .select-area .second-line .second-item {
+    height: 100rpx;
+    width: 132rpx;
+    padding: 0 24rpx 0 24rpx;
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+    text-align: left;
+}
+
+.choose .filter .class-area .select-area .second-line .second-select {
+    background-color: #ebf0f2;
+    color: #3d9bfc;
+}
+
+.choose .filter .class-area .select-area .third-line {
+    -webkit-box-orient: vertical;
+    -webkit-box-direction: normal;
+    flex-direction: column;
+    width: 290rpx;
+    background-color: #ebf0f2;
+    height: 100%;
+    border-top: 1px solid #e5e5ea;
+}
+
+.choose .filter .class-area .select-area .third-line .third-item {
+    height: 100rpx;
+    width: 182rpx;
+    text-align: left;
+    padding: 0 84rpx 0 24rpx;
+    position: relative;
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+}
+
+.choose .filter .class-area .select-area .third-line .weui-icon-radio {
+    position: absolute;
+    top: 20rpx;
+    right: 20rpx;
+}
+
+.choose .filter .main-teacher {
+    position: fixed;
+    width: 620rpx;
+    height: 100%;
+    top: 0;
+    right: -620rpx;
+    z-index: 11;
+    background-color: #fff;
+    transition: right .2s linear;
+}
+
+.choose .filter .main-teacher .header {
+    height: 106rpx;
+    line-height: 106rpx;
+    text-align: center;
+    display: inline-block;
+    margin: 0 0 0 230rpx;
+    color: #454545;
+    font-size: 28rpx;
+}
+
+.choose .filter .main-teacher .back-button {
+    display: inline-block;
+    width: 80rpx;
+    height: 60rpx;
+}
+
+.choose .filter .main-teacher .back {
+    left: 2rpx;
+    width: 20rpx;
+    height: 20rpx;
+    transform: rotate(45deg);
+    border: 2px solid #999;
+    border-width: 0 0 2rpx 2rpx;
+    display: inline-block;
+    margin: 0 0 0 44rpx;
+}
+
+.choose .filter .show {
+    right: 0;
+}
+
+.choose .filter .container {
+    position: fixed;
+    background-color: #fff;
+    width: 620rpx;
+    height: 100%;
+    top: 0;
+    right: -620rpx;
+    padding-top: 68rpx;
+    z-index: 10;
+    transition: right .2s linear;
+}
+
+.choose .filter .container.show {
+    right: 0;
+}
+
+.choose .filter .class-type {
+    padding: 0 0 30rpx 22rpx;
+    border-bottom: 1px solid #e5e5ea;
+}
+
+.choose .filter .class-type .class-title {
+    color: #999;
+    font-size: 24rpx;
+    margin-bottom: 20rpx;
+}
+
+.choose .filter .class-type .type-item {
+    margin-right: 21rpx;
+    float: left;
+}
+
+.choose .filter .class-type .default {
+    width: 178rpx;
+    height: 60rpx;
+    color: #454545;
+    background-color: #f0f4f5;
+    margin: 0 auto;
+    border-radius: 8rpx;
+    line-height: 60rpx;
+    font-size: 26rpx;
+    text-align: center;
+}
+
+.choose .filter .class-type .button-blue {
+    background-color: #3d9bfc;
+    color: #fff;
+}
+
+.choose .filter .class-type .blue {
+    background-color: #3d9bfc;
+    color: #fff;
+}
+
+.choose .filter .time-type {
+    border: 0;
+    padding-top: 22rpx;
+}
+
+.choose .filter .time-type .time {
+    width: 128rpx;
+    margin-bottom: 30rpx;
+}
+
+.choose .filter .footer {
+    position: absolute;
+    bottom: 66rpx;
+    line-height: 88rpx;
+    text-align: center;
+}
+
+.choose .filter .footer .reset {
+    width: 306rpx;
+    height: 84rpx;
+    float: left;
+    color: #999;
+    border: 1px solid #dfdfdf;
+}
+
+.choose .filter .footer .complete {
+    width: 310rpx;
+    height: 88rpx;
+    float: left;
+    background-color: #2e8eff;
+    color: #fff;
+}
+
+.choose .change-class .container {
+    z-index: 20;
+    position: fixed;
+    top: 0;
+    width: 750rpx;
+}
+
+.choose .change-class .container .class-tip {
+    width: 100%;
+    height: 930rpx;
+    background-color: #fff;
+}
+
+.choose .change-class .container .friend-tip {
+    height: 102rpx;
+}
+
+.choose .change-class .container .msg1 {
+    padding-top: 6rpx;
+    font-size: 30rpx;
+    text-align: center;
+}
+
+.choose .change-class .container .msg2 {
+    font-size: 24rpx;
+    text-align: center;
+}
+
+.choose .change-class .container .change-item {
+    width: 716rpx;
+    background-color: #eeeeee;
+    padding: 0 17rpx 30rpx;
+}
+
+.choose .change-class .container .class-size {
+    padding: 32rpx 0 32rpx 0;
+    font-size: 30rpx;
+}
+
+.choose .change-class .choose-button {
+    margin-top: 20rpx;
+}
+
+.choose .change-class .choose-button .flex-item {
+    width: 50%;
+}
+
+.choose .change-class .choose-button .yes {
+    background-color: #3699ff;
+    color: #fff;
+}
+
+.choose .weui-cell:before {
+    left: 0;
+}
+
+.choose .weui-cell {
+    color: #2e8eff;
+    font-size: 26rpx;
+    height: 62rpx;
+}
+
+.choose .weui-cell__bd {
+    font-size: 26rpx;
+    color: #454545;
+}
+
+.choose switch {
+    font-size: 26rpx;
+}
+
+.choose .weui-cell__ft_in-access {
+    color: #2e8eff;
+}
+
+.choose .refresh-top {
+    margin-top: 106rpx;
+    padding: 20rpx;
+    font-size: 24rpx;
+    text-align: center;
+}
+
+.choose .load {
+    height: 200rpx;
+    margin: 0 auto;
+    text-align: center;
+}
+
+.choose .select-tutor-title {
+    height: 100rpx;
+    font-size: 30rpx;
+    text-align: center;
+    line-height: 100rpx;
+}
+
+.choose .select-done-btn {
+    height: 80rpx;
+    line-height: 80rpx;
+    font-size: 30rpx;
+    border-radius: 0;
+}
+
+.choose .tutor-cell {
+    box-sizing: border-box;
+    display: -webkit-box;
+    display: -webkit-flex;
+    display: flex;
+    -webkit-box-align: center;
+    align-items: center;
+    padding: 0 32rpx;
+    width: 100%;
+    height: 155rpx;
+    border-bottom: 1px solid rgba(0,0,0,0.1);
+}
+
+.choose .tutor-avatar-wrap {
+    margin-right: 30rpx;
+    width: 90rpx;
+    height: 90rpx;
+    background: url('https://cdninsight.speiyou.com/1513669644100_default_avatar.png');
+    background-size: 100% 100%;
+    -webkit-box-flex: 0;
+    flex: none;
+    border-radius: 50%;
+    overflow: hidden;
+}
+
+.choose .tutor-avatar-wrap image {
+    width: 100%;
+    height: 100%;
+}
+
+.choose .tutor-content-wrap {
+    padding-right: 20rpx;
+    -webkit-box-flex: 1;
+    flex: 1;
+    font-size: 28rpx;
+    font-weight: 300;
+}
+
+.choose .tutor-content-top {
+    display: -webkit-box;
+    display: -webkit-flex;
+    display: flex;
+    -webkit-box-pack: justify;
+    justify-content: space-between;
+}
+
+.choose .toast {
+    position: fixed;
+    top: 50%;
+}
+
+.choose .transparent-mask {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 999;
+    opacity: 0;
+}
+
+.choose .coursepay-hover {
+    opacity: 1;
+}
+
+.home-nav-list {
+    height: 90rpx;
+    background: #FFFFFF;
+    display: -webkit-box;
+    display: -webkit-flex;
+    display: flex;
+    border-top: 2rpx solid #EFEFF6;
+}
+
+.home-nav-list .home-nav-left {
+    display: -webkit-box;
+    display: -webkit-flex;
+    display: flex;
+    -webkit-box-align: center;
+    align-items: center;
+    height: 90rpx;
+    -webkit-box-flex: 1;
+    flex: 1;
+    padding-left: 50rpx;
+    padding-right: 41rpx;
+    position: relative;
+}
+
+.home-nav-list .home-nav-left::before {
+    content: "";
+    display: block;
+    height: 34rpx;
+    width: 2rpx;
+    background: #EBECF1;
+    position: absolute;
+    right: 0;
+    top: 50%;
+    transform: translateY(-50%);
+}
+
+.home-nav-list .home-nav-left .home-nav-picker {
+    -webkit-box-flex: 1;
+    flex: 1;
+    display: -webkit-box;
+    display: -webkit-flex;
+    display: flex;
+    -webkit-box-pack: center;
+    justify-content: center;
+}
+
+.home-nav-list .home-nav-left .home-nav-view {
+    -webkit-box-flex: 1;
+    flex: 1;
+    display: -webkit-box;
+    display: -webkit-flex;
+    display: flex;
+    -webkit-box-align: center;
+    align-items: center;
+}
+
+.home-nav-list .home-nav-left .home-nav-view .test {
+    font-family: PingFang-SC-Regular;
+    font-size: 30rpx;
+    color: #2B3257;
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+    max-width: 132rpx;
+}
+
+.home-nav-list .home-nav-left .home-nav-view .iconfont-darkblue {
+    height: 24rpx;
+    width: 24rpx;
+    color: #2B3257;
+    margin-left: 15rpx;
+}
+
+.home-nav-list .home-nav-right {
+    height: 90rpx;
+    width: 174rpx;
+    display: -webkit-box;
+    display: -webkit-flex;
+    display: flex;
+    -webkit-box-pack: center;
+    justify-content: center;
+    -webkit-box-align: center;
+    align-items: center;
+}
+
+.home-nav-list .home-nav-right .icon-shaixuan {
+    font-size: 35rpx;
+    color: #C8CBD9;
+}
+
+.toast {
+    width: 20%;
+    padding: 35rpx;
+}
+
+.swiper-container {
+    position: relative;
+}
+
+.swiper {
+    margin-bottom: -15rpx;
+    width: 710rpx;
+    height: 260rpx;
+    text-align: center;
+    margin: 0 auto;
+}
+
+.slide-image {
+    margin: 20rpx 0 0 0;
+    width: 710rpx;
+    height: 240rpx;
+    background: url('https://static-xesapi.speiyou.cn/1529481576102.png') no-repeat;
+    background-size: 100% 100%;
+    border-radius: 20rpx;
+}
+
+.swiper-container .dots {
+    position: absolute;
+    left: 0;
+    right: 0;
+    bottom: 33rpx;
+    display: -webkit-box;
+    display: -webkit-flex;
+    display: flex;
+    -webkit-box-pack: center;
+    justify-content: center;
+}
+
+.swiper-container .dots .dot {
+    margin: 0 6rpx;
+    width: 14rpx;
+    height: 14rpx;
+    background: rgba(255,255,255,0.9);
+    border-radius: 8rpx;
+    transition: all .6s;
+}
+
+.swiper-container .dots .dot.active {
+    background: rgba(0,0,0,0.4);
+}
+
+.weui-loading {
+    transform: translateZ(0);
+}

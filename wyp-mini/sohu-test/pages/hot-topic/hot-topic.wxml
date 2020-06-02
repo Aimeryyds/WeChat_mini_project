@@ -1,0 +1,59 @@
+<import src="../../template/news-model/hot-model-smallpic.wxml"></import>
+<view bindtap="onPageTap" class="page-wrapper">
+    <view hidden="{{!firstLoading.loadhidden}}" id="news-container">
+        <view class="news-list" hidden="{{isToday&&isTodayEmpty||isOffline}}">
+            <template is="hot-model-smallpic" data="{{articleList:articleList,clickedMap:clickedMap}}"></template>
+        </view>
+        <view class="tip-today-empty" hidden="{{!isToday||!isTodayEmpty||isOffline}}">
+            <image src="../../images/tip-today-empty.png"></image>
+            <text>今天的热点新闻还在精选中</text>
+            <text>可以先看看往期热点哟</text>
+            <view bindtap="onGotoYesterday" class="go-to-yesterday">往期热点</view>
+        </view>
+        <view class="tip-offline" hidden="{{!isOffline}}">
+            <image src="../../images/tip-no-network.png"></image>
+            <text>当前无网络, 请检查后重试</text>
+        </view>
+    </view>
+</view>
+<import src="./template/loading.wxml"></import>
+<view hidden="{{firstLoading.loadhidden}}" id="loading-begin">
+    <template is="loading-coverage" data="{{items:firstLoading.items}}"></template>
+</view>
+<import src="../../components/canvas-poster/template.wxml"></import>
+<view hidden="{{!firstLoading.loadhidden||sharePoster.hidden}}">
+    <template is="canvas-poster" data="{{sharePoster:sharePoster}}"></template>
+</view>
+<view id="side-bar">
+    <button appParameter="wechat" binderror="launchAppError" bindtap="onShareFriendClick" class="btn share-friend" data-newsid="{{newsdata.newsId}}" openType="share">
+        <image src="../../images/icon-hot-share.png"></image>
+    </button>
+    <view catchtap="onSharePosterClick" class="btn generate-poster" data-newsid="{{newsdata.newsId}}" data-newstype="{{newsdata.newsType}}">
+        <image src="../../images/icon-poster-white.png"></image>
+    </view>
+    <view catchtap="onShowDatePicker" class="btn show-date-picker">
+        <image src="../../images/icon-hot-date-b.png"></image>
+        <text class="current-day-number">{{currentDayNumber}}</text>
+    </view>
+</view>
+<view hidden="{{!datePickerShow}}" id="date-picker-mask"></view>
+<view hidden="{{!datePickerShow}}" id="date-picker">
+    <view class="bg">
+        <text class="tit"></text>
+        <image src="../../images/bg-date-picker.png"></image>
+    </view>
+    <view class="bd">
+        <view bindtap="onDatePickerClick" class="date-item{{item.active?' active':''}}" data-active="{{item.active}}" data-timestamp="{{item.timestamp}}" wx:for="{{datePickerList}}" wx:key="index">
+            <view class="month">{{item.month}}</view>
+            <view class="date">{{item.date}}</view>
+            <view class="day{{index==0?' today':''}}">{{item.day}}</view>
+        </view>
+    </view>
+    <view bindtap="onDatePickerCloseClick" class="close">
+        <image src="../../images/icon-close-white.png"></image>
+    </view>
+</view>
+<import src="../../components/tab/template.wxml"></import>
+<view hidden="{{!firstLoading.loadhidden}}">
+    <template is="tab" data="{{tabData:tabData}}"></template>
+</view>

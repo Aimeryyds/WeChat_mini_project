@@ -1,0 +1,16 @@
+<view class="main">
+    <view class="form-box">
+        <form bindsubmit="formSubmit">
+            <view class="border_bottom medium_font">
+                <text>联系人：</text>
+                <input bindinput="bindName" placeholder="请输入姓名" value="{{pickname}}"></input>
+            </view>
+            <view class="border_bottom medium_font">
+                <text>联系电话：</text>
+                <input bindinput="bindPhone" placeholder="请输入电话号码" type="number" value="{{pickphone}}"></input>
+            </view>
+            <button class="cart_bg_color2" formType="submit">保存</button>
+            <button bindtap="toBack">取消</button>
+        </form>
+    </view>
+</view>

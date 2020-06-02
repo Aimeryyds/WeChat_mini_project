@@ -1,0 +1,31 @@
+<view class="cu-list menu sm-border">
+    <view bindtap="goDealerAddr" class="cu-item">
+        <view class="action text-xxl">
+            <text class="cuIcon-locationfill text-orange"></text>
+        </view>
+        <view class="content padding-tb-sm padding-left">
+      添加新地址
+    </view>
+        <view class="action text-xxl">
+            <text class="cuIcon-add text-blue"></text>
+        </view>
+    </view>
+    <view bindtouchend="ListTouchEnd" bindtouchmove="ListTouchMove" bindtouchstart="ListTouchStart" class="cu-item {{modalName=='move-box-'+index?'move-cur':''}}" data-target="move-box-{{index}}" data-value="{{item}}" wx:for="{{addressList}}">
+        <view class="content padding-tb-sm padding-left">
+            <view>
+        {{item.contacts}}
+        <view class="text-gray text-sm padding-left">{{item.telephone}}</view>
+            </view>
+            <view class="text-sm">{{item.address}}</view>
+        </view>
+        <view class="action padding-right-sm" wx:if="{{item.state=='0'}}">
+            <text class="cu-tag radius line-orange text-xs">默认</text>
+        </view>
+        <view bindtap="goDealerAddr" class="action" data-value="{{item}}">
+            <text class="cuIcon-edit text-blue"> 编辑</text>
+        </view>
+        <view class="move">
+            <view bindtap="deleteAddress" class="bg-red" data-value="{{item.addressId}}">删除</view>
+        </view>
+    </view>
+</view>

@@ -1,0 +1,210 @@
+<import src="../../templates/orders/orderitemlistmoreproducts.wxml"></import>
+<import src="../../templates/orders/orderaddress.wxml"></import>
+<import src="/dist/quantity/index.wxml"></import>
+<import src="/dist/toptips/index.wxml"></import>
+<form bindsubmit="gopay">
+    <view class="container">
+        <view style="padding-bottom:{{order.outRange==1?'160rpx':'106rpx'}};">
+            <template is="zan-toptips" data="{{zanTopTips:zanTopTips}}"></template>
+            <view hidden="{{formData.selectPeiSongType==1}}">
+                <template is="orders-address" data="{{addressData:order.consignee,consigneeNew:order.consigneeNew}}"></template>
+            </view>
+            <template is="zan-toast" data="{{zanToast:zanToast}}"></template>
+            <view class="zan-panel" wx:if="{{order.isCrossBorder&&order.isCrossBorder==1&&formData.selectPeiSongType==3}}">
+                <view class="peisong-box">
+                    <view class="shenfen-label">收货人身份证号：</view>
+                    <input bindinput="bindIdCardInput" class="remark" maxlength="18" placeholder="请输入身份证号" type="text" value="{{formData.idCard}}"></input>
+                </view>
+                <view class="shenfen-tip" style="padding:0 15rpx 20rpx  15rpx">请确保身份证号码与收货人身份信息一致以便商品通关</view>
+            </view>
+            <view class="goods-list" wx:if="{{order.goodsList&&order.goodsList.length>0}}">
+                <view class="peisong-box bottom-line">
+          {{order.brandName}}-{{order.storeName}}
+        </view>
+                <template is="order-more-goods" data="{{ goods:order.goodsList,goodsTotal:order.goodsTotal,giveawayList:order.giveawayList||[] }}"></template>
+                <view class="peisong-box bottom-line new-order-between-box">
+          配送方式
+          <view class="peisong-type-container">
+                        <view bindtap="peiSongTypeChange" class="{{item.checked?'peisong-type_select':'peisong-type_default'}}" data-value="{{item.value}}" wx:for="{{peiSongType}}">
+                {{item.label}}
+              </view>
+                    </view>
+                </view>
+                <view class="peisong-box new-order-between-box" hidden="{{formData.selectPeiSongType==3}}">
+                    <view class="label"> {{formData.selectPeiSongType==2?'送达时间':'自提时间'}}</view>
+                    <view class="new-order-direction-row">
+                        <picker bindchange="bindMultiPickerChange" bindcolumnchange="bindMultiPickerColumnChange" mode="multiSelector" range="{{peiSongTimeArray}}" value="{{peiSongTimeIndex}}">
+                            <view class="picker-text">
+                {{formData.distributionDate}}，{{formData.distributionTime}}
+              </view>
+                        </picker>
+                        <image class="new_order_arrow-right" src="http://imgcdnali.wfenxiao.com.cn/xcx/c/icons/arrow-right.png"></image>
+                    </view>
+                </view>
+                <view class="top-line" wx:if="{{formData.selectPeiSongType==1}}">
+                    <view class="peisong-box">
+                        <view class="label">提货人</view>
+                        <input bindinput="bindPickupManInput" class="remark" maxlength="30" type="text" value="{{formData.pickupman}}"></input>
+                    </view>
+                </view>
+                <view class="top-line" wx:if="{{formData.selectPeiSongType==1}}">
+                    <view class="peisong-box">
+                        <view class="label">提货人手机</view>
+                        <input bindinput="bindPickupManMobileInput" class="remark" maxlength="11" type="number" value="{{formData.pickupmanMobile}}"></input>
+                    </view>
+                </view>
+            </view>
+            <view class="zan-panel">
+                <view bindtap="selectCard" class="peisong-box bottom-line new-order-between-box">
+                    <view class="label">会员卡</view>
+                    <view class="new-order-direction-row">
+                        <view hidden="{{!(order.card&&order.card.id)}}">
+                            <image class="new_order_shop-logo" src="{{order.card.logo}}"></image>
+                        </view>
+                        <view class="new-order-label" wx:if="{{order.isDiscountShare==2}}">{{order.activityType==2?'团购':order.activityType==1?'秒杀':''}}商品不与其他优惠共享</view>
+                        <view class="new-order-label" wx:else>{{order.card&&order.card.id?order.card.cardName:order.cardCount&&order.cardCount>0?order.cardCount+'张可用':'暂无可用会员卡'}}</view>
+                        <image class="new_order_arrow-right" src="http://imgcdnali.wfenxiao.com.cn/xcx/c/icons/arrow-right.png"></image>
+                    </view>
+                </view>
+                <view bindtap="selectCoupon" class="peisong-box new-order-between-box">
+                    <view class="label">优惠券</view>
+                    <view class="new-order-direction-row">
+                        <view class="new-order-label" wx:if="{{order.isDiscountShare==2}}">{{order.activityType==2?'团购':order.activityType==1?'秒杀':''}}商品不与其他优惠共享</view>
+                        <view class="new-order-label" wx:else>{{order.coupon&&order.coupon.id?order.coupon.name:order.couponCount&&order.couponCount>0?order.couponCount+'张可用':'暂无可用优惠券'}}</view>
+                        <image class="new_order_arrow-right" src="http://imgcdnali.wfenxiao.com.cn/xcx/c/icons/arrow-right.png"></image>
+                    </view>
+                </view>
+                <view bindtap="selectGiftCard" class="peisong-box new-order-between-box">
+                    <view class="label">礼品卡</view>
+                    <view class="new-order-direction-row">
+                        <view class="new-order-label">{{order.giftCards&&order.giftCards.length>0?'已选中'+order.giftCards.length+'张':order.giftCardCount>0?order.giftCardCount+'张可用':'暂无可用礼品卡'}}</view>
+                        <image class="new_order_arrow-right" src="http://imgcdnali.wfenxiao.com.cn/xcx/c/icons/arrow-right.png"></image>
+                    </view>
+                </view>
+                <view class="peisong-box new-order-between-box">
+                    <view style="flex:1">储值余额 共￥{{order.rechargeBalance||'0.00'}}</view>
+                    <view>
+                        <switch bindchange="onSwitch" checked="{{formData.isMemberRechargeChecked}}" color="#f22222"></switch>
+                    </view>
+                </view>
+            </view>
+            <view class="zan-panel">
+                <view class="goods-info">
+                    <view class="row-box">
+            商品金额
+            <view class="right-text">
+              ¥ {{order.goodsTotalMoney||'0.00'}}
+            </view>
+                    </view>
+                    <view class="row-box" wx:if="{{formData.selectPeiSongType==2||formData.selectPeiSongType==3}}">
+                        <view>
+              {{formData.selectPeiSongType==2?'配送费':'运费'}}
+            </view>
+                        <view class="right-text">
+              + ¥ {{order.freight||'0.00'}}
+            </view>
+                    </view>
+                </view>
+                <view class="goods-info bottom-line">
+                    <view class="row-box new-order-direction-row" wx:if="{{order.fullMoney}}">
+            满减
+            <view class="right-text">
+              -¥ {{order.fullMoney?order.fullMoney:'0.00'}}
+            </view>
+                    </view>
+                    <view class="row-box new-order-direction-right" style="color:#ff2222" wx:if="{{order.fullMoney}}">
+            + {{order.fullPoint}}积分
+          </view>
+                    <view class="row-box new-order-direction-row">
+            会员卡
+            <view class="right-text" wx:if="{{order.cardDiscount&&order.cardDiscount>0}}">
+              -¥ {{order.cardDiscount?order.cardDiscount:'0.00'}}
+            </view>
+                        <view class="right-text" wx:else>
+              +{{order.cardPoint?order.cardPoint:0}}积分
+            </view>
+                    </view>
+                    <view class="row-box">
+                        <view class="new-order-direction-row">
+              优惠券
+            </view>
+                        <view class="right-text">
+              - ¥ {{order.couponDiscount?order.couponDiscount:'0.00'}}
+            </view>
+                    </view>
+                    <view class="row-box">
+                        <view class="new-order-direction-row">
+              礼品卡
+            </view>
+                        <view class="right-text">
+              - ¥ {{order.giftCardDiscount?order.giftCardDiscount:'0.00'}}
+            </view>
+                    </view>
+                    <view class="row-box">
+                        <view class="new-order-direction-row">
+              储值抵扣
+            </view>
+                        <view class="right-text">
+              - ¥ {{order.rechargeAmount||'0.00'}}
+            </view>
+                    </view>
+                    <view class="row-box">
+                        <view class="new-order-direction-row">
+              实付
+            </view>
+                        <view class="right-text">
+              ¥ {{order.total?order.total:'0.00'}}
+            </view>
+                    </view>
+                </view>
+            </view>
+            <view class="order-msg zan-panel" wx:if="{{order.leaveMessage&&order.leaveMessage.length>0}}">
+                <view class="order-msg__item" wx:for="{{order.leaveMessage}}" wx:for-item="msgitem">
+                    <view class="order-msg__item-label {{msgitem.required==1?'order-msg__item-require':'order-msg__item-norequire'}}">
+              {{msgitem.fieldname}}
+            </view>
+                    <view class="order-msg__item-input">
+                        <input bindinput="onchangeValueMsg" id="{{index}}" maxlength="{{msgitem.verification==2?'11':msgitem.verification==3?'18':140}}" placeholder="{{msgitem.fieldcontent}}" type="{{msgitem.verification==2?'number':msgitem.verification==3?'idcard':'text'}}" value="{{msgitem.value||''}}" wx:if="{{msgitem.multiline==2}}"></input>
+                        <view bindtap="jumpmsg" data-index="{{index}}" data-item="{{msgitem}}" style="color: {{msgitem.value?'#000':'#808080'}};height:40rpx; overflow:hidden;width:100%;white-space:nowrap;" wx:if="{{msgitem.multiline==1}}">{{msgitem.value||msgitem.fieldcontent||''}}</view>
+                    </view>
+                    <image src="http://imgcdnali.wfenxiao.com.cn/xcx/c/icons/arrow_right.png" style="width:13rpx;height:22rpx;margin-left: 10rpx;" wx:if="{{msgitem.multiline==1}}"></image>
+                </view>
+            </view>
+            <view class="zan-panel peisong-box" wx:if="{{order.leaveMessage===''}}">
+                <view class="mark-label">买家备注</view>
+                <input autoHeight bindinput="bindUserMsgInput" class="remark" maxlength="30" placeholder="订单备注(30字以内)" type="text" value="{{formData.userMsg}}"></input>
+            </view>
+        </view>
+        <view class="jiesuan-box-wrap">
+            <view class="address-outRange" wx:if="{{order.outRange==1}}">当前收货地址不支持配送，请修改收货地址</view>
+            <view class="jiesuan-box">
+                <view class="left-price">
+                    <view class="jiesuan-box-total">
+                        <text style="font-size: 26rpx;color: #333333;">合计金额 </text>
+                        <text style="margin-left:18rpx">¥</text>
+                        <text style="font-size: 48rpx;color:#F22222;margin-right:18rpx">{{order.total}}</text>
+                    </view>
+                </view>
+                <button class="to-pay-btn {{formData.selectPeiSongType==2&&order.minSendFeeDifference>0||order.outRange==1?'to-pay-btn-dis':'to-pay-btn-able'}}" disable="{{formData.selectPeiSongType==2&&order.minSendFeeDifference>0}}" formType="submit">
+          {{formData.selectPeiSongType==2&&order.minSendFeeDifference>0?'还差'+order.minSendFeeDifference+'元':order.total>0?'去支付':'确认'}}
+        </button>
+            </view>
+        </view>
+        <wxc-dialog _pid="{{_pid}}" bindcancel="onCancel" bindconfirm="onConfirm" class="wxc-dialog" confirmText="我知道了" title="以下商品购买数量超过限制">
+            <view wx:for="{{errGoodList}}" wx:key="{{index}}">
+                <view class="reject-reason">
+                    <image src="{{item.img}}"></image>
+                    <view class="reject-reason-content">
+                        <wxc-elip line="2">
+                            <text style="font-size:24rpx">{{item.goodsName}}</text>
+                        </wxc-elip>
+                        <view class="reject-reason-price">
+                            <text style="color:#ff2222; font-size:24rpx">￥{{item.price}}</text>
+                            <text style="color:#cccccc; font-size:24rpx">X{{item.quantity}}</text>
+                        </view>
+                    </view>
+                </view>
+            </view>
+        </wxc-dialog>
+    </view>
+</form>

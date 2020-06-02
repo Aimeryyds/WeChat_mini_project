@@ -1,0 +1,12 @@
+<view class="product_list product_type{{item.style_type}}" style="background:{{item.bg_color}}" wx:if="{{item.list.length!=0}}">
+    <navigator class="product_item item_{{item.style_type}}" url="{{val.url}}" wx:for="{{item.list}}" wx:for-item="val">
+        <view class="product_img">
+            <image mode="widthFix" src="{{val.imgurl}}"></image>
+        </view>
+        <view class="title" style="color:{{item.text_color}};font-size:{{item.font_size*2.2}}rpx;">
+            {{val.name}}
+          </view>
+        <view class="clear"></view>
+    </navigator>
+    <view class="clear"></view>
+</view>

@@ -1,0 +1,151 @@
+<navigation-bar title="{{shortTitle}}" wx:if="{{showTopbar}}"></navigation-bar>
+<cover-view bindtap="tapBackbtn" class="backbtn" style="top:{{backbtnPos}}px" wx:if="{{!showTopbar}}">
+    <cover-image class="backbtnicon" src="{{backiconUrl}}"></cover-image>
+</cover-view>
+<view class="container" style="padding-bottom:100rpx;">
+    <view bindtap="pageReload" class="cplist_nodata" wx:if="{{requeseFail}}">{{requeseFailTips}}</view>
+    <view wx:else>
+        <view class="headervideo" wx:if="{{isVideocp}}">
+            <view class="vw" style="position:relative;overflow:hidden;background:#000;width:750rpx;height:{{tools.getHeight(articleDetail.video.height,articleDetail.video.width)}}rpx;">
+                <view style="background:url({{articleDetail.video.img}}) center no-repeat;background-size:cover;position:absolute;left:0px;top:0px;width:100%;height:100%;opacity:0.5;filter:blur(2px);"></view>
+                <video controls showFullscreenBtn autoplay="{{vAutoplay}}" customCache="{{false}}" id="myVideo" objectFit="cover" src="{{articleDetail.video.vendor_video}}" style="width:750rpx;height:{{articleDetail.video.height/articleDetail.video.width*750}}rpx;display:block;position:absolute;left:50%;bottom:0%;transform: translate(-50%, -0%);-webkit-transform: translate(-50%, -0%);"></video>
+            </view>
+        </view>
+        <view class="headerimg" style="background:url('{{articleDetail.cover_img.big}}') center no-repeat;background-size:cover;width:750rpx;height:{{articleDetail.cover_img.height/articleDetail.cover_img.width*750}}rpx;height:750rpx;" wx:else></view>
+        <view class="c_c2" wx:if="{{articleDetail.title||articleDetail.favor_amount||articleDetail.viewed_amount}}">
+            <text class="title">{{articleDetail.title}}</text>
+            <view class="info">
+                <view style="display:inline-block;vertical-align:top;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;max-width:686rpx;">{{articleDetail.user_info.nickname}}　</view>
+                <view style="display:inline-block;vertical-align:top;">收藏 {{articleDetail.favor_amount}}　浏览 {{articleDetail.view_amount}}</view>
+            </view>
+        </view>
+        <view class="c_c3" wx:if="{{articleDetail.title||articleDetail.favor_amount||articleDetail.viewed_amount}}">
+            <rich-text class="rt" nodes="{{nodes}}"></rich-text>
+        </view>
+        <view bindtap="addXcc" class="addXccBtn" wx:if="{{articleDetail.title||articleDetail.favor_amount||articleDetail.viewed_amount}}">收藏到我的小程序</view>
+        <cover-view class="addXccbox" wx:if="{{showAddXcc}}">
+            <cover-image src="{{addXccimg}}" style="width:100%;height:auto;position:absolute;left:0px;top:{{barHeight}}px"></cover-image>
+            <button bindtap="hideAddXcc" class="hideXccboxbtn">我知道了</button>
+        </cover-view>
+        <cover-view class="dlbox" wx:if="{{showdlbox}}">
+            <cover-view bindtap="shutdlbox" class="dlbox_bg"></cover-view>
+            <cover-view class="dlbox_c">
+                <cover-view bindtap="shutdlbox" class="shutbtn">×</cover-view>
+                <cover-image class="dl_qrcode" src="/images/dlqrcode.png"></cover-image>
+                <cover-view class="dl_tips">
+                    <cover-view class="text">截屏或点击下方按钮获取下载二维码</cover-view>
+                    <cover-view class="text">也可进入应用市场搜索“美食杰”下载</cover-view>
+                </cover-view>
+                <cover-view bindtap="dlqrcode" class="btn {{dlsuccesstip?'btn_done':''}}">{{dlsuccesstip||'保存到手机相册'}}</cover-view>
+                <cover-view class="tips" wx:if="{{dlsuccesstip}}">请到相册查看二维码</cover-view>
+            </cover-view>
+        </cover-view>
+        <view class="plbox">
+            <view class="avatarw">
+                <image class="avatar" src="{{articleDetail.user_info.avatar_url}}"></image>
+                <view class="info">
+                    <view class="n">{{articleDetail.user_info.nickname}}</view>
+                    <view class="time">{{articleDetail.user_info.pub_recipe_num}}篇作品</view>
+                </view>
+            </view>
+            <view class="plw">
+                <view class="pl_textareaw">
+                    <form wx:if="{{is_login}}">
+                        <input bindconfirm="sendPl" class="ta" confirmType="send" cursorSpacing="30rpx" data-id="{{option.id}}" data-type="dopl" focus="{{isfocus}}" name="pl_content" placeholder="快来写下你的评论吧～" type="text" value="{{emptystring}}"></input>
+                    </form>
+                    <button bindgetuserinfo="tapFavBtn" class="ta_btn" data-id="{{option.id}}" data-type="dopl" openType="getUserInfo" wx:else>快来写下你的评论吧～</button>
+                </view>
+            </view>
+        </view>
+        <view class="pllist">
+            <view class="plitem" wx:for="{{pllist.data.items}}" wx:key="key">
+                <view class="avatarw">
+                    <image class="avatar" src="{{item.user_info.avatar_url}}"></image>
+                    <view class="n">{{item.user_info.nickname}}</view>
+                    <view class="time">{{item.create_time}}</view>
+                </view>
+                <view class="con">
+                    <navigator class="p" url="/pages/whattoeat/reply?id={{option.id}}&cid={{item.comment_id}}&to={{item.user_info.nickname}}">{{item.content}}</navigator>
+                    <view class="quotbox" wx:if="{{item.reply&&item.reply.length>0}}">
+                        <block wx:for="{{item.reply}}" wx:key="key">
+                            <view class="n">{{item.user_info.nickname}}</view>
+                            <view class="c">{{item.content}}</view>
+                        </block>
+                    </view>
+                </view>
+            </view>
+            <navigator class="moreplbtn" url="/pages/whattoeat/pl_list?id={{option.id}}" wx:if="{{pllist.data.items.length>0}}">查看更多评论<image class="i" src="../../images/more_arrow_blue.png"></image>
+            </navigator>
+        </view>
+        <view class="recommend">
+            <view class="title" wx:if="{{recommend_list.length>0}}">更多好文推荐</view>
+            <view wx:for="{{recommend_list}}" wx:key="key">
+                <navigator class="csm_dataitem" hoverClass="navigator-hover" url="/pages/whattoeat/article?id={{item.id}}">
+                    <view class="csm_dataitem_link">
+                        <view class="imgw" style="background:#f5f5f5 url({{item.cover_img}}) center no-repeat;background-size:cover;">
+                            <view class="vicon" wx:if="{{item.is_video}}"></view>
+                        </view>
+                        <view class="info">
+                            <view class="t">{{item.content}}</view>
+                            <view class="tagsw">
+                                <view class="tag" wx:for="{{item.tags}}" wx:for-index="j" wx:key="key">{{item}}</view>
+                            </view>
+                        </view>
+                    </view>
+                </navigator>
+            </view>
+        </view>
+        <view class="fsc_topbtns2">
+            <button bindgetuserinfo="tapFavBtn" class="fsc_topbtn2" data-id="{{articleId}}" data-index="0" data-type="dozan" openType="getUserInfo" wx:if="{{articleDetail.zan_user.is_zan=='1'}}">
+                <image class="i" src="{{icon42}}"></image>{{articleDetail.zan_amount||'0'}}</button>
+            <button bindgetuserinfo="tapFavBtn" class="fsc_topbtn2" data-id="{{articleId}}" data-index="0" data-type="dozan" openType="getUserInfo" wx:else>
+                <image class="i" src="{{icon41}}"></image>{{articleDetail.zan_amount||'0'}}</button>
+            <navigator class="fsc_topbtn2" url="/pages/whattoeat/pl_list?id={{articleId}}">
+                <image class="i" src="{{icon1936_2}}"></image>{{articleDetail.comment_amount_new}}</navigator>
+            <button bindgetuserinfo="tapFavBtn" class="fsc_topbtn2" data-id="{{articleId}}" data-index="0" data-type="dofav" openType="getUserInfo" wx:if="{{articleDetail.is_collection=='1'}}">
+                <image class="i" src="{{icon22}}"></image>{{articleDetail.favor_amount}}</button>
+            <button bindgetuserinfo="tapFavBtn" class="fsc_topbtn2" data-id="{{articleId}}" data-index="0" data-type="dofav" openType="getUserInfo" wx:else>
+                <image class="i" src="{{icon21}}"></image>{{articleDetail.favor_amount}}</button>
+            <button class="fsc_topbtn2" data-index="0" openType="share">
+                <image class="i" src="{{icon31}}"></image>{{articleDetail.share_amount}}</button>
+        </view>
+        <view class="toastw" wx:if="{{showToast}}">
+            <view class="toast">
+                <rich-text nodes="{{toastTitle}}"></rich-text>
+            </view>
+        </view>
+    </view>
+</view>
+<loading hidden="{{requeseDone}}">
+ 加载中...
+</loading>
+<wxs module="tools">
+function getHeight(height, width) {
+    if (height / width * 750 > 1000) {
+        return (1000)
+    } else {
+        return (height / width * 750)
+    }
+};
+
+function getVWidth(height, width) {
+    if (height / width * 750 > 1000) {
+        return (width / height * 1000)
+    } else {
+        return (750)
+    }
+};
+
+function getVHeight(height, width) {
+    if (height / width * 750 > 1000) {
+        return (1000)
+    } else {
+        return (height / width * 750)
+    }
+};
+module.exports = ({
+    getHeight: getHeight,
+    getVWidth: getVWidth,
+    getVHeight: getVHeight,
+});
+</wxs>

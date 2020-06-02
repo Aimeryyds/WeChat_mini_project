@@ -1,0 +1,98 @@
+<view class="page">
+    <my-component bind:myevent="myEventListener" innerText="骑行卡详情"></my-component>
+    <view class="main" style=" margin-top: {{myHight}}px"></view>
+    <view class="box" wx:if="{{obj.type==2||obj.type==3||obj.type==4||obj.type==5||obj.type==6}}">
+        <view class="content">
+            <image src="{{options.state!=0?'../../../Content/images/wallet/06.png':'../../../Content/images/wallet/06old.png'}}"></image>
+            <view class="left">
+                <view style="font-size:24rpx;">购卡骑行更省钱</view>
+                <view style="font-size:46rpx;">{{options.name}}</view>
+                <view class="down">
+                    <text>有效期至{{options.expiretime}}</text>
+                </view>
+            </view>
+            <view class="right">
+                <view class="area" wx:if="{{options.state==0}}">今天已使用</view>
+                <view class="discount" wx:if="{{options.state==0}}">{{options.usecounted}}/{{options.daycount}}</view>
+            </view>
+        </view>
+        <view class="details">
+            <view class="introduce">
+                <view style="color:#333;font-size:30rpx;line-height:20px;font-family:PingFang SC;">卡类型:{{obj.typeName}}</view>
+                <view style="color:#333;font-size:26rpx">有效时间:{{obj.createtime}}-{{options.expiretimeTmp}}</view>
+                <view style="color:#333;font-size:26rpx">使用须知:</view>
+                <view class="know"> 1.若用户当前无骑行卡，购买骑行卡后立即生效，骑行 卡仅适用于{{obj.areaname}}</view>
+                <view class="know">2.畅骑卡生效期间，每日最多可骑行{{obj.daycount}}次，每次最多可骑行{{obj.minute}}分钟或{{obj.mile}}公里，超出部分依据计费规则计费；用户最多可拥有2张未过期的畅骑卡，新购买的畅骑卡在上一张畅骑卡失效的次日开始生效；</view>
+                <view class="know"> 3.用户不能同时购买限城市骑行卡和全国通用骑行卡；</view>
+                <view class="know">4.若用户同事有畅骑卡和次数卡在有效期内,结算时优惠权益不可叠加,默认为用户使用最优权益的骑行卡,即长期卡优先于次数卡;</view>
+                <view class="know">5.骑行卡在订单结算时是否可用,以关锁时骑行卡是否在有效期内为准;</view>
+                <view class="know">6.骑行卡仅可抵扣正常骑行费用,不可抵扣调度费,请规范骑行;</view>
+                <view class="know">7.骑行卡购买后不支持更换或退款,不能转赠;</view>
+                <view class="know">8.小呗骑行卡限小呗出行微信小程序，支付宝小程序及客户端最新版可用，如您的客户端版本过低，请及时升级客户端，以免影响骑行卡使用;</view>
+                <view class="know">9.以上规则自2020年4月26日发布生效;</view>
+            </view>
+        </view>
+    </view>
+    <view class="box" wx:if="{{obj.type==0}}">
+        <view class="content">
+            <image src="{{options.state!=0?'../../../Content/images/wallet/06.png':'../../../Content/images/wallet/06old.png'}}"></image>
+            <view class="left">
+                <view style="font-size:24rpx;">购卡骑行更省钱</view>
+                <view style="font-size:46rpx;">{{options.name}}</view>
+                <view class="down">
+                    <text>有效期至{{options.expiretime}}</text>
+                </view>
+            </view>
+            <view class="right">
+                <view class="area">已使用</view>
+                <view class="discount">{{options.usecounted}}/{{options.totalcount}}</view>
+            </view>
+        </view>
+        <view class="details">
+            <view class="introduce">
+                <view style="color:#333;font-size:30rpx;line-height:20px;font-family:PingFang SC;">卡类型:{{obj.typeName}}</view>
+                <view style="color:#333;font-size:26rpx">有效时间:{{obj.createtime}}-{{options.expiretimeTmp}}</view>
+                <view style="color:#333;font-size:26rpx">使用须知:</view>
+                <view class="know">1.若用户当前无骑行卡，购买骑行卡后立即生效，骑行卡仅适用于{{obj.areaname}};</view>
+                <view class="know">2.次数卡生效期间，每次骑行消耗1次骑行次数，每次最多骑行{{obj.minute}}分钟或{{obj.mile}}公里，超出部分依据计费规则计费；次数使用完毕或者超出有效期，即视为失效；用户最多可拥有2张未失效的次数卡，次数卡购买后立即生效</view>
+                <view class="know">3.用户不能同时购买限城市骑行卡和全国通用骑行卡；</view>
+                <view class="know">4.若用户同时有多张骑行卡，在有效期内，结算时优
+					惠权益不可叠加，默认为用户使用最优权益的骑行卡，
+					即畅骑卡优先于次数卡；</view>
+                <view class="know">5.骑行卡在订单结算时是否可用，以关锁时骑行卡是否
+					在有效期内为准；</view>
+                <view class="know">6.骑行卡仅可抵扣正常骑行费用，不可抵扣调度费，请
+					规范骑行；</view>
+                <view class="know">7.骑行卡购买后不支持更换或退款，不能转赠；</view>
+                <view class="know">8.小呗骑行卡限小呗出行微信小程序、支付宝小程序及
+					客户端最新版可用，如您的客户端版本过低，请及时升
+					级客户端，以免影响骑行卡使用；</view>
+                <view class="know">9.以上规则自2020年4月26日发布生效;</view>
+            </view>
+        </view>
+    </view>
+    <view class="box" wx:if="{{obj.type==1}}">
+        <view class="content">
+            <image src="{{options.state!=0?'../../../Content/images/wallet/06.png':'../../../Content/images/wallet/06old.png'}}"></image>
+            <view class="left">
+                <view style="font-size:24rpx;">免押金骑行卡</view>
+                <view style="font-size:46rpx;">{{options.name}}</view>
+                <view class="down">
+                    <text>有效期至{{options.expiretime}}</text>
+                </view>
+            </view>
+            <view class="right"></view>
+        </view>
+        <view class="details">
+            <view class="introduce">
+                <view style="color:#333;font-size:30rpx;line-height:20px;font-family:PingFang SC;">卡类型:{{obj.typeName}}</view>
+                <view style="color:#333;font-size:26rpx">有效时间:{{obj.createtime}}-{{options.expiretimeTmp}}</view>
+                <view style="color:#333;font-size:26rpx">使用须知:</view>
+                <view class="know">1.用户购买免押金骑行卡后立即生效，购卡当天即可享受免押金骑行服务；</view>
+                <view class="know">2.免押金骑行卡仅在有效期内免押金，不免骑行费用；</view>
+                <view class="know">3.用户仅可拥有一张免押金骑行卡，有效期到期后方可再次购买；</view>
+                <view class="know">4.免押金骑行卡购买后不支持更换或退款，不能转赠。</view>
+            </view>
+        </view>
+    </view>
+</view>

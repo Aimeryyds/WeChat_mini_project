@@ -1,0 +1,14 @@
+<view class="container">
+    <share bCode="{{bCode}}" bindhandleClick="clickShare" class="share" pvId="{{pvId}}" shareInfo="{{shareInfo}}" type="{{pageConfig.shareConfig.type}}"></share>
+    <view class="title" wx:if="galleryData.album.title">{{galleryData.album.title}}</view>
+    <view class="author" wx:if="galleryData.author">
+        <view class="author-name">{{galleryData.author.name}}</view>
+    </view>
+    <view class="pic-list" wx:if="picList.length">
+        <view class="img-wrapper" wx:for="{{picList}}" wx:for-item="image">
+            <view class="description">{{image.description}}</view>
+            <image bindtap="viewImage" class="pic" data-img="{{image}}" mode="widthFix" src="{{image.url}}"></image>
+            <ad apid="{{insertAd.id}}" appid="{{insertAd.appid}}" bind:adError="handleErrorAd" bind:adLoad="handleLoadAd" class="ad" type="{{insertAd.type}}" wx:if="{{index==1&&insertAd}}"></ad>
+        </view>
+    </view>
+</view>

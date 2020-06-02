@@ -1,0 +1,12 @@
+<include src="../../../components/circus/network/network.wxml"></include>
+<view class="v v-download">
+    <view class="download-bg" style="background-image: url('{{downloadInfo.image_name}}')"></view>
+    <view bindtap="handleGoService" class="download-btn" style="background-image: url('{{downloadInfo.command}}')">
+        <view class="contact-list">
+            <contact-button sessionFrom="appletdownload" size="20" type="default-light" wx:for="{{buttonList}}" wx:key="{{index}}"></contact-button>
+        </view>
+    </view>
+    <view bindtap="goBack" class="go_back {{item.navColor}}">＜返回首页</view>
+</view>
+<include src="../../../components/circus/toast/toast.wxml"></include>
+<include src="../../../components/circus/confirm/confirm.wxml"></include>

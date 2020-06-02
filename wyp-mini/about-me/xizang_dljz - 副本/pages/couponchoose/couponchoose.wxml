@@ -1,0 +1,83 @@
+<view class="container">
+    <view class="tag-view">
+        <view catchtap="clickTag" class="{{selected==index?'selected':'unselected'}}" id="{{index}}" wx:for="{{tags}}" wx:key="tag">
+            <text>{{item}}</text>
+        </view>
+    </view>
+    <swiper bindchange="scrollContent" class="content-view" current="{{selected}}">
+        <swiper-item>
+            <view class="cnt cnt1" id="cnt1">
+                <scroll-view scrollY="true">
+                    <view class="empty-wrap" wx:if="{{list.length==0}}">
+                        <image src="../../images/empty/img_lingquan.png"></image>
+                        <view class="text">
+                            <text>无可使用的优惠券</text>
+                        </view>
+                        <navigator class="btn" url="../couponcenter/couponcenter">去领券</navigator>
+                    </view>
+                    <view catchtap="chooseCoupon" class="coupon-item" id="{{index}}" wx:for="{{list}}">
+                        <image class="item-bg" src="../../images/coupon/bg_frame.png"></image>
+                        <view class="item-left">
+                        ¥ <text class="price">{{item.amount}}</text>
+                        </view>
+                        <view class="item-right">
+                            <view class="item-title">
+                                <text class="tag-label">使用门槛</text>
+                                <text>{{item.limitStr}}</text>
+                            </view>
+                            <block wx:if="{{item.coupon}}">
+                                <view class="item-bottom">
+                                    <text>活动开始: {{item.coupon.beginTime}}</text>
+                                </view>
+                                <view class="item-bottom">
+                                    <text>有效期至: {{item.coupon.endTime}}</text>
+                                </view>
+                            </block>
+                            <view class="item-bottom" wx:else>
+                                <text>有效期至: {{item.overTime}}</text>
+                            </view>
+                        </view>
+                        <image class="choose-icon" src="../../images/settle/{{chooseId==item.id?'radio_sel':'radio_nor'}}.png"></image>
+                    </view>
+                </scroll-view>
+            </view>
+        </swiper-item>
+        <swiper-item>
+            <view class="cnt cnt2" id="cnt2">
+                <scroll-view scrollY="true">
+                    <view class="empty-wrap" wx:if="{{invalidList.length==0}}">
+                        <image src="../../images/empty/img_lingquan.png"></image>
+                        <view class="text">
+                            <text>无不可使用的优惠券</text>
+                        </view>
+                        <navigator class="btn" url="../couponcenter/couponcenter">去领券</navigator>
+                    </view>
+                    <view class="coupon-item" wx:for="{{invalidList}}">
+                        <image class="item-bg" src="../../images/coupon/bg_frame.png"></image>
+                        <view class="item-left">
+                        ¥ <text class="price">{{item.amount}}</text>
+                        </view>
+                        <view class="item-right">
+                            <view class="item-title">
+                                <text class="tag-label">使用门槛</text>
+                                <text>{{item.limitStr}}</text>
+                            </view>
+                            <block wx:if="{{item.coupon}}">
+                                <view class="item-bottom">
+                                    <text>活动开始: {{item.coupon.beginTime}}</text>
+                                </view>
+                                <view class="item-bottom">
+                                    <text>有效期至: {{item.coupon.endTime}}</text>
+                                </view>
+                            </block>
+                            <view class="item-bottom" wx:else>
+                                <text>有效期至: {{item.overTime}}</text>
+                            </view>
+                        </view>
+                    </view>
+                </scroll-view>
+            </view>
+        </swiper-item>
+    </swiper>
+    <view bindtap="noUseCoupon" class="cancel-btn">不使用优惠券</view>
+</view>

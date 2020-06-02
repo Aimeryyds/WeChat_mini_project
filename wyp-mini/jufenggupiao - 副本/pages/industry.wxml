@@ -1,0 +1,8 @@
+<view class="weburl _4f84a6c">
+    <view class="network _32f532b _4f84a6c" wx:if="{{$net$hasNet}}">
+        <image class="_32f532b" src="../images/network.png"></image>
+        <text class="_32f532b">网络不可用，请检查网络设置</text>
+        <view class="net-text font28 animated flash infinite _32f532b">正在尝试重新连接...</view>
+    </view>
+    <web-view binderror="err" bindload="suc" class="_4f84a6c" src="{{weburl}}"></web-view>
+</view>

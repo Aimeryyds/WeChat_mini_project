@@ -1,0 +1,7 @@
+<view bindtap="changeState" class="{{anonymousState__temp}}" wx:if="{{$taroCompReady}}">
+    <view class="{{'icon icon-left '+(isOpen?'icon-folder-open':'icon-folder')}}"></view>
+    <text class="title">{{item.name}}</text>
+    <view class="sub-project-wrapper">
+        <project-item compid="{{subitem[$compid__23]}}" wx:for="{{loopArray21}}" wx:for-index="_anonIdx2" wx:for-item="subitem" wx:key="id"></project-item>
+    </view>
+</view>

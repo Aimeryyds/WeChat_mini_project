@@ -1,0 +1,74 @@
+<import src="../../libs/templates/toast.wxml"></import>
+<form bindsubmit="commitOrder" data-form-list="{{formList}}">
+    <view class="main orderDetail-container">
+        <scroll-view scrollY class="orderDetail-scroll">
+            <view class="service-main service-main-nav">
+                <view class="order-detail-wrapper">
+                    <view class="order-detail">
+                        <view class="order-img-wrap">
+                            <image class="spread" src="{{bookInfo.pic.url}}"></image>
+                        </view>
+                        <view class="order-info-wrap">
+                            <view class="order-name ellipsis">{{bookInfo.name}}</view>
+                            <view class="order-abstract ellipsis">{{bookInfo.summary}}</view>
+                            <view class="order-price-wrap">
+                                <text class="selling-price" style="color: {{globalColor}};">￥{{bookInfo.promotionPrice>0?bookInfo.promotionPrice:bookInfo.price}}</text>
+                                <text class="original-price" wx:if="{{bookInfo.promotionPrice>0}}">￥{{bookInfo.price}}</text>
+                                <text class="promotion" style="background-color: {{globalColor}};" wx:if="{{bookInfo.promotionPrice>0}}">促销</text>
+                                <text bindtap="switchPayMode" class="pay-mode iconfont {{payModes[payIndex].type===0?'icon-gopay':'icon-wxpay'}} {{payModes.length==1?'no-more':''}}">{{payModes[payIndex].name}}</text>
+                            </view>
+                        </view>
+                    </view>
+                    <view class="contact-info">
+                        <view class="contact-item {{item.type==4?'message':''}}" wx:if="{{item.s}}" wx:for="{{formList}}" wx:key="index">
+                            <view class="contact-item-name">
+                                <view class="item-must" wx:if="{{item.m}}">*</view>{{item.fn}}</view>
+                            <view wx:if="{{item.formType==0}}">
+                                <input class="item-input" maxlength="100" name="{{item.k}}" placeholder="{{item.placeholder}}" placeholderClass="input-placeholder"></input>
+                            </view>
+                            <view wx:if="{{item.formType==1}}">
+                                <radio-group class="radio-group" name="{{item.k}}">
+                                    <radio class="radio" color="#333" value="{{option}}" wx:for="{{item.input}}" wx:for-item="option" wx:key="index">
+                                        <text>{{option}}</text>
+                                    </radio>
+                                </radio-group>
+                            </view>
+                            <view wx:if="{{item.formType==2}}">
+                                <checkbox-group class="beautify-checkbox-group" name="{{item.k}}">
+                                    <label bindtap="checkedOption" class="jz-beautify-checkbox-wrapper" data-index="{{index}}" data-key="{{item.k}}" data-option="{{option}}" wx:for="{{item.input}}" wx:for-item="option" wx:key="index">
+                                        <view class="jz-beautify-checkbox {{option.selected?'jz-beautify-checkbox-checked':''}}">
+                                            <view class="jz-beautify-checkbox-inner">{{option.name}}</view>
+                                        </view>
+                                        <checkbox value="{{option.name}}"></checkbox>
+                                    </label>
+                                </checkbox-group>
+                            </view>
+                            <view wx:if="{{item.formType==3}}">
+                                <input class="item-textarea" maxlength="999" name="{{item.k}}" placeholder="{{item.placeholder}}" placeholderClass="input-placeholder"></input>
+                            </view>
+                        </view>
+                    </view>
+                </view>
+            </view>
+        </scroll-view>
+    </view>
+    <view class="service-footer">
+        <view class="order-detail-footer">
+            <button class="comfirm-btn" formType="submit" style="background-color: {{globalColor}};" wx:if="{{hasUserInfo}}">提交订单</button>
+            <button bindgetuserinfo="userInfoHandler" class="comfirm-btn" formType="submit" openType="getUserInfo" style="background-color: {{globalColor}};" wx:if="{{!hasUserInfo}}">提交订单</button>
+        </view>
+    </view>
+</form>
+<view bindtap="closeDrawer" class="drawer {{showDrawer?'drawer-show':''}}">
+    <view class="content">
+        <view class="pay-title">支付方式</view>
+        <radio-group bindchange="payModeChange" name="pay">
+            <label class="pay-item" wx:for="{{payModes}}" wx:key="index">
+                <text class="iconfont {{index===0?'icon-wxpay':'icon-gopay'}}"></text>
+                <text class="pay-name">{{item.name}}</text>
+                <radio checked="{{payIndex===index}}" class="radio" color="{{globalColor}}" value="{{index}}"></radio>
+            </label>
+        </radio-group>
+    </view>
+</view>
+<template is="toast" data="{{toastShow:toastShow,toastTxt:toastTxt}}"></template>

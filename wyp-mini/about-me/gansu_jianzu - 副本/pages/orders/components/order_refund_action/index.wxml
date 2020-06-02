@@ -1,0 +1,7 @@
+<view wx:if="{{actionList&&actionList.length>0}}" wx:for="{{actionList}}" wx:key="{{index}}">
+    <navigator url="{{item=='applyrefund'?'/pages/returngoods/apply/index?id='+orderid:'/pages/returngoods/applydetail/index?id='+refundId}}">
+        <view class="zan-card view-direction-row-reverse" wx:if="{{item=='refunding'||item=='applyrefund'||item=='succeed'||item=='viewrefund'}}">
+            <view class="btn_tuikuan">{{item=='refunding'?'退款中':item=='applyrefund'?'申请退款':item=='succeed'?'退款成功':'退款关闭'}}</view>
+        </view>
+    </navigator>
+</view>

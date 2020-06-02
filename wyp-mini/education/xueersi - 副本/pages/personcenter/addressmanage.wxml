@@ -1,0 +1,48 @@
+<view class="box {{orderAddr?'order-addr':''}}">
+    <view class="no-address" wx:if="{{addressList.length===0}}">
+        <image mode="aspectFit" src="https://cdninsight.speiyou.com/1512553125847_nocollection.png"></image>
+        <view class="no-address-word">暂无收货地址</view>
+        <view class="add">
+            <button bindtap="add">添加收货地址</button>
+        </view>
+    </view>
+    <view class="have-address" wx:if="{{addressList.length!==0}}">
+        <view bindtap="select" class="address-box" data-wpyselect-a="{{item}}" wx:for="{{addressList}}" wx:key="index">
+            <view class="info">
+                <text class="border-style fl">{{item.riRecipientName}}</text>
+                <text class="border-style fr">{{item.riMobilePhoneNumber}}</text>
+            </view>
+            <view class="address">
+                   {{item.riProvinceName}} {{item.riCityName}}{{item.riCountyName}}{{item.riDetailAddress}}
+                </view>
+            <view class="bootom-box">
+                <view catchtap="change" class="fl" data-wpychange-a="{{index}}">
+                    <image class="check-right" src="https://cdninsight.speiyou.com/1514529799372_pay_icon_unselected_grey.png" wx:if="{{item.riIsDefault===0}}"></image>
+                    <image class="check-right" src="https://cdninsight.speiyou.com/1514530752053_pay_icon_selected_blue.png" wx:if="{{item.riIsDefault===1}}"></image>
+                    <text class="default-address active" wx:if="{{item.riIsDefault===1}}">默认地址</text>
+                    <text class="default-address" wx:if="{{item.riIsDefault===0}}">设为默认</text>
+                </view>
+                <view class="fr">
+                    <view catchtap="del" class="delete" data-wpydel-a="{{index}}">
+                        <image src="https://cdninsight.speiyou.com/1513058121490_Rectangle%252010%2520Copy%25204.png"></image>
+                        <text class="normal-style border-style">删除</text>
+                    </view>
+                    <view catchtap="edita" class="edit" data-wpyedita-a="{{index}}">
+                        <image src="https://cdninsight.speiyou.com/1512703787466_Rectangle%252010%2520Copy%25202%25402x.png"></image>
+                        <text class="normal-style style-txt">编辑</text>
+                    </view>
+                </view>
+            </view>
+            <view class="addr-selector" wx:if="{{orderAddr}}">
+                <image mode="aspectFit" src="https://cdninsight.speiyou.com/1514530752053_pay_icon_selected_blue.png" wx:if="{{item._checked}}"></image>
+                <image mode="aspectFit" src="https://cdninsight.speiyou.com/1514529799372_pay_icon_unselected_grey.png" wx:else></image>
+            </view>
+        </view>
+        <button bindtap="add" class="add-address" disabled="{{addLoading}}">添加收货地址</button>
+    </view>
+</view>
+<view animation="{{$taltoast$animationData}}" class="tal-toast-container" style="top:{{$taltoast$vertical}}%;" wx:if="{{$taltoast$toastVisible}}">
+    <view class="tal-toast">
+        <text>{{$taltoast$toastMessage}}</text>
+    </view>
+</view>

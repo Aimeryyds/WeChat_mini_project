@@ -1,0 +1,22 @@
+<view class="page">
+    <view wx:if="{{!showPhone}}">
+        <image class="page_bg" src="https://public.wutongwan.org/public-20180626-FhQ4aSgUzZtt-IUQiiOSkkVEVvw-"></image>
+        <view class="login_title">
+            <view class="line" wx:if="{{!allUserSell&&!loginNum}}"></view>
+            <view class="title_word" wx:if="{{!allUserSell&&!loginNum}}">推荐方式登录</view>
+            <view class="line" wx:if="{{!allUserSell&&!loginNum}}"></view>
+            <view class="title_word" style="margin-left:60rpx;" wx:if="{{loginNum}}">首次使用微信登录，请绑定手机号</view>
+        </view>
+        <view class="login_btn">
+            <button bindgetuserinfo="__e" class="wx_login" data-event-opts="{{[ [ 'getuserinfo',[ [ 'getuserinfo',['$event'] ] ] ] ]}}" openType="getUserInfo" wx:if="{{loginUser}}">微信登录</button>
+            <view bindtap="__e" class="phone_login" data-event-opts="{{[ [ 'tap',[ [ 'phone_login',['$event'] ] ] ] ]}}" wx:if="{{phoneLogin}}">
+                <view>手机登录</view>
+            </view>
+            <button bindgetuserinfo="__e" class="wx_login" data-event-opts="{{[ [ 'getuserinfo',[ [ 'getuserinfo',['$event'] ] ] ] ]}}" openType="getUserInfo" wx:if="{{allUserSell}}">授权登录</button>
+            <button bindgetphonenumber="__e" class="wx_login" data-event-opts="{{[ [ 'getphonenumber',[ [ 'getphonenumber',['$event'] ] ] ] ]}}" openType="getPhoneNumber" wx:if="{{loginNum}}">
+                <view>授权绑定手机号</view>
+            </button>
+        </view>
+    </view>
+    <loginphone active="{{active}}" active_cb="{{active_cb}}" animation="{{animationData}}" bargain="{{bargain}}" bind:__l="__l" bind:closeEvents="__e" callback="{{callback}}" class="login-phone" data-event-opts="{{[ [ '^closeEvents',[ ['closeEvent'] ] ] ]}}" isClickOnline="{{isClickOnline}}" isselfclick="{{isSelfClick}}" name="loginphone" new_to_detail="{{new_to_detail}}" owneruserid="{{ownerUserId}}" path="{{path}}" qa_active="{{qa_active}}" qa_active_cb="{{qa_active_cb}}" recommend="{{recommend}}" recommend_login="{{recommend_login}}" tocoupon="{{tocoupon}}" tooldpullnew="{{tooldpullnew}}" vueId="35a7246c-1" wx:if="{{showPhone}}"></loginphone>
+</view>

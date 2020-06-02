@@ -1,0 +1,46 @@
+<template name="aa63a2de">
+    <view class="_view aa63a2de loginDialog">
+        <view class="_view aa63a2de login-bg1"></view>
+        <view class="_view aa63a2de login">
+            <view class="_view aa63a2de login-title">
+                <view class="_view aa63a2de">手机快捷登录</view>
+            </view>
+            <view class="_view aa63a2de login-form">
+                <view class="_view aa63a2de mg-border-bottom form-item" style="text-align:center" wx:if="{{phoneNum}}">{{phoneNum}}</view>
+                <view class="_view aa63a2de mg-border-bottom form-item" wx:else>
+                    <template is="0e2552d0" data="{{...$root['0'],...$root[$kk+'aa63a2de-0'],$root:$root}}"></template>
+                </view>
+                <view class="_view aa63a2de mg-border-bottom mg-flex form-item" wx:if="{{mode==modeEnum.code||mode==modeEnum.retrieve}}">
+                    <view class="_view aa63a2de mg-flex-col">
+                        <template is="0e2552d0" data="{{...$root['0'],...$root[$kk+'aa63a2de-1'],$root:$root}}"></template>
+                    </view>
+                    <view bindtap="handleProxy" class="_view aa63a2de mg-border-left mg-flex mg-flex_both_center right-item" data-comkey="{{$k}}" data-eventid="{{'aa63a2de-2'}}">
+                        <image class="_image aa63a2de item-img" src="{{picCodeUrl}}"></image>
+                    </view>
+                </view>
+                <view class="_view aa63a2de mg-border-bottom mg-flex form-item" wx:if="{{mode==modeEnum.code||mode==modeEnum.retrieve}}">
+                    <view class="_view aa63a2de mg-flex-col">
+                        <template is="0e2552d0" data="{{...$root['0'],...$root[$kk+'aa63a2de-2'],$root:$root}}"></template>
+                    </view>
+                    <view class="_view aa63a2de mg-border-left right-item" wx:if="{{mode==modeEnum.code||mode==modeEnum.retrieve}}">
+                        <view class="_view aa63a2de placeholder txtcenter" wx:if="{{timeStep<step}}">
+                            <text class="_text aa63a2de text-orange">{{timeStep}}s</text>
+                            <text class="_text aa63a2de">重新获取</text>
+                        </view>
+                        <view bindtap="handleProxy" class="_view aa63a2de text-orange txtcenter" data-comkey="{{$k}}" data-eventid="{{'aa63a2de-4'}}" wx:else>获取验证码</view>
+                    </view>
+                </view>
+                <template is="aa10e628" data="{{...$root['0'],...$root[$kk+'aa63a2de-3'],$root:$root,$slotdefault:'aa63a2de-default-aa63a2de-3'}}"></template>
+            </view>
+            <view class="_view aa63a2de login-bottom" wx:if="{{mode==modeEnum.code||mode==modeEnum.retrieve}}">
+                <view class="_view aa63a2de text-lightgray">新用户初次登录将自动注册，注册成功即视为已阅读并同意</view>
+                <view class="_view aa63a2de">
+                    <text bindtap="handleProxy" class="_text aa63a2de text-dark" data-comkey="{{$k}}" data-eventid="{{'aa63a2de-6'}}">《用户使用条款及隐私声明》</text>及<text bindtap="handleProxy" class="_text aa63a2de text-dark" data-comkey="{{$k}}" data-eventid="{{'aa63a2de-7'}}">《蘑菇租房隐私政策》</text>
+                </view>
+            </view>
+            <label bindtap="handleProxy" class="_span aa63a2de icon iconfont mgic-chahao" data-comkey="{{$k}}" data-eventid="{{'aa63a2de-8'}}"></label>
+        </view>
+    </view>
+</template>
+<import src="/components/mgInput.vue.wxml"></import>
+<import src="/components/mgButton.vue.wxml"></import>

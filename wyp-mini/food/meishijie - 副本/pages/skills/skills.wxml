@@ -1,0 +1,69 @@
+<navigation-bar enable="{{enable}}" title="生活技巧"></navigation-bar>
+<view class="container">
+    <view style="height:{{barHeight+48+10}}px"></view>
+    <view bindtap="pageReload" class="cplist_nodata" wx:if="{{requeseFail}}">{{requeseFailTips}}</view>
+    <view class="tj_tabww" style="top:{{barHeight}}px">
+        <scroll-view class="tj_tabw" scrollX="{{true}}">
+            <view bindtap="switchtab" class="tj_tabitem {{current_tab==item.id?'current':''}}" data-id="{{item.id}}" wx:for="{{tablist.data.child}}" wx:key="key">
+                <view class="c">{{item.label_name}}</view>
+            </view>
+        </scroll-view>
+    </view>
+    <view class="tj_w">
+        <view class="wfw">
+            <view class="wf_left">
+                <view class="wf-item wf-type-1" wx:for="{{wfdata_left}}" wx:key="key">
+                    <navigator class="wf-itemw" url="/pages/article/article?id={{item.id}}&nocon=1">
+                        <view class="imgw" style="background-image:url({{item.img}});padding-top:{{100/item.width/item.height}}%">
+                            <view class="vicon" wx:if="{{item.data_type==2}}"></view>
+                        </view>
+                        <view class="infow">
+                            <view class="title">{{item.title}}</view>
+                            <view class="userw">
+                                <view class="avatar">
+                                    <view class="avatarw">
+                                        <image class="img" src="{{item.avatar}}"></image>
+                                    </view>
+                                    <view class="n">{{item.author}}</view>
+                                </view>
+                                <view class="view">
+                                    <view class="i"></view>{{item.click_num}}</view>
+                            </view>
+                        </view>
+                    </navigator>
+                </view>
+            </view>
+            <view class="wf_right">
+                <view class="wf-item wf-type-1" wx:for="{{wfdata_right}}" wx:key="key">
+                    <navigator class="wf-itemw" url="/pages/article/article?id={{item.id}}&nocon=1">
+                        <view class="imgw" style="background-image:url({{item.img}});padding-top:{{100/item.width/item.height}}%">
+                            <view class="vicon"></view>
+                        </view>
+                        <view class="infow">
+                            <view class="title">{{item.title}}</view>
+                            <view class="userw">
+                                <view class="avatar">
+                                    <view class="avatarw">
+                                        <image class="img" src="{{item.avatar}}"></image>
+                                    </view>
+                                    <view class="n">{{item.author}}</view>
+                                </view>
+                                <view class="view">
+                                    <view class="i"></view>{{item.click_num}}</view>
+                            </view>
+                        </view>
+                    </navigator>
+                </view>
+            </view>
+        </view>
+    </view>
+    <loading hidden="{{requeseDone||!hasNextPage||requeseFail||noData}}">
+   加载中...
+  </loading>
+    <view class="bottomline" wx:if="{{bottomline}}">- 这就是我的底线了 -</view>
+    <view class="toastw" wx:if="{{showToast}}">
+        <view class="toast">
+            <rich-text nodes="{{toastTitle}}"></rich-text>
+        </view>
+    </view>
+</view>

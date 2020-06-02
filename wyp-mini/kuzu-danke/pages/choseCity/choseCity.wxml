@@ -1,0 +1,18 @@
+<view class="chosecity-wrapper">
+    <view class="current-city">当前定位城市</view>
+    <view class="position-city">
+        <view class="position-ing" wx:if="{{positioning}}">正在获取当前定位城市...</view>
+        <view bindtap="__e" class="isposition" data-event-opts="{{[ [ 'tap',[ [ 'toMap',['$event'] ] ] ] ]}}" id="{{city}}" wx:if="{{isposition}}">
+            <image class="img" src="https://public.danke.com.cn/public-20180814-FmKP-d3q_V99H2F19thK80oxC2DQ"></image>
+            <text class="city">{{city}}</text>
+        </view>
+        <view class="position-fail" wx:if="{{positionFail}}">
+            <view class="position-fail-text">定位失败，请检查网络或定位是否开启</view>
+            <view bindtap="__e" class="position-btn" data-event-opts="{{[ [ 'tap',[ [ 'rePosition',['$event'] ] ] ] ]}}">重新定位</view>
+        </view>
+    </view>
+    <view class="current-city">选择城市</view>
+    <view class="city-list">
+        <view bindtap="__e" class="item" data-event-opts="{{[ [ 'tap',[ [ 'toMap',['$event'] ] ] ] ]}}" id="{{item}}" wx:for="{{cityList}}" wx:key="index">{{item}}</view>
+    </view>
+</view>

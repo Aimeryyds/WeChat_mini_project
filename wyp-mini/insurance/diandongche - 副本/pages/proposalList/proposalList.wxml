@@ -1,0 +1,36 @@
+<view>
+    <view catchtap="getDetail" class="cu-list menu-avatar" data-insuranceno="{{item.insuranceNo}}" data-proposalid="{{item.proposalId}}" data-proposalstat="{{item.stateName}}" style="margin-top: 5rpx;" wx:for="{{proposalList}}" wx:key="item">
+        <view wx:if="{{item.stateName=='已出单'||item.stateName=='已退保'}}">
+            <view class="cu-list menu sm-border card-menu margin-top">
+                <view class="cu-item">
+                    <view class="content padding-tb-sm">
+                        <view>{{item.productName}}</view>
+                        <view class="text-gray text-sm">
+                            <text class="cuIcon-form margin-right-xs"></text>保单号：{{item.insuranceNo}}</view>
+                        <view class="text-gray text-sm">
+                            <text class="cuIcon-time margin-right-xs"></text>投保日期：{{item.insuranceNo?item.buyDate:''}}</view>
+                    </view>
+                    <view class="action">
+                        <view wx:if="{{item.insuranceNo!=''}}">
+                            <view wx:if="{{item.stateName=='已出单'}}">
+                                <text class="cuIcon-safe lg text-orange"></text>
+                                <text class="text-sm text-orange"> 保障中</text>
+                            </view>
+                            <view wx:else>
+                                <text class="text-sm text-blu"> {{item.stateName}}</text>
+                            </view>
+                        </view>
+                        <view wx:else>
+                            <text class="cuIcon-roundclose lg text-grey"></text>
+                            <text class="text-sm text-grey"> 未承保</text>
+                        </view>
+                    </view>
+                </view>
+            </view>
+        </view>
+    </view>
+    <view class="noDataMessage" style="text-align: center;margin-top: 10rpx;" wx:if="{{proposalList==null||proposalList.length<1}}">暂无保单</view>
+</view>
+<view class="cu-load load-modal" wx:if="{{loadModal}}">
+    <view class="gray-text">加载中...</view>
+</view>

@@ -1,0 +1,93 @@
+<view hidden="{{vhidden&&!newsdata.content[0].tvInfo.tvUrl}}" wx:if="{{newsdata.newsType==64||newsdata.newsType==82}}">
+    <video controls autoplay="true" class="art_video" direction="{{newsdata.newsType==76?'':90}}" id="myVideo" objectFit="contain" src="{{newsdata.content[0].tvInfo.tvUrl}}" wx:if="{{allowVideo}}"></video>
+</view>
+<view class="container" hidden="{{!firstLoading.loadhidden}}" id="container">
+    <view class="art-detail">
+        <view bindtap="onTitleTap" class="article-title" wx:if="{{newsdata.wechatNewsType!=1&&newsdata.title}}">
+      {{newsdata.title}}
+    </view>
+        <view class="article-info">
+            <view class="time">{{newsdata.time}}</view>
+            <view class="media">{{newsdata.media.mediaName}}</view>
+        </view>
+        <view class="article-content">
+            <view class="article-item" wx:for="{{newsdata.content}}" wx:key="*this">
+                <view hidden="{{!item.tvInfo.tvUrl||!imageGallery.isHidden||!circleShareHidden}}" wx:if="{{newsdata.newsType!=64&&item.type=='tv'&&item.tvInfo}}">
+                    <video controls autoplay="{{item.tvInfo.tvUrl&&imageGallery.isHidden&&circleShareHidden&&index==0?true:false}}" class="art_video" hidden="{{vhidden}}" id="myVideo" objectFit="contain" src="{{item.tvInfo.tvUrl}}" wx:if="{{allowVideo}}"></video>
+                </view>
+                <view wx:if="{{item.type=='text'&&item.info&&item.info.length>0}}">
+          {{item.info}}
+        </view>
+                <view wx:if="{{item.type=='image'&&item.imageInfo}}">
+                    <image bindtap="onImageClick" data-index="{{index}}" data-url="{{item.imageInfo.pic}}" mode="widthFix" src="{{item.imageInfo.pic}}" style="width: 100%; height: {{item.imageInfo.height>0?690/item.imageInfo.width*item.imageInfo.height+'rpx':'0'}}; background-color:#f1f1f1;"></image>
+                </view>
+            </view>
+        </view>
+    </view>
+    <block wx:if="{{recommendNews.length>0}}">
+        <import src="../../template/relevant-model/news-relevant.wxml"></import>
+        <view class="art-correlation" hidden="{{corhidden}}">
+            <view class="com-block">
+                <view>
+                    <text class="art-correlation-t">相关推荐</text>
+                </view>
+            </view>
+            <template is="news-relevant" data="{{newsList:recommendNews}}"></template>
+        </view>
+    </block>
+    <view class="pro-container" hidden="{{nearCommentList.length<=0}}" style="width:100%; margin-top: 50rpx;">
+        <view class="com-block">
+            <view>
+                <text class="art-correlation-t">热门评论</text>
+            </view>
+        </view>
+        <view bindchange="swipChange" class="rank-list-container" current="{{currentindex}}" data-height="{{clientHeight}}" duration="500" style="width:100%;">
+            <scroll-view lowerThreshold="20" scrollY="true" style="width:100%;;overflow:hidden;">
+                <block wx:if="{{nearCommentList.length>0}}">
+                    <import src="../../template/news-comment/comment.wxml"></import>
+                    <view>
+                        <template is="comment" data="{{commentList:nearCommentList}}"></template>
+                    </view>
+                </block>
+                <view class="no-com-tips" wx:else>
+                    <text>暂无评论</text>
+                </view>
+            </scroll-view>
+        </view>
+    </view>
+</view>
+<view bindtap="onLaunchAppClick" id="btn-launch-app" wx:if="{{ableLaunchApp}}">
+    <button appParameter="{{launchAppParams}}" binderror="launchAppError" openType="launchApp">
+    打开APP查看
+  </button>
+</view>
+<import src="./template/loading.wxml"></import>
+<view class="bg_cont" hidden="{{firstLoading.loadhidden}}">
+    <template is="loading-coverage" data="{{items:firstLoading.items}}"></template>
+</view>
+<view class="image-gallery" hidden="{{imageGallery.isHidden}}">
+    <swiper bindchange="onSwiperChange" bindtap="onGalleryClick" circular="true" class="gallery" current="{{imageGallery.current}}" duration="{{imageGallery.isHidden?0:200}}">
+        <swiper-item class="slide-image" wx:if="{{!item.invalid}}" wx:for="{{imageGallery.imageUrls}}" wx:key="url">
+            <image class="" mode="aspectFit" src="{{item.url}}"></image>
+        </swiper-item>
+    </swiper>
+    <view class="bottom-bar">
+        <view class="page-number">{{imageGallery.current+1}}/{{imageGallery.imageUrls.length}}</view>
+        <view class="operator">
+            <button appParameter="wechat" binderror="launchAppError" class="btn btn-friend" openType="share">
+                <image src="../../images/wxshare-hollow.png"></image>
+            </button>
+            <view catchtap="saveGalleryPic" class="btn btn-save" data-index="{{imageGallery.current}}">
+                <image src="../../images/save-local-hollow.png"></image>
+            </view>
+        </view>
+    </view>
+</view>
+<import src="../../components/share-bar/template.wxml"></import>
+<view hidden="{{!firstLoading.loadhidden||!sharePoster.hidden}}">
+    <template is="share-bar" data="{{newsdata:newsdata,shareBarHidden:shareBarHidden}}"></template>
+</view>
+<import src="../../components/share-poster/template.wxml"></import>
+<view hidden="{{sharePoster.hidden}}">
+    <template is="share-poster" data="{{sharePoster:sharePoster}}"></template>
+</view>

@@ -1,0 +1,45 @@
+<import src="/dist/toast/index.wxml"></import>
+<view class="container">
+    <template is="zan-toast" data="{{zanToast:zanToast}}"></template>
+    <view class="zan-panel zan-panel__no-margin-top" wx:if="{{stores}}">
+        <block wx:if="{{stores.length>0}}">
+            <view bindtap="showQrDialog" class="zan-cell zan-cell--access {{store.isXcx?'app-item':''}}" data-store="{{store}}" wx:for="{{stores}}" wx:for-item="store">
+                <view class="zan-cell__bd fx_store-item--lt">
+                    <view class="fx_store-item--lt-name {{store.isXcx?'app-name':''}}">{{store.isXcx?'小程序二维码':store.storeName}} </view>
+                    <view class="fx_store-item--lt-address" wx:if="{{!store.isXcx}}">{{store.detailAddress}}</view>
+                </view>
+                <view class="zan-cell__ft" style="display:flex;justify-content:center">
+                    <image src="http://imgcdnali.wfenxiao.com.cn/xcx/c/qr.png" style="width:30rpx;height:30rpx"></image>
+                </view>
+            </view>
+        </block>
+        <view style="text-align:center;font-size:24rpx;color:#aaa;margin-top:200rpx" wx:else>分享店铺或商品后自动生成二维码，快去分享吧！</view>
+    </view>
+    <view class="zan-dialog {{showDialog?'zan-dialog--show':''}}">
+        <view bindtap="hideQrDialog" class="zan-dialog__mask"></view>
+        <view class="zan-dialog__container" style="background-color: transparent;top:0">
+            <view class="qr-dailog" style="margin: 160rpx 48rpx 64rpx 48rpx;border-radius: 20rpx">
+                <view class="qr-dialog__title">
+                    <image class="qr-dialog__avatar" mode="scaleToFill" src="{{userinfo.avatarUrl}}"></image>
+                    <view class="qr-dialog__name">{{userinfo.nickName}}</view>
+                </view>
+                <view class="qr-dialog__content">
+                    <view class="qr-dialog__content-name">{{currentStore.storeName}}</view>
+                    <image bindtap="handleTapQr" class="qr-dialog__content-qr" mode="scaleToFill" src="{{currentStore.qrcodeUrl}}"></image>
+                    <view class="qr-dialog__content-tip">扫一扫上面的二维码，进入{{currentStore.storeId==-10?'小程序':'门店'}}</view>
+                </view>
+                <view style="text-align:center">
+                    <image bindtap="toggleQrDialog" mode="scaleToFill" src="http://imgcdnali.wfenxiao.com.cn/xcx/c/close.png" style="width:56rpx;height:56rpx"></image>
+                </view>
+                <view class="qr-dialog__footer">
+                    <view style="color:{{downloadStatus==2?'green':''}}" wx:if="{{downloadStatus>0}}">
+                        {{downloadStatus==1?'二维码下载中...':'二维码已保存至系统相册'}}
+                    </view>
+                </view>
+            </view>
+            <view style="text-align:center">
+                <image bindtap="hideQrDialog" mode="scaleToFill" src="http://imgcdnali.wfenxiao.com.cn/xcx/c/close.png" style="width:56rpx;height:56rpx"></image>
+            </view>
+        </view>
+    </view>
+</view>

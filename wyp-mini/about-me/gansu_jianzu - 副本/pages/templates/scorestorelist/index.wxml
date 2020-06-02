@@ -1,0 +1,21 @@
+<template name="storelist">
+    <view class="zan-dialog {{show?'zan-dialog--show':''}}">
+        <view class="zan-dialog__mask">
+            <view class="storelist-wrap">
+                <view class="storelist-wrap__title">门店列表</view>
+                <scroll-view enableBackToTop scrollY scrollTop="{{scrollTop}}" style="width:100%;height:626rpx;">
+                    <view class="store-list" wx:for="{{list}}">
+                        <image class="store-list__img" src="{{item.brandLogo||item.logo}}"></image>
+                        <view>
+                            <view class="store-list__title">{{item.brandName}}</view>
+                            <view class="store-list__adress">{{item.storeName}}</view>
+                        </view>
+                    </view>
+                </scroll-view>
+            </view>
+            <view style="text-align:center">
+                <image bindtap="toggleStoreDialog" mode="scaleToFill" src="http://imgcdnali.wfenxiao.com.cn/xcx/c/close.png" style="width:50rpx;height:50rpx"></image>
+            </view>
+        </view>
+    </view>
+</template>

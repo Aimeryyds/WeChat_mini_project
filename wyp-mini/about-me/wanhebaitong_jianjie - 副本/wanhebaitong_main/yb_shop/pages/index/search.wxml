@@ -1,0 +1,15 @@
+<view class="fui-searchbar bar {{item.style_type==1?'search_fixed':''}}" style="background:{{item.bg_color}}">
+    <view class="searchbar">
+        <navigator class="weui-search-bar__form" hoverClass="none" url="/yb_shop/pages/goods/index/index?fromsearch=1&key={{item.default}}">
+            <view class="search-input" style="background:{{item.bd_color}}">
+                <view class="search_box">
+                    <text style="color:{{item.text_color}}">{{item.hot_word!=''?item.hot_word:'商品搜索'}}</text>
+                    <view style="width:18px;height:18px;">
+                        <view style="position: absolute; background: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACQAAAAkCAYAAADhAJiYAAAAGXRFWHRTb2Z0d2FyZQBBZG9iZSBJbWFnZVJlYWR5ccllPAAAAyhpVFh0WE1MOmNvbS5hZG9iZS54bXAAAAAAADw/eHBhY2tldCBiZWdpbj0i77u/IiBpZD0iVzVNME1wQ2VoaUh6cmVTek5UY3prYzlkIj8+IDx4OnhtcG1ldGEgeG1sbnM6eD0iYWRvYmU6bnM6bWV0YS8iIHg6eG1wdGs9IkFkb2JlIFhNUCBDb3JlIDUuNi1jMTM4IDc5LjE1OTgyNCwgMjAxNi8wOS8xNC0wMTowOTowMSAgICAgICAgIj4gPHJkZjpSREYgeG1sbnM6cmRmPSJodHRwOi8vd3d3LnczLm9yZy8xOTk5LzAyLzIyLXJkZi1zeW50YXgtbnMjIj4gPHJkZjpEZXNjcmlwdGlvbiByZGY6YWJvdXQ9IiIgeG1sbnM6eG1wPSJodHRwOi8vbnMuYWRvYmUuY29tL3hhcC8xLjAvIiB4bWxuczp4bXBNTT0iaHR0cDovL25zLmFkb2JlLmNvbS94YXAvMS4wL21tLyIgeG1sbnM6c3RSZWY9Imh0dHA6Ly9ucy5hZG9iZS5jb20veGFwLzEuMC9zVHlwZS9SZXNvdXJjZVJlZiMiIHhtcDpDcmVhdG9yVG9vbD0iQWRvYmUgUGhvdG9zaG9wIENDIDIwMTcgKE1hY2ludG9zaCkiIHhtcE1NOkluc3RhbmNlSUQ9InhtcC5paWQ6QjcwQ0M0RUZCQjA4MTFFOEI0QTI5OTY3QUE5NUFBREYiIHhtcE1NOkRvY3VtZW50SUQ9InhtcC5kaWQ6QjcwQ0M0RjBCQjA4MTFFOEI0QTI5OTY3QUE5NUFBREYiPiA8eG1wTU06RGVyaXZlZEZyb20gc3RSZWY6aW5zdGFuY2VJRD0ieG1wLmlpZDpCNzBDQzRFREJCMDgxMUU4QjRBMjk5NjdBQTk1QUFERiIgc3RSZWY6ZG9jdW1lbnRJRD0ieG1wLmRpZDpCNzBDQzRFRUJCMDgxMUU4QjRBMjk5NjdBQTk1QUFERiIvPiA8L3JkZjpEZXNjcmlwdGlvbj4gPC9yZGY6UkRGPiA8L3g6eG1wbWV0YT4gPD94cGFja2V0IGVuZD0iciI/PjtQ30AAAAJfSURBVHjazJfRcYMwDIYh1/ekE5QNSiYInSB0gtAN2CBkgjICmaDJBnSCkA3YoGGCVLr7udMRY+zgXNCdzkewnA9Jlmz/er16U5IX+eD7vpFRmqYxDSHpHCNLRdqQHvI8r+6BYef40kM6IIIIaMhIY4A0gJCywliT7kmJLb84ByIYBknxWLD2eQHeY90AOqW5hRMgWnwBgDXpzuaL4dEctnuyS0YBAaYk5YUTWvAg39HcFdku+b3uz2gue/bbBIpZZpr3BWCiFoZBEL6ajA8IS6D7E3YpDV88F7ZaUXpIfNWngOHd9AOAHfKoNk1YwGxJP8iuNA4ZQlVj+yYCpsTvsQ1IB4o3wh/Zf9iELMW2zjrhqxG+ekTd47UjAuvNJRXQBglYC1e/I7EvY6owQnVmKCMgbNUA4ekCVp4bKVGnjDzUtgGZyEH77Eh4rTmtHRkDidC0zy6BtGFX5VA3aX9ddnMR+mCw23cnogcVLoFQVlQfrvTQxXu8hDYhq0QyP0oCYw+hTjS6belAeO1zX4Gd9dSJzSNIkD9rXRlRAXF3DnTlfWTraHQbpa/bs5feSJdj24XwDufliU8KtGZmex5i77ziuOEqVAX6WG5bGD0kXILOXDiAOYmTp3Wl9kS7aE96FRrvvWEyth28dYjDWZvwgwd9cWXaIExJ50hcjb0GLbBDtvjpiCJaCts5Dv0xzk8N4DPFpUEJZXVRFF/e3rtWPdOOqDOHrieHoKyBejwXiipvaqOEGg00cufdQA3dyx4mCGWEBlvKZv4UIB3U04AUUOFNHZqCzLyJyeSA/gUYAC9LZz+rcKdwAAAAAElFTkSuQmCC) no-repeat;background-size: 18px 18px;right: -17px;width:18px;height:18px;filter: drop-shadow({{item.text_color}} -30px 0px);"></view>
+                    </view>
+                </view>
+            </view>
+        </navigator>
+    </view>
+</view>
+<view style="height:2.7rem;line-height:2.7rem;" wx:if="{{item.style_type==1}}"></view>

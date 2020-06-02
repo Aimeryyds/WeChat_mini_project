@@ -1,0 +1,27 @@
+<view class="zan-dialog {{show?'zan-dialog--show':''}}">
+    <view bindtap="hideDialog" class="zan-dialog__mask"></view>
+    <view class="zan-dialog__container">
+        <view class="cart_popup--header">
+            <image src="{{service.imgUrl}}" style="width:120rpx;height:120rpx;"></image>
+            <view class="cart_popup--header-content">
+                <view class="zan-eclipses" style="font-size: 28rpx">{{service.serviceName}}</view>
+                <view>
+                    <text style="font-size:12px;color:#f22222">￥</text>
+                    <text style="font-size:14px;color:#f22222">{{service.selectedSku.price||service.price}}</text>
+                    <text class="yuyuetip" wx:if="{{service.showNum}}">(已预约{{service.num}}人)</text>
+                </view>
+            </view>
+        </view>
+        <view style="min-height:200rpx;max-height:600rpx;overflow-y:auto;padding-bottom:24rpx;font-size:28rpx;">
+            <view class="cart_popup--spec" wx:for="{{service.specs}}" wx:for-index="specIdx" wx:for-item="spec" wx:key="{{id}}">
+                <view style="padding: 6rpx 24rpx;margin-bottom:2">{{spec.name}}</view>
+                <view class="cart_popup--spec-values">
+                    <view bindtap="handleSelectSpec" class="cart_popup--spec-value {{specValue.disabled?'spec-value--disabled':''}} {{specValue.selected?'spec-value--selected':''}}" data-specindex="{{specIdx}}" data-specvalueindex="{{specValueIdx}}" wx:for="{{spec.values}}" wx:for-index="specValueIdx" wx:for-item="specValue" wx:key="{{id}}">{{specValue.itemValue}}</view>
+                </view>
+            </view>
+        </view>
+        <view class="cart_popup--footer">
+            <button bindtap="handleAddToCart" class="zan-btn zan-btn--danger {{service.selectedSku?'cart_popup--footer-btn':'card_popup--footer-btn-disable'}}" disabled="{{service.selectedSku.id?false:true}}">确定</button>
+        </view>
+    </view>
+</view>

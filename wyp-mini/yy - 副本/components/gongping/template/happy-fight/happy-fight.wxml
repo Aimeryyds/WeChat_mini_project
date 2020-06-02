@@ -1,0 +1,34 @@
+<template name="happy-fight">
+    <view class="happyFight-wrapper" wx:if="{{happyFightInfo.type==4||happyFightInfo.type==5||happyFightInfo.type==6}}">
+        <view class="happyFight-main">
+            <view class="happyFight-pk">
+                <view class="anchorSide">
+                    <view class="anchorSide-blood" style="width:{{happyFightInfo.leftInfo.blood}}%"></view>
+                    <view class="anchorSide-txt">{{happyFightInfo.leftInfo.txt||'我方'}} {{happyFightInfo.leftInfo.num}} </view>
+                </view>
+                <view class="oppositeSide">
+                    <view class="oppositeSide-blood" style="width:{{happyFightInfo.rightInfo.blood}}%"></view>
+                    <view class="oppositeSide-txt">{{happyFightInfo.rightInfo.num}} {{happyFightInfo.rightInfo.txt||'对方'}}</view>
+                </view>
+            </view>
+        </view>
+        <view class="happyFight-info">
+            <view class="anchorSide-result" wx:if="{{happyFightInfo.type==6}}">
+                <image src="./template/happy-fight/images/{{happyFightInfo.pkResult.leftPng}}.png"></image>
+            </view>
+            <view class="happyFight-status">
+                <image class="happyFight-status-bg" src="./template/happy-fight/images/bg-title.png"></image>
+                <view class="happyFight-status-info">
+                    <image class="happyFight-status-img" src="./template/happy-fight/images/happypk-icon.png"></image>
+                    <view class="happyFight-status-txt">
+                        {{happyFightInfo.txt}}
+                        <view class="happyFight-count-down">{{happyFightRemainTime}}</view>
+                    </view>
+                </view>
+            </view>
+            <view class="oppositeSide-result" wx:if="{{happyFightInfo.type==6}}">
+                <image src="./template/happy-fight/images/{{happyFightInfo.pkResult.rightPng}}.png"></image>
+            </view>
+        </view>
+    </view>
+</template>

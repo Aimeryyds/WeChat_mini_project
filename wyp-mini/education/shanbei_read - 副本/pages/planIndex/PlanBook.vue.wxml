@@ -1,0 +1,15 @@
+<template name="ec2c3258">
+    <view bindtap="handleProxy" class="_div data-v-4967749f container" data-comkey="{{$k}}" data-eventid="{{'0'}}">
+        <view class="_div data-v-4967749f cover-wrapper">
+            <image alt="cover" class="_img data-v-4967749f cover" src="{{src}}"></image>
+            <view class="_div data-v-4967749f reading-icon" wx:if="{{isReading&&planStatus!==1}}">正在读</view>
+            <view class="_div data-v-4967749f progress-bar" wx:if="{{planStatus!==1}}">
+                <view class="_div data-v-4967749f progress" style=" {{'width:'+progress+'%'+';'}}"></view>
+            </view>
+            <view class="_div data-v-4967749f mask" wx:if="{{planStatus===1}}">
+                <view class="_div data-v-4967749f lock"></view>
+            </view>
+        </view>
+        <view class="_div data-v-4967749f title">{{title}}</view>
+    </view>
+</template>

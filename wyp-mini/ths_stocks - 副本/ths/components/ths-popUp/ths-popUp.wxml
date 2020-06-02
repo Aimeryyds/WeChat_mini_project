@@ -1,0 +1,18 @@
+<view>
+    <cover-view bindtap="__e" class="popUpWrap" data-event-opts="{{[ [ 'tap',[ [ 'changePopUpState',[1] ] ] ] ]}}" hidden="{{!showPop}}">
+        <cover-view catchtap="__e" class="userWrap" data-event-opts="{{[ [ 'tap',[ [ '',['$event'] ] ] ] ]}}" wx:if="{{popUpType=='userInfo'}}">
+            <cover-view class="content">
+                <cover-view class="userName item">{{loginInfo.account}}</cover-view>
+                <cover-view bindtap="__e" class="btn_one_wrap" data-event-opts="{{[ [ 'tap',[ [ 'jump',['$event'] ] ] ] ]}}">
+                    <cover-image class="btn_one item" src="../../static/popUpBtn.png"></cover-image>
+                    <cover-view class="text">切换手机号</cover-view>
+                </cover-view>
+                <cover-view bindtap="__e" class="btn_two item" data-event-opts="{{[ [ 'tap',[ [ 'exitLogin',['$event'] ] ] ] ]}}">退出登录</cover-view>
+            </cover-view>
+            <cover-view class="headWrap">
+                <cover-image class="headBg" src="../../static/headBg.png"></cover-image>
+                <cover-image class="headIcon" src="{{headUrl}}" wx:if="{{headUrl}}"></cover-image>
+            </cover-view>
+        </cover-view>
+    </cover-view>
+</view>

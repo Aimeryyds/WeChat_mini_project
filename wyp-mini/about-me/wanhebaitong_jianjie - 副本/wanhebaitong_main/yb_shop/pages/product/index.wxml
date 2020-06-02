@@ -1,0 +1,66 @@
+<view class="clear"></view>
+<view class="page_top_class">
+    <view class="page_search">
+        <navigator hoverClass="none" url="/yb_shop/pages/goods/index/index?fromsearch=1&key=">
+            <view class="search_box">
+                <image src="/yb_shop/static/images/icon/search.png" style="width:18px;height:18px;"></image>
+                <text style="color:#999;font-size:0.8rem;">商品搜索</text>
+            </view>
+        </navigator>
+    </view>
+    <view bindtap="showFilter" class="page_class_icon">
+        <image mode="aspectFill" src="/yb_shop/static/images/icon/app.png"></image>
+    </view>
+    <view class="clear"></view>
+</view>
+<view class="page_top_space"></view>
+<view class="screen {{isFilterShow?'in':''}}">
+    <view class="title">选择分类</view>
+    <view class="cate">
+        <view class="item">
+            <view>
+                <nav bindtap="cate_select" class="{{cate_id==''?'on':''}}" data-id="" data-index="" data-level="1">全部</nav>
+            </view>
+            <view wx:for="{{category}}">
+                <nav bindtap="cate_select" class="{{cate_id1==item.cate_id?'on':''}}" data-id="{{item.cate_id}}" data-index="{{index}}" data-level="{{item.level}}">{{item.cate_name}}</nav>
+            </view>
+        </view>
+        <view class="item" wx:if="{{cate2.length>0}}">
+            <view wx:for="{{cate2}}">
+                <nav bindtap="cate_select" class="{{cate_id2==item.cate_id?'on':''}}" data-id="{{item.cate_id}}" data-index="{{index}}" data-level="{{item.level}}">{{item.cate_name}}</nav>
+            </view>
+        </view>
+        <view class="item" wx:if="{{cate3.length>0}}">
+            <view wx:for="{{cate3}}">
+                <nav bindtap="cate_select" class="{{cate_id3==item.cate_id?'on':''}}" data-id="{{item.cate_id}}" data-level="{{item.level}}">{{item.cate_name}}</nav>
+            </view>
+        </view>
+    </view>
+    <view class="btns">
+        <view bindtap="showFilter" class="cancel">取消</view>
+        <view bindtap="confirm" class="confirm">确认</view>
+    </view>
+</view>
+<view class="fui-goods-groups block">
+    <view class="fui-goods-items" wx:for="{{list}}">
+        <navigator hoverClass="none" url="/yb_shop/pages/goods/detail/index?id={{item.goods_id}}">
+            <view class="image" style="background-image:url({{item.pic.img_cover}})"></view>
+        </navigator>
+        <view class="detail">
+            <navigator hoverClass="none" url="/yb_shop/pages/goods/detail/index?id={{item.goods_id}}">
+                <view class="name">{{item.goods_name}}</view>
+                <view class="goods_desc">{{item.introduction}}</view>
+            </navigator>
+            <view class="price">
+                <view class="text">￥{{item.price}}</view>
+            </view>
+        </view>
+    </view>
+</view>
+<view class="fui-loading empty" wx:if="{{loaded}}">
+    <view class="text">没有更多商品了</view>
+</view>
+<block wx:if="{{showtabbar}}">
+    <view style="height:100rpx"></view>
+    <include src="/yb_shop/pages/common/menu.wxml"></include>
+</block>

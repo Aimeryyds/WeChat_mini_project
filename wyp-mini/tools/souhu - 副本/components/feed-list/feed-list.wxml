@@ -1,0 +1,13 @@
+<view class="feed-list-wrapper">
+    <view class="feed-list">
+        <view class="feed-item{{page}} feed-item" data-id="{{news.id}}" data-scm="{{news.scm}}" data-spm="{{spmA}}.{{spmB}}.{{spmC}}.{{index+1}}.{{pvId}}" data-target="{{spmB}}|{{news.id}}|{{news.authorId}}" wx:for="{{list}}" wx:for-item="news" wx:key="index">
+            <ad appid="{{news.data.appid}}" bindclose="closeAd" binderror="handleErrorAd" class="{{isHideAd?'ad-item hide':'ad-item'}}" scale="{{news.data.scale}}" type="{{news.data.adType}}" unitId="{{news.data.id}}" wx:if="{{news.type=='ad'}}"></ad>
+            <navigator openType="{{openType}}" url="{{news.path}}&spm={{spmA}}.{{spmB}}.{{spmC}}.{{index+1}}.{{pvId}}" wx:else>
+                <no-img config="{{news}}" hasAuthor="{{news.hasAuthor}}" wx:if="{{news.viewType==ViewType.text}}"></no-img>
+                <single-img config="{{news}}" hasAuthor="{{news.hasAuthor}}" wx:if="{{news.viewType==ViewType.textImage}}"></single-img>
+                <video-img config="{{news}}" videoSrc="{{news.videoInfo.sofaInfo[0].videoUrl}}" wx:if="{{news.viewType==ViewType.video}}"></video-img>
+                <image-flow config="{{news}}" wx:if="{{news.viewType==ViewType.flow}}"></image-flow>
+            </navigator>
+        </view>
+    </view>
+</view>

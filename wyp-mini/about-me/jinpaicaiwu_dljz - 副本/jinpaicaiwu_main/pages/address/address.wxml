@@ -1,0 +1,46 @@
+<view class="main">
+    <view class="form-box">
+        <form bindsubmit="formSubmit">
+            <view class="border_bottom medium_font">
+                <text>收货人：</text>
+                <input bindinput="bindName" placeholder="请输入姓名" value="{{address.name}}"></input>
+            </view>
+            <view class="border_bottom medium_font">
+                <text>电话：</text>
+                <input bindinput="bindPhone" placeholder="请输入电话号码" type="number" value="{{address.phone}}"></input>
+            </view>
+            <view bindtap="choosearea" class="border_bottom medium_font choose-prov" style="position:relative;">
+                <text>选择地区：</text>
+                <input disabled="true" value="{{address.province}}"></input>
+                <view style="position:absolute;width:80%;left:20%;top:0;height:90rpx;z-index:100;"></view>
+            </view>
+            <view class="border_bottom medium_font">
+                <text>详细地址：</text>
+                <input bindinput="bindDetail" placeholder="请输入详细地址" value="{{address.detail}}"></input>
+            </view>
+            <view class="border_bottom medium_font">
+                <text>设为默认：</text>
+                <view class="switch" style="width:100rpx;">
+                    <switch bindchange="switchChange" checked="{{address.is_def}}"></switch>
+                </view>
+            </view>
+            <button class="cart_bg_color2" formType="submit">保存</button>
+            <button bindtap="toBack">取消</button>
+        </form>
+    </view>
+    <view class="pickerConfirm" wx:if="{{isShow}}">
+        <text bindtap="onCancel">取消</text>
+        <text bindtap="onConfirm">确定</text>
+    </view>
+    <picker-view bindchange="bindChange" class="picker-view" indicatorStyle="height: 40px;" style="width: 100%; height: 500rpx;" value="{{value}}" wx:if="{{isShow}}">
+        <picker-view-column>
+            <view class="addr-item" wx:for="{{proviceData}}" wx:key="index">{{item.fullNameDot}}</view>
+        </picker-view-column>
+        <picker-view-column>
+            <view class="addr-item" wx:for="{{cityData}}" wx:key="index">{{item.fullNameDot}}</view>
+        </picker-view-column>
+        <picker-view-column wx:if="{{showDistrict}}">
+            <view class="addr-item" wx:for="{{districtData}}" wx:key="index">{{item.fullNameDot}}</view>
+        </picker-view-column>
+    </picker-view>
+</view>

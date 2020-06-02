@@ -1,0 +1,29 @@
+<view class="header">
+    <view class="header_img">
+        <image backgroundSize="cover" src="{{adviser_info.picture?adviser_info.picture:'../../images/head_evaluate.png'}}"></image>
+    </view>
+    <text>{{adviser_info.name}}</text>
+</view>
+<view class="evaluate_title">请对顾问的服务进行评价:</view>
+<view class="evaluate_grade">
+    <view bindtap="evaluatFun" class="grade_box" data-id="{{item.id}}" wx:for="{{evaluat_level}}" wx:key="id">
+        <image backgroundSize="cover" src="{{comm.getTypeUrl(imgurls,item.id)+(item.checked?1:2)+'.png'}}"></image>
+        <text>{{item.name}}</text>
+    </view>
+</view>
+<view class="evaluate_checkbox" wx:if="{{taglist.length}}">
+    <view class="evaluate_comment">
+        <view bindtap="clickTypeOver" class="{{item.checked?'cur':''}} evaluate_lst" data-id="{{item.id}}" data-ind="{{item.val}}" wx:for="{{taglist}}" wx:key="id">{{item.name}}</view>
+        <textarea bindinput="valFun" placeholder=""></textarea>
+    </view>
+</view>
+<view bindtap="submitFun" class="evaluate_btn">提交评价</view>
+<view class="evaluate_pop" wx:if="{{show}}"></view>
+<view class="evaluate_prompt" wx:if="{{show}}">
+    <text class="prompt_box">确认取消评价吗？</text>
+    <view class="prompt_btn">
+        <view bindtap="toIndex">取消</view>
+        <view bindtap="clickTypeFun">继续评价</view>
+    </view>
+</view>
+<wxs module="comm" src="../../utils/common.wxs" />

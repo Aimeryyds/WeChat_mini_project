@@ -1,0 +1,15 @@
+<template name="index$9cc4bdde">
+    <view bindtap="handleProxy" class="_div data-v-c81bcdbe container" data-comkey="{{$k}}" data-eventid="{{'1'}}">
+        <swiper bindchange="handleProxy" class="_swiper data-v-c81bcdbe swiper" current="{{currentIndex}}" data-comkey="{{$k}}" data-eventid="{{'0'}}" indicatorDots="{{indicatorDots}}">
+            <swiper-item class="_swiper-item data-v-c81bcdbe" itemId="{{item.id}}" key="{{item.id}}" wx:for="{{dailyQuoteList}}" wx:key="item.id">
+                <template is="card$68f19830" data="{{...$root[$kk+'0-'+index],$root:$root}}"></template>
+            </swiper-item>
+        </swiper>
+        <template is="tool$2ecf02b8" data="{{...$root[$kk+'2'],$root:$root}}"></template>
+        <image class="_img data-v-c81bcdbe tip" src="/static/img/tip.png" wx:if="{{showScrollTip}}"></image>
+        <image class="_img data-v-c81bcdbe tip" src="/static/img/click-tip.png" wx:if="{{showClickTip}}"></image>
+        <canvas canvasId="share-canvas" class="_canvas data-v-c81bcdbe" style="background:transparent;width:750px;height:1334px;position:absolute;top:0;left:10000px"></canvas>
+    </view>
+</template>
+<import src="card$68f19830"></import>
+<import src="tool$2ecf02b8"></import>

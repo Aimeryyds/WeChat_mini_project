@@ -1,0 +1,84 @@
+<import src="../../libs/wxParse/wxParse.wxml"></import>
+<import src="../../libs/templates/footer.wxml"></import>
+<import src="../../libs/templates/cusService.wxml"></import>
+<view scrollY class="scroll-container">
+    <view class="bookDetail-wrapper">
+        <view class="swiperWrap">
+            <swiper autoplay="true" circular="true" class="swiper {{bookInfo.picList.length==1?'noDot':''}}" duration="3000" indicatorDots="true" interval="3000">
+                <swiper-item wx:for="{{bookInfo.picList}}" wx:for-item="imgInfo">
+                    <image bindtap="previewImage" class="slide-image spread" data-img="{{imgInfo.url}}" data-imgList="{{bookInfo.picList}}" src="{{imgInfo.url}}"></image>
+                </swiper-item>
+            </swiper>
+        </view>
+        <view class="bookDetail-intro">
+            <view class="iconfont icon-share"></view>
+            <view bindtap="showShareChoosePanel" class="shareBtn" wx:if="{{shareWXMoment}}"></view>
+            <button class="shareBtn" openType="share" wx:elif="{{!shareWXMoment}}"></button>
+            <view class="detail-title">{{bookInfo.name}}</view>
+            <view class="detail-sub-title ellipsis">{{bookInfo.summary}}</view>
+            <view class="detail-price-wrap">
+                <text class="selling-price" style="color: {{globalColor}};">￥{{bookInfo.promotionPrice>0?bookInfo.promotionPrice:bookInfo.price}}</text>
+                <text class="original-price" wx:if="{{bookInfo.promotionPrice>0}}">￥{{bookInfo.price}}</text>
+                <text class="promotion" style="background-color: {{globalColor}};" wx:if="{{bookInfo.promotionPrice>0}}">促销</text>
+            </view>
+        </view>
+        <view class="service-detail">
+            <view class="detail-header">
+                <text>服务详情</text>
+            </view>
+            <view class="detail-content" wx:if="{{!bookInfoEmpty}}">
+                <template is="wxParse" data="{{wxParseData:bookInfoContent0}}" wx:if="{{bookInfoContent0}}"></template>
+                <template is="wxParse" data="{{wxParseData:bookInfoContent100}}" wx:if="{{bookInfoContent100}}"></template>
+                <template is="wxParse" data="{{wxParseData:bookInfoContent200}}" wx:if="{{bookInfoContent200}}"></template>
+                <template is="wxParse" data="{{wxParseData:bookInfoContent300}}" wx:if="{{bookInfoContent300}}"></template>
+            </view>
+            <view class="detail-content-empty" wx:if="{{bookInfoEmpty}}">
+                <view class="imageWrap">
+                    <image class="spread" src="http://qz.faisys.com/image/wxImage/empty-4.png"></image>
+                </view>
+                <view class="des">没有服务详情哦</view>
+            </view>
+        </view>
+        <template is="footer" data="{{flag:flag,isOem:isOem,agentAcct:agentAcct}}" wx:if="{{flag.footerOpen}}"></template>
+        <view class="footerPosition"></view>
+    </view>
+</view>
+<view class="bookDetail-footer">
+    <view class="detail-nav">
+        <view class="nav-wx-item" wx:if="{{flag.bookNavWXCusShow}}">
+            <view class="iconfont icon-weixin"></view>
+            <view>微信客服</view>
+        </view>
+        <contact-button class="wxContact" wx:if="{{flag.bookNavWXCusShow}}"></contact-button>
+        <view bindtap="makePhoneCall" class="nav-phone-item" wx:if="{{!flag.bookNavPhoneHide}}">
+            <view class="iconfont icon-phone"></view>
+            <view>电话</view>
+        </view>
+        <view bindtap="toOrder" class="nav-booking-item {{bookInfo.status==1?'has-out':''}}" data-bookid="{{bookInfo.id}}" style="background-color: {{bookInfo.status==1?'':globalColor}};">{{bookInfo.status==1?'已下架':formItem.bn}}</view>
+    </view>
+</view>
+<template is="cusservice" data="{{cusService:cusService,flag:flag}}" wx:if="{{flag.cusServiceOpen||cusService.supportOpen}}"></template>
+<view bindtap="hideSharePanel" class="commodity_screen" wx:if="{{showSharePanel}}"></view>
+<view class="mySharePanel" wx:if="{{showSharePanel}}">
+    <view>
+        <canvas canvasId="myCanvas" style="width:640rpx;margin:0 auto;margin-top:56rpx;height:800rpx"></canvas>
+        <view bindtap="savePic" class="saveSharePic">保存到相册，发送到朋友圈</view>
+    </view>
+</view>
+<view bindtap="hideShareChoosePanel" class="commodity_screen" wx:if="{{showModalStatus}}"></view>
+<view animation="{{animationData}}" class="commodity_attr_box" wx:if="{{showModalStatus}}">
+    <view class="shareChoose">
+        <view class="shareFriend">
+            <button bindtap="hideShareChoosePanel" class="shareBtn" openType="share"></button>
+            <view class="iconfont icon-weixinShare"></view>
+            <view class="iconBg"></view>
+            <view class="des">发送给好友</view>
+        </view>
+        <view bindtap="showSharePanel" class="shareFriendWord">
+            <view class="iconfont icon-weixinFriend"></view>
+            <view class="iconBg"></view>
+            <view class="des">发送到朋友圈</view>
+        </view>
+    </view>
+    <view bindtap="hideShareChoosePanel" class="cancelBtn">取消</view>
+</view>

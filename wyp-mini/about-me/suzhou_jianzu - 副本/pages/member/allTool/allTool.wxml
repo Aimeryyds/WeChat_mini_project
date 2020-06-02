@@ -1,0 +1,115 @@
+<view bindtap="joinSign" class="tableviewcell" wx:if="{{toolList.sign==1}}">
+    <view class="tableviewcellImage">
+        <image class="sizeImg" src="https://tws.cnweisou.com/images/signPn.png"></image>
+    </view>
+    <text>我要签到</text>
+</view>
+<view bindtap="joinVIPCard" class="tableviewcell" wx:if="{{toolList.card==1}}">
+    <view class="tableviewcellImage">
+        <image class="sizeImg vipImg" src="https://tws.cnweisou.com/images/vipPn.png"></image>
+    </view>
+    <text> 会员卡</text>
+</view>
+<view hidden bindtap="navigateToEvaluate" class="tableviewcell">
+    <view class="tableviewcellImage">
+        <image src="https://tws.cnweisou.com/images/shopPn.png"></image>
+    </view>
+    <text>我的评价</text>
+</view>
+<view bindtap="navigateToCollect" class="tableviewcell" wx:if="{{toolList.favor==1}}">
+    <view class="tableviewcellImage">
+        <image src="https://tws.cnweisou.com/images/collectPn.png"></image>
+    </view>
+    <text>我的收藏</text>
+</view>
+<view bindtap="navigateToAddress" class="tableviewcell" wx:if="{{toolList.address==1}}">
+    <view class="tableviewcellImage">
+        <image class="addressP" src="https://tws.cnweisou.com/images/addressPn.png"></image>
+    </view>
+    <text>地址管理</text>
+</view>
+<view bindtap="navigateToCoupon" class="tableviewcell" wx:if="{{toolList.discount==1}}">
+    <view class="tableviewcellImage">
+        <image class="discountP" src="https://tws.cnweisou.com/images/discountPn.png"></image>
+    </view>
+    <text>优惠券</text>
+</view>
+<view bindtap="yu_list" class="tableviewcell" wx:if="{{toolList.subscribe==1}}">
+    <view class="tableviewcellImage">
+        <image src="https://tws.cnweisou.com/images/yuyuePn.png"></image>
+    </view>
+    <text>预约服务</text>
+</view>
+<view bindtap="joinIntegral" class="tableviewcell" wx:if="{{toolList.point==1}}">
+    <view class="tableviewcellImage">
+        <image class="sizeImg" src="https://tws.cnweisou.com/images/jifenPn.png"></image>
+    </view>
+    <text>积分商城</text>
+</view>
+<view bindtap="navigateRegister" class="tableviewcell" wx:if="{{toolList.distribution==1}}">
+    <view class="tableviewcellImage">
+        <image src="https://tws.cnweisou.com/images/distributionPn.png"></image>
+    </view>
+    <text>分销中心</text>
+</view>
+<view bindtap="joinCreateActivity" class="tableviewcell" wx:if="{{toolList.activity==1}}">
+    <view class="tableviewcellImage">
+        <image class="activity" src="https://tws.cnweisou.com/images/creatActivityn.png"></image>
+    </view>
+    <text>发起活动</text>
+</view>
+<view bindtap="joinMyActivity" class="tableviewcell" wx:if="{{toolList.myactivity==1}}">
+    <view class="tableviewcellImage">
+        <image class="sizeImg myActivity" src="https://tws.cnweisou.com/images/myactivityn.png"></image>
+    </view>
+    <text>我的活动</text>
+</view>
+<view bindtap="navigateToList" class="tableviewcell" wx:if="{{toolList.redirect==1}}">
+    <view class="tableviewcellImage">
+        <image src="https://tws.cnweisou.com/images/jumpPn.png"></image>
+    </view>
+    <text>跳转列表</text>
+</view>
+<view bindtap="joinUs" class="tableviewcell" wx:if="{{toolList.aboutus==1}}">
+    <view class="tableviewcellImage">
+        <image class="sizeImg" src="https://tws.cnweisou.com/images/personPn.png"></image>
+    </view>
+    <text>关于我们</text>
+</view>
+<view bindtap="groupsbuy" class="tableviewcell" id="0" wx:if="{{toolList.groupbuy==1}}">
+    <view class="tableviewcellImage">
+        <image class="sizeImg" src="https://tws.cnweisou.com/images/mygroupShop.png"></image>
+    </view>
+    <text>我的团购</text>
+</view>
+<view bindtap="groupsbuyDetail" class="tableviewcell" wx:if="{{toolList.personGroup==1}}">
+    <view class="tableviewcellImage">
+        <image class="sizeImg" src="https://tws.cnweisou.com/images/groundShopDetail.png"></image>
+    </view>
+    <text>团购详情</text>
+</view>
+<view bindtap="joinsupdem" class="tableviewcell" wx:if="{{toolList.sad==1}}">
+    <view class="tableviewcellImage">
+        <image class="gongImg" src="https://tws.cnweisou.com/images/sdgong.png"></image>
+    </view>
+    <text>发布供求</text>
+</view>
+<view bindtap="joinexihibit" class="tableviewcell" wx:if="{{toolList.mysad==1}}">
+    <view class="tableviewcellImage">
+        <image class="gongImg" src="https://tws.cnweisou.com/images/sdxu.png"></image>
+    </view>
+    <text>我的供求</text>
+</view>
+<view bindtap="loginbtn" class="tableviewcell" wx:if="{{toolList.openshop==1}}">
+    <view class="tableviewcellImage">
+        <image class="openshop" src="https://tws.cnweisou.com/images/shopPn.png"></image>
+    </view>
+    <text>我要开店</text>
+</view>
+<view bindtap="joincustomerForm" class="tableviewcell" wx:if="{{toolList.customerForm==1}}">
+    <view class="tableviewcellImage">
+        <image class="openshop" src="https://tws.cnweisou.com/images/customerForm.png"></image>
+    </view>
+    <text>预约列表</text>
+</view>
+<loading wx:if="{{loading}}"></loading>

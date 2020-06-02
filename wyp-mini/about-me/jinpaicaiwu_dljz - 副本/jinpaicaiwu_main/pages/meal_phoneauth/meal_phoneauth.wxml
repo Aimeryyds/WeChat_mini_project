@@ -1,0 +1,19 @@
+<view>
+    <view class="header">
+        <view class="title">手机绑定</view>
+    </view>
+    <view class="inputs">
+        <view class="input">
+            <image src="../../static/icons/phone.png"></image>
+            <input bindinput="resetInput" data-itype="phone" placeholder="请输入手机号" placeholderStyle="color:#ff7e09" type="number"></input>
+        </view>
+        <view class="input">
+            <image src="../../static/icons/suo.png"></image>
+            <input bindinput="resetInput" data-itype="yzcode" placeholder="请输入数据计算值" placeholderStyle="color:#ff7e09" type="number"></input>
+            <button bindtap="tapResetExpr">{{expr}}</button>
+        </view>
+    </view>
+    <view class="green">
+        <button bindtap="tapGetPhone">立即绑定</button>
+    </view>
+</view>

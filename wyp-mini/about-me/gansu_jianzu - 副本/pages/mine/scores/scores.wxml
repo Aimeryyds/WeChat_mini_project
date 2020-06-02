@@ -1,0 +1,65 @@
+<import src="/dist/loadmore/index.wxml"></import>
+<import src="/dist/toast/index.wxml"></import>
+<view class="container">
+    <scroll-view enableBackToTop bindscrolltolower="lower" scrollY="true" style="height: 100vh;">
+        <view class="zan-panel zan-panel__no-margin-top score-header" style="background-color:{{color||'#F63939'}}">
+            <view style="display:flex;align-items:center;padding-left:40rpx">
+                <image src="http://imgcdnali.wfenxiao.com.cn/xcx/c/money.png" style="width:40px;height:40px"></image>
+                <text class="score-header_score">{{remainPoints}}</text>
+            </view>
+            <view style="display:flex;flex-direction:column;align-items:center;justify-content:space-around;height:140rpx">
+                <navigator url="/pages/mine/scores/score_mall">
+                    <view style="font-size:12px;display:flex;justify-content:center;align-items:center;color:#fff;background: linear-gradient(to right, #FFD641, #FF8A1F); ;width:140rpx;height:60rpx;border-radius:30rpx 0 0 30rpx">去兑换 ></view>
+                </navigator>
+                <navigator url="/pages/mine/scores/score_orders">
+                    <view style="color:#fff;font-size:28rpx;margin-top:20rpx">兑换订单</view>
+                </navigator>
+            </view>
+        </view>
+        <view class="zan-panel">
+            <view class="zan-cell zan-cell--access score-header_list-title">
+                <view class="zan-cell__bd" style="display:flex;align-items: center ;">
+                    <view class="menu-name">积分明细</view>
+                </view>
+            </view>
+            <view wx:for="{{pointList}}">
+                <view class="zan-card score-item" hidden="{{item.points>=0}}">
+                    <view class="zan-card__detail" style="margin-left:0px">
+                        <view class="zan-card__detail-row">
+                            <view class="zan-card__right-col score-item_score">{{item.points}}</view>
+                            <view class="zan-card__left-col zan-ellipsis--l2 score-item_desc">
+                {{item.typeName}}
+              </view>
+                        </view>
+                        <view class="zan-card__detail-row zan-c-gray-darker">
+                            <view class="zan-card__right-col"></view>
+                            <view class="zan-card__left-col score-item_date">
+               {{item.createTime}}
+              </view>
+                        </view>
+                    </view>
+                </view>
+                <view class="zan-card  score-item" hidden="{{item.points<0}}">
+                    <view class="zan-card__detail" style="margin-left:0px">
+                        <view class="zan-card__detail-row">
+                            <view class="zan-card__right-col score-item_score-red">{{item.points>0?'+':''}}{{item.points}}</view>
+                            <view class="zan-card__left-col zan-ellipsis--l2 score-item_desc">
+                {{item.typeName}}
+              </view>
+                        </view>
+                        <view class="zan-card__detail-row zan-c-gray-darker">
+                            <view class="zan-card__right-col"></view>
+                            <view class="zan-card__left-col score-item_date">
+                {{item.createTime}}
+              </view>
+                        </view>
+                    </view>
+                </view>
+            </view>
+        </view>
+        <view id="loadmore">
+            <template is="zan-loadmore" data="{{loading:isloadingmore}}"></template>
+        </view>
+    </scroll-view>
+    <template is="zan-toast" data="{{zanToast:zanToast}}"></template>
+</view>

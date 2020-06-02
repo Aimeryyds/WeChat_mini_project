@@ -1,0 +1,28 @@
+<template name="f56f7a90">
+    <view class="_view f56f7a90 {{'roomBrand'+passClass}}" wx:if="{{roomBrand}}">
+        <view class="_view f56f7a90 top">
+            <view bindtap="handleProxy" class="_view f56f7a90 top-x" data-comkey="{{$k}}" data-eventid="{{'f56f7a90-0'}}">
+                <template is="0e24a461" data="{{...$root['0'],...$root[$kk+'f56f7a90-0'],$root:$root}}"></template>
+                <view class="_view f56f7a90 p">
+                    <view class="_view f56f7a90 span">{{roomBrand.title}}</view>
+                    <template is="0255ce1c" data="{{...$root['0'],...$root[$kk+'f56f7a90-1-'+index],$root:$root}}" wx:for="{{roomBrand.landlordIcons}}" wx:key="index"></template>
+                </view>
+            </view>
+            <view class="_view f56f7a90 phone-button">
+                <template is="aa10e628" data="{{...$root['0'],...$root[$kk+'f56f7a90-2'],$root:$root,$slotdefault:'f56f7a90-default-f56f7a90-2'}}" wx:if="{{phoneNum}}"></template>
+            </view>
+        </view>
+        <view class="_view f56f7a90 middle" wx:if="{{roomBrand.brandStars}}">
+            <text class="_text f56f7a90 span">品牌星级:</text>
+            <text class="_text f56f7a90 i mgic-shiwujiao" key="{{i}}" wx:for="{{roomBrand.brandStars}}" wx:for-index="i" wx:for-item="star" wx:key="i"></text>
+            <text class="_text f56f7a90 i mgic-kongwujiao" key="{{i}}" wx:for="{{5-roomBrand.brandStars}}" wx:for-index="i" wx:for-item="star" wx:key="i"></text>
+        </view>
+        <view class="_view f56f7a90 ul bottom" wx:if="{{roomBrand.brandLabelConfig&&roomBrand.brandLabelConfig.length>0}}">
+            <view class="_view f56f7a90 li" key="{{index}}" wx:for="{{roomBrand.brandLabelConfig}}" wx:key="index">
+                <text class="_text f56f7a90 mgic-success"></text>{{item.value}}</view>
+        </view>
+    </view>
+</template>
+<import src="/components/mgImage.vue.wxml"></import>
+<import src="/components/mgAutoImage.vue.wxml"></import>
+<import src="/components/mgButton.vue.wxml"></import>

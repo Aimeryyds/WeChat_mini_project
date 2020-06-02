@@ -1,0 +1,27 @@
+<view class="data-v-90a41b42">
+    <view class="{{['contentWrap data-v-90a41b42',!showState?'show':'']}}">
+        <view bindtap="__e" class="topWrap data-v-90a41b42" data-event-opts="{{[ [ 'tap',[ [ 'change',['$event'] ] ] ] ]}}">
+            <image class="headIcon data-v-90a41b42" src="../../static/THSlogo.png"></image>
+            <view class="centerWrap data-v-90a41b42">
+                <swiper circular autoplay="{{true}}" class="swiper data-v-90a41b42" disableTouch="{{true}}" duration="{{duration}}" interval="{{interval}}" touchable="{{false}}" vertical="{{true}}" wx:if="{{showState}}">
+                    <swiper-item class="data-v-90a41b42" wx:for="{{newsList}}" wx:for-index="__i0__" wx:key="seq">
+                        <text class="data-v-90a41b42">{{item.title}}</text>
+                    </swiper-item>
+                </swiper>
+                <view class="newDate data-v-90a41b42" wx:else>
+                    <text class="data-v-90a41b42">{{'更新时间'+upDate}}</text>
+                </view>
+            </view>
+            <view class="icon data-v-90a41b42">
+                <image class="up data-v-90a41b42" hidden="{{!!showState}}" src="../../static/arrows_hz.png"></image>
+                <image class="down data-v-90a41b42" hidden="{{!showState}}" src="../../static/arrows_hz.png"></image>
+            </view>
+        </view>
+        <view class="infoWrap data-v-90a41b42">
+            <view bindtap="__e" class="item data-v-90a41b42" data-event-opts="{{[ [ 'tap',[ [ 'jumpNews',['$0'],[ [ ['newsList','seq',item.seq] ] ] ] ] ] ]}}" wx:for="{{newsList}}" wx:key="seq">
+                <text class="serial data-v-90a41b42">{{index+1}}</text>
+                <text class="content data-v-90a41b42">{{item.title}}</text>
+            </view>
+        </view>
+    </view>
+</view>

@@ -1,0 +1,44 @@
+<template name="cate_list2">
+    <view class="container2" style="position: relative">
+        <scroll-view class="cate-menu" scrollY="true" style="position: fixed;left:0; top: 1px; bottom: 0;">
+            <view bindtap="switchCate" class="{{cid==item.id?'selected':'unselected'}}" data-idx="{{index}}" id="{{item.id}}" wx:for="{{categories}}">{{item.name}}</view>
+        </scroll-view>
+        <view class="empty-wrap" style="left:60%" wx:if="{{goods_list.length==0}}">
+            <image src="../../images/empty/img_dingdan.png"></image>
+            <view class="text">
+                <text>暂无该分类商品</text>
+            </view>
+        </view>
+        <scroll-view bindscrolltolower="loadmore" bindscrolltoupper="refresh" class="content" scrollY="true" style="position: absolute; left: 170rpx;right: 0; top: 0; bottom: 0;" wx:else>
+            <view class="banner" wx:if="{{cate.pic}}">
+                <image mode="widthFix" src="{{cate.pic}}"></image>
+            </view>
+            <view class="recommon-grid" wx:if="{{cateExt.goodsType==1}}">
+                <view bindtap="go2Detail" class="recommon-item" id="{{item.goodsSn}}" wx:for="{{goods_list}}">
+                    <image class="{{item.groupMarket?'is_group':''}}" src="{{item.thumb}}"></image>
+                    <view class="item-footer">
+                        <view class="item-left">
+                            <text class="item-title">{{item.name}}</text>
+                            <text class="item-price">¥ {{item.price}}</text>
+                        </view>
+                    </view>
+                </view>
+            </view>
+            <view class="recommon-list" wx:if="{{cateExt.goodsType==2}}">
+                <navigator class="recommon-item" url="../shopdetail/shopdetail?goodsSn={{item.goodsSn}}" wx:for="{{goods_list}}">
+                    <image class="item-image" src="{{item.thumb}}"></image>
+                    <view class="item-right">
+                        <text class="item-title">{{item.name}}</text>
+                        <view class="item-bottom">
+                            <text class="item-price">¥ {{item.price}}</text>
+                            <view catchtap="join2Cart" class="join-btn" id="{{item.goodsSn}}">
+                                <image src="../../images/icon_cart.png"></image>
+                            </view>
+                        </view>
+                    </view>
+                </navigator>
+            </view>
+            <button loading class="load-more" wx:if="{{showMore}}"></button>
+        </scroll-view>
+    </view>
+</template>

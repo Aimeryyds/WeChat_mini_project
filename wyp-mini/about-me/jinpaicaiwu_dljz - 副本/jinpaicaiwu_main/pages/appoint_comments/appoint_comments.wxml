@@ -1,0 +1,32 @@
+<view class="header-title">
+    <view class="header-title-p">
+        <text>所有评价({{total}})</text>
+    </view>
+</view>
+<scroll-view scrollY="true">
+    <block wx:for="{{lists}}" wx:key="{{item.id}}">
+        <view class="assess">
+            <view class="assess-d">
+                <text>商品满意度</text>
+                <text class="f">{{item.score}}分</text>
+                <image src="{{star}}" wx:for="{{item.stars}}" wx:key="{{item}}"></image>
+                <image src="{{nostar}}" wx:for="{{item.nostars}}" wx:key="{{item}}"></image>
+            </view>
+        </view>
+        <view class="content">
+            <view class="content-T">
+                <view class="content-l">
+                    <image class="content-header" src="{{item.user_head}}"></image>
+                    <view class="content-r">
+                        <text class="content-title">{{item.user_name}}</text>
+                        <text class="content-date">{{item.create_time}}</text>
+                    </view>
+                </view>
+            </view>
+            <view class="content-B">{{item.content}}</view>
+        </view>
+    </block>
+    <view bindtap="loadMore" class="btnmore" wx:if="{{total>lists.length}}">
+        <text>加载更多</text>
+    </view>
+</scroll-view>

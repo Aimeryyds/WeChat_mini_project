@@ -1,0 +1,19 @@
+<template name="orders-o2o-btns">
+    <view class="o2o-action-box" wx:if="{{order.actionList&&order.actionList.length>0}}">
+        <block wx:for="{{order.actionList}}" wx:key="{{index}}">
+            <view bindtap="payOrder" class="o2o-order-btn o2o-order-btn--primary" data-id="{{order.id}}" data-no="{{order.orderNo}}" data-oto="1" wx:if="{{item=='pay'}}">去支付</view>
+            <view bindtap="cancelOrder" class="o2o-order-btn o2o-order-btn--default" data-id="{{order.id}}" wx:if="{{item==='cancel'}}">取消订单</view>
+            <view bindtap="logisticsDetail" class="o2o-order-btn o2o-order-btn--default" data-id="{{order.id}}" wx:if="{{item=='logistics'}}">查看物流</view>
+            <view catchtap="confirmOrder" class="o2o-order-btn o2o-order-btn--primary" data-id="{{order.id}}" wx:if="{{item=='receive'}}">确认收货</view>
+            <navigator url="/pages/tuan/detail/index?id={{order.sponsorId}}">
+                <view class="o2o-order-btn o2o-order-btn--default" data-id="{{order.sponsorId}}" wx:if="{{item=='viewGroup'}}">查看团详情</view>
+            </navigator>
+            <navigator hoverClass="none" style="min-width:160rpx" url="/pages/pingjia/evaluateform/index?orderNo={{order.orderNo}}&type=1" wx:if="{{item=='firstEvaluate'}}">
+                <view class="o2o-order-btn o2o-order-btn--primary">去评价</view>
+            </navigator>
+            <navigator hoverClass="none" style="width:160rpx" url="/pages/pingjia/evaluateform/index?orderNo={{order.orderNo}}&type=1" wx:if="{{item=='secondEvaluate'}}">
+                <view class="o2o-order-btn o2o-order-btn--primary">写追评</view>
+            </navigator>
+        </block>
+    </view>
+</template>

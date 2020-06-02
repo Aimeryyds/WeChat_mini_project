@@ -1,0 +1,56 @@
+<import src="../../modules/chat-input/chat-input.wxml"></import>
+<import src="../../modules/chat-input/voice.wxml"></import>
+<import src="../../modules/chat-input/extra.wxml"></import>
+<view class="navigation-container" style="top:0px;height:{{46+navigationBarHeight}}px;">
+    <view class="navigation-area" style="height:46px; margin-top:{{navigationBarHeight}}px;">
+        <view catchtap="navigationBack" class="navigation-back">
+            <image class="navigation-back-image" src="../../images/navigation_back_default.png"></image>
+        </view>
+        <view class="navigation-title-container">
+            <text class="navigation-title-text">{{roomTitle==null?'':roomTitle}}</text>
+            <image class="navigation-title-image" src="{{roomStateSrc}}"></image>
+        </view>
+    </view>
+</view>
+<view class="border" style="height:{{windowHeight-46-navigationBarHeight}}px; margin-top:{{navigationBarHeight+46}}px;">
+    <scroll-view animation="{{animation}}" bindscroll="bindScroll" bindscrolltoupper="bindRefesh" bindtap="bindClose" class="messageScrollView" scrollIntoView="{{toView}}" scrollTop="{{scrollTop}}" scrollY="true" style="top:{{navigationBarHeight+46}}px;max-height:{{!isBangPhone?windowHeightRpx-100-navigationBarHeightRpx-92:windowHeightRpx-140-navigationBarHeightRpx-92}}rpx;" upperThreshold="50">
+        <view class="loadMore-block" hidden="{{!loadMore}}">
+            <image class="loadMore-roate" src="../../images/icon_loading.png"></image>
+        </view>
+        <view wx:for="{{messages}}" wx:key="asa">
+            <view id="test" wx:if="{{item.contentType==0&&item.content!=null&&item.content!=''}}">
+                <view class="message-time-border" hidden="{{item.transformTime==null}}">
+                    <view class="message-time-bg">
+                        <view class="message-time">{{item.transformTime}}</view>
+                    </view>
+                </view>
+                <view id="toView{{item.msgkey}}">
+                    <view class="chatmessage" wx:if="{{userInfo.uid!=-1?item.fromId==userInfo.uid:item.fromId==myUid}}">
+                        <image class="right-avatar" src="{{item.fromHead}}"></image>
+                        <view class="right-triangle"></view>
+                        <view class="right-content">
+                            <image src="/images/chat/play_video_right.png" style="width: 20rpx; height: 20rpx; margin-right: 6rpx;" wx:if="{{item.type==2}}"></image>
+                            <text wx:if="{{item.content}}">{{item.content}}</text>
+                            <image src="{{item.imgList}}" style="max-width:150px;max-height:120px" wx:if="{{item.imgList}}"></image>
+                            <map covers="{{covers}}" latitude="{{latitude}}" longitude="{{longitude}}" markers="{{markers}}" scale="16" style="width: 220px; height: 160px;" wx:if="{{item.map}}"></map>
+                        </view>
+                    </view>
+                    <view class="chatmessage" wx:else>
+                        <image binderror="errorFunction" bindtap="gotoHomePage" class="left-avatar" data-errorimg="{{index}}" src="{{item.fromHead==''||item.fromHead==null?defaultImage:item.fromHead}}"></image>
+                        <view class="left-triangle"></view>
+                        <view class="left-content">
+                            <image src="/images/chat/play_video_left.png" style="width: 20rpx; height: 20rpx; margin-right: 6rpx;" wx:if="{{item.type==2}}"></image>
+                            <text>{{item.content}}</text>
+                        </view>
+                    </view>
+                </view>
+            </view>
+        </view>
+        <view class="weui-icon_success"></view>
+    </scroll-view>
+    <template is="chat-input" data="{{inputObj:inputObj,textMessage:textMessage,showVoicePart:false}}" wx:if="{{!showMessagePacket}}"></template>
+</view>
+<alertView bindalertViewCancelAction="alertViewCancelAction" bindalertViewOkAction="alertViewOkAction" id="alertView"></alertView>
+<alertView bindalertViewCancelAction="alertViewCancelAction" bindalertViewOkAction="alertViewOkAction" id="againAlertView"></alertView>
+<toast id="myToast"></toast>
+<getPhone fromstr="聊天详情页面" id="getPhonepop"></getPhone>

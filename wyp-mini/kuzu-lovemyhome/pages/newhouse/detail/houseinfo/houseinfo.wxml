@@ -1,0 +1,7 @@
+<view class="info-wrap" wx:for="{{houseinfo}}">
+    <view class="info-title">{{item.titleName}}</view>
+    <view class="info-list" wx:for="{{item.infoList}}" wx:for-item="infoitem">
+        <view class="list-title" wx:if="{{infoitem.showValue}}">{{infoitem.showName}}</view>
+        <view class="list-ctn" wx:if="{{infoitem.showValue}}">{{infoitem.showValue}}</view>
+    </view>
+</view>

@@ -1,0 +1,11 @@
+<view>
+    <view class="stockbox">
+        <table bind:checkedchange="tableCheckedChange" bind:iconclick="tableIconClick" bind:move="tableMove" columns="{{columns}}" dataSource="{{dataSource}}" moveable="{{moveable}}" noHeader="{{true}}" perRowHeight="{{perItemHeight}}" trStyle="{{trStyle}}"></table>
+        <modal contentPadding="0" id="modal_1"></modal>
+        <view class="content_bg" wx:if="{{message}}">
+            <image class="bg" src="./no-bg.png"></image>
+        </view>
+    </view>
+</view>
+<include src="../../../components/circus/toast/toast.wxml"></include>
+<include src="../../../components/circus/loading/loading.wxml"></include>

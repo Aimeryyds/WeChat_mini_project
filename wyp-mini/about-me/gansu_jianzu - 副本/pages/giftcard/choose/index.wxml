@@ -1,0 +1,27 @@
+<import src="/pages/giftcard/templates/card/index.wxml"></import>
+<view class="container" wx:if="{{isShow}}">
+    <view class="giftcard-choose">
+        <view bindtap="chooseOn" class="giftcard-choose__list" data-index="{{index}}" data-item="{{item}}" wx:for="{{datalist}}">
+            <view class="giftcard-choose__radio" style="border:1px solid {{toggle[index]?'#fff':'#b0b0b0'}}">
+                <image src="http://imgcdnali.wfenxiao.com.cn/xcx/c/selected.png" style="display:{{toggle[index]?'inline-block':'none'}}"></image>
+            </view>
+            <template is="giftcard" data="{{text:item.name,imgUrl:item.imgUrl}}"></template>
+            <view class="giftcard-choose__text">
+                <view>{{item.originalPrice}}元</view>
+                <view>有效期限:{{item.forever==1?'无期限':item.validTimeStr}}</view>
+                <view>使用范围:{{item.platformRange==1?'全部门店':item.platformRange==2?'指定商品':'部分门店'}}</view>
+                <view>剩余{{item.balance}}元</view>
+            </view>
+        </view>
+    </view>
+    <view class="giftcard-choose__footer">
+        <view class="giftcard-choose__payinfo">
+            <view class="giftcard-choose__payinfo-top">实付：￥{{money.total>money.discount?money.paid:0}}</view>
+            <view class="giftcard-choose__payinfo-bottom">
+                <text style="margin-right:20rpx;">应付：￥{{money.total}}</text>
+                <text>礼品卡抵扣{{money.discount>money.total?money.total:money.discount}}</text>
+            </view>
+        </view>
+        <view bindtap="onSubmitGift" class="giftcard-choose__btn">确定</view>
+    </view>
+</view>

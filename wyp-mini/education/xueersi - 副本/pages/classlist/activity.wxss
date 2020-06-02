@@ -1,0 +1,810 @@
+@import "../../wuBaseWxss/12.wxss";
+
+.card {
+    background-color: #fff;
+    position: relative;
+}
+
+.card .desc {
+    padding: 16rpx 16rpx 32rpx 16rpx;
+}
+
+.card .fl {
+    float: left;
+}
+
+.card .fr {
+    float: right;
+}
+
+.card .clearfix:after {
+    content: '';
+    display: block;
+    visibility: hidden;
+    height: 0;
+    line-height: 0;
+    clear: both;
+}
+
+.card .teachers .teacher {
+    line-height: 64rpx;
+    width: 204px;
+    height: 64rpx;
+    overflow-x: scroll;
+    white-space: nowrap;
+}
+
+.card .teachers .one-teacher {
+    display: inline-block;
+    padding-right: 20rpx;
+}
+
+.card .teachers .display-none {
+    display: none;
+}
+
+.card .teachers .avatar {
+    width: 64rpx;
+    height: 64rpx;
+    background: url('https://cdninsight.speiyou.com/1513669644100_default_avatar.png');
+    background-size: 100% 100%;
+    display: inline-block;
+    vertical-align: middle;
+}
+
+.card .teachers .teacher-name {
+    font-size: 24rpx;
+    line-height: 64rpx;
+    margin-left: 18rpx;
+}
+
+.card .teachers .price {
+    line-height: 64rpx;
+    color: #ff5d5d;
+    font-size: 24rpx;
+    font-family: "Hiragino Sans GB";
+    margin-right: 80rpx;
+}
+
+.card .teachers .price-number {
+    font-weight: bold;
+    font-family: "Georgia";
+    font-size: 21.333rpx;
+}
+
+.card .people {
+    margin: 22rpx 0 0 0;
+    line-height: 22rpx;
+    overflow: hidden;
+}
+
+.card .people .icon-teacher {
+    width: 20rpx;
+    height: 25rpx;
+    vertical-align: middle;
+    float: left;
+    margin-left: 12rpx;
+}
+
+.card .people .lecture {
+    color: #666;
+    margin-left: 12rpx;
+    font-size: 22rpx;
+    max-width: 500rpx;
+    line-height: 30rpx;
+    float: left;
+}
+
+.card .class-title {
+    font-size: 30rpx;
+    margin: 16rpx 0 0 14rpx;
+    max-width: 600rpx;
+    line-height: 38rpx;
+}
+
+.card .time {
+    margin: 22rpx 0 0 14rpx;
+    line-height: 22rpx;
+    color: #666;
+}
+
+.card .icon-time {
+    width: 20rpx;
+    height: 20rpx;
+    vertical-align: middle;
+    display: inline-block;
+    line-height: 22rpx;
+}
+
+.card .date {
+    font-size: 22rpx;
+    line-height: 30rpx;
+    margin-left: 12rpx;
+}
+
+.card .date-time {
+    margin-left: 34rpx;
+    font-size: 22rpx;
+    max-width: 300rpx;
+    line-height: 30rpx;
+}
+
+.card .area {
+    background-color: #f6f6f6;
+    border-radius: 40rpx;
+    line-height: 22rpx;
+    padding: 6rpx 24rpx 6rpx 6rpx;
+    margin-top: 24rpx;
+    display: inline-block;
+}
+
+.card .address {
+    max-width: 400rpx;
+    color: #666;
+    margin-left: 12rpx;
+    font-size: 22rpx;
+    display: inline-block;
+    line-height: 30rpx;
+}
+
+.card .icon-area {
+    width: 18rpx;
+    height: 25rpx;
+    vertical-align: top;
+    display: inline-block;
+    margin-left: 12rpx;
+}
+
+.card .bottom {
+    height: 80rpx;
+    padding: 0 15rpx 0;
+    border-top: 1px solid #e8e8e8;
+}
+
+.card .bottom .case {
+    margin-top: 23rpx;
+    width: 80rpx;
+    height: 34rpx;
+    border-radius: 50rpx;
+    border: 1px solid #ff6000;
+    font-size: 20rpx;
+    text-align: center;
+    line-height: 34rpx;
+}
+
+.card .bottom .case-last {
+    color: #ff6000;
+    border: 1px solid #ff6000;
+}
+
+.card .bottom .case-more {
+    color: #1eca16;
+    border: 1px solid #1eca16;
+}
+
+.card .bottom .case-hot {
+    color: #ffba00;
+    border: 1px solid #ffba00;
+}
+
+.card .bottom .case-full {
+    color: #ff5d5d;
+    border: 1px solid #ff5d5d;
+}
+
+.card .bottom .sign {
+    margin-right: 10rpx;
+}
+
+.card .bottom .sign-word {
+    color: #666;
+    font-size: 23rpx;
+    line-height: 80rpx;
+}
+
+.card .bottom .sign-up {
+    border-radius: 0;
+    width: 128rpx;
+    height: 48rpx;
+    font-size: 24rpx;
+    display: inline-block;
+    line-height: 48rpx;
+    margin-top: 16rpx;
+}
+
+.card .class-type {
+    position: absolute;
+    right: 0;
+    top: 0;
+    width: 98rpx;
+    height: 98rpx;
+}
+
+.card .display-none {
+    display: none;
+}
+
+page {
+    background: #eee;
+}
+
+.choose {
+    font-size: 34rpx;
+    background-color: #eee;
+    min-height: 100%;
+    width: 100%;
+}
+
+.choose .clearfix:after {
+    content: "";
+    display: block;
+    visibility: hidden;
+    height: 0;
+    line-height: 0;
+    clear: both;
+}
+
+.choose .top {
+    position: fixed;
+    top: 0;
+    border-bottom: 1px solid #ddd;
+    z-index: 1;
+}
+
+.choose .classlist {
+    padding: 34rpx 18rpx 18rpx 18rpx;
+}
+
+.choose .no-list-tip {
+    color: #949494;
+    font-size: 26rpx;
+    margin: 300rpx auto;
+    text-align: center;
+}
+
+.choose .choose-type {
+    width: 100%;
+    height: 94rpx;
+}
+
+.choose .choose-grade {
+    font-size: 30rpx;
+    line-height: 94rpx;
+    text-align: center;
+    background-color: #2e8eff;
+    color: #fff;
+}
+
+.choose .grade {
+    position: relative;
+    display: inline-block;
+}
+
+.choose .icon-grade {
+    display: inline-block;
+    width: 40rpx;
+    height: 40rpx;
+    transform: rotate(-90deg);
+    position: absolute;
+    right: -50rpx;
+    top: 16rpx;
+}
+
+.choose .page-section-spacing {
+    width: 100%;
+}
+
+.choose .flex-wrp {
+    display: -webkit-box;
+    display: -webkit-flex;
+    display: flex;
+    width: 100%;
+    padding-left: 40rpx;
+    background-color: #fff;
+    overflow: hidden;
+}
+
+.choose .flex-blue {
+    color: #2e8eff;
+}
+
+.choose .flex-item {
+    margin-right: 30rpx;
+    height: 94rpx;
+    font-size: 30rpx;
+    line-height: 94rpx;
+    position: relative;
+    word-break: break-all;
+    word-wrap: break-word;
+}
+
+.choose .flex-item .triangle {
+    width: 0;
+    height: 0;
+    border-bottom: 18rpx solid #2e8eff;
+    border-left: 18rpx solid transparent;
+    display: inline-block;
+    vertical-align: middle;
+    margin-left: 20rpx;
+}
+
+.choose .flex-item .icon-choose {
+    display: inline-block;
+    width: 28rpx;
+    height: 29rpx;
+    margin-right: 10rpx;
+    position: absolute;
+    top: 34rpx;
+    left: 26rpx;
+}
+
+.choose .go-center {
+    background: url(https://cdninsight.speiyou.com/1512544208020_center.png);
+    background-size: 100% 100%;
+    width: 140rpx;
+    height: 108rpx;
+    position: fixed;
+    right: 0;
+    bottom: 112rpx;
+}
+
+.choose .class-item {
+    margin-bottom: 18rpx;
+}
+
+.choose .list {
+    position: fixed;
+    bottom: 0;
+    background-color: #fe5722;
+    height: 92rpx;
+    width: 100%;
+    font-size: 34rpx;
+    line-height: 92rpx;
+    text-align: center;
+    color: #fff;
+}
+
+.choose .mask {
+    position: fixed;
+    z-index: 9;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0,0,0,0.7);
+}
+
+.choose .filter .class-area {
+    position: fixed;
+    width: 620rpx;
+    height: 100%;
+    top: 0;
+    right: -620rpx;
+    z-index: 11;
+    background-color: #fff;
+    transition: right .2s linear;
+}
+
+.choose .filter .class-area .header {
+    height: 106rpx;
+    line-height: 106rpx;
+    text-align: center;
+    display: inline-block;
+    margin: 0 0 0 230rpx;
+    color: #454545;
+    font-size: 28rpx;
+}
+
+.choose .filter .class-area .back-button {
+    display: inline-block;
+    width: 80rpx;
+    height: 60rpx;
+}
+
+.choose .filter .class-area .back {
+    left: 2rpx;
+    width: 20rpx;
+    height: 20rpx;
+    transform: rotate(45deg);
+    border: 2px solid #999;
+    border-width: 0 0 2rpx 2rpx;
+    display: inline-block;
+    margin: 0 0 0 44rpx;
+}
+
+.choose .filter .class-area .select-area {
+    -webkit-box-orient: horizontal;
+    -webkit-box-direction: normal;
+    flex-direction: row;
+    height: 100%;
+    font-size: 26rpx;
+}
+
+.choose .filter .class-area .select-area .flex-item {
+    width: 152rpx;
+    font-size: 26rpx;
+}
+
+.choose .filter .class-area .select-area .first-line {
+    -webkit-box-orient: vertical;
+    -webkit-box-direction: normal;
+    flex-direction: column;
+    border-top: 1px solid #e5e5ea;
+}
+
+.choose .filter .class-area .select-area .first-line .first-item {
+    width: 104rpx;
+    height: 100rpx;
+    padding: 0 24rpx 0 24rpx;
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+    text-align: left;
+}
+
+.choose .filter .class-area .select-area .first-line .first-select {
+    background-color: #f0f4f5;
+    color: #3d9bfc;
+}
+
+.choose .filter .class-area .select-area .second-line {
+    -webkit-box-orient: vertical;
+    -webkit-box-direction: normal;
+    flex-direction: column;
+    width: 180rpx;
+    height: 100%;
+    background-color: #f5f8f9;
+    border-top: 1px solid #e5e5ea;
+}
+
+.choose .filter .class-area .select-area .second-line .second-item {
+    height: 100rpx;
+    width: 132rpx;
+    padding: 0 24rpx 0 24rpx;
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+    text-align: left;
+}
+
+.choose .filter .class-area .select-area .second-line .second-select {
+    background-color: #ebf0f2;
+    color: #3d9bfc;
+}
+
+.choose .filter .class-area .select-area .third-line {
+    -webkit-box-orient: vertical;
+    -webkit-box-direction: normal;
+    flex-direction: column;
+    width: 290rpx;
+    background-color: #ebf0f2;
+    height: 100%;
+    border-top: 1px solid #e5e5ea;
+}
+
+.choose .filter .class-area .select-area .third-line .third-item {
+    height: 100rpx;
+    width: 182rpx;
+    text-align: left;
+    padding: 0 84rpx 0 24rpx;
+    position: relative;
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+}
+
+.choose .filter .class-area .select-area .third-line .weui-icon-radio {
+    position: absolute;
+    top: 20rpx;
+    right: 20rpx;
+}
+
+.choose .filter .main-teacher {
+    position: fixed;
+    width: 620rpx;
+    height: 100%;
+    top: 0;
+    right: -620rpx;
+    z-index: 11;
+    background-color: #fff;
+    transition: right .2s linear;
+}
+
+.choose .filter .main-teacher .header {
+    height: 106rpx;
+    line-height: 106rpx;
+    text-align: center;
+    display: inline-block;
+    margin: 0 0 0 230rpx;
+    color: #454545;
+    font-size: 28rpx;
+}
+
+.choose .filter .main-teacher .back-button {
+    display: inline-block;
+    width: 80rpx;
+    height: 60rpx;
+}
+
+.choose .filter .main-teacher .back {
+    left: 2rpx;
+    width: 20rpx;
+    height: 20rpx;
+    transform: rotate(45deg);
+    border: 2px solid #999;
+    border-width: 0 0 2rpx 2rpx;
+    display: inline-block;
+    margin: 0 0 0 44rpx;
+}
+
+.choose .filter .show {
+    right: 0;
+}
+
+.choose .filter .container {
+    position: fixed;
+    background-color: #fff;
+    width: 620rpx;
+    height: 100%;
+    top: 0;
+    right: -620rpx;
+    padding-top: 68rpx;
+    z-index: 10;
+    transition: right .2s linear;
+}
+
+.choose .filter .container.show {
+    right: 0;
+}
+
+.choose .filter .class-type {
+    padding: 0 0 30rpx 22rpx;
+    border-bottom: 1px solid #e5e5ea;
+}
+
+.choose .filter .class-type .class-title {
+    color: #999;
+    font-size: 24rpx;
+    margin-bottom: 20rpx;
+}
+
+.choose .filter .class-type .type-item {
+    margin-right: 21rpx;
+    float: left;
+}
+
+.choose .filter .class-type .default {
+    width: 178rpx;
+    height: 60rpx;
+    color: #454545;
+    background-color: #f0f4f5;
+    margin: 0 auto;
+    border-radius: 8rpx;
+    line-height: 60rpx;
+    font-size: 26rpx;
+    text-align: center;
+}
+
+.choose .filter .class-type .button-blue {
+    background-color: #3d9bfc;
+    color: #fff;
+}
+
+.choose .filter .class-type .blue {
+    background-color: #3d9bfc;
+    color: #fff;
+}
+
+.choose .filter .time-type {
+    border: 0;
+    padding-top: 22rpx;
+}
+
+.choose .filter .time-type .time {
+    width: 128rpx;
+    margin-bottom: 30rpx;
+}
+
+.choose .filter .footer {
+    position: absolute;
+    bottom: 66rpx;
+    line-height: 88rpx;
+    text-align: center;
+}
+
+.choose .filter .footer .reset {
+    width: 306rpx;
+    height: 84rpx;
+    float: left;
+    color: #999;
+    border: 1px solid #dfdfdf;
+}
+
+.choose .filter .footer .complete {
+    width: 310rpx;
+    height: 88rpx;
+    float: left;
+    background-color: #2e8eff;
+    color: #fff;
+}
+
+.choose .change-class .container {
+    z-index: 20;
+    position: fixed;
+    top: 0;
+    width: 750rpx;
+}
+
+.choose .change-class .container .class-tip {
+    width: 100%;
+    height: 930rpx;
+    background-color: #fff;
+}
+
+.choose .change-class .container .friend-tip {
+    height: 102rpx;
+}
+
+.choose .change-class .container .msg1 {
+    padding-top: 6rpx;
+    font-size: 30rpx;
+    text-align: center;
+}
+
+.choose .change-class .container .msg2 {
+    font-size: 24rpx;
+    text-align: center;
+}
+
+.choose .change-class .container .change-item {
+    width: 716rpx;
+    background-color: #eeeeee;
+    padding: 0 17rpx 30rpx;
+}
+
+.choose .change-class .container .class-size {
+    padding: 32rpx 0 32rpx 0;
+    font-size: 30rpx;
+}
+
+.choose .change-class .choose-button {
+    margin-top: 20rpx;
+    padding: 0;
+}
+
+.choose .change-class .choose-button .change-class {
+    width: 50%;
+    text-align: center;
+    margin: 0;
+}
+
+.choose .change-class .choose-button .yes {
+    background-color: #3699ff;
+    color: #fff;
+    width: 50%;
+    margin: 0;
+}
+
+.choose .weui-cell:before {
+    left: 0;
+}
+
+.choose .weui-cell {
+    color: #2e8eff;
+    font-size: 26rpx;
+    height: 62rpx;
+}
+
+.choose .weui-cell__bd {
+    font-size: 26rpx;
+    color: #454545;
+}
+
+.choose switch {
+    font-size: 26rpx;
+}
+
+.choose .weui-cell__ft_in-access {
+    color: #2e8eff;
+}
+
+.choose .refresh-top {
+    margin-top: 16rpx;
+    padding: 20rpx;
+    font-size: 24rpx;
+    text-align: center;
+}
+
+.choose .act-content {
+    position: relative;
+}
+
+.choose .act-content .act-name {
+    border: 1px solid #fe5722;
+    color: #fe5722;
+    font-size: 22rpx;
+    position: absolute;
+    top: 0;
+    left: 20rpx;
+    padding: 0 2px 0;
+    max-width: 120rpx;
+}
+
+.choose .act-content .act-content {
+    margin: 20rpx 20px 10px 80px;
+    font-size: 26rpx;
+}
+
+.choose .load {
+    height: 100rpx;
+    text-align: center;
+    margin: 0;
+}
+
+.choose .action-sheet scroll-view {
+    height: 620rpx;
+}
+
+.choose .select-tutor-title {
+    height: 100rpx;
+    font-size: 30rpx;
+    text-align: center;
+    line-height: 100rpx;
+}
+
+.choose .select-done-btn {
+    height: 80rpx;
+    line-height: 80rpx;
+    font-size: 30rpx;
+    border-radius: 0;
+}
+
+.choose .tutor-cell {
+    box-sizing: border-box;
+    display: -webkit-box;
+    display: -webkit-flex;
+    display: flex;
+    -webkit-box-align: center;
+    align-items: center;
+    padding: 0 32rpx;
+    width: 100%;
+    height: 155rpx;
+    border-bottom: 1px solid rgba(0,0,0,0.1);
+}
+
+.choose .tutor-avatar-wrap {
+    margin-right: 30rpx;
+    width: 90rpx;
+    height: 90rpx;
+    background: url('http://static-xesapi.speiyou.cn/1524642003100.png');
+    background-size: 100% 100%;
+    -webkit-box-flex: 0;
+    flex: none;
+    border-radius: 50%;
+    overflow: hidden;
+}
+
+.choose .tutor-avatar-wrap image {
+    width: 100%;
+    height: 100%;
+}
+
+.choose .tutor-content-wrap {
+    padding-right: 20rpx;
+    -webkit-box-flex: 1;
+    flex: 1;
+    font-size: 28rpx;
+    font-weight: 300;
+}
+
+.choose .tutor-content-top {
+    display: -webkit-box;
+    display: -webkit-flex;
+    display: flex;
+    -webkit-box-pack: justify;
+    justify-content: space-between;
+}
+
+.choose .toast {
+    position: fixed;
+    top: 50%;
+}

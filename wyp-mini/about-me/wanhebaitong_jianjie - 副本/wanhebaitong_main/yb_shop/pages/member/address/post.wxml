@@ -1,0 +1,40 @@
+<loading hidden="{{show}}">正在加载</loading>
+<view class="page" wx:if="{{show}}">
+    <view class="fui-cell-group" style="margin-top:0;margin:0 auto;background: #f4f4f4;">
+        <view class="post_box">
+            <view class="post_tit">收货人</view>
+            <view class="fui-cell">
+                <view class="fui-cell-label">姓名</view>
+                <view class="fui-cell-info">
+                    <input bindinput="onChange" class="fui-input" data-type="consigner" placeholder="收件人" value="{{detail.consigner}}"></input>
+                </view>
+            </view>
+            <view class="fui-cell">
+                <view class="fui-cell-label">手机</view>
+                <view class="fui-cell-info">
+                    <input bindinput="onChange" class="fui-input" data-type="phone" placeholder="手机号码" type="number" value="{{detail.phone}}"></input>
+                </view>
+            </view>
+        </view>
+        <view class="post_box">
+            <view class="post_tit">收货地址</view>
+            <view class="fui-cell">
+                <view class="fui-cell-label">所在地区</view>
+                <view bindtap="selectArea" class="fui-cell-info" data-area="{{detail.province+' '+detail.city+' '+detail.area}}">{{!detail.province||!detail.city?'请选择所在地区':detail.province+' '+detail.city+' '+detail.area}}</view>
+            </view>
+            <view class="fui-cell">
+                <view class="fui-cell-label">详细地址</view>
+                <view class="fui-cell-info">
+                    <input bindinput="onChange" class="fui-input" data-type="address" placeholder="街道，楼牌号等" value="{{detail.address}}"></input>
+                </view>
+            </view>
+        </view>
+    </view>
+    <button bindtap="get_wx_address" style="margin:1rem auto;width:90%;height:86rpx;line-height:86rpx;font-size:30rpx;background:#09bb07;color:#fff;">一键获取微信地址</button>
+    <include src="/yb_shop/pages/common/city-picker.wxml"></include>
+    <view class="fui-mask {{showPicker?'show':''}}"></view>
+    <view bindtap="submit" class="btn btn-danger block" data-type="{{type=='add'?'add':'save'}}" style="margin:1rem auto;width:90%;height:86rpx;line-height:86rpx;font-size:30rpx;background:{{config.selectedColor!='#000000'?config.selectedColor:config.background}};color:{{config.selectedColor=='#000000'&&config.font_color=='black'?'#000000':'#ffffff'}};border:1px solid {{config.selectedColor!='#000000'?config.selectedColor:config.background}};">{{subtext}}</view>
+    <view class="fui-toast {{FoxUIToast.show?'in':'out'}}">
+        <view class="text">{{FoxUIToast.text}}</view>
+    </view>
+</view>

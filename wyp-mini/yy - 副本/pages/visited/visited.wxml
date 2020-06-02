@@ -1,0 +1,11 @@
+<import src="../../commons/tpl/templateLive.wxml"></import>
+<import src="../../commons/tpl/templateNoData.wxml"></import>
+<form bindsubmit="submitForm" reportSubmit="true">
+    <view class="visited-page" style="margin-top:{{statusBar.height+'px'}}">
+        <status-bar statusBar="{{statusBar}}"></status-bar>
+        <scroll-view scrollY class="visited-main">
+            <template is="searchLive-tpl" data="{{list:list}}" wx:if="{{list.length}}"></template>
+            <template is="noData-tpl" data="{{tips:'暂无最近访问~'}}" wx:else></template>
+        </scroll-view>
+    </view>
+</form>

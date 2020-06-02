@@ -1,0 +1,36 @@
+<template name="69e4c243">
+    <view class="_view 69e4c243 {{'activity'+passClass}}" wx:if="{{activity.promotionTags&&activity.promotionTags.length>0||activity.couponsSlice&&activity.couponsSlice.length>0}}">
+        <view class="_view 69e4c243 ul promotionTags">
+            <view bindtap="handleProxy" class="_view 69e4c243 li" data-comkey="{{$k}}" data-eventid="{{'69e4c243-0-'+index}}" key="{{index}}" wx:for="{{activity.promotionTags}}" wx:key="index">
+                <template is="0e24a461" data="{{...$root['0'],...$root[$kk+'69e4c243-0-'+index],$root:$root}}" wx:if="{{item.img}}"></template>
+                <text class="_text 69e4c243 span" style=" {{'color:'+item.color+';'}}">{{item.label}}</text>
+                <text class="_text 69e4c243 mgic-angle-r"></text>
+            </view>
+        </view>
+        <template is="66bb9f6d" data="{{...$root['0'],...$root[$kk+'69e4c243-1'],$root:$root}}" wx:if="{{showNoticeDetail}}"></template>
+        <view class="_view 69e4c243 ul couponsSlice" wx:if="{{activity.couponsSlice&&activity.couponsSlice.length>0}}">
+            <view bindtap="handleProxy" class="_view 69e4c243 li" data-comkey="{{$k}}" data-eventid="{{'69e4c243-2'}}">
+                <text class="_text 69e4c243 span">优惠券</text>
+                <view class="_view 69e4c243 p">
+                    <text class="_text 69e4c243 var" key="{{index}}" wx:for="{{activity.couponsSlice}}" wx:key="index">{{item}}</text>
+                </view>
+                <text class="_text 69e4c243 mgic-angle-r"></text>
+            </view>
+        </view>
+        <transition class="_transition 69e4c243" name="fade">
+            <view class="_view 69e4c243 bg" wx:if="{{couponVisible}}">
+                <view class="_view 69e4c243 couponDialog">
+                    <view bindtap="handleProxy" class="_view 69e4c243 i mgic-chahao" data-comkey="{{$k}}" data-eventid="{{'69e4c243-3'}}"></view>
+                    <view class="_view 69e4c243 h2">优惠券</view>
+                    <view class="_view 69e4c243 panel-title" wx:if="{{activity.platformCoupons&&activity.platformCoupons.length>0}}">-蘑菇优惠券-</view>
+                    <template is="41a747a0" data="{{...$root['0'],...$root[$kk+'69e4c243-2-'+index],$root:$root}}" wx:for="{{activity.platformCoupons}}" wx:key="index"></template>
+                    <view class="_view 69e4c243 panel-title" wx:if="{{activity.landlordCoupons&&activity.landlordCoupons.length>0}}">-房东优惠券-</view>
+                    <template is="41a747a0" data="{{...$root['0'],...$root[$kk+'69e4c243-3-'+index],$root:$root}}" wx:for="{{activity.landlordCoupons}}" wx:key="index"></template>
+                </view>
+            </view>
+        </transition>
+    </view>
+</template>
+<import src="/components/mgImage.vue.wxml"></import>
+<import src="/components/common/noticeDetail.vue.wxml"></import>
+<import src="/components/common/ticket.vue.wxml"></import>

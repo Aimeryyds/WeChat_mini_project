@@ -1,0 +1,151 @@
+<view class="list-search">
+    <view bindtap="searchhouse" class="list-search-box">
+        <image src="https://res.5i5j.com/cache/weixin/newhouse/search.png"></image>
+        <text>输入小区或商圈名称</text>
+    </view>
+</view>
+<view class="list-tab">
+    <view bindtap="filtertabFn" class="list-item {{item.select?'filter-cur':tabindex==index?'filter-cur':''}}" data-index="{{index}}" wx:for="{{tabArr}}" wx:key="{{index}}">
+        <view wx:if="{{item.name!='排序'}}">
+            <text>{{item.name}}</text>
+            <text class="arrow"></text>
+            <view class="item-border"></view>
+        </view>
+        <view wx:else>
+            <image src="{{item.select?'https://res.5i5j.com/cache/weixin/newhouse/sort_select.png':tabindex==index?'https://res.5i5j.com/cache/weixin/newhouse/sort_select.png':'https://res.5i5j.com/cache/weixin/newhouse/sort.png'}}"></image>
+        </view>
+    </view>
+</view>
+<view class="list-data">
+    <scroll-view bindscrolltolower="scrolltolower" lowerThreshold="50" scrollY="true">
+        <view bindtap="routego" class="list-ctn" data-estateid="{{item.estateID}}" data-propertytypeid="{{item.propertyTypeID}}" wx:for="{{listdata}}" wx:key="{{item.estateID}}">
+            <view class="image-wrap">
+                <image class="icon3d" src="../../../img/resources/icon3d.png" wx:if="{{item.is3d==1}}"></image>
+                <image lazyLoad="true" src="{{item.coverImageName}}"></image>
+            </view>
+            <view class="content">
+                <view class="item-1">
+                    <text>{{item.estateName}}</text>
+                    <view class="tag">{{item.saleStatus_desc}}</view>
+                </view>
+                <view class="item-2">
+                    <text>{{item.propertyTypeName}}</text>·
+        <text>{{item.estateAreaName}}</text>-
+        <text>{{item.estateAddress}}</text>
+                </view>
+                <view class="item-3">
+                    <view class="item-tag" wx:for="{{item.tagList}}" wx:for-item="itemthis">{{itemthis}}</view>
+                </view>
+                <view class="item-4">
+                    <text>{{item.show_price}}</text>
+                    <text wx:if="{{item.minBuildArea&&item.maxBuildArea}}">建面{{item.minBuildArea}}-{{item.maxBuildArea}}㎡</text>
+                </view>
+            </view>
+        </view>
+    </scroll-view>
+    <view class="nodata" wx:if="{{datastatus}}">
+        <image src="https://res.5i5j.com/cache/weixin/common/no-house.png"></image>
+        <text>没有找到相关房源</text>
+    </view>
+</view>
+<view class="filter" wx:if="{{tabindex!=5}}">
+    <view bindtap="hidefilter" class="filter-box" wx:if="{{tabindex!=5}}"></view>
+    <view catchtouchmove="preventD" class="area" wx:if="{{tabindex==0}}">
+        <view class="area-left">
+            <view catchtap="checkarea" class="{{areaFirstSelect==0?'filter-cur':''}}" data-index="0">区域</view>
+            <view catchtap="checkarea" class="{{areaFirstSelect==1?'filter-cur':''}}" data-index="1">地铁</view>
+        </view>
+        <view class="area-right">
+            <scroll-view scrollY="true">
+                <view bindtap="areasecondFn" class="bx {{postdata.areaID==''&&postdata.trafficID==''?'filter-cur':''}}" data-areaid="">不限</view>
+                <view bindtap="areasecondFn" class="{{item.areaID==postdata.areaID?'filter-cur':''||item.trafficID==postdata.trafficID?'filter-cur':''}}" data-areaid="{{item.areaID||item.trafficID}}" data-name="{{item.areaName||item.trafficName}}" wx:for="{{areaData}}" wx:key="{{item.areaID || item.trafficID}}">
+          {{item.areaName||item.trafficName}}
+        </view>
+            </scroll-view>
+        </view>
+    </view>
+    <view catchtouchmove="preventD" class="price" wx:if="{{tabindex==1}}">
+        <view class="price-left">
+            <view bindtap="checkprice" class="{{priceFirstSelect==0?'filter-cur':''}}" data-index="0">总价</view>
+            <view bindtap="checkprice" class="{{priceFirstSelect==1?'filter-cur':''}}" data-index="1">单价</view>
+        </view>
+        <view class="price-right">
+            <scroll-view scrollY="true">
+                <view bindtap="pricesecondFn" class="bx {{postdata.priceID==''&&postdata.customPriceLow==''&&postdata.customPriceTop==''&&postdata.customTotalPriceLow==''&&postdata.customTotalPriceTop==''?'filter-cur':''}}" data-priceid="">不限</view>
+                <view bindtap="pricesecondFn" class="{{postdata.priceID==item.id?'filter-cur':''}}" data-name="{{item.name||item.regionName}}" data-priceid="{{item.id}}" wx:for="{{peiceData}}" wx:key="{{item.id}}">
+          {{item.name||item.regionName}}
+        </view>
+            </scroll-view>
+        </view>
+        <view class="custom">
+            <view>自定义</view>
+            <input bindinput="inputprice" class="minprice" data-type="min" maxlength="7" placeholder="最低价" value="{{minprice}}"></input>
+            <view class="hx">-</view>
+            <input bindinput="inputprice" class="topprice" data-type="max" maxlength="7" placeholder="最高价" value="{{maxprice}}"></input>
+            <text>万</text>
+            <view bindtap="priceconfirm" class="confirm-btn">确定</view>
+        </view>
+    </view>
+    <view catchtouchmove="preventD" class="housetype" wx:if="{{tabindex==2}}">
+        <scroll-view scrollY="true">
+            <view bindtap="housetypeFn" class="{{postdata.houseTypeID==''?'filter-cur':''}}" data-housetypeid="">不限</view>
+            <view bindtap="housetypeFn" class="{{postdata.houseTypeID==item.id?'filter-cur':''}}" data-housetypeid="{{item.id}}" data-name="{{item.houstTypeName}}" wx:for="{{housetypeData}}" wx:key="{{item.id}}">
+        {{item.houstTypeName}}
+      </view>
+        </scroll-view>
+    </view>
+    <view catchtouchmove="preventD" class="moretag" wx:if="{{tabindex==3}}">
+        <view class="tag-ctn">
+            <scroll-view scrollY="true">
+                <view class="moretag-title">面积</view>
+                <view style="overflow:hidden;">
+                    <view bindtap="moretagFn" class="more-tag-item {{postdatafront.budingArea==''?'filter-cur':''}}" data-id="" data-type="budingArea">不限</view>
+                    <view bindtap="moretagFn" class="more-tag-item {{postdatafront.budingArea==item.id?'filter-cur':''}}" data-id="{{item.id}}" data-type="budingArea" wx:for="{{filterData.budingArea}}" wx:key="{{item.id}}">
+            {{item.name}}
+          </view>
+                </view>
+                <view class="moretag-title">售卖状态</view>
+                <view style="overflow:hidden;">
+                    <view bindtap="moretagFn" class="more-tag-item {{postdatafront.otherID==''?'filter-cur':''}}" data-id="" data-type="otherID">不限</view>
+                    <view bindtap="moretagFn" class="more-tag-item {{postdatafront.otherID==item.id?'filter-cur':''}}" data-id="{{item.id}}" data-type="otherID" wx:for="{{filterData.other}}" wx:key="{{ite.id}}"> 
+            {{item.otherName}}
+          </view>
+                </view>
+                <view class="moretag-title">类型</view>
+                <view style="overflow:hidden;">
+                    <view bindtap="moretagFn" class="more-tag-item {{postdatafront.propertyTypeID==''?'filter-cur':''}}" data-id="" data-type="propertyTypeID">不限</view>
+                    <view bindtap="moretagFn" class="more-tag-item {{postdatafront.propertyTypeID==item.propertyTypeID?'filter-cur':''}}" data-id="{{item.propertyTypeID}}" data-type="propertyTypeID" wx:for="{{filterData.propertyType}}" wx:key="{{item.propertyTypeID}}"> 
+            {{item.propertyTypeName}}
+          </view>
+                </view>
+                <view class="moretag-title">特色</view>
+                <view style="overflow:hidden;">
+                    <view bindtap="moretagFn" class="more-tag-item {{postdatafront.tagID==''?'filter-cur':''}}" data-id="" data-type="tagID">不限</view>
+                    <view bindtap="moretagFn" class="more-tag-item {{postdatafront.tagID==item.tagID?'filter-cur':''}}" data-id="{{item.tagID}}" data-type="tagID" wx:for="{{filterData.tag}}" wx:key="{{item.tagID}}"> 
+            {{item.tagName}}
+          </view>
+                </view>
+                <view class="moretag-title">开盘时间</view>
+                <view style="overflow:hidden;">
+                    <view bindtap="moretagFn" class="more-tag-item {{postdatafront.openDate==''?'filter-cur':''}}" data-id="" data-type="openDate">不限</view>
+                    <view bindtap="moretagFn" class="more-tag-item {{postdatafront.openDate==item.id?'filter-cur':''}}" data-id="{{item.id}}" data-type="openDate" wx:for="{{filterData.openDate}}" wx:key="{{ite.id}}"> 
+            {{item.otherName}}
+          </view>
+                </view>
+            </scroll-view>
+        </view>
+        <view class="tab-btn">
+            <view bindtap="moreCancel">重置</view>
+            <view bindtap="moreConfirm">确定</view>
+        </view>
+    </view>
+    <view catchtouchmove="preventD" class="sorttab" wx:if="{{tabindex==4}}">
+        <view bindtap="sortFn" class="{{postdata.sortID==''?'filter-cur':''}}" data-sortid="">默认排序</view>
+        <view bindtap="sortFn" class="{{postdata.sortID==item.id?'filter-cur':''}}" data-sortid="{{item.id}}" wx:for="{{filterData.order}}" wx:key="{{item.id}}">
+      {{item.orderName}}
+    </view>
+    </view>
+</view>
+<view class="loading" hidden="{{loadstatus}}">
+    <image class="loading-img" src="/img/resources/load.png"></image>
+</view>

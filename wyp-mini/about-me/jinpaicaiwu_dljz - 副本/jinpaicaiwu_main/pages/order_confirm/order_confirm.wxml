@@ -1,0 +1,200 @@
+<view class="main">
+    <view class="orders-list confirm-box border_bottom2">
+        <view class="orders-detail border_bottom" wx:for="{{selectCarts}}" wx:key="{{index}}">
+            <image src="{{item.image||item.product_thumb}}"></image>
+            <view class="tooLong2" style="line-height: 40rpx;">{{item.title||item.product_name}}</view>
+            <view class="tooLong2" style="line-height: 40rpx;" wx:if="{{item.skuchecked}}">{{item.skuchecked}}</view>
+            <view class="" style="position: absolute;left: 170rpx;bottom: 0;line-height: 60rpx;">{{item.num||item.amount}}</view>
+            <view class="li_add">
+                <text bindtap="subtract" class="newadd" data-index="{{index}}">-</text>
+                <text class="newtxt">{{item.num||item.amount}}</text>
+                <text bindtap="add" class="newadd" data-index="{{index}}">+</text>
+            </view>
+        </view>
+        <view class="orders-footer">
+            <text class="fl">{{nowtime}}</text>
+            <text class="fr">应付:<text class="cart_color strong">￥{{lastPrice}}</text>
+            </text>
+        </view>
+    </view>
+    <view class="delivery-box confirm-box border_bottom2">
+        <picker bindchange="bindPickerChange" range="{{delivery_mode}}" value="{{index}}">
+            <view class="delivery-top border_bottom">
+                <text class="fl">配送方式</text>
+                <view class="picker fr">
+                    <text wx:if="{{!delivery_title}}">请选择</text>
+                    <text>{{delivery_mode[index]}}</text>
+                    <text class="car_color" wx:if="{{delivery_title}}">{{delivery_title}}+￥{{ifee||0}}</text>
+                </view>
+            </view>
+        </picker>
+        <view class="delivery-middle border_bottom" wx:if="{{dis_key>0}}">
+            <view bindtap="addAddr" class="delivery_addr-no-content" wx:if="{{delivery_addr||pickupaddrs}}">
+                <view class="delivery_addr-no-list">
+                    <view wx:if="{{dis_key==1}}">
+                        <picker bindchange="bindpickupaddrChange" range="{{pickupaddrs}}" rangeKey="address" value="{{pickaddrindex}}">
+                            <view>请选择自提地址</view>
+                            <view class="addr_detail small_font pickupaddr">
+               当前自提地址: {{pickupaddrs[pickaddrindex].address}}
+            </view>
+                        </picker>
+                    </view>
+                    <view wx:elif="{{!dis_key||dis_key>1}}">
+                        <view class="addr_name normal_font">收货人：<text class="cart_color">{{address.reciever_name}}</text>
+                        </view>
+                        <view class="addr_phone medium_font">电话：{{address.phone}}</view>
+                        <view class="addr_detail small_font tooLong">地址：{{address.detail}}</view>
+                    </view>
+                </view>
+            </view>
+            <view bindtap="addAddr" class="delivery_addr-no-content" wx:else>
+                <text class="delivery_addr-no-plus">+</text>
+                <text class="delivery_addr-no-tex">添加收货人信息</text>
+            </view>
+        </view>
+        <picker bindchange="bindDateChange" end="{{end_date}}" mode="date" start="{{start_date}}" value="{{date}}" wx:if="{{delivery_time.length&&(!dis_key||dis_key>1)}}">
+            <view class="delivery-top border_bottom ">
+                <text class="fl">配送日期</text>
+                <view class="picker fr">{{date}}</view>
+            </view>
+        </picker>
+        <picker bindchange="bindTimeChange" range="{{delivery_time}}" value="{{index}}" wx:if="{{delivery_time.length&&(!dis_key||dis_key>1)}}">
+            <view class="delivery-top border_bottom ">
+                <text class="fl">配送时间</text>
+                <view class="picker fr">{{delivery_time[index_time]}}</view>
+            </view>
+        </picker>
+        <view class="pickupinbox" wx:if="{{dis_key==1}}">
+            <view class="p1">联系人:{{pickname}}</view>
+            <view class="p2">联系电话:{{pickphone}}</view>
+            <view bindtap="pickupEdit" class="p3">编辑自提信息</view>
+        </view>
+    </view>
+    <view class="confirm-pay confirm-box border_bottom2">
+        <picker bindchange="bindPayChange" range="{{pay_mode}}" value="{{index}}">
+            <view class="delivery-top border_bottom">
+                <text class="fl">支付方式</text>
+                <view class="picker fr">{{pay_mode[index_pay]}}</view>
+            </view>
+        </picker>
+        <view class="pay_way" wx:if="{{index_pay==0}}">
+            <view class="pay_way_list" wx:for="{{pay_ways}}" wx:key="{{index}}">
+                <image bindtap="changePay" class="{{item.way_id==pay_way_id?'active':''}}" data-id="{{item.way_id}}" src="{{item.src}}"></image>
+                <icon color="#fff" size="10" type="success_no_circle" wx:if="{{item.way_id==pay_way_id}}"></icon>
+            </view>
+        </view>
+        <view class="border_bottom delivery-desc" wx:if="{{description}}">
+            <view class="orders-number clearFix">
+                <text class="fl descfl">描述</text>
+                <text class="fr descfr">{{description}}</text>
+            </view>
+        </view>
+        <block wx:if="{{cashresult[index_pay]['paraval']['recep']}}">
+            <view class="border_bottom delivery-desc" wx:if="{{cashresult[index_pay]['paraval']['fullname_display']==1}}">
+                <view class="orders-number qrcode-order clearFix">
+                    <text class="fl descfl">姓名：</text>
+                    <text class="fr descfr">{{cashresult[index_pay]['paraval']['fullname']}}</text>
+                </view>
+            </view>
+            <view class="border_bottom delivery-desc" wx:if="{{cashresult[index_pay]['paraval']['account_display']==1}}">
+                <view class="orders-number qrcode-order clearFix">
+                    <text class="fl descfl">帐号：</text>
+                    <text class="fr descfr">{{cashresult[index_pay]['paraval']['account']}}</text>
+                </view>
+            </view>
+            <view class="border_bottom delivery-desc" wx:if="{{cashresult[index_pay]['paraval']['desc_display']==1}}">
+                <view class="orders-number qrcode-order clearFix">
+                    <text class="desc">{{cashresult[index_pay]['paraval']['desc']}}</text>
+                </view>
+            </view>
+            <view class="border_bottom" wx:if="{{cashresult[index_pay]['paraval']['recep']}}">
+                <view class="orders-number qrcode-order clearFix">
+                    <image mode="widthFix" src="{{cashresult[index_pay]['paraval']['recep']}}" style="width:400rpx;"></image>
+                </view>
+            </view>
+        </block>
+    </view>
+    <view class="confirm-pay confirm-box border_bottom2">
+        <picker bindchange="bindCouponChange" range="{{coupon_mode}}" rangeKey="name" value="{{index}}">
+            <view class="delivery-top border_bottom  coupon-list">
+                <text class="fl">优惠券:<text class="cart_color">{{coupon}}张</text>
+                </text>
+                <view class="picker fr">{{coupon_mode[index_coupon]['name']}}</view>
+            </view>
+        </picker>
+        <view bindtap="addCount" class="delivery-top border_bottom  coupon-list" wx:if="{{yhm_enable}}">
+            <text class="fl">优惠码:<text class="cart_color">{{yhmcode}}</text>
+            </text>
+            <view class="picker fr">
+                <text wx:if="{{yhm_money>0}}">-￥{{yhm_money}}</text>
+                <text wx:else>未使用</text>
+            </view>
+        </view>
+        <picker bindchange="bindIntegralChange" range="{{integral_mode}}" value="{{index}}">
+            <view class="delivery-top border_bottom  integral-list">
+                <text class="fl">可用积分:<text class="cart_color">{{ujfdata.account_points||0}}</text>
+                </text>
+                <view class="picker fr small_font color2">已用{{integral||integral_mode[index_integral]||0}}积分,<text class="cart_color medium_font">-￥{{integral_money}}</text>
+                </view>
+            </view>
+        </picker>
+        <picker bindchange="bindBalanceChange" class="selye" range="{{balance_mode}}" value="{{index}}">
+            <view class="delivery-top border_bottom  balance-list">
+                <radio catchtap="tapAttr" checked="{{Select?'true':''}}" color="{{insidepage_themecolor}}" style="float:left;transform:scale(0.7);"></radio>
+                <text class="fl">可用余额:<text class="cart_color">￥{{ujfdata.account_money||0}}</text>
+                </text>
+                <view class="picker fr cart_color">-￥{{balance||0}}</view>
+            </view>
+        </picker>
+    </view>
+    <view class="confirm-invoice confirm-box border_bottom2" wx:if="{{payInfo.invoice=='0'}}">
+        <picker bindchange="bindInvoiceChange" range="{{invoice_mode}}" value="{{index}}">
+            <view class="delivery-top border_bottom">
+                <text class="fl">发票<block wx:if="{{payInfo.fax_rate>0}}">(税率 {{payInfo.fax_rate}}%)</block>
+                </text>
+                <view class="picker fr">{{invoice_mode[index_invoice]}}<block wx:if="{{taxmoney>0}}">+￥{{taxmoney}}</block>
+                </view>
+            </view>
+        </picker>
+        <block wx:if="{{index_invoice==1}}">
+            <view class="invoice-box confirm-msg confirm-box border_bottom2">
+                <view class="confirm-msg-box">
+                    <input bindblur="binkInvoiceText" placeholder="发票抬头" type="text"></input>
+                </view>
+            </view>
+            <view class="invoice-box confirm-msg confirm-box border_bottom2">
+                <view class="confirm-msg-box">
+                    <input bindblur="binkTaxpayerIDText" placeholder="纳税人识别码" type="text"></input>
+                </view>
+            </view>
+        </block>
+    </view>
+    <view class="confirm-msg confirm-box border_bottom2">
+        <view class="confirm-msg-box">
+            <text class="iconfont icon-edit"></text>
+            <input bindblur="binkMessageConfirm" placeholder="{{TextModification}}" type="text"></input>
+        </view>
+    </view>
+    <view class="confirm-footer">
+        <text class="cart-toatl-price">实付款:<text class="cart_color strong">￥{{total_price}}</text>
+        </text>
+        <form bindsubmit="submitOrder" reportSubmit="true">
+            <button class="confirm-pay cart_bg_color2" formType="submit">提交订单</button>
+        </form>
+    </view>
+</view>
+<view bindtap="hide" class="body" hidden="{{flag}}"></view>
+<view animation="{{animationData}}" class="window" hidden="{{flag}}">
+    <view class="contain">
+        <view>
+            <text class="tex">请输入优惠码</text>
+        </view>
+        <view class="input">
+            <input bindchange="bindYhmcodeChange" class="yhmcode" maxlength="12" type="text" value="{{yhmcode}}"></input>
+        </view>
+        <view class="contain_button">
+            <button bindtap="cancelYhm">取消</button>
+            <button bindtap="getYhmcode">确认</button>
+        </view>
+    </view>
+</view>

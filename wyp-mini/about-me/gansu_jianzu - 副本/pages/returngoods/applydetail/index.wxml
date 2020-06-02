@@ -1,0 +1,92 @@
+<import src="/dist/toast/index.wxml"></import>
+<import src="/pages/templates/orders/orderitemlistmoreproducts.wxml"></import>
+<view class="container">
+    <view class="applyDetail-operate">
+        <view class="applyDetail-operate__status" style="background-color:{{color}}">{{applyDetailData.refundStatusTitle}}</view>
+        <view class="applyDetail-operate__title" wx:if="{{applyDetailData.refundStatusName}}">{{applyDetailData.refundStatusName}}</view>
+        <view class="applyDetail-operate__tips" wx:if="{{applyDetailData.tips.length>0}}">
+            <view class="applyDetail-form__tips-item" wx:for="{{applyDetailData.tips}}" wx:for-item="tips">
+                <view class="applyDetail-form__cont">{{tips}}</view>
+            </view>
+        </view>
+        <view class="applyDetail-form" style="margin-left:24rpx; border-top:1px solid #f4f4f4;padding-left:0;" wx:if="{{applyDetailData.refundStatus==40}}">
+            <view class="applyDetail-form__item">
+                <text>收货人：</text>
+                <view class="applyDetail-form__cont">{{applyDetailData.consignee.linkman}}           {{applyDetailData.consignee.tel}}</view>
+            </view>
+            <view class="applyDetail-form__item">
+                <text>退货地址：</text>
+                <view class="applyDetail-form__cont">
+          {{applyDetailData.consignee.provincdName}}{{applyDetailData.consignee.cityName}}{{applyDetailData.consignee.areaName}}{{applyDetailData.consignee.address}} 
+        </view>
+            </view>
+            <view class="applyDetail-form__item" wx:if="{{applyDetailData.consignee.remark}}">
+                <text>卖家留言：</text>
+                <view class="applyDetail-form__cont">{{applyDetailData.consignee.remark}}</view>
+            </view>
+        </view>
+        <view wx:if="{{applyDetailData.refundStatus==70}}">
+            <view class="applyDetail-form__success">
+                <text>退款总金额</text>
+                <view style="font-size:34rpx; color:#F32828;">￥{{applyDetailData.amount}}</view>
+            </view>
+            <view class="applyDetail-form__success1" wx:if="{{applyDetailData.cardPaid!==0}}">
+                <text>退回礼品卡</text>
+                <view style="color:rgba(0,0,0,0.43)">￥{{applyDetailData.cardPaid}}</view>
+            </view>
+            <view class="applyDetail-form__success1" wx:if="{{applyDetailData.onlinePaid!==0}}">
+                <text>退回在线付款</text>
+                <view style="color:rgba(0,0,0,0.43)">￥{{applyDetailData.onlinePaid}}</view>
+            </view>
+            <view class="applyDetail-form__success1" wx:if="{{applyDetailData.rechargeAmount!==0}}">
+                <text>退回储值金额</text>
+                <view style="color:rgba(0,0,0,0.43)">￥{{applyDetailData.rechargeAmount}}</view>
+            </view>
+        </view>
+        <view wx:if="{{applyDetailData.refundStatus==0||applyDetailData.refundStatus==70}}"></view>
+        <view class="applyDetail-btnGroup" wx:else>
+            <view bindtap="logisticsInfoUrl" class="applyDetail-btnGroup__btn" data-id="{{applyDetailData.id}}" wx:if="{{applyDetailData.refundStatus==40}}">填写退货物流信息</view>
+            <view bindtap="logisticsInfoUrlModify" class="applyDetail-btnGroup__btn" data-id="{{applyDetailData.id}}" wx:if="{{applyDetailData.refundStatus==50}}">修改退货物流信息</view>
+            <view bindtap="queryApplyCancel" class="applyDetail-btnGroup__btn">撤销申请</view>
+            <view bindtap="applyModifyUrl" class="applyDetail-btnGroup__btn applyDetail-btnGroup__btn--style">修改申请</view>
+        </view>
+    </view>
+    <view class="zan-panel consult-history">
+        <navigator class="zan-cell zan-cell--access" hoverClass="none" openType="redirect" url="/pages/returngoods/consult/index?id={{applyDetailData.id}}">
+            <view class="zan-cell__bd">协商历史</view>
+            <view class="zan-cell__ft"></view>
+        </navigator>
+    </view>
+    <view class="applyDetail-info">
+        <view class="applyDetail-title">退款信息</view>
+        <view class="applyDetail__goodsList">
+            <template is="order-more-goods" data="{{ goods:applyDetailData.goodsList,goodsTotal:applyDetailData.goodsNum,giveawayList:applyDetailData.giveawayList||[] }}"></template>
+        </view>
+        <view class="applyDetail-form">
+            <view class="applyDetail-form__item">
+                <text>退款原因：</text>
+                <view class="applyDetail-form__cont">{{applyDetailData.reason}}</view>
+            </view>
+            <view class="applyDetail-form__item" wx:if="{{applyDetailData.detail}}">
+                <view class="applyDetail-form__cont" style="margin-left:126rpx;">{{applyDetailData.detail}}</view>
+            </view>
+            <view class="applyDetail-form__item">
+                <text>退款金额：</text>
+                <view class="applyDetail-form__cont">￥{{applyDetailData.amount}}</view>
+            </view>
+            <view class="applyDetail-form__item" wx:if="{{applyDetailData.expressStatus!==0}}">
+                <text>货物状态：</text>
+                <view class="applyDetail-form__cont">{{applyDetailData.expressStatus==1?'未收货':'已收货'}}</view>
+            </view>
+            <view class="applyDetail-form__item">
+                <text>申请时间：</text>
+                <view class="applyDetail-form__cont">{{applyDetailData.createdTime}}</view>
+            </view>
+            <view class="applyDetail-form__item">
+                <text>退款编号：</text>
+                <view class="applyDetail-form__cont">{{applyDetailData.refundNo}}</view>
+            </view>
+        </view>
+    </view>
+    <template is="zan-toast" data="{{zanToast:zanToast}}"></template>
+</view>

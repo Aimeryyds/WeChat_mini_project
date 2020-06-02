@@ -1,0 +1,42 @@
+<view class="container">
+    <view class="userinfo">
+        <input bindinput="getOrderNum" class="input_search" placeholder="请输入订单号" type="text" value=""></input>
+        <view class="page">
+            <view class="page__bd">
+                <view class="section">
+                    <view class="section__title">物流公司:</view>
+                    <picker bindchange="bindPickerChange" class="pickBox" range="{{array}}" value="{{index}}">
+                        <view class="picker">
+                  {{array[index]}}
+                </view>
+                    </picker>
+                </view>
+            </view>
+        </view>
+        <button bindtap="search">查询</button>
+    </view>
+    <view class="list" wx:if="{{searchSubmit}}">
+        <block wx:if="{{expressresult}}">
+            <view class="express-title">物流信息：</view>
+            <block wx:for="{{resultList}}">
+                <view class="item highLight" wx:if="{{index==0}}">
+                    <view class="last"></view>
+                    <view class="item_wrap">
+                        <text style="margin-bottom:16rpx;">{{item.step}}</text>
+                        <text>{{item.time}}</text>
+                    </view>
+                </view>
+                <view class="item" wx:else>
+                    <view class="first"></view>
+                    <view class="item_wrap">
+                        <text style="margin-bottom:16rpx;">{{item.step}}</text>
+                        <text>{{item.time}}</text>
+                    </view>
+                </view>
+            </block>
+        </block>
+        <view class="noexpress" wx:else>
+            <text>暂时没有相关物流信息啦！</text>
+        </view>
+    </view>
+</view>

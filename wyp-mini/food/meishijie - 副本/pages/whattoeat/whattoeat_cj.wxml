@@ -1,0 +1,120 @@
+<view class="container">
+    <view bindtap="pageReload" class="cplist_nodata" wx:if="{{requeseFail}}">{{requeseFailTips}}</view>
+    <view class="topbar" style="padding-top:{{barHeight_nobar}}px;" wx:if="{{showTopbar}}">
+        <view bindtap="tapBackbtn" class="topbar_backicon">
+            <image class="nav-icon" src="../../images/nav_icon_black.png"></image>
+        </view>
+        <navigator class="searchw" hoverClass="navigator-hover" url="/pages/whattoeat/search?scene_id={{option.scene_id}}">
+            <image class="img" src="../../images/searchicon_black.png"></image>{{cjdata.data.search_default}}
+		</navigator>
+    </view>
+    <cover-view bindtap="tapBackbtn" class="backbtn" style="top:{{backbtnPos}}px" wx:if="{{!showTopbar}}">
+        <cover-image class="backbtnicon" src="../../images/nav_icon_black.png"></cover-image>
+    </cover-view>
+    <view class="cj_top" style="padding-top:{{barHeight_nobar}}px;padding-bottom:{{cjdata.data.top_items&&cjdata.data.top_items.length>0?'32':'88'}}rpx;background-position:center {{cjdata.data.top_items&&cjdata.data.top_items.length>0?'top':'bottom'}};">
+        <navigator class="searchw" hoverClass="navigator-hover" url="/pages/whattoeat/search?scene_id={{option.scene_id}}">
+            <image class="img" src="../../images/searchicon_black.png"></image>{{cjdata.data.search_default}}
+		</navigator>
+        <view class="cj_swiperw" wx:if="{{cjdata.data.top_items&&cjdata.data.top_items.length>0}}">
+            <swiper bindchange="cjSwiperChange" circular="{{true}}" class="cj_swiper" nextMargin="36rpx" previousMargin="36rpx">
+                <swiper-item wx:for="{{cjdata.data.top_items}}" wx:for-index="i" wx:key="key">
+                    <view class="cj_swiper_item {{cj_swiper_current==i?'current':''}}">
+                        <navigator class="link" url="/pages/whattoeat/article?id={{item.id}}">
+                            <view class="img" style="background:url({{item.cover_img}}) center no-repeat;background-size:cover;">
+                                <video autoplay="{{cj_swiper_current==i?true:false}}" class="top_vitem" controls="{{false}}" id="top_vitem{{i}}" loop="{{true}}" muted="{{cj_swiper_current==i?vmuted:true}}" poster="{{item.video.img}}" showCenterPlayBtn="{{false}}" src="{{item.video.vendor_video}}" wx:if="{{vAutoplay&&item.is_video=='1'}}"></video>
+                            </view>
+                            <view class="infos">
+                                <view class="title">{{item.content}}</view>
+                            </view>
+                        </navigator>
+                        <view bindtap="tapMutedBtn" class="muted_btn" wx:if="{{cj_swiper_current==i&&item.is_video=='1'}}">
+                            <image src="../../images/muted_off.png" style="display:block;height:50rpx;width:50rpx;" wx:if="{{vmuted}}"></image>
+                            <image src="../../images/muted_on.png" style="display:block;height:50rpx;width:50rpx;" wx:else></image>
+                        </view>
+                    </view>
+                </swiper-item>
+            </swiper>
+        </view>
+    </view>
+    <view class="cj_linksw">
+        <navigator class="cj_links_item" hoverClass="none" url="/pages/whattoeat/whattoeat_zsk?scene_id={{option.scene_id}}">
+            <image class="img" src="{{cjdata.data.icons[0].img}}"></image>
+            <view class="t">{{cjdata.data.icons[0].title}}</view>
+        </navigator>
+        <navigator class="cj_links_item" hoverClass="none" url="/pages/whattoeat/whattoeat_caneat_index?scene_id={{option.scene_id}}">
+            <image class="img" src="{{cjdata.data.icons[1].img}}"></image>
+            <view class="t">{{cjdata.data.icons[1].title}}</view>
+        </navigator>
+        <navigator class="cj_links_item" hoverClass="none" url="/pages/whattoeat/cj_cplist?scene_id={{option.scene_id}}&title={{cjdata.data.icons[2].title}}">
+            <image class="img" src="{{cjdata.data.icons[2].img}}"></image>
+            <view class="t">{{cjdata.data.icons[2].title}}</view>
+        </navigator>
+    </view>
+    <view class="csmi_line"></view>
+    <view class="csm_datalist">
+        <view class="csm_titlew">
+            <view class="t">{{cjdata.data.recommend.title}}</view>
+            <navigator class="more" hoverClass="none" url="/pages/whattoeat/whattoeat_zsk?scene_id={{option.scene_id}}">更多<image class="i" src="../../images/arrow1.png"></image>
+            </navigator>
+        </view>
+        <block wx:for="{{cjdata.data.recommend.items}}" wx:for-index="i" wx:key="key">
+            <navigator class="csm_dataitem" hoverClass="navigator-hover" url="/pages/content/content?id={{item.recipe.id}}" wx:if="{{item.item_type=='1'}}">
+                <view class="csm_dataitem_link">
+                    <view class="imgw" style="background:#f5f5f5 url({{item.recipe.img}}) center no-repeat;background-size:cover;">
+                        <view class="vicon" wx:if="{{item.recipe.is_video=='1'}}"></view>
+                    </view>
+                    <view class="info">
+                        <view class="t">{{item.recipe.title}}</view>
+                        <view class="tagsw">
+                            <view class="tag" wx:for="{{item.recipe.tags}}" wx:for-index="j" wx:key="key">{{item}}</view>
+                        </view>
+                    </view>
+                </view>
+            </navigator>
+            <navigator class="csm_dataitem" hoverClass="navigator-hover" url="/pages/whattoeat/article?id={{item.article.id}}" wx:elif="{{item.item_type=='2'}}">
+                <view class="csm_dataitem_link">
+                    <view class="imgw" style="background:#f5f5f5 url({{item.article.cover_img}}) center no-repeat;background-size:cover;">
+                        <view class="vicon" wx:if="{{item.article.is_video=='1'}}"></view>
+                    </view>
+                    <view class="info">
+                        <view class="t">{{item.article.content}}</view>
+                        <view class="tagsw">
+                            <view class="tag" wx:for="{{item.article.tags}}" wx:for-index="j" wx:key="key">{{item}}</view>
+                        </view>
+                    </view>
+                </view>
+            </navigator>
+        </block>
+        <view class="cj_adw">
+            <ad unitId="adunit-64fec37b5b124357"></ad>
+        </view>
+    </view>
+    <view class="csmi_line"></view>
+    <view class="csm_cj_zqw">
+        <view class="csm_titlew">
+            <view class="t">{{cjdata.data.ad_topic.title}}</view>
+        </view>
+        <scroll-view class="csm_cj_zq_list" scrollX="{{true}}">
+            <block wx:for="{{cjdata.data.ad_topic.items}}" wx:for-index="i" wx:key="key">
+                <navigator class="csm_cj_zq_item" style="background:url({{item.img}}) center no-repeat;background-size:cover;" url="/pages/whattoeat/article?id={{item.id}}" wx:if="{{item.type=='1'}}">
+                    <view class="infos">
+                        <view class="title">{{item.title}}</view>
+                        <view class="des">
+                            <block wx:if="{{item.desc}}">{{item.desc}}<block wx:if="{{item.professional_title}}"> - </block>{{item.professional_title}}</block>　</view>
+                    </view>
+                    <view class="vicon" wx:if="{{item.is_video=='1'}}"></view>
+                </navigator>
+                <navigator class="csm_cj_zq_item" style="background:url({{item.img}}) center no-repeat;background-size:cover;" url="/pages/zt/zt?id={{item.id}}" wx:elif="{{item.type=='2'}}">
+                    <view class="infos">
+                        <view class="title">{{item.title}}</view>
+                        <view class="des">
+                            <block wx:if="{{item.desc}}">{{item.desc}}</block>　</view>
+                    </view>
+                </navigator>
+            </block>
+        </scroll-view>
+    </view>
+</view>
+<loading hidden="{{requeseDone||requeseFail||noData}}">
+ 加载中...
+</loading>

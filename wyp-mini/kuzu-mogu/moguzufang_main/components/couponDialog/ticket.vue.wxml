@@ -1,0 +1,22 @@
+<template name="76e25bad">
+    <view class="_view 76e25bad ticket">
+        <view class="_view 76e25bad price">
+            <view class="_view 76e25bad amount">
+                <text class="_text 76e25bad" wx:if="{{ticketObj.couponInfo.amountType==1||ticketObj.couponInfo.amountType==2&&ticketObj.couponInfo.amount>1}}">
+                    <text class="_text 76e25bad sub">￥</text>{{ticketObj.couponInfo.amount}}</text>
+                <text class="_text 76e25bad" wx:else>{{ticketObj.couponInfo.amount*10}}<text class="_text 76e25bad sub">折</text>
+                </text>
+            </view>
+            <view class="_view 76e25bad limit">{{ticketObj.couponInfo.useLimitString||''}}</view>
+        </view>
+        <view class="_view 76e25bad cont">
+            <view class="_view 76e25bad h1">{{ticketObj.couponInfo.coupName||''}}</view>
+            <view class="_view 76e25bad h4">{{ticketObj.couponInfo.coupDesc||''}}</view>
+            <view class="_view 76e25bad h4">{{ticketObj.couponInfo.reciStime||''}} - {{ticketObj.couponInfo.reciEtime||''}}</view>
+            <view class="_view 76e25bad" style="width: 100%;text-align: right">
+                <view class="_view 76e25bad btn-got" wx:if="{{ticketObj.couponInfo.userReci}}">已领取</view>
+                <view bindtap="handleProxy" class="_view 76e25bad btn-get" data-comkey="{{$k}}" data-eventid="{{'76e25bad-0'}}" wx:else>立即领取</view>
+            </view>
+        </view>
+    </view>
+</template>

@@ -1,0 +1,25 @@
+<view class="container">
+    <view bindtap="choosePayway" class="input-wrap">
+        <view class="input-row">
+            <text>提现账户</text>
+            <view>
+                <text>{{paywayStrs[payway]}}</text>
+                <image src="/images/icon_next.png"></image>
+            </view>
+        </view>
+    </view>
+    <view class="input-wrap">
+        <view class="input-row">
+            <text>提现金额</text>
+            <input bindinput="inputAmount" placeholder="请输入提现金额" placeholderClass="input-p-color" value="{{amount}}"></input>
+        </view>
+        <view class="input-row">
+            <text>可提现金额：￥{{balance}}</text>
+            <view catchtap="withdrawAll" style="color: #bb3333;">全部提现</view>
+        </view>
+    </view>
+    <view bindtap="confirm" class="btn">确认提现</view>
+    <view class="tip-wrap">
+        <text>{{account.remark}}</text>
+    </view>
+</view>

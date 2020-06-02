@@ -1,0 +1,75 @@
+<view class="w">
+    <view class="header header-logined">
+        <button bindgetuserinfo="bangding" class="bangding" hoverClass="bangding-hover" hoverStayTime="600" lang="zh_CN" openType="getUserInfo">
+      {{bangding}}
+    </button>
+        <view class="avator">
+            <view class="inner">
+                <image src="{{avatarUrl}}"></image>
+            </view>
+        </view>
+        <view class="userName">{{userInfo.customerName}}</view>
+    </view>
+    <view class="app-body">
+        <form bindsubmit="toSaveFormId" data-urltype="MY_CLAIM" reportSubmit="true">
+            <button bindgetuserinfo="onMyClaim" class="item" data-urltype="MY_CLAIM" formType="submit" lang="zh_CN" openType="getUserInfo">
+                <navigator class="item-cell">
+                    <view class="item-icon">
+                        <image class="icon-img" src="/images/usercenter/usercenter_claim.png"></image>
+                    </view>
+                    <view>
+                        <text>我的理赔</text>
+                    </view>
+                </navigator>
+            </button>
+        </form>
+        <form bindsubmit="toSaveFormId" data-urltype="MY_POLICY" reportSubmit="true">
+            <button bindgetuserinfo="onPopView" class="item" data-urltype="MY_POLICY" formType="submit" lang="zh_CN" openType="getUserInfo">
+                <navigator class="item-cell">
+                    <view class="item-icon">
+                        <image class="icon-img" src="/images/usercenter/usercenter_policy.png"></image>
+                    </view>
+                    <view>
+                        <text>我的保单</text>
+                    </view>
+                </navigator>
+            </button>
+        </form>
+        <form bindsubmit="toSaveFormId" data-urltype="MY_CACULATOR" reportSubmit="true">
+            <button bindgetuserinfo="onPopView" class="item" data-urltype="MY_CACULATOR" formType="submit" lang="zh_CN" openType="getUserInfo">
+                <navigator class="item-cell">
+                    <view class="item-icon">
+                        <image class="icon-img" src="/images/usercenter/usercenter_calculator.png"></image>
+                    </view>
+                    <view>
+                        <text>我的车险计算结果</text>
+                    </view>
+                </navigator>
+            </button>
+        </form>
+        <form bindsubmit="toSaveFormId" data-urltype="MY_SERVICE" reportSubmit="true">
+            <button bindgetuserinfo="onPopView" class="item" data-urltype="MY_SERVICE" formType="submit" lang="zh_CN" openType="getUserInfo">
+                <navigator class="item-cell">
+                    <view class="item-icon">
+                        <image class="icon-img" src="/images/usercenter/usercenter_service.png"></image>
+                    </view>
+                    <view>
+                        <text>我的增值服务</text>
+                    </view>
+                </navigator>
+            </button>
+        </form>
+        <form bindsubmit="toSaveFormId" data-urltype="CARD" reportSubmit="true">
+            <button bindgetuserinfo="onPopView" class="item" data-urltype="CARD" formType="submit" lang="zh_CN" openType="getUserInfo">
+                <navigator class="item-cell">
+                    <view class="item-icon">
+                        <image class="icon-img" src="/images/usercenter/usercenter_card.png"></image>
+                    </view>
+                    <view>
+                        <text>保险卡激活</text>
+                    </view>
+                </navigator>
+            </button>
+        </form>
+    </view>
+</view>

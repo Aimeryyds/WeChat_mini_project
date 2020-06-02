@@ -1,0 +1,42 @@
+<view class="{{type=='audio'?'auido':'page'}}" wx:if="{{!loading}}">
+    <view wx:if="{{type!='audio'}}">
+        <view class="title-panel">
+            <text>{{info.title}}</text>
+        </view>
+        <view class="desc-panel">
+            <text wx:if="{{!!info.media}}">数据来源：{{info.media}}</text>
+            <text>{{info.publishTime}}</text>
+        </view>
+        <rich-text class="content-panel" nodes="{{info.content}}"></rich-text>
+    </view>
+    <view wx:if="{{type=='audio'}}">
+        <view class="desc-audio">
+            <image src="./icon-audio.png"></image>
+        </view>
+        <view class="desc_name">{{name}}</view>
+        <view class="desc_author">
+      主讲人：
+      <text wx:for="{{author}}" wx:key="{{item}}">{{item.name}}</text>
+        </view>
+        <slider activeColor="#3F7DE5" backgroundColor="#EBECF1" bindchange="sliderChange" bindchanging="sliderChanging" blockSize="16" max="{{total}}" min="1" step="1" value="{{process}}"></slider>
+        <view class="time">
+            <view class="start_time">{{slider_value}}</view>
+            <view class="start_max">{{slider_max}}</view>
+        </view>
+        <view class="icon-audio">
+            <view bindtap="prev" class="prev">
+                <image src="./icon-prev.png"></image>
+            </view>
+            <view class="stop" wx:if="{{isStop}}">
+                <image bindtap="stop" src="./icon-stop.png"></image>
+            </view>
+            <view class="play" wx:else>
+                <image bindtap="play" src="./icon-play.png"></image>
+            </view>
+            <view bindtap="next" class="next">
+                <image src="./icon-next.png"></image>
+            </view>
+        </view>
+    </view>
+</view>
+<include src="../../../components/disclaimer/disclaimer.wxml"></include>

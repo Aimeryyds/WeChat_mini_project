@@ -1,0 +1,76 @@
+<import src="../common/footer.wxml"></import>
+<view class="page">
+    <view animation="{{animationData}}" class="home-purchase" wx:if="{{purchaseState!=2}}">
+        <text class="home-purchase-text">每天为你推荐最热菜谱</text>
+        <form reportSubmit bindsubmit="submitPurchase" class="home-purchase-form" wx:if="{{purchaseState==0}}">
+            <button class="home-purchase-apply" formType="submit" wx:if="{{logined}}">开启通知</button>
+            <button bindgetuserinfo="loginAction" class="home-purchase-apply" openType="getUserInfo" wx:if="{{!logined}}">开启通知</button>
+        </form>
+        <view class="home-purchase-view" wx:if="{{purchaseState==1}}">已开启</view>
+    </view>
+    <taskbarGuide></taskbarGuide>
+    <form bindsubmit="searchButtonPressed">
+        <view class="home-head-search" style="padding-top: {{purchaseState==2?'40rpx':'126rpx'}}">
+            <view class="home-search" wx:if="{{focused==false}}">
+                <view bindtap="searchPressed" class="home-search-container">
+                    <image class="home-search-icon" mode="aspectFill" src="/images/home_search_icon.png"></image>
+                    <view class="home-search-input-placeholder">搜你想吃的</view>
+                </view>
+                <button class="home-search-button">搜索</button>
+            </view>
+            <view class="home-search" wx:if="{{focused==true}}">
+                <input bindblur="searchBlur" bindconfirm="searchConfirm" class="home-search-input" focus="{{focused}}" name="searchinput" placeholder="搜你想吃的" placeholderClass="home-search-input-placeholder"></input>
+                <button class="home-search-button" formType="submit">搜索</button>
+            </view>
+        </view>
+    </form>
+    <view class="home-header-hot">
+        <view class="home-hot-title" wx:if="{{tags.length>0}}">- 热门搜索 -</view>
+        <view bindtap="hotItemPressed" class="home-hot-item" data-hot-search="{{item}}" wx:for="{{tags}}" wx:key="key">{{item.text}}</view>
+    </view>
+    <view class="home-header-swiper" wx:if="{{banners.length>0}}">
+        <swiper autoplay="{{autoplay}}" class="home-swiper" duration="{{duration}}" indicatorDots="{{indicatorDots}}" interval="{{interval}}">
+            <swiper-item catchtouchmove="{{banners.length==1?'forbid':''}}" wx:for="{{banners}}" wx:key="*this">
+                <view bindtap="swiperItemPressed" class="home-swiper-item" data-swiper-url="{{item.action_url}}">
+                    <image class="home-swiper-item-image" mode="aspectFill" src="{{item.image_url}}"></image>
+                </view>
+            </swiper-item>
+        </swiper>
+    </view>
+    <view class="home-recommend">
+        <view class="home-recommend-title" wx:if="{{array.length>0}}">- 今日编辑精选 -</view>
+        <block wx:for="{{array}}" wx:key="key">
+            <view bindtap="recipeItemPressed" class="home-recommend-recipe" data-recipe-id="{{item.recipe.id}}" wx:if="{{item.type=='1'}}">
+                <view class="home-recommend-recipe-title">{{item.recipe.n}}</view>
+                <view class="home-recommend-recipe-description">
+                    <text class="home-recommend-recipe-author">{{item.recipe.a.n}}</text>
+                    <image class="home-recommend-recipe-icon-page-view" src="/images/recipe_icon_view.png" wx:if="{{item.recipe.vc}}"></image>
+                    <text class="home-recommend-recipe-page-view" wx:if="{{item.recipe.vc}}"> {{item.recipe.vc}}   </text>
+                    <image class="home-recommend-recipe-icon-favo" src="/images/recipe_icon_favo.png" wx:if="{{item.recipe.fc}}"></image>
+                    <text class="home-recommend-recipe-favo" wx:if="{{item.recipe.fc}}"> {{item.recipe.fc}}</text>
+                </view>
+                <view class="home-recommend-recipe-image-view" style="background-image:url({{item.recipe.p}})">
+                    <image class="home-recommend-recipe-video-image" src="/images/recipe_button_play.png" wx:if="{{item.recipe.vu.length>0||item.recipe.vfurl.length>0}}"></image>
+                </view>
+            </view>
+            <view bindtap="menuItemPressed" class="home-recommend-menu" data-menu-id="{{item.menu.id}}" wx:if="{{item.type=='2'}}">
+                <image class="home-recommend-menu-image" mode="aspectFill" src="{{item.menu.b}}"></image>
+                <view class="home-recommend-menu-masking"></view>
+                <view class="home-recommend-menu-container">
+                    <view class="home-recommend-menu-title">{{item.menu.t}}</view>
+                    <view class="home-recommend-menu-count">{{item.menu.c}}道菜谱</view>
+                </view>
+            </view>
+            <view bindtap="noteItemPressed" class="home-recommend-note" data-note-id="{{item.note.id}}" wx:if="{{item.type=='3'}}">
+                <view class="home-recommend-note-title">{{item.note.title}}</view>
+                <view class="home-recommend-note-image-view" style="background-image:url({{item.note.image_u}})">
+                    <image class="home-recommend-note-video-image" src="/images/recipe_button_play.png" wx:if="{{item.note.media_type==1}}"></image>
+                </view>
+            </view>
+            <view class="home-recommend-commercial" wx:if="{{item.type=='4'}}">
+                <ad adType="video" unitId="{{item.commercial_id}}"></ad>
+            </view>
+        </block>
+    </view>
+    <template is="menu-footer" data="{{footerState:footerState}}"></template>
+</view>

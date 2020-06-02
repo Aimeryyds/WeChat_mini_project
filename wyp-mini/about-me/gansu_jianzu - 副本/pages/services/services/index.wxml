@@ -1,0 +1,22 @@
+<view class="container">
+    <view class="services-list">
+        <navigator class="services-list__item" data-id="{{item.id}}" url="/pages/services/service_detail/index?shopId={{shopId}}&serviceId={{item.id}}" wx:for="{{services.data}}">
+            <image class="services-list__item__avatar" mode="scaleToFit" src="{{item.imgs}}"></image>
+            <view class="services-list__item__detail">
+                <view class="services-list__item__detail__name">{{item.serviceName}}</view>
+                <view class="services-list__item__detail__desc" style="height:38rpx;line-height:38rpx;">
+                    <wxc-elip>
+                        <text> {{item.description}}</text>
+                    </wxc-elip>
+                </view>
+                <view class="services-list__item__detail__desc">
+                    <view class="services-list__item__detail__price">
+                        <text class="services-list__item__detail__price-cur">￥{{item.price}}</text>
+                        <wxc-label typeColor="#F87E27">{{item.payPre==1?item.prePayMsg:item.payTypeName}}</wxc-label>
+                        <text class="services-list__item__detail__price-old" wx:if="{{item.payPre==1}}">￥{{item.prePrice}}</text>
+                    </view>
+                </view>
+            </view>
+        </navigator>
+    </view>
+</view>

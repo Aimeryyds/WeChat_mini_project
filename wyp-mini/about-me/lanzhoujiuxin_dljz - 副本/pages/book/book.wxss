@@ -1,0 +1,227 @@
+.main {
+    width: 100%;
+    height: 100%;
+    overflow-y: scroll;
+    overflow-x: hidden;
+    background: #f4f4f4;
+}
+
+.nav-bar {
+    height: 90rpx;
+    padding-left: 30rpx;
+    padding-right: 30rpx;
+    margin-bottom: 20rpx;
+    background-color: #fff;
+    display: flex;
+    position: relative;
+}
+
+.nav-bar .nav-list {
+    display: flex;
+    position: relative;
+    overflow-x: scroll;
+    overflow-y: hidden;
+    white-space: nowrap;
+    user-select: none;
+}
+
+.nav-bar .nav-item {
+    display: inline-block;
+    line-height: 90rpx;
+    padding: 0 20rpx;
+    margin-right: 25rpx;
+    font-size: 28rpx;
+    color: #353535;
+    text-align: center;
+    position: relative;
+}
+
+.nav-bar .nav-item:last-child {
+    margin-right: 0;
+}
+
+.nav-bar .indicator {
+    width: 100%;
+    height: 4rpx;
+    position: absolute;
+    bottom: 0;
+    left: 0;
+}
+
+.nav-bar .more-btn {
+    width: 38rpx;
+    height: 38rpx;
+    cursor: pointer;
+    transform: rotate(90deg);
+    color: #565656;
+    position: relative;
+    right: 0rpx;
+    top: 5rpx;
+    margin: auto;
+    font-size: 28rpx;
+}
+
+.bookListWrap {
+    background-color: #fff;
+}
+
+.bookList {
+    padding: 30rpx 0;
+    margin: 0 30rpx;
+    border-bottom: 1rpx solid #eee;
+}
+
+.book-card {
+    width: 690rpx;
+    margin: 0 auto;
+    overflow: hidden;
+}
+
+.book-card .card-pic {
+    height: 380rpx;
+    border-radius: 8rpx;
+    border: 1rpx solid #eee;
+}
+
+.book-card .card-pic image {
+    border-radius: 8rpx;
+}
+
+.book-card .card-title {
+    margin-top: 30rpx;
+    font-size: 30rpx;
+    word-wrap: break-word;
+    color: #353535;
+    max-height: 60rpx;
+    line-height: 30rpx;
+    overflow: hidden;
+}
+
+.book-card .card-sub-title {
+    font-size: 24rpx;
+    margin-top: 18rpx;
+    color: #888;
+    word-wrap: break-word;
+}
+
+.book-card .card-price-wrap {
+    height: 56rpx;
+    line-height: 56rpx;
+    margin-top: 16rpx;
+}
+
+.book-card .selling-price {
+    font-size: 32rpx;
+    color: #D02F3E;
+    position: relative;
+    top: 6rpx;
+}
+
+.book-card .original-price {
+    font-size: 24rpx;
+    color: #999;
+    text-decoration: line-through;
+    margin-left: 2rpx;
+    position: relative;
+    top: 6rpx;
+}
+
+.book-card .promotion {
+    font-size: 22rpx;
+    padding: 2rpx 6rpx;
+    margin-left: 12rpx;
+    background-color: #D03038;
+    color: #fff;
+    border-radius: 4rpx;
+}
+
+.book-card .booking-btn {
+    width: 136rpx;
+    height: 50rpx;
+    line-height: 50rpx;
+    border-radius: 24rpx;
+    float: right;
+    border: none;
+    outline: none;
+    background-color: #D12F3A;
+    color: #fff;
+    font-size: 24rpx;
+    cursor: pointer;
+    text-align: center;
+}
+
+.bookEmpty {
+    min-height: 970rpx;
+}
+
+.bookEmpty .imageWrap {
+    margin: 0 auto;
+    width: 181rpx;
+    height: 170rpx;
+    margin-top: 140rpx;
+}
+
+.bookEmpty .des {
+    text-align: center;
+    font-size: 26rpx;
+    color: #9f9f9f;
+    margin-top: 42rpx;
+}
+
+.editor-drawer {
+    height: 100%;
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    background: #fff;
+    z-index: 4;
+}
+
+.editor-drawer .cate-title-bar {
+    position: relative;
+}
+
+.editor-drawer .cate-title {
+    text-align: left;
+    height: 80rpx;
+    line-height: 80rpx;
+    font-size: 30rpx;
+    padding-left: 30rpx;
+    color: #4D4D4D;
+}
+
+.editor-drawer .cate-close {
+    position: absolute;
+    top: 50%;
+    margin-top: -17rpx;
+    right: 23rpx;
+    display: inline-block;
+    width: 38rpx;
+    height: 38rpx;
+    cursor: pointer;
+    transform: rotate(-90deg);
+    color: #565656;
+    font-size: 28rpx;
+}
+
+.editor-drawer .cate-list-wrapper {
+    overflow: auto;
+    height: calc(100% - 40px);
+}
+
+.editor-drawer .cate-list {
+    padding: 20rpx 30rpx;
+}
+
+.editor-drawer .cate-item {
+    display: inline-block;
+    border: 1rpx solid #E9E9E9;
+    font-size: 30rpx;
+    color: #353535;
+    border-radius: 40rpx;
+    padding: 12rpx 40rpx;
+    margin-right: 16rpx;
+    margin-bottom: 20rpx;
+    cursor: pointer;
+}

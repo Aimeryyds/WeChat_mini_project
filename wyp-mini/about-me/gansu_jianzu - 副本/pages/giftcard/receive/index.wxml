@@ -1,0 +1,45 @@
+<import src="/dist/toast/index.wxml"></import>
+<import src="/pages/giftcard/templates/card/big.wxml"></import>
+<view class="giftcard-receive__note" wx:if="{{receiveData.actionName=='wait'}}">
+    <image class="giftcard-receive__note-img" src="http://imgcdnali.wfenxiao.com.cn/xcx/c/giftcard/time-icon.png"></image>
+    <view>等待对方领取</view>
+</view>
+<view class="giftcard-receive__note" wx:if="{{receiveData.actionName=='already'}}">
+    <image class="giftcard-receive__note-img" src="http://imgcdnali.wfenxiao.com.cn/xcx/c/giftcard/receive-icon.png"></image>
+    <view>对方已领取</view>
+</view>
+<view class="giftcard-receive">
+    <template is="big-giftcard" data="{{text:receiveData.name,imgUrl:receiveData.imgUrl}}"></template>
+    <view class="giftcard-receive__text">
+    {{receiveData.name}}
+    <text>共￥{{receiveData.giftCardDiscount}}</text>
+        <view style="display:flex">
+      包括(<view wx:for="{{receiveData.subTotal}}">{{item.quantity}}张{{item.price}}元{{index==receiveData.subTotal.length-1?'':','}}</view>)
+    </view>
+    </view>
+</view>
+<view class="giftcard-receive__userinfo" wx:if="{{receiveData.actionName=='use'}}">
+    <image class="giftcard-receive__userinfo-img" src="{{receiveData.avatarUrl}}"></image>
+    <view>{{receiveData.receiverNickName}}</view>
+</view>
+<view>
+    <view class="giftcard-receive__groupbtn" wx:if="{{receiveData.actionName=='receive'}}">
+        <button bindtap="onReceive" class="giftcard-receive__btn1" data-item="{{receiveData}}" size="{{mini}}" style="margin-top:44rpx;margin-bottom:0;" type="primary">领取</button>
+    </view>
+    <view class="giftcard-receive__end" wx:if="{{receiveData.actionName=='revoke'}}">
+        <image src="http://imgcdnali.wfenxiao.com.cn/xcx/c/1120/receive-hint2.png"></image>
+        <text>礼品卡已被撤回</text>
+    </view>
+    <view class="giftcard-receive__end" wx:if="{{receiveData.actionName=='other'}}">
+        <image src="http://imgcdnali.wfenxiao.com.cn/xcx/c/1120/receive-hint.png"></image>
+        <text>抱歉，礼品卡已被领完</text>
+    </view>
+    <navigator hoverClass="none" openType="switchTab" url="/tabs/home/index" wx:if="{{receiveData.actionName=='use'}}">
+        <button class="giftcard-receive__btn1" size="{{mini}}" type="primary">已领取，现在去用</button>
+    </navigator>
+    <view bindtap="giveOn" wx:if="{{receiveData.actionName=='use'||receiveData.actionName=='revoke'||receiveData.actionName=='other'}}">
+        <button class="giftcard-receive__btn2" size="{{mini}}" type="default">我也要送</button>
+    </view>
+    <view class="giftcard-receive__hint">提示：礼品卡可以在购买商品时抵扣现金或直接兑换指定商品</view>
+</view>
+<template is="zan-toast" data="{{zanToast:zanToast}}"></template>

@@ -1,0 +1,18 @@
+<template name="fenxiao">
+    <view class="container" wx:if="{{config}}">
+        <block wx:if="{{config.isOpen}}">
+            <block wx:if="{{config.isDist}}">
+                <template is="center" data="{{userdata:userdata}}" wx:if="{{userdata}}"></template>
+            </block>
+            <block wx:else>
+                <block wx:if="{{config.isRecruit}}">
+                    <template is="zhaomu" data="{{zanToast:zanToast,content:content,title:detail.title,globalName:config.globalName}}" wx:if="{{detail}}"></template>
+                </block>
+                <view style="text-align:center;font-size:24rpx;color:#aaa;margin-top:200rpx" wx:else>您还不是分销员，请留意店铺信息</view>
+            </block>
+        </block>
+        <view style="text-align:center;font-size:24rpx;color:#aaa;margin-top:200rpx" wx:else>分销功能尚未开启，敬请期待</view>
+    </view>
+</template>
+<import src="./_center.wxml"></import>
+<import src="./_zhaomu.wxml"></import>

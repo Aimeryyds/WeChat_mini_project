@@ -1,0 +1,102 @@
+<view class="bg">
+    <view class="header">
+        <view class="header-l">
+            <view class="header-l-img">
+                <image src="{{appoitinfo.thumbnail}}"></image>
+            </view>
+            <view class="header-l-title">
+                <view class="header-l-title-t">{{appoitinfo.title}}</view>
+                <view class="header-l-title-b">
+                    <text>{{appoitinfo.discount}}</text> / {{appoitinfo.service_hours}}分钟</view>
+            </view>
+        </view>
+        <view class="header-r">
+            <view>
+                <text>人数：{{appoitinfo.min_total}} - {{appoitinfo.max_total}}</text>
+            </view>
+        </view>
+    </view>
+    <view class="ul" style="background-color:#fff;overflow:hidden;">
+        <view class="li" wx:if="{{clerk.length}}">
+            <view>服务人员</view>
+            <view>{{clerk}}</view>
+        </view>
+        <view class="li">
+            <view>预订时间</view>
+            <view>{{service_time}}</view>
+        </view>
+        <view class="li newcenter">
+            <view>预订数量</view>
+            <view class="li_add">
+                <text bindtap="subtract" class="newadd">-</text>
+                <text class="newtxt">{{amount}}</text>
+                <text bindtap="add" class="newadd">+</text>
+            </view>
+        </view>
+        <view class="li" wx:if="{{payment.length}}">
+            <view>支付方式</view>
+            <view>{{payment}}</view>
+        </view>
+    </view>
+    <view class="confirm-pay confirm-box border_bottom2">
+        <picker bindchange="bindCouponChange" range="{{coupon_mode}}" rangeKey="name" value="{{index_coupon}}">
+            <view class="delivery-top border_bottom  coupon-list">
+                <text class="fl">优惠券:<text class="cart_color">{{coupon}}张</text>
+                </text>
+                <view class="picker fr">{{coupon_mode[index_coupon]['name']}}</view>
+            </view>
+        </picker>
+        <view class="delivery-top1 border_bottom  integral-list">
+            <radio catchtap="bindIntegralChange" checked="{{Selectp?'true':''}}" color="{{insidepage_themecolor}}" style="float:left;transform:scale(0.7);"></radio>
+            <text catchtap="bindIntegralChange" class="fl">可用积分:<text class="cart_color">{{ujfdata.account_points||0}}</text>
+            </text>
+            <view class="picker fr small_font color2" style="position:absolute;right:0;">已用{{integral||0}}积分,<text class="cart_color medium_font">-￥{{integral_money||'0.00'}}</text>
+            </view>
+        </view>
+        <view class="delivery-top1 border_bottom  balance-list">
+            <radio catchtap="tapAttr" checked="{{Select?'true':''}}" color="{{insidepage_themecolor}}" style="float:left;transform:scale(0.7);"></radio>
+            <text catchtap="tapAttr" class="fl">可用余额:<text class="cart_color">￥{{ujfdata.account_money||0}}</text>
+            </text>
+            <view class="picker fr cart_color" style="position:absolute;right:0;">-￥{{balance||'0.00'}}</view>
+        </view>
+    </view>
+    <view class="ul-textarea" style="background-color:#fff;overflow:hidden;width:100%">
+        <view class="li{{index=='message'||index=='address'?'-textarea':''}}" wx:for="{{userinfo}}" wx:key="index">
+            <view>{{item.alias}} <text style="color:#f00;" wx:if="{{item.required=='true'}}">*</text>
+            </view>
+            <input bindinput="onInput" class="{{item.error?'error':''}}" id="name" placeholder="请填写您的姓名" placeholderClass="input-style" type="text" wx:if="{{index=='name'}}"></input>
+            <radio-group bindchange="onInput" class="radio-box{{item.error?' error':''}}" id="sex" wx:elif="{{index=='sex'}}">
+                <label>
+                    <radio value="male"></radio> 先生</label>
+                <label>
+                    <radio value="female"></radio> 女士</label>
+            </radio-group>
+            <input bindinput="onInput" class="{{item.error?'error':''}}" id="age" placeholder="请填写您的年龄" placeholderClass="input-style" type="number" wx:elif="{{index=='age'}}"></input>
+            <input bindinput="onInput" class="{{item.error?'error':''}}" id="id" placeholder="请填写您的身份证号码" placeholderClass="input-style" type="idcard" wx:elif="{{index=='id'}}"></input>
+            <input bindinput="onInput" class="{{item.error?'error':''}}" id="phone" placeholder="请准确填写手机号码，以便商家联系" placeholderClass="input-style" type="number" wx:elif="{{index=='phone'}}"></input>
+            <view style="flex:3;" wx:elif="{{index=='address'}}">
+                <picker bindchange="regionChange" mode="region" style="width:100%;" value="{{region}}">
+                    <view class="picker">
+					  {{region[0]}}，{{region[1]}}，{{region[2]}}
+					</view>
+                </picker>
+                <input bindinput="onInput" class="{{item.error?'error':''}}" id="address" placeholder="填写地址" placeholderClass="input-style" type="text"></input>
+            </view>
+            <textarea bindinput="onInput" class="{{item.error?'error':''}}" id="message" placeholder="填写留言内容" placeholderClass="input-style" wx:elif="{{index=='message'}}"></textarea>
+        </view>
+    </view>
+    <view style="height:200rpx;width:100%;"></view>
+    <view class="cur">
+        <text>退订时间：{{appoitinfo.unsubscribe_date}}前可退订，逾期不可退款</text>
+    </view>
+    <view class="footer">
+        <view class="footer-index">
+        合计:<text>¥{{total_price}}</text>
+        </view>
+        <view class="footer-btn">
+            <form bindsubmit="onSubmit" reportSubmit="true">
+                <button formType="submit">提交</button>
+            </form>
+        </view>
+    </view>
+</view>

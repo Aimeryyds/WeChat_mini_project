@@ -1,0 +1,34 @@
+<template name="14fdb1ae">
+    <view class="_view 14fdb1ae">
+        <image class="_image 14fdb1ae banner" src="https://assets.mgzf.com/appimg/1697a17a31ea9dd9d03f55cf21ab3970.png"></image>
+        <view class="_view 14fdb1ae content-brand">
+            <image class="_image 14fdb1ae brand-page-img" src="{{info.brokerIcon}}"></image>
+            <view class="_view 14fdb1ae title">
+                <view class="_view 14fdb1ae h1">{{info.brokerName}}<image bindtap="handleProxy" class="_image 14fdb1ae" data-comkey="{{$k}}" data-eventid="{{'14fdb1ae-0'}}" src="https://assets.mgzf.com/appimg/2da049077ddd7c6bef39de5360e60ad6.png" style="width: 44rpx;height: 30rpx;margin-left: 20rpx;vertical-align: middle" wx:if="{{info.businessLicenseUrl}}"></image>
+                </view>
+            </view>
+        </view>
+        <view class="_view 14fdb1ae card">
+            <view class="_view 14fdb1ae broker-page-house">
+                <view class="_view 14fdb1ae">
+                    <text class="_text 14fdb1ae text-gray-2">房源：</text>
+                    <text class="_text 14fdb1ae text-gray">{{info.roomTotalCount}}套</text>
+                </view>
+                <view class="_view 14fdb1ae join" wx:if="{{info.joinYears}}">
+                    <text class="_text 14fdb1ae text-gray-2">入住平台：</text>
+                    <text class="_text 14fdb1ae text-gray">{{info.joinYears}}年</text>
+                </view>
+            </view>
+            <view class="_view 14fdb1ae  broker-page-address" wx:if="{{info.areas}}">
+                <text class="_text 14fdb1ae text-gray-2">主营：</text>
+                <text class="_text 14fdb1ae text-gray">{{info.areas}}</text>
+            </view>
+        </view>
+        <template is="4acf755c" data="{{...$root['0'],...$root[$kk+'14fdb1ae-0'],$root:$root}}"></template>
+        <view class="_view 14fdb1ae footer">
+            <view bindtap="handleProxy" class="_view 14fdb1ae first" data-comkey="{{$k}}" data-eventid="{{'14fdb1ae-1'}}">我想开店</view>
+            <view bindtap="handleProxy" class="_view 14fdb1ae {{'second '+(info.virtualNum?'':'disabled')}}" data-comkey="{{$k}}" data-eventid="{{'14fdb1ae-2'}}">电话咨询</view>
+        </view>
+    </view>
+</template>
+<import src="/components/listCollection.vue.wxml"></import>

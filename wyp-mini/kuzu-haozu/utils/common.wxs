@@ -1,0 +1,315 @@
+var main = "hello for the main page content!";
+var substring = (function(str, a, b) {
+    if (a > b) {
+        return ("")
+    };
+    var list = [];
+    for (var i = 0; i < str.length; i++) {
+        if (i >= a && i <= b) {
+            list.push(str[((nt_0 = (i), null == nt_0 ? undefined : 'Number' === nt_0.constructor ? nt_0 : "" + nt_0))])
+        }
+    };
+    return (list.join(""))
+});
+
+function toUpperCase(s) {
+    var map = ({
+        "a": "A",
+        "b": "B",
+        "c": "C",
+        "d": "D",
+        "e": "E",
+        "f": "F",
+        "g": "G",
+        "h": "H",
+        "i": "I",
+        "j": "J",
+        "k": "K",
+        "l": "L",
+        "m": "M",
+        "n": "N",
+        "o": "O",
+        "p": "P",
+        "q": "Q",
+        "r": "R",
+        "s": "S",
+        "t": "T",
+        "u": "U",
+        "v": "V",
+        "w": "W",
+        "x": "X",
+        "y": "Y",
+        "z": "Z",
+    });
+    var i;
+    var lis = [];
+    for (i = 0; i < s.length; i++) {
+        var sr = substring(s, i, i);
+        var rsr = map[((nt_1 = (sr), null == nt_1 ? undefined : 'Number' === nt_1.constructor ? nt_1 : "" + nt_1))];
+        rsr ? lis.push(rsr) : lis.push(sr)
+    };
+    return (lis.join(""))
+};
+var beforeFun = (function(str, key) {
+    var bstr = toUpperCase(str);
+    key = toUpperCase(key);
+    return (substring(str, 0, bstr.indexOf(key) - 1))
+});
+var afterFun = (function(str, key) {
+    var bstr = toUpperCase(str);
+    key = toUpperCase(key);
+    return (substring(str, bstr.indexOf(key) + key.length, str.length))
+});
+var contentFun = (function(str, key) {
+    var bstr = toUpperCase(str);
+    key = toUpperCase(key);
+    return (substring(str, bstr.indexOf(key), bstr.indexOf(key) + key.length - 1))
+});
+var html_decode = (function(str) {
+    var s = "";
+    if (!str || str.length == 0) return ("");;
+    s = str.replace("\x26amp;", "\x26");
+    s = s.replace("\x26lt;", "\x3c");
+    s = s.replace("\x26gt;", "\x3e");
+    s = s.replace("\x26nbsp;", " ");
+    s = s.replace("\x26#39;", "\\x27");
+    s = s.replace("\x26quot;", "\\x22");
+    s = s.replace("\x26sdot;", "⋅");
+    return (s)
+});
+var phone_decode = (function(str) {
+    var s = str.substring(0, 3) + '****' + str.substring(7, 11);
+    return (s)
+});
+var str_num = (function(str, num) {
+    console.log(str);
+    var s = str;
+    if (str.length > num) {
+        s = str.replace(str.substring(num), '...')
+    };
+    return (s)
+});
+var getIcon = (function(str) {
+    var list = [({
+        "key": "iconAccessories",
+        "name": "卫生间配套",
+        "icon": "weisheng",
+    }), ({
+        "key": "iconAirCleaner",
+        "name": "空气净化器",
+        "icon": "jinghua",
+    }), ({
+        "key": "iconAirConditioner",
+        "name": "中央空调",
+        "icon": "kongtiao",
+    }), ({
+        "key": "iconCoffeeHouse",
+        "name": "咖啡厅",
+        "icon": "kating",
+    }), ({
+        "key": "iconCopyPrint",
+        "name": "复印打印",
+        "icon": "fuyin",
+    }), ({
+        "key": "iconDrinking",
+        "name": "饮用水",
+        "icon": "yinyong",
+    }), ({
+        "key": "iconFax",
+        "name": "传真",
+        "icon": "chuanzhen",
+    }), ({
+        "key": "iconFitness",
+        "name": "健身设施",
+        "icon": "jianshen",
+    }), ({
+        "key": "iconFreeCoffee",
+        "name": "免费咖啡",
+        "icon": "kafei",
+    }), ({
+        "key": "iconMeeting",
+        "name": "会议室",
+        "icon": "huiyi",
+    }), ({
+        "key": "iconMicrowave",
+        "name": "微波炉",
+        "icon": "weibo",
+    }), ({
+        "key": "iconMultifunction",
+        "name": "多功能厅",
+        "icon": "duogong",
+    }), ({
+        "key": "iconNegotiate",
+        "name": "洽谈室",
+        "icon": "qiatan",
+    }), ({
+        "key": "iconNetwork",
+        "name": "办公宽带",
+        "icon": "kuandai",
+    }), ({
+        "key": "iconOfficeCleaning",
+        "name": "办公清洁",
+        "icon": "qingjie",
+    }), ({
+        "key": "iconOfficeFurniture",
+        "name": "办公家具",
+        "icon": "bangong",
+    }), ({
+        "key": "iconReception",
+        "name": "前台接见",
+        "icon": "qiantai",
+    }), ({
+        "key": "iconRefreshments",
+        "name": "茶点",
+        "icon": "chadian",
+    }), ({
+        "key": "iconRefrigerator",
+        "name": "冰箱",
+        "icon": "bingxiang",
+    }), ({
+        "key": "iconRemoteVideo",
+        "name": "视频远程会议",
+        "icon": "shipin",
+    }), ({
+        "key": "iconTeaRoom",
+        "name": "茶水间",
+        "icon": "chashui",
+    }), ({
+        "key": "iconWIFI",
+        "name": "WIFI",
+        "icon": "wifi",
+    }), ({
+        "key": "iconAdviser",
+        "name": "政策顾问",
+        "icon": "zhengwen",
+    }), ({
+        "key": "iconBusinessGathering",
+        "name": "商务聚会",
+        "icon": "juhui",
+    }), ({
+        "key": "iconBusinessReg",
+        "name": "工商注册",
+        "icon": "gongshang",
+    }), ({
+        "key": "iconEntrepreneurship",
+        "name": "创业辅导",
+        "icon": "chuangye",
+    }), ({
+        "key": "iconFiscalAgency",
+        "name": "财税代理",
+        "icon": "caishui",
+    }), ({
+        "key": "iconInvestment",
+        "name": "投融资服务",
+        "icon": "tourong",
+    }), ({
+        "key": "iconLegalAdvice",
+        "name": "法律咨询",
+        "icon": "falv",
+    }), ({
+        "key": "iconMarketing",
+        "name": "营销推荐",
+        "icon": "tuijian",
+    }), ({
+        "key": "iconOperate",
+        "name": "运营服务",
+        "icon": "yunying",
+    }), ({
+        "key": "iconPersonnelAgency",
+        "name": "人事代理",
+        "icon": "renshi",
+    }), ({
+        "key": "iconPolicy",
+        "name": "政策申请",
+        "icon": "zhengche",
+    }), ({
+        "key": "iconPropaganda",
+        "name": "宣传设计",
+        "icon": "xuanchuan",
+    }), ({
+        "key": "iconRecruit",
+        "name": "人力招聘",
+        "icon": "renli",
+    }), ({
+        "key": "iconYearly",
+        "name": "公司年检",
+        "icon": "nianjian",
+    }), ({
+        "key": "iconBookBar",
+        "name": "书吧",
+        "icon": "shuba",
+    }), ({
+        "key": "iconLeisureArea",
+        "name": "休闲区",
+        "icon": "xiuxian",
+    }), ({
+        "key": "iconAutomaticSale",
+        "name": "自动售卖机",
+        "icon": "shoumai",
+    }), ({
+        "key": "iconWuye",
+        "name": "免费物业",
+        "icon": "wuye",
+    })];
+    var res = "";
+    for (var i = 0; i < list.length; i++) {
+        if (list[((nt_2 = (i), null == nt_2 ? undefined : 'Number' === nt_2.constructor ? nt_2 : "" + nt_2))].key === str) {
+            res = list[((nt_3 = (i), null == nt_3 ? undefined : 'Number' === nt_3.constructor ? nt_3 : "" + nt_3))].icon
+        }
+    };
+    return (res)
+});
+module.exports = ({
+    main: main,
+    before: beforeFun,
+    after: afterFun,
+    content: contentFun,
+    html_decode: html_decode,
+    str_num: str_num,
+    decode: (function(str) {
+        return (decodeURIComponent(str))
+    }),
+    reverse: (function(list) {
+        return (list.reverse())
+    }),
+    getTypeUrl: (function(list, i) {
+        var res = "../../images/AllAble_icon.png";
+        for (var j = 0; j < list.length; j++) {
+            if (list[((nt_4 = (j), null == nt_4 ? undefined : 'Number' === nt_4.constructor ? nt_4 : "" + nt_4))].id === i) {
+                res = list[((nt_5 = (j), null == nt_5 ? undefined : 'Number' === nt_5.constructor ? nt_5 : "" + nt_5))].url
+            }
+        };
+        return (res)
+    }),
+    getIcon: getIcon,
+    phone_decode: phone_decode,
+    getCity: (function(domain, citys) {
+        var str = "";
+        for (var i = 0; i < citys.length; i++) {
+            if (citys[((nt_6 = (i), null == nt_6 ? undefined : 'Number' === nt_6.constructor ? nt_6 : "" + nt_6))].domain === domain) {
+                str = citys[((nt_7 = (i), null == nt_7 ? undefined : 'Number' === nt_7.constructor ? nt_7 : "" + nt_7))].name
+            }
+        };
+        return (str)
+    }),
+    emptyCheck: (function(val1, val2, txt) {
+        val1 = Number(val1);
+        val2 = Number(val2);
+        if (!!val1 || !!val2) {
+            var tip = "";
+            if (!!val1 && !!val2) {
+                tip = "~"
+            };
+            return (!!val1 ? val1 : "") + tip + (!!val2 ? val2 : "")
+        } else {
+            return (txt ? txt : "暂无数据")
+        }
+    }),
+    buquan: (function(str) {
+        if (str.length > 9) {
+            return (str)
+        } else {
+            return ("building_id\x3d" + str)
+        }
+    }),
+});

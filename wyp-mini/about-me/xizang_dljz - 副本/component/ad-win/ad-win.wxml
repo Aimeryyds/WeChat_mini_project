@@ -1,0 +1,10 @@
+<template name="advertisement">
+    <view class="advertisement">
+        <view class="image-box">
+            <image bindtap="go2BannerLink" data-target="{{list[0].target}}" data-targetid="{{list[0].targetId}}" mode="widthFix" src="{{list[0].pic}}"></image>
+        </view>
+        <view class="image-box">
+            <image bindtap="go2BannerLink" data-target="{{item.target}}" data-targetid="{{item.targetId}}" mode="widthFix" src="{{item.pic}}" wx:for="{{[ list[1],list[2] ]}}"></image>
+        </view>
+    </view>
+</template>

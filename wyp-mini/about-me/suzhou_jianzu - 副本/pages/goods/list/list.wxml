@@ -1,0 +1,77 @@
+<view class="search">
+    <view class="search-content">
+        <image src="http://tws.cnweisou.com/images/search1.png"></image>
+        <input bindconfirm="search" bindinput="bindChange" class="input_search" placeholder="搜索关键字" placeholderStyle="color:#999" value="{{keywords}}"></input>
+    </view>
+    <text bindtap="search">筛选</text>
+</view>
+<dl class="menu">
+    <dt bindtap="selectSalePri" class="{{saleIndex=='0'?'light':''}}" data-index="0">默认</dt>
+    <dt bindtap="selectSalePri" class="{{saleIndex=='1'?'light':''}} tabTitle" data-index="1">
+        <view>销量</view>
+        <view class="titleRight" wx:if="{{saleArrowTop==''}}">
+            <view class="arrowTop"></view>
+            <view class="arrowBottom"></view>
+        </view>
+        <view class="titleRight" wx:else>
+            <view class="arrowTopLight" wx:if="{{saleArrowTop=='false'}}"></view>
+            <view class="arrowBottomLight" wx:if="{{saleArrowTop=='true'}}"></view>
+        </view>
+    </dt>
+    <dt bindtap="selectSalePri" class="{{saleIndex=='2'?'light':''}}" data-index="2">最新</dt>
+    <dt bindtap="selectSalePri" class="{{saleIndex=='3'?'light':''}} tabTitle" data-index="3">
+        <view>价格</view>
+        <view class="titleRight" wx:if="{{priceArrowTop==''}}">
+            <view class="arrowTop"></view>
+            <view class="arrowBottom"></view>
+        </view>
+        <view class="titleRight" wx:else>
+            <view class="arrowTopLight" wx:if="{{priceArrowTop=='false'}}"></view>
+            <view class="arrowBottomLight" wx:if="{{priceArrowTop=='true'}}"></view>
+        </view>
+    </dt>
+    <dt bindtap="styleSelect" class="{{!style?'highlight2 ':'highlight1'}}" data-index="4">排列</dt>
+</dl>
+<view class="goodsList carts-list" wx:if="{{!empty&&style}}">
+    <view bindtap="tapGoods" class="carts-item" data-object-id="{{item.id}}" wx:for="{{goods}}" wx:key="objectId">
+        <view>
+            <image class="carts-image" mode="aspectFill" src="{{item.thumb}}"></image>
+        </view>
+        <view class="carts-text">
+            <text class="carts-title">{{item.title}}</text>
+            <view>
+                <text class="carts-price">￥{{item.marketprice}}元</text>
+                <image class="carts-img" src="https://tws.cnweisou.com/images/myCart1.png"></image>
+            </view>
+            <view class="goods-score">
+                <text>已售{{item.sales}}件</text>
+                <text>库存:{{item.total}}</text>
+            </view>
+        </view>
+    </view>
+    <view class="noMoreData" wx:if="{{noMoreData&&goods.length>6}}">没有更多数据了！</view>
+</view>
+<view class="goodsList1 carts-list1" wx:if="{{!empty&&!style}}">
+    <view bindtap="tapGoods" class="carts-item1" data-object-id="{{item.id}}" wx:for="{{goods}}" wx:key="objectId">
+        <view class="imgView">
+            <image class="carts-image1" mode="aspectFill" src="{{item.thumb}}"></image>
+        </view>
+        <view class="carts-text1">
+            <text class="carts-title1">{{item.title}}</text>
+            <text class="carts-price1">￥{{item.marketprice}}元</text>
+            <image class="carts-img1" src="https://tws.cnweisou.com/images/myCart1.png"></image>
+            <view class="goods-score1">
+                <text>已售{{item.sales}}件</text>
+                <text>库存:{{item.total}}</text>
+            </view>
+        </view>
+    </view>
+    <view class="noMoreData" wx:if="{{noMoreData&&goods.length>6}}">没有更多数据了！</view>
+</view>
+<view class="view-empty" wx:if="{{empty}}">
+    <text>抱歉暂时没有相关结果,换个筛选条件试试吧!</text>
+</view>
+<view bindtap="goToTop" class="scrollTop" wx:if="{{showScrollTop}}">
+    <image src="http://tws.cnweisou.com/images/toTopList.png"></image>
+</view>
+<loading wx:if="{{loading}}"></loading>

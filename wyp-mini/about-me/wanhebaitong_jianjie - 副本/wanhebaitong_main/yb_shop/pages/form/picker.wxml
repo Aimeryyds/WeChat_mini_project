@@ -1,0 +1,10 @@
+<view class="form_tit" wx:if="{{f_item.title}}">{{f_item.title}}<text class="ture_color" wx:if="{{f_item.empty}}">*</text>
+</view>
+<view class="form_li right_arrow">
+    <picker bindchange="bindPickerChange" id="{{f_item.name}}" range="{{f_item.list}}" rangeKey="value" value="{{index}}">
+        <view class="picker">
+      当前选择：{{f_item.list[ form_data[f_item.name] ].value}}
+    </view>
+        <input name="{{f_item.name}}" style="display:none" value="{{f_item.list[ form_data[f_item.name] ].value}}"></input>
+    </picker>
+</view>

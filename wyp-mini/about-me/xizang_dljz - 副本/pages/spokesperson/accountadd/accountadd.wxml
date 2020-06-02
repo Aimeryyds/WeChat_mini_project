@@ -1,0 +1,56 @@
+<view class="container">
+    <view class="payway-list">
+        <view bindtap="chooseWay" id="{{index+1}}" wx:for="{{paywaylist}}" wx:key="*this">
+            <image src="/images/spokesperson/withdraw/{{item.pic}}.png"></image>
+            <text>{{item.name}}</text>
+            <image class="check-icon" src="/images/spokesperson/withdraw/icon_sel_dark.png" wx:if="{{payway==index+1}}"></image>
+            <image class="check-icon" src="/images/spokesperson/withdraw/icon_sel_dark-1.png" wx:else></image>
+        </view>
+    </view>
+    <form bindsubmit="save">
+        <view class="input-wrap" wx:if="{{payway==1}}">
+            <view class="input-row">
+                <text>认证姓名</text>
+                <input name="wxAuthname" placeholder="请输入您的真实姓名" placeholderClass="input-p-color" value="{{account.wxAuthname}}"></input>
+            </view>
+        </view>
+        <view class="input-wrap" wx:elif="{{payway==2}}">
+            <view class="input-row">
+                <text>支付宝账号</text>
+                <input name="alipayAccount" placeholder="请输入手机号或邮箱" placeholderClass="input-p-color" value="{{account.alipayAccount}}"></input>
+            </view>
+            <view class="input-row">
+                <text>认证姓名</text>
+                <input name="alipayAuthname" placeholder="请输入您的真实姓名" placeholderClass="input-p-color" value="{{account.alipayAuthname}}"></input>
+            </view>
+        </view>
+        <view class="input-wrap" wx:elif="{{payway==3}}">
+            <view class="input-row">
+                <text>开户银行</text>
+                <picker bindchange="bindPickerChange" range="{{banks}}" value="{{bank_idx}}">
+                    <view class="picker">
+                        <text>{{banks[bank_idx]?banks[bank_idx]:'请选择'}}</text>
+                        <image src="/images/icon_next.png"></image>
+                    </view>
+                </picker>
+            </view>
+            <view class="input-row">
+                <text>开户省市</text>
+                <input name="bankAddress" placeholder="请输入开户省市" placeholderClass="input-p-color" value="{{account.bankAddress}}"></input>
+            </view>
+            <view class="input-row">
+                <text>支行名称</text>
+                <input name="bankName" placeholder="请输入该卡的支行名称" placeholderClass="input-p-color" value="{{account.bankName}}"></input>
+            </view>
+            <view class="input-row">
+                <text>开户人</text>
+                <input name="bankUsername" placeholder="请输入持卡人的真实姓名" placeholderClass="input-p-color" value="{{account.bankUsername}}"></input>
+            </view>
+            <view class="input-row">
+                <text>银行卡</text>
+                <input name="bankAccount" placeholder="请输入银行卡号" placeholderClass="input-p-color" value="{{account.bankAccount}}"></input>
+            </view>
+        </view>
+        <button class="btn" formType="submit">确认保存</button>
+    </form>
+</view>

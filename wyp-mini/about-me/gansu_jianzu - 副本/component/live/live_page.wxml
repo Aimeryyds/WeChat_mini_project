@@ -1,0 +1,13 @@
+<view style="background:#fff">
+    <wxc-tab bind:tabchange="onTabChange" componentId="c4" defaultIndex="{{0}}" id="tab">
+        <wxc-tab-panel componentId="c4" label="{{tab.title}}" tabIndex="{{index}}" wx:for="{{tabs}}" wx:for-item="tab" wx:key="{{tab.content}}">
+            <navigator class="speaker" url="/pages/live/available/index" wx:if="{{isPusher&&index==0}}">
+                <image src="http://imgcdnali.wfenxiao.com.cn/xcx/c/live/begin.png"></image>
+            </navigator>
+            <scroll-view scrollY style="background:#efefef;height: {{scrollHeight}}px;padding-bottom:24rpx;box-sizing: border-box">
+                <live-list id="list_{{index}}" liveList="{{tab.liveList}}" wx:if="{{tab.liveList&&tab.liveList.length>0}}"></live-list>
+                <wxc-abnor title="{{tab.noDataTitle}}" type="DATA" wx:if="{{!tab.loading&&tab.liveList&&tab.liveList.length==0}}"></wxc-abnor>
+            </scroll-view>
+        </wxc-tab-panel>
+    </wxc-tab>
+</view>

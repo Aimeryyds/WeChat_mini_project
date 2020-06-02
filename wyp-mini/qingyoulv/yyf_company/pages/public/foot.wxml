@@ -1,0 +1,37 @@
+<template name="foot">
+    <view class="we7-bottom" style="background-color:{{blist.background_color}};border-color:{{blist.border_color}};">
+        <view class="we7-bottom-item" wx:if="{{blist.m1_name!=''}}">
+            <button bindtap="{{blist.m1_path=='tel'?'tel':''}}{{blist.m1_path=='driver'?'driver':''}}" openType="{{blist.m1_path=='custom'?'contact':''}}" wx:if="{{blist.m1_path=='custom'||blist.m1_path=='tel'||blist.m1_path=='driver'}}"></button>
+            <navigator hoverClass="active" openType="reLaunch" url="{{blist.path1}}" wx:if="{{blist.m1_path!='custom'&&blist.m1_path!='tel'&&blist.m1_path!='driver'}}"></navigator>
+            <image class="item-img" mode="widthFix" src="{{blist.m1_selimg}}" wx:if="{{blist.isCurrentPage&&blist.currentNum==1}}"></image>
+            <image class="item-img" mode="widthFix" src="{{blist.m1_img}}" wx:if="{{!blist.isCurrentPage||blist.currentNum!=1}}"></image>
+            <view class="item-text" style="color: {{blist.sel_color}}" wx:if="{{blist.isCurrentPage&&blist.currentNum==1}}">{{blist.m1_name}}</view>
+            <view class="item-text" style="color: {{blist.color}}" wx:if="{{!blist.isCurrentPage||blist.currentNum!=1}}">{{blist.m1_name}}</view>
+        </view>
+        <view class="we7-bottom-item" wx:if="{{blist.m2_name!=''}}">
+            <button bindtap="{{blist.m2_path=='tel'?'tel':''}}{{blist.m2_path=='driver'?'driver':''}}" openType="{{blist.m2_path=='custom'?'contact':''}}" wx:if="{{blist.m2_path=='custom'||blist.m2_path=='tel'||blist.m2_path=='driver'}}"></button>
+            <view bindtap="tabNav" class="aview" data-tab="tab2" data-url="{{blist.path2}}" wx:if="{{blist.m2_path!='custom'&&blist.m2_path!='tel'&&blist.m2_path!='driver'}}"></view>
+            <image class="item-img" mode="widthFix" src="{{blist.m2_selimg}}" wx:if="{{blist.isCurrentPage&&blist.currentNum==2}}"></image>
+            <image class="item-img" mode="widthFix" src="{{blist.m2_img}}" wx:if="{{!blist.isCurrentPage||blist.currentNum!=2}}"></image>
+            <view class="item-text" style="color: {{blist.sel_color}}" wx:if="{{blist.isCurrentPage&&blist.currentNum==2}}">{{blist.m2_name}}</view>
+            <view class="item-text" style="color: {{blist.color}}" wx:if="{{!blist.isCurrentPage||blist.currentNum!=2}}">{{blist.m2_name}}</view>
+        </view>
+        <view class="we7-bottom-item" wx:if="{{blist.m3_name!=''}}">
+            <button bindtap="{{blist.m3_path=='tel'?'tel':''}}{{blist.m3_path=='driver'?'driver':''}}" openType="{{blist.m3_path=='custom'?'contact':''}}" wx:if="{{blist.m3_path=='custom'||blist.m3_path=='tel'||blist.m3_path=='driver'}}"></button>
+            <view bindtap="tabNav" class="aview" data-tab="tab3" data-url="{{blist.path3}}" wx:if="{{blist.m3_path!='custom'&&blist.m3_path!='tel'&&blist.m3_path!='driver'}}"></view>
+            <image class="item-img" mode="widthFix" src="{{blist.m3_selimg}}" wx:if="{{blist.isCurrentPage&&blist.currentNum==3}}"></image>
+            <image class="item-img" mode="widthFix" src="{{blist.m3_img}}" wx:if="{{!blist.isCurrentPage||blist.currentNum!=3}}"></image>
+            <view class="item-text" style="color: {{blist.sel_color}}" wx:if="{{blist.isCurrentPage&&blist.currentNum==3}}">{{blist.m3_name}}</view>
+            <view class="item-text" style="color: {{blist.color}}" wx:if="{{!blist.isCurrentPage||blist.currentNum!=3}}">{{blist.m3_name}}</view>
+        </view>
+        <view class="we7-bottom-item" wx:if="{{blist.m4_name!=''}}">
+            <button bindtap="{{blist.m4_path=='tel'?'tel':''}}{{blist.m4_path=='driver'?'driver':''}}" openType="{{blist.m4_path=='custom'?'contact':''}}" wx:if="{{blist.m4_path=='custom'||blist.m4_path=='tel'||blist.m4_path=='driver'}}"></button>
+            <view bindtap="tabNav" class="aview" data-tab="tab4" data-url="{{blist.path4}}" wx:if="{{blist.m4_path!='custom'&&blist.m4_path!='tel'&&blist.m4_path!='driver'}}"></view>
+            <image class="item-img" mode="widthFix" src="{{blist.m4_selimg}}" wx:if="{{blist.isCurrentPage&&blist.currentNum==4}}"></image>
+            <image class="item-img" mode="widthFix" src="{{blist.m4_img}}" wx:if="{{!blist.isCurrentPage||blist.currentNum!=4}}"></image>
+            <view class="item-text" style="color: {{blist.sel_color}}" wx:if="{{blist.isCurrentPage&&blist.currentNum==4}}">{{blist.m4_name}}</view>
+            <view class="item-text" style="color: {{blist.color}}" wx:if="{{!blist.isCurrentPage||blist.currentNum!=4}}">{{blist.m4_name}}</view>
+        </view>
+    </view>
+    <view class="we7-bottom-placeholder"></view>
+</template>

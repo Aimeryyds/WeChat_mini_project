@@ -1,0 +1,32 @@
+<view class="searchBox">
+    <view class="inputBackground">
+        <image class="search-icon" src="/img/resources/search-icon.png"></image>
+        <input bindinput="searchInpFn" class="searchInput" confirmType="search" placeholder="请输入门店名称" type="text" value="{{inputValue}}"></input>
+        <image bindtap="delInp" class="search-del" hidden="{{inputCha}}" src="/img/resources/del-search.png"></image>
+    </view>
+</view>
+<view class="searchListBox">
+    <view class="cityStores lenovoBox" hidden="{{nodata}}">
+        <view class="storesBox history-box">
+            <view bindtap="storesContent" class="historySty" data-num="{{item.id}}" data-text="{{item.shopsname}}" wx:for="{{storesList}}" wx:key="index">
+                <text>{{item.shopsname}}</text>
+            </view>
+        </view>
+    </view>
+    <view class="lenovoBox">
+        <view class="history-box">
+            <view bindtap="toListLink" class="historySty" data-num="{{item.communityid}}" data-text="{{item.name}}" wx:for="{{lianxiangList}}" wx:key="index">
+                <text>{{item.name}}</text>
+            </view>
+        </view>
+    </view>
+    <view class="no-data" hidden="{{lxHidden}}">
+        <image src="https://res.5i5j.com/cache/weixin/common/no-house.png"></image>
+        <view class="no-text">
+            <text>没有找到此门店，换个条件试试</text>
+        </view>
+    </view>
+</view>
+<view class="loading" hidden="{{loadinghide}}">
+    <image class="loading-img" src="/img/resources/load.png"></image>
+</view>

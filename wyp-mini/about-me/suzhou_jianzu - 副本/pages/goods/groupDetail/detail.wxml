@@ -1,0 +1,88 @@
+<loading wx:if="{{loading}}"></loading>
+<view class="class-tab">
+    <text bindtap="tabClick" class="{{tabClasss[0]}}" data-index="0">商品</text>
+    <text bindtap="tabClick" class="{{tabClasss[1]}}" data-index="1">详情</text>
+    <text bindtap="tabClick" class="{{tabClasss[2]}}" data-index="2">评价</text>
+</view>
+<view class="parent" wx:if="{{tab==0}}">
+    <swiper autoplay="true" class="images" duration="1000" indicatorDots="true" interval="5000" style="height:{{galleryHeight}}px;">
+        <swiper-item wx:for="{{goods.gallery}}">
+            <image bindtap="previewImage" class="swiper-image" data-current="{{index}}" mode="aspectFill" src="{{item.image_url}}"></image>
+        </swiper-item>
+    </swiper>
+    <view class="view-class-title">
+        <view class="summary">
+            <text class="title">{{goods.goods.goods_name}}</text>
+        </view>
+        <view class="class-line"></view>
+        <view bindtap="addCollect" class="class-collect" data-id="{{goods.goods.goods_id}}">
+            <image src="http://tws.cnweisou.com/images/collect.png"></image>
+        </view>
+    </view>
+    <view class="view-price">
+        <text class="text-red">￥{{price}}</text>
+        <text class="btn-red">限时团购</text>
+        <text class="text-endtime">截止日期:{{groupInfo.end_time}}</text>
+    </view>
+    <view class="view-other-info">
+        <text>库存:{{goods.goods.store_count}}</text>
+        <text>{{goods.goods.comment_count}}人评价</text>
+        <text>{{groupInfo.virtual_num}}人已参团</text>
+    </view>
+    <text class="text-prop">选择商品属性</text>
+    <view class="rowline"></view>
+    <view class="view-sub-prop" wx:for="{{goods.goods.goods_spec_list}}" wx:for-index="pos">
+        <text class="text-prop">{{item[0].spec_name}}</text>
+        <view class="view-btns">
+            <text bindtap="propClick" class="{{textStates[item.isClick]}}" data-index="{{pos}}" data-pos="{{index}}" wx:for="{{item}}">{{item.item}}</text>
+        </view>
+    </view>
+    <view class="rowline"></view>
+    <text class="text-prop">购买数量</text>
+    <view class="rowline"></view>
+    <view>
+        <view class="stepper">
+            <text bindtap="bindMinus" class="normal" data-index="{{index}}">-</text>
+            <input bindchange="bindManual" data-index="{{index}}" type="number" value="{{goods_num}}"></input>
+            <text bindtap="bindPlus" class="normal" data-index="{{index}}">+</text>
+        </view>
+    </view>
+    <view style="width:100%;height:30px;"></view>
+    <view class="detail">
+        <image mode="widthFix" src="{{item}}" wx:for="{{goods.detail}}"></image>
+    </view>
+</view>
+<view class="parent" wx:if="{{tab==1}}">
+    <image bindtap="previewImage" class="xq-image" data-current="{{index}}" mode="widthFix" src="{{item.image_url}}" wx:for="{{goods.gallery}}"></image>
+    <text class="text-desc-title">商品信息</text>
+    <view class="rowline"></view>
+    <text class="text-propdesc" wx:for="{{goods.goods.goods_attr_list}}">{{item.attr_name}}:{{item.attr_value}}</text>
+    <view style="width:100%;height:100px;"></view>
+</view>
+<view class="parent" wx:if="{{tab==2}}">
+    <view class="container carts-list">
+        <view class="carts-item" wx:for="{{goods.comment}}" wx:key="index">
+            <view class="carts-userinfo">
+                <image class="carts-image" mode="aspectFill" src="http://tws.cnweisou.com/images/user.jpg"></image>
+                <text class="text-username">{{item.username}}</text>
+            </view>
+            <view class="carts-text">
+                <text class="text-username">{{item.content}}</text>
+                <view calss="carts_bottom">
+                    <image class="stars" src="http://tws.cnweisou.com/images/stars0.gif" wx:if="{{item.service_rank==0}}"></image>
+                    <image class="stars" src="http://tws.cnweisou.com/images/stars1.gif" wx:elif="{{item.service_rank==1}}"></image>
+                    <image class="stars" src="http://tws.cnweisou.com/images/stars2.gif" wx:elif="{{item.service_rank==2}}"></image>
+                    <image class="stars" src="http://tws.cnweisou.com/images/stars3.gif" wx:elif="{{item.service_rank==3}}"></image>
+                    <image class="stars" src="http://tws.cnweisou.com/images/stars4.gif" wx:elif="{{item.service_rank==4}}"></image>
+                    <image class="stars" src="http://tws.cnweisou.com/images/stars5.gif" wx:elif="{{item.service_rank==5}}"></image>
+                    <text class="text-username">{{item.add_time}}</text>
+                </view>
+            </view>
+            <view class="carts-right"></view>
+        </view>
+    </view>
+</view>
+<view class="footer">
+    <button bindtap="bug" class="btn-bug">立即购买</button>
+    <button bindtap="addCart" class="add-cart">加入购物车</button>
+</view>

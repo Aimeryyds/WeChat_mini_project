@@ -1,0 +1,65 @@
+<import src="/dist/toast/index.wxml"></import>
+<template is="zan-toast" data="{{zanToast:zanToast}}"></template>
+<view class="container" style="padding-bottom: 112rpx;">
+    <view class="withdraw" wx:if="{{withdrawData.bankName}}">
+        <view class="withdraw__item">
+            <view class="withdraw__bank">
+                <image class="withdraw__item__img" src="{{withdrawData.bankLogo}}"></image>
+                <view class="withdraw__item__info">
+                    <view class="withdraw__item__name">{{withdrawData.bankName}}</view>
+                    <view class="withdraw__item__cont">
+                        <view style="margin-bottom:6rpx;">{{withdrawData.accountName}}</view>
+                        <view>尾号{{minCard}}</view>
+                    </view>
+                </view>
+            </view>
+            <view bindtap="bankAccount" class="form__item-link">
+                <view class="form__item-text">设置提款账户</view>
+                <image class="form__item-linkImg" src="http://imgcdnali.wfenxiao.com.cn/xcx/c/icons/arrow_right.png"></image>
+            </view>
+        </view>
+    </view>
+    <view class="withdraw" wx:else>
+        <view class="withdraw__item">
+            <view class="withdraw__bank">
+                <image class="withdraw__item__img" src="http://imgcdnali.wfenxiao.com.cn/xcx/c/account-normal.png"></image>
+                <view class="withdraw__item__info">
+                    <view class="withdraw__item__name">还未设置提款账户</view>
+                </view>
+            </view>
+            <view bindtap="bankAccount" class="form__item-link">
+                <view class="form__item-text">设置提款账户</view>
+                <image class="form__item-linkImg" src="http://imgcdnali.wfenxiao.com.cn/xcx/c/icons/arrow_right.png"></image>
+            </view>
+        </view>
+    </view>
+    <view class="order-list">
+        <view bindtap="checkOrder" class="order-item" data-index="{{index}}" wx:for="{{orderList}}" wx:key="index">
+            <view class="order-item__radio" style="border:1px solid {{item.isChecked?'#fff':'#b0b0b0'}}">
+                <image src="http://imgcdnali.wfenxiao.com.cn/xcx/c/selected.png" style="display:{{item.isChecked?'inline-block':'none'}}"></image>
+            </view>
+            <view class="order-item__detail">
+                <view class="order-item__detail-title">
+                    <view style="color:#000;font-size: 26rpx;">{{item.nickName}}</view>
+                    <view style="margin: 10rpx 0;">{{item.finishedTime}}</view>
+                    <view class="">订单编号：{{item.orderNo}}</view>
+                </view>
+                <view class="order-item__detail-money">
+                    <view class="">金额：￥{{item.total}}</view>
+                    <view class="">佣金：￥{{item.amount}}</view>
+                </view>
+            </view>
+        </view>
+    </view>
+    <view class="total-wrap">
+        <view bindtap="checkAll" style="display:flex;padding-left:20rpx;">
+            <view class="order-item__radio" style="border:1px solid {{checkAll?'#fff':'#b0b0b0'}}">
+                <image src="http://imgcdnali.wfenxiao.com.cn/xcx/c/selected.png" style="display:{{checkAll?'inline-block':'none'}}"></image>
+            </view>
+            <view>全选</view>
+        </view>
+        <view style="margin-left:20rpx;">总计: <text style="color:#f22222;">{{total}}</text>
+        </view>
+        <button bindtap="checkMoney" class="total-btn" disabled="{{withdrawData.bankName&&total==0}}" style=" {{total==0?'color:rgba(0, 0, 0, 0.3);background-color:#F7F7F7;':''}}">立即提现</button>
+    </view>
+</view>

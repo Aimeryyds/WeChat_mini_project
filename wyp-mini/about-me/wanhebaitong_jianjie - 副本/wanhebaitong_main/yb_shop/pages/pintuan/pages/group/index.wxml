@@ -1,0 +1,38 @@
+<import src="/yb_shop/pages/pintuan/pages/template/grouplist.wxml"></import>
+<scroll-view class="scroll-view-x" scrollX="true">
+    <view class="scroll-view-item">
+        <view bindtap="swichNav" class="{{currentTab==0?'on':''}}" data-current="0">全部</view>
+    </view>
+    <view class="scroll-view-item">
+        <view bindtap="swichNav" class="{{currentTab==1?'on':''}}" data-current="1">待成团</view>
+    </view>
+    <view class="scroll-view-item">
+        <view bindtap="swichNav" class="{{currentTab==2?'on':''}}" data-current="2">已成团</view>
+    </view>
+    <view class="scroll-view-item">
+        <view bindtap="swichNav" class="{{currentTab==3?'on':''}}" data-current="3">拼团失败</view>
+    </view>
+</scroll-view>
+<swiper bindchange="bindChange" class="swiper-box" current="{{currentTab}}" duration="300" style="height: {{windowHeight-36}}px;">
+    <swiper-item>
+        <scroll-view bindscrolltolower="scrolltolower" class="scroll-view-y" lowerThreshold="50" scrollTop="{{scrollTop}}" scrollWithAnimation="true" scrollY="true" style="height: {{windowHeight-36}}px;">
+            <template is="groupList" data="{{groupList:groupList,loading:loading}}"></template>
+        </scroll-view>
+    </swiper-item>
+    <swiper-item>
+        <scroll-view bindscrolltolower="scrolltolower" class="scroll-view-y" lowerThreshold="50" scrollTop="{{scrollTop}}" scrollWithAnimation="true" scrollY="true" style="height: {{windowHeight-36}}px;">
+            <template is="groupList" data="{{groupList:groupList,loading:loading}}"></template>
+        </scroll-view>
+    </swiper-item>
+    <swiper-item>
+        <scroll-view bindscrolltolower="scrolltolower" class="scroll-view-y" lowerThreshold="50" scrollTop="{{scrollTop}}" scrollWithAnimation="true" scrollY="true" style="height: {{windowHeight-36}}px;">
+            <template is="groupList" data="{{groupList:groupList,loading:loading}}"></template>
+        </scroll-view>
+    </swiper-item>
+    <swiper-item>
+        <scroll-view bindscrolltolower="scrolltolower" class="scroll-view-y" lowerThreshold="50" scrollTop="{{scrollTop}}" scrollWithAnimation="true" scrollY="true" style="height: {{windowHeight-36}}px;">
+            <template is="groupList" data="{{groupList:groupList,loading:loading}}"></template>
+        </scroll-view>
+    </swiper-item>
+</swiper>
+<template is="loading" data="{{loading:loading}}"></template>

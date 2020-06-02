@@ -1,0 +1,36 @@
+<view class="data-map" id="map_area">
+    <map showLocation class="map-content" id="map" latitude="{{point.lat}}" longitude="{{point.lng}}" markers="{{markers}}" scale="16" style="width:100%;height:{{contHeight-bottomHeight}}px"></map>
+    <view class="map-tips" id="map_text">
+        <view class="map-vis">
+            <image class="map-here hide" src="../../images/here.png"></image>
+            <view class="map-title">{{name}}</view>
+            <view class="map-dizhi">{{address}}</view>
+        </view>
+        <view class="map-uls">
+            <view bindtap="searchThat" class="ditie {{curr===1?'cur':''}}" data-icon="ditie" data-id="1" data-search="地铁">
+                <image class="normal" src="../../images/map/ditie1.png"></image>
+                <image class="active" src="../../images/map/ditie2.png"></image>
+                <text>地铁</text>
+            </view>
+            <view bindtap="searchThat" class="gongjiao {{curr===2?'cur':''}}" data-icon="gongjiao" data-id="2" data-search="公交">
+                <image class="normal" src="../../images/map/gongjiao1.png"></image>
+                <image class="active" src="../../images/map/gongjiao2.png"></image>
+                <text>公交</text>
+            </view>
+            <view bindtap="searchThat" class="canyin {{curr===3?'cur':''}}" data-icon="canyin" data-id="3" data-search="餐饮">
+                <image class="normal" src="../../images/map/canyin1.png"></image>
+                <image class="active" src="../../images/map/canyin2.png"></image>
+                <text>餐饮</text>
+            </view>
+            <view bindtap="searchThat" class="yinhang {{curr===4?'cur':''}}" data-icon="yinhang" data-id="4" data-search="银行">
+                <image class="normal" src="../../images/map/yinhang1.png"></image>
+                <image class="active" src="../../images/map/yinhang2.png"></image>
+                <text>银行</text>
+            </view>
+        </view>
+    </view>
+</view>
+<navigator class="goTag_home" openType="reLaunch" style="left:auto;right:30rpx;bottom:146rpx;" url="/pages/index/index" wx:if="{{!!share}}">
+    <image class="icon_home" src="/images/home.png"></image>
+    <text>首页</text>
+</navigator>

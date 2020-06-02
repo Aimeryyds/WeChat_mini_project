@@ -1,0 +1,26 @@
+<view class="login-container">
+    <view class="login">
+        <view class="login-banner">
+            <image class="banner-image" src="{{logo}}"></image>
+        </view>
+        <view class="login-title">电动车保险</view>
+        <view class="cu-form-group phoneGroup">
+            <view class="title">手机号</view>
+            <input bindinput="getInputValue" class="title" id="phoneNumber" maxlength="11" placeholder="{{phonetext}}" type="number"></input>
+        </view>
+        <view class="cu-form-group" style="border: 0px;border-bottom:1px solid #cecece;margin-top: 40rpx;">
+            <view class="title">验证码</view>
+            <input bindinput="getInputValue" class="title" id="verificationCode" placeholder="请输入验证码"></input>
+            <view class="padding-sm flex flex-wrap">
+                <button bindtap="sendRegistCode" class="cu-btn line-blue round" disabled="{{disabled}}">{{code}}</button>
+            </view>
+        </view>
+        <view class="cu-form-group" style="border: 0px;border-bottom:1px solid #cecece;margin-top: 40rpx;">
+            <view class="title text-right margin-left">密码</view>
+            <input bindinput="getInputValue" class="title" id="password" placeholder="{{passtext}}" type="password"></input>
+        </view>
+        <button bindtap="goPassword" class="cu-btn block bg-blue margin-tb-sm lg btn" style="margin-top: 80rpx;">下一步</button>
+        <button bindtap="goHome" class="cu-btn block line-blue margin-tb-sm lg btn" wx:if="{{registerType!='renew'}}">取消</button>
+    </view>
+    <view bindtap="goLogin" class="text-sm text-blue text-center" wx:if="{{registerType!='renew'}}">已有账号？去登录</view>
+</view>

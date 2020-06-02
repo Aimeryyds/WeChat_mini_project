@@ -1,0 +1,77 @@
+<view class="page">
+    <view class="wait">
+        <view class="goods">
+            <view style="font-weight: bolder;">
+                <block wx:if="{{data.log.status=='1'&&data.log.paystatus=='0'}}">待支付</block>
+                <block wx:elif="{{data.log.status=='2'}}">待发货</block>
+                <block wx:elif="{{data.log.status=='2'&&data.log.paystatus=='2'}}">已完成</block>
+            </view>
+            <view style="margin-top: 12rpx;font-size: 27rpx;">
+                消费总额：{{data.goods.credit}}积分
+                <block wx:if="{{sum>'0.00'}}">+ ￥{{sum}}</block>
+            </view>
+        </view>
+        <image class="img" src="http://tws.cnweisou.com/images/yuan.png"></image>
+    </view>
+    <view class="addr">
+        <image class="img" src="http://tws.cnweisou.com/images/addr.png"></image>
+        <view class="wrap">
+            <view style="font-weight: bolder;font-size: 34rpx;">
+                <text>{{data.log.address.realname}} {{data.log.address.mobile}}</text>
+            </view>
+            <view style="margin-top: 12rpx;font-size: 27rpx;color: gray;">{{data.log.address.province}}{{data.log.address.city}}{{data.log.address.area}} {{data.log.address.address}}</view>
+        </view>
+    </view>
+    <view class="list">
+        <view class="item">
+            <image class="left" src="{{data.goods.thumb}}"></image>
+            <view class="center">
+                <view style="overflow: hidden;text-overflow:ellipsis;white-space: nowrap;">{{data.goods.title}}</view>
+            </view>
+            <view class="right">
+                <view>{{data.goods.credit}}积分</view>
+                <view style="margin-top: 12rpx;">×1</view>
+            </view>
+        </view>
+    </view>
+    <view class="store_list">
+        <view class="item">
+            <view>商品</view>
+            <view>{{data.goods.credit}}积分
+                <block wx:if="{{sum>'0.00'}}">+ ￥{{data.goods.money}}</block>
+            </view>
+        </view>
+        <view class="item">
+            <view>运费</view>
+            <view>
+                <block wx:if="{{data.goods.dispatch>'0.00'}}">{{data.goods.dispatch}}</block>
+                <block wx:else>包邮</block>
+            </view>
+        </view>
+        <view class="item">
+            <view>实付费（含运费）</view>
+            <view style="color:rgb(239, 79, 79)">{{data.goods.credit}}积分
+                <block wx:if="{{sum>'0.00'}}">+ ￥{{sum}}</block>
+            </view>
+        </view>
+    </view>
+    <view class="store_list">
+        <view class="item_left">
+            <view>订单编号：</view>
+            <view>{{data.log.logno}}</view>
+        </view>
+        <view class="item_left">
+            <view>创建时间：</view>
+            <view>{{data.log.createtime}}</view>
+        </view>
+        <view class="item_left" wx:if="{{data.log.paytime}}">
+            <view>支付时间：</view>
+            <view>{{data.log.paytime}}</view>
+        </view>
+    </view>
+    <view class="order-footer" wx:if="{{data.log.status=='1'}}">
+        <text bindtap="pay" class="btn-pay" data-index="{{index}}" wx:if="{{data.log.pay_code!='cod'}}">立即付款</text>
+    </view>
+    <view bindtap="toindex" class="btn">返回首页</view>
+</view>
+<loading wx:if="{{loading}}"></loading>

@@ -1,0 +1,177 @@
+<import src="../common/footer.wxml"></import>
+<import src="../common/comment.wxml"></import>
+<reloadView wx:if="{{showReloadView}}"></reloadView>
+<view class="note_container" wx:if="{{showPage}}">
+    <view style=" min-height:100%; flex:1; background-color:white;">
+        <view class="top-content" wx:if="{{!showError}}">
+            <view class="note-swiper-container" wx:if="{{!note.video_url||note.video_url.length<=0}}">
+                <swiper autoplay="{{autoplay}}" bindchange="swiperBindChange" class="note-swiper" duration="{{duration}}" indicatorDots="{{indicatorDots}}" interval="{{interval}}">
+                    <swiper-item wx:for="{{note.images}}" wx:key="*this">
+                        <view class="note-swiper-item">
+                            <image class="note-swiper-item-image" mode="aspectFill" src="{{item.u}}"></image>
+                        </view>
+                    </swiper-item>
+                </swiper>
+                <view class="note-swiper-index">{{currentIndex}}/{{note.images.length}}</view>
+            </view>
+            <view class="margin-view" wx:if="{{!note.video_url||note.video_url.length<=0}}"></view>
+            <view class="note-video-container" style="background-image:url({{note.video_cover}})" wx:if="{{note.video_url.length>0}}">
+                <video binderror="videoErrorCallback" class="note-video" id="videoPlayer" poster="{{note.imageURL}}" src="{{note.video_url}}"></video>
+            </view>
+            <view class="author-view">
+                <image class="avatar" mode="aspectFill" src="{{note.author.p}}"></image>
+                <view class="user-name">{{note.author.n}}</view>
+                <image class="prime-icon" src="/images/prime.png" wx:if="{{note.author.is_prime}}"></image>
+                <view class="user-level" wx:if="{{note.author.lv}}">LV.{{note.author.lv}}</view>
+            </view>
+            <view class="title-label">{{note.title}}</view>
+            <view bindtap="recipeItemPressed" class="recipe-title-view" data-recipe-id="{{note.recipe_id}}" wx:if="{{note.recipe_id.length>0}}">
+                <image mode="aspectFit" src="{{note.recipe_icon}}"></image>
+                <view>{{note.recipe_title}}</view>
+            </view>
+            <view class="course-title-view" wx:if="{{note.course_id.length>0}}">
+                <image mode="aspectFit" src="{{note.course_icon}}"></image>
+                <view>{{note.recipe_title}}</view>
+            </view>
+            <view class="story-rich-text-container" wx:if="{{noteContents.length}}">
+                <block wx:for="{{noteContents}}" wx:key="key">
+                    <navigator appId="{{goodMiniAppid}}" class="content_item_container" openType="navigate" path="{{item.u}}" target="miniProgram" version="release" wx:if="{{item.type==2&&item.product}}">
+                        <image class="content_item_image" mode="aspectFill" src="{{item.product.ti}}"></image>
+                        <view class="item_info_container">
+                            <view class="item_good_title">{{item.product.t}}</view>
+                            <view class="item_good_price_count">
+                                <text class="item_good_price">￥{{item.product.p}}</text>
+                                <text class="item_good_count">已售{{item.product.sc}}</text>
+                            </view>
+                        </view>
+                    </navigator>
+                    <view bindtap="contentRecipeClick" class="content_item_container" data-action-url="{{item.u}}" wx:elif="{{item.type==4&&item.recipe}}">
+                        <image class="content_item_image" mode="aspectFill" src="{{item.recipe.img}}"></image>
+                        <view class="item_recipe_info_container">
+                            <view class="item_recipe_title">
+              {{item.recipe.n}}
+            </view>
+                            <view class="item_recipe_author" wx:if="{{item.recipe.a}}">{{item.recipe.a.n}}</view>
+                            <view class="item_recipe_star_favorite">
+                                <view class="item_recipe_star_container" wx:if="{{item.recipe.rate&&item.recipe.rate!=0}}">
+                                    <starView class="item_recipe_star" isSmall="{{true}}" starCount="{{item.recipe.rate}}" wx:if="{{item.recipe.rate&&item.recipe.rate!=0}}"></starView>
+                                    <view class="recipe_star_text"> {{item.recipe.rate}}分</view>
+                                </view>
+                                <view class="item_recipe_favorite" wx:else>{{item.recipe.fc}}人已收藏</view>
+                            </view>
+                        </view>
+                    </view>
+                    <navigator appId="{{courseMiniAppid}}" class="content_item_container" openType="navigate" path="{{item.u}}" target="miniProgram" version="release" wx:elif="{{item.type==5&&item.course}}">
+                        <image class="content_item_image" mode="aspectFill" src="{{item.course.i}}"></image>
+                        <view class="item_course_info_container">
+                            <view class="item_course_title">{{item.course.t}}</view>
+                            <view class="item_course_author" wx:if="{{item.course.anchor}}">{{item.course.anchor.n}}</view>
+                            <view class="item_course_study"> {{item.course.ec}}人加入学习</view>
+                        </view>
+                    </navigator>
+                    <view bindtap="contentNoteClick" class="content_item_container" data-action-url="{{item.u}}" wx:elif="{{item.type==6&&item.note}}">
+                        <image class="content_item_image" mode="aspectFill" src="{{item.note.image_u}}"></image>
+                        <view class="item_note_info_container">
+                            <view class="item_note_title">{{item.note.title}}</view>
+                            <view class="item_note_author" wx:if="{{item.note.author}}">{{item.note.author.n}}</view>
+                        </view>
+                    </view>
+                    <rich-text bindtap="richTextClick" class="content_rich_container" data-rich-url="{{item.u}}" nodes="{{item.richTextContent}}" wx:else></rich-text>
+                </block>
+            </view>
+            <view class="note_recipe_container" wx:if="{{note.recipe}}">
+                <view class="recipe_star_container">
+                    <view>给菜谱评分：</view>
+                    <starView isSmall="{{false}}" starCount="{{note.recipe.rate}}"></starView>
+                </view>
+                <view bindtap="contentRecipeClick" class="content_item_container" data-action-url="{{note.recipe.u}}">
+                    <image class="content_item_image" mode="aspectFill" src="{{note.recipe.img}}"></image>
+                    <view class="item_recipe_info_container">
+                        <view class="item_recipe_title">
+            {{note.recipe.title}}
+          </view>
+                        <view class="item_recipe_author" wx:if="{{note.recipe.a}}">{{note.recipe.a.n}}</view>
+                        <view class="item_recipe_star_favorite">
+                            <view class="item_recipe_star_container" wx:if="{{note.recipe.rate&&note.recipe.rate!=0}}">
+                                <starView isSmall="{{true}}" starCount="{{note.recipe.rate}}"></starView>
+                                <view class="recipe_star_text"> {{note.recipe.rate}}分</view>
+                            </view>
+                            <view class="item_recipe_favorite" wx:else>{{note.recipe.fc}}人已收藏</view>
+                        </view>
+                    </view>
+                </view>
+            </view>
+            <view class="note_course_container" wx:if="{{note.course}}">
+                <view class="recipe_star_container">
+                    <view>给课堂评分：</view>
+                    <starView isSmall="{{false}}" starCount="{{note.course.rate}}"></starView>
+                </view>
+                <navigator appId="{{courseMiniAppid}}" class="content_item_container" openType="navigate" path="{{note.course.actoin_url}}" target="miniProgram" version="release">
+                    <image class="content_item_image" mode="aspectFill" src="{{note.course.i}}"></image>
+                    <view class="item_course_info_container">
+                        <view class="item_course_title">{{note.course.t}}</view>
+                        <view class="item_course_author" wx:if="{{item.course.anchor}}">{{note.course.anchor.n}}</view>
+                        <view class="item_course_study"> {{note.course.ec}}人加入学习</view>
+                    </view>
+                </navigator>
+            </view>
+            <view class="note_time_favorite_like_container">
+                <view class="note_time"></view>
+                <view class="favorite_like_contaienr">
+                    <view class="favorite_favo_count" wx:if="{{note.favo_count>0}}">{{note.favo_count}}次收藏 </view>
+                    <view class="favorite_like_count" wx:if="{{note.like_count>0}}"> {{note.like_count}}次赞</view>
+                </view>
+            </view>
+            <view wx:if="{{note.cs.length>0}}">
+                <view class="tips-section-header">笔记评论</view>
+                <template is="comment-template" data="{{item:item,index:index}}" wx:for="{{note.cs}}" wx:key="key"></template>
+                <view bindtap="commentsMoreViewPressed" class="comments-more-view" wx:if="{{note.cc>note.cs.length}}">查看全部{{note.cc}}条评论</view>
+            </view>
+        </view>
+        <view class="no-note-container" wx:if="{{showError}}">
+            <image class="no-note-logo" src="/images/no-note-logo.png"></image>
+            <view class="no-note-text-one">笔记审核中 无法查看</view>
+            <view class="no-note-text-two">看看“相关推荐”吧</view>
+        </view>
+        <view wx:if="{{recommends.length}}">
+            <view class="tips-section-header">— 相关笔记 —</view>
+            <view class="note-simple-item" wx:if="{{item.type==1}}" wx:for="{{recommends}}" wx:key="key">
+                <view bindtap="noteItemPressed" class="note-simple-content" data-note-id="{{item.note.id}}">
+                    <image class="note-simple-image" mode="aspectFill" src="{{item.note.image_u}}"></image>
+                    <view class="note-simple-detail">
+                        <view class="note-simple-title">{{item.note.title}}</view>
+                        <view class="note-simple-nickname">{{item.note.author.n}}</view>
+                        <view class="note-simple-favo" wx:if="{{item.note.like_count!=0}}">{{item.note.like_count}}人已赞</view>
+                    </view>
+                </view>
+            </view>
+            <template is="menu-footer" data="{{footerState:footerState}}"></template>
+        </view>
+        <view class="note-footer" style="height:{{isIpx?'134rpx':'100rpx'}}"></view>
+    </view>
+    <button appParameter="{{'recipes://www.douguo.com/notedetail?id='+noteID+'&_vs=6100'}}" binderror="launchAppError" class="download-app-button" openType="launchApp" style="bottom:{{isIpx?'216rpx':'182rpx'}}" wx:if="{{appScene}}">
+        <image class="download-app-icon" src="/images/open_app.png"></image>
+    </button>
+    <button bindtap="download_app" class="download-app-button" style="bottom:{{isIpx?'216rpx':'182rpx'}}" wx:if="{{logined&&!appScene}}">
+        <image class="download-app-icon" src="/images/download_app.png"></image>
+    </button>
+    <button bindtap="returnToHome" class="back-button" style="bottom:{{isIpx?'34rpx':'0rpx'}}">
+        <text class="back-button-text">首页</text>
+    </button>
+    <button bindtap="returnToHome" class="back-button-bottom" hidden="{{!isIpx}}"></button>
+    <button bindtap="commentButtonPressed" class="comment-button" style="bottom:{{isIpx?'34rpx':'0rpx'}}">
+        <text class="comment-button-text">评论</text>
+    </button>
+    <button bindtap="commentButtonPressed" class="comment-button-bottom" hidden="{{!isIpx}}"></button>
+    <button bindtap="shareButtonPressed" class="sharing-button" openType="share" style="bottom:{{isIpx?'34rpx':'0rpx'}}">
+        <text class="sharing-button-text">分享</text>
+    </button>
+    <button class="sharing-button-bottom" hidden="{{!isIpx}}" openType="share"></button>
+    <view bindtap="alertCoverPressed" class="download-app-alert-cover" wx:if="{{showDownloadAlert}}"></view>
+    <view class="download-app-alert-container" wx:if="{{showDownloadAlert}}">
+        <view class="download-app-alert-title">在客服会话中回复数字 1
+下载「豆果美食」APP</view>
+        <button binderror="contactError" class="download-app-contact-button" openType="contact">前往下载：回复 1</button>
+        <view bindtap="alertCoverPressed" class="download-app-cancel-view">我知道了</view>
+    </view>
+</view>

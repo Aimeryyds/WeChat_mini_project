@@ -1,0 +1,77 @@
+<template name="014b5f40">
+    <view class="_div data-v-a7b2c556 bookplan-wrapper container" style=" {{'background-image:'+coverStyle+';'}}" wx:if="{{bookplanInfo}}">
+        <view class="_div data-v-a7b2c556 img-overlay"></view>
+        <view class="_div data-v-a7b2c556 logo"></view>
+        <view class="_div data-v-a7b2c556 plan-info">
+            <view class="_div data-v-a7b2c556 info">
+                <view class="_div data-v-a7b2c556 end-time">{{startedAt}}-{{expireDate}}（计划共{{bookplanInfo.total_days}}天）</view>
+                <view class="_div data-v-a7b2c556 title">{{bookplanInfo.title}}</view>
+                <view class="_div data-v-a7b2c556 tip" wx:if="{{bookplanInfo.allow_reward&&bookplanInfo.book_plan_id!=='bzdkl'}}">/坚持学习{{bookplanInfo.least_days}}天，领奖学金/</view>
+            </view>
+            <view class="_div data-v-a7b2c556 progress">
+                <view class="_div data-v-a7b2c556 progress-calendar">
+                    <view class="_div data-v-a7b2c556 status">已完成</view>
+                    <view class="_div data-v-a7b2c556 progress-number">
+                        <view class="_div data-v-a7b2c556 number">{{bookplanInfo.completed_days}}</view>
+                        <view class="_div data-v-a7b2c556">天</view>
+                    </view>
+                </view>
+            </view>
+        </view>
+        <view class="_div data-v-a7b2c556 plan-card">
+            <view class="_div data-v-a7b2c556 title">计划书目</view>
+            <scroll-view scrollX class="_scroll-view data-v-a7b2c556 books-container">
+                <view class="_div data-v-a7b2c556 books-wrapper">
+                    <template is="ec2c3258" data="{{...$root[$kk+'0-'+index],$root:$root}}" wx:for="{{bookplanInfo.books}}" wx:for-item="book" wx:key="book.book_id"></template>
+                </view>
+            </scroll-view>
+        </view>
+        <view class="_div data-v-a7b2c556 finished tip" wx:if="{{bookplanInfo.status===3}}"></view>
+        <view class="_div data-v-a7b2c556 tomorrow tip" wx:elif="{{bookplanInfo.status===1}}"></view>
+        <view class="_div data-v-a7b2c556 end tip" wx:elif="{{bookplanInfo.status===4||bookplanInfo.status===5}}"></view>
+        <view class="_div data-v-a7b2c556 plan-card" wx:else>
+            <view class="_div data-v-a7b2c556 title">今日任务</view>
+            <view class="_div data-v-a7b2c556 task-status">
+                <view class="_div data-v-a7b2c556 amount">阅读 {{bookplanInfo.daily_amount}} 章</view>
+                <view class="_div data-v-a7b2c556 finish" wx:if="{{todayTask.is_finished}}">
+                    <view class="_div data-v-a7b2c556 icon"></view>
+                    <view class="_div data-v-a7b2c556">已完成</view>
+                </view>
+                <view class="_div data-v-a7b2c556 not-finish" wx:if="{{!todayTask.article_amount}}">未完成</view>
+                <view class="_div data-v-a7b2c556 not-finish" wx:if="{{inProgress}}">已读{{todayTask.article_amount}}章</view>
+            </view>
+            <form reportSubmit bindsubmit="handleProxy" class="_form data-v-a7b2c556" data-comkey="{{$k}}" data-eventid="{{'1'}}">
+                <button class="_button data-v-a7b2c556 btn {{[todayTask.is_finished?'finish':'']}}" formType="submit">{{btnText}}</button>
+            </form>
+        </view>
+        <view class="_div data-v-a7b2c556 bottom-btn-group" wx:if="{{bookplanInfo.has_knowledge_card}}">
+            <navigator class="_navigator data-v-a7b2c556 navigator" hoverClass="none" url="/pages/planProgress/main">
+                <view class="_div data-v-a7b2c556 study-achievement"></view>
+                <label class="_span data-v-a7b2c556">学习进度</label>
+            </navigator>
+            <view bindtap="handleProxy" class="_div data-v-a7b2c556 navigator" data-comkey="{{$k}}" data-eventid="{{'2'}}" hoverClass="none" wx:if="{{bookplanInfo.allow_reward}}">
+                <view class="_div data-v-a7b2c556 share-refund"></view>
+                <label class="_span data-v-a7b2c556">奖学金</label>
+            </view>
+            <navigator class="_navigator data-v-a7b2c556 navigator" hoverClass="none" url="/pages/articleKnowledges/main?scene=homepage">
+                <view class="_div data-v-a7b2c556 knowledge-card">
+                    <view class="_div data-v-a7b2c556 new"></view>
+                </view>
+                <label class="_span data-v-a7b2c556">知识卡片</label>
+            </navigator>
+        </view>
+        <view class="_div data-v-a7b2c556 btn-group" wx:else>
+            <navigator class="_navigator data-v-a7b2c556 navigator {{[!bookplanInfo.allow_reward?'single':'']}}" hoverClass="none" url="/pages/planProgress/main">
+                <view class="_div data-v-a7b2c556 study-achievement"></view>
+                <label class="_span data-v-a7b2c556">学习进度</label>
+            </navigator>
+            <view bindtap="handleProxy" class="_div data-v-a7b2c556 navigator" data-comkey="{{$k}}" data-eventid="{{'3'}}" hoverClass="none" wx:if="{{bookplanInfo.allow_reward}}">
+                <view class="_div data-v-a7b2c556 share-refund"></view>
+                <label class="_span data-v-a7b2c556">奖学金</label>
+            </view>
+        </view>
+        <template is="82d0995c" data="{{...$root[$kk+'2'],$root:$root}}" wx:if="{{isShowModal}}"></template>
+    </view>
+</template>
+<import src="/pages/planIndex/PlanBook.vue.wxml"></import>
+<import src="/pages/planIndex/PlanModal.vue.wxml"></import>

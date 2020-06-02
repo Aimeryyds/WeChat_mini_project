@@ -1,0 +1,1 @@
+exports.app_key = "xmcbc3c4713c7dc8b8dce7fb7f8d2dd3", exports.plugin = !1, exports.getOpenid = !1;

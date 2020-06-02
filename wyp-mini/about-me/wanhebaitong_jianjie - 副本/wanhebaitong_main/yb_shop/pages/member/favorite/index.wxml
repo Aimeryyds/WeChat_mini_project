@@ -1,0 +1,41 @@
+<loading hidden="{{show}}">正在加载</loading>
+<view class="page footer" wx:if="{{show}}">
+    <view class="del_item" wx:for="{{list}}">
+        <view bindtouchend="touchE" bindtouchmove="touchM" bindtouchstart="touchS" class="inner txt" data-index="{{index}}" style="{{item.txtStyle}}">
+            <view class="fui-list-group">
+                <label bindtap="itemClick" class="fui-list" data-goodsid="{{item.goods.goods_id}}" data-id="{{item.log_id}}">
+                    <view class="fui-list-media" wx:if="{{isedit}}">
+                        <radio checked="{{checkObj[item.log_id]?true:''}}" class="zoom-80" color="#ef4f4f"></radio>
+                    </view>
+                    <view class="fui-list-media02">
+                        <image class="round" src="{{item.pic.img_cover}}"></image>
+                    </view>
+                    <view class="fui-list-inner">
+                        <view class="row">
+                            <view class="subtitle">{{item.goods.goods_name}}</view>
+                        </view>
+                        <view class="subtitle">
+                            <text class="text-danger" style="font-size:30rpx;">￥{{item.goods.price}}</text>
+                            <text class="text-delete" style="padding-left: 10rpx;"></text>
+                        </view>
+                    </view>
+                </label>
+            </view>
+        </view>
+        <view bindtap="delItem" class="inner del" data-id="{{item.log_id}}" data-index="{{index}}"></view>
+    </view>
+    <view class="fui-loading" wx:if="{{loading}}">
+        <view class="icon"></view>
+        <view class="text" style="background:#f2f2f2;">正在加载</view>
+    </view>
+    <view class="fui-loading empty" wx:if="{{loaded&&list.length>0}}">
+        <view class="text" style="background:#f2f2f2;">没有更多了</view>
+    </view>
+    <view class="fui-loading empty" wx:if="{{list==''}}">
+        <view class="text" style="background:#f2f2f2;">没有数据</view>
+    </view>
+    <block wx:if="{{showtabbar}}">
+        <view style="height:100rpx"></view>
+        <include src="/yb_shop/pages/common/menu.wxml"></include>
+    </block>
+</view>

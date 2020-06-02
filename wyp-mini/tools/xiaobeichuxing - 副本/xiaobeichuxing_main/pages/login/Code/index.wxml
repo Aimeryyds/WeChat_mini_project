@@ -1,0 +1,17 @@
+<view class="page">
+    <my-component innerText="填写验证码"></my-component>
+    <view class="code-cont">
+        <view class="tit">{{tit}}</view>
+        <view class="tit-t">{{titcode}} :
+      <text class="pho">{{phone}}</text>
+        </view>
+        <view class="code">
+            <input bindinput="losinput" style="height:40px;line-height:40px;width:100%;border-bottom:1px solid #999;margin-bottom:20px" type="number" value=""></input>
+        </view>
+        <view bindtap="aginCode" class="acgin {{is_show?'show':'hide'}}">再次发送</view>
+        <view class="acgin {{is_show?'hide':'show'}}">{{last_time}}秒后再次发送</view>
+        <view class="fot-btn">
+            <button bindtap="loginbtn" class="loginBtn">登录</button>
+        </view>
+    </view>
+</view>

@@ -1,0 +1,95 @@
+<view class="title_h1 mt20">{{subject}}</view>
+<view class="collect_info_u" wx:if="{{subject}}">
+    <navigator class="collect_info_nu" url="/pages/space/space?uid={{uid}}">
+        <image class="collect_info_img_u" src="{{avatar}}"></image>
+        <image class="vip_icon" src="/image/vip_icon.png" wx:if="{{vip}}"></image>
+    </navigator>
+    <navigator class="collect_info_nu2" url="/pages/space/space?uid={{uid}}">{{username}}</navigator>
+    <view class="collect_info_time">{{lastactivity}}</view>
+</view>
+<block wx:if="{{message}}">
+    <view class="event_index height1" wx:if="{{show_data==1}}">
+        <text>{{message}}</text>
+    </view>
+    <view class="event_index" wx:else>
+        <text>{{message}}</text>
+    </view>
+    <view bindtap="message_show" class="event_show" wx:if="{{show_data>0}}">
+        <block wx:if="{{show_data==1}}">
+            <text>查看全部</text>
+            <image src="/image/down.png"></image>
+        </block>
+        <block wx:if="{{show_data==2}}">
+            <text>收起</text>
+            <image src="/image/up.png"></image>
+        </block>
+    </view>
+    <view class="mt20" wx:if="{{show_data==0}}"></view>
+</block>
+<view class="colist">
+    <view class="colist_item {{item.hidden?'hidden':''}}" wx:for="{{recipelist}}" wx:key="classifylist">
+        <view bindtap="do_edit" class="colist_edit" data-index="{{index}}" wx:if="{{myuid==uid}}">编辑</view>
+        <navigator url="../recipe_info/recipe_info?id={{item.id}}">
+            <view class="colist_i">
+                <image class="colist_img r4{{open_v==1?item.r4:''}}" src="{{item.mpic}}"></image>
+            </view>
+            <view class="colist_detail">
+                <text class="colist_t">{{item.title}}</text>
+                <text class="colist_n" wx:if="{{item.collnum>0}}">{{item.collnum}}人收藏</text>
+            </view>
+            <view class="colist_unote" wx:if="{{item.unote}}">
+                <image src="/image/yinhao.png"></image>
+                <text> {{item.unote}}</text>
+            </view>
+        </navigator>
+    </view>
+</view>
+<view class=" btn_do2" style="padding-bottom:{{statusBarHeight>30?'40':'0'}}rpx">
+    <form catchsubmit="formSubmit" reportSubmit="true">
+        <button bindtap="do_backhome" formType="submit" plain="true">
+            <image class="icon_fav" src="../../image/home2.png"></image>
+            <text>回首页</text>
+        </button>
+        <block wx:if="{{haveuid}}">
+            <button bindtap="do_fav" data-type="fav_done" formType="submit" plain="true" wx:if="{{isfav==1}}">
+                <image class="icon_fav" src="../../image/fav2_on.png"></image>
+                <text style="color:#ff6767">收藏</text>
+            </button>
+            <button bindtap="do_fav" data-type="fav_do" formType="submit" plain="true" wx:else>
+                <image class="icon_fav" src="../../image/fav2.png"></image>
+                <text>收藏</text>
+            </button>
+        </block>
+        <button bindgetuserinfo="clickinfo" data-type="fav" openType="getUserInfo" plain="true" wx:else>
+            <image class="icon_fav" src="../../image/fav2.png"></image>
+            <text>收藏</text>
+        </button>
+        <button formType="submit" openType="share" plain="true">
+            <image class="icon_fav" src="../../image/share2.png"></image>
+            <text>分享</text>
+        </button>
+        <button bindtap="edit_collect" formType="submit" plain="true" wx:if="{{myuid==uid}}">
+            <image class="icon_fav" src="../../image/collect_edit.png"></image>
+            <text>编辑菜单</text>
+        </button>
+        <button bindtap="fulishe" formType="submit" plain="true" wx:if="{{myuid!=uid}}">
+            <image class="icon_fav" src="../../image/fulishe2_on.png"></image>
+            <text style="color:#ff6767">福利社</text>
+        </button>
+    </form>
+</view>
+<view class="loading" wx:if="{{loading}}">
+    <image class="loading_img" src="../../image/loading-32-32.gif"></image>
+</view>
+<view class="loading_end" wx:if="{{loading_end}}"></view>
+<view class="loading_fail" wx:if="{{loading_fail}}"></view>
+<view>　</view>
+<view>　</view>
+<view>　</view>
+<mp-actionSheet actions="{{groups}}" bindactiontap="do_action" show="{{showActionsheet}}"></mp-actionSheet>
+<view bindtap="mask_close" catchtouchmove="myCatchTouch" class="mask_share {{mask_dialog?'':'hidden'}}"></view>
+<view catchtouchmove="myCatchTouch" class="mask_dialog {{mask_dialog?'':'hidden'}}">
+    <text>写推荐语</text>
+    <textarea bindinput="edit_unote" catchtouchmove="myCatchTouch" focus="{{mask_dialog?true:false}}" placeholder="请输入推荐语" placeholderStyle="color:#999" value="{{unote}}"></textarea>
+    <view bindtap="do_edit_unote">确定</view>
+</view>

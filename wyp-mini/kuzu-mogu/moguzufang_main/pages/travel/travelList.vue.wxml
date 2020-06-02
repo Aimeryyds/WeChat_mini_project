@@ -1,0 +1,28 @@
+<template name="b26896ee">
+    <view class="_view b26896ee travel-body">
+        <view class="_view b26896ee travel-box">
+            <text class="_text b26896ee travel-title">看房行程</text>
+            <text bindtap="handleProxy" class="_text b26896ee travel-subTitle" data-comkey="{{$k}}" data-eventid="{{'b26896ee-0'}}" wx:if="{{isLogin}}">看房历史</text>
+        </view>
+        <view class="_view b26896ee loginTravel" wx:if="{{!isLogin}}">
+            <image class="_image b26896ee" src="https://assets.mgzf.com/appimg/681685d035749bdfdd0413c9ad052120.png"></image>
+            <view class="_view b26896ee">预约心仪房源</view>
+            <view class="_view b26896ee">您的看房之旅将从这里开始</view>
+            <view bindtap="handleProxy" class="_view b26896ee btn-jump" data-comkey="{{$k}}" data-eventid="{{'b26896ee-1'}}">立即寻找你心仪的房子</view>
+        </view>
+        <view class="_view b26896ee" wx:else>
+            <view class="_view b26896ee loginTravel" wx:if="{{queryList.length<1}}">
+                <image class="_image b26896ee" src="https://assets.mgzf.com/appimg/681685d035749bdfdd0413c9ad052120.png"></image>
+                <view class="_view b26896ee">暂无看房行程</view>
+                <view bindtap="handleProxy" class="_view b26896ee btn-jump" data-comkey="{{$k}}" data-eventid="{{'b26896ee-2'}}">立即寻找你心仪的房子</view>
+            </view>
+            <template is="8fecc90e" data="{{...$root['0'],...$root[$kk+'b26896ee-0'],$root:$root}}" wx:if="{{queryList&&queryList.length>0}}"></template>
+            <view class="_view b26896ee" hidden="{{!(isLoading&&!isEmpty)}}">
+                <template is="49b8e2ad" data="{{...$root['0'],...$root[$kk+'b26896ee-1'],$root:$root}}"></template>
+            </view>
+            <view class="_view b26896ee noMore" hidden="{{!(!hasMore&&!isEmpty)}}">--- 没有更多数据 ---</view>
+        </view>
+    </view>
+</template>
+<import src="/components/card/travel.vue.wxml"></import>
+<import src="/components/mgMoreLoading.vue.wxml"></import>

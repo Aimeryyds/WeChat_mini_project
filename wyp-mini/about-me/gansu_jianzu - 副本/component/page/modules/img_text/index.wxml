@@ -1,0 +1,35 @@
+<view bindtap="makecustome" class="continer" data-item="{{module.options}}" wx:if="{{module.options.showType=='type1'}}">
+    <view class="title">{{module.options.title}}</view>
+    <view class="content">
+        <image class="content-img1" src="{{module.options.img}}"></image>
+        <text class="content-text" wx:if="{{module.options.content.length>105&&showMore}}">{{module.options.showContent}}</text>
+        <text class="content-text" wx:else>{{module.options.content}}</text>
+    </view>
+    <view catchtap="hiddenMore" class="more" wx:if="{{module.options.content.length>105&&showMore}}">查看全部<image src="http://imgcdnali.wfenxiao.com.cn/xcx/c/icons/arrow-button.png" style="margin-left: 10rpx;width:20rpx;height:14rpx;"></image>
+    </view>
+    <view catchtap="showMore" class="more" wx:if="{{module.options.content.length>105&&!showMore}}">收起<image src="http://imgcdnali.wfenxiao.com.cn/xcx/c/icons/arrow-button.png" style="transform: rotate(180deg); margin-left: 10rpx;width:20rpx;height:14rpx;"></image>
+    </view>
+</view>
+<view bindtap="makecustome" class="continer" data-item="{{module.options}}" wx:if="{{module.options.showType=='type2'}}">
+    <view class="title">{{module.options.title}}</view>
+    <view class="content">
+        <image class="content-img2" src="{{module.options.img}}"></image>
+        <text class="content-text" wx:if="{{module.options.content.length>105&&showMore}}">{{module.options.showContent}}</text>
+        <text class="content-text" wx:else>{{module.options.content}}</text>
+    </view>
+    <view catchtap="hiddenMore" class="more" wx:if="{{module.options.content.length>104&&showMore}}">查看全部<image src="http://imgcdnali.wfenxiao.com.cn/xcx/c/icons/arrow-button.png" style="margin-left: 10rpx;width:20rpx;height:14rpx;"></image>
+    </view>
+    <view catchtap="showMore" class="more" wx:if="{{module.options.content.length>104&&!showMore}}">收起<image src="http://imgcdnali.wfenxiao.com.cn/xcx/c/icons/arrow-button.png" style="transform: rotate(180deg); margin-left: 10rpx;width:20rpx;height:14rpx;"></image>
+    </view>
+</view>
+<view bindtap="makecustome" class="continer" data-item="{{module.options}}" wx:if="{{module.options.showType=='type3'}}">
+    <view class="title">{{module.options.title}}</view>
+    <view class="content">
+        <text class="content-text" wx:if="{{module.options.content.length>140&&showMore}}">{{module.options.showContent}}</text>
+        <text class="content-text" wx:else>{{module.options.content}}</text>
+    </view>
+    <view catchtap="hiddenMore" class="more" wx:if="{{module.options.content.length>140&&showMore}}">查看全部<image src="http://imgcdnali.wfenxiao.com.cn/xcx/c/icons/arrow-button.png" style="margin-left: 10rpx;width:20rpx;height:14rpx;"></image>
+    </view>
+    <view catchtap="showMore" class="more" wx:if="{{module.options.content.length>140&&!showMore}}">收起<image src="http://imgcdnali.wfenxiao.com.cn/xcx/c/icons/arrow-button.png" style="transform: rotate(180deg); margin-left: 10rpx;width:20rpx;height:14rpx;"></image>
+    </view>
+</view>

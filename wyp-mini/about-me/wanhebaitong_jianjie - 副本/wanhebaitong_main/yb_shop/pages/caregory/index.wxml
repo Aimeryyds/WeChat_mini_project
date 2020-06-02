@@ -1,0 +1,22 @@
+<scroll-view class="orientation_region" scrollWithAnimation="true" scrollY="true" style="padding-bottom: {{showtabbar?100:0}}rpx;">
+    <view class="left_box">
+        <view bindtap="tabFun" class="orientation_city {{curHdIndex==index?'active':''}}" data-id="{{index}}" style="z-index:999;" wx:for="{{category}}">{{item.cate_name}}</view>
+    </view>
+</scroll-view>
+<scroll-view bindscroll="scroll" class="content" scrollIntoView="{{toView}}" scrollTop="{{scrollY}}" scrollWithAnimation="true" scrollY="true" style="padding-bottom: {{showtabbar?100:0}}rpx;" wx:if="{{cate_type==1}}">
+    <view class="shop_list_right" wx:for="{{category}}">
+        <view class="address_top" id="{{'inToView'+index}}" wx:if="{{item.goods_list.length>0}}">
+            <view class="class_tit">{{item.short_name}}</view>
+        </view>
+        <view class="shop_info_box" wx:for="{{item.goods_list}}">
+            <navigator hoverClass="none" url="/yb_shop/pages/goods/detail/index?id={{item.goods_id}}">
+                <view class="shop_info_photo">
+                    <image src="{{item.pic.img_cover}}"></image>
+                </view>
+                <view class="address_bottom">{{item.goods_name}}</view>
+            </navigator>
+        </view>
+        <view class="clear"></view>
+    </view>
+</scroll-view>
+<include src="/yb_shop/pages/common/menu.wxml" wx:if="{{showtabbar}}"></include>

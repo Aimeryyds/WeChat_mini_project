@@ -1,0 +1,10 @@
+<template name="6a2a0618">
+    <view class="_view 6a2a0618 {{[true?'filter':'',fixed>0?'fixed':'']}}">
+        <view class="_view 6a2a0618 ul">
+            <view bindtap="handleProxy" class="_view 6a2a0618 {{[true?'li':'',item.selected||item.active?'selected':'',item.active?'active':'']}}" data-comkey="{{$k}}" data-eventid="{{'6a2a0618-0-'+index}}" key="{{index}}" wx:for="{{filter}}" wx:key="index">{{item.name}}</view>
+        </view>
+        <view class="_view 6a2a0618 dl" hidden="{{!item.active}}" key="{{index}}" wx:for="{{filter}}" wx:key="index">
+            <view bindtap="handleProxy" class="_view 6a2a0618 {{[true?'dd':'',itemChild.selected?'selected':'']}}" data-comkey="{{$k}}" data-eventid="{{'6a2a0618-1-'+index+'-'+indexChild}}" key="{{indexChild}}" wx:for="{{item.child}}" wx:for-index="indexChild" wx:for-item="itemChild" wx:key="indexChild">{{itemChild.name}}</view>
+        </view>
+    </view>
+</template>

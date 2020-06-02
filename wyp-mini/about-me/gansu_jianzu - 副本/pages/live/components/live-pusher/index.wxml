@@ -1,0 +1,21 @@
+<live-pusher aspect="9:16" beauty="{{beauty}}" bindstatechange="statechange" class="pusher" id="livePusher" mode="hd" orientation="vertical" url="{{live.pushUrl}}" whiteness="{{whiteness}}" wx:if="{{live}}">
+    <cover-view class="top-controls">
+        <cover-view catch:tap="handleStopPush" class="top-controls--action">
+            <cover-image class="top-controls--icon" src="http://imgcdnali.wfenxiao.com.cn/xcx/c/live/close.png"></cover-image>
+        </cover-view>
+        <cover-view catch:tap="handleToggleWhiteness" class="top-controls--action">
+            <cover-image class="top-controls--icon" src="http://imgcdnali.wfenxiao.com.cn/xcx/c/live/{{whiteness==0?'meibai':'meibai_on'}}.png"></cover-image>
+        </cover-view>
+        <cover-view catch:tap="handleToggleBeauty" class="top-controls--action">
+            <cover-image class="top-controls--icon" src="http://imgcdnali.wfenxiao.com.cn/xcx/c/live/{{beauty==0?'meiyan':'meiyan_on'}}.png"></cover-image>
+        </cover-view>
+        <cover-view catch:tap="handleToggleCamera" class="top-controls--action">
+            <cover-image class="top-controls--icon" src="http://imgcdnali.wfenxiao.com.cn/xcx/c/live/switch_camera.png"></cover-image>
+        </cover-view>
+    </cover-view>
+    <cover-view class="countdown {{showAnim?'anim':''}}">{{countDown}}</cover-view>
+    <cover-view class="tips" wx:if="{{showTips}}">{{tips}}</cover-view>
+    <cover-view class="start" wx:if="{{showStart}}">
+        <cover-image catch:tap="handleStart" class="start-icon" src="http://imgcdnali.wfenxiao.com.cn/xcx/c/live/start_push.png"></cover-image>
+    </cover-view>
+</live-pusher>

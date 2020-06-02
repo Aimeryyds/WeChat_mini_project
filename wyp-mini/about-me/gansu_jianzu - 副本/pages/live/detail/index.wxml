@@ -1,0 +1,98 @@
+<view class="container" style="padding-bottom: 120rpx;" wx:if="{{live}}">
+    <wxc-abnor bindabnortap="handleTapBack" button="返回" title="该直播已失效" type="DATA" wx:if="{{live.del==2}}"></wxc-abnor>
+    <block wx:else>
+        <wxc-toast isShow="{{toast.show}}" text="{{toast.title}}"></wxc-toast>
+        <live-video bind:onlivestart="handleLiveStart" bind:onlivestop="handleLiveStop" liveData="{{live}}" wx:if="{{(live.status==1||live.status==2)&&live.mobile!=userinfo.mobile}}"></live-video>
+        <video-player bind:onplayvideo="handleVideoPlay" srcs="{{live.videoUrl}}" wx:if="{{live.status==3}}"></video-player>
+        <view class="zan-panel zan-panel__no-margin-top header">
+            <view class="header-title">{{live.theme}}</view>
+            <view class="header-center">
+                <view class="header-center-left">
+                    <image src="http://imgcdnali.wfenxiao.com.cn/xcx/c/live/time.png"></image>
+                    <text class="time">{{render.timeStr(live.startTime,live.endTime)}}</text>
+                    <view class="status {{live.status==2?'living':'normal'}}">{{render.status(live.status)}}</view>
+                </view>
+            </view>
+            <view class="header-footer">
+                <view class="header-footer-left">{{live.totalNum}}人观看</view>
+                <view class="header-footer-right"></view>
+            </view>
+        </view>
+        <view class="live-actions">
+            <view class="live-actions--favorite">
+                <form bindsubmit="handleFavorite" reportSubmit="{{true}}">
+                    <button class="action-btn" formType="submit">
+                        <image src="http://imgcdnali.wfenxiao.com.cn/xcx/c/live/{{live.isFavorite?'favorite':'unfavorite'}}.png"></image>
+                        <text>{{live.favoriteUsers}}人收藏</text>
+                    </button>
+                </form>
+            </view>
+            <view class="live-actions--share">
+                <button bindtap="handleShare" class="action-btn">
+                    <image src="http://imgcdnali.wfenxiao.com.cn/xcx/c/live/share.png"></image>
+                    <text>分享</text>
+                </button>
+            </view>
+        </view>
+        <view class="zan-panel desc">
+            <view class="title">
+                主讲人
+            </view>
+            <view class="subTitle">
+                {{live.speaker}}
+            </view>
+            <view class="content">
+                {{live.speakerBrief}}
+            </view>
+        </view>
+        <view class="zan-panel desc">
+            <view class="title">
+                简介
+            </view>
+            <view class="content">
+                {{live.brief}}
+            </view>
+        </view>
+        <view class="backPanel" wx:if="{{showBackBtn}}">
+            <navigator class="btn" hoverClass="none" openType="switchTab" url="/tabs/home/index">返回首页</navigator>
+        </view>
+        <view class="action" wx:if="{{userinfo.mobile&&userinfo.mobile==live.mobile&&live.status!=3&&leftTime>0}}">
+            <view bindtap="startPush" wx:if="{{live.countDown<=0||live.status==2}}">
+                开始直播
+            </view>
+            <view style="display: {{live.status==1&&live.countDown>0?'flex':'none'}};justify-content:center;align-itmes:center">
+                <wxc-countdown bind:runcount="onStartCountdown" countdown="{{countdown}}" format="hh:mm:ss"></wxc-countdown>
+                <text style="margin-left:12rpx">后可开始直播</text>
+            </view>
+        </view>
+    </block>
+</view>
+<wxs module="render">
+function status(status) {
+    switch (status) {
+        case 1:
+            return ('未开始');
+        case 2:
+            return ('直播中');
+        case 3:
+            return ('已结束');
+    }
+};
+
+function timeStr(startTime, endTime) {
+    return (formatTime(startTime) + ' - ' + formatTime(endTime))
+};
+
+function formatTime(time) {
+    var reg = getRegExp("-", "g");
+    var timeStr = time.replace(reg, '/');
+    var date = getDate(timeStr);
+    var hh = date.getHours() > 9 ? date.getHours() : '0' + date.getHours();
+    var mm = date.getMinutes() > 9 ? date.getMinutes() : '0' + date.getMinutes();
+    return (hh + ':' + mm)
+};
+module.exports = ({
+    status: status,
+    timeStr: timeStr,
+});
+</wxs>

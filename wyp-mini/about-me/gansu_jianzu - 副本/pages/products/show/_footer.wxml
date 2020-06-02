@@ -1,0 +1,54 @@
+<template name="productFooter">
+    <view class="product-show-footer">
+        <view class="footerLeft">
+            <view bindtap="gotoshop" class="footerLeft-item" wx:if="{{bottomMenu==1}}">
+                <image src="http://imgcdnali.wfenxiao.com.cn/xcx/c/store.png"></image>
+                <text>店铺</text>
+            </view>
+            <view bindtap="gotoshop" class="footerLeft-item" wx:if="{{bottomMenu==0}}">
+                <image src="http://imgcdnali.wfenxiao.com.cn/xcx/c/home-img.png"></image>
+                <text>首页</text>
+            </view>
+            <view bindtap="call" class="footerLeft-item">
+                <image src="http://imgcdnali.wfenxiao.com.cn/xcx/c/phone1.png"></image>
+                <text>电话</text>
+            </view>
+            <button class="footerLeft-item footerLeft-item--contact" openType="contact" style="border: 0px;">
+                <image src="http://imgcdnali.wfenxiao.com.cn/xcx/c/contact.png"></image>
+                <text>客服</text>
+            </button>
+            <button bindtap="collectionGoods" class="footerLeft-item footerLeft-item--contact">
+                <image src="http://imgcdnali.wfenxiao.com.cn/xcx/c/1120/collection.png" wx:if="{{goods.hasCollection}}"></image>
+                <image src="http://imgcdnali.wfenxiao.com.cn/xcx/c/1120/no-collection.png" wx:else></image>
+                <text>收藏</text>
+            </button>
+        </view>
+        <view class="footerRight">
+            <view class="product-show-foot-empty" wx:if="{{goods.status&&goods.status==2}}">已下架</view>
+            <view class="product-show-foot-empty" wx:elif="{{goods.gstock==0}}">暂无库存</view>
+            <block wx:elif="{{goods.isDist==1&&from=='distribution'}}">
+                <button bindtap="handleDistribution" class="footerRight-item footerRight-item--black footerRight-item--share" openType="share">立即分销</button>
+                <view bindtap="handleFenXiaoBuyNow" class="footerRight-item">立即购买</view>
+            </block>
+            <view bindtap="handleFenXiaoBuyNow" class="footerRight-item" wx:elif="{{goods.isDist==1&&from=='share'}}">立即购买</view>
+            <block wx:elif="{{goods.activityType==1&&goods.seckillStatus==2}}">
+                <view bindtap="handleAddCart" class="footerRight-item footerRight-item--black" wx:if="{{!isService}}">加入购物车</view>
+                <view bindtap="handleMiaoShaBuyNow" class="footerRight-item">立即购买</view>
+            </block>
+            <block wx:elif="{{goods.activityType==2}}">
+                <view bindtap="handleBuyNow" class="footerRight-item footerRight-item--black footerRight-item--tuan">
+                    <view>￥{{sku.price||'0.00'}}</view>
+                    <view>单独购买</view>
+                </view>
+                <view bindtap="handleOpenTuan" class="footerRight-item footerRight-item--tuan">
+                    <view>￥{{sku.groupPrice||'0.00'}}</view>
+                    <view>一键开团</view>
+                </view>
+            </block>
+            <block wx:else>
+                <view bindtap="handleAddCart" class="footerRight-item footerRight-item--black" wx:if="{{!isService}}">加入购物车</view>
+                <view bindtap="handleBuyNow" class="footerRight-item" wx:if="{{store.storeType!=6}}">立即购买</view>
+            </block>
+        </view>
+    </view>
+</template>

@@ -1,0 +1,32 @@
+<template name="58d0ae98">
+    <view class="_div data-v-095d3323 course-list">
+        <view class="_div data-v-095d3323 empty" wx:if="{{!courses.length}}">
+            <image class="_img data-v-095d3323" src="https://media-image1.baydn.com/storage_media_image/kvhfgj/edfea2dd54c632b12c5658265f0142e0.6cab67a4a7de3310f0eb26bdf3e3467a.png"></image>
+            <view class="_div data-v-095d3323 tip">没有正在参与的课程哦～</view>
+        </view>
+        <view class="_div data-v-095d3323" wx:else>
+            <view class="_div data-v-095d3323 courses" key="{{index}}" wx:for="{{courses}}" wx:for-item="course" wx:key="index">
+                <view bindtap="handleProxy" class="_div data-v-095d3323 course-item" data-comkey="{{$k}}" data-eventid="{{'0-'+index}}" style=" {{'opacity:'+(course.status===6?0.4:1)+';'}}">
+                    <view class="_div data-v-095d3323 background" style=" {{'background-image:'+'url('+course.background_url+')'+';'}}" wx:if="{{course.background_url}}"></view>
+                    <view class="_div data-v-095d3323 course">
+                        <image class="_img data-v-095d3323 cover" src="{{course.cover_url}}"></image>
+                        <view class="_div data-v-095d3323">
+                            <view class="_div data-v-095d3323 title">{{course.title}}</view>
+                            <view class="_div data-v-095d3323 description">
+                                <label class="_span data-v-095d3323 normal">课程已完成</label>
+                                <label class="_span data-v-095d3323 highlight">{{course.progress}}%</label>
+                            </view>
+                            <view class="_div data-v-095d3323 progress">
+                                <view class="_div data-v-095d3323 text">{{course.finished_amount}}/{{course.total_amount}}课</view>
+                                <view class="_div data-v-095d3323 bar-container">
+                                    <view class="_div data-v-095d3323 bg"></view>
+                                    <view class="_div data-v-095d3323 indicator" style=" {{'width:'+course.progress+'%'+';'}}"></view>
+                                </view>
+                            </view>
+                        </view>
+                    </view>
+                </view>
+            </view>
+        </view>
+    </view>
+</template>

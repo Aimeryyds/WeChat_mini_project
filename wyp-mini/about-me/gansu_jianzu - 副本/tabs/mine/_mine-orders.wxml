@@ -1,0 +1,48 @@
+<template name="mineOrders">
+    <view wx:if="{{myOrderIsShow}}">
+        <view class="mine-order-all">
+            <view bindtap="handleMakeUrl" class="zan-cell zan-cell--access " data-url="/pages/orders/list/list?type=0" style="background-color:#fff;margin-top: 20rpx;border-top: 1rpx solid #e5e5e5;border-bottom: 1rpx solid #e5e5e5; ">
+                <view class="zan-cell__bd" style="display:flex;align-items: center ;">
+                    <view class="menu-name">我的订单</view>
+                </view>
+                <view class="zan-cell__ft">查看全部</view>
+            </view>
+        </view>
+        <view style="display:flex;padding:20rpx 0; border-bottom: 1rpx solid #e5e5e5;background-color:#fff; ">
+            <view bindtap="handleMakeUrl" class="order-item" data-url="/pages/orders/list/list?type=1">
+                <view class="zan-badge">
+                    <view class="zan-badge__count" wx:if="{{order[10]}}">{{order[10]}}</view>
+                    <image class="order-item-img" src="http://imgcdnali.wfenxiao.com.cn/xcx/c/order/ic_order_no_delivery.png"></image>
+                </view>
+                <view>待付款</view>
+            </view>
+            <view bindtap="handleMakeUrl" class="order-item" data-url="/pages/orders/list/list?type=2">
+                <view class="zan-badge">
+                    <view class="zan-badge__count" wx:if="{{order[30]}}">{{order[30]}}</view>
+                    <image class="order-item-img" src="http://imgcdnali.wfenxiao.com.cn/xcx/c/order/ic_order_nopay.png"></image>
+                </view>
+                <view>待发货</view>
+            </view>
+            <view bindtap="handleMakeUrl" class="order-item" data-url="/pages/orders/list/list?type=3">
+                <view class="zan-badge">
+                    <view class="zan-badge__count" wx:if="{{order[61]}}">{{order[61]}}</view>
+                    <image class="order-item-img" src="http://imgcdnali.wfenxiao.com.cn/xcx/c/order/ic_order_delivery.png"></image>
+                </view>
+                <view>待收货</view>
+            </view>
+            <view bindtap="handleMakeUrl" class="order-item" data-url="/pages/orders/list/list?type=4">
+                <view class="zan-badge">
+                    <view class="zan-badge__count" wx:if="{{order[70]}}">{{order[70]}}</view>
+                    <image class="order-item-img" src="http://imgcdnali.wfenxiao.com.cn/xcx/c/order/ic_order_done.png"></image>
+                </view>
+                <view>待评价</view>
+            </view>
+            <view bindtap="handleMakeUrl" class="order-item" data-url="/pages/returngoods/list/index">
+                <view class="zan-badge">
+                    <image class="order-item-img" src="http://imgcdnali.wfenxiao.com.cn/xcx/c/1120/ic_order_refund.png"></image>
+                </view>
+                <view>退款</view>
+            </view>
+        </view>
+    </view>
+</template>

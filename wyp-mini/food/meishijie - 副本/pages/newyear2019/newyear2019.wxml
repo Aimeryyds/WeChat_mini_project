@@ -1,0 +1,197 @@
+<navigation-bar enable="{{enable}}" title="{{bartitle}}" wx:if="{{showTopbar}}"></navigation-bar>
+<cover-view bindtap="tapBackbtn" class="backbtn" style="top:{{backbtnPos}}px" wx:if="{{!showTopbar}}">
+    <cover-image class="backbtnicon" src="{{backiconUrl}}"></cover-image>
+</cover-view>
+<view class="container">
+    <view class="bottomsharebtnw">
+        <button class="bottomsharebtn" openType="share"></button>
+    </view>
+    <view class="sub_main" wx:if="{{!is_index}}">
+        <view class="bigtitletop" style="top:{{barHeight_notopbar}}px">{{bartitle}}</view>
+        <view class="subtop">
+            <view class="tubtop_t" wx:if="{{option.type==1}}">每小时实时更新排行榜</view>
+            <view class="tubtop_t" wx:if="{{option.type==2}}">用户选择实时排行</view>
+            <view class="tubtop_t" wx:if="{{option.type==3}}"></view>
+        </view>
+        <view class="sub_listw">
+            <block wx:for="{{bdlist}}" wx:for-index="i" wx:key="key">
+                <block wx:if="{{option.type==1}}">
+                    <navigator class="sub_listitem" url="/pages/newyear2019/newyear2019?words={{item.title}}&type=2" wx:if="{{item.total>4}}">
+                        <view class="imgw" style="background:url({{item.img}}) center no-repeat;background-size:cover;">
+                            <view class="vicon" wx:if="{{item.recipe_type==3}}"></view>
+                        </view>
+                        <view class="tag {{i>2?'tag1':'tag2'}}">{{i+1}}</view>
+                        <view class="infow">
+                            <view class="title">{{item.prefix}}{{item.title}}</view>
+                            <view class="cptag">{{option.words}}榜Top{{i+1}}</view>
+                            <view class="cpdes" wx:if="{{item.desc}}">{{item.desc}}</view>
+                            <view class="iw">
+                                <image class="avatar" src="{{item.author.avatar_url}}"></image>
+                                <view class="name">{{item.author.nickname}}</view>
+                                <view class="vc">{{item.click_num}}</view>
+                            </view>
+                        </view>
+                    </navigator>
+                    <navigator class="sub_listitem" url="/pages/content/content?id={{item.id}}" wx:else>
+                        <view class="imgw" style="background:url({{item.img}}) center no-repeat;background-size:cover;">
+                            <view class="vicon" wx:if="{{item.recipe_type==3}}"></view>
+                        </view>
+                        <view class="tag {{i>2?'tag1':'tag2'}}">{{i+1}}</view>
+                        <view class="infow">
+                            <view class="title">{{item.prefix}}{{item.title}}</view>
+                            <view class="cptag">{{option.words}}榜Top{{i+1}}</view>
+                            <view class="iw">
+                                <image class="avatar" src="{{item.author.avatar_url}}"></image>
+                                <view class="name">{{item.author.nickname}}</view>
+                                <view class="vc">{{item.click_num}}</view>
+                            </view>
+                        </view>
+                    </navigator>
+                </block>
+                <navigator class="sub_listitem" url="/pages/content/content?id={{item.id}}" wx:if="{{option.type==2}}">
+                    <view class="imgw" style="background:url({{item.img}}) center no-repeat;background-size:cover;">
+                        <view class="vicon" wx:if="{{item.recipe_type==3}}"></view>
+                    </view>
+                    <view class="tag {{i>2?'tag1':'tag2'}}">{{i+1}}</view>
+                    <view class="infow">
+                        <view class="title">{{item.prefix}}{{item.title}}</view>
+                        <view class="cptag">{{option.words}}榜Top{{i+1}}</view>
+                        <view class="iw">
+                            <image class="avatar" src="{{item.author.avatar_url}}"></image>
+                            <view class="name">{{item.author.nickname}}</view>
+                            <view class="vc">{{item.click_num}}</view>
+                        </view>
+                    </view>
+                </navigator>
+                <navigator class="sub_listitem" url="/pages/zt/zt?id={{item.zt_id}}" wx:if="{{option.type==3}}">
+                    <view class="imgw" style="background:url({{item.img}}) center no-repeat;background-size:cover;">
+                        <view class="vicon" wx:if="{{item.recipe_type==3}}"></view>
+                    </view>
+                    <view class="infow">
+                        <view class="title">{{item.prefix}}{{item.title}}</view>
+                        <view class="cpdes" wx:if="{{item.desc}}">{{item.desc}}</view>
+                        <view class="iw">
+                            <image class="avatar" src="{{item.author_avatar}}"></image>
+                            <view class="name">{{item.author_name}}</view>
+                            <view class="vc">{{item.onclick}}</view>
+                        </view>
+                    </view>
+                </navigator>
+            </block>
+        </view>
+        <view class="bgfix"></view>
+    </view>
+    <block wx:if="{{is_index}}">
+        <view class="topimg"></view>
+        <view class="c1 c1_1">
+            <view class="c1_top c1_top_1"></view>
+            <view class="c1_cw">
+                <view class="c1_cpitem" wx:for="{{jixianglist}}" wx:key="key">
+                    <navigator class="c1_cpitem_link" url="/pages/newyear2019/newyear2019?words=吉祥&type=1">
+                        <view class="imgw" style="background:url({{item.img}}) center no-repeat;background-size:cover;">
+                            <view class="vicon" wx:if="{{item.recipe_type==3}}"></view>
+                        </view>
+                        <view class="cpt cpt1">{{item.prefix}}{{item.title}}</view>
+                    </navigator>
+                </view>
+            </view>
+        </view>
+        <view class="c1 c1_2">
+            <view class="c1_top c1_top_2"></view>
+            <view class="c1_cw">
+                <view class="c1_cpitem" wx:for="{{yingcailist}}" wx:key="key">
+                    <navigator class="c1_cpitem_link" url="/pages/newyear2019/newyear2019?words=硬菜&type=1">
+                        <view class="imgw" style="background:url({{item.img}}) center no-repeat;background-size:cover;">
+                            <view class="vicon" wx:if="{{item.recipe_type==3}}"></view>
+                        </view>
+                        <view class="cpt cpt2">{{item.prefix}}{{item.title}}</view>
+                    </navigator>
+                </view>
+            </view>
+        </view>
+        <view class="c1 c1_3">
+            <view class="c1_top c1_top_3"></view>
+            <view class="c1_cw">
+                <view class="c1_cpitem" wx:for="{{haizizuiailist}}" wx:key="key">
+                    <navigator class="c1_cpitem_link" url="/pages/newyear2019/newyear2019?words=孩子&type=1">
+                        <view class="imgw" style="background:url({{item.img}}) center no-repeat;background-size:cover;">
+                            <view class="vicon" wx:if="{{item.recipe_type==3}}"></view>
+                        </view>
+                        <view class="cpt cpt3">{{item.prefix}}{{item.title}}</view>
+                    </navigator>
+                </view>
+            </view>
+        </view>
+    </block>
+    <view class="c2">
+        <navigator class="c2_item c2_item_1" url="/pages/newyear2019/newyear2019?words=老人&type=1"></navigator>
+        <navigator class="c2_item c2_item_2" url="/pages/newyear2019/newyear2019?words=食肉&type=1"></navigator>
+        <navigator class="c2_item c2_item_3" url="/pages/newyear2019/newyear2019?words=素菜&type=1"></navigator>
+        <navigator class="c2_item c2_item_4" url="/pages/newyear2019/newyear2019?words=解腻&type=1"></navigator>
+        <navigator class="c2_item c2_item_5" url="/pages/newyear2019/newyear2019?words=硬菜&type=1"></navigator>
+        <navigator class="c2_item c2_item_6" url="/pages/newyear2019/newyear2019?words=孩子&type=1"></navigator>
+    </view>
+    <view class="c3">
+        <view class="c3_t"></view>
+        <view class="c3_c">
+            <navigator class="c3_c_item c3_c_item_11" url="/pages/newyear2019/newyear2019?words=饺子&type=1"></navigator>
+            <navigator class="c3_c_item c3_c_item_10" url="/pages/newyear2019/newyear2019?words=汤圆&type=1"></navigator>
+            <navigator class="c3_c_item c3_c_item_1" url="/pages/newyear2019/newyear2019?words=鸡&type=1"></navigator>
+            <navigator class="c3_c_item c3_c_item_2" url="/pages/newyear2019/newyear2019?words=鸭&type=1"></navigator>
+            <navigator class="c3_c_item c3_c_item_3" url="/pages/newyear2019/newyear2019?words=鹅&type=1"></navigator>
+            <navigator class="c3_c_item c3_c_item_4" url="/pages/newyear2019/newyear2019?words=鱼&type=1"></navigator>
+            <navigator class="c3_c_item c3_c_item_5" url="/pages/newyear2019/newyear2019?words=食肉&type=1"></navigator>
+            <navigator class="c3_c_item c3_c_item_6" url="/pages/newyear2019/newyear2019?words=素菜&type=1"></navigator>
+            <navigator class="c3_c_item c3_c_item_7" url="/pages/newyear2019/newyear2019?words=海鲜&type=1"></navigator>
+            <navigator class="c3_c_item c3_c_item_8" url="/pages/newyear2019/newyear2019?words=凉菜&type=1"></navigator>
+            <navigator class="c3_c_item c3_c_item_9" url="/pages/newyear2019/newyear2019?words=汤&type=1"></navigator>
+            <navigator class="c3_c_item c3_c_item_12" url="/pages/newyear2019/newyear2019?words=主食&type=1"></navigator>
+            <navigator class="c3_c_item c3_c_item_13" url="/pages/newyear2019/newyear2019?words=煎&type=1"></navigator>
+            <navigator class="c3_c_item c3_c_item_14" url="/pages/newyear2019/newyear2019?words=炸&type=1"></navigator>
+            <navigator class="c3_c_item c3_c_item_15" url="/pages/newyear2019/newyear2019?words=卤&type=1"></navigator>
+        </view>
+    </view>
+    <view class="xs_t"></view>
+    <navigator class="banner1" url="/pages/newyear2019/newyear2019?words=初一&type=3"></navigator>
+    <view class="c4">
+        <view class="c4_t"></view>
+        <view class="c4_c">
+            <navigator class="c4_c_item c4_c_item_1" url="/pages/newyear2019/newyear2019?words=北京&type=1"></navigator>
+            <navigator class="c4_c_item c4_c_item_2" url="/pages/newyear2019/newyear2019?words=上海&type=1"></navigator>
+            <navigator class="c4_c_item c4_c_item_3" url="/pages/newyear2019/newyear2019?words=杭州&type=1"></navigator>
+            <navigator class="c4_c_item c4_c_item_4" url="/pages/newyear2019/newyear2019?words=广州&type=1"></navigator>
+            <navigator class="c4_c_item c4_c_item_5" url="/pages/newyear2019/newyear2019?words=南京&type=1"></navigator>
+            <navigator class="c4_c_item c4_c_item_6" url="/pages/newyear2019/newyear2019?words=苏州&type=1"></navigator>
+            <navigator class="c4_c_item c4_c_item_7" url="/pages/newyear2019/newyear2019?words=深圳&type=1"></navigator>
+            <navigator class="c4_c_item c4_c_item_8" url="/pages/newyear2019/newyear2019?words=成都&type=1"></navigator>
+            <navigator class="c4_c_item c4_c_item_9" url="/pages/newyear2019/newyear2019?words=重庆&type=1"></navigator>
+            <navigator class="c4_c_item c4_c_item_10" url="/pages/newyear2019/newyear2019?words=天津&type=1"></navigator>
+            <navigator class="c4_c_item c4_c_item_11" url="/pages/newyear2019/newyear2019?words=宁波&type=1"></navigator>
+            <navigator class="c4_c_item c4_c_item_12" url="/pages/newyear2019/newyear2019?words=扬州&type=1"></navigator>
+            <navigator class="c4_c_item c4_c_item_13" url="/pages/newyear2019/newyear2019?words=无锡&type=1"></navigator>
+            <navigator class="c4_c_item c4_c_item_14" url="/pages/newyear2019/newyear2019?words=福州&type=1"></navigator>
+            <navigator class="c4_c_item c4_c_item_15" url="/pages/newyear2019/newyear2019?words=厦门&type=1"></navigator>
+            <navigator class="c4_c_item c4_c_item_16" url="/pages/newyear2019/newyear2019?words=武汉&type=1"></navigator>
+            <navigator class="c4_c_item c4_c_item_17" url="/pages/newyear2019/newyear2019?words=西安&type=1"></navigator>
+            <navigator class="c4_c_item c4_c_item_18" url="/pages/newyear2019/newyear2019?words=沈阳&type=1"></navigator>
+            <navigator class="c4_c_item c4_c_item_19" url="/pages/newyear2019/newyear2019?words=长春&type=1"></navigator>
+            <navigator class="c4_c_item c4_c_item_20" url="/pages/newyear2019/newyear2019?words=哈尔滨&type=1"></navigator>
+            <navigator class="c4_c_item c4_c_item_21" url="/pages/newyear2019/newyear2019?words=温州&type=1"></navigator>
+            <navigator class="c4_c_item c4_c_item_22" url="/pages/newyear2019/newyear2019?words=合肥&type=1"></navigator>
+            <navigator class="c4_c_item c4_c_item_23" url="/pages/newyear2019/newyear2019?words=郑州&type=1"></navigator>
+            <navigator class="c4_c_item c4_c_item_24" url="/pages/newyear2019/newyear2019?words=东莞&type=1"></navigator>
+            <navigator class="c4_c_item c4_c_item_25" url="/pages/newyear2019/newyear2019?words=太原&type=1"></navigator>
+            <navigator class="c4_c_item c4_c_item_26" url="/pages/newyear2019/newyear2019?words=南昌&type=1"></navigator>
+            <navigator class="c4_c_item c4_c_item_27" url="/pages/newyear2019/newyear2019?words=济南&type=1"></navigator>
+            <navigator class="c4_c_item c4_c_item_28" url="/pages/newyear2019/newyear2019?words=佛山&type=1"></navigator>
+            <navigator class="c4_c_item c4_c_item_29" url="/pages/newyear2019/newyear2019?words=常州&type=1"></navigator>
+            <navigator class="c4_c_item c4_c_item_30" url="/pages/newyear2019/newyear2019?words=青岛&type=1"></navigator>
+            <navigator class="c4_c_item c4_c_item_31" url="/pages/newyear2019/newyear2019?words=大连&type=1"></navigator>
+            <navigator class="c4_c_item c4_c_item_32" url="/pages/newyear2019/newyear2019?words=汕头&type=1"></navigator>
+            <navigator class="c4_c_item c4_c_item_33" url="/pages/newyear2019/newyear2019?words=兰州&type=1"></navigator>
+            <navigator class="c4_c_item c4_c_item_34" url="/pages/newyear2019/newyear2019?words=昆明&type=1"></navigator>
+            <navigator class="c4_c_item c4_c_item_35" url="/pages/newyear2019/newyear2019?words=长沙&type=1"></navigator>
+            <navigator class="c4_c_item c4_c_item_36" url="/pages/newyear2019/newyear2019?words=三亚&type=1"></navigator>
+        </view>
+    </view>
+</view>

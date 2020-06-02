@@ -1,0 +1,43 @@
+<view style="text-align:center">
+    <view class="order" style="background-color: {{headColor}}">
+        <icon color="{{headColor=='#ffffff'?mainColor:'#ffffff'}}" size="100" type="search"></icon>
+        <text bindtap="detail" style="color: {{textColor}}"></text>
+    </view>
+    <view class="orderData">
+        <view class="using">
+            <label>
+                <text style="color:{{mainColor}};">里程费</text>
+            </label>
+            <text class="text">{{baseMileage_A}}</text>
+        </view>
+        <view class="using">
+            <label>
+                <text style="color:{{mainColor}};">计时费</text>
+            </label>
+            <text class="text" wx:if="{{baseTime_C}}">{{baseTime_C}}</text>
+            <text class="text">{{baseTime_A}}</text>
+            <text class="text" wx:if="{{baseTime_B}}">{{baseTime_B}}</text>
+        </view>
+        <view class="using" wx:if="{{maxFee!=''}}">
+            <label>
+                <text style="color:{{mainColor}};">收费封顶</text>
+            </label>
+            <text class="text">{{maxFee}}</text>
+            <text class="text" wx:if="{{capMile!=''}}">{{capMile}}</text>
+        </view>
+        <view class="using">
+            <label>
+                <text style="color:{{mainColor}};">调度费用</text>
+            </label>
+            <text class="text">{{areaMoney}}</text>
+            <text class="text" wx:if="{{parkPointMoney!=''}}">{{parkPointMoney}}</text>
+        </view>
+        <view class="using">
+            <label>
+                <text style="color:{{mainColor}};">临时停车费</text>
+            </label>
+            <text class="text">{{parkBaseTime_A}}</text>
+        </view>
+    </view>
+    <button bindtap="back" style="background-color: {{mainColor}};color: {{textColor}}"> 返回</button>
+</view>

@@ -1,0 +1,132 @@
+.recommon-grid {
+    display: flex;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    padding-bottom: 0;
+}
+
+.recommon-grid .recommon-item {
+    width: 328rpx;
+    flex: 0 0 auto;
+    margin-bottom: 42rpx;
+}
+
+.recommon-grid .recommon-item>image {
+    width: 328rpx;
+    height: 328rpx;
+}
+
+.recommon-grid .recommon-item .item-footer {
+    display: flex;
+    justify-content: space-between;
+}
+
+.recommon-item .join-btn {
+    width: 52rpx;
+    height: 52rpx;
+    background: #bb3434;
+    border-radius: 5px;
+    margin-top: 33rpx;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex: 0 0 52rpx;
+}
+
+.recommon-item .join-btn>image {
+    width: 32rpx;
+    height: 32rpx;
+}
+
+.recommon-grid .recommon-item .item-footer .item-left {
+    display: flex;
+    flex-direction: column;
+    font-size: 26rpx;
+}
+
+.recommon-grid .recommon-item .item-footer .item-left .item-title {
+    margin: 26rpx 0 16rpx;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    height: 1em;
+    display: -webkit-box;
+    word-break: break-all;
+    -webkit-box-orient: vertical;
+    -webkit-line-clamp: 1;
+}
+
+.recommon-grid .recommon-item .item-footer .item-left .item-price {
+    font-weight: bold;
+}
+
+.recommon-list .recommon-item {
+    display: flex;
+    align-items: center;
+    border-bottom: 1px solid #efeff0;
+    padding: 26rpx 0;
+}
+
+.recommon-list .recommon-item:first-child {
+    padding-top: 0;
+}
+
+.recommon-list .recommon-item .item-image {
+    width: 180rpx;
+    height: 180rpx;
+    flex: 0 0 180rpx;
+    margin-right: 26rpx;
+}
+
+.recommon-list .recommon-item .item-right {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+    flex: 1;
+    height: 180rpx;
+}
+
+.recommon-list .recommon-item .item-right .item-title {
+    font-size: 28rpx;
+    line-height: 1.5;
+}
+
+.recommon-list .recommon-item .item-right .item-bottom {
+    display: flex;
+    justify-content: space-between;
+    height: 54rpx;
+    align-items: center;
+}
+
+.recommon-list .recommon-item .item-right .item-bottom .join-btn {
+    margin-top: 0;
+}
+
+.recommon-item .is_group::before {
+    content: '';
+    position: absolute;
+    left: 0;
+    top: 0;
+    color: #fff;
+    width: 0;
+    height: 0;
+    border-top: 60rpx solid #bb3333;
+    border-right: 60rpx solid transparent;
+    display: block;
+}
+
+.recommon-item .is_group::after {
+    content: '团';
+    color: #fff;
+    position: absolute;
+    left: 6rpx;
+    top: 8rpx;
+    font-size: 23rpx;
+}
+
+.recommon-item .group-tag {
+    background: #bb3434;
+    color: #fff;
+    font-size: 24rpx;
+    padding: 4rpx 4rpx;
+    margin-left: 20rpx;
+}

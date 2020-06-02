@@ -1,0 +1,47 @@
+<view class="header">
+    <view class="user_info">
+        <image src="{{avatarUrl}}" style="width: 120rpx;height: 120rpx;"></image>
+        <view class="nickName">{{nickName}}</view>
+    </view>
+    <view catchtap="toCheckTypes" class="more_types">
+        <text>{{current_col_name}}</text>
+        <image src="../../resource/images/icon14.png" style="width: 24rpx;height: 24rpx;margin-left: 16rpx;"></image>
+    </view>
+</view>
+<view class="container">
+    <view style="position: relative;" wx:for="{{json}}" wx:key="index">
+        <form bindsubmit="checkOne" data-id="{{item.id}}" reportSubmit="true">
+            <button class="getform_btn" formType="submit">Submit</button>
+            <view class="one-list">
+                <view class="icon">
+                    <image class="icon-1" mode="widthFix" src="{{item.icon}}"></image>
+                    <view class="small-mask"></view>
+                    <image class="icon-2" src="../../resource/images/icon06.png"></image>
+                </view>
+                <view class="content">
+                    <view>
+                        <view class="flex">
+                            <view style="margin-right: 14rpx;">{{item.title}}</view>
+                            <view class="flex" style="color: #ff9800;font-size: 22rpx;">
+                                <image mode="widthFix" src="../../resource/images/icon11.png" style="width: 28rpx;" wx:if="{{item.score>0}}"></image>
+                                <text wx:if="{{item.score>0}}">{{item.score}}星以上</text>
+                            </view>
+                        </view>
+                    </view>
+                    <view class="heat">热度 {{item.click_count}}</view>
+                </view>
+            </view>
+        </form>
+    </view>
+    <view class="no_more" wx:if="{{!has_next}}">已全部加载完毕...</view>
+    <view class="des_msg" wx:if="{{showDes}}">
+        <view catchtap="sure" class="close">
+            <image mode="widthFix" src="../../resource/images/icon13.png" style="width: 72rpx;"></image>
+        </view>
+        <view class="">
+      你当前的星星还不够, 请获取更多的星星来解锁更多跟读。
+    </view>
+        <view catchtap="sure" class="sure_btn">好的，知道了</view>
+    </view>
+    <view class="mask" wx:if="{{showDes}}"></view>
+</view>

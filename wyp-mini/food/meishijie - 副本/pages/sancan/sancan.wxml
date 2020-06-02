@@ -1,0 +1,145 @@
+<navigation-bar title="每日三餐"></navigation-bar>
+<view class="sancanlistw" style="padding-top:{{barHeight}}px">
+    <view class="sancan_tab_linew">
+        <view class="sancan_tab_line" style="top:{{barHeight}}px"></view>
+    </view>
+    <view class="sancan_tabw" style="top:{{barHeight}}px">
+        <view bindtap="setScCurrent" class="sancan_tabitem {{scCurrent==0?'current':''}}" data-sc="0">
+            <view class="linew">早餐</view>
+        </view>
+        <view bindtap="setScCurrent" class="sancan_tabitem {{scCurrent==1?'current':''}}" data-sc="1">
+            <view class="linew">午餐</view>
+        </view>
+        <view bindtap="setScCurrent" class="sancan_tabitem {{scCurrent==2?'current':''}}" data-sc="2">
+            <view class="linew">下午茶</view>
+        </view>
+        <view bindtap="setScCurrent" class="sancan_tabitem {{scCurrent==3?'current':''}}" data-sc="3">
+            <view class="linew">晚餐</view>
+        </view>
+        <view bindtap="setScCurrent" class="sancan_tabitem {{scCurrent==4?'current':''}}" data-sc="4">
+            <view class="linew">夜宵</view>
+        </view>
+    </view>
+    <view>
+        <swiper bindanimationfinish="scrollFinish" bindchange="scChange" current="{{scCurrent}}" style="height:{{winHeight}}rpx" wx:if="{{scrollDone}}">
+            <swiper-item>
+                <view bindtap="pageReload" class="cplist_nodata" wx:if="{{requeseFail}}">{{requeseFailTips}}</view>
+                <scroll-view bindscrolltolower="onReachBottom" class="sancan_scoller" data-sc="0" scrollY="true">
+                    <view class="sancanitem" wx:for="{{sancanResult0}}" wx:for-index="fi_i" wx:key="key">
+                        <view wx:if="{{fi_i==3}}">
+                            <view class="sancan_ad">
+                                <ad unitId="adunit-9c8dea7e7cdfa153"></ad>
+                            </view>
+                        </view>
+                        <view class="time">{{item.title}}</view>
+                        <view class="cpw">
+                            <view class="cpitemw" wx:for="{{item.items}}" wx:key="key">
+                                <navigator class="recipeitem" hoverClass="navigator-hover" url="/pages/content/content?id={{item.id}}">
+                                    <image src="{{item.img}}"></image>
+                                    <text>{{item.title}}</text>
+                                </navigator>
+                            </view>
+                        </view>
+                    </view>
+                    <view class="bottomline" wx:if="{{!hasNextPage0}}">- 这就是我的底线了 -</view>
+                </scroll-view>
+            </swiper-item>
+            <swiper-item>
+                <view bindtap="pageReload" class="cplist_nodata" wx:if="{{requeseFail}}">{{requeseFailTips}}</view>
+                <scroll-view bindscrolltolower="onReachBottom" class="sancan_scoller" data-sc="1" scrollY="true">
+                    <view class="sancanitem" wx:for="{{sancanResult1}}" wx:for-index="fi_i" wx:key="key">
+                        <view wx:if="{{fi_i==3}}">
+                            <view class="sancan_ad">
+                                <ad unitId="adunit-25e75c3fc4229c81"></ad>
+                            </view>
+                        </view>
+                        <view class="time">{{item.title}}</view>
+                        <view class="cpw">
+                            <view class="cpitemw" wx:for="{{item.items}}" wx:key="key">
+                                <navigator class="recipeitem" hoverClass="navigator-hover" url="/pages/content/content?id={{item.id}}">
+                                    <image src="{{item.img}}"></image>
+                                    <text>{{item.title}}</text>
+                                </navigator>
+                            </view>
+                        </view>
+                    </view>
+                    <view class="bottomline" wx:if="{{!hasNextPage1}}">- 这就是我的底线了 -</view>
+                </scroll-view>
+            </swiper-item>
+            <swiper-item>
+                <view bindtap="pageReload" class="cplist_nodata" wx:if="{{requeseFail}}">{{requeseFailTips}}</view>
+                <scroll-view bindscrolltolower="onReachBottom" class="sancan_scoller" data-sc="2" scrollY="true">
+                    <view class="sancanitem" wx:for="{{sancanResult2}}" wx:for-index="fi_i" wx:key="key">
+                        <view wx:if="{{fi_i==3}}">
+                            <view class="sancan_ad">
+                                <ad unitId="adunit-7515f0584b901708"></ad>
+                            </view>
+                        </view>
+                        <view class="time">{{item.title}}</view>
+                        <view class="cpw">
+                            <view class="cpitemw" wx:for="{{item.items}}" wx:key="key">
+                                <navigator class="recipeitem" hoverClass="navigator-hover" url="/pages/content/content?id={{item.id}}">
+                                    <image src="{{item.img}}"></image>
+                                    <text>{{item.title}}</text>
+                                </navigator>
+                            </view>
+                        </view>
+                    </view>
+                    <view class="bottomline" wx:if="{{!hasNextPage2}}">- 这就是我的底线了 -</view>
+                </scroll-view>
+            </swiper-item>
+            <swiper-item>
+                <view bindtap="pageReload" class="cplist_nodata" wx:if="{{requeseFail}}">{{requeseFailTips}}</view>
+                <scroll-view bindscrolltolower="onReachBottom" class="sancan_scoller" data-sc="3" scrollY="true">
+                    <view class="sancanitem" wx:for="{{sancanResult3}}" wx:for-index="fi_i" wx:key="key">
+                        <view wx:if="{{fi_i==3}}">
+                            <view class="sancan_ad">
+                                <ad unitId="adunit-b147a2bac3474541"></ad>
+                            </view>
+                        </view>
+                        <view class="time">{{item.title}}</view>
+                        <view class="cpw">
+                            <view class="cpitemw" wx:for="{{item.items}}" wx:key="key">
+                                <navigator class="recipeitem" hoverClass="navigator-hover" url="/pages/content/content?id={{item.id}}">
+                                    <image src="{{item.img}}"></image>
+                                    <text>{{item.title}}</text>
+                                </navigator>
+                            </view>
+                        </view>
+                    </view>
+                    <view class="bottomline" wx:if="{{!hasNextPage3}}">- 这就是我的底线了 -</view>
+                </scroll-view>
+            </swiper-item>
+            <swiper-item>
+                <view bindtap="pageReload" class="cplist_nodata" wx:if="{{requeseFail}}">{{requeseFailTips}}</view>
+                <scroll-view bindscrolltolower="onReachBottom" class="sancan_scoller" data-sc="4" scrollY="true">
+                    <view class="sancanitem" wx:for="{{sancanResult4}}" wx:for-index="fi_i" wx:key="key">
+                        <view wx:if="{{fi_i==3}}">
+                            <view class="sancan_ad">
+                                <ad unitId="adunit-a310e24809b7b439"></ad>
+                            </view>
+                        </view>
+                        <view class="time">{{item.title}}</view>
+                        <view class="cpw">
+                            <view class="cpitemw" wx:for="{{item.items}}" wx:key="key">
+                                <navigator class="recipeitem" hoverClass="navigator-hover" url="/pages/content/content?id={{item.id}}">
+                                    <image src="{{item.img}}"></image>
+                                    <text>{{item.title}}</text>
+                                </navigator>
+                            </view>
+                        </view>
+                    </view>
+                    <view class="bottomline" wx:if="{{!hasNextPage4}}">- 这就是我的底线了 -</view>
+                </scroll-view>
+            </swiper-item>
+        </swiper>
+    </view>
+</view>
+<view class="bottombar">
+    <image src="{{shareicon}}"></image>
+    <text>分享</text>
+    <button class="share_bottom" openType="share"></button>
+</view>
+<loading hidden="{{requeseDone||requeseFail||noData}}">
+ 加载中...
+</loading>

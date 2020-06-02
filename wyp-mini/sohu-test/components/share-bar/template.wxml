@@ -1,0 +1,12 @@
+<template name="share-bar">
+    <view class="share-bar" hidden="{{shareBarHidden}}">
+        <button appParameter="wechat" binderror="launchAppError" bindtap="onShareFriendClick" class="btn share-friend" data-newsid="{{newsdata.newsId}}" openType="share">
+            <image src="../../images/wxshare-red.png"></image>
+            <text>分享给朋友</text>
+        </button>
+        <view catchtap="onSharePosterClick" class="btn generate-poster" data-newsid="{{newsdata.newsId}}" data-newstype="{{newsdata.newsType}}">
+            <image src="../../images/icon-poster-red.png"></image>
+            <text>生成海报</text>
+        </view>
+    </view>
+</template>

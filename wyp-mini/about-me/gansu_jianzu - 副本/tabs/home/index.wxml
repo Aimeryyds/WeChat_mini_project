@@ -1,0 +1,32 @@
+<view class="container">
+    <block wx:if="{{locationSuccess}}">
+        <view class="search-wrap">
+            <navigator class="search-address" hoverClass="none" url="{{globalConfig.locationType==0?'/pages/citys/citys?city='+location.location||'':'/pages/addressdetail/addressdetail?addressid='+location.addressId}}" wx:if="{{globalConfig.isEnableLocation}}">
+                <text class="zan-ellipsis">{{location.location||'定位中...'}}</text>
+                <image class="search-arrow-down" src="http://imgcdnali.wfenxiao.com.cn/xcx/c/icons/xiala.png"></image>
+            </navigator>
+            <navigator class="search-box" hoverClass="none" url="/pages/page/search/search">
+                <image class="search-img" src="http://imgcdnali.wfenxiao.com.cn/xcx/c/icons/ic_search.png" style="width: 28rpx; height: 28rpx;"></image>
+                <text class="zan-ellipsis">{{globalConfig.searchTip||'搜索附近的商品/门店/品牌'}}</text>
+            </navigator>
+        </view>
+        <modules id="modules" modules="{{...modules}}" serverTime="{{serverTime}}"></modules>
+    </block>
+    <wxc-abnor bindabnortap="handleChooseAddress" type="LOCATION_ERROR" wx:else></wxc-abnor>
+    <home-gift-popup bind:updateindex="updateindex" class="home_gift_popup" index="{{activityIndex}}" list="{{activityCards}}" tabName="{{tabName}}"></home-gift-popup>
+</view>
+<view style="z-index:999;position:fixed;bottom:48rpx;right:0rpx" wx:if="{{modules}}">
+    <view class="phone-bar">
+        <view style="flex:1" wx:if="{{config.recruitment&&config.recruitment.isOpen&&config.recruitment.isRecruit==1&&config.recruitment.idenWord}}">
+            <navigator class="phone-bar__zhuan" hoverClass="none" style="font-size:{{config.recruitment.idenWord.length>1?24:28}}rpx;background-color:{{config.recruitment.idenColor||'#FF9300'}}" url="/pages/fenxiao/center/index">
+                <view class="phone-bar__zhuan-text" style="color:#fff">{{config.recruitment.idenWord}}</view>
+            </navigator>
+        </view>
+        <view style="flex:1" wx:if="{{config.showContact}}">
+            <button class="phone-bar__contact-btn" openType="contact">客服</button>
+        </view>
+        <view style="flex:1" wx:if="{{config.phone&&config.phone.isShow}}">
+            <view bindtap="handlePhoneBtnTap" class="phone-bar__phone" data-phone="{{...config.phone}}">电话</view>
+        </view>
+    </view>
+</view>

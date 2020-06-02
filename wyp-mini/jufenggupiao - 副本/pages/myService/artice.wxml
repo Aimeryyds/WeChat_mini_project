@@ -1,0 +1,143 @@
+<view class="_4d25cf2">
+    <view class="network _32f532b _4d25cf2" wx:if="{{$net$hasNet}}">
+        <image class="_32f532b" src="../../images/network.png"></image>
+        <text class="_32f532b">网络不可用，请检查网络设置</text>
+        <view class="net-text font28 animated flash infinite _32f532b">正在尝试重新连接...</view>
+    </view>
+    <block wx:if="{{loaded}}">
+        <import src="../../components/wxParse/wxParse.wxml"></import>
+        <view class="_4d25cf2">
+            <view class="artice _4d25cf2">
+                <text class="title _4d25cf2">{{bothData.articleInfo.title}}</text>
+                <view class="moduleDetail _4d25cf2">
+                    <view class="module_left _4d25cf2">
+                        <image class="_4d25cf2" src="{{bothData.columnistInfo.image}}"></image>
+                        <view class="module_option _4d25cf2">
+                            <view class="_4d25cf2">{{bothData.columnistInfo.name}}</view>
+                            <view class="_4d25cf2">{{bothData.columnistInfo.desc}}</view>
+                            <view class="date _4d25cf2">{{bothData.articleInfo.created_at}}</view>
+                        </view>
+                    </view>
+                    <view class="module_right _4d25cf2">
+                        <view catchtap="addDy" class="{{bothData.columnistInfo.is_subscribe?'subscribe':''}} _4d25cf2" data-wpyadddy-a="{{bothData.columnistInfo}}">
+                            <text class="word animated fadeIn _4d25cf2" wx:if="{{bothData.columnistInfo.is_subscribe}}">取消定制</text>
+                            <text class="word animated fadeIn _4d25cf2" wx:else>定制</text>
+                        </view>
+                        <text class="_4d25cf2">已有{{bothData.columnistInfo.subscribe_num}}人定制</text>
+                    </view>
+                </view>
+                <view class="module_content _4d25cf2">
+                    <template is="wxParse" data="{{wxParseData:article.nodes}}"></template>
+                </view>
+                <view class="module_method _4d25cf2">
+                    <button class="_4d25cf2" data-name="shareBtn" openType="share" plain="true">
+                        <image class="_4d25cf2" src="https://jfinfo.oss-cn-beijing.aliyuncs.com/jugupiao/images/live/share.png"></image>
+                    </button>
+                    <image bindtap="add" class="animated bounceIn _4d25cf2" data-wpyadd-a="1" src="https://jfinfo.oss-cn-beijing.aliyuncs.com/jugupiao/images/live/collection.png" wx:if="{{!bothData.articleInfo.is_collect}}"></image>
+                    <image bindtap="add" class="animated bounceIn _4d25cf2" data-wpyadd-a="2" src="https://jfinfo.oss-cn-beijing.aliyuncs.com/jugupiao/images/live/al_save.png" wx:else></image>
+                </view>
+            </view>
+            <view class="_4d25cf2" wx:if="{{bothData.stockInfo.length}}">
+                <view class="block _c5d98df _4d25cf2">
+                    <image class="icon _4d25cf2" src="https://jfinfo.oss-cn-beijing.aliyuncs.com/jugupiao/images/service/stock.png"></image>
+                    <text class="_c5d98df">{{$blocks$text}}</text>
+                </view>
+                <view class="stock_head _4d25cf2">
+                    <view class="tem _4d25cf2" wx:for="{{headArr}}">{{item}}</view>
+                </view>
+                <view class="stock _4d25cf2">
+                    <view class="tem1 _4d25cf2" wx:for="{{bothData.stockInfo}}">
+                        <view catchtap="goIndustry" class="f_tem _4d25cf2" data-wpygoindustry-a="{{item}}">
+                            <view class="_4d25cf2">{{item.name}}</view>
+                            <view class="_4d25cf2">{{item.code}}</view>
+                        </view>
+                        <view class="f_tem _4d25cf2">{{item.cur}}</view>
+                        <view class="f_tem {{item['changeRate']=='停牌'?'color-dark':item['changeRate']==0?'color-grey':item['changeRate']<0?'color-green':'color-red'}} _4d25cf2">{{item['changeRate']>0?'+':''}}{{item['changeRate']}}{{item['changeRate']!=='停牌'?'%':''}}</view>
+                        <view catchtap="checkStock" class="f_tem _4d25cf2" data-wpycheckstock-a="{{item}}" data-wpycheckstock-b="{{index}}">
+                            <image class="_4d25cf2" src="https://jfinfo.oss-cn-beijing.aliyuncs.com/jugupiao/images/service/add.png" wx:if="{{!item.isExists}}"></image>
+                            <image class="_4d25cf2" src="https://jfinfo.oss-cn-beijing.aliyuncs.com/jugupiao/images/service/del.png" wx:else></image>
+                        </view>
+                        <view catchtap="diagnostic" class="f_tem _4d25cf2" data-wpydiagnostic-a="{{item}}">
+                            <image class="_4d25cf2" src="https://jfinfo.oss-cn-beijing.aliyuncs.com/jugupiao/images/service/diagnosis.png"></image>
+                        </view>
+                        <view catchtap="goAskStock" class="f_tem _4d25cf2" data-wpygoaskstock-a="{{item}}">
+                            <image class="_4d25cf2" src="https://jfinfo.oss-cn-beijing.aliyuncs.com/jugupiao/images/service/ask.png"></image>
+                        </view>
+                    </view>
+                </view>
+            </view>
+            <view class="tj _4d25cf2" wx:if="{{bothData.articleList.length}}">
+                <view class="block _c5d98df _4d25cf2">
+                    <image class="icon _4d25cf2" src="https://jfinfo.oss-cn-beijing.aliyuncs.com/jugupiao/images/service/heart.png"></image>
+                    <text class="_c5d98df">{{$anotherblocks$text}}</text>
+                </view>
+                <view class="tj_box _4d25cf2">
+                    <view catchtap="redictUrl" class="tj_temp _4d25cf2" data-wpyredicturl-a="{{item}}" wx:for="{{bothData.articleList}}">
+                        <image class="_4d25cf2" src="{{item.cover||'https://jfinfo.oss-cn-beijing.aliyuncs.com/jugupiao/images/service/img_zw.png'}}"></image>
+                        <view class="tj_content _4d25cf2">
+                            <view class="_4d25cf2">{{item.title}}</view>
+                            <view class="_4d25cf2">{{item.created_at}}</view>
+                        </view>
+                    </view>
+                </view>
+                <view bindtap="goList" class="lokkMore _4d25cf2" wx:if="{{bothData.articleNum>4&&!query.no_show}}">
+                    <text class="_4d25cf2">更多推荐</text>
+                    <image class="_4d25cf2" src="https://jfinfo.oss-cn-beijing.aliyuncs.com/jugupiao/images/service/enter.png"></image>
+                </view>
+            </view>
+            <view class="articeAfter _8ca7e77 _4d25cf2">
+                <view class="si-teacher _8ca7e77" wx:if="{{$after$authorData.author_name}}">
+                    <view class="no-bar _8ca7e77">
+                        <text class="_8ca7e77">{{$after$authorData.author_name}}</text>
+                        <text class="_8ca7e77">{{$after$authorData.certificate}}</text>
+                    </view>
+                    <view class="no-bar _8ca7e77">
+                        <text class="_8ca7e77">执笔顾问</text>
+                        <text class="_8ca7e77">执业证书号</text>
+                    </view>
+                </view>
+                <navigator class="_8ca7e77" hoverClass="none" url="/pages/myService/team" wx:if="{{!$after$authorData.author_name}}">
+                    <view class="team _8ca7e77">
+                        <view class="team_desc _8ca7e77">
+                            <view class="_8ca7e77">执笔投顾团队</view>
+                            <view class="_8ca7e77">用心专为您的投资</view>
+                        </view>
+                        <image class="preson _8ca7e77" src="https://jfinfo.oss-cn-beijing.aliyuncs.com/jugupiao/images/service/pers.png"></image>
+                    </view>
+                </navigator>
+                <view class="team team1 _8ca7e77">
+                    <view class="team_desc _8ca7e77">
+                        <view class="_8ca7e77">投诉与建议</view>
+                    </view>
+                    <view catchtap="$after$callTel" class="team_tel _8ca7e77">
+                        <image class="_8ca7e77" src="https://jfinfo.oss-cn-beijing.aliyuncs.com/jugupiao/images/service/team.png"></image>
+                        <view class="tel _8ca7e77">
+                            <view class="_8ca7e77">400-633-5058</view>
+                            <view class="_8ca7e77" style="margin-left:10rpx;">
+              9:00<text class="_8ca7e77">AM</text>  ～  18:00<text class="_8ca7e77">PM</text>
+                            </view>
+                        </view>
+                    </view>
+                </view>
+                <navigator class="_8ca7e77" hoverClass="none" url="/pages/mine/risk">
+                    <view class="team team1 team2 _8ca7e77">
+                        <view class="team_desc _8ca7e77">
+                            <view class="_8ca7e77">风险揭示说明</view>
+                        </view>
+                        <view class="team_summry _8ca7e77">
+                            <view class="_8ca7e77" style="margin-bottom: {{$after$userType.isExist?'14rpx':'0'}}">股市有风险，投资需谨慎<text class="_8ca7e77"></text>
+                            </view>
+                            <view class="_8ca7e77" wx:if="{{$after$userType.isExist}}">根据风险测评结果，您属于{{$after$userType.level_label}}投资者</view>
+                        </view>
+                    </view>
+                </navigator>
+            </view>
+            <view class="footer _9f298ed _4d25cf2">
+      用心专为您的投资
+    </view>
+        </view>
+    </block>
+    <view catchtap="$backHome$goHome" class="box animated bounceIn _97a9f08 _4d25cf2" wx:if="{{$backHome$isShow}}">
+        <image class="_97a9f08" lazyLoad="false" mode="scaleToFill" src="https://jfinfo.oss-cn-beijing.aliyuncs.com/jugupiao/images/share/home.png"></image>
+    </view>
+</view>

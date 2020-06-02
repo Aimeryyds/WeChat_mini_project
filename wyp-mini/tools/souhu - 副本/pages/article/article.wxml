@@ -1,0 +1,76 @@
+<view class="article-page-wrapper">
+    <custom-tab-bar aCode="{{aCode}}" bCode="{{bCode}}" bindhandleClick="clickShare" cCode="{{tabBarCode}}" id="custom-tab-bar" isIphoneX="{{isIphoneX}}" list="{{tabBarList}}" pvId="{{pvId}}" shareInfo="{{shareInfo}}" type="{{pageConfig.shareConfig.type}}" wx:if="{{isShowTabBar}}"></custom-tab-bar>
+    <share bCode="{{bCode}}" bindhandleClick="clickShare" class="share" pvId="{{pvId}}" shareInfo="{{shareInfo}}" type="{{pageConfig.shareConfig.type}}" wx:if="{{!isShowTabBar}}"></share>
+    <view class="article-main" data-id="article-{{articleData.fulltext.id}}" data-spm="smbd.content.content.0.{{pvId}}" wx:if="{{articleData.fulltext}}">
+        <text class="article-title">{{articleData.fulltext.mobileTitle||articleData.fulltext.title}}</text>
+        <view bindtap="onAuthorTap" class="article-detail">
+            <image class="avatar" src="{{articleData.author.logo}}"></image>
+            <view class="author-detail">
+                <text class="author-name">{{articleData.author.name}}</text>
+                <text class="public-time">{{dateFormat}}</text>
+            </view>
+        </view>
+        <view class="article-content">
+            <rich-text bindtap="onRichTextTap" class="rich-text" nodes="{{contentFormatDisplay}}"></rich-text>
+            <view bindtap="sketchHidden" class="show-display" wx:if="{{articleData.fulltext.hiddenContent&&!showHidden}}">展开剩余{{articleData.fulltext.hiddenRatio}}%<view class="ic-more"></view>
+            </view>
+            <rich-text bindtap="onRichTextTap" class="rich-text" nodes="{{contentFormatHidden}}" wx:if="{{articleData.fulltext.hiddenContent&&showHidden}}"></rich-text>
+        </view>
+    </view>
+    <view class="zw article-main" wx:if="{{!articleData.fulltext&&articleId}}">
+        <view class="title-zw"></view>
+        <view class="detail-zw"></view>
+        <view class="content-zw"></view>
+    </view>
+    <view class="content-border" wx:if="{{middleAd&&articleData.fulltext&&isNeedAd}}"></view>
+    <ad appid="{{middleAd.appid}}" bindclose="closeAd" binderror="handleErrorAd" bindload="handleLoadAd" class="{{isHideAd?'ad-item hide border-zero padding-fix':'ad-item border-zero padding-fix'}}" type="{{middleAd.type}}" unitId="{{middleAd.id}}" wx:if="{{middleAd}}"></ad>
+    <view class="checkShare">
+        <feed-list-pack atricleInfo="{{articleData.fulltext}}" bind:adError="handleErrorAd" bind:adLoad="handleLoadAd" class="cut-line" options="{{dataOptions}}" pvId="{{pvId}}" regionId="{{pageConfig.recommend.id}}" spmB="{{bCode}}" wx:if="{{articleData.regionId&&!pageConfig.isCustom}}"></feed-list-pack>
+        <view class="feed-list-wrapper custom-feed cut-line" wx:if="{{pageConfig.isCustom&&customFeedList.length>0}}">
+            <view class="feed-list">
+                <view class="feed-item" data-id="{{news.id}}" data-scm="{{news.scm}}" data-spm="{{spmA}}.{{spmB}}.{{spmC}}.{{index+1}}.{{pvId}}" data-target="{{spmB}}|{{news.id}}|{{news.authorId}}" wx:for="{{customFeedList}}" wx:for-item="news" wx:key="index">
+                    <ad appid="{{news.data.appid}}" bindclose="closeAd" binderror="handleErrorAd" class="{{isHideAd?'ad-item hide':'ad-item'}}" scale="{{news.data.scale}}" type="{{news.data.adType}}" unitId="{{news.data.id}}" wx:if="{{news.type=='ad'}}"></ad>
+                    <navigator openType="{{openType}}" url="{{news.path}}&spm={{aCode}}.{{bCode}}.fd-d.{{index+1}}.{{pvId}}" wx:else>
+                        <view class="no-pic-wrapper feed-item-wrapper" wx:if="{{news.type==ViewType.text}}">
+                            <view class="article">
+                                <view class="title">{{news.title}}</view>
+                                <view class="footer">
+                                    <view class="author">{{news.authorName}}</view>
+                                    <view class="time">{{news.dateFormat}}</view>
+                                </view>
+                            </view>
+                        </view>
+                        <view class="single-pic-wrapper feed-item-wrapper" wx:if="{{news.type==ViewType.textImage}}">
+                            <view class="article">
+                                <view class="title">{{news.title}}</view>
+                                <view class="footer">
+                                    <view class="author">{{news.authorName}}</view>
+                                    <view class="time">{{news.dateFormat}}</view>
+                                </view>
+                            </view>
+                            <view class="img-container">
+                                <image class="img-wrapper" src="{{'https:'+news.images[0]}}"></image>
+                            </view>
+                        </view>
+                        <view class="feed-item-wrapper big-pic-wrapper" wx:if="{{news.type==ViewType.video}}">
+                            <view class="picture">
+                                <image class="img-wrapper" src="{{'https:'+news.bigCover}}"></image>
+                                <view class="play-icon"></view>
+                                <view class="title">{{news.title}}</view>
+                            </view>
+                            <view class="author">
+                                <image class="author-avatar" src="{{news.authorImage}}"></image>
+                                <view class="author-name">{{news.authorName}}</view>
+                            </view>
+                        </view>
+                    </navigator>
+                </view>
+            </view>
+        </view>
+        <navigator class="back-home" openType="navigate" url="{{backHome}}">
+            <text class="back-home-text">查看更多精彩内容</text>
+            <image class="back-home-logo" src="/images/ic_more_b.png"></image>
+        </navigator>
+        <view class="{{isIphoneX?'bottomSpace bottomSpaceFix':'bottomSpace'}}" wx:if="{{isShowTabBar}}"></view>
+    </view>
+</view>

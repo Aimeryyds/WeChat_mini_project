@@ -1,0 +1,14 @@
+<view bindtap="handleHide" class="i-toast-mask" wx:if="{{visible&&mask}}"></view>
+<view class="i-class i-toast" wx:if="{{visible}}">
+    <view class="i-toast-type" wx:if="{{type!=='default'}}">
+        <i-icon iClass="i-toast-icon" type="success" wx:if="{{type==='success'}}"></i-icon>
+        <i-icon iClass="i-toast-icon" type="prompt" wx:elif="{{type==='warning'}}"></i-icon>
+        <i-icon iClass="i-toast-icon" type="delete" wx:elif="{{type==='error'}}"></i-icon>
+        <view class="i-toast-icon i-toast-loading" wx:elif="{{type==='loading'}}"></view>
+    </view>
+    <block wx:else>
+        <i-icon iClass="i-toast-icon" type="{{icon}}" wx:if="{{icon}}"></i-icon>
+        <image class="i-toast-image" mode="aspectFit" src="{{image}}" wx:if="{{image}}"></image>
+    </block>
+    <view class="i-toast-content" wx:if="{{content}}">{{content}}</view>
+</view>

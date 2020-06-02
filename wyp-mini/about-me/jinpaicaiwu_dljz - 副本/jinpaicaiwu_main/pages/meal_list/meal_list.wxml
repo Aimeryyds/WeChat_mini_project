@@ -1,0 +1,160 @@
+<view class="index">
+    <view class="menu-wrp" style="height:{{windowHeight-50}}px;{{styles.background}}">
+        <scroll-view class="left-side" scrollY="true" style="height:{{windowHeight-50}}px">
+            <view bindtap="selectMenu" class="menu-item {{selectMenuid==item.id?'item_bc_red':''}}" data-id="{{item.id}}" style="{{styles.border_btm}}" wx:for="{{categorys}}" wx:key="id">
+                <view class="menu-item-wrp">
+                    <view class="m-item-icon">
+                        <text class="{{selectMenuid==item.id?'bc_red':'bc_gray'}} m-item-title" style="border-left-{{selectMenuid==item.id?styles.category_actived+styles.category_actived:''}}">{{item.name}}</text>
+                    </view>
+                </view>
+            </view>
+        </scroll-view>
+        <scroll-view class="right-side" scrollY="true" style="height:{{windowHeight-50}}px">
+            <view id="{{menu.id}}" style="padding:4px">
+                <view class="dish-item" style="{{styles.border_btm+styles.boxer_space}}" wx:for="{{meals}}" wx:for-item="dish" wx:key="id">
+                    <view class="dish-item-wrp">
+                        <view class="dish-item-pic" style="{{styles.thumb}}">
+                            <image class="image" mode="aspectFit" src="{{dish.feature_img}}" style="{{styles.thumb}}"></image>
+                        </view>
+                        <view class="dish-item-info">
+                            <view>
+                                <view>
+                                    <view class="dish-item-name" wx:if="{{display.title}}">
+                                        <text style="{{styles.title}}">{{dish.name}}</text>
+                                    </view>
+                                    <view class="dish-item-sales" wx:if="{{display.desc}}">
+                                        <text style="{{styles.desc}}">{{dish.description}}</text>
+                                    </view>
+                                </view>
+                                <view>
+                                    <view class="dish-item-count">
+                                        <view class="dish-item-money" wx:if="{{display.price}}">
+                                            <block wx:if="{{dish.price_type=='0'}}">
+                                                <text style="{{styles.price}}" wx:if="{{dish.discount_price>0}}">¥{{dish.discount_price}}</text>
+                                                <text style="{{styles.price}}" wx:else>￥{{dish.price}}</text>
+                                                <text style="font-size：8px;color:#ccc;text-decoration:line-through" wx:if="{{dish.discount_price>0}}">￥{{dish.price}}</text>
+                                            </block>
+                                            <block wx:else>
+                                                <text style="{{styles.price}}" wx:if="{{dish.spec[0].discount_price>0}}">￥{{dish.spec[0].discount_price}}</text>
+                                                <text style="{{styles.price}}" wx:else>{{dish.spec[0].price}}</text>
+                                                <text style="font-size：8px;color:#ccc;text-decoration:line-through" wx:if="{{dish.spec[0].discount_price>0}}">￥{{dish.spec[0].price}}</text>
+                                            </block>
+                                        </view>
+                                        <view class="fl">
+                                            <view class="dish-item-tab">
+                                                <view class="dish-item-count-minus" hidden="{{!dish.count||dish.count==0}}">
+                                                    <view class="add_j" style="{{styles.minusplus}}">
+                                                        <view bindtap="minusCount" class="selected_l" data-id="{{dish.id}}" data-index="{{index}}" data-type="list" style="{{styles.minusplus_icon}}">
+                                                            <text class="iconfont icon-minus-bold"></text>
+                                                        </view>
+                                                        <view>
+                                                            <text hidden="{{!dish.count||dish.count==0}}">{{dish.count}}</text>
+                                                        </view>
+                                                        <view bindtap="addCount" class="selected_l" data-id="{{dish.id}}" data-index="{{index}}" data-type="list" style="{{styles.minusplus_icon}}">
+                                                            <text class="iconfont icon-jiahao"></text>
+                                                        </view>
+                                                    </view>
+                                                </view>
+                                            </view>
+                                            <view bindtap="addCount" class="dish-item-count-plus " data-id="{{dish.id}}" data-index="{{index}}" data-type="list" style="{{styles.minusplus}}">
+                                                <view style="border-radius:50px;{{styles.minusplus_icon}}">
+                                                    <text class="iconfont icon-jiahao"></text>
+                                                </view>
+                                            </view>
+                                        </view>
+                                    </view>
+                                </view>
+                            </view>
+                        </view>
+                    </view>
+                </view>
+            </view>
+        </scroll-view>
+    </view>
+    <view class="cart-tab-wrp">
+        <view bindtap="showModal" class="cart-item-total cart-tab-item" style="{{styles.shopping_cart}}">
+            <view class="cart-item-icon-wrp" style="{{styles.carticon_bg}}" wx:if="{{display.shopping_cart}}">
+                <image class="cart-item-icon" mode="widthFix" src="/pages/meal_list/resources/pic/orderBox.png"></image>
+                <text class="cart-item-total-num" hidden="{{cartsLength}}" style="{{styles.carticon_bg}}">{{cartsLength}}</text>
+            </view>
+            <text class="shopcar" wx:if="{{display.shopping_cart}}">{{text.shopping_cart}}</text>
+            <text class="cart-item-total-price">￥{{cartsprice}}</text>
+        </view>
+        <view class="cart-tab-item" wx:if="{{display.buy}}">
+            <view bindtap="submit" class="cart-tab-item-btn" hoverClass="navigator-hover" style="{{styles.buy}}">{{text.buy}}</view>
+        </view>
+    </view>
+    <view bindtap="handletouchmove" class="body" hidden="{{flag}}"></view>
+    <view animation="{{animation}}" class="window" hidden="{{flag}}" style="z-index:{{winzIndex}}">
+        <view class="t_title">
+            <text>{{meal.name}}</text>
+        </view>
+        <view class="select" wx:if="{{specs.length}}">
+            <view class="guige">规格:</view>
+            <view class="foods">
+                <text catchtap="tapAttr" class="b1 {{selspec.id==item.id?'b2':''}}" data-index="{{index}}" data-type="spec" style="{{selspec.id==item.id?'color:#fff;background-color:'+styles.actived.color:''}}" wx:for="{{specs}}" wx:key="{{item}}">{{item.name}}</text>
+            </view>
+        </view>
+        <view class="select" wx:if="{{meal.ingred}}">
+            <view class="guige">加料:</view>
+            <view class="foods">
+                <text catchtap="tapAttr" class="b1 {{item.sel==true?'b2':''}}" data-index="{{index}}" data-type="ingred" style="{{item.sel==true?'color:#fff;background-color:'+styles.actived.color:''}}" wx:for="{{meal.ingred}}" wx:key="{{item}}">{{item.name}}</text>
+            </view>
+        </view>
+        <block wx:if="{{meal.taste.length}}">
+            <view class="select" wx:for="{{meal.taste}}" wx:key="{{item}}">
+                <view class="guige">{{item.name}}:</view>
+                <view class="foods">
+                    <text catchtap="tapAttr" class="b1 {{item.sel==item0?'b2':''}}" data-index="{{index}}" data-name="{{item0}}" data-tindex="{{index0}}" data-type="taste" style="{{item.sel==item0?'color:#fff;background-color:'+styles.actived.color:''}}" wx:for="{{item.subname}}" wx:for-index="index0" wx:for-item="item0" wx:key="{{item0}}">{{item0}}</text>
+                </view>
+            </view>
+        </block>
+        <view class="footer-btn">
+            <text class="select_txt">
+                <text style="font-size:0.8em;">总价：￥</text>
+                <text style="font-size:1.5em;">{{total.money}}</text>
+            </text>
+            <button catchtap="addCart" class="select_btn" style="background-color:{{styles.actived.color}}">加入购物车</button>
+        </view>
+    </view>
+    <view bindtap="hideModal" class="commodity_screen" wx:if="{{showModalStatus}}"></view>
+    <view animation="{{animationData}}" class="commodity_attr_box" wx:if="{{showModalStatus}}">
+        <view class="content">
+            <view class="head_tile">
+                <view class="head_tile_l">
+                    <text>已选商品</text>
+                </view>
+                <view class="head_tile_r">
+                    <image src="/pages/meal_list/resources/pic/delete.png"></image>
+                    <text bindtap="truncateCarts">清空</text>
+                </view>
+            </view>
+            <view class="car_detail">
+                <view class="car_empty" wx:if="{{carts.length==0}}">购物车空空如也</view>
+                <view class="car_item" wx:if="{{carts.length!=0}}" wx:for="{{carts}}" wx:key="index">
+                    <view class="car_item_l">
+                        <text class="car_item_l_t" style="{{styles.title}}">{{item.name}}</text>
+                    </view>
+                    <view class="car_item_r">
+                        <view class="car_item_t">
+                  ￥<text>{{item.count*item.price}}</text>
+                        </view>
+                        <view class="fl">
+                            <view class="add_j1" style="{{styles.minusplus}}">
+                                <view bindtap="minusCount" class="selected_l" data-id="{{item.id}}" data-index="{{index}}" data-type="cart" style="{{styles.minusplus_icon}}">
+                                    <text class="iconfont icon-minus-bold"></text>
+                                </view>
+                                <view>
+                                    <text>{{item.count}}</text>
+                                </view>
+                                <view bindtap="addCount" class="selected_l" data-id="{{item.id}}" data-index="{{index}}" data-type="cart" style="{{styles.minusplus_icon}}">
+                                    <text class="iconfont icon-jiahao"></text>
+                                </view>
+                            </view>
+                        </view>
+                    </view>
+                </view>
+            </view>
+        </view>
+    </view>
+</view>

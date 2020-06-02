@@ -1,0 +1,7 @@
+<view>
+    <swiper autoplay="{{autoplay||true}}" circular="{{true}}" duration="{{duration||1000}}" indicatorDots="{{true}}" interval="{{module.options.interval*1000||2000}}" style="height: {{module.options.height||285}}rpx">
+        <swiper-item wx:if="{{item.imgUrl}}" wx:for="{{module.options.navs}}" wx:key="{{index}}">
+            <image class="carousel-slideImage" data-link="{{item}}" ontap="onTapCarousel" src="{{item.imgUrl}}" style="width: 750rpx; height: {{module.options.height||285}}rpx"></image>
+        </swiper-item>
+    </swiper>
+</view>

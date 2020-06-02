@@ -1,0 +1,64 @@
+<view class="container">
+    <view bindtap="priceClick" class="top">
+        <text>累计佣金(元)</text>
+        <text>{{data.commission_total}}</text>
+        <view class="btn">提现明细</view>
+    </view>
+    <view class="Withdraw">
+        <view class="list">
+            <image src="https://tws.cnweisou.com/images/price.png"></image>
+            <text class="brokerage">可提现佣金</text>
+            <text class="money red">{{data.commission_ok}}元</text>
+        </view>
+    </view>
+    <view class="Withdraw WithdrawOne">
+        <view class="list">
+            <image src="https://tws.cnweisou.com/images/timet.png"></image>
+            <text class="brokerage">已申请佣金</text>
+            <text class="money">{{data.commission_apply}}元</text>
+        </view>
+        <view class="list">
+            <image src="https://tws.cnweisou.com/images/tea.png"></image>
+            <text class="brokerage">待打款佣金</text>
+            <text class="money">{{data.commission_check}}元</text>
+        </view>
+        <view class="list">
+            <image src="https://tws.cnweisou.com/images/tea.png"></image>
+            <text class="brokerage">无效的佣金</text>
+            <text class="money">{{data.commission_fail}}元</text>
+        </view>
+        <view class="list last">
+            <image src="https://tws.cnweisou.com/images/success1.png" style="width:40rpx;height:40rpx;"></image>
+            <text class="brokerage ">成功提现佣金</text>
+            <text class="money">{{data.commission_pay}}元</text>
+        </view>
+    </view>
+    <view class="Withdraw WithdrawOne">
+        <view class="list">
+            <image src="https://tws.cnweisou.com/images/circle.png"></image>
+            <text class="brokerage">待收货佣金</text>
+            <text class="money">{{data.commission_wait}}元</text>
+        </view>
+        <view class="list list1">
+            <image src="https://tws.cnweisou.com/images/lock.png"></image>
+            <text class="brokerage">未结算佣金</text>
+            <text class="money">{{data.commission_lock}}元</text>
+        </view>
+    </view>
+    <view class="Withdraw notice">
+        <view bindtap="showOrhide" class="list" style="border:none">
+            <text class="brokerage">用户须知</text>
+            <image src="https://tws.cnweisou.com/images/right.png" style="float: right;margin-top: 12rpx;margin-right: 16rpx;"></image>
+            <view class="inc hide {{show==true?'show':''}}">
+                <view class="Tone">
+                    <text>买家确认收货后，立即获得分销佣金 </text>
+                </view>
+                <view class="Tone">注意:可用佣金满<text style="color:red">1元</text>后才能申请提现</view>
+            </view>
+        </view>
+    </view>
+    <view class="buttonBox">
+        <button bindtap="tixian" class="button" disabled="{{disabled}}" type="warn">我要提现</button>
+    </view>
+</view>
+<loading wx:if="{{loading}}"></loading>

@@ -1,0 +1,174 @@
+<navigation-bar title="菜谱合辑"></navigation-bar>
+<view bindtap="pageReload" class="cplist_nodata" wx:if="{{requeseFail}}">{{requeseFailTips}}</view>
+<view style="padding-top:{{barHeight}}px" wx:else>
+    <view class="cs_title">你喜欢吃牛肉吗？牛肉精品菜谱大合辑，让你一次看个够！</view>
+    <view class="cs_authorw">
+        <view class="a_avatar" style="background:url(https://wx1.sinaimg.cn/mw690/49b2ea91ly1g5l31zfsb9j21280u00zm.jpg) center no-repeat;background-size:cover;"></view>
+        <view class="a_name">林初寒</view>
+    </view>
+    <view class="cs_des">至尊盗王拉法姆和他的反派团队驾驶着达拉然横跨了整个世界，来到了奥丹姆！这里遍地都是魔法和木乃伊，古墓密布，黄沙满天。尽管他们的最终目标仍然成谜，但他们在沙丘之中的所作所为已经在这片土地上释放出了毁灭性的灾祸。</view>
+    <view class="line"></view>
+    <view class="wf_title">28道菜谱</view>
+    <view class="wf_wrap">
+        <view class="wf_left">
+            <block wx:for="{{wfdata_left}}" wx:key="key">
+                <view class="wf-item wf-type-1" wx:if="{{item.type=='1'}}">
+                    <navigator class="wf-itemw" url="/pages/content/content?id={{item.recipe.id}}">
+                        <view class="imgw" style="background-image:url({{item.recipe.img}});padding-top:{{100/item.wh_ratio}}%">
+                            <view class="vicon"></view>
+                        </view>
+                        <view class="infow">
+                            <view class="title">{{item.recipe.title}}</view>
+                            <view class="yyw">
+                                <view class="t">养</view>
+                                <view class="des">低脂低糖菜，越吃越享瘦 </view>
+                            </view>
+                            <view class="userw">
+                                <view class="avatar">
+                                    <view class="avatarw">
+                                        <image class="img" src="{{item.recipe.author.avatar_url}}"></image>
+                                    </view>
+                                    <view class="n">{{item.recipe.author.nickname}}</view>
+                                </view>
+                                <view class="view">
+                                    <view class="i"></view>{{item.recipe.viewed_amount}}</view>
+                            </view>
+                        </view>
+                    </navigator>
+                </view>
+                <view class="wf-item wf-type-7" wx:if="{{item.type=='7'}}">
+                    <navigator class="wf-itemw" url="/pages/content/content?id={{item.video_recipe.id}}">
+                        <view class="imgw" style="background-image:url({{item.video_recipe.img}});padding-top:{{100/item.wh_ratio}}%">
+                            <view class="vicon"></view>
+                        </view>
+                        <view class="infow">
+                            <view class="title">{{item.video_recipe.title}}</view>
+                            <view class="yyw">
+                                <view class="t">养</view>
+                                <view class="des">低脂低糖菜，越吃越享瘦 </view>
+                            </view>
+                            <view class="userw">
+                                <view class="avatar">
+                                    <view class="avatarw">
+                                        <image class="img" src="{{item.video_recipe.author.avatar_url}}"></image>
+                                    </view>
+                                    <view class="n">{{item.video_recipe.author.nickname}}</view>
+                                </view>
+                                <view class="view">
+                                    <view class="i"></view>{{item.video_recipe.viewed_amount}}</view>
+                            </view>
+                        </view>
+                    </navigator>
+                </view>
+                <view class="wf-item wf-type-8" wx:if="{{item.type=='8'}}">
+                    <navigator class="wf-itemw" url="/pages/article/article?id={{item.video_article.id}}">
+                        <view class="imgw" style="background-image:url({{item.video_article.img}});padding-top:{{100/item.wh_ratio}}%">
+                            <view class="vicon"></view>
+                        </view>
+                        <view class="infow">
+                            <view class="title">{{item.video_article.title}}</view>
+                            <view class="yyw">
+                                <view class="t">养</view>
+                                <view class="des">低脂低糖菜，越吃越享瘦 </view>
+                            </view>
+                            <view class="userw">
+                                <view class="avatar">
+                                    <view class="avatarw">
+                                        <image class="img" src="{{item.video_article.author.avatar_url}}"></image>
+                                    </view>
+                                    <view class="n">{{item.video_article.author.nickname}}</view>
+                                </view>
+                                <view class="view">
+                                    <view class="i"></view>{{item.video_article.viewed_amount}}</view>
+                            </view>
+                        </view>
+                    </navigator>
+                </view>
+            </block>
+        </view>
+        <view class="wf_right">
+            <block wx:for="{{wfdata_right}}" wx:key="key">
+                <view class="wf-item wf-type-1" wx:if="{{item.type=='1'}}">
+                    <navigator class="wf-itemw" url="/pages/content/content?id={{item.recipe.id}}">
+                        <view class="imgw" style="background-image:url({{item.recipe.img}});padding-top:{{100/item.wh_ratio}}%">
+                            <view class="vicon"></view>
+                        </view>
+                        <view class="infow">
+                            <view class="title">{{item.recipe.title}}</view>
+                            <view class="yyw">
+                                <view class="t">养</view>
+                                <view class="des">低脂低糖菜，越吃越享瘦 </view>
+                            </view>
+                            <view class="userw">
+                                <view class="avatar">
+                                    <view class="avatarw">
+                                        <image class="img" src="{{item.recipe.author.avatar_url}}"></image>
+                                    </view>
+                                    <view class="n">{{item.recipe.author.nickname}}</view>
+                                </view>
+                                <view class="view">
+                                    <view class="i"></view>{{item.recipe.viewed_amount}}</view>
+                            </view>
+                        </view>
+                    </navigator>
+                </view>
+                <view class="wf-item wf-type-7" wx:if="{{item.type=='7'}}">
+                    <navigator class="wf-itemw" url="/pages/content/content?id={{item.video_recipe.id}}">
+                        <view class="imgw" style="background-image:url({{item.video_recipe.img}});padding-top:{{100/item.wh_ratio}}%">
+                            <view class="vicon"></view>
+                        </view>
+                        <view class="infow">
+                            <view class="title">{{item.video_recipe.title}}</view>
+                            <view class="yyw">
+                                <view class="t">养</view>
+                                <view class="des">低脂低糖菜，越吃越享瘦越吃越享瘦越吃越享瘦越吃越享瘦 </view>
+                            </view>
+                            <view class="userw">
+                                <view class="avatar">
+                                    <view class="avatarw">
+                                        <image class="img" src="{{item.video_recipe.author.avatar_url}}"></image>
+                                    </view>
+                                    <view class="n">{{item.video_recipe.author.nickname}}</view>
+                                </view>
+                                <view class="view">
+                                    <view class="i"></view>{{item.video_recipe.viewed_amount}}</view>
+                            </view>
+                        </view>
+                    </navigator>
+                </view>
+                <view class="wf-item wf-type-8" wx:if="{{item.type=='8'}}">
+                    <navigator class="wf-itemw" url="/pages/article/article?id={{item.video_article.id}}">
+                        <view class="imgw" style="background-image:url({{item.video_article.img}});padding-top:{{100/item.wh_ratio}}%">
+                            <view class="vicon"></view>
+                        </view>
+                        <view class="infow">
+                            <view class="title">{{item.video_article.title}}</view>
+                            <view class="yyw">
+                                <view class="t">养</view>
+                                <view class="des">低脂低糖菜，越吃越享瘦 </view>
+                            </view>
+                            <view class="userw">
+                                <view class="avatar">
+                                    <view class="avatarw">
+                                        <image class="img" src="{{item.video_article.author.avatar_url}}"></image>
+                                    </view>
+                                    <view class="n">{{item.video_article.author.nickname}}</view>
+                                </view>
+                                <view class="view">
+                                    <view class="i"></view>{{item.video_article.viewed_amount}}</view>
+                            </view>
+                        </view>
+                    </navigator>
+                </view>
+            </block>
+        </view>
+    </view>
+    <view class="bottombar">
+        <image src="{{shareicon}}"></image>
+        <text>分享</text>
+        <button class="share_bottom" openType="share"></button>
+    </view>
+</view>
+<loading hidden="{{requeseDone}}">
+ 加载中...
+</loading>

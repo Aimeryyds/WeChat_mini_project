@@ -1,0 +1,67 @@
+<import src="../../commons/tpl/templateLive.wxml"></import>
+<import src="../../commons/tpl/templateAnchor.wxml"></import>
+<form bindsubmit="submitForm" reportSubmit="true">
+    <view class="search-block {{focusSearch?'focusSearch':''}}">
+        <view class="search-bar retina-border">
+            <form bindsubmit="searchSubmit" class="search-bar-input">
+                <image class="icon" src="/images/search.png"></image>
+                <input bindconfirm="searchSubmit" bindinput="bindInput" bindtap="focusInput" class="input" focus="{{focusSearch}}" placeholder="搜索主播/直播间/频道" type="text" value="{{searchQuery}}"></input>
+                <view bindtap="clearInput" class="close" wx:if="{{hasInput}}">
+                    <image src="/images/ico_close.png"></image>
+                </view>
+            </form>
+            <view class="search-button">
+                <button bindgetuserinfo="search" class="search-btn" formType="submit" openType="getUserInfo" wx:if="{{hasInput}}">搜索</button>
+                <button bindtap="goBack" class="search-btn" wx:if="{{!hasInput}}">取消</button>
+            </view>
+        </view>
+    </view>
+    <view class="page-search {{focusSearch?'focusSearch':''}}">
+        <scroll-view scrollY class="search-main" scrollTop="{{scrollTop}}" style="padding-bottom: {{statusBar.height}}px">
+            <view class="search-history" wx:if="{{!isSearch}}">
+                <view class="search-history-list" wx:if="{{searchHistory.length>0}}">
+                    <view class="head">
+                        搜索历史
+                        <view bindtap="cleanSearchStorage" class="del">
+                            <image src="/images/nav_btn_delete.png"></image>
+                        </view>
+                    </view>
+                    <view class="list">
+                        <view bindtap="historySearch" class="item" data-data="{{item}}" wx:for="{{searchHistory}}" wx:key="unique">{{item}}</view>
+                    </view>
+                </view>
+                <view class="search-recommend">
+                    <view class="head">大家都在看</view>
+                    <template is="searchRecomend-tpl" data="{{...roomList}}"></template>
+                </view>
+            </view>
+            <view class="search-result" wx:if="{{isSearch}}">
+                <view class="anchor-block search-result-room" wx:if="{{anchors.list.length>0}}">
+                    <view bindtap="goToAnchor" class="head">
+                        <text>主播</text>
+                        <image class="more" src="/images/arrow_right_icon.png" wx:if="{{moreAchors}}"></image>
+                    </view>
+                    <template is="searchAnchor-tpl" data="{{...anchors}}"></template>
+                </view>
+                <view class="search-result-gap" wx:if="{{anchors.list.length>0&&channels.list.length>0}}"></view>
+                <view class="channels-block search-result-room" wx:if="{{channels.list.length>0}}">
+                    <view bindtap="gotToChannels" class="head">
+                        <text>直播间</text>
+                        <image class="more" src="/images/arrow_right_icon.png" wx:if="{{moreChannels}}"></image>
+                    </view>
+                    <template is="searchLive-tpl" data="{{...channels}}"></template>
+                </view>
+                <view wx:if="{{anchors.list.length<=0&&channels.list.length<=0}}">
+                    <view class="search-empty">
+                        “
+                        <text class="text-yellow">{{searchQuery}}</text>”的主播正在路上
+                    </view>
+                    <view class="search-recommend">
+                        <view class="head">大家都在看</view>
+                        <template is="searchRecomend-tpl" data="{{...roomList}}"></template>
+                    </view>
+                </view>
+            </view>
+        </scroll-view>
+    </view>
+</form>

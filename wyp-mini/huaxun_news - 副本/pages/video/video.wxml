@@ -1,0 +1,150 @@
+<view class="section" hidden="{{isShowQnaire}}">
+    <video autoplay="{{autoplay}}" bindended="endVideo" bindfullscreenchange="screenChange" bindpause="pauseVideo" bindplay="playVideo" bindtimeupdate="timeupdate" class="myVideo" id="myVideo" src="{{videoSrc}}" style="height: {{videoHeight}}px;"></video>
+    <view class="swiper-title">
+        <view bindtap="swiperDemo1" class="swiper-demo">
+            <view class="{{current==1?'choose':''}}">文档</view>
+            <view class="swiper-in" hidden="{{current!=1}}"></view>
+        </view>
+        <view bindtap="swiperDemo2" class="swiper-demo">
+            <view class="{{current==2?'choose':''}}">章节</view>
+            <view class="swiper-in" hidden="{{current!=2}}"></view>
+        </view>
+        <view bindtap="swiperDemo3" class="swiper-demo">
+            <view class="{{current==3?'choose':''}}">聊天记录</view>
+            <view class="swiper-in" hidden="{{current!=3}}"></view>
+        </view>
+        <view bindtap="swiperDemo4" class="swiper-demo">
+            <view class="{{current==4?'choose':''}}">问答记录</view>
+            <view class="swiper-in" hidden="{{current!=4}}"></view>
+        </view>
+    </view>
+    <view class="swiper-main" style="height:{{swiperHeight}}px;line-height:{{swiperHeight}}px">
+        <view class="swiper-item" hidden="{{current!=1}}">
+            <canvas canvasId="drawCanvas" class="canvas" hidden="{{!condition||isShowQnaire||isFullScreen}}" style="height: {{docHeight}}px;overflow:hidden"></canvas>
+            <view class="noppt" hidden="{{condition}}">
+                <view class="noppt-img">
+                    <image class="noppt-img2" src="../../assets/images/noPpt.png"></image>
+                </view>
+                <text class="noppt-text">没有文档，去别处看看</text>
+            </view>
+            <image class="documentPpt" hidden="{{!condition}}" src="{{documentUrl}}" style="height:{{docHeight}}px;"></image>
+        </view>
+        <view class="swiper-item" hidden="{{current!=2}}">
+            <vodChapter lheight="{{swiperHeight}}"></vodChapter>
+        </view>
+        <view class="swiper-item" hidden="{{current!=3}}">
+            <vodChat id="chat" lheight="{{swiperHeight}}"></vodChat>
+        </view>
+        <view class="swiper-item" hidden="{{current!=4}}">
+            <vodQa lheight="{{swiperHeight}}"></vodQa>
+        </view>
+    </view>
+</view>
+<view class="qnaire" hidden="{{!isShowQnaire}}" style="z-index: -{{index}}" wx:for="{{voteAll}}" wx:for-item="itemOut">
+    <view class="naire-title">
+        <text class="naireSubject">{{itemOut.subject}}</text>
+        <image bindtap="closeNaire" class="naire-close" data-id="{{itemOut.id}}" src="../../assets/icons/closeNaire.png" wx:if="{{itemOut.skip=='true'||itemOut.type=='publish'||itemOut.showAns}}"></image>
+    </view>
+    <view class="naire-point" wx:if="{{itemOut.type=='question'&&itemOut.skip!='true'}}">此问卷不能跳过哦，请努力完成吧</view>
+    <view wx:if="{{itemOut.type=='question'&&!itemOut.showAns}}" wx:for="{{itemOut.questions}}">
+        <view class="naire-single" wx:if="{{item.type=='single'}}">
+            <view class="single-title">{{index+1}}.【单选】{{item.subject}}</view>
+            <view class="single-item" wx:for="{{item.items}}" wx:for-index="sort" wx:for-item="itemIn">
+                <image bindtap="singleTap" class="single-choose" data-id="{{itemIn.id}}" data-qaid="{{item.id}}" src="{{itemIn.selected?voteSingleSel2:voteSingleSel}}"></image>
+                <view class="single-text">{{voteList[sort]}}.{{itemIn.option}}</view>
+            </view>
+        </view>
+        <view class="naire-multiple" wx:if="{{item.type=='multi'}}">
+            <view class="single-title">{{index+1}}.【多选】{{item.subject}}</view>
+            <view class="single-item" wx:for="{{item.items}}" wx:for-index="sort" wx:for-item="itemIn">
+                <image bindtap="multTap" class="single-choose" data-id="{{itemIn.id}}" src="{{itemIn.selected?voteMultSel2:voteMultSel}}"></image>
+                <view class="single-text">{{voteList[sort]}}.{{itemIn.option}}</view>
+            </view>
+        </view>
+        <view class="naire-area" wx:if="{{item.type=='text'}}">
+            <view class="single-title">{{index+1}}.【问答】{{item.subject}}</view>
+            <textarea autoHeight="true" bindinput="textInput" class="qnArea" cursorSpacing="12" data-id="{{item.id}}" maxlength="-1" showConfirmBar="{{showBar}}"></textarea>
+        </view>
+    </view>
+    <view wx:if="{{itemOut.type=='question'&&itemOut.showAns}}" wx:for="{{itemOut.questions}}">
+        <view class="naire-single" wx:if="{{item.type=='single'}}">
+            <view class="single-title">{{index+1}}.【单选】{{item.subject}}</view>
+            <view class="single-item" wx:for="{{item.items}}" wx:for-index="sort" wx:for-item="itemIn">
+                <text class="showTrue {{itemIn.correct=='true'?'showTrueBg':''}}" style="float: left;">
+                    <text wx:if="{{itemIn.correct=='true'}}">正确</text>
+                </text>
+                <image class="single-choose" src="{{itemIn.selected?voteSingleSel3:voteSingleSel}}" style="margin-left: 10rpx;"></image>
+                <view class="single-text" style="padding-left: 120rpx;">{{voteList[sort]}}.{{itemIn.option}}</view>
+            </view>
+        </view>
+        <view class="naire-multiple" wx:if="{{item.type=='multi'}}">
+            <view class="single-title">{{index+1}}.【多选】{{item.subject}}</view>
+            <view class="single-item" wx:for="{{item.items}}" wx:for-index="sort" wx:for-item="itemIn">
+                <text class="showTrue {{itemIn.correct=='true'?'showTrueBg':''}}" style="float: left;">
+                    <text wx:if="{{itemIn.correct=='true'}}">正确</text>
+                </text>
+                <image class="single-choose" src="{{itemIn.selected?voteMultSel3:voteMultSel}}" style="margin-left: 10rpx;"></image>
+                <view class="single-text" style="padding-left: 120rpx;">{{voteList[sort]}}.{{itemIn.option}}</view>
+            </view>
+        </view>
+        <view class="naire-area" wx:if="{{item.type=='text'}}">
+            <view class="single-title">{{index+1}}.【问答】{{item.subject}}</view>
+            <textarea autoHeight="true" class="qnArea" disabled="true" maxlength="-1" showConfirmBar="{{showBar}}" value="{{item.answer}}"></textarea>
+        </view>
+    </view>
+    <view wx:if="{{itemOut.type=='publish'}}" wx:for="{{itemOut.questions}}">
+        <view class="naire-single" wx:if="{{item.type=='single'}}">
+            <view class="single-title">{{index+1}}.【单选】{{item.subject}}</view>
+            <view class="single-item" wx:for="{{item.items}}" wx:for-index="sort" wx:for-item="itemIn">
+                <view class="result-text">
+                    <text class="showTrue {{itemIn.correct=='true'?'showTrueBg':''}}" wx:if="{{itemOut.showTrue}}">
+                        <text wx:if="{{itemIn.correct=='true'}}">正确</text>
+                    </text>
+                    <text class="resultNum">{{voteList[sort]}}</text>
+                    <view class="resultPro">
+                        <view class="proOut">
+                            <view class="proIn" style="width: {{itemIn.total/item.total*100}}%;"></view>
+                        </view>
+                    </view>
+                    <text class="resultTotal">{{itemIn.total}}人</text>
+                </view>
+            </view>
+        </view>
+        <view class="naire-multiple" wx:if="{{item.type=='multi'}}">
+            <view class="single-title">{{index+1}}.【多选】{{item.subject}}</view>
+            <view class="single-item" wx:for="{{item.items}}" wx:for-index="sort" wx:for-item="itemIn">
+                <view class="result-text">
+                    <text class="showTrue {{itemIn.correct=='true'?'showTrueBg':''}}" wx:if="{{itemOut.showTrue}}">
+                        <text wx:if="{{itemIn.correct=='true'}}">正确</text>
+                    </text>
+                    <text class="resultNum">{{voteList[sort]}}</text>
+                    <view class="resultPro">
+                        <view class="proOut">
+                            <view class="proIn" style="width: {{itemIn.total/item.total*100}}%;"></view>
+                        </view>
+                    </view>
+                    <text class="resultTotal">{{itemIn.total}}人</text>
+                </view>
+            </view>
+        </view>
+        <view class="naire-area" wx:if="{{item.type=='text'}}">
+            <view class="single-title">{{index+1}}.【问答】{{item.subject}}</view>
+            <view class="areaResult">参加人数：{{item.total}}人</view>
+        </view>
+    </view>
+    <view style="height: 120rpx;"></view>
+    <view class="naire-submit" wx:if="{{itemOut.type=='question'&&!itemOut.showAns}}">
+        <view bindtap="subVote" class="submit-button" data-id="{{itemOut.id}}">提交</view>
+    </view>
+</view>
+<view class="ads-box" style="{{adsInfo.adsBoxStyle}}" wx:if="{{adsInfo.show}}">
+    <view class="ads-inner" style="{{adsInfo.adsInnerStyle}}">
+        <button class="ads-contact-btn" lang="zh_CN" openType="contact" wx:if="{{adsInfo.type=='contact'}}"></button>
+        <button bindgetphonenumber="getPhoneNumber" class="ads-contact-btn" lang="zh_CN" openType="getPhoneNumber" wx:if="{{adsInfo.type=='auth-phone'}}"></button>
+        <button bindgetuserinfo="getUserInfo" class="ads-contact-btn" lang="zh_CN" openType="getUserInfo" wx:if="{{adsInfo.type=='auth-userinfo'}}"></button>
+        <view bindtap="closeAdsClick" class="ads-close" data-ads="{{adsInfo}}" wx:if="{{adsInfo.showClose}}">
+            <view class="ads-close-icon"></view>
+        </view>
+        <image bindtap="openAds" data-ads="{{adsInfo}}" mode="{{adsInfo.imageMode}}" src="{{adsInfo.imageUrl}}" style="{{adsInfo.adsImageStyle}}"></image>
+    </view>
+</view>

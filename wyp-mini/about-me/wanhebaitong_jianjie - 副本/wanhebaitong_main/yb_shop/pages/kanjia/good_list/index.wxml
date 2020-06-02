@@ -1,0 +1,43 @@
+<block wx:if="{{show}}">
+    <view class="swiper-tab">
+        <view class="swiper-tab-list" style="width:50%;border-right:1px solid #f2f2f2;box-sizing:border-box;">
+            <picker bindchange="status" range="{{status}}" value="{{kj_type-1}}">
+             {{kj_type==1?'正在进行':kj_type==2?'即将开始':'全部活动'}}<view class="down_arrow"></view>
+            </picker>
+        </view>
+        <view class="swiper-tab-list" style="width:50%;">
+            <picker bindchange="cate" range="{{cate_info}}" rangeKey="class_name" value="{{cate_index}}">
+            {{cate_info[cate_index].class_name}}<view class="down_arrow"></view>
+            </picker>
+        </view>
+    </view>
+    <navigator bindtap="url" data-goods_type="{{item.goods_type}}" data-id="{{item.id}}" hoverClass="none" wx:for="{{list}}">
+        <view class="index_info_li">
+            <view class="index_info_pic" style="background:url({{item.pic.img_cover}}) no-repeat center center;background-size: cover;">
+                <view class="index_info_count">
+                    <text>剩余{{item.bargain_inventory}}份</text>
+                </view>
+            </view>
+            <view class="index_info_tit">{{item.bargain_name}}</view>
+            <view class="index_info_uface clear" wx:if="{{item.user.length>0}}">
+                <view class="image" style="background:url({{val.user_headimg}}) no-repeat center center;background-size: cover;" wx:if="{{index<6}}" wx:for="{{item.user}}" wx:for-item="val"></view>
+                <view class="image" style="background:url(http://ddfwz.sssvip.net/asmce/kanjia/index_more.jpg) no-repeat center center;background-size: cover;" wx:if="{{item.user_num>5}}"></view>
+                <view class="user_no">{{item.user_num}}人正在参加</view>
+            </view>
+            <view class="index_price clear">
+                <view class="price_left">
+                    <view class="price02">￥<text>{{item.lowest_price}}</text>
+                        <text class="price01"> 原价￥{{item.original_price}}</text>
+                    </view>
+                </view>
+                <view class="price_right">
+                    <view class="buy_btn{{item.goods_type==1?'_none':''}}">{{item.goods_type==1?'即将开始':'去砍价'}}</view>
+                </view>
+                <view class="clear"></view>
+            </view>
+        </view>
+    </navigator>
+    <view class="fui-loading empty" wx:if="{{loaded}}">
+        <view class="text">没有更多了</view>
+    </view>
+</block>

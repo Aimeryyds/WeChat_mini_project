@@ -1,0 +1,21 @@
+<view class="container" wx:if="{{isShow}}">
+    <map bindmarkertap="markertap" bindregionchange="regionchange" id="map" includePoints="{{includePoints}}" markers="{{markers}}" style="width: 100%; height: {{height}}vh;"></map>
+    <view class="brandmap--store__detail" style="height: {{100-height}}vh;  align-items: center;" wx:if="{{height-100}}">
+        <view style="flex:1;">
+            <view style="margin-bottom:3rpx; font-size:28rpx;color: #111;">{{store.brandName}}({{store.title}})</view>
+            <view style="display: flex; font-size:24rpx">
+                <view>营业时间: </view>
+                <view style="flex: 1;">
+                    <view style="padding-right: 10rpx;" wx:for="{{store.openTimeJson}}" wx:for-item="time">{{time.time}}</view>
+                </view>
+            </view>
+            <view style="display: flex; align-items: center;font-size:24rpx">
+        门店电话:{{store.tel}} <image bindtap="makephone" src="http://imgcdnali.wfenxiao.com.cn/xcx/c/icons/blue-phone.png" style="width:32rpx;height:32rpx;margin-left: 32rpx;"></image>
+            </view>
+            <view style="font-size:24rpx">门店地址:{{store.detailAddress}}</view>
+        </view>
+        <view bindtap="createmap" style="padding-left:40rpx;font-size:24rpx">
+            <image src="http://imgcdnali.wfenxiao.com.cn/xcx/c/icons/ic_nav_home_footprint.png" style="width:76rpx;height:76rpx;"></image>
+        </view>
+    </view>
+</view>

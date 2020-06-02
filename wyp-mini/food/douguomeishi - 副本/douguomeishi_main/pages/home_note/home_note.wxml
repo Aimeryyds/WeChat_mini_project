@@ -1,0 +1,38 @@
+<import src="../common/footer.wxml"></import>
+<view class="page">
+    <view class="fall-container">
+        <view class="fall-left">
+            <view bindtap="noteItemPressed" class="note-item" data-note-id="{{item.id}}" wx:for="{{leftList}}" wx:key="{{item.id}}">
+                <view class="note_image_container">
+                    <image class="note_video_icon" src="../../images/icon_video.png" wx:if="{{item.media_type==1}}"></image>
+                    <image class="note-image" mode="aspectFill" src="{{item.image_u}}" style="width:{{item.image_w}}rpx;height:{{item.image_h}}rpx;"></image>
+                </view>
+                <view class="note-title">{{item.title}}</view>
+                <view class="note-author">
+                    <image mode="aspectFill" src="{{item.author.p}}"></image>
+                    <view>{{item.author.n}}</view>
+                </view>
+            </view>
+        </view>
+        <view class="fall-right">
+            <view bindtap="noteItemPressed" class="note-item" data-note-id="{{item.id}}" wx:for="{{rightList}}" wx:key="{{item.id}}">
+                <view class="note_image_container">
+                    <image class="note_video_icon" src="../../images/icon_video.png" wx:if="{{item.media_type==1}}"></image>
+                    <image class="note-image" mode="aspectFill" src="{{item.image_u}}" style="width:{{item.image_w}}rpx;height:{{item.image_h}}rpx;"></image>
+                </view>
+                <view class="note-title">{{item.title}}</view>
+                <view class="note-author">
+                    <image mode="aspectFill" src="{{item.author.p}}"></image>
+                    <view>{{item.author.n}}</view>
+                </view>
+            </view>
+        </view>
+    </view>
+    <template is="note-footer" data="{{footerState:footerState}}"></template>
+    <view class="bottom_button_container" wx:if="{{bottomButtonShow}}">
+        <button bindgetuserinfo="uploadNoteClick" class="upload_note_container" openType="getUserInfo">
+            <image class="upload_note_icon" src="../../images/note_publish.png"></image>
+            <text>写笔记</text>
+        </button>
+    </view>
+</view>

@@ -1,0 +1,43 @@
+<template name="score">
+    <view class="score-panel" wx:if="{{type==1}}">
+        <view class="score-item">
+            <text>面值:</text>
+            <view class="score-item__cont">{{coupon.value}}元</view>
+        </view>
+        <view class="score-item">
+            <text>使用范围:</text>
+            <view class="score-item__cont" wx:if="{{coupon.rangeOfUse==1}}">全平台</view>
+            <view bindtap="toggleStoreDialog" class="score-item__cont" style="color:#f22222" wx:else>查看全部门店></view>
+        </view>
+        <view class="score-item">
+            <text>使用门槛:</text>
+            <view class="score-item__cont" wx:if="{{coupon.useThreshold==0}}">无限制</view>
+            <view class="score-item__cont" wx:else>满{{coupon.useThreshold}}元可使用</view>
+        </view>
+        <view class="score-item">
+            <text>使用时间:</text>
+            <view class="score-item__cont" wx:if="{{coupon.termOfValidity}}">兑换后{{coupon.termOfValidity}}天有效</view>
+            <view class="score-item__cont" wx:else>{{coupon.useTime}}~{{coupon.useEndTime}}</view>
+        </view>
+    </view>
+    <view class="score-panel" wx:else>
+        <view class="score-item" wx:if="{{card.brandGoodsId==0}}">
+            <text>面值:</text>
+            <view class="score-item__cont">{{card.cardValue}}元</view>
+        </view>
+        <view class="score-item" wx:else>
+            <text>兑换商品:</text>
+            <view class="score-item__cont">{{card.brandGoodName}}</view>
+        </view>
+        <view class="score-item">
+            <text>使用范围:</text>
+            <view class="score-item__cont" wx:if="{{card.platformRange==1}}">全平台</view>
+            <view bindtap="toggleStoreDialog" class="score-item__cont" style="color:#f22222" wx:else>查看全部门店></view>
+        </view>
+        <view class="score-item">
+            <text>使用时间:</text>
+            <view class="score-item__cont" wx:if="{{card.forever==1}}">无限期</view>
+            <view class="score-item__cont" wx:else>{{card.validNumMonth}}个月有效</view>
+        </view>
+    </view>
+</template>

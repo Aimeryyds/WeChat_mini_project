@@ -1,0 +1,28 @@
+<form bindsubmit="formSubmit" class="test">
+    <view class="wrap">
+        <view class="line">
+            <view>收件人</view>
+            <input class="res_input" name="name" placeholder="收件人" type="text"></input>
+        </view>
+        <view class="line">
+            <view>联系电话</view>
+            <input class="res_input" name="phone" placeholder="联系电话" type="text"></input>
+        </view>
+        <view class="line">
+            <view>所在地区</view>
+            <input class="res_input" name="addr" placeholder="所在地区" type="text"></input>
+        </view>
+        <view class="line">
+            <view>所在街道</view>
+            <input class="res_input" name="street" placeholder="所在街道" type="text"></input>
+        </view>
+        <view class="line" style="border-bottom: none;">
+            <view>详细地址</view>
+            <input class="res_input" name="daddr" placeholder="街道，楼牌号等" type="text"></input>
+        </view>
+    </view>
+    <label>
+        <view class="submit">保存地址</view>
+        <button hidden class="res_btn" formType="submit" style="background-color: {{data.style.background}};" type="primary">确认提交</button>
+    </label>
+</form>

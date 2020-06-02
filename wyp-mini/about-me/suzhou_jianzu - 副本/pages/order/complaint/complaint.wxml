@@ -1,0 +1,23 @@
+<view class="toptitle">
+您好，欢迎光临！请问有什么可以帮到您？
+</view>
+<view bindtap="everyComp" class="toptitle">
+可以看看大家的问题喔
+</view>
+<form bindsubmit="bindFormSubmit">
+    <textarea bindinput="bindinputCont" class="reviewText" name="talkContent" placeholder="请输入您的问题" value="{{areaCont}}"></textarea>
+    <button class="reviewButton" disabled="{{!areaCont}}" formType="submit" type="primary"> 提交 </button>
+</form>
+<view bindtap="joinQues" class="talkCont" data-index="{{index}}" wx:for="{{myQuesAll}}">
+    <view class="rightCont rightContBottom">
+        <view class="rightContTop">{{item.nickname}}</view>
+        <text class="special">{{item.create_time}}</text>
+        <view class="talkDetial talkDetialCont">
+			{{item.question}}
+			</view>
+    </view>
+    <view class="talcImg">
+        <image src="{{item.avatar}}"></image>
+    </view>
+    <view class="clear"></view>
+</view>

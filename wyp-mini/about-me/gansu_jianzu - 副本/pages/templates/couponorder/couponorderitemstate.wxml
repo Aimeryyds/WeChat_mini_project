@@ -1,0 +1,6 @@
+<template name="coupon_order-item-state">
+    <view class="coupon_order-state-row-box">
+        <view class="coupon_order-state_text">订单编号：{{item.orderNo}}</view>
+        <view class="coupon_order-state_text {{item.orderStatus==10?'state-will-pay':item.orderStatus==20?'state-paid':item.orderStatus==30?'state-paid':'state-done'}}" data-orderid="{{item.id}}">{{item.orderStatus==10?'待支付':item.orderStatus==20?'待发货':item.orderStatus==30?'已发货':'已完成'}}</view>
+    </view>
+</template>

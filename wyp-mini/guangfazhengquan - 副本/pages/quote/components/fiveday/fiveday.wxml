@@ -1,0 +1,24 @@
+<view class="v-fiveday">
+    <view class="content-t">
+        <view>均价:{{fiveday.data.hint.avg_d}}</view>
+        <view class="ml10" style="color:{{fiveday.data.hint.color}}">
+      最新:{{fiveday.data.hint.now_d}}  {{fiveday.data.hint.change_d}}  {{fiveday.data.hint.rise_d}}
+    </view>
+    </view>
+    <view class="content-b" style="height: {{fiveday.data.chart.style.height}}px;">
+        <view capture-bind:touchend="ontouchend" capture-bind:touchmove="ontouchmove" capture-bind:touchstart="ontouchstart" class="chart">
+            <canvas canvasId="fiveDayDataCvs" class="data-cvs {{isHiddenCanvas?'hidden':''}}"></canvas>
+            <canvas canvasId="fiveDayHintCvs" class="hint-cvs {{isHiddenCanvas||!fiveday.data.chart.lining?'hidden':''}}"></canvas>
+            <canvas canvasId="fiveDayTouchCvs" class="touch-cvs {{isHiddenCanvas||!fiveday.data.chart.lining?'hidden':''}}"></canvas>
+            <view style="{{item.style}}" wx:for="{{fiveday.data.labels.statics}}" wx:key="id">
+        {{item.text}}
+      </view>
+            <view style="{{item.style}}" wx:for="{{fiveday.data.labels.dynamics}}" wx:key="id">
+        {{item.text}}
+      </view>
+            <view class="loading c-fs-10 c-fc-gray c-right-angle-rect" wx:if="{{fiveday.data.chart.loading}}">
+                <view class="fiveDayHint">加载中</view>
+            </view>
+        </view>
+    </view>
+</view>

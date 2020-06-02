@@ -1,0 +1,17 @@
+<view class="wp_content form_selector_content" wx:if="{{param.skin=='default'}}">
+    <picker bindchange="pickerChange" name="{{layerid}}" range="{{options}}" style="{{inner_style}}margin-right:{{param.required?'20rpx':0}};" value="{{_value_}}">
+        <view class="picker" style="{{picker_style}}">{{options[value]?options[value]:param.title}}</view>
+    </picker>
+    <text class="required" wx:if="{{param.required}}">*</text>
+    <icon class="warn" size="20" style="top:calc(50% - 20rpx);right:4rpx;" type="warn" wx:if="{{haswarn}}"></icon>
+</view>
+<view class="wp_content form_selector_content" wx:else>
+    <label class="labbox">
+        <text class="labtext" style="{{label_style}};border:none;">{{param.labtext}}</text>
+        <picker bindchange="pickerChange" name="{{layerid}}" range="{{options}}" style="{{inner_style}}margin-right:{{param.required?'20rpx':0}};" value="{{_value_}}">
+            <view class="picker" style="{{picker_style}}">{{options[value]?options[value]:param.title}}</view>
+        </picker>
+    </label>
+    <text class="required" wx:if="{{param.required}}">*</text>
+    <icon class="warn" size="20" style="top:calc(50% - 20rpx);right:4rpx;" type="warn" wx:if="{{haswarn}}"></icon>
+</view>

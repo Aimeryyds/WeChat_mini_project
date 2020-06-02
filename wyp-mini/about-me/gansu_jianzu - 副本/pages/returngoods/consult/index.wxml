@@ -1,0 +1,88 @@
+<view class="container">
+    <scroll-view enableBackToTop bindscrolltolower="lower" scrollY="true" style="width:100%;height:100vh">
+        <view class="consult-history">
+            <view class="consult-history__list" wx:for="{{consultData}}" wx:for-index="dataindex" wx:key="index">
+                <view class="consult-history__info">
+                    <image class="consult-history__img" src="{{item.logType==1?item.avatarUrl:item.logo?item.logo:'http://imgcdnali.wfenxiao.com.cn/xcx/c/icons/brand.png'}}"></image>
+                    <view class="consult-history__cont">
+                        <view class="consult-history__title">{{item.logType==1?item.nickName:item.storeName}}</view>
+                        <view class="consult-history__text">{{item.createdTime}}</view>
+                    </view>
+                </view>
+                <view>{{item.refundStatus==0?'买家主动撤销退款申请':item.refundStatusName}}</view>
+                <view wx:if="{{item.logType==1}}">
+                    <view class="consult-history__note" wx:if="{{item.refundStatus==10||item.refundStatus==30}}">
+                        <view class="consult-history__note-item" wx:if="{{item.refundType}}">
+                            <text>退货类型：</text>
+                            <view class="consult-history__note-cont">{{item.refundType==3?'退货退款':'仅退款'}}</view>
+                        </view>
+                        <view class="consult-history__note-item" wx:if="{{item.expressStatus}}">
+                            <text>货物状态：</text>
+                            <view class="consult-history__note-cont">{{item.expressStatus==1?'未收货':'已收货'}}</view>
+                        </view>
+                        <view class="consult-history__note-item" wx:if="{{item.amount}}">
+                            <text>退款金额：</text>
+                            <view class="consult-history__note-cont apply-price">￥{{item.amount}}</view>
+                        </view>
+                        <view class="consult-history__note-item" wx:if="{{item.reason}}">
+                            <text>退款原因：</text>
+                            <view class="consult-history__note-cont">{{item.reason}}</view>
+                        </view>
+                        <view class="consult-history__note-item" style="margin-left:128rpx;" wx:if="{{item.detail}}">
+                            <view class="consult-history__note-cont">{{item.detail}}</view>
+                        </view>
+                        <view class="consult-history__note-item" wx:if="{{item.remark}}">
+                            <text>退款说明：</text>
+                            <view class="consult-history__note-cont">{{item.remark}}</view>
+                        </view>
+                        <view class="consult-history__note-item" wx:if="{{item.proofUrl}}">
+                            <text>图片凭证：</text>
+                            <view class="consult-history__note-img" wx:for="{{item.proofUrl}}">
+                                <image bindtap="onTapPic" data-index="{{dataindex}}" data-link="{{item}}" src="{{item}}"></image>
+                            </view>
+                        </view>
+                    </view>
+                    <view class="consult-history__note" wx:if="{{item.refundStatus==50}}">
+                        <view class="consult-history__note-item" wx:if="{{item.expressComp}}">
+                            <text>物流公司：</text>
+                            <view class="consult-history__note-cont">{{item.expressComp}}</view>
+                        </view>
+                        <view class="consult-history__note-item" wx:if="{{item.expressNo}}">
+                            <text>物流单号：</text>
+                            <view class="consult-history__note-cont">{{item.expressNo}}</view>
+                        </view>
+                        <view class="consult-history__note-item" wx:if="{{item.expressRemark}}">
+                            <text>退款备注：</text>
+                            <view class="consult-history__note-cont">{{item.expressRemark}}</view>
+                        </view>
+                    </view>
+                </view>
+                <view wx:if="{{item.logType==2}}">
+                    <view class="consult-history__note" wx:if="{{item.refundStatus==70}}">
+                        <view class="consult-history__note-item">
+                            <text>退款金额：</text>
+                            <view class="consult-history__note-cont apply-price">￥{{item.amount}}</view>
+                        </view>
+                    </view>
+                    <view class="consult-history__note" wx:if="{{item.refundStatus==40}}">
+                        <view class="consult-history__note-item" wx:if="{{item.consignee}}">
+                            <text>退货地址：</text>
+                            <view class="consult-history__note-cont">{{item.consignee.linkman}}  <text style="margin:0 30rpx;">{{item.consignee.tel}}</text>{{item.consignee.provinceName}}{{item.consignee.cityName}}{{item.consignee.areaName}}{{item.consignee.address}}</view>
+                        </view>
+                        <view class="consult-history__note-item" wx:if="{{item.consignee.remark}}">
+                            <text>备注：</text>
+                            <view class="consult-history__note-cont">{{item.consignee.remark}}</view>
+                        </view>
+                    </view>
+                    <view class="consult-history__note" wx:if="{{item.refundStatus==20}}">
+                        <view class="consult-history__note-item" wx:if="{{item.disagreeReason}}">
+                            <text>拒绝原因：</text>
+                            <view class="consult-history__note-cont">{{item.disagreeReason}}</view>
+                        </view>
+                    </view>
+                </view>
+            </view>
+        </view>
+        <view class="noData" wx:if="{{consultData.length==0}}">暂无数据</view>
+    </scroll-view>
+</view>

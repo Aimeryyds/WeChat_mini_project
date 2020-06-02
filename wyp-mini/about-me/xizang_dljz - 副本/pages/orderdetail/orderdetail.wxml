@@ -1,0 +1,208 @@
+<view class="container">
+    <view class="order-status" wx:if="{{orders.status==1}}">
+        <image src="../../images/orders/icon_pray.png"></image>
+        <view>
+            <text>等待买家付款</text>
+            <text class="time-row">{{clock.min}}分{{clock.sec}}秒后自动关闭</text>
+        </view>
+    </view>
+    <view class="order-status" wx:elif="{{orders.status==2}}">
+        <image src="../../images/orders/icon_daifahuo.png"></image>
+        <text>等待卖家发货</text>
+    </view>
+    <view class="order-status" wx:elif="{{orders.status==3}}">
+        <image src="../../images/orders/icon_daishouhuo.png"></image>
+        <text>卖家已发货</text>
+    </view>
+    <view class="order-status" wx:elif="{{orders.status==4}}">
+        <image src="../../images/orders/icon_complete.png"></image>
+        <text>交易已完成</text>
+    </view>
+    <view class="order-status" wx:elif="{{orders.status==6}}">
+        <image src="../../images/orders/icon_close.png"></image>
+        <text>交易已关闭</text>
+    </view>
+    <view class="order-status" wx:elif="{{orders.status==7}}">
+        <image src="../../images/orders/icon_close.png"></image>
+        <text>订单已退款</text>
+    </view>
+    <view class="logistics-info" wx:if="{{orders.deliveryWay!=null}}">
+        <view class="info-wrap">
+            <view>配送方式: {{orders.deliveryWay}}</view>
+            <view>快递单号: {{orders.deliveryNo}}</view>
+        </view>
+        <view class="order-address info-nav">
+            <image src="../../images/pcenter/icon_daishouhuo2.png"></image>
+            <navigator class="right-wrap" hoverClass="hover" url="../logistics/logistics?orderNo={{orders.orderNo}}" wx:if="{{orders.deliveryInfo&&orders.deliveryInfo.list}}">
+                <view class="user-info">
+          {{orders.deliveryInfo.list[0].status}}
+        </view>
+                <view class="address-info">
+          {{orders.deliveryInfo.list[0].time}}
+        </view>
+                <image class="arrow" src="../../images/icon_next.png"></image>
+            </navigator>
+            <view class="no-title" wx:else>
+        暂无物流信息
+      </view>
+        </view>
+    </view>
+    <view class="order-address">
+        <image src="../../images/orders/icon_adress.png"></image>
+        <view class="right-wrap">
+            <view class="user-info">
+                <text>
+                    <text class="group-label" wx:if="{{orders.deliveryType==1}}">团长</text> {{orders.username}}</text>
+                <text class="phone">{{orders.phone}}</text>
+            </view>
+            <view class="address-info">
+        {{orders.address}}
+      </view>
+        </view>
+    </view>
+    <view class="order-address">
+        <image src="../../images/orders/icon_message.png"></image>
+        <view class="right-wrap">
+            <view class="user-info">
+                <text>买家留言</text>
+            </view>
+            <view class="address-info">
+        {{orders.message?orders.message:'无'}}
+      </view>
+        </view>
+    </view>
+    <view class="order-cell">
+        <view class="cell__header">
+            <image class="cell-icon" src="../../images/orders/icon_store.png"></image>
+            <text>{{shop.name}}</text>
+            <image class="right-arrow" src="../../images/icon_next.png"></image>
+        </view>
+        <view class="cell__content">
+            <view bindtap="clickShopItem" class="content-item" data-barurl="../bargain/bargain-detail/bargain-detail?id={{orders.bargainId}}" data-id="{{orders.bargainId}}" data-url="../shopdetail/shopdetail?goodsSn={{item.goodsSn}}" openType="redirect" wx:for="{{orders.itemList}}">
+                <view class="item-image-wrap">
+                    <image class="item-image" src="{{item.pic}}"></image>
+                    <view catchtap="go2CommentDetail" class="tag-label" id="{{item.commentId}}" wx:if="{{item.commentId}}">我的评价</view>
+                </view>
+                <view class="item-right">
+                    <view class="item-row">
+                        <text class="item-title">{{item.name}}</text>
+                        <text class="item-price">¥ {{item.amount}}</text>
+                    </view>
+                    <view class="item-row">
+                        <view class="standards">{{item.attrsStr}}</view>
+                        <text class="number">x {{item.number}}</text>
+                    </view>
+                </view>
+            </view>
+        </view>
+        <view class="cell__footer">
+            <view class="footer__row">
+        商品总价: <text class="price-wrap">¥ <text class="price">{{orders.totalPrice}}</text>
+                </text>
+            </view>
+            <view class="footer__row">
+        运费: <text class="price-wrap">+ ¥ <text class="price">{{orders.deliveryFee}}</text>
+                </text>
+            </view>
+            <view class="footer__row" wx:if="{{orders.couponPrice>0}}">
+        优惠: <text class="price-wrap">- ¥ <text class="price">{{orders.couponPrice}}</text>
+                </text>
+            </view>
+            <view class="footer__row" wx:if="{{orders.rebatePrice>0}}">
+        活动满减: <text class="price-wrap">- ¥ <text class="price">{{orders.rebatePrice}}</text>
+                </text>
+            </view>
+            <view class="footer__row">
+        合计: <text class="price-wrap">¥ <text class="price">{{orders.price}}</text>
+                </text>
+            </view>
+        </view>
+    </view>
+    <view class="order-info">
+        <view class="info-row">
+            <view class="left">
+                <text class="label">订单编号: </text>
+                <text>{{orders.orderNo}}</text>
+            </view>
+        </view>
+        <view class="info-row">
+            <view class="left">
+                <text class="label">{{orders.lotteryId?'领取时间':'下单时间'}}: </text>
+                <text>{{orders.orderTime}}</text>
+            </view>
+        </view>
+        <block wx:if="{{orders.status<6}}">
+            <block wx:if="{{orders.lotteryId==null}}">
+                <view class="info-row" wx:if="{{orders.status>1}}">
+                    <view class="left">
+                        <text class="label">付款时间: </text>
+                        <text>{{orders.payTime}}</text>
+                    </view>
+                </view>
+                <view class="info-row" wx:if="{{orders.status>1}}">
+                    <view class="left">
+                        <text class="label">订单流水: </text>
+                        <text>{{orders.payNo}}</text>
+                    </view>
+                </view>
+            </block>
+            <block wx:if="{{orders.status>2}}">
+                <view class="info-row">
+                    <view class="left">
+                        <text class="label">发货时间: </text>
+                        <text>{{orders.deliveryTime}}</text>
+                    </view>
+                </view>
+                <view class="info-row">
+                    <view class="left">
+                        <text class="label">快递公司: </text>
+                        <text>{{orders.deliveryWay}}</text>
+                    </view>
+                </view>
+                <view class="info-row">
+                    <view class="left">
+                        <text class="label">快递单号: </text>
+                        <text>{{orders.deliveryNo}}</text>
+                    </view>
+                </view>
+            </block>
+            <view class="info-row" wx:if="{{orders.status>3}}">
+                <view class="left">
+                    <text class="label">完成时间: </text>
+                    <text>{{orders.finishTime}}</text>
+                </view>
+            </view>
+        </block>
+        <view class="info-row" wx:if="{{orders.status==6}}">
+            <view class="left">
+                <text class="label">取消时间: </text>
+                <text>{{orders.cancelTime}}</text>
+            </view>
+        </view>
+        <block wx:if="{{orders.status==7}}">
+            <view class="info-row">
+                <view class="left">
+                    <text class="label">退款单号: </text>
+                    <text>{{orders.refundNo}}</text>
+                </view>
+            </view>
+            <view class="info-row">
+                <view class="left">
+                    <text class="label">退款时间: </text>
+                    <text>{{orders.refundTime}}</text>
+                </view>
+            </view>
+        </block>
+    </view>
+    <view class="order-footer">
+        <view class="buttons__row">
+            <view catchtap="concat" class="row__btn">联系卖家</view>
+            <block wx:if="{{orders.status==1}}">
+                <view catchtap="cancel" class="row__btn">取消订单</view>
+                <view catchtap="pay" class="row__btn">去付款</view>
+            </block>
+            <view catchtap="receive" class="row__btn" wx:if="{{orders.status==3}}">确认收货</view>
+            <navigator catchtap="go2GroupDetail" class="row__btn" openType="redirect" url="/pages/groupdetail/groupdetail?groupOrderId={{orders.groupOrderId}}&goodsSn={{orders.itemList[0].goodsSn}}&orderNo={{orders.orderNo}}" wx:if="{{orders.status>1&&orders.payNo!=null&&orders.payNo!=''&&orders.groupOrderId>0}}">拼团详情</navigator>
+        </view>
+    </view>
+</view>

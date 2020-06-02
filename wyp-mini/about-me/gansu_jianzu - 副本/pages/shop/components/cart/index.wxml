@@ -1,0 +1,19 @@
+<view style="font-size:32rpx;display:flex;justify-content:flex-start;align-items:center;position:fixed;width:100%;background-color:#fff;border-top:1px solid #e5e5e5;bottom:0;height: 112rpx">
+    <view style="text-align:center;position:absolute;top:12rpx;left:92rpx;font-size:24rpx;min-width:36rpx;min-height:36rpx;padding:2rpx;border-radius:50%;color:#fff;background-color: red" wx:if="{{numTotal>0}}">{{numTotal}}</view>
+    <image bindtap="{{!(minSendFeeDifference>0)&&numTotal>0||action=='store'?'handleCheckout':''}}" mode="scaleToFill" src="http://imgcdnali.wfenxiao.com.cn/xcx/c/food/{{numTotal>0?'cart1':'cart'}}.png" style="margin-left:34rpx;height:88rpx;width:88rpx"></image>
+    <view style="margin-left: 48rpx;opacity: 0.43;font-size: 32rpx;color: #000000" wx:if="{{numTotal==0}}">购物车是空的</view>
+    <view wx:else>
+        <view>
+            <text style="margin-left: 48rpx">总计：</text>
+            <text style="color:red">￥{{priceTotal}}</text>
+        </view>
+        <view wx:if="{{selectFullMoney&&selectFullMoney>0}}">
+            <text style="font-size:18rpx; margin-left: 48rpx">已减：</text>
+            <text style="font-size:18rpx; color:red">￥{{selectFullMoney}}</text>
+        </view>
+    </view>
+    <button bindtap="{{!(minSendFeeDifference>0)&&numTotal>0||action=='store'?'handleCheckout':''}}" class="cart-jiesuan-button {{!(minSendFeeDifference>0)&&numTotal>0?'cart-jiesuan-button-able':'cart-jiesuan-button-disable'}}" style="width:228rpx;height:100%">
+  {{minSendFee>0&&minSendFee==minSendFeeDifference?minSendFee+'元起送':minSendFeeDifference>0?'还差'+minSendFeeDifference+'元':'去结算'}}
+  </button>
+</view>
+<phonemodal showModal="{{showModal}}" url="{{url}}"></phonemodal>

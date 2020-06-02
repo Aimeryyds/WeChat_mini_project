@@ -1,0 +1,67 @@
+<swiper bindchange="swiper_list_change" class="swiper_list" current="{{tag}}" duration="300" skipHiddenItemLayout="true" style="height:{{height}}px;">
+    <swiper-item>
+        <scroll-view bindscrolltolower="list_onReachBottom" enableBackToTop="true" scrollY="true">
+            <view class="search">
+                <view class="search_item">
+                    <input bindconfirm="do_search" bindinput="bindKeyInput" confirmType="search" focus="{{iffocus?true:false}}" name="q" placeholder="搜索菜谱、食材或专题..." placeholderStyle="color:#666;" value="{{q}}"></input>
+                    <form catchsubmit="formSubmit" reportSubmit="true">
+                        <button class="search_b" formType="submit" plain="true">
+                            <icon size="14" type="search"></icon>
+                            <text>搜索</text>
+                        </button>
+                    </form>
+                </view>
+            </view>
+            <block wx:if="{{show_noq}}">
+                <view class="hotkey">
+                    <navigator openType="redirect" url="../search/search?q={{item.key}}" wx:if="{{index<12}}" wx:for="{{hotkey}}" wx:key="hotkey">{{item.key}}</navigator>
+                </view>
+                <view class="hot500">
+                    <navigator bindtap="search_link" data-type="2" url="../recipe_menu/recipe_menu">500道最常见的家常菜</navigator>
+                </view>
+            </block>
+            <view class="rlist">
+                <navigator class="rlist_item" url="../mofang_info/mofang_info?domain={{top_mofang.mfid}}" wx:if="{{top_mofang}}">
+                    <image class="rlist_img" src="{{top_mofang.fcover}}"></image>
+                    <view class="rlist_detail">
+                        <text class="rlist_t">{{top_mofang.subject}} <text class="s_note">专题</text>
+                        </text>
+                        <text class="rlist_c3">{{top_mofang.summary}}</text>
+                    </view>
+                </navigator>
+                <navigator class="rlist_item" url="../ingredient_info/ingredient_info?id={{top_ingredient.pinyin}}&title={{top_ingredient.name}}" wx:if="{{top_ingredient}}">
+                    <image class="rlist_img" src="{{top_ingredient.imgs}}"></image>
+                    <view class="rlist_detail">
+                        <text class="rlist_t">{{top_ingredient.name}} <text class="s_note">食材</text>
+                        </text>
+                        <text class="rlist_c3">{{top_ingredient.summary}}</text>
+                    </view>
+                </navigator>
+                <block wx:for="{{list[0]}}" wx:key="list0">
+                    <view class="rlist_item" style="padding:20rpx 40rpx 20rpx 0;" wx:if="{{(top_mofang||top_ingredient)&&index==1||!top_mofang&&!top_ingredient&&index==2}}">
+                        <ad unitId="adunit-0f1ead849dc7f8ac"></ad>
+                    </view>
+                    <view class="rlist_item" style="padding:20rpx 40rpx 20rpx 0;" wx:if="{{(top_mofang||top_ingredient)&&index==6||!top_mofang&&!top_ingredient&&index==7}}">
+                        <ad unitId="adunit-da68c2d18ac219b6"></ad>
+                    </view>
+                    <navigator class="rlist_item" url="../recipe_info/recipe_info?id={{item.id}}">
+                        <image class="rlist_img r4{{open_v==1?item.r4:''}}" src="{{item.fcover}}"></image>
+                        <view class="rlist_detail">
+                            <text class="rlist_t">{{item.title}}</text>
+                            <text class="rlist_c">{{item.mainingredient}}</text>
+                            <text class="rlist_n" wx:if="{{item.collnum>0}}">{{item.collnum}}人收藏</text>
+                        </view>
+                    </navigator>
+                </block>
+            </view>
+            <view class="loading_end" wx:if="{{loading_end[0]}}"></view>
+            <view class="loading" wx:if="{{tag==0&&loading}}">
+                <image class="loading_img" src="../../image/loading-32-32.gif"></image>
+            </view>
+            <view class="loading_fail" wx:if="{{tag==0&&loading_fail}}"></view>
+            <view class="loading_none" wx:if="{{loading_none}}">
+抱歉，没有找到与 {{q_none}} 相关的内容。
+</view>
+        </scroll-view>
+    </swiper-item>
+</swiper>

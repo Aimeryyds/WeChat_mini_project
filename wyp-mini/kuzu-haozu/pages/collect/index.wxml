@@ -1,0 +1,107 @@
+<view class="tab">
+    <view catchtap="buildingFn" class="{{building_class}}">楼盘</view>
+    <view catchtap="spaceFn" class="{{space_class}}">房源</view>
+</view>
+<scroll-view bindscrolltolower="upper" hidden="{{building_show}}" scrollY="true" style="height:{{windowHeight}}px;">
+    <view class="list">
+        <scroll-view scrollX bindscroll="turnScroll" bindtouchcancel="touchEnd" bindtouchend="touchEnd" bindtouchstart="touchStart" class="sell-content" data-flag="{{item.status}}" data-id="{{item.building_id}}" scrollLeft="{{leftView[item.building_id]}}" wx:for="{{data_msg}}" wx:key="{{item.building_id}}">
+            <navigator class="list_li clearfix" url="{{!!leftMove[item.building_id]&&leftMove[item.building_id]>100?'':'../building/building?building_id='+item.building_id}}">
+                <image class="img_tag" src="../../images/down_icon.png" wx:if="{{item.status==-1}}"></image>
+                <view>
+                    <image class="pht" src="{{item.thumb_image}}"></image>
+                </view>
+                <view class="text">
+                    <text class="title">{{item.building_name}}</text>
+                    <view class="sm_msg" hidden="{{item.area_min==0}}" wx:if="{{item.status!=-1}}">{{item.area_min}}㎡-{{item.area_max}}㎡</view>
+                    <view class="sm_msg">{{item.district_name}}-{{item.circle_name}}</view>
+                    <view class="sm_msg">{{item.subway_display}}</view>
+                    <view class="price">
+                        <text style="font-size:32rpx;color:#fd9704;">{{item.price}}</text>{{tools.html_decode(item.price_unit)}}</view>
+                    <view class="icon clearfix">
+                        <view class="{{arr[index]}}" wx:for="{{item.tag_list}}" wx:key="{{item.tag_id}}">{{item.tag_name}}</view>
+                    </view>
+                </view>
+            </navigator>
+            <view class="r_btn" wx:if="{{item.status!=-1}}">
+                <view bindtap="shouchang" class="r_collection" data-id="{{item.building_id}}" data-index="{{index}}" data-type="data_msg" wx:if="{{collectOrbrowse!=1}}">
+                    <view>{{item.isCollect?'已':''}}收藏</view>
+                </view>
+                <view bindtap="shouchang" class="r_collection" data-id="{{item.building_id}}" data-index="{{index}}" data-type="data_msg" wx:if="{{collectOrbrowse==1}}">
+                    <view>取消收藏</view>
+                </view>
+                <view bindtap="zixun" class="r_advisory">
+                    <view>免费咨询</view>
+                </view>
+                <view bindtap="remove" class="r_delete" data-id="{{item.building_id}}" data-index="{{index}}" data-type="data_msg" wx:if="{{collectOrbrowse!=1}}">
+                    <view>删除</view>
+                </view>
+            </view>
+            <view class="r_btn" wx:if="{{item.status==-1}}">
+                <view bindtap="zixun" class="r_advisory">
+                    <view>免费咨询</view>
+                </view>
+                <view bindtap="remove" class="r_delete" data-id="{{item.building_id}}" data-index="{{index}}" data-type="data_msg">
+                    <view>删除</view>
+                </view>
+            </view>
+        </scroll-view>
+    </view>
+    <view wx:if="{{none_show}}">
+        <image src="{{none_icon}}" style="width:750rpx;height:753rpx;"></image>
+    </view>
+</scroll-view>
+<scroll-view bindscrolltolower="upper" hidden="{{space_show}}" scrollY="true" style="height:{{windowHeight}}px;">
+    <view class="list">
+        <scroll-view scrollX bindscroll="turnScroll" bindtouchcancel="touchEnd" bindtouchend="touchEnd" bindtouchstart="touchStart" class="sell-content" data-flag="{{item.status}}" data-id="{{item.id}}" scrollLeft="{{leftView[item.id]}}" wx:for="{{space_data_msg}}" wx:key="{{item.id}}">
+            <navigator class="list_li clearfix" url="../house/house?house_id={{item.id}}">
+                <image class="img_tag" src="../../images/down_icon.png" wx:if="{{item.status==-1}}"></image>
+                <view>
+                    <image class="pht" src="{{item.thumb_image}}"></image>
+                </view>
+                <view class="text">
+                    <text class="title" wx:if="{{item.status==-1}}">暂无价格</text>
+                    <text class="title" wx:if="{{item.status!=-1}}">{{item.rent_price}}{{tools.html_decode(item.price_unit)}}</text>
+                    <view class="sm_msg" style="color:#666;font-size:28rpx;line-height:50rpx;height:50rpx;">{{item.area}}㎡ | {{item.gongwei_number_min}}~{{item.gongwei_number_max}}个工位</view>
+                    <view class="sm_msg">{{item.building_name}}</view>
+                    <view class="sm_msg" wx:if="{{item.status==-1}}">
+                        <text space="nbsp">总价:暂无价格  {{item.zhuangxiu}}</text>
+                    </view>
+                    <view class="sm_msg" wx:if="{{item.status!=-1}}">
+                        <text space="nbsp">总价:{{item.total_price}}{{item.total_price_unit}}  {{item.zhuangxiu}}</text>
+                    </view>
+                </view>
+            </navigator>
+            <view class="r_btn" wx:if="{{item.status!=-1}}">
+                <view bindtap="shouchang" class="r_collection" data-id="{{item.id}}" data-index="{{index}}" data-type="space_data_msg" wx:if="{{collectOrbrowse!=1}}">
+                    <view>{{item.isCollect?'已':''}}收藏</view>
+                </view>
+                <view bindtap="shouchang" class="r_collection" data-id="{{item.id}}" data-index="{{index}}" data-type="space_data_msg" wx:if="{{collectOrbrowse==1}}">
+                    <view>取消收藏</view>
+                </view>
+                <view bindtap="zixun" class="r_advisory">
+                    <view>免费咨询</view>
+                </view>
+                <view bindtap="remove" class="r_delete" data-id="{{item.id}}" data-index="{{index}}" data-type="space_data_msg" wx:if="{{collectOrbrowse!=1}}">
+                    <view>删除</view>
+                </view>
+            </view>
+            <view class="r_btn" wx:if="{{item.status==-1}}">
+                <view bindtap="zixun" class="r_advisory">
+                    <view>免费咨询</view>
+                </view>
+                <view bindtap="remove" class="r_delete" data-id="{{item.id}}" data-index="{{index}}" data-type="space_data_msg">
+                    <view>删除</view>
+                </view>
+            </view>
+        </scroll-view>
+    </view>
+    <view wx:if="{{none_show}}">
+        <image src="{{none_icon}}" style="width:750rpx;height:753rpx;"></image>
+    </view>
+</scroll-view>
+<view class="loadingWrap {{subsucc?'':'hide'}}">
+    <view class="loadingWrap_Box">
+        <loading wx:if="{{showLoading}}">加载中</loading>
+    </view>
+</view>
+<wxs module="tools" src="../../utils/common.wxs" />

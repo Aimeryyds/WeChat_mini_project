@@ -1,0 +1,13 @@
+<view class="page">
+    <web-view src="{{privacy_url}}" wx:if="{{userPrivacy}}"></web-view>
+    <view bindtap="__e" class="change_phone" data-event-opts="{{[ [ 'tap',[ [ 'toChange',['$event'] ] ] ] ]}}" wx:if="{{onoff}}">
+        <view>换绑手机号</view>
+        <image src="https://public.danke.com.cn/public-20180519-Fqqg8CcCgAC7E2d6CDNhNRa2d7kv"></image>
+    </view>
+    <view class="version">
+        <view class="v1">版本号</view>
+        <view class="v2">V4.0</view>
+    </view>
+    <view class="version regulations">查看<text bindtap="__e" data-event-opts="{{[ [ 'tap',[ [ 'toSecrecy',['$event'] ] ] ] ]}}">《用户使用条款》</text>和<text bindtap="__e" data-event-opts="{{[ [ 'tap',[ [ 'toProtect',['$event'] ] ] ] ]}}">《隐私保护政策》</text>
+    </view>
+</view>

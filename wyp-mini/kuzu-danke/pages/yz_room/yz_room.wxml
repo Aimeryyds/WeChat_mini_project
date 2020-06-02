@@ -1,0 +1,98 @@
+<view class="page">
+    <view class="swiper-tab">
+        <view bindtap="__e" class="{{['swiper-tab-list',currentTab==0?'on':'']}}" data-current="0" data-event-opts="{{[ [ 'tap',[ [ 'swichNav',['$event'] ] ] ] ]}}">合租样板间<view class="{{['borderLine',currentTab==0?'active':'']}}"></view>
+        </view>
+        <view bindtap="__e" class="{{['swiper-tab-list',currentTab==1?'on':'']}}" data-current="1" data-event-opts="{{[ [ 'tap',[ [ 'swichNav',['$event'] ] ] ] ]}}">整租样板间<view class="{{['borderLine',currentTab==1?'active':'']}}"></view>
+        </view>
+        <view bindtap="__e" class="{{['swiper-tab-list',currentTab==2?'on':'']}}" data-current="2" data-event-opts="{{[ [ 'tap',[ [ 'swichNav',['$event'] ] ] ] ]}}">共享一居室<view class="{{['borderLine',currentTab==2?'active':'']}}"></view>
+        </view>
+    </view>
+    <view class="aq" wx:if="{{isShow==0}}">
+        <image class="hz_idx1" mode="widthFix" src="https://public.danke.com.cn/public-20180725-Fgq2hYdZuv3hnyflMMGRAGZuClU8"></image>
+        <image class="hz_idx2" mode="widthFix" src="https://public.danke.com.cn/public-20190603-Figo-OXnMAh2JY4N1p966PzHaF8f"></image>
+        <view class="slide">
+            <view class="before_box" style="{{'width:'+before_width1-30+'px'+';'}}">
+                <image class="before" src="https://public.danke.com.cn/public-20180725-FvKdr6o5chLuQC672BEBHQ4tMUEu"></image>
+            </view>
+            <view class="after_box">
+                <image class="after" src="https://public.danke.com.cn/public-20180725-FuiYXsoJoJIPcFeCGeTOVujPZQna"></image>
+            </view>
+            <image bindtouchend="__e" bindtouchmove="__e" bindtouchstart="__e" class="middle" data-event-opts="{{[ [ 'touchstart',[ [ 'handletouchtart1',['$event'] ] ] ],[ 'touchmove',[ [ 'handletouchmove1',['$event'] ] ] ],[ 'touchend',[ [ 'bindtouchend1',['$event'] ] ] ] ]}}" src="https://public.danke.com.cn/public-20180725-FsF_hU13qC5VO6Eu7GFkMsKj72Hg" style="{{'left:'+middle_left1+'px'+';'}}"></image>
+            <view class="mask" wx:if="{{opacity1}}"></view>
+            <view class="text_mask_before"></view>
+            <view class="text_line_before">装修前</view>
+            <view class="text_mask_after"></view>
+            <view class="text_line_after">装修后</view>
+        </view>
+        <view class="hz_part">
+            <view class="title">加盟我们后房屋统一装修</view>
+            <view class="line1">多种风格您可以选择，我们会对施工</view>
+            <view class="line2">质量全面监管，我们专业的装修团队会给您一个全</view>
+            <view class="line3">新的家，配置高品质家具家电，合同到期后这些家</view>
+            <view class="line4">具会根据情况免费送给业主</view>
+            <view class="line5">多元化装修设计理念,不同的风格给</view>
+            <view class="line6">您和租户带来不一样的感受</view>
+        </view>
+        <image class="hz_idx4" mode="widthFix" src="https://public.danke.com.cn/public-20180725-Fs1SLxBlc1pZWAbgNb1LIa2L2lP0"></image>
+    </view>
+    <view class="ax" wx:if="{{isShow==1}}">
+        <image class="hz_idx1" mode="widthFix" src="https://public.danke.com.cn/public-20180725-FkKhoyIvz4x_gMGgwOSNW5qQgWl2"></image>
+        <image class="hz_idx2" mode="widthFix" src="https://public.danke.com.cn/public-20190603-Figo-OXnMAh2JY4N1p966PzHaF8f"></image>
+        <view class="slide">
+            <view class="before_box" style="{{'width:'+before_width2-30+'px'+';'}}">
+                <image class="before" src="https://public.danke.com.cn/public-20180725-FpjYpTvGWLmCEDsQ4BT6Zsj-cIq2"></image>
+            </view>
+            <view class="after_box">
+                <image class="after" src="https://public.danke.com.cn/public-20180725-FpvPB_moEF8fsMYFKB0FnjTVFVal"></image>
+            </view>
+            <image bindtouchend="__e" bindtouchmove="__e" bindtouchstart="__e" class="middle" data-event-opts="{{[ [ 'touchstart',[ [ 'handletouchtart2',['$event'] ] ] ],[ 'touchmove',[ [ 'handletouchmove2',['$event'] ] ] ],[ 'touchend',[ [ 'bindtouchend2',['$event'] ] ] ] ]}}" src="https://public.danke.com.cn/public-20180725-FsF_hU13qC5VO6Eu7GFkMsKj72Hg" style="{{'left:'+middle_left2+'px'+';'}}"></image>
+            <view class="mask" wx:if="{{opacity2}}"></view>
+            <view class="text_mask_before"></view>
+            <view class="text_line_before">装修前</view>
+            <view class="text_mask_after"></view>
+            <view class="text_line_after">装修后</view>
+        </view>
+        <view class="hz_part">
+            <view class="title">加盟我们后房屋统一装修</view>
+            <view>多种风格您可以选择，我们会对施工</view>
+            <view>质量全面监管，我们专业的装修团队会给您一个全</view>
+            <view>新的家，配置高品质家具家电，合同到期后这些家</view>
+            <view>具会根据情况免费送给业主</view>
+            <view class="line5">多元化装修设计理念,不同的风格给</view>
+            <view class="line6">您和租户带来不一样的感受</view>
+        </view>
+        <image class="hz_idx4" mode="widthFix" src="https://public.danke.com.cn/public-20180725-FtPtV5yur7CxPmHCXhGvL3ctHh5O"></image>
+    </view>
+    <view class="pp" wx:if="{{isShow==2}}">
+        <image class="hz_idx1" mode="widthFix" src="https://public.danke.com.cn/public-20180725-FgJx-CJDGRU3IuZAWAGhZDmBkx_V"></image>
+        <image class="hz_idx2" mode="widthFix" src="https://public.danke.com.cn/public-20190603-Figo-OXnMAh2JY4N1p966PzHaF8f"></image>
+        <view class="slide">
+            <view class="before_box" style="{{'width:'+before_width3-30+'px'+';'}}">
+                <image class="before" src="https://public.danke.com.cn/public-20180725-FqdNXqs1gc6F61ExVX1T10jf1B0T"></image>
+            </view>
+            <view class="after_box">
+                <image class="after" src="https://public.danke.com.cn/public-20180725-Fuc7vp-0wVnEDtsj2rETZzTvKY46"></image>
+            </view>
+            <image bindtouchend="__e" bindtouchmove="__e" bindtouchstart="__e" class="middle" data-event-opts="{{[ [ 'touchstart',[ [ 'handletouchtart3',['$event'] ] ] ],[ 'touchmove',[ [ 'handletouchmove3',['$event'] ] ] ],[ 'touchend',[ [ 'bindtouchend3',['$event'] ] ] ] ]}}" src="https://public.danke.com.cn/public-20180725-FsF_hU13qC5VO6Eu7GFkMsKj72Hg" style="{{'left:'+middle_left3+'px'+';'}}"></image>
+            <view class="mask" wx:if="{{opacity3}}"></view>
+            <view class="text_mask_before"></view>
+            <view class="text_line_before">装修前</view>
+            <view class="text_mask_after"></view>
+            <view class="text_line_after">装修后</view>
+        </view>
+        <view class="hz_part">
+            <view class="title">加盟我们后房屋统一装修</view>
+            <view class="line1">多种风格您可以选择，我们会对施工</view>
+            <view class="line2">质量全面监管，我们专业的装修团队会给您一个全</view>
+            <view class="line3">新的家，配置高品质家具家电，合同到期后这些家</view>
+            <view class="line4">具会根据情况免费送给业主</view>
+            <view class="line5">多元化装修设计理念,不同的风格给</view>
+            <view class="line6">您和租户带来不一样的感受</view>
+        </view>
+        <image class="hz_idx4" mode="widthFix" src="https://public.danke.com.cn/public-20180725-FlJv4BAmnUyOfmMwXjI7nsScSSvd"></image>
+    </view>
+    <view class="js_bottom">
+        <view bindtap="__e" class="wxzx" data-event-opts="{{[ [ 'tap',[ [ 'wtzx',['$event'] ] ] ] ]}}">委托咨询</view>
+        <view bindtap="__e" class="zxwt" data-event-opts="{{[ [ 'tap',[ [ 'zxwt',['$event'] ] ] ] ]}}">在线委托</view>
+    </view>
+</view>

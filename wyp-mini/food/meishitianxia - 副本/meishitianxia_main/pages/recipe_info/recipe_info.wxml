@@ -1,0 +1,309 @@
+<view class="loading" wx:if="{{loading}}">
+    <image class="loading_img" src="../../image/loading-32-32.gif"></image>
+</view>
+<view class="loading_fail" wx:if="{{loading_fail}}"></view>
+<view class="recipeVideo" wx:if="{{isplay}}">
+    <video autoplay="true" bindaderror="onAdError" bindadload="onAdload" bindadplay="onAdplay" id="recipeVideo" src="{{videourl}}" unitId="adunit-c499e59c037da77a"></video>
+</view>
+<scroll-view bindscrolltolower="scrolltolower" bindtouchend="handletouchend" bindtouchmove="handletouchmove" bindtouchstart="handletouchtart" enableBackToTop="true" scrollY="true" style="height: {{height}}px;">
+    <view class="main {{loading_ok?'':'hidden'}} {{refresh>0?'refresh_show_padding':''}}">
+        <view class="infos" style="height:2rpx;"></view>
+        <view class="refresh {{refresh>0?'refresh_show':''}}" style="top:0">
+            <view wx:if="{{refresh_end}}">没有更多了</view>
+            <block wx:else>
+😲<view>{{refresh==2?'松开':'下拉'}}阅读上一篇</view>
+            </block>
+        </view>
+        <block wx:if="{{openapp}}">
+            <button appParameter="{\"recipe\":\"{{id}}\"}" binderror="launchAppError" openType="launchApp" wx:if="{{myuid==5990958||myuid==8341388||myuid==9054385||myuid==6240061}}">打开APP</button>
+        </block>
+        <view bindtap="do_play" class="videobox" wx:if="{{videourl!=''&&open_v==1}}">
+            <image class=" load" src="{{sosopic}}" wx:if="{{!isplay}}"></image>
+            <view class="play" wx:if="{{!isplay}}"></view>
+        </view>
+        <view class="recipe_swiper_view" style="height:{{swiper_height}}px" wx:else>
+            <swiper bindchange="goheight" class="recipe_swiper" duration="300" style="height:{{swiper_height}}px">
+                <swiper-item wx:for="{{photoallpic}}" wx:key="photoallpic">
+                    <image bindtap="previewImage" data-src="{{item.bigphoto}}" mode="widthFix" src="{{item.bigphoto}}"></image>
+                </swiper-item>
+            </swiper>
+            <view class="recipe_swiper_num" wx:if="{{photoallpic.length>1}}">
+                <text>{{photoallpic_current}}/{{photoallpic.length}}</text>
+            </view>
+        </view>
+        <view class="title_h1 mt20">{{subject}}</view>
+        <view class="r_info_u">
+            <navigator class="r_info_u_a" url="/pages/space/space?uid={{uid}}">
+                <image class="r_info_u_img" src="{{avatar}}"></image>
+                <image class="vip_icon" src="/image/vip_icon.png" wx:if="{{vip}}"></image>{{username}}</navigator>
+        </view>
+        <block wx:if="{{message}}">
+            <view class="r_info_txt height1" wx:if="{{show_data==1}}">
+                <image src="/image/yinhao.png" style="width:40rpx;height:40rpx;margin:-8rpx 12rpx 0 0"></image>
+                <text>{{message}}</text>
+            </view>
+            <view class="r_info_txt" wx:else>
+                <image src="/image/yinhao.png" style="width:40rpx;height:40rpx;margin:-8rpx 12rpx 0 0"></image>
+                <text>{{message}}</text>
+            </view>
+            <view bindtap="message_show" class="event_show" wx:if="{{show_data>0}}">
+                <block wx:if="{{show_data==1}}">
+                    <text>查看全部</text>
+                    <image src="/image/down.png"></image>
+                </block>
+                <block wx:if="{{show_data==2}}">
+                    <text>收起</text>
+                    <image src="/image/up.png"></image>
+                </block>
+            </view>
+            <view class="mt20" wx:if="{{show_data==0}}"></view>
+        </block>
+        <view class="mt40"></view>
+        <block wx:if="{{ingredients.length>0}}">
+            <block wx:for="{{ingredients}}" wx:key="ingredients">
+                <view class="group_name">{{item.group_name}}</view>
+                <view class="c2list">
+                    <block wx:for="{{item.ingredient}}" wx:key="ingredient">
+                        <navigator bindtap="recipe_info_ingredient" class="c2list_item" url="../ingredient_info/ingredient_info?id={{item.pinyin}}&title={{item.name}}" wx:if="{{item.pinyin}}">
+                            <text class="c2list_left">{{item.name}}</text>
+                            <text class="c2list_right gray" wx:if="{{item.value=='适量'}}">{{item.value}}</text>
+                            <text class="c2list_right" wx:else>{{item.value}}</text>
+                            <view class="c2list_url"></view>
+                        </navigator>
+                        <view class="c2list_item" wx:else>
+                            <text class="c2list_left">{{item.name}}</text>
+                            <text class="c2list_right gray" wx:if="{{item.value=='适量'}}">{{item.value}}</text>
+                            <text class="c2list_right" wx:else>{{item.value}}</text>
+                            <view class="c2list_url_none"></view>
+                        </view>
+                    </block>
+                </view>
+            </block>
+        </block>
+        <view class="c2list_txt" wx:else>{{mainingredient}}</view>
+        <view class="steps">
+            <view class="r_info_steps" wx:if="{{idx<3}}" wx:for="{{steps}}" wx:for-index="idx" wx:key="steps">
+                <block wx:if="{{item.p800_pic}}">
+                    <view class="steppic_span"></view>
+                    <image bindtap="recipe_step" class="steppic load" data-idx="{{idx}}" mode="widthFix" src="{{item.p800_pic}}" style="width:670rpx;min-height:2rpx"></image>
+                    <view class="r_info_steps_t">
+                        <text>{{idx+1}}. </text>{{item.note}}</view>
+                </block>
+                <block wx:else>
+                    <view class="steppic_span2"></view>
+                    <view class="r_info_steps_t2" style="width:670rpx">
+                        <text>{{idx+1}}. </text>
+                        <text>{{item.note}}</text>
+                    </view>
+                </block>
+            </view>
+            <view bindtap="step_down" class="step_down" wx:if="{{(steps.length>3||tips)&&!step_down}}">
+                <view></view>
+                <image src="/image/step_down.png"></image>
+                <text>展开全文</text>
+                <text wx:if="{{steps.length>3}}">（还有{{steps.length-3}}步）</text>
+            </view>
+        </view>
+        <block wx:if="{{step_down}}" wx:for="{{steps}}" wx:for-index="idx" wx:key="steps">
+            <view class="r_info_steps" wx:if="{{idx>2}}">
+                <block wx:if="{{item.p800_pic}}">
+                    <view class="steppic_span"></view>
+                    <image bindtap="recipe_step" class="steppic load" data-idx="{{idx}}" mode="widthFix" src="{{item.p800_pic}}" style="width:670rpx;min-height:2rpx"></image>
+                    <view class="r_info_steps_t">
+                        <text>{{idx+1}}. </text>{{item.note}}</view>
+                </block>
+                <block wx:else>
+                    <view class="steppic_span2"></view>
+                    <view class="r_info_steps_t2" style="width:670rpx">
+                        <text>{{idx+1}}. </text>
+                        <text>{{item.note}}</text>
+                    </view>
+                </block>
+            </view>
+        </block>
+        <view wx:if="{{tips&&step_down}}">
+            <view class="s2">温馨小提示</view>
+            <view class="r_info_tips">
+                <text>{{tips}}</text>
+            </view>
+        </view>
+        <view style="height:120rpx" wx:if="{{(steps.length>3||tips)&&!step_down}}"></view>
+        <view style="margin:0 40rpx 20rpx;">
+            <ad adTheme="white" adType="video" unitId="adunit-09f39659bb7fce3a"></ad>
+        </view>
+        <view class="s2">您可能还喜欢</view>
+        <view class="timeline" style="margin-top:-24rpx">
+            <form catchsubmit="timelineSubmit" reportSubmit="true">
+                <view class="timeline_item" wx:if="{{item.type=='collect'||item.type=='recipe'||item.type=='pai'||item.type=='mofang'||item.type=='article'||item.type=='event'||item.type=='miniprogram'}}" wx:for="{{timeline}}" wx:for-index="idx" wx:key="timeline">
+                    <button bindtap="open_timeline" data-adid="{{item.adid}}" data-app="0" data-id="{{item.subid}}" data-type="{{item.type}}" data-url="{{item.url}}" formType="submit" plain="true"></button>
+                    <view class="tm1" wx:if="{{item.templetid==1}}">
+                        <image class="tm1_img r4{{open_v==1?item.r4:''}}" src="{{item.pic640}}"></image>
+                        <view class="tm1_11" wx:if="{{item.description==''}}">{{item.subject}}</view>
+                        <view class="tm1_1" wx:else>{{item.subject}}</view>
+                        <view class="tm1_2" wx:if="{{item.description!=''}}">{{item.description}}</view>
+                        <view class="tm1_3">{{item.remark}}</view>
+                    </view>
+                    <view class="tm2" wx:elif="{{item.templetid==2}}">
+                        <view class="tm2_1" wx:if="{{item.subject}}">{{item.subject}}</view>
+                        <view class="tm2_2" wx:if="{{item.description}}">{{item.description}}</view>
+                        <image class="tm2_img" src="{{item.picset[0]}}"></image>
+                        <image class="tm2_img" src="{{item.picset[1]}}"></image>
+                        <image class="tm2_img" src="{{item.picset[2]}}"></image>
+                        <view class="tm2_3" wx:if="{{item.remark}}">{{item.remark}}</view>
+                    </view>
+                    <view class="tm3" wx:elif="{{item.templetid==3}}">
+                        <view class="tm3_1" wx:if="{{item.subject}}">{{item.subject}}</view>
+                        <view class="tm3_2" wx:if="{{item.description}}">{{item.description}}</view>
+                        <image class="tm3_img r42{{open_v==1?item.r4:''}}" src="{{item.picset.length>0?item.picset[0]:item.pic}}" style="height:{{670*item.shownum}}rpx"></image>
+                        <view class="tm3_3" wx:if="{{item.remark}}">{{item.remark}}</view>
+                    </view>
+                </view>
+            </form>
+        </view>
+        <view class="timeline" wx:if="{{miniprogram.subid}}">
+            <view bindtap="open_timeline" class="timeline_item" data-id="{{miniprogram.subid}}" data-type="{{miniprogram.type}}" data-url="{{miniprogram.url}}">
+                <view class="tm1" wx:if="{{miniprogram.templetid==1}}">
+                    <image class="tm1_img r4{{open_v==1?miniprogram.r4:''}}" src="{{miniprogram.pic640}}"></image>
+                    <view class="tm1_11" wx:if="{{miniprogram.description==''}}">{{miniprogram.subject}}</view>
+                    <view class="tm1_1" wx:else>{{miniprogram.subject}}</view>
+                    <view class="tm1_2" wx:if="{{miniprogram.description!=''}}">{{miniprogram.description}}</view>
+                    <view class="tm1_3">{{miniprogram.remark}}</view>
+                </view>
+                <view class="tm2" wx:elif="{{miniprogram.templetid==2}}">
+                    <view class="tm2_1" wx:if="{{miniprogram.subject}}">{{miniprogram.subject}}</view>
+                    <view class="tm2_2" wx:if="{{miniprogram.description}}">{{miniprogram.description}}</view>
+                    <image class="tm2_img" src="{{miniprogram.picset[0]}}"></image>
+                    <image class="tm2_img" src="{{miniprogram.picset[1]}}"></image>
+                    <image class="tm2_img" src="{{miniprogram.picset[2]}}"></image>
+                    <view class="tm2_3" wx:if="{{miniprogram.remark}}">{{miniprogram.remark}}</view>
+                </view>
+                <view class="tm3" wx:elif="{{miniprogram.templetid==3}}">
+                    <view class="tm3_1" wx:if="{{miniprogram.subject}}">{{miniprogram.subject}}</view>
+                    <view class="tm3_2" wx:if="{{miniprogram.description}}">{{miniprogram.description}}</view>
+                    <image class="tm3_img r42{{open_v==1?miniprogram.r4:''}}" src="{{miniprogram.picset.length>0?miniprogram.picset[0]:miniprogram.pic}}" style="height:{{670*miniprogram.shownum}}rpx"></image>
+                    <view class="tm3_3" wx:if="{{miniprogram.remark}}">{{miniprogram.remark}}</view>
+                </view>
+            </view>
+        </view>
+        <view class="rlist" wx:if="{{taglist.length>0}}">
+            <block wx:for="{{taglist}}" wx:for-index="idx" wx:key="taglist">
+                <navigator bindtap="recipe_info_recommend" class="rlist_item" openType="redirect" url="../recipe_info/recipe_info?id={{item.id}}" wx:if="{{idx<5&&item.id!=id}}">
+                    <image class="rlist_img" src="{{item.fcover}}"></image>
+                    <view class="rlist_detail">
+                        <text class="rlist_t">{{item.title}}</text>
+                        <text class="rlist_c">{{item.mainingredient}}</text>
+                        <text class="rlist_n" wx:if="{{item.collnum>0}}">{{item.collnum}}人收藏</text>
+                    </view>
+                </navigator>
+                <view style="padding:20rpx 40rpx 20rpx 0;border-bottom:1rpx solid #ddd;" wx:if="{{idx==0}}">
+                    <ad style="margin:0 auto" unitId="adunit-2361ee3d0b8e084c"></ad>
+                </view>
+            </block>
+        </view>
+        <view class="s2_1" wx:if="{{commentlist.length>0}}">最新评论</view>
+        <view class="comment_list" wx:if="{{commentlist.length>0}}">
+            <view class="comment_list_item" wx:for="{{commentlist}}" wx:key="commentlist">
+                <view class="comment_list_u">
+                    <navigator class="comment_list_nu" url="/pages/space/space?uid={{item.authorid}}">
+                        <image class="comment_list_img_u" src="{{item.avatar}}"></image>
+                        <image class="vip_icon" src="/image/vip_icon.png" wx:if="{{item.vip}}"></image>
+                    </navigator>
+                    <navigator class="comment_list_nu2" url="/pages/space/space?uid={{item.authorid}}">{{item.author}}</navigator>
+                    <view class="comment_list_time">{{item.floors}}#　{{item.dateline}}</view>
+                </view>
+                <view class="comment_list_q" wx:if="{{item.cmessage!=''}}">
+                    <view>
+{{item.cmessage}}
+</view>
+                </view>
+                <view class="comment_list_t">
+                    <block wx:for="{{item.message}}" wx:key="message">
+                        <text wx:if="{{item.type=='txt'}}">{{item.value}}</text>
+                        <image class="face" mode="widthFix" src="{{item.value}}" wx:if="{{item.type=='img'}}"></image>
+                    </block>
+                </view>
+                <image class="load" mode="widthFix" src="{{item.pic}}" wx:if="{{item.pic!=''}}"></image>
+            </view>
+        </view>
+        <view class="loading" wx:if="{{loading_c}}">
+            <image class="loading_img" src="../../image/loading-32-32.gif"></image>
+        </view>
+        <view class="loading_fail" wx:if="{{loading_c_fail}}"></view>
+        <view class="loading_end" wx:if="{{loading_c_end&&!comment_more}}"></view>
+        <navigator class="loading_end_comment" url="/pages/comment_info/comment_info?id={{id}}&type=recipe&title={{subject}}" wx:if="{{loading_c_end&&comment_more}}">查看更多评论</navigator>
+        <view class="refresh {{refresh_b>0?'refresh_show':''}}" style="bottom:-80rpx">
+            <view wx:if="{{refresh_b_end}}">没有更多了</view>
+            <block wx:else>
+                <view>{{refresh_b==2?'松开':'上拉'}}阅读下一篇</view>😲
+</block>
+        </view>
+    </view>
+    <view>　</view>
+    <view>　</view>
+    <view>　</view>
+    <view class="infos" style="height:2rpx;"></view>
+</scroll-view>
+<view class="{{loading_ok?'':'hidden'}} btn_do2" style="padding-bottom:{{statusBarHeight>30?'40':'0'}}rpx">
+    <form catchsubmit="formSubmit">
+        <button bindtap="comment_do" formType="submit" plain="true" wx:if="{{haveuid}}">
+            <image class="icon_fav" src="../../image/comment2.png"></image>
+            <text>评论</text>
+        </button>
+        <button bindgetuserinfo="clickinfo" data-type="comment" openType="getUserInfo" plain="true" wx:else>
+            <image class="icon_fav" src="../../image/comment2.png"></image>
+            <text>评论</text>
+        </button>
+        <block wx:if="{{haveuid}}">
+            <button bindtap="do_fav" data-type="fav_done" formType="submit" plain="true" wx:if="{{isfav==1}}">
+                <image class="icon_fav" src="../../image/fav2_on.png"></image>
+                <text style="color:#ff6767">收藏</text>
+            </button>
+            <button bindtap="do_fav" data-type="fav_do" formType="submit" plain="true" wx:else>
+                <image class="icon_fav" src="../../image/fav2.png"></image>
+                <text>收藏</text>
+            </button>
+        </block>
+        <button bindgetuserinfo="clickinfo" data-type="fav" openType="getUserInfo" plain="true" wx:else>
+            <image class="icon_fav" src="../../image/fav2.png"></image>
+            <text>收藏</text>
+        </button>
+        <button bindtap="collect_do" formType="submit" plain="true" wx:if="{{haveuid}}">
+            <image class="icon_fav" src="../../image/collect_add.png"></image>
+            <text>加入菜单</text>
+        </button>
+        <button bindgetuserinfo="clickinfo" data-type="collect" openType="getUserInfo" plain="true" wx:else>
+            <image class="icon_fav" src="../../image/collect_add.png"></image>
+            <text>加入菜单</text>
+        </button>
+        <button formType="submit" openType="share" plain="true">
+            <image class="icon_fav" src="../../image/share2.png"></image>
+            <text>分享</text>
+        </button>
+    </form>
+</view>
+<view bindtap="backindex" class="icon_goods">
+    <image src="/image/icon_home.png"></image>
+    <text>首页</text>
+</view>
+<view bindtap="mask_close" catchtouchmove="myCatchTouch" class="mask_share {{mask_dialog?'':'hidden'}}"></view>
+<view catchtouchmove="myCatchTouch" class="mask_dialog {{mask_dialog?'':'hidden'}}">
+    <text>收藏到菜单</text>
+    <scroll-view bindscrolltolower="collect_tolower" scrollY="true" style="height:800rpx;background:#fff;">
+        <view class="mclist">
+            <view bindtap="do_collect" class="mclist_item" data-collectid="{{item.id}}" data-isfav="{{item.isFav}}" wx:for="{{collectlist}}" wx:key="collectlist">
+                <image src="../../image/fav2_on.png" wx:if="{{item.isFav==1}}"></image>
+                <image src="../../image/fav2.png" wx:if="{{item.isFav!=1}}"></image>
+                <view>{{item.subject}}</view>
+                <text>{{item.innum}}篇</text>
+            </view>
+            <view bindtap="do_addcollect" class="loading_nodata mt40" wx:if="{{page_cl==2&&collectlist.length==0}}">没有菜单，点击新建菜单</view>
+            <view class="loading" wx:if="{{loading_cl}}">
+                <image class="loading_img" src="../../image/loading-32-32.gif"></image>
+            </view>
+        </view>
+    </scroll-view>
+    <view class="mask_bottom" style="padding-bottom:{{statusBarHeight>30?'40':'0'}}rpx">
+        <view bindtap="do_addcollect" style="color:#ff6767;border-right:2rpx solid #EAEAEA">新建菜单</view>
+        <view bindtap="mask_close">取消</view>
+    </view>
+</view>

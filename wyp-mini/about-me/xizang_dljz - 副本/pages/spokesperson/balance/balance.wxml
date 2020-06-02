@@ -1,0 +1,24 @@
+<view class="container">
+    <view class="balance-wrap">
+        <view class="wrap__top">
+            <text>累计收益/元</text>
+            <view>¥{{spokesman.amount}}</view>
+            <text>含待结算金额: {{spokesman.settleAmount}}</text>
+        </view>
+        <navigator class="wrap__bottom" hoverClass="hover" openType="redirect" url="/pages/spokesperson/withdraw/withdraw">
+            <text>账户余额: ¥{{spokesman.balance}}</text>
+            <view>
+                <text>去提现</text>
+                <image class="arrow" src="/images/pcenter/icon_next_light.png"></image>
+            </view>
+        </navigator>
+    </view>
+    <navigator class="table-cell" hoverClass="hover" url="/pages/spokesperson/withdrawrecord/withdrawrecord">
+        <text>提现记录</text>
+        <image src="/images/pcenter/icon_next_dark.png"></image>
+    </navigator>
+    <navigator class="table-cell" hoverClass="hover" url="/pages/spokesperson/incomedetail/incomedetail">
+        <text>收支明细</text>
+        <image src="/images/pcenter/icon_next_dark.png"></image>
+    </navigator>
+</view>

@@ -1,0 +1,99 @@
+<import src="../../libs/templates/cusService.wxml"></import>
+<import src="../../libs/templates/footer.wxml"></import>
+<import src="../../libs/templates/tabBar.wxml"></import>
+<scroll-view scrollY class="main user-container">
+    <view class="user-header" style="background-color:{{globalColor}};">
+        <button bindgetuserinfo="userInfoHandler" openType="getUserInfo">
+            <view class="head-icon-wrap">
+                <image class="spread" src="{{avatarUrl}}"></image>
+            </view>
+        </button>
+        <text class="username" wx:if="{{hasUserInfo}}">{{nickName}}</text>
+        <button bindgetuserinfo="userInfoHandler" class="username" openType="getUserInfo" wx:if="{{!hasUserInfo}}">请点击登录</button>
+    </view>
+    <view class="info-wrapper">
+        <view class="info-detail">
+            <view bindtap="toMyOrderAll" class="all-order">
+                <text>所有{{formType==1?'咨询':'订单'}}</text>
+                <view class="iconfont icon-turn"></view>
+            </view>
+            <view class="order-status-wrap">
+                <view bindtap="toMyOrderWaitPay" class="order-status">
+                    <view class="iconfont icon-waitpay" style="color:{{globalColor}};"></view>
+                    <view>待支付</view>
+                    <view class="tip-bubble" style="color:{{globalColor}};border-color:{{globalColor}};" wx:if="{{finSettleCount>0}}">{{finSettleCount}}</view>
+                </view>
+                <view bindtap="toMyOrderProccess" class="order-status">
+                    <view class="iconfont icon-go" style="color:{{globalColor}};"></view>
+                    <view>进行中</view>
+                    <view class="tip-bubble" style="color:{{globalColor}};border-color:{{globalColor}};" wx:if="{{orderProcCount>0}}">{{orderProcCount}}</view>
+                </view>
+                <view bindtap="toMyOrderAppraise" class="order-status">
+                    <view class="iconfont icon-list" style="color:{{globalColor}};"></view>
+                    <view>已完成</view>
+                </view>
+                <view bindtap="tpMyOrderCancel" class="order-status">
+                    <view class="iconfont icon-cancel" style="color:{{globalColor}};"></view>
+                    <view>已取消</view>
+                </view>
+            </view>
+        </view>
+        <view class="info-detail" wx:if="{{hasOrder}}">
+            <view class="message-header">最新消息</view>
+            <view class="message-item">
+                <view class="service-info">
+                    <view class="service-img-wrap">
+                        <image class="spread" src="{{firstOrder.service.pic.url}}"></image>
+                    </view>
+                    <view class="service-name ellipsis">{{firstOrder.service.name}}</view>
+                    <view class="service-intro ellipsis">{{firstOrder.service.summary}}</view>
+                </view>
+                <view class="message">{{firstOrder.msgReply}}</view>
+            </view>
+            <view wx:if="{{showMore}}">
+                <view class="message-item" wx:for="{{otherOrderList}}" wx:for-item="order">
+                    <view class="service-info">
+                        <view class="service-img-wrap">
+                            <image class="spread" src="{{order.service.pic.url}}"></image>
+                        </view>
+                        <view class="service-name ellipsis">{{order.service.name}}</view>
+                        <view class="service-intro ellipsis">{{order.service.summary}}</view>
+                    </view>
+                    <view class="message">{{order.msgReply}}</view>
+                </view>
+            </view>
+            <view bindtap="viewMoreOrNot" class="view-more" wx:if="{{!showMore&&otherOrderList.length>0}}">查看更多</view>
+            <view bindtap="viewMoreOrNot" class="view-more" wx:if="{{showMore&&otherOrderList.length>0}}">收起</view>
+        </view>
+        <view class="info-detail" wx:if="{{myPage.adr||cusService.phone||myPage.bh||myPage.i}}">
+            <view class="info-item address" wx:if="{{myPage.adr}}">
+                <view class="iconfont icon-addr"></view>
+                <text bindtap="myPageAddr" class="item-text">{{myPage.adr}}</text>
+                <view class="iconfont icon-turn"></view>
+            </view>
+            <view bindtap="makePhoneCall" class="info-item phone" wx:if="{{cusService.phone}}">
+                <view class="iconfont icon-phone"></view>
+                <text class="item-text">{{cusService.phone}}</text>
+                <view class="iconfont icon-turn"></view>
+            </view>
+            <view class="info-item company-time" wx:if="{{myPage.bh}}">
+                <view class="iconfont icon-time"></view>
+                <text class="item-text">{{myPage.bh}}</text>
+            </view>
+            <view class="info-item introduction" wx:if="{{myPage.i}}">
+                <view class="iconfont icon-home"></view>
+                <text class="item-text">{{myPage.i}}</text>
+            </view>
+        </view>
+        <view class="info-detail-empty" wx:if="{{!myPage.adr&&!cusService.phone&&!myPage.bh&&!myPage.i}}">
+            <view class="imageWrap">
+                <image class="spread" src="http://qz.faisys.com/image/wxImage/empty-4.png"></image>
+            </view>
+            <view class="des">还没有相关的介绍呢~</view>
+        </view>
+        <template is="footer" data="{{flag:flag,isOem:isOem,agentAcct:agentAcct}}" wx:if="{{flag.footerOpen}}"></template>
+    </view>
+</scroll-view>
+<template is="cusservice" data="{{cusService:cusService,flag:flag}}" wx:if="{{flag.cusServiceOpen||cusService.supportOpen}}"></template>
+<view class="cusTabBarPosition" wx:if="{{showTabBar}}"></view>
+<template is="tabbar" data="{{tabbar:tabbar}}" wx:if="{{showTabBar}}"></template>

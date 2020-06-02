@@ -1,0 +1,20 @@
+<view class="container">
+    <share bCode="{{bCode}}" bindhandleClick="clickShare" class="share" pvId="{{pvId}}" shareInfo="{{shareInfo}}" type="{{pageConfig.shareConfig.type}}"></share>
+    <view class="article-main" data-id="article-{{articleData.article.id}}">
+        <video autoplay="{{true}}" bindended="videoEnded" bindpause="videoPause" bindplay="videoPlay" class="head-video" id="headVideo" poster="{{articleData.fulltext.videoInfo.cover}}" src="{{articleData.fulltext.videoInfo.sofaPlayInfo[0].videoUrl}}" wx:if="{{articleData.fulltext&&articleData.fulltext.videoInfo.sofaPlayInfo[0].videoUrl}}"></video>
+        <view class="article-title" wx:if="{{articleData.fulltext}}">{{articleData.fulltext.title}}</view>
+        <view class="article-detail" wx:if="{{articleData.fulltext}}">
+            <text class="author-name">{{articleData.author.name}}</text>
+            <text class="public-time">{{articleData.fulltext.publicTime}}</text>
+        </view>
+        <view class="zw" wx:if="{{!articleData.fulltext}}">
+            <view class="video-zw"></view>
+            <view class="title-zw"></view>
+            <view class="detail-zw"></view>
+        </view>
+        <view class="rec-title">
+            <image src="../../images/rec_title.png"></image>
+        </view>
+        <feed-list-pack atricleInfo="{{articleData.fulltext}}" bind:adError="handleErrorAd" bind:adLoad="handleLoadAd" bind:feedExposure="expoCheck" options="{{dataOptions}}" pvId="{{pvId}}" regionId="{{pageConfig.recommend.id}}" spmB="{{bCode}}" wx:if="{{articleData.fulltext}}"></feed-list-pack>
+    </view>
+</view>

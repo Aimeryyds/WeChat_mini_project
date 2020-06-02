@@ -1,0 +1,15 @@
+<view class="v-paging">
+    <view class="loading" wx:if="{{_paging0.status=='loading'}}">
+        <view class="icon-loading"></view>
+        <view class="text">加载中</view>
+    </view>
+    <view bindtap="_paging0" class="more" wx:if="{{_paging0.status=='more'}}">
+    点击加载更多
+  </view>
+    <view class="done" wx:if="{{_paging0.status=='done'}}">
+    没有更多了
+  </view>
+    <view class="fail" wx:if="{{_paging0.status=='fail'}}">
+    出错啦
+  </view>
+</view>

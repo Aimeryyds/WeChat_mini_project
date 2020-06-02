@@ -1,0 +1,15 @@
+<view class="form_tit" wx:if="{{f_item.title}}">
+{{f_item.title}}
+<text class="ture_color" wx:if="{{f_item.empty}}">*</text>
+</view>
+<view class="join_pic_list">
+    <view class="join_pic_li" wx:if="{{form_data[f_item.name].length>0}}" wx:for="{{form_data[f_item.name]}}" wx:for-item="val">
+        <image mode="aspectFill" src="{{val}}"></image>
+        <view bindtap="Image_del" class="close_icon" data-index="{{val}}" data-key="{{f_item.name}}"></view>
+    </view>
+    <view class="join_pic_li">
+        <image catchtap="chooseImageTap2" data-id="{{f_item.name}}" mode="aspectFill" src="{{default_pic}}"></image>
+    </view>
+    <view class="clear"></view>
+</view>
+<textarea maxlength="-1" name="{{f_item.name}}" style="display:none" value="{{form_data[f_item.name]}}"></textarea>

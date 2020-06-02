@@ -1,0 +1,647 @@
+.content {
+    width: 100%;
+}
+
+.topword {
+    padding: 30rpx 30rpx 40rpx;
+    position: relative;
+    height: 32rpx;
+    width: 100%;
+    height: 92rpx;
+    box-sizing: border-box;
+}
+
+.topword .txtw {
+    position: relative;
+    display: inline-block;
+    vertical-align: top;
+    height: 32rpx;
+}
+
+.topword .txt {
+    font-size: 28rpx;
+    color: #333;
+    font-weight: 400;
+    position: relative;
+    line-height: 32rpx;
+    z-index: 10;
+    height: 32rpx;
+}
+
+.topword .line {
+    height: 20rpx;
+    background: #fde8e6;
+    width: 100%;
+    left: 0%;
+    bottom: 0px;
+    position: absolute;
+    z-index: 1;
+}
+
+.cswiper {
+    width: 100%;
+    height: 100%;
+    position: absolute;
+    left: 0px;
+    top: 0px;
+    padding-top: 20rpx;
+    box-sizing: border-box;
+}
+
+.fs_topw {
+    position: fixed;
+    width: 100%;
+    height: 148rpx;
+    background: #fff;
+    z-index: 1000;
+    left: 0px;
+}
+
+.fs_top {
+    width: 100%;
+    font-size: 0px;
+    box-sizing: border-box;
+    text-align: center;
+    height: 148rpx;
+}
+
+.toptabitemw {
+    width: 100%;
+}
+
+.toptabitemlist {
+    white-space: nowrap;
+    padding: 8rpx 20rpx;
+    height: 132rpx;
+}
+
+.toptabitem {
+    width: 148rpx;
+    height: 112rpx;
+    margin: 10rpx 10rpx;
+    display: inline-block;
+    vertical-align: top;
+    position: relative;
+    transition: all ease 0.2s;
+    border-radius: 12rpx;
+}
+
+.toptabitem:last-child {
+    margin-right: 30rpx;
+}
+
+.toptabitem.active {
+    width: 182rpx;
+    height: 132rpx;
+    margin-top: 0rpx;
+    border-radius: 20rpx;
+    box-shadow: 0 6rpx 12rpx rgba(0,0,0,0.1);
+}
+
+.toptabitem .t {
+    height: 64rpx;
+    line-height: 64rpx;
+    color: #fff;
+    display: block;
+    position: absolute;
+    bottom: 0px;
+    left: 0px;
+    width: 100%;
+    text-align: center;
+    font-weight: 600;
+    font-size: 26rpx;
+    text-shadow: 0rpx 2rpx 0rpx rgba(0,0,0,0.5);
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    transition: all ease 0.3s;
+}
+
+.toptabitem.active .t {
+    font-size: 30rpx;
+    line-height: 64rpx;
+    height: 64rpx;
+}
+
+.showZpbtnw {
+    height: 100rpx;
+    width: 100rpx;
+    padding: 0px;
+    background: #ef5352;
+    border-radius: 50rpx;
+    position: fixed;
+    right: 30rpx;
+    bottom: 30rpx;
+    z-index: 9000;
+    display: block;
+    background: #e92214;
+    background-image: linear-gradient(to bottom,#ffa493,#fb7186);
+}
+
+.showZpbtnw:after {
+    border: 0px;
+}
+
+.showZpbtn {
+    height: 100rpx;
+    width: 100rpx;
+    transition: all ease 0.1s;
+    transform: rotate(-0deg);
+}
+
+.showZpbtn.open {
+    transform: rotate(-45deg);
+}
+
+.showZpbtn .s1 {
+    height: 4rpx;
+    width: 44rpx;
+    border-radius: 2rpx;
+    position: absolute;
+    left: 28rpx;
+    top: 48rpx;
+    display: block;
+    background: #fff;
+}
+
+.showZpbtn .s2 {
+    height: 44rpx;
+    width: 4rpx;
+    border-radius: 2rpx;
+    position: absolute;
+    left: 48rpx;
+    top: 28rpx;
+    display: block;
+    background: #fff;
+}
+
+.floatbtnsw {
+    display: block;
+}
+
+.floatbtnsw.show {
+    display: block;
+}
+
+.tj_w {
+    width: 100%;
+    position: absolute;
+    left: 0px;
+    z-index: 500;
+}
+
+.tj_titlew {
+    display: block;
+    margin: 30rpx 30rpx 20rpx;
+    height: 44rpx;
+}
+
+.tj_title {
+    height: 44rpx;
+    color: #333;
+    line-height: 44rpx;
+    font-size: 40rpx;
+    display: inline-block;
+    border-radius: 22rpx;
+    vertical-align: top;
+    font-weight: 900;
+}
+
+.wfw {
+    margin: 0 20rpx;
+}
+
+.wf_left {
+    width: 50%;
+    display: inline-block;
+    vertical-align: top;
+}
+
+.wf_right {
+    width: 50%;
+    display: inline-block;
+    vertical-align: top;
+}
+
+.wf-item {
+    height: auto;
+    overflow: hidden;
+    padding: 0rpx 10rpx 32rpx;
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position: center;
+    width: 100%;
+    box-sizing: border-box;
+}
+
+.wf-itemw {
+    box-shadow: 0 6rpx 12rpx rgba(0,0,0,0.1);
+    border-radius: 14rpx;
+    overflow: hidden;
+    display: block;
+}
+
+.wf-item .imgw {
+    position: relative;
+    overflow: hidden;
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position: center;
+}
+
+.wf-item .imgw .vicon {
+    display: none;
+    height: 40rpx;
+    width: 40rpx;
+    background: url(https://s1.st.meishij.net/p2/20181206/20181206143142_460.png) 0rpx 0rpx no-repeat;
+    background-size: 40rpx 80rpx;
+    right: 20rpx;
+    top: 20rpx;
+    position: absolute;
+}
+
+.wf-type-2 .imgw .vicon {
+    display: block;
+}
+
+.wf-type-7 .imgw .vicon {
+    display: block;
+}
+
+.wf-type-8 .imgw .vicon {
+    display: block;
+}
+
+.wf-type-9 .imgw .vicon {
+    display: block;
+}
+
+.wf-item .infow {
+    background: #fff;
+    padding-bottom: 24rpx;
+}
+
+.wf-item .infow .title {
+    font-size: 32rpx;
+    color: #333;
+    font-weight: 600;
+    line-height: 44rpx;
+    max-height: 196rpx;
+    padding: 20rpx 30rpx 0rpx 30rpx;
+    position: relative;
+    display: -webkit-box;
+    -webkit-line-clamp: 4;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.wf-item .infow .descw {
+    max-height: 40rpx;
+    margin: 0rpx 30rpx 0rpx 30rpx;
+    position: relative;
+    font-size: 0rpx;
+}
+
+.wf-item .infow .desc {
+    display: inline-block;
+    vertical-align: top;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+    overflow: hidden;
+    position: relative;
+}
+
+.wf-item .infow .desc .p {
+    position: relative;
+    z-index: 10;
+    font-size: 20rpx;
+    line-height: 40rpx;
+    font-weight: 400;
+    color: #666;
+}
+
+.wf-item .infow .descw .desc .p:empty {
+    display: none;
+}
+
+.wf-item .infow .desc .bgc {
+    position: absolute;
+    bottom: 10rpx;
+    height: 10rpx;
+    background: #fde8e6;
+    left: 0rpx;
+    display: block;
+    width: 100%;
+}
+
+.wf-item .infow .userw {
+    height: 36rpx;
+    margin: 40rpx 30rpx 0rpx;
+    position: relative;
+}
+
+.wf-item .infow .userw .avatar {
+    font-size: 0rpx;
+}
+
+.wf-item .infow .userw .avatarw {
+    height: 36rpx;
+    width: 36rpx;
+    border-radius: 18rpx;
+    overflow: hidden;
+    box-shadow: 0rpx 2rpx 6rpx rgba(0,0,0,0.1);
+    display: inline-block;
+    vertical-align: top;
+}
+
+.wf-item .infow .userw .avatarw image {
+    display: block;
+    height: 36rpx;
+    width: 36rpx;
+}
+
+.wf-item .infow .userw .avatar .n {
+    display: inline-block;
+    vertical-align: top;
+    height: 36rpx;
+    line-height: 36rpx;
+    font-size: 18rpx;
+    color: #666;
+    padding-left: 10rpx;
+    max-width: 45%;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+
+.wf-item .infow .userw .view {
+    position: absolute;
+    right: 0rpx;
+    top: 0rpx;
+    height: 36rpx;
+    padding-left: 30rpx;
+    line-height: 36rpx;
+    color: #666;
+    font-size: 18rpx;
+}
+
+.wf-item .infow .userw .view .i {
+    position: absolute;
+    left: 0rpx;
+    top: 8rpx;
+    height: 20rpx;
+    width: 26rpx;
+    background: url(https://s1.st.meishij.net/p2/20181206/20181206143142_460.png) -8rpx -40rpx no-repeat;
+    background-size: 40rpx 80rpx;
+}
+
+.topbarww {
+    height: 44px;
+    width: 100%;
+}
+
+.topbarw {
+    height: 44px;
+    position: relative;
+    left: 0px;
+    top: 0px;
+    box-sizing: border-box;
+    z-index: 1000;
+    width: 100%;
+    background: rgba(255,255,255,0);
+    transition: all ease 0.2s;
+}
+
+.topbarw.show {
+    background: rgba(255,255,255,1);
+}
+
+.topbar {
+    height: 44px;
+    width: 100%;
+    z-index: 100;
+    position: relative;
+}
+
+.topbar .h1 {
+    color: #fff;
+    font-weight: 600;
+    font-size: 36rpx;
+    line-height: 44px;
+    text-align: left;
+    padding: 0rpx 32rpx;
+    transition: all ease 0.1s;
+}
+
+.topbar a {
+    display: block;
+    right: 0rpx;
+    bottom: 0rpx;
+    height: 88rpx;
+    line-height: 44px;
+    font-size: 32rpx;
+    font-weight: 400;
+    padding: 0rpx 32rpx;
+    color: #fff;
+    position: absolute;
+    transition: all ease 0.1s;
+}
+
+.topbarw.show h1 {
+    color: #333;
+}
+
+.topbarw.show a {
+    color: #333;
+}
+
+.topbg {
+    width: 100%;
+    padding-top: 115.2%;
+    background: url(https://s1.st.meishij.net/p2/20181211/20181211183303_645.png) center bottom no-repeat;
+    background-size: 100% auto;
+    position: absolute;
+    left: 0px;
+    top: 0px;
+}
+
+.swiper {
+    position: relative;
+    z-index: 100;
+    padding-top: 30rpx;
+    position: absolute;
+    left: 0rpx;
+    top: 0rpx;
+    width: 100%;
+    top: 128rpx;
+}
+
+.topitemw {
+    display: block;
+    position: relative;
+    width: 560rpx;
+    height: 560rpx;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+    border-radius: 32rpx;
+    overflow: hidden;
+    box-shadow: 0rpx 10rpx 40rpx rgba(0,0,0,0.2);
+}
+
+.topitemw .title {
+    position: absolute;
+    left: 0rpx;
+    bottom: 80rpx;
+    color: #fff;
+    font-weight: 600;
+    font-size: 40rpx;
+    line-height: 60rpx;
+    padding: 10rpx 30rpx;
+    width: 100%;
+    box-sizing: border-box;
+    text-shadow: 0rpx 2rpx 2rpx rgba(0,0,0,0.3);
+}
+
+.topitemw .avatarw {
+    position: absolute;
+    left: 0rpx;
+    bottom: 32rpx;
+    padding: 0rpx 32rpx;
+    height: 46rpx;
+    font-size: 0rpx;
+    overflow: hidden;
+    white-space: nowrap;
+    width: 100%;
+    box-sizing: border-box;
+}
+
+.topitemw .avatarw .imgw {
+    height: 46rpx;
+    width: 46rpx;
+    border-radius: 100%;
+    overflow: hidden;
+    display: inline-block;
+    vertical-align: top;
+    box-shadow: 0rpx 2rpx 2rpx rgba(0,0,0,0.3);
+}
+
+.topitemw .avatarw .imgw .img {
+    display: block;
+    height: 46rpx;
+    width: 46rpx;
+}
+
+.topitemw .avatarw .aun {
+    font-size: 30rpx;
+    line-height: 46rpx;
+    padding-left: 10rpx;
+    display: inline-block;
+    vertical-align: top;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    color: #fff;
+    text-shadow: 0rpx 2rpx 2rpx rgba(0,0,0,0.3);
+}
+
+.wf-type-v .imgw .vicon {
+    display: block;
+}
+
+.scaler {
+    padding-bottom: 40rpx;
+    opacity: 1;
+    transform: scale(0.9166666);
+    transition: all ease 0.2s;
+}
+
+.active .scaler {
+    opacity: 1;
+    transform: scale(1);
+}
+
+.bgimgset {
+    width: 100%;
+    padding-top: 114%;
+    position: absolute;
+    left: 0rpx;
+    top: 0rpx;
+    overflow: hidden;
+    background: #000;
+}
+
+.bgimgset .bgimgitem {
+    position: absolute;
+    left: 0rpx;
+    top: 0rpx;
+    transform: scale(1.1);
+    filter: blur(8rpx);
+    transition: opacity ease 0.6s;
+    opacity: 0.9;
+    height: 100%;
+    width: 100%;
+    opacity: 0;
+}
+
+.bgimgset .bgimgitem.show {
+    opacity: 0.4;
+}
+
+.listtitlew {
+    padding-top: 123%;
+    margin: 0px 30rpx 24rpx;
+    height: 40rpx;
+    font-size: 0rpx;
+}
+
+.listtitlew .t {
+    font-size: 36rpx;
+    color: #333;
+    font-weight: 600;
+    display: inline-block;
+    vertical-align: top;
+    line-height: 40rpx;
+}
+
+.listtitlew .tip {
+    margin-left: 6rpx;
+    position: relative;
+    z-index: 100;
+    display: inline-block;
+    vertical-align: bottom;
+    height: 34rpx;
+    padding: 0rpx 10rpx;
+    border-radius: 6rpx;
+    color: #ef5352;
+    background: #ffeae9;
+    font-size: 18rpx;
+    line-height: 34rpx;
+}
+
+.listtitlew .icon {
+    display: block;
+    background: url(https://s1.st.meishij.net/p2/20181207/20181207101127_525.png) center no-repeat;
+    background-size: 56rpx 40rpx;
+    height: 40rpx;
+    width: 56rpx;
+    margin-left: -8rpx;
+    margin-bottom: -4rpx;
+    display: inline-block;
+    vertical-align: bottom;
+}
+
+.topswiper {
+    height: 560rpx;
+    width: 100%;
+    margin-top: 30rpx;
+}
+
+.bottomline {
+    font-size: 28rpx;
+    text-align: center;
+    color: #bbb;
+    padding: 40rpx 0rpx;
+    line-height: 32rpx;
+}

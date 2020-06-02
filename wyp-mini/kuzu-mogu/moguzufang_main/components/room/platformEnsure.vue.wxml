@@ -1,0 +1,13 @@
+<template name="ce77b276">
+    <view class="_view ce77b276 {{'platformEnsure'+passClass}}">
+        <view class="_view ce77b276 h1">
+            <text class="_text ce77b276">平台保障</text>
+        </view>
+        <view class="_view ce77b276 ul">
+            <view class="_view ce77b276 li" key="{{index}}" wx:for="{{platformEnsure}}" wx:key="index">
+                <template is="0e24a461" data="{{...$root['0'],...$root[$kk+'ce77b276-0-'+index],$root:$root}}"></template>{{item.summary}}</view>
+            <view class="_view ce77b276 li" key="{{platformEnsure.length+item}}" wx:for="{{(3-platformEnsure.length%3)%3}}" wx:key="platformEnsure.length+item"></view>
+        </view>
+    </view>
+</template>
+<import src="/components/mgImage.vue.wxml"></import>

@@ -1,0 +1,111 @@
+<import src="/dist/toptips/index.wxml"></import>
+<import src="../template/foodlist/foodlist.wxml"></import>
+<template is="zan-toptips" data="{{zanTopTips:zanTopTips}}"></template>
+<form bindsubmit="commitOrder">
+    <view class="container">
+        <view class="fco-top-container">
+            <view class="zan-panel fco-item-container" wx:if="{{cyType==1}}">
+                <view class="fco-label">桌号
+          <text wx:if="{{table.id}}">: {{table.typeName}} {{table.diningTableNo}}</text>
+                </view>
+                <image bindtap="handleScan" class="fco-scan" src="http://imgcdnali.wfenxiao.com.cn/xcx/c/food/ic_scan.png"></image>
+            </view>
+            <view class="zan-panel" wx:if="{{cyType==0}}">
+                <view class="fco-item-container">
+                    <view class="fco-label">用餐时间 </view>
+                    <view class="fco-item-right">
+                        <view class="fco-placeholder" wx:if="{{order.isOrder!=1}}">餐厅暂未营业</view>
+                        <picker bindchange="bindPickerChange" range="{{timeArray}}" value="{{index}}" wx:if="{{order.isOrder==1}}">
+                            <view class="fco-placeholder" wx:if="{{timeIndex===-1}}">请选择用餐时间</view>
+                            <view class="fco-value" wx:else>
+                {{fco.getText(times,times.timeData[timeIndex-1],timeIndex)}}
+              </view>
+                        </picker>
+                        <wxc-icon color="#979797" style="margin-bottom:10rpx;" type="arrow-right"></wxc-icon>
+                    </view>
+                </view>
+                <view class="fco-item-container" style="font-size:24rpx;color:#b1b1b1">提示: 根据当天实际完成情况，您指定的到店时间可能会顺延</view>
+            </view>
+            <view class="fco-child-container" wx:if="{{cyType==0}}">
+                <view class="zan-panel fco-item-container">
+                    <view class="fco-label">预定人姓名 </view>
+                    <input class="fco-value" name="reserveName" placeholder="请输入预定人姓名" placeholderClass="fco-placeholder"></input>
+                </view>
+                <view class="zan-panel fco-item-container">
+                    <view class="fco-label">预定人手机号 </view>
+                    <input class="fco-value" maxlength="11" name="reserveMobile" placeholder="请输入预定人手机号" placeholderClass="fco-placeholder" type="number"></input>
+                </view>
+            </view>
+            <view class="zan-panel fco-item-container">
+                <view class="fco-label">买家备注</view>
+                <view bindtap="handleLeaveMessage" class="fco-item-right">
+                    <view class="fco-value fco-elip" wx:if="{{userMsg}}">
+            {{userMsg}}
+          </view>
+                    <view class="fco-placeholder" wx:else>
+            订单备注30字以内
+          </view>
+                    <wxc-icon color="#979797" style="margin-bottom:10rpx;" type="arrow-right"></wxc-icon>
+                </view>
+            </view>
+            <view class="zan-panel fco-child-container">
+                <view bindtap="selectCard" class="fco-item-container">
+                    <view class="fco-label">会员卡</view>
+                    <view class="fco-item-right">
+                        <view hidden="{{!(order.card&&order.card.id)}}">
+                            <image class="fco-card-icon" src="{{order.card.logo}}"></image>
+                        </view>
+                        <view class="fco-value" wx:if="{{order.isDiscountShare==2}}">{{order.activityType==2?'团购':order.activityType==1?'秒杀':''}}商品不与其他优惠共享</view>
+                        <view class="fco-value" wx:else>{{order.card&&order.card.id?order.card.cardName:order.cardCount&&order.cardCount>0?order.cardCount+'张可用':'暂无可用会员卡'}}</view>
+                        <wxc-icon color="#979797" style="margin-bottom:10rpx;" type="arrow-right"></wxc-icon>
+                    </view>
+                </view>
+                <view bindtap="selectCoupon" class="fco-item-container">
+                    <view class="fco-label">优惠券</view>
+                    <view class="fco-item-right">
+                        <view class="fco-value" wx:if="{{order.isDiscountShare==2}}">{{order.activityType==2?'团购':order.activityType==1?'秒杀':''}}商品不与其他优惠共享</view>
+                        <view class="fco-value" wx:else>{{order.coupon&&order.coupon.id?order.coupon.name:order.couponCount&&order.couponCount>0?order.couponCount+'张可用':'暂无可用优惠券'}}</view>
+                        <wxc-icon color="#979797" style="margin-bottom:10rpx;" type="arrow-right"></wxc-icon>
+                    </view>
+                </view>
+            </view>
+            <view class="food_user_product">
+                <template is="foodlist" data="{{order:order}}"></template>
+            </view>
+        </view>
+        <view class="fco-bottom-container">
+            <view class="fco-bottom-left-container">
+                <text class="fco-bottom-left-tag">¥</text>
+                <text class="fco-bottom-left-price">{{order.total}}</text>
+            </view>
+            <button class="fco-bottom-btn" formType="submit"> 提交订单 </button>
+        </view>
+        <wxc-dialog _pid="{{_pid}}" bindcancel="onCancel" bindconfirm="onConfirm" class="wxc-dialog" confirmText="我知道了" title="以下商品购买数量超过限制">
+            <view wx:for="{{errGoodList}}" wx:key="{{index}}">
+                <view class="reject-reason">
+                    <image src="{{item.img}}"></image>
+                    <view class="reject-reason-content">
+                        <wxc-elip line="2">
+                            <text style="font-size:24rpx">{{item.goodsName}}</text>
+                        </wxc-elip>
+                        <view class="reject-reason-price">
+                            <text style="color:#ff2222; font-size:24rpx">￥{{item.price}}</text>
+                            <text style="color:#cccccc; font-size:24rpx">X{{item.quantity}}</text>
+                        </view>
+                    </view>
+                </view>
+            </view>
+        </wxc-dialog>
+    </view>
+</form>
+<wxs module="fco">
+var getText = (function(times, item, index) {
+    if (index == 0) {
+        return ('立即用餐(立即送达)')
+    } else {
+        console.log(item, times, times.timeData, index, '---');
+        return (times.year + '.' + times.month + '.' + times.day + ' ' + item.startTime + '-' + item.endTime)
+    }
+});
+module.exports.getText = getText;
+</wxs>

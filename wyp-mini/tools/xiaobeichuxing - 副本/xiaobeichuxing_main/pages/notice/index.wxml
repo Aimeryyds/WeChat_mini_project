@@ -1,0 +1,21 @@
+<view class="page">
+    <my-component bind:myevent="myEventListener" innerText="我的消息"></my-component>
+    <view class="main" style=" margin-top: {{myHight}}px"></view>
+    <view class="main" style=" margin-top: {{myHight}}px"></view>
+    <view wx:if="{{noticeList.length==0}}">
+        <image class="no" src="{{no}}"></image>
+        <view class="tit">暂时还没有消息</view>
+    </view>
+    <block wx:else>
+        <view bindtap="showtices" class="tice-list" data-cont="{{item.content}}" data-rid="{{item.rid}}" data-time="{{item.time}}" data-title="{{item.title}}" wx:for="{{noticeList}}" wx:key="index">
+            <view class="news">
+                <view class="title" wx:if="{{item.isread==0}}">
+                    <text class="red-t15"></text>{{item.title}}</view>
+                <view class="title" wx:else>
+                    <text></text>{{item.title}}</view>
+                <view class="time">{{item.senddate}}</view>
+            </view>
+            <view class="arrow iconfont icon-angle-right"></view>
+        </view>
+    </block>
+</view>

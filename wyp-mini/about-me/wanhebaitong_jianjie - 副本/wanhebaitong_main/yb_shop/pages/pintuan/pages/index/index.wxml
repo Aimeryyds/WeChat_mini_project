@@ -1,0 +1,49 @@
+<import src="../template/toast.wxml"></import>
+<import src="../template/loading.wxml"></import>
+<scroll-view bindscrolltolower="scrolltolower" class="scroll-view-y" lowerThreshold="50" scrollTop="{{scrollTop}}" scrollWithAnimation="true" scrollY="true" style="height: {{windowHeight-42}}px;">
+    <swiper autoplay="true" circular="true" indicatorActiveColor="#f00" indicatorColor="#fff" indicatorDots="true">
+        <swiper-item wx:for="{{advert}}" wx:key="unique">
+            <image mode="aspectFill" src="{{item.img}}"></image>
+        </swiper-item>
+    </swiper>
+    <view class="row topic-group" wx:if="{{category&&category.length>0}}">
+        <view class="topic-item" wx:for="{{category}}">
+            <navigator style="outline: none;" url="/yb_shop/pages/pintuan/pages/index/list?cid={{item.id}}">
+                <view class="icon">
+                    <image src="{{item.img}}"></image>
+                </view>
+                <view>{{item.name}}</view>
+            </navigator>
+        </view>
+    </view>
+    <view class="goods-group" style="margin-top: 15rpx;">
+        <block wx:for="{{goodsList}}" wx:key="unique">
+            <view bindtap="showGoodsDetial" class="goods-item pull-left" data-id="{{item.id}}">
+                <image mode="aspectFill" src="{{item.indexImg}}"></image>
+                <view class="goods-title">{{item.name}}</view>
+                <view class="pull-left kaituan">
+                    <view class="pull-left" style="margin-top: 20rpx;">
+                        <text class="goods-price">¥{{item.gprice}}</text>
+                        <text class="goods-mprice">¥{{item.price}}</text>
+                        <text class="user_no">{{item.groupNum}}人团</text>
+                    </view>
+                    <view class="pull-right" style="margin-right: 35rpx;">
+                        <view class="group-userImg" wx:if="{{item.groupList.length>0}}">
+                            <image class="{{idx==1?'two':''}}" mode="" src="{{val.user_headimg}}" wx:for="{{item.groupList}}" wx:for-index="idx" wx:for-item="val" wx:key="unique"></image>
+                        </view>
+                        <view class="btn text-center" style="border:0;font-size:30rpx;">去开团
+                <image src="../../resource/left.png"></image>
+                        </view>
+                    </view>
+                </view>
+            </view>
+            <view class="clearfix"></view>
+        </block>
+    </view>
+    <template is="toast" data="{{toast:toast}}"></template>
+    <template is="loading" data="{{loading:loading}}"></template>
+</scroll-view>
+<block wx:if="{{showtabbar}}">
+    <view style="height:100rpx"></view>
+    <include src="/yb_shop/pages/common/menu.wxml"></include>
+</block>

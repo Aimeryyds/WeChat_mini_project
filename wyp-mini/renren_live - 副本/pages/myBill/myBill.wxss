@@ -1,0 +1,117 @@
+view,text {
+    box-sizing: border-box;
+}
+
+.bill_main {
+    width: 100%;
+    background: #FAFAFA;
+    overflow: hidden;
+}
+
+.bill_top {
+    position: fixed;
+    left: 0;
+    right: 0;
+    z-index: 100;
+    width: 100%;
+    background: #fff;
+    height: 45px;
+}
+
+.bill_top .line_icon {
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%,-50%);
+    width: 2px;
+    height: 24rpx;
+    background: #EBECF1;
+}
+
+.bill_top view {
+    float: left;
+    display: flex;
+    justify-content: center;
+    width: 50%;
+    height: 45px;
+    line-height: 45px;
+    color: #555;
+    font-size: 30rpx;
+    text-align: center;
+}
+
+.bill_top view text {
+    height: 100%;
+    color: #333;
+    border-bottom: 8rpx solid transparent;
+}
+
+.bill_top .active text {
+    color: #008EFF;
+    border-bottom: 8rpx solid #008EFF;
+}
+
+.remain {
+    padding-left: 20rpx;
+    height: 90rpx;
+    line-height: 90rpx;
+    color: #333;
+    font-size: 24rpx;
+    font-weight: bold;
+    background: #FAFAFA;
+}
+
+.remain .remain_num {
+    margin-left: 25rpx;
+    padding-left: 25rpx;
+    padding-right: 8rpx;
+    color: #ffd600;
+    border-left: 1px solid #D4D5DA;
+}
+
+.remain .remain_icon {
+    color: #999;
+}
+
+.bill_item {
+    padding: 35rpx 20rpx 30rpx 20rpx;
+    height: 147rpx;
+    background: #fff;
+    border-bottom: 1px solid #EFEFF0;
+}
+
+.bill_item .name {
+    display: flex;
+    justify-content: space-between;
+    font-size: 28rpx;
+    color: #171717;
+}
+
+.bill_item .name .left {
+    font-size: 30rpx;
+}
+
+.bill_item .name .right text {
+    color: #ffd600;
+}
+
+.bill_item .time {
+    display: flex;
+    justify-content: space-between;
+    font-size: 24rpx;
+    color: #a8a9ad;
+}
+
+.bill_item .time .right {
+    color: #565658;
+}
+
+.bill_item .left {
+    width: 75%;
+    text-align: left;
+}
+
+.bill_item .right {
+    width: 25%;
+    text-align: right;
+}

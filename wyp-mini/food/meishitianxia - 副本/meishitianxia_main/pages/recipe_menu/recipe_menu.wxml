@@ -1,0 +1,12 @@
+<scroll-view scrollWithAnimation="true" scrollY="true" style="height: {{height}}px;">
+    <view class="list3 clear mt40">
+        <block wx:for="{{menulist}}" wx:key="menulist">
+            <navigator url="../mofang_info/mofang_info?domain={{item.id}}">
+                <image class="loads" lazyLoad="true" src="{{item.pic}}?x-oss-process=style/c320"></image>
+                <view class="line">{{item.tagname}}</view>
+            </navigator>
+            <view class="blank" wx:if="{{index%9==8}}"></view>
+        </block>
+    </view>
+    <view>　</view>
+</scroll-view>

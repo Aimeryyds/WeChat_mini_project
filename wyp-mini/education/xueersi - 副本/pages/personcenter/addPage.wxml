@@ -1,0 +1,37 @@
+<view class="add-address">
+    <view class="box">
+        <view class="name">
+            <text class="text-style">收货人</text>
+            <input bindinput="trueName" placeholder="请填写真实姓名" placeholderClass="placeholderclass" value="{{name}}"></input>
+        </view>
+        <view class="name">
+            <text class="text-style">联系电话</text>
+            <input bindinput="phoneInput" placeholder="请填写手机号码" placeholderClass="placeholderclass" type="number" value="{{phone}}"></input>
+        </view>
+        <picker bindchange="bindRegionChange" bindcolumnchange="bindMultiPickerColumnChange" mode="multiSelector" range="{{multiArray}}" value="{{multiIndex}}">
+            <view class="name">
+                <view class="picker">
+                    <view class="text-style">
+                    所在地区
+                    <text wx:if="{{areaSelectResult}}">{{areaSelectResult}}</text>
+                        <text class="add_placeholder" wx:else>请选择所在地区</text>
+                    </view>
+                </view>
+            </view>
+        </picker>
+        <view class="more-address">
+            <textarea bindinput="addressDetail" placeholder="请输入收货人详细地址" placeholderClass="placeholderclass" style="width:100%;height:160rpx;" value="{{address}}"></textarea>
+        </view>
+    </view>
+    <view class="line"></view>
+    <view class="default-box">
+        <text class="text-style default-style">设为默认</text>
+        <switch bindchange="switch1Change" checked="{{riIsDefault==1}}"></switch>
+    </view>
+    <button bindtap="addAddress" class="btn-save" disable="{{saving}}" loading="{{saving}}">保存地址</button>
+</view>
+<view animation="{{$taltoast$animationData}}" class="tal-toast-container" style="top:{{$taltoast$vertical}}%;" wx:if="{{$taltoast$toastVisible}}">
+    <view class="tal-toast">
+        <text>{{$taltoast$toastMessage}}</text>
+    </view>
+</view>

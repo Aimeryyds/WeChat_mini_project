@@ -1,0 +1,38 @@
+<view class="my-account">
+    <view bindtap="goToInfo" class="my-card">
+        <image class="head-img" src="{{stu_avatar}}"></image>
+        <view class="my-box">
+            <view class="my-name">{{stu_name}}</view>
+            <view>
+                <view class="my-city">{{stu_area}}</view>
+                <view class="my-grade">{{stu_grade}}</view>
+            </view>
+        </view>
+        <view class="num-box">
+            <view class="num-first">No.</view>
+            <view class="num-second">{{firstNumber}}</view>
+            <view class="num-second">{{secondNumber}}</view>
+            <view class="num-second">{{threeNumber}}</view>
+            <view catchtap="copy" class="copy">复制</view>
+        </view>
+    </view>
+    <view class="other">其他学员</view>
+    <view class="some-box">
+        <view class="forlist" wx:for="{{accountList}}" wx:for-item="_item" wx:key="index">
+            <image class="head-imglist" src="{{_item.avatar}}"></image>
+            <view class="boxlist">
+                <view class="namelist">{{_item.username}}</view>
+                <view class="gradelist">{{_item.grd_name}}</view>
+            </view>
+            <view class="change-btn">
+                <view bindtap="tochange" class="change-font" data-wpytochange-a="{{_item}}">点击切换</view>
+            </view>
+        </view>
+        <view class="addlist">
+            <view bindtap="toAdd" class="add-btn" wx:if="{{isBtn}}">
+                <view class="add-font">+ 添加学员</view>
+            </view>
+            <view class="tips">温馨提示：最多可关联5名学员</view>
+        </view>
+    </view>
+</view>

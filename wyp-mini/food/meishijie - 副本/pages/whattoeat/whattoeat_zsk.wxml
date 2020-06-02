@@ -1,0 +1,37 @@
+<navigation-bar enable="{{enable}}" title="小儿发热知识库" wx:if="{{showtopbar}}"></navigation-bar>
+<view class="container">
+    <view class="loadtip {{hide_loadtip?'hide':''}}">共有{{zskdata_list.data.total_amount}}篇文章</view>
+    <view class="leftbar">
+        <scroll-view class="leftbar_scroll" scrollY="false" style="height:{{leftbar_height}}px">
+            <view class="leftbar_item {{item.id==tab_current?'current':''}}" wx:for="{{zskdata_tab.data}}" wx:for-index="i" wx:key="key">
+                <view bindtap="changtab" class="link" data-index="{{item.id}}">
+                    <view class="line"></view>
+                    <image class="img" src="{{item.img}}"></image>
+                    <view class="t">{{item.title}}</view>
+                </view>
+            </view>
+        </scroll-view>
+    </view>
+    <view class="rightcon">
+        <scroll-view bindscrolltolower="loadmore_wz" class="rightcon_scroll" scrollY="false" style="height:{{leftbar_height}}px">
+            <view class="zsk_item" wx:for="{{zskdata_list.data.items}}" wx:for-index="i" wx:key="key">
+                <navigator class="link" hoverClass="navigator-hover" url="/pages/whattoeat/article?id={{item.id}}">
+                    <view class="imgw" style="background:#f5f5f5 url({{item.cover_img}}) center no-repeat;background-size:cover;">
+                        <view class="vicon" wx:if="{{item.is_video=='1'}}"></view>
+                    </view>
+                    <view class="t">{{item.content}}</view>
+                    <view class="c">
+                        <view class="name">{{item.user_info.nickname}}</view>
+                        <block wx:if="{{item.user_info.professional_title}}"> - </block>{{item.user_info.professional_title}}</view>
+                </navigator>
+            </view>
+            <view class="nocontent" style="padding-top:160rpx;" wx:if="{{zskdata_list&&!(zskdata_list.data.items.length>0)}}">
+                <image src="https://s1.st.meishij.net/p2/20190621/20190621181912_633.png" style="display:block;width:448rpx;height:300rpx;margin:0rpx auto;"></image>
+                <view style="font-size:28rpx;color:#999;text-align:center;line-hegiht:42rpx;margin-top:30rpx;">这里暂无可食用食材哦~</view>
+            </view>
+        </scroll-view>
+    </view>
+</view>
+<loading hidden="{{requeseDone||requeseFail||noData}}">
+ 加载中...
+</loading>

@@ -1,0 +1,22 @@
+<view class="order-item" wx:if="{{!noInfo}}" wx:for="{{collects}}">
+    <view class="carts-item">
+        <view>
+            <image class="carts-image" mode="aspectFill" src="{{item.thumb}}"></image>
+        </view>
+        <view class="carts-text">
+            <text class="carts-title">{{item.title}}</text>
+            <view class="carts-subtitle">
+                <text>￥{{item.marketprice}}</text>
+            </view>
+            <view class="order-footer">
+                <text bindtap="details" class="btn-pay" data-goods-id="{{item.goodsid}}">购买</text>
+                <text bindtap="deleteGoods" class="btn-delete" data-goods-id="{{item.id}}">删除</text>
+            </view>
+        </view>
+    </view>
+</view>
+<view class="noInfo" wx:if="{{noInfo}}">
+    <image src="https://tws.cnweisou.com/images/becomeRegister.png"></image>
+    <text>还没有任何收藏喔</text>
+</view>
+<loading wx:if="{{loading}}"></loading>

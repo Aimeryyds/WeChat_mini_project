@@ -1,0 +1,24 @@
+<view class="page">
+    <my-component innerText="关于我们"></my-component>
+    <view class="logo">
+        <image class="logo" src="{{logo}}"></image>
+        <text class="tit">{{edition}}</text>
+        <view class="tit">小呗出行</view>
+    </view>
+    <view class="content">
+        <view wx:for="{{list}}" wx:key="index">
+            <view bindtap="makePhoneCall" class="list" wx:if="{{index===2}}">
+                <view class="liat-l epl">
+                    <text>{{item.epl}}</text>
+                </view>
+                <view class="liat-l aling-r">{{item.num}}</view>
+            </view>
+            <view class="list" wx:else>
+                <view class="liat-l epl">
+                    <text>{{item.epl}}</text>
+                </view>
+                <view class="liat-l aling-r">{{item.num}}</view>
+            </view>
+        </view>
+    </view>
+</view>

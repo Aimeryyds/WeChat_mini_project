@@ -1,0 +1,13 @@
+<import src="../../wxParse/wxParse.wxml"></import>
+<import src="../news/footer-view.wxml"></import>
+<view wx:if="{{isProduct==1}}">
+    <image class="item-cell-img" mode="widthFix" src="{{headerImg}}"></image>
+    <text class="item-cell-title">{{navTitle}}</text>
+</view>
+<view class="" wx:if="{{id}}">
+    <template is="footerView" data="{{errorMsg:errorMsg}}"></template>
+    <view class="basis-rich">
+        <template is="wxParse" data="{{wxParseData:content.nodes}}"></template>
+    </view>
+</view>
+<include src="textview.wxml" wx:else></include>

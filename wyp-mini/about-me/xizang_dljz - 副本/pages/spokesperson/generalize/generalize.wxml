@@ -1,0 +1,58 @@
+<import src="../../../component/s-share-wrap/s-share-wrap.wxml"></import>
+<view class="container">
+    <view class="search-wrap">
+        <input bindconfirm="search" placeholder="输入查找的商品名"></input>
+    </view>
+    <view class="cate-tab">
+        <view bindtap="cateDidClick" class="cate-item {{current_type==0?'sel':''}}" id="0">
+            <text>全部</text>
+        </view>
+        <view bindtap="cateDidClick" class="cate-item {{current_type==1?'sel':''}}" id="1">
+            <text>佣金</text>
+        </view>
+        <view bindtap="cateDidClick" class="cate-item {{current_type==2?'sel':''}}" id="2">
+            <text>最新</text>
+        </view>
+        <view bindtap="cateDidClick" class="cate-item {{current_type==3?'sel':''}}" id="3">
+            <text>价格</text>
+            <view class="arrow-wrap">
+                <image class="" src="/images/spokesperson/generalize/icon_select.png"></image>
+                <image class="up" src="/images/spokesperson/generalize/icon_rise_sel.png" wx:if="{{price_rank==1}}"></image>
+                <image class="drop" src="/images/spokesperson/generalize/icon_drop_sel.png" wx:if="{{price_rank==-1}}"></image>
+            </view>
+        </view>
+    </view>
+    <view class="shop-list">
+        <view class="shop-item" wx:for="{{list}}" wx:key="*this">
+            <image src="{{item.thumb}}"></image>
+            <view class="item-right">
+                <view class="item-t">
+                    <text>{{item.name}}</text>
+                    <view>
+                        <text>¥{{item.price}}</text>
+                        <text>(佣金比例: {{item.rate}}%)</text>
+                    </view>
+                </view>
+                <view class="item-b">
+                    <text>预计收益: {{item.amount}}</text>
+                    <image bindtap="openSSWrap" id="{{index}}" src="/images/spokesperson/generalize/icon_share.png"></image>
+                </view>
+            </view>
+        </view>
+    </view>
+    <view class="load-more" wx:if="{{showMore}}">
+        <text>继续拖动，查看更多</text>
+    </view>
+</view>
+<view class="generate-wrap">
+    <view bindtap="closeGenWrap" class="bg" style="display: {{show_generate?'fixed':'none'}}"></view>
+    <view class="generate-box" style="display: {{show_generate?'block':'none'}}">
+        <view class="generating" style="width: {{box_w}}rpx; height: {{box_h}}rpx">
+            <image src="/images/wait.png"></image>
+            <text>图片生成中...</text>
+        </view>
+        <image bindtap="previewPhoto" class="pre-img" src="{{photo}}" style="width: {{generate_w}}rpx; height: {{generate_h}}rpx; left: {{generate_l}}; top: {{generate_t}}" wx:if="{{photo}}"></image>
+        <view bindtap="savePhoto" class="generate-btn" style="background: {{photo?'#b90404':'#707070'}}">保存图片到相册</view>
+    </view>
+</view>
+<template is="s-share-wrap" data="{{alias:alias,amount:goods.amount,show_s_wrap:show_s_wrap,openType:'redirectTo'}}"></template>

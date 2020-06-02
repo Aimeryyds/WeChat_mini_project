@@ -1,0 +1,51 @@
+<template name="info">
+    <view class="contact_img">
+        <image mode="aspectFill" src="{{info.contact_background}}"></image>
+    </view>
+    <view class="card1">
+        <view class="card2">
+            <image backgroundSize="cover" class="userinfo-avatar logo" src="{{info.contact_logo}}"></image>
+        </view>
+        <view class="contact_name" style="font-size:{{info.size}}px;">{{info.contact_name}}</view>
+    </view>
+    <view class="contact_text first">
+        <image mode="scaleToFill" src="../../resource/images/phone.png"></image>
+        <text class="le">{{info.phone}} </text>
+        <text bindtap="calling" class="ri" style="color:{{info.tcolor}}">点击拨打</text>
+    </view>
+    <view class="contact_text" wx:if="{{info.phone2}}">
+        <image mode="scaleToFill" src="../../resource/images/phone.png"></image>
+        <text class="le">{{info.phone2}} </text>
+        <text bindtap="calling2" class="ri" style="color:{{info.tcolor}}">点击拨打</text>
+    </view>
+    <view class="contact_text" wx:if="{{info.qq}}">
+        <image mode="scaleToFill" src="../../resource/images/qq.png"></image>
+        <text class="le">{{info.qq}}</text>
+    </view>
+    <view class="contact_text" wx:if="{{info.email}}">
+        <image mode="scaleToFill" src="../../resource/images/email.png"></image>
+        <text class="le">{{info.email}}</text>
+    </view>
+    <view class="contact_text wechat" wx:if="{{info.wechat}}">
+        <image mode="scaleToFill" src="../../resource/images/wechat.png"></image>
+        <text class="le">{{info.wechat}}</text>
+    </view>
+    <view class="contact_text" wx:if="{{info.website}}">
+        <image mode="scaleToFill" src="../../resource/images/website.png"></image>
+        <text class="le">{{info.website}}</text>
+    </view>
+    <view class="contact_address">
+        <view>
+            <image mode="scaleToFill" src="../../resource/images/address.png"></image>
+        </view>
+        <view class="context">
+            <view class="left_text">{{info.address}}</view>
+            <view class="right_btn">
+                <text bindtap="gomap" class="ri" style="color:{{info.tcolor}}">地图导航</text>
+            </view>
+        </view>
+    </view>
+    <view class="contact_customer  {{info.custom_close=='1'?'hide':''}}">
+        <button class="contact_button" openType="contact" style="background-color:{{info.tcolor}}">在线客服</button>
+    </view>
+</template>

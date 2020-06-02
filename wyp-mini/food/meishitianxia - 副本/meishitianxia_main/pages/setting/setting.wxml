@@ -1,0 +1,19 @@
+<view bindtap="chooseImage" class="updateUserAvatar">
+    <image src="{{avatar}}"></image>
+    <view>换头像</view>
+</view>
+<view class="c2list">
+    <navigator class="c2list_item" url="../changename/changename?name={{username}}">
+        <text class="c2list_left">修改用户名</text>
+        <text class="c2list_right">{{username}}</text>
+        <view class="c2list_url"></view>
+    </navigator>
+    <navigator class="c2list_item" url="../follow/follow">
+        <text class="c2list_left">我的关注</text>
+        <text class="c2list_right">管理</text>
+        <view class="c2list_url"></view>
+    </navigator>
+</view>
+<view class="bottom">
+    <view bindtap="do_logout" class="logout">退出登录</view>
+</view>

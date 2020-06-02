@@ -1,0 +1,7 @@
+<template name="quantity">
+    <view class="quantity" style="display:flex;align-items: center;">
+        <image bindtap="handleQuantityMinus" data-component-id="{{componentId}}" data-data="{{data}}" data-quantity="{{quantity}}" src="http://imgcdnali.wfenxiao.com.cn/xcx/c/subtract.png" style="height:48rpx;width:48rpx"></image>
+        <text style="font-size: 24rpx;text-align:center;width: 48rpx">{{quantity.quantity||1}}</text>
+        <image bindtap="handleQuantityPlus" data-component-id="{{componentId}}" data-data="{{data}}" data-quantity="{{quantity}}" src="{{quantity.quantity<quantity.max?'http://imgcdnali.wfenxiao.com.cn/xcx/c/plus.png':'http://imgcdnali.wfenxiao.com.cn/xcx/c/plus-disable.png'}}" style="height:48rpx;width:48rpx"></image>
+    </view>
+</template>

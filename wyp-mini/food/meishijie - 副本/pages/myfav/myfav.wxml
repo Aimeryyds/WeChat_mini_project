@@ -1,0 +1,130 @@
+<navigation-bar enable="{{enable}}" title="收藏"></navigation-bar>
+<view class="container">
+    <view bindtap="pageReload" class="cplist_nodata" wx:if="{{requeseFail}}">{{requeseFailTips}}</view>
+    <view class="nui_w" wx:if="{{noUserInfo}}">
+        <view class="nui_tip">使用收藏功能需要您的授权允许哦~</view>
+        <button bindgetuserinfo="getInfo" class="nui_button" openType="getUserInfo">授权</button>
+    </view>
+    <view class="cplist_nodata" wx:if="{{noData}}">{{noDataTips}}</view>
+    <view style="padding-top:{{barHeight}}px;width:100%;" wx:else>
+        <view class="tabww">
+            <view class="tabw" style="top:{{barHeight}}px">
+                <view bindtap="taptab" class="tabitem {{tab==1?'active':''}}" data-type="1">
+                    <view class="c">全部</view>
+                </view>
+                <view bindtap="taptab" class="tabitem {{tab==3?'active':''}}" data-type="3">
+                    <view class="c">食秀</view>
+                </view>
+            </view>
+        </view>
+        <view wx:if="{{tab==1}}">
+            <view class="cplist_nodata" wx:if="{{noData}}">{{noDataTips_caipu}}</view>
+            <view wx:for="{{favData}}" wx:key="key">
+                <navigator class="recipeitem" hoverClass="navigator-hover" url="/pages/article/article?id={{item.id}}" wx:if="{{item.item_type==3}}">
+                    <view class="recipeitemw">
+                        <view class="cpimgw" style="background:#f5f5f5 url({{item.img}}) center no-repeat;background-size:cover;"></view>
+                        <view class="cpinfow">
+                            <view class="wznamew">
+                                <view class="wzname">{{item.title}}</view>
+                            </view>
+                            <view style="font-size:28rpx;color:#666;line-height:42rpx;">{{item.desc}}</view>
+                        </view>
+                    </view>
+                </navigator>
+                <navigator class="recipeitem" hoverClass="navigator-hover" url="/pages/content/content?id={{item.id}}" wx:if="{{item.item_type==1}}">
+                    <view class="recipeitemw">
+                        <view class="cpimgw" style="background:#f5f5f5 url({{item.img}}) center no-repeat;background-size:cover;"></view>
+                        <view class="cpinfow">
+                            <view class="cpnamew">
+                                <text class="cpname">{{item.title}}</text>
+                            </view>
+                            <view class="tagw">
+                                <view class="tag" wx:if="{{item.label[0]}}">
+                                    <view class="t" wx:if="{{item.label[0].name}}">{{item.label[0].name}}</view>
+                                    <view class="c" wx:if="{{item.label[0].desc}}">{{item.label[0].desc}}</view>
+                                </view>
+                            </view>
+                            <view class="starw">
+                                <view wx:for="{{[1,2,3,4,5]}}" wx:for-item="i" wx:key="key">
+                                    <image src="{{starUrl1}}" wx:if="{{item.rate-i>=0}}"></image>
+                                    <image src="{{starUrl2}}" wx:elif="{{item.rate-i+1>0}}"></image>
+                                    <image src="{{starUrl3}}" wx:else></image>
+                                </view>
+                            </view>
+                            <view class="viewdata">
+                                <view class="au">
+                                    <image src="{{item.author.avatar_url}}"></image>
+                                    <view class="strong">{{item.author.nickname}}</view>
+                                </view>
+                                <view class="vd">
+                                    <image src="{{iconUrl1}}"></image>
+                                    <text class="em">{{item.favor_amount||0}}</text>
+                                    <image src="{{iconUrl2}}"></image>
+                                    <text class="em">{{item.viewed_amount||0}}</text>
+                                </view>
+                            </view>
+                        </view>
+                    </view>
+                </navigator>
+                <navigator class="recipeitem" hoverClass="navigator-hover" url="/pages/foodshow_content/foodshow_content?id={{item.id}}" wx:if="{{item.item_type==4}}">
+                    <view class="recipeitemw">
+                        <view class="cpimgw" style="background:#f5f5f5 url({{item.img}}) center no-repeat;background-size:cover;"></view>
+                        <view class="cpinfow">
+                            <view class="fsnamew">
+                                <view class="fsname">{{item.title}}</view>
+                            </view>
+                            <view class="fstagw">
+                                <block wx:if="{{item.topic_info.topic_title}}">
+                                    <view class="fstag"># {{item.topic_info.topic_title}}</view>
+                                    <view class="line"></view>
+                                </block>
+                            </view>
+                            <view class="viewdata">
+                                <view class="au">
+                                    <image src="{{item.author.avatar_url}}"></image>
+                                    <view class="strong">{{item.author.nickname}}</view>
+                                </view>
+                                <view class="vd">
+                                    <text class="em">{{item.time}}</text>
+                                </view>
+                            </view>
+                        </view>
+                    </view>
+                </navigator>
+            </view>
+        </view>
+        <view wx:if="{{tab==3}}">
+            <view class="cplist_nodata" wx:if="{{noData_foodshow}}">{{noDataTips_foodshow}}</view>
+            <view wx:for="{{favData_foodshow}}" wx:key="key">
+                <navigator class="recipeitem" hoverClass="navigator-hover" url="/pages/foodshow_content/foodshow_content?id={{item.id}}">
+                    <view class="recipeitemw">
+                        <view class="cpimgw" style="background:#f5f5f5 url({{item.img}}) center no-repeat;background-size:cover;"></view>
+                        <view class="cpinfow">
+                            <view class="fsnamew">
+                                <view class="fsname">{{item.content}}</view>
+                            </view>
+                            <view class="fstagw">
+                                <block wx:if="{{item.topic_info.topic_title}}">
+                                    <view class="fstag"># {{item.topic_info.topic_title}}</view>
+                                    <view class="line"></view>
+                                </block>
+                            </view>
+                            <view class="viewdata">
+                                <view class="au">
+                                    <image src="{{item.author.avatar_url}}"></image>
+                                    <view class="strong">{{item.author.nickname}}</view>
+                                </view>
+                                <view class="vd">
+                                    <text class="em">{{item.time}}</text>
+                                </view>
+                            </view>
+                        </view>
+                    </view>
+                </navigator>
+            </view>
+        </view>
+    </view>
+</view>
+<loading hidden="{{requeseDone||!hasNextPage}}">
+ 加载中...
+</loading>

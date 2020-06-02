@@ -1,0 +1,30 @@
+<view style="overflow: hidden">
+    <view class="member-card" wx:for="{{orderList}}" wx:key="index">
+        <view class="card-item" style="background-color: {{!item.isValid?'rgb(120, 120, 120)':mainColor}};color: {{!item.isValid?'#fff':textColor}}" wx:if="{{type==0}}">
+            <view>
+                <view style="display: flex;align-items: flex-end;">
+                    <text style="font-size: 40rpx;font-weight:600;color:#fff">{{item.name}}</text>
+                    <view style="margin-left: 5px;font-size: 26rpx;">次数:{{item.useCount}}/{{item.maxRide==0?'不限':item.maxRide}}({{item.timeCount}}分钟/次)</view>
+                </view>
+                <view style="margin-top: 10rpx">{{item.buyTime}}</view>
+            </view>
+            <view style="margin-bottom:10rpx">
+                <view style="margin-bottom:4rpx;color:#fff">{{!item.isValid?'已过期':'生效'}}</view>
+                <view>至 {{item.endDate}}</view>
+            </view>
+        </view>
+        <view class="card-item" style="background-color: {{item.overTime?'rgb(120, 120, 120)':mainColor}};color: {{item.overTime?'#fff':textColor}}" wx:else>
+            <view>
+                <view style="font-size: 40rpx;font-weight:600;color:#fff">{{item.memberFeeName}}</view>
+                <view style="margin-top: 10rpx">{{item.buyTime}}</view>
+            </view>
+            <view style="margin-bottom:10rpx">
+                <view style="margin-bottom:4rpx;">购买金额：{{item.money/100}}元</view>
+                <view>至 {{item.expireTime}}</view>
+            </view>
+        </view>
+    </view>
+    <view class="none-data" wx:if="{{orderList.length==0}}">
+    暂无数据
+  </view>
+</view>

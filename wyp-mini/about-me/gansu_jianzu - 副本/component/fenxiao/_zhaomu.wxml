@@ -1,0 +1,14 @@
+<template name="zhaomu">
+    <template is="zan-toast" data="{{zanToast:zanToast}}"></template>
+    <view class="zan-cell card-title-cell">
+        <view class="zan-c-red zan-font-16">{{title}}</view>
+    </view>
+    <view style="padding:20rpx">
+        <template is="wxParse" data="{{wxParseData:content.nodes}}"></template>
+    </view>
+    <view bindtap="applyRecruitment" class="zhaomu-rigster-footer">
+        <view class="zhaomu-rigster-button">申请{{globalName}}</view>
+    </view>
+</template>
+<import src="../../utils/wxParse/wxParse.wxml"></import>
+<import src="/dist/toast/index.wxml"></import>

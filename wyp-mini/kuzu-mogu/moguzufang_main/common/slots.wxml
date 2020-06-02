@@ -1,0 +1,96 @@
+<template name="66bb9f6d-default-66bb9f6d-0">确定</template>
+<template name="data-v-365dc918-default-23f31621-1">立即联系</template>
+<template name="data-v-365dc918-default-23f31621-0">预约看房</template>
+<template name="f56f7a90-default-f56f7a90-2">
+    <text class="_text f56f7a90 mgic-dianhua"></text>
+    <text class="_text f56f7a90 phone-button-txt">立即联系</text>
+</template>
+<template name="f5958b94-default-f5958b94-2">
+    <text class="_text f5958b94 mgic-dianhua"></text>
+    <text class="_text f5958b94 phone-button-txt">立即联系</text>
+</template>
+<template name="401023eb-default-401023eb-1">确定</template>
+<template name="aa63a2de-default-aa63a2de-3">{{mode==modeEnum.retrieve?'提交并登录':'登录'}}</template>
+<template name="2ba2ca72-content-2ba2ca72-1">
+    <view class="_view 2ba2ca72" wx:if="{{nopassword}}">温馨提示：临时密码有效期为两个小时</view>
+    <view class="_view 2ba2ca72" wx:if="{{!nopassword&&passwordItem.data}}">
+        <view class="_view 2ba2ca72">临时密码为：{{passwordItem.data}}</view>
+        <view class="_view 2ba2ca72">有效期至 {{passwordItem.endTime}}</view>
+        <view class="_view 2ba2ca72 tipContent">（密码信息已经复制，可直接粘贴）</view>
+    </view>
+</template>
+<template name="2ba2ca72-title-2ba2ca72-1">临时密码</template>
+<template name="2ba2ca72-default-2ba2ca72-1"></template>
+<template name="28b9e905-default-28b9e905-4">{{mode==modeEnum.retrieve?'提交并登录':'登录'}}</template>
+<template name="6ca957c3-default-6ca957c3-5">
+    <scroll-view class="_scroll-view 6ca957c3 recommend-shop-scroll" scrollX="true">
+        <view bindtap="handleProxy" class="_view 6ca957c3 recommend-shop" data-comkey="{{$k}}" data-eventid="{{'6ca957c3-6-'+k}}" key="{{k}}" wx:for="{{homeBrands}}" wx:for-index="k" wx:key="k">
+            <template is="0e24a461" data="{{...$root['0'],...$root[$kk+'6ca957c3-3-'+k],$root:$root}}"></template>
+            <view class="_view 6ca957c3 shop-num">
+                <text class="_text 6ca957c3 shop-cnt">{{item.roomCount}}</text>
+                <text class="_text 6ca957c3 mg-ellipsis shop-un">套房源</text>
+            </view>
+            <view class="_view 6ca957c3 mg-flex mg-flex_sa_center shop-info">
+                <template is="0e24a461" data="{{...$root['0'],...$root[$kk+'6ca957c3-4-'+k],$root:$root}}"></template>
+                <text class="_text 6ca957c3 mg-flex-col mg-ellipsis shop-name">{{item.name}}</text>
+            </view>
+        </view>
+    </scroll-view>
+</template>
+<template name="6ca957c3-default-6ca957c3-2">
+    <view class="_view 6ca957c3 mg-flex mg-flex-wrap mg-flex_avg">
+        <view bindtap="handleProxy" class="_view 6ca957c3 recommend-block mg-radius" data-comkey="{{$k}}" data-eventid="{{'6ca957c3-5-'+k}}" key="{{k}}" wx:for="{{homeSubjects}}" wx:for-index="k" wx:key="k">
+            <template is="0e24a461" data="{{...$root['0'],...$root[$kk+'6ca957c3-1-'+k],$root:$root}}"></template>
+            <view class="_view 6ca957c3 recommend-info">
+                <view class="_view 6ca957c3 mg-ellipsis mg-txt_h2 mg-txt_bold">{{item.title}}</view>
+                <view class="_view 6ca957c3 mg-ellipsis mg-txt_h6">{{item.subTitle}}</view>
+            </view>
+        </view>
+    </view>
+</template>
+<import src="/components/swiper/promote.vue.wxml"></import>
+<import src="/components/mgBlock.vue.wxml"></import>
+<import src="/components/mgImage.vue.wxml"></import>
+<import src="/components/listCollection.vue.wxml"></import>
+<import src="/components/mgInput.vue.wxml"></import>
+<import src="/components/mgButton.vue.wxml"></import>
+<import src="/components/mgDialog.vue.wxml"></import>
+<import src="/components/mgAutoImage.vue.wxml"></import>
+<import src="/components/common/searchHeader.vue.wxml"></import>
+<import src="/components/picker/filter.vue.wxml"></import>
+<import src="/components/card/room.vue.wxml"></import>
+<import src="/components/mgMoreLoading.vue.wxml"></import>
+<import src="/components/room/roomBanner.vue.wxml"></import>
+<import src="/components/room/roomTitle.vue.wxml"></import>
+<import src="/components/room/roomInfo.vue.wxml"></import>
+<import src="/components/room/roomSelect.vue.wxml"></import>
+<import src="/components/room/roomTag.vue.wxml"></import>
+<import src="/components/room/activity.vue.wxml"></import>
+<import src="/components/room/location.vue.wxml"></import>
+<import src="/components/room/buildingImages.vue.wxml"></import>
+<import src="/components/room/roomConfig.vue.wxml"></import>
+<import src="/components/room/roomFeatures.vue.wxml"></import>
+<import src="/components/room/roomDesc.vue.wxml"></import>
+<import src="/components/room/roomMates.vue.wxml"></import>
+<import src="/components/room/platformEnsure.vue.wxml"></import>
+<import src="/components/room/roomAgent.vue.wxml"></import>
+<import src="/components/room/roomBrand.vue.wxml"></import>
+<import src="/components/room/roomRecommend.vue.wxml"></import>
+<import src="/components/room/roomButton.vue.wxml"></import>
+<import src="/components/room/evaluation.vue.wxml"></import>
+<import src="/components/loginDialog.vue.wxml"></import>
+<import src="/components/couponDialog/index.vue.wxml"></import>
+<import src="/components/bottomTab.vue.wxml"></import>
+<import src="/pages/search/imagine.vue.wxml"></import>
+<import src="/components/self/settingTable.vue.wxml"></import>
+<import src="/components/mgRow.vue.wxml"></import>
+<import src="/components/common/empty.vue.wxml"></import>
+<import src="/components/card/travel.vue.wxml"></import>
+<import src="/components/picker/brandShopFilter.vue.wxml"></import>
+<import src="/components/card/brandShopRoom.vue.wxml"></import>
+<import src="/components/mgLoading.vue.wxml"></import>
+<import src="/common/slots.wxml"></import>
+<import src="/components/mgSwiper.vue.wxml"></import>
+<import src="/components/common/noticeDetail.vue.wxml"></import>
+<import src="/components/common/ticket.vue.wxml"></import>
+<import src="/components/couponDialog/ticket.vue.wxml"></import>

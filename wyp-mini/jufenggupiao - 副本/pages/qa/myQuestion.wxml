@@ -1,0 +1,48 @@
+<view class="myQuestion _6156814">
+    <view class="network _32f532b _6156814" wx:if="{{$net$hasNet}}">
+        <image class="_32f532b" src="../../images/network.png"></image>
+        <text class="_32f532b">网络不可用，请检查网络设置</text>
+        <view class="net-text font28 animated flash infinite _32f532b">正在尝试重新连接...</view>
+    </view>
+    <view class="empty _dbd904a _6156814" wx:if="{{isHas}}">
+        <image class="robot _dbd904a" src="https://jfinfo.oss-cn-beijing.aliyuncs.com/jugupiao/images/ask/empty.png"></image>
+        <text class="text _dbd904a">{{$empty$text}}</text>
+        <button bindtap="goAsk" class="button _6156814">去提问</button>
+    </view>
+    <view class="que-list _6156814" wx:for="{{question}}">
+        <view class="per-box flex _6156814">
+            <image class="_6156814" src="{{user.avatar}}"></image>
+            <view class="rig-box _6156814">
+                <view class="name font30 _6156814">{{user.name}}</view>
+                <view class="time _6156814">{{item.created_at}}</view>
+            </view>
+            <image class="fine-logo _6156814" mode="widthFix" src="https://jfinfo.oss-cn-beijing.aliyuncs.com/jugupiao/images/mine/fine1.png" wx:if="{{item.answer_type=='1'}}"></image>
+        </view>
+        <view catchtap="check" class="text font32 _6156814" data-wpycheck-a="{{item.id}}" data-wpycheck-b="qc" wx:if="{{!item.qc}}">
+               {{item.content}}
+            </view>
+        <view catchtap="check" class="text2 font32 _6156814" data-wpycheck-a="{{item.id}}" data-wpycheck-b="qc" wx:else>
+               {{item.content}}
+            </view>
+        <view class="_6156814" wx:if="{{item.answer}}">
+            <view class="per-box flex _6156814">
+                <image class="_6156814" src="{{item.lecturers_avatar||'http://jfinfo.oss-cn-beijing.aliyuncs.com/jugupiao_admin/storage/timg.jpg'}}"></image>
+                <view class="rig-box _6156814">
+                    <view class="name font30 _6156814">{{item.lecturers_name||'巨丰股票'}}</view>
+                    <view class="time _6156814">{{item.answer.created_at}}</view>
+                </view>
+            </view>
+            <view catchtap="check" class="text font32 _6156814" data-wpycheck-a="{{item.id}}" data-wpycheck-b="ac" wx:if="{{!item.ac}}">
+                    {{item.answer.content}}
+                </view>
+            <view catchtap="check" class="text2 font32 _6156814" data-wpycheck-a="{{item.id}}" data-wpycheck-b="ac" wx:else>
+                  {{item.answer.content}}
+                </view>
+        </view>
+        <view class="no-answer flex _6156814" wx:else>老师暂时还没有回复，多等等哦~</view>
+    </view>
+    <view bindtap="$ask$goAsk" class="ask-question flex _a3953f2 _6156814">问</view>
+    <view catchtap="$backHome$goHome" class="box animated bounceIn _97a9f08 _6156814" wx:if="{{$backHome$isShow}}">
+        <image class="_97a9f08" lazyLoad="false" mode="scaleToFill" src="https://jfinfo.oss-cn-beijing.aliyuncs.com/jugupiao/images/share/home.png"></image>
+    </view>
+</view>

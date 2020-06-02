@@ -1,0 +1,9 @@
+<import src="/pages/giftcard/templates/card/index.wxml"></import>
+<import src="/pages/giftcard/templates/carddetail/index.wxml"></import>
+<view class="container">
+    <view class="giftcard-record">
+        <view bindtap="linkUrl" data-id="{{item.id}}" wx:for="{{recordData}}">
+            <template is="carddetail" data="{{status:item.status,price:item.originalPrice,text:item.name,imgUrl:item.imgUrl,range:item.platformRange,validTime:item.validTimeStr,forever:item.forever}}"></template>
+        </view>
+    </view>
+</view>

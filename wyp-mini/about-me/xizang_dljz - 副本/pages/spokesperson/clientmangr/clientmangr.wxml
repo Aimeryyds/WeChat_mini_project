@@ -1,0 +1,37 @@
+<view bindtap="openWrap" class="filter-btn">
+    <image src="/images/pcenter/icon_fliter.png"></image>
+    <text>{{type_arr[customType]}}</text>
+</view>
+<view class="container">
+    <view class="header">
+    客户总数: {{totalNum}}
+  </view>
+    <view class="list">
+        <view class="item" wx:for="{{list}}" wx:key="*this">
+            <image src="{{item.photo}}" wx:if="{{item.photo}}"></image>
+            <view class="info">
+                <view>
+                    <text>{{item.nickName}}</text>
+                    <text class="label" wx:if="{{item.status==2}}">{{alias}}</text>
+                    <text class="label outline" wx:else>客户</text>
+                </view>
+                <text>成交笔数: {{item.ordersNum}}</text>
+                <text>成交金额: ¥{{item.ordersAmount}}</text>
+                <block wx:if="{{item.status==2}}">
+                    <text>客户人数: {{item.memberId==memberId?totalNum:item.customNum}}</text>
+                    <text>他的收入: ¥{{item.customAmount}}</text>
+                </block>
+            </view>
+            <text class="time">{{item.createTime}}</text>
+        </view>
+    </view>
+    <view class="load-more" wx:if="{{showMore}}">
+        <text>继续拖动，查看更多</text>
+    </view>
+</view>
+<form bindsubmit="confirm" class="form">
+    <view bindtap="closeWrap" class="form__bg" style="display: {{show_wrap?'fixed':'none'}}"></view>
+    <view class="form__view" style="bottom: {{show_wrap?0:-474}}px">
+        <view catchtap="selectType" class="form__row" id="{{index}}" wx:for="{{type_arr}}" wx:key="*this">{{item}}</view>
+    </view>
+</form>

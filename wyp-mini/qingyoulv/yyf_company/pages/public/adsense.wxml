@@ -1,0 +1,13 @@
+<template name="adsense">
+    <view bindtap="{{adsense.a1url=='tel'?'tel':''}}{{adsense.a1url=='driver'?'driver':''}}{{adsense.a1url!='driver'&&adsense.a1url!='tel'&&adsense.a1url!='0'?'ad1nav':''}}" class="ad" wx:if="{{adsense.ad_img}}">
+        <image mode="widthFix" src="{{adsense.ad_img}}"></image>
+    </view>
+    <view class="ad1 {{adsense.ad_img?'mt15':''}}" wx:if="{{adsense.ad1_img}}">
+        <view bindtap="{{adsense.a2url=='tel'?'tel':''}}{{adsense.a2url=='driver'?'driver':''}}{{adsense.a2url!='driver'&&adsense.a2url!='tel'&&adsense.a2url!='0'?'ad2nav':''}}">
+            <image mode="widthFix" src="{{adsense.ad1_img}}"></image>
+        </view>
+        <view bindtap="{{adsense.a3url=='tel'?'tel':''}}{{adsense.a3url=='driver'?'driver':''}}{{adsense.a3url!='driver'&&adsense.a3url!='tel'&&adsense.a3url!='0'?'ad3nav':''}}">
+            <image mode="widthFix" src="{{adsense.ad2_img}}"></image>
+        </view>
+    </view>
+</template>

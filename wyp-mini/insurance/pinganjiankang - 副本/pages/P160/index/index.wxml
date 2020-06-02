@@ -1,0 +1,295 @@
+<pa-sticky bindstickyscroll="getScrollTop" scroll="{{curNodes}}">
+    <view slot="stickychild">
+        <view style="margin-bottom:4vw;">
+            <view class="section__ctn">
+                <image mode="widthFix" src="{{imgurl.topImgUrl}}" style="padding-bottom:18rpx; background-color: #eeeeee;"></image>
+            </view>
+            <view class="section">
+                <view class="flex-row header">
+                    <view class="title">投保方案</view>
+                </view>
+                <view class="plantab">
+                    <view bindtap="tabPlan" class="{{tabplan=='908'?'active':''}}" data-plan="908">普惠版
+              <view class="triangle-down" wx:if="{{tabplan=='908'}}"></view>
+                    </view>
+                    <view bindtap="tabPlan" class="{{tabplan=='1952'?'active':''}}" data-plan="1952">特需版
+              <view class="triangle-down" wx:if="{{tabplan=='1952'}}"></view>
+                    </view>
+                </view>
+                <view class="flex-row content has-pdtop">
+                    <view>被保人年龄
+      </view>
+                    <view class="pull-right">45-70周岁</view>
+                </view>
+                <view class="flex-row content has-pdtop">
+                    <view>保障期间
+      </view>
+                    <view class="pull-right">1年</view>
+                </view>
+                <view class="flex-row content has-pdtop">
+                    <view>缴费方式
+      </view>
+                    <view class="pull-right">年缴</view>
+                </view>
+            </view>
+            <view class="section">
+                <view class="flex-row header">
+                    <view class="title">保障范围</view>
+                    <view bindtap="seePlan" class="blue pull-right blue-end">查看详情</view>
+                </view>
+                <view class="flex-row content has-pdtop" wx:for="{{insuredAreasData}}" wx:key="item">
+                    <view>{{item.name}}
+                    </view>
+                    <view class="pull-right">{{item.value}}</view>
+                </view>
+                <view class="flex-row content has-pdtop" wx:if="{{tabplan==908}}">
+                    <view>医院范围
+                 </view>
+                    <view class="pull-right">二级以上(含二级)公立医院普通部</view>
+                </view>
+                <view class="flex-row content has-pdtop" wx:if="{{tabplan==1952}}">
+                    <view>医院范围
+                 </view>
+                    <view class="pull-right">二级以上(含二级)公立医院普通部(恶性肿瘤及原位癌医疗含特需部)</view>
+                </view>
+                <view class="flex-row baofei">
+                    <view class="orange title">￥{{price}}</view>
+                    <view bindtap="openPdf" class="blue pull-right blue-end" data-pdfurl="/mgr/makePdf.do?filename=A100000023-14.pdf">查看保费        </view>
+                </view>
+                <view class="stand"></view>
+            </view>
+        </view>
+        <view class="section">
+            <view class="flex-row header">
+                <view class="title">加购责任</view>
+            </view>
+            <view class="flex-row content has-pdtop has-btmborder">
+                <view>
+                    <view>质子重离子医疗附加包<text bindtap="showModal" class="qst" data-qst="showDes_01">?</text>
+                    </view>
+                    <view class="add-duty">投保年龄：45-70周岁</view>
+                    <view>100万元保额 | 免赔额0元</view>
+                </view>
+                <view class="pull-right orange">
+        ￥30元起
+        <van-checkbox bind:change="onChange" checkedColor="#f60" class="planCheck" id="plan_01" title="复选框" value="{{plan_01}}"></van-checkbox>
+                </view>
+            </view>
+            <view class="flex-row content has-pdtop has-btmborder">
+                <view>
+                    <view>恶性肿瘤特药附加包<text bindtap="showModal" class="qst" data-qst="showDes_02">?</text>
+                    </view>
+                    <view class="add-duty">投保年龄：45-60周岁</view>
+                    <view>150万元保额 | 免赔额：0元</view>
+                </view>
+                <view class="pull-right orange">
+        ￥29元起
+        <van-checkbox bind:change="onChange" checkedColor="#f60" class="planCheck" id="plan_02" title="复选框" value="{{plan_02}}"></van-checkbox>
+                </view>
+            </view>
+            <view class="flex-row content has-pdtop has-btmborder">
+                <view>
+                    <view>意外伤害附加包<text bindtap="showModal" class="qst" data-qst="showDes_03">?</text>
+                    </view>
+                    <view class="add-duty">投保年龄：45-70周岁</view>
+                    <view>意外身故/伤残/医疗 | 120.5万元总保障</view>
+                </view>
+                <view class="pull-right orange">
+            ￥165.27元起
+            <van-checkbox bind:change="onChange" checkedColor="#f60" class="planCheck" id="plan_03" title="复选框" value="{{plan_03}}"></van-checkbox>
+                </view>
+            </view>
+        </view>
+        <pa-flex paClass="pa-nav-flex">
+            <view bindtap="getNavIndex" class="pa-nav-li {{navcur==index?'pa-active':''}}" data-index="{{index}}" slot="flexchild" wx:for="{{navlist}}" wx:key="navlist">
+                <text>{{item}}</text>
+            </view>
+        </pa-flex>
+        <view class="paNodes" id="cpxq">
+            <image mode="widthFix" src="{{imgurl.cpxq}}"></image>
+            <view class="rt">
+                <image mode="widthFix" src="{{imgurl.cpxq2}}"></image>
+                <view class="position-absolutet">注: 由镁信健康提供服务 , 点击查看<a bindtap="openPdf" data-pdfurl="/mgr/makePdf.do?filename=A100000023-19.pdf">《特药服务手册》</a>了解详情</view>
+            </view>
+            <image mode="widthFix" src="{{imgurl.cpxq3}}"></image>
+            <view class="rt">
+                <image mode="widthFix" src="{{imgurl.cpxq4}}"></image>
+                <view class="position-absolute">点击<a bindtap="openPdf" data-pdfurl="/mgr/makePdf.do?filename=A100000023-20.pdf">《服务手册》</a>了解详情</view>
+            </view>
+            <image mode="widthFix" src="{{imgurl.cpxq5}}"></image>
+        </view>
+        <view class="paNodes" id="cjwt">
+            <image mode="widthFix" src="{{imgurl.cjwt1}}"></image>
+            <image bindtap="openPdf" data-pdfurl="/mgr/makePdf.do?filename=A100000013-10.pdf" mode="widthFix" src="{{imgurl.cjwt2}}"></image>
+            <view class="rt">
+                <image mode="widthFix" src="{{imgurl.cjwt3}}"></image>
+                <view class="cjwt-footer">以上服务的详细说明、服务限制、服务流程及其他注意事项参见<a bindtap="openPdf" data-pdfurl="/mgr/makePdf.do?filename=A100000023-20.pdf">《就医服务手册》</a>
+                </view>
+            </view>
+        </view>
+        <view class="txxx paNodes" id="wytb">
+            <view class="header">
+                <view class="title">填写投保信息</view>
+            </view>
+            <view>
+                <text class="qst">1</text>本人信息（投保人）
+        </view>
+            <view class="bbr">
+                <view class="flex-row">
+                    <view>姓名</view>
+                    <view>
+                        <input adjustPosition="{{false}}" bindblur="bindAname" maxlength="32" placeholder="请输入您的姓名" value="{{applicant.name}}"></input>
+                    </view>
+                </view>
+                <view class="flex-row">
+                    <view>身份证</view>
+                    <view>
+                        <input adjustPosition="{{false}}" bindblur="bindAidno" maxlength="18" placeholder="身份证" type="idcard" value="{{applicant.idno}}"></input>
+                    </view>
+                </view>
+                <view class="flex-row">
+                    <view>手机号码</view>
+                    <view>
+                        <input adjustPosition="{{false}}" bindblur="bindAmobile" maxlength="11" placeholder="手机号码" type="idcard" value="{{applicant.contactInfo.mobile}}"></input>
+                    </view>
+                </view>
+            </view>
+            <view>
+                <text class="qst">2</text>为谁投保（被保人）
+        </view>
+            <view>
+                <radio-group bindchange="relationChange" class="radio-group">
+                    <label class="radio {{item.checked?'active':''}}" id="{{value}}" wx:for="{{relations}}" wx:key="value">
+                        <radio checked="{{item.checked}}" value="{{item.value}}"></radio> {{item.name}}
+              <image class="checked" src="{{imgurl.checkedImg}}" wx:if="{{item.checked}}"></image>
+                    </label>
+                </radio-group>
+            </view>
+            <view class="bbr" wx:if="{{relationshipWithApplicant!=1}}">
+                <view class="flex-row">
+                    <view>姓名</view>
+                    <view>
+                        <input adjustPosition="{{false}}" bindblur="bindBname" maxlength="32" placeholder="请输入姓名" value="{{beibaoren.name}}"></input>
+                    </view>
+                </view>
+                <view class="flex-row">
+                    <view>身份证</view>
+                    <view>
+                        <input adjustPosition="{{false}}" bindblur="bindBidno" maxlength="18" placeholder="身份证" type="idcard" value="{{beibaoren.idno}}"></input>
+                    </view>
+                </view>
+            </view>
+            <view>
+                <text class="qst">3</text>被保人社保情况
+        </view>
+            <view class="">
+                <radio-group bindchange="socialSecuritysChange" class="radio-group">
+                    <label class="radio {{item.checked?'active':''}}" id="{{value}}" wx:for="{{socialSecuritys}}" wx:key="value">
+                        <radio checked="{{item.checked}}" value="{{item.value}}"></radio> {{item.name}}
+              <image class="checked" src="{{imgurl.checkedImg}}" wx:if="{{item.checked}}"></image>
+                    </label>
+                </radio-group>
+            </view>
+            <image mode="widthFix" src="{{imgurl.copyRightUrl}}" style="margin-top:30rpx;"></image>
+        </view>
+        <view class="bottom">
+            <view class="provisions">
+                <checkbox-group bindchange="agreeChange">
+                    <label class="checkbox" wx:for="{{agreeItems}}" wx:key="item">
+                        <checkbox checked="{{item.checked}}" color="#fc611d" value="{{item.value}}"></checkbox>我已阅读并了解
+          </label>
+                    <text bindtap="openPdf" class="blue" data-pdfurl="/mgr/makePdf.do?filename=A100000023-17.pdf">《保险条款及重要文档》</text>和
+          <text bindtap="openPdf" class="blue" data-pdfurl="/mgr/makePdf.do?filename=A100000023-7.pdf">《责任免除》</text>
+                </checkbox-group>
+            </view>
+            <view class="btm-nav">
+                <view bindtap="toIndex" class="icon">
+                    <image src="{{imgurl.icon1}}" style="width: 50rpx;"></image>
+                </view>
+                <view class="icon">
+                    <button openType="contact">
+                        <image src="{{imgurl.icon2}}" style="width: 50rpx;"></image>
+                    </button>
+                </view>
+                <view class="price">
+          ￥{{totalPrem}}
+        </view>
+                <view bindtap="buy" class="buy">
+          立即投保
+        </view>
+            </view>
+        </view>
+    </view>
+</pa-sticky>
+<view class="share">
+    <button hoverClass="none" openType="share">
+        <image src="{{imgurl.share}}"></image>
+    </button>
+</view>
+<view class="add-duty-des" wx:if="{{showDes_01}}">
+    <view>
+        <view>质子重离子医疗附加包</view>
+        <view class="age">
+            <text>投保年龄：45-70周岁</text>
+        </view>
+        <view>免赔额0元，赔付比例100%，床位费限1500元/天</view>
+        <view>被保险人在30天等待期后经医院确诊初次发生恶性肿瘤，并在我们指定的特定医疗机构接受质子重离子放射治疗的，对于其实际支出的合理且必要的质子重离子医疗费用，我们按照约定的给付比例进行报销，包括床位费、护理费、膳食费、检查检验费、治疗费、诊疗费、药品费，但不包括化学疗法、肿瘤免疫疗法、肿瘤内分泌疗法和肿瘤靶向疗法所产生的医疗费用。</view>
+        <view bindtap="closeModal">
+            <text>我知道了</text>
+        </view>
+    </view>
+</view>
+<view class="add-duty-des" wx:if="{{showDes_02}}">
+    <view>
+        <view>恶性肿瘤特药附加包</view>
+        <view class="age">
+            <text>投保年龄：45-60周岁</text>
+        </view>
+        <view>免赔额0元，赔付比例100%，保额150万元</view>
+        <view>
+            <view>包括直付用药服务、援助用药申请指导服务。特药由镁信健康在本公司指定或认可的药店直接为您提供药房直付，无须您先垫付资金购买后再申请理赔报销。若您用药时长符合本公司指定或认可的慈善机构援助项目赠药（以下简称“援助用药”）申请条件，镁信健康会通知您并协助进行申请材料准备，申请人须提供申请援助用药合理且必需的材料。
+      援助用药项目审核通过后，申请人须到援助用药项目的指定药店领取赠药。
+      具体服务内容及申请方式详见《特药服务手册》。
+  </view>
+        </view>
+        <view bindtap="closeModal">
+            <text>我知道了</text>
+        </view>
+    </view>
+</view>
+<view class="add-duty-des" wx:if="{{showDes_03}}">
+    <view>
+        <view>意外伤害附加包</view>
+        <view class="age">
+            <text>投保年龄：45-70周岁</text>
+        </view>
+        <view></view>
+        <view>
+            <view class="sub-title">
+            一般意外身故/伤残：10万元 
+        </view>
+            <view>被保险人因遭受意外伤害（指遭受外来的、突发的、非本意的、非疾病的使身体受到伤害的客观事件），并自该意外伤害发生之日起180日内因该意外伤害身故或伤残的，我们按约定的保险金额给付相应保险金，详细说明以条款为准。 </view>
+            <view class="sub-title">航空意外身故/伤残：50万元 </view>
+            <view>被保险人以乘客身份持有效客票搭乘合法运营的客运民航班机期间遭受意外伤害事故，且自该事故发生之日起180日内（含180日当日）因该意外伤害事故导致身故或伤残的，我们按约定的保险金额给付相应保险金，详细说明以条款为准。
+            </view>
+            <view class="sub-title">公共客运汽车意外身故/伤残：20万元 </view>
+            <view>被保险人以乘客身份持票乘坐经相关政府部门登记许可的以客运为目的的汽车，乘坐期间遭受意外伤害事故，且自该事故发生之日起180日内（含180日当日）因该意外伤害事故导致身故或伤残的，我们按约定的保险金额给付相应保险金，详细说明以条款为准。
+            </view>
+            <view class="sub-title">火车/地铁/轻轨意外身故/伤残：20万元</view>
+            <view>被保险人以乘客身份持票乘坐经相关政府部门登记许可的以客运为目的的火车/地铁/轻轨，乘坐期间遭受意外伤害事故，且自该事故发生之日起180日内（含180日当日）因该意外伤害事故导致身故或伤残的，我们按约定的保险金额给付相应保险金，详细说明以条款为准。
+            </view>
+            <view class="sub-title">轮船意外身故/伤残：20万元</view>
+            <view>被保险人以乘客身份持票乘坐经相关政府部门登记许可的以客运为目的的轮船，乘坐期间遭受意外伤害事故，且自该事故发生之日起180日内（含180日当日）因该意外伤害事故导致身故或伤残的，我们按约定的保险金额给付相应保险金，详细说明以条款为准。
+            </view>
+            <view class="sub-title">意外医疗（含门诊、住院，免赔额100元/次）：5000元 </view>
+            <view>
+            被保险人因遭受意外伤害在医院进行治疗，对于在保险期间内且在事故发生之日起180日内，因该意外伤害而实际支出的、合理且必要的住院或门诊急诊医疗费用，我们在扣除被保险人按照社会医疗保险或公费医疗的有关规定取得的医疗费用补偿及免赔额100元后，按100%的给付比例进行报销，详细说明以条款为准。
+            </view>
+            <view>*若发生保障范围内的交通工具意外，一般意外保额和交通工具意外保额可同时叠加赔付。</view>
+        </view>
+        <view bindtap="closeModal">
+            <text>我知道了</text>
+        </view>
+    </view>
+</view>
+<input placeholder="请不要删除，不然会有bug" style="visibility:hidden;height:1px;"></input>

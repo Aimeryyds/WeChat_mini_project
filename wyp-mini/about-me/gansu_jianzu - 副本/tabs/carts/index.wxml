@@ -1,0 +1,38 @@
+<import src="/pages/templates/mine/mine-error.wxml"></import>
+<template is="mineerror" data wx:if="{{!userinfo.mobile}}"></template>
+<view class="container" wx:if="{{userinfo.mobile&&carts&&carts.length>0}}">
+    <view class="zan-panel" wx:for="{{carts}}" wx:for-index="storeIndex">
+        <navigator class="cart" hoverClass="none" url="/pages/shop/products/products?storeid={{item.storeId}}">
+            <view class="cart-title" hoverClass="none" url="/pages/shop/products/products?storeid={{item.storeId}}">
+                <text class="cart-title--text">{{item.brandName}}-{{item.storeName}}</text>
+                <view catchtap="deleteStore" class="cart-title--arrow" data-storeid="{{item.storeId}}">
+                    <image src="http://imgcdnali.wfenxiao.com.cn/xcx/c/order/ic_delete_cart.png"></image>
+                    <text>删除</text>
+                </view>
+            </view>
+        </navigator>
+        <navigator class="cart" hoverClass="none" url="/pages/shop/carts/index?storeId={{item.storeId}}">
+            <view style="display:flex;align-items:center">
+                <view class="cart-items" style="flex:4">
+                    <view class="cart-item" wx:for="{{item.goodsList}}" wx:for-index="goodIndex" wx:for-item="good">
+                        <view class="cart-item--num" wx:if="{{good.quantity>1}}">{{good.quantity}}</view>
+                        <view class="cart-item--thumb">
+                            <view class="cart-item--cover" wx:if="{{good.msg}}">{{good.msg}}</view>
+                            <image class="cart-item--image" mode="" src="{{good.imgUrl}}"></image>
+                        </view>
+                        <text class="cart-item--{{good.msg?'price-invalid':'price'}}">￥{{good.price}}</text>
+                    </view>
+                </view>
+                <view class="cart-item" style="flex:1">
+          共{{item.cartNum}}件 >
+        </view>
+            </view>
+        </navigator>
+    </view>
+</view>
+<view style="display:flex;flex-direction:column;align-items:center" wx:if="{{userinfo.mobile&&carts&&carts.length==0}}">
+    <image src="http://imgcdnali.wfenxiao.com.cn/xcx/c/icons/no_order.png" style="margin-top:100px;width:150rpx;height:150rpx"></image>
+    <view style="margin-top:20px;font-size:28rpx;color:#bbb;">
+      购物车中暂无商品
+    </view>
+</view>

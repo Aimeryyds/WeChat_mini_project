@@ -1,0 +1,31 @@
+<view class="pdrf">
+    <view bindtap="toBrokerDetail" class="t_broker_box mflex" data-brokerid="{{item.brokerid}}" data-citycode="{{item.citycode}}" wx:if="{{brokerInfo}}" wx:for="{{brokerInfo}}" wx:key="index">
+        <view class="t_broker_info mflex mfauto">
+            <view class="t_broker_head">
+                <image binderror="avatarError" data-imgindex="{{index}}" src="{{item.brokerimg==null||item.brokerimg==''?'/img/resources/default_broker_404.png':item.brokerimg}}" style="height:{{height}}"></image>
+            </view>
+            <view class="t_broker_text_">
+                <view class="t_broker_name">
+                    <view class="bk_title">{{item.bname}} 
+                    <text class="score" wx:if="{{item.dkscore>0}}">{{filter.scoreOne(item.dkscore)}}分</text>
+                        <text class="bk_showing">近30天带看{{item.sell_30_showings}}次</text>
+                    </view>
+                </view>
+                <view>
+                    <text wx:if="{{item.rent_turnover_cnt&&item.sell_turnover_cnt}}">
+                    历史成交（买卖{{item.sell_turnover_cnt}}套，租赁{{item.rent_turnover_cnt}}套）
+                    </text>
+                </view>
+            </view>
+        </view>
+        <view class="t_broker_ mflex">
+            <view catchtap="tel" class="bro_tel" data-bid="{{item.brokerid}}" data-index="{{index}}" data-job_leave="{{item.job_leave}}" id="{{item.mobile}}">
+                <image src="/img/resources/tel_icon.png"></image>
+            </view>
+            <view catchtap="toIm" class="bro_mes" data-bid="{{item.brokerid}}" data-index="{{index}}" data-leave="{{item.job_leave}}">
+                <image src="/img/resources/mes_icon.png"></image>
+            </view>
+        </view>
+    </view>
+</view>
+<wxs module="filter" src="../wxs/replaceTo.wxs" />

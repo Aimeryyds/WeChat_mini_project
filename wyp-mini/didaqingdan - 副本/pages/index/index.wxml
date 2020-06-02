@@ -1,0 +1,22 @@
+<view class="{{anonymousState__temp}}" wx:if="{{$taroCompReady}}">
+    <view class="task-list-page">
+        <view class="header">
+            <text bindtap="openProjectList" class="project-title">{{anonymousState__temp2}}</text>
+            <view bindtap="openProjectList" class="open-list">
+                <view class="icon icon-right icon-select-list"></view>
+            </view>
+        </view>
+        <view class="container task-list">
+            <view bindtap="jumpToSubscribe" class="{{'subscribe-account '+(hideSubscribe?'hide':'')}}" wx:if="{{env==='wechat'&&isSubscribe===false}}">
+                <view class="subscribe-account-text">关注公众号，接收日程提醒</view>
+                <view catchtap="hideSubscribe" class="icon icon-delete-subtask hide-subscribe"></view>
+            </view>
+            <task-item compid="{{item[$compid__24]}}" wx:for="{{loopArray23}}" wx:for-index="_anonIdx2" wx:key="id"></task-item>
+            <view class="{{'task-section sort-by-completed '+(completedTaskList.length===0?'hide':'')}}">已完成</view>
+            <task-item compid="{{item[$compid__25]}}" wx:for="{{loopArray24}}" wx:for-index="_anonIdx4" wx:key="id"></task-item>
+        </view>
+        <view class="create-task-wrapper show">
+            <quick-add></quick-add>
+        </view>
+    </view>
+</view>

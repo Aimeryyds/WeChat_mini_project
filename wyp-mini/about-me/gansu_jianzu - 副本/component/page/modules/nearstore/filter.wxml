@@ -1,0 +1,17 @@
+<view catchtap="preventPop" class="filter">
+    <view class="filter-row" wx:for="{{filters}}" wx:key="index">
+        <view class="filter-row--title">
+        {{item.title}}   
+      </view>
+        <wxc-flex cross="top" main="left" style="display:block" wrap="wrap">
+            <view catchtap="onCheck" class="filter-row--contents-item" data-idx="{{idx}}" data-index="{{index}}" style="background-color:{{option.checked?'#ECF6FD':''}};color: {{option.checked?'#108ee9':''}};border-color:{{option.checked?'#108ee9':'#e5e5e5'}} " wx:for="{{item.options}}" wx:for-index="idx" wx:for-item="option" wx:key="index">
+                <wxc-label type="fill" typeColor="{{option.labelColor}}" wx:if="{{option.label}}">{{option.label}}</wxc-label>
+                <text style="margin-left:12rpx">{{option.title}}</text>
+            </view>
+        </wxc-flex>
+    </view>
+    <view class="buttons">
+        <view catchtap="onReset" class="button-reset">重置</view>
+        <view catchtap="onSubmit" class="button-submit">确定</view>
+    </view>
+</view>

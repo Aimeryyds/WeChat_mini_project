@@ -1,0 +1,31 @@
+<view class="page">
+    <my-component bind:myevent="myEventListener" innerText="我的骑行卡"></my-component>
+    <view class="main" style=" margin-top: {{myHight}}px"></view>
+    <view class="content" wx:for="{{carList}}" wx:key="index">
+        <view bindtap="gotodetail" data-item="{{item}}">
+            <image src="../../../Content/images/wallet/06.png" wx:if="{{item.old!=true}}"></image>
+            <image src="../../../Content/images/wallet/06old.png" wx:else></image>
+            <view class="left">
+                <view wx:if="{{item.type!=1}}">葛天骑行卡</view>
+                <view wx:else>免押金骑行卡</view>
+                <view>{{item.name}}</view>
+                <view class="down {{item.type==6?'isL':' '}}">
+                    <text>有效期至{{item.expiretime}}</text>
+                    <text class="daoqi" wx:if="{{item.type==6}}">到期自动续费</text>
+                </view>
+            </view>
+            <view class="right" wx:if="{{item.type!=1}}">
+                <view class="area">
+                    <view wx:if="{{item.type!=0}}">今天</view>
+					已使用
+				</view>
+                <view class="discount">{{item.usecounted}}/{{item.daycount}}</view>
+                <view class="btn">限{{item.areaname}}使用</view>
+            </view>
+        </view>
+    </view>
+    <view class="no" wx:if="{{carList.length==0}}">
+        <image class="noqi" mode="widthFix" src="../../../Content/images/wallet/noqi.png"></image>
+        <view>你还没有骑行卡哦！</view>
+    </view>
+</view>

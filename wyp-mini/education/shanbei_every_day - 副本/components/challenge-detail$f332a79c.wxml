@@ -1,0 +1,44 @@
+<template name="challenge-detail$f332a79c">
+    <view class="_div data-v-60318a22 challenge-detail" style=" {{'padding-top:'+paddingTop+'px'+';'}}">
+        <template is="nav-bar$6acec6f9" data="{{...$root[$kk+'0'],$root:$root}}"></template>
+        <view class="_div data-v-60318a22 header">
+            <view class="_div data-v-60318a22 publisher">
+                <image catchtap="handleProxy" class="_img data-v-60318a22 avatar" data-comkey="{{$k}}" data-eventid="{{'0'}}" src="{{challenge.avatar_img_urls&&challenge.avatar_img_urls[0]}}"></image>
+                <view class="_div data-v-60318a22 info">
+                    <view class="_div data-v-60318a22 nickname">{{challenge.publisher}}</view>
+                    <view class="_div data-v-60318a22 publish-date">{{challenge.release_time}}</view>
+                </view>
+            </view>
+            <button class="_button data-v-60318a22 share" id="{{share-challenge}}" openType="share">邀请好友</button>
+        </view>
+        <view class="_div data-v-60318a22 message">{{challenge.message}}</view>
+        <video class="_video data-v-60318a22 video" customCache="{{false}}" src="{{challenge.video_url}}" wx:if="{{challenge.video_url}}"></video>
+        <image bindtap="handleProxy" class="_img data-v-60318a22 content-img" data-comkey="{{$k}}" data-eventid="{{'1'}}" src="{{challenge.background_img_urls&&challenge.background_img_urls[0]}}"></image>
+        <image bindtap="handleProxy" class="_img data-v-60318a22 billboard-img" data-comkey="{{$k}}" data-eventid="{{'2'}}" src="{{challenge.billboard_img_urls&&challenge.billboard_img_urls[0]}}" wx:if="{{challenge.billboard_img_urls}}"></image>
+        <view class="_div data-v-60318a22 billboard-text">{{challenge.billboard}}</view>
+        <view class="_div data-v-60318a22 sep-line"></view>
+        <view class="_div data-v-60318a22 translations">
+            <view class="_div data-v-60318a22 translation-title">
+                <label class="_span data-v-60318a22 title">翻译作品</label>
+                <label class="_span data-v-60318a22 total">({{total}})</label>
+            </view>
+            <view class="_div data-v-60318a22 show-empty" wx:if="{{total===0}}">
+                <image class="_img data-v-60318a22" src="/static/img/empty-translation.png"></image>
+            </view>
+            <template is="translation$041ded7e" data="{{...$root[$kk+'1'],$root:$root}}" wx:if="{{mine.challenge_id}}"></template>
+            <template is="translation$041ded7e" data="{{...$root[$kk+'2-'+index],$root:$root}}" wx:for="{{translationList}}" wx:key="item.id"></template>
+        </view>
+        <form bindsubmit="handleProxy" class="_form data-v-60318a22 bottom-form" data-comkey="{{$k}}" data-eventid="{{'6'}}" wx:if="{{showTextArea}}">
+            <view class="_div data-v-60318a22 bottom-input" style=" {{'height:'+inputHeight+'px'+';'+'padding-bottom:'+textAreaPaddingBottom+'px'+';'}}">
+                <textarea autoHeight="{{true}}" bindconfirm="handleProxy" bindfocus="handleProxy" bindlinechange="handleProxy" class="_textarea data-v-60318a22 input" cursorSpacing="{{10}}" data-comkey="{{$k}}" data-eventid="{{'5'}}" fixed="{{true}}" name="input" placeholder="我来翻译..." placeholderStyle="font-size:15px;color:#999999;" showConfirmBar="{{false}}"></textarea>
+                <button class="_button data-v-60318a22 send" formType="submit" style=" {{'margin-bottom:'+sendMarginBottom+'px'+';'}}">
+                    <image class="_img data-v-60318a22 icon" src="/static/img/send-icon.png"></image>
+                </button>
+            </view>
+        </form>
+        <template is="modal$47d16d3d" data="{{...$root[$kk+'3'],$root:$root}}"></template>
+    </view>
+</template>
+<import src="nav-bar$6acec6f9"></import>
+<import src="translation$041ded7e"></import>
+<import src="modal$47d16d3d"></import>

@@ -1,0 +1,9 @@
+<template name="quantity">
+    <view catchtap="_handleZanQuantityMinus" class="quantity__minus" data-component-id="{{componentId}}" data-disabled="{{quantity<min}}" data-quantity="{{quantity}}">
+        <image src="http://imgcdnali.wfenxiao.com.cn/xcx/c/giftcard/minus-icon.png"></image>
+    </view>
+    <input bindblur="_handleZanQuantityBlur" class="quantity__num" data-component-id="{{componentId}}" data-max="{{max}}" data-min="{{min}}" data-quantity="{{quantity}}" disabled="{{min>=max}}" type="number" value="{{quantity}}"></input>
+    <view catchtap="_handleZanQuantityPlus" class="quantity__plus" data-component-id="{{componentId}}" data-disabled="{{quantity>=max}}" data-quantity="{{quantity}}">
+        <image src="{{quantity<max?'http://imgcdnali.wfenxiao.com.cn/xcx/c/giftcard/plus-icon.png':'http://imgcdnali.wfenxiao.com.cn/xcx/c/1120/plus-disable-icon.png'}}"></image>
+    </view>
+</template>

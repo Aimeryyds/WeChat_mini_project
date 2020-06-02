@@ -1,0 +1,239 @@
+<view class="loading" hidden="{{loadinghide}}">
+    <image class="loading-img" src="/img/resources/load.png"></image>
+</view>
+<view wx:if="{{kajuanLength!='undefined'}}">
+    <view class="siqing-box" hidden="{{siqing}}">
+        <image bindtap="sqHuodong" class="siqing-banner" mode="widthFix" src="{{indexPop[0].img_url}}"></image>
+        <image bindtap="sqClose" class="siqing-colse" mode="widthFix" src="https://res.5i5j.com/wap/event/year/images/icon-close.png" wx:if="{{indexPop[0].img_url}}"></image>
+    </view>
+</view>
+<view bindtap="sqHuodong" class="fixed-point" wx:if="{{kajuanLength!='undefined'}}">
+    <image mode="widthFix" src="https://res.5i5j.com/wap/event/year/images/icon-hb.png"></image>
+</view>
+<view class="siqing-bg" hidden="{{siqing}}" wx:if="{{indexPop[0].img_url}}"></view>
+<view class="index">
+    <view class="home-top">
+        <view class="h-search-box flexbox b-s">
+            <view bindtap="routerview" class="city" data-path="city">{{cityname}}</view>
+            <image class="h-search" src="/img/resources/home-search.png"></image>
+            <view bindtap="routerview" class="info" data-path="search">请输入小区名或商圈</view>
+        </view>
+    </view>
+    <view class="home-banner">
+        <image src="https://res.5i5j.com/cache/weixin/common/home-banner.png"></image>
+    </view>
+    <view class="home-nav _flex _row _icenter _around">
+        <view bindtap="routerview" data-path="sale">
+            <image src="/img/resources/home-sale.png"></image>
+            <text>二手房</text>
+        </view>
+        <view bindtap="routerview" data-path="rent">
+            <image src="/img/resources/home-rent.png"></image>
+            <text>租房</text>
+        </view>
+        <view bindtap="routerview" data-path="newhouse">
+            <image class="newhouse" src="/img/resources/home-newhouse.png"></image>
+            <text>新房</text>
+        </view>
+    </view>
+</view>
+<view class="home_nav_new">
+    <view bindtap="routerview" data-path="community">
+        <image src="/img/resources/nav_community.png"></image>
+    小区
+  </view>
+    <view bindtap="routerview" data-path="broker" wx:if="{{city!='天津'}}">
+        <image src="/img/resources/nav_broker.png"></image>
+    经纪人
+  </view>
+    <view bindtap="routerview" data-path="broker_tj" wx:if="{{city=='天津'}}">
+        <image src="/img/resources/nav_broker.png"></image>
+    经纪人
+  </view>
+    <view bindtap="routerview" data-path="sellhouse">
+        <image src="/img/resources/nav_sale.png"></image>卖房</view>
+    <view bindtap="routerview" data-path="rentout">
+        <image src="/img/resources/nav_rent.png"></image>出租</view>
+</view>
+<view class="houseknowledge" wx:if="{{houseknowledge.list.length>0}}">
+    <image bindtap="routerview" data-path="webview" data-targeturl="{{houseknowledge.moreUrl}}" src="https://res.5i5j.com/cache/weixin/common/zixun.png"></image>
+    <view class="knowledge_title">
+        <swiper autoplay="true" circular="true" duration="500" interval="2000" vertical="true">
+            <swiper-item wx:for="{{houseknowledge.list}}" wx:key="index">
+                <view bindtap="routerview" class="swiper-item" data-path="webview" data-targeturl="{{item.url}}">{{item.title}}</view>
+            </swiper-item>
+        </swiper>
+    </view>
+    <view bindtap="routerview" class="more_knowledge" data-path="webview" data-targeturl="{{houseknowledge.moreUrl}}">更多</view>
+</view>
+<view class="helpYouPick" wx:if="{{hotrecommend.length==3}}">
+    <view class="title">热门推荐</view>
+    <view class="hotrecommend_tab">
+        <view bindtap="routerview" class="tab_{{index}}" data-choiceType="{{item.choice_type}}" data-cityId="{{item.city_id}}" data-condition="{{item.condition}}" data-path="hotrecommend" data-targeturl="{{item.targeturl}}" data-topicType="{{item.topic_type}}" style="background:url({{item.hotimgurl}}) no-repeat center;background-size:100% 100%;" wx:for="{{hotrecommend}}">
+            <view class="tag_name">{{item.tag_name}}</view>
+            <view class="tab_title">{{item.title}}</view>
+            <view class="sub_title">{{item.sub_title}}</view>
+        </view>
+    </view>
+</view>
+<view class="helpYouPick" wx:if="{{helpYouPick.length>0}}">
+    <view class="title">帮你挑</view>
+    <view class="pick_list">
+        <scroll-view scrollX class="scroll-view_H">
+            <view bindtap="routerview" class="pick_item_wrap" data-choiceType="{{item.choice_type}}" data-cityId="{{item.city_id}}" data-condition="{{item.condition}}" data-listparam="1" data-path="pickorrent" data-targeturl="{{item.targeturl}}" data-topicCtn="{{item.topic_content}}" data-topicType="{{item.topic_type}}" wx:for="{{helpYouPick}}" wx:key="index">
+                <view class="pick_image_wrap">
+                    <image src="{{item.imgurl}}"></image>
+                    <view class="title">{{item.title}}</view>
+                    <view class="title sub_title">{{item.sub_title}}</view>
+                </view>
+            </view>
+        </scroll-view>
+    </view>
+</view>
+<view class="helpYouPick" wx:if="{{helpYouRent.length>0}}">
+    <view class="title">帮你租</view>
+    <view class="pick_list">
+        <scroll-view scrollX class="scroll-view_H">
+            <view bindtap="routerview" class="pick_item_wrap" data-choiceType="{{item.choice_type}}" data-cityId="{{item.city_id}}" data-condition="{{item.condition}}" data-listparam="2" data-path="pickorrent" data-targeturl="{{item.targeturl}}" data-topicCtn="{{item.topic_content}}" data-topicType="{{item.topic_type}}" wx:for="{{helpYouRent}}" wx:key="index">
+                <view class="pick_image_wrap">
+                    <image src="{{item.imgurl}}"></image>
+                    <view class="title">{{item.title}}</view>
+                    <view class="title sub_title">{{item.sub_title}}</view>
+                </view>
+            </view>
+        </scroll-view>
+    </view>
+</view>
+<view class="communitytest" wx:if="{{communitytest.list.length>0}}">
+    <view class="title">小区测评</view>
+    <view class="pick_list">
+        <scroll-view enableFlex scrollX class="scroll-view_H">
+            <view bindtap="routerview" class="community_total" data-path="webview" data-targeturl="{{communitytest.moreUrl}}">
+                <image class="community_image" src="https://res.5i5j.com/cache/weixin/common/community_index.png"></image>
+                <view class="absolute_txt">
+            了解小区真实面貌
+          </view>
+                <view class="absolute_total">
+                    <text style="font-size:60rpx; margin-right:10rpx;">{{communitytest.count}}</text>套
+          </view>
+            </view>
+            <view class="community_list">
+                <view bindtap="routerview" class="pick_item_wrap" data-path="webview" data-targeturl="{{item.url}}" wx:for="{{communitytest.list}}">
+                    <view class="pick_image_wrap">
+                        <image src="{{item.img}}"></image>
+                        <view class="socer">
+                {{item.total_score}}分
+                <view class="star_wrap">
+                                <view wx:for="{{starFn.setStarArr(item.total_score)}}">
+                                    <image src="{{item==3?'https://res.5i5j.com/cache/weixin/common/star.png':item==2?'https://res.5i5j.com/cache/weixin/common/starhalf.png':'https://res.5i5j.com/cache/weixin/common/star_bg.png'}}"></image>
+                                </view>
+                            </view>
+                        </view>
+                        <view class="title">{{item.community_name}}</view>
+                    </view>
+                </view>
+            </view>
+        </scroll-view>
+    </view>
+</view>
+<view class="h-tit" wx:if="{{list||list2}}">
+    <view style="float:left">推荐房源</view>
+    <view class="bgcolors">
+        <view bindtap="housetabCur" class="saleSty {{currentTab==0?'active':''}}" data-current="0">二手房</view>
+        <view bindtap="housetabCur" class="rentSty {{currentTab==1?'active':''}}" data-current="1">租房</view>
+    </view>
+</view>
+<view class="house-list recommend" hidden="{{currentTab!='0'}}">
+    <view bindtap="toDetail" class="list-item flexbox" data-index="{{index}}" wx:for="{{list}}" wx:key="index">
+        <view class="item-img">
+            <image data-index="{{index}}" src="{{item.imgurl==null||item.imgurl==''?'https://res.5i5j.com/cache/weixin/common/default_house_list_404.png':item.imgurl}}"></image>
+            <text class="zhenxuan" wx:if="{{item.housetag}}">甄选</text>
+            <view class="icon3d hz-3d" wx:if="{{item.flag3d==1}}">
+                <image src="/img/resources/icon3d.png"></image>
+            </view>
+            <view class="iconhz hz-3d" wx:if="{{item.flag3d==2}}">
+                <image src="/img/resources/iconhz.png"></image>
+            </view>
+        </view>
+        <view class="item-con flex1">
+            <text class="item-tit">{{item.housetitle}}</text>
+            <view class="item-info">
+                <text>{{item.bedroom+'室'+item.livingroom+'厅'+item.toilet+'卫'}}</text>
+                <text class="dian"></text>
+                <text>{{item.buildarea}}㎡</text>
+                <text class="dian"></text>
+                <text>{{item.heading}}</text>
+                <text class="dian"></text>
+                <text>{{item.communityname}}</text>
+            </view>
+            <view class="item-label" wx:if="{{item.tagwall!=''}}">
+                <text class="tag" wx:for="{{item.tagwall}}" wx:for-item="items" wx:key="index">{{items}}</text>
+            </view>
+            <view class="item-price">
+                <view class="wan-price">
+                    <text class="num">{{item.price}}</text>
+                    <text class="wan"></text>
+                </view>
+                <text class="ping">{{item.unitprice}}</text>
+            </view>
+        </view>
+    </view>
+    <view bindtap="routerview" class="look-link" data-path="sale" wx:if="{{list}}">
+        <text>查看全部二手房</text>
+    </view>
+</view>
+<view class="house-list recommend " hidden="{{currentTab!='1'}}">
+    <view bindtap="toDetail2" class="list-item flexbox" data-index="{{index}}" wx:for="{{list2}}" wx:key="index">
+        <view class="item-img">
+            <image data-index="{{index}}" src="{{item.imgurl==null||item.imgurl==''?'https://res.5i5j.com/cache/weixin/common/default_house_list_404.png':item.imgurl}}"></image>
+            <text class="zhenxuan" wx:if="{{item.housetag}}">甄选</text>
+            <text class="xiangyu" wx:if="{{item.othertypeid==3}}">相寓</text>
+            <view class="icon3d hz-3d" wx:if="{{item.flag3d==1}}">
+                <image src="/img/resources/icon3d.png"></image>
+            </view>
+            <view class="iconhz hz-3d" wx:if="{{item.flag3d==2}}">
+                <image src="/img/resources/iconhz.png"></image>
+            </view>
+        </view>
+        <view class="item-con flex1">
+            <text class="item-tit">{{item.housetitle}}</text>
+            <view class="item-info">
+                <text>{{item.bedroom+'室'+item.livingroom+'厅'+item.toilet+'卫'}}</text>
+                <text class="dian"></text>
+                <text>{{item.area}}㎡</text>
+                <text class="dian"></text>
+                <text>{{item.heading}}</text>
+                <text class="dian"></text>
+                <text>{{item.communityname}}</text>
+            </view>
+            <view class="item-label" wx:if="{{item.tagwall!=''}}">
+                <text class="tag" wx:for="{{item.tagwall}}" wx:for-item="items" wx:key="index">{{items}}</text>
+            </view>
+            <view class="item-price">
+                <view class="wan-price">
+                    <text class="num">{{item.price}}元/月</text>
+                </view>
+                <text class="ping">{{item.rentmodename}}</text>
+            </view>
+        </view>
+    </view>
+    <view bindtap="routerview" class="look-link" data-path="rent" wx:if="{{list2}}">
+        <text>查看全部租房</text>
+    </view>
+</view>
+<view class="bottom-nav _flex _row _icenter _around">
+    <view class="b-navitem b-nav-cur">
+        <image src="/img/resources/bar-home-cur.png"></image>
+        <text>首页</text>
+    </view>
+    <view bindtap="tabbarrouterview" class="b-navitem" data-path="toMessage">
+        <image src="/img/resources/bar-message.png"></image>
+        <text>消息</text>
+        <text class="messageNumber" wx:if="{{unReadNum>0}}">{{unReadNum}}</text>
+    </view>
+    <view bindtap="tabbarrouterview" class="b-navitem" data-path="toUser">
+        <image src="/img/resources/bar-my.png"></image>
+        <text>我的</text>
+    </view>
+</view>
+<wxs module="starFn" src="wxs/star.wxs" />

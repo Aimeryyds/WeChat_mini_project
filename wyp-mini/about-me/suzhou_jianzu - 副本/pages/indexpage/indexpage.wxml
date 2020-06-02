@@ -1,0 +1,52 @@
+<template name="map2">
+    <view class="mapAssembly">
+        <map showLocation bindcontroltap="controltap" bindmarkertap="markertap" controls="{{controls}}" id="map" latitude="{{data.style.latitude}}" longitude="{{data.style.longitude}}" markers="{{markers}}" scale="14" style="width: 100%; height: 700px;"></map>
+    </view>
+</template>
+<template name="wxapp_res">
+    <form bindsubmit="formSubmitX" class="test">
+        <view class="test_wrap">
+            <block wx:for="{{data.data}}">
+                <text class="res_text">{{item.title}}</text>
+                <input class="res_input" name="{{item.title}}" placeholder="{{item.desc}}" type="text"></input>
+            </block>
+            <button class="res_btn" formType="submit" style="background-color: {{data.style.background}};" type="primary">确认提交</button>
+        </view>
+    </form>
+</template>
+<template name="img_X">
+    <image src="{{item.params.goodsiconsrc}}"></image>
+</template>
+<import src="../../wxParse/wxParse.wxml"></import>
+<import src="../index/index.wxml"></import>
+<view style="background-color:{{data.data.page.background}}">
+    <block wx:if="{{data.data.items}}">
+        <block wx:for="{{data.data.items}}">
+            <template is="richtext" data="{{data:item}}" wx:if="{{item.id=='richtext'}}"></template>
+            <template is="wxapp_adv1" data="{{data:item}}" wx:if="{{item.id=='banner'}}"></template>
+            <template is="wxapp_search1" data="{{search:search,data:item,windowWidthS:windowWidthS}}" wx:if="{{item.id=='search'}}"></template>
+            <template is="wxapp_title1" data="{{data:item}}" wx:if="{{item.id=='title'}}"></template>
+            <template is="wxapp_nav1" data="{{data:item}}" wx:if="{{item.id=='menu'}}"></template>
+            <template is="wxapp_notice1" data="{{data:item}}" wx:if="{{item.id=='notice'}}"></template>
+            <template is="wxapp_banner1" data="{{data:item}}" wx:if="{{item.id=='picture'}}"></template>
+            <template is="wxapp_recommand1" data="{{data:item}}" wx:if="{{item.id=='goods'||item.id=='diyordergoods'}}"></template>
+            <template is="wxapp_line1" data="{{data:item}}" wx:if="{{item.id=='line'}}"></template>
+            <template is="wxapp_blank1" data="{{data:item}}" wx:if="{{item.id=='blank'}}"></template>
+            <template is="wxapp_article1" data="{{data:item}}" wx:if="{{item.id=='article'}}"></template>
+            <template is="wxapp_cube1" data="{{data:item}}" wx:if="{{item.id=='picturew'}}"></template>
+            <template is="wxapp_merchgroup" data="{{data:item,store:store,store_num:store_num}}" wx:if="{{item.id=='merchgroup'}}"></template>
+            <template is="wxapp_video" data="{{data:item.data}}" wx:if="{{item.id=='video'}}"></template>
+            <template is="map2" data="{{data:item,markers:markers,controls:controls}}" wx:if="{{item.id=='map'}}"></template>
+            <template is="audioView" data="{{data:item}}" wx:if="{{item.id=='audio'}}"></template>
+        </block>
+        <block wx:if="{{data.data.page.phone!=''}}">
+            <template is="wxapp_phone" data="{{data:data.data.page}}" wx:if="{{data.data.page.phone}}"></template>
+        </block>
+        <template is="wxapp_customerserver" data="{{data:data.data.page}}" wx:if="{{data.data.page.customerserver==1}}"></template>
+    </block>
+</view>
+<block wx:if="{{item.id=='diymodorder'}}" wx:for="{{data.data.items}}"></block>
+<view class="reservation" style="height:100%;background-image: url({{item.params.goodsiconsrc}});background-size: 100% 100%;background-repeat: no-repeat;" wx:if="{{item.id=='diymodorder'}}" wx:for="{{data.data.items}}">
+    <template is="wxapp_res" data="{{data:item}}" wx:if="{{item.id=='diymodorder'}}" wx:for="{{data.data.items}}"></template>
+</view>
+<loading wx:if="{{loading}}"></loading>

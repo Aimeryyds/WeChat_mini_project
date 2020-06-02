@@ -1,0 +1,147 @@
+@import "../components/cart/index.wxss";
+
+@import "../../templates/tag/tuan.wxss";
+
+.zan-tab__bd--scroll .zan-tab__item {
+    min-width: 375rpx;
+}
+
+.cart-title {
+    background-color: #fff;
+    font-size: 28rpx;
+    display: flex;
+    align-items: center;
+    padding: 20rpx 24rpx;
+    border-bottom: 1rpx solid #e5e5e5;
+}
+
+.cart-title--selection,.cart-item--selection {
+    width: 38rpx;
+    height: 38rpx;
+}
+
+.cart-title--text {
+    margin-left: 28rpx;
+    flex: 1;
+    opacity: 0.65;
+    color: #000;
+}
+
+.cart-title--right {
+    color: #000;
+    opacity: 0.43;
+    margin-left: 4rpx;
+    font-size: 24rpx;
+}
+
+.cart-clear {
+    width: 28rpx;
+    height: 28rpx;
+}
+
+.cart-item {
+    font-size: 28rpx;
+    padding: 24rpx;
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+    position: relative;
+}
+
+.cart-item:after {
+    position: absolute;
+    content: "";
+    border-top: 1rpx solid #e5e5e5;
+    left: 238rpx;
+    right: 0;
+    bottom: 0;
+}
+
+.cart-item:last-child:after {
+    border: 0rpx;
+}
+
+.cart-item--thumb {
+    width: 140rpx;
+    height: 140rpx;
+    margin-left: 24rpx;
+}
+
+.cart-item--cover {
+    border-radius: 8rpx;
+    position: absolute;
+    width: 140rpx;
+    height: 140rpx;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: rgba(0,0,0,0.3);
+    color: #fff;
+}
+
+.cart-item--image {
+    border-radius: 8rpx;
+    width: 140rpx;
+    height: 140rpx;
+}
+
+.cart-item--content {
+    min-height: 140rpx;
+    flex: 1;
+    margin-left: 12rpx;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    justify-content: space-between;
+}
+
+.cart-item--content-name {
+    font-size: 28rpx;
+    color: #000;
+}
+
+.cart-item--gift-name {
+    font-size: 26rpx;
+    color: #000;
+}
+
+.cart-item--content-desc {
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.cart-item--content-price {
+    color: red;
+    flex: 1;
+}
+
+.cart-item-manjian-tag-container {
+    width: 100%;
+    display: flex;
+    justify-content: left;
+    margin-left: 24rpx;
+    margin-top: 24rpx;
+}
+
+.cart-item-manjian-tag-container-title {
+    font-size: 24rpx;
+    color: #060606;
+    margin-left: 24rpx;
+    margin-right: 48rpx;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    word-wrap: normal;
+}
+
+.cart-item--content-num {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.cart-item--content-num-miao {
+    font-size: 24rpx;
+}

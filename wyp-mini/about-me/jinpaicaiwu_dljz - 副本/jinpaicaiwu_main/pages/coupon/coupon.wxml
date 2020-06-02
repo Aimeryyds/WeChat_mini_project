@@ -1,0 +1,160 @@
+<import src="../../common/package/prompt.wxml"></import>
+<view class="bg_color">
+    <view class="coupon-nav medium_font">
+        <view bindtap="changActive" class="{{activeIndex=='all'?'active':''}}" data-id="all">领券中心</view>
+        <view bindtap="changActive" class="{{activeIndex=='nouse'?'active':''}}" data-id="nouse">未使用</view>
+        <view bindtap="changActive" class="{{activeIndex=='overdue'?'active':''}}" data-id="overdue">已过期</view>
+        <view bindtap="changActive" class="{{activeIndex=='hasuse'?'active':''}}" data-id="hasuse">使用记录</view>
+    </view>
+    <view class="coupon-box">
+        <template is="prompt" data="{{prompt:prompt}}"></template>
+        <view class="coupon" wx:for="{{coupons}}" wx:key="{{index}}">
+            <block wx:if="{{activeIndex=='all'}}">
+                <view class="jagged"></view>
+                <view class="coupon_count">
+                    <view class="coupon_l">
+                        <view class="money">
+                            <text class="money_t">￥</text>
+                            <text class="money_b">{{item.money}}</text>
+                        </view>
+                        <view bindtap="show_des" class="rule" data-index="{{index}}" wx:if="{{item.description}}">使用规则</view>
+                    </view>
+                    <view class="coupon_c">
+                        <view class="t1">
+                            <text>{{item.name}}</text>
+                        </view>
+                        <view class="t2">
+                            <text class="d"></text>
+                            <text>满￥{{item.full}}可用</text>
+                            <text wx:if="{{item.sp_type==1}}">（仅限预约产品）</text>
+                        </view>
+                        <view class="t2">
+                            <text class="d"></text>
+                            <text wx:if="{{item.usetime_type!=1}}">有效期至:{{item.expire_time}}</text>
+                            <text wx:else>有效期{{item.use_day}}天</text>
+                        </view>
+                        <view class="t2" wx:if="{{item.range_type>0}}">
+                            <text class="d"></text>
+                            <text>{{item.range_catedet}}</text>
+                        </view>
+                    </view>
+                    <view class="coupon_r">
+                        <text bindtap="get_coupons" data-id="{{item.id}}" wx:if="{{item.receive_num>0&&item.receive_num>item.take_num&&activeIndex=='all'}}">立即领取</text>
+                        <text wx:elif="{{activeIndex=='all'}}">已领取({{item.take_num}})</text>
+                        <text wx:elif="{{activeIndex=='overdue'}}">已过期</text>
+                        <text wx:elif="{{item.take_num>0&&activeIndex=='nouse'}}">未使用</text>
+                        <text wx:elif="{{activeIndex=='hasuse'}}">已使用</text>
+                    </view>
+                </view>
+            </block>
+            <block wx:if="{{activeIndex=='nouse'}}">
+                <view class="jagged"></view>
+                <view class="coupon_count">
+                    <view class="coupon_l">
+                        <view class="money">
+                            <text class="money_t">￥</text>
+                            <text class="money_b">{{item.money}}</text>
+                        </view>
+                        <view bindtap="show_des" class="rule" data-index="{{index}}" wx:if="{{item.description}}">使用规则</view>
+                    </view>
+                    <view class="coupon_c">
+                        <view class="t1">
+                            <text>{{item.name}}</text>
+                        </view>
+                        <view class="t2">
+                            <text class="d"></text>
+                            <text>满￥{{item.full}}可用</text>
+                        </view>
+                        <view class="t2">
+                            <text class="d"></text>
+                            <text>有效期至:{{item.expire_time}}</text>
+                        </view>
+                        <view class="t2" wx:if="{{item.range_catedet}}">
+                            <text class="d"></text>
+                            <text>{{item.range_catedet}}</text>
+                        </view>
+                    </view>
+                    <view class="coupon_r top">
+                        <text>未使用</text>
+                    </view>
+                </view>
+            </block>
+            <block wx:if="{{activeIndex=='overdue'}}">
+                <view class="jagged3"></view>
+                <view class="coupon_count">
+                    <view class="coupon_l">
+                        <view class="money">
+                            <text class="money_t gq">￥</text>
+                            <text class="money_b gq">{{item.money}}</text>
+                        </view>
+                        <view bindtap="show_des" class="rule gq" data-index="{{index}}" wx:if="{{item.description}}">使用规则</view>
+                    </view>
+                    <view class="coupon_c">
+                        <view class="t1 gq">
+                            <text>{{item.name}}</text>
+                        </view>
+                        <view class="t2 gq">
+                            <text class="d hs_bg"></text>
+                            <text>满￥{{item.full}}可用</text>
+                        </view>
+                        <view class="t2 gq">
+                            <text class="d hs_bg"></text>
+                            <text wx:if="{{item.usetime_type!=1}}">有效期至:{{item.expire_time}}</text>
+                            <text wx:else>有效期{{item.use_day}}天</text>
+                        </view>
+                        <view class="t2 gq" wx:if="{{item.range_catedet}}">
+                            <text class="d hs_bg"></text>
+                            <text>{{item.range_catedet}}</text>
+                        </view>
+                    </view>
+                    <view class="coupon_r top gq">
+                        <text>已过期</text>
+                    </view>
+                </view>
+            </block>
+            <block wx:if="{{activeIndex=='hasuse'}}">
+                <view class="jagged4"></view>
+                <view class="coupon_count">
+                    <view class="coupon_l">
+                        <view class="money">
+                            <text class="money_t hs">￥</text>
+                            <text class="money_b hs">{{item.money}}</text>
+                        </view>
+                        <view bindtap="show_des" class="rule hs" data-index="{{index}}" wx:if="{{item.description}}">使用规则</view>
+                    </view>
+                    <view class="coupon_c">
+                        <view class="t1 hs">
+                            <text>{{item.name}}</text>
+                        </view>
+                        <view class="t2 hs">
+                            <text class="d"></text>
+                            <text>满￥{{item.full}}可用</text>
+                        </view>
+                        <view class="t2 hs">
+                            <text class="d hs_bg"></text>
+                            <text>有效期至:{{item.expire_time}}</text>
+                        </view>
+                        <view class="t2 hs" wx:if="{{item.range_catedet}}">
+                            <text class="d hs_bg"></text>
+                            <text>{{item.range_catedet}}</text>
+                        </view>
+                    </view>
+                    <view class="coupon_r top hs">
+                        <text>已使用</text>
+                    </view>
+                </view>
+            </block>
+        </view>
+    </view>
+    <block wx:if="{{showBar}}">
+        <view style="height:110rpx;"></view>
+        <view class="tabBar" style="color:{{tabs.color}};border-color:{{tabs.borderStyle}};background-color:{{tabs.backgroundColor}};border-top-color:{{tabs.borderTopColor}};">
+            <view class="barList" style="color:{{pageid==item.pagePath?tabs.selectedColor:tabs.color}}" wx:for="{{tabs.list}}" wx:key="{{index}}">
+                <view bindtap="switchTab" class="barList-content" data-tab="{{item}}" data-url="{{item.pagePath}}">
+                    <image class="icon" src="{{pageid==item.pagePath?item.selectedIconPath:item.iconPath}}"></image>
+                    <view>{{item.text}}</view>
+                </view>
+            </view>
+        </view>
+    </block>
+</view>

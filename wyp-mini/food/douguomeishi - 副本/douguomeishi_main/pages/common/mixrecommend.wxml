@@ -1,0 +1,144 @@
+<template name="ipad-recommend-small-note">
+    <view class="ipad-note-small-container" wx:if="{{notes}}">
+        <block wx:for="{{notes}}" wx:key="key">
+            <view bindtap="noteItemPressed" class="ipad-recommends-note-item" data-note-id="{{item.id}}">
+                <image class="ipad-recommends-note-item-image" mode="aspectFill" src="{{item.image_u}}"></image>
+                <text class="ipad-recommends-note-item-name">{{item.title}}</text>
+            </view>¸
+    </block>
+    </view>
+</template>
+<template name="ipad-recommend-small-recipe">
+    <view class="ipad-recipe-small-container" wx:if="{{recipes}}">
+        <block wx:for="{{recipes}}" wx:key="key">
+            <view bindtap="recipeItemPressed" class="ipad-recommends-recipe-item" data-recipe-id="{{item.id}}">
+                <image class="ipad-recommends-recipe-item-image" mode="aspectFill" src="{{item.img}}"></image>
+                <text class="ipad-recommends-recipe-item-name">{{item.n}}</text>
+            </view>¸
+    </block>
+    </view>
+</template>
+<template name="ipad-recommend-normal-note">
+    <view bindtap="noteItemPressed" class="ipad-note-normal-content" data-note-id="{{note.id}}" wx:if="{{note}}">
+        <view class="ipad-recommend-note-title">{{note.title}}</view>
+        <view class="ipad-recommend-note-image-view" style="background-image:url({{note.image_u}})">
+            <image class="ipad-recommend-note-video-image" src="/images/recipe_button_play.png" wx:if="{{note.media_type==1}}"></image>
+        </view>
+    </view>
+</template>
+<template name="ipad-recommend-normal-recipe">
+    <view bindtap="recipeItemPressed" class="ipad-recipe-normal-content" data-recipe-id="{{recipe.id}}" wx:if="{{recipe}}">
+        <view class="ipad-recommend-recipe-title">{{recipe.n}}</view>
+        <view class="ipad-recommend-recipe-description">
+            <text class="ipad-recommend-recipe-author">{{recipe.a.n}}</text>
+            <text class="ipad-recommend-recipe-page-view" wx:if="{{recipe.vc}}"> {{recipe.vc}}看过   </text>
+            <text class="ipad-recommend-recipe-favo" wx:if="{{recipe.fc}}"> {{recipe.fc}}收藏</text>
+        </view>
+        <view class="ipad-recommend-recipe-image-view" style="background-image:url({{recipe.p}})">
+            <image class="ipad-recommend-recipe-video-image" src="/images/recipe_button_play.png" wx:if="{{recipe.vu.length>0||recipe.vfurl.length>0}}"></image>
+        </view>
+    </view>
+</template>
+<template name="ipad-recommend-simple-note">
+    <view bindtap="noteItemPressed" class="ipad-note-simple-content" data-note-id="{{note.id}}" wx:if="{{note}}">
+        <image class="ipad-note-simple-image" mode="aspectFill" src="{{note.image_u}}"></image>
+        <view class="ipad-note-simple-detail">
+            <view class="ipad-note-simple-title">{{note.title}}</view>
+            <view class="ipad-note-simple-ingredients">
+                <a wx:for="{{note.major}}" wx:key="key">{{note.title}} </a>
+            </view>
+            <view class="ipad-note-simple-nickname">{{note.author.n}}</view>
+            <view class="ipad-note-simple-favo">
+                <a wx:if="{{note.fc}}">{{note.favo_count}}收藏 </a>
+            </view>
+        </view>
+    </view>
+</template>
+<template name="ipad-recommend-simple-recipe">
+    <view bindtap="recipeItemPressed" class="ipad-recipe-simple-content" data-recipe-id="{{recipe.id}}" wx:if="{{recipe}}">
+        <image class="ipad-recipe-simple-image" mode="aspectFill" src="{{recipe.img}}"></image>
+        <view class="ipad-recipe-simple-detail">
+            <view class="ipad-recipe-simple-title">{{recipe.n}}</view>
+            <view class="ipad-recipe-simple-ingredients">
+                <a wx:for="{{recipe.major}}" wx:key="key">{{recipe.title}} </a>
+            </view>
+            <view class="ipad-recipe-simple-nickname">{{recipe.a.n}}</view>
+            <view class="ipad-recipe-simple-favo">
+                <a wx:if="{{recipe.fc}}">{{recipe.fc}}收藏 </a>
+                <a wx:if="{{recipe.dc}}">{{recipe.dc}}作品</a>
+            </view>
+        </view>
+    </view>
+</template>
+<template name="recommend-small-note">
+    <view class="note-small-container" wx:if="{{notes}}">
+        <view bindtap="noteItemPressed" class="recommends-note-item" data-note-id="{{item.id}}" wx:for="{{notes}}" wx:key="key">
+            <image class="recommends-note-item-image" mode="aspectFill" src="{{item.image_u}}"></image>
+            <text class="recommends-note-item-name">{{item.title}}</text>
+        </view>
+    </view>
+</template>
+<template name="recommend-small-recipe">
+    <view class="recipe-small-container" wx:if="{{recipes}}">
+        <view bindtap="recipeItemPressed" class="recommends-recipe-item" data-recipe-id="{{item.id}}" wx:for="{{recipes}}" wx:key="key">
+            <image class="recommends-recipe-item-image" mode="aspectFill" src="{{item.img}}"></image>
+            <text class="recommends-recipe-item-name">{{item.n}}</text>
+        </view>
+    </view>
+</template>
+<template name="recommend-normal-note">
+    <view bindtap="noteItemPressed" class="note-normal-content" data-note-id="{{note.id}}" wx:if="{{note}}">
+        <view class="recommend-note-title">{{note.title}}</view>
+        <view class="recommend-note-image-view" style="background-image:url({{note.image_u}})">
+            <image class="recommend-note-video-image" src="/images/recipe_button_play.png" wx:if="{{note.media_type==1}}"></image>
+        </view>
+    </view>
+</template>
+<template name="recommend-normal-recipe">
+    <view bindtap="recipeItemPressed" class="recipe-normal-content" data-recipe-id="{{recipe.id}}" wx:if="{{recipe}}">
+        <view class="recommend-recipe-title">{{recipe.n}}</view>
+        <view class="recommend-recipe-description">
+            <text class="recommend-recipe-author">{{recipe.a.n}}</text>
+            <text class="recommend-recipe-page-view" wx:if="{{recipe.vc}}"> {{recipe.vc}}看过   </text>
+            <text class="recommend-recipe-favo" wx:if="{{recipe.fc}}"> {{recipe.fc}}收藏</text>
+        </view>
+        <view class="recommend-recipe-image-view" style="background-image:url({{recipe.p}})">
+            <image class="recommend-recipe-video-image" src="/images/recipe_button_play.png" wx:if="{{recipe.vu.length>0||recipe.vfurl.length>0}}"></image>
+        </view>
+    </view>
+</template>
+<template name="recommend-simple-note">
+    <view bindtap="noteItemPressed" class="note-simple-content" data-note-id="{{note.id}}" wx:if="{{note}}">
+        <view class="note-simple-image" style="background-image:url({{note.image_u}})">
+            <image class="note-simple-video-image" src="/images/recipe_button_play.png" wx:if="{{note.media_type==1}}"></image>
+        </view>
+        <view class="note-simple-detail">
+            <view class="note-simple-title">{{note.title}}</view>
+            <view class="note-simple-ingredients">
+                <a wx:for="{{note.major}}" wx:key="key">{{note.title}} </a>
+            </view>
+            <view class="note-simple-nickname">{{note.author.n}}</view>
+            <view class="note-simple-favo">
+                <a wx:if="{{note.fc}}">{{note.favo_count}}收藏 </a>
+            </view>
+        </view>
+    </view>
+</template>
+<template name="recommend-simple-recipe">
+    <view bindtap="recipeItemPressed" class="recipe-simple-content" data-recipe-id="{{recipe.id}}" wx:if="{{recipe}}">
+        <view class="recipe-simple-image" style="background-image:url({{recipe.img}})">
+            <image class="recipe-simple-video-image" src="/images/recipe_button_play.png" wx:if="{{recipe.vu.length>0||recipe.vfurl.length>0}}"></image>
+        </view>
+        <view class="recipe-simple-detail">
+            <view class="recipe-simple-title">{{recipe.n}}</view>
+            <view class="recipe-simple-ingredients">
+                <a wx:for="{{recipe.major}}" wx:key="key">{{item.title}} </a>
+            </view>
+            <view class="recipe-simple-nickname">{{recipe.a.n}}</view>
+            <view class="recipe-simple-favo">
+                <a wx:if="{{recipe.fc}}">{{recipe.fc}}收藏 </a>
+                <a wx:if="{{recipe.dc}}">{{recipe.dc}}作品</a>
+            </view>
+        </view>
+    </view>
+</template>

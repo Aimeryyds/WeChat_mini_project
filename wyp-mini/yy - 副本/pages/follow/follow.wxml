@@ -1,0 +1,50 @@
+<import src="../../commons/tpl/templateLive.wxml"></import>
+<import src="../../commons/tpl/templateAnchor.wxml"></import>
+<import src="../../commons/tpl/templateNoData.wxml"></import>
+<view class="container follow-container" style="margin-top:{{statusBar.height+'px'}}">
+    <allPage-toast statusBar="{{statusBar}}"></allPage-toast>
+    <view style="position:fixed;background:#fff;z-index:9;width:100%;top:0;height:{{statusBar.height+'px'}}"></view>
+    <status-bar statusBar="{{statusBar}}"></status-bar>
+    <view class="follow-head" style="top:{{statusBar.height+'px'}}">
+        <view class="follow-nav__list" wx:if="{{hasLogin}}">
+            <view bindtap="changeCurrentIdx" class="{{currentIdx==index?'follow-nav__item follow-nav__select':'follow-nav__item'}}" data-index="{{index}}" wx:for="{{navList}}" wx:key="index">{{item}}</view>
+        </view>
+    </view>
+    <pull-refresh bind:refreshData="onRefreshData" hasPullReq="{{hasPullReq}}" wx:if="{{hasLogin}}">
+        <view scrollY class="follow-main" slot="slot1" wx:if="{{hasLogin}}">
+            <view class="follow-nav__page swiper-{{currentIdx}}" wx:if="{{currentIdx==0}}">
+                <view scrollY class="swiper-scroll" style="height:100%;" wx:if="{{list.length}}">
+                    <form bindsubmit="submitForm" reportSubmit="true">
+                        <template is="liveList-tpl" data="{{list:list}}"></template>
+                    </form>
+                </view>
+                <template is="noData-tpl" data="{{tips:'暂无正在直播~'}}" wx:if="{{liveNoData&&list.length<=0}}"></template>
+            </view>
+            <view class="follow-nav__page" wx:if="{{currentIdx==1}}">
+                <view scrollY class="swiper-scroll" style="height:100%;" wx:if="{{followList.length}}">
+                    <form bindsubmit="submitForm" reportSubmit="true">
+                        <template is="followList-tpl" data="{{followList:followList}}"></template>
+                    </form>
+                </view>
+                <template is="noData-tpl" data="{{tips:'暂无关注列表~'}}" wx:if="{{followNoData&&followList.length<=0}}"></template>
+            </view>
+        </view>
+    </pull-refresh>
+</view>
+<view bindtap="hideModal" class="mask" wx:if="{{showModal}}">
+    <view animation="{{animationData}}" class="modal-content">
+        <view bindtap="cancelAttention" class="modal-attention-btn" style="margin-bottom: 6rpx;">
+            取消关注
+        </view>
+        <view bindtap="hideModal" class="modal-attention-btn">
+            返回
+        </view>
+    </view>
+</view>
+<view class="login-wrapper" wx:if="{{!hasLogin}}">
+    <view class="login-main">
+        <image src="images/login_icon.png"></image>
+        <view class="tips">点击登录，观看正在直播的主播直播间~</view>
+        <button bindgetuserinfo="getuserinfoLogin" openType="getUserInfo">快速登录</button>
+    </view>
+</view>

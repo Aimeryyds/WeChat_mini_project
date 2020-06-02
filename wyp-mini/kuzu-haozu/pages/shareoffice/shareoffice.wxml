@@ -1,0 +1,114 @@
+<swiper autoplay="0" bindchange="changeCur" circular="true" class="head_swiper" duration="1000" interval="5000">
+    <swiper-item wx:for="{{imgUrls}}" wx:key="item">
+        <image class="slide-image" src="{{item}}"></image>
+    </swiper-item>
+    <swiper-item wx:if="{{imgUrls.length===0}}">
+        <image class="slide-image" src="https://fang-oss.haozu.com/cms/index/2018/04/17/JkhhPDfpJA.jpg@750w_490h_1c_1e_1"></image>
+    </swiper-item>
+</swiper>
+<view class="swiper_tips" wx:if="{{imgUrls.length>0}}">
+    <text>{{currIndex}}/{{total}}</text>
+</view>
+<view class="number_tips">
+    <text>{{house.serial_number}}</text>
+</view>
+<view class="title_con">
+    <view class="left_con">
+        <view class="con_h1">{{title}}</view>
+    </view>
+    <button class="right-con" openType="share">
+        <image class="share_img" src="{{shareimg}}"></image>
+    </button>
+</view>
+<view class="data-bar {{house.type==3&&house.station_type==1?'barsimple':''}}">
+    <view class="bar bar-begin">
+        <text class="bar-title">单价</text>
+        <text class="text_number">{{house.avg_price}}</text>
+        <text class="line_unit">{{comm.html_decode(house.avg_price_unit)}}</text>
+    </view>
+    <view class="bar bar-second">
+        <text class="bar-title" wx:if="{{!(house.type==3&&house.station_type==1)}}">可容纳</text>
+        <text class="bar-title" wx:if="{{house.type==3&&house.station_type==1}}">工位数</text>
+        <text class="text_number" hidden="{{!(house.station_type!=3)}}">{{house.gongwei_num}}</text>
+        <text class="text_number" hidden="{{!(house.type==3&&house.station_type==3&&!house.gongwei_num)}}">{{house.gongwei_number_min}}-{{house.gongwei_number_max}}</text>
+        <text class="text_number" hidden="{{!(house.type==3&&house.station_type==3&&house.gongwei_num)}}">{{house.gongwei_num}}</text>
+        <text class="line_unit" wx:if="{{!(house.type==3&&house.station_type==1)}}">人</text>
+        <text class="line_unit" wx:if="{{house.type==3&&house.station_type==1}}">个</text>
+    </view>
+    <view class="bar bar-third" wx:if="{{!(house.type==3&&house.station_type==1)}}">
+        <text class="bar-title">面积</text>
+        <text class="text_number">{{house.briefIntroduction.totalArea.val}}</text>
+        <text class="line_unit">㎡</text>
+    </view>
+</view>
+<view class="data-pos data-sharehouse">
+    <view class="build-detail house-detail">
+        <view class="v-last" wx:if="{{house.information.station_info}}">
+            <text class="tag-name">工位信息：</text>
+            <text class="last-text">{{house.information.station_info}}</text>
+        </view>
+        <view class="v-last" wx:if="{{house.information.price_info}}">
+            <text class="tag-name">价格优势：</text>
+            <text class="last-text">{{house.information.price_info}}</text>
+        </view>
+        <view class="v-last" wx:if="{{house.information.zhuangxiu}}">
+            <text class="tag-name">装修情况：</text>
+            <text class="last-text">{{house.information.zhuangxiu}}</text>
+        </view>
+        <view class="v-last" wx:if="{{house.information.mianzu_time}}">
+            <text class="tag-name">免租时间：</text>
+            <text class="last-text">{{house.information.mianzu_time}}</text>
+        </view>
+        <view class="v-last" wx:if="{{house.information.look_house_time}}">
+            <text class="tag-name">看房时间：</text>
+            <text class="last-text">{{house.information.look_house_time}}</text>
+        </view>
+    </view>
+    <navigator class="show-more" url="/pages/building/building?building_id={{house.building_id}}">查看 {{house.building_name}}<text>{{houseNum}}</text>套出租房源</navigator>
+</view>
+<view class="empty-line"></view>
+<view bindtap="toMapInfo" class="data-map data-suggest">
+    <view class="map-title">{{house.building_name}}写字楼简介</view>
+    <image class="map-area" id="map-content" src="{{mapUrl}}"></image>
+</view>
+<view class="data-admin">
+    <view bindtap="showyekan" class="admin-order">
+        <image src="../../images/task.png"></image>
+        <text>预约看房</text>
+    </view>
+    <view bindtap="zixun" class="admin-call">
+        <text>免费咨询</text>
+    </view>
+</view>
+<view class="data-shade {{shade?'':'hide'}}"></view>
+<view class="data-yuekan {{showYK?'':'hide'}}">
+    <view class="yuekan-title">
+        <text>预约看房</text>
+        <image bindtap="closeyuekan" class="closebtn" src="{{close}}"></image>
+    </view>
+    <view class="yuekan-content" wx:if="{{house.renqi&&house.renqi.yuyue}}">
+    已有<text>{{house.renqi&&house.renqi.yuyue?house.renqi.yuyue:10}}</text>人预约看过此房源，预计很快会成交，留下联系方式，顾问带您实地看房。
+  </view>
+    <view class="yuekan-input error">
+        <image src="{{error_icon}}" wx:if="{{hasError}}"></image>
+        <input bindinput="inputChange" disabled="{{isYK||isDis}}" focus="{{showYK}}" maxlength="11" placeholder="请输入手机号" placeholderClass="phone_holder" type="number" value="{{resPhone}}"></input>
+        <text wx:if="{{hasError}}">请输入正确的手机号！</text>
+    </view>
+    <view bindtap="submitYK" class="yuekan-btn {{isYK?'hui':''}}">{{isYK?'已':'立即'}}预约</view>
+</view>
+<view class="data-result {{subsucc?'':'hide'}}">
+    <image src="../../images/success.png"></image>
+    <text class="result-title">提交成功</text>
+    <text>客服很快会与您联系！</text>
+    <view class="login-box {{loginYK?'h270':'hide'}}">
+        <text class="login-prompt">是否用当前手机号登录会员？</text>
+        <view bindtap="Ylogin" class="login-btn">确认登录</view>
+        <view bindtap="closePop" class="login-cancel">暂时不用</view>
+    </view>
+    <image bindtap="closePop" class="closebtn" src="{{close}}"></image>
+</view>
+<navigator class="goTag_home" openType="reLaunch" url="/pages/index/index" wx:if="{{!!share}}">
+    <image class="icon_home" src="/images/home.png"></image>
+    <text>首页</text>
+</navigator>
+<wxs module="comm" src="../../utils/common.wxs" />

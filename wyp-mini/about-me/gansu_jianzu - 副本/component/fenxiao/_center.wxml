@@ -1,0 +1,52 @@
+<template name="center">
+    <view class="center">
+        <view class="center__mod">
+            <view class="center__info">
+                <view class="center__info__img">
+                    <image src="{{userdata.avatarUrl||'http://imgcdnali.wfenxiao.com.cn/xcx/c/icons/avatar.png'}}"></image>
+                </view>
+                <view>
+                    <view class="center__info__name">{{userdata.nickName||'- -'}}</view>
+                    <view class="center__info__phone">{{userdata.mobile}}</view>
+                </view>
+            </view>
+            <view>
+                <view class="center__profit">{{userdata.totalIncome}}</view>
+                <view>累计收益（元）</view>
+            </view>
+        </view>
+        <view class="center__withdraw" ontap="withdrawLink">
+            <text class="center__withdraw-money">可提现佣金:{{userdata.balance}}元</text>
+            <navigator class="center__withdraw-link" hoverClass="none" url="/pages/fenxiao/account/index">
+                <view>立即提现</view>
+                <image src="http://imgcdnali.wfenxiao.com.cn/xcx/c/icons/item-link2.png"></image>
+            </navigator>
+        </view>
+    </view>
+    <view class="zan-panel">
+        <navigator class="zan-cell zan-cell--access" hoverClass="none" url="/pages/fenxiao/stores/index">
+            <view class="zan-cell__bd">我的二维码</view>
+            <view class="zan-cell__ft" style="display:flex;justify-content:center">
+                <image src="http://imgcdnali.wfenxiao.com.cn/xcx/c/qr.png" style="width:30rpx;height:30rpx"></image>
+            </view>
+        </navigator>
+        <navigator class="zan-cell zan-cell--access" hoverClass="none" url="/pages/fenxiao/products/index?type=list">
+            <view class="zan-cell__bd">分销及收藏</view>
+            <view class="zan-cell__ft"></view>
+        </navigator>
+        <navigator class="zan-cell zan-cell--access" hoverClass="none" url="/pages/fenxiao/products/index?type=mylist">
+            <view class="zan-cell__bd">分销商品库</view>
+            <view class="zan-cell__ft"></view>
+        </navigator>
+    </view>
+    <view class="zan-panel">
+        <navigator class="zan-cell zan-cell--access" hoverClass="none" url="/pages/fenxiao/customers/index">
+            <view class="zan-cell__bd">累计客户</view>
+            <view class="zan-cell__ft">{{userdata.clientNum}}</view>
+        </navigator>
+        <navigator class="zan-cell zan-cell--access" hoverClass="none" url="/pages/fenxiao/orders/index">
+            <view class="zan-cell__bd">分销订单</view>
+            <view class="zan-cell__ft">{{userdata.orderNum}}</view>
+        </navigator>
+    </view>
+</template>

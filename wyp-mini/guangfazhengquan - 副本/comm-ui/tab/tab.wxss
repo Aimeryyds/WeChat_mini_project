@@ -1,0 +1,71 @@
+.tab {
+    height: 90rpx;
+}
+
+.tab::-webkit-scrollbar {
+    display: none;
+}
+
+.tab__bd {
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+    background: #fff;
+}
+
+.tab__bd--fixed {
+    position: fixed;
+    top: 0;
+    z-index: 2;
+}
+
+.tab__item {
+    flex: 1;
+    display: inline-block;
+    padding: 18rpx 10rpx;
+    line-height: 0;
+    box-sizing: border-box;
+    overflow: hidden;
+    text-align: center;
+}
+
+.tab__title {
+    display: inline-block;
+    max-width: 100%;
+    height: 54rpx;
+    line-height: 58rpx;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    box-sizing: border-box;
+    word-break: keep-all;
+    font-size: 30rpx;
+    text-align: center;
+    color: #333;
+}
+
+.tab__item--selected .tab__title {
+    color: #3f7de5;
+    border-bottom: 4rpx solid #3f7de5;
+}
+
+.tab__bd--scroll {
+    display: block;
+    white-space: nowrap;
+}
+
+.tab__bd--scroll::-webkit-scrollbar {
+    display: none;
+}
+
+.tab__bd--scroll .tab__item {
+    text-align: left;
+    padding: 18rpx 32rpx 18rpx 30rpx;
+}
+
+.tab__bd--scroll .tab__item:first-child {
+    padding-left: 0;
+}
+
+.tab__bd--scroll .tab__item:last-child {
+    padding-right: 0;
+}

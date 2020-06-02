@@ -1,0 +1,57 @@
+<import src="../../wxParse/wxParse.wxml"></import>
+<view class="loading" wx:if="{{loading}}">
+    <image class="loading_img" src="../../image/loading-32-32.gif"></image>
+</view>
+<view class="loading_fail" wx:if="{{loading_fail}}"></view>
+<view wx:else>
+    <view class="title_h1 mt20">{{title}}</view>
+    <view class="datetime mt20">{{timeline}}</view>
+    <view class="wxParse message mt20">
+        <template is="wxParse" data="{{wxParseData:article.nodes}}"></template>
+    </view>
+    <block wx:if="{{loadCmsRecommList.length>0}}">
+        <view class="s2_1">相关推荐</view>
+        <view class="arlist">
+            <navigator class="arlist_item" url="../health_detail/health_detail?id={{item.ArticleID}}" wx:for="{{loadCmsRecommList}}" wx:key="loadCmsRecommList">
+                <image class="arlist_img" src="{{item.ArticlePic}}" wx:if="{{item.ArticlePic}}"></image>
+                <view class="arlist_health_detail">
+                    <text class="arlist_t">{{item.Title}}</text>
+                    <text class="arlist_n">{{item.Datetime}}</text>
+                </view>
+            </navigator>
+        </view>
+    </block>
+</view>
+<view class=" btn_do2" style="padding-bottom:{{statusBarHeight>30?'40':'0'}}rpx">
+    <form catchsubmit="formSubmit" reportSubmit="true">
+        <button bindtap="do_backhome" formType="submit" plain="true">
+            <image class="icon_fav" src="../../image/home2.png"></image>
+            <text>回首页</text>
+        </button>
+        <block wx:if="{{haveuid}}">
+            <button bindtap="do_fav" data-type="fav_done" formType="submit" plain="true" wx:if="{{isfav==1}}">
+                <image class="icon_fav" src="../../image/fav2_on.png"></image>
+                <text style="color:#ff6767">收藏</text>
+            </button>
+            <button bindtap="do_fav" data-type="fav_do" formType="submit" plain="true" wx:else>
+                <image class="icon_fav" src="../../image/fav2.png"></image>
+                <text>收藏</text>
+            </button>
+        </block>
+        <button bindgetuserinfo="clickinfo" data-type="fav" openType="getUserInfo" plain="true" wx:else>
+            <image class="icon_fav" src="../../image/fav2.png"></image>
+            <text>收藏</text>
+        </button>
+        <button formType="submit" openType="share" plain="true">
+            <image class="icon_fav" src="../../image/share2.png"></image>
+            <text>分享</text>
+        </button>
+        <button bindtap="fulishe" formType="submit" plain="true">
+            <image class="icon_fav" src="../../image/fulishe2_on.png"></image>
+            <text style="color:#ff6767">福利社</text>
+        </button>
+    </form>
+</view>
+<view>　</view>
+<view>　</view>
+<view>　</view>

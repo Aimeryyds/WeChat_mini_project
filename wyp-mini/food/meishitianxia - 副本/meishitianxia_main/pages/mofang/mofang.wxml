@@ -1,0 +1,10 @@
+<view class="mlist">
+    <navigator class="mlist_item" url="../mofang_info/mofang_info?domain={{item.mfid}}" wx:for="{{mofanglist}}" wx:key="mofanglist">
+        <image class="mlist_img" mode="aspectFill" src="{{item.bannerpic}}"></image>
+    </navigator>
+</view>
+<view class="loading" wx:if="{{loading}}">
+    <image class="loading_img" src="../../image/loading-32-32.gif"></image>
+</view>
+<view class="loading_end" wx:if="{{loading_end}}"></view>
+<view class="loading_fail" wx:if="{{loading_fail}}"></view>

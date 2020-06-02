@@ -1,0 +1,28 @@
+<block wx:if="{{data.goods}}">
+    <view bindtap="tobargain" class="g_item" data-id="{{item[0].id}}" wx:for="{{data.goods}}">
+        <image class="g_img" src="{{item[0].images}}"></image>
+        <view class="g_text">
+            <text style="font-size: 32rpx;font-weight: bolder;overflow: hidden;text-overflow:ellipsis;white-space: nowrap;">{{item[0].title}}</text>
+            <view style="display: flex;flex-direction: row;justify-content: space-between;">
+                <block wx:if="{{item[0].type=='0'}}">
+                    <text style="color:#Ff8080;font-size: 26rpx;line-height: 30rpx;margin-top:30rpx;">当前价：￥{{item[0].now_price}}</text>
+                    <text style="color:#Ff8080;font-size: 26rpx;line-height: 30rpx;margin-top:30rpx;">
+                        <block wx:if="{{item[0].label_swi=='0'}}">原价：￥{{item[0].now_price}}</block>
+                        <block wx:elif="{{item[0].label_swi=='1'}}">已超时</block>
+                        <block wx:elif="{{item[0].label_swi=='2'}}">已结束</block>
+                        <block wx:elif="{{item[0].label_swi=='3'}}">已到底价</block>
+                    </text>
+                </block>
+                <block wx:elif="{{item[0].type=='1'}}">
+                    <text style="color:#Ff8080;font-size: 26rpx;line-height: 30rpx;margin-top:30rpx;">当前价：￥{{item[0].now_price}}</text>
+                    <text style="color:#Ff8080;font-size: 26rpx;line-height: 30rpx;margin-top:30rpx;">
+                        <block wx:if="{{item[0].label_swi=='0'}}">底价：￥{{item[0].end_price}}</block>
+                        <block wx:elif="{{item[0].label_swi=='1'}}">已超时</block>
+                        <block wx:elif="{{item[0].label_swi=='2'}}">已结束</block>
+                        <block wx:elif="{{item[0].label_swi=='3'}}">已到底价</block>
+                    </text>
+                </block>
+            </view>
+        </view>
+    </view>
+</block>

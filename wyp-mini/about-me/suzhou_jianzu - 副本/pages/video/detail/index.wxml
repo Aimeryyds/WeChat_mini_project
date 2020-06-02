@@ -1,0 +1,12 @@
+<view class="content">
+    <view class="title">{{data.advname}}</view>
+    <view class="wrap">
+        <view>{{data.create_time}}</view>
+        <view>浏览<text> {{data.read_time}}</text>
+        </view>
+    </view>
+    <view class="video_wrap">
+        <video controls customCache="{{false}}" objectFit="contain" poster="{{data.thumb}}" src="{{data.link}}" style="width:100%;"></video>
+    </view>
+    <rich-text nodes="{{data.detail}}"></rich-text>
+</view>

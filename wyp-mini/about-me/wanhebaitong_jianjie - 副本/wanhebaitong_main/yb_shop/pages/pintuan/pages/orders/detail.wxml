@@ -1,0 +1,103 @@
+<view class="jumbotron flex-row">
+    <block wx:if="{{orderInfo.orderStatus=='待付款'}}">
+        <view class="flex-grow-1 info-text">{{orderInfo.orderStatus}}</view>
+        <view class="flex-grow-0 img">
+            <image src="../../resource/order-unpay.png"></image>
+        </view>
+    </block>
+    <block wx:if="{{orderInfo.orderStatus=='已取消'}}">
+        <view class="flex-grow-1 info-text">订单已取消</view>
+        <view class="flex-grow-0 img">
+            <image src="../../resource/order-fail.png"></image>
+        </view>
+    </block>
+    <block wx:if="{{orderInfo.orderStatus=='待成团'}}">
+        <view class="flex-grow-1 info-text">{{orderInfo.orderStatus}}</view>
+        <view class="flex-grow-0 img">
+            <image src="../../resource/order-ungroup.png"></image>
+        </view>
+    </block>
+    <block wx:if="{{orderInfo.orderStatus=='待发货'}}">
+        <view class="flex-grow-1 info-text">{{orderInfo.orderStatus}}</view>
+        <view class="flex-grow-0 img">
+            <image src="../../resource/order-unsend.png"></image>
+        </view>
+    </block>
+    <block wx:if="{{orderInfo.orderStatus=='待收货'}}">
+        <view class="flex-grow-1 info-text">{{orderInfo.orderStatus}}</view>
+        <view class="flex-grow-0 img">
+            <image src="../../resource/order-receive.png"></image>
+        </view>
+    </block>
+    <block wx:if="{{orderInfo.orderStatus=='已完成'}}">
+        <view class="flex-grow-1 info-text">{{orderInfo.orderStatus}}</view>
+        <view class="flex-grow-0 img">
+            <image src="../../resource/order-success.png"></image>
+        </view>
+    </block>
+    <block wx:if="{{orderInfo.orderStatus=='拼团失败'}}">
+        <view class="flex-grow-1 info-text">{{orderInfo.orderStatus}}</view>
+        <view class="flex-grow-0 img">
+            <image src="../../resource/order-fail.png"></image>
+        </view>
+    </block>
+    <block wx:if="{{orderInfo.orderStatus=='已退款(未成团)'}}">
+        <view class="flex-grow-1 info-text">未成团，退款成功</view>
+        <view class="flex-grow-0 img">
+            <image src="../../resource/order-fail.png"></image>
+        </view>
+    </block>
+</view>
+<view class="address bg-fff flex-row">
+    <view class="flex-grow-0 flex-y-center img">
+        <image src="../../resource/address.png"></image>
+    </view>
+    <view class="flex-grow-1">
+        <view class="flex-grow-0 addr-user">
+            <text>{{orderInfo.address.userName}}</text>
+            <text>{{orderInfo.address.telNumber}}</text>
+        </view>
+        <view class="flex-grow-0 addr-info">
+			{{orderInfo.address.province}} {{orderInfo.address.city}} {{orderInfo.address.county}} {{orderInfo.address.address}}
+		</view>
+    </view>
+</view>
+<view class="ordernum bg-fff flex-row">
+    <view>订单编号：{{orderInfo.orderNum}}</view>
+</view>
+<view class="order-goods flex-row">
+    <view class="goods-img flex-grow-0">
+        <image mode="aspectFill" src="{{orderInfo.goods.img}}"></image>
+    </view>
+    <view class="goods-right flex-grow-1">
+        <view class="goods-title flex-row">
+				{{orderInfo.goods.name}}
+			</view>
+        <view class="goods-info flex-row">
+            <view class="goods-class flex-grow-1">
+                <text class="goods-num">数量：{{orderInfo.goodsNum}} {{item.goods.unit}}</text>
+            </view>
+            <view class="flex-grow-0 info-money">
+					￥{{orderInfo.totalPrice}}
+				</view>
+        </view>
+    </view>
+</view>
+<view class="order-price bg-fff">
+    <text>实付：¥{{orderInfo.totalPrice}}</text>
+</view>
+<view class="order-item bg-fff">
+    <view>
+		订单编号：{{orderInfo.orderNum}}<text></text>
+    </view>
+    <view>支付方式：微信</view>
+    <view>下单时间：{{orderInfo.createTime}}</view>
+    <view wx:if="{{orderInfo.payTime}}">支付时间：{{orderInfo.payTime}}</view>
+    <view wx:if="{{orderInfo.group_time}}">成团时间：{{orderInfo.group_time}}</view>
+    <view wx:if="{{orderInfo.deliveryTime}}">发货时间：{{orderInfo.deliveryTime}}</view>
+    <view wx:if="{{orderInfo.completeTime}}">成交时间：{{orderInfo.completeTime}}</view>
+    <block wx:if="{{orderInfo.express}}">
+        <view>快递方式：{{orderInfo.express.type}}</view>
+        <view>运单编号：{{orderInfo.express.sn}}</view>
+    </block>
+</view>

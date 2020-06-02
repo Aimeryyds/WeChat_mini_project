@@ -1,0 +1,39 @@
+<template name="shopheader">
+    <view class="header" id="header">
+        <view bindtap="jumpstoredetail" data-id="{{storeid}}" data-openevaluate="{{openEvaluate}}">
+            <image class="logo" src="{{logo?logo:'http://imgcdnali.wfenxiao.com.cn/xcx/c/icons/brand.png'}}"></image>
+            <view class="freight">
+                <view class="shop-header-name zan-ellipsis" style="max-width:{{hasCoupons==0?'500rpx':'460rpx'}}">{{brandName}}-{{storeName}}</view>
+                <view hidden="{{hasCoupons==0}}">
+                    <image src="http://imgcdnali.wfenxiao.com.cn/xcx/c/icons/coupon.png" style="width:30rpx; height:30rpx;margin-left:40rpx"></image>
+                </view>
+            </view>
+            <view style="display:flex;">
+                <view style="flex:1;">
+                    <view class="freight">
+                        <view class="type">已售{{orderNum||0}}单</view>
+                        <view class="type" style="margin-left: 10rpx;" wx:if="{{categoryNum||categoryNum==0}}">分销商品{{categoryNum||0}}种</view>
+                        <view class="item_intro" style="font-size:22rpx; margin-left:10rpx;" wx:if="{{openEvaluate==1}}">{{goodReviewsRate||0}}%好评</view>
+                    </view>
+                    <view class="welcome ellipsis">配送费: ￥{{deliveryFee}}元 </view>
+                </view>
+                <view class="desc-Collection" style="margin-right:70rpx;" wx:if="{{!categoryNum||categoryNum==0}}">
+                    <view catchtap="collectionOn" class="desc-Collection__cont" data-hascollection="{{hasCollection}}" style="background-color: {{hasCollection?'#f22222':'#d2d2d2'}}">
+                        <image src="http://imgcdnali.wfenxiao.com.cn/xcx/c/1120/collection2.png"></image>
+                        <text>{{hasCollection?'已收藏':'未收藏'}}</text>
+                    </view>
+                </view>
+            </view>
+            <image class="arrow" src="http://imgcdnali.wfenxiao.com.cn/xcx/c/icons/arrow_right.png"></image>
+            <view class="shop-header-manjian" wx:if="{{fullreductionMsg&&fullreductionMsg.length>0}}">
+                <view style="margin-top:4rpx">
+                    <template is="manjian-tag" data></template>
+                </view>
+                <text class="shop-header-manjian-content shop-header-manjian-text">{{fullreductionMsg[0].msg[0]}}</text>
+                <text class="shop-header-manjian-text">{{fullreductionMsg.length}}个活动</text>
+                <image src="http://imgcdnali.wfenxiao.com.cn/xcx/c/icons/arrow_right.png" style="  width: 13rpx;  height: 22rpx;"></image>
+            </view>
+        </view>
+    </view>
+</template>
+<import src="/pages/templates/tag/manjian.wxml"></import>

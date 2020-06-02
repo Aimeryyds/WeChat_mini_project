@@ -1,0 +1,21 @@
+<template name="content"></template>
+<template name="title"></template>
+<template name="a4a139fc">
+    <transition class="_transition a4a139fc" name="fade">
+        <view class="_view a4a139fc mg-dialog" wx:if="{{visiable}}">
+            <view class="_view a4a139fc mg-dialog-mask"></view>
+            <view class="_view a4a139fc mg-dialog-container">
+                <view class="_view a4a139fc mg-dialog-title">
+                    <template is="{{$slottitle||'title'}}" data="{{...$root['0'],...$root[$k],$root:$root}}"></template>
+                </view>
+                <view class="_view a4a139fc mg-dialog-content">
+                    <template is="{{$slotcontent||'content'}}" data="{{...$root['0'],...$root[$k],$root:$root}}"></template>
+                </view>
+                <view class="_view a4a139fc mg-dialog-footer">
+                    <view bindtap="handleProxy" class="_view a4a139fc mg-dialog-button" data-comkey="{{$k}}" data-eventid="{{'a4a139fc-0-'+index}}" hoverClass="mg-dialog-button-hover" key="{{index}}" wx:for="{{_buttons}}" wx:key="index">{{item.name}}</view>
+                </view>
+            </view>
+        </view>
+    </transition>
+</template>
+<import src="/common/slots.wxml"></import>

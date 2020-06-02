@@ -1,0 +1,30 @@
+<template name="a81b6ff2">
+    <view class="_div data-v-4e5c7352 container" wx:if="{{!isLoading}}">
+        <view class="_div data-v-4e5c7352 word-list" wx:if="{{total}}">
+            <view class="_div data-v-4e5c7352 total">共有单词{{total}}个，已为你添加到扇贝单词学习计划中</view>
+            <view class="_div data-v-4e5c7352 word-item" key="{{wordIndex}}" wx:for="{{words}}" wx:for-index="wordIndex" wx:for-item="word" wx:key="wordIndex">
+                <view class="_div data-v-4e5c7352 basic-info">
+                    <view bindtap="handleProxy" class="_i data-v-4e5c7352 ib ib-volume voice" data-comkey="{{$k}}" data-eventid="{{'0-'+wordIndex}}"></view>
+                    <view class="_div data-v-4e5c7352 content">
+                    {{word.vocabulary.word}}
+                    <label class="_span data-v-4e5c7352 phonogram" wx:if="{{word.vocabulary.sound&&word.vocabulary.sound.ipa_us}}">/{{word.vocabulary.sound.ipa_us}}/</label>
+                    </view>
+                </view>
+                <view class="_div data-v-4e5c7352 definition-section">
+                    <view class="_div data-v-4e5c7352 definition-icon">释义</view>
+                    <view class="_div data-v-4e5c7352 definitions">
+                        <view class="_div data-v-4e5c7352 definition" key="{{defIndex}}" wx:for="{{word.vocabulary.senses}}" wx:for-index="defIndex" wx:for-item="definition" wx:key="defIndex">{{definition.pos}}{{definition.definition_cn}}</view>
+                    </view>
+                </view>
+                <view class="_div data-v-4e5c7352 bottom-info {{[!word.objects.source_name?'no-source':'']}}">
+                    <view class="_div data-v-4e5c7352 source" wx:if="{{word.objects.source_name}}">来源《{{word.objects.source_name}}》</view>
+                    <button bindtap="handleProxy" class="_button data-v-4e5c7352 remove-btn" data-comkey="{{$k}}" data-eventid="{{'1-'+wordIndex}}">移出</button>
+                </view>
+            </view>
+        </view>
+        <view class="_div data-v-4e5c7352 no-word" wx:else>
+            <image alt="img" class="_img data-v-4e5c7352" src="https://media-image1.baydn.com/storage_media_image/kdbdns/5488a08c877f08fb5c6f91d2976241bc.99a73b98de2bd9144f4b11364a126228.png"></image>
+            <view class="_div data-v-4e5c7352 tip">还没有生词哦~</view>
+        </view>
+    </view>
+</template>

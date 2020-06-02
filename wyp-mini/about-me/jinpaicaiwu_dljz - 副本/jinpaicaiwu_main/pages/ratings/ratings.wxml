@@ -1,0 +1,42 @@
+<view class="main">
+    <view class="ratings-top confirm-box medium_font border_bottom2">
+        <image src="{{product[0].product_thumb}}"></image>
+        <view>
+            <text bindtap="selectStar2" class="iconfont {{item}}" data-index="{{index}}" wx:for="{{wjxNum2}}" wx:key="{{index}}"></text>
+        </view>
+    </view>
+    <view class="ratings-bottom confirm-box medium_font border_bottom2">
+        <textarea autoHeight bindblur="binkContentConfirm" placeholder="宝贝满足你的期待吗？说说他的优点和缺点吧。" wx:if="{{submit}}"></textarea>
+        <textarea autoHeight disabled="true" value="{{content}}" wx:else></textarea>
+    </view>
+    <view class="weui-cells" wx:if="{{!isAliApp&&rating_type!='collage'}}">
+        <view class="weui-cell">
+            <view class="weui-cell__bd">
+                <view class="weui-uploader">
+                    <view class="weui-uploader__hd">
+                        <view class="weui-uploader__title">点击可预览选好的图片</view>
+                        <view class="weui-uploader__info" wx:if="{{submit}}">{{upload_picture_list.length}}/9</view>
+                    </view>
+                    <view class="weui-uploader__bd">
+                        <view class="weui-uploader__files">
+                            <view class="weui-uploader__file" wx:for="{{upload_picture_list}}" wx:for-item="image" wx:key="{{index}}">
+                                <image bindtap="previewImage" class="weui-uploader__img" data-src="{{image}}" data-state="upload" mode="aspectFill" src="{{image}}" wx:if="{{!submit}}"></image>
+                                <image bindtap="previewImage" class="weui-uploader__img" data-src="{{image.path}}" data-state="upload" mode="aspectFill" src="{{image.path}}" wx:if="{{image.upload_percent<100}}"></image>
+                                <icon catchtap="deleteImage" class="cancel" data-index="{{index}}" size="20" type="clear" wx:if="{{submit}}"></icon>
+                                <image bindtap="previewImage" class="weui-uploader__img" data-src="{{image.path_server}}" data-state="server" mode="aspectFill" src="{{image.path_server}}" wx:if="{{image.upload_percent==100}}"></image>
+                                <view class="upload_progress" wx:if="{{image.upload_percent>0&&image.upload_percent<100}}">{{image.upload_percent}}%</view>
+                            </view>
+                        </view>
+                        <view class="weui-uploader__input-box {{isShow?'true':'hideTrue'}}">
+                            <view bindtap="chooseImage" class="weui-uploader__input"></view>
+                        </view>
+                    </view>
+                </view>
+            </view>
+        </view>
+    </view>
+    <view class="ratings-btn">
+        <button bindtap="submit" class="cart_bg_color2" wx:if="{{submit}}">提交</button>
+        <button class="cart_bg_color2" wx:else>已评价</button>
+    </view>
+</view>

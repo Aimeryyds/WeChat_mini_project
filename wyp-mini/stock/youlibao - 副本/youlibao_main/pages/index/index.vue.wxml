@@ -1,0 +1,46 @@
+<template name="8905f8ae">
+    <view class="_div data-v-1a475e3b container">
+        <view bindtap="handleProxy" class="_div data-v-1a475e3b banner" data-comkey="{{$k}}" data-eventid="{{'1_0'}}" id="banner">
+            <image alt class="_img data-v-1a475e3b" src="https://static.xyzq.cn/activity/mp-images/mp-home/banner.png"></image>
+        </view>
+        <view class="_div data-v-1a475e3b card-src">
+            <view class="_div data-v-1a475e3b" id="quote">
+                <template is="226d665c" data="{{...$root[$kk+'0'],$root:$root}}"></template>
+            </view>
+            <view class="_div data-v-1a475e3b" id="tools">
+                <template is="226d665c" data="{{...$root[$kk+'1'],$root:$root}}"></template>
+            </view>
+            <view class="_div data-v-1a475e3b" id="info">
+                <template is="226d665c" data="{{...$root[$kk+'2'],$root:$root}}"></template>
+            </view>
+            <view class="_div data-v-1a475e3b" id="playulb">
+                <template is="226d665c" data="{{...$root[$kk+'3'],$root:$root}}"></template>
+            </view>
+            <view class="_div data-v-1a475e3b" id="game">
+                <template is="226d665c" data="{{...$root[$kk+'4'],$root:$root}}"></template>
+            </view>
+        </view>
+        <view class="_div data-v-1a475e3b download" wx:if="{{downLoad}}">
+            <view bindtap="handleProxy" class="_div data-v-1a475e3b down" data-comkey="{{$k}}" data-eventid="{{'2_6'}}" id="download"></view>
+        </view>
+        <view class="_div data-v-1a475e3b musk-box" wx:if="{{isShow}}">
+            <view class="_div data-v-1a475e3b pop-up">
+                <view class="_div data-v-1a475e3b musk-p">
+                    <view class="_p data-v-1a475e3b">系统检测到您未安装优理宝APP，<view class="_br data-v-1a475e3b"></view>是否要下载并安装?</view>
+                </view>
+                <view bindtap="handleProxy" class="_div data-v-1a475e3b musk-click musk-click1" data-comkey="{{$k}}" data-eventid="{{'3_7'}}">取消</view>
+                <view bindtap="handleProxy" class="_div data-v-1a475e3b musk-click musk-click2" data-comkey="{{$k}}" data-eventid="{{'3_8'}}">下载并安装</view>
+            </view>
+        </view>
+        <view class="_div data-v-1a475e3b musk-box" wx:if="{{isIos}}">
+            <view class="_div data-v-1a475e3b pop-up-ios">
+                <view bindtap="handleProxy" class="_div data-v-1a475e3b closeMusk" data-comkey="{{$k}}" data-eventid="{{'3_9'}}"></view>
+                <view class="_p data-v-1a475e3b">如需下载,请长按网址复制后使用<view class="_br data-v-1a475e3b"></view>浏览器访问</view>
+                <view class="_h4 data-v-1a475e3b">
+                    <text bindtap="handleProxy" class="_text data-v-1a475e3b" data-comkey="{{$k}}" data-eventid="{{'4_10'}}" selectable="true">https://wap.xyzq.com.cn/</text>
+                </view>
+            </view>
+        </view>
+    </view>
+</template>
+<import src="/components/container.vue.wxml"></import>

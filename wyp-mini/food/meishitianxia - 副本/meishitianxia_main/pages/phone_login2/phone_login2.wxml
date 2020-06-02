@@ -1,0 +1,17 @@
+<view class="btn_area">
+    <view class="title">请输入验证码</view>
+    <view class="section__title">
+        <text class="red" wx:if="{{tip}}">{{tip}}</text>
+        <text wx:else>验证码已发短信至 {{number}}</text>
+    </view>
+    <input focus bindinput="codeinput" class="bind_input" maxlength="6" placeholder="验证码" placeholderStyle="color:#bbb;" type="number" value="{{code_q}}"></input>
+    <view class="phone_d" wx:if="{{reload}}">
+        <text bindinput="do_reload" style="color:#ff6767">重新获取</text>
+    </view>
+    <view class="phone_d" wx:else>
+        <text>{{time}}s</text>
+    </view>
+</view>
+<button bindtap="phone_do" class="bind_btn {{isdo?'':'graybg'}}">确认</button>
+<view>　</view>
+<button bindtap="login_drop" class="">取消</button>

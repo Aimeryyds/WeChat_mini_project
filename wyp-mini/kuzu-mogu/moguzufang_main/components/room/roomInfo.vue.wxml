@@ -1,0 +1,41 @@
+<template name="7b817946">
+    <view class="_view 7b817946 {{passClass+'apartment-info'}}" wx:if="{{info&&info.price}}">
+        <view class="_view 7b817946 infoRoom">
+            <view bindtap="handleProxy" class="_view 7b817946" data-comkey="{{$k}}" data-eventid="{{'7b817946-0'}}">
+                <view class="_view 7b817946 h1">
+                    <text class="_text 7b817946 span">{{info.price}}</text>
+                    <text class="_text 7b817946 span price">元/月{{info.maxShowPrice}}</text>
+                </view>
+                <view class="_view 7b817946 h2">
+                    <text class="_text 7b817946">{{info.payDisplayValue}}</text>
+                    <text class="_text 7b817946 span">明细</text>
+                    <text class="_text 7b817946 mgic-wenhao"></text>
+                </view>
+            </view>
+            <view class="_view 7b817946 b"></view>
+            <view class="_view 7b817946">
+                <view class="_view 7b817946 h1">{{info.flatDesc}}</view>
+                <view class="_view 7b817946 h2">户型</view>
+            </view>
+            <view class="_view 7b817946 b"></view>
+            <view class="_view 7b817946">
+                <view class="_view 7b817946 h1">{{info.areaStr}}</view>
+                <view class="_view 7b817946 h2">面积</view>
+            </view>
+        </view>
+        <transition class="_transition 7b817946" name="fade">
+            <view class="_view 7b817946 bg" wx:if="{{PriceDetailVisibled}}">
+                <view class="_view 7b817946 infoDetail">
+                    <view bindtap="handleProxy" class="_i 7b817946 mgic-chahao" data-comkey="{{$k}}" data-eventid="{{'7b817946-1'}}"></view>
+                    <view class="_view 7b817946 h3">明细</view>
+                    <view class="_view 7b817946 ul">
+                        <view class="_view 7b817946 li">{{info.payDisplayValue}}:<text class="_text 7b817946">{{info.price}}</text>元/月</view>
+                        <view class="_view 7b817946 li" wx:if="{{info.deposit}}">{{info.deposit}}</view>
+                        <view class="_view 7b817946 li" wx:if="{{info.renterServiceChargeDetailStr}}">{{info.renterServiceChargeDetailStr}}</view>
+                    </view>
+                    <view class="_view 7b817946 p" wx:if="{{info.serviceFeeDesc}}">{{info.serviceFeeDesc}}</view>
+                </view>
+            </view>
+        </transition>
+    </view>
+</template>

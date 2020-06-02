@@ -1,0 +1,78 @@
+<import src="../../libs/templates/footer.wxml"></import>
+<import src="../../libs/templates/cusService.wxml"></import>
+<import src="../../libs/templates/tabBar.wxml"></import>
+<view class="news-wrapper">
+    <view class="nav-topnav-bar" wx:if="{{tabsDef.length>1}}">
+        <view class="nav-topnav-wrap">
+            <view class="nav-topnav-scroll {{showMoreBtn?'nav-topnav-showmore':''}}" id="nav-topnav-scroll">
+                <scroll-view scrollX class="nav-topnav-list" scrollLeft="{{scrollLeft}}">
+                    <view class="flex-wrap">
+                        <view bindtap="handleClick" class="topnav-item {{currentTab==tab.id?'topnav-item-active':''}}" data-tabId="{{tab.id}}" id="cate{{tab.id}}" wx:for="{{tabsDef}}" wx:for-item="tab" wx:key="index">
+                            <view class="topnav-text">{{tab.name}}</view>
+                        </view>
+                    </view>
+                </scroll-view>
+                <view bindtap="showAllCate" class="nav-topnav-btn iconfont icon-turn" id="nav-topnav-btn" wx:if="{{showMoreBtn}}"></view>
+            </view>
+        </view>
+    </view>
+    <view class="has-news" wx:if="{{isLoaded&&newsList.length>0}}">
+        <view bindtap="toNewsDetail" class="news-item" data-newsid="{{news.id}}" wx:for="{{newsList}}" wx:for-item="news" wx:key="news.newsId">
+            <view class="news-item-wrapper">
+                <view class="news-img">
+                    <image src="{{defaultImg.getDefaultImg(news.pic.url)}}"></image>
+                </view>
+                <view class="news-info">
+                    <view class="info-wrapper">
+                        <view class="news-title">
+                            <view class="stick" wx:if="{{news.top}}">HOT</view>{{news.title}}</view>
+                        <view class="news-abstract">{{trim.trimSummary(news.summary)}}</view>
+                    </view>
+                    <view class="news-time">{{timeFormat.datetimeFormat(news.publicTime)}}</view>
+                </view>
+                <view class="item-wrapper-border"></view>
+            </view>
+        </view>
+    </view>
+    <view class="empty-news {{showCategory?'has-category':''}}" wx:if="{{isLoaded&&newsList.length==0}}">
+        <image class="empty-img" src="http://qz.faisys.com/image/wxImage/empty-5.png"></image>
+        <view class="empty-tip">还没有相关文章呢</view>
+    </view>
+    <template is="footer" data="{{flag:flag,isOem:isOem,agentAcct:agentAcct}}" wx:if="{{flag.footerOpen&&newsList.length>0}}"></template>
+    <template is="cusservice" data="{{cusService:cusService,flag:flag}}" wx:if="{{flag.cusServiceOpen||cusService.supportOpen}}"></template>
+    <view class="cusTabBarPosition" wx:if="{{showTabBar}}"></view>
+    <template is="tabbar" data="{{tabbar:tabbar}}" wx:if="{{showTabBar}}"></template>
+    <view class="editor-drawer" wx:if="{{showAllCateFlag}}">
+        <view class="cate-title-bar">
+            <view class="cate-title">所有分类</view>
+            <view bindtap="closeCateDrawer" class="cate-close iconfont icon-turn"></view>
+        </view>
+        <view class="cate-list-wrapper">
+            <view class="cate-list">
+                <a bindtap="jumpToTab" class="cate-item" data-tabId="{{tab.id}}" wx:for="{{tabsDef}}" wx:for-item="tab" wx:key="index">{{tab.name}}</a>
+            </view>
+        </view>
+    </view>
+</view>
+<wxs module="timeFormat">
+var datetimeFormat = (function(value) {
+    if (!value) return ('');;
+    return (value.split(" ")[(0)])
+});
+module.exports.datetimeFormat = datetimeFormat;
+</wxs>
+<wxs module="defaultImg">
+var getDefaultImg = (function(url) {
+    if (!url) return ("http://qz.faisys.com/image/wxImage/default_img.png");;
+    return (url)
+});
+module.exports.getDefaultImg = getDefaultImg;
+</wxs>
+<wxs module="trim">
+var trimSummary = (function(val) {
+    if (!val) return ("");;
+    var reg = getRegExp('(^\x5cs*)|(\x5cs*$)', 'g');
+    return (val.replace(reg, ""))
+});
+module.exports.trimSummary = trimSummary;
+</wxs>

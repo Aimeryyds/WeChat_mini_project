@@ -1,0 +1,51 @@
+<view class="page">
+    <view class="nav bc_white">
+        <view bindtap="selected" class="{{selected?'red':'default'}}">次卡</view>
+        <view bindtap="selected1" class="{{selected1?'red':'default'}}">月卡</view>
+    </view>
+    <view class="{{selected?'show':'hidden'}}">
+        <view class="content">
+            <view class="card">
+                <text class="type">小呗出行·次卡</text>
+                <text class="num">{{Travelnum}}次</text>
+                <text class="time">有限期{{Datanum}}天</text>
+            </view>
+        </view>
+        <view class="year-list flex ">
+            <view class="">
+                <view bindtap="select_date" class="f-mar {{state==index?'select':''}}" data-Dnum="{{item.Datanum}}" data-Tnum="{{item.Travelnum}}" data-key="{{index}}" data-pic="{{item.Price}}" wx:for="{{numCar}}" wx:key="index">
+                    <view class="placeholder ">
+                        <text class="pl-text sm">{{item.Price}}元</text>
+                    </view>
+                </view>
+            </view>
+        </view>
+        <view class="txt" wx:for="{{ExplainC}}" wx:key="index">
+            <text>{{item.cont}}</text>
+        </view>
+    </view>
+    <view class="{{selected1?'show':'hidden'}}">
+        <view class="content">
+            <view class="card">
+                <text class="type">小呗出行·畅骑卡</text>
+                <text class="time" style="text-align:left">有限期{{Datanum}}天</text>
+            </view>
+        </view>
+        <view class="year-list flex ">
+            <view class="">
+                <view bindtap="select_date" class="f-mar {{state==index?'select':''}}" data-Dnum="{{item.Datanum}}" data-Tnum="{{item.Travelnum}}" data-key="{{index}}" data-pic="{{item.Price}}" wx:for="{{numCar}}" wx:key="index">
+                    <view class="placeholder ">
+                        <text class="pl-text sm">{{item.Price}}元</text>
+                    </view>
+                </view>
+            </view>
+        </view>
+        <view class="txt" wx:for="{{ExplainY}}" wx:key="index">
+            <text>{{item.cont}}</text>
+        </view>
+    </view>
+    <view class="pays">
+        <view class="moneys">{{paynum}}元</view>
+        <view bindtap="buys" class="buys">购买</view>
+    </view>
+</view>

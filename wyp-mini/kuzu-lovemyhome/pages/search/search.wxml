@@ -1,0 +1,73 @@
+<view class="search-box flexbox">
+    <view class="search-inp flexbox basic-search" hidden="{{search}}" wx:if="{{search_param==1}}">
+        <text bindtap="qiehuanFn" class="qiehuan">{{qiehuanName}}</text>
+        <view class="qiehuan-con" hidden="{{qieHidden}}">
+            <view class="qiehuan-arrow">
+                <image src="/img/resources/qiehuan-arrow.png"></image>
+            </view>
+            <text bindtap="qiehuanConFn" class="{{curName==item.name?'sub-cur':''}}" data-index="{{index}}" data-name="{{item.name}}" wx:for="{{qiehuanData}}" wx:key="index">{{item.name}}</text>
+        </view>
+        <text class="arrow"></text>
+        <input bindconfirm="bindconfirm" bindinput="searchInpFn" class="inp" confirmType="search" placeholder="请输入小区或商圈名称" type="text" value="{{inputValue}}"></input>
+        <image bindtap="delInp" class="search-del" src="/img/resources/del-search.png" wx:if="{{inputValue}}"></image>
+    </view>
+    <view class="search-inp flexbox" hidden="{{search}}" wx:if="{{search_param==2}}">
+        <image class="search-icon" src="/img/resources/search-icon.png"></image>
+        <input bindconfirm="bindconfirm" bindinput="searchInpFn" class="inp" confirmType="search" placeholder="请输入小区或商圈名称" type="text" value="{{inputValue}}"></input>
+        <image bindtap="delInp" class="search-del" src="/img/resources/del-search.png" wx:if="{{inputValue}}"></image>
+    </view>
+    <view bindtap="cancelFn" class="search-cancel">取消</view>
+</view>
+<view class="lianxiang-box" wx:if="{{lianxiangList.length!=0}}">
+    <view class="lianxiang">
+        <block wx:for="{{lianxiangList}}" wx:key="index">
+            <view bindtap="toListLink" class="down-item flexbox" data-name="{{item.searchName}}" data-parentid="{{item.parentId}}" data-searchid="{{item.searchId}}" data-searchtype="{{item.searchType}}" wx:if="{{list_param==1}}">
+                <text class="con flex1">{{item.searchName}}</text>
+                <text class="tao">{{item.salecount}}套</text>
+            </view>
+            <view bindtap="toListLink" class="down-item flexbox" data-name="{{item.searchName}}" data-parentid="{{item.parentId}}" data-searchid="{{item.searchId}}" data-searchtype="{{item.searchType}}" wx:if="{{list_param==2}}">
+                <text class="con flex1">{{item.searchName}}</text>
+                <text class="tao">{{item.rentcount}}套</text>
+            </view>
+        </block>
+    </view>
+</view>
+<view class="search-con-box">
+    <view class="search-con">
+        <view class="title">热门搜索</view>
+        <view bindtap="refreshFn" class="history-btn refresh-btn">
+            <image src="https://res.5i5j.com/cache/weixin/common/refresh-icon.png"></image>
+        </view>
+        <view class="hot-search">
+            <text bindtap="hotLinkFn" data-index="{{index}}" data-name="{{item.searchName}}" data-parentid="{{item.parentId}}" data-searchid="{{item.searchId}}" data-searchtype="{{item.searchType}}" wx:if="{{index<=5}}" wx:for="{{hotList}}" wx:key="index">{{item.searchName}}</text>
+        </view>
+    </view>
+    <view class="search-con" wx:if="{{historyRecord.length!=0&&list_param==1}}">
+        <view class="title">历史搜索</view>
+        <view bindtap="historyDelFn" class="history-btn empty-btn">
+            <image src="/img/resources/empty-icon.png"></image>
+        </view>
+        <view class="history-search">
+            <view class="history-item" wx:for="{{historyRecord}}" wx:key="index">
+                <view bindtap="historyLinkFn" class="history" data-keywords="" data-name="{{item.value[0]}}" data-parentid="{{item.value[4]}}" data-searchid="{{item.value[2]}}" data-searchtype="{{item.value[3]}}">
+                    <text class="content">{{item.value[0]}}</text>
+                    <text class="label" wx:if="{{item.value[1]}}">{{item.value[1]}}</text>
+                </view>
+            </view>
+        </view>
+    </view>
+    <view class="search-con" wx:if="{{historyRecordRent.length!=0&&list_param==2}}">
+        <view class="title">历史搜索</view>
+        <view bindtap="historyDelFn" class="history-btn empty-btn">
+            <image src="/img/resources/empty-icon.png"></image>
+        </view>
+        <view class="history-search">
+            <view class="history-item" wx:for="{{historyRecordRent}}" wx:key="index">
+                <view bindtap="historyLinkFn" class="history" data-keywords="" data-name="{{item.value[0]}}" data-parentid="{{item.value[4]}}" data-searchid="{{item.value[2]}}" data-searchtype="{{item.value[3]}}">
+                    <text class="content">{{item.value[0]}}</text>
+                    <text class="label" wx:if="{{item.value[1]}}">{{item.value[1]}}</text>
+                </view>
+            </view>
+        </view>
+    </view>
+</view>

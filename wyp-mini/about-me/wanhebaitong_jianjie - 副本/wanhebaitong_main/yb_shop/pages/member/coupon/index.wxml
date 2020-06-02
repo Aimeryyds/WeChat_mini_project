@@ -1,0 +1,45 @@
+<view wx:if="{{show}}">
+    <view class="coupon_box" wx:for="{{list}}">
+        <view class="box_top">
+            <view class="coupon_price">
+                <text class="price01">￥</text>
+                <text class="price02">{{item.discount_money}}</text>
+            </view>
+            <view class="coupon_li">
+                <view class="coupon_con">
+                    <text>满{{item.satisfy_money}}可用</text>
+                </view>
+                <view class="coupon_time" wx:if="{{now_time<=item.end_time}}">
+                    <text>有效期：{{item.endtime}}</text>
+                </view>
+                <view class="coupon_state" wx:if="{{now_time>item.end_time}}">
+                    <text>已过期</text>
+                </view>
+                <view>
+                    <view class="is_used" wx:if="{{item.status==0}}">
+                        <text>未使用</text>
+                    </view>
+                    <view class="is_used02" wx:if="{{item.status==1}}">
+                        <text>已使用</text>
+                    </view>
+                </view>
+            </view>
+            <view class="clear"></view>
+        </view>
+        <view class="box_bottom">
+            <text>{{item.together==1?'不':''}}可以和满减共用</text>
+        </view>
+        <navigator bindtap="url" hoverClass="none">
+            <view class="coupon_btn">
+                <text>去使用</text>
+            </view>
+        </navigator>
+    </view>
+    <view class="fui-loading empty" wx:if="{{list.length==0&&loaded}}">
+        <view class="text">暂无优惠券</view>
+    </view>
+    <block wx:if="{{showtabbar}}">
+        <view style="height:100rpx"></view>
+        <include src="/yb_shop/pages/common/menu.wxml"></include>
+    </block>
+</view>

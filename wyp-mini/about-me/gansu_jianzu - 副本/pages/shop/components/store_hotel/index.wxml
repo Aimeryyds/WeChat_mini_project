@@ -1,0 +1,107 @@
+<view style="background:#f5f4f4;">
+    <view style="height:420rpx;position:relative;" wx:if="{{hotelPageData.imgUrl.length>0}}">
+        <swiper autoplay="{{autoplay||true}}" circular="{{true}}" duration="{{duration||1000}}" indicatorDots="{{flase}}" interval="2000" style="height:420rpx;">
+            <swiper-item wx:for="{{hotelPageData.imgUrl}}" wx:key="{{index}}">
+                <image class="carousel-slideImage" data-link="{{item}}" ontap="onTapCarousel" src="{{item}}" style="width: 750rpx; height:420rpx"></image>
+            </swiper-item>
+        </swiper>
+        <view class="swiper-text">
+            <view style="flex:1">
+                <view style="font-size:24rpx;">{{hotelPageData.brandName}}-{{hotelPageData.storeName}}</view>
+                <view class="swiper-decoratedTime">{{hotelPageData.decoratedTime}}年装修</view>
+            </view>
+            <view>{{hotelPageData.imgUrl.length}}张</view>
+        </view>
+    </view>
+    <view style="height:420rpx;position:relative;" wx:else>
+        <image src="http://imgcdnali.wfenxiao.com.cn/xcx/c/hotel/hotel-normal.png" style="width: 750rpx; height:420rpx"></image>
+        <view class="swiper-text">
+            <view style="flex:1">
+                <view style="font-size:24rpx;">{{hotelPageData.brandName}}-{{hotelPageData.storeName}}</view>
+                <view class="swiper-decoratedTime">{{hotelPageData.decoratedTime}}年装修</view>
+            </view>
+            <view>{{hotelPageData.imgUrl.length}}张</view>
+        </view>
+    </view>
+    <view class="hotel-panel" wx:if="{{hotelPageData.openEvaluate==1}}">
+        <navigator hoverClass="none" url="/pages/pingjia/storeevaluate/index?sType=4&id={{shopId}}&openevaluate={{hotelPageData.openEvaluate}}">
+            <view class="hotel-cell__bd" wx:if="{{hotelPageData.evaluateScore==-1}}">暂无评分</view>
+            <view class="hotel-cell__bd" wx:else>
+                <view class="hotel-cell__evaluateNum">{{hotelPageData.evaluateScore}}<text>分</text>
+                </view>
+            </view>
+            <view class="hotel-cell__ft">{{hotelPageData.commentNum}}条评价</view>
+        </navigator>
+    </view>
+    <view class="hotel-panel hotel-location--bg">
+        <navigator bindtap="handleStoreMap" data-hotelPageData="{{hotelPageData}}" hoverClass="none" url="">
+            <view class="hotel-cell__bd">
+                <view class="hotel-cell__address">
+                    <image class="hotel-cell__address-img" src="http://imgcdnali.wfenxiao.com.cn/xcx/c/icons/about/location.png"></image>
+                    <view style="flex:1; padding-right:80rpx">{{hotelPageData.provinceName}}{{hotelPageData.cityName}}{{hotelPageData.areaName}}{{hotelPageData.detailAddress}}</view>
+                </view>
+                <view class="hotel-cell__distance">距我{{hotelPageData.distance}}m</view>
+            </view>
+            <view class="hotel-cell__ft">地图</view>
+        </navigator>
+    </view>
+    <view class="hotel-inTime" style="padding:14rpx 72rpx; background:#fff;border-bottom:1px solid #f4f4f4">
+        <hotel-intime bindchangetime="handleChangeTime" id="hotel-time"></hotel-intime>
+    </view>
+    <view class="hotel-in__list" wx:if="{{hotelPageData.roomList.length>0&&isShow}}">
+        <view class="hotel-in__item" wx:for="{{hotelPageData.roomList}}" wx:for-index="dataindex">
+            <view catchtap="toggleOn" class="hotel-in__item-top" data-index="{{dataindex}}" data-item="{{item}}">
+                <view class="hotel-in__info">
+                    <image catchtap="gotoHomeDetail" class="hotel-in__info-img" data-id="{{item.id}}" src="{{item.imgUrl[0]}}"></image>
+                    <view class="hotel-in__cont" style="flex:1">
+                        <view>{{item.roomName}}</view>
+                        <view class="hotel-in__cont-sku">
+                            <text wx:if="{{item.checkAcreage==1}}">{{item.acreage}}m²</text>
+                            <text wx:if="{{item.checkBed==1}}">{{item.bedType}}{{item.bedLength}}*{{item.bedWidth}}</text>
+                            <text wx:if="{{item.checkNet==1}}">{{item.checkWired==1?'有线网络':item.checkNoNet==1?'无网络':item.checkWifi==1?'wifi':''}}</text>
+                            <text wx:if="{{item.checkWindow==1}}">{{item.hasWindow==1?'有窗':'无窗'}}</text>
+                            <text wx:if="{{item.checkFloor==1}}">{{item.fromFloor}}-{{item.toFloor}}层</text>
+                            <text wx:if="{{item.checkCapacity==1}}">可入住{{item.capacity}}人 {{item.checkAddBed==1?'可加床':''}}</text>
+                            <text wx:if="{{item.checkSmoke==1}}">{{item.smokeType==1?'无烟处理':'无烟楼层'}}</text>
+                        </view>
+                    </view>
+                </view>
+                <view class="hotel-in__price-wrap {{item.checked?'hotel-in__price-wrap':'hotel-in__price-wrap--bottom'}}">
+                    <view class="hotel-in__price">
+                        <text>￥</text>{{item.roomPrice}}</view>
+                    <view>起</view>
+                </view>
+            </view>
+            <view wx:if="{{item.checked}}">
+                <view class="hotel-in__item-list" wx:for="{{item.strategyList}}" wx:for-item="strategyItem">
+                    <view class="hotel-in__cont2">
+                        <view>{{strategyItem.strategyName}}</view>
+                        <view class="hotel-in__cont-sku">
+                            <text>{{strategyItem.hasBreakfase==1?'含早餐':'不含早餐'}}</text>
+                            <text>{{strategyItem.hasWindow==1?'有窗':'无窗'}}</text>
+                        </view>
+                        <view class="hotel-in__cont-cancle" wx:if="{{strategyItem.cancelRule==1}}">不可取消</view>
+                        <view class="hotel-in__cont-cancle" wx:if="{{strategyItem.cancelRule==2}}">
+                            <view wx:if="{{strategyItem.cancelDay>0}}">入住前{{strategyItem.cancelDay}}天{{strategyItem.cancelTime}} 前可取消</view>
+                            <view wx:else>入住当天{{strategyItem.cancelTime}}前可取消</view>
+                        </view>
+                    </view>
+                    <view class="hotel-in__book">
+                        <view class="hotel-in__price">
+                            <text>￥</text>{{strategyItem.roomPrice}}</view>
+                        <view bindtap="toOrder" class="hotel-in__btn" data-roomid="{{item.id}}" data-strategyid="{{strategyItem.strategyId}}">
+                            <view class="hotel-in__btn-top">订</view>
+                            <view class="hotel-in__btn-bottom">{{strategyItem.payType==1?'在线付':'到店付'}}</view>
+                        </view>
+                    </view>
+                </view>
+            </view>
+        </view>
+    </view>
+    <wxc-abnor title="暂时没有数据" type="MESSAGE" wx:if="{{hotelPageData.roomList.length==0}}"></wxc-abnor>
+    <view class="hotel-in__service">
+        <view class="hotel-in__service-list">酒店详情</view>
+        <navigator class="hotel-cell__ft" hoverClass="none" url="/pages/hotel/phonedetail/index?id={{shopId}}">详情/电话</navigator>
+    </view>
+</view>
+<phonemodal showModal="{{showModal}}" url="{{url}}"></phonemodal>

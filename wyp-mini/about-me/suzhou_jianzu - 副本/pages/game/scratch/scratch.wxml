@@ -1,0 +1,26 @@
+<import src="../../../components/components.wxml"></import>
+<import src="../../../wxParse/wxParse.wxml"></import>
+<view class="scratchBg" style="background:url(https://tws.cnweisou.com/images/scratchBg.png) no-repeat center center;background-size:100% 100%;" wx:if="{{scratchResult}}">
+    <view class="scratchTop">
+        <view class="countPrize">还剩<text>{{scratchResult.chance}}</text>次刮奖喔</view>
+    </view>
+    <template is="scratch" data="{{scratch:scratch,isScroll:isScroll,scratchResult:scratchResult}}" wx:if="{{noprize}}"></template>
+    <button bindtap="onStart" class="{{btndisabled}}" wx:if="{{scratchResult.chance!=0}}">{{txt}}</button>
+    <view class="scratchBottom" wx:if="{{scratchResult.lottery.lotteryinfo}}">
+        <view class="title">刮卡规则</view>
+        <scroll-view scrollY class="cont">
+            <template is="wxParse" data="{{wxParseData:article.nodes}}"></template>
+        </scroll-view>
+    </view>
+</view>
+<view class="bgtypeList" wx:if="{{cover}}">
+    <view class="prizeCont">
+        <text bindtap="prizeOk" class="close">X</text>
+        <view class="pirzeIcon">
+            <image mode="widthFix" src="{{scratchPrize.icon}}" wx:if="{{scratchPrize.icon}}"></image>
+            <image mode="widthFix" src="https://tws.cnweisou.com/images/placeholder.png" wx:else></image>
+        </view>
+        <view class="prizeDetail">{{scratchPrize.info}}</view>
+        <view bindtap="prizeOk" class="prizeOk">确定</view>
+    </view>
+</view>

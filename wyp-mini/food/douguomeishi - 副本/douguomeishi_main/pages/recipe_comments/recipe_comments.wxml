@@ -1,0 +1,19 @@
+<import src="../common/footer.wxml"></import>
+<import src="../common/comment.wxml"></import>
+<view class="page">
+    <view style="margin-bottom:{{isIpx?'84px':'50px'}}">
+        <template is="comment-template" data="{{item:item,index:index}}" wx:for="{{array}}" wx:key="key"></template>
+        <template is="comment-footer" data="{{footerState:footerState}}"></template>
+    </view>
+    <form bindsubmit="publishButtonPressed">
+        <view class="comment-input-view" style="bottom: {{keyboardBottom}}px">
+            <view class="comment-input-box">
+                <image class="input-box-icon" mode="aspectFill" src="/images/publish_comment.png"></image>
+                <input adjustPosition="{{false}}" bindblur="inputBoxBlur" bindconfirm="publishConfirm" bindfocus="inputBoxFocus" class="comment-input" focus="{{focused}}" name="searchinput" placeholder="{{placeholder}}" placeholderClass="comment-input-placeholder" value="{{commentText}}"></input>
+            </view>
+            <button class="publish-button" formType="submit">发布</button>
+        </view>
+    </form>
+    <view class="bottom-view" hidden="{{!isIpx}}"></view>
+    <button bindgetuserinfo="loginAction" class="post_login_button" hidden="{{logined?true:false}}" openType="getUserInfo" style="height:{{isIpx?'84px':'50px'}}"></button>
+</view>

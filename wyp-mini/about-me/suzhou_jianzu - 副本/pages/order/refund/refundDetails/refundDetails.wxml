@@ -1,0 +1,87 @@
+<view class="interval"></view>
+<view class="process">
+    <view class="processTop">
+        <view class="mapicon">
+            <image mode="aspectFit" src="http://tws.cnweisou.com/images/refundInfo.png"></image>
+        </view>
+        <view class="formValue">
+	{{statemsg}}
+  			</view>
+        <view class="mapicon">
+            <image bindtap="moreSelectArrow" class="{{ClassNum==0?'':'rotateBottom'}}" mode="aspectFit" src="http://tws.cnweisou.com/images/rightArrow.png"></image>
+        </view>
+    </view>
+    <view class="processCont" wx:if="{{ClassNum==1}}">
+        <view class="processTitle">退款申请流程:</view>
+        <view class="processDetail1">1.发起退款申请</view>
+        <view class="processDetail2">2.商家确认后退款到您的账户，如果商家未处理，请及时与商家联系。</view>
+    </view>
+</view>
+<view class="interval money">
+协商详情
+</view>
+<form bindreset="formReset" bindsubmit="formSubmit" class="formMode">
+    <view class="listMode">
+        <view class="title">处理方式</view>
+        <view class="formValue">
+     {{rtype}}
+			</view>
+    </view>
+    <view class="listMode">
+        <view class="title">退款原因</view>
+        <view class="formValue">
+{{reason}}
+			</view>
+    </view>
+    <view class="listMode1" wx:if="{{content}}">
+        <view class="titleR">退款说明</view>
+        <view class="formValueR">
+{{content}}
+			</view>
+        <view class="clear"></view>
+    </view>
+    <view class="listMode">
+        <view class="title">退款金额</view>
+        <view class="formValue">
+	{{applyprice}}元
+  			</view>
+    </view>
+    <view class="listMode">
+        <view class="title">申请时间</view>
+        <view class="formValue">
+{{createtime}}
+  			</view>
+    </view>
+    <view class="voucher" wx:if="{{isimages!='N'}}">
+        <view class="title">上传凭证</view>
+        <scroll-view class="couponNum" scrollX="true" style=" white-space: nowrap;">
+            <image class="channelImage" mode="aspectFit" src="{{item.url}}" wx:for="{{images}}"></image>
+        </scroll-view>
+    </view>
+    <view class="interval2">
+        <view class="title"></view>
+    </view>
+    <view class="bottom">
+        <view class="buttomTow">
+            <button class="apply" formType="submit">取消申请</button>
+        </view>
+    </view>
+</form>
+<view class="bgtypeList" wx:if="{{Treatmentmode}}">
+    <view class="cardAgainType">
+        <radio-group bindchange="radioChange1" class="radio-group">
+            <label class="radio" wx:for="{{Treatmentmodeitems}}">
+                <radio checked="{{item.checked}}" color="#5998FD" value="{{item.name}}"></radio>{{item.value}}
+  </label>
+        </radio-group>
+    </view>
+</view>
+<view class="bgtypeList" wx:if="{{Refundreason}}">
+    <view class="cardAgainType">
+        <radio-group bindchange="radioChange2" class="radio-group">
+            <label class="radio" wx:for="{{Refundreasonitems}}">
+                <radio checked="{{item.checked}}" color="#5998FD" value="{{item.name}}"></radio>{{item.value}}
+  </label>
+        </radio-group>
+    </view>
+</view>

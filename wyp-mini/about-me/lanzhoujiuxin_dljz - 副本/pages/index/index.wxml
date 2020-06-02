@@ -1,0 +1,29 @@
+<import src="../../libs/calendar/index.wxml"></import>
+<import src="../../libs/timepicker/index.wxml"></import>
+<import src="../../libs/templates/module.wxml"></import>
+<import src="../../libs/templates/header.wxml"></import>
+<import src="../../libs/templates/footer.wxml"></import>
+<import src="../../libs/templates/cusService.wxml"></import>
+<import src="../../libs/templates/tabBar.wxml"></import>
+<view bind:scroll="scrollHandler" class="wxapp_body">
+    <template is="header" data="{{header:header,globalColor:globalColor}}" wx:if="{{flag.headerOpen}}"></template>
+    <view class="main">
+        <view class="moduleContainer">
+            <template is="module" data="{{moduleInfoList:moduleInfoList,globalColor:globalColor}}"></template>
+        </view>
+    </view>
+    <template is="footer" data="{{flag:flag,isOem:isOem,agentAcct:agentAcct}}" wx:if="{{flag.footerOpen}}"></template>
+</view>
+<template is="cusservice" data="{{cusService:cusService,flag:flag}}" wx:if="{{flag.cusServiceOpen||cusService.supportOpen}}"></template>
+<view class="cusTabBarPosition" wx:if="{{showTabBar}}"></view>
+<template is="tabbar" data="{{tabbar:tabbar}}" wx:if="{{showTabBar}}"></template>
+<view animation="{{animationData}}" class="card-entrance" wx:if="{{showCardEntrance}}">
+    <view class="wrapper">
+        <image src="{{cardEntranceInfo.avatorUrl}}"></image>
+        <view class="name" wx:if="{{cardEntranceType==1}}">{{cardEntranceInfo.name}}</view>
+        <view bind:tap="backCardPage" class="btn">{{cardEntranceType==1?'查看名片':'返回名片'}}</view>
+        <view catch:tap="closeCardEntrance" class="iconfont icon-close close-btn"></view>
+    </view>
+</view>
+<template is="calendar" data="{{globalColor:globalColor,...calendar}}"></template>
+<template is="timepicker" data="{{globalColor:globalColor,...timepicker}}"></template>

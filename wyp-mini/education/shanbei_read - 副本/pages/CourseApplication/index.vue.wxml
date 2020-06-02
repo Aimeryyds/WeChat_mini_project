@@ -1,0 +1,97 @@
+<template name="c47a29a8">
+    <view class="_div data-v-0bc5777e">
+        <view class="_div data-v-0bc5777e course-application-list" wx:if="{{showAppList}}">
+            <view class="_div data-v-0bc5777e title">·句子回顾</view>
+            <view class="_div data-v-0bc5777e card" key="{{appIdx}}" wx:for="{{applicationList}}" wx:for-index="appIdx" wx:for-item="application" wx:key="appIdx">
+                <view class="_div data-v-0bc5777e scene-container">
+                    <view class="_div data-v-0bc5777e scene-title">适用场景</view>
+                    <view class="_div data-v-0bc5777e">
+                        <view class="_div data-v-0bc5777e scene-wrap" key="{{sceneIdx}}" wx:for="{{application.composite_scenes}}" wx:for-index="sceneIdx" wx:for-item="scene" wx:key="sceneIdx">
+                            <button class="_button data-v-0bc5777e scene">{{scene.composite_scene_name}}</button>
+                        </view>
+                    </view>
+                </view>
+                <view class="_div data-v-0bc5777e example">
+                    <label class="_span data-v-0bc5777e" key="{{index}}" wx:for="{{application.sentenceWords}}" wx:for-item="word" wx:key="index">
+                        <label class="_span data-v-0bc5777e" wx:if="{{word.text!==null}}">
+                            <label class="_span data-v-0bc5777e {{[word.status===0?'word':'',word.status===2?'show':'']}}">{{word.text}}</label>
+                            <label class="_span data-v-0bc5777e word">{{word.punctuation}}</label>
+                            <label class="_span data-v-0bc5777e">{{' '}}</label>
+                        </label>
+                        <view class="_div data-v-0bc5777e blank" wx:if="{{word.text===null}}"></view>
+                    </label>
+                </view>
+                <view class="_div data-v-0bc5777e definition">{{application.def}}</view>
+                <view class="_div data-v-0bc5777e exp-container">
+                    <label class="_span data-v-0bc5777e exp-en">{{application.authentic_expression.expression}}</label>
+                    <label class="_span data-v-0bc5777e exp-cn">{{application.authentic_expression.interpretation}}</label>
+                </view>
+                <view class="_div data-v-0bc5777e left-circle"></view>
+                <view class="_div data-v-0bc5777e right-circle"></view>
+            </view>
+            <button bindtap="handleProxy" class="_button data-v-0bc5777e flex-vhc finish" data-comkey="{{$k}}" data-eventid="{{'0'}}">完成</button>
+        </view>
+        <view class="_div data-v-0bc5777e {{isHideAppGuide?'course-lecture':'course-lecture show-guide'}}" wx:else>
+            <view class="_div data-v-0bc5777e progress-container">
+                <view class="_div data-v-0bc5777e bar-container">
+                    <view class="_div data-v-0bc5777e bar" style=" {{'width:'+(currentAppIdx+1)*100/applicationList.length+'%'+';'}}"></view>
+                </view>
+                <view class="_div data-v-0bc5777e text">{{currentAppIdx+1}}/{{applicationList.length}}</view>
+            </view>
+            <view class="_div data-v-0bc5777e container">
+                <view class="_div data-v-0bc5777e label">·中文释义</view>
+                <view class="_div data-v-0bc5777e definition-container">
+                    <rich-text class="_rich-text data-v-0bc5777e" nodes="{{currentApp.definition_cn}}"></rich-text>
+                </view>
+            </view>
+            <view class="_div data-v-0bc5777e container">
+                <view class="_div data-v-0bc5777e label">·英文原句</view>
+                <view class="_div data-v-0bc5777e sentence-container">
+                    <label class="_span data-v-0bc5777e" key="{{index}}" wx:for="{{sentenceWords}}" wx:for-item="word" wx:key="index">
+                        <label class="_span data-v-0bc5777e" wx:if="{{word.text!==null}}">
+                            <label class="_span data-v-0bc5777e {{[word.status===0?'word':'',word.status===1?'hide':'',word.status===2?'show':'']}}">{{word.text}}</label>
+                            <label class="_span data-v-0bc5777e word">{{word.punctuation}}</label>
+                            <label class="_span data-v-0bc5777e">{{' '}}</label>
+                        </label>
+                        <view class="_div data-v-0bc5777e blank" wx:if="{{word.text===null}}"></view>
+                    </label>
+                </view>
+                <view class="_div data-v-0bc5777e option-container" wx:if="{{!isNextAvailable}}">
+                    <label class="_span data-v-0bc5777e" key="{{index}}" wx:for="{{optionWords}}" wx:for-item="word" wx:key="index">
+                        <label bindtap="handleProxy" class="_span data-v-0bc5777e {{[true?'option-word':'',word.status===2?'wrong':'']}}" data-comkey="{{$k}}" data-eventid="{{'1-'+index}}" wx:if="{{word.status!==1}}">{{word.text}}</label>
+                        <label class="_span data-v-0bc5777e" wx:if="{{word.status!==1}}">{{' '}}</label>
+                    </label>
+                </view>
+                <view class="_div data-v-0bc5777e s-container" wx:if="{{isNextAvailable}}">
+                    <label class="_span data-v-0bc5777e s-label">适用场景：</label>
+                    <view class="_div data-v-0bc5777e s-content">
+                        <button div class="_button data-v-0bc5777e scene" key="{{index}}" wx:for="{{currentApp.composite_scenes}}" wx:for-item="scene" wx:key="index">{{scene.composite_scene_name}}</button>
+                    </view>
+                </view>
+            </view>
+            <view class="_div data-v-0bc5777e btn-group">
+                <view class="_div data-v-0bc5777e tip flex-vhc" wx:if="{{wrongCount>2}}">
+                    <view class="_i data-v-0bc5777e ib ib-info-circle-o"></view>
+                    <label class="_span data-v-0bc5777e">不会做可以先巩固哦~</label>
+                </view>
+                <button bindtap="handleProxy" class="_button data-v-0bc5777e btn flex-vhc" data-comkey="{{$k}}" data-eventid="{{'2'}}">巩固知识点</button>
+                <button bindtap="handleProxy" class="_button data-v-0bc5777e {{['btn','flex-vhc',isNextAvailable?'finish':'']}}" data-comkey="{{$k}}" data-eventid="{{'3'}}">{{currentAppIdx===applicationList.length-1?'完成':'下一个'}}</button>
+            </view>
+            <view bindtap="handleProxy" class="_div data-v-0bc5777e exp-card-container" data-comkey="{{$k}}" data-eventid="{{'4'}}" wx:if="{{isShowExpCard}}">
+                <view class="_div data-v-0bc5777e">
+                    <view class="_div data-v-0bc5777e exp-card">
+                        <view class="_div data-v-0bc5777e meta">{{currentApp.authentic_expression.expression}}</view>
+                        <view class="_div data-v-0bc5777e detail">
+                            <view class="_div data-v-0bc5777e trans">{{currentApp.authentic_expression.interpretation}}</view>
+                            <rich-text class="_rich-text data-v-0bc5777e" nodes="{{currentApp.authentic_expression.notes}}"></rich-text>
+                        </view>
+                    </view>
+                    <view class="_div data-v-0bc5777e flex-vhc">
+                        <view class="_i data-v-0bc5777e ib ib-times-circle-o close"></view>
+                    </view>
+                </view>
+            </view>
+            <image bindtap="handleProxy" class="_img data-v-0bc5777e guide" data-comkey="{{$k}}" data-eventid="{{'5'}}" src="https://media-image1.baydn.com/storage_media_image/kvhfgj/6a39a4e1e519a3b024ecbdc76ea997c0.782a562f57cc1d56039a93455dba87af.png" wx:if="{{!isHideAppGuide}}"></image>
+        </view>
+    </view>
+</template>

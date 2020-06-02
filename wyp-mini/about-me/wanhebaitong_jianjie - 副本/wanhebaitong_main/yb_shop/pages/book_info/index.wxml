@@ -1,0 +1,11 @@
+<import src="/yb_shop/utils/wxParse/wxParse.wxml"></import>
+<view class="page_content" wx:if="{{show}}">
+    <view class="case_tit">{{info.name}}</view>
+    <view class="book_pic_box">
+        <image class="book_pic" src="{{info.img}}"></image>
+    </view>
+    <view class="wxParse case_content">
+        <template is="wxParse" data="{{wxParseData:wxParseData.nodes}}"></template>
+    </view>
+    <include src="../index/power_form.wxml"></include>
+</view>

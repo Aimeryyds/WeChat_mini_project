@@ -1,0 +1,272 @@
+view,image,text {
+    box-sizing: border-box;
+}
+
+.person_con {
+    padding: 15rpx 30rpx 30rpx;
+    background: #303243;
+}
+
+.head {
+    position: relative;
+    padding-top: 15rpx;
+    height: 175rpx;
+}
+
+.head_img {
+    width: 160rpx;
+    height: 160rpx;
+    border-radius: 50%;
+}
+
+.status {
+    position: absolute;
+    z-index: 5;
+    left: 73rpx;
+    bottom: 0;
+    width: 120rpx;
+    height: 40rpx;
+    line-height: 40rpx;
+    color: #fff;
+    font-size: 20rpx;
+    background: #FF682A;
+    border-radius: 20rpx;
+}
+
+.status image {
+    float: left;
+    margin: 12rpx 13rpx;
+    width: 19rpx;
+    height: 20rpx;
+    border-radius: 100%;
+}
+
+.name {
+    margin-top: 30rpx;
+    width: 100%;
+    height: 73rpx;
+    font-size: 50rpx;
+    color: #fff;
+    overflow: hidden;
+}
+
+.name .name_txt {
+    float: left;
+    width: 300rpx;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+
+.name .has_guanzhu {
+    float: right;
+    margin-left: 20rpx;
+    width: 164rpx;
+    height: 70rpx;
+    line-height: 70rpx;
+    font-size: 34rpx;
+    color: #fff;
+    text-align: center;
+    border-radius: 37rpx;
+    background: linear-gradient(-21deg,rgba(165,34,228,1),rgba(182,34,214,1),rgba(213,34,188,1));
+    box-shadow: 0px 15rpx 15rpx 0px rgba(253,193,255,0.5) inset;
+}
+
+.animationSlow {
+    width: 100rpx;
+    height: 100rpx;
+    animation-name: myfirst;
+    animation-duration: 2000ms;
+    animation-timing-function: linear;
+    animation-iteration-count: infinite;
+}
+
+@-webkit-keyframes myfirst {
+    0%,100% {
+        opacity: 1;
+    }
+
+    30%,70% {
+        opacity: 0.8;
+    }
+}
+
+@keyframes myfirst {
+    0%,100% {
+        opacity: 1;
+    }
+
+    30%,70% {
+        opacity: 0.8;
+    }
+}
+
+.name .no_guanzhu {
+    float: right;
+    width: 162rpx;
+    height: 73rpx;
+}
+
+.uid {
+    margin: 18rpx 0rpx 17rpx;
+    color: #fff;
+    font-size: 32rpx;
+    font-family: "Myriad Pro";
+}
+
+.uid text {
+    padding-right: 10rpx;
+    margin-right: 10rpx;
+    border-right: 1px solid #fff;
+}
+
+.renzheng {
+    margin: 18rpx 0rpx 16rpx;
+    width: 100%;
+    height: 39rpx;
+    line-height: 39rpx;
+    font-size: 28rpx;
+    color: #807F88;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+
+.renzheng image {
+    float: left;
+    margin-right: 20rpx;
+    width: 94rpx;
+    height: 39rpx;
+}
+
+.right_icon {
+    width: 22rpx;
+    height: 16rpx;
+}
+
+.msg {
+    height: 36rpx;
+}
+
+.msg image {
+    float: left;
+}
+
+.vj_img {
+    margin-right: 10rpx;
+    width: 34rpx;
+    height: 35rpx;
+}
+
+.noChat {
+    opacity: 0.3;
+}
+
+.gender_female {
+    margin-right: 10rpx;
+    width: 36rpx;
+    height: 35rpx;
+}
+
+.gender_male {
+    margin-right: 10rpx;
+    width: 36rpx;
+    height: 35rpx;
+}
+
+.dengji_con {
+    float: left;
+    padding-left: 10rpx;
+}
+
+.tag_con {
+    padding: 45rpx 30rpx 38rpx;
+}
+
+.tag_con .txt {
+    font-size: 30rpx;
+    color: #333;
+}
+
+.tag {
+    float: right;
+    margin-left: 10rpx;
+    display: inline-block;
+    padding: 0rpx 16rpx;
+    height: 40rpx;
+    line-height: 40rpx;
+    font-size: 22rpx;
+    color: #fff;
+    background: linear-gradient(to right,#7542F1,#D044FF);
+    border-radius: 20rpx;
+}
+
+.default_txt {
+    float: right;
+    font-size: 26rpx;
+    color: #999;
+}
+
+.none {
+    margin-top: 280rpx;
+    text-align: center;
+    font-size: 26rpx;
+    color: #a8a9ad;
+}
+
+.video_con {
+    padding-bottom: 10rpx;
+    overflow: hidden;
+}
+
+.video_con .item {
+    position: relative;
+    float: left;
+    width: 246rpx;
+    height: 328rpx;
+    border-radius: 3rpx;
+}
+
+.video_con .item .img {
+    float: left;
+    width: 100%;
+    height: 100%;
+}
+
+.video_con .item .bottom {
+    position: absolute;
+    z-index: 1;
+    padding: 0rpx 15rpx 13rpx;
+    width: 100%;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    color: #fff;
+    text-shadow: 2rpx 2rpx 2rpx rgba(0,0,0,0.3);
+}
+
+.video_con .item .bottom .num {
+    font-size: 22rpx;
+}
+
+.video_con .item .bottom .num .viewcount {
+    height: 25rpx;
+    line-height: 25rpx;
+}
+
+.video_con .item .bottom .num .icon {
+    float: left;
+    margin-top: 10rpx;
+    margin-right: 7rpx;
+    width: 20rpx;
+    height: 16rpx;
+}
+
+.video_con .item .bottom .txt {
+    margin-top: 14rpx;
+    width: 100%;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    font-size: 24rpx;
+}

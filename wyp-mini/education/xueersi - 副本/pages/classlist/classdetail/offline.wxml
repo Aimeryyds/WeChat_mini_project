@@ -1,0 +1,787 @@
+<block wx:if="{{ABTest}}">
+    <view class="wrap-detail {{$NewDetails$noScroll?'noscroll':''}}">
+        <view class="swiper-container _8b26158">
+            <swiper autoplay="{{$NewDetails$swiperBanner$swiperinfo.isAutoplay}}" bindchange="$NewDetails$swiperBanner$swiperChange" circular="{{$NewDetails$swiperBanner$swiperinfo.circular}}" class="swiper _8b26158" current="{{$NewDetails$swiperBanner$swiperinfo.current}}" indicatorDots="{{$NewDetails$swiperBanner$swiperinfo.isIndicatorDots}}" interval="{{$NewDetails$swiperBanner$swiperinfo.interval}}">
+                <swiper-item class="swiper-item tea-video _8b26158" wx:if="{{$NewDetails$swiperBanner$defaultShowVideo.teacherImg}}">
+                    <image class="tea-img _8b26158" mode="aspectFit" src="{{$NewDetails$swiperBanner$defaultShowVideo.teacherImg}}" wx:if="{{!$NewDetails$swiperBanner$defaultShowVideo.teacherVideoUrl}}"></image>
+                    <video autoplay bindended="$NewDetails$swiperBanner$hideVideo" class="_8b26158" enablePlayGesture="enable-play-gesture" id="teacherVideo" src="{{$NewDetails$swiperBanner$defaultShowVideo.teacherVideoUrl}}" wx:if="{{$NewDetails$swiperBanner$defaultShowVideo.teacherVideoUrl&&$NewDetails$swiperBanner$isWifi||$NewDetails$swiperBanner$videoPlayTea}}"></video>
+                    <block wx:elif="{{$NewDetails$swiperBanner$defaultShowVideo.teacherVideoUrl}}">
+                        <image class="tea-img _8b26158" mode="aspectFit" src="{{$NewDetails$swiperBanner$defaultShowVideo.teacherImg}}"></image>
+                        <image bindtap="$NewDetails$swiperBanner$playVideoTea" class="play-icon _8b26158" src="https://static-xesapi.speiyou.cn/xesFeProject/xesFeSource/xesImagesLibrary/1585822177870.png"></image>
+                    </block>
+                </swiper-item>
+                <swiper-item class="swiper-item _8b26158" wx:if="{{$NewDetails$swiperBanner$lightHouseVideo.topVideo}}">
+                    <video autoplay bindended="$NewDetails$swiperBanner$hideVideo" class="_8b26158" enablePlayGesture="enable-play-gesture" id="topVideo" src="{{$NewDetails$swiperBanner$lightHouseVideo.topVideo}}" wx:if="{{$NewDetails$swiperBanner$lightHouseVideo.topVideo&&$NewDetails$swiperBanner$isWifi&&!$NewDetails$swiperBanner$defaultShowVideo.teacherVideoUrl||$NewDetails$swiperBanner$videoPlay}}"></video>
+                    <block wx:if="{{$NewDetails$swiperBanner$lightHouseVideo.topVideo&&!$NewDetails$swiperBanner$videoPlay}}">
+                        <image class="img _8b26158" mode="scaleToFill" src="{{$NewDetails$swiperBanner$lightHouseVideo.videoCoverImage}}"></image>
+                        <image bindtap="$NewDetails$swiperBanner$playVideo" class="play-icon _8b26158" src="https://static-xesapi.speiyou.cn/xesFeProject/xesFeSource/xesImagesLibrary/1585822177870.png"></image>
+                    </block>
+                </swiper-item>
+                <swiper-item class="swiper-item _8b26158" wx:for="{{$NewDetails$swiperBanner$topImages}}" wx:for-index="_index" wx:key="index">
+                    <image binderror="$NewDetails$swiperBanner$ImgError" class="img _8b26158" data-wpyimgerror-a="{{_index}}" mode="scaleToFill" src="{{item}}"></image>
+                </swiper-item>
+            </swiper>
+            <view class="index-tips _8b26158">
+      {{$NewDetails$swiperBanner$swiperinfo.current+1}}/{{$NewDetails$swiperBanner$bannerLength}}
+    </view>
+        </view>
+        <view class="detail _1b46fa2">
+            <view bindtouchend="$NewDetails$detailInfo$touchendHandler" bindtouchstart="$NewDetails$detailInfo$touchstartHandler" class="_1b46fa2">
+                <view class="detail-price _1b46fa2">
+                    <text class="money tx-red _1b46fa2">¥</text>
+                    <view class="_1b46fa2">
+                        <text class="price tx-red _1b46fa2">{{$NewDetails$detailInfo$detailInfo.real_price}}</text>
+                    </view>
+                    <text class="_1b46fa2">/{{$NewDetails$detailInfo$detailInfo.remain_count}}课时</text>
+                    <text class="through _1b46fa2" wx:if="{{$NewDetails$detailInfo$detailInfo.cla_price&&$NewDetails$detailInfo$detailInfo.real_price!=$NewDetails$detailInfo$detailInfo.cla_price}}">¥{{$NewDetails$detailInfo$detailInfo.cla_price}}</text>
+                    <view class="tag _1b46fa2" wx:if="{{$NewDetails$detailInfo$detailInfo.promotions.length}}">{{$NewDetails$detailInfo$detailInfo.promotions[0].promotion_name}}</view>
+                </view>
+                <view bindtouchend="$NewDetails$detailInfo$touchendHandler" bindtouchstart="$NewDetails$detailInfo$touchstartHandler" class="cla-name _1b46fa2">
+                    <text class="course-type-icon {{'course_'+$NewDetails$detailInfo$detailInfo.class_type}} _1b46fa2">{{$NewDetails$detailInfo$classType[$NewDetails$detailInfo$detailInfo.class_type]}}</text>
+                    <text class="name _1b46fa2">{{$NewDetails$detailInfo$detailInfo.cla_name}}</text>
+                </view>
+                <view class="allow-num _1b46fa2" wx:if="{{$NewDetails$detailInfo$detailInfo.class_type!=='1'}}">{{$NewDetails$detailInfo$detailInfo.cla_quota_num}}</view>
+            </view>
+            <view bindtap="$NewDetails$detailInfo$toMap" class="my-rows location _1b46fa2" wx:if="{{$NewDetails$detailInfo$detailInfo.cla_venue_name}}">
+                <text class="icon icon-address _1b46fa2"></text>
+                <text class="desc _1b46fa2">{{$NewDetails$detailInfo$detailInfo.area_name}}{{$NewDetails$detailInfo$detailInfo.cla_venue_name}}</text>
+                <button catchtap="$NewDetails$detailInfo$toSetMapPurview" class="openMap-btn _1b46fa2" wx:if="{{$NewDetails$detailInfo$showGetLocationBtn}}">地理授权</button>
+                <text class="icon icon-arrow _1b46fa2"></text>
+            </view>
+            <view class="my-rows has-linehight _1b46fa2" wx:if="{{$NewDetails$detailInfo$detailInfo.cla_times}}">
+                <text class="icon icon-time _1b46fa2"></text>
+                <text class="desc flex-1 _1b46fa2">{{$NewDetails$detailInfo$detailInfo.claStartEndDate}} {{$NewDetails$detailInfo$detailInfo.cla_times}}</text>
+            </view>
+            <view bindtap="$NewDetails$detailInfo$checkPay" class="my-rows observer-analytics _1b46fa2" wx:if="{{$NewDetails$detailInfo$detailInfo.stages.length>1}}">
+                <text class="icon icon-pay _1b46fa2"></text>
+                <text class="desc _1b46fa2">分期支付</text>
+                <text class="icon icon-arrow _1b46fa2"></text>
+            </view>
+            <view class="line _1b46fa2"></view>
+            <view class="activities _1b46fa2" wx:if="{{$NewDetails$detailInfo$detailInfo.promotions.length}}">
+                <view bindtap="$NewDetails$detailInfo$goActivity" class="act-item _1b46fa2" data-wpygoactivity-a="{{index}}" wx:for="{{$NewDetails$detailInfo$detailInfo.promotions}}" wx:key="index">
+                    <text class="act-tag _1b46fa2">{{item.promotion_name}}</text>
+                    <text class="act-title _1b46fa2">{{item.promotion_title}}</text>
+                    <text class="icon icon-arrow _1b46fa2"></text>
+                </view>
+            </view>
+            <view class="service observer-analytics _1b46fa2" wx:if="{{$NewDetails$detailInfo$featureService.length}}">
+                <view class="icon icon-service _1b46fa2"></view>
+                <view class="ser-item _1b46fa2" wx:if="{{index<3}}" wx:for="{{$NewDetails$detailInfo$featureService}}" wx:key="index">
+                    <text class="icon icon-service-rights _1b46fa2"></text>
+                    <text class="_1b46fa2" wx:if="{{$NewDetails$detailInfo$areaCode==='00852'}}">{{item.label_hk}}</text>
+                    <text class="_1b46fa2" wx:else>{{item.label}}</text>
+                </view>
+                <view bindtap="$NewDetails$detailInfo$checkService" class="icon icon-arrow-hasbg _1b46fa2"></view>
+            </view>
+        </view>
+        <view class="cover-wrap _1b46fa2" wx:if="{{$NewDetails$detailInfo$showPay}}">
+            <view class="cover-content pay-cover _1b46fa2">
+                <view bindtap="$NewDetails$detailInfo$checkPay" class="icon-close _1b46fa2"></view>
+                <view class="cover-title _1b46fa2">分期支付</view>
+                <view class="cover-desc _1b46fa2" wx:if="{{$NewDetails$detailInfo$areaCode!=='00852'}}">{{$NewDetails$detailInfo$detailInfo.stage_desc}}</view>
+                <view class="cover-other _1b46fa2">
+                    <view class="pay-rows _1b46fa2" wx:for="{{$NewDetails$detailInfo$detailInfo.stages}}" wx:key="index">
+                        <view class="class {{item.status!=='1'?'disabel':''}} _1b46fa2">
+                            <text class="_1b46fa2">{{item.stage_name}}</text>
+                            <text class="_1b46fa2">{{item.start_date}} - {{item.end_date}}</text>
+                        </view>
+                        <view class="price {{item.status!=='1'?'disabel':''}} _1b46fa2">
+                            <text class="_1b46fa2">{{$NewDetails$detailInfo$areaCode==='00852'?'$':'¥'}}</text>
+                            <text class="_1b46fa2">{{item.price}}</text>
+                        </view>
+                    </view>
+                </view>
+            </view>
+        </view>
+        <view class="cover-wrap _1b46fa2" wx:if="{{$NewDetails$detailInfo$showService}}">
+            <view class="cover-content service-cover _1b46fa2">
+                <view bindtap="$NewDetails$detailInfo$checkService" class="icon-close _1b46fa2"></view>
+                <view class="cover-title _1b46fa2">服务保障</view>
+                <view class="cover-other _1b46fa2">
+                    <view class="service-rows _1b46fa2" wx:for="{{$NewDetails$detailInfo$featureService}}" wx:key="index">
+                        <image class="icon _1b46fa2" src="{{item.icon}}"></image>
+                        <view class="desc _1b46fa2" wx:if="{{$NewDetails$detailInfo$areaCode==='00852'}}">
+                            <view class="_1b46fa2">{{item.label_hk}}</view>
+                            <text class="_1b46fa2">{{item.description_hk}}</text>
+                        </view>
+                        <view class="desc _1b46fa2" wx:else>
+                            <view class="_1b46fa2">{{item.label}}</view>
+                            <text class="_1b46fa2">{{item.description}}</text>
+                        </view>
+                    </view>
+                </view>
+            </view>
+        </view>
+        <view animation="{{$NewDetails$detailInfo$taltoast$animationData}}" class="tal-toast-container toast _1b46fa2" style="top:{{$NewDetails$detailInfo$taltoast$vertical}}%;" wx:if="{{$NewDetails$detailInfo$taltoast$toastVisible}}">
+            <view class="tal-toast">
+                <text>{{$NewDetails$detailInfo$taltoast$toastMessage}}</text>
+            </view>
+        </view>
+        <view animation="{{$NewDetails$detailInfo$newToast$animationData}}" class="tal-toast-container toast1 _1b46fa2" style="top:{{$NewDetails$detailInfo$newToast$vertical}}%;" wx:if="{{$NewDetails$detailInfo$newToast$toastVisible}}">
+            <view class="tal-toast">
+                <text>{{$NewDetails$detailInfo$newToast$toastMessage}}</text>
+            </view>
+        </view>
+        <view class="teachers">
+            <view class="tea">授课老师</view>
+            <view class="tea-box">
+                <view catchtap="$NewDetails$teachers$goDetail" class="tea-rows" data-wpygodetail-a="{{item}}" data-wpygodetail-b="0" wx:if="{{!$NewDetails$teachers$strengTutor}}" wx:for="{{$NewDetails$teachers$teachersList}}" wx:key="index">
+                    <view class="img-wrap">
+                        <image binderror="$NewDetails$teachers$imgError" data-wpyimgerror-a="{{index}}" data-wpyimgerror-b="0" mode="widthFix" src="{{item.picture_url?item.picture_url:$NewDetails$teachers$teacherAvator}}"></image>
+                    </view>
+                    <view class="tea-info">
+                        <text class="name">{{item.name}}</text>
+                        <text class="role">授课</text>
+                    </view>
+                </view>
+                <view catchtap="$NewDetails$teachers$goDetail" class="tea-rows" data-wpygodetail-a="{{item}}" data-wpygodetail-b="1" wx:for="{{$NewDetails$teachers$teachersTutorList}}" wx:for-index="_index" wx:key="_index">
+                    <view class="img-wrap">
+                        <image binderror="$NewDetails$teachers$imgError" data-wpyimgerror-a="{{_index}}" data-wpyimgerror-b="1" mode="widthFix" src="{{item.picture_url?item.picture_url:$NewDetails$teachers$teacherAvator}}"></image>
+                    </view>
+                    <view class="tea-info">
+                        <text class="name">{{item.name}}</text>
+                        <text class="role">{{$NewDetails$teachers$strengTutor?'老师':'辅导'}}</text>
+                    </view>
+                </view>
+            </view>
+            <view class="cover"></view>
+        </view>
+        <view class="content _e4e0784 classPackage" wx:if="{{$NewDetails$classPackage$curriculumInfo.curriculumList&&$NewDetails$classPackage$curriculumInfo.curriculumList.length}}">
+            <view class="con-wrap _e4e0784">
+                <view class="title _e4e0784">课程大纲<text class="_e4e0784">{{$NewDetails$classPackage$curriculumInfo.curriculumList.length}}讲</text>
+                </view>
+                <view class="desc _e4e0784" wx:if="{{$NewDetails$classPackage$curriculumInfo.suitable||$NewDetails$classPackage$curriculumInfo.goal}}">
+                    <view class="row _e4e0784" wx:if="{{$NewDetails$classPackage$curriculumInfo.suitable}}">
+                        <text class="left _e4e0784">适合对象</text>
+                        <text class="right _e4e0784">{{$NewDetails$classPackage$curriculumInfo.suitable}}</text>
+                    </view>
+                    <view class="row _e4e0784" wx:if="{{$NewDetails$classPackage$curriculumInfo.goal}}">
+                        <text class="left _e4e0784">培养目标</text>
+                        <text class="right _e4e0784">{{$NewDetails$classPackage$curriculumInfo.goal}}</text>
+                    </view>
+                    <text class="icon icon-course _e4e0784"></text>
+                </view>
+                <view class="flex-wrap _e4e0784" wx:if="{{$NewDetails$classPackage$curriculumInfo.curriculumList&&$NewDetails$classPackage$curriculumInfo.curriculumList.length&&index<3}}" wx:for="{{$NewDetails$classPackage$curriculumInfo.curriculumList}}" wx:key="index">
+                    <view class="flex-left _e4e0784">第<text class="_e4e0784">{{item.class_num>9?item.class_num:'0'+item.class_num}}</text>讲</view>
+                    <view class="flex-right {{item.status===1?'disabled':''}} _e4e0784">
+                        <view class="_e4e0784">{{item.curriculum_name}}</view>
+                        <view class="_e4e0784">{{item.class_date}} {{item.class_time_name}} | {{item.tea_name}}</view>
+                    </view>
+                </view>
+            </view>
+            <view bindtap="$NewDetails$classPackage$checkAll" class="extend _e4e0784" data-wpycheckall-a="" wx:if="{{$NewDetails$classPackage$curriculumInfo.curriculumList&&$NewDetails$classPackage$curriculumInfo.curriculumList.length>3}}">全部课程</view>
+        </view>
+        <view class="content _e4e0784" wx:if="{{$NewDetails$classPackage$curriculumInfo.descImages&&$NewDetails$classPackage$curriculumInfo.descImages.length}}">
+            <view class="con-wrap _e4e0784">
+                <view class="title _e4e0784">课程详情</view>
+                <view class="img-wrap _e4e0784">
+                    <image class="_e4e0784" mode="widthFix" src="{{item}}" wx:for="{{$NewDetails$classPackage$curriculumInfo.descImages}}" wx:key="index"></image>
+                </view>
+            </view>
+        </view>
+        <view class="fix-bar {{$NewDetails$detailFixBar$isiPhoneX?'isiPhoneX':''}} _abd2102">
+            <view class="op-block feedback _abd2102">
+                <text class="icon icon-feedback _abd2102"></text>
+                <text class="_abd2102">反馈</text>
+                <button bindtap="$NewDetails$detailFixBar$feedbackFunc" class="open-feedback _abd2102" openType="feedback">反馈</button>
+            </view>
+            <view class="op-block _abd2102">
+                <text bindtap="$NewDetails$detailFixBar$goOrder" class="icon icon-buycar _abd2102" data-wpygoorder-a=""></text>
+                <text bindtap="$NewDetails$detailFixBar$goOrder" class="_abd2102" data-wpygoorder-a="">购课单</text>
+                <text class="count _abd2102" wx:if="{{$NewDetails$detailFixBar$count>0}}">{{$NewDetails$detailFixBar$count}}</text>
+                <button bindgetuserinfo="$NewDetails$detailFixBar$checkGoOrder" class="opent-btn _abd2102" openType="getUserInfo" wx:if="{{!$NewDetails$detailFixBar$isBtnStatus}}">我</button>
+            </view>
+            <view class="btn-wrap _abd2102">
+                <button bindgetuserinfo="$NewDetails$detailFixBar$getUserInfoFn" class="opent-btn _abd2102" openType="getUserInfo" wx:if="{{!$NewDetails$detailFixBar$isBtnStatus}}">我</button>
+                <view bindtap="$NewDetails$detailFixBar$regist" class="btn-common _abd2102">{{$NewDetails$detailFixBar$btnWord}}</view>
+            </view>
+        </view>
+        <view animation="{{$NewDetails$detailFixBar$taltoast$animationData}}" class="tal-toast-container _abd2102" style="top:{{$NewDetails$detailFixBar$taltoast$vertical}}%;" wx:if="{{$NewDetails$detailFixBar$taltoast$toastVisible}}">
+            <view class="tal-toast">
+                <text>{{$NewDetails$detailFixBar$taltoast$toastMessage}}</text>
+            </view>
+        </view>
+        <view class="app-cen _abd2102" wx:if="{{$NewDetails$detailFixBar$appmask$isHide}}">
+            <view class="app-mask"></view>
+            <view class="app-center">
+                <view class="app-con">
+                    <view class="title">每一位学而思家长的必备APP</view>
+                    <image src="http://static-xesapi.speiyou.cn/1536045641131.png"></image>
+                    <view class="test" wx:if="{{$NewDetails$detailFixBar$appmask$SystemInfo}}">
+                        <view>请在App Store内搜索“学而思”</view>
+                        <view>下载学而思APP</view>
+                    </view>
+                    <view class="test" wx:else>
+                        <view>请在各大应用商店内搜索“学而思”</view>
+                        <view>（应用宝、360手机助手、华为应用市场等）下载学而思APP</view>
+                    </view>
+                    <view bindtap="$NewDetails$detailFixBar$appmask$goHide" class="btn">知道了</view>
+                </view>
+            </view>
+        </view>
+        <view class="cover-wrap _abd2102" wx:if="{{$NewDetails$detailFixBar$showConfirm}}">
+            <view class="confirm-cover">
+                <view class="confirm-title">{{$NewDetails$detailFixBar$confirm$option.title}}</view>
+                <view class="confirm-desc">{{$NewDetails$detailFixBar$confirm$option.content}}</view>
+                <view class="confirm-btns-third" wx:if="{{$NewDetails$detailFixBar$confirm$option.type==='thirdConfirm'}}">
+                    <view bindtap="$NewDetails$detailFixBar$confirm$submit" class="submit" data-wpysubmit-a="1">{{$NewDetails$detailFixBar$confirm$option.submitTxt}}</view>
+                    <view bindtap="$NewDetails$detailFixBar$confirm$submit" class="submit" data-wpysubmit-a="2">{{$NewDetails$detailFixBar$confirm$option.submitSecTxt}}</view>
+                    <view bindtap="$NewDetails$detailFixBar$confirm$cancel" class="cancel" data-wpycancel-a="">{{$NewDetails$detailFixBar$confirm$option.cancelTxt}}</view>
+                </view>
+                <view class="confirm-btns" wx:else>
+                    <view bindtap="$NewDetails$detailFixBar$confirm$cancel" class="cancel" data-wpycancel-a="" wx:if="{{$NewDetails$detailFixBar$confirm$option.type==='confirm'}}">{{$NewDetails$detailFixBar$confirm$option.cancelTxt}}</view>
+                    <view bindtap="$NewDetails$detailFixBar$confirm$submit" class="submit" data-wpysubmit-a="">{{$NewDetails$detailFixBar$confirm$option.submitTxt}}</view>
+                </view>
+            </view>
+        </view>
+    </view>
+    <view animation="{{$NewDetails$actionsheet$aniMain}}" class="action_sheet_wrap _5c58a8d action-sheet" wx:if="{{$NewDetails$actionsheet$visible}}">
+        <view class="close-center _5c58a8d">
+            <text class="text _5c58a8d">选择辅导老师</text>
+            <text bindtap="$NewDetails$actionsheet$closes" class="icon-close _5c58a8d"></text>
+        </view>
+        <view class="action-padding _5c58a8d">
+            <scroll-view scrollY class="scroll-box _5c58a8d">
+                <radio-group bindchange="$NewDetails$actionsheet$selectChange" class="_5c58a8d">
+                    <label class="tutor-cell _5c58a8d" wx:for="{{$NewDetails$actionsheet$teacherList}}" wx:key="index">
+                        <view catchtap="$NewDetails$actionsheet$goDetail" class="tutor-avatar-wrap _5c58a8d" data-wpygodetail-a="{{item}}">
+                            <image binderror="$NewDetails$actionsheet$loadErrorImg" class="_5c58a8d" data-wpyloaderrorimg-a="{{index}}" mode="aspectFill" src="{{item.picture_url&&item.accountType===1?item.picture_url:$NewDetails$actionsheet$imgList.defaultImg}}"></image>
+                        </view>
+                        <view class="tutor-content-wrap _5c58a8d">
+                            <view class="tutor-name _5c58a8d">{{item.teacher?item.teacher:'待定'}}</view>
+                            <view class="tutor-count _5c58a8d">
+                                <text class="_5c58a8d" wx:if="{{item.left>0}}">剩余{{item.left}}</text>
+                                <text class="gray _5c58a8d" wx:else>已满</text>
+                            </view>
+                        </view>
+                        <radio checked="{{item.checked}}" class="weui-check _5c58a8d" value="{{index}}"></radio>
+                        <view class="icon-box _5c58a8d" wx:if="{{item.left}}">
+                            <image class="_5c58a8d" src="{{item.checked?$NewDetails$actionsheet$imgList.checkType:$NewDetails$actionsheet$imgList.notCheckType}}"></image>
+                        </view>
+                    </label>
+                </radio-group>
+            </scroll-view>
+            <view class="btn-wrap {{$NewDetails$actionsheet$isiPhoneX?'iphonex':''}} _5c58a8d">
+                <view bindtap="$NewDetails$actionsheet$tutorDone" class="{{$NewDetails$actionsheet$tutorDisable?'select-done-btn':'select-done-btn-active'}} _5c58a8d">完成</view>
+            </view>
+        </view>
+    </view>
+    <view animation="{{$NewDetails$actionsheet$aniMask}}" bindtap="$NewDetails$actionsheet$concealFrame" class="action_sheet_mask _5c58a8d" wx:if="{{$NewDetails$actionsheet$visible}}"></view>
+    <view animation="{{$NewDetails$actionsheet$taltoast$animationData}}" class="tal-toast-container _5c58a8d" style="top:{{$NewDetails$actionsheet$taltoast$vertical}}%;" wx:if="{{$NewDetails$actionsheet$taltoast$toastVisible}}">
+        <view class="tal-toast">
+            <text>{{$NewDetails$actionsheet$taltoast$toastMessage}}</text>
+        </view>
+    </view>
+    <view class="cover-wrap _5c58a8d" wx:if="{{$NewDetails$actionsheet$showConfirm}}">
+        <view class="confirm-cover">
+            <view class="confirm-title">{{$NewDetails$actionsheet$confirm$option.title}}</view>
+            <view class="confirm-desc">{{$NewDetails$actionsheet$confirm$option.content}}</view>
+            <view class="confirm-btns-third" wx:if="{{$NewDetails$actionsheet$confirm$option.type==='thirdConfirm'}}">
+                <view bindtap="$NewDetails$actionsheet$confirm$submit" class="submit" data-wpysubmit-a="1">{{$NewDetails$actionsheet$confirm$option.submitTxt}}</view>
+                <view bindtap="$NewDetails$actionsheet$confirm$submit" class="submit" data-wpysubmit-a="2">{{$NewDetails$actionsheet$confirm$option.submitSecTxt}}</view>
+                <view bindtap="$NewDetails$actionsheet$confirm$cancel" class="cancel" data-wpycancel-a="">{{$NewDetails$actionsheet$confirm$option.cancelTxt}}</view>
+            </view>
+            <view class="confirm-btns" wx:else>
+                <view bindtap="$NewDetails$actionsheet$confirm$cancel" class="cancel" data-wpycancel-a="" wx:if="{{$NewDetails$actionsheet$confirm$option.type==='confirm'}}">{{$NewDetails$actionsheet$confirm$option.cancelTxt}}</view>
+                <view bindtap="$NewDetails$actionsheet$confirm$submit" class="submit" data-wpysubmit-a="">{{$NewDetails$actionsheet$confirm$option.submitTxt}}</view>
+            </view>
+        </view>
+    </view>
+    <view class="turn-class-centent">
+        <view animation="{{$NewDetails$turnclass$aniMain}}" class="turn-class-con">
+            <view class="turn-padding">
+                <view class="title">
+                    <view class="iocns">
+                        <text bindtap="$NewDetails$turnclass$click_hide" class="iconfont icon-home_classdetail_clo"></text>
+                    </view>
+                    <text class="title-bar">转班</text>
+                </view>
+                <view class="explain">您已报名同类型班级，若继续报名，将会自动从原来的班级转入当前报名的班级，请慎重选择！</view>
+                <scroll-view class="scroll-view" scrollY="{{$NewDetails$turnclass$isScroll}}">
+                    <view class="nav">原班级</view>
+                    <view class="card-information">
+                        <view bindtap="$NewDetails$turnclass$oldFiche$goClassInfo" class="card-padding" data-wpygoclassinfo-a="{{item}}" wx:for="{{$NewDetails$turnclass$oldFiche$cardInfo}}" wx:key="index">
+                            <view class="card-title">
+                                <text class="iocnt-text {{item.cla_class_type===2?'sh-back':item.cla_class_type===4?'ms-back':''}}">{{$NewDetails$turnclass$oldFiche$classType[item.cla_class_type]}}</text>
+                                <text class="h2">{{item.cla_name}}</text>
+                            </view>
+                            <view class="card-block">
+                                <text class="iconfont icon-home_classdetail_cal"></text>
+                                <text class="test">{{item.cla_start_date}} 至 {{item.cla_end_date}}</text>
+                            </view>
+                            <view class="card-block">
+                                <text class="iconfont icon-home_classdetailpage"></text>
+                                <text class="test">{{item.cla_classtime_names}}</text>
+                            </view>
+                            <view class="card-block" hidden="{{item.cla_class_type===1}}">
+                                <text class="iconfont icon-home_classdetailpage2"></text>
+                                <text class="test">地点：{{item.cla_area_name?item.cla_area_name:''}}{{item.cla_venue_name}} </text>
+                            </view>
+                            <view class="card-block" wx:if="{{item.cla_class_type!==2}}">
+                                <block wx:for="{{item.show_teacher_list}}" wx:for-item="itemName" wx:key="index">
+                                    <text class="iconfont icon-home_classdetail_mai"></text>
+                                    <text class="test">主讲老师：{{itemName.name?itemName.name:'待定'}}</text>
+                                </block>
+                            </view>
+                            <view class="card-block" wx:else>
+                                <text class="iconfont icon-home_classdetail_mai"></text>
+                                <text class="test">主讲老师：{{item.cla_teacher_names}}</text>
+                            </view>
+                            <view class="card-block" wx:if="{{item.cla_class_type===2}}">
+                                <text class="iconfont icon-home_classdetail_coa"></text>
+                                <text class="test">辅助老师：{{item.cla_tutor_real_name?item.cla_tutor_real_name:'待定'}}</text>
+                            </view>
+                        </view>
+                    </view>
+                    <view class="nav">转入班级 <text class="iconfont icon-CombinedShapex"></text>
+                    </view>
+                    <view class="card-information">
+                        <view bindtap="$NewDetails$turnclass$newFiche$goClassInfo" class="card-padding" data-wpygoclassinfo-a="{{item}}" wx:for="{{$NewDetails$turnclass$newFiche$cardInfo}}" wx:key="index">
+                            <view class="card-title">
+                                <text class="iocnt-text {{item.cla_class_type===2?'sh-back':item.cla_class_type===4?'ms-back':''}}">{{$NewDetails$turnclass$newFiche$classType[item.cla_class_type]}}</text>
+                                <text class="h2">{{item.cla_name}}</text>
+                            </view>
+                            <view class="card-block">
+                                <text class="iconfont icon-home_classdetail_cal"></text>
+                                <text class="test">{{item.cla_start_date}} 至 {{item.cla_end_date}}</text>
+                            </view>
+                            <view class="card-block">
+                                <text class="iconfont icon-home_classdetailpage"></text>
+                                <text class="test">{{item.cla_classtime_names}}</text>
+                            </view>
+                            <view class="card-block" hidden="{{item.cla_class_type===1}}">
+                                <text class="iconfont icon-home_classdetailpage2"></text>
+                                <text class="test">地点：{{item.cla_area_name?item.cla_area_name:''}}{{item.cla_venue_name}} </text>
+                            </view>
+                            <view class="card-block" wx:if="{{item.cla_class_type!==2}}">
+                                <block wx:for="{{item.show_teacher_list}}" wx:for-item="itemName" wx:key="index">
+                                    <text class="iconfont icon-home_classdetail_mai"></text>
+                                    <text class="test">主讲老师：{{itemName.name?itemName.name:'待定'}}</text>
+                                </block>
+                            </view>
+                            <view class="card-block" wx:else>
+                                <text class="iconfont icon-home_classdetail_mai"></text>
+                                <text class="test">主讲老师：{{item.cla_teacher_names}}</text>
+                            </view>
+                            <view class="card-block" wx:if="{{item.cla_class_type===2}}">
+                                <text class="iconfont icon-home_classdetail_coa"></text>
+                                <text class="test">辅助老师：{{item.cla_tutor_real_name?item.cla_tutor_real_name:'待定'}}</text>
+                            </view>
+                        </view>
+                    </view>
+                    <view class="{{$NewDetails$turnclass$change_course?'attention':'attention-none'}}">
+                        <text>注意：转班后所有未上课次的调课都会被取消!</text>
+                    </view>
+                </scroll-view>
+                <view bindtap="$NewDetails$turnclass$submitfunc" class="determine">确定转班</view>
+            </view>
+        </view>
+        <view bindtap="$NewDetails$turnclass$click_hide" class="turn-class-mask" wx:if="{{!$NewDetails$turnclass$visible}}"></view>
+    </view>
+    <view animation="{{$NewDetails$taltoast$animationData}}" class="tal-toast-container" style="top:{{$NewDetails$taltoast$vertical}}%;" wx:if="{{$NewDetails$taltoast$toastVisible}}">
+        <view class="tal-toast">
+            <text>{{$NewDetails$taltoast$toastMessage}}</text>
+        </view>
+    </view>
+    <view class="loading-center" hidden="{{$NewDetails$LoadingView$isLoading}}">
+        <view class="loading-animation">
+            <text></text>
+            <text></text>
+            <text></text>
+            <text></text>
+            <text></text>
+        </view>
+        <view class="loading-mask"></view>
+    </view>
+</block>
+<view class="details-center {{$ComDetails$isAddCls?'is-scroll':''}}" wx:else>
+    <view class="ms-details-center">
+        <view bindtouchend="$ComDetails$DetailCard$touchendHandler" bindtouchstart="$ComDetails$DetailCard$touchstartHandler" class="detail-region">
+            <view class="course-info-wrap">
+                <view class="title">
+                    <text class="'course-type-icon' {{$ComDetails$DetailCard$CourseInfo$classType[$ComDetails$DetailCard$CourseInfo$courseInfo.courseType].icon}}" hidden="{{!$ComDetails$DetailCard$CourseInfo$courseInfo.courseType}}">{{$ComDetails$DetailCard$CourseInfo$classType[$ComDetails$DetailCard$CourseInfo$courseInfo.courseType].text}}</text>
+                    <text class="class-name">{{$ComDetails$DetailCard$CourseInfo$courseInfo.className}}</text>
+                </view>
+                <view class="info-list">
+                    <view class="item" hidden="{{$ComDetails$DetailCard$CourseInfo$courseInfo.courseType===1||!$ComDetails$DetailCard$CourseInfo$courseInfo.address}}">
+                        <image class="icon" mode="widthFix" src="../../../common/img/address.png"></image>
+                        <view class="text-right">{{$ComDetails$DetailCard$CourseInfo$courseInfo.address}}</view>
+                    </view>
+                    <view class="item" hidden="{{!$ComDetails$DetailCard$CourseInfo$courseInfo.classTime}}">
+                        <image class="icon" mode="widthFix" src="../../../common/img/time.png"></image>
+                        <view class="text-right">{{$ComDetails$DetailCard$CourseInfo$courseInfo.classTime}}</view>
+                    </view>
+                    <view class="item" hidden="{{!$ComDetails$DetailCard$CourseInfo$courseInfo.timeArea}}">
+                        <image class="icon" mode="widthFix" src="../../../common/img/date.png"></image>
+                        <view class="text-right">{{$ComDetails$DetailCard$CourseInfo$courseInfo.timeArea}}</view>
+                    </view>
+                    <view class="item" wx:if="{{$ComDetails$DetailCard$CourseInfo$courseInfo.teacherList||$ComDetails$DetailCard$CourseInfo$courseInfo.tutorList}}">
+                        <image class="icon" mode="widthFix" src="../../../common/img/person.png"></image>
+                        <view class="text-right">
+                            <view class="text-right-block" wx:if="{{$ComDetails$DetailCard$CourseInfo$courseInfo.teacherList.length&&!$ComDetails$DetailCard$CourseInfo$courseInfo.strengTutor}}">
+                                <text class="teacher-title">授课:</text>
+                                <text class="teacher-item" wx:for="{{$ComDetails$DetailCard$CourseInfo$courseInfo.teacherList}}" wx:for-index="_mun1" wx:for-item="_tea1" wx:key="_mun1">{{_tea1.name}}</text>
+                            </view>
+                            <view class="text-right-block" wx:if="{{$ComDetails$DetailCard$CourseInfo$courseInfo.tutorList.length&&$ComDetails$DetailCard$CourseInfo$courseInfo.classType!==4}}">
+                                <text class="teacher-title">{{$ComDetails$DetailCard$CourseInfo$courseInfo.strengTutor?'老师':'辅导'}}:</text>
+                                <text class="teacher-item" wx:for="{{$ComDetails$DetailCard$CourseInfo$courseInfo.tutorList}}" wx:for-index="_mun2" wx:for-item="_tea2" wx:key="_tea2">{{_tea2.name}}</text>
+                            </view>
+                        </view>
+                    </view>
+                </view>
+                <view class="price-wrap">
+                    <text class="info-price" wx:if="{{$ComDetails$DetailCard$CourseInfo$courseInfo.coursePrice}}">{{$ComDetails$DetailCard$CourseInfo$courseInfo.coursePrice}}</text>
+                    <text class="surplus-class" wx:if="{{$ComDetails$DetailCard$CourseInfo$courseInfo.surplusClassNum}}">剩余{{$ComDetails$DetailCard$CourseInfo$courseInfo.surplusClassNum}}节课</text>
+                </view>
+            </view>
+            <view bindtap="$ComDetails$DetailCard$toMap" class="course-info-item" hidden="{{!$ComDetails$DetailCard$classInfo.class_area}}">
+                <image class="icon" mode="widthFix" src="../../../common/img/address.png"></image>
+                <view class="text-right">
+                    <text>{{$ComDetails$DetailCard$classInfo.class_area}}</text>
+                    <button catchtap="$ComDetails$DetailCard$toSetMapPurview" class="openMap-btn" wx:if="{{$ComDetails$DetailCard$isGetMapbtn}}">地理授权</button>
+                    <image class="jt" src="../../../common/img/sanjiao.png"></image>
+                </view>
+            </view>
+        </view>
+        <view class="ms-details-between {{!$ComDetails$DetailCard$originPrice?'noPromotion':''}}">
+            <view class="ms-details-left">
+                <text class="title">{{$ComDetails$DetailCard$classInfo.actual_price}}</text>
+                <text class="remainingClassCount">{{$ComDetails$DetailCard$remainingClassCount}}</text>
+            </view>
+            <view class="between-center">
+                <view class="between-right">
+                    <view class="bottom_bar_label {{$ComDetails$DetailCard$tipColor[$ComDetails$DetailCard$classInfo.cla_quota_num]}}" wx:if="{{$ComDetails$DetailCard$info.cla_class_type!==1}}">{{$ComDetails$DetailCard$states}}</view>
+                </view>
+            </view>
+        </view>
+        <view class="ms-details-originPrice" wx:if="{{$ComDetails$DetailCard$originPrice}}">原价:<text class="originPrice">{{$ComDetails$DetailCard$originPrice}}</text>
+        </view>
+        <view class="course-period-item {{$ComDetails$DetailCard$_item.disabled?'disabled':''}} _2a75096" wx:for="{{$ComDetails$DetailCard$classInfo.stagesInfo}}" wx:for-index="$ComDetails$DetailCard$i" wx:for-item="$ComDetails$DetailCard$_item" wx:key="$ComDetails$DetailCard$_index">
+            <view class="info-left _2a75096">
+                <view class="period-name _2a75096">
+                    <text class="_2a75096">{{$ComDetails$DetailCard$_item.stagesName}}</text>
+                </view>
+                <view class="date-bottom _2a75096">
+                    <text class="text _2a75096">{{$ComDetails$DetailCard$_item.startDate}} - {{$ComDetails$DetailCard$_item.endDate}}</text>
+                </view>
+                <view class="_2a75096">
+                    <text class="tips _2a75096" wx:if="{{$ComDetails$DetailCard$_item.disabled&&$ComDetails$DetailCard$_item.startPayTime}}">支付开始时间: {{$ComDetails$DetailCard$_item.startPayTime}}</text>
+                </view>
+            </view>
+            <view class="price-right price-end _2a75096" wx:if="{{$ComDetails$DetailCard$entry&&$ComDetails$DetailCard$_item.disabled}}">已结课</view>
+            <view class="price-right _2a75096" wx:else>{{$ComDetails$DetailCard$_item.price}}</view>
+        </view>
+        <view class="details-teachers" hidden="{{!$ComDetails$DetailCard$newTeacherList}}">
+            <block wx:for="{{$ComDetails$DetailCard$newTeacherList}}" wx:for-index="_index0" wx:key="index0">
+                <view class="teacher-center" wx:if="{{!$ComDetails$DetailCard$classInfo.strengTutor&&_index0===0||_index0>0}}" wx:for="{{item}}" wx:for-index="_index" wx:key="_index">
+                    <view catchtap="$ComDetails$DetailCard$goDetail" class="parents" data-wpygodetail-a="{{item}}">
+                        <view class="logo">
+                            <image binderror="$ComDetails$DetailCard$imgError" class="user-img" data-wpyimgerror-a="{{_index0}}" data-wpyimgerror-b="{{_index}}" mode="widthFix" src="{{item.url}}"></image>
+                        </view>
+                    </view>
+                    <view class="names">
+                        <view class="tea-name">{{item.name}}</view>
+                        <view class="tea-name-bom">{{item.type==='辅'?$ComDetails$DetailCard$classInfo.strengTutor?'老师':'辅导':'授课'}}</view>
+                    </view>
+                    <view catchtap="$ComDetails$DetailCard$teacherTap" class="teacher-tap" hidden="{{$ComDetails$DetailCard$badges.id!=1}}" wx:if="{{item.id==2}}">
+                        <text>选择辅导老师</text>
+                        <image class="jt" src="../../../common/img/sanjiao.png"></image>
+                    </view>
+                </view>
+            </block>
+            <view class="add-getbuttons" wx:if="{{!$ComDetails$DetailCard$isBtnStatus}}">
+                <button bindgetuserinfo="$ComDetails$DetailCard$getUserInfoFn" class="opent-btn" openType="getUserInfo" wx:if="{{!$ComDetails$DetailCard$isBtnStatus}}">我</button>
+            </view>
+        </view>
+    </view>
+    <view animation="{{$ComDetails$DetailCard$taltoast$animationData}}" class="tal-toast-container toast" style="top:{{$ComDetails$DetailCard$taltoast$vertical}}%;" wx:if="{{$ComDetails$DetailCard$taltoast$toastVisible}}">
+        <view class="tal-toast">
+            <text>{{$ComDetails$DetailCard$taltoast$toastMessage}}</text>
+        </view>
+    </view>
+    <view animation="{{$ComDetails$DetailCard$newToast$animationData}}" class="tal-toast-container toast1" style="top:{{$ComDetails$DetailCard$newToast$vertical}}%;" wx:if="{{$ComDetails$DetailCard$newToast$toastVisible}}">
+        <view class="tal-toast">
+            <text>{{$ComDetails$DetailCard$newToast$toastMessage}}</text>
+        </view>
+    </view>
+    <view class="details-content _45b0a8a" hidden="{{$ComDetails$DetailsModule$isImgTestInfo}}">
+        <view class="content-title _45b0a8a">
+            <text class="item _45b0a8a" wx:for="{{$ComDetails$DetailsModule$detailLabel}}" wx:key="index">{{item}}</text>
+        </view>
+        <block wx:if="{{$ComDetails$DetailsModule$lessoncoupon$isDiscount}}">
+            <view class="coupon_wrap" wx:for="{{$ComDetails$DetailsModule$lessoncoupon$activity}}" wx:key="index">
+                <view bindtap="$ComDetails$DetailsModule$lessoncoupon$goActivity" class="discount-nav" data-wpygoactivity-a="{{item}}" hoverClass="weui-cell_active">
+                    <view class="coupon_label">{{item.promotionTypeName}}</view>
+                    <view class="coupon_content">{{item.promotionName}}</view>
+                    <text class="iconfont icon-home_classdetailpage4"></text>
+                </view>
+            </view>
+        </block>
+        <view class="content-diagnosis _45b0a8a" hidden="{{$ComDetails$DetailsModule$isDiagnosis}}" wx:if="{{$ComDetails$DetailsModule$isEvaluation}}">
+            <text class="data-source _45b0a8a">{{$ComDetails$DetailsModule$evaluation.title}}</text>
+            <view class="contents-box _45b0a8a" wx:if="{{$ComDetails$DetailsModule$isArrow}}">
+                <button bindgetuserinfo="$ComDetails$DetailsModule$getUserInfoFn" class="opent-btn _45b0a8a" openType="getUserInfo" wx:if="{{$ComDetails$DetailsModule$isGetbtn}}">我</button>
+                <view bindtap="$ComDetails$DetailsModule$diagnosisFn" class="_45b0a8a" clsss="content-test">
+                    <text class="test _45b0a8a">{{$ComDetails$DetailsModule$diagnosisTest}}</text>
+                    <image class="jt _45b0a8a" src="../../../common/img/sanjiao.png"></image>
+                </view>
+            </view>
+        </view>
+        <view class="card _45b0a8a" wx:if="{{$ComDetails$DetailsModule$recrument.detailSuit}}">
+            <view class="content-object _45b0a8a">
+                <view class="h2 _45b0a8a">适合对象</view>
+                <text class="test _45b0a8a">{{$ComDetails$DetailsModule$recrument.detailSuit}}</text>
+            </view>
+        </view>
+        <view class="card _45b0a8a" wx:if="{{$ComDetails$DetailsModule$recrument.detailTarget}}">
+            <view class="content-object _45b0a8a">
+                <view class="h2 _45b0a8a">培养目标</view>
+                <text class="test _45b0a8a">{{$ComDetails$DetailsModule$recrument.detailTarget}}</text>
+            </view>
+        </view>
+        <view class="img-info _45b0a8a">
+            <view class="content-imgs _45b0a8a" wx:if="{{$ComDetails$DetailsModule$isVideoContent}}">
+                <view bindtap="$ComDetails$DetailsModule$playVideo" class="imgInfos _45b0a8a" wx:if="{{$ComDetails$DetailsModule$isDetailType}}">
+                    <view class="toggle-view _45b0a8a">
+                        <view class="default-imgs _45b0a8a" wx:if="{{$ComDetails$DetailsModule$isCoverVideoImg}}">
+                            <image class="default-logo _45b0a8a" src="http://static-xesapi.speiyou.cn/1543376212528.png"></image>
+                            <image class="play-logo _45b0a8a" src="http://static-xesapi.speiyou.cn/1543375759401.png"></image>
+                        </view>
+                        <view class="show-view _45b0a8a" wx:else>
+                            <image class="logo _45b0a8a" mode="widthFix" src="{{$ComDetails$DetailsModule$coverUrl}}"></image>
+                            <image class="play-logo _45b0a8a" src="http://static-xesapi.speiyou.cn/1543375759401.png"></image>
+                        </view>
+                    </view>
+                </view>
+                <view class="bottom-imgs {{$ComDetails$DetailsModule$isRmoveClass?'mergepad':''}} _45b0a8a" wx:if="{{$ComDetails$DetailsModule$recrument.detailDescImg.length}}">
+                    <view class="imglist _45b0a8a">
+                        <image bindtap="$ComDetails$DetailsModule$imglarge" class="imgs _45b0a8a" data-wpyimglarge-a="itemImgs" mode="widthFix" src="{{itemImgs}}" wx:for="{{$ComDetails$DetailsModule$recrument.detailDescImg}}" wx:for-item="itemImgs" wx:key="index"></image>
+                    </view>
+                </view>
+            </view>
+        </view>
+    </view>
+    <view class="video-box _45b0a8a" hidden="{{!$ComDetails$DetailsModule$showVideo}}" wx:if="{{$ComDetails$DetailsModule$isimgInfo}}">
+        <view bindtap="$ComDetails$DetailsModule$hideVideo" class="shadow _45b0a8a"></view>
+        <view class="videoView _45b0a8a">
+            <video bindfullscreenchange="$ComDetails$DetailsModule$changefullscreen" class="videos _45b0a8a" controls="{{$ComDetails$DetailsModule$controls}}" id="myVideo" src="{{$ComDetails$DetailsModule$imgDetail.vedioUrl}}"></video>
+            <cover-view class="closeArea _45b0a8a" wx:if="{{$ComDetails$DetailsModule$isFullScreen}}">
+                <cover-image bindtap="$ComDetails$DetailsModule$hideVideo" class="close-logo _45b0a8a" src="https://static-xesapi.speiyou.cn/1543573232416.png"></cover-image>
+            </cover-view>
+        </view>
+    </view>
+    <view class="class_detail_bottom_bar bottom-bar">
+        <view class="bottom-flex-center">
+            <view class="customer-service">
+                <button bindtap="$ComDetails$BottomBar$feedbackFunc" class="open-feedback" openType="feedback">反馈</button>
+                <view class="icon">
+                    <image src="http://static-xesapi.speiyou.cn/1540868046266.png"></image>
+                </view>
+            </view>
+            <view class="btn-list">
+                <button bindgetuserinfo="$ComDetails$BottomBar$getUserInfoFn" class="opent-btn" openType="getUserInfo" wx:if="{{!$ComDetails$BottomBar$isBtnStatus}}">我</button>
+                <view bindtap="$ComDetails$BottomBar$regist" class="{{$ComDetails$BottomBar$registDisabled?'state-btn default-btn':'default-btn'}}">{{$ComDetails$BottomBar$btnWord}}</view>
+            </view>
+        </view>
+        <view animation="{{$ComDetails$BottomBar$taltoast$animationData}}" class="tal-toast-container bom-toast" style="top:{{$ComDetails$BottomBar$taltoast$vertical}}%;" wx:if="{{$ComDetails$BottomBar$taltoast$toastVisible}}">
+            <view class="tal-toast">
+                <text>{{$ComDetails$BottomBar$taltoast$toastMessage}}</text>
+            </view>
+        </view>
+    </view>
+    <view class="app-cen" wx:if="{{$ComDetails$BottomBar$appmask$isHide}}">
+        <view class="app-mask"></view>
+        <view class="app-center">
+            <view class="app-con">
+                <view class="title">每一位学而思家长的必备APP</view>
+                <image src="http://static-xesapi.speiyou.cn/1536045641131.png"></image>
+                <view class="test" wx:if="{{$ComDetails$BottomBar$appmask$SystemInfo}}">
+                    <view>请在App Store内搜索“学而思”</view>
+                    <view>下载学而思APP</view>
+                </view>
+                <view class="test" wx:else>
+                    <view>请在各大应用商店内搜索“学而思”</view>
+                    <view>（应用宝、360手机助手、华为应用市场等）下载学而思APP</view>
+                </view>
+                <view bindtap="$ComDetails$BottomBar$appmask$goHide" class="btn">知道了</view>
+            </view>
+        </view>
+    </view>
+    <view class="cover-wrap" wx:if="{{$ComDetails$BottomBar$showConfirm}}">
+        <view class="confirm-cover">
+            <view class="confirm-title">{{$ComDetails$BottomBar$confirm$option.title}}</view>
+            <view class="confirm-desc">{{$ComDetails$BottomBar$confirm$option.content}}</view>
+            <view class="confirm-btns-third" wx:if="{{$ComDetails$BottomBar$confirm$option.type==='thirdConfirm'}}">
+                <view bindtap="$ComDetails$BottomBar$confirm$submit" class="submit" data-wpysubmit-a="1">{{$ComDetails$BottomBar$confirm$option.submitTxt}}</view>
+                <view bindtap="$ComDetails$BottomBar$confirm$submit" class="submit" data-wpysubmit-a="2">{{$ComDetails$BottomBar$confirm$option.submitSecTxt}}</view>
+                <view bindtap="$ComDetails$BottomBar$confirm$cancel" class="cancel" data-wpycancel-a="">{{$ComDetails$BottomBar$confirm$option.cancelTxt}}</view>
+            </view>
+            <view class="confirm-btns" wx:else>
+                <view bindtap="$ComDetails$BottomBar$confirm$cancel" class="cancel" data-wpycancel-a="" wx:if="{{$ComDetails$BottomBar$confirm$option.type==='confirm'}}">{{$ComDetails$BottomBar$confirm$option.cancelTxt}}</view>
+                <view bindtap="$ComDetails$BottomBar$confirm$submit" class="submit" data-wpysubmit-a="">{{$ComDetails$BottomBar$confirm$option.submitTxt}}</view>
+            </view>
+        </view>
+    </view>
+    <view animation="{{$ComDetails$actionsheet$aniMain}}" class="action_sheet_wrap _5c58a8d action-sheet" wx:if="{{$ComDetails$actionsheet$visible}}">
+        <view class="close-center _5c58a8d">
+            <text class="text _5c58a8d">选择辅导老师</text>
+            <text bindtap="$ComDetails$actionsheet$closes" class="icon-close _5c58a8d"></text>
+        </view>
+        <view class="action-padding _5c58a8d">
+            <scroll-view scrollY class="scroll-box _5c58a8d">
+                <radio-group bindchange="$ComDetails$actionsheet$selectChange" class="_5c58a8d">
+                    <label class="tutor-cell _5c58a8d" wx:for="{{$ComDetails$actionsheet$teacherList}}" wx:key="index">
+                        <view catchtap="$ComDetails$actionsheet$goDetail" class="tutor-avatar-wrap _5c58a8d" data-wpygodetail-a="{{item}}">
+                            <image binderror="$ComDetails$actionsheet$loadErrorImg" class="_5c58a8d" data-wpyloaderrorimg-a="{{index}}" mode="aspectFill" src="{{item.picture_url&&item.accountType===1?item.picture_url:$ComDetails$actionsheet$imgList.defaultImg}}"></image>
+                        </view>
+                        <view class="tutor-content-wrap _5c58a8d">
+                            <view class="tutor-name _5c58a8d">{{item.teacher?item.teacher:'待定'}}</view>
+                            <view class="tutor-count _5c58a8d">
+                                <text class="_5c58a8d" wx:if="{{item.left>0}}">剩余{{item.left}}</text>
+                                <text class="gray _5c58a8d" wx:else>已满</text>
+                            </view>
+                        </view>
+                        <radio checked="{{item.checked}}" class="weui-check _5c58a8d" value="{{index}}"></radio>
+                        <view class="icon-box _5c58a8d" wx:if="{{item.left}}">
+                            <image class="_5c58a8d" src="{{item.checked?$ComDetails$actionsheet$imgList.checkType:$ComDetails$actionsheet$imgList.notCheckType}}"></image>
+                        </view>
+                    </label>
+                </radio-group>
+            </scroll-view>
+            <view class="btn-wrap {{$ComDetails$actionsheet$isiPhoneX?'iphonex':''}} _5c58a8d">
+                <view bindtap="$ComDetails$actionsheet$tutorDone" class="{{$ComDetails$actionsheet$tutorDisable?'select-done-btn':'select-done-btn-active'}} _5c58a8d">完成</view>
+            </view>
+        </view>
+    </view>
+    <view animation="{{$ComDetails$actionsheet$aniMask}}" bindtap="$ComDetails$actionsheet$concealFrame" class="action_sheet_mask _5c58a8d" wx:if="{{$ComDetails$actionsheet$visible}}"></view>
+    <view animation="{{$ComDetails$actionsheet$taltoast$animationData}}" class="tal-toast-container _5c58a8d" style="top:{{$ComDetails$actionsheet$taltoast$vertical}}%;" wx:if="{{$ComDetails$actionsheet$taltoast$toastVisible}}">
+        <view class="tal-toast">
+            <text>{{$ComDetails$actionsheet$taltoast$toastMessage}}</text>
+        </view>
+    </view>
+    <view class="cover-wrap _5c58a8d" wx:if="{{$ComDetails$actionsheet$showConfirm}}">
+        <view class="confirm-cover">
+            <view class="confirm-title">{{$ComDetails$actionsheet$confirm$option.title}}</view>
+            <view class="confirm-desc">{{$ComDetails$actionsheet$confirm$option.content}}</view>
+            <view class="confirm-btns-third" wx:if="{{$ComDetails$actionsheet$confirm$option.type==='thirdConfirm'}}">
+                <view bindtap="$ComDetails$actionsheet$confirm$submit" class="submit" data-wpysubmit-a="1">{{$ComDetails$actionsheet$confirm$option.submitTxt}}</view>
+                <view bindtap="$ComDetails$actionsheet$confirm$submit" class="submit" data-wpysubmit-a="2">{{$ComDetails$actionsheet$confirm$option.submitSecTxt}}</view>
+                <view bindtap="$ComDetails$actionsheet$confirm$cancel" class="cancel" data-wpycancel-a="">{{$ComDetails$actionsheet$confirm$option.cancelTxt}}</view>
+            </view>
+            <view class="confirm-btns" wx:else>
+                <view bindtap="$ComDetails$actionsheet$confirm$cancel" class="cancel" data-wpycancel-a="" wx:if="{{$ComDetails$actionsheet$confirm$option.type==='confirm'}}">{{$ComDetails$actionsheet$confirm$option.cancelTxt}}</view>
+                <view bindtap="$ComDetails$actionsheet$confirm$submit" class="submit" data-wpysubmit-a="">{{$ComDetails$actionsheet$confirm$option.submitTxt}}</view>
+            </view>
+        </view>
+    </view>
+    <view class="turn-class-centent">
+        <view animation="{{$ComDetails$turnclass$aniMain}}" class="turn-class-con">
+            <view class="turn-padding">
+                <view class="title">
+                    <view class="iocns">
+                        <text bindtap="$ComDetails$turnclass$click_hide" class="iconfont icon-home_classdetail_clo"></text>
+                    </view>
+                    <text class="title-bar">转班</text>
+                </view>
+                <view class="explain">您已报名同类型班级，若继续报名，将会自动从原来的班级转入当前报名的班级，请慎重选择！</view>
+                <scroll-view class="scroll-view" scrollY="{{$ComDetails$turnclass$isScroll}}">
+                    <view class="nav">原班级</view>
+                    <view class="card-information">
+                        <view bindtap="$ComDetails$turnclass$oldFiche$goClassInfo" class="card-padding" data-wpygoclassinfo-a="{{item}}" wx:for="{{$ComDetails$turnclass$oldFiche$cardInfo}}" wx:key="index">
+                            <view class="card-title">
+                                <text class="iocnt-text {{item.cla_class_type===2?'sh-back':item.cla_class_type===4?'ms-back':''}}">{{$ComDetails$turnclass$oldFiche$classType[item.cla_class_type]}}</text>
+                                <text class="h2">{{item.cla_name}}</text>
+                            </view>
+                            <view class="card-block">
+                                <text class="iconfont icon-home_classdetail_cal"></text>
+                                <text class="test">{{item.cla_start_date}} 至 {{item.cla_end_date}}</text>
+                            </view>
+                            <view class="card-block">
+                                <text class="iconfont icon-home_classdetailpage"></text>
+                                <text class="test">{{item.cla_classtime_names}}</text>
+                            </view>
+                            <view class="card-block" hidden="{{item.cla_class_type===1}}">
+                                <text class="iconfont icon-home_classdetailpage2"></text>
+                                <text class="test">地点：{{item.cla_area_name?item.cla_area_name:''}}{{item.cla_venue_name}} </text>
+                            </view>
+                            <view class="card-block" wx:if="{{item.cla_class_type!==2}}">
+                                <block wx:for="{{item.show_teacher_list}}" wx:for-item="itemName" wx:key="index">
+                                    <text class="iconfont icon-home_classdetail_mai"></text>
+                                    <text class="test">主讲老师：{{itemName.name?itemName.name:'待定'}}</text>
+                                </block>
+                            </view>
+                            <view class="card-block" wx:else>
+                                <text class="iconfont icon-home_classdetail_mai"></text>
+                                <text class="test">主讲老师：{{item.cla_teacher_names}}</text>
+                            </view>
+                            <view class="card-block" wx:if="{{item.cla_class_type===2}}">
+                                <text class="iconfont icon-home_classdetail_coa"></text>
+                                <text class="test">辅助老师：{{item.cla_tutor_real_name?item.cla_tutor_real_name:'待定'}}</text>
+                            </view>
+                        </view>
+                    </view>
+                    <view class="nav">转入班级 <text class="iconfont icon-CombinedShapex"></text>
+                    </view>
+                    <view class="card-information">
+                        <view bindtap="$ComDetails$turnclass$newFiche$goClassInfo" class="card-padding" data-wpygoclassinfo-a="{{item}}" wx:for="{{$ComDetails$turnclass$newFiche$cardInfo}}" wx:key="index">
+                            <view class="card-title">
+                                <text class="iocnt-text {{item.cla_class_type===2?'sh-back':item.cla_class_type===4?'ms-back':''}}">{{$ComDetails$turnclass$newFiche$classType[item.cla_class_type]}}</text>
+                                <text class="h2">{{item.cla_name}}</text>
+                            </view>
+                            <view class="card-block">
+                                <text class="iconfont icon-home_classdetail_cal"></text>
+                                <text class="test">{{item.cla_start_date}} 至 {{item.cla_end_date}}</text>
+                            </view>
+                            <view class="card-block">
+                                <text class="iconfont icon-home_classdetailpage"></text>
+                                <text class="test">{{item.cla_classtime_names}}</text>
+                            </view>
+                            <view class="card-block" hidden="{{item.cla_class_type===1}}">
+                                <text class="iconfont icon-home_classdetailpage2"></text>
+                                <text class="test">地点：{{item.cla_area_name?item.cla_area_name:''}}{{item.cla_venue_name}} </text>
+                            </view>
+                            <view class="card-block" wx:if="{{item.cla_class_type!==2}}">
+                                <block wx:for="{{item.show_teacher_list}}" wx:for-item="itemName" wx:key="index">
+                                    <text class="iconfont icon-home_classdetail_mai"></text>
+                                    <text class="test">主讲老师：{{itemName.name?itemName.name:'待定'}}</text>
+                                </block>
+                            </view>
+                            <view class="card-block" wx:else>
+                                <text class="iconfont icon-home_classdetail_mai"></text>
+                                <text class="test">主讲老师：{{item.cla_teacher_names}}</text>
+                            </view>
+                            <view class="card-block" wx:if="{{item.cla_class_type===2}}">
+                                <text class="iconfont icon-home_classdetail_coa"></text>
+                                <text class="test">辅助老师：{{item.cla_tutor_real_name?item.cla_tutor_real_name:'待定'}}</text>
+                            </view>
+                        </view>
+                    </view>
+                    <view class="{{$ComDetails$turnclass$change_course?'attention':'attention-none'}}">
+                        <text>注意：转班后所有未上课次的调课都会被取消!</text>
+                    </view>
+                </scroll-view>
+                <view bindtap="$ComDetails$turnclass$submitfunc" class="determine">确定转班</view>
+            </view>
+        </view>
+        <view bindtap="$ComDetails$turnclass$click_hide" class="turn-class-mask" wx:if="{{!$ComDetails$turnclass$visible}}"></view>
+    </view>
+    <view bindtap="$ComDetails$GoHomeView$backfunc" class="goHome" wx:if="{{$ComDetails$isShare}}">
+        <text class="iconfont icon-home"></text>
+    </view>
+    <view animation="{{$ComDetails$taltoast$animationData}}" class="tal-toast-container" style="top:{{$ComDetails$taltoast$vertical}}%;" wx:if="{{$ComDetails$taltoast$toastVisible}}">
+        <view class="tal-toast">
+            <text>{{$ComDetails$taltoast$toastMessage}}</text>
+        </view>
+    </view>
+    <view class="loading-center" hidden="{{$ComDetails$LoadingView$isLoading}}">
+        <view class="loading-animation">
+            <text></text>
+            <text></text>
+            <text></text>
+            <text></text>
+            <text></text>
+        </view>
+        <view class="loading-mask"></view>
+    </view>
+</view>

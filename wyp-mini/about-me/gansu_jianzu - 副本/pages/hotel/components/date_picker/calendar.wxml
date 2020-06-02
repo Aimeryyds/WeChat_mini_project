@@ -1,0 +1,11 @@
+<view class="calendar">
+    <view class="calendar-title">{{year}}年{{month+1}}月</view>
+    <view class="calendar-content">
+        <view class="date-cell" wx:for="{{emptyGrids}}" wx:key="{{index}}"></view>
+        <view bindtap="{{item.valid?'handleSelectDate':''}}" class="date-cell {{item.valid?'valid':''}} {{item.selected?'selected':''}}" data-day="{{index+1}}" wx:for="{{days}}" wx:key="{{index}}">
+            <view class="date">{{item.value}}</view>
+            <view class="tip">{{item.tip}}</view>
+        </view>
+        <view class="date-cell" wx:for="{{emptyAfter}}" wx:key="{{index}}"></view>
+    </view>
+</view>

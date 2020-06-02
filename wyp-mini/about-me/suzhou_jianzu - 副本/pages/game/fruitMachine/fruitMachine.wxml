@@ -1,0 +1,23 @@
+<import src="../../../components/components.wxml"></import>
+<import src="../../../wxParse/wxParse.wxml"></import>
+<view class="fruitMachineBg" style="background:url(https://tws.cnweisou.com/images/fruitMachine.png) no-repeat center center;background-size:100% 100%;" wx:if="{{prizeList}}">
+    <view class="fruitMachineTop"></view>
+    <template is="fruitMachine" data="{{...machine,prizeList:prizeList,prizeResult:prizeResult,myData:myData}}"></template>
+    <view class="countPrize">还剩<text>{{prizeResult.chance}}</text>次抽奖喔</view>
+    <view class="rule" wx:if="{{prizeResult.lottery.lotteryinfo}}">
+        <text>活动规则</text>
+        <scroll-view scrollY class="ruleCont">
+            <template is="wxParse" data="{{wxParseData:article.nodes}}"></template>
+        </scroll-view>
+    </view>
+</view>
+<view class="bgtypeList" wx:if="{{myData.cover}}">
+    <view class="prizeCont">
+        <text bindtap="prizeOk" class="close">X</text>
+        <view class="pirzeIcon">
+            <image mode="widthFix" src="{{luckDraw.icon}}"></image>
+        </view>
+        <view class="prizeDetail">{{luckDraw.info}}</view>
+        <view bindtap="prizeOk" class="prizeOk">确定</view>
+    </view>
+</view>

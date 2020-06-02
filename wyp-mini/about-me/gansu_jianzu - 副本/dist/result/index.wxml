@@ -1,0 +1,20 @@
+<template name="resultPage">
+    <view class="page">
+        <view class="zan-msg">
+            <view class="zan-msg__icon-area">
+                <icon size="93" type="success" wx:if="{{result}}"></icon>
+                <icon size="93" type="warn" wx:else></icon>
+            </view>
+            <view class="zan-msg__text-area">
+                <view class="zan-msg__title">{{content.title}}</view>
+                <view class="zan-msg__desc">{{content.desc}}</view>
+            </view>
+            <view class="zan-msg__opr-area">
+                <view class="zan-btn-area">
+                    <button bindtap="onTapResultAction" class="zan-btn" type="primary">{{content.btnText}}</button>
+                    <button bindtap="onTapResultActionExt" class="zan-btn" type="default">{{content.btnExtText}}</button>
+                </view>
+            </view>
+        </view>
+    </view>
+</template>

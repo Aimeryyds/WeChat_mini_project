@@ -1,0 +1,59 @@
+<view>
+    <view class="orderList-top">
+        <view class="orderList-top-nav">
+            <view bindtap="__e" class="{{[pageFlag==0?'on':'']}}" data-event-opts="{{[ [ 'tap',[ [ 'tabswitch',['$event'] ] ] ] ]}}" data-flag="0">未缴账单</view>
+            <view bindtap="__e" class="{{[pageFlag==1?'on':'']}}" data-event-opts="{{[ [ 'tap',[ [ 'tabswitch',['$event'] ] ] ] ]}}" data-flag="1">已缴账单</view>
+        </view>
+    </view>
+    <view class="orderList-list" wx:if="{{pageFlag==0&&list.length>0}}">
+        <view class="orderList-top-notice">逾期支付会影响其他服务使用，有疑问请联系客服:4001-551-551</view>
+        <view class="orderList-item" wx:if="{{list.length>0}}" wx:for="{{$root.l0}}" wx:key="index">
+            <view class="item-title">{{item[$orig].title}}</view>
+            <view class="item-content" wx:if="{{item[$orig].start_date&&item[$orig].end_date}}">{{'账单周期: '+item[$orig].start_date+'至'+item[$orig].end_date}}</view>
+            <view class="item-content" wx:if="{{item[$orig].should_date}}">{{'应缴日期: '+item[$orig].should_date}}</view>
+            <view class="item-content" wx:if="{{item[$orig].amount}}">{{'分摊金额: '+item[$orig].amount+'元'}}</view>
+            <view class="item-content" wx:if="{{item[$orig].status}}">{{'支付状态: '+item[$orig].status}}</view>
+            <view class="item-choose">
+                <view class="item-content item-havetopay">应缴金额:</view>
+                <view class="order-havetopay">{{'￥'+item[$orig].should_money}}</view>
+                <view bindtap="__e" class="{{[item.g0>-1?'on':'item-checkbox']}}" data-event-opts="{{[ [ 'tap',[ [ 'checkListItem',['$event'] ] ] ] ]}}" data-id="{{item[$orig].id}}"></view>
+            </view>
+        </view>
+    </view>
+    <view class="orderList-list-pay" wx:if="{{pageFlag==1&&list1.length>0}}">
+        <view class="pay-timelist" wx:if="{{list1.length>0}}" wx:for="{{list1}}" wx:key="index">
+            <view class="pay-time-title">{{item.time+'已缴费账单'}}</view>
+            <view class="orderList-item" wx:for="{{item.data}}" wx:key="index">
+                <view class="item-title">{{item.title}}</view>
+                <view class="item-content" wx:if="{{item.start_date}}">{{'账单周期:'+item.start_date+'至'+item.end_date}}</view>
+                <view class="item-content" wx:if="{{item.should_date}}">{{'应缴日期:'+item.should_date}}</view>
+                <view class="item-content" wx:if="{{item.amount}}">{{'分摊金额: '+item.amount+'元'}}</view>
+                <view class="item-content item-content-paylist">实际支付金额:<view class="order-havetopay">{{'￥'+item.should_money}}</view>
+                </view>
+            </view>
+        </view>
+    </view>
+    <view class="orderlist-default" wx:if="{{pageFlag==0&&list.length==0}}">
+        <view class="orderlist-default-pic">
+            <image src="http://public.danke.com.cn/public-20190110-Fua3yK5ngNn9-atTUwIECAGmKSI5"></image>
+        </view>
+        <view class="orderlist-default-text">暂无未缴账单</view>
+    </view>
+    <view class="orderlist-default" wx:if="{{pageFlag==1&&list1.length==0}}">
+        <view class="orderlist-default-pic">
+            <image src="http://public.danke.com.cn/public-20190110-Fua3yK5ngNn9-atTUwIECAGmKSI5"></image>
+        </view>
+        <view class="orderlist-default-text">暂无已缴账单</view>
+    </view>
+    <view class="orderList-foot" wx:if="{{pageFlag==0&&list.length>0}}">
+        <view class="foot-check-money">
+            <view class="foot-checkall">
+                <view bindtap="__e" class="{{[checkAllFlag==true?'on':'item-checkbox']}}" data-event-opts="{{[ [ 'tap',[ [ 'checkAll',['$event'] ] ] ] ]}}" data-flag="{{checkAllFlag}}"></view>
+                <view class="foot-checkall-view">全选</view>
+            </view>
+            <view class="foot-money">共<view class="foot-money-num">{{allMoney==0?'0.00':allMoney}}</view>元</view>
+        </view>
+        <view bindtap="__e" class="foot-pay-btn payOn" data-event-opts="{{[ [ 'tap',[ [ 'pay',['$event'] ] ] ] ]}}" wx:if="{{checkflagArr.length>0}}">付款</view>
+        <view class="foot-pay-btn" wx:if="{{checkflagArr.length<=0}}">付款</view>
+    </view>
+</view>

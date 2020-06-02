@@ -1,0 +1,80 @@
+<view class="top cart_bg_color">
+    <view class="image ">
+        <image mode="aspectFit" src="t.png"></image>
+        <view class="pos cart_color">
+            <text class="iconfont icon-dingdan ri" wx:if="{{status_no==3}}"></text>
+            <text class="le" wx:if="{{status_no==3}}">订单已完成</text>
+            <text class="iconfont icon-tuikuan ri" wx:if="{{status_no==8}}"></text>
+            <text class="le" wx:if="{{status_no==8}}">订单已退款</text>
+            <text class="iconfont icon-jiaoyiguanbi ri" wx:if="{{status_no==4}}"></text>
+            <text class="le" wx:if="{{status_no==4}}">订单已取消</text>
+            <text class="iconfont icon-weijiedan ri" wx:if="{{status_no==5}}"></text>
+            <text class="le" wx:if="{{status_no==5}}">商家已拒单</text>
+            <text class="iconfont icon-yijiedan ri" wx:if="{{status_no==9}}"></text>
+            <text class="le" wx:if="{{status_no==9}}">商家已接单</text>
+            <text class="iconfont icon-tuikuanguanhuai ri" wx:if="{{status_no==7}}"></text>
+            <text class="le" wx:if="{{status_no==7}}">订单退款中</text>
+            <text class="iconfont icon-dengdaiwenjian ri" wx:if="{{status_no==2}}"></text>
+            <text class="le" wx:if="{{status_no==2}}">等待商家接单</text>
+            <text class="iconfont icon-fukuan ri" wx:if="{{status_no==1}}"></text>
+            <text class="le" wx:if="{{status_no==1}}">等待买家付款</text>
+        </view>
+    </view>
+</view>
+<view class="title">
+    <view class="title_t">
+        <view>
+            <image src="{{order.shimg}}"></image>
+        </view>
+        <view>
+            <text>{{order.shop_name?order.shop_name:''}}（{{order.detailed_addr?order.detailed_addr:''}}）</text>
+        </view>
+    </view>
+    <view class="title_b" wx:if="{{status_no==9}}">
+        <text class="title_b1">取餐号:</text>
+        <text class="title_b2">{{take_number}}</text>
+    </view>
+</view>
+<view class="eatch_list">
+    <view class="eatch_item" wx:for="{{products}}" wx:key="index">
+        <view class="eatch_item_l">
+            <image mode="aspectFit" src="{{item.feature_img}}"></image>
+        </view>
+        <view class="eatch_item_r">
+            <view class="eatch_item_r1">
+                <text>{{item.product_name}}</text>
+            </view>
+            <text class="eatch_item_r2 newstyle2">{{item.product_attr?item.product_attr:''}}</text>
+            <view class="eatch_item_r2">
+                <text>￥{{item.total_price/item.amount}}X{{item.amount}}</text>
+                <text>￥{{item.price}}</text>
+            </view>
+        </view>
+    </view>
+    <view class="hj">
+        <text>合计：</text>
+        <text class="red cart_color">￥{{order.total_price}}</text>
+    </view>
+</view>
+<view class="input_list">
+    <view class="input_item">
+        <text class="f1">取单时间 </text>
+        <text class="f2">{{order.meal_getime}} </text>
+    </view>
+    <view class="input_item">
+        <text class="f1">支付方式 </text>
+        <text class="f2">{{order.payment_type}} </text>
+    </view>
+    <view class="input_item">
+        <text class="f1">买家留言 </text>
+        <text class="f2">{{order.message?order.message:''}} </text>
+    </view>
+    <view class="input_item">
+        <text class="f1">下单时间 </text>
+        <text class="f2">{{order.order_time}} </text>
+    </view>
+    <view class="input_item">
+        <text class="f1">订单号 </text>
+        <text class="f2">{{order.out_trade_no}} </text>
+    </view>
+</view>

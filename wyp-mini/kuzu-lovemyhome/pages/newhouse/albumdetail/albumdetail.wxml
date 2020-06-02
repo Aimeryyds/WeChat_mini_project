@@ -1,0 +1,22 @@
+<view class="album-cover">
+    <view class="album-title">
+        <view bindtap="routergo" class="all_album" data-type="album">全部</view>
+    </view>
+    <view class="album-loop">
+        <swiper autoplay="true" bindchange="loopchangecover" circular="true" current="{{coverCurrentIndex}}" duration="500" interval="3000">
+            <swiper-item data-albumname="{{item.albumName}}" data-count="{{item.count}}" data-itemindex="{{item.itemindex}}" wx:for="{{albumloop}}" wx:key="index">
+                <view class="swiper-inner">
+                    <image src="{{item.photo.imageName}}"></image>
+                    <image catchtap="routergo" class="icon_3d" data-targeturl="{{item.photo.tagUrl3D}}" data-type="albumvr" src="/img/resources/icon3d.png" wx:if="{{item.photo.tagUrl3D!=''}}"></image>
+                </view>
+            </swiper-item>
+        </swiper>
+    </view>
+    <view class="cover-bottom">
+        <scroll-view>
+            <view bindtap="coverAlbumClick" class="{{scrollIndex==index?'selected':''}}" data-id="{{'scrollitem_'+index}}" data-index="{{index}}" id="{{'scrollitem_'+index}}" wx:for="{{albumdata}}">
+        {{item.mainAlbumName}}({{item.count}})
+      </view>
+        </scroll-view>
+    </view>
+</view>

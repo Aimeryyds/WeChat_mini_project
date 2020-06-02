@@ -1,0 +1,23 @@
+<template name="c23f67f2">
+    <view class="_div data-v-77e2ce12 wrapper">
+        <view class="_div data-v-77e2ce12 search">
+            <view class="_div data-v-77e2ce12 search-bar">
+                <view bindtap="handleProxy" class="_i data-v-77e2ce12 ib ib-search" data-comkey="{{$k}}" data-eventid="{{'0'}}"></view>
+                <input bindconfirm="handleProxy" bindinput="handleProxy" class="_input data-v-77e2ce12" confirmType="search" data-comkey="{{$k}}" data-eventid="{{'1'}}" focus="{{true}}" placeholder="输入你想搜索的书籍" placeholderStyle="color: #999;" type="text" value="{{word}}"></input>
+                <view bindtap="handleProxy" class="_i data-v-77e2ce12 ib ib-times-circle" data-comkey="{{$k}}" data-eventid="{{'2'}}" wx:if="{{word}}"></view>
+            </view>
+            <navigator class="_navigator data-v-77e2ce12 cancel" openType="navigateBack">取消</navigator>
+        </view>
+        <view class="_div data-v-77e2ce12 result" wx:if="{{didSearch}}">
+            <view class="_div data-v-77e2ce12 contents" wx:if="{{total}}">
+                <view class="_div data-v-77e2ce12 total">共搜到{{total}}本与<label class="_span data-v-77e2ce12 key-word">“{{word}}”</label>相关的书籍</view>
+                <template is="694882de" data="{{...$root[$kk+'0-'+index],$root:$root}}" wx:for="{{books}}" wx:for-item="book" wx:key="book.id"></template>
+            </view>
+            <view class="_div data-v-77e2ce12 no-contents" wx:else>
+                <view class="_div data-v-77e2ce12 icon"></view>
+                <view class="_div data-v-77e2ce12 tip">很抱歉，没有搜到相关书籍~</view>
+            </view>
+        </view>
+    </view>
+</template>
+<import src="/components/ComplexBook.vue.wxml"></import>

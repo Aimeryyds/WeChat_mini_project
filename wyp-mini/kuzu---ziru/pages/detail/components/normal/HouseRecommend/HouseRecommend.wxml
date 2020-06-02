@@ -1,0 +1,46 @@
+<view class="house-recommend house-detail _div data-v-b0a25c0c" wx:if="{{houseRecommend&&houseRecommend.length}}">
+    <view class="block-title _h2 data-v-b0a25c0c">{{recommend_title}}</view>
+    <view class="_div data-v-b0a25c0c" wx:for="{{$root.l0}}" wx:for-item="houseData" wx:key="index">
+        <view bindtap="__e" class="list-item-wrapper _div data-v-b0a25c0c" data-event-opts="{{[ [ 'tap',[ [ 'handleJumpHouse',['$0'],[ [ ['houseRecommend','',index] ] ] ] ] ] ]}}" wx:if="{{houseData[$orig].house_type}}">
+            <view class="list-item-image _div data-v-b0a25c0c">
+                <image alt="房源图片" binderror="__e" class="image data-v-b0a25c0c" data-event-opts="{{[ [ 'error',[ [ 'handleImageError',[0] ] ] ] ]}}" src="{{houseData.m0}}" wx:if="{{!isImageError[0]}}"></image>
+                <image alt="房源图片" class="image error data-v-b0a25c0c" src="{{errorImageSrc}}" wx:else></image>
+                <view class="image-tag-wrapper _div data-v-b0a25c0c">
+                    <view class="image-tag iconfont icon-vr _i data-v-b0a25c0c" wx:if="{{houseData[$orig].has_3d}}"></view>
+                    <view class="image-tag iconfont icon-videoplay _i data-v-b0a25c0c" wx:if="{{houseData[$orig].has_video}}"></view>
+                </view>
+                <image class="first-photo-style data-v-b0a25c0c" src="{{houseData[$orig].first_photo_style}}" wx:if="{{houseData[$orig].first_photo_style}}"></image>
+            </view>
+            <view class="list-item-content _div data-v-b0a25c0c">
+                <view class="top _div data-v-b0a25c0c">
+                    <view class="name _div data-v-b0a25c0c" wx:if="{{houseData[$orig].house_type!==8}}">{{houseData[$orig].type_text+'·'+houseData[$orig].name}}</view>
+                    <view class="name _div data-v-b0a25c0c" wx:else>
+                        <label class="hz-style _span data-v-b0a25c0c">{{houseData[$orig].type_text}}</label>{{'·'+houseData[$orig].name+''}}</view>
+                    <view class="detail _div data-v-b0a25c0c">
+                        <label class="area _span data-v-b0a25c0c">{{houseData[$orig].area+'㎡ | '+houseData[$orig].bedroom+'室'+houseData[$orig].parlor+'厅'}}</label>
+                        <label class="price _span data-v-b0a25c0c">
+                            <view class="price-wrapper _div data-v-b0a25c0c" wx:if="{{houseData[$orig].price_highlight[0]}}">
+                                <label class="flashsale _span data-v-b0a25c0c" wx:if="{{houseData[$orig].sale_img}}">
+                                    <image alt class="_img data-v-b0a25c0c" src="{{houseData[$orig].sale_img}}"></image>
+                                </label>
+                                <label class="rmb _span data-v-b0a25c0c">¥</label>
+                                <label class="price-n _span data-v-b0a25c0c" style="{{'width:'+'9px'+';'+'height:'+'12px'+';'+'background-image:'+'url('+houseData[$orig].price_highlight[0]+')'+';'+'background-size:'+'auto '+'12px'+';'+'background-position:'+'-'+item*12+'px'+';'}}" wx:for="{{houseData[$orig].price_highlight[1]}}" wx:for-index="i" wx:key="i"></label>
+                                <label class="unit _span data-v-b0a25c0c">{{houseData[$orig].price_unit}}</label>
+                            </view>
+                        </label>
+                    </view>
+                    <view class="place _div data-v-b0a25c0c">
+                        <view class="iconfont icon-zm_ic_address _i data-v-b0a25c0c"></view>{{''+houseData[$orig].subway_station_info+''}}</view>
+                </view>
+                <view class="bottom _div data-v-b0a25c0c">
+                    <view class="tags _div data-v-b0a25c0c">
+                        <label class="{{['zr-tag _span data-v-b0a25c0c',houseData[$orig].house_type===8?'hz-style':'',!tag.style&&tag.bg_img?'image-tag':'',tag.style?'styled-tag':'']}}" style="{{'background:'+(tag.style&&tag.style.background||'')+';'+'color:'+(tag.style&&tag.style.color||'')+';'}}" wx:for="{{houseData[$orig].tags}}" wx:for-index="i" wx:for-item="tag" wx:key="i">
+                            <image class="image _img data-v-b0a25c0c" src="{{tag.bg_img}}" wx:if="{{!tag.style&&tag.bg_img}}"></image>
+                            <label class="_span data-v-b0a25c0c" wx:else>{{tag.title}}</label>
+                        </label>
+                    </view>
+                </view>
+            </view>
+        </view>
+    </view>
+</view>

@@ -1,0 +1,29 @@
+<view class="container">
+    <view class="empty-wrap" wx:if="{{list.length==0}}">
+        <image src="../../images/empty/img_lingquan.png"></image>
+        <view class="text">
+            <text>暂无可领取的优惠券</text>
+        </view>
+    </view>
+    <view class="coupon-list">
+        <view class="coupon-item" wx:for="{{list}}">
+            <image class="item-bg" src="../../images/coupon/bg_frame.png"></image>
+            <view class="item-left">
+        ¥ <text class="price">{{item.amount}}</text>
+            </view>
+            <view class="item-right">
+                <view class="item-title">
+                    <text class="tag-label">使用门槛</text>
+                    <text>{{item.openAmountLimit==1?'满'+item.limitAmount+'元可用':'无使用门槛'}}</text>
+                </view>
+                <view class="item-bottom">
+                    <text>活动开始: {{item.beginTime}}</text>
+                </view>
+                <view class="item-bottom">
+                    <text>有效期至: {{item.endTime}}</text>
+                </view>
+            </view>
+            <view bindtap="receiveCoupon" class="btn" data-id="{{item.id}}">立即领取</view>
+        </view>
+    </view>
+</view>

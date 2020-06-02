@@ -1,0 +1,46 @@
+<view class="load_style" hidden="{{!loading}}">
+    <view class="loading">
+        <image class="loading-img" src="/img/resources/load.png"></image>
+    </view>
+</view>
+<view class="broker_record_box">
+    <view class="mmcj_list_box bothpadding" wx:if="{{resultParm==1}}">
+        <view class="mmList" wx:for="{{brokerRecordData.list}}" wx:key="index">
+            <view class="mmTitles_box">
+                <view class="mmTags">已售</view>
+                <view class="mmTitles">
+                    <text>{{item.communityname}}</text>
+                    <text>{{item.bedroom+'室'+item.livingroom+'卫'}}</text>
+                    <text>{{item.area+'㎡'}}</text>
+                </view>
+            </view>
+            <view class="mmAres">{{item.heading+' · '+item.floortype}} </view>
+            <view class="mmjia_data">
+                <view class="mmJiage">
+                    <text class="red">{{item.price+'万'}}</text>
+                    <text class="hui">{{item.averageprice+'元/㎡'}}</text>
+                </view>
+                <view class="mmTime">成交日期：{{item.signtime}}</view>
+            </view>
+        </view>
+    </view>
+    <view class="mmcj_list_box yizu bothpadding" wx:if="{{resultParm==2}}">
+        <view class="mmList" wx:for="{{brokerRecordData.list}}" wx:key="index">
+            <view class="mmTitles_box">
+                <view class="mmTags">已租</view>
+                <view class="mmTitles">
+                    <text>{{item.communityname}}</text>
+                    <text>{{item.bedroom+'室'+item.livingroom+'厅'}} </text>
+                    <text>{{item.area+'㎡'}}</text>
+                </view>
+            </view>
+            <view class="mmAres">{{item.heading}} · {{item.floortype}} </view>
+            <view class="mmjia_data">
+                <view class="mmJiage">
+                    <text class="red">{{item.price+'元/月'}}</text>
+                </view>
+                <view class="mmTime">签约日期：{{item.signtime}}</view>
+            </view>
+        </view>
+    </view>
+</view>

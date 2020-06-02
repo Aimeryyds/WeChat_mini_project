@@ -1,0 +1,23 @@
+<template name="1c3e9cee">
+    <view class="_view 1c3e9cee content  room-list">
+        <view class="_view 1c3e9cee content-fix">
+            <template is="76b6dc79" data="{{...$root['0'],...$root[$kk+'1c3e9cee-0'],$root:$root}}"></template>
+            <template is="5dbe9ece" data="{{...$root['0'],...$root[$kk+'1c3e9cee-1'],$root:$root}}"></template>
+        </view>
+        <view class="_view 1c3e9cee content-fix-bg" hidden="{{!acitveShow}}"></view>
+        <view class="_view 1c3e9cee content room-list-content">
+            <template is="446228fa" data="{{...$root['0'],...$root[$kk+'1c3e9cee-2-'+key],$root:$root}}" wx:for="{{roomList}}" wx:for-index="key" wx:key="key"></template>
+        </view>
+        <view class="_view 1c3e9cee" hidden="{{!showMoreAll}}">
+            <template is="49b8e2ad" data="{{...$root['0'],...$root[$kk+'1c3e9cee-3'],$root:$root}}"></template>
+        </view>
+        <view class="_view 1c3e9cee empty" hidden="{{!empty}}">
+            <image class="_image 1c3e9cee" src="https://assets.mgzf.com/appimg/1e352def5ce0fa6433d7756888ea2317.png"></image>
+            <view class="_view 1c3e9cee">没有符合条件的房源</view>
+        </view>
+    </view>
+</template>
+<import src="/components/common/searchHeader.vue.wxml"></import>
+<import src="/components/picker/filter.vue.wxml"></import>
+<import src="/components/card/room.vue.wxml"></import>
+<import src="/components/mgMoreLoading.vue.wxml"></import>

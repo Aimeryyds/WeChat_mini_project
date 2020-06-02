@@ -1,0 +1,192 @@
+<view class="container _edc0d1e">
+    <view class="intro _edc0d1e">
+        <image binderror="loadErrorImg" class="teacher-img _edc0d1e" src="{{teacherPicUrl}}"></image>
+        <view class="text-intro _edc0d1e">
+            <text class="name _edc0d1e">{{teacherName}}</text>
+            <text class="title _edc0d1e" hidden="{{strengTutor&&teacherType==='1'}}">{{teacherSummary}}</text>
+            <view class="tags _edc0d1e">
+                <view class="tagwrap _edc0d1e" wx:for="{{teacherTags}}" wx:for-index="_index" wx:key="index">
+                    <text class="tag _edc0d1e">{{item}}</text>
+                </view>
+            </view>
+        </view>
+    </view>
+    <view class="container _8ab3914 {{menuFixed?'fixed':''}} _edc0d1e">
+        <view bindtap="$selecttab$changeTab" class="tab {{$selecttab$currentIndex==0?'item-selected':''}} _8ab3914" data-wpychangetab-a="0">介绍</view>
+        <view bindtap="$selecttab$changeTab" class="tab {{$selecttab$currentIndex==1?'item-selected':''}} _8ab3914" data-wpychangetab-a="1">评价</view>
+        <view bindtap="$selecttab$changeTab" class="tab {{$selecttab$currentIndex==2?'item-selected':''}} _8ab3914" data-wpychangetab-a="2">课程</view>
+    </view>
+    <view class="{{menuFixed?'takeplace':''}} _edc0d1e"></view>
+    <view class="container _9dd04e9 _edc0d1e" wx:if="{{currentIndex==0}}">
+        <view class="video-box _9dd04e9" hidden="{{!$intro$showVideo}}">
+            <view bindtap="$intro$hideVideo" class="shadow _9dd04e9"></view>
+            <view class="videoView _9dd04e9">
+                <video bindfullscreenchange="$intro$changefullscreen" class="videos _9dd04e9" controls="{{$intro$controls}}" id="myVideo" src="{{$intro$introInfo.tea_video_url}}"></video>
+            </view>
+        </view>
+        <view bindtap="$intro$playVideo" class="teach-video _9dd04e9" data-wpyplayvideo-a="" wx:if="{{$intro$introInfo&&$intro$introInfo.tea_video_url}}">
+            <image class="teach-video-pic _9dd04e9" src="https://static-xesapi.speiyou.cn/xesFeProject/xesFeSource/xesImagesLibrary/1584000448304.png"></image>
+            <text class="teach-video-text _9dd04e9">教学视频</text>
+        </view>
+        <view class="intro-item _9dd04e9" wx:if="{{$intro$introInfo&&$intro$introInfo.qualification_certificate}}">
+            <text class="title little-block _9dd04e9">教师资质</text>
+            <text class="content _9dd04e9">教师资格证号码：{{$intro$introInfo.qualification_certificate}}</text>
+        </view>
+        <view class="intro-item _9dd04e9" wx:if="{{$intro$introInfo&&$intro$introInfo.grd_name.length>0}}">
+            <text class="title little-block _9dd04e9">授课年级</text>
+            <text class="content _9dd04e9">{{$intro$introInfo.grd_name}}</text>
+        </view>
+        <view class="intro-item _9dd04e9" wx:if="{{$intro$introInfo&&$intro$introInfo.tea_teach_result}}">
+            <text class="title big-block _9dd04e9">教学成果</text>
+            <text class="content _9dd04e9">{{$intro$introInfo.tea_teach_result}}</text>
+        </view>
+        <view class="intro-item _9dd04e9" wx:if="{{$intro$introInfo&&$intro$introInfo.tea_experience}}">
+            <text class="title big-block _9dd04e9">教学经验</text>
+            <text class="content _9dd04e9">{{$intro$introInfo.tea_experience}}</text>
+        </view>
+        <view class="intro-item last-item _9dd04e9" wx:if="{{$intro$introInfo&&$intro$introInfo.tea_features}}">
+            <text class="title big-block _9dd04e9">教学特点</text>
+            <text class="content _9dd04e9">{{$intro$introInfo.tea_features}}</text>
+        </view>
+        <view class="no-intro _9dd04e9" wx:if="{{$intro$showEmptyPic}}">
+            <image class="no-intro-pic _9dd04e9" src="https://static-xesapi.speiyou.cn/xesFeProject/xesFeSource/xesImagesLibrary/1584548550647.png"></image>
+            <text class="no-intro-text _9dd04e9">暂无老师介绍</text>
+        </view>
+    </view>
+    <view class="appraise-wrap _edc0d1e" wx:if="{{currentIndex==1}}">
+        <view class="appraise-top-tags" wx:if="{{$appraise$totalCount>0}}">
+            <view class="multi">
+                <view class="count gray_tx">共有{{$appraise$totalCount}}条评价</view>
+                <view class="star-score">
+                    <view class="icon-star {{$appraise$star$size==='s'?'':'bigger'}} {{$appraise$star$score>_index+0.5?'get-one':$appraise$star$score>_index?'get-half':''}}" wx:for="{{5}}" wx:for-index="_index" wx:key="index"></view>
+                    <view class="score" wx:if="{{$appraise$star$showScore}}">{{$appraise$star$score}}</view>
+                </view>
+            </view>
+            <view class="tags-list">
+                <view bindtap="$appraise$tagChange" class="tag {{_index===$appraise$currentTagIndex?'active':''}}" data-wpytagchange-a="{{_index}}" wx:for="{{$appraise$evaluateTags}}" wx:for-index="_index" wx:key="index">
+              {{item.desc}}<text wx:if="{{item.count}}">（{{item.count}}）</text>
+                </view>
+            </view>
+        </view>
+        <view class="data-list" wx:if="{{$appraise$evaluateList.length}}">
+            <view class="item" wx:for="{{$appraise$evaluateList}}" wx:for-index="$appraise$index" wx:for-item="$appraise$Item" wx:key="$appraise$index">
+                <image binderror="$appraise$loadErrorImg" class="avator" data-wpyloaderrorimg-a="{{$appraise$index}}" src="{{$appraise$Item.stu_logo?$appraise$Item.stu_logo:$appraise$imgList.defaultImg}}"></image>
+                <view class="border-bottom">
+                    <view class="info">
+                        <view class="info-name">
+                            <text class="usr-name">{{$appraise$Item.stu_name}}</text>
+                            <view class="star-score">
+                                <view class="icon-star {{$appraise$star1$size==='s'?'':'bigger'}} {{$appraise$Item.star_num>_index+0.5?'get-one':$appraise$Item.star_num>_index?'get-half':''}}" wx:for="{{5}}" wx:for-index="_index" wx:key="index"></view>
+                                <view class="score" wx:if="{{$appraise$star1$showScore}}">{{$appraise$Item.star_num}}</view>
+                            </view>
+                        </view>
+                        <view class="grade gray_tx">{{$appraise$Item.cla_name}}</view>
+                        <view class="tags-list">
+                            <view class="tag" wx:for="{{$appraise$Item.tags}}" wx:for-index="$appraise$tIndex" wx:for-item="$appraise$tItem" wx:key="$appraise$index">{{$appraise$tItem}}</view>
+                        </view>
+                        <view class="usr-desc" wx:if="{{$appraise$Item.evaluate_content||!$appraise$Item.tags||$appraise$Item.tags.length==0}}">{{$appraise$Item.evaluate_content||'该用户没有对老师留下文字评论~'}}<text class="gray_tx" wx:if="{{$appraise$Item.is_audit==='Y'}}"> #家长旁听#</text>
+                        </view>
+                        <text class="reply" wx:if="{{$appraise$Item.reply}}">老师回复：{{$appraise$Item.reply}}</text>
+                        <text class="time gray_tx">{{$appraise$Item.evaluate_time}}</text>
+                    </view>
+                </view>
+            </view>
+        </view>
+        <view class="no-intro" wx:if="{{$appraise$totalCount===0}}">
+            <image class="no-intro-pic" src="https://static-xesapi.speiyou.cn/xesFeProject/xesFeSource/xesImagesLibrary/1584846827741.png"></image>
+            <text class="no-intro-text">还没有人评价过</text>
+        </view>
+    </view>
+    <view class="container _de9e722 _edc0d1e" wx:if="{{currentIndex==2}}">
+        <view class="course-card-centers _de9e722" wx:if="{{$course$cardInfo.length}}" wx:for="{{$course$card$cardInfo}}" wx:for-index="_index" wx:key="index">
+            <view bindtap="$course$card$goClassInfo" class="card-padding" data-wpygoclassinfo-a="{{item}}">
+                <view class="card-top">
+                    <text class="card-title">{{item.className}}</text>
+                    <text class="back-view {{$course$card$classType[item.classType].class}}">{{$course$card$classType[item.classType].test}}</text>
+                </view>
+                <view class="icon-test">
+                    <text class="iconfont icon-home_classdetailpage"></text>
+                    <text class="text">{{item.classtimeNames}}</text>
+                </view>
+                <view class="icon-test" hidden="{{item.classType==1}}">
+                    <text class="iconfont icon-home_classdetailpage2"></text>
+                    <text class="text">{{item.districtName?item.districtName:''}}{{item.venueName}}</text>
+                </view>
+                <view class="card-state">
+                    <text class="date">{{item.startDate}} 至 {{item.endDate}}</text>
+                    <block wx:if="{{$course$card$bottomLine}}">
+                        <text class="state-btn {{$course$card$tipColor[item.claQuotaNum]}} " wx:if="{{item.classType!=1}}"> {{$course$card$tip[item.claQuotaNum]?$course$card$tip[item.claQuotaNum]:item.claQuotaNum}}</text>
+                    </block>
+                </view>
+                <view class="card-teachers">
+                    <view class="teachers-list">
+                        <view catchtap="$course$card$goDetail" class="teachers" data-wpygodetail-a="{{item.teachers}}" data-wpygodetail-b="0" wx:if="{{item.classType==4&&item.teachers.length>=2}}">
+                            <view class="parents">
+                                <view class="teachers-info">
+                                    <image binderror="$course$card$minImgError" class="user-img" data-wpyminimgerror-a="{{_index}}" data-wpyminimgerror-b="0" mode="widthFix" src="{{item.teachers[0].teacherPictureUrl}}" wx:if="{{item.teachers[0].teacherPictureUrl}}"></image>
+                                    <image class="default-img" src="{{$course$card$DefaultImg}}" wx:else></image>
+                                </view>
+                            </view>
+                            <view>
+                                <view class="names">{{item.teachers[0].teacherName?item.teachers[0].teacherName:'待定'}}</view>
+                                <view class="tea-label">授课</view>
+                            </view>
+                            <view class="parents">
+                                <view class="teachers-info">
+                                    <image binderror="$course$card$minImgError" class="user-img" data-wpyminimgerror-a="{{_index}}" data-wpyminimgerror-b="1" mode="widthFix" src="{{item.teachers[1].teacherPictureUrl}}" wx:if="{{item.teachers[1].teacherPictureUrl}}"></image>
+                                    <image class="default-img" src="{{$course$card$DefaultImg}}" wx:else></image>
+                                </view>
+                            </view>
+                            <view>
+                                <view class="names">{{item.teachers[1].teacherName?item.teachers[1].teacherName:'待定'}}</view>
+                                <view class="tea-label">授课</view>
+                            </view>
+                        </view>
+                        <view catchtap="$course$card$goDetail" class="teachers" data-wpygodetail-a="{{item.teachers}}" data-wpygodetail-b="0" wx:if="{{!item.strengTutor&&(item.teachers.length<2||item.classType!=4)}}">
+                            <view class="parents">
+                                <view class="teachers-info">
+                                    <image binderror="$course$card$minImgError" class="user-img" data-wpyminimgerror-a="{{_index}}" data-wpyminimgerror-b="0" mode="widthFix" src="{{item.teachers[0].teacherPictureUrl}}" wx:if="{{item.teachers[0].teacherPictureUrl}}"></image>
+                                    <image class="default-img" src="{{$course$card$DefaultImg}}" wx:else></image>
+                                </view>
+                            </view>
+                            <view>
+                                <view class="names">{{item.teachers[0].teacherName?item.teachers[0].teacherName:'待定'}}</view>
+                                <view class="tea-label">授课</view>
+                            </view>
+                        </view>
+                        <view catchtap="$course$card$goDetail" class="teachers" data-wpygodetail-a="{{item.tutors}}" data-wpygodetail-b="0" wx:if="{{item.classType==2}}">
+                            <view class="parents">
+                                <view class="teachers-info">
+                                    <image binderror="$course$card$ImgError" class="user-img" data-wpyimgerror-a="{{_index}}" mode="widthFix" src="{{item.tutors[0].tutorPictureUrl}}" wx:if="{{item.tutors[0].tutorPictureUrl}}"></image>
+                                    <image class="default-img" src="{{$course$card$DefaultImg}}" wx:else></image>
+                                </view>
+                            </view>
+                            <view>
+                                <view class="names">{{item.tutors[0].tutorSysName?item.tutors[0].tutorSysName:'待定'}}</view>
+                                <view class="tea-label">{{item.strengTutor?'老师':'辅导'}}</view>
+                            </view>
+                        </view>
+                        <view class="ellipsis" wx:if="{{item.teachers.length>=3}}">
+                            <text></text>
+                            <text></text>
+                            <text></text>
+                        </view>
+                    </view>
+                    <view class="card-price">
+                        <view>
+                            <text class="card-price-icon">￥</text>{{item.actualPrice}}</view>
+                        <view class="card-price-origin" wx:if="{{item.promotionPrice>0&&item.originPrice>item.promotionPrice}}">原价: <text class="origin-price">￥{{item.originPrice}}</text>
+                        </view>
+                    </view>
+                </view>
+            </view>
+        </view>
+        <view class="no-intro _de9e722" wx:if="{{$course$cardInfo.length===0}}">
+            <image class="no-intro-pic _de9e722" src="https://static-xesapi.speiyou.cn/xesFeProject/xesFeSource/xesImagesLibrary/1584847203713.png"></image>
+            <text class="no-intro-text _de9e722">没有可报名的课程</text>
+        </view>
+    </view>
+    <view class="no-more-wrap _edc0d1e" wx:if="{{currentIndex==1&&noMoreAppraise||currentIndex==2&&noMoreClass}}">
+        <text class="no-more _edc0d1e">受益一生的能力</text>
+    </view>
+</view>

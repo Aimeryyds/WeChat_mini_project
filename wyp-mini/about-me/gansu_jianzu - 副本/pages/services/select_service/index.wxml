@@ -1,0 +1,16 @@
+<view class="container">
+    <view class="services-list">
+        <view bindtap="handleSelectService" class="services-list__item" data-id="{{item.id}}" data-img="{{item.imgUrl}}" data-name="{{item.serviceName}}" data-price="{{item.price}}" wx:for="{{serviceList}}">
+            <image class="services-list__item__avatar" mode="scaleToFit" src="{{item.imgUrl}}"></image>
+            <view class="services-list__item__detail">
+                <view class="services-list__item__detail__name">{{item.serviceName}}</view>
+                <view class="services-list__item__detail__price">
+                    <text class="services-list__item__detail__price-cur">￥{{item.price}}</text>
+                </view>
+            </view>
+            <view class="services-list__item__{{serviceId==item.id?'selected':'unselected'}}">
+                <image src="http://imgcdnali.wfenxiao.com.cn/xcx/c/selected.png" style="display:block;width:40rpx;height:40rpx" wx:if="{{serviceId==item.id}}"></image>
+            </view>
+        </view>
+    </view>
+</view>

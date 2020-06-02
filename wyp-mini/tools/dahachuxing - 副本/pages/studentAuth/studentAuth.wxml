@@ -1,0 +1,32 @@
+<form bindreset="formReset" bindsubmit="formSubmit">
+    <view class="shopApply">
+        <view class="input" style="margin-top:40rpx">
+            <label style="flex:2;padding-left: 20rpx;">姓名</label>
+            <input focus="true" maxlength="50" name="name" placeholder="请输入真实姓名" style="flex:5"></input>
+        </view>
+        <view class="input">
+            <label style="flex:2;padding-left: 20rpx;">学号</label>
+            <input maxlength="50" name="studentNO" placeholder="请输入学生证号" style="flex:5" type="idcard"></input>
+        </view>
+        <view class="textArea">
+            <label style="flex:2;padding-left: 20rpx;">申请理由</label>
+            <textarea autoHeight="true" maxlength="30" name="reason" placeholder="请输入申请理由(选填)" style="flex:5"></textarea>
+        </view>
+        <view style="background:#fff;width:100%;margin:20rpx;">
+            <view style="margin:30rpx;">
+                <image bindtap="upImg" mode="aspectFill" src="{{studentAuthImg}}" style="width:132rpx;height:132rpx;"></image>
+                <view class="delete-btn">学生证图片</view>
+            </view>
+        </view>
+        <view>
+            <checkbox-group name="agreement">
+                <label class="checkbox">
+                    <checkbox value="agreement"></checkbox>
+          请勾选并仔细阅读
+          <text catchtap="toAgreement" style="text-decoration: underline;color:#52926c;">《优驱出行车辆租赁服务协议书》</text>
+                </label>
+            </checkbox-group>
+        </view>
+        <button formType="submit" style="margin-top:30px;width:85%" type="primary">立即申请</button>
+    </view>
+</form>

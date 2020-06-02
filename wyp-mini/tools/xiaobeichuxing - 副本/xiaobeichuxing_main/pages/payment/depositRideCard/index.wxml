@@ -1,0 +1,28 @@
+<view class="box">
+    <my-component bind:myevent="myEventListener" innerText="押金"></my-component>
+    <view class="main" style=" margin-top: {{myHight}}px"></view>
+    <view class="item-box" wx:if="{{canzff}}">
+        <view class="title" style="padding-bottom: 10px;">免押金用车</view>
+        <image bindtap="sure" class="imageV" data-cur="2" mode="widthFix" src="../../../Content/Img/ya1.png"></image>
+    </view>
+    <view class="item-box">
+        <view class="title">用车卡用车</view>
+        <view bindtap="sure" class="content" data-cur="0">
+            <image class="imageV" mode="widthFix" src="../../../Content/Img/ya2.png"></image>
+            <view class="abs">
+                <view class="blue">骑行卡免押金用车</view>
+                <view class="xz">免押金骑行卡有效期内可免押金用车</view>
+            </view>
+        </view>
+    </view>
+    <view class="item-box" wx:if="{{candeposit}}">
+        <view class="title">交押金用车</view>
+        <view bindtap="sure" class="content" data-cur="1">
+            <image class="imageV" mode="widthFix" src="../../../Content/Img/ya3.png"></image>
+            <view class="abs">
+                <view class="blue">{{deposit}}元</view>
+                <view class="xz">随时可退|急速到账|原路返回</view>
+            </view>
+        </view>
+    </view>
+</view>

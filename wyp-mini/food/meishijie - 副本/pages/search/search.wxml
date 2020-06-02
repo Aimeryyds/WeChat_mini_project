@@ -1,0 +1,49 @@
+<navigation-bar title="搜索"></navigation-bar>
+<view class="container" style="padding-top:{{barHeight}}px">
+    <view class="search_wrapw">
+        <view class="search_wrapc" style="top:{{barHeight}}px">
+            <view class="search_wrap">
+                <form bindreset="formReset" bindsubmit="formSubmit">
+                    <view class="search_bg">
+                        <view class="search_icon">
+                            <image src="{{searchicon}}"></image>
+                        </view>
+                        <input bindblur="iBlured" bindconfirm="formSubmit" bindfocus="iFocused" bindinput="inputIng" class="search_input" confirmHold="true" confirmType="search" data-hideSearchedWords="1" focus="{{focus}}" name="mainSearchInput" placeholder="{{searchPlh}}" placeholderStyle="color:#aaa;" value="{{nowords}}"></input>
+                    </view>
+                    <button class="s_submitbtn" formType="submit">搜索</button>
+                </form>
+            </view>
+        </view>
+    </view>
+    <view class="searchboxw" style="top:{{barHeight}}px">
+        <view class="searchedWords" hidden="{{hideSearchedWords||noSearchedWords}}">
+            <view class="t">搜索历史<view bindtap="clearSearchedWords">清空</view>
+            </view>
+            <view class="btnsw">
+                <navigator bindtap="recordSearched" class="searchedWordsitem" data-hideSearchedWords="0" data-name="{{item}}" hoverClass="navigator-hover" url="/pages/searchRecipe/searchRecipe?keyword={{item}}" wx:for="{{searchedWords}}" wx:key="key">{{item}}</navigator>
+            </view>
+        </view>
+        <view class="search_tips">
+            <block wx:for="{{searchTips}}" wx:key="key">
+                <navigator class="search_tips_sc" url="/pages/sc_content/sc_content?id={{item.id}}&title={{item.t}}" wx:if="{{item.id}}">
+                    <view class="img" style="background:url({{item.img}}) center no-repeat;background-size:cover;"></view>
+                    <view class="sct">{{item.t}}</view>
+                    <view class="tipword">营养价值-使用建议<image src="../../images/arrow3.png"></image>
+                    </view>
+                </navigator>
+                <view class="linkww" wx:else>
+                    <navigator bindtap="recordSearched" class="searchtipsitem" data-hideSearchedWords="1" data-name="{{item.t}}" hoverClass="navigator-hover" url="/pages/searchRecipe/searchRecipe?keyword={{item.t}}">{{item.t}}</navigator>
+                    <view class="dapei" wx:if="{{item.items.length>0}}">
+                        <navigator bindtap="recordSearched" class="dapei_item" data-hideSearchedWords="1" data-name="{{item.t+' '+sc}}" hoverClass="navigator-hover" url="/pages/searchRecipe/searchRecipe?keyword={{item.t+' '+sc}}" wx:for="{{item.items}}" wx:for-item="sc" wx:key="key">{{sc}}</navigator>
+                    </view>
+                </view>
+            </block>
+        </view>
+    </view>
+    <view bindtap="pageReload" class="cplist_nodata" wx:if="{{requeseFail}}">{{requeseFailTips}}</view>
+    <view class="toastw" wx:if="{{showToast}}">
+        <view class="toast">
+            <rich-text nodes="{{toastTitle}}"></rich-text>
+        </view>
+    </view>
+</view>

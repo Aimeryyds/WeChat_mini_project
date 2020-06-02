@@ -1,0 +1,71 @@
+<toast show="{{toast.show}}" title="{{toast.title}}"></toast>
+<view class="container products-container" style="display:{{shopDefault.loading?'none':''}};height: calc(100vh-112rpx)">
+    <store-header bindsetStoreDetail="setStoreDetail" shopId="{{shopId}}"></store-header>
+    <store-search shopId="{{shopId}}"></store-search>
+    <view class="content-container" wx:if="{{shopDefault.store.categoryData&&shopDefault.store.categoryData.length>0}}">
+        <scroll-view class="classify-container" scrollY="true" style="height:calc(100vh - {{fullreductionMsg&&fullreductionMsg.length>0?380:420}}rpx)">
+            <block wx:for="{{shopDefault.store.categoryData}}" wx:for-item="category" wx:key="id">
+                <view bindtap="tapClassify" class="classify" data-category="{{category}}" data-id="{{category.id}}">
+                    <view class="left-line {{shopDefault.classifySelectedId==category.id&&shopDefault.classifySelectedSecondId==''?'left-active-line':''}}"></view>
+                    <view class="{{category.name.length>12?'long-name':'name'}}  {{shopDefault.classifySelectedId==category.id?'active':'default'}}">{{category.name}}</view>
+                </view>
+                <view bindtap="tapSecondClassify" class="secondclassify" data-id="{{secondcategory.id}}" data-name="{{secondcategory.name}}" data-pid="{{category.id}}" wx:if="{{shopDefault.classifySelectedId==category.id}}" wx:for="{{category.categoryList}}" wx:for-item="secondcategory" wx:key="id">
+                    <view class="left-line {{shopDefault.classifySelectedId==category.id&&shopDefault.classifySelectedSecondId==secondcategory.id?'left-active-line':''}}"></view>
+                    <view class="{{secondcategory.name.length>12?'long-name':'name'}} {{shopDefault.classifySelectedId==category.id&&shopDefault.classifySelectedSecondId==secondcategory.id?'active_name':''}}">{{secondcategory.name}}</view>
+                </view>
+            </block>
+        </scroll-view>
+        <scroll-view bindscrolltolower="lower" class="goods-container" scrollY="true" style="height:calc(100vh - {{fullreductionMsg&&fullreductionMsg.length>0?380:420}}rpx)">
+            <view class="right-classify-name">
+                <block wx:if="{{shopDefault.classifySelectedSecondName&&shopDefault.classifySelectedSecondName.length>0&&shopDefault.classifySelectedSecondName[0]}}">
+                    <view style="margin-right:24rpx" wx:for="{{shopDefault.classifySelectedSecondName}}">{{item}}{{index==shopDefault.classifySelectedSecondName.length-1?'('+shopDefault.totalNumber+')':''}}</view>
+                </block>
+                <block wx:elif="{{shopDefault.classifySelectedName&&shopDefault.classifySelectedName.length>0}}">
+                    <view wx:for="{{shopDefault.classifySelectedName}}">{{item}}{{index==shopDefault.classifySelectedName.length-1?'('+shopDefault.totalNumber+')':''}}</view>
+                </block>
+            </view>
+            <view bindtap="goodDetail" class="goods" data-id="{{good.id}}" wx:if="{{shopDefault.goodList&&shopDefault.goodList.length>0}}" wx:for="{{shopDefault.goodList}}" wx:for-item="good" wx:key="id">
+                <image class="pic" src="{{good.imgUrl?good.imgUrl:''}}" style="width:140rpx;height:140rpx"></image>
+                <view style="flex:1;display:flex;flex-direction:column;align-items: flex-start;justify-content: space-between;height: 140rpx;">
+                    <view class="name">
+                        <view wx:if="{{good.activityType==1}}">
+                            <view class="seckill-tag">
+                                <image src="http://imgcdnali.wfenxiao.com.cn/xcx/c/tuan/seckill.png"></image>
+                                <view>秒杀</view>
+                            </view>
+                        </view>
+                        <view wx:elif="{{good.activityType==2}}">
+                            <view class="tuan-tag">{{good.limitPeople||0}}人团</view>
+                        </view>
+                        <view wx:elif="{{good.activityType==3}}">
+                            <view class="manjian-tag">满减</view>
+                        </view>
+                        <view class="goods-name zan-ellipsis" style="margin-left: {{good.activityType==0?'0rpx':'14rpx'}}">{{good.name}}</view>
+                    </view>
+                    <view style="width:100%;display:flex;align-items:center;justify-content:flex-start">
+                        <view style="flex:1">
+                            <view class="sold">{{good.activityType==2?'已团':'已售'}}{{good.saleNum}}件</view>
+                            <view class="price-box">
+                                <view class="price-label">￥</view>
+                                <view class="price">{{good.price}}</view>
+                            </view>
+                        </view>
+                        <view class="goods-list__btn" wx:if="{{good.activityType==1}}">马上抢</view>
+                        <view class="goods-list__btn" wx:elif="{{good.activityType==2}}">去开团</view>
+                        <image catchtap="addToCart" data-good="{{good}}" data-index="{{index}}" src="http://imgcdnali.wfenxiao.com.cn/xcx/c/plus1.png" style="align-self:flex-end;width:48rpx;height:48rpx" wx:elif="{{good.activityType==0||good.activityType==3}}"></image>
+                    </view>
+                </view>
+            </view>
+            <view class="goods-end" wx:if="{{shopDefault.goodList&&shopDefault.goodList.length>0}}">
+                <view class="goods-end-border"></view>
+                <text>去看看其他分类吧</text>
+                <view class="goods-end-border"></view>
+            </view>
+        </scroll-view>
+    </view>
+    <view class="no-pro" hidden="{{shopDefault.store.categoryData&&shopDefault.store.categoryData.length>0||shopDefault.loading?true:false}}">
+        <view class="no-pro-text">店铺暂无商品</view>
+    </view>
+    <cart-popup bindaddToCartSuccess="handleAddToCartSuccess" currentGood="{{currentGood}}" id="cartpop" showDialog="{{showDialog}}"></cart-popup>
+</view>
+<cart id="cart" shopId="{{shopId}}"></cart>

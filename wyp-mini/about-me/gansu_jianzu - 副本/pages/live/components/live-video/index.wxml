@@ -1,0 +1,9 @@
+<video controls autoplay="{{autoplay}}" bindended="handleEnd" bindplay="handlePlay" class="player" customCache="false" direction="0" id="myVideo" showCenterPlayBtn="{{false}}" src="{{srcs[currentIndex]}}">
+    <cover-view class="tips" style="display: {{showTips?'':'none'}}">
+        <cover-view catch:tap="playVideo" class="btn" wx:if="{{srcs.length>0}}">观看回放</cover-view>
+        <cover-view class="title" wx:else>
+            <cover-view>直播已结束</cover-view>
+            <cover-view style="margin-top: 24rpx">直播回放正在录制中，请稍后</cover-view>
+        </cover-view>
+    </cover-view>
+</video>

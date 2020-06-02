@@ -1,0 +1,21 @@
+<template name="1fadf9dc">
+    <view class="_view 1fadf9dc">
+        <image class="_image 1fadf9dc banner" src="{{info.banner}}"></image>
+        <view class="_view 1fadf9dc content-brand">
+            <image class="_image 1fadf9dc brand-page-img" src="{{info.img}}"></image>
+            <view class="_view 1fadf9dc title">
+                <view class="_view 1fadf9dc h1">{{info.title}}<image bindtap="handleProxy" class="_image 1fadf9dc" data-comkey="{{$k}}" data-eventid="{{'1fadf9dc-0'}}" src="https://assets.mgzf.com/appimg/2da049077ddd7c6bef39de5360e60ad6.png" style="width: 44rpx;height: 30rpx;margin-left: 20rpx;vertical-align: middle" wx:if="{{info.businessLicenseUrl}}"></image>
+                </view>
+                <view class="_view 1fadf9dc iconfont icon-perfect"></view>
+            </view>
+            <view bindtap="handleProxy" class="_view 1fadf9dc brand-page-button" data-comkey="{{$k}}" data-eventid="{{'1fadf9dc-1'}}">品牌介绍</view>
+        </view>
+        <view class="_view 1fadf9dc description-expand" wx:if="{{descriptionExpand}}">
+            <view class="_view 1fadf9dc brand-page-title1">{{info.title}}</view>
+            <view class="_view 1fadf9dc brand-page-desc">{{info.description}}</view>
+            <view bindtap="handleProxy" class="_view 1fadf9dc iconfont mgic-chahao" data-comkey="{{$k}}" data-eventid="{{'1fadf9dc-2'}}"></view>
+        </view>
+        <template is="4acf755c" data="{{...$root['0'],...$root[$kk+'1fadf9dc-0'],$root:$root}}"></template>
+    </view>
+</template>
+<import src="/components/listCollection.vue.wxml"></import>

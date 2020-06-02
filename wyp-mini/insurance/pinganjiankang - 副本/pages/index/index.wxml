@@ -1,0 +1,10 @@
+<view class="container">
+    <swiper autoplay="{{autoplay}}" class="swiper" duration="{{duration}}" indicatorDots="{{indicatorDots}}" interval="{{interval}}" wx:if="{{pictures.length}}">
+        <swiper-item wx:for="{{pictures}}" wx:key="{{index}}">
+            <image bindtap="toProduct" class="slide-image" data-product="{{item.clickUrl}}" src="{{item.downLoadUrl}}"></image>
+        </swiper-item>
+    </swiper>
+    <image mode="widthFix" src="{{imgurl.top}}" wx:if="{{!pictures.length}}"></image>
+    <image bindtap="jumpImgUrl" class="pdimg" data-canclick="{{item.canClick}}" data-clickurl="{{item.clickUrl}}" data-clickurltype="{{item.clickUrlType}}" data-productid="{{item.productId}}" mode="widthFix" src="{{item.picUrl}}" wx:for="{{indexImgList}}" wx:key="item"></image>
+    <image bindtap="" data-product="P172" mode="widthFix" src="{{imgurl.more}}"></image>
+</view>

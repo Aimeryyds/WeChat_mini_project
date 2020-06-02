@@ -1,0 +1,21 @@
+<form bindsubmit="doRecharge">
+    <view class="top">
+        <view class="incom">
+            <text>充值金额</text>
+            <input bindinput="Checkmoney" focus="{{focus}}" name="amount" placeholder="请输入充值的金额" placeholderClass="place" type="digit" value="{{money}}"></input>
+        </view>
+    </view>
+    <view class="containerr">
+        <view class="view-list" wx:for="{{mlist}}">
+            <view bindtap="Selmoney" class="product-item {{money==item?'active':''}}" data-id="{{index}}">
+        {{item}}元
+    </view>
+        </view>
+    </view>
+    <view class="button-group">
+        <button class="button-group1" formType="submit">充值</button>
+        <navigator hoverClass="none" url="../recharge_list/recharge_list">
+            <button class="button-group2">查看明细</button>
+        </navigator>
+    </view>
+</form>

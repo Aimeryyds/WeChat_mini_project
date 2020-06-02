@@ -1,0 +1,44 @@
+<view class="page">
+    <my-component bind:myevent="myEventListener" innerText="我的钱包"></my-component>
+    <view class="main" style=" margin-top: {{myHight}}px"></view>
+    <view class="bgc" wx:if="{{cardActivity}}">
+        <image src="../../../Content/images/wallet/01.png"></image>
+        <view class="left">
+            <text style="font-size:46rpx">葛天骑行卡</text>
+            <text style="font-size:26rpx">购卡骑行更省钱</text>
+        </view>
+        <view class="right">
+            <view bindtap="gotobuy" class="buy">去购买</view>
+        </view>
+    </view>
+    <view class="wallet-list">
+        <view class="list-nav" wx:for="{{walletlist}}" wx:key="index">
+            <view class="list-left adsize08">
+                <view wx:if="{{index===0}}">
+                    <image src="{{item.src}}" style="width:38rpx;height:38rpx;vertical-align:middle; margin-left:30rpx"></image>
+                    <text class="title1">{{item.listname}} </text>
+                </view>
+                <view wx:else>
+                    <image src="{{item.src}}" style="width:38rpx;height:38rpx;vertical-align:middle; margin-left:30rpx"></image>
+                    <text class="title1">{{item.listname}}</text>
+                </view>
+            </view>
+            <view class="list-right">
+                <navigator data-deposit="{{item.listnameRight}}" hoverClass="navigator-hover" url="{{item.url}}">
+                    <view wx:if="{{index===0}}">
+                        <text class="title2">￥{{item.listnameRight}}{ 赠送:￥{{item.test}} }</text>
+                        <image class="ad-r-img" src="{{right}}"></image>
+                    </view>
+                    <view wx:elif="{{index===2}}">
+                        <text class="title2">{{item.listnameRight}}张</text>
+                        <image class="ad-r-img" src="{{right}}"></image>
+                    </view>
+                    <view wx:else>
+                        <text class="title2">{{item.listnameRight}}</text>
+                        <image class="ad-r-img" src="{{right}}"></image>
+                    </view>
+                </navigator>
+            </view>
+        </view>
+    </view>
+</view>

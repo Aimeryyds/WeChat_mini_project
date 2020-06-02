@@ -1,0 +1,5 @@
+<scroll-view>
+    <view class="text-continer" style="width: {{module.options.navs.length>4?187.5*module.options.navs.length:750}}rpx; ">
+        <view bindtap="makecustome" class="text-item" data-item="{{item}}" style="background-color: {{item.bgcolor||'#fff'}}; color:{{item.textcolor||'#000'}}; " wx:for="{{module.options.navs}}">{{item.navName}}</view>
+    </view>
+</scroll-view>

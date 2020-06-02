@@ -1,0 +1,5 @@
+<scroll-view scrollWithAnimation scrollX class="menu-list" data-spm="smbd.home.nav.0.{{pvId}}" scrollLeft="{{currentLeft}}" wx:if="{{list}}">
+    <view bindtap="clickMenu" class="{{currentIndex==index?'menu-item active':'menu-item'}}" data-index="{{index}}" id="menu-{{index}}" wx:for="{{list}}" wx:key="id">
+        {{item.name}}
+    </view>
+</scroll-view>

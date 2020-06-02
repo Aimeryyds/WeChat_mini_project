@@ -1,0 +1,27 @@
+<scroll-view bindscrolltolower="lower" class="noqa" scrollTop="{{scrollTop}}" scrollWithAnimation="true" scrollY="true" style="height: {{lheight}}px" wx:if="{{condition}}">
+    <view class="question-info" id="qa-box">
+        <view class="question-item" wx:for="{{allList}}" wx:key="*this">
+            <view class="qa-title">
+                <view class="question-user" wx:if="{{item.reply}}">{{item.answerBy}} 回答 {{item.submitor}}</view>
+                <view class="question-user" wx:else>{{item.submitor}} 问</view>
+                <view class="question-time">{{item.time}}</view>
+            </view>
+            <view class="qa-main" wx:if="{{item.reply}}">{{item.answer}}</view>
+            <view class="qa-main" wx:else>{{item.question}}<label class="voice-ans" wx:if="{{item.ansVoice==1}}">[已加入语音回复列表]</label>
+                <label class="voice-ans" wx:if="{{item.ansVoice==2}}">[语音回复中]</label>
+                <label class="voice-ans" wx:if="{{item.ansVoice==3}}">[语音已回复]</label>
+            </view>
+            <view class="qa-ask" wx:if="{{item.reply}}">
+                <view class="ask-main">{{item.submitor}} 问：{{item.question}}</view>
+            </view>
+        </view>
+        <view class="moreMess" hidden="{{!showR1}}">正在加载中···</view>
+        <view class="moreMess" hidden="{{!showR2}}">消息已全部显示</view>
+    </view>
+</scroll-view>
+<view class="noqa" wx:else>
+    <view class="noQa-img">
+        <image class="noQa-img2" src="../../assets/images/noQa.png"></image>
+    </view>
+    <text class="noQa-text">无问答记录</text>
+</view>

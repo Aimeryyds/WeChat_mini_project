@@ -1,0 +1,43 @@
+<cover-view class="pop_sign" wx:if="{{signShow}}">
+    <cover-view bindtap="closeSign" class="pop_bg"></cover-view>
+    <cover-view class="sign_con">
+        <cover-view class="sign_title">
+            <cover-image class="sign_title_bg" src="./../../images/sign/sign_title.jpg"></cover-image>
+            <cover-view class="sign_str">累计签到</cover-view>
+            <cover-view class="sign_num">
+                <cover-view class="num">{{signDay}}</cover-view>
+                <cover-view class="numstr">天</cover-view>
+            </cover-view>
+        </cover-view>
+        <cover-view class="sign_body">
+            <cover-view class="sign_item" wx:for="{{signImgs}}" wx:key="index">
+                <cover-image class="sign_bg" src="./../../images/sign/sign_bg1.png" wx:if="{{index==6}}"></cover-image>
+                <cover-view class="title">Day {{item.day}}</cover-view>
+                <cover-view class="img img_has" wx:if="{{item.classStr=='has'}}">
+                    <cover-image class="gift" src="{{item.img}}"></cover-image>
+                </cover-view>
+                <cover-view class="gift_has" wx:if="{{item.classStr=='has'}}">已领取</cover-view>
+                <cover-view class="img img_no" wx:if="{{item.classStr=='no'}}">
+                    <cover-image class="gift" src="{{item.img}}"></cover-image>
+                </cover-view>
+                <cover-view class="gift_no" wx:if="{{item.classStr=='no'}}">{{item.str}} X{{item.num}}</cover-view>
+            </cover-view>
+        </cover-view>
+        <cover-view bindtap="onSign" class="sign_btn no" wx:if="{{!signHas&&signNowDay!=2&&signNowDay!=6}}">领取</cover-view>
+        <cover-view class="sign_btn" wx:if="{{signHas}}">今日已领</cover-view>
+        <cover-view class="sign_btn no" wx:if="{{!signHas&&(signNowDay==2||signNowDay==6)}}">
+            <button bindtap="onSignShare" class="signShare_button" openType="share">分享领取道具</button>
+        </cover-view>
+    </cover-view>
+    <cover-view bindtap="closeSign" class="sign_close">
+        <cover-image class="sign_close_img" src="./../../images/close_x.png"></cover-image>
+    </cover-view>
+    <cover-view class="signGet" wx:if="{{signGetShow}}">
+        <cover-image class="signGet_bg" src="./../../images/sign/sign_bg2.jpg"></cover-image>
+        <cover-image class="signGet_gift" src="{{signGetImg}}"></cover-image>
+        <cover-view class="signGet_text">
+            <cover-view class="text_nor">已获得</cover-view>
+            <cover-view class="text_txt">{{signGetTxt}}</cover-view>
+        </cover-view>
+    </cover-view>
+</cover-view>

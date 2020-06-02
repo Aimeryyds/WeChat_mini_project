@@ -1,0 +1,39 @@
+<view class="videoCon" style="background-image: url({{'../../images/live/liveTransition.png'}});background-size:cover;">
+    <video autoplay bindended="videoEnd" binderror="videoError" bindplay="videoPlay" controls="{{false}}" customCache="{{false}}" id="myVideo" loop="{{false}}" objectFit="fill" src="{{liveVideoUrl}}" style="top:{{live.liveTop}}px;left:{{live.liveLeft}}px;width:{{live.liveWidth}}px;height:{{live.liveHeight}}px;"></video>
+</view>
+<image class="skin-up" src="../../images/mini/skin_up.png"></image>
+<image class="skin-down" src="../../images/mini/skin_down.png"></image>
+<view catchtap="playVideo" class="live-play-btn" wx:if="{{true}}"></view>
+<view bindtap="bindClose" class="btn-close" style="top:{{navigationBarHeight}}px;">
+    <image src="../../images/mini/btnClose.png" style="width: 48rpx; height: 48rpx;position: relative;top:20rpx;"></image>
+</view>
+<view bindtap="liveHomeAction" class="userReadme">
+    <view class="userName">@{{message.userName}}</view>
+    <view class="title">{{message.userTitle}}</view>
+</view>
+<view class="rightControl">
+    <view bindtap="focusAction" class="r0">
+        <view class="head">
+            <image class="head-img" src="{{headUrl}}" wx:if="{{headUrl}}"></image>
+        </view>
+        <view class="focusView">
+            <view class="addFocus {{focus==1?'active':''}}" style="opacity:{{showFocus}};">{{fInfo}}</view>
+        </view>
+    </view>
+    <image bindtap="msgAction" class="r1" src="../../images/mini/rightControl1.png" style="opacity:{{alphaMsg}};"></image>
+    <view class="r2">
+        <image class="s-icon1" src="../../images/mini/share1.png"></image>
+        <image class="s-icon2" src="../../images/mini/share2.png"></image>
+        <image class="s-icon3" src="../../images/mini/rightControl2_.png"></image>
+    </view>
+    <image bindtap="nextAction" class="r3" src="../../images/mini/rightControl3.png" style="opacity:{{alphaNext}};"></image>
+    <button class="share-btn" openType="share">s</button>
+</view>
+<cover-view bindtap="liveAction" class="onlive" wx:if="{{liveShow}}">
+    <cover-image class="head" src="{{headUrl}}"></cover-image>
+    <cover-view class="label-title">
+        <cover-image class="icon" src="../../images/mini/live.png"></cover-image>
+        <cover-view class="iconTitle">正在直播</cover-view>
+    </cover-view>
+</cover-view>
+<official-account class="oa" style="top:{{tabHeight}}px;"></official-account>

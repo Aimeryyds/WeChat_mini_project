@@ -1,0 +1,60 @@
+<view class="container">
+    <view class="input-row">
+        <text class="label">收货人</text>
+        <input bindinput="bindNameInput" placeholder="请填写收货人姓名" placeholderStyle="color: #cfcfd3;" value="{{deliveryAddr.username}}"></input>
+    </view>
+    <view class="input-row">
+        <text class="label">手机号码</text>
+        <input bindinput="bindPhoneInput" placeholder="请填写联系电话" placeholderStyle="color: #cfcfd3;" value="{{deliveryAddr.phone}}"></input>
+    </view>
+    <view class="input-row">
+        <text class="label">地区</text>
+        <view bindtap="open" class="city-wrap">
+            <view class="city-item">
+                <text>{{deliveryAddr.province}}</text>
+                <image src="/images/settle/icon_drop.png"></image>
+            </view>
+            <view class="city-item">
+                <text>{{deliveryAddr.city}}</text>
+                <image src="/images/settle/icon_drop.png"></image>
+            </view>
+            <view class="city-item">
+                <text>{{deliveryAddr.district}}</text>
+                <image src="/images/settle/icon_drop.png"></image>
+            </view>
+        </view>
+    </view>
+    <view class="input-row">
+        <textarea autoHeight bindinput="bindAddrInput" placeholder="详细地址" placeholderStyle="color: #cfcfd3;" value="{{deliveryAddr.address}}"></textarea>
+    </view>
+    <view bindtap="getLocation" class="input-row location">
+        <image src="/images/address.png" style="width:30rpx; height:32rpx;margin-right:16rpx;"></image>
+        <text>定位当前收货地址</text>
+    </view>
+    <view bindtap="checkboxChange" class="input-row">
+        <view class="check-box">
+            <image class="check-icon" mode="aspectFit" src="../../images/{{deliveryAddr.isDefault?'checked':'check'}}.png"></image>
+        </view>
+        <text class="color333">设为默认地址</text>
+    </view>
+    <view bindtap="saveAddress" class="add-btn">
+        <text>保 存</text>
+    </view>
+</view>
+<view class="citypicker" wx:if="{{condition}}">
+    <picker-view bindchange="bindChange" class="citybody" indicatorStyle="height: 50px;" style="width: 100%; height: 300px;" value="{{value}}">
+        <view class="cityheader">
+            <view bindtap="open" class="city-cancel">取消</view>
+            <view bindtap="open" class="city-true">确定</view>
+        </view>
+        <picker-view-column>
+            <view style="line-height: 50px;padding-left:10px;" wx:for="{{provinces}}" wx:key="item">{{item}}</view>
+        </picker-view-column>
+        <picker-view-column>
+            <view style="line-height: 50px;padding-left:10px;" wx:for="{{citys}}" wx:key="item">{{item}}</view>
+        </picker-view-column>
+        <picker-view-column>
+            <view style="line-height: 50px;padding-left:10px;" wx:for="{{countys}}" wx:key="item">{{item}}</view>
+        </picker-view-column>
+    </picker-view>
+</view>

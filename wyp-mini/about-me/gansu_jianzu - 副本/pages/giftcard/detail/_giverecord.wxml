@@ -1,0 +1,11 @@
+<template name="giveRecord">
+    <view class="giftcard-detail__record" wx:if="{{status==70}}">
+        <view style="line-height:28rpx;">领取记录</view>
+        <view class="giftcard-detail__record-cont">
+            <image class="giftcard-detail__record-img" src="{{avatarUrl}}"></image>
+            <view style="flex:1">{{receiverNickName}}</view>
+        </view>
+        <view class="giftcard-detail__record-time">领取时间：{{receiveTime}}</view>
+    </view>
+</template>
+@import "./index.wxss";

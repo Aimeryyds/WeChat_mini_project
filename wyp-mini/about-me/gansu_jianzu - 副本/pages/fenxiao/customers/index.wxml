@@ -1,0 +1,14 @@
+<view class="container">
+    <view class="customers-list" wx:for="{{clientList}}">
+        <image class="customers-list__img" src="{{item.avatarUrl}}"></image>
+        <view class="customers-list__info">
+            <view class="customers-list__name">{{item.nickName}}</view>
+            <view class="customers-list__cont">
+                <text>成交金额:  ¥{{item.total}}</text>
+                <text class="customers-list--line">|</text>
+                <text>订单:{{item.orderNum}}</text>
+            </view>
+        </view>
+    </view>
+    <view class="noData" wx:if="{{clientList.length==0}}">暂无数据</view>
+</view>

@@ -1,0 +1,24 @@
+<view class="zan-panel zan-panel__no-margin-top">
+    <view class="services__header" wx:if="{{module.options.title}}">
+        <text class="services__title">{{module.options.title}}</text>
+    </view>
+    <view bindtap="handleServiceClick" class="services__projectItem" data-storedetail="{{id:item.id}}" data-storeid="{{item.storeId}}" wx:if="{{module.data.length>0}}" wx:for="{{module.data}}" wx:key="{{index}}">
+        <image alt="" class="services__img" mode="aspectFill" src="{{item.imgUrl||item.img}}"></image>
+        <view class="services__right">
+            <text class="services__name">{{item.serviceName}}</text>
+            <view class="services_storename" wx:if="{{isShowStoreName}}">【{{item.brandName}}-{{item.storeName}}】</view>
+            <view class="services__priceContainer">
+                <view class="services__price1">
+                    <text class="services__price1_t">￥</text>
+                    <text class="services__price1_p">{{item.price}}</text>
+                </view>
+            </view>
+            <view class="services__desc">{{item.reviewsNum}}条评价  {{item.goodReviewsRate}}%好评</view>
+        </view>
+    </view>
+</view>
+<view class="services-error" wx:if="{{module.data.length==0}}">{{locationType==0?'该城市暂无服务项目':'当前位置暂无服务项目'}}</view>
+<view bindtap="makedataSource" class="view-more" data-options="{{module.options}}" data-type="service" wx:if="{{module.total>20}}">
+    <text>查看更多</text>
+    <image class="view-more--img" src="http://imgcdnali.wfenxiao.com.cn/xcx/c/icons/arrow-bottom-red.png"></image>
+</view>

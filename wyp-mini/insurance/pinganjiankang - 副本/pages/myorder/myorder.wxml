@@ -1,0 +1,44 @@
+<view style="margin-bottom:17%;">
+    <image src="http://test-mobile.health.pingan.com/ehis-hl/image/subIndex/baodan.png" style="width: 100%;"></image>
+    <view class="myorder1">
+        <ul>
+            <li class="start">
+                <picker bindchange="startbindDateChange" end="2017" fields="year" mode="date" start="1900" value="{{startyear}}">
+                    <view class="picker">
+      查询年度: {{startyear}}
+    </view>
+                </picker>
+            </li>
+            <li class="end">
+                <picker bindchange="endbindDateChange" end="2017" fields="year" mode="date" start="1900" value="{{endyear}}">
+                    <view class="picker">
+     至: {{endyear}}
+    </view>
+                </picker>
+            </li>
+            <li bindtap="searchbaodan" class="group">
+                <icon size="20" type="{{item}}" wx:for="{{iconType}}"></icon>
+  查询
+</li>
+        </ul>
+    </view>
+    <view bindtap="showOrder" class="myorder2" data-orderid="{{item.orderId}}" wx:for="{{orderList}}">
+        <view>保单号：{{item.policyNo}}</view>
+        <view bindtap="search1" class="group">
+            <image animation="{{animation1}}" src="../../resource/arrowR.png" style="width:10px;height:20px;float:right;"></image>
+        </view>
+        <view class="myorder21">有效期期：{{item.effectiveDate}}至{{item.matuDate}}</view>
+    </view>
+    <view class="myorder3" wx:for="{{orderDetailList}}">
+        <view class="myorder31">投保人：{{item.holderName}}</view>
+        <view class="myorder31">主险名称：{{item.productName}}</view>
+        <view class="myorder31">被保人：{{item.insurantName}}</view>
+        <view class="myorder31">生效日期:{{item.effectiveDate}}</view>
+        <view class="myorder31">满期日期:{{item.matuDate}}</view>
+        <view class="myorder31">保单状态：{{item.policyStateName}}</view>
+    </view>
+</view>
+<view style="width:100%; position:fixed; left:0; bottom:0;">
+    <view bindtap="backindex" class="myorder4" style="color:#d6d6d8;">百万保障</view>
+    <view class="myorder4" style="color:#f0a403;">我的保单</view>
+</view>

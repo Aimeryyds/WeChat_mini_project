@@ -1,0 +1,104 @@
+<template name="5dbe9ece">
+    <view class="_view 5dbe9ece picker-filter">
+        <view class="_view 5dbe9ece visible-filter">
+            <view class="_view 5dbe9ece content-space">
+                <view class="_view 5dbe9ece select-filter mg-flex mg-flex_avg mg-flex_sa_center">
+                    <view bindtap="handleProxy" class="_view 5dbe9ece {{'filter-row '+(item.actived||item.value||item.hasValue?'actived':'')}}" data-comkey="{{$k}}" data-eventid="{{'5dbe9ece-0-'+k}}" key="{{k}}" wx:for="{{filters}}" wx:for-index="k" wx:key="k">
+                        <text class="_text 5dbe9ece {{'filter-text mg-ellipsis '+(item.name.length>4?'filter-text-long':'')}}" wx:if="{{!item.icon}}">{{item.value||item.name}}</text>
+                        <text class="_text 5dbe9ece filter-icon mgic-angle-b" wx:if="{{!item.icon}}"></text>
+                        <text class="_text 5dbe9ece {{'filter-sign-icon '+item.icon}}"></text>
+                    </view>
+                </view>
+                <view class="_view 5dbe9ece filter-border">
+                    <view class="_view 5dbe9ece mg-border-bottom"></view>
+                </view>
+            </view>
+            <view class="_view 5dbe9ece" style="background-color: #fff">
+                <view class="_view 5dbe9ece picker-block picker-option" wx:if="{{filterItems&&filterItems.moreFilters&&isShowQuickFilter}}">
+                    <view class="_view 5dbe9ece quickly-filter-box">
+                        <view class="_view 5dbe9ece quickly-filter" key="{{index}}" wx:if="{{item.key=='sourceType'||item.key=='payTypes'}}" wx:for="{{filterItems.moreFilters}}" wx:key="index">
+                            <view bindtap="handleProxy" class="_view 5dbe9ece {{'quickly-filter-item '+(children.selected?'active-quickly-filter':'')}}" data-comkey="{{$k}}" data-eventid="{{'5dbe9ece-1-'+index+'-'+index1}}" key="{{index1}}" wx:if="{{children.key=='sourceType'&&(children.value==7||children.value==5)||children.key=='payTypes'&&children.value==2}}" wx:for="{{item.children}}" wx:for-index="index1" wx:for-item="children" wx:key="index1">{{children.key=='sourceType'?children.value==5?'中介房源':children.value==7?'房东直租':children.name:children.name}}</view>
+                        </view>
+                    </view>
+                </view>
+            </view>
+        </view>
+        <view class="_view 5dbe9ece fixed-content" wx:if="{{acitveShow}}">
+            <view class="_view 5dbe9ece fixed-filter">
+                <view class="_view 5dbe9ece content-space select-filter mg-flex mg-flex_avg mg-flex_sa_center">
+                    <view bindtap="handleProxy" class="_view 5dbe9ece {{'filter-row '+(item.actived||item.value||item.hasValue?'actived':'')}}" data-comkey="{{$k}}" data-eventid="{{'5dbe9ece-2-'+k}}" key="{{k}}" wx:for="{{filters}}" wx:for-index="k" wx:key="k">
+                        <text class="_text 5dbe9ece {{'filter-text mg-ellipsis '+(item.name.length>4?'filter-text-long':'')}}" wx:if="{{!item.icon}}">{{item.value||item.name}}</text>
+                        <text class="_text 5dbe9ece {{'filter-icon '+(item.actived?'mgic-angle-t':'mgic-angle-b')}}" wx:if="{{!item.icon}}"></text>
+                        <text class="_text 5dbe9ece {{'filter-sign-icon '+item.icon}}"></text>
+                    </view>
+                </view>
+                <view class="_view 5dbe9ece filter-border">
+                    <view class="_view 5dbe9ece mg-border-bottom"></view>
+                </view>
+            </view>
+            <view class="_view 5dbe9ece picker-block picker-area" wx:if="{{filterItems&&filterItems.districtSubway&&filters[0].actived}}">
+                <view class="_view 5dbe9ece picker-area-panel">
+                    <view class="_view 5dbe9ece ul ul1">
+                        <view bindtap="handleProxy" class="_view 5dbe9ece {{'li '+(ul1Type==1?'actived':'')}}" data-comkey="{{$k}}" data-eventid="{{'5dbe9ece-3'}}" wx:if="{{filterItems.districtSubway.districts}}">区域</view>
+                        <view bindtap="handleProxy" class="_view 5dbe9ece {{'li '+(ul1Type==2?'actived':'')}}" data-comkey="{{$k}}" data-eventid="{{'5dbe9ece-4'}}" wx:if="{{filterItems.districtSubway.subways}}">地铁</view>
+                    </view>
+                    <view class="_view 5dbe9ece ul ul2" wx:if="{{ul1Type==1}}">
+                        <view bindtap="handleProxy" class="_view 5dbe9ece {{'li '+(filtersData.districtId==item.value?'actived':'')}}" data-comkey="{{$k}}" data-eventid="{{'5dbe9ece-5-'+index}}" key="{{index}}" wx:for="{{filterItems.districtSubway.districts}}" wx:key="index">{{item.name}}</view>
+                    </view>
+                    <view class="_view 5dbe9ece ul ul2" wx:if="{{ul1Type==2}}">
+                        <view bindtap="handleProxy" class="_view 5dbe9ece {{'li '+(filtersData.subwayId==item.value?'actived':'')}}" data-comkey="{{$k}}" data-eventid="{{'5dbe9ece-6-'+index}}" key="{{index}}" wx:for="{{filterItems.districtSubway.subways}}" wx:key="index">{{item.name}}</view>
+                    </view>
+                    <view class="_view 5dbe9ece ul ul3" wx:if="{{filtersData.districtId}}">
+                        <view bindtap="handleProxy" class="_view 5dbe9ece {{'li '+(item.selected?'actived ':' ')+(item.isHot==='yes'?'showHot':'')}}" data-comkey="{{$k}}" data-eventid="{{'5dbe9ece-7-'+index}}" key="{{index}}" wx:for="{{businessIds}}" wx:key="index">{{item.name}}</view>
+                    </view>
+                    <view class="_view 5dbe9ece ul ul3" wx:if="{{filtersData.subwayId}}">
+                        <view bindtap="handleProxy" class="_view 5dbe9ece {{'li '+(item.selected?'actived ':' ')+(item.isHot==='yes'?'showHot':'')}}" data-comkey="{{$k}}" data-eventid="{{'5dbe9ece-8-'+index}}" key="{{index}}" wx:for="{{stationIds}}" wx:key="index">{{item.name}}</view>
+                    </view>
+                </view>
+                <view class="_view 5dbe9ece pick-bottom">
+                    <button bindtap="handleProxy" class="_button 5dbe9ece" data-comkey="{{$k}}" data-eventid="{{'5dbe9ece-9'}}">重置</button>
+                    <button bindtap="handleProxy" class="_button 5dbe9ece" data-comkey="{{$k}}" data-eventid="{{'5dbe9ece-10'}}">确定</button>
+                </view>
+            </view>
+            <view class="_view 5dbe9ece picker-block picker-price" wx:if="{{filterItems&&filterItems.prices&&filters[1].actived}}">
+                <view class="_view 5dbe9ece ul">
+                    <view bindtap="handleProxy" class="_view 5dbe9ece {{'li '+(item.selected?'actived':'')}}" data-comkey="{{$k}}" data-eventid="{{'5dbe9ece-11-'+index}}" key="{{index}}" wx:for="{{filterItems.prices}}" wx:key="index">{{item.name}}</view>
+                </view>
+            </view>
+            <view class="_view 5dbe9ece picker-block picker-type" wx:if="{{filterItems&&filterItems.houseType&&filters[2].actived}}">
+                <view class="_view 5dbe9ece  picker-type-content">
+                    <view class="_view 5dbe9ece dl" key="{{index}}" wx:for="{{filterItems.houseType}}" wx:key="index">
+                        <view class="_view 5dbe9ece dt">{{item.name}}</view>
+                        <view class="_view 5dbe9ece dd-panel">
+                            <view bindtap="handleProxy" class="_view 5dbe9ece {{'dd '+(children.selected?'activedBorder':'')}}" data-comkey="{{$k}}" data-eventid="{{'5dbe9ece-12-'+index+'-'+index1}}" key="{{index1}}" wx:for="{{item.children}}" wx:for-index="index1" wx:for-item="children" wx:key="index1">{{children.name}}</view>
+                        </view>
+                    </view>
+                </view>
+                <view class="_view 5dbe9ece pick-bottom">
+                    <button bindtap="handleProxy" class="_button 5dbe9ece" data-comkey="{{$k}}" data-eventid="{{'5dbe9ece-13'}}">重置</button>
+                    <button bindtap="handleProxy" class="_button 5dbe9ece" data-comkey="{{$k}}" data-eventid="{{'5dbe9ece-14'}}">确定</button>
+                </view>
+            </view>
+            <view class="_view 5dbe9ece picker-block picker-option" wx:if="{{filterItems&&filterItems.moreFilters&&filters[3].actived}}">
+                <view class="_view 5dbe9ece picker-option-content">
+                    <view class="_view 5dbe9ece dl" key="{{index}}" wx:for="{{filterItems.moreFilters}}" wx:key="index">
+                        <view class="_view 5dbe9ece dt">{{item.name}}</view>
+                        <view class="_view 5dbe9ece dd-panel">
+                            <view bindtap="handleProxy" class="_view 5dbe9ece {{'dd '+(children.selected?'activedBorder':'')}}" data-comkey="{{$k}}" data-eventid="{{'5dbe9ece-15-'+index+'-'+index1}}" key="{{index1}}" wx:for="{{item.children}}" wx:for-index="index1" wx:for-item="children" wx:key="index1">{{children.name}}</view>
+                        </view>
+                    </view>
+                </view>
+                <view class="_view 5dbe9ece pick-bottom">
+                    <button bindtap="handleProxy" class="_button 5dbe9ece" data-comkey="{{$k}}" data-eventid="{{'5dbe9ece-16'}}">重置</button>
+                    <button bindtap="handleProxy" class="_button 5dbe9ece" data-comkey="{{$k}}" data-eventid="{{'5dbe9ece-17'}}">确定</button>
+                </view>
+            </view>
+            <view class="_view 5dbe9ece picker-block picker-sort" wx:if="{{filterItems&&filterItems.orders&&filters[4].actived}}">
+                <view class="_view 5dbe9ece ul">
+                    <view bindtap="handleProxy" class="_view 5dbe9ece {{'li '+(item.selected?'actived':'')}}" data-comkey="{{$k}}" data-eventid="{{'5dbe9ece-18-'+index}}" key="{{index}}" wx:for="{{filterItems.orders}}" wx:key="index">{{item.name}}</view>
+                </view>
+            </view>
+        </view>
+        <view class="_view 5dbe9ece fixed-content-bg" hidden="{{!acitveShow}}"></view>
+    </view>
+</template>

@@ -1,0 +1,77 @@
+<template name="1dc6c12d">
+    <view class="_div data-v-119e5b82">
+        <view class="_div data-v-119e5b82 plan-order-detail" wx:if="{{!showCouponModal}}">
+            <view class="_div data-v-119e5b82" style="background-color: #fff;">
+                <view class="_div data-v-119e5b82 meta">
+                    <image alt class="_img data-v-119e5b82" src="https://media-image1.baydn.com/storage_media_image/kvhfgj/647aef9b6696e559f31d968579e7b9e6.c9100a2f5d917ab1a030056a37ac385a.png?x-oss-process=image/format,jpg/quality,q_80/resize,p_100"></image>
+                    <view class="_div data-v-119e5b82 description">
+                        <view class="_div data-v-119e5b82 logo">扇贝·读书计划</view>
+                        <view class="_div data-v-119e5b82 title">{{title}}</view>
+                        <view class="_div data-v-119e5b82 price">
+                            <view class="_div data-v-119e5b82">¥{{price}}</view>
+                            <view class="_div data-v-119e5b82 original-price">原价{{originalPrice}}</view>
+                        </view>
+                    </view>
+                </view>
+                <view class="_div data-v-119e5b82 book-list">
+                    <view class="_div data-v-119e5b82 title">计划书单</view>
+                    <view class="_div data-v-119e5b82 content">
+                        <view class="_div data-v-119e5b82 book flex-between" key="{{book.book_id}}" wx:for="{{books}}" wx:for-item="book" wx:key="book.book_id">
+                            <view class="_div data-v-119e5b82">{{book.name_cn}}</view>
+                            <view class="_div data-v-119e5b82">{{book.article_amount}}章</view>
+                        </view>
+                    </view>
+                </view>
+            </view>
+            <view class="_div data-v-119e5b82 info-container">
+                <view class="_div data-v-119e5b82 info flex-between">
+                    <view class="_div data-v-119e5b82">计划时长：</view>
+                    <view class="_div data-v-119e5b82">{{totalDays}}天</view>
+                </view>
+                <view class="_div data-v-119e5b82 info flex-between">
+                    <view class="_div data-v-119e5b82">开始日期：</view>
+                    <view class="_div data-v-119e5b82">{{startAt}}</view>
+                </view>
+                <view class="_div data-v-119e5b82 info flex-between">
+                    <view class="_div data-v-119e5b82">结束日期：</view>
+                    <view class="_div data-v-119e5b82">{{endAt}}</view>
+                </view>
+            </view>
+            <view class="_div data-v-119e5b82 {{['pay',isIpx?'fix-iphonex':'']}}">
+                <view class="_div data-v-119e5b82 not-support" wx:if="{{status===3}}">书籍快读完啦，暂不支持加入计划</view>
+                <view class="_div data-v-119e5b82" wx:else>
+                    <view bindtap="handleProxy" class="_div data-v-119e5b82 coupon {{[!coupons.length?'disable-coupon':'']}}" data-comkey="{{$k}}" data-eventid="{{'0'}}">
+                        <view class="_div data-v-119e5b82" style="flex: 1">代金券</view>
+                        <view class="_div data-v-119e5b82 disable-color {{[isColorFont?'highlight':'']}}">{{btnText}}</view>
+                        <view class="_div data-v-119e5b82">
+                            <view class="_i data-v-119e5b82 ib ib-chevron-right chevron" style="color: #c0c0c0;"></view>
+                        </view>
+                    </view>
+                    <view class="_div data-v-119e5b82 pay-button">
+                        <view class="_div data-v-119e5b82 left">合计:</view>
+                        <view class="_div data-v-119e5b82 center">¥{{totalPrice}}</view>
+                        <button bindtap="handleProxy" class="_button data-v-119e5b82 flex-vhc" data-comkey="{{$k}}" data-eventid="{{'1'}}">去付款</button>
+                    </view>
+                </view>
+            </view>
+        </view>
+        <view class="_div data-v-119e5b82 coupon-list" wx:else>
+            <view bindtap="handleProxy" class="_div data-v-119e5b82 coupon" data-comkey="{{$k}}" data-eventid="{{'2-'+index}}" key="{{coupon.user_coupon_id}}" wx:for="{{coupons}}" wx:for-item="coupon" wx:key="coupon.user_coupon_id">
+                <view class="_div data-v-119e5b82 meta-info">
+                    <view class="_div data-v-119e5b82 value">
+                        <view class="_div data-v-119e5b82 rmb">¥</view>
+                        <view class="_div data-v-119e5b82">{{coupon.amount}}</view>
+                    </view>
+                    <view class="_div data-v-119e5b82 meta">
+                        <view class="_div data-v-119e5b82 tile">{{coupon.title}}</view>
+                        <view class="_div data-v-119e5b82 date">{{coupon.valid_at}}至{{coupon.expired_at}}</view>
+                    </view>
+                </view>
+                <view class="_div data-v-119e5b82 tip">{{coupon.tips}}</view>
+                <image alt class="_img data-v-119e5b82" src="https://media-image1.baydn.com/storage_media_image/kdbdns/54dc3d9b8623f7510339faab83a1dc1b.a7f811140a3849f8d05d0b4ebcb6f0ea.png" wx:if="{{coupon.checked}}"></image>
+                <view class="_div data-v-119e5b82 left semi-circle"></view>
+                <view class="_div data-v-119e5b82 right semi-circle"></view>
+            </view>
+        </view>
+    </view>
+</template>

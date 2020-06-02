@@ -1,0 +1,13 @@
+<template name="694882de">
+    <view bindtap="handleProxy" class="_div data-v-7be8431c book" data-comkey="{{$k}}" data-eventid="{{'0'}}">
+        <template is="9afe1ab4" data="{{...$root[$kk+'0'],$root:$root}}"></template>
+        <view class="_div data-v-7be8431c book-info {{[isDetail?'detail':'']}}">
+            <view class="_div data-v-7be8431c title-en">{{name_en}}</view>
+            <view class="_div data-v-7be8431c title-cn">{{name_cn}}</view>
+            <view class="_div data-v-7be8431c author">{{author}}</view>
+            <view class="_div data-v-7be8431c desc" wx:if="{{description_cn}}">{{description_cn}}</view>
+            <view class="_div data-v-7be8431c reader-amount" wx:if="{{readAmount}}">{{readAmount}}人在读</view>
+        </view>
+    </view>
+</template>
+<import src="/components/BookCover.vue.wxml"></import>

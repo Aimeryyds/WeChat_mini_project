@@ -1,0 +1,99 @@
+<view class="page-box">
+    <my-component bind:myevent="myEventListener" innerText="合作加盟"></my-component>
+    <view class="main" style=" margin-top: {{myHight}}px"></view>
+    <view class="page">
+        <image src="../../Content/images/joinin/banner.png"></image>
+        <view class="box">
+            <view class="textcenter mg-b-10">— 目前已有
+      <span class="red men">{{people}}</span>人获取项目资料 —</view>
+            <view class="mg-b-10">您的姓名</view>
+            <view class="inputboder mg-b-10">
+                <input bindinput="namePut" class="name" type="text" value="{{name}}"></input>
+            </view>
+            <view class="mg-b-10">目前从事行业</view>
+            <view class="mg-b-10">
+                <radio-group bindchange="hangyeChange" class="radio-group" name="lib">
+                    <label class="radio" key="label-{{index}}" wx:for="{{items}}">
+                        <radio checked="{{hangye==item.name}}" value="{{item.name}}"></radio>
+                        <text class="radio-text">{{item.value}}</text>
+                    </label>
+                </radio-group>
+            </view>
+            <view class="mg-b-10">您的投资预算</view>
+            <view class="mg-b-10">
+                <radio-group bindchange="touziChange" class="radio-group" name="lib">
+                    <label class="radio" key="label-{{index}}" wx:for="{{items1}}">
+                        <radio checked="{{touzi==item.name}}" value="{{item.name}}"></radio>
+                        <text class="radio-text">{{item.value}}</text>
+                    </label>
+                </radio-group>
+            </view>
+            <view class="mg-b-10">您的联系方式</view>
+            <view class="inputboder mg-b-10">
+                <input bindinput="telPut" class="tel" type="text" value="{{tel}}"></input>
+            </view>
+            <view class="mg-b-10">手机验证</view>
+            <view class="inputboder mg-b-10" style="display: flex;position: relative;">
+                <input bindinput="codePut" class="code" style="width: 70%;" type="text" value="{{code}}"></input>
+                <view bindtap="getcode" class="textcenter getCode getcode" wx:if="{{getTime}}">发送验证码</view>
+                <view class="time" wx:if="{{!getTime}}">{{codeTime}}</view>
+            </view>
+            <view bindtap="submi" class="btn mg-b-10 submi">获取加盟商资料</view>
+        </view>
+        <view class="bg" style="background-image: url(../../Content/images/joinin/bg.png);background-size: cover;padding: 10px 0;">
+            <view class="box">
+                <image src="../../Content/images/joinin/shuju.png"></image>
+                <image src="../../Content/images/joinin/youshi.png"></image>
+                <view class="textcenter yellow">人们选择新的出行方式</view>
+                <view class="white" style="margin: 10px 0;font-size: 12px;">电动车新规《电动自行车安全技术规范》在部分地区试行，在“超标车”禁售、电动车上牌等举措影响下，促使人们选择新的、更高效、更便捷出行方式。</view>
+                <image class="dansheng1" src="../../Content/images/joinin/dansheng1.png"></image>
+                <image class="dansheng2" src="../../Content/images/joinin/dansheng2.png"></image>
+                <image class="dansheng3" src="../../Content/images/joinin/dansheng3.png"></image>
+                <image class="touzi" src="../../Content/images/joinin/touzi.png"></image>
+            </view>
+        </view>
+        <view class="box">
+            <view class="textcenter mg-b-10">— 目前已有
+      <span class="red men">{{people}}</span>人获取项目资料 —</view>
+            <view class="mg-b-10">您的姓名</view>
+            <view class="inputboder mg-b-10">
+                <input bindinput="namePut" class="name" type="text" value="{{name}}"></input>
+            </view>
+            <view class="mg-b-10">目前从事行业</view>
+            <view class="mg-b-10">
+                <radio-group bindchange="hangyeChange" class="radio-group" name="lib">
+                    <label class="radio" key="label-{{index}}" wx:for="{{items}}">
+                        <radio checked="{{hangye==item.name}}" value="{{item.name}}"></radio>
+                        <text class="radio-text">{{item.value}}</text>
+                    </label>
+                </radio-group>
+            </view>
+            <view class="mg-b-10">您的投资预算</view>
+            <view class="mg-b-10">
+                <radio-group bindchange="touziChange" class="radio-group" name="lib">
+                    <label class="radio" key="label-{{index}}" wx:for="{{items1}}">
+                        <radio checked="{{touzi==item.name}}" value="{{item.name}}"></radio>
+                        <text class="radio-text">{{item.value}}</text>
+                    </label>
+                </radio-group>
+            </view>
+            <view class="mg-b-10">您的联系方式</view>
+            <view class="inputboder mg-b-10">
+                <input bindinput="telPut" class="tel" type="text" value="{{tel}}"></input>
+            </view>
+            <view class="mg-b-10">手机验证</view>
+            <view class="inputboder mg-b-10" style="display: flex;position: relative;">
+                <input bindinput="codePut" class="code" style="width: 70%;" type="text" value="{{code}}"></input>
+                <view bindtap="getcode" class="textcenter getCode getcode" wx:if="{{getTime}}">发送验证码</view>
+                <view class="time" wx:if="{{!getTime}}">{{codeTime}}</view>
+            </view>
+            <view bindtap="submi" class="btn mg-b-10 submi">获取加盟商资料</view>
+        </view>
+        <view style="line-height: 0;">
+            <image class="tiaojian" src="../../Content/images/joinin/tiaojian.png"></image>
+        </view>
+        <view class="backtop" style="line-height: 0;">
+            <image bindinput="submi" class="huoqu" src="../../Content/images/joinin/huoqured.png"></image>
+        </view>
+    </view>
+</view>

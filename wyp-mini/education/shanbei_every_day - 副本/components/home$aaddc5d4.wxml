@@ -1,0 +1,13 @@
+<template name="home$aaddc5d4">
+    <view class="_div data-v-46c56306 container daily">
+        <template is="header$fe0911a6" data="{{...$root[$kk+'0'],$root:$root}}"></template>
+        <swiper bindchange="handleProxy" class="_swiper data-v-46c56306 swiper" current="{{currentIndex}}" data-comkey="{{$k}}" data-eventid="{{'1'}}" indicatorDots="{{indicatorDots}}" nextMargin="90px">
+            <swiper-item bindtap="handleProxy" class="_swiper-item data-v-46c56306" data-comkey="{{$k}}" data-eventid="{{'0-'+index}}" itemId="{{item.id}}" key="{{item.id}}" wx:for="{{dailyQuoteList}}" wx:key="item.id">
+                <template is="card$68f19830" data="{{...$root[$kk+'1-'+index],$root:$root}}"></template>
+            </swiper-item>
+        </swiper>
+        <navigator bindtap="handleProxy" class="_a data-v-46c56306 campaign" data-comkey="{{$k}}" data-eventid="{{'2'}}" openType="switchTab" style=" {{'background-image:'+'url('+campaign.image_urls[0]+')'+';'}}" url="/pages/trans-challenge/main" wx:if="{{campaign.id}}"></navigator>
+    </view>
+</template>
+<import src="header$fe0911a6"></import>
+<import src="card$68f19830"></import>

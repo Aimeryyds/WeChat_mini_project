@@ -1,0 +1,65 @@
+<import src="../../libs/templates/footer.wxml"></import>
+<import src="../../libs/wxParse/wxParse.wxml"></import>
+<view class="bg" style="background-color: {{globalColor}};"></view>
+<view class="card-container">
+    <view class="header-bg" style="background-color: {{globalColor}};"></view>
+    <view class="card">
+        <view class="intro">
+            <view class="firm-name ellipsis">{{corpName}}</view>
+            <view class="name ellipsis">{{name}}</view>
+            <view class="job">{{job}}</view>
+            <image bind:tap="viewMyAvator" class="head-icon" src="{{avator}}"></image>
+        </view>
+        <view bind:tap="shareMyCard" class="intro-bottom">
+            <text class="card-text">我的名片</text>
+            <view class="iconfont qr-code"></view>
+        </view>
+    </view>
+    <view class="content">
+        <view class="nav">
+            <view bind:tap="switchNav" class="nav-item {{activeIndex==0?'active':''}}" data-index="0">联系我</view>
+            <view bind:tap="switchNav" class="nav-item {{activeIndex==1?'active':''}}" data-index="1" wx:if="{{about.length>0}}">关于我</view>
+        </view>
+        <view class="connect" hidden="{{activeIndex!=0}}">
+            <view bind:tap="makePhoneCall" class="item iconfont phone" wx:if="{{phone}}">
+                <text class="item-text">{{phone}}</text>
+            </view>
+            <view bind:tap="copyInfo" class="item iconfont email" data-type="0" wx:if="{{email}}">
+                <text class="item-text ellipsis" data-type="0">{{email}}</text>
+            </view>
+            <view bind:tap="openMap" class="item iconfont address" wx:if="{{addr}}">
+                <text class="item-text ellipsis">{{addr}}</text>
+            </view>
+            <view bind:tap="copyInfo" class="item iconfont wechatId" data-type="1" wx:if="{{wechatId}}">
+                <text class="item-text ellipsis" data-type="1">{{wechatId}}</text>
+            </view>
+        </view>
+        <view class="about" hidden="{{activeIndex!=1}}" wx:if="{{about.length>0}}">
+            <template is="wxParse" data="{{wxParseData:aboutInfo.nodes}}"></template>
+        </view>
+    </view>
+    <template is="footer" data="{{flag:flag,isOem:isOem,agentAcct:agentAcct}}" wx:if="{{flag.footerOpen}}"></template>
+</view>
+<view class="card-footer">
+    <view class="footer-item iconfont share">
+        <button class="shareBtn" openType="share"></button>
+        <text class="footer-text">分享</text>
+    </view>
+    <view bind:tap="viewMyHome" class="footer-item iconfont firm">
+        <text class="footer-text">{{btnName}}</text>
+    </view>
+    <view bind:tap="saveToContact" class="footer-btn" style="background-color: {{globalColor}};">保存到通讯录</view>
+</view>
+<view bind:tap="hideShareMyCard" class="commodity_screen" hidden="{{!showShareMyCard}}"></view>
+<view class="mySharePanel" hidden="{{!showShareMyCard}}">
+    <canvas canvasId="myCanvas" style="width:690rpx;margin:0 auto;margin-top:30rpx;height:920rpx"></canvas>
+    <view bindtap="savePic" class="share-btn saveSharePic">保存到手机相册</view>
+    <view bindtap="hideShareMyCard" class="share-btn hideSharePic">取消</view>
+</view>
+<view class="visitor-list {{visitedList.length==1?'single-icon':''}}" wx:if="{{visitedList.length>0}}">
+    <image bind:tap="visitHandler" data-cid="{{visitedList[0].id}}" src="{{visitedList[0].avatorUrl}}"></image>
+    <image bind:tap="visitHandler" data-cid="{{visitedList[1].id}}" src="{{visitedList[1].avatorUrl}}" wx:if="{{visitedList.length>1}}"></image>
+    <view class="visitor-tip {{fadeShowFlag?'tip-show':''}}" wx:if="{{visitorTipFlag}}">我是{{visitedList[0].name}}，也可以联系我哟
+    <view class="arrow"></view>
+    </view>
+</view>

@@ -1,0 +1,19 @@
+<view catchtap="itemTap" class="list-item-class gf-list-item {{isLastItem?'last-list-item':''}} {{isLink?'gf-list-item--access':''}}" style="{{customStyle}}">
+    <view class="gf-list-item__image" wx:if="{{image}}">
+        <image src="{{image}}"></image>
+    </view>
+    <slot name="title"></slot>
+    <view class="gf-list-item__bd">
+        <view class="gf-list-item__title" wx:if="{{title}}">{{title}}</view>
+        <view class="gf-list-item__desc">
+            <view>
+                <text class="gf-list-item__tag">{{tag}}</text>
+                <text class="gf-list-item__label">{{label}}</text>
+            </view>
+            <view>
+                <text class="gf-list-item__footer">{{footer}}</text>
+            </view>
+        </view>
+        <slot></slot>
+    </view>
+</view>

@@ -1,0 +1,18 @@
+<template name="module">
+    <view class="moduleWrap" wx:for="{{moduleInfoList}}" wx:for-item="moduleInfo" wx:key="index">
+        <template is="packModule" data="{{moduleInfo:moduleInfo}}" wx:if="{{moduleInfo.style==5}}"></template>
+        <template is="multiPhotoModule" data="{{moduleInfo:moduleInfo}}" wx:elif="{{moduleInfo.style==6}}"></template>
+        <template is="videoModule" data="{{moduleInfo:moduleInfo}}" wx:elif="{{moduleInfo.style==7}}"></template>
+        <template is="formModule" data="{{moduleInfo:moduleInfo,globalColor:globalColor}}" wx:elif="{{moduleInfo.style==8}}"></template>
+        <template is="newsModule" data="{{moduleInfo:moduleInfo}}" wx:elif="{{moduleInfo.style==9}}"></template>
+        <template is="serviceModule" data="{{moduleInfo:moduleInfo,globalColor:globalColor}}" wx:elif="{{moduleInfo.style==10}}"></template>
+        <template is="magicNavModule" data="{{moduleInfo:moduleInfo}}" wx:elif="{{moduleInfo.style==11}}"></template>
+    </view>
+</template>
+<import src="./modules/pack.wxml"></import>
+<import src="./modules/multiPhoto.wxml"></import>
+<import src="./modules/video.wxml"></import>
+<import src="./modules/form.wxml"></import>
+<import src="./modules/news.wxml"></import>
+<import src="./modules/service.wxml"></import>
+<import src="./modules/magicNav.wxml"></import>

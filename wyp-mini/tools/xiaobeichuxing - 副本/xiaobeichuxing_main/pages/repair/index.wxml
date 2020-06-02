@@ -1,0 +1,60 @@
+<view class="page">
+    <my-component bind:myevent="myEventListener" innerText="申报故障"></my-component>
+    <view class="main" style=" margin-top: {{myHight}}px"></view>
+    <form bindsubmit="formSubmit">
+        <text class="title ad-t09 adweihg">{{smtitle}}</text>
+        <view class="weui-cell weui-cell_vcode">
+            <view class="weui-cell__bd">
+                <input class="sm-inp" name="input" placeholder="扫描二维码或输入车辆编码" value="{{scanval}}"></input>
+            </view>
+            <view class="weui-cell__ft">
+                <image bindtap="scan" class="sm-icon" src="{{imgsm}}"></image>
+            </view>
+        </view>
+        <view class="wrap">
+            <view class="title ad-t09 adweihg">{{wxtitle}}</view>
+            <view class="checkbox-con">
+                <view style="display:flex">
+                    <view style="flex:1">
+                        <checkbox-group bindchange="checkboxChange" class="check-all09" name="seletList">
+                            <label bindtap="checkbox" class="{{item.checked?'checkbox checked':'checkbox'}}" data-index="{{index}}" style="margin-bottom:29px;" wx:if="{{index<3}}" wx:for="{{checkboxArr}}" wx:key="item">
+                                <checkbox checked="{{item.checked}}" value="{{item.name}}"></checkbox>{{item.name}}
+                </label>
+                        </checkbox-group>
+                    </view>
+                    <view style="flex:1">
+                        <image class="con-car10" src="{{img2}}"></image>
+                    </view>
+                    <view style="flex:1">
+                        <checkbox-group bindchange="checkboxChange" class="check-all09" name="seletList2">
+                            <label bindtap="checkbox" class="{{item.checked?'checkbox checked':'checkbox'}}" data-index="{{index}}" style="float:right" wx:if="{{index>=3}}" wx:for="{{checkboxArr}}" wx:key="item">
+                                <checkbox checked="{{item.checked}}" value="{{item.name}}"></checkbox>{{item.name}}
+                  </label>
+                        </checkbox-group>
+                    </view>
+                </view>
+            </view>
+        </view>
+        <view class="updata-img">
+            <text class="title">{{wxtitle2}}</text>
+            <view class="weui-uploader">
+                <view class="weui-uploader__bd admar">
+                    <image bindtap="updataImg" class="up-img" src="{{upimg}}"></image>
+                    <view class="weui-uploader__file up-img-con" wx:for="{{upImgList}}" wx:for-item="image" wx:key="index">
+                        <image bindtap="previewImage" class="weui-uploader__img upimg-list" data-src="{{image}}" src="{{image}}" style="width:90px;"></image>
+                        <view catchtap="deleteImg" class="delete-btn" data-index="{{index}}">
+                            <image class="del-img29" src="{{delImg}}"></image>
+                        </view>
+                    </view>
+                </view>
+            </view>
+        </view>
+        <view class="wxtextarea">
+            <text class="title ad-t09">问题与意见</text>
+            <textarea class="weui-textarea" name="textareaCont" placeholder="请输入您的意见建议" rows="3"></textarea>
+        </view>
+        <view class="btn-area">
+            <button class="sub" formType="submit">立即提交</button>
+        </view>
+    </form>
+</view>

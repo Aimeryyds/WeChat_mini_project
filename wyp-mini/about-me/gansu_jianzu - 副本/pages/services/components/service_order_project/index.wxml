@@ -1,0 +1,15 @@
+<view class="service_order_pro_item" wx:if="{{serviceList&&serviceList.length>0}}" wx:for="{{serviceList}}" wx:key="{{index}}">
+    <image src="{{item.imgUrl}}"></image>
+    <view class="content">
+        <wxc-elip line="1">
+            <text class="title">{{item.serviceName}}</text>
+        </wxc-elip>
+        <wxc-elip line="1">
+            <text class="properties">{{item.propertiesName}}</text>
+        </wxc-elip>
+        <view class="view-num">
+            <text class="price">￥{{item.price}}</text>
+            <text class="num" wx:if="{{appointmentPeople}}">X{{appointmentPeople}}</text>
+        </view>
+    </view>
+</view>

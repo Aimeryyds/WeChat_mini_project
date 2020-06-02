@@ -1,0 +1,37 @@
+<view class="my_record_list" wx:if="{{show}}">
+    <view class="none_info_box" wx:if="{{list.length==0&&loaded}}">
+        <view class="none_info_img"></view>
+        <view class="none_info_text">暂无相关信息！</view>
+    </view>
+    <view bindtap="url" class="my_record_li" data-goods_type="{{item.goods_type}}" data-id="{{item.bargain_id}}" wx:for="{{list}}">
+        <view class="my_record_tit">
+            <image src="{{item.pic.img_cover}}"></image>
+            <text>{{item.bargain_name}}</text>
+            <text style="font-size:0.8rem;color:#666">消费截止： {{item.consumptiontime}}</text>
+            <view class="clear"></view>
+        </view>
+        <view class="my_record_price">
+            <view class="price_li">
+                <text class="y_color">{{item.original_price}}</text>
+                <text>原价</text>
+            </view>
+            <view class="price_li">
+                <text class="y_color">{{item.current_price}}</text>
+                <text>当前价</text>
+            </view>
+            <view class="price_li">
+                <text class="y_color">{{item.lowest_price}}</text>
+                <text>最低价</text>
+            </view>
+            <view class="price_li">
+                <text class="y_color">{{item.help}}</text>
+                <text>人帮砍</text>
+            </view>
+            <view class="clear"></view>
+        </view>
+        <view class="my_record_state">
+            <text class="y_color" wx:if="{{item.overtime==2}}">活动状态：{{item.goods_type==1&&item.kj_type==1?'已完成，前去订购吧':item.goods_type==2?'活动已结束':'活动进行中'}}</text>
+            <text class="y_color" wx:if="{{item.overtime==1}}">该活动已过期</text>
+        </view>
+    </view>
+</view>

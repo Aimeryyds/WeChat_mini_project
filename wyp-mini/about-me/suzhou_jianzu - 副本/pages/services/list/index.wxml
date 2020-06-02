@@ -1,0 +1,45 @@
+<view class="order-item" wx:for="{{data.list}}">
+    <view class="view-title">
+        <image src="http://tws.cnweisou.com/images/order_icon.png"></image>
+        <text>订单号:{{item.logno}} </text>
+    </view>
+    <view bindtap="test" id="{{item.orderid}}">
+        <view class="carts-item" data-index="{{index}}">
+            <view style="overflow:hidden;">
+                <image class="carts-image" src="{{item.thumb}}"></image>
+            </view>
+            <view class="carts-text">
+                <text class="carts-title">{{item.title}}</text>
+                <view class="carts-subtitle">
+                    <text>{{item.optiontitle}}</text>
+                </view>
+            </view>
+            <view class="carts-right">
+                <text class="carts-price">￥{{item.price}}</text>
+                <text class="carts-num">x{{item.number}}</text>
+            </view>
+        </view>
+        <view class="order-footer">
+            <text>{{item.statusstr}} 实付款：</text>
+            <text style="color:red">￥{{item.price*item.number}}元</text>
+        </view>
+    </view>
+    <view class="order-footer" wx:if="{{item.status==0}}">
+        <text bindtap="cancel" class="btn-cancel" data-index="{{index}}">取消订单</text>
+        <text bindtap="pay" class="btn-pay" data-index="{{index}}" wx:if="{{item.pay_code!='cod'}}">立即付款</text>
+    </view>
+    <view class="order-footer" wx:elif="{{item.status==2}}">
+        <text bindtap="test" class="btn-pay" data-index="{{index}}" id="{{item.orderid}}">查看订单</text>
+    </view>
+    <view class="order-footer" wx:elif="{{item.status==3}}">
+        <text bindtap="test" class="btn-pay" data-index="{{index}}" id="{{item.orderid}}">查看订单</text>
+    </view>
+    <view class="order-footer" wx:elif="{{item.status==4}}">
+        <text bindtap="test" class="btn-pay" data-index="{{index}}" id="{{item.orderid}}">查看订单</text>
+        <text bindtap="evaluation" class="btn-pay" data-index="{{item.orderid}}" style="background:#eee;" wx:if="{{item.iscomment=='0'}}">评价</text>
+    </view>
+    <view class="order-footer" wx:else>
+        <text bindtap="delete" class="btn-pay" data-index="{{index}}" wx:if="{{item.statusstr=='已取消'}}">立即删除</text>
+    </view>
+</view>
+<loading wx:if="{{loading}}"></loading>

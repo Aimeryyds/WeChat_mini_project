@@ -1,0 +1,81 @@
+<view class="loading" wx:if="{{loading}}">
+    <image class="loading_img" src="../../image/loading-32-32.gif"></image>
+</view>
+<view class="loading_end" wx:if="{{loading_end}}"></view>
+<view class="loading_fail" wx:if="{{loading_fail}}"></view>
+<view wx:if="{{!loading}}">
+    <view class="goods">
+        <block wx:if="{{userInfo}}">
+            <view class="goods_h2">
+                <view>
+                    <text>{{userInfo.luckdraw>-1?userInfo.luckdraw:0}}</text>幸运草(抽奖机会)</view>
+            </view>
+            <view class="goods_c">
+                <view class="do_sign done" wx:if="{{isSign==1}}">今日已签，明天+<text>{{userInfo.addluckdraw}}</text>
+                </view>
+                <button bindtap="do_sign" class="do_sign" plain="true" wx:if="{{isSign!=1}}">立即签到，幸运草+<text>{{userInfo.addluckdraw}}</text>
+                </button>
+                <text>您已连续签到{{userInfo.signcount>-1?userInfo.signcount:0}}天</text>
+            </view>
+        </block>
+        <view class="goods_c" wx:if="{{userInfo==''}}">
+            <view style="padding:50rpx;font-size:36rpx;">每日签到，领取抽奖机会</view>
+            <button bindgetuserinfo="clickinfo" class="do_sign" openType="getUserInfo" plain="true">使用微信登录</button>
+            <view class="mt40"></view>
+            <button bindtap="btn_phone_login" class="do_sign" plain="true">手机验证码登录</button>
+        </view>
+    </view>
+    <navigator class="goods_s mt40" url="../draw/draw" wx:if="{{drawlist.length>0}}">
+        <text class="goods_s1">免费抽奖，奖品免费无邮费</text>
+        <view>
+            <text>全部</text>
+            <text class="url"></text>
+        </view>
+    </navigator>
+    <view class="goodlist">
+        <navigator class="goodlist_item" url="../draw_info/draw_info?id={{item.ctid}}" wx:for="{{drawlist}}" wx:key="recipelist_new">
+            <view class="goodlist_c load">
+                <image class="goodlist_img" src="{{item.ctphoto}}"></image>
+            </view>
+            <view class="goodlist_detail">
+                <text class="goodlist_t">{{item.ctsubject}}</text>
+                <text class="goodlist_n">{{item.ctendtime}}结束</text>
+            </view>
+            <text class="goodlist_b" wx:if="{{item.timestate==3}}">查看</text>
+            <text class="goodlist_b red" wx:if="{{item.timestate==2}}">参与</text>
+            <text class="goodlist_b" wx:if="{{item.timestate==1}}">未开始</text>
+        </navigator>
+    </view>
+    <navigator class="goods_s mt40" url="../trial/trial" wx:if="{{triallist.length>0}}">
+        <text class="goods_s1">免费试用，潮品尖货免费送</text>
+        <view>
+            <text>全部</text>
+            <text class="url"></text>
+        </view>
+    </navigator>
+    <view class="goodlist">
+        <navigator class="goodlist_item" url="../trial_info/trial_info?id={{item.ctid}}" wx:for="{{triallist}}" wx:key="recipelist_new">
+            <view class="goodlist_c load">
+                <image class="goodlist_img" src="{{item.ctphoto}}"></image>
+            </view>
+            <view class="goodlist_detail">
+                <text class="goodlist_t">{{item.ctsubject}}</text>
+                <text class="goodlist_n">{{item.ctendtime}}结束</text>
+            </view>
+            <text class="goodlist_b" wx:if="{{item.timestate==3}}">查看</text>
+            <text class="goodlist_b red" wx:if="{{item.timestate==2}}">申请</text>
+            <text class="goodlist_b" wx:if="{{item.timestate==1}}">未开始</text>
+        </navigator>
+    </view>
+</view>
+<view class="btn_do">
+    <form catchsubmit="shareSubmit" reportSubmit="true">
+        <button class="share" formType="submit" openType="share">
+            <image class="icon_fav" src="../../image/share.png"></image>
+            <text>分享给朋友</text>
+        </button>
+    </form>
+</view>
+<view>　</view>
+<view>　</view>
+<view>　</view>

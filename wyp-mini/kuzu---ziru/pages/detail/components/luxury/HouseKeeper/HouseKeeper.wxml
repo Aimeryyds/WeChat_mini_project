@@ -1,0 +1,43 @@
+<view class="house-keeper-wrapper house-detail bb1 _div data-v-2d060ac9" wx:if="{{!!houseKeeper}}">
+    <view class="title hz-style _h3 data-v-2d060ac9">专属服务</view>
+    <view class="content _div data-v-2d060ac9">
+        <view class="hz-house-keeper-info _div data-v-2d060ac9">
+            <view class="house-keeper-img _div data-v-2d060ac9">
+                <image alt="headCorn" binderror="__e" class="house-keeper-image _img data-v-2d060ac9" data-event-opts="{{[ [ 'error',[ [ 'imgFallback',['$event'] ] ] ] ]}}" mode="aspectFit" src="{{houseKeeper.headCorn}}" wx:if="{{!errorFlag&&houseKeeper.headCorn}}"></image>
+                <image alt="housekeeper" class="house-keeper-image _img data-v-2d060ac9" src="https://static8.ziroom.com/phoenix/msite/2017/haozhai/img/none.png" wx:else></image>
+            </view>
+            <view class="house-keeper-detail _div data-v-2d060ac9">
+                <view class="house-keeper-name _h3 data-v-2d060ac9">{{houseKeeper.keeperName}}</view>
+                <view class="house-keeper-desc _p data-v-2d060ac9">{{houseKeeper.keeperPresent}}</view>
+                <view bindtap="__e" class="contact-btn _div data-v-2d060ac9" data-event-opts="{{[ [ 'tap',[ [ 'handleCallKeeper',['$0'],['houseKeeper.keeperPhone'] ] ] ] ]}}">联系管家</view>
+            </view>
+        </view>
+        <view class="hz-icons _div data-v-2d060ac9">
+            <view class="icon _div data-v-2d060ac9">
+                <view class="icon-title _p data-v-2d060ac9">
+                    <view class="iconfont icon-zrk_ic_masionconsult _i data-v-2d060ac9"></view>咨询</view>
+                <view class="_p data-v-2d060ac9">专线便捷咨询</view>
+            </view>
+            <view class="icon _div data-v-2d060ac9">
+                <view class="icon-title _p data-v-2d060ac9">
+                    <view class="iconfont icon-zrk_ic_masionsafesvg _i data-v-2d060ac9"></view>安全</view>
+                <view class="_p data-v-2d060ac9">租前房屋全面检测</view>
+            </view>
+            <view class="icon _div data-v-2d060ac9">
+                <view class="icon-title _p data-v-2d060ac9">
+                    <view class="iconfont icon-zrk_ic_masioncleansv _i data-v-2d060ac9"></view>保洁</view>
+                <view class="_p data-v-2d060ac9">月度双次全屋保洁</view>
+            </view>
+            <view class="icon _div data-v-2d060ac9">
+                <view class="icon-title _p data-v-2d060ac9">
+                    <view class="iconfont icon-zrk_ic_masionbutlers _i data-v-2d060ac9"></view>管家</view>
+                <view class="_p data-v-2d060ac9">7*24小时专属管家服务</view>
+            </view>
+            <view class="icon _div data-v-2d060ac9">
+                <view class="icon-title _p data-v-2d060ac9">
+                    <view class="iconfont icon-zrk_ic_masiontesting _i data-v-2d060ac9"></view>检测</view>
+                <view class="_p data-v-2d060ac9">季度房屋监测</view>
+            </view>
+        </view>
+    </view>
+</view>

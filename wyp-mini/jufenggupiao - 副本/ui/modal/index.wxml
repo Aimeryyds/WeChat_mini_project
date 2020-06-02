@@ -1,0 +1,46 @@
+<template name="button">
+    <i-button long bind:click="handleClickItem" data-index="{{index}}" type="ghost">
+        <view class="i-modal-btn-loading" wx:if="{{item.loading}}"></view>
+        <i-icon iClass="i-modal-btn-icon" type="{{item.icon}}" wx:if="{{item.icon}}"></i-icon>
+        <view class="i-modal-btn-text" style="{{item.color?'color: '+item.color:''}}">
+            {{item.name}}
+        </view>
+    </i-button>
+</template>
+<view class="i-modal-mask i-class-mask {{visible?'i-modal-mask-show':''}}"></view>
+<view class="i-class i-modal {{visible?'i-modal-show':''}}">
+    <view class="i-modal-main">
+        <view class="i-modal-content">
+            <view class="i-modal-title" wx:if="{{title}}">{{title}}</view>
+            <view class="i-modal-body">
+                <slot></slot>
+            </view>
+            <view class="i-modal-actions" wx:if="{{actions.length}}">
+                <i-grid iClass="i-modal-grid" wx:if="{{actionMode==='horizontal'}}">
+                    <i-grid-item iClass="{{actions.length===index+1?'i-modal-grid-item-last':'i-modal-grid-item'}}" wx:for="{{actions}}" wx:key="{{ item.name }}">
+                        <template is="button" data="{{item:item,index:index}}"></template>
+                    </i-grid-item>
+                </i-grid>
+                <block wx:else>
+                    <view class="i-modal-action-vertical" wx:for="{{actions}}" wx:key="{{ item.name }}">
+                        <template is="button" data="{{item:item,index:index}}"></template>
+                    </view>
+                </block>
+            </view>
+            <view class="i-modal-actions" wx:else>
+                <i-grid iClass="i-modal-grid" wx:if="{{showOk||showCancel}}">
+                    <i-grid-item iClass="i-modal-grid-item" wx:if="{{showCancel}}">
+                        <i-button long bind:click="handleClickCancel" iClass="i-modal-btn-cancel" type="ghost">
+                            {{cancelText}}
+                        </i-button>
+                    </i-grid-item>
+                    <i-grid-item iClass="i-modal-grid-item-last" wx:if="{{showOk}}">
+                        <i-button long bind:click="handleClickOk" iClass="i-modal-btn-ok" type="ghost">
+                            {{okText}}
+                        </i-button>
+                    </i-grid-item>
+                </i-grid>
+            </view>
+        </view>
+    </view>
+</view>

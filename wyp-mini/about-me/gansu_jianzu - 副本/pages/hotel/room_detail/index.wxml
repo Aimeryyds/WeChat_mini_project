@@ -1,0 +1,16 @@
+<view class="container">
+    <view class="swiper-container">
+        <swiper autoplay="{{autoplay}}" bindchange="handleChange" class="swiper" duration="{{duration}}" indicatorDots="{{indicatorDots}}" interval="{{interval}}">
+            <swiper-item wx:for="{{detail.imgUrl}}">
+                <image class="slide-image" src="{{item}}"></image>
+            </swiper-item>
+        </swiper>
+        <view class="swiper-position">{{positionString}}</view>
+    </view>
+    <wxc-flex _pid="{{_pid}}" class="describe-container" cross="top" wrap="wrap">
+        <view class="item {{index%2==0?'side':'main'}}" wx:for="{{detail.props}}">
+            <text class="describe-key">{{item.key}}</text>
+            <text class="describe-value">{{item.value}}</text>
+        </view>
+    </wxc-flex>
+</view>

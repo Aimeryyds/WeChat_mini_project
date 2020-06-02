@@ -1,0 +1,119 @@
+<navigation-bar bgStyle="{{bgStyle}}" enable="{{enable}}" title="{{wdtitle}}"></navigation-bar>
+<view class="container" style="padding-top:{{barHeight}}px;height:auto;">
+    <view bindtap="pageReload" class="cplist_nodata" wx:if="{{requeseFail}}">{{requeseFailTips}}</view>
+    <view class="nui_w" wx:if="{{noUserInfo}}">
+        <view class="nui_tip">收藏、足迹等功能需要您的授权允许哦~</view>
+        <button bindgetuserinfo="getInfo" class="nui_button" openType="getUserInfo">授权</button>
+    </view>
+    <block wx:else>
+        <view class="mn_top1">
+            <view class="avatarw">
+                <image class="avatar" src="{{userData.user_info.avatar}}"></image>
+            </view>
+            <view class="uinfo">
+                <view class="name">{{userData.user_info.user_name}}</view>
+                <view class="sign">{{userData.user_info.signature}}</view>
+            </view>
+        </view>
+        <view class="mn_line"></view>
+        <view class="mn_top2">
+            <navigator class="mn_top2_btn" url="/pages/myfav/myfav">
+                <image class="i" src="{{wd_scicon_img}}"></image>我的收藏</navigator>
+            <navigator class="mn_top2_btn" url="/pages/mypost/mypost">
+                <image class="i" src="{{wd_fbicon_img}}"></image>我的发布</navigator>
+            <view class="line"></view>
+        </view>
+        <view class="mn_line"></view>
+        <view class="zujiw">
+            <view class="zjtitle" wx:if="{{zujiData.length>0}}">我的足迹</view>
+            <view class="cpitemw" wx:for="{{zujiData}}" wx:key="key">
+                <navigator class="recipeitem" hoverClass="navigator-hover" url="/pages/article/article?id={{item.article.id}}" wx:if="{{item.type==3}}">
+                    <view class="recipeitemw">
+                        <view class="timeshow">
+                            <view class="rlw">
+                                <view class="rl_1">{{item.month}}</view>
+                                <view class="rl_2">{{item.time}}</view>
+                            </view>
+                            <view class="line"></view>
+                        </view>
+                        <view class="cpimgw" style="background:#f5f5f5 url({{item.article.cover_img}}) center no-repeat;background-size:cover;"></view>
+                        <view class="cpinfow">
+                            <view class="wznamew">
+                                <view class="wzname">{{item.article.content}}</view>
+                            </view>
+                            <view class="viewdata">
+                                <image src="{{iconUrl1}}"></image>
+                                <text>{{item.article.collection_num}}</text>
+                                <image src="{{iconUrl2}}"></image>
+                                <text>{{item.article.viewed_amount}}</text>
+                            </view>
+                        </view>
+                    </view>
+                </navigator>
+                <navigator class="recipeitem" hoverClass="navigator-hover" url="/pages/content/content?id={{item.recipe.id}}" wx:if="{{item.type==1}}">
+                    <view class="recipeitemw">
+                        <view class="timeshow">
+                            <view class="rlw">
+                                <view class="rl_1">{{item.month}}</view>
+                                <view class="rl_2">{{item.time}}</view>
+                            </view>
+                            <view class="line"></view>
+                        </view>
+                        <view class="cpimgw" style="background:#f5f5f5 url({{item.recipe.img}}) center no-repeat;background-size:cover;"></view>
+                        <view class="cpinfow">
+                            <view class="cpnamew">
+                                <text class="cpname">{{item.recipe.title}}</text>
+                            </view>
+                            <view class="tagw">
+                                <view class="tag" wx:if="{{item.recipe.label[0]}}">
+                                    <view class="t" wx:if="{{item.recipe.label[0].name}}">{{item.recipe.label[0].name}}</view>
+                                    <view class="c" wx:if="{{item.recipe.label[0].desc}}">{{item.recipe.label[0].desc}}</view>
+                                </view>
+                            </view>
+                            <view class="starw">
+                                <view wx:for="{{[1,2,3,4,5]}}" wx:for-item="i" wx:key="key">
+                                    <image src="{{starUrl1}}" wx:if="{{item.recipe.rate-i>=0}}"></image>
+                                    <image src="{{starUrl2}}" wx:elif="{{item.recipe.rate-i+1>0}}"></image>
+                                    <image src="{{starUrl3}}" wx:else></image>
+                                </view>
+                            </view>
+                            <view class="viewdata">
+                                <image src="{{iconUrl1}}"></image>
+                                <text>{{item.recipe.favor_amount}}</text>
+                                <image src="{{iconUrl2}}"></image>
+                                <text>{{item.recipe.viewed_amount}}</text>
+                            </view>
+                        </view>
+                    </view>
+                </navigator>
+            </view>
+        </view>
+    </block>
+</view>
+<loading hidden="{{requeseDone||!hasNextPage}}">
+ 加载中...
+</loading>
+<view class="tabbarw" style="padding-bottom:{{barHeight==88?'32px':'0px'}}">
+    <view class="tabbar" style="padding-bottom:{{barHeight==88?'32px':'0px'}}">
+        <navigator class="item" hoverClass="none" openType="redirect" url="/pages/index/index">
+            <image src="/images/i1.png"></image>
+            <text>推荐</text>
+        </navigator>
+        <navigator appId="wx93d17942795dec0e" class="item" hoverClass="none" target="miniProgram">
+            <image src="/images/i8.png"></image>
+            <text>好物</text>
+        </navigator>
+        <navigator class="item" hoverClass="none" openType="redirect" url="/pages/whattoeat/whattoeat_xcc">
+            <image src="/images/i7.png"></image>
+            <text>吃什么</text>
+        </navigator>
+        <navigator class="item" hoverClass="none" openType="redirect" url="/pages/foodshow/foodshow">
+            <image src="/images/i2.png"></image>
+            <text>食秀</text>
+        </navigator>
+        <navigator class="item current" hoverClass="none" openType="redirect" url="/pages/mine/mine">
+            <image src="/images/i4_fill.png"></image>
+            <text>我的</text>
+        </navigator>
+    </view>
+</view>

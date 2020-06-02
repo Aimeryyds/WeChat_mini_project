@@ -1,0 +1,286 @@
+.combo-content {
+    position: absolute;
+    top: 0;
+    left: 20rpx;
+    z-index: 99999;
+    width: 85%;
+    overflow: hidden;
+    height: 215rpx;
+}
+
+.combo {
+    position: absolute;
+    left: 0;
+    pointer-events: auto;
+    width: 100%;
+    height: 88rpx;
+}
+
+.combo .combo-image {
+    position: absolute;
+    top: 2rpx;
+    left: 0;
+    transition: transform .1s linear;
+    transition: transform .1s linear,-webkit-transform .1s linear;
+    width: 426rpx;
+    height: 84rpx;
+}
+
+.effect-lv .combo-image {
+    top: 0;
+    width: 450rpx;
+    height: 88rpx;
+}
+
+.combo.comboA {
+    top: 100rpx;
+}
+
+.combo.comboB {
+    top: 0;
+}
+
+.combo .flow-light {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 480rpx;
+    height: 80rpx;
+}
+
+.combo .mask-bg {
+    position: absolute;
+    top: 2rpx;
+    left: 0;
+    height: 80rpx;
+    width: 0;
+}
+
+.combo .text-content {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    box-sizing: border-box;
+    color: #fff;
+    vertical-align: middle;
+    z-index: 10;
+    padding: 5rpx 10rpx;
+}
+
+.combo .text-content .nick,.combo .text-content .text {
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    overflow: hidden;
+    width: 190rpx;
+    min-height: 38rpx;
+    margin: 3rpx 10rpx 0 15rpx;
+}
+
+.combo .text-content .nick {
+    display: block;
+    font-size: 26rpx;
+}
+
+.combo .text-content .text {
+    font-size: 24rpx;
+}
+
+.combo .text-content .text .gift-name {
+    display: inline-block;
+    padding-left: 5rpx;
+    font-weight: bold;
+    color: #ffd800;
+}
+
+.combo .text-content .gift {
+    position: absolute;
+    left: 210rpx;
+    top: 1rpx;
+    width: 80rpx;
+    height: 80rpx;
+}
+
+.combo .text-content .number {
+    position: absolute;
+    top: 18rpx;
+    left: 300rpx;
+}
+
+.combo .text-content .number .x {
+    position: absolute;
+    left: 0;
+    display: inline-block;
+    top: 12rpx;
+    width: 35rpx;
+    height: 34rpx;
+}
+
+.combo .text-content .number .num {
+    margin-left: 36rpx;
+}
+
+.combo .text-content .number-gift {
+    top: 0rpx;
+    left: 300rpx;
+}
+
+.combo .text-content .number-gift .x {
+    height: 20rpx;
+    width: 20rpx;
+    top: 10rpx;
+}
+
+.combo .text-content .number-gift .num {
+    margin-left: 22rpx;
+    margin-top: 2rpx;
+}
+
+.combo .text-content .number-gift .num .num-img {
+    position: relative;
+    display: inline-block;
+    width: 21rpx;
+    height: 44rpx;
+    z-index: 9;
+}
+
+.combo .text-content .combo-advanced {
+    position: absolute;
+    bottom: -8rpx;
+    left: 310rpx;
+}
+
+.combo .text-content .num,.combo .text-content .num-advanced {
+    display: inline-block;
+}
+
+.combo .text-content .num .text-img,.combo .text-content .num-advanced .advanced-img {
+    position: relative;
+    display: inline-block;
+    width: 30rpx;
+    height: 60rpx;
+    z-index: 9;
+}
+
+.combo .text-content .num .num-img {
+    width: 28rpx;
+    height: 50rpx;
+}
+
+.combo .text-content .x-advanced {
+    position: relative;
+    top: -6rpx;
+    display: inline-block;
+    background-size: cover;
+    width: 93rpx;
+    height: 35rpx;
+}
+
+.combo.start .number:not(.number-gift) {
+    animation: combo-number .5s linear;
+}
+
+.combo.start .combo-advanced .num-advanced {
+    animation: combo-number 0.85s linear;
+}
+
+.combo.start .flow-light .mask-bg {
+    animation: mask-bg 0.5s ease-out forwards;
+}
+
+.combo.end {
+    transform: translate3d(200%,0,0);
+}
+
+.fix-img {
+    display: inline-block;
+    width: 1rpx;
+    height: 1rpx;
+    margin-left: 12rpx;
+    vertical-align: top;
+}
+
+@-webkit-keyframes combo-number {
+    0% {
+        transform: scale(0.7,0.7);
+    }
+
+    30% {
+        transform: scale(1,1);
+    }
+
+    70% {
+        transform: scale(1.2,1.2) translate(12rpx,0);
+    }
+
+    100% {
+        transform: scale(1,1) translate(0,0);
+    }
+}
+
+@keyframes combo-number {
+    0% {
+        transform: scale(0.7,0.7);
+    }
+
+    30% {
+        transform: scale(1,1);
+    }
+
+    70% {
+        transform: scale(1.2,1.2) translate(12rpx,0);
+    }
+
+    100% {
+        transform: scale(1,1) translate(0,0);
+    }
+}
+
+@-webkit-keyframes combo-advanced {
+    0% {
+        transform: scale(1,1);
+    }
+
+    90% {
+        transform: scale(1.5,1.5);
+    }
+
+    100% {
+        transform: scale(1,1);
+    }
+}
+
+@keyframes combo-advanced {
+    0% {
+        transform: scale(1,1);
+    }
+
+    90% {
+        transform: scale(1.5,1.5);
+    }
+
+    100% {
+        transform: scale(1,1);
+    }
+}
+
+@-webkit-keyframes mask-bg {
+    0% {
+        width: 0rpx;
+    }
+
+    100% {
+        width: 480rpx;
+    }
+}
+
+@keyframes mask-bg {
+    0% {
+        width: 0rpx;
+    }
+
+    100% {
+        width: 480rpx;
+    }
+}

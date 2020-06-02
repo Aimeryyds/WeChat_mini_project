@@ -1,0 +1,70 @@
+<view class="container">
+    <form bindsubmit="confirmPay" reportSubmit="true">
+        <view bindtap="chooseAddress" class="order-address-none" wx:if="{{!deliveryAddr}}">
+            <view>
+                <image src="../../images/settle/icon_add.png"></image>
+                <text>添加配送地址</text>
+            </view>
+            <image class="arrow" src="../../images/icon_next.png"></image>
+        </view>
+        <view bindtap="chooseAddress" class="order-address" wx:else>
+            <image src="../../images/orders/icon_adress.png"></image>
+            <view class="right-wrap">
+                <view class="user-info">
+                    <text>{{deliveryAddr.username}}</text>
+                    <text class="phone">{{deliveryAddr.phone}}</text>
+                </view>
+                <view class="address-info">
+          {{deliveryAddr.province}}{{deliveryAddr.city}}{{deliveryAddr.district}}{{deliveryAddr.address}}
+        </view>
+                <image class="arrow" src="../../images/icon_next.png"></image>
+            </view>
+        </view>
+        <view class="cell__content">
+            <view class="content-item">
+                <image class="item-image" src="{{goods.thumb}}"></image>
+                <view class="item-right">
+                    <view class="item-row">
+                        <text class="item-title">{{goods.name}}</text>
+                        <text class="item-price">¥ {{goods.price}}</text>
+                    </view>
+                    <view class="item-row">
+                        <view class="standards" wx:if="{{goods.attrs}}">{{goods.attrsStr}}</view>
+                        <view class="standards" wx:else></view>
+                        <text class="number">x 1</text>
+                    </view>
+                </view>
+            </view>
+        </view>
+        <view class="settle-row">
+            <text class="label">留言</text>
+            <textarea autoHeight name="message" placeholder="如有特殊需求, 请在此填写" placeholderStyle="color: #cfcfd3;"></textarea>
+        </view>
+        <view class="settle-info">
+            <view class="info-top">
+                <view class="info-title">费用明细</view>
+                <view class="info-row">
+                    <text class="label">商品总价</text>
+                    <text class="price-wrap">¥ <text class="price">{{goods.price}}</text>
+                    </text>
+                </view>
+                <view class="info-row">
+                    <text class="label">运费</text>
+                    <text class="price-wrap">+ ¥ <text class="price">0</text>
+                    </text>
+                </view>
+                <view class="info-row">
+                    <text class="label">优惠</text>
+                    <text class="price-wrap">- ¥ <text class="price">{{goods.price}}</text>
+                    </text>
+                </view>
+            </view>
+            <view class="info-bottom">
+                <text class="label">实付款</text>
+                <text class="price-wrap">¥ <text class="price">0</text>
+                </text>
+            </view>
+        </view>
+        <button class="settle-btn" formType="submit">立即领取</button>
+    </form>
+</view>

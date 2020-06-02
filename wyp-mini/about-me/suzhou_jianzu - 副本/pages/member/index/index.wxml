@@ -1,0 +1,338 @@
+<template name="richtext">
+    <view class="bottomTipdiy" style="background:{{data.style.background}};padding:{{data.style.padding}}px 0;}}">
+        <rich-text nodes="{{data.params.content}}"></rich-text>
+    </view>
+</template>
+<template name="logout">
+    <view class="userSetdiy" style="background:{{data.style.background}};margin-top:{{data.style.margintop}}px;">
+        <text style="color:{{data.style.textcolor}};">修改密码</text>
+        <text style="color:{{data.style.textcolor}};">退出登录</text>
+    </view>
+</template>
+<template name="listmenu">
+    <view class="option" style="margin-top:{{data.style.margintop}}px;">
+        <view catchtap="getToPage" class="tableviewcelldiy" data-link="{{item.linkurl}}" wx:for="{{data.data}}">
+            <view class="tableviewcellImagediy">
+                <image src="{{item.listmenuImg}}"></image>
+            </view>
+            <view class="tableviewcellContdiy">
+                <text style="color:{{item.textcolor}}">{{item.text}}</text>
+                <text style="color:{{item.remarkcolor}}" wx:if="{{item.remark}}">{{item.remark}}</text>
+            </view>
+            <view class="tableviewcellImage1diy">
+                <image class="rightArrow" src="http://tws.cnweisou.com/images/rightArrow.png"></image>
+            </view>
+        </view>
+    </view>
+</template>
+<template name="icongroup">
+    <view class="order-areadiy" style="background:{{data.style.background}};">
+        <view catchtap="getToPage" class="orderdiy" data-index="{{index}}" data-link="{{item.linkurl}}" wx:for="{{data.data}}">
+            <view class="circlediy" wx:if="{{item.currOrder!=0}}">{{item.currOrder}}</view>
+            <view class="iconImg">
+                <image src="{{item.iconImg}}"></image>
+            </view>
+            <view class="iconCont">
+                <text>{{item.text}}</text>
+            </view>
+        </view>
+    </view>
+</template>
+<template name="member">
+    <view style="width:100%;height:370rpx;background:#fff;" wx:if="{{data.params.style=='default1'}}">
+        <view class="memberTop1" style="background:{{data.style.background}};">
+            <view class="topRecharge">
+                <text style="color:{{data.style.textcolor}};">余额</text>
+                <text style="color:{{data.style.textlight}};">{{memberInfo.credit2}}</text>
+                <view class="exchange"></view>
+            </view>
+            <view class="topUser">
+                <view class="userImg">
+                    <image src="{{userInfo.avatar}}" style="border-radius: 50%;"></image>
+                </view>
+                <text style="color:{{data.style.textcolor}};">{{userInfo.nickname}}</text>
+                <text bindtap="joinMemberCar" style="color:{{data.style.textcolor}};">会员卡</text>
+                <text bindtap="joinMemberCar" style="color:{{data.style.textlight}};">{{memberInfo.credit3}}</text>
+            </view>
+            <view class="topExchange">
+                <view class="set">
+                    <image src="https://tws.cnweisou.com/images/setImage.png"></image>
+                </view>
+                <text style="color:{{data.style.textcolor}};">积分</text>
+                <text style="color:{{data.style.textlight}};">{{memberInfo.credit1}}</text>
+                <view class="exchange"></view>
+            </view>
+        </view>
+    </view>
+    <view class="memberTop2" style="background:{{data.style.background}};" wx:if="{{data.params.style=='default2'}}">
+        <view class="topRecharge">
+            <image src="{{userInfo.avatar}}" style="border-radius: 50%;"></image>
+        </view>
+        <view class="topUser">
+            <text style="color:{{data.style.textcolor}};">{{userInfo.nickname}}</text>
+            <view bindtap="joinMemberCar" class="userImg">
+                <text style="color:{{data.style.textcolor}};">会员卡:</text>
+                <text style="color:{{data.style.textlight}};">{{memberInfo.credit3}}</text>
+            </view>
+            <view class="userImg">
+                <text style="color:{{data.style.textcolor}};">余额:</text>
+                <text style="color:{{data.style.textlight}};">{{memberInfo.credit2}}</text>
+            </view>
+            <view class="userImg">
+                <text style="color:{{data.style.textcolor}};">积分:</text>
+                <text style="color:{{data.style.textlight}};">{{memberInfo.credit1}}</text>
+            </view>
+        </view>
+        <view class="topExchange">
+            <image src="https://tws.cnweisou.com/images/setImage.png"></image>
+        </view>
+    </view>
+</template>
+<view wx:if="{{index}}">
+    <view class="myTop">
+        <view class="myTopRed"></view>
+        <view class="myTopInfo">
+            <view class="myTopInfoTop" style="{{toolList.credit==1?'':'margin-top:40rpx;'}}">
+                <image backgroundSize="cover" src="{{userInfo.avatar}}"></image>
+                <view>{{userInfo.nickname}}</view>
+            </view>
+            <view class="myTopInfobottom" wx:if="{{toolList.credit==1}}">
+                <view bindtap="joinbalanceDetail">
+                    <text>{{balance}}</text>
+                    <text>余额</text>
+                </view>
+                <view bindtap="joinintegralDetail">
+                    <text>{{integral}}</text>
+                    <text>积分</text>
+                </view>
+            </view>
+        </view>
+    </view>
+    <view class="tool myOrder">
+        <view class="bibei">我的订单</view>
+        <view bindtap="navigateToOrderMore" class="more">
+      查看全部
+      <image src="http://tws.cnweisou.com/images/rightArrow.png"></image>
+        </view>
+    </view>
+    <view class="order-area">
+        <view bindtap="navigateToOrder" class="order" id="1">
+            <view class="circle" wx:if="{{order_0!=0}}">{{order_0}}</view>
+            <image mode="widthFix" src="https://tws.cnweisou.com/images/21n.png"></image>
+            <text>待付款</text>
+        </view>
+        <view bindtap="navigateToOrder" class="order" id="2">
+            <view class="circle" wx:if="{{order_1!=0}}">{{order_1}}</view>
+            <image mode="widthFix" src="https://tws.cnweisou.com/images/22n.png"></image>
+            <text>待发货</text>
+        </view>
+        <view bindtap="navigateToOrder" class="order" id="3">
+            <view class="circle" wx:if="{{order_2!=0}}">{{order_2}}</view>
+            <image class="receiptImg" mode="widthFix" src="https://tws.cnweisou.com/images/23n.png"></image>
+            <text>待收货</text>
+        </view>
+        <view bindtap="navigateToOrder" class="order" id="4">
+            <image class="finishImg" mode="widthFix" src="https://tws.cnweisou.com/images/24n.png"></image>
+            <text>已完成</text>
+        </view>
+        <view bindtap="refundGoods" class="order">
+            <view class="circle" wx:if="{{order_4!=0}}">{{order_4}}</view>
+            <image class="refundGoodsImg" mode="widthFix" src="https://tws.cnweisou.com/images/25n.png"></image>
+            <text>退货款</text>
+        </view>
+    </view>
+    <view hidden bindtap="navigateToMoney" class="tableviewcell">
+        <image src="https://tws.cnweisou.com/images/qb.png"></image>
+        <text>我的钱包</text>
+    </view>
+    <view hidden bindtap="navigateToPoint" class="tableviewcell">
+        <image src="https://tws.cnweisou.com/images/jf.png"></image>
+        <text>我的积分</text>
+    </view>
+    <view hidden bindtap="navigateToCoupon" class="tableviewcell">
+        <image src="https://tws.cnweisou.com/images/yhj.png"></image>
+        <text>我的优惠劵</text>
+    </view>
+    <view class="myMembership" wx:if="{{toolList.credit==1}}">
+        <view bindtap="joinMemberCar" class="myMembershipTitle">
+      会员卡
+    </view>
+        <view bindtap="joinMemberCar" class="myMembershipTop">
+            <image mode="widthFix" src="https://tws.cnweisou.com/images/myMembershipImg.png"></image>
+            <view>
+                <text>会员卡余额：</text>
+                <text>￥{{membercard}}</text>
+            </view>
+        </view>
+        <view class="myMembershipbottom">
+            <text bindtap="joinMemberCar">{{memberLevel}}</text>
+            <text bindtap="joinMemberShip">立即开卡</text>
+        </view>
+    </view>
+    <view class="getPhone" wx:if="{{toolList.mobile==1}}">
+        <image src="http://tws.cnweisou.com/images/memberPhone.png"></image>
+        <button bindgetphonenumber="getPhoneNumber" hoverClass="changeColor" openType="getPhoneNumber" wx:if="{{!myPhone}}">点击即可绑定手机号</button>
+        <view class="hasPhone" wx:else>绑定手机号：{{myPhone}}</view>
+    </view>
+    <view class="tool">
+        <view class="bibei">必备工具</view>
+        <view bindtap="joinAllTool" class="more">
+      查看全部
+      <image src="http://tws.cnweisou.com/images/rightArrow.png"></image>
+        </view>
+    </view>
+    <view class="myTool">
+        <view bindtap="joinSign" class="tableviewcell" wx:if="{{toolList.sign==1}}">
+            <view class="tableviewcellImage">
+                <image class="sizeImg" src="http://tws.cnweisou.com/images/signPnColor.png"></image>
+            </view>
+            <text>我要签到</text>
+        </view>
+        <view bindtap="joinVIPCard" class="tableviewcell" wx:if="{{toolList.card==1}}">
+            <view class="tableviewcellImage">
+                <image class="sizeImg vipImg" src="http://tws.cnweisou.com/images/vipPnColor.png"></image>
+            </view>
+            <text> 会员卡</text>
+        </view>
+        <block wx:if="{{merchid==0&&toolList.openshop==1}}">
+            <view bindtap="loginbtn" class="tableviewcell" wx:if="{{is_openmerch==1}}">
+                <view class="tableviewcellImage">
+                    <image class="shopP" src="http://tws.cnweisou.com/images/shopPnColor.png"></image>
+                </view>
+                <text>我要开店</text>
+            </view>
+        </block>
+        <block wx:elif="{{merchid!=0&&toolList.openshop==1}}">
+            <view bindtap="stroebtn" class="tableviewcell" wx:if="{{is_openmerch==1}}">
+                <view class="tableviewcellImage">
+                    <image src="http://tws.cnweisou.com/images/shopPnColor.png"></image>
+                </view>
+                <text>我的店铺</text>
+            </view>
+        </block>
+        <view hidden bindtap="navigateToEvaluate" class="tableviewcell">
+            <view class="tableviewcellImage">
+                <image src="http://tws.cnweisou.com/images/shopPnColor.png"></image>
+            </view>
+            <text>我的评价</text>
+        </view>
+        <view bindtap="navigateToAddress" class="tableviewcell" wx:if="{{toolList.address==1}}">
+            <view class="tableviewcellImage">
+                <image class="addressP" src="http://tws.cnweisou.com/images/addressPnColor.png"></image>
+            </view>
+            <text>地址管理</text>
+        </view>
+        <view bindtap="navigateToCoupon" class="tableviewcell" wx:if="{{toolList.discount==1}}">
+            <view class="tableviewcellImage">
+                <image class="discountP" src="http://tws.cnweisou.com/images/discountPnColor.png"></image>
+            </view>
+            <text>优惠券</text>
+        </view>
+        <view bindtap="navigateToCollect" class="tableviewcell" wx:if="{{toolList.favor==1}}">
+            <view class="tableviewcellImage">
+                <image class="favor" src="http://tws.cnweisou.com/images/collectPnColor.png"></image>
+            </view>
+            <text>我的收藏</text>
+        </view>
+        <view bindtap="yu_list" class="tableviewcell" wx:if="{{toolList.subscribe==1}}">
+            <view class="tableviewcellImage">
+                <image src="http://tws.cnweisou.com/images/yuyuePnColor.png"></image>
+            </view>
+            <text>预约服务</text>
+        </view>
+        <view bindtap="joinIntegral" class="tableviewcell" wx:if="{{toolList.point==1}}">
+            <view class="tableviewcellImage">
+                <image class="sizeImg" src="http://tws.cnweisou.com/images/jifenPnColor.png"></image>
+            </view>
+            <text>积分商城</text>
+        </view>
+        <view bindtap="navigateRegister" class="tableviewcell" wx:if="{{toolList.distribution==1}}">
+            <view class="tableviewcellImage">
+                <image src="http://tws.cnweisou.com/images/distributionPnColor.png"></image>
+            </view>
+            <text>分销中心</text>
+        </view>
+        <view bindtap="joinCreateActivity" class="tableviewcell" wx:if="{{toolList.activity==1}}">
+            <view class="tableviewcellImage">
+                <image class="addactive" src="http://tws.cnweisou.com/images/creatActivitynColor.png"></image>
+            </view>
+            <text>发起活动</text>
+        </view>
+        <view bindtap="joinMyActivity" class="tableviewcell" wx:if="{{toolList.myactivity==1}}">
+            <view class="tableviewcellImage">
+                <image class="sizeImg myActivity" src="http://tws.cnweisou.com/images/myactivitynColor.png"></image>
+            </view>
+            <text>我的活动</text>
+        </view>
+        <view bindtap="navigateToList" class="tableviewcell" wx:if="{{toolList.redirect==1}}">
+            <view class="tableviewcellImage">
+                <image src="http://tws.cnweisou.com/images/jumpPnColor.png"></image>
+            </view>
+            <text>跳转列表</text>
+        </view>
+        <view bindtap="joinUs" class="tableviewcell" wx:if="{{toolList.aboutus==1}}">
+            <view class="tableviewcellImage">
+                <image class="sizeImg" src="http://tws.cnweisou.com/images/personPnColor.png"></image>
+            </view>
+            <text>关于我们</text>
+        </view>
+        <view bindtap="joinSad" class="tableviewcell" wx:if="{{toolList.sad==1}}">
+            <view class="tableviewcellImage">
+                <image class="mysad" src="http://tws.cnweisou.com/images/sdgongColor.png"></image>
+            </view>
+            <text>发布供求</text>
+        </view>
+        <view bindtap="joinMysad" class="tableviewcell" wx:if="{{toolList.mysad==1}}">
+            <view class="tableviewcellImage">
+                <image class="mysad" src="http://tws.cnweisou.com/images/sdxuColor.png"></image>
+            </view>
+            <text>我的供求</text>
+        </view>
+        <view bindtap="navigateTogroupbuy" class="tableviewcell" wx:if="{{toolList.groupbuy==1}}">
+            <view class="tableviewcellImage">
+                <image class="groupbuy" src="http://tws.cnweisou.com/images/mygroupShopColor.png"></image>
+            </view>
+            <text>我的团购</text>
+        </view>
+        <view bindtap="joincustomerForm" class="tableviewcell" wx:if="{{toolList.customerForm==1}}">
+            <view class="tableviewcellImage">
+                <image class="groupbuy" src="http://tws.cnweisou.com/images/customerFormColor.png"></image>
+            </view>
+            <text>预约列表</text>
+        </view>
+        <view bindtap="joingroundShopDetail" class="tableviewcell" wx:if="{{toolList.personGroup==1}}">
+            <view class="tableviewcellImage">
+                <image class="groupbuy" src="http://tws.cnweisou.com/images/groundShopDetailColor.png"></image>
+            </view>
+            <text>团购详情</text>
+        </view>
+        <view hidden bindtap="logout" class="tableviewcell">
+            <view class="tableviewcellImage">
+                <image src="https://tws.cnweisou.com/images/shopP.png"></image>
+            </view>
+            <text>注销登录</text>
+        </view>
+        <view class="tableviewcell" wx:if="{{customerserver}}">
+            <view class="tableviewcellImage myTalk">
+                <contact-button sessionFrom="weapp" size="100" style="opacity:0;" type="default-light"></contact-button>
+                <view class="myTalkImg" style="background-image:url(https://tws.cnweisou.com/images/iconCustomer.png);background-size:contain;background-repeat:no-repeat;"></view>
+            </view>
+            <text>客服</text>
+        </view>
+    </view>
+    <view class="bottomTip">
+        <text wx:if="{{wxapp_sign}}">{{wxapp_sign}}</text>
+    </view>
+</view>
+<view wx:else>
+    <block wx:if="{{memberInfo}}">
+        <block wx:for="{{memberInfo.member_page.data.items}}">
+            <template is="member" data="{{data:item,userInfo:userInfo,memberInfo:memberInfo}}" wx:if="{{item.id=='member'}}"></template>
+            <template is="listmenu" data="{{data:item}}" wx:if="{{item.id=='listmenu'}}"></template>
+            <template is="icongroup" data="{{data:item,memberInfo:memberInfo}}" wx:if="{{item.id=='icongroup'}}"></template>
+            <template is="logout" data="{{data:item}}" wx:if="{{item.id=='logout'}}"></template>
+            <template is="richtext" data="{{data:item}}" wx:if="{{item.id=='richtext'}}"></template>
+        </block>
+    </block>
+</view>
+<loading wx:if="{{loading}}"></loading>

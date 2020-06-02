@@ -1,0 +1,32 @@
+<template name="c0107f74">
+    <view class="_view c0107f74 content my">
+        <view class="_view c0107f74 mg-flex mg-flex_sa_center my-user">
+            <view class="_view c0107f74 my-user-logo">
+                <image class="_image c0107f74 my-user-img" src="{{userInfo.userLogo||defaultUserLogo}}"></image>
+            </view>
+            <view bindtap="handleProxy" class="_view c0107f74 my-user-name" data-comkey="{{$k}}" data-eventid="{{'c0107f74-0'}}" wx:if="{{!isLogin}}">登录/注册</view>
+            <view class="_view c0107f74 my-user-name" wx:if="{{isLogin}}">{{userName}}</view>
+            <view class="_view c0107f74 my-user-real" wx:if="{{userInfo.isVerified==1}}">实名</view>
+        </view>
+        <view class="_view c0107f74 mg-flex mg-flex_avg my-option-group">
+            <view class="_view c0107f74 my-option" key="{{k}}" wx:for="{{options}}" wx:for-index="k" wx:key="k">
+                <text class="_text c0107f74 option-tips" hidden="{{!(item.tips>0)}}">{{item.tips>99?'99+':item.tips}}</text>
+                <view bindtap="handleProxy" class="_view c0107f74 mg-flex mg-flex-v mg-flex_sa_center" data-comkey="{{$k}}" data-eventid="{{'c0107f74-1-'+k}}">
+                    <view class="_view c0107f74 {{'option-icon '+item.iconClass}}"></view>
+                    <view class="_view c0107f74 option-title">{{item.title}}</view>
+                </view>
+            </view>
+        </view>
+        <view bindtap="handleProxy" class="_view c0107f74" data-comkey="{{$k}}" data-eventid="{{'c0107f74-2'}}" style="background-color: #fff;width: 100%;text-align: center;">
+            <image class="_image c0107f74" src="https://assets.mgzf.com/appimg/78171d67112b2ed849cb5055518b90bf.png" style="width: 670rpx;height: 130rpx;margin-top: 50rpx;"></image>
+        </view>
+        <template is="3a5abe60" data="{{...$root['0'],...$root[$kk+'c0107f74-0-'+index],$root:$root}}" wx:for="{{entries}}" wx:key="index"></template>
+        <view class="_view c0107f74 footerTips">
+            <view bindtap="handleProxy" class="_view c0107f74" data-comkey="{{$k}}" data-eventid="{{'c0107f74-4'}}" style="font-size: 22rpx;color: #f56000;text-decoration: underline">蘑菇租房</view>
+            <view class="_view c0107f74" style="font-size: 20rpx;color: #d1d1d1">蘑菇租房提供技术支持</view>
+        </view>
+        <template is="31e93c2c" data="{{...$root['0'],...$root[$kk+'c0107f74-1'],$root:$root}}"></template>
+    </view>
+</template>
+<import src="/components/mgRow.vue.wxml"></import>
+<import src="/components/bottomTab.vue.wxml"></import>

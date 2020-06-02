@@ -1,0 +1,33 @@
+<navigation-bar enable="{{enable}}" title="{{shortTitle}}" wx:if="{{showTopbar}}"></navigation-bar>
+<cover-view bindtap="tapBackbtn" class="backbtn" style="top:{{backbtnPos}}px" wx:if="{{!showTopbar}}">
+    <cover-image class="backbtnicon" src="{{backiconUrl}}"></cover-image>
+</cover-view>
+<view class="container">
+    <view class="topimg" style="background:url({{ztdata.header_img}}) center no-repeat;background-size:cover;"></view>
+    <view class="bigtitle" wx:if="{{ztdata.title}}">{{ztdata.title}}</view>
+    <view class="contentw">
+        <block wx:for="{{ztdata.content}}" wx:key="key">
+            <view class="paraw" wx:if="{{item.type==2}}">{{item.data}}</view>
+            <view class="subtitle" wx:if="{{item.type==1}}">{{item.data}}</view>
+            <view class="cpitem" wx:if="{{item.type==3}}">
+                <navigator class="link" url="/pages/content/content?id={{item.id}}">
+                    <view class="imgw" style="background:url({{item.img}}) center no-repeat;background-size:cover"></view>
+                    <view class="cpinfo">
+                        <view class="titlew">{{item.title}}</view>
+                        <view class="authorw">
+                            <image src="{{item.author_avatar}}"></image>
+                            <view class="aun">{{item.author_name}}</view>
+                        </view>
+                    </view>
+                </navigator>
+            </view>
+        </block>
+    </view>
+    <view class="sharebtnw">
+        <button class="sharebtn" openType="share">
+            <image class="i" src="{{shareicon}}"></image> 分享给朋友</button>
+    </view>
+</view>
+<loading hidden="{{requeseDone||requeseFail||noData}}">
+ 加载中...
+</loading>

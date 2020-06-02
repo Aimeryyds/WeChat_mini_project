@@ -1,0 +1,66 @@
+<view class="listbox" wx:if="{{operationType==2}}">
+    <view catchtap="setdefult" class="addresslist" data-id="{{item.id}}" data-index="{{index}}" data-isdefault="{{item.isdefault}}" wx:for="{{addressList}}">
+        <view class="default" wx:if="{{item.isdefault==1}}">默认</view>
+        <view>
+            <view class="name">{{item.realname}} {{item.mobile}}</view>
+            <view class="address">{{item.province+item.city+item.area+item.address}}</view>
+        </view>
+        <view catchtap="edittap" class="btn-edit" data-id="{{item.id}}">编辑</view>
+    </view>
+</view>
+<view bindtap="addtap" class="btn-add" wx:if="{{operationType==2}}">新增收货地址</view>
+<view class="add" wx:if="{{operationType==0||operationType==1}}">
+    <view class="box">
+        <view>
+            <text class="title">联系人</text>
+            <view class="list">
+                <text>收件人</text>
+                <input bindblur="inputName" placeholder="填写收货人名字" type="text" value="{{addressInfo.realname}}"></input>
+            </view>
+            <view class="list">
+                <text>性别</text>
+                <view bindtap="checkSex" class="boy" data-sex="1">
+                    <view class="select {{addressInfo.sex==1?'active':''}}"></view>
+                    <text>男</text>
+                </view>
+                <view bindtap="checkSex" class="girl" data-sex="2">
+                    <view class="select {{addressInfo.sex==2?'active':''}}"></view>
+                    <text>女</text>
+                </view>
+            </view>
+            <view class="list">
+                <text>手机</text>
+                <input bindinput="inputMobile" placeholder="填写收货人手机号" type="number" value="{{addressInfo.mobile}}"></input>
+            </view>
+        </view>
+        <view class="address">
+            <text class="title">收货地址</text>
+            <view class="list">
+                <text>省/市/区</text>
+                <picker bindchange="bindRegionChange" mode="region" style="width:100%;heigth:100%;">
+                    <view class="picker" style="width:100%;heigth:100%;">
+            {{addressInfo.province?addressInfo.province+'，'+addressInfo.city+'，'+addressInfo.areas:'点击选择地址'}}
+          </view>
+                </picker>
+            </view>
+            <view class="list">
+                <text>详细地址</text>
+                <input bindblur="inputDoorplate" placeholder="填写详细地址" type="text" value="{{addressInfo.address}}"></input>
+            </view>
+            <view class="list setdefault">
+                <text>是否设为默认地址</text>
+                <view>
+                    <view bindtap="isdefault" class="boy" data-isdefault="1">
+                        <view class="select {{addressInfo.isdefault==1?'active':''}}"></view>
+                        <text>是</text>
+                    </view>
+                    <view bindtap="isdefault" class="girl" data-isdefault="0">
+                        <view class="select {{addressInfo.isdefault==0?'active':''}}"></view>
+                        <text>否</text>
+                    </view>
+                </view>
+            </view>
+        </view>
+    </view>
+    <view bindtap="saveAddress" class="button">保存收货地址</view>
+</view>

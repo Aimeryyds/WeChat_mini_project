@@ -1,0 +1,11 @@
+<view class="btn_area">
+    <view class="title">验证码登录</view>
+    <view class="section__title">
+        <text class="red" wx:if="{{tip}}">{{tip}}</text>
+        <text wx:else>接收手机验证码，快速注册或登录</text>
+    </view>
+    <input focus bindinput="phoneinput" class="bind_input" maxlength="11" placeholder="手机号码" placeholderStyle="color:#bbb;" type="number" value="{{phone_q}}"></input>
+</view>
+<button bindtap="phone_do" class="bind_btn {{isdo?'':'graybg'}}">确认</button>
+<view>　</view>
+<button bindtap="login_drop" class="">取消</button>

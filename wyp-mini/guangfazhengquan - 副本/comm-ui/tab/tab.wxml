@@ -1,0 +1,16 @@
+<template name="tab-list">
+    <view bindtap="_handleTabChange" class="tab__item {{selectedId==item.gid?'tab__item--selected':''}}" data-item-id="{{item.gid}}" data-item-name="{{item.name}}" id="item-{{item.gid}}" wx:for="{{list}}" wx:key="id">
+        <view class="tab__title {{selectedId==item.id?'active-tab-class':''}}" style="{{height?'height:'+height+'rpx;line-height:'+height+'rpx':''}}">
+      {{item.name}}
+    </view>
+    </view>
+</template>
+<view class="tab" style="{{height?'height:'+height+'px':''}}">
+    <scroll-view scrollWithAnimation scrollX class="tab__bd tab__bd--scroll {{fixed?'tab__bd--fixed':''}}" id="scroll-view" scrollLeft="{{scrollLeft}}" style="height: {{height?height+'rpx':'auto'}}" wx:if="{{scroll}}">
+        <template is="tab-list" data="{{list:list,selectedId:selectedId,height:height}}"></template>
+    </scroll-view>
+    <view class="tab__bd {{fixed?'tab__bd--fixed':''}}" style="height: {{height?height+'rpx':'auto'}}" wx:else>
+        <template is="tab-list" data="{{list:list,selectedId:selectedId,height:height}}"></template>
+    </view>
+</view>
+<slot></slot>

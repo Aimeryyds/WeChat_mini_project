@@ -1,0 +1,11 @@
+<view class="{{['house-nav _div data-v-ef7ec416',skeletonFlag||isOffline?'active':'']}}" wx:if="{{!isLowVersion}}">
+    <view class="{{['status_bar _div data-v-ef7ec416',!isTop?'fill':'']}}" style="{{'height: '+statusBarHeight+'px'}}"></view>
+    <view class="{{['nav_bar _div data-v-ef7ec416',!isTop?'fill':'']}}">
+        <view bindtap="__e" class="{{['png-icon back-btn _i data-v-ef7ec416',isTop&&!isOffline?'icon-back':'icon-back-b']}}" data-event-opts="{{[ [ 'tap',[ [ 'handleBack',['$event'] ] ] ] ]}}" wx:if="{{showBackBtn}}"></view>
+        <view class="{{['zz4_0_nav _div data-v-ef7ec416',!isTop?'fill':'']}}" wx:if="{{showNavBar}}">
+            <view bindtap="__e" class="{{['item _div data-v-ef7ec416',currentSelectIndex===0?'active':'']}}" data-event-opts="{{[ [ 'tap',[ [ 'handleNavSelect',[0] ] ] ] ]}}">房源</view>
+            <view bindtap="__e" class="{{['item _div data-v-ef7ec416',currentSelectIndex===1?'active':'']}}" data-event-opts="{{[ [ 'tap',[ [ 'handleNavSelect',[1] ] ] ] ]}}">详情</view>
+            <view bindtap="__e" class="{{['item _div data-v-ef7ec416',currentSelectIndex===2?'active':'']}}" data-event-opts="{{[ [ 'tap',[ [ 'handleNavSelect',[2] ] ] ] ]}}">推荐</view>
+        </view>
+    </view>
+</view>

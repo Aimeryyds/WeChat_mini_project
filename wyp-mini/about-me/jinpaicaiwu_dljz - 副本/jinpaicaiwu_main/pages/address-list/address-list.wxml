@@ -1,0 +1,37 @@
+<import src="../../common/package/prompt.wxml"></import>
+<view class="address-list">
+    <template is="prompt" data="{{prompt:prompt}}"></template>
+    <view class="scroll-list">
+        <view class="weui-panel" wx:if="{{!!items.length}}">
+            <view class="weui-panel__bd">
+                <view class="weui-media-box border_bottom" wx:if="{{!item.detailed_name}}" wx:for="{{items}}" wx:key="index">
+                    <view bindtap="choseAddress" class="weui-media-box__det" data-index="{{index}}">{{item.reciever_name}}  {{item.phone}}</view>
+                    <view bindtap="choseAddress" class="weui-media-box__desc medium_font" data-index="{{index}}">
+                        <block wx:if="{{item.prov_id}}">{{areaname[item.prov_id]}}</block>
+                        <block wx:if="{{item.city_id}}">{{areaname[item.city_id]}}</block>
+                        <block wx:if="{{item.dist_id}}">{{areaname[item.dist_id]}}</block>
+                        <block wx:if="{{item.detailed_addr}}">{{item.detailed_addr}}</block>
+                    </view>
+                    <view class="weui-media-box__info">
+                        <view class="cart_color small_font" wx:if="{{item.is_default=='1'}}">默认地址</view>
+                        <view bindtap="setDefalutAddress" class="color2 small_font" data-id="{{item.id}}" wx:else>设为默认</view>
+                    </view>
+                    <view class="edit">
+                        <view bindtap="toAddressEdit" data-id="{{item.id}}">
+                            <text class="small_font color2">编辑:</text>
+                            <text class="iconfont icon-edit color2"></text>
+                        </view>
+                        <view bindtap="cancelAddress" data-id="{{item.id}}">
+                            <text class="small_font color2">删除:</text>
+                            <text class="iconfont icon-shanchu color2"></text>
+                        </view>
+                    </view>
+                </view>
+            </view>
+        </view>
+    </view>
+    <view bindtap="toAddressAdd" class="btn-plus cart_color">
+        <text class="iconfont icon-tianjia"></text>
+        <text>新增地址</text>
+    </view>
+</view>

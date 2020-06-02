@@ -1,0 +1,68 @@
+<view class="container">
+    <view class="header">
+        <view class="info_img">
+            <image class="img {{is_play?'rotate':''}}" mode="widthFix" src="{{icon}}" style="border-radius: 50%;"></image>
+            <view class="small-mask"></view>
+            <image catchtap="play" class="play btn-common" src="../../resource/images/icon06.png" wx:if="{{!is_play}}"></image>
+            <image catchtap="pause" class="stop btn-common" src="../../resource/images/icon07.png" wx:else></image>
+        </view>
+        <view class="progresswrap">
+            <text class="now_val val_common">00:{{curTimeVal<10?'0'+curTimeVal:curTimeVal}}</text>
+            <slider activeColor="#79d1c3" backgroundColor="#dcdcdc" blockColor="#dcdcdc" blockSize="12" class="drag" disabled="true" max="{{duration}}" step="1" value="{{curTimeVal}}"></slider>
+            <text class="max_val val_common">00:{{duration<10?'0'+duration:duration}}</text>
+        </view>
+    </view>
+    <view class="info_body">
+        <view class="en-content">{{content}}</view>
+        <view class="cn-content">{{trans_content}}</view>
+        <view style="overflow: hidden;">
+            <view class="more more-btns">
+                <form bindsubmit="changeMore" reportSubmit="true">
+                    <button class="getform_btn" formType="submit">Submit</button>
+          更多跟读
+        </form>
+            </view>
+            <view class="another more-btns">
+                <form bindsubmit="changeOne" reportSubmit="true">
+                    <button class="getform_btn" formType="submit">Submit</button>
+          换一句 {{now}}/{{all_length}}
+        </form>
+            </view>
+        </view>
+    </view>
+    <ad style="padding: 20rpx 0;" unitId="{{ad_id}}" wx:if="{{ad_id}}"></ad>
+    <view class="list">
+        <view class="title">我的跟读</view>
+        <view class="list-content">
+            <view class="d_flex every_one" wx:for="{{comment_list}}" wx:key="{{index}}">
+                <view class="d_flex">
+                    <image class="user_icon" src="{{item.head_ico}}"></image>
+                    <view style="margin-left: 16rpx;">
+                        <view>{{item.nickname}}</view>
+                        <view style="width: {{135+item.duration*item.duration+'rpx'}};position: relative;">
+                            <form bindsubmit="playVoice" data-voice="{{item.voice}}" reportSubmit="true">
+                                <button class="getform_btn" formType="submit">Submit</button>
+                                <view class="tape d_flex">
+                                    <image class="icon" src="../../resource/images/icon09.png"></image>
+                                    <text>{{item.duration}}"</text>
+                                </view>
+                            </form>
+                        </view>
+                    </view>
+                </view>
+                <view class="time d_flex">
+                    <view>{{item.created}}</view>
+                </view>
+            </view>
+        </view>
+        <view style="text-align: center;padding-top: 16rpx;" wx:if="{{!has_next}}">没有更多记录了...</view>
+    </view>
+    <view class="bottom-btn">
+        <view class="followUp">
+            <form bindsubmit="followUp" reportSubmit="true">
+                <button class="getform_btn" formType="submit">Submit</button>
+        我要跟读
+      </form>
+        </view>
+    </view>
+</view>

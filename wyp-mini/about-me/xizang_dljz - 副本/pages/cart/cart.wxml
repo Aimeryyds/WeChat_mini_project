@@ -1,0 +1,90 @@
+<import src="../../component/icon/icon.wxml"></import>
+<view class="container">
+    <view class="empty-wrap" wx:if="{{!list&&!invalid_list||list.length==0&&invalid_list.length==0}}">
+        <image src="../../images/empty/img_empty_cart.png"></image>
+        <view class="text">
+            <text>您的购物车空空的</text>
+            <text>快把它填满吧</text>
+        </view>
+        <navigator class="btn" openType="switchTab" url="../index/index">去购物</navigator>
+    </view>
+    <view class="cart-wrap">
+        <view class="cart-list">
+            <view class="cart-item" wx:for="{{list}}">
+                <view bindtap="chooseItem" class="choose-wrap" data-idx="{{index}}">
+                    <template is="icon" data="{{width:'32rpx',height:'32rpx',icon:'/images/checkbox_nor.png'}}" wx:if="{{!item.selected}}"></template>
+                    <template is="icon" data="{{width:'32rpx',height:'32rpx',icon:'/images/checkbox_sel.png'}}" wx:else></template>
+                </view>
+                <image bindtap="go2GoodsDetail" class="item-image" id="{{item.goods.goodsSn}}" src="{{item.pic}}"></image>
+                <view class="item-right">
+                    <view class="item-top">
+                        <view class="row">
+                            <text>{{item.goods.name}}</text>
+                            <view catchtap="delCartItem" data-idx="{{index}}" id="{{item.id}}">
+                                <template is="icon" data="{{width:'20rpx',height:'20rpx',icon:'/images/icon_delete.png'}}"></template>
+                            </view>
+                        </view>
+                        <view class="standard">
+                            <text>{{item.attrsStr}}</text>
+                        </view>
+                    </view>
+                    <view class="item-bottom">
+                        <text class="price-wrap">¥ <text class="price">{{item.goods.price}}</text>
+                        </text>
+                        <view class="stepper">
+                            <view catchtap="bindMinus" class="icon-wrap left" data-idx="{{index}}" id="{{item.id}}">
+                                <image src="/images/icon_del.png" style="width: 11px; height: 11px;"></image>
+                            </view>
+                            <input bindinput="bindKeyInput" data-idx="{{index}}" type="number" value="{{item.number}}"></input>
+                            <view catchtap="bindPlus" class="icon-wrap right" data-idx="{{index}}" id="{{item.id}}">
+                                <image src="/images/icon_add.png" style="width: 11px; height: 11px;"></image>
+                            </view>
+                        </view>
+                    </view>
+                </view>
+            </view>
+            <block wx:if="{{invalid_list!=null&&invalid_list.length>0}}">
+                <view class="cart-item" wx:for="{{invalid_list}}">
+                    <view class="choose-wrap" data-idx="{{index}}">
+                        <template is="icon" data="{{width:'48rpx',height:'48rpx',icon:'/images/goods/cart_invalid.png'}}" wx:if="{{!item.selected}}"></template>
+                    </view>
+                    <image bindtap="go2GoodsDetail" class="item-image" id="{{item.goods.goodsSn}}" src="{{item.pic}}"></image>
+                    <view class="item-right">
+                        <view class="item-top">
+                            <view class="row">
+                                <text>{{item.goods.name}}{{item.goods.frozen}}</text>
+                                <view catchtap="delCartItem" data-idx="{{index}}" id="{{item.id}}">
+                                    <template is="icon" data="{{width:'20rpx',height:'20rpx',icon:'/images/icon_delete.png'}}"></template>
+                                </view>
+                            </view>
+                            <view class="standard">
+                                <text>{{item.attrsStr}}</text>
+                            </view>
+                        </view>
+                        <view class="item-bottom">
+                            <text class="price-wrap">¥ <text class="price">{{item.goods.price}}</text>
+                            </text>
+                            <view class="stepper">{{item.number}}</view>
+                        </view>
+                    </view>
+                </view>
+                <button bindtap="clearInvalid" plain="true" style="border-color:#bb3535;color:#bb3535;width:250rpx;font-size:24rpx;">清空失效的宝贝</button>
+            </block>
+        </view>
+        <view class="settle-footer" wx:if="{{list&&list.length>0}}">
+            <view bindtap="chooseAll" class="all-choose">
+                <template is="icon" data="{{width:'32rpx',height:'32rpx',icon:'/images/checkbox_nor.png'}}" wx:if="{{!is_all_choose}}"></template>
+                <template is="icon" data="{{width:'32rpx',height:'32rpx',icon:'/images/checkbox_sel.png'}}" wx:else></template>
+                <text>全选</text>
+            </view>
+            <view class="footer-right">
+                <view class="price-wrap">
+                    <text class="freight-row">{{deliveryFee>0?'运费：'+deliveryFee:'不含运费'}}</text>
+                    <text class="price-row">合计: ¥<text class="price">{{totalPrice}}</text>
+                    </text>
+                </view>
+                <view bindtap="settle" class="btn">结算</view>
+            </view>
+        </view>
+    </view>
+</view>

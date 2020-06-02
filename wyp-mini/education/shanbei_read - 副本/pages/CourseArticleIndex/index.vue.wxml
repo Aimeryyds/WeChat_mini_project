@@ -1,0 +1,53 @@
+<template name="29277214">
+    <view class="_div data-v-1a5d1081 course-article-index">
+        <view class="_div data-v-1a5d1081 book-info">
+            <image class="_img data-v-1a5d1081 cover" src="{{bookCover}}"></image>
+            <view class="_div data-v-1a5d1081">
+                <view class="_div data-v-1a5d1081 title-en">{{bookTitleEn}}</view>
+                <view class="_div data-v-1a5d1081 title-cn">{{bookTitleCn}}</view>
+                <view class="_div data-v-1a5d1081 author">{{bookAuthor}}</view>
+            </view>
+        </view>
+        <view class="_div data-v-1a5d1081 article-info">
+            <view class="_div data-v-1a5d1081 title">{{articleTitle}}</view>
+            <image class="_img data-v-1a5d1081 decoration" src="https://media-image1.baydn.com/storage_media_image/kvhfgj/04b7f9a27453022d12822a3061b439a5.82114944ceb0a0ad4f5a181d3276e3e7.png"></image>
+        </view>
+        <view class="_div data-v-1a5d1081 content">
+            <view class="_div data-v-1a5d1081 label">本章看点</view>
+            <view class="_div data-v-1a5d1081 point-list">
+                <view class="_div data-v-1a5d1081" key="{{point}}" wx:for="{{keyPoints}}" wx:for-item="point" wx:key="point">{{point}}</view>
+            </view>
+            <view class="_div data-v-1a5d1081 card-list">
+                <view class="_div data-v-1a5d1081 vertical-line"></view>
+                <view bindtap="handleProxy" class="_div data-v-1a5d1081 card" data-comkey="{{$k}}" data-eventid="{{'0-'+index}}" key="{{index}}" wx:for="{{parts}}" wx:for-item="part" wx:key="index">
+                    <view class="_div data-v-1a5d1081 circle-container">
+                        <view class="_div data-v-1a5d1081 circle start" wx:if="{{part.status===2}}"></view>
+                        <view class="_div data-v-1a5d1081 circle locked" wx:if="{{part.status===1}}"></view>
+                        <view class="_div data-v-1a5d1081 circle finished" wx:if="{{part.status===4}}"></view>
+                    </view>
+                    <view class="_div data-v-1a5d1081 meta-container">
+                        <view class="_div data-v-1a5d1081 title">{{part.name}}</view>
+                        <view class="_div data-v-1a5d1081 meta">
+                            <view class="_div data-v-1a5d1081 desc">预计学习时间{{part.time}}分钟</view>
+                            <view class="_div data-v-1a5d1081 state">
+                                <button class="_button data-v-1a5d1081 start" wx:if="{{part.status===2}}">开始</button>
+                                <view class="_i data-v-1a5d1081 ib ib-lock-o" wx:if="{{part.status===1}}"></view>
+                                <view class="_i data-v-1a5d1081 ib ib-check check" wx:if="{{part.status===4}}"></view>
+                            </view>
+                        </view>
+                    </view>
+                </view>
+            </view>
+            <button bindtap="handleProxy" class="_button data-v-1a5d1081 share flex-vhc" data-comkey="{{$k}}" data-eventid="{{'1'}}" wx:if="{{parts.length&&parts[2].status===4}}">
+                <view class="_div data-v-1a5d1081 text">分享成就</view>
+            </button>
+            <view class="_div data-v-1a5d1081 modal flex-vhc" wx:if="{{!isHideCourseAppTip&&finishedParts.length>0&&finishedParts.length<4}}">
+                <view class="_div data-v-1a5d1081 body">
+                    <view class="_div data-v-1a5d1081 title">我们增加了【活学活用】版块，帮你把学到的词汇、短语放在新场景中应用。</view>
+                    <view class="_div data-v-1a5d1081 tip">注意：新版块的出现不会影响之前已经完成的章节进度哦~</view>
+                    <view bindtap="handleProxy" class="_div data-v-1a5d1081 footer flex-vhc" data-comkey="{{$k}}" data-eventid="{{'2'}}">我知道了</view>
+                </view>
+            </view>
+        </view>
+    </view>
+</template>

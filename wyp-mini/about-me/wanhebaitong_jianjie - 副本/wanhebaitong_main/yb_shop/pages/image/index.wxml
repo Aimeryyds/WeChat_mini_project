@@ -1,0 +1,14 @@
+<view class="photo_list" wx:if="{{show}}">
+    <view class="photo_items" wx:for="{{list}}">
+        <view bindtap="previewImage" class="image" data-url="{{item.img_cover}}" style="background-image:url({{item.img_cover}})"></view>
+    </view>
+    <view style="float:none;width:100%;">
+        <view class="fui-loading empty" wx:if="{{loaded}}">
+            <view class="text">没有更多内容了</view>
+        </view>
+    </view>
+    <block wx:if="{{showtabbar}}">
+        <view style="height:100rpx"></view>
+        <include src="/yb_shop/pages/common/menu.wxml"></include>
+    </block>
+</view>

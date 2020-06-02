@@ -1,0 +1,37 @@
+var filter = ({
+    dateFilter: (function() {
+        var date = getDate();
+        var seperator1 = "-";
+        var year = date.getFullYear();
+        var month = date.getMonth() + 1;
+        var strDate = date.getDate();
+        if (month >= 1 && month <= 9) {
+            month = "0" + month
+        };
+        if (strDate >= 0 && strDate <= 9) {
+            strDate = "0" + strDate
+        };
+        var currentdate = year + seperator1 + month + seperator1 + strDate;
+        return (currentdate)
+    }),
+    dateFn: (function(value) {
+        var today = filter.dateFilter();
+        var year = value.substring(0, 4);
+        var month = value.substring(5, 7);
+        var day = value.substring(8, 10);
+        var h = value.substring(11, 13);
+        var m = value.substring(14, 16);
+        var s = value.substring(17);
+        var dates = year + "-" + month + "-" + day;
+        if (today == dates) {
+            value = h + ":" + m
+        } else {
+            value = month + "-" + day + " " + h + ":" + m
+        };
+        return (value)
+    }),
+});
+module.exports = ({
+    dateFilter: filter.dateFilter,
+    dateFn: filter.dateFn,
+});

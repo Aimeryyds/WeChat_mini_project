@@ -1,0 +1,14 @@
+<checkbox-group bindchange="onChange">
+    <label class="checkbox" wx:if="{{items.length>0}}" wx:for="{{items}}" wx:key="value">
+        <checkbox checked="{{item.checked}}" disabled="{{item.disabled}}" value="{{item.value}}"></checkbox>
+        <icon color="{{item.disabled?'#cccccc':'#3f7de5'}}" size="20" type="success" wx:if="{{item.checked}}"></icon>
+        <view class="un-checked" wx:if="{{!item.checked}}"></view>
+    {{item.label}}
+  </label>
+    <label class="checkbox" wx:if="{{items.length===0}}">
+        <checkbox checked="{{checked}}" disabled="{{disabled}}" value="{{value}}"></checkbox>
+        <icon color="{{disabled?'#cccccc':'#3f7de5'}}" size="20" type="success" wx:if="{{checked}}"></icon>
+        <view class="un-checked" wx:if="{{!checked}}"></view>
+    {{label}}
+  </label>
+</checkbox-group>

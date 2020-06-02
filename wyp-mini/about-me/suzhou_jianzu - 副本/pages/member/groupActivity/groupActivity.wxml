@@ -1,0 +1,113 @@
+<view class="swiper">
+    <swiper autoplay="{{autoplay}}" class="swiperCont" duration="{{duration}}" indicatorDots="{{indicatorDots}}" interval="{{interval}}">
+        <swiper-item class="swiperItem" wx:for="{{imgUrls}}">
+            <image class="slide-image" mode="widthFix" src="{{item}}"></image>
+        </swiper-item>
+        <view bindtap="changeImage" class="changeImage">
+添加宣传图
+</view>
+    </swiper>
+</view>
+<view class="careful">
+    <image class="icon" src="http://tws.cnweisou.com/images/topA.png"></image>
+    <text class="cont">群内活动是私密活动，仅对分享的微信用户可见</text>
+</view>
+<form bindsubmit="formSubmitAll" reportSubmit="true">
+    <view class="formSetion">
+        <view class="formList">
+            <view class="formKey">
+                <image src="http://tws.cnweisou.com/images/activityA.png"></image>
+            </view>
+            <view class="formValue formmap">
+                <input bindinput="actItem" maxlength="30" name="actItem" placeholder="活动主题（必填，不超过30个字）" placeholderStyle="color: #ccc;" type="text" value="{{formInfo.actItem}}"></input>
+            </view>
+        </view>
+        <view class="formList">
+            <view class="formKey marginRight30">
+                <image src="http://tws.cnweisou.com/images/timeA.png"></image>
+            </view>
+            <picker bindchange="changeStartDate" class="formDateValue" mode="date" name="actStartdate" value="{{Startdate}}">{{Startdate}}</picker>
+            <picker bindchange="changeStartTime" class="formTimeValue" mode="time" name="actStarttimne" value="{{Starttimne}}">{{Starttimne}}</picker>
+            <text class="timeBegin">开始</text>
+        </view>
+    </view>
+    <view bindtap="changeMap" class="formList marginLeft">
+        <view class="formKey">
+            <image src="http://tws.cnweisou.com/images/position1Z.png"></image>
+        </view>
+        <view class="formValue formmap">
+            <input bindinput="changeadress" name="actAddress" placeholder="活动地点(必填)" placeholderStyle="color: #ccc;" type="text" value="{{formInfo.actAddress}}"></input>
+            <view class="mapicon">
+                <image mode="aspectFit" src="http://tws.cnweisou.com/images/rightArrow.png"></image>
+            </view>
+        </view>
+    </view>
+    <view class="formList marginLeft">
+        <view class="formKey">
+            <image src="http://tws.cnweisou.com/images/phoneA.png"></image>
+        </view>
+        <input bindblur="bindblurPhone" bindinput="verificationPhone" class="formValue" maxlength="11" name="actTotalnum" placeholder="验证手机(必填)" placeholderStyle="color: #ccc;" type="number" value="{{verification}}"></input>
+        <view class="mapicon marginRight"></view>
+    </view>
+    <view class="colorGray"></view>
+    <view class="moreSelect">
+        <view catchtap="moreSelectArrow" class="moreSelectTip">
+更多选项
+	<image class="{{ClassNum==0?'':'rotateBottom'}}" mode="aspectFit" src="http://tws.cnweisou.com/images/rightArrow.png"></image>
+        </view>
+        <view class="{{ClassNum==0?'displayHide':''}}">
+            <view class="formList marginLeft">
+                <view class="formKey marginRight30">
+                    <image src="http://tws.cnweisou.com/images/timeA.png"></image>
+                </view>
+                <picker bindchange="changeEndDate" class="formDateValue" mode="date" name="actEnddate" value="{{Enddate}}">
+      {{Enddate}}</picker>
+                <picker bindchange="changeEndTime" class="formTimeValue" mode="time" name="actEndtime" value="{{Endtime}}">{{Endtime}}</picker>
+                <text class="timeEnd">结束</text>
+            </view>
+            <view class="formList marginLeft">
+                <view class="formKey">
+                    <image src="http://tws.cnweisou.com/images/peopleZ.png"></image>
+                </view>
+                <input bindinput="actPersonum" class="formValue" maxlength="4" name="actTotalnum" placeholder="人数限制(不填为不限)" placeholderStyle="color: #ccc;" type="number" value="{{formInfo.actPersonnum}}"></input>
+            </view>
+            <view class="formList marginLeft">
+                <view class="formKey">
+                    <image src="http://tws.cnweisou.com/images/moneyZ.png"></image>
+                </view>
+                <view class="formValue formtype">
+                    <picker bindchange="systemChange" range="{{arraySystem}}" value="{{index}}">
+     {{arraySystem[index]}}
+  </picker>
+                </view>
+            </view>
+            <view class="formList marginLeft">
+                <view class="formKey">
+                    <image src="http://tws.cnweisou.com/images/typeA.png"></image>
+                </view>
+                <view bindtap="showchangetype" class="formValue formtype">
+                    <input name="actType" placeholder="活动类型" placeholderStyle="color: #ccc;" type="text" value="{{activityType}}"></input>
+                    <view bindtap="choosetype" class="choosetype">
+                        <image mode="aspectFit" src="http://tws.cnweisou.com/images/rightArrow.png"></image>
+                    </view>
+                </view>
+            </view>
+            <view class="formList marginLeft">
+                <view class="formKey">
+                    <image src="http://tws.cnweisou.com/images/talk2Z.png"></image>
+                </view>
+                <view bindtap="activityIntroduce" class="formValue formtype">
+                    <input class="textareaIntroduce" name="actType" placeholder="活动介绍（选填）" placeholderStyle="color: #ccc;" type="text" value="{{activityIntroduce}}"></input>
+                    <view class="choosetype">
+                        <image mode="aspectFit" src="http://tws.cnweisou.com/images/rightArrow.png"></image>
+                    </view>
+                </view>
+            </view>
+        </view>
+    </view>
+    <view class="clickOK">
+点击发布表示您已同意<text>《用户使用协议》</text>
+    </view>
+    <button class="createSubmit" disabled="{{!formInfo.imgUrls||!formInfo.actItem||!formInfo.actAddress||!formInfo.phone||!formInfo.activityType}}" formType="submit" type="primary">发布</button>
+</form>
+<loading wx:if="{{loading}}"></loading>

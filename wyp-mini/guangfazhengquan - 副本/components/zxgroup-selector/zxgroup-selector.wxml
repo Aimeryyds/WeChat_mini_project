@@ -1,0 +1,19 @@
+<modal bottom="{{bottom}}" contentPadding="0" id="modal__{{modalId}}">
+    <view slot="content">
+        <view hidden="{{mode!='select'}}">
+            <scroll-view scrollY class="v-quote-stocks stock-list" style="margin-bottom:8rpx;max-height: {{maxHeight}}px;">
+                <list-item customStyle="padding:22rpx 0" footer="{{item.hasAdd?'已添加':''}}" wx:for="{{groupList}}" wx:key="{{gid}}">
+                    <view slot="title">
+                        <m-checkbox bind:change="toggleSelectStatus" checked="{{item.selected}}" data-index="{{index}}" disabled="{{item.gid=='0'}}" label="{{item.cname}}"></m-checkbox>
+                    </view>
+                </list-item>
+            </scroll-view>
+            <view bindtap="switchMode" style="padding-top:20rpx;">
+                <text class="text-link">+ 添加分组</text>
+            </view>
+        </view>
+        <view class="input-wrapper" hidden="{{mode=='select'}}">
+            <input bindblur="blur" bindfocus="focus" bindinput="handleNameChange" maxlength="6" placeholder="最多六个字" value="{{name}}"></input>
+        </view>
+    </view>
+</modal>

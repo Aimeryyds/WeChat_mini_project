@@ -1,0 +1,55 @@
+<view class="room-recommend-page">
+    <view style="position:fixed;background:#fff;z-index:9;width:100%;top:0;height:{{statusBar.height+'px'}}"></view>
+    <status-bar statusBar="{{statusBar}}"></status-bar>
+    <view class="room-recommend-bg" hidden="{{!roomAttentionList.length}}" style="background-image: url({{shareInfo.snapshot}});"></view>
+    <scroll-view scrollY bind:touchend="recommendPageTouchend" bind:touchstart="recommendPageTouchstart" class="room-recommend" style="top: calc(90rpx + {{statusBarHeight}}px);height: calc(100vh - 80rpx - {{statusBarHeight}}px);">
+        <view class="room-recommend__attention--title" wx:if="{{roomAttentionList.length}}">
+            <view class="room-recommend__attention__txt--title">
+                关注的主播（{{roomAttentionList.length}}）
+            </view>
+            <image class="room-recommend__attention__bg--title" src="/pages/room-recommend/images/img_gradient.png"></image>
+        </view>
+        <view class="room-attention-list">
+            <view bindtap="openNewRoom" class="room-attention-item" data-sid="{{item.sid}}" data-ssid="{{item.ssid}}" data-type="1" data-uid="{{item.uid}}" data-url="{{'/pages/room/room?sid='+item.sid+'&ssid='+item.ssid+'&uid='+item.uid+'&snapshot='+item.img}}" hidden="{{index>6&&!showMoreRoomAttention}}" wx:for="{{roomAttentionList}}" wx:key="{{item.sid}}">
+                <view class="room-attention-item__left">
+                    <image class="room-attention-avatar" src="{{item.img}}"></image>
+                    <view class="room-attention-info">
+                        <view class="room-attention-info__name">{{item.name}}</view>
+                        <view class="room-attention-info__desc">开播{{item._liveTime}}</view>
+                    </view>
+                </view>
+                <view class="room-attention-item__right">
+                    <image class="room-attention-live" src="/pages/room-recommend/images/ico_live.png"></image>
+                </view>
+                <view class="room-attention-item__line"></view>
+            </view>
+            <view class="room-attention-more" wx:if="{{roomAttentionList.length>7}}">
+                <view bindtap="roomAttentionMore" class="room-attention-more__area">
+                    <view class="room-attention-more__txt">{{showMoreRoomAttention?'折叠':'展开'}}</view>
+                    <image class="room-attention-more__arrow" src="{{showMoreRoomAttention?'/pages/room/images/icon-up.png':'/pages/room/images/icon-down.png'}}"></image>
+                </view>
+            </view>
+        </view>
+        <view class="room-recommend__attention--title" wx:if="{{roomRecommendList.length}}">
+            <view class="room-recommend__attention__txt--title">
+                为你推荐
+            </view>
+            <image class="room-recommend__attention__bg--title" src="/pages/room-recommend/images/img_gradient.png"></image>
+        </view>
+        <view class="room-attention-list">
+            <view bindtap="openNewRoom" class="room-attention-item" data-sid="{{item.sid}}" data-ssid="{{item.ssid}}" data-type="2" data-uid="{{item.uid}}" data-url="{{'/pages/room/room?sid='+item.sid+'&ssid='+item.ssid+'&uid='+item.uid+'&snapshot='+item.snapshot}}" wx:for="{{roomRecommendList}}" wx:key="{{item.sid}}">
+                <view class="room-attention-item__left">
+                    <image class="room-recommend-avatar" src="{{item.snapshot}}"></image>
+                    <view class="room-attention-info">
+                        <view class="room-attention-info__name">{{item.desc}}</view>
+                        <view class="room-attention-info__desc room-recommend-users">
+                            <image class="room-attention-user__icon" src="/images/viewer_icon2.png"></image>
+                            <view class="room-attention-user__num">{{item.users}}</view>
+                        </view>
+                    </view>
+                </view>
+                <view class="room-attention-item__line"></view>
+            </view>
+        </view>
+    </scroll-view>
+</view>

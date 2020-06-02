@@ -1,0 +1,91 @@
+<import src="../../../../wxParse/wxParse.wxml"></import>
+<scroll-view bindscrolltolower="bottom" scrollY="true" style="height: {{height}}rpx;margin-bottom: 80rpx;">
+    <view class="banner">
+        <view bindtap="toPerson" class="item" data-bid="{{xbid}}" data-pid="{{data.member.id}}">
+            <view class="left">
+                <image class="img" src="{{data.member.avatar}}"></image>
+                <view class="wrap">
+                    <view class="line">{{data.member.nickname}}
+					<text class="levelname">{{data.level.levelname}}</text>
+                    </view>
+                </view>
+            </view>
+            <view class="right" style="margin-right: 20rpx;display: flex;flex-direction: row;justify-content: space-between;align-items:center;">
+                <image src="http://tws.cnweisou.com/images/rightArrow.png" style="width:18rpx;height:26rpx;"></image>
+            </view>
+        </view>
+    </view>
+    <view class="contain">
+        <view class="title">{{data.post.title}}</view>
+        <view class="time">{{times}}
+			<view class="levelname">{{data.level.levelname}}</view>
+        </view>
+        <view class="content">
+            <template is="wxParse" data="{{wxParseData:article.nodes}}"></template>
+        </view>
+        <view class="img_wrap" style="" wx:if="{{data.post.images_arr}}">
+            <image bindtap="joinImage" mode="aspectFit" src="{{item}}" style="width: 160rpx;height: 160rpx;margin-right: 20rpx;" wx:for="{{data.post.images_arr}}"></image>
+        </view>
+        <view class="views">浏览：{{data.post.views}}</view>
+    </view>
+    <view class="comment">
+        <view class="top">全部评论</view>
+        <block wx:if="{{comment}}">
+            <view class="item" wx:for="{{comment}}">
+                <image bindtap="toPerson" class="img" data-bid="{{xbid}}" data-pid="{{item.member.id}}" src="{{item.avatar}}"></image>
+                <view style="">
+                    <view class="m_name" style="">
+                        <view class="line">
+                            <text style="line-height: 44rpx;">{{item.nickname}}</text>
+                            <text class="levelname" style="">{{item.level.levelname}}</text>
+                        </view>
+                        <text style="line-height: 44rpx">{{item.createtime}} </text>
+                    </view>
+                    <view class="wrap">
+                        <view class="title">{{item.title}}</view>
+                        <view class="c_content" style="">
+                            <template is="wxParse" data="{{ wxParseData:replyTemArray[index] }}"></template>
+                        </view>
+                        <view class="img_wrap" style="" wx:if="{{item.images}}">
+                            <image mode="widthFix" src="{{item}}" style="width: 33%;" wx:for="{{item.images}}"></image>
+                        </view>
+                        <view style="font-size:28rpx;display:flex;flex-direction:row;" wx:if="{{item.parent}}">
+                            <text style="color:orange;margin-right: 20rpx;">@{{item.parent.nickname}} </text>
+                            <template is="wxParse" data="{{ wxParseData:subtempArr[index] }}"></template>
+                        </view>
+                        <view class="b_createtime">
+                            <view>{{item.createtime}} </view>
+                            <view class="huifu_wrap" style="">
+                                <view class="icon"></view>
+                                <text bindtap="to_topic" data-bid="{{xbid}}" data-pid="{{xpid}}" data-rid="{{item.id}}">回复</text>
+                                <view class="icon"></view>
+                                <text bindtap="isGood" data-bid="{{xbid}}" data-index="{{index}}" data-isgood="{{pin[index]}}" data-pid="{{item.id}}">赞({{pin[index]}})</text>
+                            </view>
+                        </view>
+                    </view>
+                </view>
+            </view>
+        </block>
+        <view class="body" wx:else>
+            <view class="no_comment" style="margin-top:180rpx;">
+                <image src="https://tws.cnweisou.com/images/talk2Z.png" style="width: 120rpx;height: 120rpx;margin: 30rpx 0;"></image>
+                <view>暂时没有任何评论</view>
+            </view>
+        </view>
+    </view>
+    <view class="footer">
+        <view bindtap="X" class="postcount" data-bid="{{xbid}}" data-pid="{{xpid}}">
+            <image class="icon" src="https://tws.cnweisou.com/images/yu.png" style="width:28rpx;height:28rpx;"></image>评论</view>
+        <view bindtap="zan" class="goodcount" data-bid="{{xbid}}" data-pid="{{xpid}}">
+            <image class="icon" src="https://tws.cnweisou.com/images/good1Z.png" wx:if="{{check==1}}"></image>
+            <image class="icon" src="https://tws.cnweisou.com/images/good2Z.png" wx:else></image>{{isgood}}</view>
+    </view>
+    <view bindtap="showImages" class="bgtypeList" wx:if="{{showImage}}">
+        <swiper autoplay="false" bindchange="currChange" circular="true" class="slideImgs" duration="500">
+            <swiper-item style="height:auto;display:flex;flex-direction:row;justify-content:center;align-items:center;" wx:for="{{imgUrls}}">
+                <image class="slide-image" mode="widthFix" src="{{item}}"></image>
+            </swiper-item>
+        </swiper>
+        <view class="imagesNum">{{currIndex}}/{{imgLength}}</view>
+    </view>
+</scroll-view>

@@ -1,0 +1,95 @@
+<form>
+    <view class="cu-form-group">
+        <view class="title">保险公司</view>
+        <view class="title">
+				{{insrCorpName}}
+			</view>
+    </view>
+    <view class="cu-form-group margin-top">
+        <view class="title">经销商</view>
+    {{companyName}}
+	</view>
+    <view class="cu-form-group">
+        <view class="title">门店名称</view>
+    {{appliName}}
+	</view>
+    <view class="cu-form-group">
+        <view class="title">信用代码</view>
+    {{appliCorpId}}
+	</view>
+    <view class="cu-form-group">
+        <view class="title">联系电话</view>
+    {{appliCorpPhone}}
+	</view>
+    <view class="cu-form-group margin-top">
+        <view class="title">被保险人</view>
+    {{insuredName}}
+	</view>
+    <view class="cu-form-group">
+        <view class="title">证件号码</view>
+    {{insuredCard}}
+	</view>
+    <view class="cu-form-group">
+        <view class="title">手机号码</view>
+    {{insuredPhone}}
+		</view>
+    <view class="cu-form-group margin-top">
+        <view class="title">车辆信息</view>
+        <view bindtap="goScan" class="cu-item text-xxl">
+            <text class="cuIcon-scan lg text-blue"></text>
+        </view>
+    </view>
+    <view class="cu-form-group">
+        <view class="title">车牌号</view>
+        <input bindinput="getInputValue" id="plateNumber" placeholder="请填写车牌号" value="{{plateNumber}}"></input>
+    </view>
+    <view class="cu-form-group">
+        <view class="title">厂牌型号</view>
+        <input bindinput="getInputValue" id="modelNumber" placeholder="请填写厂牌型号" value="{{modelNumber}}"></input>
+    </view>
+    <view class="cu-form-group">
+        <view class="title">电机号码</view>
+        <input bindinput="getInputValue" id="machineryNumber" placeholder="请填写电机号码" value="{{machineryNumber}}"></input>
+    </view>
+    <view class="cu-form-group">
+        <view class="title">车架号</view>
+        <input bindinput="getInputValue" id="frameNumber" placeholder="请填写车架号" value="{{frameNumber}}"></input>
+    </view>
+    <view class="cu-form-group">
+        <view class="title">车辆颜色</view>
+        <input bindinput="getInputValue" id="veichelColor" placeholder="请填写车辆颜色" value="{{veichelColor}}"></input>
+    </view>
+    <view class="cu-form-group">
+        <view class="title">生产日期</view>
+        <picker bindchange="DateChange" id="productionDate" mode="date">
+            <view class="picker">
+				{{productionDate}}
+			</view>
+        </picker>
+    </view>
+    <view class="cu-form-group">
+        <view class="title">购买日期</view>
+        <picker bindchange="DateChange" id="buyDate" mode="date" value="{{buyDate}}">
+            <view class="picker">
+				{{buyDate}}
+			</view>
+        </picker>
+    </view>
+    <view class="cu-form-group text-left">
+        <checkbox catchtap="chooseRead" class="round orange"></checkbox>
+        <text class="text-grey text-left text-sm">我已阅读并同意</text>
+        <text bindtap="readDetail" class="text-blue text-left text-sm" data-type="notice">《投保须知》</text>
+        <text bindtap="readDetail" class="text-blue text-left text-sm" data-type="clause">《保险条款》</text>
+        <text bindtap="readDetail" class="text-blue text-left text-sm" data-type="statement">《投保声明》</text>
+    </view>
+    <view class="cu-bar btn-group margin-top margin-bottom">
+        <button bindtap="goHome" class="cu-btn text-blue line-blue ">返回</button>
+        <button catchtap="submitInsuranceForm" class="cu-btn bg-blue">确认激活</button>
+    </view>
+    <view class="cu-load load-modal" wx:if="{{loadModal}}">
+        <view class="gray-text">提交中...</view>
+    </view>
+    <view class="cu-load load-modal" wx:if="{{readModal}}">
+        <view class="gray-text">读取中...</view>
+    </view>
+</form>

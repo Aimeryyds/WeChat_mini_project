@@ -1,0 +1,23 @@
+<template name="fruitMachine">
+    <view class="marquee_wp" wx:if="{{prizeList}}">
+        <view class="marquee_wp_circle" data-index="{{index}}" style="top:{{item.topCircle}}rpx;left:{{item.leftCircle}}rpx;background-color: {{index%2==0?myData.colorCircleFirst:myData.colorCircleSecond}};  position: absolute; display: block;border-radius: 50%;height: 20rpx;width: 20rpx;" wx:for="{{myData.circleList}}"></view>
+        <view class="marquee_item {{idx==item.id?'on':''}}" data-index="{{index}}" style="" wx:for="{{prizeList}}">
+            <view class="marquee_itemImg" wx:if="{{item.icon}}">
+                <image src="{{item.icon}}"></image>
+            </view>
+            <view class="marquee_itemImgCont" wx:if="{{item.title}}">
+     {{item.title}}
+     </view>
+            <view bindtap="startPrize" class="luckDraw {{myData.btnDisabled}}" wx:if="{{item.titleBtn}}"></view>
+        </view>
+    </view>
+</template>
+<template name="scratch">
+    <view class="scratch_wp" style="display:block;position:relative;width: 85%; height: 395rpx;;margin:0 auto;" wx:if="{{scratchResult.chance>0}}">
+        <canvas bindtouchend="touchEnd" bindtouchmove="touchMove" bindtouchstart="touchStart" canvasId="scratch" style="margin: 0 auto;width: 85%; height: 395rpx; background: transparent;z-index:5;padding-top:10rpx;"></canvas>
+        <view class="scratch_txt">{{scratch.awardTxt}}</view>
+    </view>
+    <view class="scratch_wp_no" style="display:block;position:relative;width:88%;height:200px;margin:0 auto;text-align: center;line-height: 200px;border-radius:10rpx;background:#E44245;color:#fff;font-size:36rpx;" wx:else>
+  没有刮奖的机会喔
+  </view>
+</template>

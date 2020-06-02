@@ -1,0 +1,43 @@
+<view class="page">
+    <view class="weeks box box-lr box-pack-center box-align-center">
+        <view class="flex week fs28" data-idx="{{index}}" wx:for="{{weeks_ch}}" wx:key="{{index}}">{{item}}</view>
+    </view>
+    <view class="flex box box-tb box-align-center" wx:for="{{allDays}}" wx:for-item="i" wx:key="{{index}}">
+        <view class="monthTitle">
+            <block wx:if="{{index==0}}">{{curYear}}年{{curMonth}}月</block>
+            <block wx:if="{{index==1}}">{{curYear}}年{{curMonth+1}}月</block>
+            <block wx:if="{{index==2}}">{{curYear}}年{{curMonth+2}}月</block>
+        </view>
+        <view class="calendar pink-color box box-tb">
+            <view class="days box box-lr box-wrap">
+                <view class="grid white-color box box-align-center box-pack-center" data-idx="{{index}}" wx:if="{{i.emptyDays!=0}}" wx:for="{{i.emptyDays}}" wx:key="{{index}}"></view>
+                <block wx:if="{{i.month==curMonth}}">
+                    <view class="grid white-color box box-align-center box-pack-center" wx:for="{{i.days}}" wx:key="{{index}}">
+                        <view style="display: flex;justify-content: center;align-items: center;flex-direction: column;">
+                            <view bindtap="{{curDate<=item?'Xget':''}}" class="day box-align-center box-pack-center {{indexs==item&&curMonthIndex==curMonth?'border-radius pink-bg':''}}  {{curDate>item?'color-bg':''}}  " data-Day="{{item}}" data-Month="{{curMonth}}" style="text-align:center;line-height:60rpx">
+                                    {{item}}
+                                </view>
+                            <view style="text-align:center;font-size:20rpx;color:#ff9a11" wx:if="{{list_item.month==curMonth&&list_item.day==item}}" wx:for="{{list}}" wx:for-item="list_item">￥{{list_item.oprice}}</view>
+                        </view>
+                    </view>
+                </block>
+                <block wx:elif="{{i.month==curMonth+1}}">
+                    <view class="grid white-color box box-align-center box-pack-center" wx:for="{{i.days}}" wx:key="{{index}}">
+                        <view style="text-align:center">
+                            <view bindtap="Xget" class="day box-align-center box-pack-center {{indexs==item&&curMonthIndex==curMonth+1?'border-radius pink-bg':''}}" data-Day="{{item}}" data-Month="{{curMonth+1}}" style="text-align:center;line-height:60rpx">{{item}}</view>
+                            <view style="text-align:center;font-size:20rpx;color:#ff9a11" wx:if="{{list_item.month==curMonth+1&&list_item.day==item}}" wx:for="{{list}}" wx:for-item="list_item">￥{{list_item.oprice}}</view>
+                        </view>
+                    </view>
+                </block>
+                <block wx:elif="{{i.month==curMonth+2}}">
+                    <view class="grid white-color box box-align-center box-pack-center" wx:for="{{i.days}}" wx:key="{{index}}">
+                        <view style="text-align:center">
+                            <view bindtap="Xget" class="day box-align-center box-pack-center {{indexs==item&&curMonthIndex==curMonth+2?'border-radius pink-bg':''}}" data-Day="{{item}}" data-Month="{{curMonth+2}}" style="text-align:center;line-height:60rpx">{{item}}</view>
+                            <view style="text-align:center;font-size:20rpx;color:#ff9a11" wx:if="{{list_item.month==curMonth+2&&list_item.day==item}}" wx:for="{{list}}" wx:for-item="list_item">￥{{list_item.oprice}}</view>
+                        </view>
+                    </view>
+                </block>
+            </view>
+        </view>
+    </view>
+</view>

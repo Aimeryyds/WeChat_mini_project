@@ -1,0 +1,149 @@
+<navigationTopbar navImage="{{navigationImg}}" navTxt="{{navTxtStr}}" navtype="1" showWhiteBackground="{{navTopBackShow}}"></navigationTopbar>
+<view class="home_tab" style="top:{{tabHeight}}px;">
+    <view class="tab">
+        <view class="tab_live no" hidden="{{tabliveicon}}"></view>
+        <view class="tab_live has" hidden="{{!tabliveicon}}"></view>
+        <button catchtap="onLive" class="tab_btn"></button>
+    </view>
+    <view class="tab">
+        <view class="tab_dance no" hidden="{{tabdanceicon}}"></view>
+        <view class="tab_dance has" hidden="{{!tabdanceicon}}"></view>
+        <button catchtap="onDance" class="tab_btn"></button>
+    </view>
+    <view class="tab">
+        <view class="tab_short no" hidden="{{tabshorticon}}"></view>
+        <view class="tab_short has" hidden="{{!tabshorticon}}"></view>
+        <button catchtap="onShort" class="tab_btn"></button>
+    </view>
+    <view class="imgbg {{tabCss}}"></view>
+</view>
+<view class="page_container" style="top:{{navHeight}}px;">
+    <swiper autoplay="{{autoplay}}" bindanimationfinish="changeGoodsSwip" circular="{{true}}" class="banner_swiper" current="{{goodsIndex}}" duration="{{duration}}" indicatorDots="{{indicatorDots}}" interval="{{interval}}" wx:if="{{bannerShow}}">
+        <swiper-item bindtap="toWeb" data-item="{{item}}" wx:for="{{privateBannerInfoList}}" wx:key="index">
+            <image class="slide-image" mode="widthFix" src="{{item.picUrl}}"></image>
+        </swiper-item>
+    </swiper>
+    <view hidden="{{!tablive}}">
+        <view class="home_container">
+            <view bindtap="toLiveRoom" class="list_item" data-item="{{item}}" style="margin-left: {{itemLeft}}px;margin-top: {{itemLeft}}px;" wx:for="{{videoInfoList}}" wx:key="index">
+                <view class="sign" style="background: linear-gradient(to right, {{item.tagLeft}},{{item.tagRight}})" wx:if="{{item.tag}}">{{item.tag}}</view>
+                <view class="sign_new sign_new_newer" wx:elif="{{!item.tag&&item.new_live_host_tag}}">
+                    <image class="sign_new_icon" src="./../../images/newer_icon.png"></image>
+                    <view class="sign_new_txt">新晋</view>
+                </view>
+                <view class="sign_new sign_new_hot" wx:elif="{{!item.tag&&item.playerType==3}}">
+                    <image class="sign_new_icon" src="./../../images/hot_icon.png"></image>
+                    <view class="sign_new_txt">热门</view>
+                </view>
+                <view class="videoicon" wx:if="{{item.live_state===0}}">
+                    <text class="icon_txt">直播中</text>
+                    <image class="video_icon" src="./../../images/video_icon_new.png"></image>
+                </view>
+                <view class="icon" wx:if="{{item.live_state!=0}}">
+                    <text class="icon_txt">回放</text>
+                    <image class="huifang" src="./../../images/huifang.png"></image>
+                </view>
+                <view class="img">
+                    <image src="{{item.cover_img_url}}"></image>
+                </view>
+                <view class="bottom">
+                    <view class="title">{{item.name}}</view>
+                    <view class="msg">
+                        <text class="num">{{item.viewer_total_count}}</text>
+                        <text class="txt">观看</text>
+                        <text class="city">{{item.live_city}}</text>
+                    </view>
+                </view>
+            </view>
+        </view>
+        <view class="bottom_tip" wx:if="{{hasMore}}">Opps,已经到底了</view>
+    </view>
+    <view hidden="{{!tabdance}}">
+        <view class="home_container" wx:if="{{!danceListNone}}">
+            <view bindtap="toLiveRoom" class="list_item" data-item="{{item}}" style="margin-left: {{itemLeft}}px;margin-top: {{itemLeft}}px;" wx:for="{{danceList}}" wx:key="index">
+                <view class="sign" style="background: linear-gradient(to right, {{item.tagLeft}},{{item.tagRight}})" wx:if="{{item.tag}}">{{item.tag}}</view>
+                <view class="sign_new sign_new_newer" wx:elif="{{!item.tag&&item.new_live_host_tag}}">
+                    <image class="sign_new_icon" src="./../../images/newer_icon.png"></image>
+                    <view class="sign_new_txt">新晋</view>
+                </view>
+                <view class="sign_new sign_new_hot" wx:elif="{{!item.tag&&item.playerType==3}}">
+                    <image class="sign_new_icon" src="./../../images/hot_icon.png"></image>
+                    <view class="sign_new_txt">热门</view>
+                </view>
+                <view class="videoicon" wx:if="{{item.live_state===0}}">
+                    <text class="icon_txt">直播中</text>
+                    <image class="video_icon" src="./../../images/video_icon_new.png"></image>
+                </view>
+                <view class="icon" wx:if="{{item.live_state!=0}}">
+                    <text class="icon_txt">回放</text>
+                    <image class="huifang" src="./../../images/huifang.png"></image>
+                </view>
+                <view class="img">
+                    <image src="{{item.cover_img_url}}"></image>
+                </view>
+                <view class="bottom">
+                    <view class="title">{{item.title}}</view>
+                    <view class="msg">
+                        <text class="num">{{item.viewer_total_count}}</text>
+                        <text class="txt">观看</text>
+                        <text class="city">{{item.live_city}}</text>
+                    </view>
+                </view>
+            </view>
+        </view>
+        <block wx:else>
+            <image class="dancenone" src="./../../images/hint/none.jpg"></image>
+            <view class="bottom_tip">没有正在进行的直播哦~</view>
+        </block>
+    </view>
+    <view hidden="{{!tabshort}}">
+        <view class="home_container">
+            <view bindtap="toShortRoom" class="list_item" data-item="{{item}}" style="margin-left: {{itemLeft}}px;margin-top: {{itemLeft}}px;" wx:for="{{shortList}}" wx:key="index">
+                <view class="img">
+                    <image mode="aspectFill" src="{{item.coverUrl}}"></image>
+                </view>
+                <view class="bottom">
+                    <view class="title">{{item.title}}</view>
+                    <view class="msg">
+                        <image class="view_img" src="./../../images/viewIcon.png"></image>
+                        <text class="num">{{item.viewCount}}</text>
+                    </view>
+                </view>
+            </view>
+        </view>
+    </view>
+</view>
+<view class="errorUer" style="top:{{navHeight}}px;" wx:if="{{errorUerShow}}">您的账号已停止使用，如有疑问请联系客服QQ：2433099001咨询。</view>
+<view class="pop_con" wx:if="{{recommendShow}}">
+    <view bindtap="closePop" class="pop_mask"></view>
+    <view class="pop_body">
+        <form bindsubmit="toLiveRoom" class="pop_form" data-item="{{recommendItem}}" data-str="recommend" reportSubmit="true">
+            <button class="button_btn" formType="submit">
+                <image class="recommend_bg" src="./../../images/pop_recommend.jpg"></image>
+                <view class="recommend_box">
+                    <view class="head">
+                        <image class="user_head" src="{{recommendItem.cover_img_url}}"></image>
+                        <image class="head_top" src="./../../images/pop_recommend_msg.png"></image>
+                        <image class="head_box" src="./../../images/pop_recommend_heart.png"></image>
+                    </view>
+                    <view class="go_btn" formType="submit">
+                        <image src="./../../images/pop_btn.png"></image>
+                        <view class="go_txt">去看看</view>
+                    </view>
+                </view>
+            </button>
+        </form>
+    </view>
+</view>
+<button class="shareHome" id="shareHome" openType="share">
+    <image class="shareHome_img_bg" src="./../../images/share_icon.png"></image>
+    <image class="shareHome_img" src="./../../images/share_icon.png"></image>
+</button>
+<view class="pop_newLibao" wx:if="{{newLibaoShow}}">
+    <view class="newLibao_con">
+        <image class="libao" src="./../../images/newLibao.jpg"></image>
+        <button bindgetphonenumber="getPhoneNumber" class="getphon" openType="getPhoneNumber"></button>
+        <image bindtap="onCloseLibao" class="close_libao" src="./../../images/closeNew.png"></image>
+    </view>
+</view>
+<login bind:getUserInfo="getAuthor" id="login"></login>

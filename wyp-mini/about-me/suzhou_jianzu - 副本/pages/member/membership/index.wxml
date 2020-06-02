@@ -1,0 +1,29 @@
+<block wx:if="{{cardList[0]}}" wx:for="{{cardList}}">
+    <view class="card" style="background-image:url(http://tws.cnweisou.com/images/cardBgC.png);background-size: 100% 100%">
+        <view class="cardLogo">
+            <image mode="widthFix" src="{{item.logo}}"></image>
+        </view>
+        <image class="bg" src="{{item.background.backurl}}"></image>
+        <view class="vipCont">
+            <view class="vipcard">VIP
+                <text class="cardType">{{item.title}}</text>
+                <view class="price">￥{{item.money}}</view>
+            </view>
+        </view>
+        <view bindtap="activateCardSilver" class="activateCard" data-index="{{index}}">
+            开卡
+        </view>
+    </view>
+    <view class="cardTip">
+        <text>{{item.description}}</text>
+    </view>
+</block>
+<view class="noCardCont" wx:if="{{!cardList[0]}}">
+    <view class="noImg">
+        <image src="http://tws.cnweisou.com/images/becomeRegister.png"></image>
+    </view>
+    <view class="noCont">
+        没有会员卡内容
+    </view>
+</view>
+<loading wx:if="{{loading}}"></loading>

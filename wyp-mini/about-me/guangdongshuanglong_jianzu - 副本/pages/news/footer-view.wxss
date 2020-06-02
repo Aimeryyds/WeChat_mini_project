@@ -1,0 +1,71 @@
+.footer-view {
+    width: 100%;
+    height: 45px;
+    line-height: 45px;
+    flex-flow: row nowrap;
+    justify-content: center;
+    align-content: center;
+}
+
+.loading-clip-rotate>view {
+    background-color: #fff;
+    width: 12px;
+    height: 12px;
+    border-radius: 100%;
+    animation-fill-mode: both;
+    border: 1px solid #aaa;
+    border-bottom-color: transparent;
+    height: 15px;
+    width: 15px;
+    background: transparent!important;
+    display: inline-block;
+    animation: rotate 0.75s 0s linear infinite;
+}
+
+@-webkit-keyframes rotate {
+    0% {
+        transform: rotate(0deg) scale(1);
+    }
+
+    50% {
+        transform: rotate(180deg) scale(0.6);
+    }
+
+    100% {
+        transform: rotate(360deg) scale(1);
+    }
+}
+
+@keyframes rotate {
+    0% {
+        transform: rotate(0deg) scale(1);
+    }
+
+    50% {
+        transform: rotate(180deg) scale(0.6);
+    }
+
+    100% {
+        transform: rotate(360deg) scale(1);
+    }
+}
+
+@-webkit-keyframes scale {
+    30% {
+        transform: scale(0.3);
+    }
+
+    100% {
+        transform: scale(1);
+    }
+}
+
+@keyframes scale {
+    30% {
+        transform: scale(0.3);
+    }
+
+    100% {
+        transform: scale(1);
+    }
+}

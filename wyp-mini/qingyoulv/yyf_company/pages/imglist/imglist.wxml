@@ -1,0 +1,27 @@
+<view class="news">
+    <view class="cate">
+        <scroll-view scrollX class="scroll_view">
+            <view bindtap="catClick" class="cate-item {{currentTabsIndex==item.id?'hover':''}}" data-catkey="{{catkey}}" data-cid="{{item.id}}" data-fid="{{item.fid}}" style="{{currentTabsIndex==item.id?'border-color:'+tcolor+';color:'+tcolor:''}}" wx:for="{{cats}}" wx:for-index="catkey" wx:key="unique"> {{item.name}} </view>
+        </scroll-view>
+    </view>
+    <view class="news-div">
+        <view class="image-item" wx:for="{{list}}" wx:key="{{index}}">
+            <navigator url="{{item.url}}">
+                <image src="{{item.thumb}}"></image>
+                <view class="image-item-bg image-position"></view>
+                <view class="image-item-text image-position">{{item.title}}</view>
+            </navigator>
+        </view>
+    </view>
+</view>
+<view bindtap="loadMore" class="loadMore" data-lastid="{{lastid}}">加载更多</view>
+<view class="copyright {{blist.copyright.copyright==''?'mt0':''}}">
+    <block wx:if="{{blist.copyright.copyright!=''}}">
+        <import src="../public/copy.wxml"></import>
+        <template is="copy" data="{{blist:blist}}"></template>
+    </block>
+</view>
+<block wx:if="{{hide_tabbar=='0'}}">
+    <import src="../public/foot.wxml"></import>
+    <template is="foot" data="{{blist:blist}}"></template>
+</block>

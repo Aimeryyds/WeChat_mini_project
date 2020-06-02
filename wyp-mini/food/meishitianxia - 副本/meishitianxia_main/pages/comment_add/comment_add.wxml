@@ -1,0 +1,23 @@
+<view class="comment_add">
+    <textarea autoFocus autoHeight bindinput="comment_message" class="comment_add_textarea" placeholder="写评论..." placeholderStyle="color:#999"></textarea>
+    <view class="weui-uploader__bd">
+        <view class="weui-uploader__files">
+            <view class="weui-uploader__file" wx:for="{{imageList}}" wx:for-index="num" wx:for-item="image" wx:key="imageList">
+                <image bindtap="previewImage" class="weui-uploader__img" data-src="{{image}}" src="{{image}}?x-oss-process=style/c180"></image>
+                <view bindtap="del_img" class="del_img" data-num="{{num}}">
+                    <view></view>
+                </view>
+            </view>
+        </view>
+        <view class="weui-uploader__input-box" wx:if="{{img_count>0}}">
+            <view bindtap="chooseImage" class="weui-uploader__input">
+                <image src="../../image/xiangji.png"></image>
+                <view>传图片</view>
+            </view>
+        </view>
+    </view>
+</view>
+<button bindtap="comment_add_do" class="comment_add_btn" wx:if="{{allowadd}}">发表</button>
+<button class="comment_add_btn graybg" wx:else>发表</button>
+<view>　</view>
+<view>　</view>

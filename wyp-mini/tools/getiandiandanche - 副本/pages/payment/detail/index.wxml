@@ -1,0 +1,22 @@
+<view class="page">
+    <my-component bind:myevent="myEventListener" innerText="我的明细"></my-component>
+    <view class="main" style=" margin-top: {{myHight}}px"></view>
+    <view class="no-detail08" wx:if="{{detailist.length==0}}">
+    暂无数据...
+</view>
+    <view class="list" wx:for="{{detailist}}" wx:key="index">
+        <view>
+            <view class="amount">{{item.recharge}}</view>
+            <view class="cz-time08">{{item.rechargetime}}</view>
+        </view>
+        <view>
+            <view class="cz-num08 {{item.paytype=='微信充值'?'red':'bule'}}">{{item.amount}}元</view>
+            <view class="cz-time08 adp08" style="text-align:right">{{item.paytype}}</view>
+        </view>
+    </view>
+    <view class="body-view">
+        <loading bindchange="loadingChange" hidden="{{hidden}}">
+             加载中...
+         </loading>
+    </view>
+</view>

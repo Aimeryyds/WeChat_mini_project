@@ -1,0 +1,48 @@
+<view class="container">
+    <view class="top">
+        <view class="top-banner">
+            <image mode="widthFix" src="{{imgUrl}}{{bannerUrl}}" style="width:100%;display:block;"></image>
+        </view>
+        <view class="title border_bottom">微银行</view>
+        <swiper indicatorActiveColor="#4990f7" indicatorColor="rgba(201, 201, 201, 1)" indicatorDots="{{indicatorDots}}">
+            <swiper-item>
+                <view class="top-wrap">
+                    <view class="flex-item-V" wx:for="{{wyhObj1}}" wx:key="id">
+                        <view bindtap="webviewGo" data-menuid="{{item.id}}" data-menuurl="{{item.menuurl}}">
+                            <image src="{{imgUrl}}{{item.imagepath}}" style="width:32px; height:32px;"></image>
+                            <view class="flex-item-text">{{item.text}}</view>
+                        </view>
+                    </view>
+                </view>
+            </swiper-item>
+            <swiper-item>
+                <view class="top-wrap">
+                    <view class="flex-item-V" wx:for="{{wyhObj2}}" wx:key="id">
+                        <view bindtap="webviewGo" data-menuid="{{item.id}}" data-menuurl="{{item.menuurl}}">
+                            <image src="{{imgUrl}}{{item.imagepath}}" style="width:32px; height:32px;"></image>
+                            <view class="flex-item-text">{{item.text}}</view>
+                        </view>
+                    </view>
+                </view>
+            </swiper-item>
+        </swiper>
+    </view>
+    <view class="title border_bottom">信用卡功能</view>
+    <view class="con-wrap">
+        <view class="con-item" wx:for="{{xykgnObj}}" wx:key="id">
+            <view bindtap="webviewGo" class="innerbox" data-menuid="{{item.id}}" data-menuurl="{{item.menuurl}}">
+                <text class="con-item-text">{{item.text}}</text>
+                <image src="{{imgUrl}}{{item.imagepath}}" style="width:38px;height:38px;display:inline-block;"></image>
+            </view>
+        </view>
+    </view>
+    <view class="title">小西服务</view>
+    <view class="active" wx:for="{{xxfwObj}}" wx:key="id">
+        <view bindtap="webviewGo" data-menuid="{{item.id}}" data-menuurl="{{item.menuurl}}">
+            <image mode="widthFix" src="{{imgUrl}}{{item.imagepath}}" style="width:100%;display:block;"></image>
+            <view class="active-text-tit">{{item.text}}</view>
+        </view>
+    </view>
+    <view class="foot">Copyright@Bank of Xi’an All Rights Reserved</view>
+    <view class="foot" style="margin-bottom:10px;">西安银行 版权所有</view>
+</view>

@@ -1,0 +1,52 @@
+<view class="container">
+    <view wx:if="{{openevaluate==1}}">
+        <view class="evaluate-store__title">评价（{{storeEvaluateData.reviewsNum}}）  {{storeEvaluateData.goodReviewsRate}}%好评</view>
+        <evaluate-tab bindonquery="evaluateTab" pingjiaArray="{{pingjiaArray}}"></evaluate-tab>
+    </view>
+    <scroll-view enableBackToTop scrollY bindscroll="handlescroll" bindscrolltolower="lower" scrollTop="{{scrollTop}}" style="width:100%;height: 75vh;">
+        <view class="myevaluate" wx:if="{{isShow}}">
+            <view class="myevaluate-list" wx:for="{{storeEvaluateData.data}}" wx:for-index="dataindex">
+                <view class="myevaluate-list__item">
+                    <view class="myevaluate-baseInfo__wrap">
+                        <view class="myevaluate-baseInfo">
+                            <image class="myevaluate-baseInfo__img" src="{{item.avatarUrl}}"></image>
+                            <view class="myevaluate-baseInfo__cont">
+                                <view>{{item.nickName}}</view>
+                            </view>
+                        </view>
+                        <view class="myevaluate-list__start">商家打分：<image src="http://imgcdnali.wfenxiao.com.cn/xcx/c/1120/pingjia.png" wx:if="{{score<=item.businessScore}}" wx:for="{{[2,4,6,8,10]}}" wx:for-item="score"></image>
+                        </view>
+                    </view>
+                    <view style="margin-bottom:24rpx;" wx:for="{{item.evaluates}}" wx:for-index="dataindex2">
+                        <view class="myevaluate-list--fontcolor">{{item.firstEvaluateTimeStr}}  <text wx:if="{{item.properties}}">{{item.properties}}</text>
+                        </view>
+                        <view class="myevaluate-list__cont" wx:if="{{item.firstEvaluateContent}}">{{item.firstEvaluateContent}}</view>
+                        <view class="myevaluate-list__uploadimg" wx:if="{{item.firstEvaluateImgs}}">
+                            <image bindtap="onTapPic" data-imgindex="{{dataindex2}}" data-index="{{dataindex}}" data-link="{{item}}" data-type="first" src="{{item}}" style="margin-right:{{index==3?'0':'10rpx'}}" wx:for="{{item.firstEvaluateImgs}}"></image>
+                        </view>
+                        <view class="myevaluate-list__reply myevaluate-list--fontcolor" wx:if="{{item.firstBusinessReply}}">商家回复：{{item.firstBusinessReply}}</view>
+                        <view class="myevaluate-list__add" wx:if="{{item.secondEvaluateContent}}">
+                            <view class="myevaluate-list__add-title">{{item.days}}</view>
+                            <view class="myevaluate-list__cont">{{item.secondEvaluateContent}}</view>
+                            <view class="myevaluate-list__uploadimg" wx:if="{{item.secondEvaluateImgs}}">
+                                <image bindtap="onTapPic" data-imgindex="{{dataindex2}}" data-index="{{dataindex}}" data-link="{{item}}" data-type="second" src="{{item}}" style="margin-right:{{index==3?'0':'10rpx'}}" wx:for="{{item.secondEvaluateImgs}}"></image>
+                            </view>
+                            <view class="myevaluate-list__reply myevaluate-list--fontcolor" wx:if="{{item.secondBusinessReply}}">商家回复：{{item.secondBusinessReply}}</view>
+                        </view>
+                        <view class="myevaluate-product">
+                            <image class="myevaluate-product__img" src="{{item.imgs}}"></image>
+                            <view class="myevaluate-product__cont">
+                                <view style="margin-bottom:6rpx;">{{item.name}}</view>
+                                <view class="myevaluate-product__price" wx:if="{{item.price!=0}}">￥{{item.price}}</view>
+                            </view>
+                        </view>
+                    </view>
+                </view>
+            </view>
+            <wxc-abnor title="暂时没有数据" type="MESSAGE" wx:if="{{storeEvaluateData.data==0}}"></wxc-abnor>
+        </view>
+        <view id="loadmore">
+            <template is="zan-loadmore" data="{{loading:loadingmore}}"></template>
+        </view>
+    </scroll-view>
+</view>

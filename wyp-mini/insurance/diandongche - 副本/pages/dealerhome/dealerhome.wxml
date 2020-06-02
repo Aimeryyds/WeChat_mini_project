@@ -1,0 +1,130 @@
+<view class="my-container">
+    <view class="gradients-view">
+        <view bindtap="goDealermy" class="edit-view">
+            <text class="cuIcon-people text-white text-xl"></text>
+            <view class="text-white margin-left-sm text-sm">设置</view>
+        </view>
+    </view>
+    <view class="cu-list menu sm-border card-menu margin-top-minus">
+        <view bindtap="chooseDepartment" class="cu-list menu-avatar">
+            <view class="cu-item">
+                <view class="cu-avatar avatar round ">
+                    <open-data type="userAvatarUrl"></open-data>
+                </view>
+                <view class="content padding-left-sm">
+                    <view class="text">{{userName}}</view>
+                    <view class="text-gray text-sm ">
+            {{address}}
+          </view>
+                </view>
+                <view class="action">
+                    <text class="cuIcon-order text-grey "></text>
+                </view>
+            </view>
+        </view>
+        <view class="grid col-3 bg-white ">
+            <view class="bottom-message" data-index="0">
+                <text class="title text-df">E保卡总数</text>
+                <text class="title text-xl text-orange">{{allnumber}}</text>
+            </view>
+            <view class="bottom-message">
+                <text class="title text-df">已投保车辆</text>
+                <text class="title text-xl text-orange">{{used}}</text>
+            </view>
+            <view class="bottom-message" data-index="2">
+                <text class="title text-df">E保卡剩余</text>
+                <text class="title text-xl text-orange">{{unuse}}</text>
+            </view>
+        </view>
+        <view class="cu-bar btn-group bg-white">
+            <button bindtap="goEcForm" class="cu-btn bg-blue">
+                <text class="cuIcon-vipcard" decode="{{true}}">&nbsp;&nbsp;</text> E保卡购买
+      </button>
+            <button bindtap="goEcOrder" class="cu-btn text-blue line-blue ">
+                <text class="cuIcon-search" decode="{{true}}">&nbsp;&nbsp;</text> 订单查询
+      </button>
+        </view>
+        <view class="cu-item">
+            <view class="content">
+                <text class="text">门店</text>
+            </view>
+            <view class="action">
+                <text class="text-grey text-sm">{{department.departmentname}}</text>
+            </view>
+        </view>
+        <view class="cu-item">
+            <view class="content">
+                <text class="text">所属公司</text>
+            </view>
+            <view class="action">
+                <text class="text-grey text-sm">{{department.company}}</text>
+            </view>
+        </view>
+        <view class="cu-item">
+            <view class="content">
+                <text class="text">门店地址</text>
+            </view>
+            <view class="action">
+                <text class="text-grey text-sm">{{department.address}}</text>
+            </view>
+        </view>
+        <view class="cu-item">
+            <view class="content">
+                <text class="text">上牌登记点</text>
+            </view>
+            <view class="action">
+                <text class="text-grey text-sm">{{department.playingCard}}</text>
+            </view>
+        </view>
+        <view class="cu-item">
+            <view class="content">
+                <text class="text">店主姓名</text>
+            </view>
+            <view class="action">
+                <text class="text-grey text-sm">{{department.contacts}}</text>
+            </view>
+        </view>
+        <view class="cu-item">
+            <view class="content">
+                <text class="text">店主电话</text>
+            </view>
+            <view class="action">
+                <text class="text-grey text-sm">{{department.mobile}}</text>
+            </view>
+        </view>
+    </view>
+</view>
+<view class="cu-modal {{modalName=='RadioModal'?'show':''}}">
+    <view catchtap class="cu-dialog margin-top-xl margin-bottom-xl">
+        <scroll-view scrollY class="scrollPage">
+            <view class="cu-bar bg-white solid-bottom">
+                <view class="action">
+                    <text class="cuIcon-title text-blue"></text>
+                    <text class="title text-bold">请选择门店</text>
+                </view>
+            </view>
+            <radio-group class="block">
+                <view class="cu-list menu text-left ">
+                    <view class="cu-item" wx:for="{{deptlist}}">
+                        <label bindtap="ChooseRadio" class="flex justify-between align-center flex-sub" data-value="{{item}}">
+                            <view class="cu-item">
+                                <view class="content padding-tb-sm padding-left">
+                                    <view>
+                    {{item.departmentname}}
+                    </view>
+                                    <view class="text-sm padding-right-sm">{{item.address}}</view>
+                                </view>
+                            </view>
+                            <view data-value="{{item.id}}" wx:if="{{item.id==deptid}}">
+                                <radio checked class="round"></radio>
+                            </view>
+                            <view wx:else>
+                                <radio class="round"></radio>
+                            </view>
+                        </label>
+                    </view>
+                </view>
+            </radio-group>
+        </scroll-view>
+    </view>
+</view>

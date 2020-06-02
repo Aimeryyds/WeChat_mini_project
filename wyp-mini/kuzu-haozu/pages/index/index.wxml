@@ -1,0 +1,109 @@
+<view class="haozu_banner">
+    <image backgroundSize="cover" src="https://fang-oss.haozu.com/cms/index/2018/04/19/E7Fy5x6cdM.jpg@750w_500h_90q_1c_1e_1"></image>
+    <navigator class="index_logo" hoverClass="none" openType="redirect" url="index">
+        <image backgroundSize="cover" src="../../images/haozu_logo.png"></image>
+    </navigator>
+    <view catchtap="showFn" class="index_phone" hoverClass="none">
+        <image backgroundSize="cover" src="../../images/phone_icon.png"></image>
+        <text>{{msg_template}}</text>
+    </view>
+    <view class="seachBox">
+        <navigator class="selectCity" hoverClass="none" url="city">{{comm.getCity(domain,citys)}}<text class="selectCity_down"></text>
+            <text class="selectCity_line">|</text>
+        </navigator>
+        <navigator class="iptHeader" hoverClass="none" url="search">
+            <image backgroundSize="cover" src="../../images/search_icon.png"></image>
+            <input disabled="disabled" focus="{{focus}}" placeholder=" 输入您想找的区域/商圈或者写字楼名称" type="text" value=""></input>
+        </navigator>
+    </view>
+</view>
+<view class="navList">
+    <navigator hoverClass="none" url="../list/list?domain={{domain}}">
+        <image backgroundSize="cover" src="../../images/rent_icon.png"></image>
+        <text>写字楼出租</text>
+    </navigator>
+    <navigator hoverClass="none" url="../list/list_space?domain={{domain}}">
+        <image backgroundSize="cover" src="../../images/share_icon.png"></image>
+        <text>共享办公</text>
+    </navigator>
+    <navigator hoverClass="none" url="../list/list_chuangyi?domain={{domain}}">
+        <image backgroundSize="cover" src="../../images/creativity_icon.png"></image>
+        <text>创意园区</text>
+    </navigator>
+</view>
+<view class="spaceComm"></view>
+<view class="entrustWrap">
+    <view class="entrustForm" hoverClass="none">
+        <view class="error">
+            <input bindinput="inputChange" class="iptEntrust" disabled="{{isYK||userInfo.mobile}}" focus="{{showYK}}" maxlength="11" placeholder="输入手机号码，免费委托找房" placeholderClass="phone_holder" type="number" value="{{userInfo.mobile||username}}"></input>
+            <text class="data-Error {{dError?'':'hide'}}">请输入正确的手机号！</text>
+            <view bindtap="submitYK" class="btSubEntrust {{isYK?'hui':''}}">{{isYK?'已':'立即'}}预约</view>
+        </view>
+    </view>
+</view>
+<view class="spaceComm"></view>
+<view class="coreWrap">
+    <view class="topCore">推荐楼盘
+    <view bindtap="refresh" class="dingwei">
+            <view class="dingwei_addres">
+                <image backgroundSize="cover" src="../../images/map_icon.png"></image>
+                <view wx:if="{{show_place.building_name!='无法获取定位'}}">
+          {{show_place.building_name}} [{{show_place.district_name}}-{{show_place.circle_name}}]
+        </view>
+                <view wx:if="{{show_place.building_name=='无法获取定位'}}">
+          无法获取定位
+        </view>
+            </view>
+            <view class="dingwei_refresh">
+                <image backgroundSize="cover" src="../../images/refresh_icon.png"></image>
+            </view>
+        </view>
+    </view>
+    <view class="listPro" hoverClass="none">
+        <navigator class="listbox" data-id="{{item.building_id}}" url="../building/building?building_id={{item.building_id}}" wx:for="{{building_items}}" wx:key="building_id">
+            <view class="listProLeft">
+                <image src="{{item.building_thumb_image}}"></image>
+                <text class="corner" wx:if="{{item.house_type==5}}">共享办公</text>
+            </view>
+            <view class="listProRight">
+                <view class="listProRight_title">{{item.building_name}}</view>
+                <view class="listProRight_about">{{item.area_min}}-{{item.area_max}}㎡</view>
+                <view class="listProRight_about">{{item.district_name}}-{{item.street_name}}</view>
+                <view class="listProRight_about">{{item.subway_display}}</view>
+                <text class="listProRight_price">
+                    <text>{{item.building_price}}</text>{{comm.html_decode(item.building_price_unit)}}</text>
+                <view class="labelPro">
+                    <text class="tag t{{index%5+1}}" wx:for="{{item.building_tags}}" wx:key="name">{{item.name}}</text>
+                </view>
+            </view>
+        </navigator>
+    </view>
+    <view bindtap="onReachBottom" class="listPro-more">查看全部房源</view>
+</view>
+<view class="footer">
+    <view class="viewTab">
+        <view class="footerimg">
+            <image src="../../images/up_index.png"></image>
+        </view>
+        <view class="footerword cur">首页</view>
+    </view>
+    <view bindtap="toMyFn" class="viewTab">
+        <view class="footerimg">
+            <image src="../../images/un_my.png"></image>
+        </view>
+        <view class="footerword">我的</view>
+    </view>
+</view>
+<view class="data-shade {{shade?'':'hide'}}"></view>
+<view class="data-result {{subsucc?'':'hide'}}">
+    <image src="../../images/success.png"></image>
+    <text class="result-title">提交成功</text>
+    <text>客服很快会与您联系！</text>
+    <view class="login-box {{loginYK?'h270':'hide'}}">
+        <text class="login-prompt">是否用当前手机号登录会员？</text>
+        <view bindtap="Ylogin" class="login-btn">确认登录</view>
+        <view bindtap="closePop" class="login-cancel">暂时不用</view>
+    </view>
+    <image bindtap="closePop" class="closebtn" src="{{close}}"></image>
+</view>
+<wxs module="comm" src="../../utils/common.wxs" />

@@ -1,0 +1,15 @@
+<view class="aclist" wx:for="{{accounts}}" wx:key="{{index}}">
+    <view bindtap="choose_account" class="ac" data-index="{{index}}">{{accounts[index]}} </view>
+    <view class="edit">
+        <view bindtap="add_account" data-id="{{accids[index]}}">
+            <text>编辑:</text>
+            <text class="iconfont icon-edit"></text>
+        </view>
+        <view bindtap="del_account" data-id="{{accids[index]}}">
+            <text>删除:</text>
+            <text class="iconfont icon-shanchu"></text>
+        </view>
+    </view>
+    <view class="cl"></view>
+</view>
+<button bindtap="add_account" class="bu">添加账户</button>

@@ -1,0 +1,43 @@
+<navigator style="display:flex;flex-direction: column" url="/pages/food/fooddetail/index?id={{item.id}}">
+    <view class="food_order_item">
+        <view class="food_order_row" data-id="{{item.id}}">
+            <view class="food_order_rowleft">
+                <image src="{{item.brandLogo}}"></image>
+                <view class="food_order_rowname">
+            {{item.brandName}} ({{item.storeName}})
+          </view>
+                <image src="http://imgcdnali.wfenxiao.com.cn/xcx/c/order/arrow-right.png" style="width:16rpx; height:24rpx; margin-left:20rpx;"></image>
+            </view>
+            <view class="food_order_rowright" style="font-size:24rpx;">{{item.statusName}}</view>
+        </view>
+        <view class="food_order_foodinfo">
+            <view wx:for="{{item.goodsList}}" wx:for-index="indx" wx:for-item="pro" wx:key="{{idx}}">
+                <view class="food_order_fooditem" wx:if="{{indx<3}}">
+            {{pro.name}}
+            <text style="color:#A8A8A8">x{{pro.num}}</text>
+                </view>
+            </view>
+            <view style="line-height:48rpx" wx:if="{{item.goodsList.length>3}}">...</view>
+            <view class="food_order_foodtotal">
+                <view class="products-list__stock">共{{item.goodsNum}}件商品</view>
+                <view class="products-list__price">
+                    <text>¥</text>{{item.total}}</view>
+            </view>
+        </view>
+    </view>
+</navigator>
+<view class="food_order_payitem">
+    <view>{{item.timeShow}}</view>
+    <view class="food_order_paytime">
+        <view class="food_order_overtime" wx:if="{{item.orderStatus==10}}">
+      还剩: <wxc-countdown bind:endcount="onEndCount" countdown="{{item.remainMinutes}}" data-hi="{{index}}" format="{{format}}" numStyle="{{numStyle}}" style="margin:0 12rpx"></wxc-countdown>
+        </view>
+        <view wx:for="{{item.actionList}}" wx:for-index="idp" wx:for-item="pay" wx:key="{{idp}}">
+            <view bindtap="toPayOrder" class="food-order-btn" data-id="{{item.orderNo}}" wx:if="{{pay=='pay'}}">去支付</view>
+            <navigator hoverClass="none" style="display:flex;width:100%;" url="/pages/pingjia/evaluateform/index?type=5&orderNo={{item.orderNo}}" wx:if="{{pay=='firstEvaluate'}}">
+                <view class="food-order-btn" data-id="{{item.id}}">去评价</view>
+            </navigator>
+        </view>
+    </view>
+</view>
+<toast show="{{toast.show}}" title="{{toast.title}}"></toast>

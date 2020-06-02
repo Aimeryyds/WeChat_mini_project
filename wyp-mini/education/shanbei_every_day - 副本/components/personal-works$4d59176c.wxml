@@ -1,0 +1,48 @@
+<template name="personal-works$4d59176c">
+    <view class="_div data-v-7322b15c personal-works" style=" {{'padding-top:'+paddingTop+'px'+';'}}">
+        <template is="nav-bar$6acec6f9" data="{{...$root[$kk+'0'],$root:$root}}"></template>
+        <view class="_div data-v-7322b15c translation-item" key="{{item.id}}" wx:if="{{type==='translation'}}" wx:for="{{translationList}}" wx:key="item.id">
+            <view class="_div data-v-7322b15c header">
+                <view class="_div data-v-7322b15c publisher">
+                    <image class="_img data-v-7322b15c avatar" src="{{item.userinfo&&item.userinfo.avatar}}"></image>
+                    <view class="_div data-v-7322b15c info">
+                        <view class="_div data-v-7322b15c nickname">{{item.userinfo&&item.userinfo.nickname}}</view>
+                        <view class="_div data-v-7322b15c publish-date">{{item.created_at}}</view>
+                    </view>
+                </view>
+                <view class="_div data-v-7322b15c love-count">
+                    <label class="_span data-v-7322b15c">{{item.like}}</label>
+                    <image class="_img data-v-7322b15c" src="/static/img/love-inactive.png"></image>
+                </view>
+            </view>
+            <view class="_div data-v-7322b15c translation-sentence">{{item.content}} </view>
+            <view class="_div data-v-7322b15c origin-sentence">原句：{{item.challenge_content}}</view>
+            <view bindtap="handleProxy" class="_div data-v-7322b15c del" data-comkey="{{$k}}" data-eventid="{{'0-'+index}}">删除</view>
+        </view>
+        <view class="_div data-v-7322b15c record-item" key="{{item.id}}" wx:if="{{type==='record'}}" wx:for="{{recordList}}" wx:key="item.id">
+            <view class="_div data-v-7322b15c header">
+                <view class="_div data-v-7322b15c publisher">
+                    <image class="_img data-v-7322b15c avatar" src="{{item.userinfo&&item.userinfo.avatar}}"></image>
+                    <view class="_div data-v-7322b15c info">
+                        <view class="_div data-v-7322b15c nickname">{{item.userinfo&&item.userinfo.nickname}}</view>
+                        <view class="_div data-v-7322b15c publish-date">{{item.created_at}}</view>
+                    </view>
+                </view>
+                <view class="_div data-v-7322b15c love-count">
+                    <label class="_span data-v-7322b15c">{{item.like}}</label>
+                    <image class="_img data-v-7322b15c" src="/static/img/love-inactive.png"></image>
+                </view>
+            </view>
+            <view class="_div data-v-7322b15c content">
+                <view bindtap="handleProxy" class="_div data-v-7322b15c sound {{[item.isPlaying?'playing':'']}}" data-comkey="{{$k}}" data-eventid="{{'1-'+index}}">
+                    <image class="_img data-v-7322b15c" src="{{item.isPlaying?'/static/img/sound-playing.gif':'/static/img/sound-line.png'}}"></image>
+                </view>
+                <view class="_div data-v-7322b15c duration">{{item.audio_length}}</view>
+            </view>
+            <view class="_div data-v-7322b15c origin-sentence">原句：{{item.quote_content}}</view>
+            <view bindtap="handleProxy" class="_div data-v-7322b15c del" data-comkey="{{$k}}" data-eventid="{{'2-'+index}}">删除</view>
+        </view>
+        <image class="_img data-v-7322b15c none-works" src="https://media-image1.baydn.com/storage_media_image/ccdbwr/5a9aa45186bd7676c8ed2a87a1ca0ed8.ce5952c5feb59724e486b432dd89e4d0.png" wx:if="{{isShowEmpty}}"></image>
+    </view>
+</template>
+<import src="nav-bar$6acec6f9"></import>

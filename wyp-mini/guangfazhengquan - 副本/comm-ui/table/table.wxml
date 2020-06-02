@@ -1,0 +1,56 @@
+<view class="theader" style="{{theaderStyle}}" wx:if="{{!noHeader}}">
+    <view class="{{item.sortable?'sort-th':'th'}}" style="width:{{item.width}};{{item.thStyle}}" wx:for="{{columns}}" wx:key="key">
+        <text>{{item.label}}</text>
+        <view bindtap="onClickSort" data-idx="{{index}}" style="margin-left:10rpx;" wx:if="{{item.sortable}}">
+            <view>
+                <m-icon on="{{item.asc}}" size="20" type="up"></m-icon>
+            </view>
+            <view>
+                <m-icon on="{{item.desc}}" size="20" type="down"></m-icon>
+            </view>
+        </view>
+    </view>
+</view>
+<view class="tbody" wx:if="{{!moveable}}">
+    <view class="tr" style="{{trStyle}}" wx:for="{{visibleDataSource}}" wx:for-index="rowIndex" wx:for-item="rowData" wx:key="key">
+        <view class="td" style="width:{{headerItem.width}};{{headerItem.tdStyle}}" wx:for="{{columns}}" wx:for-item="headerItem" wx:key="key">
+            <view wx:if="{{headerItem.hiddenValue===undefined||headerItem.hiddenValue!==rowData[headerItem.dataIndex]}}">
+                <view bindtap="onClickIcon" data-icon="{{headerItem.iconType}}" data-idx="{{rowIndex}}" data-rowkey="{{rowData.key}}" data-text="{{rowData[headerItem.dataIndex]}}" wx:if="{{headerItem.nodeType=='icon'}}">
+                    <m-icon imgIcon="{{headerItem.imgIcon}}" type="{{headerItem.iconType}}"></m-icon>
+                </view>
+                <view wx:elif="{{headerItem.nodeType=='checkbox'}}">
+                    <m-checkbox bind:change="onCheckBoxChange" checked="{{rowData.checked}}" data-idx="{{rowIndex}}" value="{{rowIndex}}"></m-checkbox>
+                </view>
+                <view wx:else>
+                    <view>{{rowData[headerItem.dataIndex]}}</view>
+                    <view class="sub" style="{{headerItem.subDataStyle}}" wx:if="{{headerItem.subDataIndex}}">{{rowData[headerItem.subDataIndex]}}</view>
+                </view>
+            </view>
+        </view>
+    </view>
+</view>
+<m-moveable-area height="{{perRowHeight*visibleDataSource.length}}" wx:if="{{moveable}}">
+    <view class="tbody">
+        <m-moveable-view bind:change="posChange" data-idx="{{rowIndex}}" height="{{perRowHeight}}" id="mv_{{t}}_{{rowData.key}}" index="{{rowIndex}}" moveable="{{true}}" noBindEvent="{{true}}" wx:for="{{visibleDataSource}}" wx:for-index="rowIndex" wx:for-item="rowData" wx:key="key">
+            <view class="tr" style="{{trStyle}}">
+                <view class="td" style="width:{{headerItem.width}};{{headerItem.tdStyle}}" wx:for="{{columns}}" wx:for-item="headerItem" wx:key="key">
+                    <view wx:if="{{headerItem.hiddenValue===undefined||headerItem.hiddenValue!==rowData[headerItem.dataIndex]}}">
+                        <view bindtap="onClickIcon" bindtouchend="touchend" bindtouchstart="touchstart" catchtouchmove="touchmove" data-dragmarker="{{headerItem.dragmarker}}" data-icon="{{headerItem.iconType}}" data-idx="{{rowIndex}}" data-rowkey="{{rowData.key}}" data-text="{{rowData[headerItem.dataIndex]}}" wx:if="{{headerItem.nodeType=='icon'&&headerItem.dragmarker}}">
+                            <m-icon imgIcon="{{headerItem.imgIcon}}" type="{{headerItem.iconType}}"></m-icon>
+                        </view>
+                        <view bindtap="onClickIcon" data-dragmarker="{{headerItem.dragmarker}}" data-icon="{{headerItem.iconType}}" data-idx="{{rowIndex}}" data-rowkey="{{rowData.key}}" data-text="{{rowData[headerItem.dataIndex]}}" wx:elif="{{headerItem.nodeType=='icon'&&!headerItem.dragmarker}}">
+                            <m-icon imgIcon="{{headerItem.imgIcon}}" type="{{headerItem.iconType}}"></m-icon>
+                        </view>
+                        <view wx:elif="{{headerItem.nodeType=='checkbox'}}">
+                            <m-checkbox bind:change="onCheckBoxChange" checked="{{rowData.checked}}" data-idx="{{rowIndex}}" value="{{rowIndex}}"></m-checkbox>
+                        </view>
+                        <view bindtap="onClickText" data-idx="{{rowIndex}}" wx:else>
+                            <view>{{rowData[headerItem.dataIndex]}}</view>
+                            <view class="sub" style="{{headerItem.subDataStyle}}" wx:if="{{headerItem.subDataIndex}}">{{rowData[headerItem.subDataIndex]}}</view>
+                        </view>
+                    </view>
+                </view>
+            </view>
+        </m-moveable-view>
+    </view>
+</m-moveable-area>

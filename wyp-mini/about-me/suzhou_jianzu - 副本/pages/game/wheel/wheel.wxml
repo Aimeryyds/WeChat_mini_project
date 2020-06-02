@@ -1,0 +1,47 @@
+<import src="../../../wxParse/wxParse.wxml"></import>
+<view class="wheelBg" style="background:url(https://tws.cnweisou.com/images/wheel.jpg) no-repeat center center;background-size:100% 100%;" wx:if="{{rewardList}}">
+    <view class="wheelTop"></view>
+    <view class="wrapper">
+        <view class="main">
+            <view class="canvas-container" id="canvas-container">
+                <view class="canvas-container-circle" data-index="{{index}}" style="top:{{item.y}}px;left:{{item.x}}px;background-color:{{index%2==0?colorCircleFirst:colorCircleSecond}};position: absolute; display: block;border-radius: 50%;height: 20rpx;width: 20rpx;" wx:for="{{circleList}}"></view>
+                <view animation="{{animationData}}" class="canvas-content">
+                    <view class="canvas-contentbg">
+                        <image src="http://tws.cnweisou.com/images/wheelBg5.png" style="width:100%;height:100%;transform:rotate(22deg);" wx:if="{{rewardLen==5}}"></image>
+                        <image src="http://tws.cnweisou.com/images/wheelBg6.png" style="width:100%;height:100%;" wx:elif="{{rewardLen==6}}"></image>
+                        <image src="http://tws.cnweisou.com/images/wheelBg7.png" style="width:100%;height:100%;transform:rotate(35deg);" wx:elif="{{rewardLen==7}}"></image>
+                        <image src="http://tws.cnweisou.com/images/wheelBg8.png" style="width:100%;height:100%;transform:rotate(20deg);" wx:elif="{{rewardLen==8}}"></image>
+                    </view>
+                    <view class="canvas-list" data-index="{{index}}" wx:for="{{rewardList}}" wx:key="unique">
+                        <view class="canvas-item" style="">
+                            <view class="canvas-item-text" style="-webkit-transform: rotate({{item.turn}});transform: rotate({{item.turn}});">
+                                <image mode="widthFix" src="{{item.icon}}" style="width:140rpx;max-height:110rpx;" wx:if="{{rewardLen==5}}"></image>
+                                <image mode="widthFix" src="{{item.icon}}" style="width:130rpx;max-height:100rpx;" wx:elif="{{rewardLen==6}}"></image>
+                                <image mode="widthFix" src="{{item.icon}}" style="width:110rpx;max-height:90rpx;" wx:elif="{{rewardLen==7}}"></image>
+                                <image mode="widthFix" src="{{item.icon}}" style="width:100rpx;max-height:80rpx;" wx:else></image>
+                            </view>
+                        </view>
+                    </view>
+                </view>
+                <view bindtap="getLottery" class="canvas-btn {{btnDisabled}}"></view>
+            </view>
+            <view class="countPrize">抽奖次数：<text>{{rewardResult.chance}}</text>次</view>
+        </view>
+    </view>
+    <view class="rule" wx:if="{{rewardResult.lottery.lotteryinfo}}">
+        <view class="ruleTop" style="background:url(https://tws.cnweisou.com/images/wheelRule.png) no-repeat center center;background-size:contain;"></view>
+        <scroll-view scrollY class="ruleCont">
+            <template is="wxParse" data="{{wxParseData:article.nodes}}"></template>
+        </scroll-view>
+    </view>
+</view>
+<view class="bgtypeList" wx:if="{{cover}}">
+    <view class="prizeCont">
+        <text bindtap="prizeOk" class="close">X</text>
+        <view class="pirzeIcon">
+            <image mode="widthFix" src="{{prizeResult.icon}}"></image>
+        </view>
+        <view class="prizeDetail">{{prizeResult.info}}</view>
+        <view bindtap="prizeOk" class="prizeOk">确定</view>
+    </view>
+</view>

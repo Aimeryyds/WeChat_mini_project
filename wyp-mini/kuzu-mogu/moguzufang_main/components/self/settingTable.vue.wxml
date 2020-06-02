@@ -1,0 +1,16 @@
+<template name="e615947e">
+    <view class="_view e615947e container">
+        <view class="_view e615947e entries" key="{{key}}" wx:for="{{tableData}}" wx:for-index="key" wx:key="key">
+            <view class="_view e615947e table-title">{{item.title}}</view>
+            <view class="_view e615947e table-box">
+                <view class="_view e615947e table-cell {{[idx==item.cellData.length-1?'lastCell':'']}}" key="{{idx}}" wx:for="{{item.cellData}}" wx:for-index="idx" wx:for-item="it" wx:key="idx">
+                    <view class="_view e615947e cell-left">
+                        <view class="_view e615947e cell-left-p">{{it.title}}</view>
+                        <view class="_view e615947e cell-left-span">{{it.span}}</view>
+                    </view>
+                    <view class="_view e615947e cell-right">{{it.right}}</view>
+                </view>
+            </view>
+        </view>
+    </view>
+</template>

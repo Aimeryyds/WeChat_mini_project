@@ -1,0 +1,15 @@
+<view class="container">
+    <view class="workers-list">
+        <view bindtap="handleSelectStaff" class="workers-list__item" data-id="{{item.id}}" data-img="{{item.headImg}}" data-name="{{item.serverName}}" wx:for="{{staffList}}">
+            <image class="workers-list__item__avatar" mode="scaleToFit" src="{{item.headImg}}"></image>
+            <view class="workers-list__item__detail">
+                <view class="workers-list__item__detail__name">{{item.serverName}}</view>
+                <view class="workers-list__item__detail__desc">{{item.brief}}</view>
+                <view class="workers-list__item__detail__number" wx:if="{{item.showNum==1}}">已有{{item.num}}人预约</view>
+            </view>
+            <view class="workers-list__item__{{staffId==item.id?'selected':'unselected'}}">
+                <image src="http://imgcdnali.wfenxiao.com.cn/xcx/c/selected.png" style="display:block;width:40rpx;height:40rpx" wx:if="{{staffId==item.id}}"></image>
+            </view>
+        </view>
+    </view>
+</view>

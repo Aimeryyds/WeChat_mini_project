@@ -1,0 +1,174 @@
+<loading hidden="{{show}}">正在加载</loading>
+<view class="page footer" wx:if="{{show}}">
+    <view class="nav" wx:if="{{is_mention==3}}">
+        <view bindtap="dispatchtype" class="{{send_type=='express'?'red':'default'}}" data-send_type="express">快递配送</view>
+        <view bindtap="dispatchtype" class="{{send_type=='selftake'?'red':'default'}}" data-send_type="selftake">上门自提</view>
+    </view>
+    <view>
+        <view class="fui-cell-group" wx:if="{{send_type=='express'}}">
+            <navigator class="fui-cell" hoverClass="none" url="/yb_shop/pages/member/address/select">
+                <image class="fui-cell-icon" src="{{icons.location01}}"></image>
+                <view class="fui-cell-text textl info">
+                    <view wx:if="{{list.address!=''}}">
+                        <text class="name">{{list.address.consigner}} </text>
+                        <text>{{list.address.phone}}</text>
+                    </view>
+                    <view class="adress" wx:if="{{list.address.address}}">{{list.address.province+list.address.city+list.address.district+' '+list.address.address}}</view>
+                    <view class="text no-address" wx:if="{{!list.address.address}}">添加收货地址</view>
+                </view>
+                <view class="fui-cell-remark"></view>
+            </navigator>
+        </view>
+        <view class="join_g_li" wx:if="{{send_type=='selftake'}}">
+            <view class="join_li">
+                <text>姓名</text>
+                <input bindinput="dataChange" id="consigner" placeholder="请输入姓名" type="text" value="{{data.consigner}}"></input>
+            </view>
+            <view class="join_li join_li_p">
+                <text>手机号</text>
+                <input bindinput="dataChange" id="phone" placeholder="请输入手机号" type="number" value="{{data.phone}}"></input>
+            </view>
+            <view class="join_li join_li_p">
+                <view class="section">
+                    <view class="s_title">
+                        <text>自提时间</text>
+                    </view>
+                    <picker bindchange="bindDateChange" mode="date" value="{{date}}">
+                        <view class="picker">{{date!=''?date:'请选择日期'}}</view>
+                    </picker>
+                    <view class="clear"></view>
+                </view>
+            </view>
+            <view class="join_li join_li_p">
+                <view class="section">
+                    <view class="s_title">
+                        <text>自提时间</text>
+                    </view>
+                    <picker bindchange="bindTimeChange" end="24:00" mode="time" start="00:00" value="{{time}}">
+                        <view class="picker">{{time}}</view>
+                    </picker>
+                    <view class="clear"></view>
+                </view>
+            </view>
+        </view>
+        <view class="fui-list-group" style="margin-top:20rpx;">
+            <view class="fui-list goods-item noclick" wx:if="{{cart_list.length==0}}">
+                <view bindtap="url" class="fui-list-media" data-url="/yb_shop/pages/goods/detail/index?id={{list.goods_id}}">
+                    <image class="round goods_img" src="{{list.pic.img_cover}}"></image>
+                </view>
+                <view bindtap="url" class="fui-list-inner" data-url="/yb_shop/pages/goods/detail/index?id={{list.goods_id}}">
+                    <view class="sure_subtitle">
+              {{list.goods.goods_name}}
+            </view>
+                    <view class="text cart-option">
+                        <view class="choose-option" wx:if="{{list.sku_name}}">{{list.sku_name}}</view>
+                    </view>
+                </view>
+                <view class="fui-list-angle">
+                    <text class="price">￥{{list.price}}</text>
+                    <view>x{{options.total}}</view>
+                </view>
+            </view>
+            <block wx:if="{{cart_list.length>0}}">
+                <view class="fui-list goods-item noclick" wx:for="{{cart_list}}" wx:for-index="key" wx:for-item="val">
+                    <view bindtap="url" class="fui-list-media" data-url="/yb_shop/pages/goods/detail/index?id={{val.goods_id}}">
+                        <image class="round goods_img" src="{{val.pic.img_cover}}"></image>
+                    </view>
+                    <view bindtap="url" class="fui-list-inner" data-url="/yb_shop/pages/goods/detail/index?id={{val.goods_id}}">
+                        <view class="sure_subtitle">
+                {{val.goods_name}}{{val.sku_name}}
+              </view>
+                        <view class="text cart-option">
+                            <view class="choose-option" wx:if="{{val.price.sku_name}}">{{val.price.sku_name}}</view>
+                        </view>
+                    </view>
+                    <view class="fui-list-angle">
+                        <text class="price">￥{{val.price.price}}</text>
+                        <view>x{{val.num}}</view>
+                    </view>
+                </view>
+            </block>
+        </view>
+        <view class="fui-list-group">
+            <view class="fui-cell-group">
+                <view class="fui-cell">
+                    <view class="fui-cell-info">
+                        <input bindinput="dataChange" id="buyer_message" placeholder="选填：买家留言（50字以内）"></input>
+                    </view>
+                </view>
+            </view>
+        </view>
+        <view class="fui-cell-group" style="margin-top:20rpx;">
+            <view class="fui-cell">
+                <view class="fui-cell-text">商品小计</view>
+                <view class="fui-cell-remark noremark">
+          共
+          <text class="text-danger">{{options.total}}</text> 件商品 合计：
+          <text class="text-danger">¥ {{data.order_money}}</text>
+                </view>
+            </view>
+            <view class="fui-cell" wx:if="{{send_type=='express'}}">
+                <view class="fui-cell-text">运费</view>
+                <view class="fui-cell-remark noremark">¥
+          <text>{{data.shipping_money}}</text>
+                </view>
+            </view>
+            <view class="fui-cell" wx:if="{{rebate_money!=0}}">
+                <view class="fui-cell-text">会员折扣享{{user_rebate}}折</view>
+                <view class="text-danger">¥
+          <text>{{rebate_money}}</text>
+                </view>
+            </view>
+            <view class="fui-cell" wx:if="{{data.discount_money&&data.discount_money!='0.00'}}">
+                <view class="fui-cell-text">减免</view>
+                <view class="fui-cell-remark noremark">
+                    <text class="text-danger">- ¥</text>
+                    <text class="text-danger">{{data.discount_money}}</text>
+                </view>
+            </view>
+            <view bindtap="open_coupon" class="fui-cell {{coupon_display?'a-li02':'a-li'}}" wx:if="{{coupon_num!=0}}">
+                <view class="fui-cell-text">优惠券</view>
+                <view class="fui-cell-remark noremark" style="margin-right:40rpx;">
+                    <text class="text-danger"></text>
+                    <text class="text-danger">{{data.coupon_money&&data.coupon_money!=0?'- ¥'+data.coupon_money:coupon_num+'张可用'}}</text>
+                </view>
+            </view>
+            <view bindtap="select" class="coupon_box" data-coupon_money="{{item.discount_money}}" data-id="{{item.id}}" data-together="{{item.together}}" wx:if="{{coupon_num!=0&&coupon_display}}" wx:for="{{coupon}}">
+                <label class="radio">
+                    <view class="coupon_price">
+                        <text class="price01">￥</text>
+                        <text class="price02">{{item.discount_money}}</text>
+                    </view>
+                    <view class="coupon_time">截止时间：{{item.endtime}}</view>
+                    <view class="coupon_con">满{{item.satisfy_money}}元可用 {{item.together==2?'(可参与满减)':''}}</view>
+                </label>
+            </view>
+            <label bindtap="select" class="radio" data-coupon_money="0.00" data-id="" data-together="2" wx:if="{{coupon_num!=0&&coupon_display}}">
+                <view class="cannel_btn">
+                    <text>不使用优惠券</text>
+                </view>
+            </label>
+        </view>
+    </view>
+    <view style="height:62px;"></view>
+    <include src="/yb_shop/pages/common/city-picker.wxml"></include>
+    <view class="fui-mask {{showPicker?'show':''}}"></view>
+    <view class="fui-footer">
+        <view class="tool nopadding">
+            <view class="text">
+                <view class="title text-right" style="padding-right:12rpx;">需支付：
+          <text class="text-danger">{{data.pay_money}}元</text>
+                </view>
+            </view>
+            <view class="btns">
+                <text bindtap="submit" class="btn {{submit?'':'disabled'}}" style="background:{{config.selectedColor!='#000000'?config.selectedColor:config.background}};color:{{config.selectedColor=='#000000'&&config.font_color=='black'?'#000000':'#ffffff'}};font-size:34rpx;border:1px solid {{config.selectedColor!='#000000'?config.selectedColor:config.background}};">确认订单</text>
+            </view>
+        </view>
+    </view>
+    <view class="fui-toast {{FoxUIToast.show?'in':'out'}}">
+        <view class="text">{{FoxUIToast.text}}</view>
+    </view>
+</view>
+<form reportSubmit bindsubmit="submit" class="index-advs-navigator">
+    <button class="bottom_form_btn" formType="submit"></button>
+</form>

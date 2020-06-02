@@ -1,0 +1,31 @@
+<view class="openLock">
+    <view class="progress_box">
+        <canvas canvasId="canvasProgressbg" class="progress_bg"></canvas>
+        <canvas canvasId="canvasProgress" class="progress_canvas"></canvas>
+        <view class="progress_content">
+            <image src="{{image}}" style="width:180rpx;height:150rpx;"></image>
+            <view class="progress_text">
+                <view class="progress_dot" style="background-color: {{dotColor}};"></view>
+                <text class="progress_info"> {{progress_txt}}</text>
+            </view>
+        </view>
+    </view>
+    <view style="margin-top: 15px;font-size: 18px">NO：{{machineNO}}</view>
+    <cover-view class="zhezao" wx:if="{{flag}}">
+        <cover-view class="t_w">
+            <cover-view class="tanchu_view">
+                <cover-view>
+                    <cover-view class="guide-body" style="background-color:{{mainColor}}">
+                        <cover-view class="body-text">
+              请打开蓝牙后点击重试!
+            </cover-view>
+                        <cover-image src="{{guideImage}}" style="height: 45vw;width:100%;display:block"></cover-image>
+                    </cover-view>
+                    <cover-view>
+                        <cover-view bindtap="retry" class="retry" style="background-color: {{mainColor}};color: {{textColor}}">重试</cover-view>
+                    </cover-view>
+                </cover-view>
+            </cover-view>
+        </cover-view>
+    </cover-view>
+</view>

@@ -1,0 +1,30 @@
+<import src="/wxParse/wxParse.wxml"></import>
+<view class="container">
+    <view class="detail_list rich-text">
+        <template is="wxParse" data="{{wxParseData:description.nodes}}"></template>
+    </view>
+    <button catchtap="openWrap" class="apply-btn" wx:if="{{phone}}">申请成为{{distribution.alias}}</button>
+    <button bindgetphonenumber="getPhoneNumber" class="apply-btn" openType="getPhoneNumber" wx:else>申请成为{{distribution.alias}}</button>
+</view>
+<form bindsubmit="apply" class="form" reportSubmit="true">
+    <view bindtap="closeWrap" class="form__bg" style="display: {{show_wrap?'fixed':'none'}}"></view>
+    <view class="form__view" style="bottom: {{show_wrap?0:-474}}px">
+        <view class="form__row" wx:if="{{distribution.phoneRequired==1}}">
+            <text>手机号</text>
+            <input name="phone" placeholder="请输入您的手机号" placeholderClass="pcolor" type="number" value="{{phone}}"></input>
+        </view>
+        <view class="form__row" wx:if="{{distribution.wechatRequired==1}}">
+            <text>微信号</text>
+            <input name="wechat" placeholder="请输入您的微信号" placeholderClass="pcolor"></input>
+        </view>
+        <view class="form__row" wx:if="{{distribution.usernameRequired==1}}">
+            <text>姓名</text>
+            <input name="username" placeholder="请输入您的真实姓名" placeholderClass="pcolor"></input>
+        </view>
+        <view class="form__row" wx:if="{{distribution.idCardRequired==1}}">
+            <text>身份证号码</text>
+            <input name="idCard" placeholder="请输入您的身份证号码" placeholderClass="pcolor" type="idcard"></input>
+        </view>
+        <button class="comfirm-btn" formType="submit">确认</button>
+    </view>
+</form>

@@ -1,0 +1,23 @@
+<template name="2c82d03e">
+    <view class="_ul data-v-e4f245da home-plans">
+        <view bindtap="handleProxy" class="_li data-v-e4f245da" data-comkey="{{$k}}" data-eventid="{{'0-'+planIdx}}" key="{{plan.id}}" wx:for="{{bookplansWithSlicedBooks}}" wx:for-index="planIdx" wx:for-item="plan" wx:key="plan.id">
+            <view class="_div data-v-e4f245da cover-container">
+                <view class="_div data-v-e4f245da cover" style=" {{'background-image:'+'url('+plan.cover_url+')'+';'}}"></view>
+                <view class="_div data-v-e4f245da shadow"></view>
+            </view>
+            <view class="_div data-v-e4f245da meta">
+                <view class="_div data-v-e4f245da title">{{plan.title}}</view>
+                <view class="_ul data-v-e4f245da">
+                    <view class="_li data-v-e4f245da book-name {{[bookIdx===1?'faded':'']}}" key="{{book.name_cn}}" wx:for="{{plan.books}}" wx:for-index="bookIdx" wx:for-item="book" wx:key="book.name_cn">
+                    ·《{{book.name_cn}}》
+                    <label class="_span data-v-e4f245da" wx:if="{{bookIdx===1&&bookplans[planIdx].books.length>2}}">...</label>
+                    </view>
+                </view>
+                <view class="_div data-v-e4f245da footer">
+                    <view class="_div data-v-e4f245da scholarship"></view>
+                    <view class="_div data-v-e4f245da description">{{plan.total_days}}天读完{{bookplans[planIdx].books.length}}本书</view>
+                </view>
+            </view>
+        </view>
+    </view>
+</template>

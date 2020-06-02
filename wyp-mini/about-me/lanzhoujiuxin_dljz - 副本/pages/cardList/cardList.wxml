@@ -1,0 +1,19 @@
+<import src="../../libs/templates/footer.wxml"></import>
+<view class="empty" wx:if="{{cardList.length==0}}">
+    <image class="empty-img" src="http://qz.faisys.com/image/wxImage/empty-5.png"></image>
+    <view class="empty-tip">暂时没有任何名片</view>
+</view>
+<view class="card-list" wx:else>
+    <view bind:tap="gotoDetail" class="card" data-id="{{card.id}}" wx:for="{{cardList}}" wx:for-item="card" wx:key="card.id">
+        <view class="img-wrapper">
+            <image class="head-icon" src="{{card.avatorUrl}}"></image>
+        </view>
+        <view class="info ellipsis">
+            <view class="name ellipsis">{{card.name}}</view>
+            <view class="job ellipsis" wx:if="{{card.job.length>0}}">{{card.job}}</view>
+        </view>
+        <view catch:tap="callPhone" class="iconfont icon-phone phone" data-phone="{{card.phone}}" style="color: {{globalColor}};"></view>
+        <view class="iconfont icon-turn arrow"></view>
+    </view>
+    <template is="footer" data="{{flag:flag,isOem:isOem,agentAcct:agentAcct}}" wx:if="{{flag.footerOpen}}"></template>
+</view>

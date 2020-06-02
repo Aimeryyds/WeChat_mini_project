@@ -1,0 +1,41 @@
+<view>
+    <view class="wallet-header">
+        <view class="wallet-total">
+            <view class="iconfont icon-money icon" style="color: {{mainColor}}"></view>
+            <view>
+                <view style="font-size: 28rpx;">钱包可用余额（元）</view>
+                <view style="font-size: 60rpx;font-weight: 700;">{{totalMoney}}</view>
+            </view>
+        </view>
+        <view class="wallet-detail">
+            <view>
+                <view style="font-size: 28rpx;color: #a0a0a0">本金余额（元）</view>
+                <view style="font-weight: 700;font-size: 36rpx;">{{actualMoney}}</view>
+            </view>
+            <view bindtap="inputCtrl">
+                <view style="font-size: 28rpx;color: #a0a0a0">卡券余额（元）</view>
+                <view style="font-weight: 700;font-size: 36rpx;">{{cardMoney}}</view>
+                <view style="font-size: 26rpx; color: #df3564">兑换</view>
+            </view>
+        </view>
+    </view>
+    <view class="wallet-bottom">
+        <view bindtap="recharge" class="charge-btn" style="background: {{mainColor}};color: {{textColor}}">充值</view>
+        <view bindtap="toRecord" style="margin-top: 10rpx;font-size: 30rpx; color: #df3564">卡券兑换记录</view>
+        <view class="deposit">
+            <view style="display: flex;align-items: center;" wx:if="{{deposit!=''}}">
+                <text class="iconfont icon-premoney" style="color: {{mainColor}};margin-right: 10rpx;font-size: 50rpx"></text>
+                <text>{{deposit}}</text>
+            </view>
+            <view bindtap="returnDeposit" class="e" wx:if="{{depositState==1&&deposit!=''}}">退还押金</view>
+            <view bindtap="toDeposit" class="e" wx:if="{{(depositState==0||depositState==6)&&deposit!=''}}">充值押金</view>
+        </view>
+    </view>
+    <view class="wallet-fixed" wx:if="{{showInput}}">
+        <view class="wallet-input">
+            <input bindinput="inputCardNO" placeholder="卡券余额兑换"></input>
+        </view>
+        <view bindtap="exchange" style="background-color: {{mainColor}};color: {{textColor}}">兑换</view>
+    </view>
+    <view bindtap="inputCtrl" class="page-mask" wx:if="{{showInput}}"></view>
+</view>

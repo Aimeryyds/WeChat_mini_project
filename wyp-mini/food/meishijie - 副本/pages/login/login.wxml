@@ -1,0 +1,11 @@
+<navigation-bar enable="{{enable}}" title="登录美食杰"></navigation-bar>
+<view class="container" style="padding-top:{{barHeight}}px">
+    <view bindtap="pageReload" class="cplist_nodata" wx:if="{{requeseFail}}">{{requeseFailTips}}</view>
+    <view class="nui_w">
+        <view class="nui_tip">{{loginTip}}</view>
+        <button bindgetuserinfo="getInfo" class="nui_button" openType="getUserInfo">登录</button>
+    </view>
+</view>
+<loading hidden="{{requeseDone}}">
+ 加载中...
+</loading>

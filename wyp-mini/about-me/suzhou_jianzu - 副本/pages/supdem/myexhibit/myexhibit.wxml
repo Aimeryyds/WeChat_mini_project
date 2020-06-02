@@ -1,0 +1,69 @@
+<view class="select" wx:if="{{isMylist==true}}">
+    <view class="selectRight">
+        <image bindtap="sarchType" src="https://tws.cnweisou.com/images/dssereach.png"></image>
+        <input bindblur="searchCont" maxlength="20" placeholder="请输入关键字" value="{{searchCont}}"></input>
+        <scroll-view scrollY class="serachbg" wx:if="{{searchCont}}">
+            <view class="typeAll" wx:for="{{typeSame}}">
+                <view bindtap="choosetypeSame" class="yearAndMonth" data-index="{{index}}">{{item}}</view>
+            </view>
+        </scroll-view>
+    </view>
+    <view class="selectLeft">
+        <text bindtap="add">去发布</text>
+    </view>
+</view>
+<view class="typeTitle">
+    <view bindtap="clickTitle" class="newTitle {{sub==index?'active':''}}" data-id="{{item.id}}" data-index="{{index}}" wx:for="{{list}}">{{item}}
+
+    </view>
+</view>
+<view wx:if="{{isMylist}}">
+    <view bindtap="joindetialInfo" class="concent" data-index="{{index}}" wx:for="{{contList}}" wx:for-item="contList">
+        <view class="concentLeft">
+            <text class="type">{{contList.desc}}</text>
+        </view>
+        <view class="concentRight">
+            <view bindtap="joinDetail" class="title">
+                <image src="{{contList.avatar}}"></image>
+                <text>{{contList.name}}</text>
+                <text>{{contList.createtime}}</text>
+            </view>
+            <scroll-view scrollX class="showImg" wx:if="{{contList.imgs}}">
+                <image src="{{item}}" wx:for="{{contList.imgs}}"></image>
+            </scroll-view>
+            <view class="showDescribe">
+        {{contList.content}}
+      </view>
+            <view class="showMyDetail">
+                <text>来自{{contList.city}}</text>
+                <text>赞{{contList.likes}}</text>
+                <text>留言{{contList.comments}}</text>
+            </view>
+        </view>
+    </view>
+</view>
+<view class="interval"></view>
+<view class="isBottom" wx:if="{{isBottom}}">不要再拉了，我已经到底了喔</view>
+<view class="add">
+    <image bindtap="allInfo" src="https://tws.cnweisou.com/images/sdallInfo.png"></image>
+</view>
+<view class="noActivity" wx:if="{{!isMylist}}">
+  目前没有信息，点击
+  <text bindtap="joinCreatActivity">确定</text>，即可创建自己的供求信息喔
+  <text bindtap="joinCreatActivity" class="creatActi">确定</text>
+</view>
+<view class="bgtypeList1" wx:if="{{showType}}">
+    <scroll-view scrollY class="typebg">
+        <view class="typeList" wx:for="{{listType}}">
+            <view bindtap="chooseType" class="yearAndMonth" data-index="{{index}}">{{item}}</view>
+        </view>
+    </scroll-view>
+</view>
+<view class="bgtypeList" wx:if="{{isType}}">
+    <view class="cardAgainType">
+    目前没有该类型，请重新选择
+    <view bindtap="isType" class="determineAgin">
+      确定
+    </view>
+    </view>
+</view>

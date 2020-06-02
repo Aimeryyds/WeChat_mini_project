@@ -1,0 +1,11 @@
+<image class="bg_photo" mode="aspectFill" src="{{down_items.thumb_image}}"></image>
+<view class="float" wx:for="{{down_items}}" wx:key="building_id">
+    <image src="{{down_items.thumb_image}}"></image>
+    <view class="float_title">{{down_items.title}}</view>
+    <view class="phone">
+        <image src="../../images/phone_icon.png"></image>
+        <text>{{msg_template}}</text>
+    </view>
+    <view catchtap="callFn" class="button button_phone">免费咨询</view>
+    <view catchtap="toIndexFn" class="button button_index">回到首页</view>
+</view>

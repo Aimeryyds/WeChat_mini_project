@@ -1,0 +1,149 @@
+<view class="detail-wrap">
+    <view class="loop-wrap">
+        <swiper autoplay="true" bindchange="loopchange" circular="true" duration="500" interval="3000">
+            <swiper-item data-albumname="{{item.mainAlbumName}}" wx:for="{{albumdata}}" wx:key="item.albumID">
+                <view class="swiper-inner">
+                    <image bindtap="routergo" data-type="albumdetail" lazyLoad="true" src="{{item.photo.imageName}}"></image>
+                    <image catchtap="routergo" class="icon_3d" data-targeturl="{{item.photo.tagUrl3D}}" data-type="albumvr" src="/img/resources/icon3d.png" wx:if="{{item.photo.tagUrl3D!=''}}"></image>
+                </view>
+            </swiper-item>
+        </swiper>
+        <view class="albumname">{{mainAlbumName}}</view>
+        <view bindtap="routergo" class="albumcount" data-type="albumlist">{{albumindex+'/'+albumdata.length}}</view>
+    </view>
+    <view class="xf-info">
+        <view class="title">
+            <view>{{detaildata.info.estateName}}</view>
+            <view bindtap="routergo" data-type="houseinfo">详细信息<image src="/img/resources/right.png"></image>
+            </view>
+        </view>
+        <view class="salestatus">
+            <view class="salestatus_desc">{{detaildata.info.saleStatus_desc}}</view>
+            <view class="salestatus_childname">{{detaildata.info.propertyTypeChildName[0]}}</view>
+        </view>
+        <view class="tags">
+            <view wx:for="{{detaildata.info.tagList}}">
+      {{item}}
+    </view>
+        </view>
+        <view class="info-item">
+            <text>均价</text>
+            <text>{{detaildata.info.showPrice}}</text>
+            <text>{{detaildata.info.averagePriceUpdate}}更新</text>
+        </view>
+        <view bindtap="routergo" class="info-item info-address" data-type="map">
+            <text>地址</text>
+            <text>{{detaildata.info.estateAddress}}</text>
+            <image src="/img/resources/right.png"></image>
+        </view>
+        <view class="info-item info-open">
+            <text>开盘</text>
+            <text>{{detaildata.info.openingDate}}</text>
+        </view>
+    </view>
+    <view wx:if="{{detaildata.houseType.length>0}}">
+        <view class="item-title">
+            <text>户型 ({{detaildata.houseType[0].count}})</text>
+            <view bindtap="routergo" class="more" data-type="housetype">查看更多 <image src="/img/resources/right.png"></image>
+            </view>
+        </view>
+        <view class="hx-scroll">
+            <scroll-view scrollX="true">
+                <view bindtap="housetypedetail" class="housetype" data-housetypeid="{{item.houseTypeID}}" wx:for="{{detaildata.houseType[0].data}}" wx:key="item.houseTypeID">
+                    <image src="{{item.houseTypeImageName}}"></image>
+                    <view class="hx-item hx-item-type">
+                        <view>{{item.houseTypeLabel}}</view>
+                        <view>{{item.saleStatus_desc}}</view>
+                    </view>
+                    <view class="hx-area">
+          {{item.buildArea}} {{item.aspect}}
+        </view>
+                    <view class="hx-price">{{item.houseTypePrice}}</view>
+                </view>
+            </scroll-view>
+        </view>
+    </view>
+    <view>
+        <view class="item-title">
+            <text>最新动态</text>
+            <view bindtap="routergo" class="more" data-type="moredt">查看更多 <image src="/img/resources/right.png"></image>
+            </view>
+        </view>
+        <view class="dt-ctn">
+            <view bindtap="routergo" class="dt-setborder" data-type="moredt" wx:for="{{detaildata.info.lastArticle}}">
+                <view class="time">{{item.publishDate}}</view>
+                <view class="dt-title">{{item.title}}</view>
+                <view class="dt-content">{{item.content}}</view>
+                <view class="border-bottom"></view>
+                <view class="circle"></view>
+            </view>
+        </view>
+    </view>
+    <view>
+        <view class="item-title">
+            <text>明星经纪人</text>
+            <view bindtap="routergo" class="more" data-type="broker">查看更多 <image src="/img/resources/right.png"></image>
+            </view>
+        </view>
+        <view class="super-agency">
+            <image binderror="brokerimgerror" class="headimg left" src="{{detaildata.info.superAgency.avatarsImageName}}"></image>
+            <text class="name left">{{detaildata.info.superAgency.agencyName}}</text>
+            <view hidden class="tel right">
+                <image src="https://res.5i5j.com/cache/weixin/newhouse/message.png"></image>
+            </view>
+            <view bindtap="givecall" class="message right" data-bid="{{detaildata.info.superAgency.erpAgencyID}}" data-tel="{{detaildata.info.superAgency.agencyCellphone}}">
+                <image src="https://res.5i5j.com/cache/weixin/newhouse/tel.png"></image>
+            </view>
+        </view>
+    </view>
+    <view>
+        <view class="item-title">
+            <text>位置及周边</text>
+            <view bindtap="routergo" class="more" data-type="map">查看更多 <image src="/img/resources/right.png"></image>
+            </view>
+        </view>
+        <view class="location">
+            <view>位置：</view>
+            <view>{{detaildata.info.estateAddress}}</view>
+        </view>
+        <view class="map-around">
+            <map bindtap="routergo" data-type="map" id="myMap" latitude="{{detaildata.info.estateLatitude}}" longitude="{{detaildata.info.estateLongitude}}" markers="{{markers}}" scale="12"></map>
+        </view>
+    </view>
+    <view wx:if="{{detaildata.recommend.length>0}}">
+        <view class="item-title">
+            <text>推荐楼盘</text>
+            <view bindtap="routergo" class="more" data-type="recommondhouse">查看更多 <image src="/img/resources/right.png"></image>
+            </view>
+        </view>
+        <view class="recommend">
+            <view bindtap="routergo" class="list-ctn" data-estateid="{{item.estateID}}" data-propertytypeid="{{item.propertyTypeID}}" data-type="detail" wx:for="{{detaildata.recommend}}" wx:key="index">
+                <view class="image-wrap">
+                    <image class="icon3d" src="../../../img/resources/icon3d.png" wx:if="{{item.albumBanner[0].albumName=='VR'}}"></image>
+                    <image lazyLoad="true" src="{{item.coverImageName}}"></image>
+                </view>
+                <view class="content">
+                    <view class="item-1">
+                        <text>{{item.estateName}}</text>
+                        <view class="tag">{{item.saleStatus_desc}}</view>
+                    </view>
+                    <view class="item-2">
+                        <text>{{item.propertyTypeName}}</text>·
+        <text>{{item.estateAreaName}}</text>-
+        <text>{{item.estateAddress}}</text>
+                    </view>
+                    <view class="item-3">
+                        <view class="item-tag" wx:for="{{item.tagList}}" wx:for-item="itemthis">{{itemthis}}</view>
+                    </view>
+                    <view class="item-4">
+                        <text>{{item.show_price}}</text>
+                        <text>建面{{item.minBuildArea}}-{{item.maxBuildArea}}㎡</text>
+                    </view>
+                </view>
+            </view>
+        </view>
+    </view>
+    <view class="loading" hidden="{{loadstatus}}">
+        <image class="loading-img" src="/img/resources/load.png"></image>
+    </view>
+</view>

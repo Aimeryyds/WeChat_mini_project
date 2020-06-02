@@ -1,0 +1,102 @@
+<view class="class-card">
+    <view class="no-pay-course" wx:if="{{list.length===0}}">
+        <image src="http://wxcp-img.oss-cn-beijing.aliyuncs.com/1513325321234_files.png"></image>
+        <view class="info">还没有待支付的订单哦</view>
+    </view>
+    <block wx:if="{{list.length!==0}}" wx:for="{{list}}" wx:key="item">
+        <view class="countdown" wx:if="{{list.length!==0}}">
+            <image mode="aspectFit" src="https://static-xesapi.speiyou.cn/xesFeProject/xesFeSource/xesImagesLibrary/yyt_order_tips_icon.png"></image>
+              请于<text class="expireTime"> {{item._expireTime||'--'}} </text>内支付，逾期订单失效班级退回至购课单
+          </view>
+        <view class="box-wrap">
+            <view class="big-box">
+                <view class="pay-course">
+                    <view bindtap="goToDetail" class="pay-course-item" data-wpygotodetail-a="{{_item}}" wx:for="{{item.classInfos}}" wx:for-index="i" wx:for-item="_item" wx:key="i">
+                        <view class="course-info-wrap">
+                            <view class="title">
+                                <text class="'course-type-icon' {{$courseInfo$classType[_item.courseType].icon}}" hidden="{{!_item.courseType}}">{{$courseInfo$classType[_item.courseType].text}}</text>
+                                <text class="class-name">{{_item.className}}</text>
+                            </view>
+                            <view class="info-list">
+                                <view class="item" hidden="{{_item.courseType===1||!_item.address}}">
+                                    <image class="icon" mode="widthFix" src="../../common/img/address.png"></image>
+                                    <view class="text-right">{{_item.address}}</view>
+                                </view>
+                                <view class="item" hidden="{{!_item.classTime}}">
+                                    <image class="icon" mode="widthFix" src="../../common/img/time.png"></image>
+                                    <view class="text-right">{{_item.classTime}}</view>
+                                </view>
+                                <view class="item" hidden="{{!_item.timeArea}}">
+                                    <image class="icon" mode="widthFix" src="../../common/img/date.png"></image>
+                                    <view class="text-right">{{_item.timeArea}}</view>
+                                </view>
+                                <view class="item" wx:if="{{_item.teacherList||_item.tutorList}}">
+                                    <image class="icon" mode="widthFix" src="../../common/img/person.png"></image>
+                                    <view class="text-right">
+                                        <view class="text-right-block" wx:if="{{_item.teacherList.length&&!_item.strengTutor}}">
+                                            <text class="teacher-title">授课:</text>
+                                            <text class="teacher-item" wx:for="{{_item.teacherList}}" wx:for-index="_mun1" wx:for-item="_tea1" wx:key="_mun1">{{_tea1.name}}</text>
+                                        </view>
+                                        <view class="text-right-block" wx:if="{{_item.tutorList.length&&_item.classType!==4}}">
+                                            <text class="teacher-title">{{_item.strengTutor?'老师':'辅导'}}:</text>
+                                            <text class="teacher-item" wx:for="{{_item.tutorList}}" wx:for-index="_mun2" wx:for-item="_tea2" wx:key="_tea2">{{_tea2.name}}</text>
+                                        </view>
+                                    </view>
+                                </view>
+                            </view>
+                            <view class="price-wrap">
+                                <text class="info-price" wx:if="{{_item.coursePrice}}">{{_item.coursePrice}}</text>
+                                <text class="surplus-class" wx:if="{{_item.surplusClassNum}}">剩余{{_item.surplusClassNum}}节课</text>
+                            </view>
+                        </view>
+                        <view class="course-period-item {{period_item.disabled?'disabled':''}} _2a75096" wx:for="{{_item.stageInfo}}" wx:for-index="period_index" wx:for-item="period_item" wx:key="period_index">
+                            <view class="info-left _2a75096">
+                                <view class="period-name _2a75096">
+                                    <text class="_2a75096">{{period_item.stagesName}}</text>
+                                </view>
+                                <view class="date-bottom _2a75096">
+                                    <text class="text _2a75096">{{period_item.startDate}} - {{period_item.endDate}}</text>
+                                </view>
+                                <view class="_2a75096">
+                                    <text class="tips _2a75096" wx:if="{{period_item.disabled&&period_item.startPayTime}}">支付开始时间: {{period_item.startPayTime}}</text>
+                                </view>
+                            </view>
+                            <view class="price-right price-end _2a75096" wx:if="{{$PeriodItem$entry&&period_item.disabled}}">已结课</view>
+                            <view class="price-right _2a75096" wx:else>{{period_item.price}}</view>
+                        </view>
+                    </view>
+                </view>
+                <view class="btn-box">
+                    <view bindtap="goPay" class="btn-common pay-btn fr" data-wpygopay-a="{{item}}">立即支付</view>
+                    <view bindtap="cancelOrder" class="btn-common cancel-order fr" data-wpycancelorder-a="{{item.orderId}}">取消订单</view>
+                </view>
+            </view>
+        </view>
+    </block>
+</view>
+<view animation="{{$talToast$animationData}}" class="tal-toast-container" style="top:{{$talToast$vertical}}%;" wx:if="{{$talToast$toastVisible}}">
+    <view class="tal-toast">
+        <text>{{$talToast$toastMessage}}</text>
+    </view>
+</view>
+<view class="app-cen" wx:if="{{$appmask$isHide}}">
+    <view class="app-mask"></view>
+    <view class="app-center">
+        <view class="app-con">
+            <view class="title">每一位学而思家长的必备APP</view>
+            <image src="http://static-xesapi.speiyou.cn/1536045641131.png"></image>
+            <view class="test" wx:if="{{$appmask$SystemInfo}}">
+                <view>请在App Store内搜索“学而思”</view>
+                <view>下载学而思APP</view>
+            </view>
+            <view class="test" wx:else>
+                <view>请在各大应用商店内搜索“学而思”</view>
+                <view>（应用宝、360手机助手、华为应用市场等）下载学而思APP</view>
+            </view>
+            <view bindtap="$appmask$goHide" class="btn">知道了</view>
+        </view>
+    </view>
+</view>
+<view bindtap="$gohomeview$backfunc" class="goHome" wx:if="{{isShare}}">
+    <text class="iconfont icon-home"></text>
+</view>

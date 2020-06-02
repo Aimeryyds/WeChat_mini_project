@@ -1,0 +1,100 @@
+<view class="v-kline">
+    <view class="content-t content-kline-t">
+        <view>
+            <text style="color:{{item.color}};margin-right:12rpx;" wx:for="{{kline.data.candleLegend}}" wx:key="{{index}}">{{item.text}}: {{item.value}}</text>
+        </view>
+        <picker bindchange="changeDirection" class="direction" range="{{kline.data.direction.range}}" value="{{kline.data.direction.currentId}}" wx:if="{{kline.data.show}}">
+            <view>{{kline.data.direction.range[kline.data.direction.currentId]}}</view>
+        </picker>
+    </view>
+    <view class="content-kline" style="height: {{kline.data.chart.height}}">
+        <view bindtap="klineOnTap" capture-bind:touchend="ontouchend" capture-bind:touchmove="ontouchmove" capture-bind:touchstart="ontouchstart" class="chart" disableScroll="true">
+            <canvas canvasId="rlineCvs" class="rline-cvs {{isHiddenCanvas?'hidden':''}}"></canvas>
+            <canvas canvasId="klineDataCvs" class="kline-data-cvs {{isHiddenCanvas?'hidden':''}}"></canvas>
+            <canvas canvasId="zoomCvs" class="zoom-cvs {{isHiddenCanvas?'hidden':''}}" disableScroll="true"></canvas>
+            <canvas canvasId="klineHintCvs" class="hint-cvs {{isHiddenCanvas||!kline.data.chart.lining?'hidden':''}}"></canvas>
+            <canvas canvasId="klineTouchCvs" class="touch-cvs {{isHiddenCanvas||!kline.data.chart.lining?'hidden':''}}"></canvas>
+            <view style="{{item.style}}" wx:for="{{kline.data.labels.statics}}" wx:key="id">
+        {{item.text}}
+      </view>
+            <view style="{{item.style}}" wx:for="{{kline.data.labels.dynamics}}" wx:key="id">
+        {{item.text}}
+      </view>
+            <view class="loading c-fs-10 c-fc-gray c-right-angle-rect" wx:if="{{kline.data.chart.loading}}">
+                <view class="hint">加载中</view>
+            </view>
+        </view>
+    </view>
+    <view class="empty-block"></view>
+    <view class="R-line-explain">
+        <view class="header c-line-bottom">
+            <view bindtap="gotoBenchmarking" class="title">
+                <view class="text">对标指数</view>
+                <view class="icon-explain"></view>
+            </view>
+            <view bindtap="selectIndex" class="select">
+                <view class="text" style="color:{{kline.data.selectText.color?'#00a5f6':''}}">
+          {{kline.data.selectText.text}}
+        </view>
+                <view class="icon-select"></view>
+            </view>
+        </view>
+        <view class="content-kline-list ">
+            <view class="up-beyond c-line-bottom">
+                <view class="icon"></view>
+                <view class="info">
+                    <view class="title">正超</view>
+                    <view class="subtitle">(涨幅超过对标指数)</view>
+                </view>
+                <view class="bar" style="width:{{kline.data.benchmarkNumbers[1].length}}"></view>
+                <view class="number">{{kline.data.benchmarkNumbers[1].number}}</view>
+            </view>
+            <view class="lower-beyond c-line-bottom">
+                <view class="icon"></view>
+                <view class="info">
+                    <view class="title">负超</view>
+                    <view class="subtitle">(跌幅超过对标指数)</view>
+                </view>
+                <view class="bar" style="width:{{kline.data.benchmarkNumbers[2].length}}"></view>
+                <view class="number">{{kline.data.benchmarkNumbers[2].number}}</view>
+            </view>
+            <view class="up-difference c-line-bottom">
+                <view class="icon"></view>
+                <view class="info">
+                    <view class="title">正差</view>
+                    <view class="subtitle">(涨幅不及对标指数)</view>
+                </view>
+                <view class="bar" style="width:{{kline.data.benchmarkNumbers[3].length}}"></view>
+                <view class="number">{{kline.data.benchmarkNumbers[3].number}}</view>
+            </view>
+            <view class="lower-difference c-line-bottom">
+                <view class="icon"></view>
+                <view class="info">
+                    <view class="title">负差</view>
+                    <view class="subtitle">(跌幅不及对标指数)</view>
+                </view>
+                <view class="bar" style="width:{{kline.data.benchmarkNumbers[4].length}}"></view>
+                <view class="number">{{kline.data.benchmarkNumbers[4].number}}</view>
+            </view>
+            <view class="up-inverse c-line-bottom">
+                <view class="icon"></view>
+                <view class="info">
+                    <view class="title">正逆</view>
+                    <view class="subtitle">(上涨时对标指数下跌)</view>
+                </view>
+                <view class="bar" style="width:{{kline.data.benchmarkNumbers[5].length}}"></view>
+                <view class="number">{{kline.data.benchmarkNumbers[5].number}}</view>
+            </view>
+            <view class="lower-inverse c-line-bottom">
+                <view class="icon"></view>
+                <view class="info">
+                    <view class="title">负逆</view>
+                    <view class="subtitle">(下跌时对标指数上涨)</view>
+                </view>
+                <view class="bar" style="width:{{kline.data.benchmarkNumbers[6].length}}"></view>
+                <view class="number">{{kline.data.benchmarkNumbers[6].number}}</view>
+            </view>
+        </view>
+        <view style="height:{{isPhoneX?'20px':''}}"></view>
+    </view>
+</view>
