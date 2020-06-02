@@ -1,0 +1,70 @@
+<view class="news_article" wx:if="{{type==0}}">
+    <view class="news_header">
+        <view class="title">{{title}}</view>
+        <view class="news-time">{{timeStr}}</view>
+    </view>
+    <view class="news-container">
+        <view wx:for="{{newsParams}}" wx:for-item="newsParam" wx:key="index">
+            <view class="params {{newsParam.type}}-param" wx:if="{{newsParam.showimg}}">
+                <image class="params-img" src="{{newsParam.content}}" style="height: {{newsParam.height}}px;"></image>
+            </view>
+            <view class="params {{newsParam.type}}-param" wx:if="{{newsParam.showtext}}">
+                {{newsParam.content}}
+            </view>
+            <block wx:if="{{newsParam.showvideo}}">
+                <view class="video-bg-container" style="height: 225px;" wx:if="{{tvpErrStr}}">
+                    <image class="video-param" src="/assets/video_bg.jpg"></image>
+                    <text class="video-bg-text">{{tvpErrStr}}</text>
+                </view>
+                <video autoplay="{{isAutoPlay}}" bindended="__onTvpEnded" binderror="__onTvpError" bindfullscreenchange="onTvpFullScreen" bindpause="__onTvpPause" bindplay="__onTvpPlay" bindtimeupdate="__onTvpTimeupdate" class="params {{newsParam.type}}-param" id="tvp" src="{{tvpUrl}}" wx:if="{{!tvpErrStr}}"></video>
+            </block>
+        </view>
+    </view>
+    <view class="news_comments" wx:if="{{commentTotal>0}}">
+        <view class="news-comments-title">
+            评论 {{commentTotal}}
+        </view>
+        <view class="news-comments-list">
+            <view wx:for="{{comments}}" wx:for-index="idx" wx:for-item="comment" wx:key="index">
+                <view class="news-comment-item">
+                    <image class="user-img" src="{{comment.userinfo.head}}" width="30"></image>
+                    <view class="user-nick font-gray t14">
+                        {{comment.userinfo.nick}}
+                    </view>
+                    <view class="font-gray t12 comment-time">
+                        {{comment.timeDifference}}
+                    </view>
+                    <view class="comment-content t16">
+                        {{comment.content}}
+                    </view>
+                </view>
+            </view>
+        </view>
+    </view>
+</view>
+<view class="news_img" style="height: {{windowHeight}}px;" wx:if="{{type==1}}">
+    <swiper class="news-img-container">
+        <view wx:for="{{newsParams}}" wx:for-item="newsParam" wx:key="index">
+            <swiper-item class="video-td">
+                <view class="center" hoverStyle="none">
+                    <view class="center-table">
+                        <image class="center-table-img" src="{{newsParam.img}}" style="height: {{newsParam.isVertical&&'100%'}}" width="100%"></image>
+                    </view>
+                </view>
+                <view class="bottom {{hideBottom}}">
+                    <view class="bottom-title t18">
+                        {{title}}
+                    </view>
+                    <scroll-view scrollY="true" style="height: 66px">
+                        <view class="t14 bottom-text">
+                            {{newsParam.content}}
+                        </view>
+                    </scroll-view>
+                </view>
+            </swiper-item>
+        </view>
+    </swiper>
+</view>
+<view class="no-news" wx:if="{{noNewsStr}}">
+    {{noNewsStr}}
+</view>

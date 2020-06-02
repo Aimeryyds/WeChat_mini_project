@@ -1,0 +1,20 @@
+<view bindtap="tapContent" class="truth-wrapper" wx:if="{{content&&content.length}}">
+    <view class="truth-title">
+        <view class="blue-bar"></view>
+        <view class="truth-text">事实</view>
+    </view>
+    <view class="truth-content {{fold&&'fold'}}">
+        <block wx:for="{{content}}" wx:key="_uid">
+            <view class="text" wx:if="{{item.type==='p'}}">
+                <text wx:for="{{item.children}}" wx:for-item="textItem" wx:key="*this">{{textItem}}</text>
+            </view>
+            <view class="h2" wx:elif="{{item.type==='h2'}}">
+                <text>{{item.desc}}</text>
+            </view>
+        </block>
+    </view>
+    <view class="fold-wrapper">
+        <image class="img {{fold&&'fold'}}" src="http://mat1.gtimg.com/www/images/news_minipro/white-arrow.png"></image>
+        <view>{{fold?'了解更多':'点击收起'}}</view>
+    </view>
+</view>

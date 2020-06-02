@@ -1,0 +1,6 @@
+<view>
+    <content-text bindtoggletitle="toggletitle" class="ci-content {{needUnfold?'line-limit':''}}" lineheight="{{lineheight}}">
+        <slot></slot>
+    </content-text>
+    <text bindtap="unfoldTap" class="ci-show-all-text" wx:if="{{needUnfold}}">全文</text>
+</view>

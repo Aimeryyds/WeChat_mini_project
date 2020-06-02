@@ -1,0 +1,123 @@
+.hot_container {
+    margin-top: 20rpx;
+    border-radius: 6px;
+    padding: 24rpx 20rpx 20rpx;
+    background-color: #fbfbfb;
+}
+
+.top_container {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.name {
+    font-family: PingFangSC-Regular;
+    font-size: 32rpx;
+    color: #888;
+    letter-spacing: 0;
+    line-height: 32rpx;
+}
+
+.praise_container {
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-start;
+    align-items: center;
+    padding: 30rpx;
+    margin-top: -36rpx;
+    margin-bottom: -36rpx;
+    margin-right: -36rpx;
+}
+
+.praiseCount {
+    font-family: PingFangSC-Regular;
+    font-size: 24rpx;
+    color: #999;
+    letter-spacing: 0;
+    line-height: normal;
+    vertical-align: middle;
+}
+
+.like_icon {
+    width: 46rpx;
+    height: 46rpx;
+    background-repeat: no-repeat;
+    background-image: url(http://mat1.gtimg.com/www/js/news/like_icon_wx.png);
+    background-position: 0;
+    background-size: 1400% 100%;
+}
+
+.like_icon.agreed {
+    background-position: 100%;
+}
+
+.like-active {
+    animation-timing-function: steps(13);
+    animation-name: plus-one;
+    animation-duration: .58s;
+    animation-iteration-count: 1;
+    display: inline-block;
+    animation-fill-mode: forwards;
+}
+
+@-webkit-keyframes plus-one {
+    0% {
+        background-position: 0;
+    }
+
+    to {
+        background-position: 100%;
+    }
+}
+
+@keyframes plus-one {
+    0% {
+        background-position: 0;
+    }
+
+    to {
+        background-position: 100%;
+    }
+}
+
+.reply_content {
+    font-family: PingFangSC-Regular;
+    font-size: 32rpx;
+    color: #222;
+    letter-spacing: 0;
+    line-height: 44rpx;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    display: -webkit-box;
+    word-break: break-all;
+    -webkit-box-orient: vertical;
+    -webkit-line-clamp: 2;
+    margin-top: 16rpx;
+    width: 662rpx;
+}
+
+.emoji-icon {
+    width: 44rpx;
+    height: 44rpx;
+    font-size: 0;
+    line-height: 48rpx;
+    vertical-align: sub;
+    display: inline-block;
+}
+
+.has-read .reply_content {
+    color: #888;
+}
+
+.small-screen .reply_content {
+    font-size: 34rpx;
+}
+
+.reply_image {
+    width: 120rpx;
+    height: 120rpx;
+    border-radius: 6rpx;
+    margin-top: 12rpx;
+}

@@ -1,0 +1,20 @@
+<block wx:if="{{show}}">
+    <button class="recommend-item-wrapper" data-article-id="{{articleId}}" formType="submit" hoverClass="none">
+        <slot></slot>
+        <exclusive list="{{mediaList}}" wx:if="{{isExclusiveMedia}}"></exclusive>
+        <hotspot articleId="{{articleId}}" articleList="{{articleList}}" chlid="{{chlid}}" showType="{{showType}}" title="{{title}}" zwbFolded="{{zwbFolded}}" zwbHasExposured="{{zwbHasExposured}}" wx:elif="{{showType===8}}"></hotspot>
+        <topic articleId="{{articleId}}" atype="{{atype}}" joinCount="{{joinCount}}" name="{{topicName}}" topicId="{{topicId}}" voteId="{{voteId}}" weiboList="{{weiboList}}" wx:elif="{{showType===11}}"></topic>
+        <newsflash fromPage="{{fromPage}}" time="{{publishTime}}" title="{{title}}" wx:elif="{{showType==12}}"></newsflash>
+        <none-image bindtap="tapArticle" chlname="{{chlname}}" hasRead="{{hasRead}}" isTop="{{isFixedTop}}" smallScreen="{{smallScreen}}" title="{{title}}" wx:elif="{{showType===4}}"></none-image>
+        <view bindtap="tapArticle" class="content-wrapper" wx:elif="{{showType===1||showType===2||showType===3||showType===9||showType===10}}">
+            <media articleId="{{articleId}}" chlicon="{{chlicon}}" chlid="{{chlid}}" chlname="{{chlname}}" class="media-wrapper" publishTime="{{publishTime}}"></media>
+            <view catchtap="tapDisLike" class="icon-xwclose iconfont dislike-btn"></view>
+            <right-image articleId="{{articleId}}" atype="{{atype}}" durationStr="{{durationStr}}" hasRead="{{hasRead}}" imageSrc="{{imgSmall}}" intro="{{intro}}" isExclusive="{{isExclusive}}" isVideo="{{isVideo}}" smallScreen="{{smallScreen}}" title="{{title}}" wx:if="{{showType===1||showType===9}}"></right-image>
+            <big-image _uid="{{_uid}}" articleId="{{articleId}}" atype="{{atype}}" bindtapVideo="tapVideo" durationStr="{{durationStr}}" hasRead="{{hasRead}}" imageCount="{{imgCount}}" imageSrc="{{imgBig}}" isExclusive="{{isExclusive}}" isVideo="{{isVideo}}" playCount="{{playCount}}" smallScreen="{{smallScreen}}" title="{{title}}" vid="{{vid}}" wx:if="{{showType===2||showType===10}}"></big-image>
+            <three-image articleId="{{articleId}}" atype="{{atype}}" hasRead="{{hasRead}}" imageCount="{{imgCount}}" imageList="{{imgThree}}" intro="{{intro}}" isExclusive="{{isExclusive}}" smallScreen="{{smallScreen}}" title="{{title}}" wx:if="{{showType===3}}"></three-image>
+            <xxw-hot-comment agreeCount="{{hotComment.agreeCount}}" articleId="{{articleId}}" atype="{{atype}}" bindtapHotComment="tapHotComment" commentId="{{hotComment.commentId}}" content="{{hotComment.content}}" fromPage="{{fromPage}}" hasRead="{{hasRead}}" imageSrc="{{hotComment.imageSrc}}" nickName="{{hotComment.nickName}}" replyId="{{hotComment.replyId}}" smallScreen="{{smallScreen}}" wx:if="{{hotComment.replyId}}"></xxw-hot-comment>
+            <bottom-bar articleId="{{articleId}}" atype="{{atype}}" isVideo="{{isVideo}}" posterShareImage="{{posterShareImage}}" title="{{title}}"></bottom-bar>
+        </view>
+    </button>
+    <view class="split-line" wx:if="{{!hideSplitLine}}"></view>
+</block>

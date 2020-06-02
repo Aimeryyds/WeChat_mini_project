@@ -1,0 +1,17 @@
+<view bindtap="newsClick" class="zwb-item-wrap {{showSmall&&'small'}}">
+    <view class="zwb-item">
+        <block wx:if="{{showSmall}}">
+            <image class="zwb-mask" mode="widthFix" src="http://mat1.gtimg.com/www/images/news_minipro/jingxuan_news_bg_small.png"></image>
+            <view class="vert-sep"></view>
+        </block>
+        <block wx:else>
+            <image class="zwb-mask" mode="aspectFill" src="http://mat1.gtimg.com/www/images/news_minipro/jingxuan_news_bg.png"></image>
+            <image bindload="imgLoad" class="img" src="{{imgBig}}" style="width:{{imgWidth}}rpx;height:{{imgHeight}}rpx;">
+                <view class="mask" style="width:{{imgWidth*3/4}}rpx;"></view>
+            </image>
+        </block>
+        <view class="title">{{title}}</view>
+        <image class="zwb-icon" src="http://mat1.gtimg.com/www/images/news_minipro/zwb_mor_small_hotnews.png" wx:if="{{type===1}}"></image>
+        <image class="zwb-icon" src="http://mat1.gtimg.com/www/images/news_minipro/zwb_eve_small_hotnews.png" wx:elif="{{type===2}}"></image>
+    </view>
+</view>

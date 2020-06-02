@@ -1,0 +1,22 @@
+<view class="title-wrapper">
+    <view class="title">
+        <text>{{title}}</text>
+    </view>
+    <view class="media-wrapper">
+        <view catchtap="tapMedia" class="media-box">
+            <view class="media-icon" wx:if="{{chlicon}}">
+                <image src="{{chlicon}}"></image>
+            </view>
+            <view class="media-name">
+                <text>{{chlname}}</text>
+            </view>
+        </view>
+        <view class="time">
+            <text>{{time}}</text>
+        </view>
+        <button catchtap="tapOriginal" class="origin-button" wx:if="{{showOriginBtn}}">
+      查看原文
+    </button>
+    </view>
+</view>
+<view class="all-comment">- 全部评论 -</view>

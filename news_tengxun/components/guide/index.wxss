@@ -1,0 +1,88 @@
+.beginnersGuide {
+    position: fixed;
+    z-index: 1;
+}
+
+.beginnersGuide.mainPage,.beginnersGuide.newsFlashTop {
+    position: fixed;
+    top: 0;
+    right: 18rpx;
+    z-index: 150;
+}
+
+.beginnersGuide.newsFlashBottom {
+    position: fixed;
+    bottom: 10rpx;
+    right: 0;
+    width: 100%;
+    margin: 0 auto;
+    display: flex;
+    justify-content: center;
+}
+
+.beginnersGuide.thanks-share {
+    position: absolute;
+    top: -75rpx;
+    right: 20rpx;
+}
+
+.layerArrow {
+    display: block;
+    box-sizing: border-box;
+    position: absolute;
+    width: 20rpx;
+    height: 15rpx;
+    border-width: 15rpx;
+    border-style: solid;
+}
+
+.mainPage .layerArrow,.newsFlashTop .layerArrow {
+    color: #2883e9;
+    border-color: rgba(40,131,233,0) rgba(40,131,233,0) rgba(40,131,233,.9);
+    border-top-width: 0;
+    right: 120rpx;
+    top: 0rpx;
+}
+
+.newsFlashBottom .layerArrow {
+    color: #2883e9;
+    border-color: rgba(40,131,233,.9) rgba(40,131,233,0) rgba(40,131,233,0);
+    border-bottom-width: 0;
+    right: 50%;
+    margin-right: -10rpx;
+    bottom: 0rpx;
+}
+
+.thanks-share .layerArrow {
+    border-color: rgba(0,0,0,.8) transparent transparent;
+    border-width: 15rpx 15rpx 0;
+    height: 0rpx;
+    width: 0rpx;
+    right: 90rpx;
+    bottom: 0rpx;
+}
+
+.textCover {
+    box-shadow: 0 2rpx 8rpx 0 rgba(0,0,0,.1);
+    border-radius: 12rpx;
+    text-align: center;
+    font-size: 28rpx;
+    color: #fff;
+    line-height: 42rpx;
+    padding: 16rpx 30rpx;
+}
+
+.mainPage .textCover,.newsFlashTop .textCover {
+    margin-top: 15rpx;
+    background: rgba(40,131,233,.9);
+}
+
+.newsFlashBottom .textCover {
+    margin-bottom: 15rpx;
+    background: rgba(40,131,233,.9);
+}
+
+.thanks-share .textCover {
+    background: rgba(0,0,0,.8);
+    margin-bottom: 15rpx;
+}

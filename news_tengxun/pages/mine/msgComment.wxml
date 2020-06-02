@@ -1,0 +1,10 @@
+<xxw-bg-loading bindrefresh="render" status="{{status}}" wx:if="{{status!==pageStatus.ready}}"></xxw-bg-loading>
+<xxw-scroll-view bindreachBottom="onReachBottom" bindretry="onReachBottom" bottomLoadingNoMoreText="{{bottomLoadingNoMoreText}}" bottomLoadingStatus="{{pullUpStatus}}" hasMore="{{hasMore}}" withBottomLoading="{{!noData}}" wx:else>
+    <block wx:for="{{list}}" wx:for-index="page" wx:for-item="firstItem" wx:key="_uid">
+        <xxw-comment-with-article withBottom withReplyBtn withReplyContent withReplyTips article="{{item.article}}" comment="{{item.comment}}" pubTimeTs="{{item.pubTimeTs}}" reply="{{item.reply}}" wx:for="{{firstItem.list}}" wx:key="_uid"></xxw-comment-with-article>
+    </block>
+    <view class="no-data" wx:if="{{noData}}">
+        <view class="tips"> - 还没有收到回复哦 - </view>
+        <view class="tips"> 快去参加互动吧! </view>
+    </view>
+</xxw-scroll-view>

@@ -1,0 +1,39 @@
+<xxw-exposure avatarUrl="{{avatarUrl}}" fromPage="{{fromPage}}" opType="{{OP_TYPE.share_circle_bar_exposure}}">
+    <button class="bar-wrapper" formType="submit">
+        <view bindtap="tapBar" class="social-info-wrapper">
+            <image class="avatar" src="{{avatarUrl||'http://mat1.gtimg.com/www/js/news/user-icon2.png'}}"></image>
+            <view class="social-info">
+                <view class="nick-name-wrapper">
+                    <text class="nick-name">{{nickName}}</text>
+                    <text class="for-you">分享给你</text>
+                    <image class="right-arrow" src="http://mat1.gtimg.com/www/js/news/close-black-ic.png"></image>
+                </view>
+                <view class="group-wrapper" wx:if="{{openGId}}">
+                    <text>来自“</text>
+                    <open-data lang="{{lang}}" openGid="{{openGId}}" type="groupName"></open-data>
+                    <text>”</text>
+                </view>
+            </view>
+        </view>
+        <thanks-button articleId="{{articleId}}" bindtapThankBtn="tapThankBtn" count="{{thanksCount}}" fromPage="{{fromPage}}" hasThanked="{{hasThanked}}" openGId="{{openGId}}"></thanks-button>
+        <view class="danmu-container" wx:if="{{commentAndThanksList.length>0}}">
+            <view bindanimationend="onCommentAndThanksListAnimationEnd" class="animation-comment {{animation&&'animation'}}" data-index="{{index}}" style="animation-delay: {{index*1.33}}s" wx:for="{{commentAndThanksList}}" wx:key="replyId">
+                <view bind:tap="tapCommentItem" class="comment-item-wrapper" data-index="{{index}}" data-replyid="{{item.replyId}}">
+                    <image class="comment-item-avatar" src="{{item.avatarUrl||'http://mat1.gtimg.com/www/js/news/user-icon2.png'}}"></image>
+                    <xxw-collapse-text class="animation-comment-collapse" lineCount="{{1}}" wx:if="{{item.type==='comment'}}">
+            {{item.text}}
+          </xxw-collapse-text>
+                    <view class="contain-thank-text-image" wx:if="{{item.type==='thanks'}}">
+                        <text>感谢分享</text>
+                        <image class="white-heart-in-thanks" src="http://mat1.gtimg.com/www/js/news/thanks.png"></image>
+                    </view>
+                </view>
+            </view>
+        </view>
+        <xxw-guide guideClass="thanks-share" keyName="thanksShare" showGuide="{{showGuide}}">
+            <view>点击试试，向群友表达感谢</view>
+        </xxw-guide>
+    </button>
+</xxw-exposure>
+<comment articleId="{{articleId}}" atype="{{atype}}" avatarUrl="{{avatarUrl}}" bindclose="onHideCommentPanel" bindtapThankBtn="tapThankBtn" commentId="{{commentId}}" fromPage="{{fromPage}}" hasThanked="{{hasThanked}}" inputPlaceholder="{{inputPlaceholder}}" isForbidden="{{isForbidden}}" lang="{{lang}}" nickName="{{nickName}}" openGId="{{openGId}}" posterShareImg="{{posterShareImg}}" readCount="{{readCount}}" replyId="{{replyId}}" show="{{commentShow}}" syncId="{{syncId}}" thanksCount="{{thanksCount}}" thanksList="{{thanksList}}" title="{{title}}"></comment>
+<view class="{{isIphoneX&&'is-iphone-x'}}"></view>

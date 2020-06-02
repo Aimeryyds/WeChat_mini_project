@@ -1,0 +1,13 @@
+<view class="container">
+    <view class="content-text" style="{{isFull?expandStyle:wrapStyle}}">
+        <slot></slot>
+        <view class="cover" wx:if="{{!isFull&&by==='height'}}"></view>
+    </view>
+    <view catchtap="tapShowAll" class="show-all-text" wx:if="{{!isFull&&enableShowAll&&by==='rows'}}">
+    全文
+  </view>
+    <view catchtap="tapShowAll" class="show-all-icon" wx:if="{{!isFull&&enableShowAll&&by==='height'}}">
+    点击查看全文
+    <image class="mask-icon" src="http://mat1.gtimg.com/www/js/news/open-blue.png"></image>
+    </view>
+</view>

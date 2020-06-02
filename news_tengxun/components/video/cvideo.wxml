@@ -1,0 +1,10 @@
+<view class="video-wrapper" style="width:{{width}};height:{{height}};border-radius:{{borderRadius}};">
+    <cover bindshowConfirm="onShowConfirm" bindtapCover="tapCover" durationStr="{{durationStr}}" id="{{_uid}}_cover" playCount="{{playCount}}" showErrorTips="{{showErrorTips}}" showRetryTips="{{showRetryTips}}" showTopTitle="{{showTopTitle}}" snapshot="{{snapshot}}" title="{{title}}" wx:if="{{!fullScreen&&showCover}}"></cover>
+    <block wx:else>
+        <video autoplay="{{autoplay}}" bindended="onEnded" binderror="onError" bindfullscreenchange="onFullscreenChange" bindpause="onPause" bindplay="onPlay" bindtap="tapVideo" bindtimeupdate="onTimeUpdate" class="video" controls="{{controls}}" direction="{{direction}}" duration="{{duration}}" id="{{_uid}}" initialTime="{{initialTime||replayInitialTime}}" poster="{{snapshot}}" posterForCrawler="{{snapshot}}" showCenterPlayBtn="{{showCenterPlayBtn}}" showFullscreenBtn="{{showFullscreenBtn}}" showProgress="{{false}}" src="{{src}}" title="{{title}}"></video>
+        <view class="title {{progressBarIsShowing&&'show'}}" wx:if="{{showTopTitle}}">
+      {{title}}
+    </view>
+        <progress-bar _uid="{{_uid}}" bindchange="onProgressBarChange" bindchanging="onProgressBarChanging" bindtapFullScreenBtn="tapProgressBarFullscreenBtn" bindtapPlayBtn="tapProgressBarPlayBtn" class="progress-bar {{progressBarIsShowing&&'show'}}" durationStr="{{durationStr}}" max="{{duration}}" playing="{{playing}}" showFullscreenBtn="{{showFullscreenBtn}}"></progress-bar>
+    </block>
+</view>

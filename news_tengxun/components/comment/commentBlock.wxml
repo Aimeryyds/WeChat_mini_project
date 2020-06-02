@@ -1,0 +1,32 @@
+<scroll-view bindscrolltolower="onScrollToLower" class="comment-wrapper {{isBlackTheme&&'black'}}" scrollIntoView="{{scrollIntoView}}" scrollTop="{{scrollTop}}" scrollY="{{true}}" style="{{wrapperStyle}}">
+    <slot name="above"></slot>
+    <xxw-bg-loading isBlackTheme="{{isBlackTheme}}" top="160rpx" wx:if="{{bgLoading}}"></xxw-bg-loading>
+    <block wx:else>
+        <block wx:if="{{(commentList[0].length||fakeList.length)&&!isForbidden}}">
+            <view class="comment-item-wrapper" hoverClass="none" id="list-{{item.replyId}}" wx:for="{{fakeList}}" wx:key="replyId">
+                <xxw-comment-item isFake enableTapReplyItem enableShowAll articleId="{{item.articleId}}" atype="{{atype}}" avatarUrl="{{item.avatarUrl}}" binddelete="onDelete" bindreply="onReply" bindtapContent="onTapContent" chlid="{{item.chlid}}" commentId="{{item.commentId}}" content="{{item.content}}" coral_uid="{{item.coral_uid}}" data-index="{{index}}" fromPage="{{fromPage}}" isBlackTheme="{{isBlackTheme}}" isMe="{{item.isMe}}" nickName="{{item.nickName}}" pubTime="{{item.pubTime}}" replyList="{{item.replyList}}" replyNum="{{item.replyNum}}" replyId="{{item.replyId}}" uin="{{item.uin}}"></xxw-comment-item>
+            </view>
+            <block wx:for="{{commentList}}" wx:for-index="page" wx:for-item="list" wx:key="page">
+                <xxw-launch-app appParameter="{{appParameter}}" articleId="{{articleId}}" atype="{{atype}}" disableLaunch="{{disableLaunchApp}}" exClass="comment-item-wrapper" exHoverClass="none" id="list-{{item.replyId}}" reportParams="{{launchReportParams}}" wx:for="{{list}}" wx:key="replyId">
+                    <xxw-comment-item articleId="{{item.articleId}}" atype="{{atype}}" avatarUrl="{{item.avatarUrl}}" binddelete="onDelete" bindreply="onReply" bindtapContent="onTapContent" chlid="{{item.chlid}}" commentId="{{item.commentId}}" content="{{item.content}}" coral_uid="{{item.coral_uid}}" data-index="{{index}}" data-page="{{page}}" enableShowAll="{{enableShowAll}}" enableTapReplyItem="{{enableTapReplyItem}}" fromPage="{{fromPage}}" image="{{item.image}}" isBlackTheme="{{isBlackTheme}}" isHotComment="{{item.hotComment}}" isMe="{{item.isMe}}" lineCount="{{lineCount}}" nickName="{{item.nickName}}" pubTime="{{item.pubTime}}" replyList="{{item.replyList}}" replyNum="{{item.replyNum}}" replyId="{{item.replyId}}" showReply="{{showReply}}" showReplyCount="{{showReplyCount}}" uin="{{item.uin}}"></xxw-comment-item>
+                </xxw-launch-app>
+            </block>
+            <slot name="below" wx:if="{{customBelow}}"></slot>
+            <block wx:else>
+                <view class="more-btn-wrapper" wx:if="{{!infinity&&bnext===1}}">
+                    <view catchtap="onTapMore" class="more-btn">
+            查看更多
+            <image class="more-icon" src="http://mat1.gtimg.com/www/js/news/open-black.png"></image>
+                    </view>
+                </view>
+                <view class="comment-blank-item">
+                    <xxw-loading-bar hasMore="{{bnext}}" wx:if="{{infinity||!infinity&&!bnext}}"></xxw-loading-bar>
+                </view>
+            </block>
+        </block>
+        <block wx:else>
+            <slot name="noComment" wx:if="{{customNoComment}}"></slot>
+            <xxw-none-comment articleId="{{articleId}}" atype="{{atype}}" bindaddComment="onAddComment" class="no-comment" fromPage="{{fromPage}}" isBlackTheme="{{isBlackTheme}}" isForbidden="{{isForbidden}}" wx:else></xxw-none-comment>
+        </block>
+    </block>
+</scroll-view>

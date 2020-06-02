@@ -1,0 +1,19 @@
+<scroll-view bindscrolltolower="_onScrollToLimit" bindscrolltoupper="_onScrollToLimit" bindtouchend="_onTouchEnd" bindtouchstart="_onTouchStart" lowerThreshold="50" scrollIntoView="{{toView}}" scrollY="true" style="height: {{scrollHeight}}px" upperThreshold="50">
+    <view class="loading" id="preNoMore" wx:if="{{isEnableMore&&dates.length}}">
+        {{isPreNoMore?'没有更多了':'加载更多'}}
+    </view>
+    <view style="min-height: 100%; background-color: #f3f3f7;">
+        <view class="empty" wx:if="{{!dates.length}}">
+            {{emptyStr}}
+        </view>
+        <view class="one-day {{!isEnableMore?'versus':''}}" id="tua{{day}}" wx:for="{{dates}}" wx:for-item="day" wx:key="index">
+            <view class="day-title">
+                {{dateDesc[index]}}
+            </view>
+            <ScheduleItem class="day-match" id="tua{{match.mid}}" match="{{match}}" wx:for="{{apiMatches[day]}}" wx:for-item="match" wx:key="mid"></ScheduleItem>
+        </view>
+    </view>
+    <view class="loading" wx:if="{{isEnableMore&&dates.length}}">
+        {{isPostNoMore?'没有更多了':'加载更多'}}
+    </view>
+</scroll-view>

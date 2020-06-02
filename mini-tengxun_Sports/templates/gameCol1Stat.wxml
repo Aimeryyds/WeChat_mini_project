@@ -1,0 +1,10 @@
+<template name="gameCol1Stat">
+    <block wx:for="{{col1StatArr}}" wx:for-index="playeridx" wx:for-item="col1StatItem" wx:key="playeridx">
+        <view class="player-data player-stat-data" url="player?cid={{cid}}&pid={{playerIdArr[playeridx-1]}}&tid={{teamId}}" wx:if="{{playeridx>0&&urlArray[playeridx]==='1'}}">
+            <text class="player-name player-item">{{col1StatItem}}</text>
+        </view>
+        <view class="player-data player-stat-data" wx:else>
+            <text class="player-name player-item">{{col1StatItem}}</text>
+        </view>
+    </block>
+</template>

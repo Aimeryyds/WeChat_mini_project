@@ -1,0 +1,77 @@
+<view>
+    <statusbar __triggerObserer="{{_triggerObserer}}"></statusbar>
+    <view class="{{'bottom-tap '+(isIPhoneX?'iPhoneX':'')}}">
+        <button class="share-friend" openType="share">分享给好友</button>
+        <view class="split-line"></view>
+        <view bindtap="handleClickShareMoment" class="share-image">生成海报分享</view>
+    </view>
+    <view class="index">
+        <view class="video-container" wx:if="{{isVideo}}">
+            <video poster="{{videoProps.poster}}" src="{{videoProps.src}}" style="{{anonymousState__temp}}"></video>
+            <view class="user-container">
+                <image class="avatar" src="{{userInfo.avatar_url}}"></image>
+                <view class="user-wrapper">
+                    <text class="username">{{userInfo.screen_name}}</text>
+                    <view class="publish-time">{{anonymousState__temp2}}</view>
+                </view>
+            </view>
+            <text class="title">{{title}}</text>
+            <view class="play-count">{{anonymousState__temp3}}</view>
+        </view>
+        <view class="article-container" wx:if="{{isArticle}}">
+            <text class="title">{{title}}</text>
+            <view class="user-container">
+                <image class="avatar" src="{{userInfo.avatar_url}}"></image>
+                <view class="user-wrapper">
+                    <text class="username">{{userInfo.screen_name}}</text>
+                    <view class="publish-time">{{anonymousState__temp4}}</view>
+                </view>
+            </view>
+            <view>
+                <block wx:for="{{loopArray0}}" wx:for-index="key" wx:for-item="i" wx:key="key">
+                    <image alt="{{i[$original].info.alt}}" bindtap="handleClickImage" class="article-image" data-item="{{i[$original]}}" lazyLoad="{{true}}" mode="widthFix" src="{{i[$original].info.src}}" wx:if="{{i[$original].type==='image'}}"></image>
+                    <block wx:else>
+                        <video data-item="{{i[$original]}}" poster="{{i[$original].info['tt-poster']}}" src="{{i[$original].src}}" style="{{i[$loopState__temp6]}}" wx:if="{{i[$original].type==='video'}}"></video>
+                        <view class="article-text" wx:else>
+                            <text>{{i[$original]}}</text>
+                        </view>
+                    </block>
+                </block>
+            </view>
+        </view>
+        <view class="related-container">
+            <view bindtap="handleClickRelated" class="related-item" data-item="{{i[$original]}}" wx:if="{{i[$loopState__temp11]}}" wx:for="{{loopArray1}}" wx:for-index="key" wx:for-item="i" wx:key="key">
+                <text class="related-title">{{i[$original].title}}</text>
+                <image mode="aspectFill" src="{{i[$original].default_image_url}}" wx:if="{{i[$original].default_image_url}}"></image>
+            </view>
+        </view>
+        <view class="comment-container">
+            <view class="comment-item" wx:for="{{loopArray2}}" wx:for-item="i" wx:key="$original.id">
+                <image class="comment-avatar" src="{{i[$original].comment.user_profile_image_url}}"></image>
+                <view class="right">
+                    <text class="comment-username">{{i[$original].comment.user_name}}</text>
+                    <text bindtap="handleClickDigg" class="{{'digg '+(i[$original].strong?'digged':'')}}" data-item="{{i[$original]}}">{{i[$original].comment.digg_count===0?'赞':i[$original].comment.digg_count}}</text>
+                    <view class="comment-text">
+                        <text>{{i[$original].comment.text}}</text>
+                    </view>
+                    <view>
+                        <text class="comment-create-time">{{i[$loopState__temp8]}}</text>
+                        <text bindtap="handleClickReply" class="{{'comment-reply-count '+(i[$original].comment.reply_count>0?'strong':'')}}" data-item="{{i[$original].comment}}">{{(i[$original].comment.reply_count>0?i[$original].comment.reply_count:'')+'回复'}}</text>
+                    </view>
+                    <view class="reply-list" wx:if="{{i[$original].showAllComment&&i[$original].comment.reply_list.length>0}}">
+                        <view class="reply-item" wx:for="{{i[$original].comment.reply_list}}" wx:for-index="k" wx:for-item="reply" wx:key="k">
+                            <text class="reply-username">{{reply.user_name||reply.user.name}}</text>
+                            <text>{{'：'+reply.text}}</text>
+                        </view>
+                        <view class="tip" wx:if="{{i[$original].hasMore}}">去今日头条App查看完整评论</view>
+                    </view>
+                </view>
+            </view>
+            <view class="loading" wx:if="{{commentData.length>0}}">{{hasMoreComment?'加载中':'没有更多评论了'}}</view>
+        </view>
+        <view bindtap="handleClickCanvasMask" class="canvas-container" style="{{anonymousState__temp9}}">
+            <canvas canvasId="canvas" class="canvas"></canvas>
+            <view class="tips">已保存至相册，快去分享吧</view>
+        </view>
+    </view>
+</view>

@@ -1,0 +1,443 @@
+@import "../../templates/canleder/canleder_temp.wxss";
+
+@import "../../templates/search/search_temp.wxss";
+
+@import "../../templates/share/share_temp.wxss";
+
+.nohave {
+    z-index: 3;
+    background: rgba(256,256,256,1);
+}
+
+.container {
+    position: relative;
+}
+
+.have {
+    background: rgba(0,0,0,.8);
+}
+
+.fixed {
+    position: fixed;
+    z-index: 2;
+}
+
+.rili {
+    width: 680rpx;
+}
+
+.riqi {
+    height: 102rpx;
+    padding: 5px 20px;
+    align-items: left;
+    background: red;
+}
+
+.riqi .riqi_text {
+    padding-top: 10px;
+    font-size: 40rpx;
+    font-weight: 500;
+    color: black;
+}
+
+.riqi .riqi_data {
+    padding: 5px 0px;
+    font-size: 30rpx;
+    color: #DDD;
+}
+
+.swiper-tab {
+    width: 100%;
+    height: 100rpx;
+    margin-bottom: 10rpx;
+    text-align: center;
+    line-height: 100rpx;
+}
+
+.swiper-tab-item {
+    font-size: 30rpx;
+    font-weight: bold;
+    font-family: PingFangSC-Semibold,sans-serif;
+    display: inline-block;
+    width: 148rpx;
+    color: #999999;
+    margin: 0 63rpx;
+}
+
+.on {
+    color: #ed4137;
+    border-bottom: 8rpx solid #ed4137;
+}
+
+.swiper-box {
+    display: block;
+    height: auto;
+    width: 100%;
+    overflow: hidden;
+}
+
+.scroll-view {
+    width: 100%;
+    height: 100%;
+}
+
+.view_video {
+    width: 100%;
+}
+
+.view_video_text {
+    width: 100%;
+    font-size: 30rpx;
+    border: 1xp solid red;
+    padding-bottom: 110rpx;
+}
+
+.view_video_text_title {
+    height: 90rpx;
+    text-align: center;
+    border-bottom: 1px solid #ddd;
+    color: #333333;
+    font-size: 30rpx;
+    font-weight: bold;
+    font-family: PingFangSC-Semibold,sans-serif;
+    line-height: 85rpx;
+}
+
+.view_video_text_list {
+    z-index: 10;
+    padding: 5rpx 0rpx;
+    color: #666;
+}
+
+.view_video_text_list::after {
+}
+
+.view_video_text .textlist {
+    width: 100%;
+    font-size: 28rpx;
+    line-height: 42rpx;
+    background-color: #fdfdfd;
+    position: relative;
+    border-bottom: 1rpx solid #ddd;
+}
+
+.textlist_index {
+    position: absolute;
+    left: 0;
+    top: 0rpx;
+    font-size: 36rpx;
+    color: #999;
+    font-family: PingFangSC-Semibold;
+    width: 8.9%;
+    height: 100%;
+    z-index: 900;
+}
+
+.textlist_index image {
+    width: 25rpx;
+    height: 25rpx;
+    position: absolute;
+    left: 0;
+    top: 45rpx;
+    z-index: 900;
+}
+
+.view_video_text_list .textlist .textlist_index::before {
+    content: '';
+    position: absolute;
+    left: 12.5rpx;
+    top: 0rpx;
+    width: 2rpx;
+    height: 57.5rpx;
+    background-color: #eceff2;
+    z-index: 99;
+}
+
+.view_video_text_list .textlist .textlist_index::after {
+    content: '';
+    position: absolute;
+    left: 12.5rpx;
+    bottom: 0rpx;
+    width: 2rpx;
+    height: 57.5rpx;
+    background-color: #eceff2;
+    z-index: 99;
+}
+
+.view_video_text_list .textlist:first-of-type .textlist_index::before {
+    content: '';
+    position: absolute;
+    left: 12.5rpx;
+    top: 0rpx;
+    width: 0rpx;
+    height: 57.5rpx;
+    background-color: #eceff2;
+    z-index: 99;
+}
+
+.view_video_text_list .textlist .textlist_index.indexlast::after {
+    content: '';
+    position: absolute;
+    left: 12.5rpx;
+    bottom: 0rpx;
+    width: 0rpx;
+    height: 57.5rpx;
+    background-color: #fff;
+    z-index: 100;
+}
+
+.textlist_text {
+    width: 100%;
+    font-size: 30rpx;
+    float: left;
+}
+
+.textconBox {
+    float: left;
+    padding: 15rpx 40rpx;
+}
+
+.textlist_dianmore {
+    float: left;
+    padding-top: 58rpx;
+}
+
+.textlist_dianmore>image {
+    width: 38rpx;
+    height: 38rpx;
+    float: left;
+    margin-top: -16rpx;
+}
+
+.view_video_content {
+    padding: 10px;
+}
+
+.view_video_content text {
+    position: relative;
+    font-size: 28rpx;
+    line-height: 30px;
+    display: block;
+    float: left;
+}
+
+.view_video_content view {
+    font-size: 28rpx;
+    padding: 0px 10px;
+    line-height: 30px;
+    float: left;
+    border: 1px solid #ddd;
+    border-radius: 20%;
+    margin-right: 10px;
+}
+
+.view_video_share {
+    position: fixed;
+    z-index: 999;
+    bottom: 0;
+    clear: both;
+    width: 100%;
+    border: 1px solid #ddd;
+    font-size: 30rpx;
+    height: 110rpx;
+    background: #fff;
+    color: #4262ab;
+}
+
+.item {
+    margin-top: 2px;
+    display: flex;
+    flex-direction: row;
+    border-bottom: 2px solid #ddd;
+}
+
+.clear {
+    clear: both;
+    height: 0rpx;
+}
+
+.hide {
+    display: none;
+}
+
+.show {
+    display: block;
+}
+
+.view_tanceng {
+    width: 100%;
+    height: 100%;
+    text-align: center;
+    position: fixed;
+    z-index: 4;
+    bottom: 0;
+    float: left;
+    background: rgba(0,0,0,.8);
+}
+
+.view_tanceng .view_tanceng_list {
+    width: 100%;
+    height: 98rpx;
+    line-height: 98rpx;
+    position: fixed;
+    z-index: 5;
+    border-bottom: 2px solid #ddd;
+    background: #fff;
+}
+
+.view_tanceng .view_tanceng_list:nth-child(1) {
+    bottom: 200rpx;
+}
+
+.view_tanceng .view_tanceng_list:nth-child(2) {
+    bottom: 100rpx;
+}
+
+.view_tanceng .view_tanceng_list:nth-child(3) {
+    bottom: 0;
+}
+
+.audio_box {
+    width: 99%;
+    height: 262rpx;
+}
+
+.slider_bg {
+    width: 100%;
+    height: 85rpx;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+}
+
+.song-control {
+    padding-top: 75rpx;
+    padding-left: 40rpx;
+    height: 238rpx;
+    box-sizing: border-box;
+    border-top: 1px solid #f0f0f0;
+    border-bottom: 1px solid #f0f0f0;
+}
+
+.song-control .progress {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.progress .pass_time,.progress .total_time {
+    color: #808080;
+    text-align: center;
+    font-size: 24rpx;
+}
+
+.progress .total_time {
+    margin-left: 20rpx;
+}
+
+.progress .pass_time {
+    margin-right: 30rpx;
+}
+
+.progress .time-bar {
+    position: relative;
+    flex: auto;
+    height: 4rpx;
+    overflow: hidden;
+    background: #ddd;
+    width: 100%;
+}
+
+.progress .time-bar .time-play {
+    position: absolute;
+    z-index: 5;
+    left: 0%;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    background: red;
+    transition: all 1s linear;
+}
+
+.progress .time-bar-zong {
+    position: relative;
+    z-index: 1;
+    flex: auto;
+    height: 4rpx;
+    overflow: hidden;
+    background: #ddd;
+}
+
+.time-bar-ball {
+    position: absolute;
+    left: 60%;
+    z-index: 10;
+    background: #fff;
+    width: 20rpx;
+    height: 20rpx;
+    border: 2px solid #ddd;
+    border-radius: 50% 50%;
+}
+
+.play {
+    border: 1rpx solid #aaa;
+    border-radius: 55%;
+    width: 70rpx;
+    height: 70rpx;
+    margin-right: 20rpx;
+    background: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAGUAAABkCAYAAACfIP5qAAAABGdBTUEAALGPC/xhBQAAACBjSFJNAAB6JgAAgIQAAPoAAACA6AAAdTAAAOpgAAA6mAAAF3CculE8AAAABmJLR0QAAAAAAAD5Q7t/AAAACXBIWXMAAAsSAAALEgHS3X78AAABM0lEQVR42u3ZvU0sQRCF0QsiA4LBJt1NAptgiOFhtTQCgYa/t1XV51gLWmO2P25jbAIAAAAAAAAAAAAAAACMcnPtB/iql8eHf+v1/dNzu+c/4/bMmy6XS4kPfwyyfn77uwlKHPZZnwWYtJpWH+TMKibEOXV9dTLhOhsXJekfptXUv3PYHa+zkUs56riaVn9FPz3gLqsZv5SjLqvZKkrSI0yLOS+/faBVr7PtlnJUdTVbR0lqhik534/89QFWuc62X8pRldWIUpAoBYly4H9KMVWCJMndtR/g2irFWLZeSsUgyaZLqRpj2W4p1YMkm0XpECTZ5PrqEmMZv5RuQZLhUToGSYZeX11jLOOW0j1IMmgpE2IsI5YyKUjS7JvH5P0XUdOCAAAAAAAAAAAAAAAAAPA/vAIIW1MYkWg/CwAAAABJRU5ErkJggg==) no-repeat;
+    background-size: contain;
+    margin-top: -2rpx;
+}
+
+.play.pause {
+    background: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAGUAAABkCAYAAACfIP5qAAAABGdBTUEAALGPC/xhBQAAACBjSFJNAAB6JgAAgIQAAPoAAACA6AAAdTAAAOpgAAA6mAAAF3CculE8AAAABmJLR0QAAAAAAAD5Q7t/AAAACXBIWXMAAAsSAAALEgHS3X78AAAAsklEQVR42u3csQ0CMRQFwYMWKIaYdn8TxBRDDRARkaATJ28wEzmynrShJW8bAAAAAAAAAAAAAAAA7HdaPeBXz9v19Tlf7o/du/91z5HOqwfwTZQgUYJECRIlSJQgUYJECRIlSJQgUYJECRIlSJQgUYJECRIlSJQgUYJECRIlSJQgUYJECRIlSJQgUYJECRIlSJQgUYJECRIFAAAAAABggZnxTlM0M8lf5wAAAAAAAIADvAGsMQxDfsu7NAAAAABJRU5ErkJggg==) no-repeat;
+    background-size: contain;
+}
+
+.view_load {
+    position: absolute;
+    top: 35%;
+    width: 100%;
+    text-align: center;
+}
+
+.view_load_box {
+    font-size: 30rpx;
+    color: #FAFAFA;
+    font-weight: bold;
+    position: absolute;
+    left: 38%;
+    width: 120rpx;
+    background: rgba(67,67,67,0.8);
+    text-align: center;
+    border-radius: 8%;
+    padding: 75rpx 50rpx;
+}
+
+video {
+    height: 450rpx;
+}
+
+.morenmeiyougao {
+    float: left;
+    width: 100%;
+}
+
+.morenmeiyougao.xianshi {
+    transform: translateY(0);
+}
+
+.morenmeiyougao.yincang {
+    transform: translateY(99999px);
+    height: 0px;
+}
+
+.articlelist_tw {
+    width: 100%;
+    text-align: center;
+    font-size: 30rpx;
+    line-height: 80rpx;
+    color: #999999;
+}

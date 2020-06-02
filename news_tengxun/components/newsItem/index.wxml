@@ -1,0 +1,88 @@
+<view bindtap="newsTap" class="news-item small-pic-item {{isLastOne&&'hide-border'}}" wx:if="{{showType===1||showType===9||showType===11||picShowType==='0'||picShowType==='12'}}">
+    <view class="title-cover">
+        <view class="title {{hasRead&&'has-read'}}">
+            <view class="icon {{isTopic&&'topic-icon'}} {{isSpecial&&'special-icon'}} {{isOriginal&&'original-icon'}}" wx:if="{{isTopic||isSpecial||isOriginal}}">
+                <text class="text" wx:if="{{isTopic}}">话题</text>
+                <text class="text" wx:elif="{{isSpecial}}">专题</text>
+                <text class="text" wx:else>独家</text>
+            </view>
+      {{title}}
+    </view>
+        <view class="desc" wx:if="{{isTopic}}">
+            <text wx:if="{{joinCount>0}}">{{formatJoinCount}}参与</text>
+            <text wx:if="{{readNum>0}}">{{formatReadNum}}阅读</text>
+        </view>
+        <view class="desc" wx:else>
+            <text>{{source}}</text>
+            <text wx:if="{{pubTime}}">{{pubTime}}</text>
+            <text wx:if="{{commentCount>0}}">{{formatCommentCount}}评</text>
+        </view>
+    </view>
+    <image class="small-pic" mode="aspectFill" src="{{imageSmall}}">
+        <view class="video-mark" wx:if="{{isVideo}}">
+            <view class="iconfont icon-xwsplay video-play-mark"></view>
+      {{duration}}
+    </view>
+    </image>
+</view>
+<view bindtap="newsTap" class="news-item big-pic-item {{isLastOne&&'hide-border'}}" wx:elif="{{showType===2||showType===10||picShowType==='3'}}">
+    <view class="title {{hasRead&&'has-read'}}">
+        <view class="icon {{isSpecial&&'special-icon'}} {{isOriginal&&'original-icon'}}" wx:if="{{isSpecial||isOriginal}}">
+            <text class="text" wx:if="{{isSpecial}}">专题</text>
+            <text class="text" wx:else>独家</text>
+        </view>
+    {{title}}
+  </view>
+    <image class="big-pic" mode="aspectFill" src="{{imageBig}}">
+        <block wx:if="{{isVideo}}">
+            <view class="iconfont icon-xwsplay big-video-mark"></view>
+            <view class="video-time-mark">
+                <block wx:if="{{playCount}}">
+                    <view class="video-play-icon iconfont icon-xwlook"></view>
+                    <view class="video-count">{{playCountStr}}</view>
+                    <view class="video-count-line"></view>
+                </block>
+                <view class="iconfont icon-xwsplay video-play-mark" wx:else></view>
+                <view class="video-count">{{duration}}</view>
+            </view>
+        </block>
+        <view class="multi-pic-mark" wx:if="{{imgCount>4&&!isVideo}}">{{imgCount}}图</view>
+    </image>
+    <view class="desc">
+        <text>{{source}}</text>
+        <text wx:if="{{pubTime}}">{{pubTime}}</text>
+        <text wx:if="{{commentCount>0}}">{{formatCommentCount}}评</text>
+    </view>
+</view>
+<view bindtap="newsTap" class="news-item {{isLastOne&&'hide-border'}}" wx:elif="{{showType===3||picShowType==='2'}}">
+    <view class="title {{hasRead&&'has-read'}}">
+        <view class="icon {{isSpecial&&'special-icon'}} {{isOriginal&&'original-icon'}}" wx:if="{{isSpecial||isOriginal}}">
+            <text class="text" wx:if="{{isSpecial}}">专题</text>
+            <text class="text" wx:else>独家</text>
+        </view>
+    {{title}}
+  </view>
+    <view class="three-pic-cover">
+        <image class="three-pic" mode="aspectFill" src="{{item}}" wx:for="{{imageThree}}" wx:key="*this"></image>
+        <view class="multi-pic-mark" wx:if="{{imgCount>4}}">{{imgCount}}图</view>
+    </view>
+    <view class="desc">
+        <text>{{source}}</text>
+        <text wx:if="{{pubTime}}">{{pubTime}}</text>
+        <text wx:if="{{commentCount>0}}">{{formatCommentCount}}评</text>
+    </view>
+</view>
+<view bindtap="newsTap" class="news-item {{isLastOne&&'hide-border'}}" wx:else>
+    <view class="title {{hasRead&&'has-read'}}">
+        <view class="icon {{isSpecial&&'special-icon'}} {{isOriginal&&'original-icon'}}" wx:if="{{isSpecial||isOriginal}}">
+            <text class="text" wx:if="{{isSpecial}}">专题</text>
+            <text class="text" wx:else>独家</text>
+        </view>
+    {{title}}
+  </view>
+    <view class="desc">
+        <text>{{source}}</text>
+        <text wx:if="{{pubTime}}">{{pubTime}}</text>
+        <text wx:if="{{commentCount>0}}">{{formatCommentCount}}评</text>
+    </view>
+</view>

@@ -1,0 +1,36 @@
+<import src="/templates/srPlayerRank.wxml"></import>
+<import src="/templates/srCBATeamRank.wxml"></import>
+<import src="/templates/srNBATeamRank.wxml"></import>
+<import src="/templates/srNFLTeamRank.wxml"></import>
+<import src="/templates/srSoccerTeamRank.wxml"></import>
+<import src="/templates/srSoccerCLTeamRank.wxml"></import>
+<block wx:if="{{!isVsSchedule&&tabs.length>1}}">
+    <view class="header">
+        <view class="tabs">
+            <view class="tab-container" wx:for="{{tabs}}" wx:for-item="tab" wx:key="path">
+                <view bindtap="changeCurTab" class="tab {{tab.path===curTab&&'active'}}" data-path="{{tab.path}}">
+                    {{tab.desc}}
+                </view>
+            </view>
+        </view>
+        <scroll-view hidden="{{curTab!==tab.path}}" scrollX="true" wx:if="{{tab.subTabs}}" wx:for="{{tabs}}" wx:for-item="tab" wx:key="path">
+            <view class="sub-tabs {{tab.isUseFlex?'flex-sub-tabs':''}}">
+                <view bindtap="changeCurSubTab" class="sub-tab {{subTab.path===curSubTab&&'active'}}" data-path="{{subTab.path}}" hidden="{{curTab!==tab.path}}" wx:if="{{tab.subTabs}}" wx:for="{{tab.subTabs}}" wx:for-item="subTab" wx:key="path">
+                        {{subTab.desc}}
+                    </view>
+            </view>
+        </scroll-view>
+    </view>
+    <swiper bindchange="changeSwiper" bindtouchstart="handleTouchStart" current="{{curIdx}}" style="height: {{contentHeight-(curSubTab?79:38)}}px">
+        <swiper-item wx:for="{{tabs}}" wx:for-item="tab" wx:key="path">
+            <ScheduleList apiMatches="{{schedule.apiMatches}}" bind:onScrollToLimit="handleScrollToLimit" bind:onTouchEnd="handleTouchEnd" bind:onTouchstart="handleTouchStart" dateDesc="{{schedule.dateDesc}}" dates="{{schedule.dates}}" isEnableMore="{{true}}" isPostNoMore="{{schedule.isPostNoMore}}" isPreNoMore="{{schedule.isPreNoMore}}" scrollHeight="{{contentHeight-(curSubTab?79:38)}}" toView="{{toView}}" wx:if="{{tab.path==='schedule'&&schedule.isFetched}}"></ScheduleList>
+            <!-- <scroll-view class="content" scrollY="true" style="height: {{contentHeight-(curSubTab?79:38)}}px" wx:else>
+                <template is="{{teamRankTmpl}}" data="{{...teamRank}}" wx:if="{{tab.path==='rank'}}"></template>
+                <template is="srPlayerRank" data="{{...{playerRank:playerRank,curSubTab:curSubTab,competitionId:competitionId,pathPrefix:'playerRank['+curSubTab+'].list'}}}" wx:if="{{tab.path==='player'}}"></template>
+                <template is="srPlayerRank" data="{{...{playerRank:playerRank,curSubTab:tab.path,competitionId:competitionId}}}" wx:else></template>
+            </scroll-view> -->
+        </swiper-item>
+    </swiper>
+</block>
+<ScheduleList apiMatches="{{schedule.apiMatches}}" bind:onScrollToLimit="handleScrollToLimit" bind:onTouchEnd="handleTouchEnd" bind:onTouchstart="handleTouchStart" dateDesc="{{schedule.dateDesc}}" dates="{{schedule.dates}}" isEnableMore="{{true}}" isPostNoMore="{{schedule.isPostNoMore}}" isPreNoMore="{{schedule.isPreNoMore}}" scrollHeight="{{contentHeight}}" toView="{{toView}}" wx:if="{{!isVsSchedule&&tabs.length===1&&schedule.isFetched}}"></ScheduleList>
+<ScheduleList apiMatches="{{vsSchedule.apiMatches}}" dateDesc="{{vsSchedule.dateDesc}}" dates="{{vsSchedule.dates}}" scrollHeight="{{contentHeight}}" toView="{{toView}}" wx:if="{{isVsSchedule&&vsSchedule.isFetched}}"></ScheduleList>

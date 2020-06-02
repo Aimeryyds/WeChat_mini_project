@@ -1,0 +1,20 @@
+<template name="share_cover_dialog">
+    <view catchtap="onShareDialogOutTap" catchtouchmove="onShareDialogOutTap" class="shade-box">
+        <view class="share-bottom-dialog">
+            <view class="share-content-block">
+                <button bindtap="_shareToPoster" class="share-item" data-shareType="wx" openType="share">
+                    <image class="share-item-icon" src="http://mat1.gtimg.com/www/images/newsapp/wxapp/news/icon_share_weixin.png"></image>
+                    <view class="share-item-text">分享好友</view>
+                </button>
+                <button bindtap="_shareToPoster" class="share-item" data-shareType="poster">
+                    <image class="share-item-icon" src="http://mat1.gtimg.com/www/images/newsapp/wxapp/news/icon_share_pyquan.png"></image>
+                    <view class="share-item-text">生成海报</view>
+                </button>
+            </view>
+            <view class="share-line"></view>
+            <view bindtap="_handleDisappearShareDialog" class="share-btn-block">
+                <view>取消</view>
+            </view>
+        </view>
+    </view>
+</template>

@@ -1,0 +1,67 @@
+<view class="subject">
+    <statusbar __triggerObserer="{{_triggerObserer}}"></statusbar>
+    <view class="{{'bottom-tap '+(isIPhoneX?'iPhoneX':'')}}">
+        <button class="share-friend" openType="share">分享给好友</button>
+        <view class="split-line"></view>
+        <view bindtap="handleClickShareImage" class="share-image">生成热点长图</view>
+    </view>
+    <view class="banner-container">
+        <image class="banner-img" mode="widthFix" src="{{hotspotInfo.cover_img}}"></image>
+        <view class="mask"></view>
+        <view class="title-container">
+            <image class="logo" src="{{anonymousState__temp}}"></image>
+            <text class="title">{{hotspotInfo.title}}</text>
+            <view class="view-count" wx:if="{{hotspotInfo.onlooker_count}}">{{anonymousState__temp2}}</view>
+        </view>
+    </view>
+    <text class="desc">{{hotspotInfo.description}}</text>
+    <block wx:for="{{loopArray0}}" wx:for-index="key" wx:for-item="module" wx:key="key">
+        <view class="event-tracking" wx:if="{{module[$original].module_type===1}}">
+            <view class="title-bar">{{module[$original].module_name}}</view>
+            <block wx:if="{{!!module[$original].module_content.trace_data}}">
+                <view bindtap="clickTimelineItem" class="timeline-item" data-item="{{data[$original]}}" wx:for="{{module[$anonymousCallee__0]}}" wx:for-index="key" wx:for-item="data" wx:key="key">
+                    <view class="bot-background">
+                        <view class="time">{{data[$loopState__temp4]}}</view>
+                        <text class="description">{{data[$original].description}}</text>
+                        <image class="img" mode="widthFix" src="{{data[$original].cover_img}}" wx:if="{{data[$original].cover_img}}"></image>
+                    </view>
+                </view>
+            </block>
+        </view>
+        <block wx:else>
+            <view class="viewport" wx:if="{{module[$original].module_type===2}}">
+                <view class="title-bar">{{module[$original].module_name}}</view>
+                <view wx:for="{{module[$anonymousCallee__2]}}" wx:for-index="_k" wx:for-item="point" wx:key="_k">
+                    <view class="viewport-name" wx:if="{{point[$original].viewport_name}}">{{point[$original].viewport_name}}</view>
+                    <view class="viewport-item" wx:for="{{point[$anonymousCallee__1]}}" wx:for-index="key" wx:for-item="data" wx:key="key">
+                        <view class="user-container">
+                            <image class="avatar" src="{{data[$original].content.user.avatar_url}}"></image>
+                            <view class="user-info">
+                                <text class="user-name">{{data[$original].content.user.name}}</text>
+                                <view class="user-desc">{{data[$loopState__temp6]}}</view>
+                            </view>
+                        </view>
+                        <text class="content">{{data[$original].content.content}}</text>
+                        <view class="{{'img-'+data[$original].content.large_image_list.length}}">
+                            <image mode="{{data[$original].content.large_image_list.length===1?'widthFix':'aspectFill'}}" src="{{'https:'+image.url}}" wx:for="{{data[$original].content.large_image_list}}" wx:for-index="k" wx:for-item="image" wx:key="k"></image>
+                        </view>
+                        <view class="status-container">
+                            <view class="status repost">{{data[$original].content.forward_info.forward_count}}</view>
+                            <view class="status comment">{{data[$original].content.comment_count}}</view>
+                            <view class="status like">{{data[$original].content.digg_count}}</view>
+                        </view>
+                    </view>
+                </view>
+            </view>
+            <block wx:else>
+                <view class="related" wx:if="{{module[$original].module_type===3}}">
+                    <view class="title-bar">{{module[$original].module_name}}</view>
+                    <view bindtap="handleClickRelated" class="related-item" data-item="{{data}}" wx:for="{{module[$original].module_content.related_data}}" wx:for-item="data" wx:key="content_id">
+                        <text class="related-title">{{data.title}}</text>
+                        <image class="related-img" src="{{data.imageUrl}}" wx:if="{{data.imageUrl}}"></image>
+                    </view>
+                </view>
+            </block>
+        </block>
+    </block>
+</view>

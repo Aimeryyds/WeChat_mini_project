@@ -1,0 +1,42 @@
+<xxw-navigation withSearch fromPage="{{fromPage}}" searchPlaceholder="{{alternate}}"></xxw-navigation>
+<block wx:if="{{show}}">
+    <view class="tab-wrapper" style="top:{{barHeight}}px">
+        <view class="tab-item-wrapper">
+            <view catchtap="tapTab" class="tab-item" data-index="{{index}}" wx:for="{{tabNames}}" wx:key="*this">
+                <view class="tab-name {{activeIndex===index&&'active'}}">
+          {{item}}
+        </view>
+                <view class="tab-line {{activeIndex===index&&'active'}}"></view>
+            </view>
+        </view>
+    </view>
+    <swiper bindchange="onChange" class="swiper-container" current="{{activeIndex}}" style="height:{{swiperHeight?swiperHeight+'px':'100%'}}">
+        <swiper-item>
+            <recommend activeIndex="{{activeIndex}}" bindscroll="onScroll" id="recommend" pullDownRefreshCount="{{pullDownRefreshCount}}"></recommend>
+        </swiper-item>
+        <swiper-item>
+            <video-page activeIndex="{{activeIndex}}" bindscroll="onScroll" id="video" pullDownRefreshCount="{{pullDownRefreshCount}}"></video-page>
+        </swiper-item>
+        <swiper-item>
+            <local_component activeIndex="{{activeIndex}}" bindscroll="onScroll" id="local" pullDownRefreshCount="{{pullDownRefreshCount}}"></local_component>
+        </swiper-item>
+    </swiper>
+</block>
+<xxw-bg-loading wx:else></xxw-bg-loading>
+<xxw-guide guideClass="mainPage" guideStyle="top:{{barHeight}}px" keyName="mainPage" showGuide="{{showTopGuide}}" timeoutShow="{{1000}}">
+    <view>刷新闻更方便</view>
+    <view>添加到我的小程序</view>
+</xxw-guide>
+<xxw-guide guideClass="newsFlashBottom" showGuide="{{showGuideBottom}}" timeoutShow="{{2000}}">
+    <view>刷一刷，世界正在发生什么？</view>
+</xxw-guide>
+<xxw-login></xxw-login>
+<xxw-poster fromPage="{{fromPage}}" previewConfig="{{posterPreviewConfig}}"></xxw-poster>
+<block wx:if="{{showTestUrl}}">
+    <view catchtap="tapTestUrlBtn" class="test-btn" data-index="{{index}}" style="bottom:{{100+index*80}}rpx;" wx:for="{{testUrl}}" wx:key="text">
+    {{item.text}}
+  </view>
+    <view catchtap="tapSwitchAPI" class="test-btn" style="bottom: 20rpx; background: #63135d;">
+    {{dev?'使用线上API':'使用测试API'}}
+  </view>
+</block>

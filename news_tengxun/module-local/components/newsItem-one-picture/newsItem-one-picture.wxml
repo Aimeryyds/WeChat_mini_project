@@ -1,0 +1,46 @@
+<form bindreset="formReset" bindsubmit="formSubmit" reportSubmit="true">
+    <navigator bindtap="tapEven" class="kb-card" data-showNewsId="{{item.id}}" data-showType="{{item.showType}}" data-url="{{item.pathUrl}}" hoverStartTime="200" id="the-{{item.id}}" wx:if="{{!item.isOld||!item.stick}}">
+        <view class="base-flex2">
+            <view class="kb-item-content base-flex-box sim2-style" style="border-bottom-style:{{item.bottomLineStyle}};border-bottom:{{moreThreeLine?0:2}}rpx solid #E7EBEE;padding-bottom:0rpx;">
+                <view class="sim2-content-wrap base-flex1">
+                    <button class="submitButton" data-chlid="{{item.chlid}}" data-newsid="{{item.id}}" formType="submit">
+                        <media-description-text bindtoggletitle="toggletitle" class="kb-title base-line3 sim2-text {{item.isClicked?'kb-clicked':''}}">
+                            <text class="kb-topic-templete-text kb-topic-text" style="color:{{item.changeInfo.topic.color}};background-color:{{item.changeInfo.topic.bgcolor}}" wx:if="{{item.changeInfo.topic&&item.changeInfo.topic.title&&item.isTopicPosition}}">{{item.changeInfo.topic.title}}</text>{{item.title}}</media-description-text>
+                    </button>
+                    <view class="bottom-wrap" wx:if="{{!moreThreeLine}}">
+                        <view class="bottom-content">
+                            <text class="kb-red-em" style="color:{{item.changeInfo.vexpr.color}};background-color:{{item.changeInfo.vexpr.bgcolor}}" wx:if="{{item.changeInfo.vexpr&&item.changeInfo.vexpr.title}}">{{item.changeInfo.vexpr.title}}</text>
+                            <text class="kb-span kb-chlname {{pageName=='local'?'local':''}}">{{item.source?item.source:'热点文章'}}</text>
+                            <text class="kb-span kb-item-time" wx:if="{{item.publishTime}}">{{item.publishTime}}</text>
+                            <text class="kb-span station-text" wx:if="{{item.chlname}}">{{item.chlname}}</text>
+                            <text class="kb-span kb-item-comment" wx:if="{{item.comments}}">{{item.comments}}评 </text>
+                        </view>
+                        <view catchtap="noInterestTap" class="iconfont icon-xwclose" data-newsid="{{item.id}}" hoverStopPropagation="true" wx:if="{{!item.isFixPosition&&!item.hiddenClose}}"></view>
+                    </view>
+                </view>
+                <button class="submitButton" data-newsid="{{item.id}}" formType="submit">
+                    <view class="sim-image-wrap kb-image-box">
+                        <image class="kb-img-center" mode="aspectFill" src="{{item.img_small}}">
+                            <view class="video-shadow  base-pa" wx:if="{{item.showType==9}}">
+                                <view class="video-play-wrap  base-pa">
+                                    <view class="iconfont icon-xwsplay"></view>
+                                    <text class="video-play-time" wx:if="{{item.video_info.duration}}">{{item.video_info.duration}}</text>
+                                </view>
+                            </view>
+                        </image>
+                    </view>
+                </button>
+            </view>
+            <view class="bottom-wrap" style="border-bottom:1rpx solid #E7EBEE;margin-top:-30rpx;" wx:if="{{moreThreeLine}}">
+                <view class="bottom-content">
+                    <text class="kb-red-em" style="color:{{item.changeInfo.vexpr.color}};background-color:{{item.changeInfo.vexpr.bgcolor}}" wx:if="{{item.changeInfo.vexpr&&item.changeInfo.vexpr.title}}">{{item.changeInfo.vexpr.title}}</text>
+                    <text class="kb-span kb-chlname">{{item.source?item.source:'热点文章'}}</text>
+                    <text class="kb-span kb-item-time" wx:if="{{item.publishTime}}">{{item.publishTime}}</text>
+                    <text class="kb-span station-text" wx:if="{{item.chlname}}">{{item.chlname}}</text>
+                    <text class="kb-span kb-item-comment" wx:if="{{item.comments}}">{{item.comments}}评 </text>
+                </view>
+                <view catchtap="noInterestTap" class="iconfont icon-xwclose" data-newsid="{{item.id}}" hoverStopPropagation="true" wx:if="{{!item.isFixPosition&&!item.hiddenClose}}"></view>
+            </view>
+        </view>
+    </navigator>
+</form>

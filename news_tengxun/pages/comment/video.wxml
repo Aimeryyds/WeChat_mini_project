@@ -1,0 +1,16 @@
+<view class="video-comment-wrapper">
+    <view class="video-wrapper">
+        <xxw-video _uid="{{_uid}}" class="xxw-video" durationStr="{{durationStr}}" fromPage="{{fromPage}}" id="{{_uid}}" playCount="{{playCount}}" snapshot="{{snapshot}}" vid="{{vid}}" wx:if="{{_uid}}"></xxw-video>
+    </view>
+    <xxw-comment-block isBlackTheme articleId="{{articleId}}" atype="{{atype}}" bgLoading="{{commentLoading}}" bnext="{{commentBnext}}" commentId="{{commentId}}" commentList="{{[commentList]}}" fromPage="{{fromPage}}" height="{{commentHeight}}" isForbidden="{{commentIsForbidden}}" lastReplyId="{{commentLastReplyId}}" syncId="{{syncId}}">
+        <view class="comment-title" slot="above">
+            <xxw-comment-title isBlackTheme title="全部评论"></xxw-comment-title>
+        </view>
+    </xxw-comment-block>
+</view>
+<view class="comment-bar-wrapper">
+    <xxw-comment-bar hideAnchor isBlackTheme isVideo articleId="{{articleId}}" atype="{{atype}}" class="comment-bar" commentId="{{commentId}}" fromPage="{{fromPage}}" isForbidden="{{commentIsForbidden}}" posterShareImg="{{posterShareImg}}" syncId="{{syncId}}" title="{{title}}"></xxw-comment-bar>
+</view>
+<xxw-comment-input-panel isBlackTheme fromPage="{{fromPage}}"></xxw-comment-input-panel>
+<xxw-login></xxw-login>
+<xxw-poster fromPage="{{fromPage}}"></xxw-poster>

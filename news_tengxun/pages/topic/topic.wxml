@@ -1,0 +1,60 @@
+<view class="container" wx:if="{{ready}}">
+    <scroll-view bindscroll="_onScroll" bindscrolltolower="_onScrollToBottom" class="scroll-con" lowerThreshold="40" scrollY="true">
+        <view class="header-box">
+            <view class="topic-title">
+                <image class="topic-image" src="http://mat1.gtimg.com/www/js/news/left.png"></image>
+                <view class="topic-name">
+          {{topicName}}
+        </view>
+                <image class="topic-image" src="http://mat1.gtimg.com/www/js/news/left.png"></image>
+            </view>
+            <view class="desc-cover">
+                <view class="header-desc">
+                    <text>{{readNum}}阅读</text>
+                    <text>{{joinCountStr}}参与</text>
+                </view>
+                <xxw-follow-button theme="yellow" topicId="{{tpid}}" type="topic"></xxw-follow-button>
+            </view>
+            <view class="description-cover">
+                <view class="description">
+                    <collapse-text lineCount="{{2}}">
+            {{desc}}
+          </collapse-text>
+                </view>
+                <view class="nav-fixed">
+                    <view bindtap="navTap" class="nav-text-cover {{activeTab==='select'&&'active'}}" id="select">
+                        <view class="nav-text">精选</view>
+                        <view class="yellow-line"></view>
+                    </view>
+                    <view bindtap="navTap" class="nav-text-cover {{activeTab==='latest'&&'active'}}" id="latest">
+                        <view class="nav-text">最新</view>
+                        <view class="yellow-line"></view>
+                    </view>
+                </view>
+            </view>
+        </view>
+        <view hidden="{{activeTab==='latest'}}">
+            <view class="topic-battle" wx:if="{{hasVote}}">
+                <topic-battle isTimeline="{{false}}" voteid="{{voteid}}"></topic-battle>
+            </view>
+            <block wx:for="{{selectList}}" wx:for-index="page" wx:for-item="second" wx:key="_uid">
+                <xxw-weibo-item withFollowBtn withDeleteBtn collapse articleId="{{weiboItem.articleId}}" atype="{{weiboItem.atype}}" binddelete="onDeleteItem" card="{{weiboItem.card}}" commentId="{{weiboItem.commentId}}" comments="{{weiboItem.comments}}" content="{{weiboItem.content}}" data-index="{{index}}" data-page="{{page}}" data-tab="selectList" date="{{weiboItem.date}}" disableBottomBar="{{weiboItem.weiboStatus!==1||weiboItem.isFake}}" fromPage="{{fromPage}}" hotComment="{{weiboItem.hotComment}}" imageList="{{weiboItem.imageList}}" imgurlList="{{weiboItem.imgurlList}}" isVideo="{{weiboItem.isVideo}}" isFake="{{weiboItem.isFake}}" isFirstArticle="{{firstArticle===weiboItem.articleId}}" posterShareImg="{{weiboItem.posterShareImg}}" pushInfo="{{weiboItem.pushInfo}}" relation="{{weiboItem.relation}}" showPushGuide="{{showPushGuide}}" time="{{weiboItem.time}}" timestamp="{{weiboItem.timestamp}}" topic="{{weiboItem.topic}}" videoInfo="{{weiboItem.videoInfo}}" wx:for="{{second.list}}" wx:for-item="weiboItem" wx:key="articleId">
+                    <view class="split-line"></view>
+                </xxw-weibo-item>
+            </block>
+            <xxw-loading-bar hasMore="{{hasNextSelect}}"></xxw-loading-bar>
+        </view>
+        <view hidden="{{activeTab==='select'}}">
+            <block wx:for="{{latestList}}" wx:for-index="page" wx:for-item="second" wx:key="_uid">
+                <xxw-weibo-item withFollowBtn withDeleteBtn collapse articleId="{{weiboItem.articleId}}" atype="{{weiboItem.atype}}" binddelete="onDeleteItem" card="{{weiboItem.card}}" commentId="{{weiboItem.commentId}}" comments="{{weiboItem.comments}}" content="{{weiboItem.content}}" data-index="{{index}}" data-page="{{page}}" data-tab="latestList" date="{{weiboItem.date}}" disableBottomBar="{{weiboItem.weiboStatus!==1||weiboItem.isFake}}" fromPage="{{fromPage}}" hotComment="{{weiboItem.hotComment}}" imageList="{{weiboItem.imageList}}" imgurlList="{{weiboItem.imgurlList}}" isVideo="{{weiboItem.isVideo}}" isFake="{{weiboItem.isFake}}" posterShareImg="{{weiboItem.posterShareImg}}" pushInfo="{{weiboItem.pushInfo}}" relation="{{weiboItem.relation}}" time="{{weiboItem.time}}" timestamp="{{weiboItem.timestamp}}" topic="{{weiboItem.topic}}" videoInfo="{{weiboItem.videoInfo}}" wx:for="{{second.list}}" wx:for-item="weiboItem" wx:key="articleId">
+                    <view class="split-line"></view>
+                </xxw-weibo-item>
+            </block>
+            <xxw-loading-bar hasMore="{{hasNextLatest}}"></xxw-loading-bar>
+        </view>
+    </scroll-view>
+    <view catchtap="tapPostWeibo" class="btn-pub"></view>
+    <xxw-poster fromPage="{{fromPage}}"></xxw-poster>
+</view>
+<xxw-bg-loading wx:else></xxw-bg-loading>
+<xxw-login></xxw-login>

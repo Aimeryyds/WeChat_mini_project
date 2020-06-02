@@ -1,0 +1,104 @@
+<import src="../../wxParse/wxParse.wxml"></import>
+<include src="../../templates/search/search_temp.wxml"></include>
+<view class="cont">
+    <view class="title  {{showView?'hide':'show'}}">
+        <view class="title_text">
+            <text>{{vTitle}}</text>
+        </view>
+        <view class="title_data">
+            <view bindtap="bin" data-text="2018"> {{vRiqi}} </view>
+        </view>
+        <view class="article_tag {{followIsShow==true?'show':'hide'}}">
+            <view catchtap="gotoonegzpage" class="gjc" data-val="{{item}}" wx:for="{{keyWoeldArray}}" wx:for-index="idx" wx:key="key">{{item}}</view>
+        </view>
+    </view>
+    <view class="swiper-tab">
+        <view bindtap="swichNav" class="swiper-tab-item {{currentTab==0?'on':''}}" data-current="0">看联播</view>
+        <view bindtap="swichNav" class="swiper-tab-item {{currentTab==1?'on':''}}" data-current="1">听联播</view>
+    </view>
+    <view class="swiper-box">
+        <view class="morenmeiyougao {{currentTab==0?'xianshi':'yincang'}}">
+            <view class="view_video">
+                <video autoplay="true" bindended="videoend" binderror="videoErrorCallback" bindpause="videoPause" bindplay="clickVplay" bindtimeupdate="getVidtime" bindwaiting="videowatting" id="videoID" initialTime="{{initialtime1}}" objectFit="contain" poster="http://p1.img.cctvpic.com/nettv/ibugu/xinwen/C10437/ibugu/images/IMG1257326364058754.jpg" src="{{isFristvideo==true?videoUrl:''}}" style="width:100%"></video>
+            </view>
+        </view>
+        <view class="morenmeiyougao {{currentTab==1?'xianshi':'yincang'}}">
+            <view class="song-control">
+                <view class="progress">
+                    <view class="slider_bg">
+                        <view bindtap="songToggle" class="play {{isAudio?'pause':''}}"></view>
+                        <view class="pass_time">{{pass_time}}</view>
+                        <wxzx-slider bind:sliderCancel="sliderCancel" bind:sliderChange="sliderChange" bind:sliderEnd="sliderEnd" bind:sliderStart="sliderStart" bind:sliderTap="sliderTap" blockImageHeight="54" blockImageWidth="54" blockSrc="../../img/slider.png" disabled="{{disabled}}" id="wxzxSlider" max="{{max}}" percent="{{percent}}" sliderLeft="75" value="{{value}}" width="350"></wxzx-slider>
+                        <view class="total_time">{{total_time}}</view>
+                    </view>
+                </view>
+            </view>
+        </view>
+    </view>
+</view>
+<view class="content">
+    <template is="wxParse" data="{{wxParseData:vContent.nodes}}"></template>
+</view>
+<view class="xiangguantuijian {{followIsShow==true?'show':'hide'}}">
+    <view class="tuijiantitle">相关推荐内容</view>
+    <view class="woguanzhude" wx:for="{{followData}}" wx:key="key">
+        <view bindtap="changepage" class="guanzhu_list list1" data-pageid="{{item.newsId}}" data-type="{{item.contype}}" wx:if="{{item.contype=='联播+'}}">
+            <view class="shang">
+                <view class="titName">
+                    <view class="titNamebg">{{item.contype}}</view>
+                </view>
+            </view>
+            <view class="zhong">{{item.newsTitle}}</view>
+            <view class="xia">
+                <view class="timedata">{{item._newsFocusDate}}</view>
+                <view class="gjc_box">
+                    <view catchtap="gotoonegzpage" class="gjc" data-val="{{item}}" wx:if="{{index<=2}}" wx:for="{{item.gjc}}" wx:key="key">{{item}}</view>
+                </view>
+            </view>
+        </view>
+        <view bindtap="changepage" class="guanzhu_list list2" data-pageid="{{item.newsId}}" data-type="{{item.contype}}" wx:if="{{item.contype=='快评'}}">
+            <view class="shang">
+                <view class="titName">
+                    <view class="titNamebg">{{item.contype}}</view>
+                </view>
+            </view>
+            <view class="zhong">{{item.newsTitle}}</view>
+            <view class="xia">
+                <view class="timedata">{{item._newsFocusDate}}</view>
+                <view class="gjc_box">
+                    <view catchtap="gotoonegzpage" class="gjc" data-val="{{item}}" wx:if="{{index<=2}}" wx:for="{{item.gjc}}" wx:key="key">{{item}}</view>
+                </view>
+            </view>
+        </view>
+        <view bindtap="changepage" class="guanzhu_list list3" data-modetype="{{item.newsEditMode}}" data-pageid="{{item.newsId}}" data-type="{{item.contype}}" wx:if="{{item.contype=='新闻联播'||item.contype==''}}">
+            <view class="shang">
+                <view class="titName">
+                    <view class="titNamebg">{{item.contype}}</view>
+                </view>
+                <view class="timelength" wx:if="{{item.contype!=''}}">时长 {{item.newsLength}}</view>
+            </view>
+            <view class="zhong">{{item.newsTitle}}</view>
+            <view class="xia">
+                <view class="timedata">{{item._newsFocusDate}}</view>
+                <view class="gjc_box">
+                    <view catchtap="gotoonegzpage" class="gjc" data-val="{{item}}" wx:if="{{index<=2}}" wx:for="{{item.gjc}}" wx:key="key">{{item}}</view>
+                </view>
+            </view>
+        </view>
+    </view>
+    <view class="articlelist_tw">
+        <text class="articlelist_tw_left"></text>
+        <text class="articlelist_tip">已显示全部内容</text>
+        <text class="articlelist_tw_right"></text>
+    </view>
+</view>
+<view>
+    <view bindtap="gotozhengqi" class="chakanzhengqi">查看该期联播</view>
+    <include src="../../templates/share/share_temp.wxml"></include>
+</view>
+<view class="view_load {{isloading?'hide':'show'}}">
+    <view class="view_load_box">加载中</view>
+</view>
+<view bindtap="backToTop" class="{{showGoTop?'show':'hide'}} scrollto-btn-wrapper">
+    <view class="scrollto-btn"></view>
+</view>

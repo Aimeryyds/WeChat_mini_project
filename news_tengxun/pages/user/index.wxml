@@ -1,0 +1,12 @@
+<xxw-bg-loading bindrefresh="render" status="{{status}}" wx:if="{{status!==pageStatus.ready}}"></xxw-bg-loading>
+<block wx:else>
+    <card avatarUrl="{{avatarUrl}}" coral_uid="{{coral_uid}}" fansNum="{{fansNum}}" followNum="{{followNum}}" isMedia="{{isMedia}}" isMyFans="{{isMyFans}}" isMyFollow="{{isMyFollow}}" likeNum="{{likeNum}}" mediaId="{{mediaId}}" nickName="{{nickName}}" type="{{type}}" uin="{{uin}}" userDesc="{{userDesc}}"></card>
+    <xxw-tab-bar activeIndex="{{activeIndex}}" bindchange="onChange" position="sticky" tabNames="{{tabNames}}" wx:if="{{tabNames.length>1}}"></xxw-tab-bar>
+    <view class="post-none" wx:if="{{!tabNames.length}}">
+        <image class="none-pic" src="http://mat1.gtimg.com/www/images/news_minipro/user-post-none.png"></image>
+    还没有发表任何内容哦
+  </view>
+    <tab-item coral_uid="{{coral_uid}}" fromPage="{{fromPage}}" mediaId="{{mediaId}}" ready="{{ready}}" style="display: {{activeIndex===index?'block':'none'}}" tabName="{{item}}" type="{{type}}" uin="{{uin}}" wx:for="{{tabNames}}" wx:key="*this"></tab-item>
+</block>
+<xxw-login></xxw-login>
+<xxw-poster fromPage="{{fromPage}}"></xxw-poster>

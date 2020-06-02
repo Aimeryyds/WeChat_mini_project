@@ -1,0 +1,35 @@
+<view class="content-container {{isBlackTheme&&'.black'}}">
+    <view class="news-loadingbg-wrap" style="top: {{top}};{{absolute?'position: absolute;':''}}" wx:if="{{status===pageStatus.loading}}">
+        <xxw-circle-loading class="loading" height="42rpx" width="42rpx"></xxw-circle-loading>
+        <image class="news-logo-image" src="http://mat1.gtimg.com/www/images/news_minipro/bg_logo_{{isBlackTheme?'black':'grey'}}.png"></image>
+    </view>
+    <view class="error-wrap" style="top: {{top}};{{absolute?'position: absolute;':''}}" wx:else>
+        <block wx:if="{{!networkIsConnected||status===pageStatus.noNetwork}}">
+            <view class="image-container">
+                <image class="error-image" src="{{isBlackTheme?'http://mat1.gtimg.com/www/images/news_minipro/night-wifi-ic.png':'http://mat1.gtimg.com/www/images/news_minipro/wifi-ic.png'}}"></image>
+                <image class="err-image-top" src="http://mat1.gtimg.com/www/images/news_minipro/wifi-top-ic.png"></image>
+            </view>
+            <view class="error">
+                <view>当前网络不可用</view>
+                <view>请检查你的网络设置</view>
+            </view>
+            <view bindtap="refresh" class="try-refresh">
+        刷新试试
+      </view>
+        </block>
+        <block wx:elif="{{status===pageStatus.delete}}">
+            <image class="error-image" src="{{isBlackTheme?'http://mat1.gtimg.com/www/images/news_minipro/night-delete-ic.png':'http://mat1.gtimg.com/www/images/news_minipro/delete-ic.png'}}"></image>
+            <view class="error">来晚了，内容已被删除</view>
+            <view bindtap="goHome" class="try-refresh">
+        去首页看更多
+      </view>
+        </block>
+        <block wx:else>
+            <image class="error-image" src="{{isBlackTheme?'http://mat1.gtimg.com/www/images/news_minipro/night-delete-ic.png':'http://mat1.gtimg.com/www/images/news_minipro/delete-ic.png'}}"></image>
+            <view class="error">{{tip}}</view>
+            <view bindtap="refresh" class="try-refresh">
+        刷新试试
+      </view>
+        </block>
+    </view>
+</view>

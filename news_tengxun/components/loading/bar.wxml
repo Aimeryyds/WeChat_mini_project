@@ -1,0 +1,15 @@
+<view bindtap="onTap" class="loading-bar-wrapper">
+    <view wx:if="{{status===pageStatus.noNetwork||!networkIsConnected}}">
+    {{noNetworkText}}
+  </view>
+    <view wx:elif="{{status===pageStatus.error}}">
+    {{errorText}}
+  </view>
+    <view wx:elif="{{!hasMore}}">
+    {{noMoreText}}
+  </view>
+    <block wx:else>
+        <xxw-circle-loading class="loading"></xxw-circle-loading>
+    {{loadingText}}
+  </block>
+</view>

@@ -1,0 +1,18 @@
+<template name="srPlayerRank">
+    <view class="empty" wx:if="{{playerRank&&playerRank[curSubTab]&&playerRank[curSubTab].isFetched&&!playerRank[curSubTab].list.length}}">
+        暂无数据
+    </view>
+    <view bindtap="onTapPlayer" class="one-player" data-player-id="{{player.playerId}}" data-player-name="{{player.name}}" wx:for="{{playerRank[curSubTab].list}}" wx:for-index="playerIdx" wx:for-item="player" wx:key="playerId">
+        <view class="serial num{{player.serial}}">
+            {{player.serial}}
+        </view>
+        <image binderror="imageError" class="icon" data-img-path="{{pathPrefix+'['+playerIdx+']'}}.icon" data-img-type="player" mode="aspectFill" src="{{player.icon}}"></image>
+        <view class="name-team">
+            <view class="name">{{player.name}}</view>
+            <view class="team">{{player.teamName}}</view>
+        </view>
+        <view class="cur-data">
+            {{player.value}}
+        </view>
+    </view>
+</template>

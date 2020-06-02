@@ -1,0 +1,15 @@
+<block wx:if="{{!isMe}}">
+    <view class="follow-button loading" wx:if="{{showLoading}}">
+        <xxw-circle-loading></xxw-circle-loading>
+    </view>
+    <button catchtap="handleTap" class="follow-button {{theme}} {{isMyFollow?'follow':'unfollow'}}" formType="submit" wx:else>
+        <block wx:if="{{isMyFollow}}">
+            <view class="follow-check" wx:if="{{!isMyFans}}"></view>
+            <view>{{isMyFans?'互相关注':'已关注'}}</view>
+        </block>
+        <block wx:else>
+            <view class="follow-plus"></view>
+            <view>关注</view>
+        </block>
+    </button>
+</block>

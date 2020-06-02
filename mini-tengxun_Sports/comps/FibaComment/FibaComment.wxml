@@ -1,0 +1,40 @@
+<view catchtap="getCommentDetail" class="comment" wx:if="{{comment}}">
+    <FibaAvatar class="photo" src="{{comment.user.avatar}}"></FibaAvatar>
+    <view class="top clearfix">
+        <view class="left">
+            <view class="name {{comment.user.id==='20190614'?'active':''}}">
+                {{comment.user.name}}
+                <image class="icon icon-vip" src="/assets/FIBA/icon_v@3x.png" wx:if="{{comment.user.id==='20190614'}}"></image>
+            </view>
+            <view class="time">{{comment.floorNum}}楼 {{comment.createTime}}</view>
+        </view>
+        <view class="right">
+            <view catchtap="getCommentDetail" class="wrap-btn-box" data-rcon="{{true}}">
+                <image class="icon icon-comment" src="/assets/FIBA/icon_comment@3x.png"></image>
+                <text class="icon-txt icon-count">{{comment.subReplyNum}}</text>
+            </view>
+            <view catchtap="parised" class="wrap-btn-box">
+                <FibaLogin bindloginevent="onLoginEvent" userInfo="{{userInfo}}"></FibaLogin>
+                <image class="icon icon-parised" src="/assets/FIBA/icon_good@3x.png" wx:if="{{!comment.supported}}"></image>
+                <image class="icon icon-parised" src="/assets/FIBA/icon_good_s@3x.png" wx:else></image>
+                <text class="icon-txt">{{comment.supportNum}}</text>
+            </view>
+        </view>
+    </view>
+    <view class="center">
+        <view class="parent" wx:if="{{comment.pid!=0&&!convered}}">
+            <view class="floor-num">{{comment.parentReply.userName}} {{comment.parentReply.floorNum}}楼</view>
+            <view class="word">{{comment.parentReply.title}}</view>
+        </view>
+        <view class="txt">{{comment.title}}</view>
+        <view class="images clearfix" wx:if="{{comment.images&&comment.images.length}}">
+            <TuaImage lazyLoad catchtap="viewImg" class="img" data-src="{{item.url}}" errSrc="{{defaultSrc}}" height="180rpx" imgMode="aspectFill" src="{{item.url||defaultSrc}}" width="180rpx" wx:for="{{comment.images}}" wx:key="{{index}}"></TuaImage>
+        </view>
+    </view>
+    <view catchtap="getCommentDetail" class="reply" data-rcon="{{true}}" wx:if="{{comment.subReplyNum!=0&&islist&&comment.pid==0}}">
+        <view class="li-more">共{{comment.subReplyNum}}条回复></view>
+    </view>
+    <view class="split-line" wx:if="{{islist}}">
+        <view class="slide"></view>
+    </view>
+</view>

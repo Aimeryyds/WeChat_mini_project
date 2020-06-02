@@ -1,0 +1,430 @@
+page {
+    height: 100%;
+}
+
+.header .tabs {
+    display: flex;
+    flex-direction: row;
+    text-align: center;
+    color: #fff;
+    background-color: #0061B8;
+    font-size: 28rpx;
+    line-height: 36px;
+}
+
+.header .tabs .tab-container {
+    flex: 1;
+}
+
+.header .tabs .tab-container .tab {
+    width: 112rpx;
+    margin: 0 auto;
+}
+
+.header .tabs .tab-container .tab.active {
+    border-bottom: 2px solid #fff;
+}
+
+.header .sub-tabs {
+    position: relative;
+    display: flex;
+    text-align: center;
+    white-space: nowrap;
+    background-color: #0061B8;
+    font-size: 26rpx;
+    line-height: 40px;
+}
+
+.header .sub-tabs:before {
+    position: absolute;
+    top: 0;
+    width: 100%;
+    height: 1px;
+    content: '';
+    background-color: #244bc0;
+}
+
+.header .sub-tabs .sub-tab {
+    display: inline-block;
+    flex: 0 1 auto;
+    padding: 0 36rpx;
+    color: #adbef3;
+    border-top: 1px solid #244bc0;
+}
+
+.header .sub-tabs .sub-tab.active {
+    color: #fff;
+}
+
+.header .sub-tabs.flex-sub-tabs .sub-tab {
+    flex: 1;
+}
+
+.content .basketball-team-rank .rank-desc {
+    position: sticky;
+    top: 0;
+    display: flex;
+    text-align: center;
+    color: #9c9c9c;
+    border-bottom: 1rpx solid #d6d7dc;
+    background-color: #f3f3f7;
+    font-size: 24rpx;
+    line-height: 66rpx;
+}
+
+.content .basketball-team-rank .rank-desc .area-name {
+    flex: 3;
+    text-align: left;
+    text-indent: 32rpx;
+}
+
+.content .basketball-team-rank .rank-desc .win-lose,.content .basketball-team-rank .rank-desc .win-rate,.content .basketball-team-rank .rank-desc .games-back {
+    flex: 1;
+}
+
+.content .basketball-team-rank .one-team {
+    display: flex;
+    text-align: center;
+    color: #212121;
+    border-bottom: 1rpx solid #d6d7dc;
+    font-size: 24rpx;
+    line-height: 88rpx;
+}
+
+.content .basketball-team-rank .one-team .team-rank {
+    flex: 1;
+    color: #9c9c9c;
+    font-weight: bold;
+}
+
+.content .basketball-team-rank .one-team .team-rank.num1,.content .basketball-team-rank .one-team .team-rank.num2,.content .basketball-team-rank .one-team .team-rank.num3,.content .basketball-team-rank .one-team .team-rank.num4,.content .basketball-team-rank .one-team .team-rank.num5,.content .basketball-team-rank .one-team .team-rank.num6,.content .basketball-team-rank .one-team .team-rank.num7,.content .basketball-team-rank .one-team .team-rank.num8 {
+    color: #e30000;
+}
+
+.content .basketball-team-rank .one-team .team-name {
+    overflow: hidden;
+    flex: 5;
+    text-align: left;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+    font-size: 28rpx;
+}
+
+.content .basketball-team-rank .one-team .team-name .logo {
+    width: 44rpx;
+    height: 44rpx;
+    margin-bottom: -14rpx;
+}
+
+.content .basketball-team-rank .one-team .win-lose,.content .basketball-team-rank .one-team .win-rate,.content .basketball-team-rank .one-team .games-back {
+    flex: 2;
+}
+
+.content .NFL-team-rank .rank-desc {
+    position: sticky;
+    top: 0;
+    display: flex;
+    text-align: center;
+    color: #9c9c9c;
+    border-bottom: 1rpx solid #d6d7dc;
+    background-color: #f3f3f7;
+    font-size: 24rpx;
+    line-height: 66rpx;
+}
+
+.content .NFL-team-rank .rank-desc .area-name {
+    flex: 3;
+    text-align: left;
+    text-indent: 32rpx;
+}
+
+.content .NFL-team-rank .rank-desc .wins,.content .NFL-team-rank .rank-desc .losses,.content .NFL-team-rank .rank-desc .ties,.content .NFL-team-rank .rank-desc .win-rate,.content .NFL-team-rank .rank-desc .streak {
+    flex: 1;
+}
+
+.content .NFL-team-rank .one-team {
+    display: flex;
+    text-align: center;
+    color: #212121;
+    border-bottom: 1rpx solid #d6d7dc;
+    font-size: 24rpx;
+    line-height: 88rpx;
+}
+
+.content .NFL-team-rank .one-team .team-rank {
+    flex: 1;
+    color: #9c9c9c;
+    font-weight: bold;
+}
+
+.content .NFL-team-rank .one-team .team-rank.num1,.content .NFL-team-rank .one-team .team-rank.num2,.content .NFL-team-rank .one-team .team-rank.num3,.content .NFL-team-rank .one-team .team-rank.num4,.content .NFL-team-rank .one-team .team-rank.num5,.content .NFL-team-rank .one-team .team-rank.num6 {
+    color: red;
+}
+
+.content .NFL-team-rank .one-team .team-name {
+    overflow: hidden;
+    flex: 5;
+    text-align: left;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+    font-size: 28rpx;
+}
+
+.content .NFL-team-rank .one-team .team-name .logo {
+    width: 44rpx;
+    height: 44rpx;
+    margin-bottom: -14rpx;
+}
+
+.content .NFL-team-rank .one-team .wins,.content .NFL-team-rank .one-team .losses,.content .NFL-team-rank .one-team .ties,.content .NFL-team-rank .one-team .win-rate,.content .NFL-team-rank .one-team .streak {
+    flex: 2;
+}
+
+.content .soccer-team-rank .team-rank {
+    flex: 10;
+}
+
+.content .soccer-team-rank .team-name {
+    flex: 30;
+}
+
+.content .soccer-team-rank .match-num,.content .soccer-team-rank .goal-conceded,.content .soccer-team-rank .rank-score {
+    flex: 10;
+}
+
+.content .soccer-team-rank .win-tie-lose {
+    flex: 15;
+}
+
+.content .soccer-team-rank .rank-desc {
+    position: sticky;
+    top: 0;
+    display: flex;
+    text-align: center;
+    color: #9c9c9c;
+    border-bottom: 1rpx solid #d6d7dc;
+    background-color: #f3f3f7;
+    font-size: 24rpx;
+    line-height: 66rpx;
+}
+
+.content .soccer-team-rank .rank-desc .team-name {
+    text-align: left;
+    text-indent: 56rpx;
+}
+
+.content .soccer-team-rank .one-team {
+    display: flex;
+    text-align: center;
+    color: #212121;
+    border-bottom: 1rpx solid #d6d7dc;
+    font-size: 24rpx;
+    line-height: 88rpx;
+}
+
+.content .soccer-team-rank .one-team .team-rank {
+    color: #9c9c9c;
+    font-weight: bold;
+}
+
+.content .soccer-team-rank .one-team .team-rank.label-type-5 {
+    color: #9c9c9c;
+}
+
+.content .soccer-team-rank .one-team .team-rank.label-type-6 {
+    color: #ff6257;
+}
+
+.content .soccer-team-rank .one-team .team-rank.label-type-7 {
+    color: #f5a623;
+}
+
+.content .soccer-team-rank .one-team .team-rank.label-type-8 {
+    color: #d6d7dc;
+}
+
+.content .soccer-team-rank .one-team .team-rank.num5 {
+    color: #55a4ff;
+}
+
+.content .soccer-team-rank .one-team .team-name {
+    overflow: hidden;
+    text-align: left;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+    font-size: 28rpx;
+}
+
+.content .soccer-team-rank .one-team .team-name .logo {
+    width: 44rpx;
+    height: 44rpx;
+    margin-right: 12rpx;
+    margin-bottom: -14rpx;
+}
+
+.content .soccer-team-rank .one-team .rank-score {
+    font-weight: bold;
+}
+
+.content .soccer-cl-team-rank .team-rank {
+    flex: 10;
+}
+
+.content .soccer-cl-team-rank .team-name {
+    flex: 30;
+}
+
+.content .soccer-cl-team-rank .win-tie-lose {
+    flex: 15;
+}
+
+.content .soccer-cl-team-rank .goal-conceded {
+    flex: 15;
+}
+
+.content .soccer-cl-team-rank .rank-score {
+    flex: 10;
+}
+
+.content .soccer-cl-team-rank .title {
+    position: sticky;
+    top: 0;
+    text-indent: 20rpx;
+    background-color: #f3f3f7;
+    font-size: 24rpx;
+    line-height: 66rpx;
+}
+
+.content .soccer-cl-team-rank .rank-desc {
+    display: flex;
+    text-align: center;
+    color: #9c9c9c;
+    border-bottom: 1rpx solid #d6d7dc;
+    font-size: 24rpx;
+    line-height: 66rpx;
+}
+
+.content .soccer-cl-team-rank .rank-desc .team-name {
+    text-align: left;
+    text-indent: 56rpx;
+}
+
+.content .soccer-cl-team-rank .one-group {
+    border-bottom: 20rpx solid #f3f3f7;
+}
+
+.content .soccer-cl-team-rank .one-group:last-of-type {
+    border: 0;
+}
+
+.content .soccer-cl-team-rank .one-team {
+    display: flex;
+    text-align: center;
+    color: #212121;
+    border-bottom: 1rpx solid #d6d7dc;
+    background-color: #fff;
+    font-size: 24rpx;
+    line-height: 88rpx;
+}
+
+.content .soccer-cl-team-rank .one-team .team-rank {
+    color: #9c9c9c;
+    font-weight: bold;
+}
+
+.content .soccer-cl-team-rank .one-team .team-rank.label-type-5 {
+    color: #9c9c9c;
+}
+
+.content .soccer-cl-team-rank .one-team .team-rank.label-type-6 {
+    color: #ff6257;
+}
+
+.content .soccer-cl-team-rank .one-team .team-rank.label-type-7 {
+    color: #f5a623;
+}
+
+.content .soccer-cl-team-rank .one-team .team-rank.label-type-8 {
+    color: #d6d7dc;
+}
+
+.content .soccer-cl-team-rank .one-team .team-rank.num5 {
+    color: #55a4ff;
+}
+
+.content .soccer-cl-team-rank .one-team .team-name {
+    overflow: hidden;
+    text-align: left;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+    font-size: 28rpx;
+}
+
+.content .soccer-cl-team-rank .one-team .team-name .logo {
+    width: 44rpx;
+    height: 44rpx;
+    margin-right: 12rpx;
+    margin-bottom: -14rpx;
+}
+
+.content .soccer-cl-team-rank .one-team .rank-score {
+    font-weight: bold;
+}
+
+.content .one-player {
+    display: flex;
+    border-bottom: 1rpx solid #d6d7dc;
+    font-size: 24rpx;
+    line-height: 104rpx;
+}
+
+.content .one-player .serial {
+    flex: 1;
+    text-align: center;
+    color: #9c9c9c;
+    font-weight: bold;
+}
+
+.content .one-player .serial.num1,.content .one-player .serial.num2,.content .one-player .serial.num3 {
+    color: #e30000;
+}
+
+.content .one-player .icon {
+    width: 80rpx;
+    height: 80rpx;
+    margin-top: 12rpx;
+    margin-right: 16rpx;
+    border-radius: 50%;
+}
+
+.content .one-player .name-team {
+    display: flex;
+    flex: 4;
+    flex-direction: column;
+}
+
+.content .one-player .name-team .name {
+    font-size: 28rpx;
+    line-height: 76rpx;
+}
+
+.content .one-player .name-team .team {
+    color: #9c9c9c;
+    line-height: 0;
+}
+
+.content .one-player .cur-data {
+    flex: 2;
+    margin-right: 32rpx;
+    text-align: right;
+    font-size: 32rpx;
+    font-weight: bold;
+}
+
+.empty {
+    padding-top: 64rpx;
+    text-align: center;
+    color: #adb4be;
+    font-size: 32rpx;
+    line-height: 1.5em;
+}

@@ -1,0 +1,97 @@
+<view class="wrapper" wx:if="{{!isDeleted}}">
+    <view bindtap="contentTap" class="container">
+        <view class="head-container">
+            <view class="user-info-wrapper">
+                <view catchtap="mediaTap" class="head-image-wrapper">
+                    <image class="head-image" src="{{card.chlicon}}"></image>
+                    <image class="vip-logo" src="{{card.vip_icon}}"></image>
+                </view>
+                <view catchtap="mediaTap" class="name-container">
+                    <view class="name">{{card.chlname}}</view>
+                    <view class="time">{{date}}{{card.vip_desc&&' · '}}{{card.vip_desc}}</view>
+                </view>
+                <view class="status" wx:if="{{withStatus}}">
+          {{statusStr}}
+        </view>
+            </view>
+            <view class="follow-wrapper">
+                <view catchtap="onDeleteItem" class="delete-btn" wx:if="{{withDeleteBtn&&card.isSelf}}">
+          删除
+        </view>
+                <xxw-follow-button coral_uid="{{card.coral_uid}}" mediaId="{{card.mediaId}}" theme="gray" type="{{card.isMedia?'media':'user'}}" uin="{{card.uin}}" wx:elif="{{withFollowBtn}}"></xxw-follow-button>
+            </view>
+        </view>
+        <view class="content-cover {{collapse&&'collapse'}}">
+            <view catchtap="topicTap" class="topic-desc" wx:if="{{withTopicName&&topic&&topic.tpname}}">
+        #{{topic.tpname}}#
+      </view>
+            <view class="weibo-content">
+                <block wx:for="{{emojiContent}}" wx:key="count">
+                    <block wx:if="{{item.type==='text'}}">
+            {{item.desc}}
+          </block>
+                    <image class="emoji-icon" mode="aspectFill" src="{{item.desc}}" wx:if="{{item.type==='emoji'&&item.desc}}"></image>
+                </block>
+            </view>
+        </view>
+        <view catchtap="relationTap" class="relation" wx:if="{{relation&&relation.id}}">
+            <text class="relation-title">{{relation.title}}</text>
+            <image class="relation-image" mode="aspectFill" src="{{relation.img}}"></image>
+        </view>
+        <xxw-video _uid="{{videoInfo.vid}}" borderRadius="8rpx" catchtap="noJump" class="video-wrapper" durationStr="{{videoInfo.duration}}" height="{{videoInfo.height||'395rpx'}}" playCount="{{videoInfo.playCount}}" snapshot="{{videoInfo.img}}" vid="{{videoInfo.vid}}" width="{{videoInfo.width||'702rpx'}}" wx:if="{{isVideo}}"></xxw-video>
+        <image binderror="imgError" catchtap="imgTap" class="big-image" id="{{0}}" mode="{{imageList[0].width<imageList[0].height*0.6875?'aspectFill':'widthFix'}}" src="{{imageList[0].url||imageList[0].origUrl}}" wx:elif="{{imageList.length===1&&!imageList[0].hide}}"></image>
+        <view class="images_container {{imageList.length===4&&'four_image'}}" wx:elif="{{imageList.length>1}}">
+            <image binderror="imgError" catchtap="imgTap" class="small-image" id="{{index}}" mode="aspectFill" src="{{item.url||item.origUrl}}" wx:if="{{!item.hide}}" wx:for="{{imageList}}" wx:key="id"></image>
+        </view>
+    </view>
+    <xxw-hot-comment agreeCount="{{hotComment.agreeCount}}" articleId="{{articleId}}" atype="{{atype}}" commentId="{{hotComment.commentId}}" content="{{hotComment.content}}" fromPage="{{fromPage}}" imageSrc="{{hotComment.imageSrc}}" nickName="{{hotComment.nickName}}" replyId="{{hotComment.replyId}}" wx:if="{{hotComment&&hotComment.replyId}}"></xxw-hot-comment>
+    <view class="animation-cover" wx:if="{{isPushing}}">
+        <view class="fly-rocket {{isPushed&&'push-active'}}" hidden="{{index>=pushTimes||index+3<=pushTimes}}" style="{{aniCon[index].rocketStyle}} opacity: {{isPushing?aniCon[index].opacity:0}};" wx:for="{{aniCon}}" wx:for-item="index" wx:key="index"></view>
+        <view class="push-number" style="{{aniCon[pushTimes].numStyle}} display: {{isPushing?'block':'none'}};"></view>
+    </view>
+    <view class="share-tab {{disableBottomBar&&'gray'}}">
+        <view catchtap="commentTap" class="left icon-wrapper">
+            <view class="icon iconfont icon-xcx-comment"></view>
+            <view class="icon-text">{{comments||'评论'}}</view>
+        </view>
+        <button catchtap="noJump" class="none_button icon-wrapper" data-article-id="{{articleId}}" data-atype="{{atype}}" data-chlname="{{card.chlname}}" data-content="{{content}}" data-image-list="{{imageList}}" openType="{{disableBottomBar?'':'share'}}">
+            <view class="icon iconfont icon-xcx-weixin"></view>
+            <view class="icon-text">微信</view>
+        </button>
+        <view catchtap="tapPoster" class="icon-wrapper">
+            <view class="icon iconfont icon-xcx-pengyouquan"></view>
+            <view class="icon-text">{{shareText}}</view>
+        </view>
+        <view catchtap="tapPush" class="right icon-wrapper rocket">
+            <image class="rocket-icon-disable" src="http://mat1.gtimg.com/www/js/news/rocket_ic_disable.png" wx:if="{{disableBottomBar}}"></image>
+            <image class="rocket-icon {{rocketScale&&'rocketScale'}}" src="http://mat1.gtimg.com/www/js/news/{{isPushed?'rocket_red':'rocket_gray'}}.png" wx:else></image>
+            <view class="icon-text {{isPushed&&'red'}}">
+        {{pushCount>0?pushCountStr+'推':'推TA'}}
+      </view>
+        </view>
+        <view class="{{hidePushGuide&&'hide-push-guide'}}" wx:if="{{showPushGuideDelay&&isFirstArticle}}">
+            <view class="mask">
+        试着连续点击，看看会发生什么
+      </view>
+            <view class="layerArrow"></view>
+        </view>
+    </view>
+</view>
+<slot></slot>
+<view bindtap="closeShareTap" class="share-guide" wx:if="{{showShareGuide}}">
+    <view animation="{{animation}}" class="guide-cover">
+        <image catchtap="noJump" class="guide-image" mode="aspectFill" src="http://mat1.gtimg.com/www/js/news/popup_rocket.png"></image>
+        <view catchtap="noJump" class="tips-cover">
+            <view class="tips-one">分享给好友，帮你推上榜</view>
+            <view class="tips-two">推的次数已达上限啦！</view>
+            <button class="none_button" data-article-id="{{articleId}}" data-atype="{{atype}}" data-chlname="{{card.chlname}}" data-content="{{content}}" data-image-list="{{imageList}}" data-pageArea="{{pageArea}}" openType="share">
+                <view bindtap="closeShareTap" class="share-btn">
+          分享给好友
+        </view>
+            </button>
+            <view catchtap="closeShareTap" class="cancle-btn">
+        取消
+      </view>
+        </view>
+    </view>
+</view>

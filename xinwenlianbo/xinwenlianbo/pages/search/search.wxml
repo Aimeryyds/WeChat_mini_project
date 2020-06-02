@@ -1,0 +1,96 @@
+<view class="searchCon">
+    <view class="search-bar">
+        <view class="search-wrap">
+            <view class="search-box">
+                <icon bindtap="oniconTap" class="icon-search" data-text="{{qtext}}" size="14" type="search"></icon>
+                <input bindconfirm="onSearchConfirm" bindfocus="onSearchFocus" bindinput="onSearchInput" class="search-input" focus="{{inputFocus}}" placeholder="搜索" type="text" value="{{qtext}}"></input>
+                <view catchtap="onClearInput" class="icon-clear" data-text="{{qtext}}" hidden="{{qtext.length<1}}"></view>
+            </view>
+        </view>
+        <view catchtap="onSearchCancel" class="cancel-btn" hidden="{{!searchCancelShow}}">取消</view>
+    </view>
+    <view class="search-sug" wx:if="{{show_sugword}}">
+        <view class="sug-record" wx:if="{{get_sugword.length>0}}">
+            <view class="record-item" wx:for="{{get_sugword}}" wx:key="{{index}}">
+                <view catchtap="onHotkeyTap" class="icon-time" data-text="{{item.TITLE}}">{{item.TITLE}} </view>
+            </view>
+        </view>
+    </view>
+    <view class="mengban {{isscroll?'':'noscroll'}}" style="height:{{isscroll?'':scrollTopView}}px">
+        <view class="search-hot" wx:if="{{searchHotShow}}">
+            <image class="hot_logo" src="../../img/search_log.png"></image>
+            <text class="hot-title">大家都在关注</text>
+            <view class="hot-wrap">
+                <text bindtap="onHotkeyTap" class="hot-item" data-text="{{item.suosuoci}}" wx:for="{{hotwords}}" wx:key="{{index}}">{{item.suosuoci}}</text>
+            </view>
+        </view>
+        <view class="search-history" wx:if="{{searchHistoryShow}}">
+            <view class="search-record" wx:if="{{searchHistorys.length>0}}">
+                <view class="record_handle">
+                    <image class="history_logo" src="../../img/search_log.png"></image>
+                    <text class="record_left">最近搜索</text>
+                    <text catchtap="onSearchHistoryDeleteAll" class="record_right"></text>
+                </view>
+                <view class="record-item" wx:for="{{searchHistorys}}" wx:key="{{index}}">
+                    <view bindtap="onHotkeyTap" class="record_con" data-text="{{item}}">{{item}}</view>
+                </view>
+            </view>
+        </view>
+        <view wx:if="{{showSearchList}}">
+            <view class="navbar">
+                <view bindtap="{{bindshownavtab?bindshownavtab:''}}" class="itembox" data-total="{{searchTabs[0].lb}}" data-type="0">
+                    <text class="item {{currentTab=='0'?'active':''}}">新闻联播</text>
+                    <text class="itemindex {{currentTab=='0'?'active':''}}">{{searchTabs[0].lb}}</text>
+                </view>
+                <view bindtap="{{bindshownavtab?bindshownavtab:''}}" class="itembox" data-total="{{searchTabs[1].ys}}" data-type="1">
+                    <text class="item {{currentTab==1?'active':''}}">央视快评</text>
+                    <text class="itemindex  {{currentTab==1?'list2_color':''}}">{{searchTabs[1].ys}}</text>
+                </view>
+                <view bindtap="{{bindshownavtab?bindshownavtab:''}}" class="itembox" data-total="{{searchTabs[2].lbp}}" data-type="2">
+                    <text class="item {{currentTab==2?'active':''}}">联播+</text>
+                    <text class="itemindex {{currentTab==2?'list1_color':''}}">{{searchTabs[2].lbp}}</text>
+                </view>
+            </view>
+            <view class="search_result" hidden="{{!shownoresult}}">
+                <image src="../../img/search_nothing.png"></image>
+                <view class="text">无搜索结果</view>
+            </view>
+            <scroll-view bindscroll="searchscroll" bindscrolltolower="searchScrollLower" catchtouchmove="true" class="search_scroll" hidden="{{!showresult}}" scrollTop="{{scrollTop}}" scrollWithAnimation="true" scrollY="true" style="height:{{scrollviewH}}px">
+                <view class="woguanzhude">
+                    <view bindtap="onNavigateToUrl" class="guanzhu_list {{search_list}}" data-flag="{{currentTab}}" data-id="{{item.SOURCEDB_ID}}" data-type="{{item.VIDEO_SOURCE}}" wx:for="{{searchlists}}" wx:key="{{index}}">
+                        <view class="shang">
+                      <view class="titName">
+                                <view class="titNamebg">{{show_re_words}}</view>
+                            </view>
+                            <view class="timelength {{show_time_css}}">
+                                <rich-text nodes="时长{{item.TIMES}}"></rich-text>
+                            </view>
+                        </view>
+                        <view class="zhong">
+                            <rich-text nodes="{{item.TITLE}}"></rich-text>
+                        </view>
+                        <view class="xia">
+                            <view class="timedata">
+                                <rich-text nodes="{{item.DATETIME}}"></rich-text>
+                            </view>
+                            <view class="gjc_box">
+                                <view catchtap="gotoonegzpage" class="gjc" data-val="{{item}}" wx:for="{{item.DE_HL_TAGS}}" wx:key="{{index}}">{{item}}</view>
+                            </view>
+                        </view>
+                    </view>
+                </view>
+                <view class="articlelist_lw {{showLoading==true?'true':'hide'}}">
+                    <image class="articlelist_loading" src="../../img/loading.gif"></image>
+                </view>
+                <view class="conend {{showend==true?'show':'hide'}}">已显示全部内容</view>
+            </scroll-view>
+        </view>
+    </view>
+    <view bindtap="hidezhezhao" class="zhezhao {{show_zhezhao}}"></view>
+    <view bindtap="backToTop" class="{{istTop?'show':'hide'}} scrollto-btn-wrapper">
+        <view class="scrollto-btn"></view>
+    </view>
+    <view class="audiobox {{audioIsHide==true?'hide':'show'}}">
+        <include src="../../templates/audio/audio.wxml"></include>
+    </view>
+</view>

@@ -1,0 +1,6 @@
+<view class="container">
+    <view class="content-text {{!ready&&'opacity'}}" style="-webkit-line-clamp: {{collapse?lineCount||'unset':'unset'}}">
+        <slot></slot>
+    </view>
+    <image bindtap="tapShowAll" class="show-all-image" mode="aspectFill" src="http://mat1.gtimg.com/www/js/news/icon_om_zhankai.png" wx:if="{{enableShowAll&&collapse}}"></image>
+</view>

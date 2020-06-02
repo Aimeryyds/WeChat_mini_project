@@ -1,0 +1,15 @@
+<view class="content">
+    <FibaPost autoplay="{{autoplayVideo}}" bind:fullScreenEvent="videoFullScreen" bind:loginevent="onLoginEvent" bind:onParisedSuccess="handleParisedSuccess" id="post" info="{{info}}" userInfo="{{userInfo}}" wx:if="{{info}}"></FibaPost>
+    <view class="title" id="comment" wx:if="{{eliteList&&eliteList.length}}">热门评论</view>
+    <FibaComment bind:loginevent="onLoginEvent" bind:onParisedSuccess="handleParisedSuccess" info="{{item}}" islist="{{true}}" supportCity="{{info&&info.supportCity}}" tid="{{id}}" userInfo="{{userInfo}}" wx:for="{{eliteList}}" wx:key="{{index}}"></FibaComment>
+    <view class="title">全部评论</view>
+    <FibaComment bind:loginevent="onLoginEvent" bind:onParisedSuccess="handleParisedSuccess" info="{{item}}" islist="{{true}}" supportCity="{{info&&info.supportCity}}" tid="{{id}}" userInfo="{{userInfo}}" wx:for="{{list}}" wx:key="{{index}}"></FibaComment>
+    <FibaComment bind:loginevent="onLoginEvent" bind:onParisedSuccess="handleParisedSuccess" info="{{item}}" islist="{{true}}" supportCity="{{info&&info.supportCity}}" tid="{{id}}" userInfo="{{userInfo}}" wx:for="{{appendList}}" wx:key="{{index}}"></FibaComment>
+    <view class="empty" wx:if="{{!list.length&&!appendList.length&&requested}}">
+        <image class="img" src="/assets/FIBA/Icon_empty_pl@3x.png"></image>
+        <view class="txt">暂无评论</view>
+    </view>
+    <FibaReplyBox bind:loginevent="onLoginEvent" bind:onSuccess="replySuccess" showTextarea="{{showTextarea}}" showUpdBox="{{true}}" supportCity="{{info&&info.supportCity}}" tid="{{id}}" userInfo="{{userInfo}}"></FibaReplyBox>
+</view>
+<image catchtap="goHome" class="m-home" src="/assets/FIBA/btn_home.png" wx:if="{{share}}"></image>
+<FibaParised bind:onParisedAnimationEnd="handleParisedAnimationEnd" cityId="{{fibaParisedCityId}}" show="{{fibaParisedShow}}"></FibaParised>

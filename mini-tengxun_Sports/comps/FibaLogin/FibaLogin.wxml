@@ -1,0 +1,11 @@
+<view wx:if="{{!userInfo}}">
+    <view wx:if="{{!onlyauth}}">
+        <image class="photo" src="/assets/FIBA/pic_default_picture@3x.png"></image>
+        <view class="name">登录</view>
+    </view>
+    <button bindgetuserinfo="onGotUserInfo" catchtap="stopPropagation" class="login-btn" lang="zh_CN" openType="getUserInfo"></button>
+</view>
+<view wx:if="{{userInfo&&!onlyauth}}">
+    <FibaAvatar class="photo" src="{{userInfo.avatarUrl}}"></FibaAvatar>
+    <view class="name">{{userInfo.nickName}}</view>
+</view>

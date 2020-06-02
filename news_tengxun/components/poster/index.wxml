@@ -1,0 +1,37 @@
+<view class="poster draw" id="poster">
+    <view class="img-wrap draw" data-imgwrap="1">
+        <image class="top-img draw" data-imgwrap="1" src="{{drawInfo.imgUrl}}"></image>
+        <image class="play-icon draw" src="http://mat1.gtimg.com/www/js/news/poster_video.png" wx:if="{{drawInfo.isVideo}}"></image>
+        <image class="logo draw" src="http://mat1.gtimg.com/www/js/news/poster_logo.png"></image>
+    </view>
+    <view class="bottom draw">
+        <view class="title draw" data-clamp="2" data-text="{{drawInfo.title}}">
+      {{drawInfo.title}}
+    </view>
+        <view class="sep draw"></view>
+        <view class="info-bar draw">
+            <image class="qr draw" src="{{drawInfo.qrUrl}}"></image>
+            <view class="right draw">
+                <view class="vert-center">
+                    <view class="line1 draw">
+                        <image class="avatar draw" src="{{drawInfo.avatarUrl}}"></image>
+                        <view class="nickname draw" data-text="{{drawInfo.nickName}}">{{drawInfo.nickName}}</view>
+                        <view class="text draw" data-text="正在观看视频" wx:if="{{drawInfo.isVideo}}">正在观看视频</view>
+                        <view class="text draw" data-text="正在读这个话题" wx:elif="{{drawInfo.atype==114}}">正在读这个话题</view>
+                        <view class="text draw" data-text="正在读这篇文章" wx:else>正在读这篇文章</view>
+                    </view>
+                    <view class="line2 draw">
+                        <view class="text draw" data-text="识别小程序码，进入">识别小程序码，进入 </view>
+                        <view class="text draw" data-text="腾讯新闻">腾讯新闻</view>
+                        <view class="text draw" data-text="查看视频" wx:if="{{drawInfo.isVideo}}">查看视频</view>
+                        <view class="text draw" data-text="查看话题" wx:elif="{{drawInfo.atype==114}}">查看话题</view>
+                        <view class="text draw" data-text="阅读全文" wx:else>阅读全文</view>
+                    </view>
+                </view>
+            </view>
+        </view>
+    </view>
+</view>
+<preview bind:showImgPreview="showImgPreview" config="{{previewConfig}}" imgUrl="{{imgUrl}}" tips="{{tips}}" wx:if="{{showPreview}}"></preview>
+<auth show="{{authPopupShow}}"></auth>
+<canvas canvasId="canvas-poster" class="share-canvas"></canvas>

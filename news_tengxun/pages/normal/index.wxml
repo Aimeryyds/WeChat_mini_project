@@ -1,0 +1,11 @@
+<form wx:if="{{pageStatus===status.ready}}">
+    <swiper bindchange="bindChange" circular="{{false}}" class="scroll-swiper" duration="{{500}}" easingFunction="easeInCubic" skipHiddenItemLayout="{{true}}" vertical="{{true}}">
+        <swiper-item class="scroll-swiper-item" wx:if="{{item.index-1<=current}}" wx:for="{{articleData}}" wx:for-index="i" wx:key="index">
+            <index-item current="{{current}}" fromPage="{{fromPage}}" item="{{item}}" next="{{articleData[item.index+1]}}" openPush="{{openPush}}" pushStatusCount="{{pushStatusCount}}"></index-item>
+        </swiper-item>
+    </swiper>
+</form>
+<xxw-bg-loading bindrefresh="init" status="{{pageStatus}}" wx:else></xxw-bg-loading>
+<xxw-comment-input-panel fromPage="{{fromPage}}"></xxw-comment-input-panel>
+<xxw-login></xxw-login>
+<xxw-poster fromPage="{{fromPage}}"></xxw-poster>

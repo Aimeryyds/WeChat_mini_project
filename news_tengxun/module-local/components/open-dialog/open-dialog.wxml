@@ -1,0 +1,10 @@
+<view class="auth-dialog" hidden="{{!show}}">
+    <view class="mask"></view>
+    <view class="content">
+        <view class="info">{{msg}}</view>
+        <view class="btns">
+            <button bindtap="hide">取消</button>
+            <button bindgetphonenumber="handleGetPhoneNumber" bindgetuserinfo="handleGetUserInfo" bindtap="authorize" class="ok" openType="{{type}}">去授权</button>
+        </view>
+    </view>
+</view>

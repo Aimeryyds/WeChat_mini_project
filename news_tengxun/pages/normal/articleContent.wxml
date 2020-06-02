@@ -1,0 +1,121 @@
+<view class="container">
+    <view class="title">{{title}}</view>
+    <view class="media-card">
+        <view class="media">
+            <image bindtap="mediaTap" class="avator" mode="aspectFill" src="{{chlicon}}" wx:if="{{chlicon}}"></image>
+            <view bindtap="mediaTap" class="nick">
+        {{chlname}}
+      </view>
+            <view class="timestamp">{{date}}</view>
+        </view>
+        <xxw-follow-button mediaId="{{chlid}}" type="media" wx:if="{{chlid}}"></xxw-follow-button>
+    </view>
+    <xxw-show-more enable="{{enableShowMore}}">
+        <view class="content">
+            <view class="summary" wx:if="{{intro}}">
+                <view class="top-split-container">
+                    <view class="summary-split-circle"></view>
+                    <view class="summary-split-line"></view>
+                </view>
+                <text class="ibtn" wx:if="{{intro_name}}">{{intro_name}}：</text>
+                <view class="intro-content">{{intro}}</view>
+                <view class="bottom-split-container">
+                    <view class="summary-split-line"></view>
+                    <view class="summary-split-circle"></view>
+                </view>
+            </view>
+            <block wx:for="{{origContent}}" wx:for-index="position" wx:key="_uid">
+                <view class="text" wx:if="{{item.type==='p'}}">
+                    <block wx:for="{{item.children}}" wx:for-item="textItem" wx:key="*this">
+                        <text class="strong" wx:if="{{textItem.type==='strong'}}">{{textItem.desc}}</text>
+                        <text bindtap="linkTap" class="link" data-link="{{textItem.link}}" wx:elif="{{textItem.type==='link'}}">{{textItem.title}}</text>
+                        <text wx:elif="{{textItem.type==='outerlink'}}">{{textItem.title}}</text>
+                        <text wx:else>{{textItem}}</text>
+                    </block>
+                </view>
+                <view class="text" wx:elif="{{item.type==='link'}}">
+                    <text bindtap="linkTap" class="link" data-link="{{item.link}}">{{item.title}}</text>
+                </view>
+                <view class="text" wx:elif="{{item.type==='outerlink'}}">
+          {{item.title}}
+        </view>
+                <view class="strong-title-container" wx:elif="{{item.type==='h1'}}">
+            {{item.desc}}
+        </view>
+                <view class="strong-border" wx:elif="{{item.type==='h2'}}">
+                    <view class="blue-bar"></view>
+                    <view class="strong-title">{{item.desc}}</view>
+                </view>
+                <view class="summary" wx:elif="{{item.type==='intro'}}">
+                    <view class="top-split-container">
+                        <view class="summary-split-circle"></view>
+                        <view class="summary-split-line"></view>
+                    </view>
+                    <view class="intro-content">
+                        <text class="ibtn" wx:if="{{item.title}}">{{item.title}}：</text>
+            {{item.desc}}
+          </view>
+                    <view class="bottom-split-container">
+                        <view class="summary-split-line"></view>
+                        <view class="summary-split-circle"></view>
+                    </view>
+                </view>
+                <view class="br" wx:elif="{{item.type==='br'}}"></view>
+                <view class="text" wx:elif="{{item.type==='time'}}">
+                    <block wx:for="{{item.desc}}" wx:for-item="textItem" wx:key="*this">
+            {{textItem}}
+          </block>
+                </view>
+                <view wx:elif="{{item.type==='list'}}">
+                    <view class="split-line-top"></view>
+                    <view class="main-point-container" wx:for="{{item.desc}}" wx:key="*this">
+                        <text class="serial-number">{{index+1}}</text>
+                        <text class="main-point">{{item.desc}}</text>
+                    </view>
+                    <view class="split-line"></view>
+                </view>
+                <block wx:elif="{{item.type==='img'}}">
+                    <view class="img-box" style="height:{{item.img_show_height}}rpx">
+                        <block wx:if="{{item.itype===1}}">
+                            <image class="img" data-url="{{item.img_url_gif}}" id="{{position}}" mode="aspectFill" src="{{item.img_url_gif}}" wx:if="{{networkType==='wifi'||item.clicked}}"></image>
+                            <block wx:if="{{networkType!=='wifi'}}">
+                                <image bindtap="gifTap" class="img gif-hold" data-url="{{item.img_url}}" hidden="{{item.clicked}}" id="{{position}}" mode="aspectFill" src="{{item.img_url}}"></image>
+                                <view class="gif-bottom" hidden="{{item.clicked}}">
+                                    <view class="gif-text">点击播放</view>
+                                    <view class="gif-size">GIF/{{item.size}}</view>
+                                </view>
+                            </block>
+                        </block>
+                        <image bindtap="imgTap" class="img" data-url="{{item.img_url}}" mode="aspectFill" src="{{item.img_url}}" style="height:{{item.img_show_height}}rpx" wx:else></image>
+                    </view>
+                    <view class="img-desc" wx:if="{{item.desc}}">
+                        <image class="img-desc-image" src="http://mat1.gtimg.com/www/js/news/image-icon.png"></image>
+            {{item.desc}}
+          </view>
+                </block>
+                <view class="live-video-box" wx:elif="{{item.type==='livevideo'}}">
+          [暂不支持直播功能，请打开腾讯新闻APP查看]
+        </view>
+                <view class="video-box" wx:elif="{{item.type==='video'||item.type==='videoalbum'}}">
+                    <xxw-video _uid="{{item._uid}}" durationStr="{{item.duration}}" snapshot="{{item.snapshot}}" vid="{{item.vid}}"></xxw-video>
+                    <view class="video-desc" wx:if="{{item.desc}}">
+                        <image class="video-desc-image" src="http://mat1.gtimg.com/www/js/news/video-icon.png"></image>
+            {{item.desc}}
+          </view>
+                    <view bindtap="albumTap" class="album-desc" data-atype="{{item.atype}}" data-id="{{item.articleId}}" wx:if="{{item.type==='videoalbum'}}">
+                        <image class="three-line" mode="aspectFill" src="http://mat1.gtimg.com/www/js/news/three-line.png"></image>
+            集锦【{{item.desc}}】 全部{{item.albumLength}}个视频
+            <image class="album-more" mode="aspectFill" src="http://mat1.gtimg.com/www/js/news/album-more.png"></image>
+                    </view>
+                </view>
+            </block>
+            <timeline desc="{{timeline.desc}}" image="{{timeline.image}}" timeList="{{timeline.data}}" title="{{timeline.title}}" wx:if="{{timeline&&timeline.title}}"></timeline>
+            <truth content="{{truthContent}}"></truth>
+            <view class="summary" wx:if="{{remark}}">
+        {{remark}}
+      </view>
+        </view>
+    </xxw-show-more>
+    <topic fromPage="{{fromPage}}" tpid="{{topic.id}}" wx:if="{{topic&&topic.id}}"></topic>
+    <special articleId="{{special.id}}" fromPage="{{fromPage}}" title="{{special.title}}" wx:if="{{special&&special.id}}"></special>
+</view>

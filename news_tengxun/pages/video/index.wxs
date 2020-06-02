@@ -1,0 +1,26 @@
+function itemIsShow(activeIndex, item, list, showMore) {
+    var rst = true;
+    var gap = 5;
+    if (showMore) {
+        rst = Math.abs(activeIndex - item.index) <= gap
+    } else {
+        var defaultCount = list[(0)].length;
+        var moreCount = list[(1)].length;
+        if (item.index >= defaultCount && item.index < defaultCount + moreCount) {
+            rst = false
+        } else {
+            var index = item.index;
+            if (item.index >= defaultCount + moreCount) {
+                index = item.index - moreCount
+            };
+            if (activeIndex >= defaultCount + moreCount) {
+                activeIndex = activeIndex - moreCount
+            };
+            rst = Math.abs(activeIndex - index) <= gap
+        }
+    };
+    return (rst)
+};
+exports = module.exports = ({
+    itemIsShow: itemIsShow,
+});

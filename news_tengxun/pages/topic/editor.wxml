@@ -1,0 +1,19 @@
+<view class="modal">
+    <view class="topic-name">{{topicName}}</view>
+    <textarea bindblur="onBlur" bindfocus="onFocus" bindinput="onInput" class="text-area {{isIos&&'ios'}}" cursor="{{topicCursor}}" focus="{{true}}" maxlength="-1" placeholder="说点什么吧..." placeholderClass="text-area-auto" showConfirmBar="{{false}}" value="{{textarea}}"></textarea>
+    <view class="img-box">
+        <view class="img" wx:if="{{!item.error}}" wx:for="{{images}}" wx:key="_uid">
+            <image catchtap="onPreview" class="item-img" data-index="{{index}}" mode="aspectFill" src="{{item.url}}"></image>
+            <view catchtap="onDelete" class="item-close" data-index="{{index}}"></view>
+        </view>
+        <upload bindcomplete="onUploadComplete" binderror="onUploadError" bindstart="onStartUpload" binduploading="onUploading" count="{{9-images.length}}" wx:if="{{images.length<9}}"></upload>
+    </view>
+    <view class="pub-box {{focus?'on':'out'}} {{isIphoneX?'iphonex':''}}" style="transform:translateY(-{{focusHeight}}px);">
+        <view class="fixed-box">
+            <button catchtap="publishWeibo" class="btn {{btnReady&&!uploading?'on':'out'}}">
+        发表
+      </button>
+        </view>
+    </view>
+</view>
+<xxw-login></xxw-login>

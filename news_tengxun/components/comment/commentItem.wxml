@@ -1,0 +1,68 @@
+<xxw-exposure articleId="{{articleId}}" atype="{{atype}}" cell_comment="1" commentId="{{commentId}}" fromPage="{{fromPage}}" replyId="{{replyId}}">
+    <view class="comment-item {{isHotComment&&'hot-icon'}} {{isBlackTheme&&'black'}}">
+        <image bindtap="tapMedia" class="avatar-icon" mode="aspectFill" src="{{avatarUrl||'http://mat1.gtimg.com/www/js/news/default_avatar.png'}}"></image>
+        <view class="content">
+            <view class="name-block">
+                <view bindtap="tapMedia" class="name">
+          {{nickName||'腾讯网友'}}
+        </view>
+                <view bindtap="tapLike" class="agree-block" data-commentid="{{commentid}}" data-index="orig_index" data-reply-openid="{{openid}}" data-replyid="{{reply_id}}">
+                    <view class="agree-num">{{agreeCountStr}}</view>
+                    <view class="agree-icon {{!isClicked&&isAgreed&&'agreed'}} {{!disableLike&&isClicked&&'like-active'}}"></view>
+                </view>
+            </view>
+            <view bindtap="tapContent">
+                <xxw-collapse-text enableShowAll="{{enableShowAll}}" lineCount="{{lineCount}}">
+                    <block wx:for="{{emojiContent}}" wx:key="count">
+                        <block wx:if="{{item.type==='text'}}">
+              {{item.desc}}
+            </block>
+                        <image class="emoji-icon" mode="aspectFill" src="{{item.desc}}" wx:if="{{item.type==='emoji'&&item.desc}}"></image>
+                    </block>
+                </xxw-collapse-text>
+                <image bindload="onImgLoad" catchtap="tapImage" class="comment-img" hidden="{{!showImg}}" mode="{{image.width<image.height*0.6875?'aspectFill':'widthFix'}}" src="{{image.url}}" wx:if="{{image}}"></image>
+            </view>
+            <view class="info-block">
+                <view class="comment-time">
+          {{pubTime}}
+        </view>
+                <block wx:if="{{!isDeleted}}">
+                    <view class="split-dot">
+                        <view class="dot"></view>
+                    </view>
+                    <block wx:if="{{isMe}}">
+                        <view bindtap="{{isMe&&'tapDelete'}}" class="del-btn" data-reply-id="{{replyId}}">
+              删除
+            </view>
+                        <view class="split-dot" wx:if="{{!isFake}}">
+                            <view class="dot"></view>
+                        </view>
+                    </block>
+                    <view bindtap="tapReplyBtn" class="reply-btn" wx:if="{{!isFake}}">
+            {{replyCountStr&&showReplyCount?replyCountStr+'回复':'回复TA'}}
+          </view>
+                </block>
+            </view>
+            <view class="reply-list-wrapper" wx:if="{{(replyData&&replyData[0]&&replyData[0].length||fakeData.length)&&showReply}}">
+                <reply-item articleId="{{item.articleId}}" binddelete="onReplyDelete" bindtapreply="tapReplyContent" commentId="{{item.commentId}}" content="{{item.content}}" data-index="{{index}}" enbaleShowAll="{{replyEnableShowAll}}" image="{{item.image}}" isBlackTheme="{{isBlackTheme}}" isMe="{{item.isMe}}" lineCount="{{replyLineCount}}" nickName="{{item.nickName}}" parentNickName="{{item.parentNickName}}" parentReplyId="{{item.parentReplyId}}" replyId="{{item.replyId}}" wx:for="{{fakeData}}" wx:key="replyId"></reply-item>
+                <block wx:for="{{replyData}}" wx:for-index="page" wx:for-item="list" wx:key="page">
+                    <reply-item articleId="{{item.articleId}}" binddelete="onReplyDelete" bindtapreply="tapReplyContent" commentId="{{item.commentId}}" content="{{item.content}}" data-index="{{index}}" data-page="{{page}}" enbaleShowAll="{{replyEnableShowAll}}" image="{{item.image}}" isBlackTheme="{{isBlackTheme}}" isMe="{{item.isMe}}" lineCount="{{replyLineCount}}" nickName="{{item.nickName}}" parentNickName="{{item.parentNickName}}" parentReplyId="{{item.parentReplyId}}" replyId="{{item.replyId}}" wx:for="{{list}}" wx:key="replyId"></reply-item>
+                </block>
+                <block wx:if="{{restReplyCountStr}}">
+                    <view bindtap="tapMoreReply" class="reply-detail-wrapper" wx:if="{{canLoadMoreReply}}">
+                        <view class="reply-detail-text">
+              展开更多{{restReplyCountStr}}条回复
+            </view>
+                        <image class="more-icon down" src="{{isBlackTheme?'http://mat1.gtimg.com/www/js/news/open-gary-night.png':'http://mat1.gtimg.com/www/js/news/open-gary.png'}}"></image>
+                    </view>
+                    <view bindtap="tapDetail" class="reply-detail-wrapper" wx:else>
+                        <view class="reply-detail-text">
+              查看全部{{replyCountStr}}条回复
+            </view>
+                        <image class="more-icon" src="{{isBlackTheme?'http://mat1.gtimg.com/www/js/news/open-gary-night.png':'http://mat1.gtimg.com/www/js/news/open-gary.png'}}"></image>
+                    </view>
+                </block>
+            </view>
+        </view>
+    </view>
+</xxw-exposure>

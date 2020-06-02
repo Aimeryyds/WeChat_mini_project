@@ -1,0 +1,127 @@
+<import src="/module-local/tpl/newlocal/feedlist.wxml"></import>
+<import src="/module-local/tpl/newlocal/emo-sayhi.wxml"></import>
+<import src="/module-local/tpl/warn.wxml"></import>
+<import src="/module-local/tpl/authorize.wxml"></import>
+<view class="local-component">
+    <template is="warn" data="{{showType:showType}}"></template>
+    <view class="g-fontfamily" wx:if="{{isNewLocal}}">
+        <mini-scroll-view enablePulldownRefresh bindpullDownRefresh="onPullDownRefresh" bindreachBottom="onReachBottom" bindretry="onReachBottom" bindscroll="onScroll" class="local-container" finishText="{{pullNewsInfo}}" hasMore="{{!isNoMore[curLocalFeed]}}" id="localContainer" pulldownFinished="{{!pulldownPending}}" scrollTop="{{scrollTop}}" scrollWithAnimation="{{hasScrollAnimation}}">
+            <view class="content-wrapper">
+                <view class="lc-header" wx:if="{{!showType}}">
+                    <block wx:if="{{false}}">
+                        <video autoplay="{{false}}" binderror="onPlayError" bindfullscreenchange="onFullScreenChange" class="lc-header-video" controls="{{showControls}}" customCache="{{false}}" direction="0" id="video" loop="{{true}}" muted="{{!fullvideo}}" objectFit="cover" showCenterPlayBtn="{{false}}" showFullscreenBtn="{{showFullBtn}}" showPlayBtn="{{false}}" showProgress="{{false}}" src="{{weishi.url}}">
+                            <view bindtap="onExitFullScreen" class="lc-video-mask" hidden="{{!fullvideo}}" style="height: {{g.comPostInfo.screenHeight}}px">
+                                <view class="lc-videoinfo g-f-xxs g-d-inlineflex">
+                                    <view class="g-d-inlineblock">视频来自</view>
+                                    <image class="lc-weishi-icon" src="http://mat1.gtimg.com/city/news/images/ic-weishi.png"></image>
+                                    <view>腾讯微视 {{weishi.author}}</view>
+                                </view>
+                            </view>
+                            <view bindtap="onEnterFullScreen" class="lc-header-cover lc-video-cover" hidden="{{fullvideo}}">
+                                <view class="lc-location">
+                                    <view class="lc-city g-mb10 g-f-xxxl">
+                                        <view class="g-d-inlineflex">{{cityName}}</view>
+                                        <view class="g-d-inlineflex">
+                                            <button catchtap="switchCity" class="lc-focus-txt g-f-weight100 g-f-s lc-switch-btn" hoverClass="g-op-6">
+                        切换城市
+                      </button>
+                                        </view>
+                                    </view>
+                                    <view class="lc-weather g-f-weight100 g-mb5 g-f-l g-d-inlineflex">
+                                        <view class="g-d-inlineblock" wx:if="{{weather.weather_chName}}">
+                                            <view class="g-d-inlineblock">
+                        {{weather.weather_chName}} {{weather.curTp}}
+                      </view>
+                                            <view class="g-d-inlineblock" style="margin-right: 26rpx;width: 32rpx;">
+                        ℃
+                      </view>
+                                            <view class="g-d-inlineblock" style="width:140rpx;">
+                        PM值 {{weather.pm}}
+                      </view>
+                                        </view>
+                                    </view>
+                                    <view class="lc-carinfo g-f-weight100 g-mb10 g-f-l" wx:if="{{traffic}}">
+                    限行尾号{{traffic}}
+                  </view>
+                                    <view bindtap="onWeishiTap" class="lc-videoinfo g-d-table g-mb5">
+                                        <view class="g-d-tablecell g-f-xxs g-v-m">视频来自</view>
+                                        <image class="lc-weishi-icon g-d-tablecell g-v-m" src="http://mat1.gtimg.com/city/news/images/ic-weishi.png"></image>
+                                        <view class="g-d-tablecell g-f-xxs g-v-m">腾讯微视</view>
+                                    </view>
+                                    <view class="lc-weishi-author__wrapper g-f-weight100 g-f-xxs" style="opacity: {{weishi.lock?'0.6':'0.65'}};">
+                    {{weishi.author}}
+                  </view>
+                                </view>
+                            </view>
+                        </video>
+                        <template is="lc-emo-sayhi" data="{{hiList:hiList,emoInfo:emoInfo,emoAnimate:emoAnimate,emoShowAnimate:emoShowAnimate,hidden:fullvideo,listAnim:listAnimData,emoAnim:emoAnimData,danmuAnim:danmuAnimData,danmuHolderHeight:danmuHolderHeight,showEmos:showEmos}}"></template>
+                    </block>
+                    <block wx:else>
+                        <swiper autoplay="true" circular="true" class="lc-header-img">
+                            <swiper-item wx:for="{{banners}}" wx:key="index">
+                                <image binderror="handleHeaderImgLoadErr" class="lc-img-item" data-index="{{index}}" mode="aspectFill" src="{{item.url}}"></image>
+                                <view class="lc-img-author">
+                                    <view class="lc-videoinfo g-f-xxs g-d-table" wx:if="{{item.author}}">
+                                        <view class="g-d-tablecell g-f-xxs g-v-m">图片来自</view>
+                                    </view>
+                                    <view class="lc-videoinfo g-f-weight100 g-f-xxs">{{item.author}}</view>
+                                </view>
+                            </swiper-item>
+                        </swiper>
+                        <view class="lc-header-cover">
+                            <view class="lc-location">
+                                <view class="lc-city g-mb10 g-f-xxxl">{{cityName}}
+                  <view bindtap="switchCity" class="lc-focus-txt g-f-weight100 g-d-inlineblock g-f-s" hoverClass="g-op-6" style="padding: 20rpx 0;">切换城市</view>
+                                </view>
+                                <view class="lc-weather g-f-weight100 g-mb5 g-f-l" wx:if="{{weather.weather_chName}}">
+                                    <view class="g-d-inlineblock">{{weather.weather_chName}} {{weather.curTp}}℃ PM值 {{weather.pm}}</view>
+                                </view>
+                                <view class="lc-carinfo g-f-weight100 g-mb5 g-f-l" wx:if="{{traffic}}">限行尾号{{traffic}}</view>
+                                <view class="g-op-0 g-f-xxs">
+                                    <view>作者</view>
+                                    <view>作者</view>
+                                </view>
+                            </view>
+                        </view>
+                        <template is="lc-emo-sayhi" data="{{discover:true,hiList:hiList,emoInfo:emoInfo,emoAnimate:emoAnimate,emoShowAnimate:emoShowAnimate,listAnim:listAnimData,emoAnim:emoAnimData,danmuAnim:danmuAnimData,danmuHolderHeight:danmuHolderHeight}}"></template>
+                    </block>
+                </view>
+                <view class="lc-city-comment" wx:if="{{!showType&&urbanMsg.message}}">
+                    <view class="g-f-s g-mb10 lc-city-title">城市寄语</view>
+                    <view bindtap="onUrbanMsgTap" class="lc-cbox base-line2 g-f-xl g-mb5">
+            {{urbanMsg.message}}
+          </view>
+                    <view class="g-d-flex">
+                        <view bindtap="onUrbanMsgAuthorTap" class="lc-userinfo g-talign-center">
+                            <image class="lc-userinfo-pic g-b-radius" src="{{urbanMsg.user_info.headimgurl}}"></image>
+                            <text class="lc-userinfo-name　base-line1 g-f-s" wx:if="{{urbanMsg.user_info}}">{{urbanMsg.user_info.nickname}}</text>
+                        </view>
+                        <button bindtap="handleWriteComment" class="lc-cbox-btn g-f-s">写寄语</button>
+                    </view>
+                </view>
+                <view class="lc-content" wx:if="{{!showType}}">
+                    <view class="js-ag-tab-hook"></view>
+                    <scroll-view class="js-ag-tab ag-tab-box {{isIOS?'ag-tab-sticky':tabIsFixed?'ag-tab-fixed':''}}" scrollLeft="{{scrollLeft}}" scrollX="true" wx:if="{{tabObj.length>1}}">
+                        <view bindtap="switchTab" class="ag-tab-item {{currentTab===tab.id?'active':''}}" data-cur="{{tab.id}}" data-idx="{{index}}" wx:for="{{tabObj}}" wx:for-item="tab" wx:key="{{index}}">{{tab.name}}</view>
+                    </scroll-view>
+                    <view class="ag-tab-fixed-placeholder" wx:if="{{tabIsFixed&&!isIOS}}"></view>
+                    <form bindreset="formReset" bindsubmit="formSubmit" reportSubmit="true">
+                        <view class="ag-tab-panel">
+                            <view class="kb-bottom-lod-wrap" hidden="{{!showTabLoading}}" style="{{localFeedLoadingStyle}}">
+                                <view class="bottom-loading-wrap">
+                                    <image class="kb-loading-image" src="http://mat1.gtimg.com/www/js/news/bottom_loading.gif"></image>
+                                    <view class="bottom-loading-text">正在加载</view>
+                                </view>
+                            </view>
+                            <view style="opacity: {{showTabLoading?0:1}}" wx:for="{{dataList}}" wx:key="{{index}}">
+                                <template is="{{'tpl_'+item.showType+(item.showType=='11'&&currentTab==c.localFeedArr.AROUND_THING.id?'_1':'')}}" data="{{...item}}"></template>
+                            </view>
+                        </view>
+                    </form>
+                </view>
+            </view>
+        </mini-scroll-view>
+    </view>
+    <lc-comment-dialog bindcommentclose="handleCommentClose" bindcommentinput="handleCommentInput" bindcommentsubmit="handleCommentSubmit" id="lcCommentDialog" maxlength="{{commentMaxLength}}"></lc-comment-dialog>
+    <template is="auth-confirm-dialog" data="{{hideCloseBtn:false,cover:true}}" wx:if="{{showUserInfoAuthDialog}}"></template>
+</view>

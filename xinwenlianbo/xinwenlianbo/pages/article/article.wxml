@@ -1,0 +1,73 @@
+<import src="../../wxParse/wxParse.wxml"></import>
+<import src="../../templates/share/share_temp.wxml"></import>
+<view class="page {{wuwangluo||!responseok?'hide':'show'}}">
+    <include src="../../templates/search/search_temp.wxml"></include>
+</view>
+<view class="wushujubox {{wuwangluo?'show':'hide'}}" style="padding-top:120rpx;">
+    <view class="img">
+        <image src="../../img/jijiangshangxian.png"></image>
+    </view>
+  暂无数据
+</view>
+<view class="{{wuwangluo?'hide':'show'}}">
+    <view class="response_no {{responseok?'hide':'show'}}" style="height:100%;"></view>
+    <view id="scrollTop"></view>
+    <view class="article_container {{responseok?'show':'hide'}}">
+        <scroll-view bindscroll="onScorll" id="{{audioIsShow==true?'':'marginbottom'}}" scrollTop="{{scrollTopView}}" scrollWithAnimation="true" scrollY="true" style="height:100%;">
+            <view class="article_aside">
+                <view class="article_t">
+                    <view class="title_area">
+                        <text class="atitle">{{itemtitle}}</text>
+                    </view>
+                    <view class="hk_time kp_time" wx:if="{{pagetype==1}}">{{pub_time}}</view>
+                    <view class="hk_time lbj_time" wx:if="{{pagetype==2}}">{{pub_time}}</view>
+                    <view class="article_tag" wx:if="{{tag_option.length>0}}">
+                        <view catchtap="toTag" class="gjc_d" data-tag="{{tag_option[0]}}" wx:if="{{tag_option[0]}}">{{tag_option[0]}}</view>
+                        <view catchtap="toTag" class="gjc_d" data-tag="{{tag_option[1]}}" wx:if="{{tag_option[1]}}">{{tag_option[1]}}</view>
+                        <view catchtap="toTag" class="gjc_d" data-tag="{{tag_option[2]}}" wx:if="{{tag_option[2]}}">{{tag_option[2]}}</view>
+                    </view>
+                </view>
+                <view class="article_con">
+                    <template is="wxParse" data="{{wxParseData:itemcontent.nodes}}"></template>
+                </view>
+            </view>
+            <view class="article_tui" wx:if="{{recdata.length>0}}">
+                <text class="tui_t">相关推荐内容</text>
+                <view class="woguanzhude">
+                    <view bindtap="toOtherMenu" class="guanzhu_list {{item.newsPrimaryPageId=='PAGEhX8s5pIxvHLUxvGqAlnG180411'?'list1':item.newsPrimaryPageId=='PAGES0fQGGS65U3FzbsI5qSj180226'?'list2':'list3'}}" data-newsEditMode="{{item.newsEditMode}}" data-newsId="{{item.newsId}}" data-newsPrimaryPageId="{{item.newsPrimaryPageId}}" data-newsType="{{item.newsType}}" wx:for="{{recdata}}" wx:key="key">
+                        <view class="shang">
+                            <view class="titName">
+                                <view class="titNamebg">{{item.newsPrimaryPageId=='PAGEhX8s5pIxvHLUxvGqAlnG180411'?'联播+':item.newsPrimaryPageId=='PAGES0fQGGS65U3FzbsI5qSj180226'?'快评':'新闻联播'}}
+                    </view>
+                            </view>
+                            <view class="timelength" wx:if="{{item.newsType==0}}">时长{{item.newsLength}}</view>
+                        </view>
+                        <view class="zhong">{{item.newsTitle}}</view>
+                        <view class="xia">
+                            <view class="timedata">{{item.newsFocusDate}}</view>
+                            <view class="gjc_box">
+                                <view catchtap="toTag" class="gjc {{item.newsType==0?'':'jc'}}" data-tag="{{item.newsHLTag[0]}}" wx:if="{{item.newsHLTag[0]}}">{{item.newsHLTag[0]}}</view>
+                                <view catchtap="toTag" class="gjc {{item.newsType==0?'':'jc'}}" data-tag="{{item.newsHLTag[1]}}" wx:if="{{item.newsHLTag[1]}}">{{item.newsHLTag[1]}}</view>
+                                <view catchtap="toTag" class="gjc {{item.newsType==0?'':'jc'}}" data-tag="{{item.newsHLTag[2]}}" wx:if="{{item.newsHLTag[2]}}">{{item.newsHLTag[2]}}</view>
+                            </view>
+                        </view>
+                    </view>
+                </view>
+            </view>
+            <view class="articlelist_tw" wx:if="{{recdata.length>0}}">
+                <text class="articlelist_tw_left"></text>
+                <text class="articlelist_tip">已显示全部内容</text>
+                <text class="articlelist_tw_right"></text>
+            </view>
+        </scroll-view>
+    </view>
+</view>
+<view catchtap="onGoTop" class="scrollto-btn-wrapper">
+    <view class="scrollto-btn  {{!istTop?'hide':''}}"></view>
+</view>
+<view class="yskp_share {{wuwangluo?'hide':'show'}}">
+    <include src="../../templates/share/share_temp.wxml"></include>
+</view>
+<view class="audiobox {{audioIsHide==true?'hide':'show'}}">
+    <include src="../../templates/audio/audio.wxml"></include>
+</view>

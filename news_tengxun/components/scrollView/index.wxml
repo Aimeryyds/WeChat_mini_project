@@ -1,0 +1,23 @@
+<scroll-view enableBackToTop scrollY bindscroll="onScroll" bindtouchend="onTouchEnd" class="scroll-view" scrollTop="{{scrollTop}}" scrollWithAnimation="{{scrollWithAnimation}}">
+    <view class="tips-wrapper" wx:if="{{withTopTips}}">
+        <block wx:if="{{enablePulldownRefresh}}">
+            <view class="down" wx:if="{{status===0}}">
+        {{pulldownText}}
+      </view>
+            <view class="up" wx:elif="{{status===1}}">
+        {{releaseText}}
+      </view>
+            <view class="tips {{status==2?'loading-wrapper':'finished-wrapper'}}" wx:elif="{{status===2||status===3}}">
+                <block wx:if="{{status===2}}">
+                    <view class="loading-icon"></view>
+          {{loadingText}}
+        </block>
+                <block wx:else>
+          {{finishText}}
+        </block>
+            </view>
+        </block>
+    </view>
+    <slot></slot>
+    <xxw-loading-bar bindretry="onRetry" class="bottom-loading-bar" hasMore="{{hasMore}}" noMoreText="{{bottomLoadingNoMoreText}}" status="{{bottomLoadingStatus}}" wx:if="{{withBottomLoading}}"></xxw-loading-bar>
+</scroll-view>

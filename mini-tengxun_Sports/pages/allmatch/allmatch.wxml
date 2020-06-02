@@ -1,0 +1,13 @@
+<view class="match-type" wx:for="{{matchList}}" wx:for-item="match" wx:key="title">
+    <view class="match-type-name">
+        {{match.title}}
+    </view>
+    <view class="match-type-list">
+        <view wx:for="{{match.columns}}" wx:key="columnId">
+            <navigator class="match-item" url="/pages/searchResult/searchResult?columnId={{item.columnId}}">
+                <image class="match-icon" height="44" src="{{item.icon}}" width="44"></image>
+                <view class="match-name">{{item.name}}</view>
+            </navigator>
+        </view>
+    </view>
+</view>

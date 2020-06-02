@@ -1,0 +1,238 @@
+.black {
+    background: #1b1c20;
+    color: #fff;
+    border-color: #33363e;
+}
+
+.comment-item {
+    display: flex;
+    align-items: flex-start;
+    justify-content: flex-start;
+    padding: 20rpx 24rpx 0;
+    position: relative;
+}
+
+.avatar-icon {
+    width: 48rpx;
+    height: 48rpx;
+    background-color: rgba(0,0,0,.03);
+    border-radius: 100%;
+    margin-right: 20rpx;
+}
+
+.content {
+    flex: 1;
+    font-family: PingFangSC-Regular;
+    font-size: 32rpx;
+    font-weight: 400;
+    font-style: normal;
+    font-stretch: normal;
+    line-height: 1.5;
+    letter-spacing: normal;
+}
+
+.black .content {
+    border-color: #33363e;
+}
+
+.emoji-icon {
+    width: 44rpx;
+    height: 44rpx;
+    font-size: 0;
+    line-height: 48rpx;
+    vertical-align: sub;
+    display: inline-block;
+}
+
+.name-block {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.name {
+    font-size: 32rpx;
+    color: #222;
+    font-weight: 700;
+    max-width: 420rpx;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+
+.agree-block {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    flex-wrap: nowrap;
+    color: #777;
+}
+
+.black .agree-block {
+    color: #888;
+}
+
+.agree-num {
+    font-size: 24rpx;
+    line-height: normal;
+    vertical-align: middle;
+}
+
+.agree-icon {
+    width: 50rpx;
+    height: 50rpx;
+    background-repeat: no-repeat;
+    background-image: url(http://mat1.gtimg.com/www/js/news/like_icon_wx.png);
+    background-position: 0;
+    background-size: 1400% 100%;
+}
+
+.agree-icon.agreed {
+    background-position: 100%;
+}
+
+.like-active {
+    animation-timing-function: steps(13);
+    animation-name: plus-one;
+    animation-duration: .58s;
+    animation-iteration-count: 1;
+    display: inline-block;
+    animation-fill-mode: forwards;
+}
+
+@-webkit-keyframes plus-one {
+    0% {
+        background-position: 0;
+    }
+
+    to {
+        background-position: 100%;
+    }
+}
+
+@keyframes plus-one {
+    0% {
+        background-position: 0;
+    }
+
+    to {
+        background-position: 100%;
+    }
+}
+
+.comment-content {
+    width: 100%;
+    font-size: 32rpx;
+    color: #222;
+    font-weight: 400;
+    line-height: 48rpx;
+    margin-right: 12rpx;
+    margin-top: 16rpx;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    display: -webkit-inline-box;
+    -webkit-box-orient: vertical;
+}
+
+.comment-img {
+    width: 220rpx;
+    margin-top: 5rpx;
+    max-height: 320rpx;
+    background: #e8e8e8 url(http://mat1.gtimg.com/www/images/newsapp/wxapp/news/logo_gray_small.png) 50% no-repeat;
+}
+
+.info-block {
+    font-size: 24rpx;
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+}
+
+.comment-time {
+    color: #777;
+    height: 30rpx;
+}
+
+.black .comment-time {
+    color: #777;
+}
+
+.split-dot {
+    margin: 0 10rpx;
+    height: 30rpx;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.dot {
+    width: 4rpx;
+    height: 4rpx;
+    border-radius: 100%;
+}
+
+.black .dot,.dot {
+    background: #777;
+}
+
+.reply-btn {
+    color: #222;
+    height: 30rpx;
+    padding: 20rpx 0;
+    white-space: nowrap;
+}
+
+.del-btn {
+    height: 30rpx;
+    padding: 20rpx 0rpx;
+}
+
+.black .del-btn,.del-btn {
+    color: #2883e9;
+}
+
+.reply-detail-wrapper {
+    display: flex;
+    align-items: center;
+    font-size: 30rpx;
+    color: #222;
+}
+
+.reply-list-wrapper {
+    width: 98%;
+    background-color: #f7f7f7;
+    padding: 15rpx 0;
+    color: #222;
+}
+
+.black .reply-list-wrapper {
+    color: #fff;
+    background-color: #232429;
+    margin-bottom: 10rpx;
+}
+
+.reply-detail-text {
+    margin: 10rpx 8rpx 5rpx 24rpx;
+    font-family: PingFangSC;
+    font-size: 28rpx;
+    font-weight: 400;
+    font-style: normal;
+    font-stretch: normal;
+    line-height: 1;
+    letter-spacing: normal;
+    color: #777;
+}
+
+.black .comment-content,.black .comment-img,.black .name,.black .reply-btn,.black .reply-detail-wrapper {
+    color: #fff;
+}
+
+.more-icon {
+    width: 24rpx;
+    height: 24rpx;
+    margin-top: 4rpx;
+}
+
+.down {
+    transform: rotate(90deg);
+}

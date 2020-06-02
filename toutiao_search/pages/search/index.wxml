@@ -1,0 +1,94 @@
+<view class="search">
+    <statusbar __triggerObserer="{{_triggerObserer}}"></statusbar>
+    <view class="input-container">
+        <input bindconfirm="handleConfirm" bindinput="handleInput" class="input" confirmType="搜索" focus="{{focus}}" placeholder="请输入关键字" placeholderClassName="input-placeholder" value="{{defaultQuery}}"></input>
+        <view bindtap="deteleInput" class="delete" wx:if="{{defaultQuery}}"></view>
+        <view bindtap="handleCancle" class="cancel">取消</view>
+    </view>
+    <view class="feedlist-container" wx:if="{{query}}">
+        <view bindtap="handleClickFeedList" class="feedlist-item" data-index="{{_k}}" data-item="{{i[$original]}}" wx:for="{{loopArray0}}" wx:for-index="_k" wx:for-item="i" wx:key="$original.item_id">
+            <view class="{{i[$original].mode}}" wx:if="{{i[$original].mode==='more_mode'}}">
+                <text class="{{'title '+(title.highlight?'highlight':'')}}" wx:for="{{i[$original].richTitle}}" wx:for-index="key" wx:for-item="title" wx:key="key">{{title.content}}</text>
+                <view class="img-container">
+                    <image class="img" mode="aspectFill" src="{{img.url}}" wx:for="{{i[$original].image_list}}" wx:for-index="key" wx:for-item="img" wx:key="key"></image>
+                </view>
+                <view class="info">
+                    <image class="tag-stick" src="{{i[$loopState__temp2]}}" wx:if="{{i[$original].is_stick}}"></image>
+                    <image class="tag-hot" src="{{i[$loopState__temp4]}}" wx:if="{{i[$original].tip===1}}"></image>
+                    <text>{{i[$original].source}}</text>
+                    <text>{{i[$original].comment_count}}评论</text>
+                    <text>{{i[$original].timeago}}</text>
+                </view>
+            </view>
+            <block wx:else>
+                <view class="{{i[$original].mode}}" wx:if="{{i[$original].mode==='middle_mode'}}">
+                    <view class="left">
+                        <text class="{{'title '+(title.highlight?'highlight':'')}}" wx:for="{{i[$original].richTitle}}" wx:for-index="key" wx:for-item="title" wx:key="key">{{title.content}}</text>
+                        <view class="info">
+                            <image class="tag-hot" src="{{i[$loopState__temp6]}}" wx:if="{{i[$original].tip===1}}"></image>
+                            <text class="source">{{i[$original].source}}</text>
+                            <text>{{i[$original].comment_count}}评论</text>
+                            <text>{{i[$original].timeago}}</text>
+                        </view>
+                    </view>
+                    <view class="right">
+                        <image mode="aspectFill" src="{{i[$original].cover_image_list.url}}"></image>
+                        <view class="video-duration" wx:if="{{i[$original].has_video}}">{{i[$loopState__temp8]}}</view>
+                    </view>
+                </view>
+                <block wx:else>
+                    <view class="{{i[$original].mode}}" wx:if="{{i[$original].mode==='large_mode'}}">
+                        <text class="{{'title '+(title.highlight?'highlight':'')}}" wx:for="{{i[$original].richTitle}}" wx:for-index="key" wx:for-item="title" wx:key="key">{{title.content}}</text>
+                        <view class="img-container">
+                            <image class="img" mode="aspectFill" src="{{i[$original].default_image_url}}"></image>
+                            <image class="play-btn" src="{{i[$loopState__temp10]}}" wx:if="{{i[$original].has_video}}"></image>
+                        </view>
+                        <view class="info">
+                            <image class="tag-hot" src="{{i[$loopState__temp12]}}" wx:if="{{i[$original].tip===1}}"></image>
+                            <text>{{i[$original].source}}</text>
+                            <text>{{i[$original].comment_count}}评论</text>
+                            <text>{{i[$original].timeago}}</text>
+                        </view>
+                    </view>
+                    <view class="{{i[$original].mode}}" wx:else>
+                        <text class="{{'title '+(title.highlight?'highlight':'')}}" wx:for="{{i[$original].richTitle}}" wx:for-index="key" wx:for-item="title" wx:key="key">{{title.content}}</text>
+                        <view class="info">
+                            <image class="tag-stick" src="{{i[$loopState__temp14]}}" wx:if="{{i[$original].is_stick}}"></image>
+                            <image class="tag-hot" src="{{i[$loopState__temp16]}}" wx:if="{{i[$original].tip===1}}"></image>
+                            <text>{{i[$original].source}}</text>
+                            <text>{{i[$original].comment_count}}评论</text>
+                            <text>{{i[$original].timeago}}</text>
+                        </view>
+                    </view>
+                </block>
+            </block>
+        </view>
+        <view class="loading">{{hasMore?'加载中':'没有更多内容了'}}</view>
+    </view>
+    <block wx:else>
+        <view class="sug-list" wx:if="{{defaultQuery&&searchSugData.length>0}}">
+            <view bindtap="handleClickSearchSug" class="sug-item" data-item="{{i}}" wx:for="{{searchSugData}}" wx:for-item="i" wx:key="keyword">{{i.keyword}}</view>
+        </view>
+        <view wx:else>
+            <view class="search-data-container" wx:if="{{searchData&&searchData.length>0}}">
+                <view bindtap="handleClickSearchData" class="search-data-item" data-item="{{i}}" wx:for="{{searchData}}" wx:for-index="key" wx:for-item="i" wx:key="key">{{i}}</view>
+            </view>
+            <view class="{{'search-history-container '+(!hideSearchHistory?'hideSearchHistory':'')}}" wx:if="{{searchHistory&&searchHistory.length>0}}">
+                <view bindtap="handleClickHideSearchHistory" class="search-history-title">历史记录</view>
+                <image bindtap="handleClickDeleteHistory" class="delete" mode="aspectFill" src="{{anonymousState__temp17}}"></image>
+                <view bindtap="handleClickHistory" class="search-history-item" data-item="{{i}}" wx:for="{{$anonymousCallee__0}}" wx:for-item="i" wx:key="i">{{i}}</view>
+            </view>
+            <view class="banner-container">
+                <image class="logo" mode="scaleToFill" src="{{anonymousState__temp18}}"></image>
+                <view class="update-time" wx:if="{{updateTime}}">{{anonymousState__temp19}}</view>
+            </view>
+            <view class="rank-list">
+                <view bindtap="handleClickRank" class="rank-item" data-item="{{i[$original]}}" data-key="{{key}}" wx:for="{{loopArray1}}" wx:for-index="key" wx:for-item="i" wx:key="key">
+                    <view class="rank-num">{{key===9?'·':key+1}}</view>
+                    <text class="rank-content">{{key===9?'更多热搜':i[$original].hotSearchWord}}</text>
+                    <image class="tag" mode="aspectFit" src="{{i[$loopState__temp21]}}" style="{{i[$loopState__temp23]}}" wx:if="{{i[$original].tag&&key<9}}"></image>
+                </view>
+            </view>
+        </view>
+    </block>
+</view>

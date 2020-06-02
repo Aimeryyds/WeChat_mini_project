@@ -1,0 +1,23 @@
+<xxw-bg-loading bindrefresh="render" status="{{status}}" wx:if="{{status!==pageStatus.ready}}"></xxw-bg-loading>
+<view wx:else>
+    <view class="post-none" wx:if="{{noData}}">
+        <image class="none-pic" src="http://mat1.gtimg.com/www/images/news_minipro/user-post-none.png"></image>
+        <view class="tips">还没有发表任何内容哦</view>
+    </view>
+    <block wx:else>
+        <block wx:for="{{list}}" wx:for-index="page" wx:for-item="firstItem" wx:key="_uid">
+            <block wx:if="{{tabName==='动态'}}">
+                <xxw-weibo-item collapse disableTapUser withTopicName articleId="{{item.articleId}}" atype="{{item.atype}}" card="{{item.card}}" commentId="{{item.commentId}}" comments="{{item.comments}}" content="{{item.content}}" data-index="{{index}}" data-page="{{page}}" date="{{item.date}}" disableBottomBar="{{item.weiboStatus!==1&&item.weiboStatus!==5}}" fromPage="{{fromPage}}" hotComment="{{item.hotComment}}" imageList="{{item.imageList}}" imgurlList="{{item.imgurlList}}" isVideo="{{item.isVideo}}" posterShareImg="{{item.posterShareImg}}" pushInfo="{{item.pushInfo}}" relation="{{item.relation}}" shareInfo="{{item.shareInfo}}" status="{{item.weiboStatus}}" time="{{item.time}}" timestamp="{{item.timestamp}}" topic="{{item.topic}}" videoInfo="{{item.videoInfo}}" withDeleteBtn="{{type==='master'}}" withStatus="{{type==='master'}}" wx:for="{{firstItem.list}}" wx:key="_uid">
+                    <view class="split-line"></view>
+                </xxw-weibo-item>
+            </block>
+            <block wx:elif="{{tabName==='评论'}}">
+                <xxw-comment-with-article disableTapUser withReplyContent article="{{item.article}}" comment="{{item.comment}}" pubTimeTs="{{item.pubTimeTs}}" reply="{{item.reply}}" withDeleteBtn="{{type==='master'}}" withReplyStatus="{{type==='master'}}" wx:for="{{firstItem.list}}" wx:key="_uid"></xxw-comment-with-article>
+            </block>
+            <block wx:else>
+                <xxw-news-item articleId="{{item.articleId}}" atype="{{item.atype}}" commentCount="{{item.commentCount}}" duration="{{item.duration}}" hasRead="{{item.hasRead}}" imageBig="{{item.imageBig}}" imageSmall="{{item.imageBig}}" isLastOne="{{page===list.length-1&&index===firstItem.list.length-1}}" isOriginal="{{item.isFisOriginal}}" picShowType="{{item.picShowType}}" playCount="{{item.playCount}}" source="{{item.source}}" time="{{item.time}}" title="{{item.title}}" vid="{{item.vid}}" wx:for="{{firstItem.list}}" wx:key="_uid"></xxw-news-item>
+            </block>
+        </block>
+        <xxw-loading-bar bindretry="onReachBottom" class="bottom-loading-bar" hasMore="{{hasMore}}" status="{{bottomLoadingStatus}}"></xxw-loading-bar>
+    </block>
+</view>

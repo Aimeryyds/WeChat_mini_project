@@ -1,0 +1,9 @@
+<view class="logo-section">
+    <image class="logo" src="/assets/login/logo.png"></image>
+</view>
+<view class="button-section">
+    <button bindgetuserinfo="onGotUserInfo" class="wx button" lang="zh_CN" openType="getUserInfo">
+        <image src="/assets/login/wechat.png"></image>微信登录</button>
+    <navigator appId="wxc5df8e3b60d4b4a2" bind:tap="onClickGotoQQ" class="qq button" extraData="{{extraData}}" path="pages/login" target="miniProgram">
+        <image src="/assets/login/qq.png"></image>QQ登录</navigator>
+</view>

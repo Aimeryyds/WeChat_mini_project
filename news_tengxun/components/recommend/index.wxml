@@ -1,0 +1,8 @@
+<view wx:if="{{list.length>0}}">
+    <view class="title-cover">
+        <view class="title">
+      {{titleText}}
+    </view>
+    </view>
+    <recommend-item showName articleId="{{item.id}}" atype="{{item.atype}}" chlname="{{item.chlname}}" comments="{{item.comments}}" fromPage="{{fromPage}}" hasRead="{{item.hasRead}}" img="{{item.img}}" index="{{i}}" isNewsflash="{{item.isNewsflash}}" noBorder="{{i===0||i-1===flashPosition}}" picShowType="{{item.picShowType}}" time="{{item.time}}" title="{{item.title}}" topicId="{{tpId}}" wx:for="{{list}}" wx:for-index="i" wx:key="id"></recommend-item>
+</view>

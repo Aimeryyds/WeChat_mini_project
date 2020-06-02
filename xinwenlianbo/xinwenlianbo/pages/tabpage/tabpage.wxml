@@ -1,0 +1,69 @@
+<include src="../../templates/include/nowork.wxml"></include>
+<view class="content" hidden="{{!netInfo.status}}">
+    <scroll-view class="tab_title" scrollX="true" style="width:75%">
+        <view bindtap="clickALL" class="guanzhu_tit {{topNav?'active':''}}">全部</view>
+        <view bindtap="clickNav" class="guanzhu_tit" data-id="{{index}}" data-val="{{item.follow}}" style="{{index==id?'color:#ef4d44':''}}" wx:for="{{_huancun}}" wx:key="key">{{item.follow}}</view>
+    </scroll-view>
+    <view bindtap="clickgetMore" class="addguanzhu">+添加关注</view>
+    <scroll-view bindscroll="getscroll" bindscrolltolower="loadMore" class="conlist" scrollTop="{{scrollTop}}" scrollWithAnimation="true" scrollY="{{isscroll}}" style="height:{{second_height}}px">
+        <view class="woguanzhude" hidden="{{shownoresult}}" wx:for="{{_data}}" wx:key="key">
+            <view bindtap="changepage" class="guanzhu_list list1" data-pageid="{{item.newsId}}" data-type="{{item.contype}}" wx:if="{{item.contype=='联播+'}}">
+                <view class="shang">
+                    <view class="titName">
+                        <view class="titNamebg">{{item.contype}}</view>
+                    </view>
+                </view>
+                <view class="zhong">{{item.newsTitle}}</view>
+                <view class="xia">
+                    <view class="timedata">{{item._newsFocusDate}}</view>
+                    <view class="gjc_box">
+                        <view catchtap="gotoonegzpage" class="gjc" data-val="{{item}}" wx:if="{{index<=2}}" wx:for="{{item.gjc}}" wx:key="key">{{item}}</view>
+                    </view>
+                </view>
+            </view>
+            <view bindtap="changepage" class="guanzhu_list list2" data-pageid="{{item.newsId}}" data-type="{{item.contype}}" wx:if="{{item.contype=='快评'}}">
+                <view class="shang">
+                    <view class="titName">
+                        <view class="titNamebg">{{item.contype}}</view>
+                    </view>
+                </view>
+                <view class="zhong">{{item.newsTitle}}</view>
+                <view class="xia">
+                    <view class="timedata">{{item._newsFocusDate}}</view>
+                    <view class="gjc_box">
+                        <view catchtap="gotoonegzpage" class="gjc" data-val="{{item}}" wx:if="{{index<=2}}" wx:for="{{item.gjc}}" wx:key="key">{{item}}</view>
+                    </view>
+                </view>
+            </view>
+            <view bindtap="changepage" class="guanzhu_list list3" data-modetype="{{item.newsEditMode}}" data-pageid="{{item.newsId}}" data-type="{{item.contype}}" wx:if="{{item.contype=='新闻联播'||item.contype==''}}">
+                <view class="shang">
+                    <view class="titName">
+                        <view class="titNamebg" wx:if="{{item.contype!=''}}">{{item.contype}}</view>
+                    </view>
+                    <view class="timelength" wx:if="{{item.contype!=''}}">时长 {{item.newsLength}}</view>
+                </view>
+                <view class="zhong">{{item.newsTitle}}</view>
+                <view class="xia">
+                    <view class="timedata">{{item._newsFocusDate}}</view>
+                    <view class="gjc_box">
+                        <view catchtap="gotoonegzpage" class="gjc" data-val="{{item}}" wx:if="{{index<=2}}" wx:for="{{item.gjc}}" wx:key="key">{{item}}</view>
+                    </view>
+                </view>
+            </view>
+        </view>
+        <view class="search_result" hidden="{{!shownoresult}}">
+            <image src="../../img/search_nothing.png"></image>
+            <view class="text">无搜索结果</view>
+        </view>
+        <view class="articlelist_lw" hidden="{{showLoading}}">
+            <image class="articlelist_loading" src="../../img/loading.gif"></image>
+        </view>
+        <view class="contentover {{showendKP==true?'show':'hide'}}">已显示全部内容</view>
+    </scroll-view>
+    <view class="audiobox {{audioIsHide==true?'hide':'show'}}">
+        <include src="../../templates/audio/audio.wxml"></include>
+    </view>
+</view>
+<view catchtap="onGoTop" class="scrollto-btn-wrapper">
+    <view class="scrollto-btn  {{!istTop?'hide':''}}"></view>
+</view>

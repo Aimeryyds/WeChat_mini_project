@@ -1,0 +1,46 @@
+.video-wrapper {
+    position: relative;
+    overflow: hidden;
+}
+
+.video {
+    width: 100%;
+    height: 100%;
+}
+
+.title {
+    top: 0;
+    color: #fff;
+    font-size: 36rpx;
+    font-family: PingFang-SC-Medium;
+    line-height: 50rpx;
+    text-align: left;
+    padding: 24rpx 24rpx 0;
+    background: linear-gradient(rgba(0,0,0,.4),transparent);
+    overflow: hidden;
+    text-overflow: ellipsis;
+    display: -webkit-box;
+    word-break: break-all;
+    -webkit-box-orient: vertical;
+    -webkit-line-clamp: 2;
+}
+
+.progress-bar,.title {
+    position: absolute;
+    left: 0;
+    right: 0;
+    z-index: -1;
+    opacity: 0;
+    transition: all .3s;
+}
+
+.progress-bar {
+    bottom: 0;
+    height: 100rpx;
+    background: linear-gradient(transparent,rgba(0,0,0,.4));
+}
+
+.show {
+    z-index: 1;
+    opacity: 1;
+}

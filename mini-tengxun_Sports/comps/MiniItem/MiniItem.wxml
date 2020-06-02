@@ -1,0 +1,48 @@
+<view class="match-list match-margin" style="{{matchType==4?'margin: 0;':''}}">
+    <view class="match-item" wx:if="{{matchType!=4}}">
+        <view bindtap="onTapTeam" class="left-icon" data-team-id="{{leftId}}">
+            <TuaImage class="icon-img" height="40px" src="{{leftBadge}}" width="40px"></TuaImage>
+            <text class="team-name">{{leftName}}</text>
+        </view>
+        <view class="match-info {{matchStatus}}">
+            <view class="match-time" wx:if="{{livePeriod!=1}}">
+                {{startTimeStamp}} {{liveTypeText||matchState}}
+            </view>
+            <view class="match-time" wx:if="{{livePeriod==1}}">
+                {{matchState}}
+            </view>
+            <view class="match-score">
+                <AttendForm bind:handleAttend="handleAttend" bind:onGotUserInfo="onGotUserInfo" isAttended="{{isAttended}}" isLogin="{{isLogin}}" wx:if="{{livePeriod==0}}"></AttendForm>
+                <block wx:else>
+                    <text class="left-score">{{leftGoal}}</text>
+                    <text class="score-space"></text>
+                    <text class="right-score">{{rightGoal}}</text>
+                </block>
+            </view>
+            <view class="match-status">
+                {{matchDesc}}
+            </view>
+        </view>
+        <view bindtap="onTapTeam" class="right-icon" data-team-id="{{rightId}}">
+            <TuaImage class="icon-img" height="40px" src="{{rightBadge}}" width="40px"></TuaImage>
+            <text class="team-name">{{rightName}}</text>
+        </view>
+    </view>
+    <view class="match-item" style="margin: 0;" wx:if="{{matchType==4}}">
+        <view class="n-match-info">
+            <view class="n-match-time" wx:if="{{livePeriod!=1}}">
+                {{startTimeStamp}} {{liveTypeText||matchState}}
+            </view>
+            <view class="n-match-time" style="color: #FF6257;" wx:if="{{livePeriod==1}}">
+                {{matchState}}
+            </view>
+            <view class="n-match-name">
+                {{title}}
+            </view>
+            <view class="n-match-status {{matchStatus}}">
+                {{matchDesc}}
+            </view>
+            <AttendForm bind:handleAttend="handleAttend" bind:onGotUserInfo="onGotUserInfo" isAttended="{{isAttended}}" isLogin="{{isLogin}}" wx:if="{{livePeriod==0}}"></AttendForm>
+        </view>
+    </view>
+</view>

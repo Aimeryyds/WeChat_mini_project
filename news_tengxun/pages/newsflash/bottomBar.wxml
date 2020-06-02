@@ -1,0 +1,18 @@
+<view class="opt-bar">
+    <view bindtap="tapComment" class="opt-item" wx:if="{{!(atype===101||atype==100||atype===120||atype==114&&topicId)}}">
+        <view class="iconfont icon-xcx-comment span"></view>
+        <view class="num">{{commentCountStr||'评论'}}</view>
+    </view>
+    <view class="opt-item">
+        <button catchtap="none" class="num share" data-article-id="{{articleId}}" data-article-type="{{atype}}" data-title="{{title}}" data-topic-id="{{topicId}}" openType="share">
+            <view class="iconfont icon-xcx-weixin span"></view>
+            <view class="text">好友</view>
+        </button>
+    </view>
+    <view class="opt-item">
+        <view catchtap="tapPoster" class="num-hb gen-poster">
+            <view class="iconfont icon-xcx-pengyouquan span"></view>
+            <view class="text">{{shareText}}</view>
+        </view>
+    </view>
+</view>

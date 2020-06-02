@@ -1,0 +1,18 @@
+<xxw-bg-loading wx:if="{{!ready}}"></xxw-bg-loading>
+<scroll-view bindscrolltolower="onScrollToLower" class="normal-comment-wrapper" scrollTop="{{scrollTop}}" scrollY="{{true}}" wx:else>
+    <title articleId="{{articleId}}" atype="{{atype}}" chlicon="{{chlicon}}" chlid="{{chlid}}" chlname="{{chlname}}" fromPage="{{fromPage}}" timestamp="{{timestamp}}" title="{{title}}"></title>
+    <xxw-comment-block articleId="{{articleId}}" atype="{{atype}}" bgLoading="{{commentLoading}}" bnext="{{commentBnext}}" commentId="{{commentId}}" commentList="{{[commentList]}}" fromPage="{{fromPage}}" infinity="{{false}}" isForbidden="{{commentIsForbidden}}" lastReplyId="{{commentLastReplyId}}" scrollTop="{{scrollTop}}" syncId="{{syncId}}"></xxw-comment-block>
+    <view class="recommend-wrapper {{isIphoneX&&'is-iphone-x'}}">
+        <recommend fromPage="{{fromPage}}" recommendList="{{recommendList}}" wx:if="{{!articleBlock}}"></recommend>
+        <view class="go-home-wrapper">
+            <view bindtap="tapGoHome" class="go-home-btn">
+        去首页，看更多热点资讯
+        <image class="go-home-btn-icon" src="http://mat1.gtimg.com/www/js/news/open-blue.png"></image>
+            </view>
+        </view>
+    </view>
+</scroll-view>
+<xxw-comment-bar articleId="{{articleId}}" atype="{{atype}}" class="comment-bar" commentId="{{commentId}}" fromPage="{{fromPage}}" hideAnchor="{{true}}" isForbidden="{{commentIsForbidden}}" posterShareImg="{{posterShareImg}}" syncId="{{syncId}}" title="{{title}}"></xxw-comment-bar>
+<xxw-comment-input-panel fromPage="{{fromPage}}"></xxw-comment-input-panel>
+<xxw-login></xxw-login>
+<xxw-poster fromPage="{{fromPage}}"></xxw-poster>

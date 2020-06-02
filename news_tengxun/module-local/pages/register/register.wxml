@@ -1,0 +1,30 @@
+<import src="../../tpl/warn.wxml"></import>
+<template is="article-warn" data="{{showType:showType}}"></template>
+<login></login>
+<view class="register-container">
+    <view class="main-title">填写报名信息<view class="title-tip">均为必填</view>
+    </view>
+    <form bindsubmit="formSubmit" class="form-container" reportSubmit="true">
+        <view class="lc-form__content">
+            <view class="lc-form__item" wx:for="{{signInfo}}" wx:key="{{index}}">
+                <input bindinput="handleInput" class="lc-form__default_line" data-key="{{item.key}}" name="{{item.key}}" placeholder="{{item.name}}" placeholderClass="lc-form__placeholder" type="text" value="{{info[item.key]}}" wx:if="{{item.key===KEYS.NAME}}"></input>
+                <button bindgetphonenumber="handleGetPhoneNumber" class="lc-btn" disabled="{{hideMmobile!==''}}" openType="getPhoneNumber" wx:elif="{{item.key===KEYS.MOBILE}}">
+                    <input bindinput="handleInput" class="lc-form__default_line" data-key="{{item.key}}" disabled="true" name="{{item.key}}" placeholder="{{item.name}}" placeholderClass="lc-form__placeholder" type="text" value="{{hideMmobile}}"></input>
+                </button>
+                <picker bindchange="handleSexChange" class="lc-form__default_line" name="{{item.key}}" range="{{sex}}" value="{{info['sex']}}" wx:elif="{{item.key===KEYS.GENDER}}">
+                    <text class="lc-form__placeholder" wx:if="{{!info['sex']}}">{{item.name}}</text>{{sex[ info['sex'] ]}}</picker>
+                <input bindinput="handleInput" class="lc-form__default_line" data-key="{{item.key}}" name="{{item.key}}" placeholder="{{item.name}}" placeholderClass="lc-form__placeholder" type="idcard" value="{{info[item.key]}}" wx:elif="{{item.key===KEYS.ID_CARD}}"></input>
+                <input bindinput="handleInput" bindtap="handleChooseAddress" class="lc-form__default_line" data-key="{{item.key}}" disabled="{{addrDisable}}" name="{{item.key}}" placeholder="{{item.name}}" placeholderClass="lc-form__placeholder" type="text" value="{{info[item.key]}}" wx:if="{{item.key===KEYS.ADDRESS}}"></input>
+                <picker bindchange="handleBirthdayChange" class="lc-form__default_line" end="{{today}}" mode="date" name="{{item.key}}" value="{{info[item.key]}}" wx:elif="{{item.key===KEYS.AGE}}">
+                    <text class="lc-form__placeholder" wx:if="{{!info[item.key]}}">生日</text>{{info[item.key]}}</picker>
+                <input bindinput="handleInput" class="lc-form__default_line" data-key="{{item.key}}" name="{{item.key}}" placeholder="{{item.name}}" placeholderClass="lc-form__placeholder" type="number" value="{{info[item.key]}}" wx:if="{{item.key===KEYS.HEIGHT}}"></input>
+                <input bindinput="handleInput" class="lc-form__default_line" data-key="{{item.key}}" name="{{item.key}}" placeholder="{{item.name}}" placeholderClass="lc-form__placeholder" type="text" value="{{info[item.key]}}" wx:if="{{item.key===KEYS.EDUCATION}}"></input>
+                <picker bindchange="handleHometownChange" class="lc-form__default_line" mode="region" name="{{item.key}}" value="{{info[item.key]}}" wx:elif="{{item.key===KEYS.HOMETOWN}}">
+                    <text class="lc-form__placeholder" wx:if="{{!info[item.key]}}">{{item.name}}</text>{{info[item.key]}}</picker>
+                <input bindinput="handleInput" class="lc-form__default_line" data-key="{{item.key}}" name="{{item.key}}" placeholder="{{item.name}}" placeholderClass="lc-form__placeholder" type="text" value="{{info[item.key]}}" wx:elif="{{item.isExt}}"></input>
+            </view>
+        </view>
+        <button class="lc-form__submit" formType="submit">确 定</button>
+    </form>
+</view>
+<lc-auth id="authDialog"></lc-auth>

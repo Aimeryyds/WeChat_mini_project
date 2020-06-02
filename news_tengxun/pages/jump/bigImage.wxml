@@ -1,0 +1,13 @@
+<view class="title-wrapper {{hasRead&&'has-read'}} {{smallScreen&&'small-screen'}}">
+    <text class="exclusive" wx:if="{{isExclusive}}">独家</text>
+    <text>{{title}}</text>
+</view>
+<view class="image-wrapper">
+    <xxw-video useCustomProgressBar _uid="{{_uid}}" articleId="{{articleId}}" atype="{{atype}}" autoPauseOther="{{true}}" bindtapVideo="tapVideo" catchtap="none" durationStr="{{durationStr}}" fromPage="{{fromPage}}" height="386rpx" id="{{_uid}}" playCount="{{playCount}}" snapshot="{{imageSrc}}" vid="{{vid}}" width="702rpx" wx:if="{{isVideo}}"></xxw-video>
+    <image class="image" mode="aspectFill" src="{{imageSrc}}" wx:else>
+        <view class="mask"></view>
+        <view class="image-count" wx:if="{{imageCount>2}}">
+      {{imageCount}}图
+    </view>
+    </image>
+</view>

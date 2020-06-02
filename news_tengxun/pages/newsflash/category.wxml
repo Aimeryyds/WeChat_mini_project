@@ -1,0 +1,5 @@
+<view class="classify-list-container">
+    <scroll-view bindscroll="onScroll" class="button-groups" scrollIntoView="btn{{tabIndex}}" scrollLeft="{{scrollLeft}}" scrollWithAnimation="{{true}}" scrollX="{{true}}">
+        <button bindtap="onTap" class="button-item {{item.checked?'checked':''}}" data-cateid="{{item.id}}" data-index="{{index}}" formType="submit" id="btn{{index}}" wx:for="{{list}}" wx:key="id">{{item.name}}</button>
+    </scroll-view>
+</view>

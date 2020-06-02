@@ -1,0 +1,121 @@
+<import src="/templates/gameCol1Stat.wxml"></import>
+<import src="/templates/gameTeamSquard.wxml"></import>
+<import src="/templates/gameTeamEvents.wxml"></import>
+<import src="/templates/gamePlayerStats.wxml"></import>
+<view class="mod_player" wx:if="{{showVideo}}">
+    <view class="video-bg-container" style="height: {{videoHeight}}" wx:if="{{isPayVideo||tvpVideoError}}">
+        <image class="video-bg" src="/assets/video_bg.jpg"></image>
+        <block wx:if="{{isPayVideo}}">
+            <span class="video-vip-text-icon"></span>
+            <text class="video-vip-text">会员专享</text>
+            <text class="video-bg-text">由于平台限制，请在腾讯体育客户端开通会员观看</text>
+        </block>
+        <text class="video-bg-text" wx:if="{{!isPayVideo&&tvpVideoError}}">{{tvpVideoError}}</text>
+    </view>
+    <video autoplay="{{autoplay}}" bindended="__onTvpEnded" binderror="__onTvpError" bindfullscreenchange="onTvpFullScreen" bindpause="__onTvpPause" bindplay="__onTvpPlay" bindtimeupdate="__onTvpTimeupdate" class="player_video" id="tvp" src="{{tvpUrl}}" style="height: {{videoHeight}}" wx:if="{{!isPayVideo&&!tvpVideoError}}"></video>
+</view>
+<MiniItem bind:handleAttend="handleAttend" bind:onGotUserInfo="onGotUserInfo" bind:onTapTeam="onTapTeam" gotoParamStr="{{gotoParamStr}}" isAttended="{{isAttended}}" isLogin="{{isLogin}}" leftBadge="{{matchInfo.leftBadge}}" leftGoal="{{matchInfo.leftGoal}}" leftId="{{matchInfo.leftId}}" leftName="{{matchInfo.leftName}}" livePeriod="{{matchInfo.livePeriod}}" liveTypeText="{{matchInfo.liveTypeText}}" matchDesc="{{matchInfo.matchDesc}}" matchState="{{matchInfo.matchState}}" matchStatus="{{matchInfo.matchStatus}}" matchType="{{matchInfo.matchType}}" rightBadge="{{matchInfo.rightBadge}}" rightGoal="{{matchInfo.rightGoal}}" rightId="{{matchInfo.rightId}}" rightName="{{matchInfo.rightName}}" startTimeStamp="{{matchInfo.startTimeStamp}}" title="{{matchInfo.title}}" wx:if="{{matchInfo&&!showVideo}}"></MiniItem>
+<view class="tab-list section" wx:if="{{matchInfo}}">
+    <view class="gametab game">
+        <view bindtap="handleTabClick" class="tab-item game {{tabItem.selected&&'selected'}}" data-index="{{index}}" data-tab="{{tabItem.name}}" wx:if="{{gametab.dict[tabItem.name]&&gametab.dict[tabItem.name].showTab}}" wx:for="{{gametab.list}}" wx:for-item="tabItem" wx:key="index">
+            <text>{{tabItem.tabname}}</text>
+        </view>
+    </view>
+</view>
+<view class="content">
+    <view class="{{gametab.dict.status.show?'show':'hide'}}">
+        <TextLive gametab="{{gametab}}" matchInfo="{{matchInfo}}" mid="{{mid}}" scrollHeight="{{scrollContentHeight}}" updateFrequency="{{updateFrequency}}" wx:if="{{matchInfo}}"></TextLive>
+    </view>
+    <view class="{{gametab.dict.stats.show?'show':'hide'}}">
+        <scroll-view scrollY bindscroll="scroll" scrollTop="{{scrollTop}}" style="height: {{scrollContentHeight}}">
+            <view wx:if="{{matchInfo.livePeriod!=2}}">
+                <MiniItem bind:handleAttend="handleAttend" bind:onGotUserInfo="onGotUserInfo" bind:onTapTeam="onTapTeam" gotoParamStr="{{gotoParamStr}}" isAttended="{{isAttended}}" isLogin="{{isLogin}}" leftBadge="{{matchInfo.leftBadge}}" leftGoal="{{matchInfo.leftGoal}}" leftId="{{matchInfo.leftId}}" leftName="{{matchInfo.leftName}}" livePeriod="{{matchInfo.livePeriod}}" liveTypeText="{{matchInfo.liveTypeText}}" matchDesc="{{matchInfo.matchDesc}}" matchState="{{matchInfo.matchState}}" matchStatus="{{matchInfo.matchStatus}}" matchType="{{matchInfo.matchType}}" rightBadge="{{matchInfo.rightBadge}}" rightGoal="{{matchInfo.rightGoal}}" rightId="{{matchInfo.rightId}}" rightName="{{matchInfo.rightName}}" startTimeStamp="{{matchInfo.startTimeStamp}}" title="{{matchInfo.title}}" wx:if="{{showVideo}}"></MiniItem>
+            </view>
+            <view class="no-news" wx:if="{{showNoData}}">
+                比赛{{matchInfo.matchState}}<br></br>
+                暂无数据
+            </view>
+            <GameDetail matchType="{{matchInfo.matchType}}" scoreDetail="{{scoreDetail}}" scoreFirstCol="{{scoreFirstCol}}" wx:if="{{showDetail}}"></GameDetail>
+            <GameMax maxPlayers="{{maxPlayers}}" teamInfo="{{teamInfo}}" wx:if="{{showMax}}"></GameMax>
+            <template is="gameTeamEvents" data="{{teamEvents:teamEvents}}" wx:if="{{showTeamEvents}}"></template>
+            <GameTeamStat bind:onTapTeam="onTapTeam" teamInfo="{{teamInfo}}" teamStats="{{teamStats}}" wx:if="{{showTeamStat}}"></GameTeamStat>
+            <template is="gameTeamSquard" data="{{teamInfo:teamInfo,teamSquard:teamSquard}}" wx:if="{{showTeamSquard}}"></template>
+            <view class="section t14" wx:if="{{showPlayerStat}}">
+                <view class="title">球员统计-{{teamInfo.leftName}}</view>
+                <view>
+                    <view class="player-first-col">
+                        <template is="gameCol1Stat" data="{{col1StatArr:leftPlayerStats1Col,playerIdArr:leftPlayerStatsId,teamId:teamInfo.leftId,urlArray:leftPlayerHasUrl,cid:teamInfo.competitionId}}"></template>
+                    </view>
+                    <scroll-view class="player-content-col" scrollX="true" style="height: auto;">
+                        <template is="gamePlayerStats" data="{{playerStatsArr:leftPlayerStats}}"></template>
+                    </scroll-view>
+                </view>
+            </view>
+            <view class="section t14" wx:if="{{showPlayerStat}}">
+                <view class="title">球员统计-{{teamInfo.rightName}}</view>
+                <view>
+                    <view class="player-first-col">
+                        <template is="gameCol1Stat" data="{{col1StatArr:rightPlayerStats1Col,playerIdArr:rightPlayerStatsId,teamId:teamInfo.rightId,urlArray:rightPlayerHasUrl,cid:teamInfo.competitionId}}"></template>
+                    </view>
+                    <scroll-view class="player-content-col" scrollX="true" style="height: auto;">
+                        <template is="gamePlayerStats" data="{{playerStatsArr:rightPlayerStats}}"></template>
+                    </scroll-view>
+                </view>
+            </view>
+        </scroll-view>
+    </view>
+    <view class="{{gametab.dict.news.show?'show':'hide'}}">
+        <scroll-view scrollY bindscroll="scroll" scrollTop="{{scrollTop}}" style="height: {{scrollContentHeight}}">
+            <view wx:if="{{matchInfo.livePeriod==2}}">
+                <MiniItem bind:handleAttend="handleAttend" bind:onGotUserInfo="onGotUserInfo" bind:onTapTeam="onTapTeam" gotoParamStr="{{gotoParamStr}}" isAttended="{{isAttended}}" isLogin="{{isLogin}}" leftBadge="{{matchInfo.leftBadge}}" leftGoal="{{matchInfo.leftGoal}}" leftId="{{matchInfo.leftId}}" leftName="{{matchInfo.leftName}}" livePeriod="{{matchInfo.livePeriod}}" liveTypeText="{{matchInfo.liveTypeText}}" matchDesc="{{matchInfo.matchDesc}}" matchState="{{matchInfo.matchState}}" matchStatus="{{matchInfo.matchStatus}}" matchType="{{matchInfo.matchType}}" rightBadge="{{matchInfo.rightBadge}}" rightGoal="{{matchInfo.rightGoal}}" rightId="{{matchInfo.rightId}}" rightName="{{matchInfo.rightName}}" startTimeStamp="{{matchInfo.startTimeStamp}}" title="{{matchInfo.title}}" wx:if="{{showVideo}}"></MiniItem>
+                <GameHighlights bind:changeVideoTab="changeVideoTab" bind:playNewVideo="playNewVideo" curVid="{{curVid}}" videoList="{{videoList}}" videoListContainerWidth="{{videoListContainerWidth}}" videoListWidth="{{videoListWidth}}" videoOnPlayIdx="{{videoOnPlayIdx}}" videoTabClass="{{videoTabClass}}" wx:if="{{videoList.totalList||videoList.playbackList}}"></GameHighlights>
+            </view>
+            <view class="news-list" scrollY="true" wx:if="{{!noNews}}">
+                <view wx:for="{{items}}" wx:for-index="idx" wx:for-item="newsItem" wx:key="newsId">
+                    <navigator bindtap="readnews" data-id="{{newsItem.newsId}}" url="/pages/news/news?detailid={{newsItem.newsId}}">
+                        <view class="news-item-wrap" data-idx="{{idx}}">
+                            <view class="news-item" data-idx="{{idx}}">
+                                <image class="preview-img" src="{{newsItem.imgurl1}}" width="100" wx:if="{{newsItem.imgurl1}}"></image>
+                                <view class="new-content {{newsItem.readed}} {{newsItem.imgurl1?'has-img':''}}">
+                                    {{newsItem.title}}
+                                </view>
+                                <view class="new-time">
+                                    <view class="new-time-detail">
+                                        {{newsItem.ptime}}
+                                    </view>
+                                    {{newsItem.commentsNum||0}}评
+                                </view>
+                            </view>
+                        </view>
+                    </navigator>
+                </view>
+            </view>
+            <view class="no-news" wx:if="{{noNews}}">暂无资讯</view>
+        </scroll-view>
+    </view>
+    <view class="{{gametab.dict.highlights.show?'show':'hide'}}">
+        <scroll-view scrollY bindscroll="scroll" scrollTop="{{scrollTop}}" style="height: {{scrollContentHeight}}">
+            <view class="hide" scrollY="true">
+                <view wx:for="{{highlightItems}}" wx:for-index="idx" wx:for-item="highlightItem" wx:key="title">
+                    <navigator bindtap="readnews" data-id="{{newsItem.newsId}}" style="padding-top: 16px;" url="/pages/gifset/gifset?mid={{mid}}&itemidx={{idx}}">
+                        <view class="highlight-item-wrap" data-idx="{{idx}}" hoverStyle="none">
+                            <view class="highlight-item" data-idx="{{idx}}">
+                                <view class="highlight-content">{{highlightItem.title}}</view>
+                                <image class="highlight-img" height="80" src="{{highlightItem.thumb}}" width="100"></image>
+                                <view class="highlight-gif"></view>
+                            </view>
+                        </view>
+                    </navigator>
+                </view>
+            </view>
+            <view class="no-highlights" wx:if="{{noHighlights}}">
+                暂无 GIF 集锦
+            </view>
+        </scroll-view>
+    </view>
+</view>
+<!-- <view wx:if="{{scopeDataList.length}}" wx:for="{{scopeDataList}}" wx:for-item="scopeData" wx:key="team">
+    <wx-scope wx:scope-data="{{...scopeData}}">
+        <view></view>
+    </wx-scope>
+</view> -->

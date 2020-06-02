@@ -1,0 +1,41 @@
+<view catchscroll="true" catchtap="tapClose" catchtouchmove="true" class="socail-comment-wrapper {{show&&'show'}}"></view>
+<view catchtouchmove="true" class="panel-wrapper {{show&&'show'}}">
+    <block wx:if="{{openGId}}">
+        <view class="head-wrapper">
+            <image class="group-avatar" src="http://mat1.gtimg.com/www/js/news/group-icon.png"></image>
+            <view class="group-name-wrapper">
+                <view class="group-name">
+                    <open-data lang="{{lang}}" openGid="{{openGId}}" type="groupName"></open-data>
+                </view>
+                <view class="read-count">
+          {{readCount}}人看过
+        </view>
+            </view>
+            <view bindtap="tapClose" class="close-btn-wrapper">
+                <image class="close-btn" src="http://mat1.gtimg.com/www/js/news/close.png"></image>
+            </view>
+        </view>
+        <view class="split-line"></view>
+    </block>
+    <xxw-comment-block articleId="{{articleId}}" atype="{{atype}}" bgLoading="{{commentLoading}}" bnext="{{commentBnext}}" commentId="{{commentId}}" commentList="{{[commentList]}}" fromPage="{{fromPage}}" isForbidden="{{commentIsForbidden}}" lastReplyId="{{commentLastReplyId}}" openGId="{{openGId}}" reqTimestamp="{{reqTimestamp}}" scrollIntoView="{{replyId}}" scrollTop="{{scrollTop}}" scrollViewStyle="{{scrollViewStyle}}" syncId="{{syncId}}">
+        <view class="thanks-info-wrapper" slot="above">
+            <view class="user-info-wrapper">
+                <image class="avatar" src="{{avatarUrl||'http://mat1.gtimg.com/www/js/news/user-icon2.png'}}"></image>
+                <view class="container-nickname-recommend">
+                    <view class="nick-name">{{nickName}}</view>
+                    <view class="recommend-text">分享给你</view>
+                </view>
+                <thanks-button articleId="{{articleId}}" bindtapThankBtn="tapThankBtn" class="thanks-button" count="{{thanksCount}}" fromPage="{{fromPage}}" hasThanked="{{hasThanked}}" openGId="{{openGId}}"></thanks-button>
+            </view>
+            <view class="thanks-info" wx:if="{{thanksList.length}}">
+                <image class="thanks-icon" src="http://mat1.gtimg.com/www/js/news/thanks-ic.png"></image>
+                <text class="thanks-icon-placeholder"></text>
+                <block wx:for="{{thanksList}}" wx:key="index">
+                    <text wx:if="{{index!==0}}">，</text>
+                    <text class="thanks-nick-name">{{item.nickName}}</text>
+                </block>
+            </view>
+        </view>
+    </xxw-comment-block>
+    <xxw-comment-bar articleId="{{articleId}}" atype="{{atype}}" class="comment-bar" commentId="{{commentId}}" fromPage="{{fromPage}}" hideAnchor="{{true}}" isForbidden="{{isForbidden}}" placeholder="{{inputPlaceholder}}" posterShareImg="{{posterShareImg}}" syncId="{{syncId}}" title="{{title}}"></xxw-comment-bar>
+</view>

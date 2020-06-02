@@ -1,0 +1,6 @@
+<view class="slider_bg">
+    <view bindtap="songToggle" class="play {{isAudio?'pause':''}}"></view>
+    <view class="pass_time">{{pass_time}}</view>
+    <wxzx-slider bind:sliderCancel="sliderCancel" bind:sliderChange="sliderChange" bind:sliderEnd="sliderEnd" bind:sliderStart="sliderStart" bind:sliderTap="sliderTap" blockImageHeight="54" blockImageWidth="54" blockSrc="../../img/slider.png" disabled="{{disabled}}" id="wxzxSlider" max="{{max}}" percent="{{percent}}" sliderLeft="75" value="{{value}}" width="440"></wxzx-slider>
+    <view class="total_time">{{total_time}}</view>
+</view>

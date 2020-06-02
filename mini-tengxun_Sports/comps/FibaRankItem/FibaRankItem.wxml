@@ -1,0 +1,23 @@
+<view catchtap="getToDetail" class="rank-item">
+    <view class="number">
+        <image class="num-bg" src="{{numbg}}"></image>
+        <text class="num-no">{{serial}}</text>
+    </view>
+    <view class="top clearfix">
+        <view class="name {{rank.user.id==='20190614'?'active':''}}">
+            <FibaAvatar class="photo" src="{{rank.user.avatar}}"></FibaAvatar>
+            {{rank.user.name}}
+            <image class="icon icon-vip" src="/assets/FIBA/icon_v@3x.png" wx:if="{{rank.user.id==='20190614'}}"></image>
+        </view>
+        <view catchtap="parised" class="parsied" data-id="{{rank.id}}">
+            <FibaLogin bindloginevent="onLoginEvent" userInfo="{{userInfo}}"></FibaLogin>
+            <image class="icon icon-good" src="/assets/FIBA/icon_good@3x.png" wx:if="{{!rank.supported}}"></image>
+            <image class="icon icon-good" src="/assets/FIBA/icon_good_s@3x.png" wx:else></image>
+            {{rank.supportNum}}
+        </view>
+    </view>
+    <view class="content">
+        <text catchtap="goPostList" class="at" data-discussid="{{item.discussId}}" wx:for="{{rank.discussList}}" wx:key="{{index}}">#{{item.content}}#</text>
+        {{rank.title}}
+    </view>
+</view>

@@ -1,0 +1,22 @@
+<import src="../../tpl/newlocal/act.wxml"></import>
+<login></login>
+<view class="lc-wrapper">
+    <view class="lc-signup">
+        <view class="lc-title base-line2">{{shareInfo.title}}</view>
+        <view class="lc-line"></view>
+        <view class="lc-msg-image"></view>
+        <block wx:if="{{status==c.ACT_STATUS.PENDING_AUDIT}}">
+            <view class="lc-signup__status">已提交，正在审核中</view>
+            <view class="lc-signup__tips">请耐心等待，稍后注意查收活动</view>
+        </block>
+        <view class="lc-signup__status" wx:if="{{status==c.ACT_STATUS.PASS_AUDIT}}">审核通过</view>
+        <view class="lc-signup__status" wx:if="{{status==c.ACT_STATUS.FAIL_AUDIT}}">审核不通过</view>
+        <view class="lc-signup__status" wx:if="{{status==c.ACT_STATUS.JOINED}}">已参与活动</view>
+        <view class="lc-line"></view>
+        <view class="lc-signup-userinfo">
+      {{userInfo.nickname}} {{userInfo.mobile}} {{sex}}
+    </view>
+    </view>
+</view>
+<lc-share articleInfo="{{shareInfo}}" fromPage="local_joinsucc_page" id="lcShare" isShow="{{isShow}}" shareType="{{shareType}}"></lc-share>
+<template is="lc-related-act" data="{{relatedActData:relatedActData,title:'其他热门活动推荐'}}"></template>

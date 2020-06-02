@@ -1,0 +1,7 @@
+<view catchtap="tapComment" class="no-comment">
+    <view class="icon-box">
+        <image bindload="showSofa" class="icon-sofa" hidden="{{!showSofa}}" mode="widthFix" src="{{isBlackTheme?'https://mat1.gtimg.com/www/js/news/sofa-ic-video.png':'http://mat1.gtimg.com/www/images/news_minipro/sofa-ic.png'}}"></image>
+        <image bindload="showWord" class="icon-qiangsofa" hidden="{{!showWord}}" mode="widthFix" src="https://mat1.gtimg.com/www/js/news/qiangsofa-ic.png" wx:if="{{!isForbidden}}"></image>
+    </view>
+    <view class="notice">暂无评论</view>
+</view>

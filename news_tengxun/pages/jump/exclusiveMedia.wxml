@@ -1,0 +1,19 @@
+<view bindtap="tapMedia" class="exclusive-item">
+    <view class="head">
+        <image class="head-img" mode="aspectFill" src="{{chlicon}}"></image>
+    </view>
+    <view class="title">{{chlname}}</view>
+    <view class="desc">{{desc}}</view>
+    <view class="bottom">
+        <view catchtap="tapButton" class="button {{follow&&'follow'}}">
+            <block wx:if="{{follow}}">
+                <view class="check-mark"></view>
+        已关注
+      </block>
+            <block wx:else>
+                <image class="button-icon" src="http://mat1.gtimg.com/www/js/news/follow_ic_add.png"></image>
+        关注
+      </block>
+        </view>
+    </view>
+</view>

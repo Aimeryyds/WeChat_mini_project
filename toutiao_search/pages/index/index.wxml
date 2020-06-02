@@ -1,0 +1,87 @@
+<scroll-view bindscroll="onScroll" bindscrolltolower="onScrollToLower" class="index" scrollY="{{true}}" style="height:100vh">
+    <statusbar __triggerObserer="{{_triggerObserer}}" showBackBtn="{{false}}" showSearchBanner="{{true}}"></statusbar>
+    <view class="logo-container">
+        <image class="logo" src="{{anonymousState__temp}}"></image>
+    </view>
+    <view wx:if="{{hotSearchData.length>0}}">
+        <view class="hot-search-container">
+            <block wx:for="{{loopArray0}}" wx:for-index="key" wx:for-item="i" wx:key="key">
+                <view class="hot-spot-item" wx:if="{{i[$original].isHotspot}}">
+                    <view class="text">
+                        <text bindtap="handleClickHotSearch" class="name" data-item="{{i[$original]}}">{{i[$loopState__temp3]}}</text>
+                        <view bindtap="handleClickHotspot" class="title" data-item="{{i[$original]}}">{{i[$original].hotspot.title}}</view>
+                    </view>
+                    <image bindtap="handleClickHotspot" class="img" data-item="{{i[$original]}}" mode="aspectFill" src="{{i[$original].hotspot.picUrl}}"></image>
+                </view>
+                <view class="hot-search-item" wx:else>
+                    <view class="text" style="{{i[$loopState__temp5]}}">
+                        <text bindtap="handleClickHotSearch" class="name" data-item="{{i[$original]}}">{{key+1+'. '+i[$original].hotSearchWord}}</text>
+                        <view bindtap="handleClickDetail" class="title" data-index="{{key}}" data-item="{{i[$original]}}">{{i[$original].content.articleTitle}}</view>
+                    </view>
+                    <image bindtap="handleClickDetail" class="img" data-index="{{key}}" data-item="{{i[$original]}}" mode="aspectFill" src="{{i[$original].content.picUrl}}" wx:if="{{i[$original].content.picUrl}}"></image>
+                </view>
+            </block>
+        </view>
+        <view bindtap="handleClickSearchRank" class="more">查看全部热搜</view>
+        <view class="split-line"></view>
+    </view>
+    <view class="feedlist-container">
+        <view bindtap="handleClickFeedList" class="feedlist-item" data-item="{{i[$original]}}" wx:for="{{loopArray1}}" wx:for-item="i" wx:key="$original.item_id">
+            <view class="{{i[$original].mode}}" wx:if="{{i[$original].mode==='more_mode'}}">
+                <text class="title">{{i[$original].title}}</text>
+                <view class="img-container">
+                    <image class="img" mode="aspectFill" src="{{img.url}}" wx:for="{{i[$original].image_list}}" wx:for-index="key" wx:for-item="img" wx:key="key"></image>
+                </view>
+                <view class="info">
+                    <image class="tag-stick" src="{{i[$loopState__temp7]}}" wx:if="{{i[$original].is_stick}}"></image>
+                    <image class="tag-hot" src="{{i[$loopState__temp9]}}" wx:if="{{i[$original].hot}}"></image>
+                    <text>{{i[$original].media_name}}</text>
+                    <text>{{i[$loopState__temp11]}}评论</text>
+                    <text>{{i[$original].timeago}}</text>
+                </view>
+            </view>
+            <block wx:else>
+                <view class="{{i[$original].mode}}" wx:if="{{i[$original].mode==='middle_mode'}}">
+                    <view class="left">
+                        <text class="title">{{i[$original].title}}</text>
+                        <view class="info">
+                            <image class="tag-stick" src="{{i[$loopState__temp13]}}" wx:if="{{i[$original].is_stick}}"></image>
+                            <image class="tag-hot" src="{{i[$loopState__temp15]}}" wx:if="{{i[$original].hot}}"></image>
+                            <text class="source">{{i[$original].media_name}}</text>
+                            <text>{{i[$loopState__temp17]}}评论</text>
+                            <text>{{i[$original].timeago}}</text>
+                        </view>
+                    </view>
+                    <image class="right" mode="aspectFill" src="{{i[$original].default_image_url}}"></image>
+                </view>
+                <block wx:else>
+                    <view class="{{i[$original].mode}}" wx:if="{{i[$original].mode==='large_mode'}}">
+                        <text class="title">{{i[$original].title}}</text>
+                        <view class="img-container">
+                            <image class="img" mode="aspectFill" src="{{i[$original].default_image_url}}"></image>
+                            <image class="play-btn" src="{{i[$loopState__temp19]}}" wx:if="{{i[$original].has_video}}"></image>
+                        </view>
+                        <view class="info">
+                            <image class="tag-stick" src="{{i[$loopState__temp21]}}" wx:if="{{i[$original].is_stick}}"></image>
+                            <image class="tag-hot" src="{{i[$loopState__temp23]}}" wx:if="{{i[$original].hot}}"></image>
+                            <text>{{i[$original].media_name}}</text>
+                            <text>{{i[$loopState__temp25]}}评论</text>
+                            <text>{{i[$original].timeago}}</text>
+                        </view>
+                    </view>
+                    <view class="{{i[$original].mode}}" wx:else>
+                        <text class="title">{{i[$original].title}}</text>
+                        <view class="info">
+                            <image class="tag-stick" src="{{i[$loopState__temp27]}}" wx:if="{{i[$original].is_stick}}"></image>
+                            <image class="tag-hot" src="{{i[$loopState__temp29]}}" wx:if="{{i[$original].hot}}"></image>
+                            <text>{{i[$original].media_name}}</text>
+                            <text>{{i[$loopState__temp31]}}评论</text>
+                            <text>{{i[$original].timeago}}</text>
+                        </view>
+                    </view>
+                </block>
+            </block>
+        </view>
+        <view class="loading" wx:if="{{feedListData&&feedListData.length>0}}">加载中</view>
+    </view>
+</scroll-view>

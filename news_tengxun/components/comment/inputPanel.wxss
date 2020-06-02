@@ -1,0 +1,133 @@
+.shade-cover {
+    position: fixed;
+    top: 0;
+    left: 0;
+    bottom: 0;
+    right: 0;
+    background: rgba(0,0,0,.6);
+    z-index: -1;
+    opacity: 0;
+}
+
+.show.shade-cover {
+    z-index: 4;
+    opacity: 1;
+}
+
+.edit-block {
+    position: fixed;
+    width: 100%;
+    background: #fff;
+    display: flex;
+    justify-content: center;
+    height: 240rpx;
+    padding-top: 24rpx;
+    z-index: -1;
+    opacity: 0;
+}
+
+.show.edit-block {
+    z-index: 4;
+    opacity: 1;
+}
+
+.edit-block.black {
+    background: #222328;
+    height: 260rpx;
+}
+
+.form {
+    display: none;
+}
+
+.show .form {
+    display: block;
+}
+
+.textarea {
+    height: 120rpx;
+    width: 662rpx;
+    background: #f9f9f9;
+    border-radius: 8rpx;
+    padding: 12rpx 20rpx;
+    font-size: 32rpx;
+    color: #222;
+    line-height: 1.5;
+}
+
+.textarea.black {
+    background: #292a2e;
+    caret-color: #4284e1;
+    color: #fff;
+}
+
+.placeholder {
+    font-size: 30rpx;
+    color: #a8b3ba;
+    letter-spacing: normal;
+    line-height: 50px;
+}
+
+.submit-btn-wrapper {
+    display: flex;
+    justify-content: flex-end;
+    padding-top: 20rpx;
+}
+
+.group-visible-wrapper {
+    flex: 1 0 auto;
+    display: flex;
+    align-items: center;
+    font-size: 0;
+}
+
+.checkbox {
+    transform: scale(.7);
+}
+
+.checkbox-label {
+    margin-left: -5rpx;
+    font-family: PingFangSC;
+    line-height: 1;
+    color: #222;
+    white-space: nowrap;
+}
+
+.checkbox-label,.submit-btn {
+    font-size: 28rpx;
+    font-weight: 400;
+    font-style: normal;
+    font-stretch: normal;
+    letter-spacing: normal;
+}
+
+.submit-btn {
+    margin: 0;
+    padding: 0;
+    text-align: center;
+    line-height: 54rpx;
+    width: 150rpx;
+    height: 56rpx;
+    border-radius: 36rpx;
+    background: #2883e9;
+    color: #fff;
+}
+
+.submit-btn:after {
+    border: none!important;
+}
+
+.submit-btn.disable {
+    background: #f7f7f7;
+    color: #888;
+}
+
+.submit-btn.black {
+    background: #4284e1;
+    color: #fff;
+}
+
+.submit-btn.black.disable {
+    background: #f7f7f7;
+    color: #888;
+}

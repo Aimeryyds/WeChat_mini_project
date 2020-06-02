@@ -1,0 +1,23 @@
+<view class="comment-bar {{isBlackTheme&&'black'}}">
+    <view bindtap="tapComment" class="input-block">
+        <image class="input-icon" src="{{isForbidden?'http://mat1.gtimg.com/www/js/news/un-write.png':'http://mat1.gtimg.com/www/js/news/write-ic.png'}}"></image>
+        <view class="input-text" wx:if="{{!isForbidden}}">
+      {{placeholder}}
+    </view>
+    </view>
+    <view class="right-block" wx:if="{{!hideAllIcon}}">
+        <view bindtap="tapAnchor" class="comment-icon-wrapper" wx:if="{{!hideAnchor}}">
+            <image class="comment-icon" src="{{isForbidden?'http://mat1.gtimg.com/www/js/news/un-comment.png':'http://mat1.gtimg.com/www/js/news/comment-ic-blue.png'}}"></image>
+            <view class="comment-icon-text" wx:if="{{!isForbidden}}">
+        {{anchorText}}
+      </view>
+        </view>
+        <button class="none_button" data-page-area="comment" openType="share">
+            <image class="share-icon" src="http://mat1.gtimg.com/www/js/news/wechat-ic.png"></image>
+        </button>
+        <view catchtap="tapPoster" class="share-icon-wrapper">
+            <image class="share-icon" src="http://mat1.gtimg.com/www/js/news/pengyouquan.png"></image>
+        </view>
+    </view>
+</view>
+<view class="{{isIphoneX&&'is-iphone-x'}} {{isBlackTheme&&'black'}}"></view>

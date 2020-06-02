@@ -1,0 +1,196 @@
+@import "../../__wuBaseWxss__/5.wxss";
+
+@import "../../templates/audio/audio.wxss";
+
+.hide {
+    display: none;
+}
+
+.show {
+    display: block;
+}
+
+.audiobox {
+    z-index: 5;
+    position: fixed;
+    bottom: 1rpx;
+    height: 100rpx;
+    border: 1rpx solid #ddd;
+    border-bottom: 0rpx;
+    width: 100%;
+    background: #fff;
+}
+
+.tab_title {
+    height: 100rpx;
+    line-height: 100rpx;
+    font-size: 30rpx;
+    white-space: nowrap;
+}
+
+.tab_title .guanzhu_tit {
+    margin: 0 40rpx;
+    display: inline-block;
+    color: #bbb;
+}
+
+.tab_title .guanzhu_tit.active {
+    color: #ef4d44;
+}
+
+.tab_title .guanzhu_tit.getmore {
+    color: #467af0;
+}
+
+.guanzhuSel {
+    width: 100%;
+    position: fixed;
+    top: 80rpx;
+    z-index: 10;
+    display: none;
+    border-bottom: 1rpx solid #ccc;
+    background: rgba(0,0,0,0.5);
+}
+
+.guanzhuSel .Selscroll {
+    background: #fff;
+}
+
+.guanzhuSel .Sel_li {
+    width: 90%;
+    margin: 0 auto;
+    border-bottom: 1px solid #ccc;
+    height: 40rpx;
+    line-height: 40rpx;
+    font-size: 30rpx;
+    color: #000;
+    padding: 20rpx 0;
+}
+
+.guanzhuSel .Sel_li1.Sel_li {
+    color: blue;
+}
+
+.guanzhuSel .addGZ {
+    height: 150rpx;
+    line-height: 150rpx;
+    font-size: 32rpx;
+    color: blue;
+    text-align: center;
+    background-color: #fff;
+    border-top: 1rpx solid #ccc;
+}
+
+.conlist {
+    height: 1000rpx;
+}
+
+.conlist .list_li {
+    padding: 30rpx 20rpx;
+    border-bottom: 10rpx solid #ddd;
+}
+
+.conlist .list_li .li_tit {
+    font-size: 30rpx;
+    color: #000;
+    line-height: 40rpx;
+    height: 80rpx;
+    display: -webkit-box;
+    -webkit-box-orient: vertical;
+    -webkit-line-clamp: 2;
+    overflow: hidden;
+}
+
+.conlist .list_li .li_time {
+    font-size: 26rpx;
+    color: #666;
+    margin-top: 10rpx;
+    margin-bottom: 10rpx;
+}
+
+.conlist .list_li .li_gjc {
+    font-size: 24rpx;
+    color: #333;
+    float: left;
+    border: 1rpx solid #ccc;
+    border-radius: 6rpx;
+    padding: 6rpx 10rpx;
+    margin-right: 10rpx;
+}
+
+.conlist .list_li .li_gjc:last-child {
+    margin-right: 0;
+}
+
+.conlist .list_li .li_timelength {
+    text-align: right;
+    font-size: 26rpx;
+    color: #666;
+    padding: 6rpx 0;
+}
+
+.show {
+    display: block;
+}
+
+.hide {
+    display: none;
+}
+
+.search_result {
+    width: 300rpx;
+    height: 300rpx;
+    margin: 236rpx auto 0;
+}
+
+.search_result image {
+    width: 300rpx;
+    height: 300rpx;
+    display: inline-block;
+}
+
+.search_result .text {
+    font-size: 36rpx;
+    color: #666;
+    text-align: center;
+    line-height: 46rpx;
+    margin-top: 20rpx;
+}
+
+.articlelist_lw {
+    width: 100%;
+    height: 72rpx;
+    text-align: center;
+    padding-top: 20rpx;
+    padding-bottom: 20rpx;
+    background-color: #f5f5fd;
+}
+
+.articlelist_lw image {
+    width: 54rpx;
+    height: 100%;
+}
+
+.articlelist_loading {
+    text-align: center;
+}
+
+.contentover {
+    height: 80rpx;
+    line-height: 80rpx;
+    text-align: center;
+    font-size: 24rpx;
+    color: #999;
+    background: url(data:image/jpeg;base64,/9j/4QAYRXhpZgAASUkqAAgAAAAAAAAAAAAAAP/sABFEdWNreQABAAQAAAA8AAD/4QNvaHR0cDovL25zLmFkb2JlLmNvbS94YXAvMS4wLwA8P3hwYWNrZXQgYmVnaW49Iu+7vyIgaWQ9Ilc1TTBNcENlaGlIenJlU3pOVGN6a2M5ZCI/PiA8eDp4bXBtZXRhIHhtbG5zOng9ImFkb2JlOm5zOm1ldGEvIiB4OnhtcHRrPSJBZG9iZSBYTVAgQ29yZSA1LjUtYzAyMSA3OS4xNTU3NzIsIDIwMTQvMDEvMTMtMTk6NDQ6MDAgICAgICAgICI+IDxyZGY6UkRGIHhtbG5zOnJkZj0iaHR0cDovL3d3dy53My5vcmcvMTk5OS8wMi8yMi1yZGYtc3ludGF4LW5zIyI+IDxyZGY6RGVzY3JpcHRpb24gcmRmOmFib3V0PSIiIHhtbG5zOnhtcE1NPSJodHRwOi8vbnMuYWRvYmUuY29tL3hhcC8xLjAvbW0vIiB4bWxuczpzdFJlZj0iaHR0cDovL25zLmFkb2JlLmNvbS94YXAvMS4wL3NUeXBlL1Jlc291cmNlUmVmIyIgeG1sbnM6eG1wPSJodHRwOi8vbnMuYWRvYmUuY29tL3hhcC8xLjAvIiB4bXBNTTpPcmlnaW5hbERvY3VtZW50SUQ9InhtcC5kaWQ6RDhERUVENzJBQ0UzRTcxMUE4NEVEQzg3RkNDOUEyRjIiIHhtcE1NOkRvY3VtZW50SUQ9InhtcC5kaWQ6N0M1MzAwMzgzRjBCMTFFOEIzRjhDNDBCNjlDNEVGMUMiIHhtcE1NOkluc3RhbmNlSUQ9InhtcC5paWQ6N0M1MzAwMzczRjBCMTFFOEIzRjhDNDBCNjlDNEVGMUMiIHhtcDpDcmVhdG9yVG9vbD0iQWRvYmUgUGhvdG9zaG9wIENTNiAoV2luZG93cykiPiA8eG1wTU06RGVyaXZlZEZyb20gc3RSZWY6aW5zdGFuY2VJRD0ieG1wLmlpZDpFQzYyNDZDOEYzM0VFODExODdBQ0JEMEM3OTA2MEQwQyIgc3RSZWY6ZG9jdW1lbnRJRD0ieG1wLmRpZDpEOERFRUQ3MkFDRTNFNzExQTg0RURDODdGQ0M5QTJGMiIvPiA8L3JkZjpEZXNjcmlwdGlvbj4gPC9yZGY6UkRGPiA8L3g6eG1wbWV0YT4gPD94cGFja2V0IGVuZD0iciI/Pv/uAA5BZG9iZQBkwAAAAAH/2wCEAAYEBAQFBAYFBQYJBgUGCQsIBgYICwwKCgsKCgwQDAwMDAwMEAwODxAPDgwTExQUExMcGxsbHB8fHx8fHx8fHx8BBwcHDQwNGBAQGBoVERUaHx8fHx8fHx8fHx8fHx8fHx8fHx8fHx8fHx8fHx8fHx8fHx8fHx8fHx8fHx8fHx8fH//AABEIAFAC7gMBEQACEQEDEQH/xABbAAEBAQEBAAAAAAAAAAAAAAAAAgEDCAEBAAAAAAAAAAAAAAAAAAAAABABAAICAQUBAQEAAAAAAAAAABITAQIRkgNTBBQxsSERAQAAAAAAAAAAAAAAAAAAAAD/2gAMAwEAAhEDEQA/APUYAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAI37Xa7nE9Nd+PyWMZ/oJ+X1vDp04A+X1vDp04A+X1vDp04BeumumuNdcY11x+YxjjAKAAAAAAAAAAAAAAAAAAAAAAAAAAAAABG/a7Xc4nprvx+SxjP8AQT8vreHTpwB8vreHTpwB8vreHTpwC9dNdNca64xrrj8xjHGAUAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAADOQZICQEgJASAkBICQEgJASAkBICQEgJASAkBICQEgJASAkBICQEgJASAkBICQEgJASAkBICQEgJASAkBICQEgJASAkBICQEgJASAkBICQEgJASAkBICQEgJASAkBICQEgJASAkBICQEgJASAkBICQEgJASAkBICQEgJASAkBICQN5ByzuCbALALALALALALALALALALALALALALALALALALALALALALALALALALALALALALALALALALALALALALALALALALALALALALALALALALALALALALALALALALALALALALALALALALALALALALALALALALALALALALALALALALALALALALALALALALAMbgqf+A//9k=) no-repeat;
+    background-size: contain;
+}
+
+.addguanzhu {
+    position: fixed;
+    top: 0;
+    right: 30rpx;
+    height: 100rpx;
+    line-height: 100rpx;
+    font-size: 30rpx;
+    color: #467af0;
+}

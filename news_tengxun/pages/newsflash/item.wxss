@@ -1,0 +1,143 @@
+.news-item {
+    position: relative;
+    display: block;
+    padding-bottom: 30rpx;
+}
+
+.news-item.last {
+    padding-bottom: 80rpx;
+}
+
+.news-item:not(:first-child) {
+    margin-top: -1rpx;
+}
+
+.news-item .news-time {
+    justify-content: flex-start;
+}
+
+.news-item .left,.news-item .news-time {
+    position: relative;
+    display: flex;
+}
+
+.news-item .left {
+    flex-direction: column;
+    top: 8rpx;
+}
+
+.news-item .dot {
+    width: 14rpx;
+    height: 14rpx;
+    border-radius: 14rpx;
+    border: 3rpx solid #f04646;
+    box-sizing: border-box;
+}
+
+.news-item .right {
+    margin-left: 12rpx;
+    font-size: 24rpx;
+    line-height: 30rpx;
+    color: #f04646;
+    font-weight: 700;
+}
+
+.news-item .line-wrap {
+    position: absolute;
+    top: 0;
+    left: 7rpx;
+    width: 3rpx;
+    height: 100%;
+    padding-top: 26rpx;
+    box-sizing: border-box;
+}
+
+.line-wrap .line {
+    width: 100%;
+    height: 100%;
+    background-color: #eaeaea;
+}
+
+.news-item .news-title {
+    margin-left: 27rpx;
+    margin-top: 16rpx;
+    font-size: 36rpx;
+    color: #222;
+    line-height: 52rpx;
+    display: -webkit-box;
+    vertical-align: middle;
+    -webkit-box-orient: vertical;
+    -webkit-line-clamp: 2;
+    text-overflow: ellipsis;
+    word-break: break-all;
+    overflow: hidden;
+}
+
+.news-item .news-title.smallScreen {
+    font-size: 40rpx;
+}
+
+.news-item .news-title.hasRead {
+    color: #888;
+}
+
+.tag {
+    display: inline-block;
+    background-color: #2883e9;
+    border-radius: 4rpx;
+    font-size: 22rpx;
+    color: #fff;
+    width: 54rpx;
+    text-align: center;
+    line-height: 32rpx;
+    height: 32rpx;
+    position: relative;
+    top: -5rpx;
+    margin-right: 20rpx;
+}
+
+.news-item .news-content {
+    margin-left: 27rpx;
+    margin-top: 8rpx;
+    font-size: 30rpx;
+    color: #999;
+    line-height: 44rpx;
+    display: -webkit-box;
+    vertical-align: middle;
+    -webkit-box-orient: vertical;
+    -webkit-line-clamp: 3;
+    text-overflow: ellipsis;
+    word-break: break-all;
+    overflow: hidden;
+}
+
+.news-item .news-content.smallScreen {
+    font-size: 34rpx;
+}
+
+.opt-bar-wrap {
+    margin-top: 20rpx;
+}
+
+.submitButton {
+    position: relative;
+    display: block;
+    margin-left: 0;
+    margin-right: 0;
+    padding-left: 0;
+    padding-right: 0;
+    box-sizing: border-box;
+    font-size: 0;
+    text-align: left;
+    text-decoration: none;
+    line-height: 2.55555556;
+    border-radius: 0;
+    -webkit-tap-highlight-color: transparent;
+    overflow: hidden;
+    color: #000;
+    background-color: transparent;
+}
+
+.submitButton:after {
+    border: none;
+}

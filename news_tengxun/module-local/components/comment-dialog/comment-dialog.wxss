@@ -1,0 +1,74 @@
+.shade-box {
+    height: 100%;
+    padding: 0;
+    top: 0;
+    background: rgba(0,0,0,.6);
+    overflow: hidden;
+    z-index: 9999;
+    justify-content: center;
+}
+
+.comment-edit-block,.shade-box {
+    width: 100%;
+    position: fixed;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.comment-edit-block {
+    z-index: 99;
+    bottom: 0;
+    height: 222rpx;
+    background: #fff;
+}
+
+.comment-edit-block form {
+    width: auto;
+}
+
+.comment-edit-input {
+    width: 640rpx;
+    height: 50rpx;
+    margin-top: 27rpx;
+    background: #f3f6f8;
+    border-radius: 4rpx;
+    padding: 20rpx;
+    font-size: 30rpx;
+}
+
+.comment-edit-submit-btn-container {
+    text-align: right;
+    width: 680rpx;
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+}
+
+.comment-edit-remaincount {
+    color: #a8b3ba;
+    font-size: 14px;
+}
+
+.comment-edit-submit-btn {
+    display: inline-block;
+    margin: 27rpx 0rpx 27rpx 10rpx;
+    text-align: center;
+    line-height: 54rpx;
+    width: 128rpx;
+    height: 54rpx;
+    border-radius: 54rpx;
+    background: #2883e9;
+    color: #fff;
+    font-size: 26rpx;
+    vertical-align: middle;
+}
+
+.comment-edit-submit-btn.disable {
+    background: #f3f6f8;
+    color: #2883e9;
+}
+
+.comment-edit-submit-btn:after {
+    border: none!important;
+}

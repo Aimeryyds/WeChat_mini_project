@@ -1,0 +1,25 @@
+<xxw-exposure articleId="{{articleId}}" articleType="{{atype}}" cell_summary="{{intro?'1':'0'}}" cell_title="1" class="news-item {{isLast&&'last'}}" fromPage="{{fromPage}}">
+    <view class="line-wrap" wx:if="{{showTimeLine}}">
+        <view class="line"></view>
+    </view>
+    <view class="news-time">
+        <view class="left">
+            <view class="dot"></view>
+        </view>
+        <view class="right">{{pubTimeStr}}</view>
+    </view>
+    <form reportSubmit bindsubmit="handleSubmit">
+        <button class="submitButton" data-article-id="{{articleId}}" formType="submit" hoverClass="none">
+            <view bindtap="tapArticle">
+                <view class="news-title {{hasRead&&'hasRead'}} {{smallScreen&&'smallScreen'}}">
+                    <text class="tag" wx:if="{{atype===100||atype===120}}">专题</text>
+                    <text>{{title}}</text>
+                </view>
+                <view class="news-content {{smallScreen&&'smallScreen'}}" wx:if="{{intro}}">
+                    <text>{{intro}}</text>
+                </view>
+            </view>
+            <bottom-bar articleId="{{articleId}}" atype="{{atype}}" posterShareImage="{{posterShareImage}}" title="{{title}}" topicId="{{topicId}}" vid="{{vid}}"></bottom-bar>
+        </button>
+    </form>
+</xxw-exposure>

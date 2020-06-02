@@ -1,0 +1,19 @@
+<view class="replybox" style="bottom: {{boxBottom}}">
+    <FibaLogin bindloginevent="onLoginEvent" userInfo="{{userInfo}}"></FibaLogin>
+    <image class="icon-msg" src="/assets/FIBA/icon_messige@3x.png" wx:if="{{showMessageIcon}}"></image>
+    <input bindblur="handleTextareaBlur" bindfocus="handleTextareaFocus" bindinput="setInputVal" class="input" maxlength="500" placeholder="快来说说你的看法~" style="{{styleStr}}; color: {{textareaColor}}" value="{{content}}" wx:if="{{showTextarea}}"></input>
+    <view class="btn-box" style="{{btnBoxStr}}">
+        <view catchtap="chooseImageFile" class="icon-box">
+            <image class="icon icon-add" src="/assets/FIBA/btn_addpic_hf@3x.png"></image>
+        </view>
+        <view catchtap="submitComment" class="icon-box">
+            <image class="icon icon-send" src="/assets/FIBA/btn_send_hf@3x.png"></image>
+        </view>
+    </view>
+    <view class="img-box" wx:if="{{image}}">
+        <view class="item-img">
+            <image catchtap="del" class="icon icon-del" src="/assets/FIBA/btn_delete_pic@3x.png"></image>
+            <image catchtap="viewImg" class="img" src="{{image.path||image.url}}"></image>
+        </view>
+    </view>
+</view>

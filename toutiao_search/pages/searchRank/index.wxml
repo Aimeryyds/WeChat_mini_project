@@ -1,0 +1,10 @@
+<view class="search-rank">
+    <statusbar __triggerObserer="{{_triggerObserer}}"></statusbar>
+    <image class="search-rank-banner" mode="widthFix" src="{{anonymousState__temp}}"></image>
+    <view bindtap="handleClick" class="{{'search-rank-item '+(i[$original].strong?'strong':'')}}" data-item="{{i[$original]}}" wx:for="{{loopArray0}}" wx:for-index="key" wx:for-item="i" wx:key="key">
+        <view class="search-rank-num">{{key+1}}</view>
+        <text class="search-rank-name">{{i[$original].hotSearchWord}}</text>
+        <image class="tag" mode="aspectFit" src="{{i[$loopState__temp3]}}" style="{{i[$loopState__temp5]}}" wx:if="{{i[$original].tag}}"></image>
+    </view>
+    <text class="tips">完整榜单可进入「今日头条」APP查看</text>
+</view>

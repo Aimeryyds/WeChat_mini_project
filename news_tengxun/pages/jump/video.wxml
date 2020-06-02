@@ -1,0 +1,18 @@
+<xxw-bg-loading bindrefresh="render" status="{{status}}" wx:if="{{status!==pageStatus.ready}}"></xxw-bg-loading>
+<swiper-scroll-view enablePulldownRefresh bindpullDownRefresh="onPullDownRefresh" bindreachBottom="onReachBottom" bindretry="onReachBottom" bindscroll="onScroll" bottomLoadingStatus="{{pullUpStatus}}" finishText="{{loadDataTips}}" hasMore="{{hasMore}}" pulldownFinished="{{!pulldownPending}}" scrollTop="{{scrollTop}}" wx:else>
+    <block wx:for="{{service.reverse(pullDownList)}}" wx:for-index="page" wx:for-item="pItem" wx:key="_uid">
+        <button class="item-wrapper" data-_uid="{{item._uid}}" data-article-id="{{item.articleId}}" data-atype="{{item.atype}}" data-title="{{item.title}}" data-vid="{{item.vid}}" formType="submit" hoverClass="none" wx:for="{{pItem.list}}" wx:key="_uid">
+            <video-item _uid="{{item._uid}}" articleId="{{item.articleId}}" atype="{{item.atype}}" bindvideoEnded="onVideoEnded" chlicon="{{item.chlicon}}" chlid="{{item.chlid}}" chlname="{{item.chlname}}" commentCount="{{item.commentCount}}" data-_uid="{{item._uid}}" durationStr="{{item.durationStr}}" playCount="{{item.playCount}}" posterShareImage="{{item.posterShareImage}}" reasonFlag="{{item.reasonFlag}}" snapshot="{{item.snapshot}}" title="{{item.title}}" vid="{{item.vid}}"></video-item>
+        </button>
+        <view bindtap="tapRefresh" class="refresh-item-wrapper" wx:if="{{page===0}}">
+            <view>上次看到这里，点击刷新</view>
+            <image class="refresh-icon" src="http://mat1.gtimg.com/www/js/news/refresh.png"></image>
+        </view>
+    </block>
+    <block wx:for="{{pullUpList}}" wx:for-index="page" wx:for-item="pItem" wx:key="_uid">
+        <button class="item-wrapper" data-_uid="{{item._uid}}" data-article-id="{{item.articleId}}" data-atype="{{item.atype}}" data-title="{{item.title}}" data-vid="{{item.vid}}" formType="submit" hoverClass="none" wx:for="{{pItem.list}}" wx:key="_uid">
+            <video-item _uid="{{item._uid}}" articleId="{{item.articleId}}" atype="{{item.atype}}" bindvideoEnded="onVideoEnded" chlicon="{{item.chlicon}}" chlid="{{item.chlid}}" chlname="{{item.chlname}}" commentCount="{{item.commentCount}}" data-_uid="{{item._uid}}" durationStr="{{item.durationStr}}" playCount="{{item.playCount}}" posterShareImage="{{item.posterShareImage}}" reasonFlag="{{item.reasonFlag}}" snapshot="{{item.snapshot}}" title="{{item.title}}" vid="{{item.vid}}"></video-item>
+        </button>
+    </block>
+</swiper-scroll-view>
+<wxs module="service" src="service.wxs" />

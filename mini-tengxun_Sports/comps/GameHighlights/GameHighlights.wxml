@@ -1,0 +1,28 @@
+<view class="video-list-container">
+    <view class="video-list-tab" wx:if="{{videoList.totalList.length&&videoList.playbackList.length}}">
+        <view bindtap="changeVideoTab" class="{{videoTabClass[0]}}" data-index="0">
+            集锦
+        </view>
+        <view bindtap="changeVideoTab" class="{{videoTabClass[1]}}" data-index="1">
+            回放
+        </view>
+    </view>
+    <scroll-view class="video-scoll-wrap" scrollIntoView="{{'tua'+curVid}}" scrollX="true" style="{{videoList.totalList.length&&videoList.playbackList.length?'width: '+videoListContainerWidth:'margin: 0;'}}">
+        <view style="{{videoListWidth}}">
+            <view bindtap="playNewVideo" class="video-list-item {{videoOnPlayIdx.idx==index&&videoOnPlayIdx.tab==0?'on':''}}" data-idx="{{index}}" data-ispay="{{item.isPay}}" data-vid="{{item.vid}}" id="{{'tua'+item.vid}}" wx:if="{{videoTabClass[0]=='tab1 on'}}" wx:for="{{videoList.totalList}}" wx:key="{{ item.vid }}">
+                <view class="video-highlight-icon" wx:if="{{item.tag}}">{{item.tag}}</view>
+                <view class="video-list-text">
+                    <view class="video-vip-icon" wx:if="{{item.isPay==='1'}}"></view>
+                    {{item.title}}
+                </view>
+            </view>
+            <view bindtap="playNewVideo" class="video-list-item {{videoOnPlayIdx.idx==index&&videoOnPlayIdx.tab==1?'on':''}}" data-idx="{{index}}" data-ispay="{{item.isPay}}" data-vid="{{item.vid}}" id="{{'tua'+item.vid}}" wx:if="{{videoTabClass[0]!=='tab1 on'}}" wx:for="{{videoList.playbackList}}" wx:key="{{ item.vid }}">
+                <view class="video-highlight-icon" wx:if="{{item.tag}}">{{item.tag}}</view>
+                <view class="video-list-text">
+                    <view class="video-vip-icon" wx:if="{{item.isPay==='1'}}"></view>
+                    {{item.title}}
+                </view>
+            </view>
+        </view>
+    </scroll-view>
+</view>

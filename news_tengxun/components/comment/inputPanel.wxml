@@ -1,0 +1,17 @@
+<view catchtap="tapShade" catchtouchmove="true" class="shade-cover {{show&&'show'}}"></view>
+<view class="edit-block {{show&&'show'}} {{isBlackTheme&&'black'}}" style="bottom: {{inputPanelBottom}}px;">
+    <form bindsubmit="submit" class="form">
+        <textarea adjustPosition="{{false}}" bindblur="onBlur" bindconfirm="submit" bindfocus="onFocus" bindinput="onInput" class="textarea {{isBlackTheme&&'black'}}" confirmType="send" focus="{{focus}}" maxlength="150" name="content" placeholder="{{placeholder}}" placeholderClass="placeholder" showConfirmBar="{{false}}" value="{{value}}"></textarea>
+        <view class="submit-btn-wrapper">
+            <checkbox-group bindchange="onCheckboxChange" catchtap="none" class="group-visible-wrapper" wx:if="{{enableShareCircle&&enableGroupVisibleControl}}">
+                <checkbox checked="{{onlyGroupVisible}}" class="checkbox" id="group" value="onlyGroupVisible"></checkbox>
+                <label class="checkbox-label" for="group">
+          {{visibleLabelText}}
+        </label>
+            </checkbox-group>
+            <button class="submit-btn {{disableSubmit?'disable':''}}" formType="submit">
+        发布
+      </button>
+        </view>
+    </form>
+</view>

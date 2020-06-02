@@ -1,0 +1,6 @@
+<view class="tab-wrapper" style="position: {{position}}; z-index: {{zIndex}}; top: {{top}};">
+    <view hoverStopPropagation catchtap="tapTab" class="item-wrapper {{activeIndex==index&&'active'}}" data-index="{{index}}" hoverClass="none" wx:for="{{tabNames}}" wx:key="*this">
+        <view class="text">{{item}}</view>
+        <view class="line"></view>
+    </view>
+</view>

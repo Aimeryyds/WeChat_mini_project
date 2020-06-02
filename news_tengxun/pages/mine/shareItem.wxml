@@ -1,0 +1,25 @@
+<xxw-exposure articleId="{{articleId}}" atype="{{atype}}" cell_title="1" fromPage="{{fromPage}}">
+    <view catchtap="tapArticle" class="item-wrapper">
+        <view class="user-wrapper">
+            <image class="avatar" src="{{avatarUrl||'http://mat1.gtimg.com/www/js/news/default_avatar.png'}}"></image>
+            <text class="nick-name">{{nickName}}</text>
+        </view>
+        <text class="share-info">分享给</text>
+        <text class="share-info share-info-blue">「</text>
+        <open-data class="share-info share-info-blue" lang="{{lang}}" openGid="{{openGId}}" type="groupName"></open-data>
+        <text class="share-info share-info-blue">」</text>
+        <text class="share-info">{{shareInfo}}</text>
+        <view class="article-wrapper">
+            <view class="img-wrapper" wx:if="{{img}}">
+                <image class="img" mode="aspectFill" src="{{img}}"></image>
+                <image class="play-icon" mode="aspectFill" src="http://mat1.gtimg.com/www/js/news/video_ic_play.png" wx:if="{{atype===4||atype==56||atype===101||atype===118}}"></image>
+            </view>
+            <view class="content-wrapper">
+                <xxw-collapse-text lineCount="{{2}}">
+                    <text wx:if="{{articleId}}">{{title}}</text>
+                    <text wx:else>文章已被删除</text>
+                </xxw-collapse-text>
+            </view>
+        </view>
+    </view>
+</xxw-exposure>

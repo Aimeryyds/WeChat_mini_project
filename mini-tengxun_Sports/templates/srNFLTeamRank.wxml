@@ -1,0 +1,41 @@
+<template name="srNFLTeamRank">
+    <view class="NFL-team-rank">
+        <view class="empty" wx:if="{{isFetched&&(!idxArr||!idxArr.length)}}">
+            暂无数据
+        </view>
+        <view wx:for="{{idxArr}}" wx:for-item="area" wx:key="en">
+            <view class="rank-desc">
+                <view class="area-name">{{area.cn}}</view>
+                <view class="wins">胜</view>
+                <view class="losses">负</view>
+                <view class="ties">平</view>
+                <view class="win-rate">胜率</view>
+                <view class="streak">连胜负</view>
+            </view>
+            <view class="one-team" wx:for="{{trData[area.en]}}" wx:for-item="team" wx:key="teamId">
+                <view class="team-rank num{{team.serial}}">
+                    {{team.serial}}
+                </view>
+                <view class="team-name">
+                    <image class="logo" src="{{team.logoNew||team.badge}}"></image>
+                    {{team.name}}
+                </view>
+                <view class="wins">
+                    {{team.wins}}
+                </view>
+                <view class="losses">
+                    {{team.losses}}
+                </view>
+                <view class="ties">
+                    {{team.ties}}
+                </view>
+                <view class="win-rate">
+                    {{team['wining-percentage']}}%
+                </view>
+                <view class="streak">
+                    {{team.streakDesc}}
+                </view>
+            </view>
+        </view>
+    </view>
+</template>

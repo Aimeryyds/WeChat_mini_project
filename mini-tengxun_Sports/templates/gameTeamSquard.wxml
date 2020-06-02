@@ -1,0 +1,41 @@
+<template name="gameTeamSquard">
+    <view class="section t14">
+        <view class="ft-title">首发阵容</view>
+        <view class="ft-detail">
+            <view class="ftd-team">
+                <view bindtap="onTapTeam" class="ftdt-left" data-team-id="{{teamInfo.leftId}}">
+                    <image class="ftdt-img" height="30" src="{{teamInfo.leftBadge}}" width="30"></image>
+                    <text class="team-name-text">{{teamInfo.leftName}}</text>
+                </view>
+                <view bindtap="onTapTeam" class="ftdt-right" data-team-id="{{teamInfo.rightId}}">
+                    <text class="team-name-text">{{teamInfo.rightName}}</text>
+                    <image class="ftdt-img" height="30" src="{{teamInfo.rightBadge}}" width="30"></image>
+                </view>
+            </view>
+            <view wx:for="{{teamSquard}}" wx:for-index="playeridx" wx:for-item="teamSquardItem" wx:key="playeridx">
+                <view class="ftd-line">
+                    <view bindtap="onTapPlayer" class="ftdl-left" data-player-id="{{teamSquardItem.left.playerId}}" data-player-name="{{teamSquardItem.left.playerName}}">
+                        <view class="shirt-container">
+                            <image class="ftdl-img" height="30" src="https://mat1.gtimg.com/sports/kbsweb/statics/soccer_shirt.png" width="30"></image>
+                            <span class="abs-num">{{teamSquardItem.left.squardPlace}}</span>
+                        </view>
+                        <view class="ftdl-player">
+                            <view class="ftdlp-name">{{teamSquardItem.left.playerName}}</view>
+                            <p class="ftdlp-pos">{{teamSquardItem.left.position}}</p>
+                        </view>
+                    </view>
+                    <view bindtap="onTapPlayer" class="ftdl-right" data-player-id="{{teamSquardItem.right.playerId}}" data-player-name="{{teamSquardItem.right.playerName}}">
+                        <view class="ftdl-player">
+                            <view class="ftdlp-name">{{teamSquardItem.right.playerName}}</view>
+                            <p class="ftdlp-pos">{{teamSquardItem.right.position}}</p>
+                        </view>
+                        <view class="shirt-container">
+                            <image class="ftdl-img" height="30" src="https://mat1.gtimg.com/sports/kbsweb/statics/soccer_shirt.png" width="30"></image>
+                            <span class="abs-num">{{teamSquardItem.right.squardPlace}}</span>
+                        </view>
+                    </view>
+                </view>
+            </view>
+        </view>
+    </view>
+</template>

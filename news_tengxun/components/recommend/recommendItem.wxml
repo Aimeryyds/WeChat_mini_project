@@ -1,0 +1,24 @@
+<view class="recommend-item-wrapper">
+    <newsflash fromPage="{{fromPage}}" time="{{time}}" title="{{title}}" wx:if="{{isNewsflash}}"></newsflash>
+    <view bindtap="recommendTap" class="recommend-item {{noBorder&&'no-border'}}" wx:else>
+        <button class="submit-button content-box" data-allinfo="{{item}}" formType="submit">
+            <view class="title {{hasRead&&'has-read'}}">
+        {{title}}
+      </view>
+            <view class="info-box">
+                <view class="info" wx:if="{{showTime}}">
+          {{publishTime}}
+        </view>
+                <view class="info" wx:elif="{{showName}}">
+          {{chlname}}
+        </view>
+                <view class="info" wx:if="{{comments}}">
+          {{commentsStr}}评
+        </view>
+            </view>
+        </button>
+        <button class="submit-button image-box" data-allinfo="{{item}}" formType="submit" wx:if="{{img&&picShowType!==1}}">
+            <image class="img" mode="aspectFill" src="{{img}}"></image>
+        </button>
+    </view>
+</view>

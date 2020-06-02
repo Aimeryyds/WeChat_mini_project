@@ -1,0 +1,55 @@
+<template name="gameTeamEvents">
+    <view class="section t14">
+        <view class="ft-title">赛况</view>
+        <view class="ms-detail">
+            <view class="eventLine"></view>
+            <view class="msd-step-top">
+                <span class="msd-step-span">比赛开始</span>
+            </view>
+            <block wx:for="{{teamEvents}}" wx:for-index="idx" wx:for-item="eventsItem" wx:key="idx">
+                <view class="msd-event" wx:if="{{eventsItem.eventPeriod!='mid'}}">
+                    <view wx:if="{{eventsItem.side=='left'}}">
+                        <view class="msde-left msd-name" wx:if="{{eventsItem.type!='换下'}}">
+                            {{eventsItem.playerName}}
+                        </view>
+                        <view class="msde-left substitution" wx:if="{{eventsItem.type=='换下'}}">
+                            <view class="player-up">
+                                {{eventsItem.playerName2}}
+                            </view>
+                            <view class="player-down">
+                                {{eventsItem.playerName}}
+                            </view>
+                        </view>
+                        <span class="msde-img {{eventsItem.class}}"></span>
+                        <view class="msde-right msde-time">
+                            {{eventsItem.time}}'
+                        </view>
+                    </view>
+                    <view wx:if="{{eventsItem.side=='right'}}">
+                        <view class="msde-left msde-time">
+                            {{eventsItem.time}}'
+                        </view>
+                        <span class="msde-img {{eventsItem.class}}"></span>
+                        <view class="msde-right msd-name" wx:if="{{eventsItem.type!='换下'}}">
+                            {{eventsItem.playerName}}
+                        </view>
+                        <view class="msde-right substitutionR" wx:if="{{eventsItem.type=='换下'}}">
+                            <view class="player-up">
+                                {{eventsItem.playerName2}}
+                            </view>
+                            <view class="player-down">
+                                {{eventsItem.playerName}}
+                            </view>
+                        </view>
+                    </view>
+                </view>
+                <view class="msd-step-center" wx:if="{{eventsItem.eventPeriod=='mid'}}">
+                    <span class="msd-step-span">上半场结束</span>
+                </view>
+            </block>
+            <view class="msd-step-bottom">
+                <span class="msd-step-span">比赛结束</span>
+            </view>
+        </view>
+    </view>
+</template>

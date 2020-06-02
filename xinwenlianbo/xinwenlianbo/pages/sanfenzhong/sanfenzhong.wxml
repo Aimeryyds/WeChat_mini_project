@@ -1,0 +1,51 @@
+<import src="../../wxParse/wxParse.wxml"></import>
+<import src="../../templates/share/share_temp.wxml"></import>
+<view class="page {{wuwangluo||!responseok?'hide':'show'}}">
+    <include src="../../templates/search/search_temp.wxml"></include>
+</view>
+<view class="wushujubox {{wuwangluo?'show':'hide'}}" style="padding-top:120rpx;">
+    <view class="img">
+        <image src="../../img/jijiangshangxian.png"></image>
+    </view>
+  暂无数据
+</view>
+<view class="{{wuwangluo?'hide':'show'}}">
+    <view class="response_no {{responseok?'hide':'show'}}" style="height:100%;"></view>
+    <view class="article_container">
+        <scroll-view bindscroll="onScorll" id="scrollList" scrollTop="{{scrollTopView}}" scrollWithAnimation="true" scrollY="true" style="height:100%">
+            <view id="scrollTop"></view>
+            <view class="article_aside">
+                <view class="article_t">
+                    <view class="title_area">
+                        <text class="atitle">{{itemtitle}}</text>
+                    </view>
+                    <view class="hk_time sfz_time">{{pub_time}}</view>
+                    <view class="article_tag" wx:if="{{tag_option.length>0}}">
+                        <view catchtap="toTag" class="gjc_d" data-tag="{{tag_option[0]}}" wx:if="{{tag_option[0]}}">{{tag_option[0]}}</view>
+                        <view catchtap="toTag" class="gjc_d" data-tag="{{tag_option[1]}}" wx:if="{{tag_option[1]}}">{{tag_option[1]}}</view>
+                        <view catchtap="toTag" class="gjc_d" data-tag="{{tag_option[2]}}" wx:if="{{tag_option[2]}}">{{tag_option[2]}}</view>
+                    </view>
+                </view>
+                <view class="article_con">
+                    <template is="wxParse" data="{{wxParseData:itemcontent.nodes}}"></template>
+                </view>
+            </view>
+        </scroll-view>
+    </view>
+</view>
+<view catchtap="onGoTop" class="scrollto-btn-wrapper">
+    <view class="scrollto-btn  {{!istTop?'hide':''}}"></view>
+</view>
+<view class="yskp_share {{wuwangluo?'hide':'show'}}">
+    <view class="view_video_share">
+        <button class="button" hoverClass="none" openType="share">
+            <image class="view_video_share_img" src="../../img/share.png"></image>
+        </button>
+    </view>
+    <view bindtap="backhome" class="backhome" wx:if="{{share==1}}">
+        <image src="../../img/backhome.png"></image>
+    </view>
+    <view class="audiobox {{audioIsHide==true?'hide':'show'}}">
+        <include src="../../templates/audio/audio.wxml"></include>
+    </view>
+</view>

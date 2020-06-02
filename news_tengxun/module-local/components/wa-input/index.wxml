@@ -1,0 +1,7 @@
+<view class="input">
+    <view class="input__combine input__{{mode}} {{error?'input__error':''}}">
+        <view class="input__label" wx:if="{{title}}">{{title}}</view>
+        <image class="input__icon" mode="aspectFit" src="{{src}}" wx:if="{{!title&&src}}"></image>
+        <input adjustPosition="{{adjustPosition}}" bindblur="onBlur" bindconfirm="onConfirm" bindfocus="onFocus" bindinput="onInput" class="input__form {{right?'input__right':''}}" confirmHold="{{confirmHold}}" confirmType="{{confirmType}}" cursor="{{cursor}}" cursorSpacing="{{cursorSpacing}}" disabled="{{disabled}}" focus="{{focus}}" maxlength="{{maxlength}}" password="{{password}}" placeholder="{{placeholder}}" placeholderClass="input__placeholder" placeholderStyle="{{placeholderStyle}}" selectionEnd="{{selectionEnd}}" selectionStart="{{selectionStart}}" type="{{type}}" value="{{value}}"></input>
+    </view>
+</view>

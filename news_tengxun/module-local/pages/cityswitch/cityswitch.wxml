@@ -1,0 +1,45 @@
+<login></login>
+<view class="kb-bg">
+    <view class="container">
+        <view class="city-grey-txt">定位城市</view>
+        <view bindtap="onSwitchCity" class="city-box" data-id="{{locationCity.chlid}}" data-name="{{locationCity.chlname}}">
+            <view class="city-locat-icon iconfont icon-xwposition"></view>
+            <text class="city-name">{{locationCity.chlname}}</text>
+        </view>
+        <view class="select_citys-box">
+            <view class="select_citys-txt">我选择的城市</view>
+            <view class="selected_container">
+                <view class="city_button-box">
+                    <text class="city-name-text">{{selectedCity.chlname}}</text>
+                    <view bindtap="tapCloseEven" class="city_close" data-allinfo="{{item}}" wx:if="{{item.lastCity==0}}"></view>
+                </view>
+            </view>
+        </view>
+        <view class="allcity-grey-txt">全部城市</view>
+        <view bindscrolltolower="lower" bindscrolltoupper="upper" class="scroll-city-list" lowerThreshold="5" scrollIntoView="{{toView}}" scrollTop="{{scrollTop}}" scrollY="true" upperThreshold="10">
+            <block wx:for="{{cityList}}" wx:key="provice">
+                <view class="provin-wrap">
+                    <button bindtap="handleExtendCity" class="city-item city-provice {{item.chlid===selectedCity.chlid&&item.cityArr.length==0?'city-now':''}}" data-allinfo="{{item}}" formType="{{item.chlid!==selectedCity.chlid&&item.cityArr.length==0?'submit':''}}">
+            {{item.chlname}}
+            <view class="city-arrow-special iconfont icon-xwdownarrow" wx:if="{{item.cityArr.length&&!item.isExtend}}"></view>
+                        <view class="city-arrow-special iconfont icon-xwuparrow" wx:if="{{item.cityArr.length&&item.isExtend}}"></view>
+                        <view class="base-right" wx:if="{{item.chlid===selectedCity.chlid}}">
+                            <image class="city-arrow" src="http://mat1.gtimg.com/www/images/newsapp/wxapp/news/blue_support" wx:if="{{length!=1&&item.cityArr.length==0}}"></image>
+                            <image class="city-arrow" src="http://mat1.gtimg.com/www/images/newsapp/wxapp/news/circle_selected_icon.png" wx:if="{{length==1&&item.cityArr.length==0}}"></image>
+                        </view>
+                    </button>
+                </view>
+                <view class="city-wrap" wx:if="{{item.isExtend}}">
+                    <button bindtap="handleExtendCity" class="city-item {{item.chlid===selectedCity.chlid?'city-now':''}}" data-allinfo="{{item}}" formType="{{item.chlid!==selectedCity.chlid?'submit':''}}" wx:if="{{item.isProvince!=1}}" wx:for="{{item.cityArr}}" wx:key="city">
+            {{item.chlname}}
+
+            <view class="base-right" wx:if="{{item.chlid===selectedCity.chlid}}">
+                            <image class="city-arrow" src="http://mat1.gtimg.com/www/images/newsapp/wxapp/news/blue_support" wx:if="{{length!=1}}"></image>
+                            <image class="city-arrow" src="http://mat1.gtimg.com/www/images/newsapp/wxapp/news/circle_selected_icon.png" wx:if="{{length==1}}"></image>
+                        </view>
+                    </button>
+                </view>
+            </block>
+        </view>
+    </view>
+</view>

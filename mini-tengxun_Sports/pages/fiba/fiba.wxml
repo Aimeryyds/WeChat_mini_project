@@ -1,0 +1,109 @@
+<view class="fixed">
+    <view class="login">
+        <FibaAd bannerInfo="{{banner.b1}}" class="bg" defaultPicUrl="/assets/FIBA/bg_mine_n@3x.png" styleStr="height:100%"></FibaAd>
+        <view class="content">
+            <view class="user">
+                <FibaLogin bindloginevent="onLoginEvent" onlyauth="{{false}}" userInfo="{{userInfo}}"></FibaLogin>
+            </view>
+        </view>
+        <view catchtap="getPublish" class="yy-btn">
+            <image class="yy-bg" src="/assets/FIBA/btn_yy@3x.png"></image>
+            <FibaLogin bindloginevent="onLoginEvent" userInfo="{{userInfo}}"></FibaLogin>
+            <view class="yy-txt">
+                <image class="icon" src="/assets/FIBA/icon_yy@3x.png"></image>
+                我要打call
+            </view>
+        </view>
+    </view>
+    <view class="nav">
+        <view catchtap="chgNav" class="li {{currentNav==='rank'?'active':''}}" data-nav="rank">
+            乐虎城市能量榜
+            <text class="text" style="width: 180rpx;"></text>
+        </view>
+        <view catchtap="chgNav" class="li {{currentNav==='square'?'active':''}}" data-nav="square">
+            中国主场
+            <text class="text"></text>
+        </view>
+        <view catchtap="chgNav" class="li {{currentNav==='samecity'?'active':''}}" data-nav="samecity">
+            城市主场
+            <text class="text"></text>
+        </view>
+    </view>
+</view>
+<view class="hot-topic {{currentNav==='square'?'show':''}}" wx:if="{{hotTopic&&hotTopic.length}}">
+    <FibaAd bannerInfo="{{banner.b2}}" class="bg" defaultPicUrl="/assets/FIBA/bg_topic@3x.png" imageStr="height: 160rpx" styleStr="height:100%"></FibaAd>
+    <view class="top clearfix">
+        <view class="title">热门话题</view>
+        <navigator class="more" url="/pages/fibaTopic/fibaTopic?from=index">更多话题 #</navigator>
+    </view>
+    <view class="con">
+        <navigator class="li {{index===0||index===1?'active':''}}" data-item="{{item}}" style="margin-right: {{(index+1)%2==0?'0':'60rpx'}}" url="/pages/fibaPost/fibaPost?discussId={{item.discussId}}" wx:for="{{hotTopic}}" wx:key="unique">
+            #{{item.content}}#
+        </navigator>
+    </view>
+</view>
+<view class="tabcon {{currentNav==='rank'?'show':''}} rank">
+    <image class="rank-bg" src="/assets/FIBA/bg_rqb.png"></image>
+    <view class="tips">
+        <view class="supporter" wx:if="{{banner.b7&&banner.b7.show}}">
+            <image class="supporter-logo" src="{{banner.b7.picUrl}}"></image>
+            冠名
+        </view>
+        > 这是近一周为城市贡献最多人气的小伙伴们
+    </view>
+    <view class="citytabs">
+        <view catchtap="rankTab" class="li {{rankCityId===item.id?'active':''}}" data-item="{{item}}" wx:for="{{fixedFibaCity}}" wx:key="{{index}}">{{item.name}}{{rankCityId===item.id?'应援榜':''}}</view>
+    </view>
+    <view class="content">
+        <FibaRankItem bind:onParisedSuccess="handleParisedSuccess" bindloginevent="onLoginEvent" idx="{{index}}" info="{{item}}" noborderbottom="{{index+1==rankCityList.length}}" userInfo="{{userInfo}}" wx:for="{{rankCityList}}" wx:key="{{index}}"></FibaRankItem>
+    </view>
+    <view class="citybox" wx:if="{{showRankCitybox}}">
+        <image class="city-bg" src="/assets/FIBA/bg_csb.png"></image>
+        <view class="intro">> 率先达到目标热爱值的城市</view>
+        <view class="intro">将为贫困山区的孩子带去一座<text class="blue-txt">全新篮球场</text>！</view>
+        <view class="city">
+            <view class="li" wx:for="{{fibaCity}}" wx:key="{{index}}">
+                <FibaRankCity cityInfo="{{item}}" class="compscity" kemp="{{index==0}}"></FibaRankCity>
+                <view class="label">0{{index+1}}·{{item.cityName}} {{item.scoreShow}}</view>
+            </view>
+        </view>
+    </view>
+    <FibaAd bannerInfo="{{banner.b5}}" styleStr="margin:20rpx 0;"></FibaAd>
+</view>
+<view class="tabcon {{currentNav==='square'?'show':''}} square">
+    <FibaPost bannerInfo="{{banner.b3}}" bannerShow="{{index+1==(banner.b3&&banner.b3.num)}}" bind:onParisedSuccess="handleParisedSuccess" bindloginevent="onLoginEvent" info="{{item}}" islist="{{true}}" userInfo="{{userInfo}}" wx:for="{{squareList}}" wx:key="{{index}}"></FibaPost>
+    <view class="square-empty" wx:if="{{!squareList.length&&squareLoaded}}">
+        <image class="img" src="/assets/FIBA/Icon_empty@3x.png"></image>
+        <view class="txt">暂无内容</view>
+    </view>
+</view>
+<view class="tabcon {{currentNav==='samecity'?'show':''}} samecity">
+    <FibaAd bannerInfo="{{sameCityBanner}}" wx:if="{{sameCityBanner.show}}"></FibaAd>
+    <FibaPost bannerInfo="{{banner.b4}}" bannerShow="{{index+1==(banner.b4&&banner.b4.num)}}" bind:onParisedSuccess="handleParisedSuccess" bindloginevent="onLoginEvent" info="{{item}}" islist="{{true}}" userInfo="{{userInfo}}" wx:for="{{sameCityList}}" wx:key="{{index}}"></FibaPost>
+    <view class="f-no-data con-show" wx:if="{{!sameCityList.length&&(choosedCity.id||authLocation)&&sameCityLoaded}}">
+        <image class="img" src="/assets/FIBA/Icon_empty@3x.png"></image>
+        <view class="txt" wx:if="{{!choosedCity.id}}">
+            <view>你所在的城市暂时没有内容，</view>
+            <view>来为8大主办城市应援吧！</view>
+        </view>
+        <view class="txt" wx:else>
+            <view>暂无内容</view>
+            <view>快来为这座城市打call!</view>
+        </view>
+        <view catchtap="getCity" class="btn" wx:if="{{!choosedCity.id}}">选择城市</view>
+    </view>
+    <view class="auth-location" wx:if="{{!authLocation&&!choosedCity.id&&!sameCityList.length}}">
+        <image class="img" src="/assets/FIBA/Icon_empty_location@3x.png"></image>
+        <view class="txt">你还没有授权位置信息</view>
+        <view catchtap="opensetting" class="btn">
+            位置授权
+        </view>
+    </view>
+</view>
+<view catchtap="getCity" class="f-fix-btn" style="display: {{currentNav==='samecity'?'block':'none'}}">
+    切换
+    城市
+</view>
+<FibaCity bind:onChoice="choiceCityComps" bind:onClose="closeCityComps" bind:onSeeSameCity="seeSameCityComps" sameShow="{{sameShow}}" show="{{citycomps}}"></FibaCity>
+<FibaHeart class="{{animatedredheart?'animatedredheart':''}}" redHeartNum="{{redHeartNum}}" redHeartSrc="{{redHeartSrc}}" showRedHeart="{{showRedHeart}}"></FibaHeart>
+<FibaParised bind:onParisedAnimationEnd="handleParisedAnimationEnd" cityId="{{fibaParisedCityId}}" show="{{fibaParisedShow}}"></FibaParised>

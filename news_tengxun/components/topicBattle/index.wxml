@@ -1,0 +1,26 @@
+<view class="battle" wx:if="{{ready}}">
+    <view class="{{isTimeline?'battleTitle':'battleTitleSmall'}}">{{title}}</view>
+    <view class="battleNumber" wx:if="{{!isTimeline}}">目前有 {{countTotalMax1}}个群众 进行了站队</view>
+    <block wx:if="{{submited||topicVoteList[voteid]}}">
+        <view class="percent">
+            <view class="iconRed">{{options[0].votePercent}}%</view>
+            <view class="percentageRed" style="width:{{options[0].votePercent}}%;"></view>
+            <view class="percentageBlue" style="width:{{options[1].votePercent}}%;"></view>
+            <view class="iconBlue">{{options[1].votePercent}}%</view>
+        </view>
+        <view class="percentTitle">
+            <view class="titleRed">{{options[0].title}}</view>
+            <view class="titleBlue">{{options[1].title}}</view>
+        </view>
+    </block>
+    <view class="optionBox" wx:else>
+        <view catchtap="onClickOption" class="option redOption" data-optionid="{{options[0].optionid}}">
+            <view class="title">{{options[0].title}}</view>
+            <image class="imgIco" src="https://mat1.gtimg.com/www/js/news/ico_red.png"></image>
+        </view>
+        <view catchtap="onClickOption" class="option blueOption" data-optionid="{{options[1].optionid}}">
+            <image class="imgIco" src="https://mat1.gtimg.com/www/js/news/ico_blue.png"></image>
+            <view class="title">{{options[1].title}}</view>
+        </view>
+    </view>
+</view>

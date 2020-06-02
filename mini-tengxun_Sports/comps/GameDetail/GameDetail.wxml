@@ -1,0 +1,33 @@
+<view class="section t14">
+    <view class="detail-data-type">详细赛况</view>
+    <view style="height: 108px;" wx:if="{{matchType==2}}">
+        <view class="first-col">
+            <view class="first-cell stat-row-{{firstColidx}}" wx:for="{{scoreFirstCol}}" wx:for-index="firstColidx" wx:for-item="colItem" wx:key="firstColidx">
+                <text wx:if="{{firstColidx==0}}">{{colItem}}</text>
+                <image class="team-icon-small" src="{{colItem}}" wx:else></image>
+            </view>
+        </view>
+        <scroll-view class="data-content" scrollX="true" style="height: 100%;">
+            <view class="table score-detail">
+                <view class="score-row stat-row-{{scoreidx}}" wx:for="{{scoreDetail}}" wx:for-index="scoreidx" wx:for-item="scoreItem" wx:key="scoreidx">
+                    <view class="score-cell score-cell-row-{{scoreidx}} stat-col-{{cellidx}}" wx:for="{{scoreItem}}" wx:for-index="cellidx" wx:for-item="score" wx:key="cellidx">
+                        <text>{{score}}</text>
+                    </view>
+                </view>
+            </view>
+        </scroll-view>
+    </view>
+    <view class="non-nba-game-detail" wx:else>
+        <view class="non-nba-game-detail-content" wx:for="{{scoreDetail[0]}}" wx:for-index="scoreIdx" wx:for-item="score" wx:key="score">
+            <view style="text-align: left; min-width: 40px;">
+                {{scoreDetail[1][scoreIdx]}}
+            </view>
+            <view style="color: #adb4be;">
+                {{scoreDetail[0][scoreIdx]}}
+            </view>
+            <view style="text-align: right; min-width: 40px;">
+                {{scoreDetail[2][scoreIdx]}}
+            </view>
+        </view>
+    </view>
+</view>

@@ -1,0 +1,15 @@
+<view class="comment-detail-wrapper" wx:if="{{ready}}">
+    <xxw-comment-item articleId="{{articleId}}" avatarUrl="{{avatarUrl}}" binddelete="onDelete" bindreply="onReply" chlid="{{chlid}}" commentId="{{commentId}}" content="{{content}}" coral_uid="{{coral_uid}}" fromPage="{{fromPage}}" image="{{image}}" isHotComment="{{hotComment}}" isMe="{{false}}" isDeleted="{{isDeleted}}" lineCount="{{0}}" nickName="{{nickName}}" parentReplyId="{{parentReplyId}}" pubTime="{{pubTime}}" replyId="{{replyId}}" showReply="{{false}}" status="{{status}}" uin="{{uin}}"></xxw-comment-item>
+    <view class="split-line"></view>
+    <block wx:if="{{replyList[0].length||fakeList.length}}">
+        <xxw-comment-item isFake articleId="{{item.articleId}}" atype="{{item.atype}}" avatarUrl="{{item.avatarUrl}}" binddelete="onDelete" chlid="{{item.chlid}}" commentId="{{item.commentId}}" content="{{item.content}}" coral_uid="{{item.coral_uid}}" data-index="{{index}}" fromPage="{{fromPage}}" isMe="{{item.isMe}}" lineCount="{{0}}" nickName="{{item.nickName}}" parentReplyId="{{item.parentReplyId}}" pubTime="{{item.pubTime}}" replyId="{{item.replyId}}" replyLineCount="{{0}}" replyList="{{item.replyList}}" replyNum="{{item.replyNum}}" uin="{{item.uin}}" wx:for="{{fakeList}}" wx:key="replyId"></xxw-comment-item>
+        <block wx:for="{{replyList}}" wx:for-index="page" wx:for-item="list" wx:key="page">
+            <xxw-comment-item canLoadMoreReply articleId="{{item.articleId}}" atype="{{item.atype}}" avatarUrl="{{item.avatarUrl}}" binddelete="onDelete" chlid="{{item.chlid}}" commentId="{{item.commentId}}" content="{{item.content}}" coral_uid="{{item.coral_uid}}" data-index="{{index}}" data-page="{{page}}" fromPage="{{fromPage}}" image="{{item.image}}" isHotComment="{{item.hotComment}}" isMe="{{item.isMe}}" lineCount="{{0}}" nickName="{{item.nickName}}" parentReplyId="{{item.parentReplyId}}" pubTime="{{item.pubTime}}" replyId="{{item.replyId}}" replyLineCount="{{0}}" replyList="{{item.replyList}}" replyNum="{{item.replyNum}}" uin="{{item.uin}}" wx:for="{{list}}" wx:key="replyId"></xxw-comment-item>
+        </block>
+    </block>
+    <xxw-none-comment articleId="{{articleId}}" atype="{{atype}}" bindaddComment="onReply" class="no-comment" fromPage="{{fromPage}}" isForbidden="{{isForbidden}}" wx:else></xxw-none-comment>
+</view>
+<xxw-bg-loading wx:else></xxw-bg-loading>
+<xxw-comment-bar hideAllIcon replyForComment articleId="{{articleId}}" atype="{{atype}}" bindreply="onReply" class="comment-bar" commentId="{{commentId}}" fromPage="{{fromPage}}" replyId="{{replyId}}" wx:if="{{ready&&!isDeleted}}"></xxw-comment-bar>
+<xxw-comment-input-panel fromPage="{{fromPage}}"></xxw-comment-input-panel>
+<xxw-login></xxw-login>

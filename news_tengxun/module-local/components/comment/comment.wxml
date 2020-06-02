@@ -1,0 +1,90 @@
+<import src="../../tpl/authorize.wxml"></import>
+<import src="../../tpl/warn.wxml"></import>
+<template is="article-warn" data="{{showType:showType}}" wx:if="{{isCommentDetail}}"></template>
+<view class="lc-comment-wrapper">
+    <view class="lc-comment-detail" wx:if="{{isCommentDetail}}">
+        <view class="lc-citem__header g-d-flex g-flex-spacebetween">
+            <image class="lc-comment__headimg" src="{{commentDetail.head_url}}"></image>
+            <view class="g-d-flex g-flex-spacebetween">
+                <text class="lc-comment__nickname g-d-inlineblock g-va-middle">{{commentDetail.nick}}</text>
+                <view bindtap="{{!commentDetail.isPraised?'_handlePraise':''}}" data-commentid="{{commentId}}" data-replyid="{{replyId}}">
+                    <text class="lc-cpraise__num g-d-inlineblock g-va-middle">{{commentDetail.agree_count||''}}</text>
+                    <view class="lc-icon g-va-middle iconfont icon-xwlike {{commentDetail.isPraised?'lc-xwliked':''}}"></view>
+                </view>
+            </view>
+        </view>
+        <collapse-text class="lc-citem__comment" lineheight="25">{{commentDetail.reply_content}}</collapse-text>
+        <view class="lc-citem__cinfo">
+            <text class="lc-citem__time g-d-inlineblock g-va-middle">{{commentDetail.pub_time_text}}  </text>
+            <text bindtap="_handleDel" class="lc-citem__del g-d-inlineblock g-va-middle" data-commentid="{{commentid}}" data-index="{{index}}" data-replyid="{{replyId}}" wx:if="{{commentDetail.isMe}}">删除</text>
+            <view bindtap="_handleWriteComment" class="lc-icon lc-icon__reply g-va-middle" data-commentid="{{commentId}}" data-nick="{{commentDetail.nick}}" data-reply-openid="{{commentDetail.openid}}" data-replyid="{{replyId}}" wx:if="{{!commentDetail.isMe}}"></view>
+        </view>
+    </view>
+    <view class="lc-comment__allnum lc-mrl24">{{isCommentDetail?'全部回复':'全部评论'}}
+    <block wx:if="{{comment_count}}">({{comment_count}})</block>
+    </view>
+    <view class="lc-comment-item lc-mrl24" wx:for="{{comment_new}}" wx:for-item="citem" wx:key="citem.comment_id">
+        <view class="lc-citem__header g-d-flex g-flex-spacebetween">
+            <image class="lc-comment__headimg" src="{{citem.comment.head_url}}"></image>
+            <view class="g-d-flex g-flex-spacebetween">
+                <text class="lc-comment__nickname g-d-inlineblock g-va-middle">{{citem.comment.nick}}</text>
+                <view bindtap="{{!citem.comment.isPraised?'_handlePraise':''}}" data-commentid="{{citem.comment.commentid}}" data-index="{{index}}" data-replyid="{{citem.comment.reply_id}}">
+                    <text class="lc-cpraise__num g-d-inlineblock g-va-middle">{{citem.comment.agree_count||''}}</text>
+                    <view class="lc-icon g-va-middle iconfont icon-xwlike {{citem.comment.isPraised?'lc-xwliked':''}}"></view>
+                </view>
+            </view>
+        </view>
+        <view class="lc-citem__content" style="{{comment_new.length-1===index?'border-bottom:0;':''}}">
+            <collapse-text class="lc-citem__comment" lineheight="25">{{citem.comment.reply_content}}</collapse-text>
+            <view class="lc-citem__cinfo">
+                <text class="lc-citem__time g-d-inlineblock g-va-middle">{{citem.comment.pub_time_text}}  </text>
+                <text bindtap="_handleDel" class="lc-citem__del g-d-inlineblock g-va-middle" data-commentid="{{citem.comment.commentid}}" data-index="{{index}}" data-replyid="{{citem.comment.reply_id}}" wx:if="{{citem.comment.isMe}}">删除</text>
+                <view bindtap="_handleWriteComment" class="lc-icon lc-icon__reply g-va-middle" data-commentid="{{citem.comment.commentid}}" data-index="{{index}}" data-nick="{{citem.comment.nick}}" data-reply-openid="{{citem.comment.openid}}" data-replyid="{{citem.comment.reply_id}}" wx:if="{{!citem.comment.isMe}}"></view>
+            </view>
+            <view class="lc-citem__creply" wx:if="{{citem.reply.length>0}}">
+                <view class="lc-creply__item" wx:for="{{citem.reply}}" wx:for-index="subIndex" wx:key="{{subIndex}}">
+                    <text class="lc-creply__name" wx:if="{{item.parent_userinfo}}">{{item.nick}}
+            <text class="lc-creply__grey">回复</text> {{item.parent_userinfo.nick}}：
+          </text>
+                    <text class="lc-creply__name" wx:else>{{item.nick}}：</text>
+                    <text class="lc-creply__content">{{item.reply_content}}</text>
+                    <view bindtap="_handleDel" class="lc-citem__del" data-commentid="{{item.commentid}}" data-index="{{index}}" data-replyid="{{item.reply_id}}" data-subindex="{{subIndex}}" wx:if="{{item.isMe}}">删除</view>
+                </view>
+                <view bindtap="_handleShowAllReply" class="lc-creply__grey" data-replyid="{{citem.comment.reply_id}}" data-url="{{citem.comment.pathUrl}}" wx:if="{{citem.comment.reply_num>citem.reply.length}}">
+                    <view bindtap="_handleGotoDetail" data-index="{{index}}" style="display:flex;align-items:center;" wx:if="{{!isCommentDetail}}">
+            查看更多{{citem.comment.reply_num}}条回复<view class="lc-icon g-va-middle iconfont icon-xwevenmore"></view>
+                    </view>
+                    <view bindtap="_handleGetThirdComment" data-index="{{index}}" wx:else>
+            展开更多{{citem.comment.reply_num-citem.reply.length}}条回复
+          </view>
+                </view>
+                <view bindtap="_handleGotoDetail" class="lc-creply__grey" data-index="{{index}}" wx:elif="{{!isCommentDetail}}">查看详情</view>
+            </view>
+        </view>
+    </view>
+    <block wx:if="{{comment_new.length!==0}}">
+        <view bindtap="_handleRetryloadComment" class="lc-comment-loadbox" wx:if="{{isLoadError}}">点击重新加载</view>
+        <view class="lc-comment-loadbox" wx:elif="{{lastReplyId!==false&&isArriveBottom}}">上拉加载更多</view>
+        <view class="lc-comment-loadbox loading" wx:elif="{{lastReplyId!==false}}">正在加载</view>
+        <view class="lc-comment-loadbox" wx:else>已显示全部内容</view>
+    </block>
+    <view class="lc-comment-empty" wx:if="{{comment_new.length===0}}"></view>
+</view>
+<view class="lc-comment-bbtn g-d-flex g-flex-spacebetween" wx:if="{{isShowBottomBtn}}">
+    <view bindtap="_handleWriteComment" class="lc-bbtn__left" data-replyid="{{replyId}}">
+        <view class="lc-icon g-va-middle iconfont icon-xwedit"></view>
+        <view class="g-d-inlineblock g-f-xl g-va-middle">评一下</view>
+    </view>
+    <view class="lc-bbtn__right" wx:if="{{!isCommentDetail}}">
+        <view class="lc-icon lc-icon__comment g-va-middle"></view>
+        <view class="g-d-inlineblock g-f-m g-mr20 g-va-middle" wx:if="{{comment_count}}">{{comment_count}}</view>
+        <view bindtap="onFloatSharePYQClick" data-sharetype="poster" style="height:42rpx;display: flex;">
+            <image class="share-icon" mode="aspectFill" src="http://mat1.gtimg.com/www/js/news/icon_pinglun_pyq.png" style="margin-right:20rpx;margin-left:52rpx;height:42rpx;width:42rpx;"></image>
+        </view>
+        <button bindtap="onFloatShareWeiXinClick" class="none_button" data-sharetype="wx" openType="share" style="height:100%">
+            <view class="iconfont icon-xwfillwechat" style="margin-left:10rpx;margin-right:0rpx;color:#48c14c;font-size:42rpx;"></view>
+        </button>
+    </view>
+</view>
+<lc-comment-dialog bindcommentsubmit="handleCommentSubmit" id="lcCommentDialog" maxlength="{{commentMaxLength}}"></lc-comment-dialog>
+<template is="auth-confirm-dialog" data="{{hideCloseBtn:false}}" wx:if="{{showUserInfoAuthDialog}}"></template>

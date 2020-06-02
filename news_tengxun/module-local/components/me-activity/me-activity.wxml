@@ -1,0 +1,30 @@
+<navigator class="kb-card" data-showType="{{item.showType}}" hoverStartTime="200" id="{{item.id}}" url="/module-local/pages/act/act?id={{item.id}}">
+    <view class="base-flex2 {{item.act_expired?'me-expired':''}}">
+        <view class="kb-item-content base-flex-box sim2-style" style="border-bottom:{{moreThreeLine?0:2}}rpx solid #E7EBEE;padding-bottom:0rpx;">
+            <view class="sim2-content-wrap base-flex1">
+                <button class="submitButton" data-chlid="{{item.chlid}}" formType="submit">
+                    <media-description-text bindtoggletitle="toggletitle" class="kb-title base-line3 sim2-text">
+            {{item.title}}
+          </media-description-text>
+                </button>
+                <view class="bottom-wrap" wx:if="{{!moreThreeLine}}">
+                    <view class="bottom-content">
+                        <text class="me-span kb-item-status" wx:if="{{item.status_word}}">{{item.status_word}}</text>
+                        <text class="me-span station-text" wx:if="{{item.chlname}}">{{item.chlname}}</text>
+                    </view>
+                </view>
+            </view>
+            <button class="submitButton" data-newsid="{{item.id}}" formType="submit">
+                <view class="sim-image-wrap kb-image-box">
+                    <image class="kb-img-center" mode="aspectFill" src="{{item.img_small}}"></image>
+                </view>
+            </button>
+        </view>
+        <view class="bottom-wrap" style="border-bottom:1rpx solid #E7EBEE;margin-top:-30rpx;" wx:if="{{moreThreeLine}}">
+            <view class="bottom-content">
+                <text class="me-span kb-item-status" wx:if="{{item.status_word}}">{{item.status_word}}</text>
+                <text class="me-span station-text" wx:if="{{item.chlname}}">{{item.chlname}}</text>
+            </view>
+        </view>
+    </view>
+</navigator>

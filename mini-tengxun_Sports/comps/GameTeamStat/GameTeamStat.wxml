@@ -1,0 +1,33 @@
+<view class="section t14">
+    <view class="title">球队统计</view>
+    <view class="content-wrapper">
+        <view class="teams" style="text-align: center;">
+            <view bindtap="onTapTeam" data-team-id="{{teamInfo.leftId}}" style="float: left;">
+                <image class="team-img" src="{{teamInfo.leftBadge}}"></image>
+                <text class="team-name-text">{{teamInfo.leftName}}</text>
+            </view>
+            <span class="font-gray font-vs">vs</span>
+            <view bindtap="onTapTeam" data-team-id="{{teamInfo.rightId}}" style="float: right;">
+                <text class="team-name-text">{{teamInfo.rightName}}</text>
+                <image class="team-img" src="{{teamInfo.rightBadge}}"></image>
+            </view>
+        </view>
+        <view class="team-data" style="text-align: center;" wx:for="{{teamStats}}" wx:for-index="playeridx" wx:for-item="teamStatsItem" wx:key="text">
+            <view class="data-num t14">
+                    {{teamStatsItem.leftVal}}
+                </view>
+            <view class="data-bar t14" style="text-align: right;">
+                <view class="bar-left {{teamStatsItem.leftBlue}}" style="width:{{teamStatsItem.leftBar}}%"></view>
+            </view>
+            <view class="font-gray data-type t14">
+                    {{teamStatsItem.text}}
+                </view>
+            <view class="data-bar t14" style="text-align: left;">
+                <view class="bar-right {{teamStatsItem.rightBlue}}" style="width:{{teamStatsItem.rightBar}}%;"></view>
+            </view>
+            <view class="data-num t14">
+                    {{teamStatsItem.rightVal}}
+                </view>
+        </view>
+    </view>
+</view>

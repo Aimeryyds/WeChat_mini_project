@@ -1,0 +1,16 @@
+<view class="fans-item-wrapper">
+    <view bindtap="tapItem" class="media-wrapper">
+        <image class="{{type==='topic'?'topic-icon':'avatar'}}" mode="aspectFill" src="{{icon||defaultIcon}}"></image>
+        <view class="name-wrapper">
+            <view class="name">{{name}}</view>
+            <view class="description">
+                <block wx:if="{{type==='topic'}}">
+                    <view class="read-count" wx:if="{{readCount}}">{{readCountStr}}阅读</view>
+                    <view wx:if="{{joinCount}}">{{joinCountStr}}参与</view>
+                </block>
+                <block wx:else>{{description}}</block>
+            </view>
+        </view>
+    </view>
+    <xxw-follow-button coral_uid="{{coral_uid}}" isMyFans="{{isMyFans}}" isMyFollow="{{isMyFollow}}" mediaId="{{mediaId}}" topicId="{{topicId}}" type="{{type}}" uin="{{uin}}"></xxw-follow-button>
+</view>

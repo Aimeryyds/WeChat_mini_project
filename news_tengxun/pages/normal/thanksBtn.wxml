@@ -1,0 +1,7 @@
+<view bindtap="tapBtn" class="recommend-btn {{hasThanked&&'recommended'}}">
+  {{hasThanked?'已感谢':'感谢分享'}}
+  <view wx:if="{{count&&hasThanked}}">
+    {{count}}
+  </view>
+    <image class="recommend-icon" src="{{hasThanked?'http://mat1.gtimg.com/www/js/news/recommend-ic-select.png':'http://mat1.gtimg.com/www/js/news/recommend-ic-normal.png'}}"></image>
+</view>

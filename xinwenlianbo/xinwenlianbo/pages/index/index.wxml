@@ -1,0 +1,182 @@
+<include src="../../templates/include/nowork.wxml"></include>
+<view class="normal" hidden="{{!netInfo.status}}">
+    <view class="pulltipbox"></view>
+    <view class="indexstatus" hidden="{{topbar!=1}}">
+        <image class="statusicon" src="../../img/indexstatus.png"></image>
+        <text class="bold">联播更新中</text>
+        <text class="rightText">马上就好了</text>
+    </view>
+    <view class="indexstatus" hidden="{{topbar!=2}}">
+        <image class="statusicon" src="../../img/indexstatus.png"></image>
+        <text class="bold">联播维护中</text>
+        <text class="rightText">最新联播内容正在维护</text>
+    </view>
+    <view class="content">
+        <view class="rili {{show_==true?'show':'hide'}}">
+            <view bindtap="tapname3" class="rili_logo">日历</view>
+            <view bindtap="tapname1" class="zuo {{zuobtnCol?'active':''}}" hoverClass=""></view>
+            <view class="text">
+                <view class="text1" hidden="{{dayStatus!=2}}">
+                    <text class="rili_day">{{year}}年{{month}}月{{getDate}}日</text>
+                </view>
+                <view class="text1" hidden="{{dayStatus!='0'&&dayStatus!='1'}}">
+                    <text class="rili_today">{{dayStatus==0?'昨日':dayStatus==1?'今日':''}}</text>
+                    <text class="rili_month">{{month}}月{{getDate}}日</text>
+                </view>
+                <view class="clear"></view>
+            </view>
+            <view bindtap="tapname2" class="you {{youbtnCol?'active':''}}"></view>
+            <view class="clear"></view>
+        </view>
+        <view catchtap="closeRL1" catchtouchmove="noevent" class="box1 {{show_==true?'hide':'show'}}" style="width: {{sysW*7}}px;height:100%">
+            <view style="background-color:#fff">
+                <view catchtap="noevent" class="rili_titlist">
+                    <text bindtap="closeRL1" class="closerl"></text>
+                    <text bindtap="tapname5" class="rili_btnzuo"></text>
+                    <text class="dateBox">{{year}}年{{month}}月</text>
+                    <text bindtap="tapname6" class="rili_btnyou"></text>
+                    <text bindtap="zuixinyiqi" class="zuixintext">最新一期</text>
+                    <view class="clear"></view>
+                </view>
+                <view catchtap="noevent">
+                    <view style="float:left;background-color:#ef4d44" wx:for="{{weekArr}}" wx:key="item">
+                        <view class="rili_one" style="width:{{sysW-24}}px;height:{{sysW-24}}px;line-height:{{sysW-24}}px;margin-bottom:20rpx;color:#fff">{{item}}</view>
+                    </view>
+                    <view class="rili_one lastmon" style="width:{{sysW-24}}px;height:{{sysW-24}}px;line-height:{{sysW-24}}px;" wx:for="{{arr1}}" wx:key="item">{{item}}</view>
+                    <view bindtap="tapname4" class="rili_one {{item==getDate?'dateOn':'putong'}} {{year=='2017'&&month=='10'&&item<18?'lastmon':''}}{{year==todayYear&&month==todayMonth&&item>todayData?'lastmon':''}}" data-id="{{item}}" style="width: {{sysW-24}}px; height: {{sysW-24}}px; line-height: {{sysW-24}}px;" wx:for="{{arr}}" wx:key="item">{{item}}<view class="rili_zuixin" wx:if="{{year==todayYear&&month==todayMonth&&item==todayData}}">最新</view>
+                    </view>
+                    <view class="rili_one lastmon" style="width:{{sysW-24}}px;height:{{sysW-24}}px;line-height:{{sysW-24}}px;" wx:for="{{arr2}}" wx:key="item">{{item}}</view>
+                    <view class="clear"></view>
+                </view>
+            </view>
+        </view>
+        <view class="scroll-view">
+            <view bindtap="gotovideopage" class="tab-item {{sulanshow?'':'changewidth'}}" data-type="0" data-vid="{{currentVide}}">
+                <view class="imgbox">
+                    <image src="../../img/index_player.png"></image>
+                </view>
+                <text>看联播</text>
+            </view>
+            <view bindtap="gotovideopage" class="tab-item {{sulanshow?'':'changewidth'}}" data-type="1" data-vid="{{currentVide}}">
+                <view class="imgbox">
+                    <image src="../../img/index_listen.png"></image>
+                </view>
+                <text>听联播</text>
+            </view>
+            <view bindtap="gotosanfenzhongsulan" class="tab-item {{sulanshow?'slshow':'hide'}}" data-article_id="{{sanfenzhongsulan}}">
+                <view class="imgbox">
+                    <image src="../../img/index_look.png"></image>
+                </view>
+                <text>三分钟速览</text>
+            </view>
+            <view class="clear"></view>
+        </view>
+        <view class="swiper-item {{zkall?'zk':''}}">
+            <view class="benqineirong">
+                <text class="text">本期主要内容</text>
+            </view>
+            <view bindtap="gotosvideopage" class="item-ans" data-vid="{{item.video_id}}" wx:for="{{looklianbo}}" wx:for-index="idx" wx:key="key">
+                <text class="item-text">{{idx+1+'、'+item.video_title}}</text>
+            </view>
+        </view>
+        <view bindtap="zhankaiquanbu" class="zhankaibox">{{zktext}}</view>
+    </view>
+    <view class="choice_switch">
+        <navigator class="choice_ul" hoverClass="none" url="{{item.url}}" wx:for="{{choice_switch}}" wx:for-index="idx" wx:key="key">
+            <view class="choice_li choice_li{{idx}}">
+                <image class="img{{idx}}" src="{{item.img}}"></image>
+                <view class="text">{{item.text}}</view>
+            </view>
+        </navigator>
+    </view>
+    <view class="yskp md">
+        <view bindtap="gotoyskpmore" class="yskp_hd hd">
+            <view class="yskp_title title">{{yskphd[0].yskptitle}}</view>
+            <view class="yskp_more more"></view>
+        </view>
+        <view class="yskp_bd">
+            <scroll-view bindscroll="scroll" class="scroll-view_H" scrollX="true">
+                <view class="scroll-view-item_H demo-text-1" id="demo{{idx+1}}" wx:for="{{yskp_bd}}" wx:for-index="idx" wx:key="key">
+                    <view bindtap="gotoyskpbd" class="yskp_box" data-article_id="{{item.article_id}}">
+                        <image class="yskp_bd_img" src="{{item.article_logo}}"></image>
+                        <view class="zhegai"></view>
+                        <view class="yskp_box_text">
+                            <view class="yskp_bd_text">{{item.article_title}}</view>
+                            <text class="yskp_bd_time">{{item.date}}</text>
+                        </view>
+                    </view>
+                </view>
+            </scroll-view>
+        </view>
+    </view>
+    <view class="md" id="{{audioIsShow==true?'':'marginbottom'}}">
+        <view class="hd">
+            <view class="title">我关注的</view>
+            <view bindtap="gototabpage" class="text {{followIsShow==true?'show':'hide'}}">查看更多</view>
+        </view>
+        <view class="bd">
+            <view class="woguanzhude {{followIsShow==true?'show':'hide'}}" wx:for="{{followData}}" wx:key="key">
+                <view bindtap="changepage" class="guanzhu_list list1" data-pageid="{{item.newsId}}" data-type="{{item.contype}}" wx:if="{{item.contype=='联播+'}}">
+                    <view class="shang">
+                        <view class="titName">
+                            <view class="titNamebg">{{item.contype}}</view>
+                        </view>
+                    </view>
+                    <view class="zhong">{{item.newsTitle}}</view>
+                    <view class="xia">
+                        <view class="timedata">{{item._newsFocusDate}}</view>
+                        <view class="gjc_box">
+                            <view catchtap="gotoonegzpage" class="gjc" data-val="{{item}}" wx:if="{{index<=2}}" wx:for="{{item.gjc}}" wx:key="key">{{item}}</view>
+                        </view>
+                    </view>
+                </view>
+                <view bindtap="changepage" class="guanzhu_list list2" data-pageid="{{item.newsId}}" data-type="{{item.contype}}" wx:if="{{item.contype=='快评'}}">
+                    <view class="shang">
+                        <view class="titName">
+                            <view class="titNamebg">{{item.contype}}</view>
+                        </view>
+                    </view>
+                    <view class="zhong">{{item.newsTitle}}</view>
+                    <view class="xia">
+                        <view class="timedata">{{item._newsFocusDate}}</view>
+                        <view class="gjc_box">
+                            <view catchtap="gotoonegzpage" class="gjc" data-val="{{item}}" wx:if="{{index<=2}}" wx:for="{{item.gjc}}" wx:key="key">{{item}}</view>
+                        </view>
+                    </view>
+                </view>
+                <view bindtap="changepage" class="guanzhu_list list3" data-modetype="{{item.newsEditMode}}" data-pageid="{{item.newsId}}" data-type="{{item.contype}}" wx:if="{{item.contype=='新闻联播'||item.contype==''}}">
+                    <view class="shang">
+                        <view class="titName">
+                            <view class="titNamebg" wx:if="{{item.contype!=''}}">{{item.contype}}</view>
+                        </view>
+                        <view class="timelength" wx:if="{{item.contype!=''}}">时长 {{item.newsLength}}</view>
+                    </view>
+                    <view class="zhong">{{item.newsTitle}}</view>
+                    <view class="xia">
+                        <view class="timedata">{{item._newsFocusDate}}</view>
+                        <view class="gjc_box">
+                            <view catchtap="gotoonegzpage" class="gjc" data-val="{{item}}" wx:if="{{index<=2}}" wx:for="{{item.gjc}}" wx:key="key">{{item}}</view>
+                        </view>
+                    </view>
+                </view>
+            </view>
+            <view class="wuguanzhu {{followIsShow==true?'hide':'show'}}">
+                <view bindtap="gotofollowpage" class="add">
+                    <view class="text">添加关注标签</view>
+                </view>
+                <view class="addtext">添加标签后可及时获取相关内容</view>
+            </view>
+            <view class="guanzhunotext {{youguanzhunoneirong==true?'show':'hide'}}">
+                <view class="add">
+                    <view class="text">该关注内容无数据</view>
+                </view>
+            </view>
+        </view>
+    </view>
+    <view class="audiobox {{audioIsHide==true?'hide':'show'}}">
+        <include src="../../templates/audio/audio.wxml"></include>
+    </view>
+    <button class="shareicon " hoverClass="none" id="{{audioIsHide==true?'':'upbottom'}}" openType="share">
+        <image src="../../img/indexshare.png"></image>
+    </button>
+</view>

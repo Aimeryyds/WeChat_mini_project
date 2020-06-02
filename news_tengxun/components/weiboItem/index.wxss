@@ -1,0 +1,477 @@
+@import "../../__wuBaseWxss__/0.wxss";
+
+.wrapper {
+    box-sizing: border-box;
+    padding: 28rpx 24rpx 0rpx;
+}
+
+.container,.wrapper {
+    width: 100%;
+    position: relative;
+}
+
+.head-container {
+    justify-content: space-between;
+    font-size: 28rpx;
+    color: #888;
+}
+
+.head-container,.user-info-wrapper {
+    display: flex;
+    align-items: center;
+}
+
+.head-image-wrapper {
+    width: 60rpx;
+    height: 60rpx;
+    position: relative;
+    margin-right: 16rpx;
+}
+
+.head-image {
+    width: 60rpx;
+    height: 60rpx;
+    border-radius: 100%;
+}
+
+.vip-logo {
+    position: absolute;
+    right: 0;
+    bottom: 0;
+    width: 24rpx;
+    height: 24rpx;
+}
+
+.name-container {
+    text-align: left;
+    max-width: 440rpx;
+}
+
+.name {
+    font-size: 28rpx;
+    color: #222;
+}
+
+.name,.time {
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+
+.time {
+    font-size: 24rpx;
+}
+
+.status {
+    padding-left: 10rpx;
+    align-self: flex-start;
+}
+
+.follow-wrapper {
+    display: flex;
+    justify-content: flex-end;
+}
+
+.content-cover {
+    font-size: 32rpx;
+    color: #222;
+    text-align: left;
+    word-break: normal;
+    width: 100%;
+    margin-top: 24rpx;
+    font-weight: 400;
+    font-style: normal;
+    font-stretch: normal;
+    line-height: 1.5;
+    letter-spacing: normal;
+    text-align: justify;
+}
+
+.content-cover.collapse {
+    text-align: left;
+    display: -webkit-box;
+    word-break: normal;
+    -webkit-box-orient: vertical;
+    -webkit-line-clamp: 8;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.weibo-content {
+    display: inline;
+}
+
+.emoji-icon {
+    width: 44rpx;
+    height: 44rpx;
+    font-size: 0;
+    line-height: 48rpx;
+    vertical-align: sub;
+    display: inline-block;
+}
+
+.topic-desc {
+    display: inline;
+    color: #eab100;
+}
+
+.relation {
+    border: 2rpx solid #e2e9f1;
+    border-radius: 8rpx;
+    width: 100%;
+    height: 110rpx;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    margin-top: 20rpx;
+}
+
+.relation-title {
+    flex: 1;
+    font-size: 28rpx;
+    color: #849098;
+    line-height: 44rpx;
+    text-align: left;
+    max-height: 88rpx;
+    display: -webkit-box;
+    word-break: break-all;
+    -webkit-box-orient: vertical;
+    -webkit-line-clamp: 2;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    margin: 0 20rpx;
+}
+
+.relation-image {
+    background: rgba(0,0,0,.1);
+    border-radius: 8rpx;
+    width: 80rpx;
+    height: 80rpx;
+    margin-right: 18rpx;
+}
+
+.video-wrapper {
+    display: block;
+    margin-top: 24rpx;
+}
+
+.images_container {
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-start;
+    align-items: center;
+    flex-wrap: wrap;
+    margin-top: 24rpx;
+    font-size: 0;
+}
+
+.big-image {
+    width: 400rpx;
+    margin-top: 24rpx;
+    border-radius: 8rpx;
+}
+
+.four_image {
+    width: 480rpx;
+}
+
+.four_image .small-image {
+    width: 232rpx;
+    height: 232rpx;
+}
+
+.four_image .small-image,.small-image {
+    border-radius: 8rpx;
+    margin-right: 8rpx;
+    margin-bottom: 8rpx;
+}
+
+.small-image {
+    width: 220rpx;
+    height: 220rpx;
+}
+
+.hot-comment {
+    margin: 0 -24rpx;
+}
+
+.share-tab {
+    flex-direction: row;
+    justify-content: space-between;
+    z-index: 0;
+    position: relative;
+}
+
+.icon-wrapper,.share-tab {
+    height: 96rpx;
+    display: flex;
+    align-items: center;
+}
+
+.icon-wrapper {
+    flex: 1;
+    justify-content: center;
+    padding: 0;
+}
+
+.icon-wrapper.left {
+    justify-content: flex-start;
+}
+
+.icon-wrapper.right {
+    justify-content: flex-end;
+}
+
+.icon {
+    font-size: 36rpx;
+    color: #555;
+    margin-right: 12rpx;
+}
+
+.icon-text {
+    font-size: 24rpx;
+    font-weight: 400;
+    font-style: normal;
+    font-stretch: normal;
+    line-height: 1;
+    letter-spacing: normal;
+    color: #555;
+}
+
+.red.icon-text {
+    color: #f04646;
+}
+
+.share-tab.gray .icon,.share-tab.gray .icon-text {
+    color: silver;
+}
+
+.none_button {
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+    padding: 0;
+    line-height: 1;
+    margin-left: 0;
+    margin-right: 0;
+    font-size: 36rpx;
+}
+
+.none_button,.none_button:after {
+    background-color: transparent;
+    border: none;
+}
+
+.none_button:after {
+    padding-left: 0rpx;
+    padding-right: 0rpx;
+    width: 0;
+    height: 0;
+}
+
+.icon {
+    padding: 2rpx;
+}
+
+.rocket-icon {
+    width: 32rpx;
+    height: 36rpx;
+    margin-right: 12rpx;
+    transition: all .08s ease-out;
+}
+
+.rocket-icon-disable {
+    width: 34rpx;
+    height: 36rpx;
+    margin-right: 12rpx;
+}
+
+.rocketScale.rocket-icon {
+    width: 28.8rpx;
+    height: 32.4rpx;
+}
+
+.animation-cover {
+    width: 100%;
+    height: 100%;
+    position: relative;
+}
+
+.fly-rocket {
+    position: absolute;
+    bottom: -180rpx;
+    right: -150rpx;
+    width: 500rpx;
+    height: 250rpx;
+    background-repeat: no-repeat;
+    background-image: url(http://mat1.gtimg.com/www/js/news/push_rocket.png);
+    background-position: 0;
+    background-size: 6000rpx 250rpx;
+    transform-origin: bottom center;
+}
+
+.push-active {
+    animation-timing-function: steps(11);
+    animation-name: rocket;
+    animation-duration: .5s;
+    animation-iteration-count: 1;
+    display: inline-block;
+    animation-fill-mode: forwards;
+}
+
+.hide-push-guide {
+    opacity: 0;
+    transition: all .3s ease-out;
+}
+
+.mask {
+    position: absolute;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 436rpx;
+    height: 68rpx;
+    background-color: rgba(34,34,34,.9);
+    object-fit: contain;
+    border-radius: 10rpx;
+    top: -60rpx;
+    right: 10rpx;
+    font-family: PingFangSC;
+    font-size: 28rpx;
+    font-weight: 400;
+    font-style: normal;
+    font-stretch: normal;
+    line-height: normal;
+    letter-spacing: normal;
+    color: #fff;
+}
+
+.layerArrow {
+    display: block;
+    box-sizing: border-box;
+    position: absolute;
+    top: 9rpx;
+    right: 60rpx;
+    width: 20rpx;
+    height: 14rpx;
+    border: 14rpx solid rgba(34,34,34,0);
+    border-top-color: rgba(34,34,34,.9);
+}
+
+@-webkit-keyframes rocket {
+    0% {
+        background-position: 0;
+    }
+
+    to {
+        background-position: 100%;
+    }
+}
+
+@keyframes rocket {
+    0% {
+        background-position: 0;
+    }
+
+    to {
+        background-position: 100%;
+    }
+}
+
+.push-number {
+    position: absolute;
+    bottom: 156rpx;
+    right: 0;
+    width: 264rpx;
+    height: 53rpx;
+    background-repeat: no-repeat;
+    background-image: url(http://mat1.gtimg.com/www/js/news/push_numbers.png);
+    background-position: 0;
+    background-size: 2640rpx 106rpx;
+}
+
+.share-guide {
+    position: fixed;
+    top: 0;
+    left: 0;
+    background-color: rgba(0,0,0,.5);
+    z-index: 999;
+}
+
+.guide-cover,.share-guide {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+.guide-image {
+    width: 558rpx;
+    height: 260rpx;
+}
+
+.tips-cover {
+    width: 558rpx;
+    height: 410rpx;
+    border-radius: 0 0 16rpx 16rpx;
+    background-color: #fff;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: flex-start;
+    font-weight: 400;
+    font-style: normal;
+    font-stretch: normal;
+    letter-spacing: normal;
+    color: #222;
+    margin-bottom: 100rpx;
+}
+
+.tips-one {
+    font-size: 44rpx;
+    font-weight: 700;
+    line-height: 1.09;
+    margin-top: 64rpx;
+}
+
+.tips-one,.tips-two {
+    font-family: PingFangSC;
+    text-align: center;
+}
+
+.tips-two {
+    font-size: 32rpx;
+    line-height: 1.5;
+    margin-top: 16rpx;
+}
+
+.share-btn {
+    height: 84rpx;
+    border-radius: 50rpx;
+    background-color: #f04646;
+    line-height: 84rpx;
+    font-size: 34rpx;
+    letter-spacing: .3px;
+    color: #fff;
+    margin-top: 44rpx;
+}
+
+.cancle-btn,.share-btn {
+    width: 420rpx;
+    font-family: PingFangSC;
+    text-align: center;
+}
+
+.cancle-btn {
+    font-size: 28rpx;
+    line-height: 1.29;
+    color: #888;
+    margin-top: 32rpx;
+}
+
+.pre-load-img {
+    display: none;
+}

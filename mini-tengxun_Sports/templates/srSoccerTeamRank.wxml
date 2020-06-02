@@ -1,0 +1,36 @@
+<template name="srSoccerTeamRank">
+    <view class="soccer-team-rank">
+        <view class="empty" wx:if="{{isFetched&&(!idxArr||!idxArr.length)}}">
+            暂无数据
+        </view>
+        <view class="rank-desc">
+            <view class="team-rank">排名</view>
+            <view class="team-name">球队</view>
+            <view class="match-num">场</view>
+            <view class="win-tie-lose">胜/平/负</view>
+            <view class="goal-conceded">进/失</view>
+            <view class="rank-score">积分</view>
+        </view>
+        <view bindtap="onTapTeam" class="one-team" data-team-id="{{team.teamId}}" data-team-name="{{team.name}}" wx:for="{{idxArr}}" wx:for-item="team" wx:key="teamId">
+            <view class="team-rank label-type-{{team.lableColorType}}">
+                {{team.serial}}
+            </view>
+            <view class="team-name">
+                <image class="logo" src="{{team.badge}}"></image>
+                {{team.name}}
+            </view>
+            <view class="match-num">
+                {{team.matchNum}}
+            </view>
+            <view class="win-tie-lose">
+                {{team.winMatchCount}}/{{team.planishMatchCount}}/{{team.lostMatchCount}}
+            </view>
+            <view class="goal-conceded">
+                {{team.goals}}/{{team.goalsConceded}}
+            </view>
+            <view class="rank-score">
+                {{team.score}}
+            </view>
+        </view>
+    </view>
+</template>

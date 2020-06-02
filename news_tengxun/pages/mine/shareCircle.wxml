@@ -1,0 +1,28 @@
+<xxw-bg-loading bindrefresh="render" status="{{status}}" wx:if="{{status!==pageStatus.ready}}"></xxw-bg-loading>
+<block wx:else>
+    <view class="share-icon-wrapper" wx:if="{{noData}}">
+        <image class="share-icon" mode="aspectFill" src="http://mat1.gtimg.com/www/js/news/icon-share.png"></image>
+        <view class="share-text">分享文章到微信群，</view>
+        <view class="share-text">收获群友的感谢，与群友一起讨论</view>
+    </view>
+    <view class="share-circle-wrapper" wx:else>
+        <block wx:for="{{list}}" wx:for-index="page" wx:for-item="firstItem" wx:key="_uid">
+            <block wx:for="{{firstItem.list}}" wx:key="_uid">
+                <view class="date-wrapper" wx:if="{{item.isDate}}">
+                    <view class="date">
+            {{item.date}}
+          </view>
+                    <view class="date-triangle"></view>
+                    <view class="date-summary">
+                        <text>共{{item.read}}人看过{{item.thanks>0?' · '+item.thanks+'人感谢':''}}{{item.comment>0?' · '+item.comment+'条评论':''}}</text>
+                    </view>
+                    <view class="date-summary-triangle"></view>
+                </view>
+                <view class="one-day-container" wx:else>
+                    <share-item articleId="{{item.articleId}}" atype="{{item.atype}}" fromPage="{{fromPage}}" img="{{item.img}}" info="{{item.shareInfo}}" title="{{item.title}}"></share-item>
+                </view>
+            </block>
+        </block>
+        <xxw-loading-bar bindretry="onScrollToLower" class="bottom-loading-bar" hasMore="{{hasMore}}" status="{{bottomLoadingStatus}}"></xxw-loading-bar>
+    </view>
+</block>

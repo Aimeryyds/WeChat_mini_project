@@ -1,0 +1,20 @@
+<view class="slider {{isIphoneX&&'is-iphone-x'}}">
+    <swiper autoplay circular bindchange="bindSwiperChange" class="swiper" current="{{current}}">
+        <swiper-item class="swiper-item" wx:for="{{list}}" wx:key="item{{index}}">
+            <xxw-launch-app appParameter="{{item.appParameter}}" articleId="{{articleId}}" exClass="slider-item" fromPage="{{fromPage}}" reportParams="{{reportParams}}">
+                <view class="image {{index===0&&'logo'}}" style="background-image: url({{item.img}})">
+                    <image class="video-icon" mode="aspectFill" src="http://mat1.gtimg.com/www/js/news/video_ic_play.png" wx:if="{{index!=0}}"></image>
+                </view>
+                <view class="title {{index===0&&'logo'}}">
+            {{item.title}}
+          </view>
+            </xxw-launch-app>
+        </swiper-item>
+    </swiper>
+    <xxw-launch-app appParameter="{{list[current].appParameter}}" articleId="{{articleId}}" exClass="open-btn-cover" fromPage="{{fromPage}}" reportParams="{{reportParams}}">
+        <view class="open-btn">去APP</view>
+    </xxw-launch-app>
+    <view class="indicator-box" wx:if="{{list.length>1}}">
+        <view class="dot {{index===current&&'active'}}" wx:for="{{list}}" wx:key="dot{{index}}"></view>
+    </view>
+</view>

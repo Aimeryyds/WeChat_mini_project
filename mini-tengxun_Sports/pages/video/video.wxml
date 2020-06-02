@@ -1,0 +1,106 @@
+<template name="detail">
+    <view class="video-detail">
+        <view class="inactive-mask {{vid!==video.vid&&nextOne.vid!==video.vid?'show':'hide'}}"></view>
+        <view class="video-title">
+            {{video.title}}
+        </view>
+        <view class="video-btns-container">
+            <view class="video-views">{{video.views}}人看过</view>
+            <view class="video-btns">
+                <view catchtap="onTapShowComment" class="icon" data-targetid="{{video.targetId}}">
+                    <image class="comment-icon" src="/assets/comment-icon.png"></image>
+                    <text>{{video.commentNum||''}}</text>
+                </view>
+                <button class="icon" data-title="{{video.title}}" data-url="{{video.pic2}}" data-vid="{{video.vid}}" openType="share">
+                    <image class="share-icon" src="/assets/share-icon.png"></image>
+                </button>
+            </view>
+        </view>
+    </view>
+</template>
+<template name="cover">
+    <view class="video-cover {{vid!==video.vid&&nextOne.vid!==video.vid?'inactive':'active'}}" style="height: {{tvpHeight}}px">
+        <image class="full-width" src="{{video.pic2}}" style="height: {{tvpHeight}}px"></image>
+        <image class="play-icon" src="/assets/play-icon.png"></image>
+    </view>
+</template>
+<template name="comment-item">
+    <view class="comment-item">
+        <view class="comment-header">
+            <TuaImage class="avatar" errSrc="https://mat1.gtimg.com/sports/sports/sport_head_default.png" height="28px" src="{{commentItem.userInfo.head}}" styleStr="border-radius: 50%;" width="28px"></TuaImage>
+            <view class="nick-container">
+                <view class="nick">
+                    {{commentItem.userInfo.nick}}
+                </view>
+                <view class="time">
+                    {{commentItem.timeStr}}
+                </view>
+            </view>
+            <view class="reply-up">
+                {{commentItem.up}}
+                <image class="up-icon" src="/assets/up-icon.png"></image>
+            </view>
+        </view>
+        <view class="comment-content">
+            <text class="reply-user" wx:if="{{commentItem.replyUser}}">{{commentItem.replyUser}}</text> {{commentItem.content}}
+
+            <view class="reply-container" wx:if="{{targetId&&commentItem.children.length}}">
+                <view class="reply-item" wx:for="{{commentItem.children}}" wx:for-item="child" wx:key="*this">
+                    <text class="rep-nick">{{commentMap[child].replyDesc}} </text>
+                    <text class="rep-content">{{commentMap[child].content}}</text>
+                </view>
+                <view bindtap="onTapShowAllReply" class="repnum" data-commentid="{{commentItem.id}}" data-targetid="{{targetId}}" wx:if="{{commentItem.repnum>2}}">
+                    共{{commentItem.repnum}}条回复<image class="arrow-grey" src="/assets/arrow-grey.png"></image>
+                </view>
+            </view>
+        </view>
+    </view>
+</template>
+<view bindtouchend="onTouchEnd" bindtouchstart="onTouchStart" class="content" style="{{contentStyleStr}}">
+    <view bindtap="onTapCover" class="js-video" data-vid="{{video.vid}}" id="tua{{video.vid}}" wx:for="{{videoList}}" wx:for-item="video" wx:key="vid">
+        <template is="cover" data="{{vid:vid,video:video,nextOne:nextOne,tvpHeight:tvpHeight}}" wx:if="{{comment.isHide}}"></template>
+        <template is="detail" data="{{vid:vid,video:video,nextOne:nextOne}}"></template>
+    </view>
+    <view class="no-more" hidden="{{!vid||hasMoreVideo}}" style="height: {{contentHeight-lastItemHeight}}px;">
+        <image class="no-more-icon" src="/assets/no-more.png"></image>
+        <text>已经没有更多内容了</text>
+    </view>
+    <view class="tvp full-width {{tvpClassStr}}" style="{{tvpStyleStr}}">
+        <view class="video-bg-container" style="height: {{tvpHeight}}px;" wx:if="{{tvpErrStr}}">
+            <image class="full-width" src="/assets/video_bg.jpg"></image>
+            <text class="video-bg-text">{{tvpErrStr}}</text>
+        </view>
+        <video autoplay="{{isAutoPlay}}" bindended="__onTvpEnded" binderror="__onTvpError" bindfullscreenchange="onTvpFullScreen" bindpause="__onTvpPause" bindplay="__onTvpPlay" bindtimeupdate="__onTvpTimeupdate" class="full-width" src="{{tvpUrl}}" style="height: {{tvpHeight}}px;" wx:if="{{tvpUrl&&!tvpErrStr}}"></video>
+    </view>
+</view>
+<view animation="{{comment.animateData}}" catchtouchmove="noop" class="popup" style="height: {{popupHeight}}px;">
+    <view bindtap="animateCommentPopup" class="close-popup">
+        收起评论<image class="grey-arrow-icon" src="/assets/grey-arrow.png"></image>
+    </view>
+    <scroll-view scrollY bindscrolltolower="getMoreComment" class="comment-list" scrollTop="{{comment.scrollTop}}" style="height: {{popupHeight-50}}px;" upperThreshold="0">
+        <view l class="comment-title">
+            {{comment.cTitle+' '+comment.total}}
+        </view>
+        <template is="comment-item" data="{{ targetId:comment.targetId,commentMap:comment.commentMap,commentItem:comment.commentMap[id] }}" wx:for="{{comment.commentIds}}" wx:for-item="id" wx:key="*this"></template>
+        <view class="more-comment" hidden="{{!comment.commentIds.length}}">
+            {{hasMoreComment?'正在加载':'没有更多了'}}
+        </view>
+        <image class="empty-comment" hidden="{{comment.commentIds.length}}" src="/assets/empty_chat_dark.png"></image>
+    </scroll-view>
+</view>
+<view animation="{{reply.animateData}}" catchtouchmove="noop" class="popup" style="height: {{popupHeight}}px;">
+    <view bindtap="animateReplyPopup" class="close-popup">
+        收起回复<image class="grey-arrow-icon" src="/assets/grey-arrow.png"></image>
+    </view>
+    <scroll-view scrollY class="reply-container" scrollTop="{{reply.scrollTop}}" style="height: {{popupHeight-50}}px;" upperThreshold="0">
+        <view class="original-comment">
+            <template is="comment-item" data="{{ commentItem:comment.commentMap[reply.commentId] }}"></template>
+        </view>
+        <view l class="reply-title">
+            {{'全部回复 '+reply.total}}
+        </view>
+        <view class="reply-list">
+            <template is="comment-item" data="{{commentItem:commentItem}}" wx:for="{{reply.replyList}}" wx:for-item="commentItem" wx:key="id"></template>
+        </view>
+    </scroll-view>
+</view>

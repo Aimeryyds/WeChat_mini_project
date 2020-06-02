@@ -1,0 +1,24 @@
+<view style="height:{{height}}px" wx:if="{{show}}"></view>
+<view class="navigation-wrapper {{isBlackTheme&&'black'}}" style="height:{{height}}px" wx:if="{{show}}">
+    <view class="title-wrapper" style="height:{{menuHeight}}px;">
+        <swiper autoplay circular vertical bindchange="onChange" catchtap="tapSearch" class="search-wrapper" interval="6000" style="width:{{searchWidth}}px;" wx:if="{{withSearch}}">
+            <swiper-item catchtap="tapSearch" catchtouchmove="none" data-keywords="{{item}}" wx:for="{{searchPlaceholder}}" wx:key="*this">
+                <view class="search-item">
+          {{item}}
+        </view>
+            </swiper-item>
+            <swiper-item wx:if="{{!searchPlaceholder||!searchPlaceholder.length}}">
+                <view class="search-item">
+          搜索你感兴趣的新闻
+        </view>
+            </swiper-item>
+        </swiper>
+        <block wx:else>
+            <view class="title">{{title}}</view>
+            <navigator catchtap="tapNavigate" class="back-arrow {{withHome&&'with-home'}}" hoverClass="back-arrow-touched" hoverStartTime="0" openType="{{withHome?'switchTab':'navigateBack'}}" wx:if="{{showBackArrow||withHome}}">
+                <image class="{{withHome?'home-arrow-img':'arrow-img'}}" src="http://mat1.gtimg.com/www/images/news_minipro/back_{{isBlackTheme?'black':'white'}}_{{withHome?'home':'none'}}.png"></image>
+                <view class="home" wx:if="{{withHome}}">首页</view>
+            </navigator>
+        </block>
+    </view>
+</view>

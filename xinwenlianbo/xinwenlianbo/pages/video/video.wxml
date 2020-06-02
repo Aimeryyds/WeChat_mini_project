@@ -1,0 +1,53 @@
+<import src="../../templates/share/share_temp.wxml"></import>
+<import src="../../templates/canleder/canleder_temp.wxml"></import>
+<view class="container">
+    <include src="../../templates/search/search_temp.wxml"></include>
+    <view class="swiper-tab">
+        <view bindtap="swichNav" class="swiper-tab-item {{currentTab==0?'on':''}}" data-current="0">看联播</view>
+        <view bindtap="swichNav" class="swiper-tab-item {{currentTab==1?'on':''}}" data-current="1">听联播</view>
+    </view>
+    <view class="swiper-box">
+        <view class="morenmeiyougao {{currentTab==0?'xianshi':'yincang'}}">
+            <view class="view_video">
+                <video autoplay="true" bindended="videoend" binderror="videoErrorCallback" bindpause="videoPause" bindplay="clickVplay" bindtimeupdate="getVidtime" bindwaiting="videowatting" id="videoID" initialTime="{{initialtime1}}" objectFit="contain" poster="http://p1.img.cctvpic.com/nettv/ibugu/xinwen/C10437/ibugu/images/IMG1257326364058754.jpg" src="{{isFristvideo==true?videoUrl:''}}" style="width:100%"></video>
+            </view>
+        </view>
+        <view class="morenmeiyougao {{currentTab==1?'xianshi':'yincang'}}">
+            <view class="song-control">
+                <view class="progress">
+                    <view class="slider_bg">
+                        <view bindtap="songToggle" class="play {{isAudio?'pause':''}}"></view>
+                        <view class="pass_time">{{pass_time}}</view>
+                        <wxzx-slider bind:sliderCancel="sliderCancel" bind:sliderChange="sliderChange" bind:sliderEnd="sliderEnd" bind:sliderStart="sliderStart" bind:sliderTap="sliderTap" blockImageHeight="54" blockImageWidth="54" blockSrc="../../img/slider.png" disabled="{{disabled}}" id="wxzxSlider" max="{{max}}" percent="{{percent}}" sliderLeft="75" value="{{value}}" width="350"></wxzx-slider>
+                        <view class="total_time">{{total_time}}</view>
+                    </view>
+                </view>
+            </view>
+        </view>
+    </view>
+    <view class="view_video_text" id="swiperID">
+        <view class="view_video_text_title">
+        本期主要内容
+      </view>
+        <view class="view_video_text_list">
+            <view class="articlelist_tw" wx:if="{{showTip}}">
+                <text class="articlelist_tip">加载中...</text>
+            </view>
+            <scroll-view scrollY="true" style="height: {{second_height}}px;">
+                <view class="textlist" wx:for="{{videolistCon}}" wx:for-index="idx" wx:key="item">
+                    <view class="textconBox">
+                        <view bindtap="nextpage" class="textlist_text" data-vid="{{item.video_id}}">
+             {{idx+1+'、'+item.video_title}}
+            </view>
+                        <view class="clear"></view>
+                    </view>
+                    <view class="clear"></view>
+                </view>
+            </scroll-view>
+        </view>
+    </view>
+    <include src="../../templates/share/share_temp.wxml"></include>
+</view>
+<view class="view_load {{isloading?'hide':'show'}}">
+    <view class="view_load_box">加载中</view>
+</view>

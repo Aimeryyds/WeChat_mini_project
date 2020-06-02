@@ -1,0 +1,41 @@
+<xxw-navigation isBlackTheme fromPage="{{fromPage}}" withHome="{{navigateBackHome}}"></xxw-navigation>
+<wx-scope wx:scope-data="{{...scopeData}}" wx:if="{{pageStatus===status.ready}}">
+    <view class="video-page">
+        <block wx:for="{{videoList}}" wx:for-item="list" wx:key="index">
+            <view class="card-box" wx:if="{{!item.isMore||showMore}}" wx:for="{{list}}" wx:key="vid">
+                <view bindtap="tapActiveArea" class="card-wrapper" data-index="{{item.index}}">
+                    <view class="recommend-for-you" wx:if="{{item.showRecommendText}}">
+                        <xxw-comment-title isBlackTheme title="为你推荐"></xxw-comment-title>
+                    </view>
+                    <xxw-exposure articleId="{{item.articleId}}" atype="{{item.atype}}" cell_title="1" cell_video="1" class="video-wrapper" data-index="{{item.index}}" fromPage="{{fromPage}}" vid="{{item.vid}}">
+                        <xxw-video _uid="{{item._uid}}" articleId="{{item.articleId}}" atype="{{item.atype}}" autoPauseOther="{{true}}" bindended="onVideoEnded" bindpause="onVideoPause" bindplay="onVideoPlay" data-index="{{item.index}}" durationStr="{{item.durationStr}}" fromPage="{{fromPage}}" id="{{item._uid}}" playCount="{{item.playCount}}" snapshot="{{item.snapshot}}" title="{{item.title}}" vid="{{item.vid}}"></xxw-video>
+                    </xxw-exposure>
+                    <xxw-launch-app appParameter="{{appParameter}}" articleId="{{articleId}}" exClass="download-botton" reportParams="{{reportParams}}" wx:if="{{isFromApp&&item.index===0}}">
+                        <view class="download-bar">
+              提升3倍流畅度，打开腾讯新闻
+            </view>
+                    </xxw-launch-app>
+                    <view class="title">
+            {{item.title}}
+          </view>
+                    <bottom-bar _uid="{{item._uid}}" articleId="{{item.articleId}}" atype="{{item.atype}}" chlicon="{{item.chlicon}}" chlid="{{item.chlid}}" chlname="{{item.chlname}}" fromPage="{{fromPage}}" isCollection="{{item.isCollection}}" pageArea="{{pageArea}}" posterShareImg="{{item.posterShareImg}}" snapshot="{{item.snapshot}}" title="{{item.title}}" vid="{{item.vid}}"></bottom-bar>
+                    <view catchtap="tapMoreBtn" class="more-btn-wrapper" wx:if="{{item.showMoreBtn&&showMore===false}}">
+                        <xxw-exposure fromPage="{{fromPage}}" opType="{{OP_TYPE.video_album_exposure}}">
+                            <view class="more-btn">
+                更多专辑内容
+                <view class="more-btn-icon iconfont icon-xwevenmore"></view>
+                            </view>
+                        </xxw-exposure>
+                    </view>
+                </view>
+                <view animation="{{coverAnimation}}" catchtap="tapCover" class="card-cover" data-index="{{item.index}}" wx:if="{{item.index!==activeIndex}}"></view>
+            </view>
+        </block>
+        <view class="loading-wrapper {{isFromApp&&'has-fixlist'}}">
+            <xxw-loading-bar hasMore="{{infiniteLoad}}"></xxw-loading-bar>
+        </view>
+    </view>
+</wx-scope>
+<xxw-bg-loading isBlackTheme bindrefresh="init" status="{{pageStatus}}" wx:else></xxw-bg-loading>
+<xxw-poster fromPage="{{fromPage}}"></xxw-poster>
+<launch-app-list articleId="{{articleId}}" class="slider" fixList="{{fixList}}" fromPage="{{fromPage}}" wx:if="{{isFromApp}}"></launch-app-list>

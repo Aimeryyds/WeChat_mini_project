@@ -1,0 +1,46 @@
+<template name="cell">
+    <view bindtap="toMatchList" class="td container-grid month-grid {{cellClass}}" data-date="{{dateString}}" data-matchnum="{{matchNum}}" hoverStyle="none">
+        <view class="month-grid-title">{{day}}</view>
+        <view class="month-grid-body" wx:if="{{showInfo}}">
+            <view class="match-count">{{matchNum}}</view>
+            <view class="match-info">场比赛</view>
+        </view>
+    </view>
+</template>
+<template name="month">
+    <view class="baseContainer deny-select week-head" unselectable="on">
+        <view class="thead">
+            <view class="tr container-head">
+                <view class="th week-day" wx:for="{{['日','一','二','三','四','五','六']}}" wx:for-item="dayDesc" wx:key="dayDesc">
+                    {{dayDesc}}
+                </view>
+            </view>
+        </view>
+    </view>
+    <scroll-view class="scroll-date" scrollY="true" style="height: {{contentHeight-138}}px">
+        <view class="baseContainer date-container deny-select" hoverStyle="none" id="calendar" unselectable="on">
+            <view class="tr" wx:for="{{dates}}" wx:for-index="idx" wx:for-item="cells" wx:key="idx">
+                <template is="cell" data="{{...cell}}" wx:for="{{cells}}" wx:for-index="idx" wx:for-item="cell" wx:key="idx"></template>
+            </view>
+        </view>
+    </scroll-view>
+</template>
+<view class="mini-c">
+    <view class="month-nav">
+        <view bindtap="preMonth" class="icon-base pre-month">
+            &gt;
+        </view>
+        <view class="cur-month">{{month}}</view>
+        <view bindtap="nextMonth" class="icon-base next-month">
+            &lt;
+        </view>
+    </view>
+    <swiper bindchange="handleChangeMonth" current="{{current}}" style="height: {{contentHeight-103}}px">
+        <swiper-item wx:for="{{monthList}}" wx:for-item="oneMonth" wx:key="month">
+            <template is="month" data="{{...cachedMonthMap[oneMonth],contentHeight:contentHeight}}"></template>
+        </swiper-item>
+    </swiper>
+</view>
+<view bindtap="returnToday" class="return-today">
+    返回今天
+</view>

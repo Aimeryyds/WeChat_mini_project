@@ -1,0 +1,20 @@
+<template name="lc-related-act">
+    <view class="lc-related-act g-mrl14" wx:if="{{relatedActData&&relatedActData.length!==0}}">
+        <view class="g-talign-center lc-related-title">
+            <view class="lc-rla__title">{{title?title:'延展阅读'}}</view>
+            <view class="lc-rla__title_line"></view>
+        </view>
+        <view class="lc-rla__list">
+            <navigator class="lc-rla__item g-d-flex" openType="navigate" url="/module-local/pages/act/act?id={{item.id}}" wx:for="{{relatedActData}}" wx:key="{{id}}">
+                <view class="lc-rla__title_box lc-flex-col">
+                    <view class="lc-rla-item__title base-line2">{{item.title}}</view>
+                    <view class="lc-rla-item__source">
+                        <text class="g-f-xs g-clr-849098" wx:if="{{item.visit}}">{{item.visit}}感兴趣</text>
+                    </view>
+                </view>
+                <image class="lc-rla__img" src="{{item.img_big}}"></image>
+            </navigator>
+        </view>
+        <view bindtap="handleMoreAct" class="lc-act-more">更多优质活动</view>
+    </view>
+</template>

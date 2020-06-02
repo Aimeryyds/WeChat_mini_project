@@ -1,0 +1,16 @@
+<xxw-bg-loading wx:if="{{!ready}}"></xxw-bg-loading>
+<view wx:else>
+    <view class="weibo-comment-wrapper">
+        <xxw-comment-block articleId="{{articleId}}" atype="{{atype}}" bgLoading="{{commentLoading}}" bnext="{{commentBnext}}" commentId="{{commentId}}" commentList="{{[commentList]}}" fromPage="{{fromPage}}" height="{{commentHeight}}" isForbidden="{{commentIsForbidden}}" lastReplyId="{{commentLastReplyId}}" scrollTop="{{scrollTop}}" syncId="{{syncId}}">
+            <view class="weibo-card" slot="above">
+                <xxw-weibo-item withTopicName withFollowBtn disableGoDetail articleId="{{weiboInfo.articleId}}" atype="{{weiboInfo.atype}}" card="{{weiboInfo.card}}" commentId="{{weiboInfo.commentId}}" comments="{{weiboInfo.comments}}" content="{{weiboInfo.content}}" date="{{weiboInfo.date}}" fromPage="{{fromPage}}" imageList="{{weiboInfo.imageList}}" isVideo="{{weiboInfo.isVideo}}" posterShareImg="{{weiboInfo.posterShareImg}}" pushInfo="{{weiboInfo.pushInfo}}" relation="{{weiboInfo.relation}}" showPushGuide="{{showPushGuide}}" syncId="{{syncId}}" time="{{weiboInfo.time}}" timestamp="{{weiboInfo.timestamp}}" topic="{{weiboInfo.topic}}" videoInfo="{{weiboInfo.videoInfo}}">
+                    <view class="split-line"></view>
+                </xxw-weibo-item>
+            </view>
+        </xxw-comment-block>
+    </view>
+    <xxw-comment-bar articleId="{{weiboInfo.articleId}}" atype="{{weiboInfo.atype}}" class="comment-bar" commentId="{{weiboInfo.commentId}}" fromPage="{{fromPage}}" hideAnchor="{{true}}" isForbidden="{{commentIsForbidden}}" isVideo="{{weiboInfo.isVideo}}" posterShareImg="{{weiboInfo.posterShareImg}}" syncId="{{syncId}}" title="{{shareTitle}}"></xxw-comment-bar>
+</view>
+<xxw-comment-input-panel fromPage="{{fromPage}}"></xxw-comment-input-panel>
+<xxw-poster fromPage="{{fromPage}}"></xxw-poster>
+<xxw-login></xxw-login>

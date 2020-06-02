@@ -1,0 +1,19 @@
+<view class="share" style="height: {{spread?320:108}}rpx;">
+    <view catchtap="changeSpreadState" class="share-mini" data-spread="{{true}}" hidden="{{spread}}">
+        <image class="arrow-icon" src="http://mat1.gtimg.com/www/js/news/share-blue.png"></image>
+        <view class="share-word">分享</view>
+    </view>
+    <view class="share-long" hidden="{{!spread}}">
+        <view bindtap="tapPoster" class="share-icon-wrapper">
+            <image class="share-icon" src="http://mat1.gtimg.com/www/js/news/pengyouquan.png"></image>
+            <view class="share-word">{{shareText}}</view>
+        </view>
+        <button class="none_button" data-page-area="{{pageArea}}" openType="share">
+            <image class="wechat-icon" src="http://mat1.gtimg.com/www/js/news/wechat-ic.png"></image>
+            <view class="share-word">好友</view>
+        </button>
+        <view catchtap="changeSpreadState" class="share-icon-wrapper" data-spread="{{false}}">
+            <image class="close-icon" src="http://mat1.gtimg.com/www/js/news/close-black.png"></image>
+        </view>
+    </view>
+</view>

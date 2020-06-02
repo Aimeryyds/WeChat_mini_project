@@ -1,0 +1,52 @@
+.auth-dialog {
+    position: fixed;
+    height: 100%;
+    top: 0;
+    width: 100%;
+    z-index: 1000;
+}
+
+.auth-dialog .mask {
+    width: 100%;
+    height: 100%;
+    background: #000;
+    opacity: .5;
+}
+
+.auth-dialog .content {
+    position: absolute;
+    top: 45%;
+    width: 80%;
+    transform: translate(-50%,-50%);
+    left: 50%;
+    background: #fff;
+}
+
+.auth-dialog .content .info {
+    padding: 40rpx;
+    font-size: 32rpx;
+    border-bottom: 1rpx solid #e5e5e5;
+    color: #888;
+}
+
+.auth-dialog .content .btns {
+    display: flex;
+    align-items: center;
+}
+
+.auth-dialog .content .btns button {
+    display: inline-block;
+    width: 50%;
+    height: 80rpx;
+    line-height: 80rpx;
+    background: #fff;
+    border-radius: 0;
+    padding: 0;
+    margin: 0;
+    position: static;
+}
+
+.auth-dialog .content .btns .ok {
+    border-left: 1rpx solid #e5e5e5;
+    color: #02bb00;
+}

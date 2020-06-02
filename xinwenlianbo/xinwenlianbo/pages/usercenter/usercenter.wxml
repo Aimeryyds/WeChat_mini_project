@@ -1,0 +1,37 @@
+<include src="../../templates/include/nowork.wxml"></include>
+<view class="page" hidden="{{!netInfo.status}}">
+    <view class="navbox">
+        <view class="userinfo">
+            <image class="userhead" hidden="{{isAuth}}" src="../../img/lianboheader02.png"></image>
+            <image class="userhead" hidden="{{!isAuth}}" src="{{usesrInfo.avatarUrl}}"></image>
+            <view class="name">{{usesrInfo.nickName}}</view>
+        </view>
+        <view class="bottonbox">
+            <button bindgetuserinfo="getUserInfo" class="shouquan" hidden="{{isAuth}}" openType="getUserInfo" type="primary">授权新闻联播</button>
+        </view>
+        <navigator url="../follow/follow">
+            <view class="follow">
+                <image src="../../img/usercenter_follow.png"></image>
+                <view class="tag">我关注的</view>
+                <view class="go">
+                    <image src="../../img/usercenter_rightarr.png"></image>
+                </view>
+            </view>
+        </navigator>
+        <navigator hoverClass="none" openType="navigate" url="../collection/collection">
+            <view class="follow">
+                <image src="../../img/usercenter_collection.png"></image>
+                <view class="tag">我收藏的</view>
+                <view class="go">
+                    <image src="../../img/usercenter_rightarr.png"></image>
+                </view>
+            </view>
+        </navigator>
+    </view>
+    <view class="bottombg">
+        <image src="../../img/usercenter_bg.png"></image>
+    </view>
+    <view class="audiobox {{audioIsHide==true?'hide':'show'}}">
+        <include src="../../templates/audio/audio.wxml"></include>
+    </view>
+</view>

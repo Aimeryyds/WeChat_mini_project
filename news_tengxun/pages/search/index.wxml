@@ -1,0 +1,59 @@
+<view class="search-box">
+    <view class="search-left">
+        <view class="icon"></view>
+        <input bindconfirm="onConfirm" bindinput="onInput" class="input" confirmType="search" placeholder="{{placeholder||'搜索你感兴趣的新闻'}}" value="{{inputValue}}"></input>
+        <view catchtap="tapClearWords" class="delete-icon" wx:if="{{showClearIcon}}"></view>
+    </view>
+    <view catchtap="tapCancel" class="cancel-btn">
+    取消
+  </view>
+</view>
+<xxw-bg-loading bindrefresh="tapRefresh" status="{{status}}" top="428rpx" wx:if="{{status!==pageStatus.ready}}"></xxw-bg-loading>
+<block wx:else>
+    <block wx:if="{{showSuggestList}}">
+        <view class="search-none" wx:if="{{!suggestList.length}}">
+      抱歉，没有找到相关结果
+    </view>
+        <view class="sug-item" wx:for="{{suggestList}}" wx:key="*this">
+            <image class="sug-icon" src="http://mat1.gtimg.com/www/images/news_minipro/search-ic-gary.png"></image>
+            <view catchtap="onTapText" class="sug-desc" data-text="{{item}}">
+        {{item}}
+      </view>
+        </view>
+    </block>
+    <block wx:elif="{{showArticle}}">
+        <block wx:for="{{articleList}}" wx:for-index="page" wx:for-item="firstItem" wx:key="_uid">
+            <xxw-news-item articleId="{{item.id}}" atype="{{item.atype}}" commentCount="{{item.comments}}" duration="{{item.duration}}" hasRead="{{item.hasRead}}" imageBig="{{item.img_big}}" imageSmall="{{item.img_small}}" imageThree="{{item.img_three}}" imgCount="{{item.img_count}}" isOriginal="{{item.isFisOriginal}}" joinCount="{{item.joinCount}}" picShowType="{{item.picShowType}}" playCount="{{item.playCount}}" readNum="{{item.readNum}}" showType="{{item.showType}}" source="{{item.source}}" time="{{item.time}}" title="{{item.title}}" topicId="{{item.tpid}}" vid="{{item.vid}}" wx:for="{{firstItem.list}}" wx:key="_uid"></xxw-news-item>
+        </block>
+        <xxw-loading-bar class="loading-bar-bottom" hasMore="{{hasMore}}" status="{{bottomLoadingStatus}}" wx:if="{{articleList[0]&&articleList[0].list.length}}"></xxw-loading-bar>
+        <view class="search-none" wx:else>
+      抱歉，没有找到相关结果
+    </view>
+    </block>
+    <view class="hot-wrapper" wx:else>
+        <block wx:if="{{history.length}}">
+            <view class="search-history">
+                <view class="title">历史搜索</view>
+                <view catchtap="tapDeleteHistory" class="delete"></view>
+            </view>
+            <view class="history-list">
+                <view catchtap="onTapText" class="span" data-text="{{item.raw}}" wx:for="{{history}}" wx:key="*this">
+          {{item.display}}
+        </view>
+            </view>
+        </block>
+        <block wx:if="{{hotList.length}}">
+            <view class="today-hot-title">
+                <image class="hot-icon" src="https://mat1.gtimg.com/www/images/newsapp/wxapp/news/pages/search/search-fire.png"></image>
+        今日热点
+      </view>
+            <view class="hot-list">
+                <view catchtap="onTapText" class="hot-item {{item.tag==='热'&&'hot'}} {{item.tag==='新'&&'new'}} {{item.tag==='荐'&&'recom'}}" data-text="{{item.desc}}" wx:for="{{hotList}}" wx:key="id">
+                    <view class="number">{{index+1}}.</view>
+                    <view class="desc">{{item.desc}}</view>
+                </view>
+            </view>
+        </block>
+    </view>
+    <view class="bottom"></view>
+</block>

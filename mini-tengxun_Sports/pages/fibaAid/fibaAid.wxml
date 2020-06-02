@@ -1,0 +1,48 @@
+<view class="content" id="content">
+    <navigator class="rules" url="/pages/fibaRules/fibaRules" wx:if="{{showRules}}">
+        <image class="icon icon-help" src="/assets/FIBA/icon_tips@3x.png"></image>
+        <text>点击查看活动规则</text>
+        <text catchtap="closeRulesTips" class="close">×</text>
+    </navigator>
+    <view class="text">
+        <textarea bindinput="setTextAreaVal" class="textarea" maxlength="500" placeholder="写点什么内容分享下吧！(内容长度不少于20字)" style="color: {{textareaColor}}" value="{{content}}" wx:if="{{showTextArea}}"></textarea>
+        <view class="view-textarea" wx:else>{{content?content:'写点什么内容分享下吧！(内容长度不少于20字)'}}</view>
+        <view class="tips">({{countTextArea}}/500)</view>
+    </view>
+    <view class="images clearfix">
+        <view class="img-box" wx:for="{{images}}" wx:key="unique">
+            <image catchtap="del" class="icon icon-del" data-index="{{index}}" data-type="image" src="/assets/FIBA/btn_delete_pic@3x.png"></image>
+            <image class="img" src="{{item.path||item.url}}"></image>
+        </view>
+        <view class="video-box" wx:if="{{video}}">
+            <image catchtap="del" class="icon icon-del" data-index="{{index}}" data-type="video" src="/assets/FIBA/btn_delete_pic@3x.png"></image>
+            <video bindfullscreenchange="handleVideoScreen" class="video" id="myVideo" objectFit="cover" src="{{video.tempFilePath}}"></video>
+        </view>
+        <view bindtap="chooseImageFile" class="add-btn" wx:if="{{(!fileType||fileType==='image')&&images.length<9}}">
+            <image class="btn-img" src="/assets/FIBA/icon_addpic@3x.png"></image>
+            <view class="tips">图片≤10M</view>
+        </view>
+        <view bindtap="chooseVideoFile" class="add-btn" wx:if="{{(!fileType||fileType==='video')&&!video}}">
+            <image class="btn-img" src="/assets/FIBA/icon_addvedio@3x.png"></image>
+            <view class="tips">视频≤64M</view>
+        </view>
+    </view>
+    <view class="detail">
+        <view class="clearfix">
+            <navigator class="li li-topic {{topics.id?'active':''}}" url="/pages/fibaTopic/fibaTopic?from=aid">
+               #想发布在哪个话题呢？
+           </navigator>
+            <view bindtap="getCity" class="li li-aid {{city.id?'active':''}}">
+                <image class="icon icon-aid" src="/assets/FIBA/icon_yy_city@3x.png" wx:if="{{city.id}}"></image>
+                <text wx:else>＋</text>{{city.name?'加油'+city.name+'!':'应援城市'}}
+           </view>
+        </view>
+        <view bindtap="getLocation" class="li li-location {{location?'active':''}}">
+            <image class="icon icon-location" src="/assets/FIBA/{{location?'icon_add_location_b@3x.png':'icon_add_location@3x.png'}}"></image>{{location?location:'嗨，我在这里！'}} <text class="split" wx:if="{{location}}">|</text>
+            <text catchtap="delLocation" class="del" wx:if="{{location}}">×</text>
+        </view>
+    </view>
+    <FibaAd bannerInfo="{{banner.b6}}" class="ad {{adClass}}" imageStr="height:148rpx;padding:0 32rpx;box-sizing:border-box;" wx:if="{{banner.b6&&banner.b6.show}}"></FibaAd>
+    <FibaCity activeCityId="{{city.id}}" bind:onChoice="choiceCityComps" bind:onClose="closeCityComps" sameShow="{{false}}" show="{{citycomps}}"></FibaCity>
+    <FibaSubmit bind:onSubmit="submit"></FibaSubmit>
+</view>

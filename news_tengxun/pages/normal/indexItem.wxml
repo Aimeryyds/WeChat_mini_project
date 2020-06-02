@@ -1,0 +1,32 @@
+<scroll-view scrollY class="scroll-view" scrollTop="{{scrollTop}}" scrollWithAnimation="{{false}}" wx:if="{{current<=item.index+1&&item.index-1<=current}}">
+    <view class="fake-scroll {{item.index===current&&'hidden'}}" hidden="{{item.index!==current&&item.index!==current+1}}"></view>
+    <view class="article {{item.index!==current&&'hidden'}}" wx:if="{{item.index===current||item.index===current+1}}">
+        <article-content chlicon="{{item.chlicon}}" chlid="{{item.chlid}}" chlname="{{item.chlname}}" date="{{item.date}}" fromPage="{{fromPage}}" intro="{{item.intro}}" introName="{{item.introName}}" origContent="{{item.content}}" remark="{{item.remark}}" special="{{item.special}}" timeline="{{item.timeline}}" title="{{item.title}}" topic="{{item.topic}}" truthContent="{{item.truthContent}}"></article-content>
+        <xxw-share-button articleId="{{item.articleId}}" fromPage="{{fromPage}}" posterShareImg="{{item.posterShareImg}}" title="{{item.title}}"></xxw-share-button>
+        <view class="comment-wrapper">
+            <xxw-comment-block customBelow showReplyCount articleId="{{item.articleId}}" atype="{{item.atype}}" bgLoading="{{commentLoading}}" bindreply="tapCommentReply" bindtapContent="tapCommentContent" commentId="{{item.commentId}}" commentList="{{[commentList]}}" enableShowAll="{{false}}" fromPage="{{fromPage}}" isForbidden="{{commentIsForbidden}}" showReply="{{false}}" syncId="{{syncId}}">
+                <view class="title-wrapper" slot="above" wx:if="{{commentCount}}">
+                    <view class="title">
+            热门评论
+          </view>
+                </view>
+                <view class="more-comment-btn-wrapper" slot="below" wx:if="{{commentCount>2}}">
+                    <view bindtap="tapAllCommentBtn" class="more-comment-btn">
+            查看全部{{commentCountStr}}条评论
+            <image class="icon" src="http://mat1.gtimg.com/www/js/news/open-black.png"></image>
+                    </view>
+                </view>
+            </xxw-comment-block>
+        </view>
+        <view class="comment-bar">
+            <xxw-comment-bar anchorText="{{commentCountStr}}" articleId="{{item.articleId}}" atype="{{item.atype}}" bindtapanchor="tapAllCommentBtn" commentCount="{{commentCount}}" commentId="{{item.commentId}}" fromPage="{{fromPage}}" isForbidden="{{commentIsForbidden}}" posterShareImg="{{item.posterShareImg}}" syncId="{{syncId}}" title="{{item.title}}"></xxw-comment-bar>
+        </view>
+        <fake-title articleId="{{next.articleId}}" atype="{{next.atype}}" fakeContent="{{next.fakeContent}}" fromPage="{{fromPage}}" hasImage="{{hasImage}}" index="{{next.index}}" title="{{next.title}}" wx:if="{{next}}"></fake-title>
+    </view>
+    <view class="fake-previous {{showFakePrevious&&'show-fake-previous'}}" wx:if="{{item.index+1===current}}">
+        <view class="mask-words">
+      下滑查看上一条
+      <image class="mask-icon" src="http://mat1.gtimg.com/www/js/news/open-blue.png"></image>
+        </view>
+    </view>
+</scroll-view>

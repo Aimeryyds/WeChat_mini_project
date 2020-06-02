@@ -1,0 +1,10 @@
+<xxw-bg-loading wx:if="{{bgLoading}}"></xxw-bg-loading>
+<view class="normal-comment-wrapper" wx:else>
+    <xxw-comment-block articleId="{{articleId}}" atype="{{atype}}" bgLoading="{{commentLoading}}" bnext="{{commentBnext}}" commentId="{{commentId}}" commentList="{{[commentList]}}" fromPage="{{fromPage}}" height="{{commentHeight}}" isForbidden="{{commentIsForbidden}}" lastReplyId="{{commentLastReplyId}}" scrollTop="{{scrollTop}}" syncId="{{syncId}}">
+        <title articleId="{{articleId}}" atype="{{atype}}" chlicon="{{chlicon}}" chlid="{{chlid}}" chlname="{{chlname}}" fromPage="{{fromPage}}" showOriginBtn="{{showOriginBtn}}" slot="above" timestamp="{{timestamp}}" title="{{title}}"></title>
+    </xxw-comment-block>
+</view>
+<xxw-comment-bar articleId="{{articleId}}" atype="{{atype}}" class="comment-bar" commentId="{{commentId}}" fromPage="{{fromPage}}" hideAnchor="{{true}}" isForbidden="{{commentIsForbidden}}" posterShareImg="{{posterShareImg}}" syncId="{{syncId}}" title="{{title}}"></xxw-comment-bar>
+<xxw-comment-input-panel fromPage="{{fromPage}}"></xxw-comment-input-panel>
+<xxw-login></xxw-login>
+<xxw-poster fromPage="{{fromPage}}"></xxw-poster>

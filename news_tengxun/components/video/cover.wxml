@@ -1,0 +1,40 @@
+<view catchtap="tapCover" class="cover-wrapper">
+    <image class="cover-snapshot" mode="aspectFill" src="{{snapshot}}"></image>
+    <view class="cover-title" wx:if="{{showTopTitle}}">
+    {{title}}
+  </view>
+    <view class="play-count-box">
+        <view class="video-play-icon iconfont icon-xwlook" wx:if="{{playCount&&durationStr}}"></view>
+        <view class="video-play-icon iconfont icon-xwsplay" wx:else></view>
+        <block wx:if="{{playCount}}">
+            <view class="play-count-text">
+        {{playCountStr}}
+      </view>
+            <view class="split-line"></view>
+        </block>
+        <view class="play-count-text">
+      {{durationStr}}
+    </view>
+    </view>
+    <view class="continue-tip-wrapper" wx:if="{{showErrorTips}}">
+        <view class="err-msg">
+      {{errMsg||'这个视频被外星人劫走，暂时看不了了~'}}
+    </view>
+    </view>
+    <view class="continue-tip-wrapper" wx:elif="{{showRetryTips}}">
+        <view catchtap="tapContinue" class="continue-btn">
+      播放出错，点击重试
+    </view>
+    </view>
+    <view class="continue-tip-wrapper" wx:elif="{{showContinueTips}}">
+        <view class="continue-tip">
+      正在使用流量播放，是否继续 ？
+    </view>
+        <view catchtap="tapContinue" class="continue-btn">
+      继续播放
+    </view>
+    </view>
+    <view class="play-btn-box" wx:else>
+        <view class="iconfont icon-xwsplay play-btn"></view>
+    </view>
+</view>

@@ -1,0 +1,86 @@
+function parse(v, f) {
+    if (!f) f = 'yyyy-MM-dd hh:mm:ss';;
+    f = f.split(getRegExp('\x5cW'));
+    v = v.split(getRegExp('\x5cD'));
+    var y = 2000;
+    var M = 0;
+    var d = 1;
+    var h = 0;
+    var m = 0;
+    var s = 0;
+    var D = true;
+    for (var i = 0; i < f.length; i++) {
+        var o = f[((nt_0 = (i), null == nt_0 ? undefined : 'number' === typeof nt_0 ? nt_0 : "" + nt_0))];
+        if (v[((nt_1 = (i), null == nt_1 ? undefined : 'number' === typeof nt_1 ? nt_1 : "" + nt_1))] != '' && !isNaN(v[((nt_2 = (i), null == nt_2 ? undefined : 'number' === typeof nt_2 ? nt_2 : "" + nt_2))])) {
+            if (o.indexOf('y') != -1) y = Number(v[((nt_3 = (i), null == nt_3 ? undefined : 'number' === typeof nt_3 ? nt_3 : "" + nt_3))]);;
+            if (o.indexOf('M') != -1) M = Number(v[((nt_4 = (i), null == nt_4 ? undefined : 'number' === typeof nt_4 ? nt_4 : "" + nt_4))]);; - 1;
+            if (o.indexOf('d') != -1) d = Number(v[((nt_5 = (i), null == nt_5 ? undefined : 'number' === typeof nt_5 ? nt_5 : "" + nt_5))]);;
+            if (o.indexOf('h') != -1) h = Number(v[((nt_6 = (i), null == nt_6 ? undefined : 'number' === typeof nt_6 ? nt_6 : "" + nt_6))]);;
+            if (o.indexOf('m') != -1) m = Number(v[((nt_7 = (i), null == nt_7 ? undefined : 'number' === typeof nt_7 ? nt_7 : "" + nt_7))]);;
+            if (o.indexOf('s') != -1) s = Number(v[((nt_8 = (i), null == nt_8 ? undefined : 'number' === typeof nt_8 ? nt_8 : "" + nt_8))]);;
+            if (o.indexOf('w') != -1) s = Number(v[((nt_9 = (i), null == nt_9 ? undefined : 'number' === typeof nt_9 ? nt_9 : "" + nt_9))]);
+        }
+    };
+    if (!D) return (false);;
+    return (getDate(y, M, d, h, m, s))
+};
+
+function tap(v, len) {
+    v = v + '';
+    if (v.length < len) {
+        for (var i = 0; i < len - v.length; i++) {
+            v = '0' + v
+        }
+    };
+    return (v)
+};
+
+function format(timestamp, fmt) {
+    var date = timestamp ? getDate(timestamp) : getDate();
+    var o = [({
+        k: 'M+',
+        v: date.getMonth() + 1,
+    }), ({
+        k: 'd+',
+        v: date.getDate(),
+    }), ({
+        k: 'h+',
+        v: date.getHours(),
+    }), ({
+        k: 'm+',
+        v: date.getMinutes(),
+    }), ({
+        k: 's+',
+        v: date.getSeconds(),
+    }), ({
+        k: 'q+',
+        v: Math.floor((date.getMonth() + 3) / 3),
+    }), ({
+        k: 'S',
+        v: date.getMilliseconds(),
+    })];
+    var now = getDate().getTime();
+    var day7 = 7 * 24 * 60 * 60 * 1000;
+    var day1 = 1 * 24 * 60 * 60 * 1000;
+    if (now > timestamp + day7) {
+        fmt = 'yyyy年MM月dd日 hh:mm'
+    } else if (now > timestamp + day1 && now < timestamp + day7) {
+        var week = ['星期日', '星期一', '星期二', '星期三', '星期四', '星期五', '星期六'][((nt_10 = (getDate(timestamp).getDay()), null == nt_10 ? undefined : 'number' === typeof nt_10 ? nt_10 : "" + nt_10))];
+        fmt = week + ' hh:mm'
+    } else {
+        fmt = 'hh:mm'
+    };
+    var reg1 = getRegExp('(y+)');
+    fmt = fmt.replace(reg1, (date.getFullYear() + ""));
+    for (var i = 0; i < o.length; i++) {
+        var item = o[((nt_11 = (i), null == nt_11 ? undefined : 'number' === typeof nt_11 ? nt_11 : "" + nt_11))];
+        var reg = getRegExp(item.k);
+        var testK = reg.exec(fmt);
+        fmt = fmt.replace(reg, tap(item.v, testK ? testK[(0)].length : 0))
+    };
+    return (fmt)
+};
+module.exports = ({
+    parse: parse,
+    format: format,
+});

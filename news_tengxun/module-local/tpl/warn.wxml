@@ -1,0 +1,42 @@
+<template name="article-warn">
+    <view class="lc-loadingbg-wrap" wx:if="{{showType==0}}">
+        <image class="lc-loading-image" src="http://mat1.gtimg.com/www/images/newsapp/wxapp/news/loading3.gif"></image>
+        <image class="lc-logo-image" src="http://mat1.gtimg.com/www/images/news_minipro/bg_logo_grey.png"></image>
+    </view>
+    <view class="lc-zwt-wrap" wx:if="{{showType==2}}">
+        <image class="lc-warn-image" src="http://mat1.gtimg.com/www/js/news/ic_default_alpha.png"></image>
+        <text class="lc-bk-warn-black">此活动暂无数据，换一个试试</text>
+    </view>
+    <view bindtap="refreshReloadModel" class="lc-zwt-wrap" wx:if="{{showType==3}}">
+        <image class="lc-warn-image" src="http://mat1.gtimg.com/www/js/news/ic_default_alpha.png"></image>
+        <text class="lc-bk-warn-black">网络无法连接，点击重试</text>
+    </view>
+    <view class="lc-zwt-wrap" wx:if="{{showType==4}}">
+        <image class="lc-warn-image" src="http://mat1.gtimg.com/www/js/news/ic_default_alpha.png"></image>
+        <text class="lc-bk-warn-black">内容建设中，返回浏览其他内容。</text>
+    </view>
+</template>
+<template name="warn">
+    <view class="lc-warn-wrap">
+        <view class="lc-loadingbg-wrap" wx:if="{{showType=='loading'}}">
+            <image class="lc-loading-image" src="http://mat1.gtimg.com/www/images/newsapp/wxapp/news/loading3.gif"></image>
+            <image class="lc-logo-image" src="http://mat1.gtimg.com/www/images/news_minipro/bg_logo_grey.png"></image>
+        </view>
+        <view class="lc-zwt-wrap" wx:if="{{showType=='blank'}}">
+            <image class="lc-warn-image" src="http://mat1.gtimg.com/www/js/news/ic_default_alpha.png"></image>
+            <text class="lc-bk-warn-black">暂无内容</text>
+        </view>
+        <view bindtap="refreshReloadModel" class="lc-zwt-wrap" wx:if="{{showType=='nonet'}}">
+            <image class="lc-warn-image" src="http://mat1.gtimg.com/www/js/news/ic_default_alpha.png"></image>
+            <text class="lc-bk-warn-black">网络无法连接，点击重试</text>
+        </view>
+        <view class="lc-zwt-wrap" wx:if="{{showType=='404'}}">
+            <image class="lc-warn-image" src="http://mat1.gtimg.com/www/js/news/ic_default_alpha.png"></image>
+            <text class="lc-bk-warn-black">页面出错，请稍后再试</text>
+        </view>
+        <view bindtap="refreshReloadModel" class="lc-zwt-wrap" wx:if="{{showType=='retry'}}">
+            <image class="lc-warn-image" src="http://mat1.gtimg.com/www/js/news/ic_default_alpha.png"></image>
+            <text class="lc-bk-warn-black">页面出错，请稍后再试</text>
+        </view>
+    </view>
+</template>

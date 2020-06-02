@@ -1,0 +1,29 @@
+<view class="card-wrapper">
+    <view class="card">
+        <view class="user-info-wrapper">
+            <image class="avatar" src="{{avatarUrl||'http://mat1.gtimg.com/www/images/news_minipro/personal_default.png'}}"></image>
+            <view class="nick-name">
+                <text>{{nickName||'腾讯网友'}}</text>
+            </view>
+            <xxw-follow-button isMyFans="{{isMyFans}}" isMyFollow="{{isMyFollow}}" mediaId="{{mediaId}}" theme="bluebig" type="{{isMedia?'media':'user'}}" uin="{{uin}}" wx:if="{{type!=='master'}}"></xxw-follow-button>
+        </view>
+        <view bindtap="tapExpend" class="user-desc-wrapper {{folded&&'folded'}}" wx:if="{{descNeedFold}}">
+            <text class="user-desc">{{userDesc}}</text>
+            <view class="user-desc-fold-icon-wrapper">
+                <image class="user-desc-fold-icon" src="http://mat1.gtimg.com/www/js/news/Personal_Card_isFolded.png"></image>
+            </view>
+        </view>
+        <text class="user-desc" style="opacity: {{calcTextReady?1:0}}" wx:else>{{userDesc}}</text>
+        <view class="number-wrapper">
+            <block wx:for="{{numbers}}" wx:key="text">
+                <view bindtap="{{item.event}}" class="number-item">
+                    <text class="number">{{item.value}}</text>
+                    <text class="text">{{item.text}}</text>
+                </view>
+                <view class="split-line" wx:if="{{item.splitLine!==false}}"></view>
+            </block>
+        </view>
+    </view>
+</view>
+<view class="card-bottom" wx:if="{{type!=='master'}}"></view>
+<like-count-modal likeCount="{{numbers[numbers.length-1].value}}" nickName="{{nickName}}" show="{{showLikeCountModal}}"></like-count-modal>

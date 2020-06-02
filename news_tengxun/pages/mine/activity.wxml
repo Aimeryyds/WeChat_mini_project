@@ -1,0 +1,13 @@
+<xxw-bg-loading bindrefresh="render" status="{{status}}" wx:if="{{status!==pageStatus.ready}}"></xxw-bg-loading>
+<block wx:else>
+    <view class="empty-wrapper" wx:if="{{noData}}">
+        <image class="empty-icon" mode="aspectFill" src="http://mat1.gtimg.com/www/images/newsapp/wxapp/news/comment_empty_icon.png"></image>
+        <view class="empty-text">暂无活动</view>
+    </view>
+    <view wx:else>
+        <block wx:for="{{list}}" wx:for-index="page" wx:for-item="firstItem" wx:key="_uid">
+            <activity-item item="{{item}}" wx:for="{{firstItem.list}}" wx:key="id"></activity-item>
+        </block>
+        <xxw-loading-bar bindretry="onScrollToLower" class="bottom-loading-bar" hasMore="{{hasMore}}" status="{{bottomLoadingStatus}}"></xxw-loading-bar>
+    </view>
+</block>

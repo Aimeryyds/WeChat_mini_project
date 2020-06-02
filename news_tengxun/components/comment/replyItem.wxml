@@ -1,0 +1,20 @@
+<view bindtap="tapContent" class="reply-item-wrapper {{isBlackTheme&&'black'}}">
+    <view class="reply-content">
+        <xxw-collapse-text class="comment-collapse-text" enableShowAll="{{enableShowAll}}" lineCount="{{lineCount}}">
+            <block wx:if="{{parentNickName}}">
+                <text class="text-bold">{{nickName}}</text>
+                <text> 回复 </text>
+                <text class="text-bold">{{parentNickName}}：</text>
+            </block>
+            <text class="text-bold" wx:else>{{nickName}}：</text>
+            <block wx:for="{{emojiContent}}" wx:key="count">
+                <block wx:if="{{item.type==='text'}}">
+          {{item.desc}}
+        </block>
+                <image class="emoji-icon" mode="aspectFill" src="{{item.desc}}" wx:if="{{item.type==='emoji'&&item.desc}}"></image>
+            </block>
+            <text catchtap="tapDelete" class="del-btn" data-article-id="{{articleId}}" data-comment-id="{{commentId}}" data-reply-id="{{replyId}}" wx:if="{{isMe}}">删除</text>
+        </xxw-collapse-text>
+    </view>
+    <image bindload="onImgLoad" catchtap="tapImage" class="comment-img" hidden="{{!showImg}}" mode="{{image.width<image.height*0.6875?'aspectFill':'widthFix'}}" src="{{image.url}}" wx:if="{{image}}"></image>
+</view>

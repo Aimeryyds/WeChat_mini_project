@@ -1,0 +1,30 @@
+<button class="form-button" data-article-id="{{articleId}}" formType="submit" hoverClass="none">
+    <view bindtap="newsClick" class="fold-hotspot-wrapper" wx:if="{{zwbFolded}}">
+        <view class="left">
+            <image class="hot-spot-icon" src="http://mat1.gtimg.com/www/images/news_minipro/fold_hot_spot_tl.png"></image>
+            <view class="desc">热点精选</view>
+        </view>
+        <swiper autoplay circular vertical class="swiper-wrap" duration="{{300}}">
+            <swiper-item catchtouchmove="stopTouchMove" class="item-wrap" wx:for="{{articleList}}" wx:key="articleId">
+                <view class="item-text">{{item.title}}</view>
+            </swiper-item>
+        </swiper>
+    </view>
+    <view class="hotspot-wrapper" wx:else>
+        <view bindtap="handleTapMore" class="hotspot-title-wrapper">
+            <view class="title-left">
+                <view class="left-icon iconfont icon-xwfire"></view>
+                <text class="title-text">{{title}}</text>
+            </view>
+            <view class="title-right">
+                <text>查看更多</text>
+                <image class="right-arrow" mode="aspectFill" src="http://mat1.gtimg.com/www/js/news/open-black.png"></image>
+            </view>
+        </view>
+        <scroll-view scrollLeft="{{zwbHasExposured?'654rpx':''}}" scrollX="true">
+            <view class="hotspot-item-wrapper" style="width:{{articleList.length*655+30}}rpx">
+                <card-item articleId="{{item.articleId}}" atype="{{item.atype}}" chlname="{{item.chlname}}" class="hotspot-item" imageSrc="{{item.imgBig}}" publishTime="{{item.publishTime}}" showType="{{item.showType}}" title="{{item.title}}" tpid="{{item.tpid}}" zwbDate="{{item.zwbDate}}" zwbDay="{{item.zwbDay}}" zwbType="{{item.zwbType}}" zwbWeekday="{{item.zwbWeekday}}" wx:for="{{articleList}}" wx:key="_uid"></card-item>
+            </view>
+        </scroll-view>
+    </view>
+</button>

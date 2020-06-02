@@ -1,0 +1,11 @@
+<view class="search-bar">
+    <view class="search-wrap">
+        <view class="search-box">
+            <view url="../search/search?key={{qtext}}&type=0">
+                <view bindtap="redirectTosearch" class="search_icon"></view>
+            </view>
+            <input bindconfirm="onSearchConfirm" bindfocus="onSearchFocus" bindinput="onSearchInput" class="search-input" focus="{{inputFocus}}" name="qtext" placeholder="搜索" type="text" value="{{qtext}}"></input>
+            <view catchtap="onClearInput" class="icon-clear" hidden="{{qtext.length<1}}"></view>
+        </view>
+    </view>
+</view>

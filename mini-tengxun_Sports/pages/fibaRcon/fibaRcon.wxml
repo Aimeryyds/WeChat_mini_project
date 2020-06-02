@@ -1,0 +1,8 @@
+<view class="content">
+    <FibaComment bind:loginevent="onLoginEvent" bind:onParisedSuccess="handleParisedSuccess" info="{{info}}" tid="{{tid}}" userInfo="{{userInfo}}" wx:if="{{info}}"></FibaComment>
+    <view class="reply">
+        <FibaReply info="{{item}}" wx:for="{{list}}" wx:key="{{index}}"></FibaReply>
+        <FibaReply info="{{item}}" wx:for="{{appendList}}" wx:key="{{index}}"></FibaReply>
+    </view>
+    <FibaReplyBox autoFocus="{{focus}}" bind:loginevent="onLoginEvent" bind:onSuccess="handleSuccess" pid="{{rid}}" supportCity="{{supportCity}}" tid="{{tid}}" userInfo="{{userInfo}}"></FibaReplyBox>
+</view>

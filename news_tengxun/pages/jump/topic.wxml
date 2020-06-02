@@ -1,0 +1,22 @@
+<view bindtap="onTap" class="topicContainer">
+    <view class="topicTitle">
+        <view class="topicTextBackground">话题</view>
+        <image class="imageStyle" src="http://mat1.gtimg.com/www/js/news/left.png"></image>
+        <text class="topicName">{{name}}</text>
+        <image class="imageStyle" src="http://mat1.gtimg.com/www/js/news/left.png"></image>
+    </view>
+    <topic-battle bind:onSubmit="onSubmit" class="topicBattle" voteid="{{voteId}}" wx:if="{{voteId}}"></topic-battle>
+    <view class="imageListView">
+        <view class="HeadView_container">
+            <view class="imageBorder {{!voteId&&activeWeiboIndex==index&&'yellowBorder'}}" style="z-index:{{weiboList.length-index}}" wx:for="{{weiboList}}" wx:key="id">
+                <image class="headView" src="{{item.avatarUrl}}"></image>
+            </view>
+        </view>
+        <view class="topicPeople">等{{joinCountStr}}人参与讨论</view>
+    </view>
+    <swiper autoplay circular vertical bindchange="onSwiperChange" class="swiper" wx:if="{{!voteId||submited}}">
+        <swiper-item catchtouchmove="catchtouchmove" class="topicDesc" wx:for="{{weiboList}}" wx:key="id">
+      {{item.desc}}
+    </swiper-item>
+    </swiper>
+</view>

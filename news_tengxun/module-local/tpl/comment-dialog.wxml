@@ -1,0 +1,25 @@
+<template name="lc-comment-bottom-btn">
+    <view class="lc-comment-bbtn g-d-flex g-flex-spacebetween">
+        <view class="lc-bbtn__left">
+            <view class="lc-icon lc-icon__write g-va-middle"></view>
+            <view class="g-d-inlineblock g-f-xl g-va-middle">评一下</view>
+        </view>
+        <view class="lc-bbtn__right">
+            <view class="lc-icon lc-icon__comment g-va-middle"></view>
+            <view class="g-d-inlineblock g-f-m g-mr20 g-va-middle">233</view>
+            <view bindtap="handleShareShow" class="lc-icon lc-icon__share g-va-middle"></view>
+        </view>
+    </view>
+</template>
+<template name="lc-comment-dialog">
+    <view catchtap="onEditFloatBlockOutTap" catchtouchmove="nothingClick" class="shade-box" wx:if="{{commentState}}">
+        <view catchtap="nothingClick" class="comment-edit-block">
+            <form bindsubmit="bindCommentSubmit">
+                <input adjustPosition="true" autoFocus="true" bindblur="commentEditBlur" bindconfirm="commentEditConfirm" bindfocus="commentEditFocus" bindinput="bindInputEvent" class="comment-edit-input" confirmType="send" cursorSpacing="60" fixed="true" focus="true" maxlength="150" name="commentContent" placeholder="{{placeholderText}}" placeholderClass="comment-placeholder-text" type="text" value="{{cacheCommentText}}"></input>
+                <view class="comment-edit-submit-btn-container">
+                    <button class="comment-edit-submit-btn {{enableInputSubmitBtn?'':'disable'}}" formType="submit">发布</button>
+                </view>
+            </form>
+        </view>
+    </view>
+</template>

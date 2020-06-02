@@ -1,0 +1,18 @@
+<view catchtap="commentTap" class="hot_container {{hasRead&&'has-read'}} {{smallScreen&&'small-screen'}}">
+    <view class="top_container">
+        <text class="name">{{nickName}}:</text>
+        <view catchtap="commentAgreeTap" class="praise_container">
+            <text class="praiseCount">{{agreeCountStr}}</text>
+            <view class="like_icon {{!isClicked&&isAgreed&&'agreed'}} {{isClicked&&'like-active'}}"></view>
+        </view>
+    </view>
+    <view class="reply_content">
+        <block wx:for="{{emojiContent}}" wx:key="count">
+            <block wx:if="{{item.type==='text'}}">
+        {{item.desc}}
+      </block>
+            <image class="emoji-icon" mode="aspectFill" src="{{item.desc}}" wx:if="{{item.type==='emoji'&&item.desc}}"></image>
+        </block>
+    </view>
+    <image class="reply_image" mode="aspectFill" src="{{imageSrc}}" wx:if="{{imageSrc}}"></image>
+</view>

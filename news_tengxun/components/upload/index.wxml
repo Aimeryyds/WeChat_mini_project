@@ -1,0 +1,7 @@
+<view class="upload-wrapper {{disable&&'disable'}}">
+    <view catchtap="tapUpload" class="upload">
+        <image class="upload-image" src="{{buttonImgSrc}}" wx:if="{{buttonImgSrc}}"></image>
+        <slot wx:else></slot>
+        <view class="uploadText">{{uploadText}}</view>
+    </view>
+</view>

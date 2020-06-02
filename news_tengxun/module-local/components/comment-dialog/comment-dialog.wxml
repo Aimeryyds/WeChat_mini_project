@@ -1,0 +1,11 @@
+<view bindtap="_disappearCommentDialog" class="shade-box" data-wrap="mask" wx:if="{{isShow}}">
+    <view class="comment-edit-block">
+        <form bindsubmit="_bindCommentSubmit">
+            <input adjustPosition="true" autoFocus="true" bindblur="_commentEditBlur" bindconfirm="_commentEditConfirm" bindfocus="_commentEditFocus" bindinput="_bindInputEvent" class="comment-edit-input" confirmType="send" cursorSpacing="60" fixed="true" focus="true" maxlength="{{maxlength}}" name="commentContent" placeholder="{{placeholderText}}" placeholderClass="comment-placeholder-text" type="text" value="{{commentText}}"></input>
+            <view class="comment-edit-submit-btn-container">
+                <text class="comment-edit-remaincount">还剩{{remainCount}}个字</text>
+                <button class="comment-edit-submit-btn {{enableInputSubmitBtn?'':'disable'}}" formType="submit">发布</button>
+            </view>
+        </form>
+    </view>
+</view>

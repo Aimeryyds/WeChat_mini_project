@@ -1,0 +1,17 @@
+<view class="content">
+    <view catchtap="choosed" class="li" data-item="{{item}}" wx:for="{{lists}}" wx:key="{{index}}">
+        <view class="title">
+            #{{item.content}}#
+        </view>
+        <view class="creater">
+            <FibaAvatar border="{{true}}" class="user-photo" src="{{item.creatorIcon}}"></FibaAvatar>
+            <text class="text">{{item.creatorName}}</text>
+            <text class="text">{{item.createTime}}创建</text>
+            <text class="text">{{item.followNum}}人参与</text>
+        </view>
+    </view>
+    <view class="empty" wx:if="{{!lists.length&&requested}}">
+        <image class="img" src="/assets/FIBA/Icon_empty@3x.png"></image>
+        <view class="txt">暂无内容</view>
+    </view>
+</view>

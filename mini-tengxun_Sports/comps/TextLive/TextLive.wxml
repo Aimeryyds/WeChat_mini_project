@@ -1,0 +1,71 @@
+<view class="text-live-container">
+    <scroll-view bindscroll="handleScroll" bindscrolltolower="handleScrollToLimit" bindscrolltoupper="handleScrollToLimit" bindtouchend="handleTouchEnd" bindtouchstart="handleTouchStart" enableBackToTop="true" lowerThreshold="30" scrollY="true" style="height: {{scrollHeight}};">
+        <view style="min-height: 100%; background-color: #f3f3f7;" wx:if="{{!quarterList[0].length}}">
+            <view class="empty">
+                {{emptyStr}}
+            </view>
+        </view>
+        <view class="quarter-item" wx:for="{{quarterList}}" wx:for-item="eventList" wx:key="{{ index }}">
+            <view class="score-banner {{eventList[0]._isCurrent&&'current'}}" wx:if="{{eventList[0]._showQuarter}}">
+                <text class="banner">
+                    <text class="icon-time"></text>{{eventList[0].quarter}} {{eventList[0].leftGoal||eventList[0].awayGoal}}-{{eventList[0].rightGoal||eventList[0].homeGoal}}</text>
+            </view>
+            <view class="event-item" wx:for="{{eventList}}" wx:for-item="event" wx:key="{{ event.id }}">
+                <view class="side-info">
+                    <view class="spot {{event.ctype!=='1'&&'goal'}}" wx:if="{{!event._hideTitle}}"></view>
+                </view>
+                <view class="event-detail">
+                    <view class="detail-container {{event._hideTitle&&'hide-title'}}">
+                        <view class="host-info" wx:if="{{event.ctype==='1'&&event.commentator}}">
+                            <text class="host-name" wx:if="{{event.commentator.nick}}">{{event.commentator.nick}}</text>
+                            <text class="host-description" wx:if="{{event.commentator.role}}">（{{event.commentator.role}}）</text>
+                            <text class="top-badge" wx:if="{{event.topIndex==='1'}}">置顶</text>
+                        </view>
+                        <view class="score-info" wx:if="{{event._teamBadgeSrc&&!event._hideTitle}}">
+                            <TuaImage height="15px" src="{{event._teamBadgeSrc}}" styleStr="margin-top: -12rpx; vertical-align: middle; padding-right: 24rpx;" width="15px"></TuaImage>
+                            <text wx:if="{{event._teamName}}">{{event._teamName}}</text>
+                            <text class="score" wx:if="{{(event.leftGoal||event.awayGoal)&&(event.rightGoal||event.homeGoal)&&(event.plus||event._showPlus)}}">
+                                <text class="{{event.teamId===matchInfo.leftId?'alert':''}}">{{event.leftGoal||event.awayGoal}}</text>-<text class="{{event.teamId===matchInfo.rightId?'alert':''}}">{{event.rightGoal||event.homeGoal}}</text>
+                            </text>
+                        </view>
+                        <view class="event-text {{event.ctype!=='1'&&'has-time'}}">
+                            <text class="event-time" wx:if="{{event.ctype!=='1'}}">{{event.time||event.quarter||''}}</text>
+                            <text>{{event._content||event.content}}</text>
+                            <text class="alert" space="{{true}}" wx:if="{{event.plus}}"> {{event.plus}}</text>
+                        </view>
+                        <view class="event-image" wx:if="{{event.image&&event.image.urls}}">
+                            <view wx:for="{{event.image.urls}}" wx:for-index="imageIndex" wx:for-item="image" wx:key="{{ imageIndex }}">
+                                <image bindtap="previewImage" data-src="{{image.large}}" lazyLoad="{{true}}" mode="widthFix" src="{{image.small}}"></image>
+                                <text class="gif-logo" wx:if="{{image.imageType==='1'}}">GIF</text>
+                            </view>
+                        </view>
+                        <view class="event-quote" wx:if="{{event.player||event.comment}}">
+                            <view class="event-star" wx:if="{{event.player}}">
+                                <view class="player-avatar">
+                                    <TuaImage errSrc="//mat1.gtimg.com/sports/kbsweb4/statics/default-player.png" height="40px" src="{{event.player._playerIcon||event.player.icon||'https://mat1.gtimg.com/sports/kbsweb4/statics/default-player.png'}}" width="40px"></TuaImage>
+                                </view>
+                                <view class="player-info">
+                                    <text class="player-name">{{event.player.name+'\n'}}</text>
+                                    <text class="player-stats">{{event.player.statDesc||''}}</text>
+                                </view>
+                            </view>
+                            <view class="event-comment" wx:if="{{event.comment}}">
+                                <text class="author" space="{{true}}">{{event.comment.userinfo.nick}}  </text>
+                                <text>{{event.comment.content}}</text>
+                            </view>
+                        </view>
+                        <view class="event-video" wx:if="{{event.video}}">
+                            <navigator class="shot" url="/pages/video/video?vid={{event.video.vid}}">
+                                <image lazyLoad="{{true}}" src="{{event.video.imgurl}}"></image>
+                                <text class="duration">{{event.video._shortDuration}}</text>
+                            </navigator>
+                        </view>
+                    </view>
+                </view>
+            </view>
+        </view>
+        <view class="loading" wx:if="{{isEnableMore&&quarterList[0].length}}">
+            {{isPostNoMore?'没有更多了':'加载更多'}}
+        </view>
+    </scroll-view>
+</view>

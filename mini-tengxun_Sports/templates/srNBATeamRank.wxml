@@ -1,0 +1,31 @@
+<template name="srNBATeamRank">
+    <view class="basketball-team-rank">
+        <view class="empty" wx:if="{{isFetched&&(!idxArr||!idxArr.length)}}">
+            暂无数据
+        </view>
+        <view wx:for="{{idxArr}}" wx:for-item="area" wx:key="en">
+            <view class="rank-desc">
+                <view class="area-name">{{area.cn}}</view>
+                <view class="win-lose">胜 - 负</view>
+                <view class="win-rate">胜率</view>
+                <view class="games-back">胜差</view>
+            </view>
+            <view class="one-team" url="team?cid={{competitionId}}&tid={{team.teamId}}" wx:for="{{trData[area.en]}}" wx:for-item="team" wx:key="teamId">
+                <view class="team-rank num{{team.serial}}">{{team.serial}}</view>
+                <view class="team-name">
+                    <image class="logo" src="{{team.logoNew||team.badge}}"></image>
+                    {{team.name}}
+                </view>
+                <view class="win-lose">
+                    {{team.wins}}-{{team.losses}}
+                </view>
+                <view class="win-rate">
+                    {{team['wining-percentage']}}%
+                </view>
+                <view class="games-back">
+                    {{~~team['games-back']}}
+                </view>
+            </view>
+        </view>
+    </view>
+</template>

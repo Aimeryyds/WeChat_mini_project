@@ -1,0 +1,15 @@
+<view class="city" wx:if="{{show}}">
+    <view class="content" style="padding-bottom: {{!sameShow?'40rpx':'0'}}">
+        <view class="title">请选择你要应援的城市</view>
+        <view class="con">
+            <view catchtap="choosedCity" class="li {{item.id==activeCityId?'active':''}}" data-item="{{item}}" wx:for="{{fibaCity}}" wx:key="unique">
+                <image class="img-city" src="{{item.icon}}"></image>
+                {{item.name}}
+            </view>
+        </view>
+        <view catchtap="choosedSameCity" class="same" wx:if="{{sameShow}}">| <text class="text">只看同城</text> |</view>
+    </view>
+    <view catchtap="close" class="close">
+        <image class="icon icon-close" src="/assets/FIBA/btn_close_b@3x.png"></image>
+    </view>
+</view>

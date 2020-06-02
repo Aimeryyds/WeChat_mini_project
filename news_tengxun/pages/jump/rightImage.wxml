@@ -1,0 +1,21 @@
+<view class="{{hasRead&&'has-read'}} {{smallScreen&&'small-screen'}}">
+    <view class="title-wrapper" wx:if="{{intro}}">
+        <text class="exclusive" wx:if="{{isExclusive}}">独家</text>
+        <text>{{title}}</text>
+    </view>
+    <view class="intro-wrapper">
+        <view class="text">
+            <text decode class="intro" wx:if="{{intro}}">{{intro}}</text>
+            <text decode class="title" wx:else>
+                <text class="exclusive" wx:if="{{isExclusive}}">独家</text>{{title}}
+        </text>
+        </view>
+        <image class="image" mode="aspectFill" src="{{imageSrc}}">
+            <view class="mask"></view>
+            <view class="video-duration" wx:if="{{isVideo}}">
+                <view class="paly-icon iconfont icon-xwsplay"></view>
+        {{durationStr}}
+      </view>
+        </image>
+    </view>
+</view>

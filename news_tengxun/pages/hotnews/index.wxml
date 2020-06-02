@@ -1,0 +1,14 @@
+<xxw-bg-loading bindrefresh="render" status="{{status}}" wx:if="{{status!==pageStatus.ready}}"></xxw-bg-loading>
+<view class="container" wx:else>
+    <view class="hot-news-list-top">
+        <image class="logo" src="http://mat1.gtimg.com/www/images/news_minipro/hotnews_top_logo.png"></image>
+        <view class="time">
+            <text>实时更新于 {{updateTime}}</text>
+        </view>
+    </view>
+    <zwb-item day="{{zwbData.day}}" hasRead="{{zwbData.hasRead}}" imgBig="{{zwbData.imgBig}}" showSmall="{{zwbData.showSmall}}" title="{{zwbData.title}}" type="{{zwbData.type}}" zwbId="{{zwbData.id}}" wx:if="{{zwbData.id}}"></zwb-item>
+    <block wx:for="{{list}}" wx:for-index="page" wx:for-item="firstItem" wx:key="_uid">
+        <xxw-news-item articleId="{{item.id}}" atype="{{item.atype}}" commentCount="{{item.comments}}" duration="{{item.duration}}" hasRead="{{item.hasRead}}" imageBig="{{item.imgBig}}" imageSmall="{{item.imgSmall}}" imageThree="{{item.imgThree}}" imgCount="{{item.imgCount}}" isOriginal="{{item.isFisOriginal}}" joinCount="{{item.joinCount}}" playCount="{{item.playCount}}" readNum="{{item.readNum}}" showType="{{item.showType}}" source="{{item.source}}" time="{{item.pubTime}}" title="{{item.title}}" topicId="{{item.tpid}}" vid="{{item.vid}}" wx:for="{{firstItem.list}}" wx:key="_uid"></xxw-news-item>
+    </block>
+    <xxw-loading-bar bindretry="onReachBotto" class="bottom-loading-bar" hasMore="{{hasMore}}" noMoreText="没有更多了，稍后回来" status="{{bottomLoadingStatus}}"></xxw-loading-bar>
+</view>

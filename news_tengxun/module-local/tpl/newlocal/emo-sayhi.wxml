@@ -1,0 +1,64 @@
+<template name="lc-emo-sayhi">
+    <block wx:if="{{discover}}">
+        <view class="lc-sayhi-list">
+            <view animation="{{danmuAnim}}" hidden="{{hidden}}">
+                <view hidden="{{!danmuHolderHeight}}">
+                    <view style="height: {{danmuHolderHeight}}px"></view>
+                </view>
+                <view class="lc-sayhi-item-wrap" wx:for="{{hiList}}" wx:for-item="emoitem" wx:key="{{index}}">
+                    <view class="lc-sayhi-item" style="opacity: {{emoitem.opacity}};">
+                        <view class="emo-nickname base-line1 g-d-inlineblock">
+                            <view class="emo-left-placeholder g-d-inlineblock"></view>
+                            <view class="emo-nickname-value g-d-inlineblock">{{emoitem.nickname}}</view>
+                            <view class="emo-right-placeholder g-d-inlineblock"></view>
+                        </view>
+                        <image class="emo-icon g-d-inlineblock" src="{{emoInfo[emoitem.emoicon]}}"></image>
+                    </view>
+                </view>
+            </view>
+        </view>
+        <view animation="{{listAnim}}" class="lc-sayhi-emos {{emoShowAnimate}}">
+            <image animation="{{emoAnim}}" bindtap="emoSayHi" class="lc-emo" data-cur="smile" data-mood="1" src="{{emoInfo['smile']}}"></image>
+            <image animation="{{emoAnim}}" bindtap="emoSayHi" class="lc-emo" data-cur="snicker" data-mood="4" src="{{emoInfo['snicker']}}"></image>
+            <image animation="{{emoAnim}}" bindtap="emoSayHi" class="lc-emo" data-cur="cry" data-mood="2" src="{{emoInfo['cry']}}"></image>
+            <image animation="{{emoAnim}}" bindtap="emoSayHi" class="lc-emo" data-cur="angry" data-mood="3" src="{{emoInfo['angry']}}"></image>
+        </view>
+        <view class="lc-sayhi" hidden="{{hidden}}">
+            <view bindtap="sayHi" class="g-d-inlineblock lc-sayhi-btn">
+                <image animation="{{emoAnim}}" class="lc-sayhi-emo g-d-inlineblock g-f-m" src="{{emoAnimate?emoInfo['smile']:'http://mat1.gtimg.com/www/js/news/lc-emo-del.png'}}"></image>
+                <view class="lc-sayhi-txt g-d-inlineblock">打招呼</view>
+            </view>
+        </view>
+    </block>
+    <block wx:else>
+        <view class="lc-sayhi-list">
+            <view animation="{{danmuAnim}}" bindtap="onEnterFullScreen">
+                <view hidden="{{!danmuHolderHeight}}">
+                    <view style="height: {{danmuHolderHeight}}px"></view>
+                </view>
+                <view class="lc-sayhi-item-wrap" wx:for="{{hiList}}" wx:for-item="emoitem" wx:key="{{index}}">
+                    <view class="lc-sayhi-item" style="opacity: {{emoitem.opacity}};">
+                        <view class="emo-nickname base-line1 g-d-inlineblock">
+                            <view class="emo-left-placeholder g-d-inlineblock"></view>
+                            <view class="emo-nickname-value g-d-inlineblock">{{emoitem.nickname}}</view>
+                            <view class="emo-right-placeholder g-d-inlineblock"></view>
+                        </view>
+                        <image class="emo-icon g-d-inlineblock" src="{{emoInfo[emoitem.emoicon]}}"></image>
+                    </view>
+                </view>
+            </view>
+        </view>
+        <view animation="{{listAnim}}" class="lc-sayhi-emos {{emoShowAnimate}} {{showEmos}}">
+            <image animation="{{emoAnim}}" bindtap="emoSayHi" class="lc-emo" data-cur="smile" data-mood="1" src="{{emoInfo['smile']}}"></image>
+            <image animation="{{emoAnim}}" bindtap="emoSayHi" class="lc-emo" data-cur="snicker" data-mood="4" src="{{emoInfo['snicker']}}"></image>
+            <image animation="{{emoAnim}}" bindtap="emoSayHi" class="lc-emo" data-cur="cry" data-mood="2" src="{{emoInfo['cry']}}"></image>
+            <image animation="{{emoAnim}}" bindtap="emoSayHi" class="lc-emo" data-cur="angry" data-mood="3" src="{{emoInfo['angry']}}"></image>
+        </view>
+        <view class="lc-sayhi" hidden="{{hidden}}">
+            <view bindtap="sayHi" class="g-d-inlineblock lc-sayhi-btn">
+                <image animation="{{emoAnim}}" class="lc-sayhi-emo g-d-inlineblock g-f-m" src="{{emoAnimate?emoInfo['smile']:'http://mat1.gtimg.com/www/js/news/lc-emo-del.png'}}"></image>
+                <view class="lc-sayhi-txt g-d-inlineblock">打招呼</view>
+            </view>
+        </view>
+    </block>
+</template>

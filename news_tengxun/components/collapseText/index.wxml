@@ -1,0 +1,6 @@
+<view class="content-text {{!ready&&'opacity'}}" style="-webkit-line-clamp: {{collapse?lineCount||'unset':'unset'}}">
+    <slot></slot>
+</view>
+<view catchtap="tapShowAll" class="show-all-text" wx:if="{{enableShowAll&&collapse}}">
+  全文
+</view>

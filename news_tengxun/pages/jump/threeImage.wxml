@@ -1,0 +1,17 @@
+<view class="{{hasRead&&'has-read'}} {{smallScreen&&'small-screen'}}">
+    <view class="title-wrapper">
+        <text class="exclusive" wx:if="{{isExclusive}}">独家</text>
+        <text>{{title}}</text>
+    </view>
+    <view class="intro" wx:if="{{intro}}">
+        <text>{{intro}}</text>
+    </view>
+    <view class="image-wrapper">
+        <image class="image" src="{{item}}" wx:for="{{imageList}}" wx:key="*this">
+            <view class="mask"></view>
+        </image>
+        <view class="image-count" wx:if="{{imageCount>3}}">
+      {{imageCount}}图
+    </view>
+    </view>
+</view>

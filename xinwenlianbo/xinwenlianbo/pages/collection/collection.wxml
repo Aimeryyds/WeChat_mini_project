@@ -1,0 +1,154 @@
+<include src="../../templates/include/nowork.wxml"></include>
+<view class="collect_container" hidden="{{!netInfo.status}}" style="height:100%;padding-bottom:{{padding+'rpx'}};">
+    <view class="swiper-tab" style="padding-bottom:{{marginbottom+'px'}};">
+        <view bindtap="swichNav" class="swiper-tab-item {{currentTab==0?'on':''}}" data-current="0">整期联播</view>
+        <view bindtap="swichNav" class="swiper-tab-item {{currentTab==1?'on':''}}" data-current="1">单条联播</view>
+        <view bindtap="swichNav" class="swiper-tab-item {{currentTab==2?'on':''}}" data-current="2">央视快评</view>
+        <view bindtap="swichNav" class="swiper-tab-item {{currentTab==3?'on':''}}" data-current="3">联播+</view>
+    </view>
+    <swiper bindchange="bindChange" class="swiper-box" current="{{currentTab}}" duration="300" style="height:100%;padding-bottom:{{paddingbottom+'px'}};">
+        <swiper-item>
+            <scroll-view bindscroll="onScorll" bindscrolltolower="bindDownLoad" bindscrolltoupper="topLoad" class="list" scrollTop="{{scrollTop}}" scrollY="true" style="height:100% ">
+                <view class="dataZQbox {{ishaveDataZQ?'hide':'show'}}" style="height:100%">
+                    <view class="boxnodata">
+                        <image src="../../img/jijiangshangxian.png"></image>
+                        <text>暂无收藏</text>
+                    </view>
+                </view>
+                <view class="{{ishaveDataZQ?'show':'hide'}} list_li">
+                    <view wx:for="{{storageZQlist}}" wx:for-index="storageindex" wx:key="item">
+                        <view bindtap="gotovideopage" class="list_li_zq" data-data="{{item.dataZQ}}" data-type="{{item.typeZQ}}" data-vid="{{item.vidZQ}}">
+                            <view class="list_zq_left">
+                                <view class="zq_year">{{item.riliYear}}</view>
+                                <view class="zq_month">{{item.riliMonth}} 月</view>
+                                <view class="zq_day">{{item.riliDay}}</view>
+                                <view class="zq_line"></view>
+                                <view class="zq_data"> {{item.riliData}}</view>
+                            </view>
+                            <view class="list_zq_right">
+                                <view class="zq_title">{{item.titleZQ}}</view>
+                                <view class="zq_timeleng">
+                                    <view class="zq_timeleng_img">时长 {{item.vLengthZQ}}</view>
+                                </view>
+                            </view>
+                        </view>
+                    </view>
+                    <view class="contentover {{showendZQ==true?'show':'hide'}}">已显示全部内容</view>
+                </view>
+            </scroll-view>
+        </swiper-item>
+        <swiper-item>
+            <scroll-view bindscroll="onScorll" bindscrolltolower="bindDownLoad" bindscrolltoupper="topLoad" class="list" scrollTop="{{scrollTop}}" scrollY="true" style="height:100%;">
+                <view class="dataZQbox {{ishaveDataDT?'hide':'show'}}" style="height:100%">
+                    <view class="boxnodata">
+                        <image src="../../img/jijiangshangxian.png"></image>
+                        <text>暂无收藏</text>
+                    </view>
+                </view>
+                <view class="{{ishaveDataDT?'show':'hide'}}">
+                    <view wx:for="{{storageDTlist}}" wx:key="item">
+                        <view bindtap="gotoSvideopage" data-data="{{item.dataDT}}" data-type="{{item.typeDT}}" data-vid="{{item.vidDT}}">
+                            <view class="woguanzhude">
+                                <view class="guanzhu_list list3">
+                                    <view class="shang">
+                                        <view class="titName">
+                                            <view class="titNamebg">新闻联播</view>
+                                        </view>
+                                        <view class="timelength">时长 {{item.vLengthDT}}</view>
+                                    </view>
+                                    <view class="zhong"> {{item.titleDT}}</view>
+                                    <view class="xia">
+                                        <view class="timedata"> {{item.dataDT}}</view>
+                                        <view class="gjc_box">
+                                            <view class="gjc_box_list" wx:if="{{itemtag.length>0&&index<=2}}" wx:for="{{item.tag}}" wx:for-item="itemtag" wx:key="itemtag">
+                                                <view catchtap="toTag" class="gjc" data-tag="{{itemtag}}">{{itemtag}}</view>
+                                            </view>
+                                        </view>
+                                    </view>
+                                </view>
+                            </view>
+                        </view>
+                    </view>
+                    <view class="contentover {{showendDT==true?'show':'hide'}}">已显示全部内容</view>
+                </view>
+            </scroll-view>
+        </swiper-item>
+        <swiper-item>
+            <scroll-view bindscroll="onScorll" bindscrolltolower="bindDownLoad" bindscrolltoupper="topLoad" class="list" scrollTop="{{scrollTop}}" scrollY="true" style="height:100%;">
+                <view class="dataZQbox {{ishaveDataKP?'hide':'show'}}" style="height:100%">
+                    <view class="boxnodata">
+                        <image src="../../img/jijiangshangxian.png"></image>
+                        <text>暂无收藏</text>
+                    </view>
+                </view>
+                <view class="{{ishaveDataKP?'show':'hide'}}">
+                    <view wx:for="{{storageKPlist}}" wx:key="item">
+                        <view bindtap="gotoKaipingpage" data-aid="{{item.vidKP}}" data-data="{{item.dataKP}}" data-type="{{item.typeKP}}">
+                            <view class="woguanzhude">
+                                <view class="guanzhu_list list2">
+                                    <view class="shang">
+                                        <view class="titName">
+                                            <view class="titNamebg">快评</view>
+                                        </view>
+                                    </view>
+                                    <view class="zhong">{{item.titleKP}}</view>
+                                    <view class="xia">
+                                        <view class="timedata">{{item.dataKP}}</view>
+                                        <view class="gjc_box">
+                                            <view class="gjc_box_list" wx:if="{{itemtag.length>0&&index<=2}}" wx:for="{{item.tag}}" wx:for-item="itemtag" wx:key="itemtag">
+                                                <view catchtap="toTag" class="gjc jc " data-tag="{{itemtag}}">{{itemtag}}</view>
+                                            </view>
+                                        </view>
+                                    </view>
+                                </view>
+                            </view>
+                        </view>
+                    </view>
+                    <view class="contentover {{showendKP==true?'show':'hide'}}">已显示全部内容</view>
+                </view>
+            </scroll-view>
+        </swiper-item>
+        <swiper-item>
+            <scroll-view bindscroll="onScorll" bindscrolltolower="bindDownLoad" bindscrolltoupper="topLoad" class="list" scrollTop="{{scrollTop}}" scrollY="true" style="height:100%;">
+                <view class="dataZQbox {{ishaveDataLBJ?'hide':'show'}}" style="height:100%">
+                    <view class="boxnodata">
+                        <image src="../../img/jijiangshangxian.png"></image>
+                        <text>暂无收藏</text>
+                    </view>
+                </view>
+                <view class="{{ishaveDataLBJ?'show':'hide'}}">
+                    <view wx:for="{{storageLBJlist}}" wx:key="item">
+                        <view bindtap="gotoLianbojiapage" data-aid="{{item.vidKP}}" data-data="{{item.dataKP}}" data-type="{{item.typeKP}}">
+                            <view class="woguanzhude">
+                                <view class="guanzhu_list list1">
+                                    <view class="shang">
+                                        <view class="titName">
+                                            <view class="titNamebg">联播+</view>
+                                        </view>
+                                    </view>
+                                    <view class="zhong">{{item.titleKP}}</view>
+                                    <view class="xia">
+                                        <view class="timedata">{{item.dataKP}}</view>
+                                        <view class="gjc_box">
+                                            <view class="gjc_box_list" wx:if="{{itemtag.length>0&&index<=2}}" wx:for="{{item.tag}}" wx:for-item="itemtag" wx:key="itemtag">
+                                                <view catchtap="toTag" class="gjc jc" data-tag="{{itemtag}}">{{itemtag}}</view>
+                                            </view>
+                                        </view>
+                                    </view>
+                                </view>
+                            </view>
+                        </view>
+                    </view>
+                    <view class="contentover {{showendLBJ==true?'show':'hide'}}">已显示全部内容</view>
+                </view>
+            </scroll-view>
+        </swiper-item>
+    </swiper>
+    <view></view>
+    <view catchtap="onGoTop" class="scrollto-btn-wrapper" style="bottom:{{bottom+'px'}};">
+        <view class="scrollto-btn  {{!istTop?'hide':''}}"></view>
+    </view>
+    <view class="audiobox {{audioIsHide==true?'hide':'show'}}">
+        <include src="../../templates/audio/audio.wxml"></include>
+    </view>
+</view>

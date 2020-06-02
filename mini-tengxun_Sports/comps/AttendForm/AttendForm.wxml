@@ -1,0 +1,15 @@
+<form bindsubmit="handleAttend" reportSubmit="true">
+    <button bindgetuserinfo="onGotUserInfo" class="attend-btn active" lang="zh_CN" openType="getUserInfo" wx:if="{{!isLogin}}">
+        <text>登录</text>
+    </button>
+    <button class="attend-btn {{isAttended?'cancel':'active'}}" formType="submit" plain="true" wx:else>
+        <block wx:if="{{!isAttended}}">
+            <image class="clock" src="/assets/clock_active@3x.png"></image>
+            <text>预约</text>
+        </block>
+        <block wx:else>
+            <image class="clock" src="/assets/clock_cancel@3x.png"></image>
+            <text>已预约</text>
+        </block>
+    </button>
+</form>

@@ -1,0 +1,42 @@
+<view class="header">
+    <view class="user-info" wx:if="{{!isUsed&&loaded}}">
+        <block wx:if="{{!isLogin}}">
+            <view class="login-title">请选择您要兑换的腾讯体育帐号</view>
+            <view class="login-icon">
+                <navigator appId="wxc5df8e3b60d4b4a2" bind:tap="onClickGotoQQ" class="qq" extraData="{{extraData}}" path="pages/login" target="miniProgram">
+                    <TuaImage class="qq-icon" height="124rpx" src="../../assets/redeem/qq-icon.png" width="124rpx"></TuaImage>
+                    <view class="desc">QQ帐号</view>
+                </navigator>
+                <button bindgetuserinfo="onGotUserInfo" class="wx" lang="zh_CN" openType="getUserInfo">
+                    <TuaImage class="wx-icon" height="124rpx" src="../../assets/redeem/wechat-icon.png" width="124rpx"></TuaImage>
+                    <view class="desc">微信帐号</view>
+                </button>
+            </view>
+        </block>
+        <block wx:if="{{isLogin}}">
+            <view class="login-title">确认兑换至下方帐号吗</view>
+            <view class="avatar-container">
+                <TuaImage class="avatar" errSrc="{{defaultAvatarUrl}}" height="120rpx" src="{{avatarUrl}}" styleStr="border-radius: 50%;" width="120rpx"></TuaImage>
+                <TuaImage class="small-icon" height="44rpx" src="../../assets/redeem/small-qq-icon.png" width="44rpx" wx:if="{{loginType==='QQ'}}"></TuaImage>
+                <TuaImage class="small-icon" height="44rpx" src="../../assets/redeem/small-wx-icon.png" width="44rpx" wx:else></TuaImage>
+            </view>
+            <view class="user-name">{{loginType}}帐号：{{nickName}}<text bindtap="onClickSwitchAccount" class="switch">切换帐号</text>
+            </view>
+            <button bindtap="onClickRedeem" class="redeem-btn" type="primary" wx:if="{{!isUsed}}">
+                确认
+            </button>
+        </block>
+    </view>
+    <view class="success" wx:if="{{isUsed&&loaded}}">
+        <TuaImage class="success-icon" height="140rpx" src="../../assets/redeem/success.png" width="140rpx"></TuaImage>
+        <view class="title">领取成功</view>
+        <view class="desc">已领取到帐号：{{receiverLoginType}}{{receiverNickName}}</view>
+    </view>
+    <view class="blank" wx:if="{{!loaded}}"></view>
+    <TuaImage class="card" height="500rpx" src="../../assets/redeem/card.png" width="708rpx"></TuaImage>
+</view>
+<view class="desc">
+    <TuaImage class="desc-1" height="378rpx" src="../../assets/redeem/desc-1.png" width="662rpx"></TuaImage>
+    <TuaImage class="desc-2" height="246rpx" src="../../assets/redeem/desc-2.png" width="654rpx"></TuaImage>
+    <TuaImage class="footer" height="160rpx" src="../../assets/redeem/footer.png" width="750rpx"></TuaImage>
+</view>

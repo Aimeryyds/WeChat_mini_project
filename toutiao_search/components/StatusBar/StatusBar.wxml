@@ -1,0 +1,21 @@
+<view style="height:{{totalHeight}}px;position:relative">
+    <view class="banner-container" style="height:{{totalHeight}}px;paddingBottom:{{totalHeight}}px">
+        <view bindtap="clickSearchBanner" class="search" style="top:{{searchTop}}px;height:32px;line-height:32px" wx:if="{{showSearchBanner}}">
+            <view class="text-container" style="transform:translate3d(0,{{offset*-32}}px,0);transition: {{showAnimation?'300ms ease-in-out':'none'}}">
+                <view class="text" wx:for="{{searchData}}" wx:key="index">
+                    {{item}}
+                </view>
+            </view>
+        </view>
+        <view class="title" style="line-height:{{titleHeight}}px" wx:if="{{!showSearchBanner}}">{{title}}</view>
+        <view wx:if="{{!showSearchBanner}}">
+            <view bindtap="clickBackBtn" class="back-container">
+                <view class="back" style="line-height:{{titleHeight}}px" wx:if="{{showBackBtn}}"></view>
+            </view>
+            <view class="split-line"></view>
+            <view bindtap="clickHomeBtn" class="home-container">
+                <view class="home" style="line-height:{{titleHeight}}px" wx:if="{{showBackBtn}}"></view>
+            </view>
+        </view>
+    </view>
+</view>

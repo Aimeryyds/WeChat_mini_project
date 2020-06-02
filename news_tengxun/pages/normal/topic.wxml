@@ -1,0 +1,33 @@
+<view bindtap="onTap" class="topic-wrapper" wx:if="{{show}}">
+    <view class="module-title">相关话题</view>
+    <view class="split-line"></view>
+    <view class="title-wrapper">
+        <image class="img" src="{{img}}"></image>
+        <view class="title-read">
+            <view class="title">
+                <text>{{title}}</text>
+            </view>
+            <view class="read-count">
+                <text wx:if="{{readCountStr}}">{{readCountStr}}阅读</text>
+                <text>&nbsp;&nbsp;</text>
+                <text wx:if="{{joinCountStr}}"> {{joinCountStr}}参与</text>
+            </view>
+        </view>
+        <view class="nav-btn">去看看</view>
+    </view>
+    <view class="desc-wrapper {{desc&&'desc'}}" wx:if="{{desc||weibo.content}}">
+        <text wx:if="{{desc}}">{{desc}}</text>
+        <block wx:else>
+            <text class="media">{{weibo.mediaName}}：</text>
+            <text>{{weibo.content}}</text>
+        </block>
+    </view>
+    <view class="vote-wrapper" wx:if="{{vote&&vote.positive}}">
+        <view class="vote-btn vote-red">
+            <text class="vote-text">{{vote.positive}}</text>
+        </view>
+        <view class="vote-btn vote-blue">
+            <text class="vote-text">{{vote.negative}}</text>
+        </view>
+    </view>
+</view>

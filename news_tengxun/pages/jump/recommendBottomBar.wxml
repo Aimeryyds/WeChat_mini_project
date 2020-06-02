@@ -1,0 +1,14 @@
+<view class="share_container">
+    <button catchtap="tapComment" class="share_item_container comment">
+        <view class="item_image iconfont icon-xcx-comment"></view>
+        <text class="item_text">{{commentCountStr||'评论'}}</text>
+    </button>
+    <button catchtap="none" class="share_item_container weixin" data-article-id="{{articleId}}" data-atype="{{atype}}" data-from="{{pageArea}}" data-from-page="{{fromPage}}" data-title="{{title}}" openType="share">
+        <view class="item_image iconfont icon-xcx-weixin"></view>
+        <text class="item_text">好友</text>
+    </button>
+    <button catchtap="tapPoster" class="share_item_container pengyouquan">
+        <view class="item_image iconfont icon-xcx-pengyouquan"></view>
+        <text class="item_text">{{shareText}}</text>
+    </button>
+</view>

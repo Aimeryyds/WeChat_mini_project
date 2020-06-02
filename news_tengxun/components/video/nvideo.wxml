@@ -1,0 +1,4 @@
+<view class="video-wrapper" style="width:{{width}};height:{{height}};border-radius:{{borderRadius}};">
+    <cover bindshowConfirm="onShowConfirm" bindtapCover="tapCover" durationStr="{{durationStr}}" id="{{_uid}}_cover" playCount="{{playCount}}" showErrorTips="{{showErrorTips}}" showRetryTips="{{showRetryTips}}" snapshot="{{snapshot}}" wx:if="{{!fullScreen&&showCover}}"></cover>
+    <video autoplay="{{autoplay}}" bindended="onEnded" binderror="onError" bindfullscreenchange="onFullscreenChange" bindpause="onPause" bindplay="onPlay" bindtap="tapVideo" bindtimeupdate="onTimeUpdate" class="video" controls="{{controls}}" direction="{{direction}}" duration="{{duration}}" id="{{_uid}}" initialTime="{{initialTime||replayInitialTime}}" poster="{{poster}}" posterForCrawler="{{snapshot}}" showCenterPlayBtn="{{showCenterPlayBtn}}" showFullscreenBtn="{{showFullscreenBtn}}" src="{{src}}" title="{{title}}" wx:else></video>
+</view>

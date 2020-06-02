@@ -1,0 +1,23 @@
+<import src="../../tpl/share-float.wxml"></import>
+<import src="../../tpl/authorize.wxml"></import>
+<view class="share-box" wx:if="{{isShow}}">
+    <button bindtap="_shareToPoster" class="share-left-button" data-shareType="wx" openType="share">
+        <text class="share-name">分享好友</text>
+        <image class="share-image" src="http://mat1.gtimg.com/www/images/newsapp/wxapp/news/share_weixin.png"></image>
+    </button>
+    <button bindtap="_shareToPoster" class="share-poster-button" data-shareType="poster">
+        <view class="share-name">生成海报</view>
+        <image class="share-image" src="http://mat1.gtimg.com/www/images/newsapp/wxapp/news/share_haibao.png"></image>
+    </button>
+</view>
+<template is="share_cover_dialog" data wx:if="{{isShareDialogShow}}"></template>
+<cover-view class="shade-box" wx:if="{{shareImagePath!==''}}">
+    <cover-view class="shade-image-box">
+        <cover-image class="shade-image" mode="aspectFill" src="{{shareImagePath}}"></cover-image>
+    </cover-view>
+    <cover-view class="save-album save-album-text">{{shareCurTitleTips}}</cover-view>
+    <cover-image catchtap="_closePosterDialog" class="cancel-button" mode="aspectFill" src="http://mat1.gtimg.com/www/images/newsapp/wxapp/news/poster_cancel.png"></cover-image>
+</cover-view>
+<canvas canvasId="shareImageCanvas" class="shade-canvas-image-box"></canvas>
+<template is="auth-confirm-dialog" data="{{hideCloseBtn:false}}" wx:if="{{showUserInfoAuthDialog}}"></template>
+<lc-auth id="authDialog"></lc-auth>

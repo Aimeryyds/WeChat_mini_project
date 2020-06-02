@@ -1,0 +1,200 @@
+<template name="tpl_10000">
+    <view class="follow-box" id="the-{{id}}">
+        <view class="mightFollowCity-container">
+            <view class="content-wrapper">
+                <text class="mightFollowCity-text">{{title}} <text class="station-text">{{chlname}}</text>
+                </text>
+                <text bindtap="tapFollowCity" class="followButton-box followed" data-newscid="{{chlid}}" data-newsid="{{id}}" data-subscribe="{{1}}" hover="true" hoverStartTime="200" wx:if="{{subscribe==1}}">已关注</text>
+                <text bindtap="tapFollowCity" class="followButton-box" data-newscid="{{chlid}}" data-newsid="{{id}}" data-subscribe="{{0}}" hover="true" hoverStartTime="200" wx:if="{{subscribe==0}}">关注</text>
+            </view>
+        </view>
+        <text class="followLine-box"></text>
+    </view>
+</template>
+<template name="tpl_12">
+    <view bindtap="handleNavigateTo" class="lc-feed-item lc-act" data-newsid="{{id}}" data-showType="{{showType}}" data-url="{{pathUrl}}" id="the-{{id}}">
+        <button class="submitButton" data-chlid="{{chlid}}" data-newsid="{{id}}" formType="submit">
+            <image class="lc-feed-img" mode="aspectFill" src="{{img_big}}"></image>
+            <view class="lc-feed-info">
+                <view class="lc-feed-info__title base-line2">
+                    <view class="lc-title__act">
+                        <text style="vertical-align: middle;">{{title}}</text>
+                    </view>
+                </view>
+                <view class="g-d-flex g-flex-spacebetween lc-feed-info__source" wx:if="{{source}}">
+                    <view class="g-f-xss">
+                        <text class="g-d-inlineblock g-mr10">{{source}}</text>
+                        <text class="g-d-inlineblock" wx:if="{{apply_remain_num}}">仅剩{{apply_remain_num}}个名额</text>
+                    </view>
+                </view>
+            </view>
+        </button>
+    </view>
+</template>
+<template name="tpl_11_1">
+    <navigator bindtap="handleNavigateTo" class="kb-card" data-newsid="{{id}}" data-showType="{{showType}}" data-url="{{pathUrl}}" hoverStartTime="200" id="the-{{id}}">
+        <button class="submitButton" data-chlid="{{chlid}}" data-newsid="{{id}}" formType="submit">
+            <view class="base-flex2">
+                <view class="kb-item-content base-flex-box sim2-style" style="">
+                    <view class="sim2-content-wrap base-flex1">
+                        <view class="kb-title base-line3 sim2-text">
+                            <view class="content-text">
+                                <view class="lc-feed-info__title base-line2">
+                                    <text class="{{isClicked?'kb-clicked':''}}" style="font-size: 34rpx;">
+                                        <text class="lc-icon__act">活动</text>{{title}}</text>
+                                </view>
+                            </view>
+                        </view>
+                        <view class="bottom-wrap" wx:if="{{source}}">
+                            <view class="bottom-content g-f-xss" wx:if="{{source}}">
+                                <text class="kb-span">{{source}}</text>
+                                <text class="kb-span" wx:if="{{apply_remain_num}}">仅剩{{apply_remain_num}}个名额</text>
+                            </view>
+                        </view>
+                    </view>
+                    <view class="sim-image-wrap kb-image-box">
+                        <image class="kb-img-center" mode="aspectFill" src="{{img_small}}"></image>
+                    </view>
+                </view>
+            </view>
+        </button>
+    </navigator>
+</template>
+<template name="tpl_11">
+    <view bindtap="handleNavigateTo" class="lc-feed-item lc-act" data-newsid="{{id}}" data-showType="{{showType}}" data-url="{{pathUrl}}" id="the-{{id}}">
+        <button class="submitButton" data-chlid="{{chlid}}" data-newsid="{{id}}" formType="submit">
+            <image class="lc-feed-img" mode="aspectFill" src="{{img_big}}"></image>
+            <view class="lc-feed-info">
+                <view class="lc-feed-info__title base-line2">
+                    <view class="lc-title__act">
+                        <text style="vertical-align: middle;">{{title}}</text>
+                    </view>
+                </view>
+                <view class="g-d-flex g-flex-spacebetween lc-feed-info__source" wx:if="{{source}}">
+                    <view class="g-f-xss">
+                        <text class="g-d-inlineblock g-mr10">{{source}}</text>
+                        <text class="g-d-inlineblock" wx:if="{{apply_remain_num}}">仅剩{{apply_remain_num}}个名额</text>
+                    </view>
+                </view>
+            </view>
+        </button>
+    </view>
+</template>
+<template name="tpl_9">
+    <newsItem-one-picture bindnoInterestTap="noInterestTap" bindtapEven="handleNavigateTo" data-newsid="{{needItem.id}}" data-showNewsId="{{needItem.id}}" data-showType="{{needItem.showType}}" data-url="{{needItem.pathUrl}}" id="the-{{ineedItem.id}}" item="{{needItem}}" pageName="local"></newsItem-one-picture>
+</template>
+<template name="tpl_10">
+    <navigator bindtap="handleNavigateTo" class="kb-card full" data-seqno="{{seq_no}}" data-showNewsId="{{id}}" data-showType="{{showType}}" data-url="{{pathUrl}}" hoverStartTime="200" id="the-{{id}}" wx:if="{{!isOld||!stick}}">
+        <view class="kb-item-content video-style ">
+            <button class="submitButton" data-chlid="{{chlid}}" data-newsid="{{id}}" formType="submit">
+                <text class="kb-title base-line2 {{isClicked?'kb-clicked':''}}">
+                    <text class="kb-topic-templete-text kb-topic-text" style="color:{{changeInfo.topic.color}};background-color:{{changeInfo.topic.bgcolor}}" wx:if="{{changeInfo.topic&&changeInfo.topic.title&&isTopicPosition}}">{{changeInfo.topic.title}}</text>{{title}}</text>
+                <view class="video-img-wrap base-pr">
+                    <image class="video-img" mode="aspectFill" src="{{img_big}}"></image>
+                    <view class="base-pa video-big-ico-wrap">
+                        <image class="video-big-icon" src="http://mat1.gtimg.com/www/js/news/icon_video.png"></image>
+                    </view>
+                    <view class="base-pa video-big-play-cover" wx:if="{{video_info.playcount>0||video_info.duration}}">
+                        <view class="video-big-play-count-wrap  base-pa" wx:if="{{video_info.playcount>0}}">
+                            <view class="iconfont icon-xwplay"></view>
+                            <text class="video-big-text">{{playcountstr}}次播放</text>
+                        </view>
+                        <text class="base-pa video-big-duration video-big-text" wx:if="{{video_info.duration}}">{{video_info.duration}}</text>
+                    </view>
+                </view>
+            </button>
+            <view class="bottom-wrap-image">
+                <view class="bottom-content">
+                    <text class="kb-red-em" style="color:{{changeInfo.vexpr.color}};background-color:{{changeInfo.vexpr.bgcolor}}" wx:if="{{changeInfo.vexpr&&changeInfo.vexpr.title}}">{{changeInfo.vexpr.title}}</text>
+                    <text class="kb-span kb-chlname">{{source}}</text>
+                    <text class="kb-span kb-item-time" wx:if="{{publishTime}}">{{publishTime}}</text>
+                    <text class="kb-span station-text" wx:if="{{chlname}}">{{chlname}}</text>
+                    <text class="kb-span kb-item-comment" wx:if="{{comments}}">{{comments}}评 </text>
+                </view>
+                <view catchtap="noInterestTap" class="iconfont icon-xwclose" data-newsid="{{id}}" hoverStopPropagation="true" wx:if="{{!isFixPosition}}"></view>
+            </view>
+            <view class="line" wx:if="{{bottomLineStyle!='none'}}"></view>
+        </view>
+    </navigator>
+</template>
+<template name="tpl_2">
+    <navigator bindtap="handleNavigateTo" class="kb-card full" data-seqno="{{seq_no}}" data-showNewsId="{{id}}" data-showType="{{showType}}" data-url="{{pathUrl}}" hoverStartTime="200" id="the-{{id}}" wx:if="{{!isOld||!stick}}">
+        <view class="kb-item-content video-style">
+            <button class="submitButton" data-chlid="{{chlid}}" data-newsid="{{id}}" formType="submit">
+                <text class="kb-title base-line2 {{isClicked?'kb-clicked':''}}">
+                    <text class="kb-topic-templete-text kb-topic-text" style="color:{{changeInfo.topic.color}};background-color:{{changeInfo.topic.bgcolor}}" wx:if="{{changeInfo.topic&&changeInfo.topic.title&&isTopicPosition}}">{{changeInfo.topic.title}}</text>{{title}}</text>
+                <view class="video-img-wrap base-pr">
+                    <image class="video-img" mode="aspectFill" src="{{img_big}}"></image>
+                    <view class="image-count-wrap  base-pa" wx:if="{{img_count>5}}">
+                        <view class="iconfont icon-xwimages"></view>
+                        <text class="image-count-text">{{img_count}}图</text>
+                    </view>
+                </view>
+            </button>
+            <view class="bottom-wrap-image">
+                <view class="bottom-content">
+                    <text class="kb-red-em" style="color:{{changeInfo.vexpr.color}};background-color:{{changeInfo.vexpr.bgcolor}}" wx:if="{{changeInfo.vexpr&&changeInfo.vexpr.title}}">{{changeInfo.vexpr.title}}</text>
+                    <text class="kb-span kb-chlname">{{source}}</text>
+                    <text class="kb-span kb-item-time" wx:if="{{publishTime}}">{{publishTime}}</text>
+                    <text class="kb-span station-text" wx:if="{{chlname}}">{{chlname}}</text>
+                    <text class="kb-span kb-item-comment" wx:if="{{comments}}">{{comments}}评 </text>
+                </view>
+                <view catchtap="noInterestTap" class="iconfont icon-xwclose" data-newsid="{{id}}" hoverStopPropagation="true" wx:if="{{!isFixPosition}}"></view>
+            </view>
+            <view class="line" wx:if="{{bottomLineStyle!='none'}}"></view>
+        </view>
+    </navigator>
+</template>
+<template name="tpl_3">
+    <navigator bindtap="handleNavigateTo" class="kb-card" data-seqno="{{seq_no}}" data-showNewsId="{{id}}" data-showType="{{showType}}" data-url="{{pathUrl}}" hoverStartTime="200" id="the-{{id}}" wx:if="{{!isOld||!stick}}">
+        <view class="kb-item-content style-muti" style="border-bottom-style:{{bottomLineStyle}}">
+            <button class="submitButton" data-chlid="{{chlid}}" data-newsid="{{id}}" formType="submit">
+                <text class="kb-title {{isClicked?'kb-clicked':''}}">
+                    <text class="kb-topic-templete-text kb-topic-text" style="color:{{changeInfo.topic.color}};background-color:{{changeInfo.topic.bgcolor}}" wx:if="{{changeInfo.topic&&changeInfo.topic.title&&isTopicPosition}}">{{changeInfo.topic.title}}</text>{{title}}</text>
+                <view class="muti-img-wrap base-flex-box">
+                    <view class="muti-item base-flex1">
+                        <image class="kb-img-three" mode="aspectFill" src="{{img_three[0]}}"></image>
+                    </view>
+                    <view class="muti-item base-flex1 middle-img">
+                        <image class="kb-img-three" mode="aspectFill" src="{{img_three[1]}}"></image>
+                    </view>
+                    <view class="muti-item base-flex1">
+                        <image class="kb-img-three" mode="aspectFill" src="{{img_three[2]}}"></image>
+                    </view>
+                </view>
+            </button>
+            <view class="bottom-wrap-image">
+                <view class="bottom-content">
+                    <text class="kb-red-em" style="color:{{changeInfo.vexpr.color}};background-color:{{changeInfo.vexpr.bgcolor}}" wx:if="{{changeInfo.vexpr&&changeInfo.vexpr.title}}">{{changeInfo.vexpr.title}}</text>
+                    <text class="kb-span kb-chlname">{{source}}</text>
+                    <text class="kb-span kb-item-time" wx:if="{{publishTime}}">{{publishTime}}</text>
+                    <text class="kb-span station-text" wx:if="{{chlname}}">{{chlname}}</text>
+                    <text class="kb-span kb-item-comment" wx:if="{{comments}}">{{comments}}评 </text>
+                </view>
+                <view catchtap="noInterestTap" class="iconfont icon-xwclose" data-newsid="{{id}}" hoverStopPropagation="true" wx:if="{{!isFixPosition}}"></view>
+            </view>
+        </view>
+    </navigator>
+</template>
+<template name="tpl_4">
+    <navigator bindtap="handleNavigateTo" class="kb-card" data-seqno="{{seq_no}}" data-showNewsId="{{id}}" data-showType="{{showType}}" data-url="{{pathUrl}}" hoverStartTime="200" id="the-{{id}}" wx:if="{{!isOld||!stick}}">
+        <view class="kb-item-content style-zt " style="border-bottom-style:{{bottomLineStyle}}">
+            <text class="kb-title {{isClicked?'kb-clicked':''}}">
+                <text class="kb-topic-templete-text kb-topic-text" style="color:{{changeInfo.topic.color}};background-color:{{changeInfo.topic.bgcolor}}" wx:if="{{changeInfo.topic&&changeInfo.topic.title&&isTopicPosition}}">{{changeInfo.topic.title}}</text>{{title}}</text>
+            <view class="bottom-wrap">
+                <view class="bottom-content">
+                    <text class="kb-red-em" style="color:{{changeInfo.vexpr.color}};background-color:{{changeInfo.vexpr.bgcolor}}" wx:if="{{changeInfo.vexpr&&changeInfo.vexpr.title}}">{{changeInfo.vexpr.title}}</text>
+                    <text class="kb-span kb-chlname">{{source}}</text>
+                    <text class="kb-span kb-item-time" wx:if="{{publishTime}}">{{publishTime}}</text>
+                    <text class="kb-span station-text" wx:if="{{chlname}}">{{chlname}}</text>
+                    <text class="kb-span kb-item-comment" wx:if="{{comments}}">{{comments}}评 </text>
+                </view>
+                <view catchtap="noInterestTap" class="iconfont icon-xwclose" data-newsid="{{id}}" hoverStopPropagation="true" id="delbtn" wx:if="{{!isFixPosition}}"></view>
+            </view>
+        </view>
+    </navigator>
+</template>
+<template name="tpl_1">
+    <newsItem-one-picture bindnoInterestTap="noInterestTap" bindtapEven="handleNavigateTo" data-newsid="{{needItem.id}}" data-showNewsId="{{needItem.id}}" data-showType="{{needItem.showType}}" data-url="{{needItem.pathUrl}}" id="the-{{needItem.id}}" item="{{needItem}}" pageName="local"></newsItem-one-picture>
+</template>
+<view class="tpl-list"></view>

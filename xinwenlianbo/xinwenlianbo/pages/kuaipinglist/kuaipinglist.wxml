@@ -1,0 +1,71 @@
+<view class="page {{wuwangluo||!responseok?'hide':'show'}}">
+    <include src="../../templates/search/search_temp.wxml"></include>
+</view>
+<view class="wushujubox {{wuwangluo?'show':'hide'}}" style="padding-top:120rpx;">
+    <view class="img">
+        <image src="../../img/jijiangshangxian.png"></image>
+    </view>
+  暂无数据
+</view>
+<view class="{{wuwangluo?'hide':'show'}}">
+    <view class="response_no {{responseok?'hide':'show'}}" style="height:100%;"></view>
+    <view id="scrollTop"></view>
+    <view class="articlelist_container common_ctrl {{responseok?'show':'hide'}}">
+        <scroll-view bindscroll="onScorll" bindscrolltolower="onScrollLower" id="scrollList" lowerThreshold="50" scrollTop="{{scrollTopView}}" scrollWithAnimation="true" scrollY="true" style="height:100%;">
+            <view class="yskp md">
+                <view class="yskp_bd">
+                    <scroll-view bindscroll="scroll" class="scroll-view_H" scrollX="true" style="width: 100%">
+                        <view bindtap="toArticle" class="scroll-view-item_H demo-text-1" data-aid="{{item.article_id}}" id="demo{{idx+1}}" wx:for="{{yskp_bd}}" wx:for-index="idx" wx:key="key">
+                            <view class="yskp_box">
+                                <image bindtap="gotoyskpbd" class="yskp_bd_img" data-article_id="{{item.article_id}}" src="{{item.article_logo}}"></image>
+                                <view class="zhegai"></view>
+                                <view class="yskp_box_text">
+                                    <view class="yskp_bd_text">{{item.article_title}}</view>
+                                    <text class="yskp_bd_time">{{item.date}}</text>
+                                </view>
+                            </view>
+                        </view>
+                    </scroll-view>
+                </view>
+            </view>
+            <view class="conList" wx:if="{{!nodata}}">
+                <view class="con woguanzhude">
+                    <view bindtap="toArticle" class="con_child" data-aid="{{item.article_id}}" wx:for="{{videosList}}" wx:key="key">
+                        <view>
+                            <view class="guanzhu_list list2">
+                                <view class="shang">
+                                    <view class="titName">
+                                        <view class="titNamebg">快评</view>
+                                    </view>
+                                </view>
+                                <view class="zhong">{{item.article_title}}</view>
+                                <view class="xia">
+                                    <view class="timedata">{{item.pub_date}}</view>
+                                    <view class="gjc_box">
+                                        <view catchtap="toTag" class="gjc jc" data-tag="{{item.news_hl_tag[0]}}" wx:if="{{item.news_hl_tag[0]}}">{{item.news_hl_tag[0]}}</view>
+                                        <view catchtap="toTag" class="gjc jc" data-tag="{{item.news_hl_tag[1]}}" wx:if="{{item.news_hl_tag[1]}}">{{item.news_hl_tag[1]}}</view>
+                                        <view catchtap="toTag" class="gjc jc" data-tag="{{item.news_hl_tag[2]}}" wx:if="{{item.news_hl_tag[2]}}">{{item.news_hl_tag[2]}}</view>
+                                    </view>
+                                </view>
+                            </view>
+                        </view>
+                    </view>
+                    <view class="articlelist_lw" hidden="{{showLoading}}">
+                        <image class="articlelist_loading" src="../../img/loading.gif"></image>
+                    </view>
+                    <view class="articlelist_tw" wx:if="{{showTip}}">
+                        <text class="articlelist_tw_left"></text>
+                        <text class="articlelist_tip">已显示全部内容</text>
+                        <text class="articlelist_tw_right"></text>
+                    </view>
+                </view>
+            </view>
+        </scroll-view>
+        <view catchtap="onGoTop" class="scrollto-btn-wrapper">
+            <view class="scrollto-btn  {{!istTop?'hide':''}}"></view>
+        </view>
+        <view class="audiobox {{audioIsHide==true?'hide':'show'}}">
+            <include src="../../templates/audio/audio.wxml"></include>
+        </view>
+    </view>
+</view>

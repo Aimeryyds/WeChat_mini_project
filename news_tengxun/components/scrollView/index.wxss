@@ -1,0 +1,108 @@
+.scroll-view {
+    height: 100%;
+}
+
+.tips-wrapper {
+    height: 80rpx;
+    line-height: 80rpx;
+    text-align: center;
+    font-size: 28rpx;
+    color: #222;
+}
+
+@font-face {
+    font-family:scollview;src:url("data:application/x-font-woff;charset=utf-8;base64,d09GRgABAAAAAAS0AAsAAAAABGgAAQAAAAAAAAAAAAAAAAAAAAAAAAAAAABPUy8yAAABCAAAAGAAAABgDxIGFWNtYXAAAAFoAAAAXAAAAFzp0uo5Z2FzcAAAAcQAAAAIAAAACAAAABBnbHlmAAABzAAAAIQAAACE9BORXGhlYWQAAAJQAAAANgAAADYU6/txaGhlYQAAAogAAAAkAAAAJAaxA8dobXR4AAACrAAAABgAAAAYDgAC62xvY2EAAALEAAAADgAAAA4AagBEbWF4cAAAAtQAAAAgAAAAIAAIAAluYW1lAAAC9AAAAZ4AAAGeNFIDTXBvc3QAAASUAAAAIAAAACAAAwAAAAMDVQGQAAUAAAKZAswAAACPApkCzAAAAesAMwEJAAAAAAAAAAAAAAAAAAAAARAAAAAAAAAAAAAAAAAAAAAAQAAA6ZYDwP/AAEADwABAAAAAAQAAAAAAAAAAAAAAIAAAAAAAAwAAAAMAAAAcAAEAAwAAABwAAwABAAAAHAAEAEAAAAAMAAgAAgAEAAEAIOmH6Zb//f//AAAAAAAg6Yfplv/9//8AAf/jFn0WbwADAAEAAAAAAAAAAAAAAAAAAQAB//8ADwABAAAAAAAAAAAAAgAANzkBAAAAAAEAAAAAAAAAAAACAAA3OQEAAAAAAQAAAAAAAAAAAAIAADc5AQAAAAABAeL/0ALvA3gABgAAARcHJxEjEQIV2iW1MwNE2iS0/NYDqAABAQn/1AIVA3QABgAAJSc3FxEzEQHi2SS1MwfaJLQDI/xgAAABAAAAAQAAp30Pt18PPPUACwQAAAAAANlu25YAAAAA2W7blgAA/9AC7wN4AAAACAACAAAAAAAAAAEAAAPA/8AAAAQAAAAAAALvAAEAAAAAAAAAAAAAAAAAAAAGBAAAAAAAAAAAAAAAAgAAAAQAAeIEAAEJAAAAAAAKABQAHgAwAEIAAAABAAAABgAHAAEAAAAAAAIAAAAAAAAAAAAAAAAAAAAAAAAADgCuAAEAAAAAAAEACQAAAAEAAAAAAAIABwByAAEAAAAAAAMACQA8AAEAAAAAAAQACQCHAAEAAAAAAAUACwAbAAEAAAAAAAYACQBXAAEAAAAAAAoAGgCiAAMAAQQJAAEAEgAJAAMAAQQJAAIADgB5AAMAAQQJAAMAEgBFAAMAAQQJAAQAEgCQAAMAAQQJAAUAFgAmAAMAAQQJAAYAEgBgAAMAAQQJAAoANAC8c2NvbGx2aWV3AHMAYwBvAGwAbAB2AGkAZQB3VmVyc2lvbiAxLjAAVgBlAHIAcwBpAG8AbgAgADEALgAwc2NvbGx2aWV3AHMAYwBvAGwAbAB2AGkAZQB3c2NvbGx2aWV3AHMAYwBvAGwAbAB2AGkAZQB3UmVndWxhcgBSAGUAZwB1AGwAYQByc2NvbGx2aWV3AHMAYwBvAGwAbAB2AGkAZQB3Rm9udCBnZW5lcmF0ZWQgYnkgSWNvTW9vbi4ARgBvAG4AdAAgAGcAZQBuAGUAcgBhAHQAZQBkACAAYgB5ACAASQBjAG8ATQBvAG8AbgAuAAAAAwAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==") format("woff");font-weight:400;font-style:normal;
+}
+
+.down {
+    height: 80rpx;
+}
+
+.down:before {
+    font-family: scollview!important;
+    speak: none;
+    font-style: normal;
+    font-weight: 400;
+    font-variant: normal;
+    text-transform: none;
+    line-height: 1;
+    content: "\e996";
+}
+
+.up {
+    height: 80rpx;
+}
+
+.up:before {
+    font-family: scollview!important;
+    speak: none;
+    font-style: normal;
+    font-weight: 400;
+    font-variant: normal;
+    text-transform: none;
+    line-height: 1;
+    content: "\e987";
+}
+
+.tips {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 80rpx;
+}
+
+.loading-wrapper {
+    margin-top: 80rpx;
+}
+
+.loading-icon {
+    height: 30rpx;
+    width: 30rpx;
+    background-image: url(http://mat1.gtimg.com/www/js/news/loading.png);
+    background-repeat: no-repeat;
+    background-position: 0;
+    background-size: 3000% 100%;
+    animation-timing-function: steps(29);
+    animation-name: zhuan;
+    animation-duration: 1s;
+    animation-iteration-count: infinite;
+    animation-fill-mode: forwards;
+    margin-right: 20rpx;
+}
+
+@-webkit-keyframes zhuan {
+    0% {
+        background-position: 0;
+    }
+
+    to {
+        background-position: 100%;
+    }
+}
+
+@keyframes zhuan {
+    0% {
+        background-position: 0;
+    }
+
+    to {
+        background-position: 100%;
+    }
+}
+
+.finished-wrapper {
+    background: #1479d7;
+    color: #fff;
+    margin-top: 0;
+    transition: margin-top 1s ease-in;
+}
+
+.bottom-loading-wrapper {
+    height: 100rpx;
+    font-size: 32rpx;
+    color: #444;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    box-sizing: border-box;
+}

@@ -1,0 +1,11 @@
+<view catchtap="tapClose" catchtouchmove="none" class="modal-mask" wx:if="{{show}}">
+    <view class="modal-dialog" wx:if="{{show}}">
+        <image class="like-icon" src="http://mat1.gtimg.com/www/js/news/me_ic_zan.png"></image>
+        <view class="modal-content">
+            <text>{{nickName}}共获赞{{likeCount}}个</text>
+        </view>
+        <view bindtap="tapClose" class="modal-footer">
+            <view class="btn-confirm">知道了</view>
+        </view>
+    </view>
+</view>

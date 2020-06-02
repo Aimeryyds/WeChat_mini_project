@@ -1,0 +1,9 @@
+<view class="progress-bar-wrapper">
+    <image catchtap="tapPlayBtn" class="progress-bar-icon play-icon" mode="aspectFill" src="{{playing?'http://mat1.gtimg.com/www/js/news/bofang.png':'http://mat1.gtimg.com/www/js/news/zanting.png'}}"></image>
+    <view class="play-time">
+        <current-time _uid="{{_uid}}"></current-time>
+    </view>
+    <bar _uid="{{_uid}}" bindchange="onChange" bindchanging="onChanging" class="progress-bar" max="{{max}}" min="{{min}}"></bar>
+    <view class="play-time">{{durationStr}}</view>
+    <image catchtap="tapFullscreenBtn" class="progress-bar-icon fullscreen-icon" mode="aspectFill" src="http://mat1.gtimg.com/www/js/news/quanping.png" wx:if="{{showFullscreenBtn}}"></image>
+</view>

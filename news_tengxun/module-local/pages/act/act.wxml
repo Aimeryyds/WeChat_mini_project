@@ -1,0 +1,115 @@
+<import src="../../tpl/warn.wxml"></import>
+<import src="../../tpl/newlocal/article.wxml"></import>
+<import src="../../tpl/common.wxml"></import>
+<template is="article-warn" data="{{showType:showType}}"></template>
+<login></login>
+<view class="lc-wrapper">
+    <swiper autoplay="{{autoplay}}" class="lc-headimg" duration="{{duration}}" indicatorDots="{{indicatorDots}}">
+        <swiper-item wx:for="{{articleInfo.act_avatar}}" wx:key="{{index}}">
+            <image class="lc-headimg" mode="scaleToFill" src="{{item}}"></image>
+        </swiper-item>
+    </swiper>
+    <view class="lc-info">
+        <view class="lc-title">{{articleInfo.act_title}}</view>
+        <view class="lc-focus">
+            <text class="g-mr20" wx:if="{{articleInfo.visit}}">{{articleInfo.visit}}人感兴趣</text>
+            <text wx:if="{{articleInfo.total}}">{{articleInfo.total}}人已报名</text>
+        </view>
+        <view class="lc-info-item" wx:if="{{articleInfo.offline_act&&articleInfo.offline_act.act_hold_start_time&&articleInfo.act_type===1}}">
+            <text class="l-cell">举行时间</text>
+            <text class="r-cell">{{articleInfo.offline_act.act_hold_start_time}}{{articleInfo.offline_act.act_hold_end_time?' 至 '+articleInfo.offline_act.act_hold_end_time:articleInfo.offline_act.act_hold_end_time}}</text>
+        </view>
+        <view class="lc-info-item" wx:if="{{articleInfo.act_reg_start_time}}">
+            <text class="l-cell">报名截止</text>
+            <text class="r-cell">{{articleInfo.act_reg_start_time}}{{articleInfo.act_reg_end_time?' 至 '+articleInfo.act_reg_end_time:articleInfo.act_reg_end_time}}</text>
+        </view>
+        <view class="lc-info-item" wx:if="{{false&&articleInfo.offline_act&&articleInfo.act_type===1}}">
+            <text class="l-cell">签到</text>
+            <text class="r-cell">{{articleInfo.offline_act.act_sign_start_time}}至{{articleInfo.offline_act.act_sign_end_time}}</text>
+        </view>
+        <view class="lc-info-item" wx:if="{{articleInfo.act_cost}}">
+            <text class="l-cell">费用</text>
+            <text class="lc-clr2f80f3 r-cell">{{articleInfo.act_cost?articleInfo.act_cost+'元':'免费'}}</text>
+        </view>
+        <view class="lc-info-item" wx:if="{{articleInfo.offline_act&&articleInfo.offline_act.act_addr}}">
+            <text class="l-cell">活动地点</text>
+            <text class="r-cell">{{articleInfo.offline_act.act_addr}}</text>
+        </view>
+    </view>
+    <view class="lc-act-author g-d-flex g-flex-spacebetween" wx:if="{{articleInfo.act_author&&articleInfo.act_author.name}}">
+        <image class="lc-author__img" mode="aspectFill" src="{{articleInfo.act_author.logo}}" wx:if="{{articleInfo.act_author.logo}}"></image>
+        <view class="lc-author__info">
+            <view class="lc-author__box">
+                <text class="lc-author__name base-line1 g-d-inlineblock g-va-middle" wx:if="{{articleInfo.act_author.name}}">{{articleInfo.act_author.name}}</text>
+                <text class="lc-clr848e98 g-f-s g-d-inlineblock g-va-middle" wx:if="{{articleInfo.act_author.fans_num}}">粉丝 {{articleInfo.act_author.fans_num}}</text>
+                <text class="lc-hline g-va-middle" wx:if="{{articleInfo.act_author.fans_num}}"></text>
+                <text class="lc-clr848e98 g-f-s g-d-inlineblock g-va-middle" wx:if="{{articleInfo.act_author.acts_num}}">发布活动 {{articleInfo.act_author.acts_num}}</text>
+            </view>
+            <view class="lc-author__desc base-line1" wx:if="{{articleInfo.act_author.desc}}">
+        {{articleInfo.act_author.desc}}
+      </view>
+        </view>
+    </view>
+    <view class="lc-content">
+        <view class="lc-tab-nav" wx:if="{{false}}">
+            <view class="g-d-inlineblock lc-tab active">
+                <view>活动详情</view>
+                <view class="lc-tab-active__line"></view>
+            </view>
+            <view catchtap="goToIntro" class="g-d-inlineblock lc-tab">活动须知</view>
+            <view catchtap="goToComment" class="g-d-inlineblock lc-tab">活动评论</view>
+        </view>
+        <view class="lc-content__article">
+            <block wx:for="{{articleInfo.desc_orig_content}}" wx:for-item="content" wx:key="{{cindex}}">
+                <view class="lc-article__text {{content.class?content.class:''}}" wx:if="{{content.type==='cnt_article'}}">
+                    <block wx:for="{{content.desc}}" wx:key="{{index}}">
+                        <text class="{{item.class?item.class:''}}" style="{{item.style?item.style:''}}" wx:if="{{item.type==='cnt_article'}}">{{item.desc}}</text>
+                        <image class="{{item.class?item.class:''}}" src="{{item.imgurl}}" wx:if="{{item.type==='img_url'}}"></image>
+                    </block>
+                </view>
+                <view wx:if="{{content.type==='img_url'}}">
+                    <image class="lc-article__img {{item.class?item.class:''}}" mode="widthFix" src="{{item.imgurl}}" wx:for="{{content.img}}" wx:key="{{index}}"></image>
+                </view>
+            </block>
+        </view>
+        <view class="lc-content__intro" id="lcActIntro" wx:if="{{false}}">
+            <view class="lc-intro__title">活动须知</view>
+            <block wx:for="{{articleInfo.notice_orig_content}}" wx:for-item="content" wx:key="{{cindex}}">
+                <view class="lc-article__text" wx:if="{{content.type==='cnt_article'}}">
+                    <block wx:for="{{content.desc}}" wx:key="{{index}}">
+                        <text class="{{item.class?item.class:''}}" style="{{item.style?item.style:''}}" wx:if="{{item.type==='cnt_article'}}">{{item.desc}}</text>
+                        <image class="{{item.class?item.class:''}}" src="{{item.imgurl}}" wx:if="{{item.type==='img_url'}}"></image>
+                    </block>
+                </view>
+                <view wx:if="{{content.type==='img_url'}}">
+                    <image class="lc-article__img {{item.class?item.class:''}}" mode="aspectFill" src="{{item.imgurl}}" wx:for="{{content.img}}" wx:key="{{index}}"></image>
+                </view>
+            </block>
+        </view>
+    </view>
+    <lc-share articleInfo="{{shareInfo}}" class="lc-share-box" fromPage="local_act_page" id="lcShare" shareType="{{shareType}}" wx:if="{{showType===1}}"></lc-share>
+    <view class="lc-line5"></view>
+    <template is="lc-related-article" data="{{relatedData:relatedData,title:'其他优质内容推荐'}}" wx:if="showType === 1"></template>
+    <view bindtap="onMoreArticle" class="lc-related-more" wx:if="{{relatedData&&relatedData.length!==0}}">查看更多内容</view>
+    <lc-comment articleId="{{articleId}}" bindhandleshare="handleShareShow" commentId="{{articleCommentId}}" id="lcComment" isShowBottomBtn="{{isShowBottomBtn}}" wx:if="{{showType===1&&articleCommentId}}"></lc-comment>
+    <view class="lc-comment-bbtn lc-comment-bbtn-patch g-d-flex g-flex-spacebetween" style="{{g.isIphoneX?'padding-bottom: 64rpx;':''}}">
+        <view bindtap="levitateClick" class="lc-icon__btn lc-go-index  g-talign-center  g-d-flex g-ai-center">
+            <view class="lc-icon__act__bottom lc-icon__act-home"></view>
+            <view class="g-f-xxxs lc-icon__btn-txt">活动</view>
+        </view>
+        <view bindtap="handleWriteComment" class="lc-icon__btn lc-go-index  g-talign-center  g-d-flex g-ai-center">
+            <view class="lc-icon__act__bottom lc-icon__act-comment-new"></view>
+            <view class="g-f-xxxs lc-icon__btn-txt">评论</view>
+        </view>
+        <button bindtap="onInvite" class="lc-icon__btn lc-go-index  g-talign-center  g-d-flex g-ai-center" data-shareType="wx" openType="share">
+            <view class="lc-icon__act__bottom lc-icon__invite-new"></view>
+            <view class="g-f-xxxs lc-icon__btn-txt">邀请</view>
+        </button>
+        <form bindsubmit="handleGetUserinfo" class="lc-icon__btn lc-apply__wrapper" reportSubmit="true">
+            <button class="g-d-inlineblock g-f-xl g-f-xl lc-icon__btn-apply" formType="submit">
+        {{signupStatus!==0?'已报名':'报名'}}
+      </button>
+        </form>
+    </view>
+</view>
+<template is="back_home_btn" data="{{needShowLevitateView:needShowLevitateView}}"></template>

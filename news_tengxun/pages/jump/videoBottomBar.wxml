@@ -1,0 +1,19 @@
+<view class="bottom-wrap-video-image">
+    <view catchtap="tapMedia" class="bottom-video-content">
+        <view class="video-bottom-head-image-box" wx:if="{{chlicon}}">
+            <image class="video-bottom-head-image" src="{{chlicon}}"></image>
+        </view>
+        <view class="chlname">
+      {{chlname}}
+    </view>
+    </view>
+    <view class="video-interestTap-style-box">
+        <view catchtap="tapComment" class="video-interestTap-style-comment iconfont icon-xwcomment"></view>
+        <view class="video-interestTap-style-comment-text">
+      {{commentCountStr}}
+    </view>
+        <view class="video-interestTap-style-line"></view>
+        <button catchtap="none" class="video-interestTap-style-share" data-article-id="{{articleId}}" data-atype="{{atype}}" data-from="{{pageArea}}" data-from-page="{{fromPage}}" data-title="{{title}}" openType="share"></button>
+        <view catchtap="tapPoster" class="video-interestTap-style-no"></view>
+    </view>
+</view>

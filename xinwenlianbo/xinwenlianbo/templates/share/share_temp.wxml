@@ -1,0 +1,11 @@
+<view class="view_video_share">
+    <button class="button" hoverClass="none" openType="share">
+        <image class="view_video_share_img" src="../../img/share.png"></image>
+    </button>
+    <view class="viewShoucang">
+        <image bindtap="saveShoucang" class="viewShoucang_img" src="{{isSave?'../../img/yishoucang.png':'../../img/shoucang.png'}}"></image>
+    </view>
+</view>
+<view bindtap="backhome" class="backhome" wx:if="{{share==1}}">
+    <image src="../../img/backhome.png"></image>
+</view>

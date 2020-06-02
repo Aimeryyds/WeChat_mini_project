@@ -1,0 +1,45 @@
+<view class="section t14">
+    <view class="title">本场最佳</view>
+    <view class="content-wrapper">
+        <view class="teams" style="text-align: center;">
+            <view style="float: left;">
+                <image class="team-img" height="30" src="{{teamInfo.leftBadge}}" width="30"></image>
+                <text class="team-name-text">{{teamInfo.leftName}}</text>
+            </view>
+            <text class="font-gray">vs</text>
+            <view style="float: right;">
+                <text class="team-name-text">{{teamInfo.rightName}}</text>
+                <image class="team-img" height="30" src="{{teamInfo.rightBadge}}" width="30"></image>
+            </view>
+        </view>
+        <view class="mvp-data" style="text-align: center;" wx:for="{{maxPlayers}}" wx:for-index="playeridx" wx:for-item="playerItem" wx:key="text">
+            <view class="mvp-info t14" style="text-align: left;">
+                <span style="display: inline-block; vertical-align: middle;">
+                    {{playerItem.leftPlayer.jerseyNum}}
+                </span>
+                <span class="mvp-name" style="text-align: left;">
+                    {{playerItem.leftPlayer.name}}
+                </span>
+            </view>
+            <view class="mvp-score t14">
+                <span style="float: left;">
+                    {{playerItem.leftVal}}
+                </span>
+                <span class="font-gray">
+                    {{playerItem.text}}
+                </span>
+                <span style="float: right;">
+                    {{playerItem.rightVal}}
+                </span>
+            </view>
+            <view class="mvp-info t14" style="text-align: right;">
+                <span class="mvp-name" style="text-align: right;">
+                    {{playerItem.rightPlayer.name}}
+                </span>
+                <span style="display: inline-block; vertical-align: middle;">
+                    {{playerItem.rightPlayer.jerseyNum}}
+                </span>
+            </view>
+        </view>
+    </view>
+</view>

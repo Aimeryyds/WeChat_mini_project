@@ -1,0 +1,45 @@
+<xxw-bg-loading bindrefresh="init" status="{{status}}" wx:if="{{status!==pageStatus.ready}}"></xxw-bg-loading>
+<block wx:else>
+    <view class="header">
+        <view class="header-bg"></view>
+        <view class="header-info">
+            <view bindtap="tapUser" class="userinfo-wrapper">
+                <image class="avatar" src="{{avatarUrl}}"></image>
+                <view class="userinfo">
+                    <text class="nick-name">{{nickName}}</text>
+                    <view class="des">
+            个人主页
+          </view>
+                </view>
+            </view>
+            <view class="numbers-wrapper">
+                <block wx:for="{{numbers}}" wx:key="text">
+                    <view bindtap="{{item.tapEvent}}" class="number-item">
+                        <text class="number">{{item.value}}</text>
+                        <text>{{item.text}}</text>
+                    </view>
+                    <view class="split-line" wx:if="{{index!=='likeNum'}}"></view>
+                </block>
+            </view>
+        </view>
+    </view>
+    <view bindtap="{{item.tapEvent}}" class="link-item" wx:for="{{links}}" wx:key="text">
+        <view class="link-name">
+            <image src="{{item.icon}}"></image>
+            <text>{{item.text}}</text>
+        </view>
+        <view class="link-right">
+            <view wx:if="{{item.msgCount}}">{{item.msgCount}}</view>
+            <image class="link-right-icon" src="http://mat1.gtimg.com/www/js/news/iconRightPoint.png"></image>
+        </view>
+    </view>
+    <button class="link-item no-border" openType="feedback">
+        <view class="link-name">
+            <image src="http://mat1.gtimg.com/www/js/news/set_ic_view.png"></image>
+            <text>意见反馈</text>
+        </view>
+        <image class="link-right-icon" src="http://mat1.gtimg.com/www/js/news/iconRightPoint.png"></image>
+    </button>
+</block>
+<like-count-modal likeCount="{{numbers.likeNum.value}}" nickName="{{nickName}}" show="{{showLikeCountModal}}"></like-count-modal>
+<xxw-login></xxw-login>

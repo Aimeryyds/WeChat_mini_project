@@ -1,0 +1,22 @@
+<view class="bottom-wrapper">
+    <view catchtap="tapMedia" class="media-wrapper">
+        <image class="media-icon" src="{{chlicon}}" wx:if="{{chlicon}}"></image>
+        <view class="media-name">
+      {{chlname||'热点视频'}}
+    </view>
+    </view>
+    <view class="btn-wrapper">
+        <view catchtap="tapComment" class="comment-wrapper">
+            <view class="comment-icon iconfont icon-xcx-comment"></view>
+            <view class="comment-count" wx:if="{{commentCountStr}}">
+        {{commentCountStr}}
+      </view>
+        </view>
+        <button catchtap="true" class="share-btn" data-article-id="{{articleId}}" data-atype="{{atype}}" data-is-collection="{{isCollection}}" data-title="{{title}}" data-vid="{{vid}}" openType="share">
+            <image class="share-btn-img" src="http://mat1.gtimg.com/www/js/news/wechat-ic.png"></image>
+        </button>
+        <view catchtap="tapPoster" class="poster-btn">
+            <image class="poster-btn-img" src="http://mat1.gtimg.com/www/js/news/pengyouquan.png"></image>
+        </view>
+    </view>
+</view>

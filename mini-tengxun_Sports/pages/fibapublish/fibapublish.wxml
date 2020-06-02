@@ -1,0 +1,8 @@
+<view class="content">
+    <FibaPost bind:onParisedSuccess="handleParisedSuccess" info="{{item}}" islist="{{true}}" redirect="{{false}}" userInfo="{{userInfo}}" wx:for="{{list}}" wx:key="{{index}}"></FibaPost>
+    <view class="empty" wx:if="{{!list.length&&requested}}">
+        <image class="img" src="/assets/FIBA/Icon_empty@3x.png"></image>
+        <view class="txt">暂无内容</view>
+    </view>
+</view>
+<FibaParised bind:onParisedAnimationEnd="handleParisedAnimationEnd" cityId="{{fibaParisedCityId}}" show="{{fibaParisedShow}}"></FibaParised>

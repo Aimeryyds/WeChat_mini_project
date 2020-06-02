@@ -1,0 +1,30 @@
+<include src="../../templates/include/nowork.wxml"></include>
+<view class="normal" hidden="{{!netInfo.status}}">
+    <view class="content" style="width:{{sWidth}}px;height:100%">
+        <view class="tip">
+            <image src="../../img/follow_banner.jpg"></image>
+        </view>
+        <scroll-view scrollY style="height:100%;padding-bottom:{{_marginbottom}}px;padding-top:124px">
+            <view class="ul">
+                <view class="li {{item.followindex?'cancelfollow':''}}" wx:for="{{followData}}" wx:for-index="i" wx:key="key">
+                    <view class="left">{{i+1<10?'0'+i+1:i+1}}</view>
+                    <view class="right">
+                        <view catchtap="gotoonegzpage" class="key" data-val="{{item.title}}">{{item.title}}</view>
+                        <view bindtap="clickCancelFollow" class="follow" data-index="{{i}}" data-key="{{item.title}}" wx:if="{{item.followindex}}">取消关注</view>
+                        <view bindtap="clickfollow" class="follow" data-index="{{i}}" data-key="{{item.title}}" wx:else>关注</view>
+                    </view>
+                </view>
+            </view>
+        </scroll-view>
+        <view class="dibu" style="padding-bottom:{{marginbottom}}px">
+            <view class="biaoqian">
+                <view class="right">已关注<text>{{followStorageArraylength}}</text>  /  7</view>
+            </view>
+            <view class="exceed {{exceed==true?'show':'hide'}}">标签数已达上限，必须取消关注部分标签后才可关注其他标签<view bindtap="closeexceed" class="closeexceed"></view>
+            </view>
+        </view>
+    </view>
+    <view class="audiobox {{audioIsHide==true?'hide':'show'}}" style="{{exceed==true?'margin-bottom:60rpx':'margin-bottom:0rpx'}}">
+        <include src="../../templates/audio/audio.wxml"></include>
+    </view>
+</view>

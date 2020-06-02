@@ -1,0 +1,76 @@
+<view class="nonet" hidden="{{netInfo.status}}">
+    <image class="" mode="widthFix" src="../../img/common_wuyf.png"></image>
+    <view>未获取到网络</view>
+    <view>请刷新或检查网络设置</view>
+    <view bindtap="rushPage" class="rush">刷新</view>
+</view>
+<view class="page" hidden="{{!netInfo.status}}">
+    <include src="../../templates/search/search_temp.wxml"></include>
+    <view class="listNav">
+        <view bindtap="showTC" class="choseyear {{showTC?'active':''}}">
+            <text class="_year">{{ZXyear}}年</text>
+        </view>
+        <scroll-view scrollX class="scrollmonth">
+            <view bindtap="navevent" class="scroll-view-item_W {{nav_active?'active':''}}" wx:if="{{zuijinLY}}">最近两月</view>
+            <view bindtap="nav_event" class="scroll-view-item_W" data-id="{{index}}" data-vol="{{item}}" style="{{index==id?'color:#ef4d44':''}}" wx:for="{{month_arr}}" wx:key="item">{{item}}月</view>
+        </scroll-view>
+    </view>
+    <view catchtap="closeTC" catchtouchmove="true" class="choseY_tanceng {{showTC?'show':'hide'}}" style="height:100%;">
+        <view class="tancenCon">
+            <view catchtap="clickYear" class="oneYear {{item==ZXyear?'active':''}}" data-vol="{{item}}" wx:for="{{choseYear}}" wx:key="item">{{item}}</view>
+        </view>
+    </view>
+    <scroll-view scrollY bindscroll="getscroll" bindscrolltolower="loadMore" scrollTop="{{scrollTop}}" scrollWithAnimation="true" style="height:{{scrollHeight}}px;">
+        <view class="ConbigBox {{showCon?'show':'hide'}}" style="">
+            <view bindtap="toast" class="list_li_zq {{show==true?'show':'hide'}}" data-vid="{{item.video_id}}" wx:for="{{_data}}" wx:key="item">
+                <view class="list_zq_left">
+                    <view class="zq_year">{{item.year}}</view>
+                    <view class="zq_month">{{item.month}} 月</view>
+                    <view class="zq_day">{{item.day}}</view>
+                    <view class="zq_line"></view>
+                    <view class="zq_data"> {{item.xingqi}}</view>
+                </view>
+                <view class="list_zq_right">
+                    <view class="zq_title">{{item._titledata}}</view>
+                    <view class="zq_timeleng">
+                        <view class="zq_timeleng_img">时长 {{item.videolength}}</view>
+                    </view>
+                </view>
+            </view>
+            <view class="dantiaoxinwen {{show==true?'hide':'show'}}" wx:for="{{_dantiaodata}}" wx:key="item">
+                <view class="data_tit">
+                    <text class="data_tit_left"></text>
+                    <text class="data_tit_xiegang"></text>
+                    <text class="data_tit_text">{{item[0].tit_data}}</text>
+                    <text class="data_tit_xiegang"></text>
+                    <text class="data_tit_right"></text>
+                </view>
+                <view bindtap="toast1" class="guanzhu_list list3" data-vid="{{item.video_id}}" wx:for="{{item}}">
+                    <view class="shang">
+                        <view class="time">{{item._data}}</view>
+                    </view>
+                    <view class="zhong">{{item.video_title}}</view>
+                    <view class="xia">
+                        <view catchtap="gotoonegzpage" class="gjc {{nogjz?'hide':''}}" data-val="{{item}}" wx:if="{{index<=2}}" wx:for="{{item.gjc}}">{{item}}</view>
+                        <view class="timelength">时长{{item.videolength}}</view>
+                    </view>
+                </view>
+            </view>
+            <view class="articlelist_lw" hidden="{{showLoading}}">
+                <image class="articlelist_loading" src="../../img/loading.gif"></image>
+            </view>
+        </view>
+    </scroll-view>
+    <view class="WQtab" style="padding-bottom:{{marginbottom}}px">
+        <view bindtap="changecon" class="bottomtab {{item.b==1?'active':''}}" data-index="{{index}}" wx:for="{{bottomtab}}" wx:key="item">
+            <text>{{item.a}}</text>
+        </view>
+        <view class="clear"></view>
+    </view>
+    <view bindtap="onGoTop" class="scrollto-btn-wrapper">
+        <view class="scrollto-btn  {{!istTop?'hide':''}}"></view>
+    </view>
+    <view class="audiobox {{audioIsHide==true?'hide':'show'}}">
+        <include src="../../templates/audio/audio.wxml"></include>
+    </view>
+</view>

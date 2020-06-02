@@ -1,0 +1,17 @@
+<view class="high-gif" wx:if="{{showRedHeart}}">
+    <view class="in-high-gif">
+        <image class="bg" src="/assets/FIBA/bg_pop@3x.png"></image>
+        <image class="img" src="{{redHeartSrc}}"></image>
+        <view class="ul">
+            <view class="li">
+                此次发帖为您的城市积累了<text class="txt">{{redHeartNum}}</text>点热爱值
+            </view>
+            <view class="li">
+                一起为城市<text class="txt">打call</text>！
+            </view>
+        </view>
+    </view>
+    <view catchtap="closeRedHeart" class="close">
+        <image class="img" src="/assets/FIBA/btn_close_b@3x.png"></image>
+    </view>
+</view>

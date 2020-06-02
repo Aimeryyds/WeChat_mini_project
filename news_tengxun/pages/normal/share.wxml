@@ -1,0 +1,63 @@
+<xxw-navigation fromPage="{{fromPage}}" withHome="{{navigateBackHome}}"></xxw-navigation>
+<wx-scope wx:scope-data="{{...scopeData}}" wx:if="{{pageStatus===status.ready}}">
+    <view class="cover" style="height: calc(100% - {{barHeight}}px)">
+        <scroll-view scrollWithAnimation scrollY bindscroll="onscroll" bindtouchend="ontouchend" class="scroll-view" lowerThreshold="{{100}}" scrollTop="{{scrollTop}}">
+            <article-content enableShowMore chlicon="{{chlicon}}" chlid="{{chlid}}" chlname="{{chlname}}" date="{{date}}" fromPage="{{fromPage}}" intro="{{intro}}" introName="{{introName}}" origContent="{{content}}" remark="{{remark}}" special="{{special}}" timeline="{{timeline}}" title="{{title}}" topic="{{topic}}" truthContent="{{truthContent}}"></article-content>
+            <xxw-share-button articleId="{{articleId}}" fromPage="{{fromPage}}" posterShareImg="{{posterShareImg}}" title="{{title}}"></xxw-share-button>
+            <xxw-comment-block showReplyCount customBelow appParameter="{{commentScheme}}" articleId="{{articleId}}" atype="{{atype}}" bgLoading="{{commentLoading}}" bindreply="tapCommentReply" bindtapContent="tapCommentContent" class="comment-block" commentId="{{commentId}}" commentList="{{[commentList]}}" customNoComment="{{isFromApp}}" disableLaunchApp="{{!isFromApp}}" enableShowAll="{{false}}" fromPage="{{fromPage}}" isForbidden="{{commentIsForbidden}}" launchReportParams="{{commentLaunchAppReportParams}}" lineCount="{{isFromApp?2:8}}" showReply="{{false}}" syncId="{{syncId}}">
+                <view class="title-wrapper" slot="above" wx:if="{{commentCount}}">
+                    <view class="title">
+          热门评论
+        </view>
+                </view>
+                <view class="more-comment-btn-wrapper" slot="below" wx:if="{{commentCount>2}}">
+                    <xxw-launch-app appParameter="{{commentScheme}}" articleId="{{articleId}}" exClass="blue-button" reportParams="{{commentLaunchAppReportParams}}" wx:if="{{isFromApp}}">
+          打开腾讯新闻APP，查看{{commentCountStr}}条评论
+          <image class="icon right" src="http://mat1.gtimg.com/www/js/news/open-blue.png"></image>
+                    </xxw-launch-app>
+                    <view bindtap="tapAllCommentBtn" class="more-comment-btn" wx:else>
+          查看全部{{commentCountStr}}条评论
+          <image class="icon" src="http://mat1.gtimg.com/www/js/news/open-black.png"></image>
+                    </view>
+                </view>
+                <view class="no-comment" slot="noComment" wx:if="{{!commentCount&&isFromApp}}">
+                    <xxw-launch-app appParameter="{{commentScheme}}" articleId="{{articleId}}" exClass="blue-button" reportParams="{{commentLaunchAppReportParams}}">
+          打开腾讯新闻APP，评论抢沙发
+          <image class="icon right" src="http://mat1.gtimg.com/www/js/news/open-blue.png"></image>
+                    </xxw-launch-app>
+                </view>
+            </xxw-comment-block>
+            <recommend class="{{commentCount&&recommendList.length&&'recommend-list'}}" fromPage="{{fromPage}}" recommendList="{{recommendList}}" wx:if="{{!articleBlock}}"></recommend>
+            <view class="go-home-btn-wrapper {{enableShareCircle&&!articleBlock&&'enable-share-circle'}}">
+                <view bindtap="tapGoHome" class="blue-button" wx:if="{{!articleBlock&&recommendList.length>0}}">
+        {{goHomeBtnText}}
+        <image class="icon {{platform!=='ios'||isFromApp?'right':'top'}}" src="http://mat1.gtimg.com/www/js/news/open-blue.png"></image>
+                </view>
+                <view class="{{isIphoneX&&'is-iphone-x'}}"></view>
+            </view>
+            <view class="fixed-btn-wrapper {{enableShareCircle&&!articleBlock&&'enable-share-circle'}} {{isIphoneX&&'is-iphone-x'}}">
+                <fixed-share-button articleId="{{articleId}}" bindchangeSpread="onChangeShareBtnSpread" class="fixed-share-button" fromPage="{{fromPage}}" posterShareImg="{{posterShareImg}}" spread="{{spreadShareBtn}}" title="{{title}}"></fixed-share-button>
+                <xxw-launch-app appParameter="{{articleScheme}}" articleId="{{articleId}}" exClass="launch-app-btn" reportParams="{{fixedLaunchAppReportParams}}" wx:if="{{isFromApp}}">
+                    <view>打开</view>
+                    <view>APP</view>
+                </xxw-launch-app>
+                <view bindtap="tapCommentBtn" class="pub-comment-btn" wx:else>
+                    <view>发表</view>
+                    <view>评论</view>
+                </view>
+            </view>
+            <view class="social-bar-wrapper" wx:if="{{enableShareCircle&&!articleBlock}}">
+                <share-circle-bar articleId="{{articleId}}" atype="{{atype}}" bindchangeCommentPanelShowState="onCommentPanelChangeState" commentId="{{commentId}}" fromPage="{{fromPage}}" inputPlaceholder="{{inputPlaceholder}}" isForbidden="{{isForbidden}}" isFromHistory="{{isFromHistory}}" openGId="{{openGId}}" posterShareImg="{{posterShareImg}}" syncId="{{syncId}}" title="{{title}}"></share-circle-bar>
+            </view>
+        </scroll-view>
+        <xxw-guide guideClass="mainPage" guideStyle="top:{{barHeight}}px" keyName="normalSharePage" showGuide="{{showGuide}}">
+            <view>刷新闻更方便</view>
+            <view>添加到我的小程序</view>
+        </xxw-guide>
+    </view>
+</wx-scope>
+<xxw-bg-loading bindrefresh="init" status="{{pageStatus}}" wx:else></xxw-bg-loading>
+<xxw-comment-input-panel enableGroupVisibleControl="{{enableGroupVisibleControl&&!articleBlock}}" enableShareCircle="{{enableShareCircle&&!articleBlock}}" fromPage="{{fromPage}}" placeholder="{{inputPlaceholder}}" visibleUid="{{visibleUid}}"></xxw-comment-input-panel>
+<xxw-login></xxw-login>
+<xxw-poster fromPage="{{fromPage}}"></xxw-poster>
+<xxw-report-dot></xxw-report-dot>

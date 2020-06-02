@@ -1,0 +1,29 @@
+<view animation="{{animationData}}" class="pulldown-tips">
+  已更新为最新内容
+</view>
+<view class="news-flash-container">
+    <category bind:change="changeCategory" class="category-wrapper" list="{{category}}" wx:if="{{category.length}}"></category>
+    <xxw-bg-loading bindrefresh="render" status="{{status}}" wx:if="{{status!==pageStatus.ready}}"></xxw-bg-loading>
+    <block wx:else>
+        <view style="display: {{categoryItem.id===activeCateId?'block':'none'}};" wx:for="{{category}}" wx:for-item="categoryItem" wx:key="id">
+            <view wx:for="{{list[categoryItem.id]}}" wx:for-index="fIndex" wx:for-item="fItem" wx:key="dateStr">
+                <block wx:for="{{fItem.list}}" wx:for-index="sIndex" wx:for-item="sItem" wx:key="_uid">
+                    <view class="news-date" wx:if="{{sIndex===0}}">
+                        <view class="left">
+                            <view class="dot"></view>
+                            <view class="bottom-line"></view>
+                        </view>
+                        <view class="right">{{fItem.dateStr}}</view>
+                    </view>
+                    <item articleId="{{item.articleId}}" atype="{{item.atype}}" class="news-item" hasRead="{{item.hasRead}}" intro="{{item.intro}}" isLast="{{item.isLast}}" posterShareImage="{{item.posterShareImage}}" pubTimeStr="{{item.pubTimeStr}}" showTimeLine="{{!item.isLastOne}}" title="{{item.title}}" topicId="{{item.topicId}}" vid="{{item.vid}}" wx:for="{{sItem.list}}" wx:key="_uid"></item>
+                </block>
+            </view>
+            <xxw-loading-bar bindretry="onReachBottom" class="bottom-loading-bar" hasMore="{{hasMore}}" noMoreText="- 没有更多了 -" status="{{bottomLoadingStatus}}"></xxw-loading-bar>
+        </view>
+    </block>
+</view>
+<xxw-guide guideClass="newsFlashTop" keyName="newsFlashTop" showGuide="{{showTopGuide}}" timeoutShow="{{10000}}">
+    <view>热点快读</view>
+    <view>添加到我的小程序</view>
+</xxw-guide>
+<xxw-poster fromPage="{{fromPage}}"></xxw-poster>

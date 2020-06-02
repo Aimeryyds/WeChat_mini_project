@@ -1,0 +1,42 @@
+<navigator url="/pages/game/game?mid={{match.mid}}">
+    <view class="day-match">
+        <view class="time-desc">
+            <view class="time">
+                {{match.startTimeDesc}}
+                <view class="vip" wx:if="{{match.isPay==1}}"></view>
+            </view>
+            <view class="desc">{{match.matchDesc}}</view>
+        </view>
+        <view class="teams" wx:if="{{match.matchType==4}}">
+            {{match.leftName+match.rightName}}
+        </view>
+        <block wx:else>
+            <view class="teams against">
+                <view class="team top">
+                    <TuaImage class="badge" src="{{match.leftBadge}}"></TuaImage>
+                    {{match.leftName}}
+                </view>
+                <view class="team bottom">
+                    <TuaImage class="badge" src="{{match.rightBadge}}"></TuaImage>
+                    {{match.rightName}}
+                </view>
+            </view>
+            <view class="goals {{match.isInPlay&&'on'}}">
+                <view class="pre-goal" wx:if="{{match.livePeriod==0}}"></view>
+                <block wx:else>
+                    <view class="goal">{{match.leftGoal}}</view>
+                    <view class="goal">{{match.rightGoal}}</view>
+                </block>
+            </view>
+        </block>
+        <view class="status {{match.isInPlay&&'in-play'}}">
+            <view class="status-desc" wx:if="{{match.sourceText}}">
+                <view class="status-icon {{match.sourceType}}"></view>
+                {{match.sourceText}}
+            </view>
+            <view class="status-quarter {{match.sourceType}}" wx:if="{{match.isInPlay}}">
+                {{match.quarterTimeDesc}}
+            </view>
+        </view>
+    </view>
+</navigator>

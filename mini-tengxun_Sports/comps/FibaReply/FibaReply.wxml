@@ -1,0 +1,23 @@
+<view class="reply clearfix">
+    <view class="left">
+        <FibaAvatar class="photo" src="{{rcon.user.avatar}}"></FibaAvatar>
+    </view>
+    <view class="right">
+        <view class="info">
+            <view class="name {{rcon.user.id==='20190614'?'active':''}}">
+                {{rcon.user.name}}
+                <image class="icon icon-vip" src="/assets/FIBA/icon_v@3x.png" wx:if="{{rcon.user.id==='20190614'}}"></image>
+            </view>
+            <view class="time">{{rcon.createTime}}</view>
+        </view>
+        <view class="content" wx:if="{{!rcon.parentReply}}">
+            {{rcon.title}}
+        </view>
+        <view class="content" wx:else>
+            回复<text class="highlight">{{rcon.parentReply.user.name}}:</text>{{rcon.title}}
+        </view>
+        <view class="images clearfix" wx:if="{{rcon.images&&rcon.images.length}}">
+            <TuaImage lazyLoad catchtap="viewImg" class="img" data-src="{{item.url}}" errSrc="{{defaultSrc}}" height="180rpx" imgMode="aspectFill" src="{{item.url||defaultSrc}}" width="180rpx" wx:for="{{rcon.images}}" wx:key="{{index}}"></TuaImage>
+        </view>
+    </view>
+</view>

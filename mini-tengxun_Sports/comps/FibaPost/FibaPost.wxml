@@ -1,0 +1,54 @@
+<view catchtap="getTopicDetail" class="post" wx:if="{{post&&post.vShow}}">
+    <view class="top clearfix">
+        <FibaAvatar class="photo" src="{{post.user.avatar}}"></FibaAvatar>
+        <view class="info">
+            <view class="name {{post.user.id==='20190614'?'active':''}}">
+                {{post.user.name||''}}
+                <image class="icon icon-vip" src="/assets/FIBA/icon_v@3x.png" wx:if="{{post.user.id==='20190614'}}"></image>
+            </view>
+            <view class="address">
+                <image class="icon icon-location" src="/assets/FIBA/icon_location@3x.png" wx:if="{{post.location}}"></image>
+                <text class="text" wx:if="{{post.location}}">{{post.location}}</text>
+                <text class="text">{{post.createTime}}</text>
+            </view>
+        </view>
+        <view class="recommend" wx:if="{{post.vIsTop}}">
+            <image class="icon icon-recmd" src="/assets/FIBA/icon_top@3x.png"></image>
+            <text>置顶</text>
+        </view>
+        <view class="status" wx:if="{{post.vShowTxt}}">{{post.vShowTxt}}</view>
+    </view>
+    <view class="content">
+        <view class="post-title">
+            <text catchtap="goPostList" class="at" data-discussid="{{item.discussId}}" wx:for="{{post.discussList}}" wx:key="unique">#{{item.content}}#</text>
+            {{post.title}}
+        </view>
+        <view class="post-images" wx:if="{{post.images&&post.images.length}}">
+            <TuaImage lazyLoad catchtap="viewImg" class="image" data-src="{{item.url}}" errSrc="{{defaultSrc}}" height="180rpx" imgMode="aspectFill" src="{{item.url||defaultSrc}}" width="180rpx" wx:for="{{post.images}}" wx:key="{{index}}"></TuaImage>
+        </view>
+        <view catchtap="getTopicDetail" class="video" data-autoplay="{{true}}" wx:if="{{post.videoInfo&&post.videoInfo.vid&&islist}}">
+            <image class="video-btn" src="/assets/play-icon.png"></image>
+            <TuaImage lazyLoad class="video-pic" errSrc="{{defaultVideoSrc}}" height="180rpx" imgMode="aspectFill" src="{{post.videoInfo.picUrl||defaultVideoSrc}}" width="280rpx"></TuaImage>
+        </view>
+        <video autoplay="{{autoplay}}" bindfullscreenchange="handleVideoScreen" catchtap="stopPropagations" class="video-control" id="video" objectFit="contain" src="{{tvpUrl}}" wx:if="{{!islist&&post.videoInfo.vid&&!islist}}"></video>
+    </view>
+    <view class="bottom clearfix">
+        <view catchtap="goPostList" class="city" data-city="{{post.supportCity.cityName}}" data-cityId="{{post.supportCity.cityId}}" wx:if="{{post.supportCity.cityName}}">
+            <image class="icon icon-city" src="/assets/FIBA/icon_yy_city@3x.png"></image>
+            <text class="icon-txt">加油{{post.supportCity.cityName}}</text>
+        </view>
+        <view class="count">
+            <view catchtap="getTopicDetail" class="wrap-btn-box" data-scroll="{{true}}">
+                <image class="icon icon-comment" src="/assets/FIBA/icon_comment@3x.png"></image>
+                <text class="icon-txt icon-count">{{post.replyNum}}</text>
+            </view>
+            <view catchtap="parised" class="wrap-btn-box" data-id="{{post.id}}">
+                <FibaLogin bindloginevent="onLoginEvent" userInfo="{{userInfo}}"></FibaLogin>
+                <image class="icon icon-parised" src="/assets/FIBA/icon_good@3x.png" wx:if="{{!post.supported}}"></image>
+                <image class="icon icon-parised" src="/assets/FIBA/icon_good_s@3x.png" wx:else></image>
+                <text class="icon-txt">{{post.supportNum}}</text>
+            </view>
+        </view>
+    </view>
+</view>
+<FibaAd bannerInfo="{{bannerInfo}}" styleStr="margin:20rpx 0;" wx:if="{{bannerShow}}"></FibaAd>

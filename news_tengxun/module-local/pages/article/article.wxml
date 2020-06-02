@@ -1,0 +1,31 @@
+<import src="../../tpl/warn.wxml"></import>
+<template is="article-warn" data="{{showType:showType}}"></template>
+<login></login>
+<view class="lc-wrapper" wx:if="showType === 1">
+    <view class="lc-headimg">
+        <image class="lc-headimg" mode="scaleToFill" src="{{articleData.cover}}"></image>
+    </view>
+    <view class="lc-article-title">{{articleData.title}}</view>
+    <view class="lc-article-source">
+        <image class="lc-source__pic g-d-inlineblock g-va-middle g-mr10" src="https://wx.qlogo.cn/mmopen/vi_32/e5ChGW597CYZT643FXsx0sNOVwic9NfDBa3p6HGclria18bvC1IknAvS8OichgHQ2mZJQcLGLdfbxAJtdFDQicSWyw/132"></image>
+        <text class="g-d-inlineblock g-va-middle g-f-xss g-clr-849098 g-mr10">{{'文章来源'}}</text>
+        <text class="g-d-inlineblock g-va-middle g-f-xss g-clr-849098 g-mr10">{{articleData.pub_time}}</text>
+    </view>
+    <view class="lc-article-content">
+        <block wx:for="{{articleData.wxapp_content_html}}" wx:for-index="cindex" wx:for-item="content" wx:key="cindex">
+            <view class="lc-article__text g-mrl14" wx:if="{{content.type==='cnt_article'}}">
+                <block wx:for="{{content.desc}}" wx:key="{{index}}">
+                    <text class="{{item.class?item.class:''}}" style="{{item.style?item.style:''}}" wx:if="{{item.type==='cnt_article'}}">{{item.desc}}</text>
+                    <image class="{{item.class?item.class:''}}" src="{{item.imgurl}}" wx:if="{{item.type==='img_url'}}"></image>
+                </block>
+            </view>
+            <view wx:if="{{content.type==='img_url'}}">
+                <image class="lc-article__img {{item.class?item.class:''}}" mode="aspectFill" src="{{item.imgurl}}" wx:for="{{content.img}}" wx:key="{{index}}"></image>
+            </view>
+            <view class="lc-article__video" wx:if="{{item.type==='video'}}"></view>
+            <view class="lc-article__summary g-mrl14" wx:if="{{articleData.remark}}">{{articleData.remark}}</view>
+        </block>
+    </view>
+    <lc-share articleInfo="{{shareArticleInfo}}" id="lcShare" shareType="{{shareType}}" wx:if="showType === 1"></lc-share>
+    <lc-comment articleId="{{articleId}}" bindhandleshare="handleShareShow" commentId="{{articleData.comment_id}}" id="lcComment" wx:if="showType === 1"></lc-comment>
+</view>

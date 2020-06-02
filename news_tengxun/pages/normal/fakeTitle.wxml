@@ -1,0 +1,26 @@
+<view class="container {{isIphoneX&&'is-iphone-x'}}">
+    <view class="title-cover">
+        <view class="next-tips-cover">
+            <view class="next-tips">下一篇</view>
+        </view>
+        <view class="title">{{title}}</view>
+    </view>
+    <view class="content-cover">
+        <view class="mask"></view>
+        <view class="content">
+            <view class="text" wx:if="{{fakeContent.type==='p'}}">
+                <block wx:for="{{fakeContent.children}}" wx:for-item="textItem" wx:key="*this">
+                    <text wx:if="{{textItem.type==='strong'}}">{{textItem.desc}}</text>
+                    <text wx:elif="{{textItem.type==='link'}}">{{textItem.title}}</text>
+                    <text wx:elif="{{textItem.type==='outerlink'}}">{{textItem.title}}</text>
+                    <text wx:else>{{textItem}}</text>
+                </block>
+            </view>
+            <image class="img" mode="aspectFill" src="{{fakeContent.img_url}}" style="height:{{fakeContent.img_show_height}}rpx" wx:if="{{fakeContent.type==='img'}}"></image>
+        </view>
+    </view>
+    <view class="mask-words">
+    上滑查看下一条
+    <image class="mask-icon" src="http://mat1.gtimg.com/www/js/news/open-blue.png"></image>
+    </view>
+</view>

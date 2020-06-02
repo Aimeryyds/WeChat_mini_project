@@ -1,0 +1,29 @@
+<view bindtap="handleTap" class="item-wrapper">
+    <image class="bg-image" mode="aspectFill" src="{{imageSrc}}">
+        <view class="image-mask"></view>
+        <view class="video-icon iconfont icon-xwsplay" wx:if="{{isVideo}}"></view>
+    </image>
+    <view class="date-wrap" wx:if="{{zwbType}}">
+        <view class="day">{{zwbDate}}</view>
+        <view class="line"></view>
+        <view class="weekday">{{zwbWeekday}}</view>
+    </view>
+    <view class="special-label" wx:elif="{{atype===100||atype===120}}">
+        <text>专题</text>
+    </view>
+    <view class="title-wrapper">
+        <block wx:if="{{zwbType}}">
+            <image class="zwb-icon" mode="aspectFill" src="{{zwbType===1?morSrc:eveSrc}}"></image>
+            <view class="split-line"></view>
+        </block>
+        <text>{{title}}</text>
+    </view>
+    <view class="bottom-wrapper">
+        <view class="pub-time">
+      {{publishTime||chlname}}
+    </view>
+        <view class="comment" wx:if="{{commentCountStr}}">
+      {{commentCountStr}}评
+    </view>
+    </view>
+</view>

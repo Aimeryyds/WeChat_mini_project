@@ -1,0 +1,27 @@
+<view class="timeline-wrapper" style="background-image: url(\"{{image}}\");">
+    <view bindtap="tapUnFold" class="image-wrapper">
+        <view class="title">{{title}}</view>
+        <view class="desc">{{timeList[0]&&timeList[0].desc}}</view>
+        <view class="time-wrapper">
+            <view>{{timeList.length}}进展</view>
+            <view class="time">{{timeList[0].time}}</view>
+            <image class="arrow {{fold&&'fold'}}" src="https://mat1.gtimg.com/www/images/news_minipro/black-arrow.png"></image>
+        </view>
+    </view>
+    <view wx:if="{{!fold}}">
+        <block wx:for="{{timeList}}" wx:key="time">
+            <view class="timeline-item">
+                <view class="dot-time">
+                    <view class="dot"></view>
+                    <view>{{item.time}}</view>
+                </view>
+                <view class="content">{{item.desc}}</view>
+            </view>
+            <view class="split-line"></view>
+        </block>
+        <view bindtap="tapFold" class="bottom-wrapper">
+            <image class="fold-arrow" src="http://mat1.gtimg.com/www/images/news_minipro/white-arrow.png"></image>
+            <view>点击收起</view>
+        </view>
+    </view>
+</view>

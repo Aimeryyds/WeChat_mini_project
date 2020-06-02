@@ -1,0 +1,26 @@
+<template name="auth-confirm-dialog">
+    <cover-view class="shade-box {{hideCloseBtn?'gray-background':''}}" wx:if="{{cover}}">
+        <cover-view class="auth-content-block">
+            <cover-view class="auth1-close-btn">
+                <cover-view bindtap="onAuthCancelBtnTap" class="img iconfont icon-xwclose" wx:if="{{!hideCloseBtn}}"></cover-view>
+            </cover-view>
+            <cover-view class="auth1-tips-text">请登录后进行相关操作</cover-view>
+            <cover-view class="auth-content-line"></cover-view>
+            <button bindgetuserinfo="bindAuthGetUserInfo" bindtap="onAuthOkBtnTap" class="auth-ok-btn" lang="zh_CN" openType="getUserInfo">
+        确定
+      </button>
+        </cover-view>
+    </cover-view>
+    <view class="shade-box {{hideCloseBtn?'gray-background':''}}" wx:else>
+        <view class="auth-content-block">
+            <view class="auth1-close-btn">
+                <view bindtap="onAuthCancelBtnTap" class="img iconfont icon-xwclose" wx:if="{{!hideCloseBtn}}"></view>
+            </view>
+            <view class="auth1-tips-text">请登录后进行相关操作</view>
+            <view class="auth-content-line"></view>
+            <button bindgetuserinfo="bindAuthGetUserInfo" bindtap="onAuthOkBtnTap" class="auth-ok-btn" lang="zh_CN" openType="getUserInfo">
+        确定
+      </button>
+        </view>
+    </view>
+</template>

@@ -1,0 +1,69 @@
+<view bindtap="tapReplyContent" class="item-wrapper" wx:if="{{!isDeleted}}">
+    <block wx:if="{{withReplyContent}}">
+        <view class="header-wrapper">
+            <view catchtap="tapMedia" class="media-wrapper">
+                <image class="media-icon {{!withReplyTips&&'big'}}" mode="aspectFill" src="{{reply.avatarUrl}}" wx:if="{{reply.avatarUrl}}"></image>
+                <block wx:if="{{withReplyTips}}">
+                    <view class="media-name">{{reply.nickName}}</view>
+                    <view catchtap="tapReplyContent" class="media-ext" wx:if="{{!isWeibo}}">
+            回复了你的评论
+          </view>
+                </block>
+                <view class="media-name-wrapper" wx:else>
+                    <view class="media-name dark">{{reply.nickName}}</view>
+                    <view class="pub-time">{{pubTime}}</view>
+                </view>
+            </view>
+            <view catchtap="tapDelete" wx:if="{{withDeleteBtn}}">
+        删除
+      </view>
+        </view>
+        <view class="reply-content">
+            <image class="reply-hot-comment" mode="aspectFill" src="https://mat1.gtimg.com/www/js/news/shenping_new.png" wx:if="{{reply.hotComment===1}}"></image>
+            <xxw-collapse-text enableShowAll class="reply-content" lineCount="{{8}}">
+                <text>{{reply.content}}</text>
+            </xxw-collapse-text>
+        </view>
+    </block>
+    <view catchtap="tapLikeAvatar" class="like-wrapper {{like.hasAvatar&&'like-right-icon'}}" wx:elif="{{withLike}}">
+        <view class="like-avatar-wrapper">
+            <image class="like-avatar" src="{{item.avatarUrl}}" wx:for="{{like.userList}}" wx:key="uin"></image>
+        </view>
+        <view class="like-nick-name" wx:if="{{like.count===1&&like.hasAvatar}}">
+      {{like.userList[0].nickName}}
+    </view>
+        <view wx:else>
+            <block wx:if="{{like.hasAvatar}}">等</block>
+      {{like.count}}人
+    </view>
+        <view>赞了你的</view>
+        <view>{{like.type===19?'动态':'评论'}}</view>
+    </view>
+    <view class="comment-article-wrapper">
+        <view catchtap="tapComment" class="comment" wx:if="{{comment&&comment.content}}">
+            <xxw-collapse-text enableShowAll="{{false}}" lineCount="{{2}}">
+                <text>{{comment.nickName}}：</text>
+                <text>{{comment.content}}</text>
+            </xxw-collapse-text>
+        </view>
+        <view class="split-line" wx:if="{{comment&&comment.content}}"></view>
+        <view catchtap="tapArticle" class="article-wrapper">
+            <view class="img-wrapper" wx:if="{{article.img}}">
+                <image class="img" mode="aspectFill" src="{{article.img}}"></image>
+                <image class="play-icon" src="http://mat1.gtimg.com/www/js/news/video_play.png" wx:if="{{isVideo}}"></image>
+            </view>
+            <view class="content-wrapper">
+                <xxw-collapse-text enableShowAll="{{false}}" lineCount="{{2}}">
+                    <text class="nick-name" wx:if="{{isWeibo}}">@{{article.nickName}}：</text>
+                    <text>{{article.title}}</text>
+                </xxw-collapse-text>
+            </view>
+        </view>
+    </view>
+    <view class="bottom-wrapper" wx:if="{{withBottom}}">
+        <view class="pub-time">{{pubTime}}</view>
+        <view class="reply-btn-wrapper" wx:if="{{withReplyBtn}}">
+            <view class="reply-btn">回复TA</view>
+        </view>
+    </view>
+</view>

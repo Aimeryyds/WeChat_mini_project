@@ -1,0 +1,149 @@
+.slider {
+    position: relative;
+    box-sizing: border-box;
+}
+
+.swiper {
+    height: 120rpx;
+    margin: 0;
+    padding: 0;
+    background-color: hsla(0,0%,100%,.97);
+}
+
+.is-iphone-x .swiper {
+    padding-bottom: 60rpx;
+}
+
+.slider-item {
+    height: 100%;
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: none;
+    padding: 0 24rpx;
+    text-align: left;
+    line-height: 1;
+}
+
+.slider-item,.slider-item:after {
+    background-color: transparent;
+    border: none;
+}
+
+.slider-item:after {
+    width: 0;
+    height: 0;
+    padding-left: 0;
+    padding-right: 0;
+    margin-left: 0;
+    margin-right: 0;
+}
+
+.image {
+    border-radius: 4rpx;
+    width: 140rpx;
+    height: 96rpx;
+    position: relative;
+    background-repeat: no-repeat;
+    background-position: 50%;
+    background-size: 100% 100%;
+}
+
+.logo.image {
+    width: 72rpx;
+    height: 72rpx;
+}
+
+.title {
+    flex: 1;
+    margin-left: 20rpx;
+    margin-right: 170rpx;
+    color: #222;
+    font-size: 28rpx;
+    line-height: 40rpx;
+    max-height: 80rpx;
+    display: -webkit-box;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    word-wrap: break-word;
+    white-space: normal;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+    margin-bottom: 17rpx;
+}
+
+.logo.title {
+    font-size: 32rpx;
+    margin-bottom: 0;
+}
+
+.open-btn-cover {
+    position: absolute;
+    right: 24rpx;
+    top: 30rpx;
+    background: #2883e9;
+    border-radius: 28rpx;
+    width: 150rpx;
+    height: 56rpx;
+    border: none;
+    padding: 0;
+    line-height: 1;
+    font-size: 32rpx;
+    color: #fff;
+    text-align: center;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.open-btn-cover:after {
+    border: none;
+    background-color: transparent;
+    width: 0;
+    height: 0;
+    padding-left: 0;
+    padding-right: 0;
+    margin-left: 0;
+    margin-right: 0;
+}
+
+.indicator-box,.open-btn {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.indicator-box {
+    position: absolute;
+    height: 10rpx;
+    width: 100%;
+    bottom: 12rpx;
+    left: 0;
+}
+
+.is-iphone-x .indicator-box {
+    bottom: 72rpx;
+}
+
+.dot {
+    width: 10rpx;
+    height: 10rpx;
+    border-radius: 100%;
+    margin: 0 7rpx;
+    background-color: #c9d7f0;
+}
+
+.dot.active {
+    background-color: #2883e9;
+}
+
+.video-icon {
+    width: 56rpx;
+    height: 56rpx;
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    margin-top: -28rpx;
+    margin-left: -28rpx;
+}
